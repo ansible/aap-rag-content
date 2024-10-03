@@ -1,0 +1,139 @@
+# Ansible Automation Platform Central Authentication for automation hub
+
+To enable Ansible Automation Platform Central Authentication for your automation hub, start by downloading the Red Hat Ansible Automation Platform installer then proceed with the necessary set up procedures as detailed in this guide.
+
+[IMPORTANT]
+----
+The installer in this guide will install central authentication for a basic standalone deployment. Standalone mode only runs one central authentication server instance, and thus will not be usable for clustered deployments. Standalone mode can be useful to test drive and play with the features of central authentication, but it is not recommended that you use standalone mode in production as you will only have a single point of failure.
+----
+To install central authentication in a different deployment mode, please see this guide for more deployment options.
+
+# System Requirements
+
+There are several minimum requirements to install and run Ansible Automation Platform Central Authentication:
+
+* Any operating system that runs Java
+* Java 8 JDK
+* zip or gzip and tar
+* At least 512mb of RAM
+* At least 1gb of disk space
+* A shared external database like PostgreSQL, MySQL, Oracle, etc. if you want to run central authentication in a cluster.
+See the Database Configuration section of the Red Hat Single Sign-On Server Installation and Configuration guide for more information.
+* Network multicast support on your machine if you want to run in a cluster. central authentication can be clustered without multicast, but this requires some configuration changes.
+See the Clustering section of the Red Hat Single Sign-On Server Installation and Configuration guide for more information.
+* On Linux, it is recommended to use /dev/urandom as a source of random data to prevent central authentication hanging due to lack of available entropy, unless /dev/random usage is mandated by your security policy. To achieve that on Oracle JDK 8 and OpenJDK 8, set the java.security.egd system property on startup to file:/dev/urandom.
+
+# Installing Ansible Automation Platform Central Authentication for use with automation hub
+
+The Ansible Automation Platform Central Authentication installation will be included with your Red Hat Ansible Automation Platform installer. Install the Ansible Automation Platform using the following procedures, then configure the necessary parameters in your inventory file to successfully install both the Ansible Automation Platform and central authentication.
+
+## Choosing and obtaining a Red Hat Ansible Automation Platform installer
+
+Choose the Red Hat Ansible Automation Platform installer you need based on your Red Hat Enterprise Linux environment internet connectivity. Review the following scenarios and decide on which Red Hat Ansible Automation Platform installer meets your needs.
+
+
+[NOTE]
+----
+A valid Red Hat customer account is required to access Red Hat Ansible Automation Platform installer downloads on the Red Hat Customer Portal.
+----
+
+Choose the Red Hat Ansible Automation Platform installer if your Red Hat Enterprise Linux environment is connected to the internet. Installing with internet access retrieves the latest required repositories, packages, and dependencies. Choose one of the following ways to set up your Ansible Automation Platform installer.
+
+Tarball install
+
+1. Navigate to the Red Hat Ansible Automation Platform download page.
+2. Click btn:[Download Now] for the Ansible Automation Platform <latest-version> Setup.
+3. Extract the files:
+
+```
+$ tar xvzf ansible-automation-platform-setup-<latest-version>.tar.gz
+```
+
+
+RPM install
+
+1. Install Ansible Automation Platform Installer Package
+
+v.2.5 for RHEL 8 for x86_64
+
+```
+$ sudo dnf install --enablerepo=ansible-automation-platform-2.4-for-rhel-8-x86_64-rpms ansible-automation-platform-installer
+```
+
+
+v.2.5 for RHEL 9 for x86-64
+
+```
+$ sudo dnf install --enablerepo=ansible-automation-platform-2.4-for-rhel-9-x86_64-rpms ansible-automation-platform-installer
+```
+
+
+
+[NOTE]
+----
+dnf install enables the repo as the repo is disabled by default.
+----
+
+When you use the RPM installer, the files are placed under the /opt/ansible-automation-platform/installer directory.
+
+Use the Red Hat Ansible Automation Platform Bundle installer if you are unable to access the internet, or would prefer not to install separate components and dependencies from online repositories. Access to Red Hat Enterprise Linux repositories is still needed. All other dependencies are included in the tar archive.
+
+1. Navigate to the Red Hat Ansible Automation Platform download page.
+2. Click btn:[Download Now] for the Ansible Automation Platform <latest-version> Setup Bundle.
+3. Extract the files:
+
+```
+$ tar xvzf ansible-automation-platform-setup-bundle-<latest-version>.tar.gz
+```
+
+
+## Configuring the Red Hat Ansible Automation Platform installer
+
+Before running the installer, edit the inventory file found in the installer package to configure the installation of automation hub and Ansible Automation Platform Central Authentication.
+
+
+[NOTE]
+----
+Provide a reachable IP address for the [automationhub] host to ensure users can sync content from Private Automation Hub from a different node and push new images to the container registry.
+----
+
+1. Navigate to the installer directory:
+1. Online installer:
+
+```
+$ cd ansible-automation-platform-setup-<latest-version>
+```
+
+2. Bundled installer:
+
+```
+$ cd ansible-automation-platform-setup-bundle-<latest-version>
+```
+
+2. Open the inventory file using a text editor.
+3. Edit the inventory file parameters under [automationhub] to specify an installation of automation hub host:
+1. Add group host information under [automationhub] using an IP address or FQDN for the automation hub location.
+2. Enter passwords for automationhub_admin_password, automationhub_pg_password, and any additional parameters based on your installation specifications.
+4. Enter a password in the sso_keystore_password field.
+5. Edit the inventory file parameters under [SSO] to specify a host on which to install central authentication:
+1. Enter a password in the sso_console_admin_password field, and any additional parameters based on your installation specifications.
+
+## Running the Red Hat Ansible Automation Platform installer
+
+With the inventory file updated, run the installer using the setup.sh playbook found in the installer package.
+
+1. Run the setup.sh playbook:
+
+```
+$ ./setup.sh
+```
+
+
+## Log in as a central authentication admin user
+
+With Red Hat Ansible Automation Platform installed, log in as an admin user to the central authentication server using the admin credentials that you specified in your inventory file.
+
+1. Navigate to your Ansible Automation Platform Central Authentication instance.
+2. Login using the admin credentials you specified in your inventory file, in the sso_console_admin_username and sso_console_admin_password fields.
+
+With Ansible Automation Platform Central Authentication successfully installed, and the admin user logged in, you can proceed by adding a user storage provider (such as LDAP) using the following procedures.

@@ -1,0 +1,9 @@
+# Viewing top templates job details for a specific cluster
+
+You can view job instances for top templates in a cluster to learn more about individual job runs associated with that template or to apply filters to further drill down into the data.
+
+1. From the navigation panel, select menu:Automation Analytics[Clusters].
+2. Click on a template name in Top Templates.
+3. Click btn:[View all jobs] in the modal that appears.
+
+The Job Explorer page displays all jobs on the chosen cluster associated with that template. The view presented will preserve the contextual information of the template based on the parameters selected in the Clusters view.

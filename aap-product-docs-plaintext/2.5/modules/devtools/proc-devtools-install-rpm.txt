@@ -1,0 +1,87 @@
+# Installing Ansible development tools from a package on RHEL
+
+Ansible development tools is bundled in the Ansible Automation Platform RPM (Red Hat Package Manager) package.
+Refer to the RPM installation documentation for information on installing Ansible Automation Platform.
+
+* You have installed RHEL.
+* You have registered your system with Red Hat Subscription Manager.
+* You have installed a containerization platform, for example Podman or Docker.
+
+1. Run the following command to check whether Simple Content Access (SCA) is enabled:
+
+```shell
+$ su subscription-manager status
+```
+
+
+If Simple Content Access is enabled, the output contains the following message:
+
+```
+Content Access Mode is set to Simple Content Access.
+```
+
+1. If Simple Content Access is not enabled, attach the Red Hat Ansible Automation Platform SKU:
+
+```shell
+$ subscription-manager attach --pool=<sku-pool-id>
+```
+
+2. Install Ansible development tools with the following command:
+
+```shell
+$ sudo dnf install --enablerepo=ansible-automation-platform-2.4-for-rhel-8-x86_64-rpms ansible-dev-tools
+```
+
+
+```
+$ sudo dnf install --enablerepo=ansible-automation-platform-2.4-for-rhel-9-x86_64-rpms ansible-dev-tools
+```
+
+
+Verify that the Ansible development tools components have been installed:
+
+
+```shell
+$ rpm -aq | grep ansible
+```
+
+
+The output displays the Ansible packages that are installed:
+
+
+```
+ansible-sign-0.1.1-2.el9ap.noarch
+ansible-creator-24.4.1-1.el9ap.noarch
+python3.11-ansible-runner-2.4.0-0.1.20240412.git764790f.el9ap.noarch
+ansible-runner-2.4.0-0.1.20240412.git764790f.el9ap.noarch
+ansible-builder-3.1.0-0.2.20240413.git167ed5c.el9ap.noarch
+ansible-dev-environment-24.1.0-2.el9ap.noarch
+ansible-core-2.16.6-0.1.20240413.gite636132.el9ap.noarch
+python3.11-ansible-compat-4.1.11-2.el9ap.noarch
+python3.11-pytest-ansible-24.1.2-1.el9ap.noarch
+ansible-lint-6.14.3-4.el9ap.noarch
+ansible-navigator-3.4.1-2.el9ap.noarch
+python3.11-tox-ansible-24.2.0-1.el9ap.noarch
+ansible-dev-tools-2.5-2.el9ap.noarch
+```
+
+
+On successful installation, you can view the help documentation for ansible-creator:
+
+
+```
+$ ansible-creator --help
+
+usage: ansible-creator [-h] [--version] command ...
+
+The fastest way to generate all your ansible content.
+
+Positional arguments:
+ command
+  add           Add resources to an existing Ansible project.
+  init          Initialize a new Ansible project.
+
+Options:
+ --version      Print ansible-creator version and exit.
+ -h     --help  Show this help message and exit
+```

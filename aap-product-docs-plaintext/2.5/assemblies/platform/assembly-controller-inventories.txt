@@ -1,0 +1,1152 @@
+# Inventories
+
+Red Hat Ansible Automation Platform works against a list of managed nodes or hosts in your infrastructure that are logically organized, using an inventory file.
+You can use the Red Hat Ansible Automation Platform installer inventory file to specify your installation scenario and describe host deployments to Ansible.
+By using an inventory file, Ansible can manage a large number of hosts with a single command.
+Inventories also help you use Ansible more efficiently by reducing the number of command line options you have to specify.
+Inventories are divided into groups and these groups contain the hosts.
+Groups can be sourced manually, by entering host names into automation controller, or from one of its supported cloud providers.
+
+[NOTE]
+----
+If you have a custom dynamic inventory script, or a cloud provider that is not yet supported natively in automation controller, you can also import that into automation controller.
+For more information, see Inventory file importing in Configuring automation execution.
+----
+From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+The Inventories window displays a list of the inventories that are currently available.
+The Inventory details page includes:
+* Name: The inventory name.
+* Status
+
+The statuses are:
+* Success: When the inventory source sync completed successfully
+* Disabled: No inventory source added to the inventory
+* Error: When the inventory source sync completed with error
+* Type: Identifies whether it is a standard inventory, a Smart inventory, or a constructed inventory.
+* Organization: The organization to which the inventory belongs.
+The following actions are available for the selected inventory:
+* Edit : Edit the properties for the selected inventory
+* Copy : Makes a copy of an existing inventory as a template for creating a new one
+* Delete inventory: Delete the selected inventory
+Click the Inventory name to display the Details page for the selected inventory, which shows the
+inventory's groups and hosts.
+
+# Smart Inventories
+
+Smart Inventories are collections of hosts defined by a stored search that can be viewed like a standard inventory and can be easily used with job runs.
+Organization administrators have admin permission for inventories in their organization and can create Smart Inventories.
+
+A Smart Inventory is identified by KIND=smart.
+
+You can define a Smart Inventory using the same method being used with Search.
+InventorySource is directly associated with an Inventory.
+
+
+[NOTE]
+----
+Smart inventories are deprecated and will be removed in a future release.
+Consider moving to constructed inventories for enhancements and replacement.
+----
+
+The Inventory model has the following new fields that are blank by default but are set accordingly for Smart Inventories:
+
+* kind is set to smart for Smart Inventories.
+* host_filter is set AND kind is set to smart for Smart Inventories.
+
+The host model has a related endpoint, smart_inventories that identifies a set of all the Smart Inventories a host is associated with.
+The membership table is updated every time a job runs against a smart inventory.
+
+
+[NOTE]
+----
+To update the memberships more frequently, you can change the AWX_REBUILD_SMART_MEMBERSHIP file-based setting to True. (The default is False).
+This updates memberships if the following events occur:
+* A new host is added
+* An existing host is modified (updated or deleted)
+* A new Smart Inventory is added
+* An existing Smart Inventory is modified (updated or deleted)
+----
+
+You can view inventories without being editable:
+
+* Names of Host and Group created as a result of an inventory source synchronization.
+* Group records cannot be edited or moved.
+
+You cannot create hosts from a Smart Inventory host endpoint (/inventories/N/hosts/) as with a normal inventory.
+The administrator of a Smart Inventory has permission to edit fields such as the name, description, variables, and the ability to delete, but does not have the permission to modify the host_filter, because that affects which hosts (that have a primary membership inside another inventory) are included in the smart inventory.
+
+host_filter only applies to hosts inside of inventories inside the Smart Inventory&#8217;s organization.
+
+To modify host_filter, you must be the organization administrator of the inventory&#8217;s organization.
+Organization administrators have implicit "admin" access to all inventories inside the organization, therefore, this does not convey any permissions they did not already possess.
+
+Administrators of the Smart Inventory can grant other users (who are not also admins of your organization) permissions such as "use" and "adhoc" to the smart inventory.
+These permit the actions indicated by the role, as with other standard inventories.
+However, this does not grant any special permissions to hosts (which live in a different inventory).
+It does not permit direct read permission to hosts, or permit them to see additional hosts under /#/hosts/, although they can still view the hosts under the smart inventory host list.
+
+In some situations, you can modify the following:
+
+* A new Host created manually on Inventory with Inventory sources.
+* Groups that were created as a result of inventory source synchronizations.
+* Variables on Host and Group are not changeable, even as the local System Administrator.
+
+Hosts associated with the Smart Inventory are manifested at view time.
+If the results of a Smart Inventory contains more than one host with identical hostnames, only one of the matching hosts is included as part of the Smart Inventory, ordered by Host ID.
+
+## Smart Host Filters
+
+You can use a search filter to populate hosts for an inventory. This feature uses the fact searching feature.
+
+Automation controller stores facts generated by an Ansible Playbook during a Job Template in the database whenever use_fact_cache=True is set per-Job Template.
+New facts are merged with existing facts and are per-host.
+These stored facts can be used to filter hosts with the /api/v2/hosts endpoint, using the GET query parameter host_filter.
+
+For example:
+
+/api/v2/hosts?host_filter=ansible_facts__ansible_processor_vcpus=8
+
+The host_filter parameter permits:
+
+* grouping with ()
+* use of the boolean and operator:
+* __ to reference related fields in relational fields
+* __ is used on ansible_facts to separate keys in a JSON key path
+* `[] is used to denote a json array in the path specification
+* "" can be used in the value when spaces are wanted in the value
+* "classic" Django queries may be embedded in the host_filter
+
+/api/v2/hosts/?host_filter=name=localhost
+/api/v2/hosts/?host_filter=ansible_facts__ansible_date_time__weekday_number="3"
+/api/v2/hosts/?host_filter=ansible_facts__ansible_processor[]="GenuineIntel"
+/api/v2/hosts/?host_filter=ansible_facts__ansible_lo__ipv6[]__scope="host"
+/api/v2/hosts/?host_filter=ansible_facts__ansible_processor_vcpus=8
+/api/v2/hosts/?host_filter=ansible_facts__ansible_env__PYTHONUNBUFFERED="true"
+/api/v2/hosts/?host_filter=(name=localhost or name=database) and (groups__name=east or groups__name="west coast") and ansible_facts__an
+
+You can search host_filter by host name, group name, and Ansible facts.
+
+Group search has the following format:
+
+groups.name:groupA
+
+Fact search has the following format:
+
+ansible_facts.ansible_fips:false
+
+You can also perform Smart Search searches, which consist of a host name and host description.
+
+host_filter=name=my_host
+
+
+[NOTE]
+----
+If a search term in host_filter is of string type, to make the value a number (for example, 2.66) or a JSON keyword (for example, null, true or false) valid, add double quotations around the value to prevent the controller from parsing it as a non-string:
+host_filter=ansible_facts__packages__dnsmasq[]__version="2.66"
+----
+
+# Constructed Inventories
+
+You can create a new inventory (called a constructed inventory) from a list of input inventories.
+
+A constructed inventory has copies of hosts and groups in its input inventories, permitting jobs to target groups of servers across many inventories.
+Groups and hostvars can be added to the inventory content, and hosts can be filtered to limit the size of the constructed inventory.
+
+Constructed inventories use the ansible.builtin.constructed inventory model.
+
+The key factors of a constructed inventory are:
+
+* The normal Ansible hostvars namespace is available
+* They provide groups
+
+Constructed inventories take source_vars and limit as inputs and transform its input_inventories into a new inventory, complete with groups. Groups (existing or constructed) can then be referenced in the limit field to reduce the number of hosts produced.
+
+You can construct groups based on these host properties:
+
+* RHEL major or minor versions
+* Windows hosts
+* Cloud based instances tagged in a certain region
+* other
+
+The examples described in later sections are organized by the structure of the input inventories.
+
+## Filtering on group name and variables
+
+You can filter on a combination of groups and variables.
+For example, you can filter hosts that match a group variable value and also match a host variable value.
+
+There are two approaches to executing this filter:
+
+* Define two groups: one group to match the group variable and the other group to match the host variable value.
+Use the limit pattern to return the hosts that are in both groups.
+This is the recommended approach.
+* Define one group. In the definition, include the condition that the group and host variables must match specific values.
+Use the limit pattern to return all the hosts in the new group.
+
+The following inventory file defines four hosts and sets group and host variables.
+It defines a product group, a sustaining group, and it sets two hosts to a shutdown state.
+
+The goal is to create a filter that returns only production hosts that are shutdown.
+
+[account_1234]
+host1
+host2 state=shutdown
+
+[account_4321]
+host3
+host4 state=shutdown
+
+[account_1234:vars]
+account_alias=product_dev
+
+[account_4321:vars]
+account_alias=sustaining
+
+The goal here is to return only shutdown hosts that are present in the group with the account_alias variable equal to product_dev.
+There are two approaches to this, both shown in YAML format. The first one suggested is recommended.
+
+1. Construct 2 groups, limit to intersection:
+
+source_vars:
+
+```
+plugin: constructed
+strict: true
+groups:
+  is_shutdown: state | default("running") == "shutdown"
+  product_dev: account_alias == "product_dev"
+```
+
+
+limit: is_shutdown:&product_dev
+
+This constructed inventory input creates a group for both categories and uses the limit (host pattern) to only return hosts that
+are in the intersection of those two groups, which is documented in Patterns:targeting hosts and groups.
+
+When a variable is or is not defined (depending on the host), you can give a default.
+For example, use | default("running") if you know what value it should have when it is not defined.
+This helps with debugging, as described in Debugging tips.
+2. Construct 1 group, limit to group:
+
+source_vars:
+
+```
+plugin: constructed
+strict: true
+groups:
+  shutdown_in_product_dev: state | default("running") == "shutdown" and account_alias == "product_dev"
+```
+
+
+limit: shutdown_in_product_dev
+
+This input creates one group that only includes hosts that match both criteria.
+The limit is then just the group name by itself, returning host2.
+The same as the earlier approach.
+
+## Debugging tips
+
+It is important to set the strict parameter to true so that you can debug problems with your templates.
+If the template fails to render, an error occurs in the associated inventory update for that constructed inventory.
+
+When encountering errors, increase verbosity to get more details.
+
+Giving a default, such as | default("running") is a generic use of Jinja2 templates in Ansible.
+Doing this avoids errors from the template when you set strict: true.
+
+You can also set strict: false, and so enable the template to produce an error, which results in the host not getting included in that group. However, doing this makes it difficult to debug issues in the future if your templates continue to grow in complexity.
+
+You might still have to debug the intended function of the templates if they are not producing the expected inventory content.
+For example, if a groups group has a complex filter (like shutdown_in_product_dev) but does not contain any hosts in the resultant constructed inventory, then use the compose parameter to help debug.
+
+For example:
+
+source_vars:
+
+plugin: constructed
+strict: true
+groups:
+  shutdown_in_product_dev: state | default("running") == "shutdown" and account_alias == "product_dev"
+compose:
+  resolved_state: state | default("running")
+  is_in_product_dev: account_alias == "product_dev"
+
+limit: ``
+
+Running with a blank limit returns all hosts.
+You can use this to inspect specific variables on specific hosts, giving insight into where problems in the groups lie.
+
+## Nested groups
+
+A nested group consists of two groups where one is a child of the other.
+In the following example, the child group has another host inside of it, and the parent group has a variable defined.
+
+Because of the way Ansible core operates, the variable of the parent group is available in the namespace as a playbook is running, and can be used for
+filtering.
+
+The following example inventory file, nested.yml is in YAML format:
+
+all:
+  children:
+    groupA:
+      vars:
+        filter_var: filter_val
+      children:
+        groupB:
+          hosts:
+            host1: {}
+    ungrouped:
+      hosts:
+        host2: {}
+
+Because host1 is in groupB, it is also in groupA.
+
+Use the following YAML format to filter on nested group names:
+
+`source_vars`:
+
+plugin: constructed
+
+`limit`: `groupA`
+
+Use the following YAML format to filter on a group variable, even if the host is indirectly a member of that group.
+
+In the inventory content, note that host2 is not expected to have the variable filter_var defined, because it is not in any of the groups.
+Because strict: true is used, use a default value so that hosts without that variable are defined.
+Using this, host2, returns false from the expression, instead of producing an error.
+host1 inherits the variable from its groups, and is returned.
+
+source_vars:
+
+plugin: constructed
+strict: true
+groups:
+  filter_var_is_filter_val: filter_var | default("") == "filter_val"
+
+limit: filter_var_is_filter_val
+
+## Ansible facts
+
+To create an inventory with Ansible facts, you must run a playbook against the inventory that has the setting gather_facts: true.
+The facts differ system-to-system.
+The following examples are not intended to address all known scenarios.
+
+### Filter on environment variables
+
+The following example involves filtering on environmental variables using the YAML format:
+
+source_vars:
+
+plugin: constructed
+strict: true
+groups:
+  hosts_using_xterm: ansible_env.TERM == "xterm"
+
+limit: hosts_using_xterm
+
+### Filter hosts by processor type
+
+The following example involves filtering hosts by processor type (Intel) using the YAML format:
+
+source_vars:
+
+plugin: constructed
+strict: true
+groups:
+  intel_hosts: "GenuineIntel" in ansible_processor
+
+limit: intel_hosts
+
+
+[NOTE]
+----
+Hosts in constructed inventories are not counted against your license allotment because they are referencing the original inventory host.
+Additionally, hosts that are disabled in the original inventories are not included in the constructed inventory.
+----
+
+An inventory update run using ansible-inventory creates the constructed inventory contents.
+
+This is always configured to update-on-launch before a job, but you can still select a cache timeout value in case this takes too long.
+
+When creating a constructed inventory, the API ensures that it always has one inventory source associated with it.
+All inventory updates have an associated inventory source, and the fields needed for constructed inventory (source_vars and limit) are fields already present on the inventory source model.
+
+# Inventory Plugins
+
+Inventory updates use dynamically-generated YAML files which are parsed by their inventory plugin.
+In automation controller v4.4, you can provide the inventory plugin configuration directly to automation controller using the inventory source source_vars for the following inventory sources:
+
+* Amazon Web Services EC2
+* Google Compute Engine
+* Microsoft Azure Resource Manager
+* VMware vCenter
+* Red Hat Satellite 6
+* Red Hat Insights
+* OpenStack
+* Red Hat Virtualization
+* Red Hat Ansible Automation Platform
+* Terraform State
+* OpenShift Virtualization
+
+Newly created configurations for inventory sources contain the default plugin configuration values.
+If you want your newly created inventory sources to match the output of a legacy source, you must apply a specific set of configuration values for that source.
+To ensure backward compatibility, automation controller uses "templates" for each of these sources to force the output of inventory plugins into the legacy
+format.
+
+For more information about sources and their templates, see Supported inventory plugin templates.
+
+source_vars that contain plugin: foo.bar.baz as a top-level key are replaced with the fully-qualified inventory plugin name at runtime based on the InventorySource source.
+For example, if you select ec2 for the InventorySource then, at run-time, plugin is  set to amazon.aws.aws_ec2.
+
+# Add a new inventory
+
+Adding a new inventory involves the following components:
+
+* Adding permissions to inventories
+* Adding groups to inventories
+* Adding a host
+* Adding a source
+* View completed jobs
+
+Use the following procedure to create a inventory:
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+The Inventories window displays a list of the inventories that are currently available.
+2. Click btn:[Create inventory], and select the type of inventory to create.
+3. Enter the appropriate details into the following fields:
+* Name: Enter a name appropriate for this inventory.
+* Optional: Description: Enter an arbitrary description as appropriate.
+* Organization: Required. Choose among the available organizations.
+* Only applicable to Smart Inventories: Smart host filter: Populate the hosts for this inventory by using a search filter.
+
+Example
+
+name__icontains=RedHat.
+
+These options are based on the organization you chose.
+
+Filters are similar to tags in that tags are used to filter certain hosts that contain those names.
+Therefore, to populate the Smart host filter field, specify a tag that has the hosts you want, not the hosts themselves.
+
+Filters are case-sensitive.
+* Instance groups: Select the instance group or groups for this inventory to run on.
+
+You can select many instance groups and sort them in the order that you want them run.
+* Optional: Labels: Supply labels that describe this inventory, so they can be used to group and filter inventories and jobs.
+* Only applicable to constructed inventories: Input inventories: Specify the source inventories to include in this constructed inventory.
+Empty groups from input inventories are copied into the constructed inventory.
+* Optional:(Only applicable to constructed inventories): Cached timeout (seconds): Set the length of time you want the cache plugin data to timeout.
+* Only applicable to constructed inventories: Verbosity: Control the level of output that Ansible produces as the playbook executes related to inventory sources associated with constructed inventories.
+
+Select the verbosity from:
+* Normal
+* Verbose
+* More verbose
+* Debug
+* Connection Debug
+* WinRM Debug
+* Verbose logging includes the output of all commands.
+* More verbose provides more detail than Verbose.
+* Debug logging is exceedingly verbose and includes information about SSH operations that can be useful in certain support instances. Most users do not need to see debug mode output.
+* Connection Debug enables you to run SSH in verbose mode, providing debugging information about the SSH connection progress.
+* WinRM Debug used for verbosity specific to windows remote management
+
+Click the  icon for information on How to use the constructed inventory plugin.
+* Only applicable to constructed inventories: Limit: Restricts the number of returned hosts for the inventory source associated with the constructed inventory.
+You can paste a group name into the limit field to only include hosts in that group.
+For more information, see the Source vars setting.
+* Only applicable to standard inventories: Options: Check the Prevent Instance Group Fallback option to enable only the instance groups listed in the Instance Groups field to execute the job.
+If unchecked, all available instances in the execution pool are used based on the hierarchy described in
+Control where a job runs.
+* Variables (Source vars for constructed inventories):
+* Variables Variable definitions and values to apply to all hosts in this inventory.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+* Source vars for constructed inventories creates groups, specifically under the groups key of the data.
+It accepts Jinja2 template syntax, renders it for every host, makes a true or false evaluation, and includes the host in the group (from the key of the entry) if the result is true.
+This is particularly useful because you can paste that group name into the limit field to only include hosts in that group.
+4. Click btn:[Create inventory].
+
+After saving the new inventory, you can proceed with configuring permissions, groups, hosts, sources, and view completed jobs, if applicable to the type of inventory.
+
+## Adding permissions to inventories
+
+Use the following procedure to add permissions to inventories:
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select a template, and in the User Access or Team Access tab, click btn:[Add roles].
+3. Select a user or team to add and click btn:[Next].
+4. Select the checkbox next to a name to add one or more users or teams from the list as members.
+5. Click btn:[Next].
+6. Select the roles you want the selected users or teams to have.
+Different resources have different options available.
+7. Click btn:[Finish] to apply the roles to the selected users or teams and to add them as members.
+
+The updated roles assigned for each user and team are displayed.
+
+* To remove roles for a particular user, click the  icon next to its resource.
+
+This launches a confirmation window, asking you to confirm the disassociation.
+
+## Adding groups to inventories
+
+Inventories are divided into groups, which can contain hosts and other groups.
+Groups are only applicable to standard inventories and are not a configurable directly through a Smart Inventory.
+You can associate an existing group through hosts that are used with standard inventories.
+
+The following actions are available for standard inventories:
+
+* Create a new Group
+* Create a new Host
+* Run a command on the selected Inventory
+* Edit Inventory properties
+* View activity streams for Groups and Hosts
+* Obtain help building your Inventory
+
+
+[NOTE]
+----
+Inventory sources are not associated with groups.
+Spawned groups are top-level and can still have child groups.
+All of these spawned groups can have hosts.
+----
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the Inventory name you want to add groups to.
+3. In the Inventory Details page, select the Groups tab.
+4. Click btn:[Create group].
+5. Enter the appropriate details:
+* Name: Required
+* Optional: Description: Enter a description as appropriate.
+* Optional: Variables: Enter definitions and values to be applied to all hosts in this group.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+6. Click btn:[Create group].
+
+When you have added a group to a template, the Group Details page is displayed.
+
+### Adding groups within groups
+
+When you have added a group to a template, the Group Details page is displayed.
+
+1. Select the Related Groups tab.
+2. Click btn:[Add existing group] to add a group that already exists in your configuration or btn:[Create group] to create a new group.
+3. If creating a new group, enter the appropriate details into the required and optional fields:
+* Name (required):
+* Optional: Description: Enter a description as appropriate.
+* Optional: Variables: Enter definitions and values to be applied to all hosts in this group.
+Enter variables using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+4. Click btn:[Create group].
+5. The Create group window closes and the newly created group is displayed as an entry in the list of groups associated with the group that it was
+created for.
+
+If you select to add an existing group, available groups appear in a separate selection window.
+
+When you select a group, it is displayed in the list of groups associated with the group.
+
+* To configure additional groups and hosts under the subgroup, click the name of the subgroup from the list of groups and repeat the steps listed in this section.
+
+### View or edit inventory groups
+
+The groups list view displays all your inventory groups, or you can filter it to only display the root groups.
+An inventory group is considered a root group if it is not a subset of another group.
+
+You can delete a subgroup without concern for dependencies, because automation controller looks for dependencies such as child groups or hosts.
+If any exist, a confirmation window displays for you to select whether to delete the root group and all of its subgroups and hosts; or to promote the subgroups so they become the top-level inventory groups, along with their hosts.
+
+## Adding hosts to an inventory
+
+You can configure hosts for the inventory and for groups and groups within groups.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want to add groups to.
+3. In the Inventory Details page, select the Hosts tab.
+4. Click btn:[Create host].
+5. Select whether to add a host that already exists in your configuration or create a new host.
+6. If creating a new host, set the toggle to On to include this host while running jobs.
+7. Enter the appropriate details:
+* Name (required):
+* Optional: Description: Enter a description as appropriate.
+* Optional: Variables: Enter definitions and values to be applied to all hosts in this group, as in the following example:
+
+{
+  ansible_user : <username to ssh into>
+  ansible_ssh_pass : <password for the username>
+  ansible_become_pass: <password for becoming the root>
+}
+
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+8. Click btn:[Create host].
+9. The Create host window closes and the newly created host is displayed in the list of hosts associated with the group that it was created for.
+
+If you select to add an existing host, available hosts appear in a separate selection window.
+
+When you select a host, it is displayed in the list of hosts associated with the group.
+10. You can disassociate a host from this screen by selecting the host and clicking the  icon.
+
+[NOTE]
+----
+You can also run ad hoc commands from this screen.
+For more information, see Running Ad Hoc commands.
+----
+11. To configure additional groups for the host, click the name of the host from the list of hosts.
+
+This opens the Details tab of the selected host.
+12. Select the Groups tab to configure groups for the host.
+13. Click btn:[Associate groups] to associate the host with an existing group.
+Available groups appear in a separate selection window.
+14. Select the groups to associate with the host and click btn:[Confirm].
+
+When a group is associated, it is displayed in the list of groups associated with the host.
+15. If you used a host to run a job, you can view details about those jobs in the Completed Jobs tab of the host.
+16. Click btn:[Expanded] to view details about each job.
+
+
+[NOTE]
+----
+You can create hosts in bulk by using the newly added endpoint in the API, /api/v2/bulk/host_create.
+This endpoint accepts JSON and you can specify the target inventory and a list of hosts to add to the inventory.
+These hosts must be unique within the inventory.
+Either all hosts are added, or an error is returned indicating why the operation was not able to complete.
+Use the OPTIONS request to return the relevant schema.
+For more information, see Bulk endpoints in the Automation Controller API Guide.
+----
+
+## Adding a source
+
+Inventory sources are not associated with groups.
+Spawned groups are top-level and can still have child groups.
+All of these spawned groups can have hosts.
+Adding a source to an inventory only applies to standard inventories.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want to add a source to.
+3. In the Inventory Details page, select the Sources tab.
+4. Click btn:[Create source].
+5. Enter the appropriate details:
+* Name (required):
+* Optional: Description: Enter a description as appropriate.
+* Optional: Execution Environment: Click the  icon or enter the name of the execution environment with which you want to run your inventory imports. For more information on building an execution environment, see Execution environments.
+* Source: Choose a source for your inventory.
+For more information about sources, and supplying the appropriate information, see Inventory sources.
+6. When the information for your chosen Inventory sources is complete, you can optionally specify other common parameters, such as verbosity, host filters, and variables.
+7. Use the Verbosity menu to select the level of output on any inventory source's update jobs.
+8. Use the Host filter field to specify only matching host names to be imported into automation controller.
+9. In the Enabled variable field, specify that automation controller retrieves the enabled state from the dictionary of host variables.
+You can specify the enabled variable by using dot notation as 'foo.bar', in which case the lookup searches nested dictionaries, equivalent to: from_dict.get('foo', {}).get('bar', default).
+10. If you specified a dictionary of host variables in the Enabled variable field, you can give a value to enable on import.
+For example, for enabled_var='status.power_state' and 'enabled_value='powered_on' in the following host variables, the host is marked enabled:
+
+{
+"status": {
+"power_state": "powered_on",
+"created": "2020-08-04T18:13:04+00:00",
+"healthy": true
+},
+"name": "foobar",
+"ip_address": "192.168.2.1"
+}
+
+If power_state is any value other than powered_on, then the host is disabled when imported into automation controller.
+If the key is not found, then the host is enabled.
+11. All cloud inventory sources have the following update options:
+* Overwrite: If checked, any hosts and groups that were previously present on the external source but are now removed, are removed from
+the automation controller inventory.
+Hosts and groups that were not managed by the inventory source are promoted to the next manually created group, or, if there is no manually created group to promote them into, they are left in the "all" default group for the inventory.
+
+When not checked, local child hosts and groups not found on the external source remain untouched by the inventory update process.
+* Overwrite variables: If checked, all variables for child groups and hosts are removed and replaced by those found on the external source.
+
+When not checked, a merge is performed, combining local variables with those found on the external source.
+* Update on launch: Each time a job runs using this inventory, refresh the inventory from the selected source before executing job tasks.
+
+To avoid job overflows if jobs are spawned faster than the inventory can synchronize, selecting this enables you to configure a Cache Timeout to previous cache inventory synchronizations for a certain number of seconds.
+
+The Update on launch setting refers to a dependency system for projects and inventory, and does not specifically exclude two jobs from running at the same time.
+
+If a cache timeout is specified, then the dependencies for the second job are created, and it uses the project and inventory update that the first job spawned.
+
+Both jobs then wait for that project or inventory update to finish before proceeding.
+If they are different job templates, they can then both start and run at the same time, if the system has the capacity to do so.
+If you intend to use automation controller&#8217;s provisioning callback feature with a dynamic inventory source, Update on launch must be set for the inventory
+group.
+
+If you synchronize an inventory source that uses a project that has Update On launch set, then the project might automatically update (according to
+cache timeout rules) before the inventory update starts.
+
+You can create a job template that uses an inventory that sources from the same project that the template uses.
+In such a case, the project updates and then the inventory updates (if updates are not already in progress, or if the cache timeout has not already expired).
+12. Review your entries and selections.
+This enables you to configure additional details, such as schedules and notifications.
+13. To configure schedules associated with this inventory source, click the Schedules tab:
+* If schedules are already set up, then review, edit, enable or disable your schedule preferences.
+* If schedules have not been set up, for more information about setting up schedules, see Schedules.
+
+## Configuring notifications for the source
+
+Use the following procedure to configure notifications for the source:
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want to configure notifications for.
+3. In the inventory Details page, select the Notifications tab.
+
+[NOTE]
+----
+The Notifications tab is only present when you have saved the newly-created source.
+----
+4. If notifications are already set up, use the toggles to enable or disable the notifications to use with your particular source.
+For more information, see Enable and Disable Notifications.
+5. If you have not set up notifications, see Notifications for more information.
+6. Review your entries and selections.
+7. Click btn:[Save].
+
+When you define a source, it is displayed in the list of sources associated with the inventory.
+From the Sources tab you can perform a sync on a single source, or sync all of them at once.
+You can also perform additional actions such as scheduling a sync process, and edit or delete the source.
+
+### Inventory sources
+
+Choose a source which matches the inventory type against which a host can be entered:
+
+* Sourcing from a Project
+* Amazon Web Services EC2
+* Google Compute Engine
+* Microsoft Azure Resource Manager
+* VMware vCenter
+* Red Hat Satellite 6
+* Red Hat Insights
+* OpenStack
+* Red Hat Virtualization
+* Red Hat Ansible Automation Platform
+* Terraform State
+
+#### Sourcing from a Project
+
+An inventory that is sourced from a project means that it uses the SCM type from the project it is tied to.
+For example, if the project&#8217;s source is from GitHub, then the inventory uses the same source.
+
+Use the following procedure to configure a project-sourced inventory:
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Create source page, select Sourced from a Project from the Source list.
+5. Enter the following details in the additional fields:
+* Optional: Source control branch/tag/commit: Enter the SCM branch, tags, commit hashes, arbitrary refs, or revision number (if applicable) from the source control (Git or Subversion) to checkout.
+
+This field only displays if the sourced project has the Allow branch override option checked. For further information, see SCM Types - Git and Subversion.
+
+
+
+Some commit hashes and refs might not be available unless you also give a custom refspec in the next field.
+If left blank, the default is HEAD which is the last checked out Branch/Tag/Commit for this project.
+* Optional: Credential: Specify the credential to use for this source.
+* Project (required): Pre-populates with a default project, otherwise, specify the project this inventory is using as its source. Click the
+ icon to choose from a list of projects.
+If the list is extensive, use the search to narrow the options.
+* Inventory file (required): Select an inventory file associated with the sourced project.
+If not already populated, you can type it into the text field within the menu to filter extraneous file types.
+In addition to a flat file inventory, you can point to a directory or an inventory script.
+
+
+6. Optional: You can specify the verbosity, host filter, enabled variable/value, and update options as described in Adding a source.
+7. Optional: To pass to the custom inventory script, you can set environment variables in the Source variables field.
+You can also place inventory scripts in source control and then run it from a project.
+For more information, see Inventory File Importing in Configuring automation execution.
+
+
+[NOTE]
+----
+If you are executing a custom inventory script from SCM, ensure that you set the execution bit (chmod +x) for the script in your upstream source control.
+If you do not, automation controller throws a [Error 13] Permission denied error on execution.
+----
+
+#### Amazon Web Services EC2
+
+Use the following procedure to configure an AWS EC2-sourced inventory.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Create source page, select Amazon EC2 from the Source list.
+5. The Create source window expands with additional fields.
+Enter the following details:
+* Optional: Credential: Choose from an existing AWS credential.
+For more information, see Managing user credentials.
+
+If automation controller is running on an EC2 instance with an assigned IAM Role, the credential can be omitted, and the security credentials from
+the instance metadata are used instead.
+For more information about using IAM Roles, see IAM roles for Amazon EC2_documentation_at_Amazon documentation at Amazon.
+6. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in
+Adding a source.
+7. Use the Source variables field to override variables used by the aws_ec2 inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see the
+aws inventory plugin documentation.
+
+
+[NOTE]
+----
+If you only use include_filters, the AWS plugin always returns all the hosts.
+To use this correctly, the first condition on the or must be on filters and then build the rest of the OR conditions on a list of
+include_filters.
+----
+
+#### Google Compute Engine
+
+Use the following procedure to configure a Google-sourced inventory:
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Add new source page, select Google Compute Engine from the Source list.
+5. The Create source window expands with the required Credential field.
+Choose from an existing GCE Credential.
+For more information, see [Credentials].
+6. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
+7. Use the Source Variables field to override variables used by the gcp_compute inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see the gcp_compute inventory plugin documentation.
+
+#### Microsoft Azure resource manager
+
+Use the following procedure to configure an Microsoft Azure Resource Manager-sourced inventory.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Create source page, select Microsoft Azure Resource Manager from the Source list.
+5. Enter the following details in the additional fields:
+6. Optional: Credential: Choose from an existing Azure Credential.
+For more information, see Managing user credentials..
+7. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
+8. Use the Source variables field to override variables used by the azure_rm inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see the
+azure_rm inventory plugin documentation.
+
+#### VMware vCenter
+
+Use the following procedure to configure a VMWare-sourced inventory.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Create source page, select VMware vCenter from the Source list.
+5. The Create source window expands with additional fields.
+Enter the following details:
+* Optional: Credential: Choose from an existing VMware credential.
+For more information, see Managing user credentials.
+6. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
+7. Use the Source Variables field to override variables used by the vmware_inventory inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see the vmware_inventory inventory plugin.
+
+
+[NOTE]
+----
+VMWare properties have changed from lower case to camel case.
+Automation controller provides aliases for the top-level keys, but lower case keys in nested properties have been discontinued.
+For a list of valid and supported properties, see Using Virtual machine attributes in VMware dynamic inventory plugin.
+----
+
+#### Red Hat Satellite 6
+
+Use the following procedure to configure a Red Hat Satellite-sourced inventory.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Create source page,, select Red Hat Satellite 6 from the Source list.
+5. The Create source window expands with additional fields.
+Enter the following details:
+* Optional: Credential: Choose from an existing Satellite Credential.
+For more information, see Managing user credentials.
+6. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
+7. Use the Source Variables field to specify parameters used by the foreman inventory source.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see the Foreman inventory source in the Ansible documentation.
+
+If you meet an issue with the automation controller inventory not having the "related groups" from Satellite, you might need to define these variables in the inventory source.
+For more information, see Red Hat Satellite 6.
+
+If you see the message, "no foreman.id" variable(s) when syncing the inventory, see the solution on the Red Hat Customer Portal at:
+https://access.redhat.com/solutions/5826451.
+Be sure to login with your customer credentials to access the full article.
+
+#### Red Hat Insights
+
+Use the following procedure to configure a Red Hat Insights-sourced inventory.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Create source page, select Red Hat Insights from the Source list.
+5. The Create source window expands with additional fields.
+Enter the following details:
+* Optional: Credential: Choose from an existing Red Hat Insights Credential.
+For more information, see Managing user credentials.
+6. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
+7. Use the Source Variables field to override variables used by the insights inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see insights inventory plugin.
+
+#### OpenStack
+
+Use the following procedure to configure an OpenStack-sourced inventory.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Create source page, select OpenStack from the Source list.
+5. The Create source window expands with additional fields.
+Enter the following details:
+* Optional: Credential: Choose from an existing OpenStack Credential.
+For more information, see Managing user credentials.
+6. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
+7. Use the Source Variables field to override variables used by the openstack inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see openstack inventory plugin.
+
+#### Red Hat Virtualization
+
+Use the following procedure to configure a Red Hat virtualization-sourced inventory.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Create source page, select Red Hat Virtualization from the Source list.
+5. The Create source window expands with additional fields.
+Enter the following details:
+* Optional: Credential: Choose from an existing Red Hat Virtualization Credential.
+For more information, see Managing user credentials.
+6. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
+7. Use the Source Variables field to override variables used by the ovirt inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see ovirt inventory plugin
+
+
+[NOTE]
+----
+Red Hat Virtualization (ovirt) inventory source requests are secure by default.
+To change this default setting, set the key ovirt_insecure to true in source_variables, which is only available from the API details of the inventory source at the /api/v2/inventory_sources/N/ endpoint.
+----
+
+#### Red Hat Ansible Automation Platform
+
+Use the following procedure to configure an automation controller-sourced inventory.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Create source page, select Red Hat Ansible Automation Platform from the Source list.
+5. The Create source window expands with additional fields.
+Enter the following details:
+* Optional: Credential: Choose from an existing Red Hat Ansible Automation Platform Credential.
+For more information, see Managing user credentials.
+6. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
+7. Use the Source Variables field to override variables used by the controller inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see Controller inventory plugin.
+This requires your Red Hat Customer login.
+
+#### Terraform State
+
+This inventory source uses the terraform_state inventory plugin from the cloud.terraform collection.
+The plugin parses a terraform state file and add hosts for AWS EC2, GCE, and Microsoft Azure instances.
+
+1. From the navigation panel, select menu:Automation Execution[Projects].
+2. On the Projects page, click btn:[Create project] to start the Create Project window.
+* Enter the appropriate details according to the steps in Adding a new project.
+3. From the navigational panel, select menu:Automation Execution[Infrastructure > Inventories].
+4. Select the inventory that you want to add a source to.
+5. In the Sources tab, click btn:[Create source].
+6. From the menu:Source[] menu, select Terraform State.
+* The Create source window expands with the optional Credential field.
+
+Choose an existing Terraform backend configuration credential. For more information, see Terraform backend configuration.
+7. Enable the options to Overwrite and Update on Launch.
+8. Use the Source Variables field to override variables used by the terraform_state inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see the terraform_state file.
+
+The backend_type variable is required by the Terraform State inventory plugin.
+This should match the remote backend configured in the Terraform backend credential.
+The following is an example Amazon S3 backend:
+
+```
+backend_type: s3
+```
+
+9. Select an Execution Environment that has a Terraform binary.
+This is required for the inventory plugin to run the Terraform commands that read inventory data from the Terraform state file.
+
+For more information, see the Terraform EE readme that has an example execution environment configuration with a Terraform binary.
+
+##### Terraform provider for Ansible Automation Platform
+
+Inventories created this way are managed by Terraform and you must not edit them in Ansible Automation Platform as it can introduce drift to the Terraform deployment.
+
+You can create inventories and hosts within the Terraform configuration by using the Terraform provider for Ansible Automation Platform.
+For more information, see the AAP Provider section of the Terraform documentation.
+
+#### OpenShift Virtualization
+
+This inventory source uses a cluster that is able to deploy Red Hat OpenShift Container Platform Virtualization.
+To configure a Red Hat OpenShift Container Platform Virtualization, you need a virtual machine deployed in a specific namespace and an OpenShift or Kubernetes API Bearer Token credential.
+
+1. From the navigational panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory that you want to add a source to.
+3. In the Sources tab, click btn:[Add source].
+4. From the menu:Source[] menu, select OpenShift Virtualization.
+* The Add new source window expands with the required Credential field.
+
+Choose from an existing Kubernetes API Bearer Token credential.
+For more information, see OpenShift or Kubernetes API Bearer Token credential type.
+In this example, the cmv2.engineering.redhat.com credential is used.
+5. You can optionally specify the Verbosity, Host Filter, Enabled Variable/Value, and Update options as described in the Adding a source steps.
+6. Use the Source Variables field to override variables used by the kubernetes inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see the kubevirt.core.kubevirt inventory source documentation.
+
+In the following example, the connections variable is used to specify access to a particular namespace in a cluster:
+
+```
+---
+connections:
+- namespaces:
+  - hao-test
+```
+
+7. Click btn:[Save] and then click btn:[Sync] to sync the inventory.
+
+### Export old inventory scripts
+
+Despite the removal of the custom inventory scripts API, the scripts are still saved in the database.
+The commands described in this section enable you to recover the scripts from the database in a format that is suitable for you to subsequently check into source control.
+
+Use the following commands:
+
+
+```
+$ awx-manage export_custom_scripts --filename=my_scripts.tar
+
+Dump of old custom inventory scripts at my_scripts.tar
+```
+
+
+Making use of the output:
+
+
+```
+$ mkdir my_scripts
+$ tar -xf my_scripts.tar -C my_scripts
+```
+
+
+The name of the scripts has the form: <pk>_<name>.
+This is the naming scheme used for project folders.
+
+
+```
+$ ls my_scripts
+10inventory_script_rawhook             _19                                       _30inventory_script_listenhospital
+_11inventory_script_upperorder          _1inventory_script_commercialinternet45   _4inventory_script_whitestring
+_12inventory_script_eastplant           _22inventory_script_pinexchange           _5inventory_script_literaturepossession
+_13inventory_script_governmentculture   _23inventory_script_brainluck             _6inventory_script_opportunitytelephone
+_14inventory_script_bottomguess         _25inventory_script_buyerleague           _7inventory_script_letjury
+_15inventory_script_wallisland          _26inventory_script_lifesport             _8random_inventory_script
+16inventory_script_wallisland          _27inventory_script_exchangesomewhere     _9random_inventory_script
+_17inventory_script_bidstory            _28inventory_script_boxchild
+_18p                                    _29__inventory_script_wearstress
+```
+
+
+Each file contains a script.
+Scripts can be bash/python/ruby/more, so the extension is not included.
+They are all directly executable.
+Executing the script dumps the inventory data.
+
+
+```
+$ ./my_scripts/11__inventory_script_upperorder
+{"group\ud801\udcb0\uc20e\u7b0e\ud81c\udfeb\ub12b\ub4d0\u9ac6\ud81e\udf07\u6ff9\uc17b": {"hosts":
+["host_\ud821\udcad\u68b6\u7a51\u93b4\u69cf\uc3c2\ud81f\uddbe\ud820\udc92\u3143\u62c7",
+"host_\u6057\u3985\u1f60\ufefb\u1b22\ubd2d\ua90c\ud81a\udc69\u1344\u9d15",
+"host_\u78a0\ud820\udef3\u925e\u69da\ua549\ud80c\ude7e\ud81e\udc91\ud808\uddd1\u57d6\ud801\ude57",
+"host_\ud83a\udc2d\ud7f7\ua18a\u779a\ud800\udf8b\u7903\ud820\udead\u4154\ud808\ude15\u9711",
+"host_\u18a1\u9d6f\u08ac\u74c2\u54e2\u740e\u5f02\ud81d\uddee\ufbd6\u4506"], "vars": {"ansible_host": "127.0.0.1", "ansible_connection":
+"local"}}}
+```
+
+
+You can verify functionality with ansible-inventory.
+This gives the same data, but reformatted.
+
+
+```
+$ ansible-inventory -i ./my_scripts/_11__inventory_script_upperorder --list --export
+```
+
+
+In the preceding example, you can cd into my_scripts and then issue a git init command, add the scripts you want, push it to source control,
+and then create an SCM inventory source in the user interface.
+
+For more information about syncing or using custom inventory scripts, see Inventory file importing in Configuring automation execution.
+
+# View completed jobs
+
+If you use an inventory to run a job, you can view details about those jobs in the Jobs tab of the inventory and click Expanded
+to view details about each job.
+
+# Running Ad Hoc commands
+
+Ad hoc refers to using Ansible to perform a quick command, using /usr/bin/ansible, rather than the orchestration language, which is /usr/bin/ansible-playbook.
+An example of an ad hoc command might be rebooting 50 machines in your infrastructure.
+Anything you can do ad hoc can be accomplished by writing a playbook.
+Playbooks can also glue many other operations together.
+
+Use the following procedure to run an ad hoc command:
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want to run an ad hoc command with.
+3. Select an inventory source from the Hosts or Groups tab.
+The inventory source can be a single group or host, a selection of many hosts, or a selection of many groups.
+4. Click btn:[Run Command].
+The Run command window opens.
+5. Enter the following information:
+* Module: Select one of the modules that the supports running commands against.
+
+* Arguments: Provide arguments to be used with the module you selected.
+* Limit: Enter the limit used to target hosts in the inventory.
+To target all hosts in the inventory enter all or *, or leave the field blank.
+This is automatically populated with whatever was selected in the previous view before clicking the launch button.
+* Machine Credential: Select the credential to use when accessing the remote hosts to run the command.
+Choose the credential containing the username and SSH key or password that Ansible needs to log in to the remote hosts.
+* Verbosity: Select a verbosity level for the standard output.
+* Forks: If needed, select the number of parallel or simultaneous processes to use while executing the command.
+* Show Changes: Select to enable the display of Ansible changes in the
+standard output.
+The default is OFF.
+* Enable Privilege Escalation: If enabled, the playbook is run with administrator privileges.
+This is the equivalent of passing the --become option to the ansible command.
+* Extra Variables: Provide extra command line variables to be applied when running this inventory.
+Enter variables using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+6. Click btn:[Next] to select the execution environment you want the ad hoc command to be run against.
+7. Click btn:[Next] to select the credential you want to use.
+8. Click btn:[Launch].
+The results display in the Output tab of the module's job window.

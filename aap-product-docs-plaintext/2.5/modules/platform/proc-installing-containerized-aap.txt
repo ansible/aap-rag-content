@@ -1,0 +1,225 @@
+# Installing containerized Ansible Automation Platform
+
+You can control the installation of Ansible Automation Platform with inventory files. Inventory files define the hosts and containers used and created, variables for components, and other information needed to customize the installation.
+
+# Example inventory files
+
+Example inventory files are provided in this document that you can copy and change to quickly get started. You can find additional example inventory files in Container supported topologies in Tested deployment models.
+
+To use the example inventory files, replace the < > placeholders with your specific variables, and update the host names. Refer to the README.md file in the installation directory for more information about optional and required variables.
+
+Use the following example inventory file to perform an online installation for the containerized growth topology:
+
+
+```yaml
+# This is the Ansible Automation Platform growth installer inventory file
+# Please consult the documentation if you are unsure what to add
+# For all optional variables please consult the included README.md
+# or the Red Hat documentation:
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation
+
+# This section is for your platform gateway hosts
+# -----------------------------------------------------
+[automationgateway]
+aap.example.org
+
+# This section is for your automation controller hosts
+# -------------------------------------------------
+[automationcontroller]
+aap.example.org
+
+# This section is for your automation hub hosts
+# -----------------------------------------------------
+[automationhub]
+aap.example.org
+
+# This section is for your Event-Driven Ansible controller hosts
+# -----------------------------------------------------
+[automationeda]
+aap.example.org
+
+# This section is for the Ansible Automation Platform database
+# --------------------------------------
+[database]
+aap.example.org
+
+[all:vars]
+
+# Common variables
+# ----------------
+postgresql_admin_username=postgres
+postgresql_admin_password=<set your own>
+
+registry_username=<your RHN username>
+registry_password=<your RHN password>
+
+redis_mode=standalone
+
+# Platform gateway
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-gateway-variables
+# -----------
+gateway_admin_password=<set your own>
+gateway_pg_host=aap.example.org
+gateway_pg_password=<set your own>
+
+# Automation controller
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-controller-variables
+# --------------
+controller_admin_password=<set your own>
+controller_pg_host=aap.example.org
+controller_pg_password=<set your own>
+
+# Automation hub
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-hub-variables
+# ------------------
+hub_admin_password=<set your own>
+hub_pg_host=aap.example.org
+hub_pg_password=<set your own>
+
+# Event-Driven Ansible controller
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# ------------------
+eda_admin_password=<set your own>
+eda_pg_host=aap.example.org
+eda_pg_password=<set your own>
+```
+
+
+Use the following example inventory file to perform an online installation for the containerized enterprise topology:
+
+
+```yaml
+# This is the Ansible Automation Platform installer inventory file
+# Please consult the documentation if you are unsure what to add
+# For all optional variables please consult the included README.md
+# or the Red Hat documentation:
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation
+
+# This section is for your platform gateway hosts
+# -----------------------------------------------------
+[automationgateway]
+gateway1.example.org
+gateway2.example.org
+
+# This section is for your automation controller hosts
+# -------------------------------------------------
+[automationcontroller]
+controller1.example.org
+controller2.example.org
+
+# This section is for your Ansible Automation Platform execution hosts
+# ------------------------------------------------
+[execution_nodes]
+hop1.example.org receptor_type='hop'
+exec1.example.org
+exec2.example.org
+
+# This section is for your automation hub hosts
+# -----------------------------------------------------
+[automationhub]
+hub1.example.org
+hub2.example.org
+
+# This section is for your Event-Driven Ansible controller hosts
+# -----------------------------------------------------
+[automationeda]
+eda1.example.org
+eda2.example.org
+
+[redis]
+gateway1.example.org
+gateway2.example.org
+hub1.example.org
+hub2.example.org
+eda1.example.org
+eda2.example.org
+
+[all:vars]
+
+# Common variables
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
+# ----------------
+registry_username=<your RHN username>
+registry_password=<your RHN password>
+
+# Platform gateway
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-gateway-variables
+# -----------
+gateway_admin_password=<set your own>
+gateway_pg_host=externaldb.example.org
+gateway_pg_database=<set your own>
+gateway_pg_username=<set your own>
+gateway_pg_password=<set your own>
+
+# Automation controller
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-controller-variables
+# --------------
+controller_admin_password=<set your own>
+controller_pg_host=externaldb.example.org
+controller_pg_database=<set your own>
+controller_pg_username=<set your own>
+controller_pg_password=<set your own>
+
+# Automation hub
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-hub-variables
+# ------------------
+hub_admin_password=<set your own>
+hub_pg_host=externaldb.example.org
+hub_pg_database=<set your own>
+hub_pg_username=<set your own>
+hub_pg_password=<set your own>
+
+# Event-Driven Ansible controller
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# ------------------
+eda_admin_password=<set your own>
+eda_pg_host=externaldb.example.org
+eda_pg_database=<set your own>
+eda_pg_username=<set your own>
+eda_pg_password=<set your own>
+```
+
+
+# Additional information for configuring your inventory file
+
+* To perform an offline installation, add the following under the [all:vars] group:
+
+
+```
+bundle_install=true
+# The bundle directory must include /bundle in the path
+bundle_dir=<full path to the bundle directory>
+```
+
+
+* Redis can be colocated with any other node in a clustered installation.
+* By default the redis_mode is set to cluster. To run in standalone mode, set redis_mode=standalone.
+* For more information about Redis, see the Caching and queueing system section of Planning your installation.
+
+To configure a HAProxy load balancer in front of platform gateway with a custom CA cert, set the following inventory file variables under the [all:vars] group:
+
+
+```
+custom_ca_cert=<path_to_cert_crt>
+gateway_main_url=<https://load_balancer_url>
+```
+
+
+
+[NOTE]
+----
+HAProxy SSL passthrough mode is not supported with platform gateway.
+----
+
+# Running the installation command
+
+Use the following command to install containerized Ansible Automation Platform:
+
+
+```
+ansible-playbook -i inventory ansible.containerized_installer.install
+```
+
+
+* If your privilege escalation requires a password to be entered, append -K to the command line. You are then prompted for the BECOME password.
+* You can use increasing verbosity, up to 4 v's (-vvvv) to see the details of the installation process. However, it is important to note that this can significantly increase installation time, so it is recommended that you use it only as needed or requested by Red Hat support.

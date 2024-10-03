@@ -1,0 +1,42 @@
+# Enable view-only access for your private automation hub
+
+By enabling view-only access, you can grant access for users to view collections or namespaces on your private automation hub without requiring them to log in. View-only access allows you to share content with unauthorized users while restricting their ability to view or download source code. They will not have permissions to edit anything on your private automation hub.
+
+To enable view-only access for your private automation hub, you must edit the inventory file on your Red Hat Ansible Automation Platform installer.
+
+* If you are installing a new instance of Ansible Automation Platform, add the automationhub_enable_unauthenticated_collection_access and automationhub_enable_unauthenticated_collection_download parameters to your inventory file along with your other installation configurations:
+* If you are updating an existing Ansible Automation Platform installation to include view-only access, add the automationhub_enable_unauthenticated_collection_access and automationhub_enable_unauthenticated_collection_download parameters to your inventory file and then run the setup.sh script to apply the updates:
+
+1. Navigate to the installer.
+Bundled installer:: 
+
+```
+$ cd ansible-automation-platform-setup-bundle-<latest-version>
+```
+
+Online installer:: 
+
+```
+$ cd ansible-automation-platform-setup-<latest-version>
+```
+
+2. Open the inventory file with a text editor.
+3. Add the automationhub_enable_unauthenticated_collection_access and automationhub_enable_unauthenticated_collection_download parameters to the inventory file and set both to True, following the example below:
+
+```
+[all:vars]
+
+automationhub_enable_unauthenticated_collection_access = True 1
+automationhub_enable_unauthenticated_collection_download = True 2
+```
+
+Allows unauthorized users to view collections
+Allows unathorized users to download collections
+4. Run the setup.sh script. The installer enables view-only access to your private automation hub.
+
+After the installation is complete, verify that you have view-only access on your private automation hub by attempting to view content on your private automation hub without logging in.
+
+1. Navigate to your private automation hub.
+2. On the login screen, click btn:[View only mode].
+
+Verify that you are able to view content on your automation hub, such as namespaces or collections, without having to log in.

@@ -1,0 +1,186 @@
+# Authenticating in the API
+
+You can use the following authentication methods in the API:
+* Session authentication
+* Basic authentication
+* OAuth 2 token authentication
+* Single sign-on authentication
+Automation controller is designed for organizations to centralize and control their automation with a visual dashboard for out-of-the box control while providing a REST API to integrate with your other tools on a deeper level.
+Automation controller supports several authentication methods to make it easy to embed automation controller into existing tools and processes.
+This ensures that the right people can access its resources.
+
+# Using session authentication
+
+You can use session authentication when logging in directly to the automation controller&#8217;s API or UI to manually create resources, such as inventories, projects, and job templates and start jobs in the browser.
+With this method, you can remain logged in for a prolonged period of time, not just for that HTTP request.
+For example, when browsing the API or UI in a browser such as Chrome or Mozilla Firefox.
+When a user logs in, a session cookie is created, this means that they can remain logged in when navigating to different pages within automation controller.
+The following image represents the communication that occurs between the client and server in a session:
+
+![Session authentication architecture]
+
+Use the curl tool to see the activity that occurs when you log in to automation controller.
+
+1. Use GET to go to the /api/login/ endpoint to get the csrftoken cookie:
+
+curl -k -c - https://<controller-host>/api/login/
+
+localhost       FALSE   /       FALSE   0   csrftoken
+AswSFn5p1qQvaX4KoRZN6A5yer0Pq0VG2cXMTzZnzuhaY0L4tiidYqwf5PXZckuj
+2. POST to the /api/login/ endpoint with username, password, and X-CSRFToken=<token-value>:
+
+curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' \
+--referer https://<awx-host>/api/login/ \
+-H 'X-CSRFToken: K580zVVm0rWX8pmNylz5ygTPamgUJxifrdJY0UDtMMoOis5Q1UOxRmV9918BUBIN' \
+--data 'username=root&password=reverse' \
+--cookie 'csrftoken=K580zVVm0rWX8pmNylz5ygTPamgUJxifrdJY0UDtMMoOis5Q1UOxRmV9918BUBIN' \
+https://<awx-host>/api/login/ -k -D - -o /dev/null
+
+All of this is done by automation controller when you log in to the UI or API in the browser, and you must only use it when authenticating in the browser.
+For programmatic integration with automation controller, see OAuth2 token authentication.
+
+The following is an example of a typical response:
+
+Server: nginx
+Date: <current date>
+Content-Type: text/html; charset=utf-8
+Content-Length: 0
+Connection: keep-alive
+Location: /accounts/profile/
+X-API-Session-Cookie-Name: awx_sessionid
+Expires: <date>
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate, private
+Vary: Cookie, Accept-Language, Origin
+Session-Timeout: 1800
+Content-Language: en
+X-API-Total-Time: 0.377s
+X-API-Request-Id: 700826696425433fb0c8807cd40c00a0
+Access-Control-Expose-Headers: X-API-Request-Id
+Set-Cookie: userLoggedIn=true; Path=/
+Set-Cookie: current_user=<user cookie data>; Path=/
+Set-Cookie: csrftoken=<csrftoken>; Path=/; SameSite=Lax
+Set-Cookie: awx_sessionid=<your session id>; expires=<date>; HttpOnly; Max-Age=1800; Path=/; SameSite=Lax
+Strict-Transport-Security: max-age=15768000
+
+When a user is successfully authenticated with this method, the server responds with a header called X-API-Session-Cookie-Name, indicating the configured name of the session cookie.
+The default value is awx_session_id which you can see later in the Set-Cookie headers.
+
+
+[NOTE]
+----
+You can change the session expiration time by specifying it in the SESSION_COOKIE_AGE parameter.
+For more information, see Working with session limits.
+----
+
+# Basic authentication
+
+Basic authentication is stateless, therefore, you must send the base64-encoded username and password along with each request through the Authorization header.
+You can use this for API calls from curl requests, python scripts, or individual requests to the API.
+We recommend OAuth 2 Token Authentication for accessing the API when at all possible.
+
+The following is an example of Basic authentication with curl:
+
+# the --user flag adds this Authorization header for us
+curl -X GET --user 'user:password' https://<controller-host>/api/v2/credentials -k -L
+
+For more information about Basic authentication, see The 'Basic' HTTP Authentication Scheme.
+
+## Disabling Basic authentication
+
+You can disable Basic authentication for security purposes.
+
+1. From the navigation panel, select Settings.
+2. Select Miscellaneous Authentication settings from the list of System options.
+3. Disable the option to Enable HTTP Basic Auth.
+
+# OAuth 2 token authentication
+
+OAuth (Open Authorization) is an open standard for token-based authentication and authorization.
+OAuth 2 authentication is commonly used when interacting with the automation controller API programmatically.
+Similar to Basic authentication, you are given an OAuth 2 token with each API request through the Authorization header.
+Unlike Basic authentication, OAuth 2 tokens have a configurable timeout and are scopable.
+Tokens have a configurable expiration time and can be easily revoked for one user or for the entire automation controller system by an administrator if needed.
+You can do this with the revoke_oauth2_tokens management command, or by using the API as explained in Revoke an access token.
+
+The different methods for obtaining OAuth2 access tokens in automation controller include the following:
+
+* Personal access tokens (PAT)
+* Application token: Password grant type
+* Application token: Implicit grant type
+* Application token: Authorization Code grant type
+
+A user needs to create an OAuth 2 token in the API or in the Users &gt; Tokens tab of the automation controller UI.
+For more information about creating tokens through the UI, see Users - Tokens.
+
+For the purpose of this example, use the PAT method for creating a token in the API.
+After you create it, you can set the scope.
+
+
+[NOTE]
+----
+You can configure the expiration time of the token system-wide.
+For more information, see Using OAuth 2 Token System for Personal Access Tokens.
+----
+
+Token authentication is best used for any programmatic use of the automation controller API, such as Python scripts or tools such as curl.
+
+curl -u user:password -k -X POST https://<controller-host>/api/v2/tokens/
+
+This call returns JSON data with the following:
+
+![API OAuth2 JSON]
+
+You can use the value of the token property to perform a GET request for an automation controller resource, such as Hosts:
+
+curl -k -X POST \
+  -H “Content-Type: application/json”
+  -H “Authorization: Bearer <oauth2-token-value>” \
+  https://<controller-host>/api/v2/hosts/
+
+You can also run a job by making a POST to the job template that you want to start:
+
+curl -k -X POST \
+  -H "Authorization: Bearer <oauth2-token-value>" \
+  -H "Content-Type: application/json" \
+  --data '{"limit" : "ansible"}' \
+  https://<controller-host>/api/v2/job_templates/14/launch/
+
+awxkit is an open source tool that makes it easy to use HTTP requests to access the automation controller API.
+You can have awxkit get a PAT on your behalf by using the awxkit login command.
+For more information, see AWX Command Line Interface.
+
+If you need to write custom requests, you can write a Python script by using Python library requests, such as the following example:
+
+import requests
+oauth2_token_value = 'y1Q8ye4hPvT61aQq63Da6N1C25jiA'   # your token value from controller
+url = 'https://<controller-host>/api/v2/users/'
+payload = {}
+headers = {'Authorization': 'Bearer ' + oauth2_token_value,}
+
+# makes request to controller user endpoint
+response = requests.request('GET', url, headers=headers, data=payload,
+allow_redirects=False, verify=False)
+
+# prints json returned from controller with formatting
+print(json.dumps(response.json(), indent=4, sort_keys=True))
+
+For more information about obtaining OAuth2 access tokens and how to use OAuth 2 in the context of external applications, see Token-Based Authentication in the Configuring automation execution.
+
+## Enabling external users to create OAuth 2 tokens
+
+By default, external users such as those created by single sign-on are not able to generate OAuth tokens for security purposes.
+
+1. From the navigation panel, select Settings.
+2. Select Miscellaneous Authentication settings from the list of System options.
+3. Enable the option to Allow External Users to Create OAuth2 Tokens.
+
+# Single sign-on authentication
+
+Single sign-on (SSO) authentication methods are different from other methods because the authentication of the user happens external to automation controller, such as Google SSO, Microsoft Azure SSO, SAML, or GitHub.
+For example, with GitHub SSO, GitHub is the single source of truth, which verifies your identity based on the username and password you gave automation controller.
+
+You can configure SSO authentication by using automation controller inside a large organization with a central Identity Provider.
+Once you have configured an SSO method in automation controller, an option for that SSO is available on the login screen.
+If you click that option, it redirects you to the Identity Provider, in this case GitHub, where you present your credentials. If the Identity Provider verifies you successfully, automation controller makes a user linked to your GitHub user (if this is your first time logging in with this SSO method), and logs you in.
+
+For the various types of supported SSO authentication methods, see Setting up social authentication and Setting up enterprise authentication in the Configuring automation execution.

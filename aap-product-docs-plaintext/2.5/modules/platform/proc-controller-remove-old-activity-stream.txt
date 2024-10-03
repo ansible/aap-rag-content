@@ -1,0 +1,5 @@
+# Removing old activity stream data
+
+To remove older activity stream data, click the launch  icon beside Cleanup Activity Stream.
+
+Enter the number of days of data you want to save and click btn:[Launch].

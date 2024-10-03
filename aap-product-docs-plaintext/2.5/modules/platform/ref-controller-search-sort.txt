@@ -1,0 +1,8 @@
+# Sort
+
+Where applicable, use the arrows in each column to sort by ascending order.
+The following is an example from the schedules list:
+
+
+
+The direction of the arrow indicates the sort order of the column.

@@ -1,0 +1,31 @@
+# Creating tokens for a user
+
+The Tokens tab is only present for the user you created for yourself.
+
+Before you add a token for your user, you might want to Create an application if you want to
+associate your token with it.
+
+You can also create a Personal Access Token (PAT) without associating it with any application.
+
+1. Select your user from the Users list view to configure your OAuth 2 tokens.
+2. Select the Tokens tab from your user's profile.
+3. Click btn:[Add] to open the Create Token window.
+4. Enter the following information:
+* Application: Enter the name of the application with which you want to associate your token.
+
+Alternatively, you can search for the application name clicking the  icon.
+This opens a separate window that enables you to choose from the available options.
+Use the Search bar to filter by name if the list is extensive.
+
+Leave this field blank if you want to create a PAT that is not linked to any application.
+* Optional: Description: Provide a short description for your token.
+* Scope: Specify the level of access you want this token to have.
+5. Click btn:[Save] or btn:[Cancel] to abandon your changes.
+6. After the token is saved, the newly created token for the user is displayed.
+
+
+
+[IMPORTANT]
+----
+This is the only time the token value and associated refresh token value are ever shown.
+----

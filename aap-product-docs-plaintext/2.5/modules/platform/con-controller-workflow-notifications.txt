@@ -1,0 +1,3 @@
+# Work with notifications
+
+For information on working with notifications in workflow job templates, see Work with notifications.

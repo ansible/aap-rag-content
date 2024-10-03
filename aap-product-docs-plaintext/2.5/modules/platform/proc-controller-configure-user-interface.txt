@@ -1,0 +1,11 @@
+# Configuring the user interface
+
+The Gateway settings page enables you to configure custom logos and login messages.
+
+1. From the navigation panel, select menu:Settings[Platform gateway].
+2. Select User Interface settings from the User Interface option.
+3. On the Gateway settings page, click btn:[Edit].
+4. Set the configurable options from the fields provided.
+Click the tooltip  icon next to the field that you need additional information about.
+5. Use the Custom logo field to upload a custom logo image.
+6. Use the Custom login info field to provide custom login messages.

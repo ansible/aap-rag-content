@@ -1,0 +1,6 @@
+# Removed features
+
+Removed features are those that were deprecated in earlier releases. They are now removed from the Ansible Automation Platform, and will no longer be supported.
+
+The following table provides information about features that are removed in Ansible Automation Platform 2.5:
+

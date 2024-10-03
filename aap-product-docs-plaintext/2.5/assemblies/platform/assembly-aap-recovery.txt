@@ -1,0 +1,172 @@
+# Recovering a Red Hat Ansible Automation Platform deployment
+
+If you lose information on your system or experience issues with an upgrade, you can use the backup resources of your deployment instances. Use the following procedures to recover your Ansible Automation Platform deployment files.
+
+# Recovering your Ansible Automation Platform deployment
+
+Ansible Automation Platform manages any enabled components (such as, automation controller, automation hub, and Event-Driven Ansible), when you recover Ansible Automation Platform you also restore these components.
+
+In previous versions of the Ansible Automation Platform Operator, it was necessary to create a restore object for each component of the platform.
+Now, you create a single AnsibleAutomationPlatformRestore resource, which  creates and manages the other restore objects:
+
+* AutomationControllerRestore
+* AutomationHubRestore
+* EDARestore
+
+* You must be authenticated with an OpenShift cluster.
+* You have installed the Ansible Automation Platform Operator on the cluster.
+* The AnsibleAutomationPlatformBackups deployment is available in your cluster.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Go to your All Instances tab, and click btn:[Create New].
+5. Select Ansible Automation Platform Restore from the list.
+6. For Name enter the name for the recovery deployment.
+7. For New Ansible Automation Platform Name enter the new name for your Ansible Automation Platform instance.
+8. Backup Source defaults to CR.
+9. For Backup name enter the name your chose when creating the backup.
+10. Click btn:[Create].
+
+Your backups starts restoring under the AnsibleAutomationPlatformRestores tab.
+
+
+[NOTE]
+----
+The recovery is not complete until all the resources are successfully restored. Depending on the size of your database this this can take some time.
+----
+
+To verify that your recovery was successful you can:
+
+1. Go to menu:Workloads[Pods].
+2. Confirm that all pods are in a Running or Completed state.
+
+# Recovering the Automation controller deployment
+
+Use this procedure to restore a previous controller deployment from an AutomationControllerBackup. The deployment name you provide will be the name of the new AutomationController custom resource that will be created.
+
+
+[NOTE]
+----
+The name specified for the new AutomationController custom resource must not match an existing deployment.
+If the backup custom resource being restored is a backup of a currently running AutomationController custom resource the recovery process will fail. See Troubleshooting for steps to resolve the issue.
+----
+
+* You must be authenticated with an OpenShift cluster.
+* You have deployed  automation controller on the cluster.
+* An AutomationControllerBackup is available on a PVC in your cluster.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Automation Controller Restore tab.
+5. Click btn:[Create AutomationControllerRestore].
+6. Enter a Name for the recovery deployment.
+7. Enter a New Deployment name for the restored deployment.
+
+[NOTE]
+----
+This must be different from the original deployment name.
+----
+8. Select the Backup source to restore from. Backup CR is recommended.
+9. Enter the Backup Name of the AutomationControllerBackup object.
+10. Click btn:[Create].
+
+A new deployment is created and your backup is restored to it. This can take approximately 5 to 15 minutes depending on the size of your database.
+
+1. Log in to Red Hat Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the AutomationControllerRestore tab.
+5. Select the restore resource you want to verify.
+6. Scroll to Conditions and check that the Successful status is True.
+
+[NOTE]
+----
+If Successful is False, the recovery has failed. Check the automation controller operator logs for the error to fix the issue.
+----
+
+# Using YAML to recover the Automation controller deployment
+
+See the following procedure for how to restore a deployment of the automation controller using YAML.
+
+The external database must be a PostgreSQL database that is the version supported by the current release of Ansible Automation Platform.
+
+
+[NOTE]
+----
+Ansible Automation Platform 2.5 supports PostgreSQL 15.
+----
+
+The external postgres instance credentials and connection information must be stored in a secret, which is then set on the automation controller spec.
+
+1. Create a external-postgres-configuration-secret YAML file, following the template below:
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: external-restore-postgres-configuration
+  namespace: <target_namespace> 1
+stringData:
+  host: "<external_ip_or_url_resolvable_by_the_cluster>" 2
+  port: "<external_port>" 3
+  database: "<desired_database_name>"
+  username: "<username_to_connect_as>"
+  password: "<password_to_connect_with>" 4
+  sslmode: "prefer" 5
+  type: "unmanaged"
+type: Opaque
+```
+
+Namespace to create the secret in. This should be the same namespace you want to deploy to.
+The resolvable hostname for your database node.
+External port defaults to 5432.
+Value for variable password should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
+The variable sslmode is valid for external databases only. The allowed values are: prefer, disable, allow, require, verify-ca, and verify-full.
+2. Apply external-postgres-configuration-secret.yml to your cluster using the oc create command.
+
+```
+$ oc create -f external-postgres-configuration-secret.yml
+```
+
+3. When creating your AutomationControllerRestore custom resource object, specify the secret on your spec, following the example below:
+
+```
+kind: AutomationControllerRestore
+apiVersion: automationcontroller.ansible.com/v1beta1
+metadata:
+  namespace: my-namespace
+  name: awxrestore-2024-07-15
+spec:
+  deployment_name: restored_controller
+  backup_name: awxbackup-2024-07-15
+  postgres_configuration_secret: 'external-restore-postgres-configuration'
+```
+
+
+# Recovering the Automation hub deployment
+
+Use this procedure to restore a previous hub deployment into the namespace. The deployment name you provide will be the name of the new AutomationHub custom resource that will be created.
+
+
+[NOTE]
+----
+The name specified for the new AutomationHub custom resource must not match an existing deployment or the recovery process will fail.
+----
+
+* You must be authenticated with an OpenShift cluster.
+* You have deployed automation hub on the cluster.
+* An AutomationHubBackup is available on a PVC in your cluster.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Automation Hub Restore tab.
+5. Click btn:[Create AutomationHubRestore].
+6. Enter a Name for the recovery deployment.
+7. Select the Backup source to restore from. Backup CR is recommended.
+8. Enter the Backup Name of the AutomationHubBackup object.
+9. Click btn:[Create].
+
+This creates a new deployment and restores your backup to it.

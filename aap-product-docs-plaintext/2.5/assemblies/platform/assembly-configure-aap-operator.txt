@@ -1,0 +1,148 @@
+# Configuring the Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+
+The platform gateway for Ansible Automation Platform enables you to manage the following Ansible Automation Platform components to form a single user interface:
+* Automation controller
+* Automation hub
+* Event-Driven Ansible
+* Red Hat Ansible Lightspeed (This feature is disabled by default, you must opt in to use it.)
+Before you can deploy the platform gateway you must have Ansible Automation Platform Operator installed in a namespace.
+If you have not installed Ansible Automation Platform Operator see .
+
+[NOTE]
+----
+Platform gateway is only available under Ansible Automation Platform Operator version 2.5. Every component deployed under Ansible Automation Platform Operator 2.5 will also default to version 2.5.
+----
+If you have the Ansible Automation Platform Operator and some or all of the Ansible Automation Platform components installed see  for how to proceed.
+
+# Linking your components to the platform gateway
+
+After installing the Ansible Automation Platform Operator in your namespace you can set up your Ansible Automation Platform instance.
+Then link all the platform components to a single user interface.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Details tab.
+5. On the Ansible Automation Platform tile click btn:[Create instance].
+6. From the Create Ansible Automation Platform page enter a name for your instance in the Name field.
+7. Click btn:[YAML view] and paste the following:
+
+```
+spec:
+  controller:
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    disabled: false
+    storage_type: file
+    file_storage_storage_class: <read-write-many-storage-class>
+    file_storage_size: 10Gi
+```
+
+8. Click btn:[Create].
+
+Go to your Ansible Automation Platform Operator deployment and click btn:[All instances] to verify if all instances deployed correctly.
+You should see the Ansible Automation Platform instance and the deployed AutomationController, EDA, and AutomationHub instances here.
+
+Alternatively you can check by the command line, run: oc get route
+
+# Accessing the platform gateway
+
+You should use the Ansible Automation Platform instance as your default.
+This instance links the automation controller, automation hub, and Event-Driven Ansible deployments to a single interface.
+
+To access your Ansible Automation Platform instance:
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Networking[Routes]
+3. Click the link under Location for Ansible Automation Platform.
+4. This redirects you to the Ansible Automation Platform login page. Enter "admin" as your username in the Username field.
+5. For the password you need to:
+1. Go to to menu:Workloads[Secrets].
+2. Click btn:[<your instance name>-admin-password] and copy the password.
+3. Paste the password into the Password field.
+6. Click btn:[Login].
+7. Apply your subscription:
+1. Click btn:[Subscription manifest] or btn:[Username/password].
+2. Upload your manifest or enter your username and password.
+3. Select  your subscription from the Subscription list.
+4. Click btn:[Next].
+This redirects you to the Analytics page.
+8. Click btn:[Next].
+9. Select the I agree to the terms of the license agreement checkbox.
+10. Click btn:[Next].
+
+You now have access to the platform gateway user interface.
+If you cannot access the Ansible Automation Platform see  for help with troubleshooting and debugging.
+
+# Deploying the platform gateway with existing Ansible Automation Platform components
+
+You can link any components of the Ansible Automation Platform, that you have already installed to a new Ansible Automation Platform instance.
+
+The following procedure simulates a scenario where you have automation controller as an existing component and want to add automation hub and Event-Driven Ansible.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Click btn:[Subscriptions] and edit your Update channel to stable-2.5.
+5. Click btn:[Details] and on the Ansible Automation Platform tile click btn:[Create instance].
+6. From the Create Ansible Automation Platform page enter a name for your instance in the Name field.
+7. Click btn:[YAML view] and copy in the following:
+
+```
+    apiVersion: aap.ansible.com/v1alpha1
+        kind: AnsibleAutomationPlatform
+        metadata:
+          name: example-aap
+          namespace: aap
+        spec:
+          # Platform
+          image_pull_policy: IfNotPresent
+          # Components
+          controller:
+            disabled: false
+            name: existing-controller-name
+          eda:
+            disabled: false
+          hub:
+            disabled: false
+            ## uncomment if using file storage for Content pod
+            storage_type: file
+            file_storage_storage_class: <your-read-write-many-storage-class>
+            file_storage_size: 10Gi
+
+            ## uncomment if using S3 storage for Content pod
+            # storage_type: S3
+            # object_storage_s3_secret: example-galaxy-object-storage
+
+            ## uncomment if using Azure storage for Content pod
+            # storage_type: azure
+            # object_storage_azure_secret: azure-secret-name
+          lightspeed:
+            disabled: true
+```
+
+1. For new components, if you do not specify a name, a default name is generated.
+8. Click btn:[Create].
+9. To access your new instance, see .
+
+
+[NOTE]
+----
+If you have an existing controller with a managed Postgres pod, after creating the Ansible Automation Platform resource your automation controller instance will continue to use that original Postgres pod. If you were to do a fresh install you would have a single Postgres managed pod for all instances.
+----
+
+# Frequently asked questions on platform gateway
+
+If I delete my Ansible Automation Platform deployment will I still have access to Automation Controller?:: No, automation controller, automation hub, and Event-Driven Ansible are nested within the deployment and are also deleted.
+Something went wrong with my deployment but I'm not sure what, how can I find out?:: You can follow along in the command line while the operator is reconciling, this can be helpful for debugging.
+Alternatively you can click into the deployment instance to see the status conditions being updated as the deployment goes on.
+Is it still possible to view individual component logs?:: When troubleshooting you should examine the Ansible Automation Platform instance for the main logs and then each individual component (EDA, AutomationHub, AutomationController) for more specific information.
+Where can I view the condition of an instance?:: To display status conditions click into the instance, and look under the Details or Events tab.
+Alternatively, to display the status conditions you can run the get command:
+oc get automationcontroller <instance-name> -o jsonpath=Pipe "| jq"
+Can I track my migration in real time?:: To help track the status of the migration or to understand why migration might have failed you can look at the migration logs as they are running. Use the logs command:
+oc logs fresh-install-controller-migration-4.6.0-jwfm6 -f

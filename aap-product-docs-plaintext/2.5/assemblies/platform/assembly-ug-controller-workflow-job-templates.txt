@@ -1,0 +1,342 @@
+# Workflow job templates
+
+You can create both Job templates and Workflow job templates from menu:Automation Execution[Templates].
+For Job templates, see Job templates.
+A workflow job template links together a sequence of disparate resources that tracks the full set of jobs that were part of the release process as a single unit.
+These resources include the following:
+* Job templates
+* Workflow job templates
+* Project syncs
+* Inventory source syncs
+The Templates page shows the workflow and job templates that are currently available.
+The default view is collapsed (Compact), showing the template name, template type, and the statuses of the jobs that have run by using that template.
+You can click the arrow next to each entry to expand and view more information.
+This list is sorted alphabetically by name, but you can sort by other criteria, or search by various fields and attributes of a template.
+From this screen you can launch , edit , and copy  a workflow job template.
+Only workflow templates have the workflow visualizer  icon as a shortcut for accessing the workflow editor.
+![Workflow templates home]
+
+[NOTE]
+----
+Workflow templates can be used as building blocks for another workflow template.
+You can enable Prompt on Launch by setting up several settings in a workflow template, which you can edit at the workflow job template level.
+These do not affect the values assigned at the individual workflow template level.
+For further instructions, see the Workflow Visualizer section.
+----
+
+# Creating a workflow job template
+
+To create a new workflow job template, complete the following steps:
+
+
+[IMPORTANT]
+----
+If you set a limit to a workflow template, it is not passed down to the job template unless you check Prompt on launch for the limit.
+This can lead to playbook failures if the limit is mandatory for the playbook that you are running.
+----
+
+1. From the navigation panel, select menu:Automation Execution[Templates].
+2. On the Templates list view, select Create workflow job template from the Create template list.
+3. Enter the appropriate details in the following fields:
+
+[NOTE]
+----
+If a field has the Prompt on launch checkbox selected, either launching the workflow template, or using the workflow template within another workflow template, you are prompted for the value for that field.
+Most prompted values override any values set in the job template.
+Exceptions are noted in the following table.
+----
+
+4. Specify the following Options for launching this template, if necessary:
+* Check Enable webhook to turn on the ability to interface with a predefined SCM system web service that is used to launch a workflow job template.
+GitHub and GitLab are the supported SCM systems.
+* If you enable webhooks, other fields display, prompting for additional information:
+* Webhook service: Select which service to listen for webhooks from.
+* Webhook URL: Automatically populated with the URL for the webhook service to POST requests to.
+* Webhook key: Generated shared secret to be used by the webhook service to sign payloads sent to automation controller.
+You must configure this in the settings on the webhook service so that webhooks from this service are accepted in automation controller.
+For additional information about setting up webhooks, see Working with Webhooks.
+* Check Enable concurrent jobs to allow simultaneous runs of this workflow.
+For more information, see Automation controller capacity determination and job impact.
+5. When you have completed configuring the workflow template, click btn:[Create workflow job template].
+
+Saving the template exits the workflow template page and the workflow visualizer opens where you can build a workflow.
+For more information, see the Workflow visualizer section.
+Otherwise, select one of these methods:
+
+* Close the workflow visualizer to return to the Details tab of the newly saved template.
+There you can complete the following tasks:
+* Review, edit, add permissions, notifications, schedules, and surveys
+* View completed jobs
+* Build a workflow template
+* Click btn:[Launch template] to start the workflow.
+
+[NOTE]
+----
+Save the template before launching, or btn:[Launch template] remains disabled.
+The Notifications tab is only present after you save the template.
+----
+
+# Work with permissions
+
+Click the Team Access  or User Access tab to review, grand, edit, and remove associated permissions for users along with team members.
+
+Click btn:[Add roles] to create new permissions for this workflow template by following the prompts to assign them.
+
+# Work with notifications
+
+For information on working with notifications in workflow job templates, see Work with notifications.
+
+# View completed workflow jobs
+
+The Jobs tab provides the list of job templates that have run.
+Click the expand icon next to each job to view the details of each job.
+
+From this view, you can click the job ID, name of the workflow job and see its graphical representation. The following example shows the job details of a workflow job:
+
+![Workflow template job ID]
+
+The nodes are marked with labels to help you identify them.
+For more information, see the legend in the Workflow visualizer section.
+
+# Scheduling a workflow job template
+
+Select the Schedules tab to access the schedules for a particular workflow job template..
+
+For more information about scheduling a workflow job template run, see the Scheduling job templates section.
+
+If a workflow job template used in a nested workflow has a survey, or the Prompt on launch is selected for the inventory option, the btn:[PROMPT] option displays next to the btn:[SAVE] and btn:[CANCEL] options on the schedule form.
+Click btn:[PROMPT] to show an optional INVENTORY step where you can give or remove an inventory or skip this step without any changes.
+
+# Surveys in workflow job templates
+
+Workflows containing job types of Run or Check provide a way to set up surveys in the workflow job template creation or editing screens.
+
+For more information on job surveys, including how to create a survey and optional survey questions in workflow job templates, see the Surveys in job templates section.
+
+# Workflow visualizer
+
+The Workflow Visualizer provides a graphical way of linking together job templates, workflow templates, project syncs, and inventory syncs to build a workflow template.
+Before you build a workflow template, see the Workflows section for considerations associated with various scenarios on parent, child, and sibling nodes.
+
+## Building a workflow
+
+You can set up any combination of two or more of the following node types to build a workflow:
+
+* Template (Job Template or Workflow Job Template)
+* Project Sync
+* Inventory Sync
+* Approval
+
+Each node is represented by a rectangle while the relationships and their associated edge types are represented by a line (or link) that connects them.
+
+1. To launch the workflow visualizer, use one of these methods:
+* From the navigation panel, select menu:Automation Execution[Templates].
+1. Select a workflow template, in the Details tab click btn:[Edit template].
+2. Select the Visualizer tab.
+* From the Templates list view, click the  icon.
+2. Click btn:[Start] to display a list of nodes to add to your workflow.
+3. From the Node Type list, select the type of node that you want to add.
+* If you select an Approval node, see Approval nodes for more information.
+
+Selecting a node provides the available valid options associated with it.
+
+[NOTE]
+----
+If you select a job template that does not have a default inventory when populating a workflow graph, the inventory of the parent workflow is used.
+Though a credential is not required in a job template, you cannot select a job template for your workflow if it has a credential that requires a password, unless the credential is replaced by a prompted credential.
+----
+4. When you select a node type, the workflow begins to build, and you must specify the type of action to be taken for the selected node.
+This action is also referred to as edge type.
+5. If the node is a root node, the edge type defaults to Always and is non-editable.
+For subsequent nodes, you can select one of the following scenarios (edge type) to apply to each:
+* Always: Continue to execute regardless of success or failure.
+* On Success: After successful completion, execute the next template.
+* On Failure: After failure, execute a different template.
+6. Select the behavior of the node if it is a convergent node from the Convergence field:
+* Any is the default behavior, allowing any of the nodes to complete as specified, before triggering the next converging node.
+If the status of one parent meets one of those run conditions, an any child node will run.
+An any node requires all nodes to complete, but only one node must complete with the expected outcome.
+* Choose All to ensure that all nodes complete as specified, before converging and triggering the next node.
+The purpose of all* nodes is to make sure that every parent meets its expected outcome to run the child node.
+The workflow checks to make sure every parent behaves as expected to run the child node.
+Otherwise, it will not run the child node.
+
+If selected, the node is labeled as ALL in the graphical view:
+
+
+
+[NOTE]
+----
+If a node is a root node, or a node that does not have any nodes converging into it, setting the Convergence rule does not apply, as its behavior is dictated by the action that triggers it.
+----
+7. If a job template used in the workflow has Prompt on launch selected for any of its parameters, a btn:[PROMPT] option appears, enabling you to change those values at the node level.
+Use the wizard to change the values in each of the tabs and click btn:[Confirm] in the Preview tab.
+
+If a workflow template used in the workflow has Prompt on launch selected for the inventory option, use the wizard to supply the inventory at the prompt.
+If the parent workflow has its own inventory, it overrides any inventory that is supplied here.
+![Prompt button inventory]
+
+[NOTE]
+----
+For workflow job templates with required fields that prompt details, but do not have a default, you must give those values when creating a node before the SELECT option is enabled.
+The following two cases disable the btn:[SELECT] option until a value is provided by the btn:[PROMPT] option:
+1. When you select the Prompt on launch checkbox in a workflow job template, but do not give a default.
+2. When you create a survey question that is required but do not give a default answer.
+However, this is not the case with credentials.
+Credentials that require a password on launch are not permitted when creating a workflow node, because everything required to launch the node must be provided when the node is created.
+If you are prompted for credentials in a workflow job template, it is not possible to select a credential that requires a password in automation controller.
+You must also click btn:[SELECT] when the prompt wizard closes, to apply the changes at that node.
+Otherwise, any changes you make revert back to the values set in the job template.
+----
+
+When the node is created, it is labeled with its job type.
+A template that is associated with each workflow node runs based on the selected run scenario as it proceeds.
+Click the compass () icon to display the legend for each run scenario and their job types.
+![Worfklow dropdown list]
+8. Hover over a node to add another node, view info about the node, edit the node details, edit an existing link, or delete the selected node:
+![Node options]
+9. When you have added or edited a node, click btn:[SELECT] to save any modifications and render it on the graphical view.
+For possible ways to build your workflow, see Building nodes scenarios.
+10. When you have built your workflow job template, click btn:[Create workflow job template] to save your entire workflow template and return to the new workflow job template details page.
+
+
+[IMPORTANT]
+----
+Clicking btn:[Close] does not save your work, but instead, it closes the entire Workflow Visualizer so that you have to start again.
+----
+
+## Approval nodes
+
+Choosing an Approval node requires your intervention in order to advance a workflow.
+This functions as a means to pause the workflow in between playbooks so that you can give approval to continue on to the next playbook in the workflow.
+This gives the user a specified amount of time to intervene, but also enables you to continue as quickly as possible without having to wait on another trigger.
+
+The default for the timeout is none, but you can specify the length of time before the request expires and is automatically denied.
+After you select and supply the information for the approval node, it displays on the graphical view with a pause icon beside it.
+
+![Approval node]
+
+The approver is anyone who meets the following criteria:
+
+* A user that can execute the workflow job template containing the approval nodes.
+* A user who has organization administrator or above privileges (for the organization associated with that workflow job template).
+* A user who has the Approve permission explicitly assigned to them within that specific workflow job template.
+
+![Node approval notifications]
+
+If pending approval nodes are not approved within the specified time limit (if an expiration was assigned) or they are denied, then they are marked as "timed out" or "failed", and move on to the next "on fail node" or "always node".
+If approved, the "on success" path is taken.
+If you try to POST in the API to a node that has already been approved, denied or timed out, an error message notifies you that this action is redundant, and no further steps are taken.
+
+The following table shows the various levels of permissions allowed on approval workflows:
+
+![Node approval rbac]
+
+## Building nodes scenarios
+
+Learn how to manage nodes in the following scenarios.
+
+* Click the () icon on the parent node to add a sibling node:
+
+![Create sibling node]
+
+* Hover over the line that connects two nodes and click the plus (), to insert another node in between nodes.
+Clicking the plus () icon automatically inserts the node between the two nodes:
+
+![Insert node template]
+
+* Click btn:[START] again, to add a root node to depict a split scenario:
+
+![Node split scenario]
+
+* At any node where you want to create a split scenario, hover over the node from which the split scenario begins and click the plus () icon.
+This adds multiple nodes from the same parent node, creating sibling nodes:
+
+![Node create siblings]
+
+
+[NOTE]
+----
+When adding a new node, the btn:[PROMPT] option also applies to workflow templates.
+Workflow templates prompt for inventory and surveys.
+----
+
+* You can undo the last inserted node by using one of these methods:
+* Click on another node without making a selection.
+* Click btn:[Cancel].
+
+The following example workflow contains all three types of jobs initiated by a job template.
+If it fails to run, you must protect the sync job.
+Regardless of whether it fails or succeeds, proceed to the inventory sync job:
+
+![Workflow template example]
+
+Refer to the key by clicking the compass () icon to identify the meaning of the symbols and colors associated with the graphical depiction.
+
+
+[NOTE]
+----
+If you remove a node that has a follow-on node attached to it in a workflow with a set of sibling nodes that has varying edge types, the attached node automatically joins the set of sibling nodes and retains its edge type:
+![Node delete scenario]
+----
+
+## Editing a node
+
+* Edit a node by using one of these methods:
+* If you want to edit a node, click on the node you want to edit.
+The pane displays the current selections.
+Make your changes and click btn:[Select] to apply them to the graphical view.
+* To edit the edge type for an existing link, (success, failure, always), click the link.
+The pane displays the current selection.
+Make your changes and click btn:[Save] to apply them to the graphical view.
+* Click the link () icon that appears on each node, to add a new link from one node to another.
+Doing this highlights the nodes that are possible to link to.
+These options are indicated by the dotted lines.
+Invalid options are indicated by disabled boxes (nodes) that would otherwise produce an invalid link.
+The following example shows the Demo Project as a possible option for the e2e-ec20de52-project to link to, indicated by the arrows:
+![Node link scenario]
+* To remove a link, click the link and click btn:[UNLINK].
+This option only appears in the pane if the target or child node has more than one parent.
+All nodes must be linked to at least one other node at all times so you must create a new link before removing an old one.
+* Edit the view of the workflow diagram by using one of these methods:
+* Click the settings icon to zoom, pan, or reposition the view.
+* Drag the workflow diagram to reposition it on the screen or use the scroll on your mouse to zoom.
+
+# Launching a workflow job template
+
+* Launch a workflow job template by using one of these methods:
+* From the navigation panel, select menu:Automation Execution[Templates] and click the  icon next to the job template.
+* Click btn:[Launch template] in the Details tab of the workflow job template that you want to launch.
+
+Variables added for a workflow job template are automatically added in automation controller when launching, along with any extra variables set in the workflow job template and survey.
+
+Events related to approvals on workflows are displayed in the activity stream () with detailed information about the approval requests, if any.
+
+# Copying a workflow job template
+
+With automation controller you can copy a workflow job template.
+When you copy a workflow job template, it does not copy any associated schedule, notifications, or permissions.
+Schedules and notifications must be recreated by the user or system administrator creating the copy of the workflow template.
+The user copying the workflow template is granted the administrator permission, but no permissions are assigned (copied) to the workflow template.
+
+1. Open the workflow job template that you want to copy by using one of these methods:
+* From the navigation panel, select menu:Automation Execution[Templates].
+* In the workflow job template Details view, click  next to the desired template.
+* Click the copy () icon.
+
+The new template with the name of the template from which you copied and a timestamp displays in the list of templates.
+2. Select the copied template and click btn:[Edit template].
+3. Replace the contents of the Name field with a new name, and give or change the entries in the other fields to complete this template.
+4. Click btn:[Save job template].
+
+
+[NOTE]
+----
+If a resource has a related resource that you do not have the right level of permission to, you cannot copy the resource. For example, in the case where a project uses a credential that a current user only has Read access.
+However, for a workflow job template, if any of its nodes use an unauthorized job template, inventory, or credential, the workflow template can still be copied.
+But in the copied workflow job template, the corresponding fields in the workflow template node are absent.
+----
+
+# Workflow job template extra variables
+
+For more information see the Extra variables section.

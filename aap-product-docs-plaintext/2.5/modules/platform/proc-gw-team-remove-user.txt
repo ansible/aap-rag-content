@@ -1,0 +1,16 @@
+# Removing users from a team
+
+You can remove a user from a team from the Team list view.
+
+1. From the navigation panel, select menu:Access Management[Teams].
+2. Select the team from which you want to remove users.
+3. Select the Users tab.
+4. Click the Remove user icon next to the user you want to remove as a member of the team.
+5. You can delete multiple users by selecting the checkbox next to each user you want to remove, and selecting Remove selected users from the More actions &#8942; list.
+
+[NOTE]
+----
+If the user is a Team administrator, you can remove their membership to the team from the Administrators tab.
+----
+
+This launches a confirmation dialog, asking you to confirm the removal.

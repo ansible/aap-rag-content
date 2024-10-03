@@ -1,0 +1,25 @@
+# Creating the API token in private automation hub
+
+In private automation hub, you can create an API token using API token management. The API token is a secret token used to protect your content.
+
+* Valid subscription credentials for Red Hat Ansible Automation Platform.
+
+1. Log in to your private automation hub.
+2. From the navigation panel, select menu:Automation Content[API token].
+3. Click btn:[Load Token].
+4. To copy the API token, click the btn:[Copy to clipboard] icon.
+5. Paste the API token into a file and store in a secure location.
+
+
+[IMPORTANT]
+----
+The API token is a secret token used to protect your content. Store your API token in a secure location.
+----
+
+The API token is now available for configuring automation hub as your default collections server or uploading collections using the ansible-galaxy command line tool.
+
+
+[NOTE]
+----
+The API token does not expire.
+----

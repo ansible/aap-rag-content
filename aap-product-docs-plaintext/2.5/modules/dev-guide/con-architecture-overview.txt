@@ -1,0 +1,8 @@
+# Architecture overview
+
+The following list shows the arrangements and uses of tools available on Ansible Automation Platform 2.0, along with how they can be utilized:
+
+* automation content navigator only - can be used today in Ansible Automation Platform 1.2
+* automation content navigator + downloaded automation execution environments — used directly on laptop/workstation
+* automation content navigator + downloaded automation execution environments + automation controller — for pushing/executing locally → remotely
+* automation content navigator + automation controller + Ansible Builder + Layered custom EE — provides even more control over utilized content for how to execute automation jobs

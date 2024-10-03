@@ -1,0 +1,27 @@
+# Importing a certificate authority in automation controller for LDAPS integration
+
+You can authenticate to the automation controller server by using LDAP, but if you change to using LDAPS (LDAP over SSL/TLS) to authenticate, it fails with one of the following errors:
+
+2020-04-28 17:25:36,184 WARNING  django_auth_ldap Caught LDAPError while authenticating e079127: SERVER_DOWN({'info': 'error:14090086:SSL routines:ssl3_get_server_certificate:certificate verify failed (unable to get issuer certificate)', 'desc': "Can't contact LDAP server"},)
+
+2020-06-02 11:48:24,840 WARNING  django_auth_ldap Caught LDAPError while authenticating reinernippes: SERVER_DOWN({'desc': "Can't contact LDAP server", 'info': 'error:14090086:SSL routines:ssl3_get_server_certificate:certificate verify failed (certificate has expired)'},)
+
+
+[NOTE]
+----
+By default, django_auth_ldap verifies SSL connections before starting an LDAPS transaction.
+When you receive a certificate verify failed error, this means that the django_auth_ldap could not verify the certificate.
+When the SSL/TLS connection cannot be verified, the connection attempt is halted.
+----
+
+* To import an LDAP CA, run the following commands:
+
+cp ldap_server-CA.crt /etc/pki/ca-trust/source/anchors/
+
+update-ca-trust
+
+
+[NOTE]
+----
+Run these two commands on all automation controller nodes in a clustered setup.
+----

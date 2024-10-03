@@ -1,0 +1,3 @@
+1. To automatically create organizations, users, and teams upon successful login, select Create objects.
+2. To enable this authentication method upon creation, select Enabled.
+3. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.

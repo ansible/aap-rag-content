@@ -1,0 +1,304 @@
+# Security
+
+The following sections describe how automation controller handles and enables you to control file system security.
+All playbooks are executed through the awx file system user.
+For running jobs, automation controller offers job isolation through the use of Linux containers.
+This protection ensures that jobs can only access playbooks, roles, and data from the Project directory for that job template.
+For credential security, you can upload locked SSH keys and set the unlock password to "ask".
+You can also have the system prompt you for SSH credentials or sudo passwords rather than having the system store them in the database.
+
+# Playbook Access and Information Sharing
+
+Automation controller&#8217;s use of automation execution environments and Linux containers prevents playbooks from reading files outside of their project directory.
+
+By default, the only data exposed to the ansible-playbook process inside the container is the current project being used.
+
+You can customize this in the Job Settings and expose additional directories from the host into the container.
+
+## Isolation functionality and variables
+
+Automation controller uses container technology to isolate jobs from each other.
+By default, only the current project is exposed to the container running a job template.
+
+If you need to expose additional directories, you must customize your playbook runs.
+To configure job isolation, you can set variables.
+
+By default, automation controller uses the system&#8217;s tmp directory (/tmp by default) as its staging area.
+This can be changed in the Job Execution Path field of the Jobs settings page, or in the REST API at /api/v2/settings/jobs:
+
+
+```
+AWX_ISOLATION_BASE_PATH = "/opt/tmp"
+```
+
+
+If there are any additional directories that should specifically be exposed from the host to the container that playbooks run in, you can specify those in the Paths to expose to isolated jobs field of the Jobs Settings page, or in the REST API at /api/v2/settings/jobs:
+
+
+```
+AWX_ISOLATION_SHOW_PATHS = ['/list/of/', '/paths']
+```
+
+
+
+[NOTE]
+----
+If your playbooks need to use keys or settings defined in AWX_ISOLATION_SHOW_PATHS, then add this file to /var/lib/awx/.ssh.
+----
+
+The fields described here can be found on the Jobs settings page:
+
+![Jobs settings options]
+
+# Role-Based Access Controls
+
+Role-Based Access Controls (RBAC) are built into automation controller and enable administrators to delegate access to server inventories, organizations,
+and more.
+Administrators can also centralize the management of various credentials, enabling users to use a required secret without exposing that secret to the user.
+You can use RBAC to enable automation controller to increase security and streamline management.
+
+RBAC is the practice of granting roles to users or teams.
+RBACs can be thought of in terms of Roles which define precisely who or what can see, change, or delete an "object" for which a specific capability is being set.
+
+The main concepts of automation controller&#8217;s RBAC design roles, resources, and users are as follows:
+
+* Users can be members of a role, which gives them certain access to any resources associated with that role, or any resources associated with "descendant" roles.
+* A role is a collection of capabilities.
+* Users are granted access to these capabilities and the automation controller's resources through the roles to which they are assigned or through roles inherited through the role hierarchy.
+* Roles associate a group of capabilities with a group of users.
+All capabilities are derived from membership within a role.
+Users receive capabilities only through the roles to which they are assigned or through roles they inherit through the role hierarchy.
+All members of a role have all capabilities granted to that role.
+Within an organization, roles are relatively stable, while users and capabilities are both numerous and may change rapidly.
+* Users can have many roles.
+
+## Role hierarchy and access inheritance
+
+Imagine that you have an organization named "SomeCompany" and want to give two people, "Josie" and "Carter", access to manage all the
+settings associated with that organization.
+To do this, you must make both people members of the organization&#8217;s admin_role.
+
+
+
+There are frequently many Roles in a system, some of which you want to include all of the capabilities of other roles.
+For example, you might want a System Administrator to have access to everything that an Organization Administrator has access to, who has everything that a Project Administrator has access to.
+
+This concept is referred to as the "Role Hierarchy":
+
+* Parent roles get all capabilities bestowed on any child roles.
+* Members of roles automatically get all capabilities for the role they are a member of, as well as any child roles.
+
+The Role Hierarchy is represented by permitting Roles to have "Parent Roles".
+Any capability that a Role has is implicitly granted to any parent roles (or parents of those parents).
+
+
+
+Roles can have more than one parent, and capabilities are implicitly granted to all parents.
+
+
+
+RBACs also enable you to explicitly permit Users and Teams of Users to run playbooks against certain sets of hosts.
+Users and teams are restricted to just the sets of playbooks and hosts to which they are granted capabilities.
+With automation controller, you can create or import as many Users and Teams as you require, create Users and Teams manually, or import them from LDAP or Active Directory.
+
+### Use of RBAC
+
+The following describe how to apply automation controller&#8217;s RBAC system in your environment.
+
+#### Edit Users
+
+When editing a user, an automation controller system administrator can specify the user as being either a System Administrator (also referred to as the Superuser) or a System Auditor:
+
+* System administrators implicitly inherit all capabilities (read/write/execute) for all objects within the environment.
+* System Auditors implicitly inherit the read-only capability for all objects within the environment.
+
+#### Edit Organizations
+
+When editing an organization, system administrators can specify the following roles:
+
+* One or more users as organization administrators
+* One or more users as organization auditors
+* One or more users (or teams) as organization members
+
+Users and teams that are members of an organization can view their organization administrator.
+
+Users who are organization administrators implicitly inherit all capabilities for all objects within that organization.
+
+Users who are organization auditors implicitly inherit the read-only capability for all objects within that organization.
+
+#### Edit Projects in an Organization
+
+When editing a project in an organization for which they are the administrator, system administrators and organization administrators can specify:
+
+* One or more users or teams that are project administrators
+* One or more users or teams that are project members
+* One or more users or teams that can update the project from SCM, from among the users and teams that are members of that organization.
+
+Users who are members of a project can view their project administrators.
+
+Project administrators implicitly inherit the capability to update the project from SCM.
+
+Administrators can also specify one or more users or teams (from those that are members of that project) that can use that project in a job template.
+
+#### Create Inventories and Credentials within an Organization
+
+All access that is granted to use, read, or write credentials is handled through roles, which use automation controller&#8217;s RBAC system to grant ownership, auditor, or usage roles.
+
+System administrators and organization administrators can create inventories and credentials within organizations under their administrative capabilities.
+
+Whether editing an inventory or a credential, System administrators and organization administrators can specify one or more users or teams (from those that are members of that organization) to be granted the usage capability for that inventory or credential.
+
+System administrators and organization administrators can specify one or more users or teams (from those that are members of that organization) that
+have the capabilities to update (dynamic or manually) an inventory.
+Administrators can also execute ad hoc commands for an inventory.
+
+#### Edit Job Templates
+
+System administrators, organization administrators, and project administrators, within a project under their administrative capabilities, can create and modify new job templates for that project.
+
+When editing a job template, administrators (automation controller, organization, and project) can select inventory and credentials in the organization for which they have usage capabilities, or they can leave those fields blank so that they are selected at runtime.
+
+Additionally, they can specify one or more users or teams (from those that are members of that project) that have execution capabilities for that
+job template.
+The execution capability is valid regardless of any explicit capabilities the user or team have been granted against the inventory or credential specified in the job template.
+
+#### User View
+
+A user can:
+
+* See any organization or project for which they are a member
+* Create their own credential objects which only belong to them
+* See and execute any job template for which they have been granted execution capabilities
+
+If a job template for which a user has been granted execution capabilities does not specify an inventory or credential, the user is prompted at run-time to select among the inventory and credentials in the organization they own or have been granted usage capabilities.
+
+Users that are job template administrators can make changes to job templates.
+However, to change to the inventory, project, playbook, credentials, or instance groups used in the job template, the user must also have the "Use" role for the project and inventory currently being used or being set.
+
+### Roles
+
+All access that is granted to use, read, or write credentials is handled through roles, and roles are defined for a resource.
+
+#### Built-in roles
+
+The following table lists the RBAC system roles with a brief description of how that role is defined with regard to privileges in automation controller:
+
+
+
+A Singleton Role is a special role that grants system-wide permissions.
+Automation controller currently provides two built-in Singleton Roles but the ability to create or customize a Singleton Role is not supported at this time.
+
+ Common Team Roles - "Personas"
+
+Automation controller support personnel typically works to ensure that automation controller is available, and manage it in a way as to balance supportability and ease-of-use for users.
+Automation controller support personnel often assign Organization Owner or Administrator roles to users to enable them to create a new Organization or add members from their team that the respective access requires.
+This minimizes the number of supporting individuals and focuses more on maintaining uptime of the service and assisting users who are using automation controller.
+
+The following table lists some common roles managed by the automation controller Organization:
+
+
+
+# Function of roles: editing and creating
+
+Organization "resource roles" functionality are specific to a certain resource type - such as workflows.
+Being a member of such a role usually provides two types of permissions.
+If a user is given a "workflow admin role" for the organization "Default", then they have the following permissions:
+
+* This user can create new workflows in the organization "Default"
+* This user can edit all workflows in the "Default" organization
+
+One exception is job templates, where having the role is independent of creation permission.
+For more information, see Job Templates.
+
+## Independence of resource roles and organization membership roles
+
+Resource-specific organization roles are independent of the organization roles of administrator and member.
+Having the "workflow administrator role" for the "Default" organization does not enable a user to view all users in the organization, but having a "member" role in the "Default" organization does.
+The two types of roles are delegated independently of each other.
+
+### Necessary permissions to edit job templates
+
+Users can edit fields not impacting job runs (non-sensitive fields) with a Job Template administrator role alone.
+However, to edit fields that impact job runs in a job template, a user must have the following:
+
+* An admin role for the job template and container groups
+* A use role for related projects
+* A use role for related inventories
+* A use role for related instance groups
+
+An "organization job template admin" role was introduced, but having this role is not sufficient by itself to edit a job template within the organization if the user does not have a use role for the project, inventory, or instance group, or an administrator role to the container group that
+a job template uses.
+
+To delegate full job template control (within an organization) to a user or team, you must grant the team or user all three organization-level roles:
+
+* job template administrator
+* project administrator
+* inventory administrator
+
+This ensures that the user (or all users who are members of the team with these roles) has full access to modify job templates in the organization.
+If a job template uses an inventory or project from another organization, the user with these organization roles can still not have permission to modify that job template.
+For clarity of permission management, do not mix projects or inventories from different organizations.
+
+### RBAC permissions
+
+Each role must have a content object, for instance, the organization administrator role has a content object of the organization.
+To delegate a role, you must have administrator permission for the content object, with some exceptions that would result in you being able to reset a user&#8217;s password.
+
+Parent is the organization.
+
+Allow is what this new permission will explicitly allow.
+
+Scope is the parent resource that this new role is created on. For example: Organization.project_create_role.
+
+It is assumed that the creator of the resource is given the administrator role for that resource.
+Instances where resource creation does not also imply resource administration are explicitly called out.
+
+The rules associated with each administrator type are as follows:
+
+Project Admin
+
+* Allow: Create, read, update, delete any project
+* Scope: Organization
+* User Interface: Project Add Screen - Organizations
+
+Inventory Admin
+
+* Parent: Org admin
+* Allow: Create, read, update, delete any inventory
+* Scope: Organization
+* User Interface: Inventory Add Screen - Organizations
+
+
+[NOTE]
+----
+As with the Use role, if you assign Project Administrator and Inventory Administrator roles to a user, it enables them to create Job Templates (not workflows) for your organization.
+----
+
+Credential Admin
+
+* Parent: Org admin
+* Allow: Create, read, update, delete shared credentials
+* Scope: Organization
+* User Interface: Credential Add Screen - Organizations
+
+Notification Admin
+
+* Parent: Org admin
+* Allow: Assignment of notifications
+* Scope: Organization
+
+Workflow Admin
+
+* Parent: Org admin
+* Allow: Create a workflow
+* Scope: Organization
+
+Org Execute
+
+* Parent: Org admin
+* Allow: Executing job templates and workflow job templates
+* Scope: Organization
+
+The following is a sample scenario showing an organization with its
+roles and which resources each have access to:
+

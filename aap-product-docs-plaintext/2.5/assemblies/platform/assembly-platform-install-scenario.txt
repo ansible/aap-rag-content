@@ -1,0 +1,669 @@
+# Installing Red Hat Ansible Automation Platform
+
+Ansible Automation Platform is a modular platform. The platform gateway deploys automation platform components, such as automation controller, automation hub, and Event-Driven Ansible controller.
+For more information about the components provided with Ansible Automation Platform, see Red Hat Ansible Automation Platform components in Planning your installation.
+There are several supported installation scenarios for Red Hat Ansible Automation Platform. To install Red Hat Ansible Automation Platform, you must edit the inventory file parameters to specify your installation scenario. You can use the enterprise installer as a basis for your own inventory file.
+For a comprehensive list of pre-defined variables used in Ansible installation inventory files, see Ansible variables.
+
+# Editing the Red Hat Ansible Automation Platform installer inventory file
+
+You can use the Red Hat Ansible Automation Platform installer inventory file to specify your installation scenario.
+
+1. Navigate to the installer:
+1. [RPM installed package]
+
+```
+$ cd /opt/ansible-automation-platform/installer/
+```
+
+2. [bundled installer]
+
+```
+$ cd ansible-automation-platform-setup-bundle-<latest-version>
+```
+
+3. [online installer]
+
+```
+$ cd ansible-automation-platform-setup-<latest-version>
+```
+
+2. Open the inventory file with a text editor.
+3. Edit inventory file parameters to specify your installation scenario.
+
+# Inventory file examples based on installation scenarios
+
+Red Hat supports several installation scenarios for Ansible Automation Platform. You can develop your own inventory files using the example files as a basis, or you can use the example closest to your preferred installation scenario.
+
+## Inventory file recommendations based on installation scenarios
+
+Before selecting your installation method for Ansible Automation Platform, review the following recommendations. Familiarity with these recommendations will streamline the installation process.
+
+* Provide a reachable IP address or fully qualified domain name (FQDN) for hosts to ensure users can sync and install content from automation hub from a different node.
+
+The FQDN must not contain either the - or the _ symbols, as it will not be processed correctly.
+
+Do not use localhost.
+* admin is the default user ID for the initial log in to Ansible Automation Platform and cannot be changed in the inventory file.
+* Use of special characters for pg_password is limited. The !, #, 0 and @ characters are supported. Use of other special characters can cause the setup to fail.
+* Enter your Red Hat Registry Service Account credentials in registry_username and registry_password to link to the Red Hat container registry.
+* The inventory file variables registry_username and registry_password are only required if a non-bundle installer is used.
+
+## Setting registry_username and registry_password
+
+If you intend to use the registry_username and registry_password variables in an inventory file you are recommended to use the following method to create a Registry Service Account to set a token with an expiration in the plaintext inventory/vars.yml file instead of using a plaintext username and password, for reasons of security.
+
+Registry service accounts provide named tokens that can be used in environments where credentials are shared, such as deployment systems.
+
+1. Navigate to https://access.redhat.com/terms-based-registry/accounts
+2. On the Registry Service Accounts page click btn:[New Service Account].
+3. Enter a name for the account using only the accepted characters.
+4. Optionally enter a description for the account.
+5. Click btn:[Create account].
+6. Find the created account in the list.
+The list of accounts is long so you might have to click btn:[Next] multiple times before finding the account you created.
+Alternatively, if you know the name of your token, you can go directly to the page by entering the URL https://access.redhat.com/terms-based-registry/token/<name-of-your-token>
+7. Click the name of the account that you created.
+8. A token page opens, displaying a generated Username (different to the account name) and a token.
+
+If no Username and token are displayed, click btn:[Regenerate token]. You can also click this to generate a new Username and token.
+9. Copy the service account name and use it to set registry_username.
+10. Copy the token and use it to set registry_password.
+
+### Single platform gateway and automation controller with an external (installer managed) database
+
+Use this example to see what is minimally needed within the inventory file to deploy single instances of platform gateway and automation controller with an external (installer managed) database.
+
+
+```
+[automationcontroller]
+controller.example.com
+
+[automationgateway]
+gateway.example.com
+
+[database]
+data.example.com
+
+[all:vars]
+admin_password='<password>'
+pg_host='data.example.com'
+pg_port=5432
+pg_database='awx'
+pg_username='awx'
+pg_password='<password>'
+pg_sslmode='prefer' # set to 'verify-full' for client-side enforced SSL
+
+registry_url='registry.redhat.io'
+registry_username='<registry username>'
+registry_password='<registry password>'
+
+# Automation Gateway configuration
+automationgateway_admin_password=''
+
+automationgateway_pg_host='data.example.com'
+automationgateway_pg_port=5432
+
+automationgateway_pg_database='automationgateway'
+automationgateway_pg_username='automationgateway'
+automationgateway_pg_password=''
+automationgateway_pg_sslmode='prefer'
+
+# The main automation gateway URL that clients will connect to (e.g. https://<load balancer host>).
+# If not specified, the first node in the [automationgateway] group will be used when needed.
+# automationgateway_main_url = ''
+
+# Certificate and key to install in Automation Gateway
+# automationgateway_ssl_cert=/path/to/automationgateway.cert
+# automationgateway_ssl_key=/path/to/automationgateway.key
+
+# SSL-related variables
+# If set, this will install a custom CA certificate to the system trust store.
+# custom_ca_cert=/path/to/ca.crt
+# Certificate and key to install in nginx for the web UI and API
+# web_server_ssl_cert=/path/to/tower.cert
+# web_server_ssl_key=/path/to/tower.key
+# Server-side SSL settings for PostgreSQL (when we are installing it).
+# postgres_use_ssl=False
+# postgres_ssl_cert=/path/to/pgsql.crt
+# postgres_ssl_key=/path/to/pgsql.key
+```
+
+
+### Single platform gateway, automation controller, and automation hub with an external (installer managed) database
+
+Use this example to populate the inventory file to deploy single instances of platform gateway, automation controller, and automation hub with an external (installer managed) database.
+
+
+```
+[automationcontroller]
+controller.example.com
+
+[automationhub]
+automationhub.example.com
+
+[automationgateway]
+gateway.example.com
+
+[database]
+data.example.com
+
+[all:vars]
+admin_password='<password>'
+pg_host='data.example.com'
+pg_port='5432'
+pg_database='awx'
+pg_username='awx'
+pg_password='<password>'
+pg_sslmode='prefer'  # set to 'verify-full' for client-side enforced SSL
+
+registry_url='registry.redhat.io'
+registry_username='<registry username>'
+registry_password='<registry password>'
+
+automationhub_admin_password= <PASSWORD>
+
+automationhub_pg_host='data.example.com'
+automationhub_pg_port=5432
+
+automationhub_pg_database='automationhub'
+automationhub_pg_username='automationhub'
+automationhub_pg_password=<PASSWORD>
+automationhub_pg_sslmode='prefer'
+
+# The default install will deploy a TLS enabled Automation Hub.
+# If for some reason this is not the behavior wanted one can
+# disable TLS enabled deployment.
+#
+# automationhub_disable_https = False
+# The default install will generate self-signed certificates for the Automation
+# Hub service. If you are providing valid certificate via automationhub_ssl_cert
+# and automationhub_ssl_key, one should toggle that value to True.
+#
+# automationhub_ssl_validate_certs = False
+# SSL-related variables
+# If set, this will install a custom CA certificate to the system trust store.
+# custom_ca_cert=/path/to/ca.crt
+# Certificate and key to install in Automation Hub node
+# automationhub_ssl_cert=/path/to/automationhub.cert
+# automationhub_ssl_key=/path/to/automationhub.key
+
+# Automation Gateway configuration
+automationgateway_admin_password=''
+
+automationgateway_pg_host=''
+automationgateway_pg_port=5432
+
+automationgateway_pg_database='automationgateway'
+automationgateway_pg_username='automationgateway'
+automationgateway_pg_password=''
+automationgateway_pg_sslmode='prefer'
+
+# The main automation gateway URL that clients will connect to (e.g. https://<load balancer host>).
+# If not specified, the first node in the [automationgateway] group will be used when needed.
+# automationgateway_main_url = ''
+
+# Certificate and key to install in Automation Gateway
+# automationgateway_ssl_cert=/path/to/automationgateway.cert
+# automationgateway_ssl_key=/path/to/automationgateway.key
+
+# Certificate and key to install in nginx for the web UI and API
+# web_server_ssl_cert=/path/to/tower.cert
+# web_server_ssl_key=/path/to/tower.key
+# Server-side SSL settings for PostgreSQL (when we are installing it).
+# postgres_use_ssl=False
+# postgres_ssl_cert=/path/to/pgsql.crt
+# postgres_ssl_key=/path/to/pgsql.key
+```
+
+
+### Single platform gateway, automation controller, automation hub, and Event-Driven Ansible controller with an external (installer managed) database
+
+Use this example to populate the inventory file to deploy single instances of platform gateway, automation controller, automation hub, and Event-Driven Ansible controller with an external (installer managed) database.
+
+
+[IMPORTANT]
+----
+* This scenario requires a minimum of automation controller 2.4 for successful deployment of Event-Driven Ansible controller.
+* Event-Driven Ansible controller must be installed on a separate server and cannot be installed on the same host as automation hub and automation controller.
+* When you activate an Event-Driven Ansible rulebook under standard conditions, it uses approximately 250 MB of memory. However, the actual memory consumption can vary significantly based on the complexity of your rules and the volume and size of the events processed. In scenarios where a large number of events are anticipated or the rulebook complexity is high, conduct a preliminary assessment of resource usage in a staging environment. This ensures that your maximum number of activations is based on the capacity of your resources. In the following example, the default automationedacontroller_max_running_activations setting is 12, but you can adjust according to your capacity.
+----
+
+[automationcontroller]
+controller.example.com
+
+[automationhub]
+automationhub.example.com
+
+[automationedacontroller]
+automationedacontroller.example.com
+
+[automationgateway]
+gateway.example.com
+
+[database]
+data.example.com
+
+[all:vars]
+admin_password='<password>'
+pg_host='data.example.com'
+pg_port='5432'
+pg_database='awx'
+pg_username='awx'
+pg_password='<password>'
+pg_sslmode='prefer'  # set to 'verify-full' for client-side enforced SSL
+
+registry_url='registry.redhat.io'
+registry_username='<registry username>'
+registry_password='<registry password>'
+
+# Automation hub configuration
+
+automationhub_admin_password= <PASSWORD>
+
+automationhub_pg_host='data.example.com'
+automationhub_pg_port=5432
+
+automationhub_pg_database='automationhub'
+automationhub_pg_username='automationhub'
+automationhub_pg_password=<PASSWORD>
+automationhub_pg_sslmode='prefer'
+
+# Automation Event-Driven Ansible controller configuration
+
+automationedacontroller_admin_password='<eda-password>'
+
+automationedacontroller_pg_host='data.example.com'
+automationedacontroller_pg_port=5432
+
+automationedacontroller_pg_database='automationedacontroller'
+automationedacontroller_pg_username='automationedacontroller'
+automationedacontroller_pg_password='<password>'
+
+# Keystore file to install in SSO node
+# sso_custom_keystore_file='/path/to/sso.jks'
+
+# This install will deploy SSO with sso_use_https=True
+# Keystore password is required for https enabled SSO
+sso_keystore_password=''
+
+# This install will deploy a TLS enabled Automation Hub.
+# If for some reason this is not the behavior wanted one can
+# disable TLS enabled deployment.
+#
+# automationhub_disable_https = False
+# The default install will generate self-signed certificates for the Automation
+# Hub service. If you are providing valid certificate via automationhub_ssl_cert
+# and automationhub_ssl_key, one should toggle that value to True.
+#
+# automationhub_ssl_validate_certs = False
+# SSL-related variables
+# If set, this will install a custom CA certificate to the system trust store.
+# custom_ca_cert=/path/to/ca.crt
+# Certificate and key to install in Automation Hub node
+# automationhub_ssl_cert=/path/to/automationhub.cert
+# automationhub_ssl_key=/path/to/automationhub.key
+
+# Automation Gateway configuration
+automationgateway_admin_password=''
+
+automationgateway_pg_host=''
+automationgateway_pg_port=5432
+
+automationgateway_pg_database='automationgateway'
+automationgateway_pg_username='automationgateway'
+automationgateway_pg_password=''
+automationgateway_pg_sslmode='prefer'
+
+# The main automation gateway URL that clients will connect to (e.g. https://<load balancer host>).
+# If not specified, the first node in the [automationgateway] group will be used when needed.
+# automationgateway_main_url = ''
+
+# Certificate and key to install in Automation Gateway
+# automationgateway_ssl_cert=/path/to/automationgateway.cert
+# automationgateway_ssl_key=/path/to/automationgateway.key
+
+# Certificate and key to install in nginx for the web UI and API
+# web_server_ssl_cert=/path/to/tower.cert
+# web_server_ssl_key=/path/to/tower.key
+# Server-side SSL settings for PostgreSQL (when we are installing it).
+# postgres_use_ssl=False
+# postgres_ssl_cert=/path/to/pgsql.crt
+# postgres_ssl_key=/path/to/pgsql.key
+
+# Boolean flag used to verify Automation Controller's
+# web certificates when making calls from Automation Event-Driven Ansible controller.
+# automationedacontroller_controller_verify_ssl = true
+#
+# Certificate and key to install in Automation Event-Driven Ansible controller node
+# automationedacontroller_ssl_cert=/path/to/automationeda.crt
+# automationedacontroller_ssl_key=/path/to/automationeda.key
+
+For more information about these inventory variables, refer to the Ansible automation hub variables.
+
+### High availability automation hub
+
+Use the following examples to populate the inventory file to install a highly available automation hub. This inventory file includes a highly available automation hub with a clustered setup.
+
+You can configure your HA deployment further to enable a high availability deployment of automation hub on SELinux.
+
+* Specify the IP address for your database host, using the automation_pg_host and automation_pg_port inventory variables. For example:
+
+
+```
+automationhub_pg_host='192.0.2.10'
+automationhub_pg_port=5432
+```
+
+
+* Also specify the IP address for your database host in the [database] section, using the value in the automationhub_pg_host inventory variable:
+
+
+```
+[database]
+192.0.2.10
+```
+
+
+* If installing a clustered setup, replace localhost ansible_connection=local in the [automationhub] section with the hostname or IP of all instances. For example:
+
+
+```
+[automationhub]
+automationhub1.testing.ansible.com ansible_user=cloud-user
+automationhub2.testing.ansible.com ansible_user=cloud-user
+automationhub3.testing.ansible.com ansible_user=cloud-user
+```
+
+
+Check that the following directives are present in /etc/pulp/settings.py in each of the private automation hub servers:
+
+
+```
+USE_X_FORWARDED_PORT = True
+USE_X_FORWARDED_HOST = True
+```
+
+
+
+[NOTE]
+----
+If automationhub_main_url is not specified, the first node in the [automationhub] group will be used as default.
+----
+
+### Enabling a high availability (HA) deployment of automation hub on SELinux
+
+You can configure the inventory file to enable high availability deployment of automation hub on SELinux. You must create two mount points for /var/lib/pulp and /var/lib/pulp/pulpcore_static, and then assign the appropriate SELinux contexts to each.
+
+
+[NOTE]
+----
+You must add the context for /var/lib/pulp pulpcore_static and run the Ansible Automation Platform installer before adding the context for /var/lib/pulp.
+----
+
+* You have already configured a NFS export on your server.
+
+1. Create a mount point at /var/lib/pulp:
+
+```
+$ mkdir /var/lib/pulp/
+```
+
+2. Open /etc/fstab using a text editor, then add the following values:
+
+```
+srv_rhel8:/data /var/lib/pulp nfs defaults,_netdev,nosharecache,context="system_u:object_r:var_lib_t:s0" 0 0
+srv_rhel8:/data/pulpcore_static /var/lib/pulp/pulpcore_static nfs defaults,_netdev,nosharecache,context="system_u:object_r:httpd_sys_content_rw_t:s0" 0 0
+```
+
+3. Run the reload systemd manager configuration command:
+
+```
+$ systemctl daemon-reload
+```
+
+4. Run the mount command for /var/lib/pulp:
+
+```
+$ mount /var/lib/pulp
+```
+
+5. Create a mount point at /var/lib/pulp/pulpcore_static:
+
+```
+$ mkdir /var/lib/pulp/pulpcore_static
+```
+
+6. Run the mount command:
+
+```
+$ mount -a
+```
+
+7. With the mount points set up, run the Ansible Automation Platform installer:
+
+```
+$ setup.sh -- -b --become-user root
+```
+
+8. After the installation is complete, unmount the /var/lib/pulp/ mount point.
+
+1. Apply the appropriate SELinux context.
+2. Configure the pulpcore.serivce.
+
+* See the SELinux Requirements on the Pulp Project documentation for a list of SELinux contexts.
+* See the Filesystem Layout for a full description of Pulp folders.
+
+#### Configuring pulpcore.service
+
+After you have configured the inventory file, and applied the SELinux context, you now need to configure the pulp service.
+
+1. With the two mount points set up, shut down the Pulp service to configure pulpcore.service:
+
+```
+$ systemctl stop pulpcore.service
+```
+
+2. Edit pulpcore.service using systemctl:
+
+```
+$ systemctl edit pulpcore.service
+```
+
+3. Add the following entry to pulpcore.service to ensure that automation hub services starts only after starting the network and mounting the remote mount points:
+
+```
+[Unit]
+After=network.target var-lib-pulp.mount
+```
+
+4. Enable remote-fs.target:
+
+```
+$ systemctl enable remote-fs.target
+```
+
+5. Reboot the system:
+
+```
+$ systemctl reboot
+```
+
+
+A bug in the pulpcore SELinux policies can cause the token authentication public/private keys in etc/pulp/certs/ to not have the proper SELinux labels, causing the pulp process to fail. When this occurs, run the following command to temporarily attach the proper labels:
+
+
+```
+$ chcon system_u:object_r:pulpcore_etc_t:s0 /etc/pulp/certs/token_{private,public}_key.pem
+```
+
+
+Repeat this command to reattach the proper SELinux labels whenever you relabel your system.
+
+#### Applying the SELinux context
+
+After you have configured the inventory file, you must now apply the context to enable the high availability (HA) deployment of automation hub on SELinux.
+
+1. Shut down the Pulp service:
+
+```
+$ systemctl stop pulpcore.service
+```
+
+2. Unmount /var/lib/pulp/pulpcore_static:
+
+```
+$ umount /var/lib/pulp/pulpcore_static
+```
+
+3. Unmount /var/lib/pulp/:
+
+```
+$ umount /var/lib/pulp/
+```
+
+4. Open /etc/fstab using a text editor, then replace the existing value for /var/lib/pulp with the following:
+
+```
+srv_rhel8:/data /var/lib/pulp nfs defaults,_netdev,nosharecache,context="system_u:object_r:pulpcore_var_lib_t:s0" 0 0
+```
+
+5. Run the mount command:
+
+```
+$ mount -a
+```
+
+
+### Configuring content signing on private automation hub
+
+To successfully sign and publish Ansible Certified Content Collections, you must configure private automation hub for signing.
+
+* Your GnuPG key pairs have been securely set up and managed by your organization.
+* Your public-private key pair has proper access for configuring content signing on private automation hub.
+
+1. Create a signing script that accepts only a filename.
+
+[NOTE]
+----
+This script acts as the signing service and must generate an ascii-armored detached gpg signature for that file using the key specified through the PULP_SIGNING_KEY_FINGERPRINT environment variable.
+----
+
+The script prints out a JSON structure with the following format.
+
+```
+{"file": "filename", "signature": "filename.asc"}
+```
+
+
+All the file names are relative paths inside the current working directory.
+The file name must remain the same for the detached signature.
+Example:
+
+The following script produces signatures for content:
+
+```shell
+#!/usr/bin/env bash
+
+FILE_PATH=$1
+SIGNATURE_PATH="$1.asc"
+
+ADMIN_ID="$PULP_SIGNING_KEY_FINGERPRINT"
+PASSWORD="password"
+
+# Create a detached signature
+gpg --quiet --batch --pinentry-mode loopback --yes --passphrase \
+   $PASSWORD --homedir ~/.gnupg/ --detach-sign --default-key $ADMIN_ID \
+   --armor --output $SIGNATURE_PATH $FILE_PATH
+
+# Check the exit status
+STATUS=$?
+if [ $STATUS -eq 0 ]; then
+   echo {\"file\": \"$FILE_PATH\", \"signature\": \"$SIGNATURE_PATH\"}
+else
+   exit $STATUS
+fi
+```
+
+
+After you deploy a private automation hub with signing enabled to your Ansible Automation Platform cluster, new UI additions are displayed in collections.
+2. Review the Ansible Automation Platform installer inventory file for options that begin with automationhub_*.
+
+```
+[all:vars]
+.
+.
+.
+automationhub_create_default_collection_signing_service = True
+automationhub_auto_sign_collections = True
+automationhub_require_content_approval = True
+automationhub_collection_signing_service_key = /abs/path/to/galaxy_signing_service.gpg
+automationhub_collection_signing_service_script = /abs/path/to/collection_signing.sh
+```
+
+
+The two new keys (automationhub_auto_sign_collections and automationhub_require_content_approval) indicate that the collections must be signed and approved after they are uploaded to private automation hub.
+
+### Adding a safe plugin variable to Event-Driven Ansible controller
+
+When using redhat.insights_eda or similar plug-ins to run rulebook activations in Event-Driven Ansible controller, you must add a safe plugin variable to a directory in Ansible Automation Platform. This ensures connecton between Event-Driven Ansible controller and the source plugin, and displays port mappings correctly.
+
+1. Create a directory for the safe plugin variable: mkdir -p ./group_vars/automationedacontroller
+2. Create a file within that directory for your new setting (for example, touch ./group_vars/automationedacontroller/custom.yml)
+3. Add the variable automationedacontroller_additional_settings to extend the default settings.yaml template for Event-Driven Ansible controller and add the SAFE_PLUGINS field with a list of plugins to enable. For example:
+
+```
+automationedacontroller_additional_settings:
+   SAFE_PLUGINS:
+     - ansible.eda.webhook
+     - ansible.eda.alertmanager
+```
+
+
+[NOTE]
+----
+You can also extend the automationedacontroller_additional_settings variable beyond SAFE_PLUGINS in the Django configuration file, /etc/ansible-automation-platform/eda/settings.yaml
+----
+
+# Running the Red Hat Ansible Automation Platform installer setup script
+
+After you update the inventory file with required parameters, run the installer setup script.
+
+* Run the setup.sh script
+
+```
+$ sudo ./setup.sh
+```
+
+
+
+[NOTE]
+----
+If you are running the setup as a non-root user with sudo privileges, you can use the following command:
+
+```
+$ ANSIBLE_BECOME_METHOD='sudo'
+ANSIBLE_BECOME=True ./setup.sh
+```
+
+----
+
+Installation of Red Hat Ansible Automation Platform will begin.
+
+See Understanding privilege escalation for additional setup.sh script examples.
+
+# Verifying installation of Ansible Automation Platform
+
+Upon a successful login, your installation of Red Hat Ansible Automation Platform is complete.
+
+
+[IMPORTANT]
+----
+If the installation fails and you are a customer who has purchased a valid license for Red Hat Ansible Automation Platform, contact Ansible through the Red Hat Customer portal.
+----
+
+See Getting started with Ansible Automation Platform for post installation instructions.
+
+# Adding a subscription manifest to Ansible Automation Platform
+
+Before you first log in, you must add your subscription information to the platform. To add a subscription to Ansible Automation Platform, see Obtaining a manifest file in the Access management and authentication.

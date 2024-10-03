@@ -1,0 +1,61 @@
+# Adding execution nodes to Ansible Automation Platform Operator
+
+You can enable the Ansible Automation Platform Operator with execution nodes by downloading and installing the install bundle.
+
+* An automation controller instance.
+* The receptor collection package is installed.
+* AAP Repository ansible-automation-platform-2.4-for-rhel-{RHEL-RELEASE-NUMBER}-x86_64-rpms is enabled.
+
+1. Log in to Red Hat Ansible Automation Platform.
+2. In the navigation panel, select menu:Automation Execution[Infrastructure > Instances].
+3. Click btn:[Add].
+4. Input the Execution Node domain name or IP in the Host Name field.
+5. Optional: Input the port number in the Listener Port field.
+6. Click btn:[Save].
+7. Click the download icon next to Install Bundle. This starts a download, take note of where you save the file
+8. Untar the gz file.
+
+[NOTE]
+----
+To run the install_receptor.yml playbook you need to install  the receptor collection from Ansible Galaxy:
+Ansible-galaxy collection install -r requirements.yml
+----
+9. Update the playbook with your user name and SSH private key file. Note that ansible_host pre-populates with the hostname you input earlier.
+
+```
+all:
+   hosts:
+      remote-execution:
+	        ansible_host: example_host_name # Same with configured in AAP WebUI
+	        ansible_user: <username> #user provided
+	        Ansible_ssh_private_key_file: ~/.ssh/id_example
+```
+
+10. Open your terminal, and navigate to the directory where you saved the playbook.
+11. To install the bundle run:
+
+```
+ansible-playbook install_receptor.yml -i inventory.yml
+```
+
+12. When installed you can now upgrade your execution node by downloading and re-running the playbook for the instance you created.
+
+To verify receptor service status run the following command:
+
+
+```
+sudo systemctl status receptor.service
+```
+
+
+Make sure the service is in active (running) state
+
+To verify if your playbook runs correctly on your new node run the following command:
+
+
+```
+watch podman ps
+```
+
+
+* For more information about managing instance groups see the Managing Instance Groups section of the Automation Controller User Guide.

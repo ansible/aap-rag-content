@@ -1,0 +1,25 @@
+# Optional build command arguments
+
+The -t flag will tag your automation execution environment image with a specific name. For example, the following command will build an image named my_first_ee_image:
+
+
+```
+$ ansible-builder build -t my_first_ee_image
+```
+
+
+[NOTE]
+----
+If you do not use -t with build, an image called ansible-execution-env is created and loaded into the local container registry.
+----
+
+If you have multiple definition files, you can specify which one to use by including the -f flag:
+
+
+```
+$ ansible-builder build -f another-definition-file.yml -t another_ee_image
+```
+
+In this example, Ansible Builder will use the specifications provided in the file named another-definition-file.yml instead of the default execution-environment.yml to build an automation execution environment image named another_ee_image.
+
+For other specifications and flags that you can use with the build command, enter ansible-builder build --help to see a list of additional options.

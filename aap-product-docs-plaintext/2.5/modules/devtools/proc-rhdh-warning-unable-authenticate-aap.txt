@@ -1,0 +1,19 @@
+# Unable to authenticate to Ansible Automation Platform
+
+The following warning indicates that the Ansible plug-ins were not able to authenticate with Ansible Automation Platform to query the subscription status.
+
+
+```
+Unable to authenticate to Ansible Automation Platform
+Verify that the authentication details for Ansible Automation Platform are correctly configured in the Ansible plug-ins.
+For help, please refer to the Ansible plug-ins installation guide.
+```
+
+
+## Remediation steps
+
+1. Verify that the automation controller Personal Access Token (PAT) configured in the Ansible plug-ins is correct.
+For more information, refer to the
+Adding tokens
+section of TitleCentralAuth.
+2. After correcting the authentication details, restart the Red Hat Developer Hub pod to initiate a subscription query.

@@ -1,0 +1,35 @@
+# Activate with a manifest file
+
+If you have a subscriptions manifest, you can upload the manifest file either by using the Red Hat Ansible Automation Platform interface.
+
+
+[NOTE]
+----
+You are opted in for Automation Analytics by default when you activate the platform on first time log in. This helps Red Hat improve the product by delivering you a much better user experience. You can opt out, after activating Ansible Automation Platform, by doing the following:
+1. From the navigation panel, select menu:Settings[System].
+2. Uncheck the Gather data for Automation Analytics option.
+3. Click btn:[Save].
+----
+
+You must have a Red Hat Subscription Manifest file exported from the Red Hat Customer Portal. For more information, see Obtaining a manifest file.
+
+1. Log in to Red Hat Ansible Automation Platform.
+2. If you are not immediately prompted for a manifest file, go to menu:Settings[Subscription].
+3. Select Subscription manifest.
+4. Click btn:[Browse] and select the manifest file.
+5. Review the End User License Agreement and select I agree to the End User License Agreement.
+6. Click btn:[Finish].
+
+
+[NOTE]
+----
+If the btn:[BROWSE] button is disabled on the License page, clear the USERNAME and PASSWORD fields.
+----
+
+After your subscription has been accepted, subscription details are displayed. A status of Compliant indicates your subscription is in compliance with the number of hosts you have automated within your subscription count. Otherwise, your status will show as Out of Compliance, indicating you have exceeded the number of hosts in your subscription.
+Other important information displayed include the following:
+Hosts automated:: Host count automated by the job, which consumes the license count
+Hosts imported:: Host count considering all inventory sources (does not impact hosts remaining)
+Hosts remaining:: Total host count minus hosts automated
+
+* You can return to the license screen by selecting menu:Settings[Subscription] from the navigation panel and clicking btn:[Edit subscription].

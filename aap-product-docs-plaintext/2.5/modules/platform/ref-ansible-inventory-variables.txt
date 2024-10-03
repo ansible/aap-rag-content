@@ -1,0 +1,8 @@
+# Ansible variables
+
+The following variables control how Ansible Automation Platform interacts with remote hosts.
+
+For more information about variables specific to certain plugins, see the documentation for Ansible.Builtin.
+
+For a list of global configuration options, see Ansible Configuration Settings.
+

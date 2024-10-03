@@ -1,0 +1,3 @@
+Users associated with an organization are shown in the Access tab of the organization.
+
+Other users can be added to an organization, including a Normal User, System Auditor, or System Administrator, but they must be created first.

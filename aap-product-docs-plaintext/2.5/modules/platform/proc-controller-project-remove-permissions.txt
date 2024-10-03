@@ -1,0 +1,8 @@
+# Removing permissions from a project
+
+Remove roles for a particular user.
+
+1. From the navigation panel, select  menu:Automation Execution[Projects].
+2. Select the project that you want to update and click the User Access or Team Access tab.
+3. Click the  icon next to the user role in the Roles column.
+4. Click btn:[Delete] in the confirmation window to confirm the disassociation.

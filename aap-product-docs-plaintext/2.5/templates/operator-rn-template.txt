@@ -1,0 +1,43 @@
+# Ansible Automation Platform Operator <version>
+
+The Ansible Automation Platform Operator provides cloud-native, push-button deployment of new Ansible Automation Platform instances in your OpenShift environment.
+
+# New features and enhancements
+
+This release of Ansible Automation Platform Operator features the following enhancements:
+
+* Feature/enhancement and description
+* Feature/enhancement and description
+
+# Technology Preview
+
+Some features in this release are currently classified as Technology Preview. These experimental features are not intended for production use. For more information about technology preview features, see What is a Technology Preview feature.
+
+<ABC> is available as a Technology Preview:: ABC, which Red Hat provides as an unsupported Technology Preview, is <description of feature>
+<XYZ> is available as a Technology Preview:: XYZ, which Red Hat provides as an unsupported Technology Preview, is <description of feature>
+
+# Bug fixes
+
+These bugs were fixed in this release of Ansible Automation Platorm:
+
+AAP-xxxx:: <description of bug fix>
+AAP-xxxx:: <description of bug fix>
+AAP-xxxx:: <description of bug fix>
+
+# Deprecated and removed features
+
+Some features available in previous releases have been deprecated or removed.
+
+Deprecated functionality is still included in Ansible Automation Platform Operator and continues to be supported; however, it will be removed in a future release of this product and is not recommended for new deployments. For the most recent list of major functionality deprecated and removed within Ansible Automation Platform Operator &lt;version&gt;, refer to the table below.
+
+
+
+
+
+# Known issues
+
+These known issues exist in Ansible Automation Platform Operator at this time:
+
+AAP-xxxx:: <description of issue>
+AAP-xxxx:: <description of issue>
+AAP-xxxx:: <description of issue>

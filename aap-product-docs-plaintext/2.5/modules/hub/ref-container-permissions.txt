@@ -1,0 +1,5 @@
+# Remote registry team permissions
+
+You can control how users can interact with execution environments managed in private automation hub.
+Use the following list of permissions to create teams with the right privileges for your remote registries.
+

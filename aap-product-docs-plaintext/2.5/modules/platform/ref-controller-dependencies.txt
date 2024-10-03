@@ -1,0 +1,60 @@
+# Dependencies
+
+Specifies dependencies to install into the final image, including ansible-core, ansible-runner, Python packages, system packages, and
+collections.
+Ansible Builder automatically installs dependencies for any Ansible collections you install.
+
+In general, you can use standard syntax to constrain package versions.
+Use the same syntax you would pass to dnf, pip, ansible-galaxy, or any other package management utility.
+You can also define your packages or collections in separate files and reference those files in the dependencies section of your definition file.
+
+The following keys are valid:
+
+
+
+The following example uses filenames that contain the various dependencies:
+
+dependencies:
+  python: requirements.txt
+  system: bindep.txt
+  galaxy: requirements.yml
+  ansible_core:
+      package_pip: ansible-core==2.14.2
+  ansible_runner:
+      package_pip: ansible-runner==2.3.1
+  python_interpreter:
+      package_system: "python310"
+      python_path: "/usr/bin/python3.10"
+
+This example uses inline values:
+
+dependencies:
+  python:
+    - pywinrm
+  system:
+    - iputils [platform:rpm]
+  galaxy:
+    collections:
+      - name: community.windows
+      - name: ansible.utils
+        version: 2.10.1
+  ansible_core:
+      package_pip: ansible-core==2.14.2
+  ansible_runner:
+      package_pip: ansible-runner==2.3.1
+  python_interpreter:
+      package_system: "python310"
+      python_path: "/usr/bin/python3.10"
+
+
+[NOTE]
+----
+If any of these dependency files (requirements.txt, bindep.txt, and requirements.yml) are in the build_ignore of the collection, the build fails.
+Collection maintainers can verify that ansible-builder recognizes the requirements they expect by using the introspect command:
+ansible-builder introspect --sanitize ~/.ansible/collections/
+----
+
+The --sanitize option reviews all of the collection requirements and removes duplicates.
+It also removes any Python requirements that are normally excluded (see python dependencies).
+
+Use the -v3 option to introspect to see logging messages about requirements that are being excluded.

@@ -1,0 +1,11 @@
+# Installing Event-Driven Ansible controller on Red Hat Ansible Automation Platform
+
+To prepare for installation of Event-Driven Ansible controller, review the following information in the Red Hat Ansible Automation Platform Planning Guide:
+
+* Example Ansible Automation Platform architecture, including the Event-Driven Ansible controller
+* Event-Driven Ansible controller general information
+* Event-Driven Ansible controller system requirements
+
+When you are ready to install the Event-Driven Ansible controller, see the procedures in the Red Hat Ansible Automation Platform Installation Guide beginning with Chapter 3. Installing Red Hat Ansible Automation Platform.
+
+Lastly, see Appendix A. 5. Event-Driven Ansible controller variables in the Red Hat Ansible Automation Platform Installation Guide to view predefined variables for Event-Driven Ansible controller.

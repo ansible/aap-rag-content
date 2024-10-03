@@ -1,0 +1,58 @@
+# Using the postinstall feature of containerized Ansible Automation Platform
+
+You can use the optional postinstall feature of containerized Ansible Automation Platform to define and load the configuration during the initial installation. This uses a configuration-as-code approach, where you simply define your configuration to be loaded as YAML files.
+
+* An Ansible Automation Platform license for this feature that is on the local filesystem so it can be automatically loaded from the inventory file.
+
+1. The postinstall feature is disabled by default. To use the postinstaller, add the following variables in your inventory file:
+
+```
+controller_postinstall=true
+controller_license_file=<full_path_to_your_manifest_zip_file>
+```
+
+2. You can pull your configuration-as-code from a Git based repository. To do this, set the following variables to dictate where you pull the content from and where to store it for upload to the Ansible Automation Platform controller:
+
+```
+controller_postinstall_repo_url=<url_to_your_config-as-code_git_repository>
+controller_postinstall_dir=<full_path_to_your_config-as-code_directory>
+controller_postinstall_repo_ref=main
+```
+
+3. The controller_postinstall_repo_url variable can define the postinstall repository URL which must include authentication information.
+
+```
+http(s)://<host>/<repo>.git (public repository without HTTP(S) authentication)
+http(s)://<user>:<password>@<host>:<repo>.git (private repository with HTTP(S) authentication)
+git@<host>:<repo>.git (public or private repository with SSH authentication)
+```
+
+
+[NOTE]
+----
+When using SSH based authentication, the installer does not configure anything for you, so you must configure everything on the installer node.
+----
+
+Definition files that are used by Ansible Builder to create automation execution environment images use the infra certified collections. The controller_configuration collection is preinstalled as part of the installation and uses the installation controller credentials you supply in the inventory file for access into the Ansible Automation Platform controller. You simply need to give the YAML configuration files.
+
+You can set up Ansible Automation Platform configuration attributes such as credentials, LDAP settings, users and teams, organizations, projects, inventories and hosts, job and workflow templates.
+
+The following example shows a sample your-config.yml file defining and loading controller job templates. The example demonstrates a simple change to the  example provided with an Ansible Automation Platform installation.
+
+
+```
+/full_path_to_your_configuration_as_code/
+├── controller
+    	└── job_templates.yml
+```
+
+
+
+```
+controller_templates:
+ - name: Demo Job Template
+   execution_environment: Default execution environment
+   instance_groups:
+ 	- default
+   inventory: Demo Inventory
+```

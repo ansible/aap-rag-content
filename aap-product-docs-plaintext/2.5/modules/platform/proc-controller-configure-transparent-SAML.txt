@@ -1,0 +1,16 @@
+# Configuring transparent SAML logins
+
+For transparent logins to work, you must first get IdP-initiated logins to work.
+
+1. Set the RelayState on the IdP to the key of the IdP definition in the SAML Enabled Identity Providers field.
+2. When this is working, specify the redirect URL for non-logged-in users to somewhere other than the default automation controller login page by using the Login redirect override URL field in the Miscellaneous Authentication settings window of the Settings menu.
+You must set this to /sso/login/saml/?idp=<name-of-your-idp> for transparent SAML login, as shown in the following example:
+![Configure SAML login]
+
+[NOTE]
+----
+This example shows a typical IdP format, but might not be the correct format for your particular case.
+You might need to reach out to your IdP for the correct transparent redirect URL as that URL is not the same for all IdPs.
+----
+3. After you configure transparent SAML login, to log in using local credentials or a different SSO, go directly to https://<your-tower-server>/login.
+This provides the standard automation controller login page, including SSO authentication options, enabling you to log in with any configured method.

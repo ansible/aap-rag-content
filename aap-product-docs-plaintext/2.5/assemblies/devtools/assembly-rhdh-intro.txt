@@ -1,0 +1,21 @@
+# Ansible plug-ins for Red Hat Developer Hub
+
+# Red Hat Developer Hub
+
+Red Hat Developer Hub (RHDH) serves as an open developer platform designed for building developer portals.
+
+# Ansible plug-ins for Red Hat Developer Hub
+
+Ansible plug-ins for Red Hat Developer Hub deliver an Ansible-first Red Hat Developer Hub user experience that simplifies the automation experience for Ansible users of all skill levels.
+The Ansible plug-ins provide curated content and features to accelerate Ansible learner onboarding and streamline Ansible use case adoption across your organization.
+
+The Ansible plug-ins provide:
+
+* A customized home page and navigation tailored to Ansible users.
+* Curated Ansible learning paths to help users new to Ansible.
+* Software templates for creating Ansible playbook and collection projects that follow best practices.
+* Links to supported development environments and tools with opinionated configurations.
+
+# Architecture
+
+![Ansible plugin for Red Hat Developer Hub architecture]

@@ -1,0 +1,12 @@
+# Creating a super user
+
+If you want to spread administration across your team, you can create a super user in private automation hub.
+
+* You must be a Super user.
+
+1. Log in to your private automation hub.
+2. From the navigation panel, select menu:Access Management[Users].
+3. Select the user that you want to make a super user. The User details for that user are displayed.
+4. Under User type, select Super User.
+
+The user now has Super user permissions.

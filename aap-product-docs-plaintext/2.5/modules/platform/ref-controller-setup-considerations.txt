@@ -1,0 +1,19 @@
+# Setup considerations
+
+Learn about the initial setup of clusters.
+To upgrade an existing cluster, see Upgrade Planning in the Ansible Automation Platform Upgrade and Migration Guide.
+
+Note the following important considerations in the new clustering environment:
+
+* PostgreSQL is  a standalone instance and is not clustered.
+Automation controller does not manage replica configuration or database failover (if the user configures standby replicas).
+* When you start a cluster, the database node must be a standalone server, and PostgreSQL must not be installed on one of the automation controller nodes.
+* PgBouncer is not recommended for connection pooling with automation controller.
+Automation controller relies on pg_notify for sending messages across various components, and therefore, PgBouncer cannot readily be used in transaction pooling mode.
+* All instances must be reachable from all other instances and they must be able to reach the database.
+It is also important for the hosts to have a stable address or hostname (depending on how the automation controller host is configured).
+* All instances must be geographically collocated, with reliable low-latency connections between instances.
+* To upgrade to a clustered environment, your primary instance must be part of the default group in the inventory and it needs to be the first host listed in the default group.
+* Manual projects must be manually synced to all instances by the customer, and updated on all instances at once.
+* The inventory file for platform deployments should be saved or persisted.
+If new instances are to be provisioned, the passwords, configuration options, and host names, must be made available to installation program.

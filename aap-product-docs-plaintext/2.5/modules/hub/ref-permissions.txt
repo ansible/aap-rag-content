@@ -1,0 +1,4 @@
+# Automation hub permissions
+
+Permissions provide a defined set of actions each group can perform on a given object. Determine the required level of access for your groups based on the permissions described in this table.
+

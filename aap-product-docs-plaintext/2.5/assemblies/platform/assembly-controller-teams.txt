@@ -1,0 +1,120 @@
+# Teams
+
+A team is a subdivision of an organization with associated users, and resources. Teams provide a means to implement role-based access control schemes and delegate responsibilities across organizations. For instance, you can grant permissions to a Team rather than each user on the team.
+You can create as many teams as needed for your organization. Teams can only be assigned to one organization while an organization can be made up of multiple teams. Each team can be assigned roles, the same way roles are assigned for users. Teams can also scalably assign ownership for credentials, preventing multiple interface click-throughs to assign the same credentials to the same user.
+
+# Teams list view
+
+The Teams page displays the existing teams for your installation. From here, you can search for a specific team, filter the list of teams by team name or organization, or change the sort order for the list.
+
+1. From the navigation panel, select menu:Access Management[Teams].
+2. In the Search bar, enter an appropriate keyword for the team you want to search for and click the arrow icon.
+3. From the menu bar, you can sort the list of teams by using the arrows for  Name and Organization to toggle your sorting preference.
+4. You can view team details by clicking a team Name on the Teams page.
+5. You can view organization details by clicking the link in the Organization column.
+
+# Creating a team
+
+You can create new teams, assign an organization to the team, and manage the users and administrators associated with each team.
+Users associated with a team inherit the permissions associated with the team and any organization permissions to which the team has membership.
+
+To add a user or administrator to a team, the user must have already been created.
+
+1. From the navigation panel, select menu:Access Management[Teams].
+2. Click btn:[Create team].
+3. Enter a Name and optionally give a Description for the team.
+4. Select an Organization to be associated with this team.
+
+[NOTE]
+----
+Each team can only be assigned to one organization.
+----
+5. Click btn:[Create team].
+
+The Details page opens, where you can review and edit your team information.
+
+# Adding users to a team
+
+To add a user to a team, the user must already have been created. For more information, see Creating a user. Adding a user to a team adds them as a member only. Use the Roles tab to assign a role for different resources to the selected team.
+
+1. From the navigation panel, select menu:Access Management[Teams].
+2. Select the team to which you want to add users.
+3. Select the Users tab and click btn:[Add users].
+4. Select one or more users from the list by clicking the checkbox next to the name to add them as members of this team.
+5. Click btn:[Add users].
+
+# Removing users from a team
+
+You can remove a user from a team from the Team list view.
+
+1. From the navigation panel, select menu:Access Management[Teams].
+2. Select the team from which you want to remove users.
+3. Select the Users tab.
+4. Click the Remove user icon next to the user you want to remove as a member of the team.
+5. You can delete multiple users by selecting the checkbox next to each user you want to remove, and selecting Remove selected users from the More actions &#8942; list.
+
+[NOTE]
+----
+If the user is a Team administrator, you can remove their membership to the team from the Administrators tab.
+----
+
+This launches a confirmation dialog, asking you to confirm the removal.
+
+# Adding administrators to a team
+
+You can add administrators to a team which allows them to manage the membership and settings of that team. For example, they can create new users and grant permission to users within the team.
+To add an administrator to a team, the administrator must already have been created. For more information, see Creating a user.
+
+1. From the navigation panel, select menu:Access Management[Teams].
+2. Select the team to which you want to add an administrator.
+3. Select the Administrators tab and click btn:[Add administrator(s)].
+4. Select one or more users from the list by clicking the checkbox next to the name to add them as administrators of this team.
+5. Click btn:[Add administrators].
+
+# Adding roles to a team
+
+You can assign permissions to teams, such as edit and administer resources and other elements.
+You can set permissions through an inventory, project, job template and other resources, or within the Organizations view.
+
+1. From the navigation panel, select menu:Access Management[Teams].
+2. Select the team Name to which you want to add roles.
+3. Select the Roles tab and click btn:[Add roles].
+
+[NOTE]
+----
+If you have multiple Ansible Automation Platform components installed, you will see selections for the roles associated with each component in the Roles menu bar. For example, Automation Execution for automation controller roles, Automation Decisions for Event-Driven Ansible roles.
+----
+4. Select a Resource type and click btn:[Next].
+5. Select the resources to receive the new roles and click btn:[Next].
+6. Select the roles to apply to the resources and click btn:[Next].
+7. Review the settings and click btn:[Finish].
+
+The Add roles dialog displays indicating whether the role assignments were successfully applied, click btn:[Close] to close the dialog.
+
+# Removing roles from a team
+
+You can remove roles from a team by selecting the - icon next to the resource. This launches a confirmation dialog, asking you to confirm the removal.
+
+1. From the navigation panel, select menu:Access Management[Teams].
+2. Select the team Name from which you want to remove roles.
+3. Select the Roles tab.
+
+[NOTE]
+----
+If you have multiple Ansible Automation Platform components installed, you will see selections for the roles associated with each component in the Roles menu bar. For example, Automation Execution for automation controller roles, Automation Decisions for Event-Driven Ansible roles.
+----
+4. Select the checkbox next to each resource you want to remove and click Remove selected roles from the &#8942; list on the menu bar.
+5. Select the checkbox to confirm removal of the selected roles and click Remove role.
+
+# Deleting a team
+
+Before you can delete a team, you must have team permissions. When you delete a team, the inherited permissions members got from that team are revoked.
+
+1. From the navigation panel, select menu:Access Management[Teams].
+2. Select the check box for the team that you want to remove.
+3. Select the &#8942; icon and select Delete team.
+
+[NOTE]
+----
+You can delete multiple teams by selecting the checkbox next to each team you want to remove, and selecting Delete teams from the More actions &#8942; list.
+----

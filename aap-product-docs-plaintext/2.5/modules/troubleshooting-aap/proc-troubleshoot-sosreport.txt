@@ -1,0 +1,5 @@
+# Troubleshooting Ansible Automation Platform on VM-based installations by generating an sos report
+
+The sos utility collects configuration, diagnostic, and troubleshooting data from your Ansible Automation Platform on a VM-based installation.
+
+For more information about installing and using the sos utility, see Generating an sos report for technical support.

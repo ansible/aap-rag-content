@@ -1,0 +1,30 @@
+# Deprovisioning instance groups
+
+Re-running the setup playbook does not deprovision instances since clusters do not currently distinguish between an instance that you took offline intentionally or due to failure.
+Instead, shut down all services on the automation controller instance and then run the deprovisioning tool from any other instance.
+
+1. Shut down the instance or stop the service with the following command:
+
+automation-controller-service stop
+2. Run the following deprovision command from another instance to remove it from the controller cluster registry:
+
+awx-manage deprovision_instance --hostname=<name used in inventory file>
+Example
+
+awx-manage deprovision_instance --hostname=hostB
+
+Deprovisioning instance groups in automation controller does not automatically deprovision or remove instance groups, even though re-provisioning often causes these to be unused. They can still show up in API endpoints and stats monitoring.
+You can remove these groups with the following command:
+
+awx-manage unregister_queue --queuename=<name>
+
+Removing an instance&#8217;s membership from an instance group in the inventory file and re-running the setup playbook does not ensure that the instance is not added back to a group. To be sure that an instance is not added back to a group, remove it through the API and also remove it in your inventory file.
+You can also stop defining instance groups in the inventory file.
+You can manage instance group topology through the automation controller UI.
+For more information about managing instance groups in the UI, see Managing Instance Groups.
+
+
+[NOTE]
+----
+If you have isolated instance groups created in older versions of automation controller (3.8.x and earlier) and want to migrate them to execution nodes to make them compatible for use with the automation mesh architecture, see Migrate isolated instances to execution nodes in the Ansible Automation Platform Upgrade and Migration Guide.
+----

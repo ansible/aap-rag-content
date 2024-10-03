@@ -1,0 +1,115 @@
+# Example: Automate Red Hat Enterprise Linux firewall configuration
+
+This example demonstrates how the Ansible plug-ins can help Ansible users of all skill levels create quality Ansible content.
+As an infrastructure engineer new to Ansible, you have been tasked to create a playbook to configure a Red Hat Enterprise Linux (RHEL) host firewall.
+The following procedures show you how to use the Ansible plug-ins and Dev Spaces to develop a playbook.
+
+# Learning more about playbooks
+
+The first step is to learn more about Ansible playbooks using the available learning paths.
+
+1. Click the Ansible A icon in the Red Hat Developer Hub navigation panel.
+2. Click Learn and select the Getting Started with Ansible Playbooks learning path.
+This redirects you to the Red Hat Developer website.
+3. If you are prompted to log in, create a Red Hat Developer account, or enter your details.
+4. Complete the learning path.
+
+# Discovering existing Ansible content for RHEL system roles
+
+Red Hat recommends that you use trusted automation content that has been tested and approved by Red Hat or your organization.
+
+Automation hub is a central repository for discovering, downloading, and managing trusted content collections from Red Hat and its partners.
+Private automation hub provides an on-premise solution for managing content collections.
+
+1. Click on the Ansible A icon in the Red Hat Developer Hub navigation panel.
+2. Click Discover existing collections.
+3. Click Go to Automation Hub.
+* If private automation hub has been configured in the Ansible plug-ins, you are redirected to your PrivateHubName instance.
+* If private automation hub has not been configured in the Ansible plug-ins installation configuration,
+you will be redirected to the Red Hat Hybrid Console (RHCC) automation hub.
+
+In this example, you are redirected to the RHCC automation hub.
+4. If you are prompted to log in, provide your Red Hat Customer Portal credentials.
+5. Filter the collections with the rhel firewall keywords.
+
+The search returns the rhel_system_roles collection.
+
+The RHEL System Roles collection contains certified Ansible content that you can reuse to configure your firewall.
+
+# Create a new playbook project to configure a firewall
+
+Use the Ansible plug-ins to create a new Ansible Playbook project.
+
+1. Click the Ansible A icon in the Red Hat Developer Hub navigation panel.
+2. From the Create dropdown menu on the landing page, select Create Ansible Git Project.
+3. Click Choose in the Create Ansible Playbook Project software template.
+4. Fill in the following information in the Create Ansible Playbook Project page:
+
+
+
+1. Click Review.
+2. Click Create to provision your new playbook project.
+3. Click Open in catalog to view your project.
+
+# Creating a new playbook to automate the firewall configuration
+
+Create a new playbook and use the RHEL System Role collection to automate your Red Hat Enterprise Linux firewall configuration.
+
+1. In your Dev Spaces instance, click menu:File[New File].
+2. Enter firewall.yml for the filename and click OK to save it in the root directory.
+3. Add the following lines to your firewall.yml file:
+
+```
+---
+- name: Open HTTPS and SSH on firewall
+  hosts: rhel
+  become: true
+  tasks:
+    - name: Use rhel system roles to allow https and ssh traffic
+      vars:
+        firewall:
+          - service: https
+            state: enabled
+            permanent: true
+            immediate: true
+            zone: public
+          - service: ssh
+            state: enabled
+            permanent: true
+            immediate: true
+            zone: public
+      ansible.builtin.include_role:
+        name: redhat.rhel_system_roles.firewall
+```
+
+
+
+[NOTE]
+----
+You can use Ansible Lightspeed with IBM watsonx Code Assistant from the Ansible VS Code extension to help you generate playbooks.
+For more information, refer to the
+Ansible Lightspeed with IBM watsonx Code Assistant User Guide.
+----
+
+# Editing your firewall playbook project
+
+The Ansible plug-ins integrate OpenShift Dev Spaces to edit your Ansible projects.
+OpenShift Dev Spaces provides on-demand, web-based Integrated Development Environments (IDEs).
+
+Ansible Git projects provisioned using the Ansible plug-ins include best practice configurations for OpenShift Dev Spaces.
+These configurations include installing the Ansible VS Code extension and providing access from the IDE terminal to Ansible development tools,
+such as Ansible Navigator and Ansible Lint.
+
+
+[NOTE]
+----
+OpenShift Dev Spaces is optional and it is not required to run the Ansible plug-ins.
+It is a separate Red Hat product and it is not included in the Ansible Automation Platform or Red Hat Developer Hub subscription.
+----
+
+This example assumes that OpenShift Dev Spaces has been configured in the Ansible plug-ins installation.
+
+* In the catalog item view of your playbook project, click Open Ansible project in OpenShift Dev Spaces.
+
+A VS Code instance of OpenShift Dev Spaces opens in a new browser tab.
+It automatically loads your new Ansible Playbook Git project.

@@ -1,0 +1,18 @@
+# SCM Type - Configuring playbooks to use Red Hat Insights
+
+1. From the navigation panel, select menu:Automation Execution[Projects].
+2. Click the project name you want to use.
+3. In the project Details tab, click btn:[Edit project].
+4. Select Red Hat Insights from the Source Control Type menu.
+5. In the Insights credential field, select the appropriate credential for use with Insights, as Red Hat Insights requires a credential for authentication.
+6. Optional: In the Options field, select the launch behavior, if applicable:
+* Clean - Removes any local modifications before performing an update.
+* Delete - Deletes the local repository in its entirety before performing an update.
+Depending on the size of the repository this can significantly increase the amount of time required to complete an
+update.
+* Update revision on launch - Updates the revision of the project to the current revision in the remote source control, and caches the
+roles directory from Ansible Galaxy support or Collections support.
+Automation controller ensures that the local revision matches, and that the roles and collections are up-to-date.
+If jobs are spawned faster than the project can synchronize, selecting this enables you to configure a Cache Timeout to
+cache previous project synchronizations for a certain number of seconds, to avoid job overflow.
+7. Click btn:[Save project].

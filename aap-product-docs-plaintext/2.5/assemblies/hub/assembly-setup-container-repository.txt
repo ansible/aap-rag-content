@@ -1,0 +1,76 @@
+# Setting up your container repository
+
+When you set up your container repository, you must add a description, include a README, add teams that can access the repository, and tag automation execution environmentss.
+
+# Prerequisites to setting up your remote registry
+
+* You are logged in to Ansible Automation Platform.
+* You have permissions to change the repository.
+
+# Adding a README to your container repository
+
+Add a README to your container repository to provide instructions to your users on how to work with the container.
+Automation hub container repositories support Markdown for creating a README.
+By default, the README is empty.
+
+* You have permissions to change containers.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Execution Environments].
+3. Select your execution environment.
+4. On the Detail tab, click btn:[Add].
+5. In the Raw Markdown text field, enter your README text in Markdown.
+6. Click btn:[Save] when you are finished.
+
+After you add a README, you can edit it at any time by clicking btn:[Edit] and repeating steps 4 and 5.
+
+# Providing access to your automation execution environmentss
+
+Provide access to your automation execution environmentss for users who need to work with the images.
+Adding a team allows you to modify the permissions the team can have to the container repository.
+You can use this option to extend or restrict permissions based on what the team is assigned.
+
+* You have change container namespace permissions.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Execution Environments].
+3. Select your automation execution environments.
+4. From the Team Access tab, click btn:[Add roles].
+5. Select the team or teams to which you want to grant access and click btn:[Next].
+6. Select the roles that you want to add to this execution environment and click btn:[Next].
+7. Click btn:[Finish].
+
+# Tagging container images
+
+Tag automation execution environmentss to add an additional name to automation execution environmentss stored in your automation hub container repository. If no tag is added to an automation execution environments, automation hub defaults to latest for the name.
+
+* You have change automation execution environments tags permissions.
+
+1. From the navigation panel, select menu:Automation Content[Execution Environments].
+2. Select your automation execution environments.
+3. Click the Images tab.
+4. Click the btn:[More Actions] icon &#8942;, and click btn:[Manage tags].
+5. Add a new tag in the text field and click btn:[Add].
+6. Optional: Remove current tags by clicking btn:[x] on any of the tags for that image.
+
+* Click the Activity tab and review the latest changes.
+
+# Creating a credential
+
+To pull automation execution environments images from a password or token-protected registry, you must create a credential.
+
+In earlier versions of Ansible Automation Platform, you were required to deploy a registry to store execution environment images.
+On Ansible Automation Platform 2.0 and later, the system operates as if you already have a remote registry up and running.
+To store execution environment images, add the credentials of only your selected remote registries.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Execution[Infrastructure > Credentials].
+3. Click btn:[Create credential] to create a new credential.
+4. Enter an authorization Name, Description, and Organization.
+5. In the Credential Type drop-down, select Container Registry.
+6. Enter the Authentication URL. This is the remote registry address.
+7. Enter the Username and Password or Token required to log in to the remote registry.
+8. Optional: To enable SSL verification, select Verify SSL.
+9. Click btn:[Create credential].
+
+Filling in at least one of the fields organization, user, or team is mandatory, and can be done through the user interface.

@@ -1,0 +1,270 @@
+# Automation controller tips and tricks
+
+* Use the automation controller CLI Tool
+* Change the automation controller Admin Password
+* Create an automation controller Admin from the commandline
+* Set up a jump host to use with automation controller
+* View Ansible outputs for JSON commands when using automation controller
+* Locate and configure the Ansible configuration file
+* View a listing of all ansible_ variables
+* The ALLOW_JINJA_IN_EXTRA_VARS variable
+* Configure the controllerhost hostname for notifications
+* Launch Jobs with curl
+* Filter instances returned by the dynamic inventory sources in automation controller
+* Use an unreleased module from Ansible source with automation controller
+* Connect to Windows with winrm
+* Import existing inventory files and host/group vars into automation controller
+
+# The automation controller CLI Tool
+
+Automation controller has a full-featured command line interface.
+
+For more information on configuration and use, see the AWX Command Line Interface and the AWX manage utility section.
+
+# Change the automation controller Administrator Password
+
+During the installation process, you are prompted to enter an administrator password that is used for the admin superuser or system administrator created by automation controller.
+If you log in to the instance by using SSH, it tells you the default administrator password in the prompt.
+
+If you need to change this password at any point, run the following command as root on the automation controller server:
+
+awx-manage changepassword admin
+
+Next, enter a new password.
+After that, the password you have entered works as the administrator password in the web UI.
+
+To set policies at creation time for password validation using Django, see Django password policies.
+
+# Create an automation controller Administrator from the command line
+
+Occasionally you might find it helpful to create a system administrator (superuser) account from the command line.
+
+To create a superuser, run the following command as root on the automation controller server and enter the administrator
+information as prompted:
+
+awx-manage createsuperuser
+
+# Set up a jump host to use with automation controller
+
+Credentials supplied by automation controller do not flow to the jump host through ProxyCommand.
+They are only used for the end-node when the tunneled connection is set up.
+
+You can configure a fixed user/keyfile in the AWX user&#8217;s SSH configuration in the ProxyCommand definition that sets up the connection through the jump host.
+
+For example:
+
+Host tampa
+Hostname 10.100.100.11
+IdentityFile [privatekeyfile]
+
+Host 10.100..
+Proxycommand ssh -W [jumphostuser]@%h:%p tampa
+
+You can also add a jump host to your automation controller instance through Inventory variables.
+
+These variables can be set at either the inventory,
+group, or host level.
+To add this, navigate to your inventory and in the variables field of whichever level you choose, add the following
+variables:
+
+ansible_user: <user_name>
+ansible_connection: ssh
+ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q <user_name>@<jump_server_name>"'
+
+# View Ansible outputs for JSON commands when using automation controller
+
+When working with automation controller, you can use the API to obtain the Ansible outputs for commands in JSON format.
+
+To view the Ansible outputs, browse to https://&lt;controller server name&gt;/api/v2/jobs/&lt;job_id&gt;/job_events/
+
+# Locate and configure the Ansible configuration file
+
+While Ansible does not require a configuration file, OS packages often include a default one in /etc/ansible/ansible.cfg for possible customization.
+
+To use a custom ansible.cfg file, place it at the root of your project.
+Automation controller runs ansible-playbook from the root of the project directory, where it finds the custom ansible.cfg file.
+
+
+[NOTE]
+----
+An ansible.cfg file anywhere else in the project is ignored.
+----
+
+To learn which values you can use in this file, see Generating a sample ansible.cfg file in the Ansible documentation.
+
+Using the defaults are acceptable for starting out, but you can configure the default module path or connection type here, as well as other things.
+
+Automation controller overrides some ansible.cfg options.
+For example, automation controller stores the SSH ControlMaster sockets, the SSH agent socket, and any other per-job run items in a per-job temporary directory that is passed to the container used for job execution.
+
+# View a listing of all ansible_ variables
+
+By default, Ansible gathers "facts" about the machines under its management, accessible in Playbooks and in templates.
+
+To view all facts available about a machine, run the setup module as an ad hoc action:
+
+ansible -m setup hostname
+
+This prints out a dictionary of all facts available for that particular host.
+For more information, see information-discovered-from-systems-facts in the Ansible documentation.
+
+# The ALLOW_JINJA_IN_EXTRA_VARS variable
+
+Setting ALLOW_JINJA_IN_EXTRA_VARS = template only works for saved job template extra variables.
+
+Prompted variables and survey variables are excluded from the 'template'.
+
+This parameter has three values:
+
+* Only On Template Definitions to allow usage of Jinja saved directly on a job template definition (the default).
+* Never to disable all Jinja usage (recommended).
+* Always to always allow Jinja (strongly discouraged, but an option for prior compatibility).
+
+This parameter is configurable in the Jobs Settings page of the automation controller UI.
+
+# Configuring the controllerhost hostname for notifications
+
+From the System settings page, you can replace https://controller.example.com in the Base URL of the Service field with your preferred hostname to change the notification hostname.
+
+Refreshing your automation controller license also changes the notification hostname.
+New installations of automation controller need not set the hostname for notifications.
+
+# Launching Jobs with curl
+
+Launching jobs with the automation controller API is simple.
+
+The following are some easy to follow examples using the curl tool.
+
+Assuming that your Job Template ID is '1', your controller IP is 192.168.42.100, and that admin and awxsecret are valid login credentials, you can create a new job this way:
+
+curl -f -k -H 'Content-Type: application/json' -XPOST \
+    --user admin:awxsecret \
+    ht p://192.168.42.100/api/v2/job_templates/1/launch/
+
+This returns a JSON object that you can parse and use to extract the 'id' field, which is the ID of the newly created job.
+You can also pass extra variables to the Job Template call, as in the following example:
+
+curl -f -k -H 'Content-Type: application/json' -XPOST \
+    -d '{"extra_vars": "{\"foo\": \"bar\"}"}' \
+    --user admin:awxsecret http://192.168.42.100/api/v2/job_templates/1/launch/
+
+
+[NOTE]
+----
+The extra_vars parameter must be a string which contains JSON, not just a JSON dictionary.
+Use caution when escaping the quotes, etc.
+----
+
+# Filtering instances returned by the dynamic inventory sources in the controller
+
+By default, the dynamic inventory sources in automation controller (such as AWS and Google) return all instances available to the cloud credentials being used.
+They are automatically joined into groups based on various attributes.
+For example, AWS instances are grouped by region, by tag name, value, and security groups.
+To target specific instances in your environment, write your playbooks so that they target the generated group names.
+
+For example:
+
+---
+- hosts: tag_Name_webserver
+  tasks:
+  ...
+
+You can also use the Limit field in the Job Template settings to limit a playbook run to a certain group, groups, hosts, or a combination of them.
+The syntax is the same as the --limit parameter on the ansible-playbook command line.
+
+You can also create your own groups by copying the auto-generated groups into your custom groups.
+Make sure that the Overwrite option is disabled on your dynamic inventory source, otherwise subsequent synchronization operations delete and replace your custom groups.
+
+# Use an unreleased module from Ansible source with automation controller
+
+If there is a feature that is available in the latest Ansible core branch that you want to use with your automation controller system, making use of it in automation controller is simple.
+
+First, determine which is the updated module you want to use from the available Ansible Core Modules or Ansible Extra Modules GitHub repositories.
+
+Next, create a new directory, at the same directory level of your Ansible source playbooks, named /library.
+
+When this is created, copy the module you want to use and drop it into the /library directory.
+It is consumed first by your system modules and can be removed once you have updated the stable version with your normal package manager.
+
+# Use callback plugins with automation controller
+
+Ansible has a flexible method of handling actions during playbook runs, called callback plugins.
+You can use these plugins with automation controller to do things such as notify services upon playbook runs or failures, or send
+emails after every playbook run.
+
+For official documentation on the callback plugin architecture, see Developing plugins.
+
+
+[NOTE]
+----
+Automation controller does not support the stdout callback plugin because Ansible only permits one, and it is already being used for streaming event data.
+----
+
+You might also want to review some example plugins, which should be modified for site-specific purposes, such as those available at: https://github.com/ansible/ansible/tree/devel/lib/ansible/plugins/callback
+
+To use these plugins, put the callback plugin .py file into a directory called /callback_plugins alongside your playbook in your automation controller Project.
+Then, specify their paths (one path per line) in the Ansible Callback Plugins field of the Job settings:
+
+
+
+
+[NOTE]
+----
+To have most callbacks shipped with Ansible applied globally, you must add them to the callback_whitelist section of your ansible.cfg.
+If you have custom callbacks, see Enabling callback plugins.
+----
+
+# Connect to Windows with winrm
+
+By default, automation controller attempts to ssh to hosts.
+
+You must add the winrm connection information to the group variables to which the Windows hosts belong.
+
+To get started, edit the Windows group in which the hosts reside and place the variables in the source or edit screen for the group.
+
+To add winrm connection info:
+
+* Edit the properties for the selected group by clicking on the Edit  icon of the group name that contains the Windows servers.
+In the "variables" section, add your connection information as follows: ansible_connection: winrm
+
+When complete, save your edits.
+If Ansible was previously attempting an SSH connection and failed, you should re-run the job template.
+
+# Import existing inventory files and host/group vars into automation controller
+
+To import an existing static inventory and the accompanying host and group variables into automation controller, your inventory must be in a structure similar to the following:
+
+inventory/
+|-- group_vars
+|   `-- mygroup
+|-- host_vars
+|   `-- myhost
+`-- hosts
+
+To import these hosts and vars, run the awx-manage command:
+
+awx-manage inventory_import --source=inventory/ \
+  --inventory-name="My Controller Inventory"
+
+If you only have a single flat file of inventory, a file called ansible-hosts, for example, import it as follows:
+
+awx-manage inventory_import --source=./ansible-hosts \
+  --inventory-name="My Controller Inventory"
+
+In case of conflicts or to overwrite an inventory named "My Controller Inventory", run:
+
+awx-manage inventory_import --source=inventory/ \
+  --inventory-name="My Controller Inventory" \
+  --overwrite --overwrite-vars
+
+If you receive an error, such as:
+
+ValueError: need more than 1 value to unpack
+
+Create a directory to hold the hosts file, as well as the group_vars:
+
+mkdir -p inventory-directory/group_vars
+
+Then, for each of the groups that have :vars listed, create a file called inventory-directory/group_vars/<groupname> and format the variables in YAML format.
+
+The importer then handles the conversion correctly.

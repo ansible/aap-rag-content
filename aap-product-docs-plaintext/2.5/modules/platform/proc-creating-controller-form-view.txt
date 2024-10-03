@@ -1,0 +1,15 @@
+# Creating your automation controller form-view
+
+1. Ensure Form view is selected. It should be selected by default.
+2. Enter the name of the new controller.
+3. Optional: Add any labels necessary.
+4. Click btn:[Advanced configuration].
+5. Enter Hostname of the instance. The hostname is optional. The default hostname will be generated based upon the deployment name you have selected.
+6. Enter the Admin account username.
+7. Enter the Admin email address.
+8. Under the Admin password secret drop-down menu, select the secret.
+9. Under Database configuration secret drop-down menu, select the secret.
+10. Under Old Database configuration secret drop-down menu, select the secret.
+11. Under Secret key secret drop-down menu, select the secret.
+12. Under Broadcast Websocket Secret drop-down menu, select the secret.
+13. Enter any Service Account Annotations necessary.

@@ -1,0 +1,20 @@
+# Jobs scheduled on the worker nodes
+
+Both automation controller and Kubernetes play a role in scheduling a job.
+
+When a job is launched, its dependencies are fulfilled, meaning any project updates or inventory updates are launched by automation controller as required by the job template, project, and inventory settings.
+
+If the job is not blocked by other business logic in automation controller and there is control capacity in the control plane to start the job, the job is submitted to the dispatcher.
+The default settings of the "cost" to control a job is 1 capacity.
+So, a control pod with 100 capacity is able to control up to 100 jobs at a time.
+Given control capacity, the job transitions from pending to waiting.
+
+The dispatcher, which is a background process in the control plan pod, starts a worker process to run the job.
+This communicates with the Kubernetes API using a service account associated with the container group and uses the pod specification as defined on the Container Group in automation controller to provision the pod.
+The job status in automation controller is shown as running.
+
+Kubernetes now schedules the pod.
+A pod can remain in the pending state for AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT.
+If the pod is denied through a ResourceQuota, the job starts over at pending.
+You can configure a resource quota on a namespace to limit how many resources may be consumed by pods in the namespace.
+For further information about ResourceQuotas, see Resource Quotas.

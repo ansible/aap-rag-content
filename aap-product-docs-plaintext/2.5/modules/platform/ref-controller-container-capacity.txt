@@ -1,0 +1,15 @@
+# Container capacity limits
+
+Capacity limits and quotas for containers are defined by objects in the Kubernetes API:
+
+* To set limits on all pods within a given namespace, use the LimitRange object.
+For more information see the Quotas and Limit Ranges section of the OpenShift documentation.
+* To set limits directly on the pod definition launched by automation controller, see Customizing the pod specification and the Compute Resources section of the OpenShift documentation.
+
+
+[NOTE]
+----
+Container groups do not use the capacity algorithm that normal nodes use.
+You need to set the number of forks at the job template level.
+If you configure forks in automation controller, that setting is passed along to the container.
+----

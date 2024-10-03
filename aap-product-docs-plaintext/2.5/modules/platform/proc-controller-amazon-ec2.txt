@@ -1,0 +1,31 @@
+# Amazon Web Services EC2
+
+Use the following procedure to configure an AWS EC2-sourced inventory.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Create source page, select Amazon EC2 from the Source list.
+5. The Create source window expands with additional fields.
+Enter the following details:
+* Optional: Credential: Choose from an existing AWS credential.
+For more information, see Managing user credentials.
+
+If automation controller is running on an EC2 instance with an assigned IAM Role, the credential can be omitted, and the security credentials from
+the instance metadata are used instead.
+For more information about using IAM Roles, see IAM roles for Amazon EC2_documentation_at_Amazon documentation at Amazon.
+6. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in
+Adding a source.
+7. Use the Source variables field to override variables used by the aws_ec2 inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see the
+aws inventory plugin documentation.
+
+
+[NOTE]
+----
+If you only use include_filters, the AWS plugin always returns all the hosts.
+To use this correctly, the first condition on the or must be on filters and then build the rest of the OR conditions on a list of
+include_filters.
+----

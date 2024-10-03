@@ -1,0 +1,31 @@
+# Adding and removing team permissions
+
+By default, all teams that you create have read permissions.
+You can assign additional permissions, such as edit and administer projects, inventories, and other elements.
+You can set permissions through an inventory, project, job template, or within the Organizations view.
+1. From the Team list view , click the required user.
+2. On the Details page, click btn:[Add].
+This opens the Add team permissions wizard.
+3. Select the object to which the team requires access.
+4. Click btn:[Next].
+5. Select the resource to assign team roles.
+6. Click btn:[Next].
+7. Click the checkbox beside the role to assign that role to your chosen type of resource.
+Different resources have different options available.
+
+
+8. Click btn:[Save].
+9. The updated profile for the user with the roles assigned for each selected resource is displayed.
+
+# Removing team permissions
+
+* To remove Permissions for a particular resource, click the  icon next to its resource.
+This launches a confirmation dialog, asking you to confirm the disassociation.
+
+
+[NOTE]
+----
+You can also add teams, individual, or many users and assign them permissions at the object level.
+This includes projects, inventories, job templates, and workflow templates.
+This feature reduces the time for an organization to onboard many users at one time.
+----

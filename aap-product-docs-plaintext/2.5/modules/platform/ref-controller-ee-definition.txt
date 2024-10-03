@@ -1,0 +1,34 @@
+# Execution environment definition example
+
+You must create a definition file to build an image for an execution environment.
+The file is in YAML format.
+
+You must specify the version of Ansible Builder in the definition file.
+The default version is 1.
+
+The following definition file is using Ansible Builder version 3:
+
+version: 3
+build_arg_defaults:
+  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: '--pre'
+dependencies:
+  galaxy: requirements.yml
+  python:
+    - six
+    - psutil
+  system: bindep.txt
+images:
+  base_image:
+    name: registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel8:latest
+additional_build_files:
+    - src: files/ansible.cfg
+      dest: configs
+additional_build_steps:
+  prepend_galaxy:
+    - ADD _build/configs/ansible.cfg /home/runner/.ansible.cfg
+  prepend_final: |
+    RUN whoami
+    RUN cat /etc/os-release
+  append_final:
+    - RUN echo This is a post-install command!
+    - RUN ls -la /etc

@@ -1,0 +1,5 @@
+
+[NOTE]
+----
+If you have multiple Ansible Automation Platform components installed, you will see selections for the roles associated with each component in the Roles menu bar. For example, Automation Execution for automation controller roles, Automation Decisions for Event-Driven Ansible roles.
+----

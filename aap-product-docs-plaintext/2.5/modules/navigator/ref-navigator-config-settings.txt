@@ -1,0 +1,4 @@
+# Automation content navigator config subcommand settings
+
+The following table describes each parameter and setting options for the automation content navigator config subcommand.
+

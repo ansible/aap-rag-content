@@ -1,0 +1,8 @@
+# Available resources
+
+Several resources exist in automation controller and elsewhere to ensure a secure platform.
+Consider using the following functionalities:
+
+* Existing security functionality
+* External account stores
+* Django password policies

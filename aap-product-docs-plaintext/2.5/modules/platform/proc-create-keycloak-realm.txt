@@ -1,0 +1,35 @@
+# Creating a Keycloak realm for Ansible Automation Platform
+
+Create a realm to manage a set of users, credentials, roles, and groups.
+A user belongs to and logs into a realm.
+Realms are isolated from one another and can only manage and authenticate the users that they control.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operator[Installed Operators].
+3. Select the Red Hat Single Sign-On Operator project.
+4. Select the Keycloak Realm tab and click btn:[Create Keycloak Realm].
+5. On the Keycloak Realm form, select btn:[YAML view].
+Edit the YAML file as follows:
+
+```
+kind: KeycloakRealm
+apiVersion: keycloak.org/v1alpha1
+metadata:
+  name: ansible-automation-platform-keycloakrealm
+  namespace: rh-sso
+  labels:
+    app: sso
+    realm: ansible-automation-platform
+spec:
+  realm:
+    id: ansible-automation-platform
+    realm: ansible-automation-platform
+    enabled: true
+    displayName: Ansible Automation Platform
+  instanceSelector:
+    matchLabels:
+      app: sso
+```
+
+
+6. Click btn:[Create] and wait for the process to complete.

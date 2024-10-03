@@ -1,0 +1,8 @@
+# Log in as a central authentication admin user
+
+With Red Hat Ansible Automation Platform installed, log in as an admin user to the central authentication server using the admin credentials that you specified in your inventory file.
+
+1. Navigate to your Ansible Automation Platform Central Authentication instance.
+2. Login using the admin credentials you specified in your inventory file, in the sso_console_admin_username and sso_console_admin_password fields.
+
+With Ansible Automation Platform Central Authentication successfully installed, and the admin user logged in, you can proceed by adding a user storage provider (such as LDAP) using the following procedures.

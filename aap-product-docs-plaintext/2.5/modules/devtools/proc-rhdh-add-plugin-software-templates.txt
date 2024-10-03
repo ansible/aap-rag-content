@@ -1,0 +1,25 @@
+# Adding Ansible plug-ins software templates
+
+Red Hat Ansible provides software templates for Red Hat Developer Hub to provision new playbooks and collection projects based on Ansible best practices.
+
+1. Edit your custom Red Hat Developer Hub config map, for example app-config-rhdh.
+2. Add the following code to your Red Hat Developer Hub app-config-rhdh.yaml file.
+
+
+```
+data:
+  app-config-rhdh.yaml: |
+    catalog:
+      ...
+      locations:
+        ...
+        - type: url
+          target: https://github.com/ansible/ansible-rhdh-templates/blob/main/all.yaml
+          rules:
+            - allow: [Template]
+```
+
+
+For more information, refer to the
+Managing templates
+section of the Administration guide for Red Hat Developer Hub.

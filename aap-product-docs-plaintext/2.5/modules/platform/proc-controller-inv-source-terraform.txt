@@ -1,0 +1,38 @@
+# Terraform State
+
+This inventory source uses the terraform_state inventory plugin from the cloud.terraform collection.
+The plugin parses a terraform state file and add hosts for AWS EC2, GCE, and Microsoft Azure instances.
+1. From the navigation panel, select menu:Automation Execution[Projects].
+2. On the Projects page, click btn:[Create project] to start the Create Project window.
+* Enter the appropriate details according to the steps in Adding a new project.
+3. From the navigational panel, select menu:Automation Execution[Infrastructure > Inventories].
+4. Select the inventory that you want to add a source to.
+5. In the Sources tab, click btn:[Create source].
+6. From the menu:Source[] menu, select Terraform State.
+* The Create source window expands with the optional Credential field.
+
+Choose an existing Terraform backend configuration credential. For more information, see Terraform backend configuration.
+7. Enable the options to Overwrite and Update on Launch.
+8. Use the Source Variables field to override variables used by the terraform_state inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see the terraform_state file.
+
+The backend_type variable is required by the Terraform State inventory plugin.
+This should match the remote backend configured in the Terraform backend credential.
+The following is an example Amazon S3 backend:
+
+```
+backend_type: s3
+```
+
+9. Select an Execution Environment that has a Terraform binary.
+This is required for the inventory plugin to run the Terraform commands that read inventory data from the Terraform state file.
+For more information, see the Terraform EE readme that has an example execution environment configuration with a Terraform binary.
+
+# Terraform provider for Ansible Automation Platform
+
+Inventories created this way are managed by Terraform and you must not edit them in Ansible Automation Platform as it can introduce drift to the Terraform deployment.
+
+You can create inventories and hosts within the Terraform configuration by using the Terraform provider for Ansible Automation Platform.
+For more information, see the AAP Provider section of the Terraform documentation.

@@ -1,0 +1,25 @@
+# Accessing the platform gateway
+
+To access your Ansible Automation Platform instance:
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Networking[Routes]
+3. Click the link under Location for Ansible Automation Platform.
+4. This redirects you to the Ansible Automation Platform login page. Enter "admin" as your username in the Username field.
+5. For the password you need to:
+1. Go to to menu:Workloads[Secrets].
+2. Click btn:[<your instance name>-admin-password] and copy the password.
+3. Paste the password into the Password field.
+6. Click btn:[Login].
+7. Apply your subscription:
+1. Click btn:[Subscription manifest] or btn:[Username/password].
+2. Upload your manifest or enter your username and password.
+3. Select  your subscription from the Subscription list.
+4. Click btn:[Next].
+This redirects you to the Analytics page.
+8. Click btn:[Next].
+9. Select the I agree to the terms of the license agreement checkbox.
+10. Click btn:[Next].
+
+You now have access to the platform gateway user interface.
+If you cannot access the Ansible Automation Platform see  for help with troubleshooting and debugging.

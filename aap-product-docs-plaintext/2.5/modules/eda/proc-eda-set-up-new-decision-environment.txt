@@ -1,0 +1,21 @@
+# Setting up a new decision environment
+
+* You have set up a credential, if necessary.
+For more information, see the Setting up credentials section.
+* You have pushed a decision environment image to an image repository or you chose to use the image de-supported provided at registry.redhat.io.
+
+1. Log in to Ansible Automation Platform.
+2. Navigate to menu:Automation Decisions[Decision Environments].
+3. Click btn:[Create decision environment].
+4. Insert the following:
+Name:: Insert the name.
+Description:: This field is optional.
+Organization:: Select an organization to associate with the decision environment.
+Image:: This is the full image location, including the container registry, image name, and version tag.
+Credential:: This field is optional. This is the token needed to use the decision environment image.
+5. Select btn:[Create decision environment].
+
+Your decision environment is now created and can be managed on the Decision Environments page.
+
+After saving the new decision environment, the decision environment&#8217;s details page is displayed.
+From there or the Decision Environments list view, you can edit or delete it.

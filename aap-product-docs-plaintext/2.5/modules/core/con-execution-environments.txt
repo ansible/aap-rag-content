@@ -1,0 +1,16 @@
+# About execution environments
+
+Automation execution environments are consistent and shareable container images that serve as Ansible control nodes. Automation execution environments reduce the challenge of sharing Ansible content that has external dependencies.
+
+Automation execution environments contain:
+
+* Ansible Core
+* Ansible Runner
+* Ansible Collections
+* Python libraries
+* System dependencies
+* Custom user needs
+
+You can define and create an automation execution environment using Ansible Builder.
+
+* For more information about Ansible Builder, see Creating and Consuming Execution Environments.

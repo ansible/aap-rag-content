@@ -1,0 +1,9 @@
+# Enabling logging for LDAP
+
+To enable logging for LDAP, you must set the level to DEBUG in the Settings configuration window:
+
+1. From the navigation panel, select Settings.
+2. Select Logging settings from the list of System options.
+3. Click btn:[Edit].
+4. Set the Logging Aggregator Level Threshold field to DEBUG.
+5. Click btn:[Save].

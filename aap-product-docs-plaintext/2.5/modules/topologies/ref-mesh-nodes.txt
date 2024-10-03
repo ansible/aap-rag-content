@@ -1,0 +1,12 @@
+# Automation mesh nodes
+
+Automation mesh is an overlay network intended to ease the distribution of work across a large and dispersed collection of workers. This is done through nodes that establish peer-to-peer connections with each other by using existing networks.
+
+# Tested system configurations
+
+Each automation mesh VM has been tested with the following component requirements: 16 GB RAM, 4 CPUs, 60 GB local disk, and 3000 IOPS.
+
+# Network ports
+
+Automation mesh uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+

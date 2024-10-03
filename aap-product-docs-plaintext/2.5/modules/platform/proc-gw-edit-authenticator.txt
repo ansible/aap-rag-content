@@ -1,0 +1,10 @@
+# Editing an authenticator
+
+You can modify the settings of previously configured authenticators from the Authentication list view.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. In the list view, you can either:
+1. Select the btn:[Edit]  icon next to authenticator you want to modify, or
+2. Select the authenticator name displayed in the Name column and click btn:[Edit authenticator] from the Details page.
+3. Modify the authentication details or mapping configurations as required.
+4. Click btn:[Save].

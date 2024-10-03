@@ -1,0 +1,25 @@
+# VMware vCenter
+
+Use the following procedure to configure a VMWare-sourced inventory.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Create source page, select VMware vCenter from the Source list.
+5. The Create source window expands with additional fields.
+Enter the following details:
+* Optional: Credential: Choose from an existing VMware credential.
+For more information, see Managing user credentials.
+6. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
+7. Use the Source Variables field to override variables used by the vmware_inventory inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see the vmware_inventory inventory plugin.
+
+
+[NOTE]
+----
+VMWare properties have changed from lower case to camel case.
+Automation controller provides aliases for the top-level keys, but lower case keys in nested properties have been discontinued.
+For a list of valid and supported properties, see Using Virtual machine attributes in VMware dynamic inventory plugin.
+----

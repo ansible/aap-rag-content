@@ -1,0 +1,10 @@
+# Work with Schedules
+
+On the Projects page, select the Schedules tab to enable you to review any schedules set up for this project.
+
+# Scheduling a Project
+
+To schedule a project run, click the Schedules tab.
+
+* If schedules are already set up; review, edit, or enable and disable your schedule preferences.
+* If schedules have not been set up, see Schedules for more information.

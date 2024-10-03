@@ -1,0 +1,4 @@
+# Backup and recovery
+
+* For information about performing a backup and recovery of Ansible Automation Platform, see Backup and restore in Configuring automation execution.
+* For information about troubleshooting backup and recovery for installations of Ansible Automation Platform Operator on OpenShift Container Platform, see the Troubleshooting section in Backup and recovery for operator environments.

@@ -1,0 +1,39 @@
+# Building the custom execution environment
+
+Before creating the new custom execution environment, an API token from the private hub will be needed in order to download content.
+
+Generate a token by taking the following steps:
+
+1. Log in to your private hub.
+2. Choose "Collections" from the left-hand menu.
+3. Choose the"API token" under the "Collections" section of the menu.
+4. Once you have the token, set the following environment variable so that Ansible Builder can access the token:
+
+```
+$ export ANSIBLE_GALAXY_SERVER_PRIVATE_HUB_TOKEN=<your_token>
+```
+
+5. Create the custom execution environment by using the command:
+
+```
+$ cd $HOME/custom-ee
+$ ansible-builder build -f execution-environment.yml -t private-hub.example.com/custom-ee:latest -v 3
+```
+
+
+[NOTE]
+----
+If the build fails with an error that the private hub certificate is signed by an unknown authority, you can pull the required image into the local image cache by running the command:
+
+```
+$ podman pull private-hub.example.com/ee-minimal-rhel8:latest --tls-verify=false
+```
+
+Alternately, you can add the private hub CA certificate to the podman certificate store:
+
+```
+$ sudo mkdir /etc/containers/certs.d/private-hub.example.com
+$ sudo cp $HOME/custom-ee/files/hub-ca.crt /etc/containers/certs.d/private-hub.example.com
+```
+
+----

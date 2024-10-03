@@ -1,0 +1,35 @@
+# Create variables
+
+Variables can apply to specific hosts.
+
+
+```
+webservers:
+  hosts:
+    webserver01:
+      ansible_host: 192.0.2.140
+      http_port: 80
+    webserver02:
+      ansible_host: 192.0.2.150
+      http_port: 443
+```
+
+
+Variables can also apply to all hosts in a group.
+
+
+```
+webservers:
+  hosts:
+    webserver01:
+      ansible_host: 192.0.2.140
+      http_port: 80
+    webserver02:
+      ansible_host: 192.0.2.150
+      http_port: 443
+  vars:
+    ansible_user: my_server_user
+```
+
+
+For more information about inventories and Ansible inventory variables, see About the Installer Inventory file and Inventory file variables.

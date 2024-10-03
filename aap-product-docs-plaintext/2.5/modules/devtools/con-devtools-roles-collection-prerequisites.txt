@@ -1,0 +1,9 @@
+# Prerequisites
+
+* You have installed VS Code and the Ansible extension.
+* You have installed the Microsoft Dev Containers extension in {VS Code.
+* You have installed Ansible development tools.
+* You have installed a containerization platform, for example Podman, Podman Desktop, Docker, or Docker Desktop.
+* You have a Red Hat account and you can log in to the Red Hat container registry at registry.redhat.io.
+For information about logging in to registry.redhat.io, see
+Authenticating with the Red Hat container registry.

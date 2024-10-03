@@ -1,0 +1,33 @@
+# Updating the plug-in registry
+
+Rebuild your plug-in registry application in your OpenShift cluster with the latest Ansible plug-ins files.
+
+1. Log in to your OpenShift Container Platform instance with credentials to create a new application.
+2. Open your Red Hat Developer Hub OpenShift project.
+
+```
+$ oc project <YOUR_DEVELOPER_HUB_PROJECT>
+```
+
+3. Run the following commands to update your plug-in registry build in the OpenShift cluster.
+
+```
+$ oc start-build plugin-registry --from-dir=$DYNAMIC_PLUGIN_ROOT_DIR --wait
+```
+
+4. When the registry has started, the output displays the following message:
+
+```
+Uploading directory "/path/to/dynamic_plugin_root" as binary input for the build …
+Uploading finished
+build.build.openshift.io/plugin-registry-1 started
+```
+
+
+Verify that the plugin-registry has been updated.
+
+1. In the OpenShift UI, click Topology.
+2. Click the redhat-developer-hub icon to view the pods for the plug-in registry.
+3. Click View logs for the plug-in registry pod.
+4. Open the Terminal tab and run ls to view the .tar files in the plug-in registry.
+5. Verify that the new .tar file has been uploaded.

@@ -1,0 +1,8 @@
+# Adding a custom ConfigMap
+
+Create a Red Hat Developer Hub ConfigMap following the procedure in
+Adding a custom application configuration file to Red Hat OpenShift Container Platform
+in the Administration guide for Red Hat Developer Hub.
+The examples below use a custom ConfigMap named app-config-rhdh
+
+To edit your custom ConfigMap, log in to the OpenShift UI and navigate to menu:Select Project ( developerHubProj )[ConfigMaps &gt; {developer-hub}-app-config &gt; EditConfigMaps &gt; app-config-rhdh].

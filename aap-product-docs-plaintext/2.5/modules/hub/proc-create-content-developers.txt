@@ -1,0 +1,27 @@
+# Creating a new team for content curators
+
+You can create a new team in Ansible Automation Platform designed to support content curation in your organization. This team can contribute internally-developed collections for publication in private automation hub.
+
+To help content developers create a namespace and upload their internally developed collections to private automation hub, you must first create and edit a team and assign the required permissions.
+
+* You have administrative permissions in Ansible Automation Platform and can create teams.
+
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select menu:Access Management[Teams] and click btn:[Create team].
+3. Enter Content Engineering as a Name for the team.
+4. Select an Organization for the team.
+5. Click btn:[Create team]. You have created the new team and the team Details page opens.
+6. Select the Roles tab and then select the Automation Content tab.
+7. Click btn:[Add roles].
+8. Select Namespace from the Resource type list and click btn:[Next].
+9. Select the namespaces that will receive the new roles and click btn:[Next].
+10. Select the roles to apply to the selected namespaces and click btn:[Next].
+11. Review your selections and click btn:[Finish].
+12. Click btn:[Close] to complete the process.
+
+The new team is created with the permissions that you assigned. You can then add users to the team.
+13. Click the Users tab on the Teams page.
+14. Click btn:[Add users].
+15. Select users and click btn:[Add users].
+
+For further instructions on managing access with teams, see Teams in the Access management and authentication guide.

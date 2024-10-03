@@ -1,0 +1,29 @@
+# Red Hat Ansible Automation Platform system requirements
+
+Your system must meet the following minimum system requirements to install and run Red Hat Ansible Automation Platform.
+A resilient deployment requires 10 virtual machines with a minimum of 16 gigabytes(GB) of ram and 4 virtual cpus(vCPU).
+See, Tested deployment models for more information on topology options.
+
+
+
+
+
+
+[NOTE]
+----
+These are minimum requirements and can be increased for larger workloads in increments of 2x (for example 16GB becomes 32GB and 4 vCPU becomes 8vCPU). See the horizontal scaling guide for more information.
+----
+
+The following are necessary for you to work with project updates and collections:
+
+* Ensure that the Network ports and protocols listed in Table 6.3. Automation Hub are available for successful connection and download of collections from automation hub or Ansible Galaxy server.
+
+* If performing a bundled Ansible Automation Platform installation, the installation setup.sh script attempts to install ansible-core (and its dependencies) from the bundle for you.
+* If you have installed Ansible-core manually, the Ansible Automation Platform installation setup.sh script detects that Ansible has been installed and does not attempt to reinstall it.
+
+
+[NOTE]
+----
+You must use Ansible-core, which is installed via dnf.
+Ansible-core version 2.16 is required for versions 2.5 and later.
+----

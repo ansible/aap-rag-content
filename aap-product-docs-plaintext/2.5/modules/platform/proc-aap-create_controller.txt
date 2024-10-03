@@ -1,0 +1,14 @@
+# Creating an AutomationController object
+
+Use the following steps to create an AutomationController custom resource object.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select the Ansible Automation Platform Operator installed on your project namespace.
+4. Select the Automation Controller tab.
+5. Click btn:[Create AutomationController].
+6. Enter a name for the new deployment.
+7. In Advanced configurations, do the following:
+1. From the Admin Password Secret list, select your secret key secret.
+2. From the Database Configuration Secret list, select the postgres configuration secret.
+8. Click btn:[Create].

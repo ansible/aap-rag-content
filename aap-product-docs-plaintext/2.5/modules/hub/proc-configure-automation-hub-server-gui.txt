@@ -1,0 +1,44 @@
+# Using the web console to configure Red Hat automation hub as the primary content source
+
+To configure automation hub, you must create a credential and add it to the Organization’s Galaxy Credentials field. With automation hub, you have access to certified, supported collections.
+
+* You have obtained the API token for the automation hub server. See Creating the Red Hat automation hub API token for more information.
+
+
+[IMPORTANT]
+----
+Creating a new token revokes any previous tokens generated for automation hub. Update any automation controller or scripts created with the previous token.
+----
+
+1. Navigate to your automation controller.
+2. Create a new credential.
+1. Navigate to menu:Automation Execution[Infrastructure > Credentials].
+2. Click btn:[Add].
+3. Enter the name for your new credential in the Name field.
+4. Optional: Enter a description and enter or select the name of the organization with which the credential is associated.
+5. Under Organization, select the organization that you want to use the credential for.
+6. Select Ansible Galaxy/Automation Hub API Token as the credential type.
+7. Under Type Details, enter the Galaxy Server URL, Authentication Server URL, and API Token previously created.
+8. Click btn:[Save].
+3. Select the credential that you created from the Organization’s Galaxy Credentials field.
+1. Navigate to menu:Access Management[Organizations].
+2. Select the organization where want to add your Galaxy credentials.
+3. Click btn:[Edit].
+4. Under Galaxy Credentials, click the btn:[Search] icon.
+5. Select the credential that you created for automation hub, and place it at the beginning of the list.
+6. Optional: If you have a secondary source of content, such as Ansible Galaxy, place this credential after the credential that you created for automation hub.
+7. Click btn:[Select].
+8. Click btn:[Save].
+
+To validate the credential, update an existing source control management (SCM)-based project by selecting the project and clicking the btn:[Sync Project] icon.
+
+1. Navigate to your project repository.
+2. Select a project that uses a collections/requirements.yml file.
+3. Update the project by clicking the btn:[Sync Project] icon.
+
+If the Status of the project is Successful, then the credential is valid.
+
+You have now configured automation hub as your primary server. You can begin to download and install supported collections.
+
+* For more information about server list configuration options and using Ansible Galaxy as an Ansible content source, see the Ansible Galaxy User Guide.
+* For more information about creating and using credentials, see the Credentials section of Automation Controller User Guide v4.2.1.

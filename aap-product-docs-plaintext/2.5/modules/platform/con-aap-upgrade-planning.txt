@@ -1,0 +1,27 @@
+# Ansible Automation Platform upgrade planning
+
+Before you begin the upgrade process, review the following considerations to plan and prepare your Ansible Automation Platform deployment:
+
+## Automation controller
+
+* Even if you have a valid license from a previous version, you must provide your credentials or a subscriptions manifest upon upgrading to the latest version of automation controller.
+* If you need to upgrade Red Hat Enterprise Linux and automation controller, you must first backup and restore your automation controller data.
+* Clustered upgrades require special attention to instance and instance groups before upgrading.
+
+* Importing a subscription
+* Backup and restore
+* Clustering
+
+## Automation hub
+
+* When upgrading to Ansible Automation Platform 2.5, you can either add an existing automation hub API token or generate a new one and invalidate any existing tokens.
+* Existing container images are removed when upgrading Ansible Automation Platform.
+This is because, when upgrading Ansible Automation Platform with setup.sh script, podman system reset -f is executed.
+This removes all container images on your Ansible Automation Platform nodes then pushes the new execution environment image that is bundled with installer.
+See Running the Red Hat Ansible Automation Platform installer setup script.
+
+* Setting up the inventory file
+
+## Event-Driven Ansible controller
+
+* If you are currently running Event-Driven Ansible controller and plan to deploy it when you upgrade to Ansible Automation Platform 2.5, it is recommended that you disable all Event-Driven Ansible activations before upgrading to ensure that only new activations run after the upgrade process has completed. This prevents possibilities of orphaned containers running activations from the previous version.

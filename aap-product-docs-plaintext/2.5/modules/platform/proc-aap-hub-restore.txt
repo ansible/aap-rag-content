@@ -1,0 +1,25 @@
+# Recovering the Automation hub deployment
+
+Use this procedure to restore a previous hub deployment into the namespace. The deployment name you provide will be the name of the new AutomationHub custom resource that will be created.
+
+
+[NOTE]
+----
+The name specified for the new AutomationHub custom resource must not match an existing deployment or the recovery process will fail.
+----
+
+* You must be authenticated with an OpenShift cluster.
+* You have deployed automation hub on the cluster.
+* An AutomationHubBackup is available on a PVC in your cluster.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Automation Hub Restore tab.
+5. Click btn:[Create AutomationHubRestore].
+6. Enter a Name for the recovery deployment.
+7. Select the Backup source to restore from. Backup CR is recommended.
+8. Enter the Backup Name of the AutomationHubBackup object.
+9. Click btn:[Create].
+
+This creates a new deployment and restores your backup to it.

@@ -1,0 +1,7 @@
+# Update planning
+
+Before you begin the update process, review the following considerations to plan and prepare your Ansible Automation Platform deployment:
+
+* Even if you have a valid license from an earlier version, you must give your credentials or a subscription manifest upon upgrading to the latest version of Ansible Automation Platform. For more information, see Attaching your Red Hat Ansible Automation Platform subscription in Access management and authentication.
+* Clustered upgrades require special attention to instance and instance groups before upgrading. Ensure you capture your inventory or instance group details before upgrading. For more information, see Clustering in Configuring automation execution.
+* If you are currently running Event-Driven Ansible controller, disable all rulebook activations before upgrading to ensure that only new activations run after the upgrade process has completed. This prevents possibilities of orphaned containers running activations from the earlier version. For more information, see Enabling and disabling rulebook activations in Using automation decisions.

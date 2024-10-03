@@ -1,0 +1,97 @@
+# Configuring proxy support for Red Hat Ansible Automation Platform
+
+You can configure Red Hat Ansible Automation Platform to communicate with traffic using a proxy. Proxy servers act as an intermediary for requests from clients seeking resources from other servers. A client connects to the proxy server, requesting some service or available resource from a different server, and the proxy server evaluates the request as a way to simplify and control its complexity. The following sections describe the supported proxy configurations and how to set them up.
+
+# Enable proxy support
+
+To provide proxy server support, automation controller handles proxied requests (such as ALB, NLB , HAProxy, Squid, Nginx and tinyproxy in front of automation controller) via the REMOTE_HOST_HEADERS list variable in the automation controller settings. By default, REMOTE_HOST_HEADERS is set to ["REMOTE_ADDR", "REMOTE_HOST"].
+
+To enable proxy server support, edit the REMOTE_HOST_HEADERS field in the settings page for your automation controller:
+
+1. From the navigation panel, select menu:Settings[System].
+2. In the Remote Host Headers field, enter the following values:
+
+```
+[
+  "HTTP_X_FORWARDED_FOR",
+  "REMOTE_ADDR",
+  "REMOTE_HOST"
+]
+```
+
+
+Automation controller determines the remote host’s IP address by searching through the list of headers in Remote Host Headers until the first IP address is located.
+
+# Known proxies
+
+When automation controller is configured with REMOTE_HOST_HEADERS = ['HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR', 'REMOTE_HOST'], it assumes that the value of X-Forwarded-For has originated from the proxy/load balancer sitting in front of automation controller.
+If automation controller is reachable without use of the proxy/load balancer, or if the proxy does not validate the header, the value of X-Forwarded-For can be falsified to fake the originating IP addresses.
+Using HTTP_X_FORWARDED_FOR in the REMOTE_HOST_HEADERS setting poses a vulnerability.
+
+To avoid this, you can configure a list of known proxies that are allowed.
+
+1. From the navigation panel, select menu:Settings[System].
+2. Enter a list of proxy IP addresses from which the service should trust custom remote header values in the Proxy IP Allowed List field.
+
+[NOTE]
+----
+Load balancers and hosts that are not on the known proxies list will result in a rejected request.
+----
+
+## Configuring known proxies
+
+To configure a list of known proxies for your automation controller, add the proxy IP addresses to the Proxy IP Allowed List field in the System Settings page.
+
+1. From the navigation panel, select menu:Settings[System].
+2. In the Proxy IP Allowed List field, enter IP addresses that are allowed to connect to your automation controller, following the syntax in the example below:
+Example Proxy IP Allowed List entry
+
+```
+[
+  "example1.proxy.com:8080",
+  "example2.proxy.com:8080"
+]
+```
+
+
+[IMPORTANT]
+----
+* Proxy IP Allowed List requires proxies in the list are properly sanitizing header input and correctly setting an X-Forwarded-For value equal to the real source IP of the client. Automation controller can rely on the IP addresses and hostnames in Proxy IP Allowed List to provide non-spoofed values for X-Forwarded-For.`
+* Do not configure HTTP_X_FORWARDED_FOR as an item in Remote Host Headers unless all of the following conditions are satisfied:
+* You are using a proxied environment with ssl termination;
+* The proxy provides sanitization or validation of the X-Forwarded-For header to prevent client spoofing;
+* /etc/tower/conf.d/remote_host_headers.py defines PROXY_IP_ALLOWED_LIST that contains only the originating IP addresses of trusted proxies or load balancers.
+----
+3. Click btn:[Save] to save the settings.
+
+# Configuring a reverse proxy
+
+You can support a reverse proxy server configuration by adding HTTP_X_FORWARDED_FOR to the Remote Host Headers field in the Systems Settings. The X-Forwarded-For (XFF) HTTP header field identifies the originating IP address of a client connecting to a web server through an HTTP proxy or load balancer.
+
+1. From the navigation panel, select menu:Settings[System].
+2. In the Remote Host Headers field, enter the following values:
+
+```
+[
+  "HTTP_X_FORWARDED_FOR",
+  "REMOTE_ADDR",
+  "REMOTE_HOST"
+]
+```
+
+3. Add the lines below to /etc/tower/conf.d/custom.py to ensure the application uses the correct headers:
+
+```
+USE_X_FORWARDED_PORT = True
+USE_X_FORWARDED_HOST = True
+```
+
+4. Click btn:[Save] to save the settings.
+
+# Enable sticky sessions
+
+By default, an application load balancer routes each request independently to a registered target based on the chosen load-balancing algorithm. To avoid authentication errors when running multiple instances of automation hub behind a load balancer, you must enable sticky sessions. Enabling sticky sessions sets a custom application cookie that matches the cookie configured on the load balancer to enable stickiness. This custom cookie can include any of the cookie attributes required by the application.
+
+* Refer to Sticky sessions for your Application Load Balancer for more information about enabling sticky sessions.
+
+Disclaimer: Links contained in this information to external website(s) are provided for convenience only. Red Hat has not reviewed the links and is not responsible for the content or its availability. The inclusion of any link to an external website does not imply endorsement by Red Hat of the website or their entities, products or services. You agree that Red Hat is not responsible or liable for any loss or expenses that may result due to your use of (or reliance on) the external site or content.

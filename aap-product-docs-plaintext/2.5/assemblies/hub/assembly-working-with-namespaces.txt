@@ -1,0 +1,138 @@
+# Using namespaces to manage collections in automation hub
+
+Namespaces are unique locations in automation hub to which you can upload and publish content collections. Access to namespaces in automation hub is governed by teams with permission to manage the content and related information that appears there.
+You can use namespaces in automation hub to organize collections developed within your organization for internal distribution and use.
+If you are working with namespaces, you must have a team that has permissions to create, edit and upload collections to namespaces. Collections uploaded to a namespace require administrative approval before you can publish them and make them available for use.
+
+# Creating a new team for content curators
+
+You can create a new team in Ansible Automation Platform designed to support content curation in your organization. This team can contribute internally-developed collections for publication in private automation hub.
+
+To help content developers create a namespace and upload their internally developed collections to private automation hub, you must first create and edit a team and assign the required permissions.
+
+* You have administrative permissions in Ansible Automation Platform and can create teams.
+
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select menu:Access Management[Teams] and click btn:[Create team].
+3. Enter Content Engineering as a Name for the team.
+4. Select an Organization for the team.
+5. Click btn:[Create team]. You have created the new team and the team Details page opens.
+6. Select the Roles tab and then select the Automation Content tab.
+7. Click btn:[Add roles].
+8. Select Namespace from the Resource type list and click btn:[Next].
+9. Select the namespaces that will receive the new roles and click btn:[Next].
+10. Select the roles to apply to the selected namespaces and click btn:[Next].
+11. Review your selections and click btn:[Finish].
+12. Click btn:[Close] to complete the process.
+
+The new team is created with the permissions that you assigned. You can then add users to the team.
+13. Click the Users tab on the Teams page.
+14. Click btn:[Add users].
+15. Select users and click btn:[Add users].
+
+For further instructions on managing access with teams, see Teams in the Access management and authentication guide.
+
+# Creating a namespace
+
+You can create a namespace to organize collections that your content developers upload to automation hub.
+When creating a namespace, you can assign a team in automation hub as owners of that namespace.
+
+* You have Add Namespaces and Upload to Namespaces permissions.
+
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Namespaces].
+3. Click btn:[Create namespace] and enter a Name for your namespace.
+4. Optional: enter a description, company, logo URL, resources, or useful links in the appropriate fields.
+5. Click btn: [Create namespace].
+6. Select the Team Access tab and click btn:[Add roles] to assign roles to your namespace.
+7. Select the team to which you want to grant a role, then click btn:[Next].
+8. Select the roles you want to apply to the selected team, and then click btn:[Next].
+9. Review your selections and click btn:[Finish].
+10. Click btn:[Close] to complete the process.
+
+Your content developers can now upload collections to your new namespace and allow users in teams assigned as owners to upload collections.
+
+# Adding additional information and resources to a namespace
+
+You can add information and provide resources for your users to accompany collections included in the namespace. For example, you can add a logo and a description, and link users to your GitHub repository, issue tracker, or other online assets. You can also enter markdown text in the Resources field to include more information. This is helpful to users who use your collection in their automation tasks.
+
+* You have Change Namespaces permissions.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Namespaces].
+3. Select the namespace you want to edit.
+4. Click the btn:[Edit namespace].
+5. Enter the relevant information in the fields.
+6. Optional: enter markdown information in the Resources field.
+7. Click btn:[Save namespace].
+
+Your content developers can now upload collections to your new namespace, or allow users in teams assigned as owners to upload collections.
+
+When you create a namespace, teams with permissions to upload to it can start adding their collections for approval. Collections in the namespace appear in the Published repository after approval.
+
+# Uploading collections to your namespaces
+
+You can upload internally developed collections in tar.gz file format to your private automation hub namespace for review and approval by an automation hub administrator.
+When approved, the collection moves to the Published content repository where automation hub users can view and download it.
+
+
+[NOTE]
+----
+Format your collection file name as follows: <my_namespace-my_collection-1.0.0.tar.gz>
+----
+
+* You have a namespace to which you can upload the collection.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Namespaces] and select a namespace.
+3. Select the Collections tab.
+4. Click btn:[Upload collection].
+5. Click btn:[Browse] next to the Collection file field.
+6. Select the collection to upload.
+7. Select one of the following options:
+* Staging repos
+* Repositories without pipeline
+8. Click btn:[Upload collection].
+
+To verify whether the collection uploaded successfully or if it failed, navigate to menu:Automation Content[Namespaces] and click the btn:[More Actions] icon &#8942;, then select Imports. There you will find a summary of tests indicating whether the import was successful.
+
+# Reviewing your namespace import logs
+
+You can review the status of collections uploaded to your namespaces to evaluate success or failure of the process.
+
+Imported collections information includes:
+
+Status:: completed or failed
+Approval status:: waiting for approval or approved
+Version:: the version of the uploaded collection
+Import log:: activities executed during the collection import
+
+* You have access to a namespace to which you can upload collections.
+
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Namespaces].
+3. Select a namespace.
+4. Click the btn:[More Actions] icon &#8942; and select Imports.
+5. Use the search field or locate an imported collection from the list.
+6. Click the imported collection.
+7. Review collection import details to determine the status of the collection in your namespace.
+
+# Deleting a namespace
+
+You can delete unwanted namespaces to manage storage on your automation hub server.
+You must first ensure that the namespace you want to delete does not contain a collection with dependencies.
+
+* The namespace you are deleting does not have a collection with dependencies.
+* You have Delete namespace permissions.
+
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Namespaces].
+3. Click the namespace to be deleted.
+4. Click the btn:[More Actions] icon &#8942;, then click btn:[Delete namespace].
+
+[NOTE]
+----
+If the btn:[Delete namespace] button is disabled, the namespace contains a collection with dependencies. Review the collections in this namespace, and delete any dependencies.
+----
+
+The namespace that you deleted, as well as its associated collections, is now deleted and removed from the namespace list view.

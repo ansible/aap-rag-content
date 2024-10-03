@@ -1,0 +1,43 @@
+# PostgreSQL database configuration and maintenance for automation controller
+
+To improve the performance of automation controller, you can configure the following configuration parameters in the database:
+
+Maintenance
+
+The VACUUM and ANALYZE tasks are important maintenance activities that can impact performance. In normal PostgreSQL operation, tuples that are deleted or obsoleted by an update are not physically removed from their table; they remain present until a VACUUM is done. Therefore it&#8217;s necessary to do VACUUM periodically, especially on frequently-updated tables. ANALYZE collects statistics about the contents of tables in the database, and stores the results in the pg_statistic system catalog. Subsequently, the query planner uses these statistics to help determine the most efficient execution plans for queries. The autovacuuming PostgreSQL configuration parameter automates the execution of VACUUM and ANALYZE commands. Setting autovacuuming to true is a good practice. However, autovacuuming will not occur if there is never any idle time on the database. If it is observed that autovacuuming is not sufficiently cleaning up space on the database disk, then scheduling specific vacuum tasks during specific maintenance windows can be a solution.
+
+Configuration parameters
+
+To improve the performance of the PostgreSQL server, configure the following Grand Unified Configuration (GUC) parameters that manage database memory. You can find these parameters inside the $PDATA directory in the postgresql.conf file, which manages the configurations of the database server.
+
+* shared_buffers: determines how much memory is dedicated to the server for caching data. The default value for this parameter is 128 MB. When you modify this value, you must set it between 15% and 25% of the machine's total RAM.
+
+
+[NOTE]
+----
+You must restart the database server after changing the value for shared_buffers.
+----
+
+* work_mem: provides the amount of memory to be used by internal sort operations and hash tables before disk-swapping. Sort operations are used for order by, distinct, and merge join operations. Hash tables are used in hash joins and hash-based aggregation. The default value for this parameter is 4 MB. Setting the correct value of the work_mem parameter improves the speed of a search by reducing disk-swapping.
+* Use the following formula to calculate the optimal value of the work_mem parameter for the database server:
+
+Total RAM * 0.25 / max_connections
+
+
+[NOTE]
+----
+Setting a large work_mem can cause the PostgreSQL server to go out of memory (OOM) if there are too many open connections to the database.
+----
+
+* max_connections: specifies the maximum number of concurrent connections to the database server.
+* maintenance_work_mem: provides the maximum amount of memory to be used by maintenance operations, such as vacuum, create index, and alter table add foreign key operations. The default value for this parameter is 64 MB. Use the following equation to calculate a value for this parameter:
+
+Total RAM * 0.05
+
+
+[NOTE]
+----
+Set maintenance_work_mem higher than work_mem to improve performance for vacuuming.
+----
+
+For more information on autovacuuming settings, see Automatic Vacuuming.

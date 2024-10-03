@@ -1,0 +1,227 @@
+# Configuring automation controller on Red Hat OpenShift Container Platform web console
+
+You can use these instructions to configure the automation controller operator on Red Hat OpenShift Container Platform, specify custom resources, and deploy Ansible Automation Platform with an external database.
+Automation controller configuration can be done through the automation controller extra_settings or directly in the user interface after deployment. However, it is important to note that configurations made in extra_settings take precedence over settings made in the user interface.
+
+[NOTE]
+----
+When an instance of automation controller is removed, the associated PVCs are not automatically deleted. This can cause issues during migration if the new deployment has the same name as the previous one. Therefore, it is recommended that you manually remove old PVCs before deploying a new automation controller instance in the same namespace. See Finding and deleting PVCs for more information.
+----
+
+# Prerequisites
+
+* You have installed the Red Hat Ansible Automation Platform catalog in Operator Hub.
+* For automation controller, a default StorageClass must be configured on the cluster for the operator to dynamically create needed PVCs. This is not necessary if an external PostgreSQL database is configured.
+* For Hub a StorageClass that supports ReadWriteMany must be available on the cluster to dynamically created the PVC needed for the content, redis and api pods. If it is not the default StorageClass on the cluster, you can specify it when creating your AutomationHub object.
+
+## Configuring your controller image pull policy
+
+Use this procedure to configure the image pull policy on your automation controller.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Go to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Automation Controller tab.
+5. For new instances, click btn:[Create AutomationController].
+1. For existing instances, you can edit the YAML view by clicking the  &#8942; icon and then btn:[Edit AutomationController].
+6. Click btn:[advanced Configuration].
+Under Image Pull Policy, click on the radio button to select
+* Always
+* Never
+* IfNotPresent
+7. To display the option under Image Pull Secrets, click the arrow.
+1. Click btn:[+] beside Add Image Pull Secret and enter a value.
+8. To display fields under the Web container resource requirements drop-down list, click the arrow.
+1. Under Limits, and Requests, enter values for CPU cores, Memory, and Storage.
+9. To display fields under the Task container resource requirements drop-down list, click the arrow.
+1. Under Limits, and Requests, enter values for CPU cores, Memory, and Storage.
+10. To display fields under the EE Control Plane container resource requirements drop-down list, click the arrow.
+1. Under Limits, and Requests, enter values for CPU cores, Memory, and Storage.
+11. To display fields under the PostgreSQL init container resource requirements (when using a managed service) drop-down list, click the arrow.
+1. Under Limits, and Requests, enter values for CPU cores, Memory, and Storage.
+12. To display fields under the Redis container resource requirements drop-down list, click the arrow.
+1. Under Limits, and Requests, enter values for CPU cores, Memory, and Storage.
+13. To display fields under the PostgreSQL container resource requirements (when using a managed instance)* drop-down list, click the arrow.
+1. Under Limits, and Requests, enter values for CPU cores, Memory, and Storage.
+14. To display the PostgreSQL container storage requirements (when using a managed instance) drop-down list, click the arrow.
+1. Under Limits, and Requests, enter values for CPU cores, Memory, and Storage.
+15. Under Replicas, enter the number of instance replicas.
+16. Under Remove used secrets on instance removal, select true or false. The default is false.
+17. Under Preload instance with data upon creation, select true or false. The default is true.
+
+## Configuring your controller LDAP security
+
+You can configure your LDAP SSL configuration for automation controller through any of the following options:
+
+* The automation controller user interface.
+* The platform gateway user interface. See the Configuring LDAP authentication section of the Access management and authentication guide for additional steps.
+* The following procedure steps.
+
+1. If you do not have a ldap_cacert_secret, you can create one with the following command:
+
+```
+$ oc create secret generic <resourcename>-custom-certs \
+    --from-file=ldap-ca.crt=<PATH/TO/YOUR/CA/PEM/FILE>  \ 1
+```
+
+Modify this to point to where your CA cert is stored.
+
+This will create a secret that looks like this:
+
+```
+$ oc get secret/mycerts -o yaml
+apiVersion: v1
+data:
+  ldap-ca.crt: <mysecret> 1
+kind: Secret
+metadata:
+  name: mycerts
+  namespace: awx
+type: Opaque
+```
+
+Automation controller looks for the data field ldap-ca.crt in the specified secret when using the ldap_cacert_secret.
+2. Under LDAP Certificate Authority Trust Bundle click the drop-down menu and select your ldap_cacert_secret.
+3. Under LDAP Password Secret, click the drop-down menu and select a secret.
+4. Under EE Images Pull Credentials Secret, click the drop-down menu and select a secret.
+5. Under Bundle Cacert Secret, click the drop-down menu and select a secret.
+6. Under Service Type, click the drop-down menu and select
+* ClusterIP
+* LoadBalancer
+* NodePort
+
+## Configuring your automation controller operator route options
+
+The Red Hat Ansible Automation Platform operator installation form allows you to further configure your automation controller operator route options under Advanced configuration.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Automation Controller tab.
+5. For new instances, click btn:[Create AutomationController].
+1. For existing instances, you can edit the YAML view by clicking the &#8942; icon and then btn:[Edit AutomationController].
+6. Click btn:[Advanced configuration].
+7. Under Ingress type, click the drop-down menu and select Route.
+8. Under Route DNS host, enter a common host name that the route answers to.
+9. Under Route TLS termination mechanism, click the drop-down menu and select Edge or Passthrough. For most instances Edge should be selected.
+10. Under Route TLS credential secret, click the drop-down menu and select a secret from the list.
+11. Under Enable persistence for /var/lib/projects directory select either true or false by moving the slider.
+
+## Configuring the ingress type for your automation controller operator
+
+The Ansible Automation Platform Operator installation form allows you to further configure your automation controller operator ingress under Advanced configuration.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Automation Controller tab.
+5. For new instances, click btn:[Create AutomationController].
+1. For existing instances, you can edit the YAML view by clicking the &#8942; icon and then btn:[Edit AutomationController].
+6. Click btn:[Advanced configuration].
+7. Under Ingress type, click the drop-down menu and select Ingress.
+8. Under Ingress annotations, enter any annotations to add to the ingress.
+9. Under Ingress TLS secret, click the drop-down menu and select a secret from the list.
+
+After you have configured your automation controller operator, click btn:[Create] at the bottom of the form view. Red Hat OpenShift Container Platform will now create the pods. This may take a few minutes.
+
+You can view the progress by navigating to menu:Workloads[Pods] and locating the newly created instance.
+
+Verify that the following operator pods provided by the Ansible Automation Platform Operator installation from automation controller are running:
+
+
+
+
+[NOTE]
+----
+A missing pod can indicate the need for a pull secret. Pull secrets are required for protected or private image registries. See Using image pull secrets for more information. You can diagnose this issue further by running oc describe pod <pod-name> to see if there is an ImagePullBackOff error on that pod.
+----
+
+# Configuring an external database for automation controller on Red Hat Ansible Automation Platform operator
+
+For users who prefer to deploy Ansible Automation Platform with an external database, they can do so by configuring a secret with instance credentials and connection information, then applying it to their cluster using the oc create command.
+
+By default, the Ansible Automation Platform Operator automatically creates and configures a managed PostgreSQL pod in the same namespace as your Ansible Automation Platform deployment. You can deploy Ansible Automation Platform with an external database instead of the managed PostgreSQL pod that the Ansible Automation Platform Operator automatically creates.
+
+Using an external database lets you share and reuse resources and manually manage backups, upgrades, and performance optimizations.
+
+
+[NOTE]
+----
+The same external database (PostgreSQL instance) can be used for both automation hub and automation controller as long as the database names are different. In other words, you can have multiple databases with different names inside a single PostgreSQL instance.
+----
+
+The following section outlines the steps to configure an external database for your automation controller on a Ansible Automation Platform Operator.
+
+The external database must be a PostgreSQL database that is the version supported by the current release of Ansible Automation Platform.
+
+
+[NOTE]
+----
+Ansible Automation Platform 2.5 supports PostgreSQL 15.
+----
+
+The external postgres instance credentials and connection information must be stored in a secret, which is then set on the automation controller spec.
+
+1. Create a postgres_configuration_secret YAML file, following the template below:
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: external-postgres-configuration
+  namespace: <target_namespace> 1
+stringData:
+  host: "<external_ip_or_url_resolvable_by_the_cluster>" 2
+  port: "<external_port>" 3
+  database: "<desired_database_name>"
+  username: "<username_to_connect_as>"
+  password: "<password_to_connect_with>" 4
+  sslmode: "prefer" 5
+  type: "unmanaged"
+type: Opaque
+```
+
+Namespace to create the secret in. This should be the same namespace you want to deploy to.
+The resolvable hostname for your database node.
+External port defaults to 5432.
+Value for variable password should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
+The variable sslmode is valid for external databases only. The allowed values are: prefer, disable, allow, require, verify-ca, and verify-full.
+2. Apply external-postgres-configuration-secret.yml to your cluster using the oc create command.
+
+```
+$ oc create -f external-postgres-configuration-secret.yml
+```
+
+3. When creating your AutomationController custom resource object, specify the secret on your spec, following the example below:
+
+```
+apiVersion: automationcontroller.ansible.com/v1beta1
+kind: AutomationController
+metadata:
+  name: controller-dev
+spec:
+  postgres_configuration_secret: external-postgres-configuration
+```
+
+
+# Finding and deleting PVCs
+
+A persistent volume claim (PVC) is a storage volume used to store data that automation hub and automation controller applications use. These PVCs are independent from the applications and remain even when the application is deleted. If you are confident that you no longer need a PVC, or have backed it up elsewhere, you can manually delete them.
+
+1. List the existing PVCs in your deployment namespace:
+
+```
+oc get pvc -n <namespace>
+```
+
+2. Identify the PVC associated with your previous deployment by comparing the old deployment name and the PVC name.
+3. Delete the old PVC:
+
+```
+oc delete pvc -n <namespace> <pvc-name>
+```
+
+
+# Additional resources
+
+* For more information on running operators on OpenShift Container Platform, navigate to the OpenShift Container Platform product documentation and click the Operators - Working with Operators in OpenShift Container Platform guide.

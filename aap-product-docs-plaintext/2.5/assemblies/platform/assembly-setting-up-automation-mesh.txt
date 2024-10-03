@@ -1,0 +1,91 @@
+# Setting up automation mesh
+
+Configure the Ansible Automation Platform installer to set up automation mesh for your Ansible environment. Perform additional tasks to customize your installation, such as importing a Certificate Authority (CA) certificate.
+
+# automation mesh Installation
+
+For a VM-based install of Ansible Automation Platform you use the installation program to set up automation mesh or to upgrade to automation mesh.
+To provide Ansible Automation Platform with details about the nodes, groups, and peer relationships in your mesh network, you define them in an the inventory file in the installer bundle. For managed cloud, OpenShift, or operator environments, see Automation mesh for managed cloud or operator environments.
+
+* RPM installation
+* Automation mesh design patterns
+
+# Editing the Red Hat Ansible Automation Platform installer inventory file
+
+You can use the Red Hat Ansible Automation Platform installer inventory file to specify your installation scenario.
+
+1. Navigate to the installer:
+1. [RPM installed package]
+
+```
+$ cd /opt/ansible-automation-platform/installer/
+```
+
+2. [bundled installer]
+
+```
+$ cd ansible-automation-platform-setup-bundle-<latest-version>
+```
+
+3. [online installer]
+
+```
+$ cd ansible-automation-platform-setup-<latest-version>
+```
+
+2. Open the inventory file with a text editor.
+3. Edit inventory file parameters to specify your installation scenario.
+
+# Running the Red Hat Ansible Automation Platform installer setup script
+
+After you update the inventory file with required parameters, run the installer setup script.
+
+* Run the setup.sh script
+
+```
+$ sudo ./setup.sh
+```
+
+
+
+[NOTE]
+----
+If you are running the setup as a non-root user with sudo privileges, you can use the following command:
+
+```
+$ ANSIBLE_BECOME_METHOD='sudo'
+ANSIBLE_BECOME=True ./setup.sh
+```
+
+----
+
+Installation of Red Hat Ansible Automation Platform will begin.
+
+See Understanding privilege escalation for additional setup.sh script examples.
+
+# Importing a Certificate Authority (CA) certificate
+
+A Certificate Authority (CA) verifies and signs individual node certificates in an automation mesh environment. You can provide your own CA by specifying the path to the certificate and the private RSA key file in the inventory file of your Red Hat Ansible Automation Platform installer.
+
+
+[NOTE]
+----
+The Ansible Automation Platform installation program generates a CA if you do not provide one.
+----
+
+1. Open the inventory file for editing.
+2. Add the mesh_ca_keyfile variable and specify the full path to the private RSA key (.key).
+3. Add the mesh_ca_certfile variable and specify the full path to the CA certificate file (.crt).
+4. Save the changes to the inventory file.
+
+
+```
+[all:vars]
+mesh_ca_keyfile=/tmp/<mesh_CA>.key
+mesh_ca_certfile=/tmp/<mesh_CA>.crt
+```
+
+
+With the CA files added to the inventory file, run the installation program to apply the CA. This process copies the CA to the to /etc/receptor/tls/ca/ directory on each control and execution node on your mesh network.
+
+* System Requirements

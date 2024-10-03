@@ -1,0 +1,3 @@
+# DNS
+
+When installing Ansible Automation Platform, the installer script checks that certain infrastructure servers are defined with a Fully Qualified Domain Name (FQDN) in the installer inventory. This guide recommends that all Ansible Automation Platform infrastructure nodes have a valid FQDN defined in DNS which resolves to a routable IP address, and that these FQDNs be used in the installer inventory file.

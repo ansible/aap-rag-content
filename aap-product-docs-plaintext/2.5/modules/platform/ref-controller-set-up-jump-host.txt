@@ -1,0 +1,26 @@
+# Set up a jump host to use with automation controller
+
+Credentials supplied by automation controller do not flow to the jump host through ProxyCommand.
+They are only used for the end-node when the tunneled connection is set up.
+
+You can configure a fixed user/keyfile in the AWX user&#8217;s SSH configuration in the ProxyCommand definition that sets up the connection through the jump host.
+
+For example:
+
+Host tampa
+Hostname 10.100.100.11
+IdentityFile [privatekeyfile]
+
+Host 10.100..
+Proxycommand ssh -W [jumphostuser]@%h:%p tampa
+
+You can also add a jump host to your automation controller instance through Inventory variables.
+
+These variables can be set at either the inventory,
+group, or host level.
+To add this, navigate to your inventory and in the variables field of whichever level you choose, add the following
+variables:
+
+ansible_user: <user_name>
+ansible_connection: ssh
+ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q <user_name>@<jump_server_name>"'

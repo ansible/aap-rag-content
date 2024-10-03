@@ -1,0 +1,8 @@
+# Common Team Roles - "Personas"
+
+Automation controller support personnel typically works to ensure that automation controller is available, and manage it in a way as to balance supportability and ease-of-use for users.
+Automation controller support personnel often assign Organization Owner or Administrator roles to users to enable them to create a new Organization or add members from their team that the respective access requires.
+This minimizes the number of supporting individuals and focuses more on maintaining uptime of the service and assisting users who are using automation controller.
+
+The following table lists some common roles managed by the automation controller Organization:
+

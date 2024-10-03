@@ -1,0 +1,3 @@
+# System requirements for installing on OpenShift Container Platform
+
+For system requirements for installing Ansible Automation Platform on OpenShift Container Platform, see the Tested system configurations section of Tested deployment models.

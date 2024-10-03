@@ -1,0 +1,17 @@
+# Issue - Jobs are failing with “ERROR! couldn’t resolve module/action” error message
+
+Jobs are failing with the error message “ERROR! couldn&#8217;t resolve module/action 'module name'. This often indicates a misspelling, missing collection, or incorrect module path”.
+
+This error can happen when the collection associated with the module is missing from the execution environment.
+
+The recommended resolution is to create a custom execution environment and add the required collections inside of that execution environment. For more information about creating an execution environment, see Using Ansible Builder in Creating and using execution environments.
+
+Alternatively, you can complete the following steps:
+
+1. Create a collections folder inside of the project repository.
+2. Add a requirements.yml file inside of the collections folder and add the collection:
+
+```
+collections:
+- <collection_name>
+```

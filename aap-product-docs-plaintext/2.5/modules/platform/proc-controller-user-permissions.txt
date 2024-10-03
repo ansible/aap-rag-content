@@ -1,0 +1,19 @@
+# Adding roles to a team
+
+You can assign permissions to teams, such as edit and administer resources and other elements.
+You can set permissions through an inventory, project, job template and other resources, or within the Organizations view.
+
+1. From the navigation panel, select menu:Access Management[Teams].
+2. Select the team Name to which you want to add roles.
+3. Select the Roles tab and click btn:[Add roles].
+
+[NOTE]
+----
+If you have multiple Ansible Automation Platform components installed, you will see selections for the roles associated with each component in the Roles menu bar. For example, Automation Execution for automation controller roles, Automation Decisions for Event-Driven Ansible roles.
+----
+4. Select a Resource type and click btn:[Next].
+5. Select the resources to receive the new roles and click btn:[Next].
+6. Select the roles to apply to the resources and click btn:[Next].
+7. Review the settings and click btn:[Finish].
+
+The Add roles dialog displays indicating whether the role assignments were successfully applied, click btn:[Close] to close the dialog.

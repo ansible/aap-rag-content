@@ -1,0 +1,64 @@
+# About the automation savings planner
+
+An automation savings plan gives you the ability to plan, track, and analyze the potential efficiency and cost savings of your automation initiatives. Use automation analytics to create an automation savings plan by defining a list of tasks needed to complete an automation job. You can then link your automation savings plans to an Ansible job template in order to accurately measure the time and cost savings upon completion of an automation job.
+To create an automation savings plan, you can utilize the automation savings planner to prioritize the various automation jobs throughout your organization and understand the potential time and cost savings for your automation initiatives.
+
+# Creating a new automation savings plan
+
+Create an automation savings plan by defining the tasks needed to complete an automation job using the automation savings planner.
+
+* The details you provide when creating a savings plan, namely the number of hosts and the manual duration, will be used to calculate your savings from automating this plan. See this section for more information.
+
+1. From the navigation panel, select menu:Automation Analytics[Savings Planner].
+2. Click btn:[Add Plan].
+3. Provide some information about your automation job:
+1. Enter descriptive information, such as a name, description, and type of automation.
+2. Enter technical information, such as the number of hosts, the duration to manually complete this job, and how often you complete this job.
+3. Click btn:[Next].
+4. In the tasks section, list the tasks needed to complete this plan:
+1. Enter each task in the field, then click btn:[Add].
+2. Rearrange tasks by dragging the item up/down the tasks list.
+3. Click btn:[Next].
+
+
+[NOTE]
+----
+The task list is for your planning purposes only, and does not currently factor into your automation savings calculation.
+----
+
+1. Select a template to link to this plan, then click btn:[Save].
+
+Your new savings plan is now created and displayed on the automation savings planner list view.
+
+# Edit an existing savings plan
+
+Edit any information about an existing savings plan by clicking on it from the savings planner list view.
+
+1. From the navigation panel, select menu:Automation Analytics[Savings Planner].
+2. On the automation savings plan, click Click the btn:[More Actions] icon &#8942;, then click btn:[Edit].
+3. Make any changes to the automation plan, then click btn:[Save].
+
+# Link a savings plan to a job template
+
+You can associate a job template to a savings plan to allow automation analytics to provide a more accurate time and cost savings estimate for completing this savings plan.
+
+1. From the navigation panel, select menu:Automation Analytics[Savings Planner].
+2. Click the btn:[More Actions] icon &#8942; and select Link Template.
+3. Click btn:[Save].
+
+# Review savings calculations for your automation plans
+
+The automation savings planner offers a calculation of how much time and money you can save by automating a job. automation analytics takes data from the plan details and the associated job template to provide you with an accurate projection of your cost savings when you complete this savings plan.
+
+To do so, navigate to your savings planner page, click the name of an existing plan, then navigate to the Statistics tab.
+
+The statistics chart displays a projection of your monetary and time savings based on the information you provided when creating a savings plan. Primarily, the statistics chart subtracts the automated cost from the manual cost of executing the plan to provide the total resources saved upon automation. The chart then displays this data by year to show you the cumulative benefits for automating the plan over time.
+
+Click between Money and Time to view the different types of savings for automating the plan.
+
+# Filter and sort plans on the list view page
+
+Find specific types of automation savings plans by filtering or sorting your savings planner list view.
+
+1. From the navigation panel, select menu:Automation Analytics[Savings Planner].
+2. To filter your saving plans based on type, or sort your savings plans by a certain order, select a filter option on the horizontal toolbar.

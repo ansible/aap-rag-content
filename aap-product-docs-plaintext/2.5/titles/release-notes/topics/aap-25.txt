@@ -1,0 +1,117 @@
+# New features and enhancements
+
+# Installation changes
+
+Starting with Ansible Automation Platform 2.5, three different on-premise deployment models are fully tested. In addition to the existing RPM-based installer and operator, support for the containerized installer is being added.
+
+As the platform moves toward a container-first model, the RPM-based installer will be removed in a future release, and a deprecation warning is being issued with the release of Ansible Automation Platform 2.5. While the RPM installer will still be supported for Ansible Automation Platform 2.5 until it is removed, the investment will focus on the container-based installation for RHEL deployments and the operator-based installation for OpenShift deployments. Upgrades from 2.4 containerized Ansible Automation Platform Technology Preview to 2.5 containerized Ansible Automation Platform are unsupported at this time.
+
+# Deployment topologies
+
+Red Hat tests Ansible Automation Platform 2.5 with a defined set of topologies to provide you with opinionated deployment options. While it is possible to install the Ansible Automation Platform on different infrastructure topologies and with different environment configurations, Red Hat guarantees support for the topologies outlined in the following table.
+
+At the time of the Ansible Automation Platform 2.5 GA release, a limited set of topologies are fully tested. Red Hat will regularly add new topologies to iteratively expand the scope of fully tested deployment options. As new topologies roll out, we will include them in the release notes.
+
+The following table shows the tested topologies for Ansible Automation Platform 2.5:
+
+
+
+For more information, see {URLTopologies}[Tested deployment models].
+
+# Unified UI
+
+In versions before 2.5, the Ansible Automation Platform was split into three primary services: automation controller, automation hub, and Event-Driven Ansible controller. Each service included standalone user interfaces, separate deployment configurations, and separate authentication schemas.
+
+In Ansible Automation Platform 2.5, the platform gateway is provided as a service that handles authentication and authorization for the Ansible Automation Platform. With the platform gateway, all services that make up the Ansible Automation Platform are consolidated into a single unified UI. The unified UI provides a single entry into the Ansible Automation Platform and serves the platform user interface to authenticate and access all of the Ansible Automation Platform services from a single location.
+
+## Terminology changes
+
+The Unified UI highlights the functional benefits provided by each underlying service. New UI terminology aligns to earlier names as follows:
+
+* Automation execution provides functionality from the automation controller service
+* Automation decisions provides functionality from the Event-Driven Ansible service
+* Automation content provides functionality from the automation hub service
+
+# Event-Driven Ansible functionality (Automation decisions)
+
+With Ansible Automation Platform 2.5, Event-Driven Ansible functionality has been enhanced with the following features:
+
+* Enterprise single-sign on and role-based access control are available through a new Ansible Automation Platform UI, which enables a single point of authentication and access to all functional components as follows:
+* Automation Execution (automation controller)
+* Automation Decision (Event-Driven Ansible)
+* Automation Content (automation hub)
+* Automation Analytics
+* Access Management
+* Red Hat Ansible Lightspeed
+* Simplified event routing capabilities introduce event streams. Event streams are an easy way to connect your sources to your rulebooks. This new capability lets you create a single endpoint to receive alerts from an event source and then use the events in multiple rulebooks. This simplifies rulebook activation setup, reduces maintenance demands, and helps lower risk by eliminating the need for additional ports to be open to external traffic.
+* Event-Driven Ansible in the Ansible Automation Platform 2.5 now supports horizontal scalability and enables high-availability deployments of the Event-Driven Ansible controller. These capabilities allow for the installation of multiple Event-Driven Ansible nodes and thus enable you to create highly available deployments.
+* Migration to the new platform-wide Red Hat Ansible Automation Platform credential type replaces the legacy controller token for enabling rulebook activations to call jobs in the automation controller.
+* Event-Driven Ansible now has the ability to manage credentials that can be added to rulebook activations. These credentials can be used in rulebooks to authenticate to event sources. In addition, you can now attach vault credentials to rulebook activations so that you can use vaulted variables in rulebooks. Encrypted credentials and vaulted variables enable enterprises to secure the use of Event-Driven Ansible within their environment.
+* New modules are added to the ansible.eda collection to enable users to automate the configuration of the Event-Driven Ansible controller using Ansible playbooks.
+
+# Event-Driven Ansible 2.5 with automation controller 2.4
+
+You can use a newly installed version of Event-Driven Ansible from Ansible Automation Platform 2.5 with some existing versions of the automation controller. A hybrid configuration is supported with the following versions:
+
+* 2.4 Ansible Automation Platform version of automation controller (4.4 or 4.5)
+* 2.5 Ansible Automation Platform version of Event-Driven Ansible (1.1)
+
+You can only use new installations of Event-Driven Ansible in this configuration. RPM-based hybrid deployments are fully supported by Red Hat. For details on setting up this configuration, see the chapter Installing Event-Driven Ansible controller 1.1 and configuring automation controller 4.4 or 4.5 in the Using Event-Driven Ansible 2.5 with Ansible Automation Platform 2.4 guide.
+
+A hybrid configuration means you can install a new Event-Driven Ansible service and configure rulebook activations to execute job templates on a 2.4 version of the automation controller.
+
+# Red Hat Ansible Lightspeed on-premise deployment
+
+Red Hat Ansible Lightspeed with IBM watsonx Code Assistant is a generative AI service that helps automation teams create, adopt, and maintain Ansible content more efficiently; it is now available as an on-premise deployment on the Ansible Automation Platform 2.5.
+
+The on-premise deployment provides the Ansible Automation Platform customers more control over their data and supports compliance with enterprise security policies. For example, organizations in sensitive industries with data privacy or air-gapped requirements can use on-premise deployments of both Red Hat Ansible Lightspeed and IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data. Red Hat Ansible Lightspeed on-premise deployments are supported on Ansible Automation Platform 2.5. For more information, see the chapter Setting up Red Hat Ansible Lightspeed on-premise deployment in the Red Hat Ansible Lightspeed with IBM watsonx Code Assistant User Guide.
+
+# Ansible plug-ins for Red Hat Developer Hub
+
+The Ansible plug-ins for Red Hat Developer Hub deliver an Ansible-first Red Hat Developer Hub user experience that simplifies creating Ansible content, such as playbooks and collections, for Ansible users of all skill levels. The Ansible plug-ins provide curated content and features to accelerate Ansible learner onboarding and streamline Ansible use case adoption across your organization.
+
+The Ansible plug-ins provide the following capabilities:
+
+* A customized home page and navigation tailored to Ansible users
+* Curated Ansible learning paths to help users new to Ansible
+* Software templates for creating Ansible playbooks and collection projects that follow best practices
+* Links to supported development environments and tools with opinionated configurations
+
+For more information, see the Ansible plug-ins for Red Hat Developer Hub documentation.
+
+# Ansible development tools
+
+Ansible development tools is a suite of tools provided with the Ansible Automation Platform to help automation creators create, test, and deploy playbook projects, execution environments, and collections on Linux, MacOS, and Windows platforms. Consolidating core Ansible tools into a single package simplifies tool management and promotes recommended practices in the automation content creation experience.
+
+Ansible development tools are distributed in an RPM package for RHEL systems, and in a supported container distribution that can be used on Linux, Mac, and Windows OS.
+
+Ansible development tools comprise the following tools:
+
+* ansible-builder
+* ansible-core
+* ansible-lint
+* ansible-navigator
+* ansible-sign
+* Molecule
+* ansible-creator
+* ansible-dev-environment
+* pytest-ansible
+* tox-ansible
+
+For more information, see Developing Ansible automation content.
+
+# Enhancements
+
+* Added the ability to provide mounts.conf or copy from a local or remote source when installing Podman. (AAP-16214)
+* Updated the inventory file to include the SSL key and certificate parameters for provided SSL web certificates. (AAP-13728)
+* Added an Ansible Automation Platform operator-version label on k8s resources created by the operator. (AAP-31058)
+* Added installation variables to support Postgres certificate authentication for user-provided databases. (AAP-1095)
+* Updated nginx to version 1.22. (AAP-15128)
+* Added a new configuration endpoint for the REST API. (AAP-13639)
+* Allowed adjustment of RuntimeDirectorySize for Podman environments at the time of installation. (AAP-11597)
+* Added support for the SAFE_PLUGINS_FOR_PORT_FORWARD setting for eda-server to the installation program. (AAP-21503)
+* Aligned inventory content to tested topologies and added comments for easier access to groups and variables when custom configurations are required. (AAP-30242)
+* The variable automationedacontroller_allowed_hostnames is no longer needed and is no longer supported for Event-Driven Ansible installations. (AAP-24421)
+* The eda-server now opens the ports for a rulebook with a source plugin that requires inbound connections only if that plugin is allowed in the settings. (AAP-17416)
+* The Event-Driven Ansible settings are now moved to a dedicated YAML file. (AAP-13276)
+* Starting with Ansible Automation Platform 2.5, customers using the controller collection (ansible.controller) have the platform collection (ansible.platform) as a single point of entry, and must use the platform collection to seed organizations, users, and teams. (AAP-31517)

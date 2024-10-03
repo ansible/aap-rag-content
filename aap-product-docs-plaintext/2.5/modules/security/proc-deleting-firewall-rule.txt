@@ -1,0 +1,35 @@
+# Deleting a firewall rule
+
+Use the acl_manager role to delete a security rule.
+
+* You have installed Ansible 2.9 or later
+* You have access to the firewall MGMT servers to enforce the new policies
+
+1. Install the acl_manager role using the ansible-galaxy command:
+
+```
+$ ansible-galaxy install ansible_security.acl_manager
+```
+
+2. Using CLI, create a new playbook with the acl_manger role and set the parameters (e.g., source object, destination object, access rule between the two objects):
+
+```
+- name: delete block list entry
+  hosts: checkpoint
+  connection: httpapi
+
+    - include_role:
+        name: acl_manager
+        Tasks_from: unblock_ip
+      vars:
+        source_ip: 192.168.0.10
+        destination_ip: 192.168.0.11
+        ansible_network_os: checkpoint
+```
+
+3. Run the playbook $ ansible-navigator run --ee false <playbook.yml>:
+![Playbook with deleted firewall rule]
+
+You have deleted the firewall rule. Access the MGMT server and verify that the new security policy has been removed.
+
+For more information on installing roles, see Installing roles from Galaxy.

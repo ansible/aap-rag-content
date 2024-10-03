@@ -1,0 +1,12 @@
+# The Settings menu
+
+You can configure some automation controller options by using the Settings menu of the User Interface.
+
+The Settings page enables an administrator to configure the following:
+
+* Configuring Subscriptions
+* Platform gateway
+* User Preferences
+* Configuring jobs
+* Setting up logging
+* Troubleshooting options

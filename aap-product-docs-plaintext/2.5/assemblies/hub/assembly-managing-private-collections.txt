@@ -1,0 +1,40 @@
+# Managing the publication process of internal collections in Automation Hub
+
+Use automation hub to manage and publish content collections developed within your organization. You can upload and group collections in namespaces. They need administrative approval to appear in the Published content repository. After you publish a collection, your users can access and download it for use.
+You can also reject submitted collections that do not meet organizational certification criteria.
+
+# About Approval
+
+You can manage uploaded collections in automation hub by using the Collection Approvals feature located in the navigation panel.
+
+Approval Dashboard:: By default, the Approval dashboard lists all collections with Needs Review status. You can check these for inclusion in your Published repository.
+Viewing collection details:: You can view more information about the collection by clicking the Version number.
+Filtering collections:: Filter collections by Namespace, Collection, or Repository to locate content and update its status.
+
+# Approving collections for internal publication
+
+You can approve collections uploaded to individual namespaces for internal publication and use. All collections awaiting review are located in menu:Automation Content[Collection Approvals].
+
+* You have Modify Ansible repo content permissions.
+
+1. From the navigation panel, select menu:Automation Content[Collection Approvals].
+
+Collections requiring approval have the status Needs review.
+2. Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
+3. Click the thumbs up icon to approve and sign the collection. Confirm your choice in the modal that appears.
+
+Approved collections are moved to the Published repository where users can view and download them for use.
+
+# Rejecting collections uploaded for review
+
+You can reject collections uploaded to individual namespaces. All collections awaiting review are located in menu:Automation Content[Collection Approvals].
+
+Collections requiring approval have the status Needs review.
+
+* You have Modify Ansible repo content permissions.
+
+1. From the navigation panel, select menu:Automation Content[Collection Approvals].
+2. Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
+3. Click the thumbs down icon to approve and sign the collection. Confirm your choice in the modal that appears.
+
+Collections you decline for publication are moved to the Rejected repository.

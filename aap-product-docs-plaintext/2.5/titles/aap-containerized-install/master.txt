@@ -1,0 +1,1194 @@
+# Containerized installation
+
+# Providing feedback on Red Hat documentation
+
+If you have a suggestion to improve this documentation, or find an error, you can contact technical support at https://access.redhat.com to open a request.
+
+# Ansible Automation Platform containerized installation
+
+Ansible Automation Platform is a commercial offering that helps teams manage complex multi-tier deployments by adding control, knowledge, and delegation to Ansible-powered environments.
+
+This guide helps you to understand the installation requirements and processes behind the containerized version of Ansible Automation Platform.
+
+
+[NOTE]
+----
+Upgrades from 2.4 Containerized Ansible Automation Platform Tech Preview to 2.5 Containerized Ansible Automation Platform are unsupported at this time.
+----
+
+* A Red Hat Enterprise Linux (RHEL) 9.2 based host. Minimal operating system (OS) base install is recommended.
+* A non-root user for the Red Hat Enterprise Linux host, with sudo or other Ansible supported privilege escalation (sudo recommended). This user is responsible for the installation of containerized Ansible Automation Platform.
+* It is recommended that you set up SSH public key authentication for the non-root user. For guidelines on setting up SSH public key authentication for the non-root user, see How to configure SSH public key authentication for passwordless login.
+* SSH keys are only required when installing on remote hosts. If doing a self contained local VM based installation, you can use ansible_connection: local.
+* Internet access from the Red Hat Enterprise Linux host if you are using the default online installation method.
+* The appropriate network ports are open if a firewall is in place. For more information about the ports to open, see Container supported topologies in Tested deployment models.
+
+## Tested deployment topologies
+
+Red Hat tests Ansible Automation Platform 2.5 with a defined set of topologies to provide you with opinionated deployment options. The tested topologies include infrastructure topology, tested system configurations, example inventory files, and network ports information.
+
+For more information about the tested deployment topologies for containerized Ansible Automation Platform, see Container supported topologies in Tested deployment models.
+
+## System requirements
+
+Each virtual machine (VM) has the following system requirements:
+
+
+
+## Preparing the RHEL host for containerized installation
+
+Containerized Ansible Automation Platform runs the component services as Podman based containers on top of a RHEL host. The installer takes care of this after the underlying host has been prepared.
+
+1. Log in to the RHEL host as your non-root user.
+2. Register your RHEL host with subscription-manager:
+
+```
+sudo subscription-manager register
+```
+
+3. Run sudo dnf repolist to validate that only the BaseOS and AppStream repositories are setup and enabled on the host:
+
+```
+$ sudo dnf repolist
+Updating Subscription Management repositories.
+repo id                                                    repo name
+rhel-9-for-x86_64-appstream-rpms                           Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
+rhel-9-for-x86_64-baseos-rpms                              Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
+```
+
+4. Ensure that only these repositories are available to the RHEL host. For more information about managing custom repositories, see:
+Chapter 10. Managing custom software repositories.
+5. Ensure that the host has DNS configured and can resolve host names and IP addresses by using a fully qualified domain name (FQDN). This is essential to ensure services can talk to one another.
+6. Install ansible-core:
+
+```
+sudo dnf install -y ansible-core
+```
+
+7. Optional: You can install additional utilities that can be useful for troubleshooting purposes, for example wget, git-core, rsync, and vim:
+
+```
+sudo dnf install -y wget git-core rsync vim
+```
+
+8. Set a hostname that is a fully qualified domain name (FQDN):
+
+```
+sudo hostnamectl set-hostname <your_hostname>
+```
+
+9. Optional: To have the installer automatically pick up and apply your Ansible Automation Platform subscription manifest license, follow the steps in link: {BaseURL}/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/assembly-gateway-licensing#assembly-aap-obtain-manifest-files[Obtaining a manifest file].
+
+* For more information about registering your RHEL system, see Getting Started with RHEL System Registration.
+* For information about configuring unbound DNS, see Chapter 2. Setting up an unbound DNS server.
+* For information about configuring DNS using BIND, see Chapter 1. Setting up and configuring a BIND DNS server.
+
+## Downloading Ansible Automation Platform
+
+Choose the installer you need based on your Red Hat Enterprise Linux environment internet connectivity and download the installer to your RHEL host.
+
+1. Download the latest installer .tar file from the Ansible Automation Platform download page.
+1. For online installations: Ansible Automation Platform 2.5 Containerized Setup
+2. For offline or bundled installations: Ansible Automation Platform 2.5 Containerized Setup Bundle
+2. Copy the installer .tar file and the optional manifest .zip file onto your Red Hat Enterprise Linux host.
+3. Decide where you want the installer to reside on the file system. Installation related files are created under this location and require at least 10 GB for the initial installation.
+4. Unpack the installer .tar file into your installation directory, and go to the unpacked directory.
+1. To unpack the online installer:
+
+```
+$ tar xfvz ansible-automation-platform-containerized-setup-<version>.tar.gz
+```
+
+2. To unpack the offline or bundled installer:
+
+```
+$ tar xfvz ansible-automation-platform-containerized-setup-bundle-<version>-<arch_name>.tar.gz
+```
+
+
+## Installing containerized Ansible Automation Platform
+
+You can control the installation of Ansible Automation Platform with inventory files. Inventory files define the hosts and containers used and created, variables for components, and other information needed to customize the installation.
+
+### Example inventory files
+
+Example inventory files are provided in this document that you can copy and change to quickly get started. You can find additional example inventory files in Container supported topologies in Tested deployment models.
+
+To use the example inventory files, replace the < > placeholders with your specific variables, and update the host names. Refer to the README.md file in the installation directory for more information about optional and required variables.
+
+Use the following example inventory file to perform an online installation for the containerized growth topology:
+
+
+```yaml
+# This is the Ansible Automation Platform growth installer inventory file
+# Please consult the documentation if you are unsure what to add
+# For all optional variables please consult the included README.md
+# or the Red Hat documentation:
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation
+
+# This section is for your platform gateway hosts
+# -----------------------------------------------------
+[automationgateway]
+aap.example.org
+
+# This section is for your automation controller hosts
+# -------------------------------------------------
+[automationcontroller]
+aap.example.org
+
+# This section is for your automation hub hosts
+# -----------------------------------------------------
+[automationhub]
+aap.example.org
+
+# This section is for your Event-Driven Ansible controller hosts
+# -----------------------------------------------------
+[automationeda]
+aap.example.org
+
+# This section is for the Ansible Automation Platform database
+# --------------------------------------
+[database]
+aap.example.org
+
+[all:vars]
+
+# Common variables
+# ----------------
+postgresql_admin_username=postgres
+postgresql_admin_password=<set your own>
+
+registry_username=<your RHN username>
+registry_password=<your RHN password>
+
+redis_mode=standalone
+
+# Platform gateway
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-gateway-variables
+# -----------
+gateway_admin_password=<set your own>
+gateway_pg_host=aap.example.org
+gateway_pg_password=<set your own>
+
+# Automation controller
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-controller-variables
+# --------------
+controller_admin_password=<set your own>
+controller_pg_host=aap.example.org
+controller_pg_password=<set your own>
+
+# Automation hub
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-hub-variables
+# ------------------
+hub_admin_password=<set your own>
+hub_pg_host=aap.example.org
+hub_pg_password=<set your own>
+
+# Event-Driven Ansible controller
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# ------------------
+eda_admin_password=<set your own>
+eda_pg_host=aap.example.org
+eda_pg_password=<set your own>
+```
+
+
+Use the following example inventory file to perform an online installation for the containerized enterprise topology:
+
+
+```yaml
+# This is the Ansible Automation Platform installer inventory file
+# Please consult the documentation if you are unsure what to add
+# For all optional variables please consult the included README.md
+# or the Red Hat documentation:
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation
+
+# This section is for your platform gateway hosts
+# -----------------------------------------------------
+[automationgateway]
+gateway1.example.org
+gateway2.example.org
+
+# This section is for your automation controller hosts
+# -------------------------------------------------
+[automationcontroller]
+controller1.example.org
+controller2.example.org
+
+# This section is for your Ansible Automation Platform execution hosts
+# ------------------------------------------------
+[execution_nodes]
+hop1.example.org receptor_type='hop'
+exec1.example.org
+exec2.example.org
+
+# This section is for your automation hub hosts
+# -----------------------------------------------------
+[automationhub]
+hub1.example.org
+hub2.example.org
+
+# This section is for your Event-Driven Ansible controller hosts
+# -----------------------------------------------------
+[automationeda]
+eda1.example.org
+eda2.example.org
+
+[redis]
+gateway1.example.org
+gateway2.example.org
+hub1.example.org
+hub2.example.org
+eda1.example.org
+eda2.example.org
+
+[all:vars]
+
+# Common variables
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
+# ----------------
+registry_username=<your RHN username>
+registry_password=<your RHN password>
+
+# Platform gateway
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-gateway-variables
+# -----------
+gateway_admin_password=<set your own>
+gateway_pg_host=externaldb.example.org
+gateway_pg_database=<set your own>
+gateway_pg_username=<set your own>
+gateway_pg_password=<set your own>
+
+# Automation controller
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-controller-variables
+# --------------
+controller_admin_password=<set your own>
+controller_pg_host=externaldb.example.org
+controller_pg_database=<set your own>
+controller_pg_username=<set your own>
+controller_pg_password=<set your own>
+
+# Automation hub
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-hub-variables
+# ------------------
+hub_admin_password=<set your own>
+hub_pg_host=externaldb.example.org
+hub_pg_database=<set your own>
+hub_pg_username=<set your own>
+hub_pg_password=<set your own>
+
+# Event-Driven Ansible controller
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# ------------------
+eda_admin_password=<set your own>
+eda_pg_host=externaldb.example.org
+eda_pg_database=<set your own>
+eda_pg_username=<set your own>
+eda_pg_password=<set your own>
+```
+
+
+### Additional information for configuring your inventory file
+
+* To perform an offline installation, add the following under the [all:vars] group:
+
+
+```
+bundle_install=true
+# The bundle directory must include /bundle in the path
+bundle_dir=<full path to the bundle directory>
+```
+
+
+* Redis can be colocated with any other node in a clustered installation.
+* By default the redis_mode is set to cluster. To run in standalone mode, set redis_mode=standalone.
+* For more information about Redis, see the Caching and queueing system section of Planning your installation.
+
+To configure a HAProxy load balancer in front of platform gateway with a custom CA cert, set the following inventory file variables under the [all:vars] group:
+
+
+```
+custom_ca_cert=<path_to_cert_crt>
+gateway_main_url=<https://load_balancer_url>
+```
+
+
+
+[NOTE]
+----
+HAProxy SSL passthrough mode is not supported with platform gateway.
+----
+
+### Running the installation command
+
+Use the following command to install containerized Ansible Automation Platform:
+
+
+```
+ansible-playbook -i inventory ansible.containerized_installer.install
+```
+
+
+* If your privilege escalation requires a password to be entered, append -K to the command line. You are then prompted for the BECOME password.
+* You can use increasing verbosity, up to 4 v's (-vvvv) to see the details of the installation process. However, it is important to note that this can significantly increase installation time, so it is recommended that you use it only as needed or requested by Red Hat support.
+
+## Using the postinstall feature of containerized Ansible Automation Platform
+
+You can use the optional postinstall feature of containerized Ansible Automation Platform to define and load the configuration during the initial installation. This uses a configuration-as-code approach, where you simply define your configuration to be loaded as YAML files.
+
+* An Ansible Automation Platform license for this feature that is on the local filesystem so it can be automatically loaded from the inventory file.
+
+1. The postinstall feature is disabled by default. To use the postinstaller, add the following variables in your inventory file:
+
+```
+controller_postinstall=true
+controller_license_file=<full_path_to_your_manifest_zip_file>
+```
+
+2. You can pull your configuration-as-code from a Git based repository. To do this, set the following variables to dictate where you pull the content from and where to store it for upload to the Ansible Automation Platform controller:
+
+```
+controller_postinstall_repo_url=<url_to_your_config-as-code_git_repository>
+controller_postinstall_dir=<full_path_to_your_config-as-code_directory>
+controller_postinstall_repo_ref=main
+```
+
+3. The controller_postinstall_repo_url variable can define the postinstall repository URL which must include authentication information.
+
+```
+http(s)://<host>/<repo>.git (public repository without HTTP(S) authentication)
+http(s)://<user>:<password>@<host>:<repo>.git (private repository with HTTP(S) authentication)
+git@<host>:<repo>.git (public or private repository with SSH authentication)
+```
+
+
+[NOTE]
+----
+When using SSH based authentication, the installer does not configure anything for you, so you must configure everything on the installer node.
+----
+
+Definition files that are used by Ansible Builder to create automation execution environment images use the infra certified collections. The controller_configuration collection is preinstalled as part of the installation and uses the installation controller credentials you supply in the inventory file for access into the Ansible Automation Platform controller. You simply need to give the YAML configuration files.
+
+You can set up Ansible Automation Platform configuration attributes such as credentials, LDAP settings, users and teams, organizations, projects, inventories and hosts, job and workflow templates.
+
+The following example shows a sample your-config.yml file defining and loading controller job templates. The example demonstrates a simple change to the  example provided with an Ansible Automation Platform installation.
+
+
+```
+/full_path_to_your_configuration_as_code/
+├── controller
+    	└── job_templates.yml
+```
+
+
+
+```
+controller_templates:
+ - name: Demo Job Template
+   execution_environment: Default execution environment
+   instance_groups:
+ 	- default
+   inventory: Demo Inventory
+```
+
+
+## Accessing Ansible Automation Platform
+
+After the installation completes, the default protocol and ports used for Ansible Automation Platform are 80 (HTTP) and 443 (HTTPS).
+
+You can customize the ports with the following variables:
+
+
+```
+gateway_nginx_http_port: 8500
+gateway_nginx_https_port: 8501
+```
+
+
+If you want to disable HTTPS, set gateway_nginx_disable_https to true:
+
+
+```
+gateway_nginx_disable_https: true
+```
+
+
+The platform UI is available by default at:
+
+
+```
+https://<gateway-node>:443
+```
+
+
+Log in as the admin user with the password you created for gateway_admin_password.
+
+## Using custom TLS certificates
+
+By default, the installer generates TLS certificates and keys for all services that are signed by a custom Certificate Authority (CA). You can provide a custom TLS certificate and key for each service. If that certificate is signed by a custom CA, you must provide the CA TLS certificate and key.
+
+* Certificate Authority
+
+
+```
+ca_tls_cert=/full/path/to/tls/certificate
+ca_tls_key=/full/path/to/tls/key
+```
+
+
+* Platform gateway
+
+
+```
+gateway_tls_cert=/full/path/to/tls/certificate
+gateway_tls_key=/full/path/to/tls/key
+```
+
+
+* Automation controller
+
+
+```
+controller_tls_cert=/full/path/to/tls/certificate
+controller_tls_key=/full/path/to/tls/key
+```
+
+
+* Automation hub
+
+
+```
+hub_tls_cert=/full/path/to/tls/certificate
+hub_tls_key=/full/path/to/tls/key
+```
+
+
+* Event-Driven Ansible
+
+
+```
+eda_tls_cert=/full/path/to/tls/certificate
+eda_tls_key=/full/path/to/tls/key
+```
+
+
+* PostgreSQL
+
+
+```
+postgresql_tls_cert=/full/path/to/tls/certificate
+postgresql_tls_key=/full/path/to/tls/key
+```
+
+
+* Receptor
+
+
+```
+receptor_tls_cert=/full/path/to/tls/certificate
+receptor_tls_key=/full/path/to/tls/key
+```
+
+
+## Using custom Receptor signing keys
+
+Receptor signing is enabled by default unless receptor_disable_signing=true is set, and an RSA key pair (public and private) is generated by the installer. However, you can provide custom RSA public and private keys by setting the path variables:
+
+
+```
+receptor_signing_private_key=<full_path_to_private_key>
+receptor_signing_public_key=<full_path_to_public_key>
+```
+
+
+## Enabling Automation hub collection and container signing
+
+Automation hub allows you to sign Ansible collections and container images. This feature is not enabled by default, and you must provide the GPG key.
+
+
+```
+hub_collection_signing=true
+hub_collection_signing_key=<full_path_to_collections_gpg_key>
+hub_container_signing=true
+hub_container_signing_key=<full_path_to_containers_gpg_key>
+```
+
+
+When the GPG key is protected by a passphrase, you must provide the passphrase.
+
+
+```
+hub_collection_signing_pass=<collections_gpg_key_passphrase>
+hub_container_signing_pass=<containers_gpg_key_passphrase>
+```
+
+
+## Adding execution nodes
+
+The containerized installer can deploy remote execution nodes. The execution_nodes group in the inventory file handles this.
+
+
+```
+[execution_nodes]
+<fqdn_of_your_execution_host>
+```
+
+
+An execution node is by default configured as an execution type running on port 27199 (TCP).
+This can be changed by the following variables:
+
+
+```
+receptor_port=27199
+receptor_protocol=tcp
+receptor_type=hop
+```
+
+
+The receptor_type value can be either execution or hop, while the receptor_protocol is either tcp or udp. By default, the nodes in the execution_nodes group are added as peers for the controller node. However, you can change the peers configuration by using the receptor_peers variable.
+
+
+```
+[execution_nodes]
+fqdn_of_your_execution_host
+fqdn_of_your_hop_host receptor_type=hop receptor_peers='["<fqdn_of_your_execution_host>"]'
+```
+
+
+## Adding a safe plugin variable to Event-Driven Ansible controller
+
+When using redhat.insights_eda or similar plug-ins to run rulebook activations in Event-Driven Ansible controller, you must add a safe plugin variable to a directory in Ansible Automation Platform. This ensures connecton between Event-Driven Ansible controller and the source plugin, and displays port mappings correctly.
+
+1. Create a directory for the safe plugin variable: mkdir -p ./group_vars/automationedacontroller
+2. Create a file within that directory for your new setting (for example, touch ./group_vars/automationedacontroller/custom.yml)
+3. Add the variable automationedacontroller_additional_settings to extend the default settings.yaml template for Event-Driven Ansible controller and add the SAFE_PLUGINS field with a list of plugins to enable. For example:
+
+```
+automationedacontroller_additional_settings:
+   SAFE_PLUGINS:
+     - ansible.eda.webhook
+     - ansible.eda.alertmanager
+```
+
+
+[NOTE]
+----
+You can also extend the automationedacontroller_additional_settings variable beyond SAFE_PLUGINS in the Django configuration file, /etc/ansible-automation-platform/eda/settings.yaml
+----
+
+## Uninstalling containerized Ansible Automation Platform
+
+To uninstall a containerized deployment, run the uninstall.yml playbook:
+
+
+```
+$ ansible-playbook -i inventory ansible.containerized_installer.uninstall
+```
+
+
+This stops all systemd units and containers and then delete all resources used by the containerized installer such as:
+
+* config and data directories and files
+* systemd unit files
+* Podman containers and images
+* RPM packages
+
+To keep container images, you can set the container_keep_images variable to true.
+
+
+```
+$ ansible-playbook -i inventory ansible.containerized_installer.uninstall -e container_keep_images=true
+```
+
+
+To keep PostgreSQL databases, you can set the postgresql_keep_databases variable to true.
+
+
+```
+$ ansible-playbook -i inventory ansible.containerized_installer.uninstall -e postgresql_keep_databases=true
+```
+
+
+
+[NOTE]
+----
+Use the Ansible Automation Platform secret key values rather than the auto-generated ones.
+----
+
+# Horizontal Scaling in Red Hat Ansible Automation Platform
+
+You can set up multi-node deployments for components across Ansible Automation Platform. Whether you require horizontal scaling for Automation Execution, Automation Decisions, or automation mesh, you can scale your deployments based on your organization’s needs.
+
+## Horizontal scaling in Event-Driven Ansible controller
+
+With Event-Driven Ansible controller, you can set up horizontal scaling for your events automation. This multi-node deployment enables you to define as many nodes as you prefer during the installation process. You can also increase or decrease the number of nodes at any time according to your organizational needs.
+
+The following node types are used in this deployment:
+
+API node type:: Responds to the HTTP REST API of Event-Driven Ansible controller.
+Worker node type:: Runs an Event-Driven Ansible worker, which is the component of Event-Driven Ansible that not only manages projects and activations, but also executes the activations themselves.
+Hybrid node type:: Is a combination of the API node and the worker node.
+
+The following example shows how you would set up an inventory file for horizontal scaling of Event-Driven Ansible controller on Red Hat Enterprise Linux VMs using the host group name [automationedacontroller] and the node type variable eda_node_type:
+
+
+```
+[automationedacontroller]
+
+3.88.116.111
+routable_hostname=automationedacontroller-api.example.com eda_node_type=api
+
+# worker node
+3.88.116.112 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker
+```
+
+
+### Sizing and scaling guidelines
+
+API nodes process user requests (interactions with the UI or API) while worker nodes process the activations and other background tasks required for Event-Driven Ansible to function properly. The number of API nodes you require correlates to the desired number of users of the application and the number of worker nodes correlates to the desired number of activations you want to run.
+
+Since activations are variable and controlled by worker nodes, the supported approach for scaling is to use separate API and worker nodes instead of hybrid nodes due to the efficient allocation of hardware resources by worker nodes. By separating the nodes, you can scale each type independently based on specific needs, leading to better resource utilization and cost efficiency.
+
+An example of an instance in which you might consider scaling up your node deployment is when you want to deploy Event-Driven Ansible for a small group of users who will run a large number of activations. In this case, one API node is adequate, but if you require more, you can scale up to three additional worker nodes.
+
+To set up a multi-node deployment, follow the procedure in Setting up horizontal scaling for Event-Driven Ansible controller.
+
+### Setting up horizontal scaling for Event-Driven Ansible controller
+
+To scale up (add more nodes) or scale down (remove nodes), you must update the content of the inventory to add or remove nodes and rerun the installer.
+
+1. Update the inventory to add two more worker nodes:
+
+```
+[automationedacontroller]
+
+3.88.116.111 routable_hostname=automationedacontroller-api.example.com eda_node_type=api
+
+3.88.116.112 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker
+
+# two more worker nodes
+3.88.116.113 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker
+
+3.88.116.114 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker
+```
+
+2. Re-run the installer.
+
+# Troubleshooting containerized Ansible Automation Platform
+
+Use this information to troubleshoot your containerized Ansible Automation Platform installation.
+
+## Troubleshooting containerized Ansible Automation Platform installation
+
+1. Ensure your system meets the minimum requirements as outlined in the installation guide. Items such as improper storage choices and high latency when distributing across many hosts will all have a significant impact.
+2. Check the installation log file located by default at ./aap_install.log unless otherwise changed within the local installer ansible.cfg.
+3. Enable task profiling callbacks on an ad hoc basis to give an overview of where the installation program spends the most time. To do this, use the local ansible.cfg file. Add a callback line such as this under the [defaults] section:
+
+
+```
+$ cat ansible.cfg
+[defaults]
+callbacks_enabled = ansible.posix.profile_tasks
+```
+
+
+This error is due to manifest.zip license files that are larger than the nginx_client_max_body_size setting. If this error occurs, you will need to change the installation inventory file to include the following variables:
+
+
+```
+nginx_disable_hsts: false
+nginx_http_port: 8081
+nginx_https_port: 8444
+nginx_client_max_body_size: 20m
+nginx_user_headers: []
+```
+
+
+The current default setting of 20m should be enough to avoid this issue.
+
+This error can occur and manifest itself in the installation application output as:
+
+
+```
+TASK [ansible.containerized_installer.automationcontroller : Wait for the Controller API to te ready] ******************************************************
+fatal: [daap1.lan]: FAILED! => {"changed": false, "connection": "close", "content_length": "150", "content_type": "text/html", "date": "Fri, 29 Sep 2023 09:42:32 GMT", "elapsed": 0, "msg": "Status code was 502 and not [200]: HTTP Error 502: Bad Gateway", "redirected": false, "server": "nginx", "status": 502, "url": "https://daap1.lan:443/api/v2/ping/"}
+```
+
+
+* Check if you have an automation-controller-web container running and a systemd service.
+
+
+[NOTE]
+----
+This is used at the regular unprivileged user not system wide level. If you have used su to switch to the user running the containers, you must set your XDG_RUNTIME_DIR environment variable to the correct value to be able to interact with the user systemctl units.
+----
+
+
+```
+export XDG_RUNTIME_DIR="/run/user/$UID"
+```
+
+
+
+```
+podman ps | grep web
+systemctl --user | grep web
+```
+
+
+No output indicates a problem.
+
+1. Try restarting the automation-controller-web service:
+
+```
+systemctl start automation-controller-web.service --user
+systemctl --user | grep web
+systemctl status automation-controller-web.service --user
+```
+
+
+```
+Sep 29 10:55:16 daap1.lan automation-controller-web[29875]: nginx: [emerg] bind() to 0.0.0.0:443 failed (98: Address already in use)
+Sep 29 10:55:16 daap1.lan automation-controller-web[29875]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+```
+
+
+The output indicates that the port is already, or still, in use by another service. In this case nginx.
+2. Run:
+
+```
+sudo pkill nginx
+```
+
+3. Restart and status check the web service again.
+
+Normal service output should look similar to the following, and should still be running:
+
+
+```
+Sep 29 10:59:26 daap1.lan automation-controller-web[30274]: WSGI app 0 (mountpoint='/') ready in 3 seconds on interpreter 0x1a458c10 pid: 17 (default app)
+Sep 29 10:59:26 daap1.lan automation-controller-web[30274]: WSGI app 0 (mountpoint='/') ready in 3 seconds on interpreter 0x1a458c10 pid: 20 (default app)
+Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,043 INFO     [-] daphne.cli Starting server at tcp:port=8051:interface=127.0.>
+Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,043 INFO     Starting server at tcp:port=8051:interface=127.0.0.1
+Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,048 INFO     [-] daphne.server HTTP/2 support not enabled (install the http2 >
+Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,048 INFO     HTTP/2 support not enabled (install the http2 and tls Twisted ex>
+Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,049 INFO     [-] daphne.server Configuring endpoint tcp:port=8051:interface=1>
+Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,049 INFO     Configuring endpoint tcp:port=8051:interface=127.0.0.1
+Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,051 INFO     [-] daphne.server Listening on TCP address 127.0.0.1:8051
+Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,051 INFO     Listening on TCP address 127.0.0.1:8051
+Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: nginx entered RUNNING state, process has stayed up for > th>
+Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: nginx entered RUNNING state, process has stayed up for > th>
+Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: uwsgi entered RUNNING state, process has stayed up for > th>
+Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: uwsgi entered RUNNING state, process has stayed up for > th>
+Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: daphne entered RUNNING state, process has stayed up for > t>
+Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: daphne entered RUNNING state, process has stayed up for > t>
+Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: ws-heartbeat entered RUNNING state, process has stayed up f>
+Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: ws-heartbeat entered RUNNING state, process has stayed up f>
+Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: cache-clear entered RUNNING state, process has stayed up fo>
+Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: cache-clear entered RUNNING state, process has stayed up
+```
+
+
+You can run the installation program again to ensure everything installs as expected.
+
+
+```
+TASK [ansible.containerized_installer.automationcontroller : Create the receptor container] ***************************************************
+fatal: [ec2-13-48-25-168.eu-north-1.compute.amazonaws.com]: FAILED! => {"changed": false, "msg": "Can't create container receptor", "stderr": "Error: creating container storage: creating an ID-mapped copy of layer \"98955f43cc908bd50ff43585fec2c7dd9445eaf05eecd1e3144f93ffc00ed4ba\": error during chown: storage-chown-by-maps: lchown usr/local/lib/python3.9/site-packages/azure/mgmt/network/v2019_11_01/operations/__pycache__/_available_service_aliases_operations.cpython-39.pyc: no space left on device: exit status 1\n", "stderr_lines": ["Error: creating container storage: creating an ID-mapped copy of layer \"98955f43cc908bd50ff43585fec2c7dd9445eaf05eecd1e3144f93ffc00ed4ba\": error during chown: storage-chown-by-maps: lchown usr/local/lib/python3.9/site-packages/azure/mgmt/network/v2019_11_01/operations/__pycache__/_available_service_aliases_operations.cpython-39.pyc: no space left on device: exit status 1"], "stdout": "", "stdout_lines": []}
+```
+
+
+If you are installing a /home filesystem into a default Amazon Web Services marketplace RHEL instance, it might be too small since /home is part of the root / filesystem. You will need to make more space available. The documentation specifies a minimum of 40GB for a single-node deployment of containerized Ansible Automation Platform.
+
+This error occurs in the installation application output as:
+
+
+```
+TASK [ansible.containerized_installer.common : Install container tools] **********************************************************************************************************
+fatal: [192.0.2.1]: FAILED! => {"changed": false, "failures": ["No package crun available.", "No package podman available.", "No package slirp4netns available.", "No package fuse-overlayfs available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
+fatal: [192.0.2.2]: FAILED! => {"changed": false, "failures": ["No package crun available.", "No package podman available.", "No package slirp4netns available.", "No package fuse-overlayfs available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
+fatal: [192.0.2.3]: FAILED! => {"changed": false, "failures": ["No package crun available.", "No package podman available.", "No package slirp4netns available.", "No package fuse-overlayfs available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
+fatal: [192.0.2.4]: FAILED! => {"changed": false, "failures": ["No package crun available.", "No package podman available.", "No package slirp4netns available.", "No package fuse-overlayfs available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
+fatal: [192.0.2.5]: FAILED! => {"changed": false, "failures": ["No package crun available.", "No package podman available.", "No package slirp4netns available.", "No package fuse-overlayfs available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
+```
+
+
+To fix this error, run the following command on the target hosts:
+
+
+```
+sudo subscription-manager register
+```
+
+
+## Troubleshooting containerized Ansible Automation Platform configuration
+
+
+```
+TASK [infra.controller_configuration.projects : Configure Controller Projects | Wait for finish the projects creation] ***************************************
+Friday 29 September 2023  11:02:32 +0100 (0:00:00.443)       0:00:53.521 ******
+FAILED - RETRYING: [daap1.lan]: Configure Controller Projects | Wait for finish the projects creation (1 retries left).
+failed: [daap1.lan] (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': '536962174348.33944', 'results_file': '/home/aap/.ansible_async/536962174348.33944', 'changed': False, '__controller_project_item': {'name': 'AAP Config-As-Code Examples', 'organization': 'Default', 'scm_branch': 'main', 'scm_clean': 'no', 'scm_delete_on_update': 'no', 'scm_type': 'git', 'scm_update_on_launch': 'no', 'scm_url': 'https://github.com/user/repo.git'}, 'ansible_loop_var': '__controller_project_item'}) => {"__projects_job_async_results_item": {"__controller_project_item": {"name": "AAP Config-As-Code Examples", "organization": "Default", "scm_branch": "main", "scm_clean": "no", "scm_delete_on_update": "no", "scm_type": "git", "scm_update_on_launch": "no", "scm_url": "https://github.com/user/repo.git"}, "ansible_job_id": "536962174348.33944", "ansible_loop_var": "__controller_project_item", "changed": false, "failed": 0, "finished": 0, "results_file": "/home/aap/.ansible_async/536962174348.33944", "started": 1}, "ansible_job_id": "536962174348.33944", "ansible_loop_var": "__projects_job_async_results_item", "attempts": 30, "changed": false, "finished": 0, "results_file": "/home/aap/.ansible_async/536962174348.33944", "started": 1, "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+```
+
+
+The infra.controller_configuration.dispatch role uses an asynchronous loop with 30 retries to apply each configuration type, and the default delay between retries is 1 second. If the configuration is large, this might not be enough time to apply everything before the last retry occurs.
+
+Increase the retry delay by setting the controller_configuration_async_delay variable to something other than 1 second. For example, setting it to 2 seconds doubles the retry time. The place to do this would be in the repository where the controller configuration is defined. It could also be added to the [all:vars] section of the installation program inventory file.
+
+A few instances have shown that no additional modification is required, and re-running the installation program again worked.
+
+## Containerized Ansible Automation Platform reference
+
+We use as much of the underlying native RHEL technology as possible. For the container runtime and management of services we use Podman. Many Podman services and commands are used to show and investigate the solution.
+
+For instance, use podman ps, and podman images to see some of the foundational and running pieces:
+
+
+```
+[aap@daap1 aap]$ podman ps
+CONTAINER ID  IMAGE                                                                        COMMAND               CREATED         STATUS         PORTS       NAMES
+88ed40495117  registry.redhat.io/rhel8/postgresql-13:latest                                run-postgresql        48 minutes ago  Up 47 minutes              postgresql
+8f55ba612f04  registry.redhat.io/rhel8/redis-6:latest                                      run-redis             47 minutes ago  Up 47 minutes              redis
+56c40445c590  registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8:latest  /usr/bin/receptor...  47 minutes ago  Up 47 minutes              receptor
+f346f05d56ee  registry.redhat.io/ansible-automation-platform-24/controller-rhel8:latest    /usr/bin/launch_a...  47 minutes ago  Up 45 minutes              automation-controller-rsyslog
+26e3221963e3  registry.redhat.io/ansible-automation-platform-24/controller-rhel8:latest    /usr/bin/launch_a...  46 minutes ago  Up 45 minutes              automation-controller-task
+c7ac92a1e8a1  registry.redhat.io/ansible-automation-platform-24/controller-rhel8:latest    /usr/bin/launch_a...  46 minutes ago  Up 28 minutes              automation-controller-web
+
+[aap@daap1 aap]$ podman images
+REPOSITORY                                                            TAG         IMAGE ID      CREATED      SIZE
+registry.redhat.io/ansible-automation-platform-24/ee-supported-rhel8  latest      b497bdbee59e  10 days ago  3.16 GB
+registry.redhat.io/ansible-automation-platform-24/controller-rhel8    latest      ed8ebb1c1baa  10 days ago  1.48 GB
+registry.redhat.io/rhel8/redis-6                                      latest      78905519bb05  2 weeks ago  357 MB
+registry.redhat.io/rhel8/postgresql-13                                latest      9b65bc3d0413  2 weeks ago  765 MB
+[aap@daap1 aap]$
+```
+
+
+Containerized Ansible Automation Platform runs as rootless containers for maximum out-of-the-box security. This means you can install containerized Ansible Automation Platform by using any local unprivileged user account. Privilege escalation is only needed for certain root level tasks, and by default is not needed to use root directly.
+
+Once installed, you will notice certain items have populate on the filesystem where the installation program is run (the underlying RHEL host).
+
+
+```
+[aap@daap1 aap]$ tree -L 1
+.
+├── aap_install.log
+├── ansible.cfg
+├── collections
+├── galaxy.yml
+├── inventory
+├── LICENSE
+├── meta
+├── playbooks
+├── plugins
+├── README.md
+├── requirements.yml
+├── roles
+```
+
+
+Other containerized services that make use of things such as Podman volumes, reside under the installation root directory used. Here are some examples for further reference:
+
+The containers directory contains some of the Podman specifics used and installed for the execution plane:
+
+
+```
+containers/
+├── podman
+├── storage
+│   ├── defaultNetworkBackend
+│   ├── libpod
+│   ├── networks
+│   ├── overlay
+│   ├── overlay-containers
+│   ├── overlay-images
+│   ├── overlay-layers
+│   ├── storage.lock
+│   └── userns.lock
+└── storage.conf
+```
+
+
+The controller directory has some of the installed configuration and runtime data points:
+
+
+```
+controller/
+├── data
+│   ├── job_execution
+│   ├── projects
+│   └── rsyslog
+├── etc
+│   ├── conf.d
+│   ├── launch_awx_task.sh
+│   ├── settings.py
+│   ├── tower.cert
+│   └── tower.key
+├── nginx
+│   └── etc
+├── rsyslog
+│   └── run
+└── supervisor
+    └── run
+```
+
+
+The receptor directory has the automation mesh configuration:
+
+
+```
+receptor/
+├── etc
+│   └── receptor.conf
+└── run
+    ├── receptor.sock
+    └── receptor.sock.lock
+```
+
+
+After installation, you will also find other pieces in the local users home directory such as the .cache directory:
+
+
+```
+.cache/
+├── containers
+│   └── short-name-aliases.conf.lock
+└── rhsm
+    └── rhsm.log
+```
+
+
+As we run by default in the most secure manner, such as rootless Podman, we can also use other services such as running systemd as non-privileged users. Under systemd you can see some of the component service controls available:
+
+The .config directory:
+
+
+```
+.config/
+├── cni
+│   └── net.d
+│       └── cni.lock
+├── containers
+│   ├── auth.json
+│   └── containers.conf
+└── systemd
+    └── user
+        ├── automation-controller-rsyslog.service
+        ├── automation-controller-task.service
+        ├── automation-controller-web.service
+        ├── default.target.wants
+        ├── podman.service.d
+        ├── postgresql.service
+        ├── receptor.service
+        ├── redis.service
+        └── sockets.target.wants
+```
+
+
+This is specific to Podman and conforms to the Open Container Initiative (OCI) specifications. Whereas Podman run as the root user would use /var/lib/containers by default, for standard users the hierarchy under $HOME/.local is used.
+
+The .local directory:
+
+
+```
+.local/
+└── share
+    └── containers
+        ├── cache
+        ├── podman
+        └── storage
+
+As an example `.local/storage/volumes` contains what the output from `podman volume ls` provides:
+
+[aap@daap1 containers]$ podman volume ls
+DRIVER      VOLUME NAME
+local       d73d3fe63a957bee04b4853fd38c39bf37c321d14fdab9ee3c9df03645135788
+local       postgresql
+local       redis_data
+local       redis_etc
+local       redis_run
+```
+
+
+We isolate the execution plane from the control plane main services (PostgreSQL, Redis, automation controller, receptor, automation hub and Event-Driven Ansible).
+
+Control plane services run with the standard Podman configuration (~/.local/share/containers/storage).
+
+Execution plane services use a dedicated configuration or storage (~/aap/containers/storage) to avoid execution plane containers to be able to interact with the control plane.
+
+* Run:
+
+
+```
+$ podman container stats -a
+```
+
+
+
+```
+podman container stats -a
+ID            NAME                           CPU %       MEM USAGE / LIMIT  MEM %       NET IO      BLOCK IO    PIDS        CPU TIME    AVG CPU %
+0d5d8eb93c18  automation-controller-web      0.23%       959.1MB / 3.761GB  25.50%      0B / 0B     0B / 0B     16          20.885142s  1.19%
+3429d559836d  automation-controller-rsyslog  0.07%       144.5MB / 3.761GB  3.84%       0B / 0B     0B / 0B     6           4.099565s   0.23%
+448d0bae0942  automation-controller-task     1.51%       633.1MB / 3.761GB  16.83%      0B / 0B     0B / 0B     33          34.285272s  1.93%
+7f140e65b57e  receptor                       0.01%       5.923MB / 3.761GB  0.16%       0B / 0B     0B / 0B     7           1.010613s   0.06%
+c1458367ca9c  redis                          0.48%       10.52MB / 3.761GB  0.28%       0B / 0B     0B / 0B     5           9.074042s   0.47%
+ef712cc2dc89  postgresql                     0.09%       21.88MB / 3.761GB  0.58%       0B / 0B     0B / 0B     21          15.571059s  0.80%
+```
+
+
+The previous is an example of a Dell sold and offered containerized Ansible Automation Platform solution (DAAP) install and utilizes ~1.8Gb RAM.
+
+As we run rootless Podman the container volume storage is under the local user at $HOME/.local/share/containers/storage/volumes.
+
+1. To view the details of each volume run:
+
+```
+$ podman volume ls
+```
+
+2. Then run:
+
+```
+$ podman volume inspect <volume_name>
+```
+
+
+Here is an example:
+
+
+```
+$ podman volume inspect postgresql
+[
+    {
+        "Name": "postgresql",
+        "Driver": "local",
+        "Mountpoint": "/home/aap/.local/share/containers/storage/volumes/postgresql/_data",
+        "CreatedAt": "2024-01-08T23:39:24.983964686Z",
+        "Labels": {},
+        "Scope": "local",
+        "Options": {},
+        "MountCount": 0,
+        "NeedsCopyUp": true
+    }
+]
+```
+
+
+Several files created by the installation program are located in $HOME/aap/ and bind-mounted into various running containers.
+
+1. To view the mounts associated with a container run:
+
+```
+$ podman ps --format "{{.ID}}\t{{.Command}}\t{{.Names}}"
+```
+
+
+```
+Example:
+$ podman ps --format "{{.ID}}\t{{.Command}}\t{{.Names}}"
+89e779b81b83	run-postgresql	postgresql
+4c33cc77ef7d	run-redis	redis
+3d8a028d892d	/usr/bin/receptor...	receptor
+09821701645c	/usr/bin/launch_a...	automation-controller-rsyslog
+a2ddb5cac71b	/usr/bin/launch_a...	automation-controller-task
+fa0029a3b003	/usr/bin/launch_a...	automation-controller-web
+20f192534691	gunicorn --bind 1...	automation-eda-api
+f49804c7e6cb	daphne -b 127.0.0...	automation-eda-daphne
+d340b9c1cb74	/bin/sh -c nginx ...	automation-eda-web
+111f47de5205	aap-eda-manage rq...	automation-eda-worker-1
+171fcb1785af	aap-eda-manage rq...	automation-eda-worker-2
+049d10555b51	aap-eda-manage rq...	automation-eda-activation-worker-1
+7a78a41a8425	aap-eda-manage rq...	automation-eda-activation-worker-2
+da9afa8ef5e2	aap-eda-manage sc...	automation-eda-scheduler
+8a2958be9baf	gunicorn --name p...	automation-hub-api
+0a8b57581749	gunicorn --name p...	automation-hub-content
+68005b987498	nginx -g daemon o...	automation-hub-web
+cb07af77f89f	pulpcore-worker	automation-hub-worker-1
+a3ba05136446	pulpcore-worker	automation-hub-worker-2
+```
+
+2. Then run:
+
+```
+$ podman inspect <container_name> | jq -r .[].Mounts[].Source
+```
+
+
+```
+Example:
+/home/aap/.local/share/containers/storage/volumes/receptor_run/_data
+/home/aap/.local/share/containers/storage/volumes/redis_run/_data
+/home/aap/aap/controller/data/rsyslog
+/home/aap/aap/controller/etc/tower.key
+/home/aap/aap/controller/etc/conf.d/callback_receiver_workers.py
+/home/aap/aap/controller/data/job_execution
+/home/aap/aap/controller/nginx/etc/controller.conf
+/home/aap/aap/controller/etc/conf.d/subscription_usage_model.py
+/home/aap/aap/controller/etc/conf.d/cluster_host_id.py
+/home/aap/aap/controller/etc/conf.d/insights.py
+/home/aap/aap/controller/rsyslog/run
+/home/aap/aap/controller/data/projects
+/home/aap/aap/controller/etc/settings.py
+/home/aap/aap/receptor/etc/receptor.conf
+/home/aap/aap/controller/etc/conf.d/execution_environments.py
+/home/aap/aap/tls/extracted
+/home/aap/aap/controller/supervisor/run
+/home/aap/aap/controller/etc/uwsgi.ini
+/home/aap/aap/controller/etc/conf.d/container_groups.py
+/home/aap/aap/controller/etc/launch_awx_task.sh
+/home/aap/aap/controller/etc/tower.cert
+```
+
+3. If the jq RPM is not installed, install with:
+
+```
+$ sudo dnf -y install jq
+```
+
+
+# Inventory file variables
+
+The following tables contain information about the variables used in Ansible Automation Platform&#8217;s installation inventory files. The tables include the variables that you can use for RPM-based installation and container-based installation.
+
+## General variables
+
+
+
+## Automation hub variables
+
+
+
+## Automation controller variables
+
+
+
+## Event-Driven Ansible controller variables
+
+
+
+## Platform gateway variables
+
+
+
+## Database variables
+
+
+
+## Image variables
+
+
+
+## Receptor variables
+
+
+
+## Ansible variables
+
+The following variables control how Ansible Automation Platform interacts with remote hosts.
+
+For more information about variables specific to certain plugins, see the documentation for Ansible.Builtin.
+
+For a list of global configuration options, see Ansible Configuration Settings.
+

@@ -1,0 +1,47 @@
+# Preparing the RHEL host for containerized installation
+
+Containerized Ansible Automation Platform runs the component services as Podman based containers on top of a RHEL host. The installer takes care of this after the underlying host has been prepared.
+
+1. Log in to the RHEL host as your non-root user.
+2. Register your RHEL host with subscription-manager:
+
+```
+sudo subscription-manager register
+```
+
+3. Run sudo dnf repolist to validate that only the BaseOS and AppStream repositories are setup and enabled on the host:
+
+```
+$ sudo dnf repolist
+Updating Subscription Management repositories.
+repo id                                                    repo name
+rhel-9-for-x86_64-appstream-rpms                           Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
+rhel-9-for-x86_64-baseos-rpms                              Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
+```
+
+4. Ensure that only these repositories are available to the RHEL host. For more information about managing custom repositories, see:
+Chapter 10. Managing custom software repositories.
+5. Ensure that the host has DNS configured and can resolve host names and IP addresses by using a fully qualified domain name (FQDN). This is essential to ensure services can talk to one another.
+6. Install ansible-core:
+
+```
+sudo dnf install -y ansible-core
+```
+
+7. Optional: You can install additional utilities that can be useful for troubleshooting purposes, for example wget, git-core, rsync, and vim:
+
+```
+sudo dnf install -y wget git-core rsync vim
+```
+
+8. Set a hostname that is a fully qualified domain name (FQDN):
+
+```
+sudo hostnamectl set-hostname <your_hostname>
+```
+
+9. Optional: To have the installer automatically pick up and apply your Ansible Automation Platform subscription manifest license, follow the steps in link: {BaseURL}/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/assembly-gateway-licensing#assembly-aap-obtain-manifest-files[Obtaining a manifest file].
+
+* For more information about registering your RHEL system, see Getting Started with RHEL System Registration.
+* For information about configuring unbound DNS, see Chapter 2. Setting up an unbound DNS server.
+* For information about configuring DNS using BIND, see Chapter 1. Setting up and configuring a BIND DNS server.

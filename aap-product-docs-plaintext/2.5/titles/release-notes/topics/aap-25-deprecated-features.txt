@@ -1,0 +1,9 @@
+# Deprecated features
+
+Deprecated functionality is still included in Ansible Automation Platform and continues to be supported during this version's support cycle. However, the functionality will be removed in a future release of Ansible Automation Platform and is not recommended for new deployments.
+The following table provides information about features that were deprecated in Ansible Automation Platform 2.5:
+
+# Deprecated API endpoints
+
+API endpoints that will be removed in a future release either because their functionality is being removed or superseded with other capabilities. For example, with the platform moving to a centralized authentication system in the platform gateway, the existing authorization APIs in the automation controller and automation hub are being deprecated for future releases as all authentication operations should occur in the platform gateway.
+

@@ -1,0 +1,11 @@
+# Downloading a manifest file
+
+After an allocation is created and has the appropriate subscriptions on it, you can download the manifest from Red Hat Subscription Management.
+
+1. From the Subscription Allocations page, click on the name of the Subscription Allocation to which you would like to generate a manifest.
+2. Click the Subscriptions tab.
+3. Click btn:[Export Manifest] to download the manifest file.
+
+This downloads a file manifest&lt;allocation name&gt;_&lt;date&gt;.zip_ to your default downloads folder.
+
+* Upload the manifest file to activate Red Hat Ansible Automation Platform.

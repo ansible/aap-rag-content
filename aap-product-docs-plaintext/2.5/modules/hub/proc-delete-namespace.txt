@@ -1,0 +1,19 @@
+# Deleting a namespace
+
+You can delete unwanted namespaces to manage storage on your automation hub server.
+You must first ensure that the namespace you want to delete does not contain a collection with dependencies.
+
+* The namespace you are deleting does not have a collection with dependencies.
+* You have Delete namespace permissions.
+
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Namespaces].
+3. Click the namespace to be deleted.
+4. Click the btn:[More Actions] icon &#8942;, then click btn:[Delete namespace].
+
+[NOTE]
+----
+If the btn:[Delete namespace] button is disabled, the namespace contains a collection with dependencies. Review the collections in this namespace, and delete any dependencies.
+----
+
+The namespace that you deleted, as well as its associated collections, is now deleted and removed from the namespace list view.

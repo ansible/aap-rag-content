@@ -1,0 +1,47 @@
+# Assigning pods to specific nodes
+
+You can constrain the automation controller pods created by the operator to run on a certain subset of nodes.
+
+* node_selector and postgres_selector constrain the automation controller pods to run only on the nodes that match all the specified key, or value, pairs.
+* tolerations and postgres_tolerations enable the automation controller pods to be scheduled onto nodes with matching taints.
+See Taints and Toleration in the Kubernetes documentation for further details.
+
+The following table shows the settings and fields that can be set on the automation controller&#8217;s specification section of the YAML (or using the OpenShift UI form).
+
+
+
+topology_spread_constraints can help optimize spreading your control plane pods across the compute nodes that match your node selector.
+For example, with the maxSkew parameter of this option set to 100, this means maximally spread across available nodes.
+So if there are three matching compute nodes and three pods, one pod will be assigned to each compute node.
+This parameter helps prevent the control plane pods from competing for resources with each other.
+
+
+```
+spec:
+  ...
+  node_selector: |
+    disktype: ssd
+    kubernetes.io/arch: amd64
+    kubernetes.io/os: linux
+  topology_spread_constraints: |
+    - maxSkew: 100
+      topologyKey: "topology.kubernetes.io/zone"
+      whenUnsatisfiable: "ScheduleAnyway"
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/name: "<resourcename>"
+  tolerations: |
+    - key: "dedicated"
+      operator: "Equal"
+      value: "AutomationController"
+      effect: "NoSchedule"
+  postgres_selector: |
+    disktype: ssd
+    kubernetes.io/arch: amd64
+    kubernetes.io/os: linux
+  postgres_tolerations: |
+    - key: "dedicated"
+      operator: "Equal"
+      value: "AutomationController"
+      effect: "NoSchedule"
+```

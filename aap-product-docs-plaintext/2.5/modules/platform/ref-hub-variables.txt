@@ -1,0 +1,2 @@
+# Automation hub variables
+

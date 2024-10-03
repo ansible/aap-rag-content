@@ -1,0 +1,52 @@
+# Caching and queueing system
+
+In Ansible Automation Platform 2.5, Redis (REmote DIctionary Server) is used as the caching and queueing system. Redis is an open source, in-memory, NoSQL key/value store that is used primarily as an application cache, quick-response database and lightweight message broker.
+Centralized Redis is provided for the platform gateway and Event-Driven Ansible and shared between those components. Automation controller and automation hub have their own instances of Redis.
+This cache and queue system stores data in memory, rather than on a disk or solid-state drive (SSD), which helps deliver speed, reliability, and performance. In Ansible Automation Platform, the system caches the following types of data for the various services in Ansible Automation Platform:
+
+This data can contain sensitive Personal Identifiable Information (PII). Your data is protected through secure communication with the cache and queue system through both Transport Layer Security (TLS) encryption and authentication.
+
+[NOTE]
+----
+The data in Redis from both the platform gateway and Event-Driven Ansible are partitioned; therefore, neither service can access the other’s data.
+----
+
+# Centralized Redis
+
+Ansible Automation Platform offers a centralized Redis instance in both standalone and clustered topologies. This enables resiliency by providing consistent performance and reliability.
+
+# Clustered Redis
+
+With clustered Redis, data is automatically partitioned over multiple nodes to provide performance stability and nodes are assigned as replicas to provide reliability. Clustered Redis shared between the platform gateway and Event-Driven Ansible is provided by default when installing Ansible Automation Platform in containerized and operator-based deployments.
+
+
+[NOTE]
+----
+Clustered Redis is currently not available for rpm deployments.
+----
+
+A cluster contains three primary nodes and each primary node contains a replica node.
+
+If a primary instance becomes unavailable due to failures, the other primary nodes will initiate a failover state to promote a replica node to a primary node.
+
+![Single-node Redis deployment]
+
+The benefits of deploying clustered Redis over standalone Redis include the following:
+
+* Data is automatically split across multiple nodes.
+* Data can be dynamically adjusted.
+* Automatic failover of the primary nodes is initiated during system failures.
+
+Therefore, if you need data scalability and automatic failover, deploy Ansible Automation Platform with a clustered Redis. For more information about scalability with Redis, refer to Scale with Redis Cluster in the Redis product documentation.
+
+For information on deploying Ansible Automation Platform with clustered Redis, refer to the Containerized installation guide or the Installing on OpenShift Container Platform guide.
+
+Disclaimer: Links contained in this information to external website(s) are provided for convenience only. Red Hat has not reviewed the links and is not responsible for the content or its availability. The inclusion of any link to an external website does not imply endorsement by Red Hat of the website or their entities, products or services. You agree that Red Hat is not responsible or liable for any loss or expenses that may result due to your use of (or reliance on) the external site or content.
+
+# Standalone Redis
+
+Standalone Redis consists of a simple architecture that is easy to deploy and configure.
+
+![Standalone Redis deployment]
+
+If a resilient solution is not a requirement, deploy Ansible Automation Platform with a standalone Redis.

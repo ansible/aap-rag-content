@@ -1,0 +1,31 @@
+# Work with permissions
+
+The set of permissions assigned to a project (role-based access controls) that provide the ability to read, change, and administer
+projects, inventories, job templates, and other elements are privileges.
+To access the project permissions, select the Access tab of the Projects page.
+This screen displays a list of users that currently have permissions to this project.
+You can sort and search this list by Username, First Name, or Last Name.
+
+# Adding project permissions
+
+Manage the permissions that users and teams have to access a project.
+
+1. From the navigation panel, select menu:Automation Execution[Projects].
+2. Select the project that you want to update and click the User Access or Team Access tab.
+3. Click btn:[Add roles].
+4. Select a user or team to add and click btn:[Next].
+5. Select one or more users or teams from the list by clicking the checkbox next to the name to add them as members.
+6. Click btn:[Next].
+7. Select the roles you want the selected users or teams to have.
+Different resources have different options available.
+8. Click btn:[Finish] to apply the roles to the selected users or teams and to add them as members.
+The updated roles assigned for each user and team are displayed.
+
+# Removing permissions from a project
+
+Remove roles for a particular user.
+
+1. From the navigation panel, select  menu:Automation Execution[Projects].
+2. Select the project that you want to update and click the User Access or Team Access tab.
+3. Click the  icon next to the user role in the Roles column.
+4. Click btn:[Delete] in the confirmation window to confirm the disassociation.

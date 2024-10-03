@@ -1,0 +1,5 @@
+# Jobs view
+
+* From the navigation panel, select menu:Automation Execution[Jobs].
+This view displays the jobs that have run, including projects, templates, management jobs, SCM updates, and playbook runs.
+

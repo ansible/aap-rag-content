@@ -1,0 +1,30 @@
+# Configuring the Red Hat Ansible Automation Platform installer
+
+Before running the installer, edit the inventory file found in the installer package to configure the installation of automation hub and Ansible Automation Platform Central Authentication.
+
+
+[NOTE]
+----
+Provide a reachable IP address for the [automationhub] host to ensure users can sync content from Private Automation Hub from a different node and push new images to the container registry.
+----
+
+1. Navigate to the installer directory:
+1. Online installer:
+
+```
+$ cd ansible-automation-platform-setup-<latest-version>
+```
+
+2. Bundled installer:
+
+```
+$ cd ansible-automation-platform-setup-bundle-<latest-version>
+```
+
+2. Open the inventory file using a text editor.
+3. Edit the inventory file parameters under [automationhub] to specify an installation of automation hub host:
+1. Add group host information under [automationhub] using an IP address or FQDN for the automation hub location.
+2. Enter passwords for automationhub_admin_password, automationhub_pg_password, and any additional parameters based on your installation specifications.
+4. Enter a password in the sso_keystore_password field.
+5. Edit the inventory file parameters under [SSO] to specify a host on which to install central authentication:
+1. Enter a password in the sso_console_admin_password field, and any additional parameters based on your installation specifications.

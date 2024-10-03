@@ -1,0 +1,25 @@
+# Steps to migrate data to Ansible Automation Platform 2.5
+
+For platform administrators looking to complete an upgrade to the Ansible Automation Platform 2.5, there may be additional steps needed to migrate data to a new instance:
+To complete an upgrade to Ansible Automation Platform 2.5, you must migrate your data. Migrating data to a new instance requires additional steps.
+
+# Migrating from legacy virtual environments (venvs) to automation execution environments
+
+Ansible Automation Platform 2.5 moves you away from custom Python virtual environments (venvs) in favor of automation execution environments - containerized images that package the necessary components needed to run and scale your Ansible automation. These components include Ansible Core, Ansible Content Collections, Python dependencies, Red Hat Enterprise Linux UBI 8, and any additional package dependencies.
+
+To migrate your venvs to execution environments, you must use the awx-manage command to list and export a list of venvs from your original instance, and then use ansible-builder to create execution environments.
+
+* Upgrading to Automation Execution Environments guide
+* Creating and Consuming Execution Environments.
+
+# Migrating Ansible Engine images using Ansible Builder
+
+To migrate previous Ansible Engine images for use with Ansible Automation Platform 2.5, use the ansible-builder tool to automate the process of rebuilding images (including its custom plugins and dependencies) for use with automation execution environments.
+
+* See Creating and Consuming Execution Environments for more information about using Ansible Builder to build execution environments.
+
+# Migrating to Ansible Core 2.13
+
+When upgrading to Ansible Core 2.13, you must update your playbooks and plugins, or other parts of your Ansible infrastructure to be supported by the latest version of Ansible Core.
+
+For instructions on updating your Ansible content for Ansible Core 2.13 compatibility, see the Ansible-core 2.13 Porting Guide.

@@ -1,0 +1,11 @@
+# Working with notifiers
+
+When automation controller is enabled on the platform, you can review any notifier integrations you have set up and manage their settings within the organization resource.
+
+1. From the navigation panel, select menu:Access Management[Organizations].
+2. From the Organizations list view, select the organization to which you want to manage notifications.
+3. Select the Notification tab.
+4. Use the toggles to enable or disable the notifications to use with your particular organization. For more information, see Enable and disable notifications.
+5. If no notifiers have been set up, select menu:Automation Execution[Administration > Notifiers] from the navigation panel.
+
+For information on configuring notification types, see Notification types.

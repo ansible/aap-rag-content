@@ -1,0 +1,22 @@
+# Deploying clustered Redis on Ansible Automation Platform Operator
+
+When you create an Ansible Automation Platform instance through the Ansible Automation Platform Operator, standalone Redis is assigned by default.
+To deploy clustered Redis, use the following procedure.
+
+For more information about Redis, refer to Caching and queueing system in the Planning your installation guide.
+
+* You have installed an Ansible Automation Platform Operator deployment.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Details tab.
+5. On the Ansible Automation Platform tile click btn:[Create instance].
+1. For existing instances, you can edit the YAML view by clicking the &#8942; icon and then btn:[Edit AnsibleAutomationPlatform].
+2. Change the redis_mode value to "clustered".
+3. Click btn:[Reload], then btn:[Save].
+6. Click to expand Advanced configuration.
+7. For the Redis Mode list, select Cluster.
+8. Configure the rest of your instance as necessary, then click btn:[Create].
+
+Your instance will deploy with a cluster Redis with 6 Redis replicas as default.

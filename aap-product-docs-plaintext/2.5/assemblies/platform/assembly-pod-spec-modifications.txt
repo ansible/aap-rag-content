@@ -1,0 +1,284 @@
+# Pod specification modifications
+
+# Introduction
+
+The Kubernetes concept of a pod is one or more containers deployed together on one host, and the smallest compute unit that can be defined, deployed, or managed.
+
+Pods are the equivalent of a machine instance (physical or virtual) to a container.
+Each pod is allocated its own internal IP address, therefore owning its entire port space, and containers within pods can share their local storage and networking.
+
+Pods have a life cycle.
+They are defined, then they are assigned to run on a node, then they run until their containers exit or they are removed for some other reason.
+Pods, depending on policy and exit code, can be removed after exiting, or can be retained to enable access to the logs of their containers.
+
+Red Hat Ansible Automation Platform provides a simple default pod specification, however, you can provide a custom YAML, or JSON document that overrides the default pod specification.
+This custom document uses custom fields, such as ImagePullSecrets, that can be serialized as valid Pod JSON or YAML.
+
+A full list of options can be found in the Openshift Online documentation.
+
+This example demonstrates many features of pods, most of which are discussed in other topics and thus only briefly mentioned here:
+
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations: { ... }                      1
+  labels:
+    deployment: docker-registry-1
+    deploymentconfig: docker-registry
+    docker-registry: default
+  generateName: docker-registry-1-          2
+spec:
+  containers:                               3
+  - env:         	            	  4
+    - name: OPENSHIFT_CA_DATA
+      value: ...
+    - name: OPENSHIFT_CERT_DATA
+      value: ...
+    - name: OPENSHIFT_INSECURE
+      value: "false"
+    - name: OPENSHIFT_KEY_DATA
+      value: ...
+    - name: OPENSHIFT_MASTER
+      value: https://master.example.com:8443
+    image: openshift/origin-docker-registry:v0.6.2 5
+    imagePullPolicy: IfNotPresent
+    name: registry
+    ports:   		                          6
+    - containerPort: 5000
+      protocol: TCP
+    resources: {}                                    7
+    securityContext: { ... }    		 8
+    volumeMounts:                       	   9
+    - mountPath: /registry
+      name: registry-storage
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-br6yz
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  imagePullSecrets:                                  10
+  - name: default-dockercfg-at06w
+  restartPolicy: Always  			     11
+  serviceAccount: default			    12
+  volumes:        	                            13
+  - emptyDir: {}
+    name: registry-storage
+  - name: default-token-br6yz
+    secret:
+      secretName: default-token-br6yz
+```
+
+
+
+
+You can change the pod used to run jobs in a Kubernetes-based cluster by using automation controller and editing the pod specification in the automation controller UI.
+The pod specification that is used to create the pod that runs the job is in YAML format.
+For further information about editing the pod specifications, see Customizing the pod specification.
+
+## Customizing the pod specification
+
+You can use the following procedure to customize the pod.
+
+1. In the automation controller UI, go to menu:Automation Execution[Infrastructure > Instance Groups].
+2. Check btn:[Customize pod specification].
+3. In the Pod Spec Override field, specify the namespace by using the toggle to enable and expand the Pod Spec Override field.
+4. Click btn:[Save].
+5. Optional: Click btn:[Expand] to view the entire customization window if you want to provide additional customizations.
+
+The image used at job launch time is determined by the execution environment associated with the job.
+If a Container Registry credential is associated with the execution environment, then automation controller uses ImagePullSecret to pull the image.
+If you prefer not to give the service account permission to manage secrets, you must pre-create the ImagePullSecret, specify it on the pod specification, and omit any credential from the execution environment used.
+
+## Enabling pods to reference images from other secured registries
+
+If a container group uses a container from a secured registry that requires a credential, you can associate a Container Registry credential with the Execution Environment that is assigned to the job template.
+Automation controller uses this to create an ImagePullSecret for you in the OpenShift Container Platform namespace where the container group job runs, and cleans it up after the job is done.
+
+Alternatively, if the ImagePullSecret already exists in the container group namespace, you can specify the ImagePullSecret in the custom pod specification for the ContainerGroup.
+
+Note that the image used by a job running in a container group is always overridden by the Execution Environment associated with the job.
+
+If you want to use this workflow and pre-create the ImagePullSecret, you can source the necessary information to create it from your local .dockercfg file on a system that has previously accessed a secure container registry.
+
+The .dockercfg file, or $HOME/.docker/config.json for newer Docker clients, is a Docker credentials file that stores your information if you have previously logged into a secured or insecure registry.
+
+1. If you already have a .dockercfg file for the secured registry, you can create a secret from that file by running the following command:
+
+```
+$ oc create secret generic <pull_secret_name> \
+--from-file=.dockercfg=<path/to/.dockercfg> \
+--type=kubernetes.io/dockercfg
+```
+
+2. Or if you have a $HOME/.docker/config.json file:
+
+```
+$ oc create secret generic <pull_secret_name> \
+--from-file=.dockerconfigjson=<path/to/.docker/config.json> \
+--type=kubernetes.io/dockerconfigjson
+```
+
+3. If you do not already have a Docker credentials file for the secured registry, you can create a secret by running the following command:
+
+```
+$ oc create secret docker-registry <pull_secret_name> \
+--docker-server=<registry_server> \
+--docker-username=<user_name> \
+--docker-password=<password> \
+--docker-email=<email>
+```
+
+4. To use a secret for pulling images for pods, you must add the secret to your service account.
+The name of the service account in this example must match the name of the service account the pod uses.
+The default is the default service account.
+
+```
+$ oc secrets link default <pull_secret_name> --for=pull
+```
+
+5. Optional: To use a secret for pushing and pulling build images, the secret must be mountable inside a pod.
+You can do this by running:
+
+```
+$ oc secrets link builder <pull_secret_name>
+```
+
+6. Optional: For builds, you must also reference the secret as the pull secret from within your build configuration.
+
+When the container group is successfully created, the Details tab of the newly created container group remains. This allows you to review and edit your container group information.
+This is the same menu that is opened if you click the btn:[Edit] icon &#9998; from the Instance Group link.
+You can also edit instances and review jobs associated with this instance group.
+
+# Resource management for pods and containers
+
+When you specify a pod, you can specify how much of each resource a container needs.
+The most common resources to specify are CPU and memory (RAM).
+
+When you specify the resource request for containers in a Pod, the kubernetes-scheduler uses this information to allocate the node to place the Pod on.
+
+When you specify a resource limit for a container, the kubelet, or node agent, enforces those limits so that the running container is not permitted to use more of that resource than the limit you set.
+The kubelet also reserves at least the requested amount of that system resource specifically for that container to use.
+
+## Requests and limits
+
+If the node where a pod is running has enough resources available, it is possible for a container to use more resources than its request for that resource specifies.
+However, a container is not allowed to use more than its resource limit.
+
+For example, if you set a memory request of 256 MiB for a container, and that container is in a pod scheduled to a Node with 8GiB of memory and no other pods, then the container can try to use more RAM.
+
+If you set a memory limit of 4GiB for that container, the kubelet and container runtime enforce the limit.
+The runtime prevents the container from using more than the configured resource limit.
+
+If a process in the container tries to consume more than the allowed amount of memory, the system kernel terminates the process that attempted the allocation, with an Out Of Memory (OOM) error.
+
+You can implement limits in two ways:
+
+* Reactively: the system intervenes once it sees a violation.
+* By enforcement: the system prevents the container from ever exceeding the limit.
+
+Different runtimes can have different ways to implement the same restrictions.
+
+
+[NOTE]
+----
+If you specify a limit for a resource, but do not specify any request, and no admission-time mechanism has applied a default request for that resource, then Kubernetes copies the limit you specified and uses it as the requested value for the resource.
+----
+
+## Resource types
+
+CPU and memory are both resource types.
+A resource type has a base unit.
+CPU represents compute processing and is specified in units of Kubernetes CPUs.
+Memory is specified in units of bytes.
+
+CPU and memory are collectively referred to as compute resources, or resources.
+Compute resources are measurable quantities that can be requested, allocated, and consumed.
+They are distinct from API resources.
+API resources, such as pods and services, are objects that can be read and modified through the Kubernetes API server.
+
+## Specifying resource requests and limits for pods and containers
+
+For each container, you can specify resource limits and requests, including the following:
+
+
+```
+spec.containers[].resources.limits.cpu
+spec.containers[].resources.limits.memory
+spec.containers[].resources.requests.cpu
+spec.containers[].resources.requests.memory
+```
+
+
+Although you can only specify requests and limits for individual containers, it is also useful to think about the overall resource requests and limits for a pod.
+For a particular resource, a pod resource request or limit is the sum of the resource requests or limits of that type for each container in the pod.
+
+## Resource units in Kubernetes
+
+Limits and requests for CPU resources are measured in CPU units.
+In Kubernetes, one CPU unit is equal to one physical processor core, or one virtual core, depending on whether the node is a physical host or a virtual machine running inside a physical machine.
+
+Fractional requests are allowed.
+When you define a container with spec.containers[].resources.requests.cpu set to 0.5, you are requesting half as much CPU time compared to if you asked for 1.0 CPU.
+For CPU resource units, the quantity expression 0.1 is equivalent to the expression 100m, which can be read as one hundred millicpu or one hundred millicores.
+millicpu and millicores mean the same thing.
+CPU resource is always specified as an absolute amount of resource, never as a relative amount.
+For example, 500m CPU represents the same amount of computing power whether that container runs on a single-core, dual-core, or 48-core machine.
+
+
+[NOTE]
+----
+To specify CPU units less than 1.0 or 1000m you must use the milliCPU form.
+For example, use 5m, not 0.005 CPU.
+----
+
+Limits and requests for memory are measured in bytes.
+You can express memory as a plain integer or as a fixed-point number using one of these quantity suffixes: E, P, T, G, M, k.
+You can also use the power-of-two equivalents: Ei, Pi, Ti, Gi, Mi, Ki.
+For example, the following represent roughly the same value:
+
+
+```
+128974848, 129e6, 129M,  128974848000m, 123Mi
+```
+
+
+Pay attention to the case of the suffixes.
+If you request 400m of memory, this is a request for 0.4 bytes, not 400 mebibytes (400Mi) or 400 megabytes (400M).
+
+The following cluster has enough free resources to schedule a task pod with a dedicated 100m CPU and 250Mi.
+The cluster can also withstand bursts over that dedicated usage up to 2000m CPU and 2Gi memory.
+
+
+```
+spec:
+  task_resource_requirements:
+    requests:
+      cpu: 100m
+      memory: 250Mi
+    limits:
+      cpu: 2000m
+      memory: 2Gi
+```
+
+
+Automation controller will not schedule jobs that use more resources than the limit set.
+If the task pod does use more resources than the limit set, the container is OOMKilled by Kubernetes and restarted.
+
+## Size recommendations for resource requests
+
+All jobs that use a container group use the same pod specification.
+The pod specification includes the resource requests for the pod that runs the job.
+
+All jobs use the same resource requests.
+The specified resource requests for your particular job on the pod specification affect how Kubernetes schedules the job pod based on resources available on worker nodes.
+These are the default values.
+
+* One fork typically requires 100Mb of memory.
+This is set by using system_task_forks_mem.
+If your jobs have five forks, the job pod specification must request 500Mb of memory.
+* For job templates that have a particularly high forks value or otherwise need larger resource requests, you should create a separate container group with a different pod spec that indicates larger resource requests.
+Then you can assign it to the job template.
+For example, a job template with the forks value of 50 must be paired with a container group that requests 5GB of memory.
+* If the fork value for a job is high enough that no single pod would be able to contain the job, use the job slicing feature.
+This splits the inventory up such that the individual job “slices” fit in an automation pod provisioned by the container group.

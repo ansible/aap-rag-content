@@ -1,0 +1,27 @@
+# Resources
+
+You can manage user access to Ansible Automation Platform resources and what users can do with those resources. Users are granted access through the roles to which they are assigned or through roles inherited through the role hierarchy, for example, through the roles they inherit through team membership. Ansible Automation Platform resources differ depending on the functionality you are configuring. For example, resources can be job templates and projects for automation execution or decision environments and rulebook activations for automation decisions.
+
+# Providing team access to a resource
+
+You can grant users access based on their team membership. When you add a user as a member of a team, they inherit access to the roles and resources defined for that team.
+
+1. From the navigation panel, select a resource to which you want to provide team access. For example, menu:Automation Execution[Templates].
+2. Select the Team Access tab.
+3. Click btn:[Add roles].
+4. Click the checkbox beside the team to assign that team to your chosen type of resource and click btn:[Next].
+5. Select the roles you want applied to the team for the chosen resource and click btn:[Next].
+6. Review the settings and click btn:[Finish]. The Add roles dialog displays indicating whether the role assignments were successfully applied.
+7. You can remove resource access for a team by selecting the Remove role icon next to the team. This launches a confirmation dialog, asking you to confirm the removal.
+
+# Providing user access to a resource
+
+You can grant users access to resources through the roles to which they are assigned.
+
+1. From the navigation panel, select a resource to which you want to provide team access. For example, menu:Automation Execution[Templates].
+2. Select the User access tab.
+3. Click btn:[Add roles].
+4. Click the checkbox beside the user to assign that user to your chosen type of resource and click btn:[Next].
+5. Select the roles you want applied to the user for the chosen resource and click btn:[Next].
+6. Review the settings and click btn:[Finish]. The Add roles dialog displays indicating whether the role assignments were successfully applied.
+7. You can remove resource access for a user by selecting the Remove role icon next to the user. This launches a confirmation dialog, asking you to confirm the removal.

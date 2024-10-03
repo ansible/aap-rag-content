@@ -1,0 +1,30 @@
+# Creating an instance group
+
+Use the following procedure to create a new instance group.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Instance Groups].
+2. Click btn:[Create group] and select Create instance group from the list.
+3. Enter the appropriate details into the following fields:
+* Name: Names must be unique and must not be named "controller".
+* Policy instance minimum: Enter the minimum number of instances to automatically assign to this group when new instances come online.
+* Policy instance percentage: Use the slider to select a minimum percentage of instances to automatically assign to this group when new instances come online.
+
+[NOTE]
+----
+Policy instance fields are not required to create a new instance group.
+If you do not specify values, then the Policy instance minimum and Policy instance percentage default to 0.
+----
+* Max concurrent jobs: Specify the maximum number of forks that can be run for any given job.
+* Max forks: Specify the maximum number of concurrent jobs that can be run for any given job.
+
+[NOTE]
+----
+The default value of 0 for Max concurrent jobs and Max forks denotes no limit.
+----
+4. Click btn:[Create instance group], or, if you have edited an existing Instance Group click btn:[Save instance group]
+
+When you have successfully created the instance group the Details tab of the newly created instance group enables you to review and edit your instance group information.
+
+You can also edit Instances and review Jobs associated with this instance group:
+
+![Instance group successfully created]

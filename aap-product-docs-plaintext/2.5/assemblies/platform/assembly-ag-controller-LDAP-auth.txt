@@ -1,0 +1,234 @@
+# LDAP authentication
+
+Administrators use the Lightweight Directory Access Protocol (LDAP) as a source for account authentication information for automation controller users.
+User authentication is provided, but not the synchronization of user permissions and credentials.
+Organization membership and team membership can be synchronized by the organization administrator.
+
+# Configuring LDAP authentication
+
+As a platform administrator, you can configure LDAP as the source for account authentication information for Ansible Automation Platform users.
+
+When LDAP is configured, an account is created for any user who logs in with an LDAP username and password and they can be automatically placed into organizations as either regular users or organization administrators.
+
+Users created through an LDAP login should not change their username, first name, last name, or set a local password for themselves. Any changes made to this information is overwritten the next time the user logs in to the platform.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. Click btn:[Create authentication].
+3. Select LDAP from the Authentication type list and click btn:[Next].
+4. Enter a Name for this LDAP configuration. The configuration name is required, must be unique across all authenticators, and must not be longer than 512 characters.
+5. In the LDAP Server URI field, enter or modify the list of LDAP servers to which you want to connect. This field supports multiple addresses.
+6. In the LDAP Bind DN text field, enter the Distinguished Name (DN) to specify the user that the Ansible Automation Platform uses to connect to the LDAP server. For example:
+
+```
+CN=josie,CN=users,DC=website,DC=com
+```
+
+7. In the LDAP Bind Password text field, enter the password to use for the binding user.
+8. Select a group type from the LDAP Group Type list.
+
+[NOTE]
+----
+The LDAP group types that are supported by the Ansible Automation Platform use the underlying django-auth-ldap library.
+----
+9. To use LDAP User DN Template as an alternative to user search, enter the name of the template. This approach is more efficient for user lookups than searching if it is usable in your organizational environment. If this setting has a value it will be used instead of the LDAP User Search setting.
+10. LDAP Start TLS is disabled by default. To enable TLS when the LDAP connection is not using SSL, set the switch to On.
+11. Optional: Enter any Additional Authenticator Fields that this authenticator can take. These fields are not validated and are passed directly back to the authenticator.
+
+[NOTE]
+----
+Values defined in this field override the dedicated fields provided in the UI.
+----
+12. Enter any LDAP Connection Options to set for the LDAP connection.
+13. In the LDAP Group Type Parameters field, enter the parameters required for the LDAP Group Type you previously selected to identify LDAP groups and the members that belong to those groups.
+
+To determine the parameters that a specific LDAP Group Type requires, refer to the django_auth_ldap documentation on the classes init parameters.
+14. In the LDAP Group Search field, specify which groups should be searched and how to search them.
+15. In the LDAP User Attribute Map field, enter user attributes to map LDAP fields to your Ansible Automation Platform users for example, email or first_name.
+16. In the LDAP User Search field, enter where to search for users during authentication.
+17. To automatically create organizations, users, and teams upon successful login, select Create objects.
+18. To enable this authentication method upon creation, select Enabled.
+19. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.
+20. Click btn:[Next].
+
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.
+
+## LDAP organization and team mapping
+
+You can control which users are placed into which automation controller organizations based on LDAP attributes (mapping out between your organization administrators, users and LDAP groups).
+
+Keys are organization names.
+Organizations are created if not present.
+Values are dictionaries defining the options for each organization&#8217;s membership.
+For each organization, you can specify what groups are automatically users of the organization and also what groups can administer the organization.
+
+admins: none, true, false, string or list/tuple of strings:
+
+* If none, organization administrators are not updated based on LDAP values.
+* If true, all users in LDAP are automatically added as administrators of the organization.
+* If false, no LDAP users are automatically added as administrators of the organization.
+* If a string or list of strings specifies the group DNs that are added to the organization if they match any of the specified groups.
+
+remove_admins: True/False. Defaults to False:
+
+* When true, a user who is not a member of the given group is removed from the organization's administrative list.
+
+users: none, true, false, string or list/tuple of strings.
+The same rules apply as for administrators.
+
+remove_users: true or false.
+Defaults to false.
+The same rules apply as for administrators.
+
+{
+"LDAP Organization": {
+  "admins": "cn=engineering_admins,ou=groups,dc=example,dc=com",
+  "remove_admins": false,
+  "users": [
+    "cn=engineering,ou=groups,dc=example,dc=com",
+    "cn=sales,ou=groups,dc=example,dc=com",
+    "cn=it,ou=groups,dc=example,dc=com"
+  ],
+  "remove_users": false
+},
+"LDAP Organization 2": {
+  "admins": [
+    "cn=Administrators,cn=Builtin,dc=example,dc=com"
+  ],
+  "remove_admins": false,
+  "users": true,
+"remove_users": false
+}
+}
+
+When mapping between users and LDAP groups, keys are team names and are created if not present.
+Values are dictionaries of options for each team&#8217;s membership, where each can contain the following parameters:
+
+organization: string. The name of the organization to which the team belongs.
+The team is created if the combination of organization and team name does not exist.
+The organization is first created if it does not exist.
+
+users: none, true, false, string, or list/tuple of strings:
+
+* If none, team members are not updated.
+* If true or false, all LDAP users are added or removed as team members.
+* If a string or list of strings specifies the group DNs, the user is added as a team member if the user is a member of any of these groups.
+
+remove: true or false.
+Defaults to false.
+When true, a user who is not a member of the given group is removed from the team.
+
+{
+"LDAP Engineering": {
+  "organization": "LDAP Organization",
+  "users": "cn=engineering,ou=groups,dc=example,dc=com",
+  "remove": true
+},
+"LDAP IT": {
+  "organization": "LDAP Organization",
+  "users": "cn=it,ou=groups,dc=example,dc=com",
+  "remove": true
+},
+"LDAP Sales": {
+  "organization": "LDAP Organization",
+  "users": "cn=sales,ou=groups,dc=example,dc=com",
+  "remove": true
+}
+}
+
+## Enabling logging for LDAP
+
+To enable logging for LDAP, you must set the level to DEBUG in the Settings configuration window:
+
+1. From the navigation panel, select Settings.
+2. Select Logging settings from the list of System options.
+3. Click btn:[Edit].
+4. Set the Logging Aggregator Level Threshold field to DEBUG.
+5. Click btn:[Save].
+
+## Preventing LDAP attributes from updating on each login
+
+By default, when an LDAP user authenticates, all user-related attributes are updated in the database on each login.
+In some environments, you can skip this operation due to performance issues.
+To avoid it, you can disable the option AUTH_LDAP_ALWAYS_UPDATE_USER.
+
+
+[WARNING]
+----
+Set this option to false to not update the LDAP user's attributes.
+Attributes are only updated the first time the user is created.
+----
+
+1. Create a custom file under /etc/tower/conf.d/custom-ldap.py with the following contents.
+If you have multiple nodes, execute it on all nodes:
+
+AUTH_LDAP_ALWAYS_UPDATE_USER = False
+2. Restart automation controller on all nodes:
+
+automation-controller-service restart
+
+With this option set to False, no changes to LDAP user&#8217;s attributes are pushed to automation controller.
+Note that new users are created and their attributes are pushed to the database on their first login.
+
+By default, an LDAP user gets their attributes updated in the database upon each login.
+For a playbook that runs multiple times with an LDAP credential, those queries can be avoided.
+
+Check the PostgreSQL for slow queries related to the LDAP authentication.
+
+For more information, see AUTH_LDAP_ALWAYS_UPDATE_USER of the Django documentation.
+
+## Importing a certificate authority in automation controller for LDAPS integration
+
+You can authenticate to the automation controller server by using LDAP, but if you change to using LDAPS (LDAP over SSL/TLS) to authenticate, it fails with one of the following errors:
+
+2020-04-28 17:25:36,184 WARNING  django_auth_ldap Caught LDAPError while authenticating e079127: SERVER_DOWN({'info': 'error:14090086:SSL routines:ssl3_get_server_certificate:certificate verify failed (unable to get issuer certificate)', 'desc': "Can't contact LDAP server"},)
+
+2020-06-02 11:48:24,840 WARNING  django_auth_ldap Caught LDAPError while authenticating reinernippes: SERVER_DOWN({'desc': "Can't contact LDAP server", 'info': 'error:14090086:SSL routines:ssl3_get_server_certificate:certificate verify failed (certificate has expired)'},)
+
+
+[NOTE]
+----
+By default, django_auth_ldap verifies SSL connections before starting an LDAPS transaction.
+When you receive a certificate verify failed error, this means that the django_auth_ldap could not verify the certificate.
+When the SSL/TLS connection cannot be verified, the connection attempt is halted.
+----
+
+* To import an LDAP CA, run the following commands:
+
+cp ldap_server-CA.crt /etc/pki/ca-trust/source/anchors/
+
+update-ca-trust
+
+
+[NOTE]
+----
+Run these two commands on all automation controller nodes in a clustered setup.
+----
+
+## Referrals
+
+Active Directory uses "referrals" in case the queried object is not available in its database.
+This does not work correctly with the django LDAP client and it helps to disable referrals.
+
+Disable LDAP referrals by adding the following lines to your /etc/tower/conf.d/custom.py file:
+
+AUTH_LDAP_GLOBAL_OPTIONS = {
+    ldap.OPT_REFERRALS: False,
+}
+
+## Changing the default timeout for authentication
+
+You can change the default length of time, in seconds, that your supplied token is valid in the Settings screen of the automation controller UI.
+
+1. From the navigation panel, select Settings.
+2. Select Miscellaneous Authentication settings from the list of System options.
+3. Click btn:[Edit].
+4. Enter the timeout period in seconds in the Idle Time Force Log Out text field.
+5. Click btn:[Save].
+
+
+[NOTE]
+----
+If you access automation controller and have trouble logging in, clear your web browser's cache.
+In situations such as this, it is common for the authentication token to be cached during the browser session.
+You must clear it to continue.
+----

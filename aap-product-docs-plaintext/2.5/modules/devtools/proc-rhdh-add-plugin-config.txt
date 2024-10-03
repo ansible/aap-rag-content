@@ -1,0 +1,61 @@
+# Adding the Ansible plug-ins configuration
+
+1. In the OpenShift Developer UI, navigate to menu:Helm[developer-hub > Actions > Upgrade > Yaml view].
+2. Update the Helm chart configuration to add the dynamic plug-ins in the Red Hat Developer Hub instance.
+Under the plugins section in the YAML file, add the dynamic plug-ins that you want to enable.
+
+```
+global:
+  auth:
+    backend:
+      enabled: true
+  clusterRouterBase: <your-developer-hub-base-url>
+  dynamic:
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      - disabled: false
+        integrity: <SHA512 Integrity key for ansible-plugin-backstage-rhaap plugin>
+        package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-x.y.z.tgz'
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-rhaap:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - disabled: false
+        integrity: <SHA512 Integrity key for ansible-plugin-scaffolder-backend-module-backstage-rhaap plugin>
+        package: >-
+          http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
+      - disabled: false
+        integrity: <SHA512 Integrity key for ansible-plugin-backstage-rhaap-backend plugin>
+        package: >-
+          http://plugin-registry:8080/ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-backstage-rhaap-backend: null
+```
+
+3. In the package sections, replace x.y.z  in the plug-in filenames with the correct version numbers for the Ansible plug-ins.
+4. For each Ansible plug-in, update the integrity values using the corresponding .integrity file content.
+5. Click btn:[Upgrade].
+
+The developer hub pods restart and the plug-ins are installed.
+
+Verify that the plug-ins have been installed:
+
+1. Open the Developer perspective for the Red Hat Developer Hub application in the OpenShift Web console.
+2. Check the install-dynamic-plugin container logs: the Ansible plug-ins are visible in Red Hat Developer Hub.
+![container logs for install-dynamic-plugin]

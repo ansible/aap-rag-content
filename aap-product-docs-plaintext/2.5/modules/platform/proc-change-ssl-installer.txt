@@ -1,0 +1,20 @@
+# Changing the SSL certificate and key using the installer
+
+The following procedure describes how to change the SSL certificate and key in the inventory file.
+
+1. Copy the new SSL certificates and keys to a path relative to the Ansible Automation Platform installer.
+2. Add the absolute paths of the SSL certificates and keys to the inventory file.
+Refer to the Automation controller variables,
+Automation hub variables, and Event-Driven Ansible controller variables sections of the
+Red Hat Ansible Automation Platform Installation Guide
+for guidance on setting these variables.
+* Automation controller: web_server_ssl_cert, web_server_ssl_key, custom_ca_cert
+* Automation hub: automationhub_ssl_cert, automationhub_ssl_key, custom_ca_cert
+* Event-Driven Ansible controller: automationedacontroller_ssl_cert, automationedacontroller_ssl_key, custom_ca_cert
+
+[NOTE]
+----
+The custom_ca_cert must be the root certificate authority that signed the intermediate certificate authority.
+This file is installed in /etc/pki/ca-trust/source/anchors.
+----
+3. Run the installer.

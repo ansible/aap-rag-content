@@ -1,0 +1,52 @@
+# Changing the SSL certificate and key on Event-Driven Ansible controller
+
+The following procedure describes how to change the SSL certificate and key manually on Event-Driven Ansible controller.
+
+1. Backup the current SSL certificate:
+
+```
+cp /etc/ansible-automation-platform/eda/server.cert /etc/ansible-automation-platform/eda/server.cert-$(date +%F)
+```
+
+2. Backup the current key files:
+
+```
+cp /etc/ansible-automation-platform/eda/server.key /etc/ansible-automation-platform/eda/server.key-$(date +%F)
+```
+
+3. Copy the new SSL certificate to /etc/ansible-automation-platform/eda/server.cert.
+4. Copy the new key to /etc/ansible-automation-platform/eda/server.key.
+5. Restore the SELinux context:
+
+```
+restorecon -v /etc/ansible-automation-platform/eda/server.cert /etc/ansible-automation-platform/eda/server.key
+```
+
+6. Set appropriate permissions for the certificate and key files:
+
+```
+chown root:eda /etc/ansible-automation-platform/eda/server.cert /etc/ansible-automation-platform/eda/server.key
+```
+
+
+```
+chmod 0600 /etc/ansible-automation-platform/eda/server.cert /etc/ansible-automation-platform/eda/server.key
+```
+
+7. Test the NGINX configuration:
+
+```
+nginx -t
+```
+
+8. Reload NGINX:
+
+```
+systemctl reload nginx.service
+```
+
+9. Verify that new SSL certificate and key have been installed:
+
+```
+true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
+```

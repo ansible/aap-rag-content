@@ -1,0 +1,59 @@
+# Setting up a rulebook activation
+
+* You are logged in to the Ansible Automation Platform Dashboard as a Content Consumer.
+* You have set up a project.
+* You have set up a decision environment.
+
+1. Log in to Ansible Automation Platform.
+2. Navigate to the menu:Automation Decisions[Rulebook Activations].
+3. Click btn:[Create rulebook activation].
+4. Insert the following:
+Name:: Insert the name.
+Description:: This field is optional.
+Organization:: Enter your organization name or select Default from the list.
+Project:: Projects are a logical collection of rulebooks. This field is optional.
+Rulebook:: Rulebooks are displayed according to the project selected.
+Credential:: Select 0 or more credentials for this rulebook activation. This field is optional.
+
+[NOTE]
+----
+The credentials that display in this field are customized based on your rulebook activation and only include the following credential types: Vault, Red Hat Ansible Automation Platform, or any custom credential types that you have created. For more information about credentials, see Credentials.
+----
+Decision environment:: Decision environments are a container image to run Ansible rulebooks.
+
+[NOTE]
+----
+In Event-Driven Ansible controller, you cannot customize the pull policy of the decision environment.
+By default, it follows the behavior of the always policy.
+Every time an activation is started, the system tries to pull the most recent version of the image.
+----
+Restart policy:: This is the policy that determines how an activation should restart after the container process running the source plugin ends.
+* Policies:
+1. Always: This restarts the rulebook activation immediately, regardless of whether it ends successfully or not, and occurs no more than 5 times.
+2. Never: This never restarts a rulebook activation when the container process ends.
+3. On failure: This restarts the rulebook activation after 60 seconds by default, only when the container process fails, and occurs no more than 5 times.
+Log level:: This field defines the severity and type of content in your logged events.
+* Levels:
+1. Error: Logs that contain error messages that are displayed in the History tab of an activation.
+2. Info: Logs that contain useful information about rulebook activations, such as a success or failure, triggered action names and their related action events, and errors.
+3. Debug: Logs that contain information that is only useful during the debug phase and might be of little value during production.
+This log level includes both error and log level data.
+Service name:: This defines a service name for Kubernetes to configure inbound connections if the activation exposes a port. This field is optional.
+Rulebook activation enabled?:: This automatically enables the rulebook activation to run.
+Variables:: The variables for the rulebook are in a JSON or YAML format.
+The content would be equivalent to the file passed through the --vars flag of ansible-rulebook command.
+Options:: Check the Skip audit events option if you do not want to see your events in the Rule Audit.
+5. Click btn:[Create rulebook activation].
+
+Your rulebook activation is now created and can be managed on the Rulebook Activations page.
+
+After saving the new rulebook activation, the rulebook activation&#8217;s details page is displayed, with either a Pending, Running, or Failed status.
+From there or the Rulebook Activations list view, you can restart or delete it.
+
+
+[NOTE]
+----
+Occasionally, when a source plugin shuts down, it causes a rulebook to exit gracefully after a certain amount of time.
+When a rulebook activation shuts down, any tasks that are waiting to be performed will be canceled, and an info level message is sent to the activation log.
+For more information, see Rulebooks.
+----

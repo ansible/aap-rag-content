@@ -1,0 +1,117 @@
+# Populating your private automation hub container registry
+
+By default, private automation hub does not include execution environments.
+To populate your container registry, you must push a execution environment to it.
+You must follow a specific workflow to populate your private automation hub remote registry:
+* Pull execution environments from the Red Hat Ecosystem Catalog (registry.redhat.io)
+* Tag them
+* Push them to your private automation hub remote registry
+
+[IMPORTANT]
+----
+Image manifests and filesystem blobs were both originally served directly from registry.redhat.io and registry.access.redhat.com.
+As of 1 May 2023, filesystem blobs are served from quay.io instead.
+* Ensure that the Network ports and protocols listed in Table 5.4. Execution Environments (EE) are available to avoid problems pulling container images.
+Make this change to any firewall configuration that specifically enables outbound connections to registry.redhat.io or registry.access.redhat.com.
+Use the hostnames instead of IP addresses when configuring firewall rules.
+After making this change you can continue to pull execution environments from registry.redhat.io and registry.access.redhat.com. You do not require a quay.io login, or need to interact with the quay.io registry directly in any way to continue pulling Red Hat container images.
+However, manifests, sometimes called “subscription allocations”, on the web-based Red Hat Subscription Management are no longer supported as of early 2024 with one exception: If a system is part of a closed network or “air gapped” system that does not receive its updates from Red Hat’s servers directly, manifests are supported until the release of Red Hat Satellite 6.16. Keep up to date with Red Hat Satellite Release Dates for the announcement for Red Hat Satellite 6.16's release date announcement.
+----
+
+# Pulling execution environments for use in automation hub
+
+Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use. The following example details how to pull an execution environment from the Red Hat Ecosystem Catalog (registry.redhat.io).
+
+
+[IMPORTANT]
+----
+As of early 2024, Red Hat no longer supports manifests or manifest lists on the Red Hat Subscription Management web platform, which has also been used interchangeably with “subscription allocations.” Red Hat also no longer supports most manifest functionality in Red Hat Satellite with one exception:
+* Red Hat Satellite users in closed network or “air gapped” networks that do not receive their updates directly from Red Hat servers can currently still use access.redhat.com until the release of Red Hat Satellite 6.16.
+New Red Hat accounts automatically use Simple Content Access for their subscription tooling. New Red Hat accounts and existing Satellite customers who can connect to Red Hat's servers can find their manifests at console.redhat.com.
+----
+
+* You have permissions to pull execution environments from registry.redhat.io.
+* A Red Hat account with Simple Content Access enabled.
+
+1. If you need to access your manifest for your container images log in to Red Hat Console.
+2. Click the three-dot menu for the manifest you need for your execution environments, and click btn:[Export manifest].
+3. Log in to Podman by using your registry.redhat.io credentials:
+
+```
+$ podman login registry.redhat.io
+```
+
+4. Enter your username and password.
+5. Pull an execution environment:
+
+```
+$ podman pull registry.redhat.io/<ee_name>:<tag>
+```
+
+
+To verify that the execution environment you recently pulled is contained in the list, take these steps:
+
+1. List the images in local storage:
+
+```
+$ podman images
+```
+
+2. Check the execution environment name, and verify that the tag is correct.
+
+* See Red Hat Ecosystem Catalog Help for information on registering and getting execution environments.
+* See Creating and managing manifests for a connected Satellite Server to learn more about the changes coming to Red Hat subscription tooling.
+
+# Tagging execution environments for use in automation hub
+
+After you pull execution environments from a registry, tag them for use in your private automation hub remote registry.
+
+* You have pulled an execution environment from an external registry.
+* You have the FQDN or IP address of the automation hub instance.
+
+* Tag a local execution environment with the automation hub container repository:
+
+```
+$ podman tag registry.redhat.io/<ee_name>:<tag> <automation_hub_hostname>/<ee_name>
+```
+
+
+1. List the images in local storage:
+
+```
+$ podman images
+```
+
+2. Verify that the execution environment you recently tagged with your automation hub information is contained in the list.
+
+# Pushing an execution environment to private automation hub
+
+You can push tagged execution environments to private automation hub to create new containers and populate the remote registry.
+
+* You have permissions to create new containers.
+* You have the FQDN or IP address of the automation hub instance.
+
+1. Log in to Podman using your automation hub location and credentials:
+
+```
+$ podman login -u=<username> -p=<password> <automation_hub_url>
+```
+
+
+[WARNING]
+----
+Let Podman prompt you for your password when you log in. Entering your password at the same time as your username can expose your password to the shell history.
+----
+2. Push your execution environment to your automation hub remote registry:
+
+```
+$ podman push <automation_hub_url>/<ee_name>
+```
+
+
+The push operation re-compresses image layers during the upload, which is not guaranteed to be reproducible and is client-implementation dependent.
+This may lead to image-layer digest changes and a failed push operation, resulting in Error: Copying this image requires changing layer representation, which is not possible (image is signed or the destination specifies a digest).
+
+1. Log in to your Ansible Automation Platform.
+2. Navigate to menu:Automation Content[Execution Environments].
+3. Locate the container in the container repository list.

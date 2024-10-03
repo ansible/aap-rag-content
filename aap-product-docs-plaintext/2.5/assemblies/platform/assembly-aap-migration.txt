@@ -1,0 +1,208 @@
+# Migrating Red Hat Ansible Automation Platform to Ansible Automation Platform Operator
+
+Migrating your Red Hat Ansible Automation Platform deployment to the Ansible Automation Platform Operator allows you to take advantage of the benefits provided by a Kubernetes native operator, including simplified upgrades and full lifecycle support for your Red Hat Ansible Automation Platform deployments.
+Use these procedures to migrate any of the following deployments to the Ansible Automation Platform Operator:
+* A VM-based installation of Ansible Tower 3.8.6, automation controller, or automation hub
+* An Openshift instance of Ansible Tower 3.8.6 (Ansible Automation Platform 1.2)
+
+# Migration considerations
+
+If you are upgrading from Ansible Automation Platform 1.2 on OpenShift Container Platform 3 to Ansible Automation Platform 2.x on OpenShift Container Platform 4, you must provision a fresh OpenShift Container Platform version 4 cluster and then migrate the Ansible Automation Platform to the new cluster.
+
+# Preparing for migration
+
+Before migrating your current Ansible Automation Platform deployment to Ansible Automation Platform Operator, you need to back up your existing data, create k8s secrets for your secret key and postgresql configuration.
+
+
+[NOTE]
+----
+If you are migrating both automation controller and automation hub instances, repeat the steps in Creating a secret key secret and Creating a postgresql configuration secret for both and then proceed to Migrating data to the Ansible Automation Platform Operator.
+----
+
+## Migrating to Ansible Automation Platform Operator
+
+To migrate Ansible Automation Platform deployment to Ansible Automation Platform Operator, you must have the following:
+
+* Secret key secret
+* Postgresql configuration
+* Role-based Access Control for the namespaces on the new OpenShift cluster
+* The new OpenShift cluster must be able to connect to the previous PostgreSQL database
+
+
+[NOTE]
+----
+You can store the secret key information in the inventory file before the initial Red Hat Ansible Automation Platform installation.
+If you are unable to remember your secret key or have trouble locating your inventory file, contact Ansible support through the Red Hat Customer portal.
+----
+
+Before migrating your data from Ansible Automation Platform 2.x or earlier, you must back up your data for loss prevention. To backup your data, do the following:
+
+1. Log in to your current deployment project.
+2. Run setup.sh to create a backup of your current data or deployment:
+
+For on-prem deployments of version 2.x or earlier:
+
+```
+$ ./setup.sh -b
+```
+
+
+For OpenShift deployments before version 2.0 (non-operator deployments):
+
+```
+./setup_openshift.sh -b
+```
+
+
+## Creating a secret key secret
+
+To migrate your data to Ansible Automation Platform Operator on OpenShift Container Platform, you must create a secret key that matches the secret key defined in the inventory file during your initial installation. Otherwise, the migrated data will remain encrypted and unusable after migration.
+
+1. Locate the old secret key in the inventory file you used to deploy Ansible Automation Platform in your previous installation.
+2. Create a yaml file for your secret key:
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: <resourcename>-secret-key
+  namespace: <target-namespace>
+stringData:
+  secret_key: <old-secret-key>
+type: Opaque
+```
+
+3. Apply the secret key yaml to the cluster:
+
+```
+oc apply -f <secret-key.yml>
+```
+
+
+## Creating a postgresql configuration secret
+
+For migration to be successful, you must provide access to the database for your existing deployment.
+
+1. Create a yaml file for your postgresql configuration secret:
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: <resourcename>-old-postgres-configuration
+  namespace: <target namespace>
+stringData:
+  host: "<external ip or url resolvable by the cluster>"
+  port: "<external port, this usually defaults to 5432>"
+  database: "<desired database name>"
+  username: "<username to connect as>"
+  password: "<password to connect with>"
+type: Opaque
+```
+
+2. Apply the postgresql configuration yaml to the cluster:
+
+
+```
+oc apply -f <old-postgres-configuration.yml>
+```
+
+
+## Verifying network connectivity
+
+To ensure successful migration of your data, verify that you have network connectivity from your new operator deployment to your old deployment database.
+
+Take note of the host and port information from your existing deployment. This information is located in the postgres.py file located in the conf.d directory.
+
+1. Create a yaml file to verify the connection between your new deployment and your old deployment database:
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+    name: dbchecker
+spec:
+  containers:
+    - name: dbchecker
+      image: registry.redhat.io/rhel8/postgresql-13:latest
+      command: ["sleep"]
+      args: ["600"]
+```
+
+2. Apply the connection checker yaml file to your new project deployment:
+
+```
+oc project ansible-automation-platform
+oc apply -f connection_checker.yaml
+```
+
+3. Verify that the connection checker pod is running:
+
+```
+oc get pods
+```
+
+4. Connect to a pod shell:
+
+```
+oc rsh dbchecker
+```
+
+5. After the shell session opens in the pod, verify that the new project can connect to your old project cluster:
+
+```
+pg_isready -h <old-host-address> -p <old-port-number> -U awx
+```
+
+Example
+
+```
+<old-host-address>:<old-port-number> - accepting connections
+```
+
+
+# Migrating data to the Ansible Automation Platform Operator
+
+After you have set your secret key, postgresql credentials, verified network connectivity and installed the Ansible Automation Platform Operator, you must create a custom resource controller object before you can migrate your data.
+
+## Creating an AutomationController object
+
+Use the following steps to create an AutomationController custom resource object.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select the Ansible Automation Platform Operator installed on your project namespace.
+4. Select the Automation Controller tab.
+5. Click btn:[Create AutomationController].
+6. Enter a name for the new deployment.
+7. In Advanced configurations, do the following:
+1. From the Admin Password Secret list, select your secret key secret.
+2. From the Database Configuration Secret list, select the postgres configuration secret.
+8. Click btn:[Create].
+
+## Creating an AutomationHub object
+
+Use the following steps to create an AutomationHub custom resource object.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select the Ansible Automation Platform Operator installed on your project namespace.
+4. Select the Automation Hub tab.
+5. Click btn:[Create AutomationHub].
+6. Enter a name for the new deployment.
+7. In Advanced configurations, select your secret key secret and postgres configuration secret.
+8. Click btn:[Create].
+
+# Post migration cleanup
+
+After your data migration is complete, you must delete any Instance Groups that are no longer required.
+
+1. Log in to Red Hat Ansible Automation Platform as the administrator with the password you created during migration.
+
+[NOTE]
+----
+Note: If you did not create an administrator password during migration, one was automatically created for you. To locate this password, go to your project, select menu:Workloads[Secrets] and open controller-admin-password. From there you can copy the password and paste it into the Red Hat Ansible Automation Platform password field.
+----
+2. Select menu:Automation Execution[Infrastructure > Instance Groups].
+3. Select all Instance Groups except controlplane and default.
+4. Click btn:[Delete].

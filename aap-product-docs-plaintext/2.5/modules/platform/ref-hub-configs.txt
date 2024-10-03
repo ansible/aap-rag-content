@@ -1,0 +1,4 @@
+# Additional automation hub configuration and resources
+
+See the following resources to explore additional automation hub configurations.
+

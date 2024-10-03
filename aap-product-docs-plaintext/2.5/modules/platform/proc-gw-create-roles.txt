@@ -1,0 +1,16 @@
+# Creating a role
+
+Ansible Automation Platform services provide a set of predefined roles with permissions sufficient for standard automation tasks. It is also possible to configure custom roles, and assign one or more permission filters to them. Permission filters define the actions allowed for a specific resource type.
+
+1. From the navigation panel, select menu:Access Management[Roles].
+2. Select a tab for the component resource for which you want to create custom roles.
+
+[NOTE]
+----
+If you have multiple Ansible Automation Platform components installed, you will see selections for the roles associated with each component in the Roles menu bar. For example, Automation Execution for automation controller roles, Automation Decisions for Event-Driven Ansible roles.
+----
+3. Click btn:[Create role].
+4. Provide a Name and optionally include a Description for the role.
+5. Select a Content Type.
+6. Select the Permissions you want assigned to this role.
+7. Click btn:[Create role] to create your new role.

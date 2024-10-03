@@ -1,0 +1,289 @@
+# Using Ansible Builder
+
+Ansible Builder is a command line tool that automates the process of building automation execution environments by using metadata defined in various Ansible Collections or created by the user.
+
+# Why use Ansible Builder?
+
+Before Ansible Builder was developed, Red Hat Ansible Automation Platform users could run into dependency issues and errors when creating custom virtual environments or containers that included all of the required dependencies installed.
+
+Now, with Ansible Builder, you can easily create a customizable automation execution environments definition file that specifies the content you want included in your automation execution environments such as Ansible Core, Python, Collections, third-party Python requirements, and system level packages. This allows you to fulfill all of the necessary requirements and dependencies to get jobs running.
+
+# Installing Ansible Builder
+
+* You have installed the Podman container runtime.
+* You have valid subscriptions attached on the host. Doing so allows you to access the subscription-only resources needed to install ansible-builder, and ensures that the necessary repository for ansible-builder is automatically enabled. See Attaching your Red Hat Ansible Automation Platform subscription for more information.
+
+* In your terminal, run the following command to install Ansible Builder and activate your Ansible Automation Platform repo:
+
+```
+#  dnf install --enablerepo=ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms ansible-builder
+```
+
+
+# Building a definition file
+
+After you install Ansible Builder, you can create a definition file that Ansible Builder uses to create your automation execution environment image. Ansible Builder makes an automation execution environment image by reading and validating your definition file, then creating a Containerfile, and finally passing the Containerfile to Podman, which then packages and creates your automation execution environment image. The definition file that you create must be in yaml format and contain different sections. The default definition filename, if not provided, is execution-environment.yml. For more information on the parts of a definition file, see Breakdown of definition file content.
+
+The following is an example of a version 3 definition file. Each definition file must specify the major version number of the Ansible Builder feature set it uses. If not specified, Ansible Builder defaults to version 1, making most new features and definition keywords unavailable.
+
+
+```
+version: 3
+
+build_arg_defaults: 1
+  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: '--pre'
+
+dependencies: 2
+  galaxy: requirements.yml
+  python:
+    - six
+    - psutil
+  system: bindep.txt
+
+images: 3
+  base_image:
+    name: registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel9:latest
+
+# Custom package manager path for the RHEL based images
+ options: 4
+ package_manager_path: /usr/bin/microdnf
+
+additional_build_steps: 5
+  prepend_base:
+    - RUN echo This is a prepend base command!
+
+  prepend_galaxy:
+    # Environment variables used for Galaxy client configurations
+    - ENV ANSIBLE_GALAXY_SERVER_LIST=automation_hub
+    - ENV ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_URL=https://console.redhat.com/api/automation-hub/content/xxxxxxx-synclist/
+    - ENV ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+    # define a custom build arg env passthru - we still also have to pass
+    # `--build-arg ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN` to get it to pick it up from the env
+    - ARG ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN
+
+  prepend_final: |
+    RUN whoami
+    RUN cat /etc/os-release
+  append_final:
+    - RUN echo This is a post-install command!
+    - RUN ls -la /etc
+```
+
+Lists default values for build arguments.
+Specifies the location of various requirements files.
+Specifies the base image to be used. Red Hat support is only provided for the redhat.registry.io base image.
+Specifies options that can affect builder runtime functionality.
+Commands for additional custom build steps.
+
+* For more information about the definition file content, see Breakdown of definition file content.
+* To read more about the differences between Ansible Builder versions 2 and 3, see the Ansible 3 Porting Guide.
+
+# Building the automation execution environment image
+
+After you create a definition file, you can proceed to build an automation execution environment image.
+
+
+[NOTE]
+----
+When building an execution environment image, it must support the architecture that Ansible Automation Platform is deployed with.
+----
+
+* You have created a definition file.
+
+To build an automation execution environment image, run the following from the command line:
+
+
+```
+$ ansible-builder build
+```
+
+
+By default, Ansible Builder looks for a definition file named execution-environment.yml but a different file path can be specified as an argument with the -f flag:
+
+
+```
+$ ansible-builder build -f definition-file-name.yml
+```
+
+
+where definition-file-name specifies the name of your definition file.
+
+# Breakdown of definition file content
+
+A definition file is required for building automation execution environments with Ansible Builder, because it specifies the content that is included in the automation execution environment container image.
+
+The following sections breaks down the different parts of a definition file.
+
+## Build args and base image
+
+The build_arg_defaults section of the definition file is a dictionary whose keys can provide default values for arguments to Ansible Builder. See the following table for a list of values that can be used in build_arg_defaults:
+
+
+
+The values given inside build_arg_defaults will be hard-coded into the Containerfile, so these values will persist if podman build is called manually.
+
+
+[NOTE]
+----
+If the same variable is specified in the CLI --build-arg flag, the CLI value will take higher precedence.
+----
+
+You can include dependencies that must be installed into the final image in the dependencies section of your definition file.
+
+To avoid issues with your automation execution environment image, make sure that the entries for Galaxy, Python, and system point to a valid requirements file, or are valid content for their respective file types.
+
+### Galaxy
+
+The galaxy entry points to a valid requirements file or includes inline content for the ansible-galaxy collection install -r &#8230;&#8203; command.
+
+The entry requirements.yml can be a relative path from the directory of the automation execution environment definition&#8217;s folder, or an absolute path.
+
+The content might look like the following:
+
+
+```
+collections:
+  - community.aws
+  - kubernetes.core
+```
+
+### Python
+
+The python entry in the definition file points to a valid requirements file or to an inline list of Python requirements in PEP508 format for the pip install -r &#8230;&#8203; command.
+
+The entry requirements.txt is a file that installs extra Python requirements on top of what the Collections already list as their Python dependencies. It may be listed as a relative path from the directory of the automation execution environment definition&#8217;s folder, or an absolute path. The contents of a requirements.txt file should be formatted like the following example, similar to the standard output from a pip freeze command:
+
+
+```
+boto>=2.49.0
+botocore>=1.12.249
+pytz
+python-dateutil>=2.7.0
+awxkit
+packaging
+requests>=2.4.2
+xmltodict
+azure-cli-core==2.11.1
+openshift>=0.6.2
+requests-oauthlib
+openstacksdk>=0.13
+ovirt-engine-sdk-python>=4.4.10
+```
+
+### System
+
+The system entry in the definition points to a bindep requirements file or to an inline list of bindep entries, which install system-level dependencies that are outside of what the collections already include as their dependencies. It can be listed as a relative path from the directory of the automation execution environment definition&#8217;s folder, or as an absolute path. At a minimum, the the collection(s) must specify necessary requirements for [platform:rpm].
+
+To demonstrate this, the following is an example bindep.txt file that adds the libxml2 and subversion packages to a container:
+
+
+```
+libxml2-devel [platform:rpm]
+subversion [platform:rpm]
+```
+
+Entries from multiple collections are combined into a single file. This is processed by bindep and then passed to dnf. Only requirements with no profiles or no runtime requirements will be installed to the image.
+
+## Images
+
+The images section of the definition file identifies the base image. Verification of signed container images is supported with the podman container runtime.
+
+See the following table for a list of values that you can use in images:
+
+
+
+
+[NOTE]
+----
+If the same variable is specified in the CLI --build-arg flag, the CLI value will take higher precedence.
+----
+
+## Additional build files
+
+You can add any external file to the build context directory by referring or copying them to the additional_build_steps section of the definition file. The format is a list of dictionary values, each with a src and dest key and value.
+
+Each list item must be a dictionary containing the following required keys:
+
+src:: Specifies the source files to copy into the build context directory. This can be an absolute path (for example, /home/user/.ansible.cfg), or a path that is relative to the execution environment file. Relative paths can be glob expressions matching one or more files (for example, files/*.cfg).
+
+
+[NOTE]
+----
+Absolute paths can not include a regular expression. If src is a directory, the entire contents of that directory are copied to dest.
+----
+
+dest:: Specifies a subdirectory path underneath the _build subdirectory of the build context directory that contains the source files (for example, files/configs). This can not be an absolute path or contain .. within the path. Ansible Builder creates this directory for you if it does not already exist.
+
+## Additional custom build steps
+
+You can specify custom build commands for any build phase in the additional_build_steps section of the definition file. This allows fine-grained control over the build phases.
+
+Use the prepend_ and append_ commands to add directives to the Containerfile that run either before or after the main build steps are executed. The commands must conform to any rules required for the runtime system.
+
+See the following table for a list of values that can be used in additional_build_steps:
+
+
+
+The syntax for additional_build_steps supports both multi-line strings and lists. See the following examples:
+
+
+```
+prepend_final: |
+   RUN whoami
+   RUN cat /etc/os-release
+```
+
+
+```
+append_final:
+- RUN echo This is a post-install command!
+- RUN ls -la /etc
+```
+
+## Additional resources
+
+* For example definition files for common scenarios, see the Common scenarios section of the Ansible Builder Documentation
+
+# Optional build command arguments
+
+The -t flag will tag your automation execution environment image with a specific name. For example, the following command will build an image named my_first_ee_image:
+
+
+```
+$ ansible-builder build -t my_first_ee_image
+```
+
+
+[NOTE]
+----
+If you do not use -t with build, an image called ansible-execution-env is created and loaded into the local container registry.
+----
+
+If you have multiple definition files, you can specify which one to use by including the -f flag:
+
+
+```
+$ ansible-builder build -f another-definition-file.yml -t another_ee_image
+```
+
+In this example, Ansible Builder will use the specifications provided in the file named another-definition-file.yml instead of the default execution-environment.yml to build an automation execution environment image named another_ee_image.
+
+For other specifications and flags that you can use with the build command, enter ansible-builder build --help to see a list of additional options.
+
+# Containerfile
+
+After your definition file is created, Ansible Builder reads and validates it, creates a Containerfile and container build context, and optionally passes these to Podman to build your automation execution environment image. The container build occurs in several distinct stages: base , galaxy, builder, and final. The image build steps (along with any corresponding custom prepend_ and append_ steps defined in additional_build_steps) are:
+
+1. During the base build stage, the specified base image is (optionally) customized with components required by other build stages, including Python, pip, ansible-core, and ansible-runner. The resulting image is then validated to ensure that the required components are available (as they may have already been present in the base image). Ephemeral copies of the resulting customized base image are used as the base for all other build stages.
+2. During the galaxy build stage, collections specified by the definition file are downloaded and stored for later installation during the final build stage. Python and system dependencies declared by the collections, if any, are also collected for later analysis.
+3. During the builder build stage, Python dependencies declared by collections are merged with those listed in the definition file. This final set of Python dependencies is downloaded and built as Python wheels and stored for later installation during the final build stage.
+4. During the final build stage, the previously-downloaded collections are installed, along with system packages and any previously-built Python packages that were declared as dependencies by the collections or listed in the definition file.
+
+# Creating a Containerfile without building an image
+
+If you are required to use shared container images built in sandboxed environments for security reasons, you can create a shareable Containerfile.
+
+
+```
+$ ansible-builder create
+```

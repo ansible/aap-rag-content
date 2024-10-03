@@ -1,0 +1,3 @@
+# Custom resources
+
+You can define custom resources for each primary installation workflows.

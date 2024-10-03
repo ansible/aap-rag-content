@@ -1,0 +1,46 @@
+# The User Interface
+
+The Automation Execution User Interface (UI) provides a graphical framework for your IT orchestration requirements.
+Access your user profile, the About page, view related documentation, or log out using the icons in the page header.
+The navigation panel provides quick access to automation controller resources, such as Jobs, Templates, Schedules, Projects, Infrastructure, and Administration.
+* Jobs
+* Job templates
+* Workflow job templates
+* Schedules
+* Projects
+
+# Infrastructure menu
+
+The Infrastucture menu provides quick access to the following automation controller resources:
+
+* Topology View
+* Inventories
+* Hosts
+* Instance Groups
+* Instances
+* Execution Environments
+* Credentials
+* Credential Types
+
+# Administration
+
+The Administration menu provides access to the administrative options of automation controller.
+From here, you can create, view, and edit:
+
+* Activity Stream
+* Workflow Approvals
+* Notifiers
+* Management Jobs
+
+# The Settings menu
+
+You can configure some automation controller options by using the Settings menu of the User Interface.
+
+The Settings page enables an administrator to configure the following:
+
+* Configuring Subscriptions
+* Platform gateway
+* User Preferences
+* Configuring jobs
+* Setting up logging
+* Troubleshooting options

@@ -1,0 +1,17 @@
+# Automation execution environments precedence
+
+Project updates will always use the control plane automation execution environments by default, however, jobs will use the first available automation execution environments as follows:
+
+1. The execution_environment defined on the template (job template or inventory source) that created the job.
+2. The default_environment defined on the project that the job uses.
+3. The default_environment defined on the organization of the job.
+4. The default_environment defined on the organization of the inventory the job uses.
+5. The current DEFAULT_EXECUTION_ENVIRONMENT setting (configurable at api/v2/settings/system/)
+6. Any image from the GLOBAL_JOB_EXECUTION_ENVIRONMENTS setting.
+7. Any other global execution environment.
+
+
+[NOTE]
+----
+If more than one execution environment fits a criteria (applies for 6 and 7), the most recently created one is used.
+----

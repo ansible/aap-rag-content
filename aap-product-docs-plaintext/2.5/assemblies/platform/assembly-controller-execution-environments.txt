@@ -1,0 +1,222 @@
+# Execution environments
+
+Unlike legacy virtual environments, execution environments are container images that make it possible to incorporate system-level dependencies and collection-based content.
+Each execution environment enables you to have a customized image to run jobs and has only what is necessary when running the job.
+
+# Building an execution environment
+
+If your Ansible content depends on custom virtual environments instead of a default environment, you must take additional steps.
+You must install packages on each node, interact well with other software installed on the host system, and keep them in synchronization.
+
+To simplify this process, you can build container images that serve as Ansible
+Control nodes.
+These container images are referred to as automation execution environments, which you can create with ansible-builder.
+Ansible-runner can then make use of those images.
+
+## Install ansible-builder
+
+To build images, you must have Podman or Docker installed, along with the ansible-builder Python package.
+
+The --container-runtime option must correspond to the Podman or Docker executable you intend to use.
+
+When building an execution environment image, it must support the architecture that Ansible Automation Platform is deployed with.
+
+For more information, see Quickstart for Ansible Builder, or Creating and consuming execution environments.
+
+## Content needed for an execution environment
+
+Ansible-builder is used to create an execution environment.
+
+An execution environment must contain:
+
+* Ansible
+* Ansible Runner
+* Ansible Collections
+* Python and system dependencies of:
+* modules or plugins in collections
+* content in ansible-base
+* custom user needs
+
+Building a new execution environment involves a definition that specifies which content you want to include in your execution environment, such as collections, Python requirements, and system-level packages.
+The definition must be a .yml file
+
+The content from the output generated from migrating to execution environments has some of the required data that can be piped to a file or pasted into this definition file.
+
+For more information, see Migrate legacy venvs to execution environments.
+If you did not migrate from a virtual environment, you can create a definition file with the required data described in the Execution Environment Setup Reference.
+
+Collection developers can declare requirements for their content by providing the appropriate metadata.
+
+For more information, see Dependencies.
+
+## Example YAML file to build an image
+
+The ansible-builder build command takes an execution environment definition as an input.
+It outputs the build context necessary for building an execution environment image, and then builds that image.
+The image can be re-built with the build context elsewhere, and produces the same result.
+By default, the builder searches for a file named execution-environment.yml in the current directory.
+
+The following example execution-environment.yml file can be used as a starting point:
+
+---
+version: 3
+dependencies:
+  galaxy: requirements.yml
+
+The content of requirements.yml:
+
+---
+collections:
+  - name: awx.awx
+
+To build an execution environment using the preceding files and run the following command:
+
+ansible-builder build
+...
+STEP 7: COMMIT my-awx-ee
+--> 09c930f5f6a
+09c930f5f6ac329b7ddb321b144a029dbbfcc83bdfc77103968b7f6cdfc7bea2
+Complete! The build context can be found at: context
+
+In addition to producing a ready-to-use container image, the build context is preserved.
+This can be rebuilt at a different time or location with the tools of your choice, such as docker build or podman build.
+
+For additional information about the ansible-builder build command, see Ansible&#8217;s CLI Usage documentation.
+
+## Execution environment mount options
+
+Rebuilding an execution environment is one way to add certificates, but inheriting certificates from the host provides a more convenient solution.
+For VM-based installations, automation controller automatically mounts the system truststore in the execution environment when jobs run.
+
+You can customize execution environment mount options and mount paths in the Paths to expose to isolated jobs field of the Job Settings page, where Podman-style volume mount syntax is supported.
+
+For more information, see the Podman documentation.
+
+### Troubleshooting execution environment mount options
+
+In some cases where the /etc/ssh/* files were added to the execution environment image due to customization of an execution environment, an SSH error can occur.
+For example, exposing the /etc/ssh/ssh_config.d:/etc/ssh/ssh_config.d:O path enables the container to be mounted, but the ownership permissions are not mapped correctly.
+
+Use the following procedure if you meet this error, or have upgraded from an older version of automation controller:
+
+1. Change the container ownership on the mounted volume to root.
+2. From the navigation panel, select menu:Settings[Job].
+3. Click btn:[Edit].
+4. Expose the path in the Paths to expose to isolated jobs field, using the current example:
+
+[
+  "/ssh_config:/etc/ssh/ssh_config.d/:0"
+]
+
+[NOTE]
+----
+The :O option is only supported for directories.
+Be as detailed as possible, especially when specifying system paths.
+Mounting /etc or /usr directly has an impact that makes it difficult to troubleshoot.
+----
+
+This informs Podman to run a command similar to the following example, where the configuration is mounted and the ssh command works as expected:
+
+podman run -v /ssh_config:/etc/ssh/ssh_config.d/:O ...
+
+To expose isolated paths in OpenShift or Kubernetes containers as HostPath, use the following configuration:
+
+[
+  "/mnt2:/mnt2",
+  "/mnt3",
+  "/mnt4:/mnt4:0"
+]
+
+Set Expose host paths for Container Groups to On to enable it.
+
+When the playbook runs, the resulting Pod specification is similar to the following example.
+Note the details of the volumeMounts and volumes sections.
+
+
+
+### Mounting the directory in the execution node to the execution environment container
+
+With Ansible Automation Platform 2.1.2, only O and z options were available.
+Since Ansible Automation Platform 2.2, further options such as rw are available.
+This is useful when using NFS storage.
+
+1. From the navigation panel, select menu:Settings[Job].
+2. Edit the Paths to expose to isolated jobs field:
+* Enter a list of paths that volumes are mounted from the execution node or the hybrid node to the container.
+* Enter one path per line.
+* The supported format is HOST-DIR[:CONTAINER-DIR[:OPTIONS].
+The allowed paths are z, O, ro, and rw.
+Example
+
+```
+[
+  "/var/lib/awx/.ssh:/root/.ssh:O"
+]
+```
+
+* For the rw option, configure the SELinux label correctly.
+For example, to mount the /foo directory, complete the following commands:
+
+```
+sudo su
+```
+
+
+```
+mkdir /foo
+```
+
+
+```
+chmod 777 /foo
+```
+
+
+```
+semanage fcontext -a -t container_file_t "/foo(/.*)?"
+```
+
+
+```
+restorecon -vvFR /foo
+```
+
+
+The awx user must be permitted to read or write in this directory at least.
+Set the permissions as 777 at this time.
+
+For more information about mount volumes, see the --volume option of the podman-run(1) section of the Podman documentation.
+
+# Adding an execution environment to a job template
+
+* An execution environment must have been created using ansible-builder as described in Build an execution environment.
+When an execution environment has been created, you can use it to run jobs.
+Use the automation controller UI to specify the execution environment to use in your job templates.
+* Depending on whether an execution environment is made available for global use or tied to an organization, you must have the appropriate level of administrator privileges to use an execution environment in a job.
+Execution environments tied to an organization require Organization administrators to be able to run jobs with those execution environments.
+* Before running a job or job template that uses an execution environment that has a credential assigned to it, ensure that the credential contains a username, host, and password.
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Execution Environments].
+2. Click btn:[Create execution environment] to add an execution environment.
+3. Enter the appropriate details into the following fields:
+* Name (required): Enter a name for the execution environment.
+* Image (required): Enter the image name.
+The image name requires its full location (repository), the registry, image name, and version tag in the example format of quay.io/ansible/awx-ee:latestrepo/project/image-name:tag.
+* Optional: Pull: Choose the type of pull when running jobs:
+* Always pull container before running: Pulls the latest image file for the container.
+* Only pull the image if not present before running: Only pulls the latest image if none is specified.
+* Never pull container before running: Never pull the latest version of the container image.
+
+[NOTE]
+----
+If you do not set a type for pull, the value defaults to Only pull the image if not present before running.
+----
+* Optional: Description:
+* Optional: Organization: Assign the organization to specifically use this execution environment. To make the execution environment available for use across multiple organizations, leave this field blank.
+* Registry Credential: If the image has a protected container registry, give the credential to access it.
+4. Click btn:[Create execution environment].
+
+Your newly added execution environment is ready to be used in a job template.
+5. To add an execution environment to a job template, specify it in the Execution Environment field of the job template.
+
+When you have added an execution environment to a job template, those templates are listed in the Templates tab of the execution environment:

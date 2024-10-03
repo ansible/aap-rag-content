@@ -1,0 +1,39 @@
+# Using the base automation execution environment
+
+Your subscription with Ansible Automation Platform gives you access to some base automation execution environments. You can use a base automation execution environments as a starting point for creating a customized execution environment.
+Base images included with Ansible Automation Platform are hosted on the Red Hat Ecosystem Catalog (registry.redhat.io).
+* You have a valid Red Hat Ansible Automation Platform subscription.
+1. Log in to registry.redhat.io.
+
+```bash
+$ podman login registry.redhat.io
+```
+
+2. Pull the base images from the registry:
+
+```
+$podman pull registry.redhat.io/aap/<image name>
+```
+
+# Customize the base execution environment image
+
+Ansible Automation Platform includes the following default execution environments:
+
+* Minimal - Includes the latest Ansible-core 2.15 release along with Ansible Runner, but does not include collections or other content
+* EE Supported - Minimal, plus all Red Hat-supported collections and dependencies
+
+While these environments cover many automation use cases, you can add additional items to customize these containers for your specific needs. For more information about customizing your execution environment, see Customizing an existing automation execution environment image in the Creating and using execution environments guide.
+
+# About Ansible Builder
+
+You also have the option of creating an entirely new execution environment with Ansible Builder, also referred to as execution environment builder.
+Ansible Builder is a command line tool you can use to create an execution environment for Ansible.
+You can only create execution environments with Ansible Builder.
+
+To build your own execution environment, you must:
+
+* Download Ansible Builder
+* Create a definition file that defines your execution environment
+* Create an execution environment image based on the definition file
+
+For more information about building an execution environment, see Creating and using execution environments.

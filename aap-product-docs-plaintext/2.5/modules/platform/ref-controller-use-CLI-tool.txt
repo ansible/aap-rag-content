@@ -1,0 +1,5 @@
+# The automation controller CLI Tool
+
+Automation controller has a full-featured command line interface.
+
+For more information on configuration and use, see the AWX Command Line Interface and the AWX manage utility section.

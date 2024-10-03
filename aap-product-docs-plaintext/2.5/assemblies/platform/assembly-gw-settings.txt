@@ -1,0 +1,193 @@
+# Configuring Ansible Automation Platform
+
+You can configure Ansible Automation platform from the Settings menu using the following selections:
+* Subscriptions
+* Platform gateway
+* User Preferences
+* Troubleshooting
+
+[NOTE]
+----
+The other selections available from the Settings menu are specific to automation execution. For more information, refer to the Configuring automation execution guide.
+----
+
+# Configuring subscriptions
+
+You can use the Subscription menu to view the details of your subscription, such as compliance, host-related statistics, or expiry, or you can apply a new subscription.
+
+1. From the navigation panel, select menu:Settings[Subscription]. The Subscription page is displayed.
+2. Click btn:[Edit subscription].
+3. You can either enter your Red Hat Username and Password, or attach a current Subscription Manifest in the Welcome page.
+4. Click btn:[Next] and agree to the terms of the license agreement.
+5. Click btn:[Next] to review the subscription settings.
+6. Click btn:[Finish] to complete the configuration.
+
+# Platform gateway
+
+The Platform gateway is the service that handles authentication and authorization for Ansible Automation Platform.
+It provides a single ingress into the Platform and serves the Platform&#8217;s user interface.
+
+From the menu:Settings[Platform gateway] menu, you can configure Platform gateway,
+Security, Session, Platform Security, Custom Login, and Other settings.
+
+1. From the navigation panel, select menu:Settings[Platform gateway].
+2. The Platform gateway settings page is displayed.
+3. To configure the options, click btn:[Edit platform gateway settings].
+4. You can configure the following platform gateway options:
+* Platform gateway proxy url: URL to the platform gateway proxy layer.
+* Platform gateway proxy url ignore cert: Ignore the certificate to the platform gateway proxy layer.
+5. Click btn:[Save platform gateway settings] to save the changes or proceed to configure the other platform options available.
+
+## Configuring platform security
+
+From the Platform gateway settings page, you can configure platform security settings.
+
+1. From the navigation panel, select menu:Settings[Platform gateway].
+2. The Platform gateway settings page is displayed.
+3. To configure the options, click btn:[Edit].
+4. You can configure the following Security settings:
+* Allow admin to set insecure: Whether a superuser account can save an insecure password when editing any local user account.
+* Gateway basic auth enabled: Enable basic authentication to the platform gateway API.
+
+Turning this off prevents all basic authentication (local users), so customers need to make sure they have their alternative authentication mechanisms correctly configured before doing so.
+
+Turning it off with only local authentication configured also prevents all access to the UI.
+
+Social auth username in full email: Enabling this setting alerts social authentication to use the full email as username instead of the full name.
+
+Gateway token name: The header name to push from the proxy to the backend service.
+
+[WARNING]
+----
+If this name is changed, backends must be updated to compensate.
+----
+* Gateway access token expiration: How long the access tokens are valid for.
+* Jwt private key: The private key used to encrypt the JWT tokens sent to backend services.
+
+This should be a private RSA key and one should be generated automatically on installation.
+
+[NOTE]
+----
+Use caution when rotating the key as it will cause current sessions to fail until their JWT keys are reset.
+----
+* (Read only) Jwt public key: The private key used to encrypt the JWT tokens sent to backend services.
+
+This should be a private RSA key and one should be generated automatically on installation.
+
+[NOTE]
+----
+See other services' documentation on how they consume this key.
+----
+5. Click btn:[Save changes] to save the changes or proceed to configure the other platform options available.
+
+## Configuring platform sessions
+
+From the Platform gateway settings page, you can configure platform session settings.
+
+1. From the navigation panel, select menu:Settings[Platform gateway].
+2. The Platform gateway settings page is displayed.
+3. To configure the options, click btn:[Edit platform gateway settings].
+4. Enter the time in seconds before a session expires in the Session cookie age field.
+5. Click btn:[Save platform gateway settings] to save the changes or proceed to configure the other platform options available.
+
+## Configuring a platform password security policy
+
+From the Platform gateway settings page, you can configure a password security policy.
+
+1. From the navigation panel, select menu:Settings[Platform gateway].
+2. The Platform gateway settings page is displayed.
+3. To configure the options, click btn:[Edit platform gateway settings].
+4. You can configure the following Password Security options:
+* Password minimum uppercase letters: How many uppercase characters need to be in a local password.
+* Password minimum length: The minimum length of a local password.
+* Password minimum numerical digits: How many numerical characters need to be in a local password.
+* Password minimum special characters: How many special characters need to be in a local password.
+5. Click btn:[Save platform gateway settings] to save the changes or proceed to configure the other platform options available.
+
+## Configuring a custom platform log in
+
+From the Platform gateway settings page, you can configure the custom log in options.
+
+1. From the navigation panel, select menu:Settings[Platform gateway].
+2. The Platform gateway settings page is displayed.
+3. To configure the options, click btn:[Edit platform gateway settings].
+4. You can configure the following Custom Login options:
+* Custom login info: Provide specific information (such as a legal notice or a disclaimer) to a text box in the login modal. For example, you can include a company banner with a statement such as, “This is only to be used for <COMPANY_NAME>, etc.”
+* Custom logo : Provide an image file for setting up a custom logo (must be a data URL with a base64-encoded GIF, PNG, or JPEG image).
+5. Click btn:[Save platform gateway settings] to save the changes or proceed to configure the other platform options available.
+
+## Configuring additional platform options
+
+From the Platform gateway settings page, you can configure additional platform options.
+
+1. From the navigation panel, select menu:Settings[Platform gateway].
+2. The Platform gateway settings page is displayed.
+3. Click btn:[Edit platform gateway settings].
+4. You can configure the following Other settings:
+* Jwt expiration buffer in seconds: The number of seconds before a JWT token's expiration to revoke from the cache.
+
+When authentication happens a JWT token is created for the user and that token is cached.
+When subsequent calls happen to services such as automation controller or Event-Driven Ansible, the token is taken from the cache and sent to the service.
+Both the token and the cache of the token have an expiration time.
+If the token expires while in the cache the authentication process attempts results in a 401 error (unauthorized).
+This setting gives Red Hat Ansible Automation Platform a buffer by removing the JWT token from the cache before the token expires.
+When a token is revoked from cache a new token with a new expiration is generated and cached for the user.
+As a result, expired tokens from the cache are never used.
+This setting defaults to 2 seconds.
+If you have a large latency between platform gateway and your services and observe 401 responses you must increase this setting to lower the number of 401 responses.
+* Status endpoint backend timeout seconds: Timeout (in seconds) for the status endpoint to wait when trying to connect to a backend.
+* Status endpoint backend verify: Specifies whether SSL certificates of the services are verified when calling individual nodes for statuses.
+* Request timeout: Specifies, in seconds, the length of time before the proxy will report a timeout and generate a 504.
+* *Allow external users to create OAuth2 tokens *: For security reasons, users from external authentication providers, such as LDAP, SAML, SSO, Radius, and others, are not allowed to create OAuth2 tokens.
+To change this behavior, enable this setting.
+Existing tokens are not deleted when this setting is turned off.
+5. Click btn:[Save platform gateway settings] to save the changes or proceed to configure the other platform options available.
+
+# User preferences
+
+You can use the User preferences page to customize your platform experience. Use this menu to control theming, layout options and formatting.
+
+
+[NOTE]
+----
+User preferences are stored locally in your browser. This means that they are unique to you and your machine.
+----
+
+1. From the navigation panel, select menu:Settings[User Preferences].
+2. The User Preferences page is displayed.
+3. Click btn:[Edit].
+4. You can configure the following options:
+* Refresh interval: Select the refresh interval for the page.
+
+This refreshes the data on the page at the selected interval.
+
+The refresh happens in the background and does not reload the page.
+* Color theme: Select from:
+* Dark theme
+* Light theme
+* System default
+* Table layout: Select from:
+* Comfortable
+* Compact
+* Form columns: Select from:
+* Multiple columns of inputs
+* Single column of inputs
+* Date format Select from:
+* Shows dates Relative to the current time
+* Shows dates as Date and time
+* Preferred data format: Sets the default format for when editing and displaying data.
+5. Click btn:[Save user preferences].
+
+# Troubleshooting options
+
+You can use the Troubleshooting page to enable or disable certain flags that aid in debugging issues within Ansible Automation Platform.
+
+1. From the navigation panel, select menu:Settings[Troubleshooting].
+2. The Troubleshooting page is displayed.
+3. Click btn:[Edit].
+4. You can select the following options:
+* Enable or Disable tmp dir cleanup: Select this to enable or disable the cleanup of tmp directories generated during execution of a job after job execution completes.
+* Debug Web Requests: Select this to enable or disable web request profiling for debugging slow web requests.
+* Release Receptor Work: Select this to turn on or off the deletion of job pods after they complete or fail. This can be helpful in debugging why a job failed.
+* Keep receptor work on error: Select this to prevent receptor work from being released when an error is detected.
+5. Click btn:[Save] to save your changes.

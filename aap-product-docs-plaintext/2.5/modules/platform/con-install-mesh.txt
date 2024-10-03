@@ -1,0 +1,7 @@
+# automation mesh Installation
+
+For a VM-based install of Ansible Automation Platform you use the installation program to set up automation mesh or to upgrade to automation mesh.
+To provide Ansible Automation Platform with details about the nodes, groups, and peer relationships in your mesh network, you define them in an the inventory file in the installer bundle. For managed cloud, OpenShift, or operator environments, see Automation mesh for managed cloud or operator environments.
+
+* RPM installation
+* Automation mesh design patterns

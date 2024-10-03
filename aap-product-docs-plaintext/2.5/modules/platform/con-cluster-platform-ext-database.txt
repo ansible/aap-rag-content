@@ -1,0 +1,11 @@
+# Multi-machine cluster installation with an external managed database
+
+This scenario includes installation of multiple automation controller nodes and an automation hub instance and configures communication with a remote PostgreSQL instance as its database. This remote PostgreSQL can be a server you manage, or can be provided by a cloud service such as Amazon RDS. In this scenario, all automation controller are active and can execute jobs, and any node can receive HTTP requests.
+
+
+[NOTE]
+----
+* Running in a cluster setup requires any database that automation controller uses to be external-&#8203;PostgreSQL must be installed on a machine that is not one of the primary or secondary tower nodes. When in a redundant setup, the remote PostgreSQL version requirements is PostgreSQL 13.
+* See Clustering for more information on configuring a clustered setup.
+* Provide a reachable IP address for the [automationhub] host to ensure users can sync content from Private Automation Hub from a different node.
+----

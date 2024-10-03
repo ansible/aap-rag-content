@@ -1,0 +1,10 @@
+# Configuring subscriptions
+
+You can use the Subscription menu to view the details of your subscription, such as compliance, host-related statistics, or expiry, or you can apply a new subscription.
+
+1. From the navigation panel, select menu:Settings[Subscription]. The Subscription page is displayed.
+2. Click btn:[Edit subscription].
+3. You can either enter your Red Hat Username and Password, or attach a current Subscription Manifest in the Welcome page.
+4. Click btn:[Next] and agree to the terms of the license agreement.
+5. Click btn:[Next] to review the subscription settings.
+6. Click btn:[Finish] to complete the configuration.
