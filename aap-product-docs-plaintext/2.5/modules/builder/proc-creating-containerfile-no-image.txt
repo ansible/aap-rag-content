@@ -1,0 +1,6 @@
+# Creating a Containerfile without building an image
+
+
+```
+$ ansible-builder create
+```

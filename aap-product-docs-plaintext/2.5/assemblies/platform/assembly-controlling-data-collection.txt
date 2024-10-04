@@ -1,0 +1,19 @@
+# Managing usability analytics and data collection from automation controller
+
+You can change how you participate in usability analytics and data collection from automation controller by opting out or changing your settings in the automation controller user interface.
+
+# Usability analytics and data collection
+
+Usability data collection is included with automation controller to collect data to better understand how automation controller users specifically interact with automation controller, to help enhance future releases, and to continue streamlining your user experience.
+
+Only users installing a trial of automation controller or a fresh installation of automation controller are opted-in for this data collection.
+
+* For more information, see the Red Hat privacy policy.
+
+## Controlling data collection from automation controller
+
+You can control how automation controller collects data from the menu:Settings[System] menu.
+
+1. Log in to your automation controller.
+2. From the navigation panel, select menu:Settings[System].
+3. Select Gather data for Automation Analytics to enable automation controller to gather data on automation and send it to Automation Analytics.

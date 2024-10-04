@@ -1,0 +1,13 @@
+# build_arg_defaults
+
+This specifies the default values for build arguments as a dictionary.
+
+This is an alternative to using the --build-arg CLI flag.
+
+Ansible Builder uses the following build arguments:
+
+
+
+Ansible Builder hard-codes values given inside of build_arg_defaults into the build instruction file, so they persist if you run your container build manually.
+
+If you specify the same variable in the definition and at the command line with the CLI build-arg flag, the CLI value overrides the value in the definition.

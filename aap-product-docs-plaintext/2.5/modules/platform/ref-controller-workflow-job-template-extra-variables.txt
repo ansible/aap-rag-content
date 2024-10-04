@@ -1,0 +1,3 @@
+# Workflow job template extra variables
+
+For more information see the Extra variables section.

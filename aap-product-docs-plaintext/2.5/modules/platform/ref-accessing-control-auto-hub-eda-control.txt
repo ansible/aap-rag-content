@@ -1,0 +1,30 @@
+# Accessing Ansible Automation Platform
+
+After the installation completes, the default protocol and ports used for Ansible Automation Platform are 80 (HTTP) and 443 (HTTPS).
+
+You can customize the ports with the following variables:
+
+
+```
+gateway_nginx_http_port: 8500
+gateway_nginx_https_port: 8501
+```
+
+
+If you want to disable HTTPS, set gateway_nginx_disable_https to true:
+
+
+```
+gateway_nginx_disable_https: true
+```
+
+
+The platform UI is available by default at:
+
+
+```
+https://<gateway-node>:443
+```
+
+
+Log in as the admin user with the password you created for gateway_admin_password.

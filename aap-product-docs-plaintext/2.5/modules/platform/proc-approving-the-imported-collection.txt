@@ -1,0 +1,45 @@
+# Approving the imported collections
+
+After you have imported collections by using either the GUI or the CLI method, you must approve them by using the GUI. After they are approved, they are available for use.
+1. Log in to automation hub Hybrid Cloud Console.
+2. From the navigation panel, select menu:Automation Content[Collection Approvals].
+3. Click btn:[Approve] for the collection you want to approve.
+4. The collection is now available for use in your private automation hub.
+5. Import any dependency for the collection by repeating steps 2 and 3.
+
+[NOTE]
+----
+The collection is added to the "Published" repository regardless of its source.
+----
+Recommended collections depend on your use case. Ansible and Red Hat provide these collections.
+
+# Custom automation execution environments
+
+Use the ansible-builder program to create custom execution environment images. For disconnected environments, custom execution environment images can be built in the following ways:
+
+* Build an execution environment image on an internet-facing system and import it to the
+disconnected environment.
+* Build an execution environment image entirely on the disconnected environment with some modifications to the normal process of using ansible-builder.
+* Create a minimal base container image that includes all of the necessary modifications for a disconnected environment, then build custom execution environment images from the base container image.
+
+## Transferring custom execution environment images across a disconnected boundary
+
+You can build a custom execution environment image on an internet-facing machine. After you create an execution environment, it is available in the local podman image cache. You can then transfer the custom execution environment image across a disconnected boundary.
+
+1. Save the image:
+
+```
+$ podman image save localhost/custom-ee:latest | gzip -c custom-ee-latest.tar.gz
+```
+
+
+Transfer the file across the disconnected boundary by using an existing mechanism such as sneakernet or one-way diode.
+2. After the image is available on the disconnected side, import it into the local podman cache, tag it, and push it to the disconnected hub:
+
+
+```
+$ podman image load -i custom-ee-latest.tar.gz
+$ podman image tag localhost/custom-ee <hub_fqdn>/custom-ee:latest
+$ podman login <hub_fqdn> --tls-verify=false
+$ podman push <hub_fqdn>/custom-ee:latest
+```

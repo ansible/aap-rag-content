@@ -1,0 +1,8 @@
+# Ansible Automation Platform upgrades
+
+Upgrading to version 2.5 from Ansible Automation Platform 2.1 or later involves downloading the installation package and then performing the following steps:
+
+* Set up your inventory to match your installation environment.
+* Run the 2.5 installation program over your current Ansible Automation Platform installation.
+
+* Upgrading to Red Hat Ansible Automation Platform 2.5

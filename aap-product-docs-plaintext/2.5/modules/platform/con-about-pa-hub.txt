@@ -1,0 +1,6 @@
+# Private automation hub
+
+Private automation hub provides both disconnected and on-premise solutions for synchronizing content.
+You can synchronize collections and execution environment images from Red Hat cloud automation hub, storing and serving your own custom automation collections and execution images.
+You can also use other sources such as Ansible Galaxy or other container registries to provide content to your private automation hub.
+Private automation hub can integrate into your enterprise directory and your CI/CD pipelines.

@@ -1,0 +1,9 @@
+# Component licenses
+
+To view the license information for the components included in Ansible Automation Platform, see /usr/share/doc/automation-controller-<version>/README.
+
+where <version> refers to the version of automation controller you have installed.
+
+To view a specific license, see /usr/share/doc/automation-controller-<version>/*.txt.
+
+where * is the license file name to which you are referring.

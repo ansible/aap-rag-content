@@ -1,0 +1,62 @@
+# Introduction to automation content navigator
+
+As a content creator, you can use automation content navigator to develop Ansible playbooks, collections, and roles that are compatible with the Red Hat Ansible Automation Platform. You can use automation content navigator in the following environments, with seamless and predictable results across them all:
+* Local development machines
+* Automation execution environments
+Automation content navigator also produces an artifact file you can use to help you develop your playbooks and troubleshoot problem areas.
+
+# Uses for automation content navigator
+
+Automation content navigator is a command line, content-creator-focused tool with a text-based user interface. You can use automation content navigator to:
+
+* Launch and watch jobs and playbooks.
+* Share stored, completed playbook and job run artifacts in JSON format.
+* Browse and introspect automation execution environments.
+* Browse your file-based inventory.
+* Render Ansible module documentation and extract examples you can use in your playbooks.
+* View a detailed command output on the user interface.
+
+# Automation content navigator modes
+
+Automation content navigator operates in two modes:
+
+stdout mode:: Accepts most of the existing Ansible commands and extensions at the command line.
+text-based user interface mode:: Provides an interactive, text-based interface to the Ansible commands. Use this mode to evaluate content, run playbooks, and troubleshoot playbooks after they run using artifact files.
+
+## stdout mode
+
+Use the -m stdout subcommand with automation content navigator to use the familiar Ansible commands, such as ansible-playbook within automation execution environments or on your local development environment. You can use commands you are familiar with for quick tasks.
+
+Automation content navigator also provides extensive help in this mode:
+
+--help:: Accessible from ansible-navigator command or from any subcommand, such as ansible-navigator config --help.
+subcommand help:: Accessible from the subcommand, for example ansible-navigator config --help-config. This help displays the details of all the parameters supported from the related Ansible command.
+
+## Text-based user interface mode
+
+The text-based user interface mode provides enhanced interaction with automation execution environments, collections, playbooks, and inventory. This mode is compatible with integrated development environments (IDE), such as Visual Studio Code.
+
+![Text-based user interface mode]
+
+This mode includes a number of helpful user interface options:
+
+colon commands:: You can access all the automation content navigator commands with a colon, such as :run or :collections
+navigating the text-based interface:: The screen shows how to page up or down, scroll, escape to a prior screen or access :help.
+output by line number:: You can access any line number in the displayed output by preceding it with a colon, for example :12.
+color-coded output:: With colors enabled, automation content navigator displays items, such as deprecated modules, in red.
+pagination and scrolling:: You can page up or down, scroll, or escape by using the options displayed at the bottom of each automation content navigator screen.
+
+You cannot switch between modes after automation content navigator is running.
+
+This document uses the text-based user interface mode for most procedures.
+
+# Automation content navigator commands
+
+The automation content navigator commands run familiar Ansible CLI commands in -m stdout mode. You can use all the subcommands and options from the related Ansible CLI command. Use ansible-navigator --help for details.
+
+
+
+# Relationship between Ansible and automation content navigator commands
+
+The automation content navigator commands run familiar Ansible CLI commands in -m stdout mode. You can use all the subcommands and options available in the related Ansible CLI command. Use ansible-navigator --help for details.
+

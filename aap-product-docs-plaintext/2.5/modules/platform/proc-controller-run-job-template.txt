@@ -1,0 +1,22 @@
+# Running a job template
+
+A benefit of automation controller is the push-button deployment of Ansible Playbooks.
+You can configure a template to store all the parameters that you would normally pass to the Ansible Playbook on the command line.
+In addition to the playbooks, the template passes the inventory, credentials, extra variables, and all options and settings that you can specify on the command line.
+
+* From the navigation panel, select menu:Automation Execution[Templates] and click btn:[Launch] next to the job template.
+
+![Launch template]
+
+The initial job start generates a status page, which updates automatically by using automation controller&#8217;s Live Event feature, until the job is complete.
+
+For more information about the job results, see Jobs in automation controller in Using automation execution.
+
+To learn more about these automation controller features or to learn about administration tasks and the controller API, see the following documentation sets:
+
+* Using automation execution
+* Red Hat Ansible Automation Platform Installation Guide
+* Configuring automation execution
+* Automation Controller API Guide
+* Automation controller Release Notes
+* Product Documentation for Red Hat Ansible Automation Platform

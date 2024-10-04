@@ -1,0 +1,79 @@
+# Projects
+
+Projects are a logical collection of rulebooks.
+They must be a git repository and only http protocol is supported.
+The rulebooks of a project must be located in the path defined for Event-Driven Ansible content in Ansible collections: /extensions/eda/rulebooks at the root of the project.
+
+[IMPORTANT]
+----
+To meet high availability demands, Event-Driven Ansible controller shares centralized Redis (REmote DIctionary Server) with the Ansible Automation Platform UI. When Redis is unavailable, you will not be able to create or sync projects.
+----
+
+# Setting up a new project
+
+You can set up projects to manage and store your rulebooks in Event-Driven Ansible controller.
+
+* You are logged in to the Ansible Automation Platform Dashboard as a Content Consumer.
+* You have set up a credential, if necessary.
+For more information, see the Setting up credentials section.
+* You have an existing repository containing rulebooks that are integrated with playbooks contained in a repository to be used by automation controller.
+
+1. Log in to the Ansible Automation Platform Dashboard.
+2. Navigate to menu:Automation Decisions[Projects].
+3. Click btn:[Create project].
+4. Insert the following:
+Name:: Enter project name.
+Description:: This field is optional.
+Source control type:: Git is the only source control type available for use. This field is optional.
+Source control URL:: Enter Git, SSH, or HTTP[S] protocol address of a repository, such as GitHub or GitLab. This field is not editable.
+
+[NOTE]
+----
+This field accepts SSH private key or private key phrase. To enable the use of these private keys, your project URL must begin with git@.
+----
+Proxy:: This is used to access access HTTP or HTTPS servers. This field is optional.
+Source control branch/tag/commit:: This is the branch to checkout. In addition to branches, you can input tags, commit hashes, and arbitrary refs. Some commit hashes and refs may not be available unless you also provide a custom refspec. This field is optional.
+Source control refspec:: A refspec to fetch (passed to the Ansible git module). This parameter allows access to references via the branch field not otherwise available. This field is optional.
+For more information, see Examples.
+Source control credential:: You must have this credential to utilize the source control URL. This field is optional.
+Content signature validation credential:: Enable content signing to verify that the content has remained secure when a project is synced. If the content has been tampered with, the job will not run. This field is optional.
+Options:: The Verify SSL option is enabled by default. Enabling this option verifies the SSL with HTTPS when the project is imported.
+
+[NOTE]
+----
+You can disable this option if you have a local repository that uses self-signed certificates.
+----
+5. Select btn:[Create project].
+
+Your project is now created and can be managed in the Projects page.
+
+After saving the new project, the project&#8217;s details page is displayed.
+From there or the Projects list view, you can edit or delete it.
+
+# Projects list view
+
+On the Projects page, you can view the projects that you have created along with the Status and the Git hash.
+
+
+[NOTE]
+----
+If a rulebook changes in source control, you can re-sync a project by selecting the sync icon next to the project from the Projects list view.
+The Git hash updates represent the latest commit on that repository.
+An activation must be restarted or recreated if you want to use the updated project.
+----
+
+# Editing a project
+
+1. From the Projects list view, select the btn:[More Actions] icon &#8942; next to the desired project. The Edit page is displayed.
+2. Enter the required changes and select btn:[Save project].
+
+# Deleting a project
+
+If you need to delete a project, the Event-Driven Ansible controller interface provides multiple options.
+
+1. To delete a project, complete one of the following:
+* From the Projects list view, select the checkbox next to the desired project, and click the btn:[More Actions] icon &#8942; from the page menu.
+* From the Projects list view, click the btn:[More Actions] icon &#8942; next to the desired project.
+2. Select btn:[Delete project].
+3. In the Permanently delete projects window, select btn:[Yes, I confirm that I want to delete this project].
+4. Select btn:[Delete project].

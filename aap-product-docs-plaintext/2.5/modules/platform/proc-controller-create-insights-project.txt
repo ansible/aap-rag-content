@@ -1,0 +1,26 @@
+# Creating a Red Hat Insights project
+
+Use the following steps to create a new project for use with Red Hat Insights:
+
+1. From the navigation panel, select menu:Automation Execution[Projects].
+2. Click btn:[Create project].
+3. Enter the appropriate details in the following fields.
+Note that the following fields require specific Red Hat Insights related entries:
+* Name: Enter the name for your Red Hat Insights project.
+* Optional: Description: Enter a description for the project.
+* Organization: Enter the name of the organization with which the credential is associated, or click the search  icon and select it from the Select organization window.
+* Optional: Execution environment: The execution environment that is used for jobs that use this project.
+* Source control type: Select Red Hat Insights.
+* Optional: Content signature validation credential: Enable content signing to verify that the content has remained secure when a project is synced.
+* Insights credential: This is pre-populated with the Red Hat Insights credential you created before.
+If not, enter the credential, or click the search  icon and select it from the Select Insights Credential window.
+4. Select the update options for this project from the Options field and provide any additional values, if applicable.
+For more information about each option click the tooltip  icon next to each one.
+![Insights create project]
+5. Click btn:[Create project].
+
+All SCM and project synchronizations occur automatically the first time you save a new project.
+If you want them to be updated to what is current in Red Hat Insights, manually update the SCM-based project by clicking the update  icon under the project&#8217;s available actions.
+
+This process syncs your Red Hat Insights project with your Red Hat Insights account solution.
+Note that the status dot beside the name of the project updates once the sync has run.

@@ -1,0 +1,118 @@
+# Performance tuning for Event-Driven Ansible controller
+
+Event-Driven Ansible is a highly scalable, flexible automation capability.
+Event-Driven Ansible controller provides the interface in which Event-Driven Ansible automation performs.
+Tune your Event-Driven Ansible controller to optimize performance and scalability through:
+* Characterizing your workload
+* System level monitoring
+* Performance troubleshooting
+
+# Characterizing your workload
+
+In Event-Driven Ansible controller, your workload includes the number of rulebook activations and events being received. Consider the following factors to characterize your Event-Driven Ansible controller workload:
+
+1. Number of simultaneous rulebook activations
+2. Number of events received by Event-Driven Ansible controller
+
+## Modifying the number of simultaneous rulebook activations
+
+By default, Event-Driven Ansible controller allows 12 rulebook activations to run simultaneously.
+If more than 12 rulebook activations are created, the expected behavior is that subsequent rulebook activations wait until there is an available rulebook activation worker.
+In this case, the rulebook activation status is displayed as Pending even if there is enough free memory and CPU on your Event-Driven Ansible controller instance.
+To change this behavior, you must change the default maximum number of running rulebook activations.
+
+
+[NOTE]
+----
+The value for MAX_RUNNING_ACTIVATIONS does not change when you modify the instance size, so it needs to be adjusted manually.
+----
+
+### Modifying the number of simultaneous rulebook activations during Event-Driven Ansible controller installation
+
+By default, Event-Driven Ansible controller allows 12 activations to run simultaneously.
+You can modify this default value during installation by using the following procedure:
+
+Provide a variable to the VM installer:
+
+1. Navigate to the setup inventory file.
+2. Add automationedacontroller_max_running_activations in the [all:vars] section.
+For example, automationedacontroller_max_running_activations=16.
+3. Run the setup.
+
+### Modifying the number of simultaneous rulebook activations after Event-Driven Ansible controller installation
+
+By default, Event-Driven Ansible controller allows 12 activations to run simultaneously.
+You can modify this default value after installation by using the following procedure:
+
+1. Navigate to the environment file at /etc/ansible-automation-platform/eda/settings.yaml.
+2. Choose the number of maximum running activations that you need.
+For example, MAX_RUNNING_ACTIVATIONS = 16
+3. Use the following command to restart Event-Driven Ansible services: automation-eda-controller-service restart
+
+For more information about rulebook activations, see the Rulebook activations.
+
+## Modifying the default memory limit for each rulebook activation
+
+Memory usage is based on the number of events that Event-Driven Ansible controller has to process.
+Each rulebook activation container has a 200MB memory limit.
+For example, with 4 CPU and 16GB of RAM, one rulebook activation container with an assigned 200MB memory limit can not handle more than 150,000 events per minute.
+If the number of parallel running rulebook activations is higher, then the maximum number of events each rulebook activation can process is reduced.
+If there are too many incoming events at a very high rate, the container can run out of memory trying to process the events.
+This will kill the container, and your rulebook activation will fail with a status code of 137.
+
+To address this failure, you can increase the amount of memory allocated to rulebook activations in order to process a high number of events at a high rate by using one of the following procedures:
+
+* Modifying the default memory limit for each rulebook activation during installation
+* Modifying the default memory limit for each rulebook activation after installation
+
+### Modifying the default memory limit for each rulebook activation during installation
+
+By default, each rulebook activation container has a 200MB memory limit.
+You can modify this default value during installation by using the following procedure:
+
+1. Navigate to the setup inventory file.
+2. Add automationedacontroller_podman_mem_limit in the [all:vars] section.
+For example, automationedacontroller_podman_mem_limit='400m'.
+3. Run the setup.
+
+### Modifying the default memory limit for each rulebook activation after installation
+
+By default, each rulebook activation container has a 200MB memory limit.
+You can modify this default value after installation by using the following procedure:
+
+1. Navigate to the environment file at /etc/ansible-automation-platform/eda/settings.yaml.
+2. Modify the default container memory limit.
+For example, PODMAN_MEM_LIMIT = '300m'.
+3. Restart the Event-Driven Ansible controller services using automation-eda-controller-service restart.
+
+# System level monitoring for Event-Driven Ansible controller
+
+After characterizing your workload to determine how many rulebook activations you are running in parallel and how many events you are receiving at any given point, you must consider monitoring your Event-Driven Ansible controller  host at the system level.
+Using system level monitoring to review information about Event-Driven Ansible’s performance over time helps when diagnosing problems or when considering capacity for future growth.
+
+System level monitoring includes the following information:
+
+* Disk I/O
+* RAM utilization
+* CPU utilization
+* Network traffic
+
+Higher CPU, RAM, or Disk utilization can affect the overall performance of Event-Driven Ansible controller.
+For example, a high utilization of any of these system level resources indicates that either the Event-Driven Ansible controller is running too many rulebook activations, or some of the individual rulebook activations are using a high volume of resources.
+In this case, you must increase your system level resources to support your workload.
+
+# Performance Troubleshooting for Event-Driven Ansible controller
+
+Based on the default parameters within Event-Driven Ansible controller, you might encounter scenarios that pose challenges to completing your workload.
+The following section provides descriptions of these scenarios and troubleshooting guidance.
+
+* My activation status displays as “running”, but it is not processing the events.
+* Ensure that you are using the correct event source in the rulebook activation.
+If the event you are expecting is coming from a source other than what is in the rulebook, Event-Driven Ansible controller will not process the event.
+* My activation status displays as “running”, and Event-Driven Ansible controller is also receiving the events, but no actions are occuring.
+* Ensure that you have set the correct conditions for matching the event and taking actions in the rulebook activation.
+* My activation keeps restarting in an infinite loop.
+* By default, the reset policy for rulebook activations is set to On Failure. Change the restart policy using the following procedure:
+1. Navigate to menu:Automation Decisions[Rulebook Activations].
+2. Select the Restart Policy list to display the options.
+3. Select the appropriate value: On Failure, Always, Never.

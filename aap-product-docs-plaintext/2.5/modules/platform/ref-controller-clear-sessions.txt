@@ -1,0 +1,7 @@
+# clearsessions
+
+Use this command to delete all sessions that have expired.
+
+For more information, see Clearing the session store in Django&#8217;s Oauth Toolkit documentation.
+
+For more information on OAuth2 token management in the UI, see the Applications.

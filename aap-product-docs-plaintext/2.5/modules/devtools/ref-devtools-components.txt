@@ -1,0 +1,19 @@
+# Ansible development tools components
+
+You can operate some Ansible development tools from the VS Code UI when you have installed the Ansible extension,
+and the remainder from the command line.
+VS Code is a free open-source code editor available on Linux, Mac, and Windows.
+
+Ansible VS Code extension:: This is not packaged with the Ansible Automation Platform RPM package, but it is an integral part of the automation creation workflow.
+From the VS Code UI, you can use the Ansible development tools for the following tasks:
+* Scaffold directories for a playbook project or a collection.
+* Write playbooks with the help of syntax highlighting and auto-completion.
+* Debug your playbooks with a linter.
+* Execute playbooks with Ansible Core using ansible-playbook.
+* Execute playbooks in an execution environment with ansible-navigator.
+
+From the VS Code extension, you can also connect to Red Hat Ansible Lightspeed with IBM watsonx Code Assistant.
+Command-line Ansible development tools:: You can perform the following tasks with Ansible development tools from the command line,
+including the terminal in VS Code:
+* Create an execution environment.
+* Test your playbooks, roles, modules, plugins and collections.

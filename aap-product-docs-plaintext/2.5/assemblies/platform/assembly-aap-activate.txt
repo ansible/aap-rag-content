@@ -1,0 +1,72 @@
+# Activating Red Hat Ansible Automation Platform
+
+Red Hat Ansible Automation Platform uses available subscriptions or a subscription manifest to authorize the use of Ansible Automation Platform. To obtain a subscription, you can do either of the following:
+1. Use your Red Hat customer or Satellite credentials when you launch Ansible Automation Platform.
+2. Upload a subscriptions manifest file either using the Red Hat Ansible Automation Platform interface or manually in an Ansible playbook.
+
+# Activate with credentials
+
+When Ansible Automation Platform launches for the first time, the Ansible Automation Platform Subscription screen automatically displays. You can use your Red Hat credentials to retrieve and import your subscription directly into Ansible Automation Platform.
+
+
+[NOTE]
+----
+You are opted in for Automation Analytics by default when you activate the platform on first time log in. This helps Red Hat improve the product by delivering you a much better user experience. You can opt out, after activating Ansible Automation Platform, by doing the following:
+1. From the navigation panel, select menu:Settings[System].
+2. Clear the Gather data for Automation Analytics option.
+3. Click btn:[Save].
+----
+
+1. Log in to Red Hat Ansible Automation Platform.
+2. Select Username / password.
+3. Enter your Red Hat username and password.
+4. Select your subscription from the Subscription list.
+
+[NOTE]
+----
+You can also use your Satellite username and password if your cluster nodes are registered to Satellite through Subscription Manager.
+----
+5. Review the End User License Agreement and select I agree to the End User License Agreement.
+6. Click btn:[Finish].
+
+After your subscription has been accepted, subscription details are displayed. A status of Compliant indicates your subscription is in compliance with the number of hosts you have automated within your subscription count. Otherwise, your status will show as Out of Compliance, indicating you have exceeded the number of hosts in your subscription.
+Other important information displayed include the following:
+Hosts automated:: Host count automated by the job, which consumes the license count
+Hosts imported:: Host count considering all inventory sources (does not impact hosts remaining)
+Hosts remaining:: Total host count minus hosts automated
+
+# Activate with a manifest file
+
+If you have a subscriptions manifest, you can upload the manifest file either by using the Red Hat Ansible Automation Platform interface.
+
+
+[NOTE]
+----
+You are opted in for Automation Analytics by default when you activate the platform on first time log in. This helps Red Hat improve the product by delivering you a much better user experience. You can opt out, after activating Ansible Automation Platform, by doing the following:
+1. From the navigation panel, select menu:Settings[System].
+2. Uncheck the Gather data for Automation Analytics option.
+3. Click btn:[Save].
+----
+
+You must have a Red Hat Subscription Manifest file exported from the Red Hat Customer Portal. For more information, see Obtaining a manifest file.
+
+1. Log in to Red Hat Ansible Automation Platform.
+2. If you are not immediately prompted for a manifest file, go to menu:Settings[Subscription].
+3. Select Subscription manifest.
+4. Click btn:[Browse] and select the manifest file.
+5. Review the End User License Agreement and select I agree to the End User License Agreement.
+6. Click btn:[Finish].
+
+
+[NOTE]
+----
+If the btn:[BROWSE] button is disabled on the License page, clear the USERNAME and PASSWORD fields.
+----
+
+After your subscription has been accepted, subscription details are displayed. A status of Compliant indicates your subscription is in compliance with the number of hosts you have automated within your subscription count. Otherwise, your status will show as Out of Compliance, indicating you have exceeded the number of hosts in your subscription.
+Other important information displayed include the following:
+Hosts automated:: Host count automated by the job, which consumes the license count
+Hosts imported:: Host count considering all inventory sources (does not impact hosts remaining)
+Hosts remaining:: Total host count minus hosts automated
+
+* You can return to the license screen by selecting menu:Settings[Subscription] from the navigation panel and clicking btn:[Edit subscription].

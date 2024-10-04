@@ -1,0 +1,34 @@
+# Linking your components to the platform gateway
+
+After installing the Ansible Automation Platform Operator in your namespace you can set up your Ansible Automation Platform instance.
+Then link all the platform components to a single user interface.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Details tab.
+5. On the Ansible Automation Platform tile click btn:[Create instance].
+6. From the Create Ansible Automation Platform page enter a name for your instance in the Name field.
+7. Click btn:[YAML view] and paste the following:
+
+```
+spec:
+  controller:
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    disabled: false
+    storage_type: file
+    file_storage_storage_class: <read-write-many-storage-class>
+    file_storage_size: 10Gi
+```
+
+8. Click btn:[Create].
+
+Go to your Ansible Automation Platform Operator deployment and click btn:[All instances] to verify if all instances deployed correctly.
+You should see the Ansible Automation Platform instance and the deployed AutomationController, EDA, and AutomationHub instances here.
+
+Alternatively you can check by the command line, run: oc get route

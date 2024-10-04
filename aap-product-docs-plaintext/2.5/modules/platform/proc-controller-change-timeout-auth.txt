@@ -1,0 +1,17 @@
+# Changing the default timeout for authentication
+
+You can change the default length of time, in seconds, that your supplied token is valid in the Settings screen of the automation controller UI.
+
+1. From the navigation panel, select Settings.
+2. Select Miscellaneous Authentication settings from the list of System options.
+3. Click btn:[Edit].
+4. Enter the timeout period in seconds in the Idle Time Force Log Out text field.
+5. Click btn:[Save].
+
+
+[NOTE]
+----
+If you access automation controller and have trouble logging in, clear your web browser's cache.
+In situations such as this, it is common for the authentication token to be cached during the browser session.
+You must clear it to continue.
+----

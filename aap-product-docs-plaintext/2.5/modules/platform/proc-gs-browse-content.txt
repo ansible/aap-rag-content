@@ -1,0 +1,18 @@
+# Browse content
+
+Ansible Certified Content Collections are included in your subscription to Red Hat Ansible Automation Platform.
+Using Ansible automation hub, you can access and curate a unique set of collections from all forms of Ansible content.
+
+Red Hat Ansible content contains two types of content:
+
+* Ansible Certified Content Collections
+* Ansible validated content collections
+
+Ansible validated content collections are available in your private automation hub through the Platform Installer.
+When you download Ansible Automation Platform with the bundled installer, validated content is pre-populated into the private automation hub by default,
+but only if you enable the private automation hub as part of the inventory.
+
+If you are not using the bundle installer, you can use a Red Hat-supplied Ansible Playbook to install validated content.
+For further information, see Ansible validated content.
+
+You can update validated collections manually by downloading their updated packages in automation hub.

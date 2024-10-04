@@ -1,0 +1,21 @@
+# Setting up a directory for your playbooks
+
+Create a directory to store your playbook projects.
+
+You can add a directory using the file explorer in VS Code.
+
+Alternatively, open a terminal, or click menu:Terminal[New Terminal] to open a terminal in VS Code. Run the following command:
+
+
+```
+$ mkdir my-playbooks
+```
+
+
+Add a .yml file to your playbook directory. You do not need to add content to the file yet.
+
+
+```
+$ cd test-playbooks
+$ touch first-playbook.yml
+```

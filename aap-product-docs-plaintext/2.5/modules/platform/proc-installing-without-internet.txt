@@ -1,0 +1,11 @@
+# Installing without internet access
+
+Use the Red Hat Ansible Automation Platform Bundle installer if you are unable to access the internet, or would prefer not to install separate components and dependencies from online repositories. Access to Red Hat Enterprise Linux repositories is still needed. All other dependencies are included in the tar archive.
+
+1. Go to the Red Hat Ansible Automation Platform download page.
+2. Click btn:[Download Now] for the Ansible Automation Platform <latest-version> Setup Bundle.
+3. Extract the files:
+
+```
+$ tar xvzf ansible-automation-platform-setup-bundle-<latest-version>.tar.gz
+```

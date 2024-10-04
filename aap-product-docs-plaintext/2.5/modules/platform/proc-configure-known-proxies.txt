@@ -1,0 +1,25 @@
+# Configuring known proxies
+
+To configure a list of known proxies for your automation controller, add the proxy IP addresses to the Proxy IP Allowed List field in the System Settings page.
+
+1. From the navigation panel, select menu:Settings[System].
+2. In the Proxy IP Allowed List field, enter IP addresses that are allowed to connect to your automation controller, following the syntax in the example below:
+Example Proxy IP Allowed List entry
+
+```
+[
+  "example1.proxy.com:8080",
+  "example2.proxy.com:8080"
+]
+```
+
+
+[IMPORTANT]
+----
+* Proxy IP Allowed List requires proxies in the list are properly sanitizing header input and correctly setting an X-Forwarded-For value equal to the real source IP of the client. Automation controller can rely on the IP addresses and hostnames in Proxy IP Allowed List to provide non-spoofed values for X-Forwarded-For.`
+* Do not configure HTTP_X_FORWARDED_FOR as an item in Remote Host Headers unless all of the following conditions are satisfied:
+* You are using a proxied environment with ssl termination;
+* The proxy provides sanitization or validation of the X-Forwarded-For header to prevent client spoofing;
+* /etc/tower/conf.d/remote_host_headers.py defines PROXY_IP_ALLOWED_LIST that contains only the originating IP addresses of trusted proxies or load balancers.
+----
+3. Click btn:[Save] to save the settings.

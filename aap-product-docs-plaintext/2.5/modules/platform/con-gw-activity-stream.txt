@@ -1,0 +1,8 @@
+# Activity stream
+
+You can access the details captured by the activity stream from the API:
+
+
+```
+/api/gateway/v1/activitystream/
+```

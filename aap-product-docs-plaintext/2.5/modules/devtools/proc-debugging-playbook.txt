@@ -1,0 +1,27 @@
+# Debugging your playbook
+
+# Error messages
+
+The following playbook contains multiple errors:
+
+
+```
+- name:
+  hosts: localhost
+  tasks:
+   - name:
+     ansible.builtin.ping:
+```
+
+
+The errors are indicated with a wavy underline in VS Code.
+Hover your mouse over an error to view the details:
+
+![Popup message explaining a playbook error]
+
+The errors are listed in the Problems tab of the VS Code terminal.
+Playbook files that contain errors are indicated with a number in the Explorer pane:
+
+![Playbook errors shown in Problems tab and explorer list]
+
+$[0].tasks[0].name None is not of type 'string' indicates that the playbook does not have a label.

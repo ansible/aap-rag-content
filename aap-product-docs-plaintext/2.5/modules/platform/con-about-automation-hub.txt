@@ -1,0 +1,5 @@
+# Ansible automation hub
+
+Ansible automation hub is a repository for certified content of Ansible Content Collections.
+It is the centralized repository for Red Hat and its partners to publish content, and for customers to discover certified, supported Ansible Content Collections.
+Red Hat Ansible Certified Content provides users with content that has been tested and is supported by Red Hat.

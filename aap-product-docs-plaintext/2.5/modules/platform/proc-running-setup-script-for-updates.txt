@@ -1,0 +1,12 @@
+# Running the Red Hat Ansible Automation Platform installer setup script
+
+You can run the setup script once you have finished updating the inventory file.
+
+1. Run the setup.sh script
+
+```
+$ ./setup.sh
+```
+
+
+The installation will begin.

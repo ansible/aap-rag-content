@@ -1,0 +1,4 @@
+# Resources for troubleshooting automation controller
+
+* For information about troubleshooting automation controller, see Troubleshooting automation controller in Configuring automation execution.
+* For information about troubleshooting the performance of automation controller, see Performance troubleshooting for automation controller in Configuring automation execution.

@@ -1,0 +1,11 @@
+# Ansible Automation Platform documentation
+
+Red Hat Ansible Automation Platform 2.5 documentation includes significant feature updates as well as documentation enhancements and offers an improved user experience.
+
+The following are documentation enhancements in Ansible Automation Platform 2.5:
+
+* The Setting up an automation controller token chapter that previously existed has been deprecated and replaced with the Setting up a Red Hat Ansible Automation Platform credential topic. As the Event-Driven Ansible controller is now integrated with centralized authentication and the Platform UI, this method simplifies the authentication process required for rulebook activations moving forward.
+* Documentation changes for 2.5 reflect terminology and product changes. Additionally, we have consolidated content into fewer documents.
+
+The following table summarizes title changes for the 2.5 release.
+

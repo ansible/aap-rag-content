@@ -1,0 +1,20 @@
+# Installing and configuring the Dev Containers extension
+
+If you are installing the containerized version of Ansible development tools, you must install the
+Microsoft Dev Containers
+extension in VS Code.
+
+1. Open VS Code.
+2. Click the Extensions () icon in the Activity Bar, or click menu:View[Extensions], to display the Extensions view.
+3. In the search field in the Extensions view, type Dev Containers.
+4. Select the Dev Containers extension from Microsoft and click btn:[Install].
+
+If you are using Podman or Podman Desktop as your containerization platform, you must modify the default settings in the Dev Containers extension.
+
+1. Replace docker with podman in the Dev Containers extension settings:
+1. In VS Code, open the settings editor.
+2. Search for @ext:ms-vscode-remote.remote-containers.
+
+Alternatively, click the Extensions icon in the activity bar and click the gear icon for the Dev Containers extension.
+2. Set Dev > Containers:Docker Path to podman.
+3. Set Dev > Containers:Docker Compose Path to podman-compose.

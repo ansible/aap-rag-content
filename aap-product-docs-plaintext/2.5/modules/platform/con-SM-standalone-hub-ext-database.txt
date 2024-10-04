@@ -1,0 +1,3 @@
+# Standalone automation hub with an external managed database
+
+This scenario includes installation of the automation hub server on a single machine, and installs a remote PostgreSQL database, managed by the Red Hat Ansible Automation Platform installer.

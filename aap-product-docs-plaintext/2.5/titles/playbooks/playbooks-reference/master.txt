@@ -1,0 +1,11 @@
+# Reference guide to Ansible Playbooks
+
+Thank you for your interest in Red Hat Ansible Automation Platform. Ansible Automation Platform is a commercial offering that helps teams manage complex multi-tier deployments by adding control, knowledge, and delegation to Ansible-powered environments.
+This guide provides a reference for the differing approaches to the creating of Ansible playbooks.
+
+# Providing feedback on Red Hat documentation
+
+If you have a suggestion to improve this documentation, or find an error, you can contact technical support at https://access.redhat.com to open a request.
+
+# This is a test
+

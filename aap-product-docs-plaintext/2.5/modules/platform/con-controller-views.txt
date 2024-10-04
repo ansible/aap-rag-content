@@ -1,0 +1,56 @@
+# Views
+
+The automation controller UI provides several options for viewing information.
+* Dashboard view
+* Jobs view
+* Schedules view
+* Activity Stream
+* Workflow Approvals
+* Host Metrics
+
+# Jobs view
+
+* From the navigation panel, select menu:Automation Execution[Jobs].
+This view displays the jobs that have run, including projects, templates, management jobs, SCM updates, and playbook runs.
+
+
+
+# Schedules view
+
+From the navigation panel, select menu:Automation Execution[Schedules]. This view shows all the scheduled jobs that are configured.
+
+
+
+# Activity Stream
+
+* From the navigation panel, select menu:Automation Execution[Administration > Activity Stream] to display Activity Streams.
+Most screens have an Activity Stream  icon.
+
+
+
+An Activity Stream shows all changes for a particular object.
+
+For each change, the Activity Stream shows the time of the event, the user that initiated the event, and the action.
+The information displayed varies depending on the type of event.
+
+Click the btn:[Examine]  icon to display the event log for the change.
+
+
+
+You can filter the Activity Stream by the initiating user, by system (if it was system initiated), or by any related object, such as a credential, job template, or schedule.
+
+The Activity Stream on the main Dashboard shows the Activity Stream for the entire instance.
+Most pages permit viewing an activity stream filtered for that specific object.
+
+# Workflow Approvals
+
+* From the navigation panel, select menu:Automation Execution[Administration > Workflow Approvals] to see your workflow approval queue.
+The list contains actions that require you to approve or deny before a job can proceed.
+
+# Host Metrics
+
+* From the navigation panel, select menu:Host Metrics[] to see the activity associated with hosts, which includes counts on those that have been automated, used in inventories, and deleted.
+
+
+
+For further information, see Troubleshooting: Keeping your subscription in compliance.

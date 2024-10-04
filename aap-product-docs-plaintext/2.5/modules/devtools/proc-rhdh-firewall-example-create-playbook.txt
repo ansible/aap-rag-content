@@ -1,0 +1,14 @@
+# Create a new playbook project to configure a firewall
+
+Use the Ansible plug-ins to create a new Ansible Playbook project.
+
+1. Click the Ansible A icon in the Red Hat Developer Hub navigation panel.
+2. From the Create dropdown menu on the landing page, select Create Ansible Git Project.
+3. Click Choose in the Create Ansible Playbook Project software template.
+4. Fill in the following information in the Create Ansible Playbook Project page:
+
+
+
+1. Click Review.
+2. Click Create to provision your new playbook project.
+3. Click Open in catalog to view your project.

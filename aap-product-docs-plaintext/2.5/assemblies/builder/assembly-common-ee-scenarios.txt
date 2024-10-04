@@ -1,0 +1,68 @@
+# Common automation execution environment scenarios
+
+Use the following example definition files to address common configuration scenarios.
+
+# Updating the automation hub CA certificate
+
+Use this example to customize the default definition file to include a CA certificate to the additional-build-files section, move the file to the appropriate directory and, finally, run the command to update the dynamic configuration of CA certificates to allow the system to trust this CA certificate.
+
+* A custom CA certificate, for example rootCA.crt.
+
+
+[NOTE]
+----
+Customizing the CA certificate using prepend_base means that the resulting CA configuration appears in all other build stages and the final image, because all other build stages inherit from the base image.
+----
+
+
+```
+additional_build_files:
+  # copy the CA public key into the build context, we will copy and use it in the base image later
+  - src: files/rootCA.crt
+    dest: configs
+
+additional_build_steps:
+  prepend_base:
+    # copy a custom CA cert into the base image and recompute the trust database
+    # because this is in "base", all stages will inherit (including the final EE)
+    - COPY _build/configs/rootCA.crt /usr/share/pki/ca-trust-source/anchors
+    - RUN update-ca-trust
+
+options:
+  package_manager_path: /usr/bin/microdnf  # downstream images use non-standard package manager
+
+[galaxy]
+server_list = automation_hub
+```
+
+
+# Using automation hub authentication details when building automation execution environments
+
+Use the following example to customize the default definition file to pass automation hub authentication details into the automation execution environment build without exposing them in the final automation execution environment image.
+
+* You have created an API token, as in Retrieving the API token for your Red Hat Certified Collection and stored it in a secure location, for example in a file named token.txt.
+* Define a build argument that gets populated with the automation hub API token:
+
+
+```
+export ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN=$(cat <token.txt>)
+```
+
+
+
+```
+additional_build_steps:
+  prepend_galaxy:
+    # define a custom build arg env passthru- we still also have to pass
+    # `--build-arg ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN` to get it to pick it up from the host env
+    - ARG ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_TOKEN
+    - ENV ANSIBLE_GALAXY_SERVER_LIST=automation_hub
+    - ENV ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_URL=https://console.redhat.com/api/automation-hub/content/<yourhuburl>-synclist/
+    - ENV ANSIBLE_GALAXY_SERVER_AUTOMATION_HUB_AUTH_URL=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+```
+
+
+# Additional resources
+
+* For information regarding the different parts of an automation execution environment definition file, see Breakdown of definition file content.
+* For additional example definition files for common scenarios, see Common scenarios section of the Ansible Builder Documentation

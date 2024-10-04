@@ -1,0 +1,3 @@
+# Standalone automation controller with a database on the same node, or a non-installer managed database
+
+This scenario includes installation of automation controller, including the web front end, REST API backend, and database on a single machine. It installs PostgreSQL, and configures the automation controller to use that as its database. This is considered the standard automation controller installation scenario.

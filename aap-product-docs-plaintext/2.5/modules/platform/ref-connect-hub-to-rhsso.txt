@@ -1,0 +1,7 @@
+# Connecting automation hub to a Red Hat Single Sign-On environment
+
+You can configure the inventory file further to connect automation hub to a Red Hat Single Sign-On installation.
+
+You must configure a different set of variables when connecting to a Red Hat Single Sign-On installation managed by Ansible Automation Platform than when connecting to an external Red Hat Single Sign-On installation.
+
+For more information about these inventory variables, refer to the Installing and configuring central authentication for the Ansible Automation Platform.

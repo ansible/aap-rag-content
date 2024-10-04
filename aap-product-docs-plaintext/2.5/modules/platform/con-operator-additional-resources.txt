@@ -1,0 +1,3 @@
+# Additional resources
+
+* See Understanding OperatorHub to learn more about OpenShift Container Platform OperatorHub.

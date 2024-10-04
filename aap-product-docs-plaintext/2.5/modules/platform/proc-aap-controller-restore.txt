@@ -1,0 +1,44 @@
+# Recovering the Automation controller deployment
+
+Use this procedure to restore a previous controller deployment from an AutomationControllerBackup. The deployment name you provide will be the name of the new AutomationController custom resource that will be created.
+
+
+[NOTE]
+----
+The name specified for the new AutomationController custom resource must not match an existing deployment.
+If the backup custom resource being restored is a backup of a currently running AutomationController custom resource the recovery process will fail. See Troubleshooting for steps to resolve the issue.
+----
+
+* You must be authenticated with an OpenShift cluster.
+* You have deployed  automation controller on the cluster.
+* An AutomationControllerBackup is available on a PVC in your cluster.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Automation Controller Restore tab.
+5. Click btn:[Create AutomationControllerRestore].
+6. Enter a Name for the recovery deployment.
+7. Enter a New Deployment name for the restored deployment.
+
+[NOTE]
+----
+This must be different from the original deployment name.
+----
+8. Select the Backup source to restore from. Backup CR is recommended.
+9. Enter the Backup Name of the AutomationControllerBackup object.
+10. Click btn:[Create].
+
+A new deployment is created and your backup is restored to it. This can take approximately 5 to 15 minutes depending on the size of your database.
+
+1. Log in to Red Hat Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the AutomationControllerRestore tab.
+5. Select the restore resource you want to verify.
+6. Scroll to Conditions and check that the Successful status is True.
+
+[NOTE]
+----
+If Successful is False, the recovery has failed. Check the automation controller operator logs for the error to fix the issue.
+----

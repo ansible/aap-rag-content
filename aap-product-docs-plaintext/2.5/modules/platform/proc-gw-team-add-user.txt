@@ -1,0 +1,7 @@
+# Adding users to a team
+
+1. From the navigation panel, select menu:Access Management[Teams].
+2. Select the team to which you want to add users.
+3. Select the Users tab and click btn:[Add users].
+4. Select one or more users from the list by clicking the checkbox next to the name to add them as members of this team.
+5. Click btn:[Add users].

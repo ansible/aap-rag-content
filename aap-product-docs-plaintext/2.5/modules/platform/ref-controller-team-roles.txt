@@ -1,0 +1,3 @@
+# Team roles and permissions
+
+Select the Roles tab on the Roles Details page to display a list of the permissions that are currently available for this team.

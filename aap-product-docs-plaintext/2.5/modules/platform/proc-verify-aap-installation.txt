@@ -1,0 +1,11 @@
+# Verifying installation of Ansible Automation Platform
+
+Upon a successful login, your installation of Red Hat Ansible Automation Platform is complete.
+
+
+[IMPORTANT]
+----
+If the installation fails and you are a customer who has purchased a valid license for Red Hat Ansible Automation Platform, contact Ansible through the Red Hat Customer portal.
+----
+
+See Getting started with Ansible Automation Platform for post installation instructions.

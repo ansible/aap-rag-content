@@ -1,0 +1,7 @@
+# Access Menu
+
+The Access menu enables you to configure who has permissions to automation controller resources:
+
+* Organizations
+* Users
+* Teams

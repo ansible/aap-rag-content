@@ -1,0 +1,162 @@
+# Creating Red Hat Ansible Automation Platform backup resources
+
+Backing up your Red Hat Ansible Automation Platform deployment involves creating backup resources for your deployed instances.
+Use the following procedures to create backup resources for your Red Hat Ansible Automation Platform deployment.
+We recommend taking backups before upgrading the Ansible Automation Platform Operator.
+Take a backup regularly in case you want to restore the platform to a previous state.
+
+# Backing up your Ansible Automation Platform deployment
+
+Regularly backing up your Ansible Automation Platform deployment is vital to protect against unexpected data loss and application errors. Ansible Automation Platform hosts any enabled components (such as, automation controller, automation hub, and Event-Driven Ansible), when you back up Ansible Automation Platform the operator will also back up these components.
+
+* You must be authenticated on OpenShift cluster.
+* You have installed Ansible Automation Platform Operator on the cluster.
+* You have deployed a Ansible Automation Platform instance using the Ansible Automation Platform Operator.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Go to your All Instances tab, and click btn:[Create New].
+5. Select Ansible Automation Platform Backup from the list.
+
+[NOTE]
+----
+When creating the Ansible Automation Platform Backup resource it also creates backup resources for each of the nested components that are enabled.
+----
+6. In the Name field, enter a name for the backup.
+7. In the Deployment name field, enter the name of the deployed Ansible Automation Platform instance being backed up. For example if your Ansible Automation Platform deployment must be backed up and the deployment name is aap, enter 'aap' in the Deployment name field.
+8. Click btn:[Create].
+
+This results in an AnsibleAutomationPlatformBackup resource. The  the resource YAML is similar to the following:
+
+
+```
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatformBackup
+metadata:
+  name: backup
+  namespace: aap
+spec:
+  no_log: true
+  deployment_name: aap
+```
+
+
+To verify that your backup was successful you can:
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Click All Instances.
+
+The All Instances page displays the main backup and the backups for each component with the name you specified when creating your backup resource.
+The status for the following instances must be either Running or Successful:
+
+* AnsibleAutomationPlatformBackup
+* AutomationControllerBackup
+* EDABackup
+* AutomationHubBackup
+
+# Backing up the Automation controller deployment
+
+Use this procedure to back up a deployment of the controller, including jobs, inventories, and credentials.
+
+* You must be authenticated with an OpenShift cluster.
+* You have installed Ansible Automation Platform Operator on the cluster.
+* You have deployed automation controller using the Ansible Automation Platform Operator.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Automation Controller Backup tab.
+5. Click btn:[Create AutomationControllerBackup].
+6. Enter a Name for the backup.
+7. Enter the Deployment name of the deployed Ansible Automation Platform instance being backed up.
+For example, if your automation controller must be backed up and the deployment name is aap-controller, enter 'aap-controller' in the Deployment name field.
+8. If you want to use a custom, pre-created pvc:
+1. [Optional]: enter the name of the Backup persistent volume claim.
+2. [Optional]: enter the Backup PVC storage requirements, and Backup PVC storage class.
+
+[NOTE]
+----
+If no pvc or storage class is provided, the cluster's default storage class is used to create the pvc.
+----
+3. If you have a large database, specify your storage requests accordingly under Backup management pod resource requirements.
+
+[NOTE]
+----
+You can check the size of the existing postgres database data directory by running the following command inside the postgres pod.
+
+```
+$ df -h | grep "/var/lib/pgsql/data"
+```
+
+----
+9. Click btn:[Create].
+
+A backup tarball of the specified deployment is created and available for data recovery or deployment rollback. Future backups are stored in separate tar files on the same pvc.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator.
+4. Select the AutomationControllerBackup tab.
+5. Select the backup resource you want to verify.
+6. Scroll to Conditions and check that the Successful status is True.
+
+[NOTE]
+----
+If Successful is False, the backup has failed. Check the automation controller operator logs for the error to fix the issue.
+----
+
+# Using YAML to back up the Automation controller deployment
+
+See the following procedure for how to back up a deployment of the automation controller using YAML.
+
+* You must be authenticated with an OpenShift cluster.
+* You have installed Ansible Automation Platform Operator on the cluster.
+* You have deployed automation controller using the Ansible Automation Platform Operator.
+
+1. Create a file named "backup-awx.yml" with the following contents:
+
+```
+---
+apiVersion: automationcontroller.ansible.com/v1beta1
+kind: AWXBackup
+metadata:
+  name: awxbackup-2024-07-15
+  namespace: my-namespace
+spec:
+  deployment_name: controller
+```
+
+
+[NOTE]
+----
+The "deployment_name" above is the name of the automation controller deployment you intend to backup from.
+The namespace above is the one containing the automation controller deployment you intend to back up.
+----
+2. Use the oc apply command to create the backup object in your cluster:
+
+$ oc apply -f backup-awx.yml
+
+# Backing up the Automation hub deployment
+
+Use this procedure to back up a deployment of the hub, including all hosted Ansible content.
+
+* You must be authenticated with an OpenShift cluster.
+* You have installed Ansible Automation Platform Operator on the cluster.
+* You have deployed automation hub using the Ansible Automation Platform Operator.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Automation Hub Backup tab.
+5. Click btn:[Create AutomationHubBackup].
+6. Enter a Name for the backup.
+7. Enter the Deployment name of the deployed Ansible Automation Platform instance being backed up.
+For example, if your automation hub must be backed up and the deployment name is aap-hub, enter 'aap-hub' in the Deployment name field.
+8. If you want to use a custom, pre-created pvc:
+1. Optionally, enter the name of the Backup persistent volume claim, Backup persistent volume claim namespace, Backup PVC storage requirements, and Backup PVC storage class.
+9. Click btn:[Create].
+
+This creates a backup of the specified deployment and is available for data recovery or deployment rollback.

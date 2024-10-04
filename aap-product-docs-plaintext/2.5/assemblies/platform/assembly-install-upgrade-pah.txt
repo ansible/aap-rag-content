@@ -1,0 +1,206 @@
+# Installing and upgrading private automation hub
+
+You can install Private Automation Hub or upgrade to a new version on a Red Hat Enterprise Linux (RHEL) 8.4 or later, or RHEL 9 or later virtual or physical machine with a valid Red Hat Ansible Automation Platform subscription.
+
+# System requirements
+
+Installing a private automation hub instance requires the following:
+
+
+
+
+[NOTE]
+----
+You cannot install Ansible Automation Platform and a private automation hub instance on the same node.
+The inventory file can handle the installation of both Ansible Automation Platform and automation hub.
+These instructions are only for the installation of Ansible Automation Platform.
+----
+
+# Installing online or offline
+
+Choose the Ansible Automation Platform installer you need to install private automation hub based on your Red Hat Enterprise Linux environment internet connectivity.
+Review the following scenarios and determine which Ansible Automation Platform installer meets your needs.
+
+
+[NOTE]
+----
+You must have a valid Red Hat customer account to access Ansible Automation Platform installer downloads on the Red Hat Customer Portal.
+----
+
+Install private automation hub using the Ansible Automation Platform installer if your Red Hat Enterprise Linux environment is connected to the internet.
+Installing with internet access will retrieve the latest required repositories, packages, and dependencies.
+
+1. Navigate to the Red Hat Ansible Automation Platform download page.
+2. Click btn:[Download Now] for the Ansible Automation Platform <latest-version> Setup.
+3. Extract the files:
+
+```
+$ tar xvzf ansible-automation-platform-setup-<latest-version>.tar.gz
+```
+
+
+Install private automation hub using the Ansible Automation Platform Bundle installer if you are unable to access the internet, or would prefer not to install separate components and dependencies from online repositories.
+Access to Red Hat Enterprise Linux repositories is still needed.
+All other dependencies are included in the tar archive.
+
+1. Navigate to Download Red Hat Ansible Automation Platform.
+2. Click btn:[Download Now] for the Ansible Automation Platform <latest-version> Setup Bundle.
+3. Extract the files:
+
+```
+$ tar xvzf ansible-automation-platform-setup-bundle-<latest-version>.tar.gz
+```
+
+
+# Editing the inventory file
+
+Edit the inventory file to specify an installation of automation hub and update the required parameters.
+
+1. Navigate to the installer.
+1. [bundled installer]
+
+```
+$ cd ansible-automation-platform-setup-bundle-<latest-version>
+```
+
+2. [online installer]
+
+```
+$ cd ansible-automation-platform-setup-<latest-version>
+```
+
+2. Open the inventory file with a text editor.
+3. Edit the inventory file parameters to specify an installation of automation hub host only. Refer to the following example.
+1. Leave [automationcontroller] inventory information empty.
+2. Add [automationhub] group host information.
+
+[NOTE]
+----
+Provide a reachable IP address for the [automationhub] host to ensure users can sync content from private automation hub from a different node.
+----
+3. Update the values for automationhub_admin_password and automationhub_pg_password and any additional parameters based on your installation specifications:
+Example
+
+```
+[automationcontroller]
+
+
+[automationhub]
+<reachable-ip> ansible_connection=local
+
+[all:vars]
+automationhub_admin_password= <PASSWORD>
+
+automationhub_pg_host=''
+automationhub_pg_port=''
+
+automationhub_pg_database='automationhub'
+automationhub_pg_username='automationhub'
+automationhub_pg_password=<PASSWORD>
+automationhub_pg_sslmode='prefer'
+
+# The default install will deploy a TLS enabled Automation Hub.
+# If for some reason this is not the behavior wanted one can
+# disable TLS enabled deployment.
+#
+# automationhub_disable_https = False
+# The default install will generate self-signed certificates for the Automation
+# Hub service. If you are providing valid certificate via automationhub_ssl_cert
+# and automationhub_ssl_key, one should toggle that value to True.
+#
+# automationhub_ssl_validate_certs = False
+# SSL-related variables
+# If set, this will install a custom CA certificate to the system trust store.
+# custom_ca_cert=/path/to/ca.crt
+# Certificate and key to install in Automation Hub node
+# automationhub_ssl_cert=/path/to/automationhub.cert
+# automationhub_ssl_key=/path/to/automationhub.key
+```
+
+
+## Connecting automation hub to a Red Hat Single Sign-On environment
+
+To connect automation hub to a Red Hat Single Sign-On installation, configure inventory variables in the inventory file before you run the installer setup script.
+
+You must configure a different set of variables when connecting to a Red Hat Single Sign-On installation managed by Ansible Automation Platform than when connecting to an external Red Hat Single Sign-On installation.
+
+### Inventory file variables for connecting automation hub to a Red Hat Single Sign-On instance
+
+If you are installing automation hub and Red Hat Single Sign-On together for the first time or you have an existing Ansible Automation Platform managed Red Hat Single Sign-On, configure the variables for Ansible Automation Platform managed Red Hat Single Sign-On.
+
+If you are installing automation hub and you intend to connect it to an existing externally managed Red Hat Single Sign-On instance, configure the variables for externally managed Red Hat Single Sign-On.
+
+For more information about these inventory variables, refer to Ansible automation hub variables in the Red Hat Ansible Automation Platform Installation Guide.
+
+The following variables can be configured for both Ansible Automation Platform managed and external Red Hat Single Sign-On:
+
+
+
+The following variables can be configured for Ansible Automation Platform managed Red Hat Single Sign-On only:
+
+
+
+The following variable can be configured for external Red Hat Single Sign-On only:
+
+
+
+# Installing automation hub with the setup script
+
+Run the installer setup script after you have configured the appropriate inventory variables.
+
+## Running the setup script
+
+You can run the setup script when you finish updating the inventory file with the required parameters for installing your private automation hub.
+
+* Run the setup.sh script to begin installation:
+
+```
+$ ./setup.sh
+```
+
+
+## Verifying Red Hat Single Sign-On connection
+
+The installer uses the Red Hat Single Sign-On variables to setup a Keycloak realm and client.
+
+To verify that you have successfully connected to the existing Red Hat Single Sign-On installation, check that settings.py contains the Red Hat Single Sign-On host information, the realm name, the key, and the secret.
+
+# Verifying installation
+
+When the installation completes, you can verify your private automation hub has been installed successfully with the following steps:
+
+1. Navigate to your private automation hub.
+2. Log in with the administrator credentials you set in the inventory file.
+
+Your private automation hub is now ready for initial configuration. See the following administration guides for more:
+
+* Managing user access in Private Automation Hub
+* Managing Red Hat Certified and Ansible Galaxy collections in Automation Hub
+
+# Upgrading to the latest version
+
+You can upgrade your private automation hub to the latest version using the Ansible Automation Platform setup bundle installer.
+Perform this upgrade using the inventory file configured when you installed private automation hub.
+
+1. Navigate to Download Red Hat Ansible Automation Platform.
+2. Click btn:[Download Now] for the Ansible Automation Platform <latest-version> Setup Bundle.
+3. Extract the files:
+
+```
+$ tar xvzf ansible-automation-platform-setup-bundle-<latest-version>.tar.gz
+```
+
+4. Copy the configuration information from your initial installation to the inventory file.
+5. Run the setup.sh script
+
+```
+$ ./setup.sh
+```
+
+
+You can verify a successful upgrade to your private automation hub by reviewing the Server version information.
+
+1. Log in to your private automation hub.
+2. Click the ? icon in the navigation panel.
+3. Click btn:[About].
+4. Verify that the server version matches the version you upgraded to.

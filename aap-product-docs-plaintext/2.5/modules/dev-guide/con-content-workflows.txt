@@ -1,0 +1,8 @@
+# About content workflows
+
+Before Red Hat Ansible Automation Platform 2.0, an automation content developer may have needed so many Python virtual environments that they required their own automation in order to manage them. To reduce this level of complexity, Ansible Automation Platform 2.0 is moving away from virtual environments and using containers, referred to as automation execution environments, instead, as they are straightforward to build and manage and are more shareable across teams and orgs.
+
+As automation controller shifts to using automation execution environments, tools like automation content navigator and Ansible Builder ensure that you can take advantage of those automation execution environments locally within your own development system.
+
+* See the Automation Content Navigator Creator Guide for more on using automation content navigator.
+* For more information on Ansible Builder, see Creating and Consuming Execution Environments.

@@ -1,0 +1,4 @@
+# Minimize local system access
+
+When you use automation controller with best practices, it does not require local user access except for administrative purposes.
+Non-administrator users do not have access to the automation controller system.

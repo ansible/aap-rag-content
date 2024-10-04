@@ -1,0 +1,35 @@
+# Installation of Event-Driven Ansible controller
+
+Similar to the automation controller and automation hub components, the setup for Event-Driven Ansible controller includes default settings for specific variables in the inventory files.
+
+[IMPORTANT]
+----
+Event-Driven Ansible controller must be installed on a separate server and cannot be installed on the same host as automation hub and automation controller.
+----
+
+[NOTE]
+----
+If you are running Red Hat Enterprise Linux 8 and want to set your memory limits, you must have cgroup v2 enabled before you install Event-Driven Ansible. For specific instructions, see the Knowledge-Centered Support (KCS) article, Ansible Automation Platform Event-Driven Ansible controller for Red Hat Enterprise Linux 8 requires cgroupv2.
+----
+
+# Installing Event-Driven Ansible controller on Red Hat Ansible Automation Platform
+
+To prepare for installation of Event-Driven Ansible controller, review the following information in the Red Hat Ansible Automation Platform Planning Guide:
+
+* Example Ansible Automation Platform architecture, including the Event-Driven Ansible controller
+* Event-Driven Ansible controller general information
+* Event-Driven Ansible controller system requirements
+
+When you are ready to install the Event-Driven Ansible controller, see the procedures in the Red Hat Ansible Automation Platform Installation Guide beginning with Chapter 3. Installing Red Hat Ansible Automation Platform.
+
+Lastly, see Appendix A. 5. Event-Driven Ansible controller variables in the Red Hat Ansible Automation Platform Installation Guide to view predefined variables for Event-Driven Ansible controller.
+
+# Deploying Event-Driven Ansible controller with Ansible Automation Platform Operator on OpenShift Container Platform
+
+Event-Driven Ansible is not limited to Ansible Automation Platform on VMs. You can also access this feature on Ansible Automation Platform Operator on OpenShift Container Platform. To deploy Event-Driven Ansible with Ansible Automation Platform Operator, follow the instructions in Deploying Event-Driven Ansible controller with Ansible Automation Platform Operator on OpenShift Container Platform.
+
+After successful deployment, you can connect to event sources and resolve issues more efficiently.
+
+* For more detailed information on planning, see the Red Hat Ansible Automation Platform Planning Guide.
+* For a comprehensive list of predefined variables for the Event-Driven Ansible controller, see the Red Hat Ansible Automation Platform Installation Guide.
+* For more information about deployment on Ansible Automation Platform operator, see the Deploying the Red Hat Ansible Automation Platform operator on OpenShift Container Platform Guide

@@ -1,0 +1,13 @@
+# Automation execution projects
+
+A project is a logical collection of Ansible playbooks that you can manage in Ansible Automation Platform.
+Platform administrators and automation developers have the permissions to create projects.
+As an automation operator you can view and sync projects.
+
+# Viewing project details
+
+The Projects page displays a list of projects that are currently available.
+
+1. From the navigation panel, select menu:Automation Execution[Projects].
+2. Click a project to view its details.
+3. For each project listed, you can sync the latest revision, edit the project, or copy the project's attributes using the icons next to each project.

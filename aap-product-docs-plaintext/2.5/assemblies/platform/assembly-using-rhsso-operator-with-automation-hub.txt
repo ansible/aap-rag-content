@@ -1,0 +1,442 @@
+# Using Red Hat Single Sign-On Operator with automation hub
+
+Private automation hub uses Red Hat Single Sign-On for authentication.
+The Red Hat Single Sign-On Operator creates and manages resources.
+Use this operator to create custom resources to automate Red Hat Single Sign-On administration in OpenShift.
+* When installing Ansible Automation Platform on Virtual Machines (VMs) the installer can automatically install and configure Red Hat Single Sign-On for use with private automation hub.
+* When installing Ansible Automation Platform on Red Hat OpenShift Container Platform you must install Single Sign-On separately.
+This chapter describes the process to configure Red Hat Single Sign-On and integrate it with private automation hub when Ansible Automation Platform is installed on OpenShift Container Platform.
+* You have access to Red Hat OpenShift Container Platform using an account with operator installation permissions.
+* You have installed the catalog containing the Red Hat Ansible Automation Platform operators.
+* You have installed the Red Hat Single Sign-On Operator.
+To install the Red Hat Single Sign-On Operator, follow the procedure in Installing Red Hat Single Sign-On using a custom resource in the Red Hat Single Sign-On documentation.
+
+## Creating a Keycloak instance
+
+After you install the Red Hat Single Sign-On Operator, you can create a Keycloak instance for use with Ansible Automation Platform.
+
+From here you provide an external Postgres or one will be created for you.
+
+/ Log in to Red Hat OpenShift Container Platform.
+. Navigate to menu:Operator[Installed Operators].
+. Select the RH-SSO project.
+. Select the Red Hat Single Sign-On Operator.
+. On the Red Hat Single Sign-On Operator details page select btn:[Keycloak].
+. Click btn:[Create instance].
+. Click btn:[YAML view].
+
++
+The default Keycloak custom resource is as follows:
+
++
+
+
+```
+apiVersion: keycloak.org/v1alpha1
+kind: Keycloak
+metadata:
+  name: example-keycloak
+  labels:
+	app: sso
+  namespace: aap
+spec:
+  externalAccess:
+	enabled: true
+  instances: 1
+```
+
+
++
+. Click btn:[Create].
+
+1. When deployment is complete, you can use this credential to login to the administrative console.
+2. You can find the credentials for the administrator in the credential-<custom-resource> (example keycloak) secret in the namespace.
+
+## Creating a Keycloak realm for Ansible Automation Platform
+
+Create a realm to manage a set of users, credentials, roles, and groups.
+A user belongs to and logs into a realm.
+Realms are isolated from one another and can only manage and authenticate the users that they control.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operator[Installed Operators].
+3. Select the Red Hat Single Sign-On Operator project.
+4. Select the Keycloak Realm tab and click btn:[Create Keycloak Realm].
+5. On the Keycloak Realm form, select btn:[YAML view].
+Edit the YAML file as follows:
+
+```
+kind: KeycloakRealm
+apiVersion: keycloak.org/v1alpha1
+metadata:
+  name: ansible-automation-platform-keycloakrealm
+  namespace: rh-sso
+  labels:
+    app: sso
+    realm: ansible-automation-platform
+spec:
+  realm:
+    id: ansible-automation-platform
+    realm: ansible-automation-platform
+    enabled: true
+    displayName: Ansible Automation Platform
+  instanceSelector:
+    matchLabels:
+      app: sso
+```
+
+
+6. Click btn:[Create] and wait for the process to complete.
+
+## Creating a Keycloak client
+
+Keycloak clients authenticate hub users with Red Hat Single Sign-On.
+When a user authenticates the request goes through the Keycloak client.
+When Single Sign-On validates or issues the OAuth token, the client provides the response to automation hub and the user can log in.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operator[Installed Operators].
+3. Select the Red Hat Single Sign-On Operator project.
+4. Select the Keycloak Client tab and click btn:[Create Keycloak Client].
+5. On the Keycloak Realm form, select btn:[YAML view].
+6. Replace the default YAML file with the following:
+
+```
+kind: KeycloakClient
+apiVersion: keycloak.org/v1alpha1
+metadata:
+  name: automation-hub-client-secret
+  labels:
+    app: sso
+    realm: ansible-automation-platform
+  namespace: rh-sso
+spec:
+  realmSelector:
+    matchLabels:
+      app: sso
+      realm: ansible-automation-platform
+  client:
+    name: Automation Hub
+    clientId: automation-hub
+    secret: <client-secret>                        1
+    clientAuthenticatorType: client-secret
+    description: Client for automation hub
+    attributes:
+      user.info.response.signature.alg: RS256
+      request.object.signature.alg: RS256
+    directAccessGrantsEnabled: true
+    publicClient: true
+    protocol: openid-connect
+    standardFlowEnabled: true
+    protocolMappers:
+      - config:
+          access.token.claim: "true"
+          claim.name: "family_name"
+          id.token.claim: "true"
+          jsonType.label: String
+          user.attribute: lastName
+          userinfo.token.claim: "true"
+        consentRequired: false
+        name: family name
+        protocol: openid-connect
+        protocolMapper: oidc-usermodel-property-mapper
+      - config:
+          userinfo.token.claim: "true"
+          user.attribute: email
+          id.token.claim: "true"
+          access.token.claim: "true"
+          claim.name: email
+          jsonType.label: String
+        name: email
+        protocol: openid-connect
+        protocolMapper: oidc-usermodel-property-mapper
+        consentRequired: false
+      - config:
+          multivalued: "true"
+          access.token.claim: "true"
+          claim.name: "resource_access.${client_id}.roles"
+          jsonType.label: String
+        name: client roles
+        protocol: openid-connect
+        protocolMapper: oidc-usermodel-client-role-mapper
+        consentRequired: false
+      - config:
+          userinfo.token.claim: "true"
+          user.attribute: firstName
+          id.token.claim: "true"
+          access.token.claim: "true"
+          claim.name: given_name
+          jsonType.label: String
+        name: given name
+        protocol: openid-connect
+        protocolMapper: oidc-usermodel-property-mapper
+        consentRequired: false
+      - config:
+          id.token.claim: "true"
+          access.token.claim: "true"
+          userinfo.token.claim: "true"
+        name: full name
+        protocol: openid-connect
+        protocolMapper: oidc-full-name-mapper
+        consentRequired: false
+      - config:
+          userinfo.token.claim: "true"
+          user.attribute: username
+          id.token.claim: "true"
+          access.token.claim: "true"
+          claim.name: preferred_username
+          jsonType.label: String
+        name: <username>
+        protocol: openid-connect
+        protocolMapper: oidc-usermodel-property-mapper
+        consentRequired: false
+      - config:
+          access.token.claim: "true"
+          claim.name: "group"
+          full.path: "true"
+          id.token.claim: "true"
+          userinfo.token.claim: "true"
+        consentRequired: false
+        name: group
+        protocol: openid-connect
+        protocolMapper: oidc-group-membership-mapper
+      - config:
+          multivalued: 'true'
+          id.token.claim: 'true'
+          access.token.claim: 'true'
+          userinfo.token.claim: 'true'
+          usermodel.clientRoleMapping.clientId:  'automation-hub'
+          claim.name: client_roles
+          jsonType.label: String
+        name: client_roles
+        protocolMapper: oidc-usermodel-client-role-mapper
+        protocol: openid-connect
+      - config:
+          id.token.claim: "true"
+          access.token.claim: "true"
+          included.client.audience: 'automation-hub'
+        protocol: openid-connect
+        name: audience mapper
+        protocolMapper: oidc-audience-mapper
+  roles:
+    - name: "hubadmin"
+      description: "An administrator role for automation hub"
+```
+
+Replace this with a unique value.
+7. Click btn:[Create] and wait for the process to complete.
+
+After you deploy automation hub, you must update the client with the “Valid Redirect URIs” and “Web Origins” as described in Updating the Red Hat Single Sign-On client
+Additionally, the client comes pre-configured with token mappers, however, if your authentication provider does not provide group data to Red Hat SSO, then the group mapping must be updated to reflect how that information is passed.
+This is commonly by user attribute.
+
+## Creating a Keycloak user
+
+This procedure creates a Keycloak user, with the hubadmin role, that can log in to automation hub with Super Administration privileges.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operator[Installed Operators].
+3. Select the Red Hat Single Sign-On Operator project.
+4. Select the Keycloak Realm tab and click btn:[Create Keycloak User].
+5. On the Keycloak User form, select btn:[YAML view].
+6. Replace the default YAML file with the following:
+
+```
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakUser
+metadata:
+  name: hubadmin-user
+  labels:
+    app: sso
+    realm: ansible-automation-platform
+  namespace: rh-sso
+spec:
+  realmSelector:
+    matchLabels:
+      app: sso
+      realm: ansible-automation-platform
+  user:
+    username: hub_admin
+    firstName: Hub
+    lastName: Admin
+    email: hub_admin@example.com
+    enabled: true
+    emailVerified: false
+    credentials:
+      - type: password
+        value: <ch8ngeme>
+    clientRoles:
+      automation-hub:
+        - hubadmin
+```
+
+7. Click btn:[Create] and wait for the process to complete.
+
+When a user is created, the Operator creates a Secret containing both the username and password using the following naming pattern: credential-<realm name>-<username>-<namespace>.
+In this example the credential is called credential-ansible-automation-platform-hub-admin-rh-sso.
+When a user is created the Operator does not update the user&#8217;s password.
+Password changes are not reflected in the Secret.
+
+## Installing the Ansible Automation Platform Operator
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operator[Operator Hub].
+3. Search for the Ansible Automation Platform Operator.
+4. Select the Ansible Automation Platform Operator project.
+5. Click on the Operator tile.
+6. Click btn:[Install].
+7. Select a Project to install the Operator into.
+Red Hat recommends using the Operator recommended Namespace name.
+1. If you want to install the Operator into a project other than the recommended one, select Create Project from the drop down menu.
+2. Enter the Project name.
+3. Click btn:[Create].
+8. Click btn:[Install].
+9. When the Operator has been installed, click btn:[View Operator].
+
+## Creating a Red Hat Single Sign-On connection secret
+
+Use this procedure to create a connection secret for Red Hat Single Sign-On.
+
+1. Navigate to \https://<sso_host>/auth/realms/ansible-automation-platform.
+2. Copy the public_key value.
+3. In the OpenShift Web UI, navigate to menu:Workloads[Secrets].
+4. Select the ansible-automation-platform project.
+5. Click btn:[Create], and select btn:[From YAML].
+6. Edit the following YAML to create the secret
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: automation-hub-sso                       1
+  namespace: ansible-automation-platform
+type: Opaque
+stringData:
+  keycloak_host: "keycloak-rh-sso.apps-crc.testing"
+  keycloak_port: "443"
+  keycloak_protocol: "https"
+  keycloak_realm: "ansible-automation-platform"
+  keycloak_admin_role: "hubadmin"
+  social_auth_keycloak_key: "automation-hub"
+  social_auth_keycloak_secret: "client-secret"   2
+  social_auth_keycloak_public_key: >-            3
+```
+
+This name is used in the next step when creating the automation hub instance.
+If the secret was changed when creating the Keycloak client for automation hub be sure to change this value to match.
+Enter the value of the public_key copied in Installing the Ansible Automation Platform Operator.
+7. Click btn:[Create] and wait for the process to complete.
+
+## Installing automation hub using the Ansible Automation Platform Operator
+
+Use the following procedure to install automation hub using the Ansible Automation Platform Operator.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operator[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Automation hub tab.
+5. Click btn:[Create Automation hub].
+6. Select btn:[YAML view].
+The YAML should be similar to:
+
+```
+apiVersion: automationhub.ansible.com/v1beta1
+kind: AutomationHub
+metadata:
+  name: private-ah                              1
+  namespace: aap
+spec:
+  sso_secret: automation-hub-sso                2
+  pulp_settings:
+    verify_ssl: false
+  route_tls_termination_mechanism: Edge
+  ingress_type: Route
+  loadbalancer_port: 80
+  file_storage_size: 100Gi
+  image_pull_policy: IfNotPresent
+  replicas: 1                                   3
+  web_replicas: N
+  task_replicas: N
+  file_storage_access_mode: ReadWriteMany
+  content:
+    log_level: INFO
+    replicas: 2
+  postgres_storage_requirements:
+    limits:
+      storage: 50Gi
+    requests:
+      storage: 8Gi
+  api:
+    log_level: INFO
+    replicas: 1
+  postgres_resource_requirements:
+    limits:
+      cpu: 1000m
+      memory: 8Gi
+    requests:
+      cpu: 500m
+      memory: 2Gi
+  loadbalancer_protocol: http
+  resource_manager:
+    replicas: 1
+  worker:
+    replicas: 2
+```
+
+Set metadata.name to the name to use for the instance.
+Set spec.sso_secret to the name of the secret created in Creating a Secret to hold the Red Hat Single Sign On connection details.
+Scale replicas up or down for each deployment by using the web_replicas or task_replicas respectively, where N represents the number of replicas you want to create. Alternatively, you can scale all pods across both deployments by using replicas. See Scaling the Web and Task Pods independently for details.
+
+[NOTE]
+----
+This YAML turns off SSL verification (ssl_verify: false).
+If you are not using self-signed certificates for OpenShift this setting can be removed.
+----
+7. Click btn:[Create] and wait for the process to complete.
+
+## Determining the automation hub Route
+
+Use the following procedure to determine the hub route.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Networking[Routes].
+3. Select the project you used for the install.
+4. Copy the location of the private-ah-web-svc service.
+The name of the service is different if you used a different name when creating the automation hub instance.
+This is used later to update the Red Hat Single Sign-On client.
+
+## Updating the Red Hat Single Sign-On client
+
+After you install automation hub and you know the URL of the instance, you must update the Red Hat Single Sign-On to set the Valid Redirect URIs and Web Origins settings.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operator[Installed Operators].
+3. Select the RH-SSO project.
+4. Click btn:[Red Hat Single Sign-On Operator].
+5. Select btn:[Keycloak Client].
+6. Click on the automation-hub-client-secret client.
+7. Select btn:[YAML].
+8. Update the Client YAML to add the Valid Redirect URIs and Web Origins settings.
+
+```
+redirectUris:
+  - 'https://private-ah-ansible-automation-platform.apps-crc.testing/*'
+webOrigins:
+  - 'https://private-ah-ansible-automation-platform.apps-crc.testing'
+```
+
+
+
+[NOTE]
+----
+Ensure the indentation is correct when entering these settings.
+----
+9. Click btn:[Save].
+
+1. Navigate to the automation hub route.
+2. Enter the hub_admin user credentials and sign in.
+3. Red Hat Single Sign-On processes the authentication and redirects back to automation hub.
+
+# Additional resources
+
+* For more information on running operators on OpenShift Container Platform, see Working with Operators in OpenShift Container Platform in the OpenShift Container Platform product documentation.

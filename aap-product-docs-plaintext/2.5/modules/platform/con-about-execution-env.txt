@@ -1,0 +1,4 @@
+# Automation execution environments
+
+Automation execution environments are container images on which all automation in Red Hat Ansible Automation Platform is run. They provide a solution that includes the Ansible execution engine and hundreds of modules that help users automate all aspects of IT environments and processes.
+Automation execution environments automate commonly used operating systems, infrastructure platforms, network devices, and clouds.

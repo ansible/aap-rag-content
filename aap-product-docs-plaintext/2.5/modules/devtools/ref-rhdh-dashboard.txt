@@ -1,0 +1,28 @@
+# Dashboard navigation
+
+When you log in to Red Hat Developer Hub (RHDH), the main RHDH menu and dashboard are displayed.
+
+To view the dashboard for Ansible plug-ins for Red Hat Developer Hub, click Ansible in the Red Hat Developer Hub navigation panel.
+
+![Ansible plug-in dashboard]
+
+The plug-in dashboard illustrates the steps you need to take from learning about Ansible to deploying automation jobs from Ansible Automation Platform:
+
+* Overview displays the main dashboard page.
+* Learn provides links to resources curated by Red Hat that introduce you to Ansible and provide step-by-step examples to get you started.
+For more information, see
+Learning about Ansible.
+* Discover existing collections links to private automation hub, if configured in the plug-ins, or to automation hub hosted on the Red Hat Hybrid Cloud Console.
+Automation hub stores existing collections and execution environments that you can use in your projects.
+For more information, see
+Discovering existing collections.
+* Create creates new projects in your configured Source Control Management platforms such as GitHub.
+For more information, see
+Creating a project.
+* Develop links you to OpenShift Dev Spaces, if configured in the Ansible plug-ins installation.
+OpenShift Dev Spaces provides on-demand, web-based Integrated Development Environments (IDEs), where you can develop automation content.
+For more information, see
+Developing projects.
+* Operate connects you to Ansible Automation Platform, where you can create and run automation jobs that use the projects you have developed.
+For more information, see
+Setting up a controller project to run your playbook project.

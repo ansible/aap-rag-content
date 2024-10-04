@@ -1,0 +1,20 @@
+# Authenticating automation controller
+
+Through the automation controller UI, you can set up a simplified login through various authentication types, such as GitHub, Google, LDAP, RADIUS, and SAML.
+Once you create and register your developer application with the appropriate service, you can set up authorizations for them.
+
+1. From the navigation panel, select Settings.
+2. Select from the following Authentication options:
+* Azure AD settings
+* Github settings
+* Google OAuth2 settings
+* LDAP Authentication
+* RADIUS settings
+* SAML settings
+* Transparent SAML Logins
+* Enabling Logging for SAML
+* TACACS+ settings
+* Generic OIDC settings
+
+Ensure that you include all the required information.
+3. Click btn:[Save] to apply the settings or btn:[Cancel] to abandon the changes.

@@ -1,0 +1,28 @@
+# About automation mesh
+
+Automation mesh is an overlay network intended to ease the distribution of work across a large and dispersed collection of workers through nodes that establish peer-to-peer connections with each other using existing networks.
+
+Red Hat Ansible Automation Platform 2 replaces Ansible Tower and isolated nodes with Ansible Automation Platform and automation hub.
+Ansible Automation Platform provides the control plane for automation through its UI, RESTful API, RBAC, workflows and CI/CD integration, while automation mesh can be used for setting up, discovering, changing or modifying the nodes that form the control and execution layers.
+
+Automation mesh uses TLS encryption for communication, so traffic that traverses external networks (the internet or other) is encrypted in transit.
+
+Automation mesh introduces:
+
+* Dynamic cluster capacity that scales independently, enabling you to create, register, group, ungroup and deregister nodes with minimal downtime.
+* Control and execution plane separation that enables you to scale playbook execution capacity independently from control plane capacity.
+* Deployment choices that are resilient to latency, reconfigurable without outage, and that dynamically re-reroute to choose a different path when outages occur.
+* Connectivity that includes bi-directional, multi-hopped mesh communication possibilities which are Federal Information Processing Standards (FIPS) compliant.
+
+# Control and execution planes
+
+## Control plane
+
+
+
+## Execution plane
+
+The execution plane consists of execution nodes that execute automation on behalf of the control plane and have no control functions. Hop nodes serve to communicate. Nodes in the execution plane only run user-space jobs, and may be geographically separated, with high latency, from the control plane.
+
+* Execution nodes - Execution nodes run jobs under ansible-runner with podman isolation. This node type is similar to isolated nodes. This is the default node type for execution plane nodes.
+* Hop nodes - similar to a jump host, hop nodes route traffic to other execution nodes. Hop nodes cannot execute automation.

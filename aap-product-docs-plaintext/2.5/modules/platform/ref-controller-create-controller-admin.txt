@@ -1,0 +1,8 @@
+# Create an automation controller Administrator from the command line
+
+Occasionally you might find it helpful to create a system administrator (superuser) account from the command line.
+
+To create a superuser, run the following command as root on the automation controller server and enter the administrator
+information as prompted:
+
+awx-manage createsuperuser

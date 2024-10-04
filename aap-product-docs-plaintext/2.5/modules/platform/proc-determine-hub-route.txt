@@ -1,0 +1,10 @@
+# Determining the automation hub Route
+
+Use the following procedure to determine the hub route.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Networking[Routes].
+3. Select the project you used for the install.
+4. Copy the location of the private-ah-web-svc service.
+The name of the service is different if you used a different name when creating the automation hub instance.
+This is used later to update the Red Hat Single Sign-On client.

@@ -1,0 +1,96 @@
+# Upgrading to Ansible Automation Platform 2.5
+
+To upgrade your instance of Ansible Tower to Ansible Automation Platform 2.5, copy the inventory file from your original Tower instance to your new Tower instance and run the installer. The Red Hat Ansible Automation Platform installer detects a pre-2.5 and offers an upgraded inventory file to continue with the upgrade process:
+
+1. Download the latest installer for Red Hat Ansible Automation Platform from the Red Hat Ansible Automation Platform download page.
+2. Extract the files:
+
+```
+$ tar xvzf ansible-automation-platform-setup-<latest_version>.tar.gz
+```
+
+3. Navigate into your Ansible Automation Platform installation directory:
+
+```
+$ cd ansible-automation-platform-setup-<latest_version>/
+```
+
+4. Copy the inventory file from your original instance into the directory of the latest installer:
+
+```
+$ cp ansible-tower-setup-3.8.x.x/inventory ansible-automation-platform-setup-<latest_version>
+```
+
+5. Run the setup.sh script:
+
+```
+$ ./setup.sh
+```
+
+
+The setup script pauses and indicates that a "pre-2.x" inventory file was detected, but offers a new file called inventory.new.ini allowing you to continue to upgrade your original instance.
+6. Open inventory.new.ini with a text editor.
+
+[NOTE]
+----
+By running the setup script, the Installer modified a few fields from your original inventory file, such as renaming [tower] to [automationcontroller].
+----
+7. Update the newly generated inventory.new.ini file to configure your automation mesh by assigning relevant variables, nodes, and relevant node-to-node peer connections:
+
+[NOTE]
+----
+The design of your automation mesh topology depends on the automation needs of your environment.
+It is beyond the scope of this document to provide designs for all possible scenarios.
+The following is one example automation mesh design.
+----
+Example inventory file with a standard control plane consisting of three nodes utilizing hop nodes:
+
+```
+[automationcontroller]
+control-plane-1.example.com
+control-plane-2.example.com
+control-plane-3.example.com
+
+[automationcontroller:vars]
+node_type=control 1
+peers=execution_nodes 2
+
+
+[execution_nodes]
+execution-node-1.example.com peers=execution-node-2.example.com
+execution-node-2.example.com peers=execution-node-3.example.com
+execution-node-3.example.com peers=execution-node-4.example.com
+execution-node-4.example.com peers=execution-node-5.example.com node_type=hop
+execution-node-5.example.com peers=execution-node-6.example.com node_type=hop 3
+execution-node-6.example.com peers=execution-node-7.example.com
+execution-node-7.example.com
+
+[execution_nodes:vars]
+node_type=execution
+```
+
+Specifies a control node that runs project and inventory updates and system jobs, but not regular jobs. Execution capabilities are disabled on these nodes.
+Specifies peer relationships for node-to-node connections in the [execution_nodes] group.
+Specifies hop nodes that route traffic to other execution nodes. Hop nodes cannot execute automation.
+8. Import or generate a automation hub API token.
+* Import an existing API token with the automationhub_api_token flag:
+
+```
+automationhub_api_token=<api_token>
+```
+
+* Generate a new API token, and invalidate any existing tokens, by setting the generate_automationhub_token flag to True:
+
+```
+generate_automationhub_token=True
+```
+
+9. Once you have finished configuring your inventory.new.ini for automation mesh, run the setup script using inventory.new.ini:
+
+```
+$ ./setup.sh -i inventory.new.ini -e @credentials.yml -- --ask-vault-pass
+```
+
+10. Once the installation completes, verify that your Ansible Automation Platform has been installed successfully by logging in to the Ansible Automation Platform dashboard UI across all automation controller nodes.
+
+* For general information about using the Ansible Automation Platform installer, see the Red Hat Ansible Automation Platform installation guide.

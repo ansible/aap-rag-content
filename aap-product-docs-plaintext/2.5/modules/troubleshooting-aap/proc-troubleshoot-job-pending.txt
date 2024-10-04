@@ -1,0 +1,38 @@
+# Issue - Jobs in automation controller are stuck in a pending state
+
+After launching jobs in automation controller, the jobs stay in a pending state and do not start.
+
+There are a few reasons jobs can become stuck in a pending state. For more information about troubleshooting this issue, see Playbook stays in pending in Configuring automation execution
+
+Cancel all pending jobs
+
+1. Run the following commands to list all of the pending jobs:
+
+```
+# awx-manage shell_plus
+```
+
+
+```
+>>> UnifiedJob.objects.filter(status='pending')
+```
+
+2. Run the following command to cancel all of the pending jobs:
+
+```
+>>> UnifiedJob.objects.filter(status='pending').update(status='canceled')
+```
+
+
+Cancel a single job by using a job id
+
+* To cancel a specific job, run the following commands, replacing <job_id> with the job id to cancel:
+
+```
+# awx-manage shell_plus
+```
+
+
+```
+>>> UnifiedJob.objects.filter(id=_<job_id>_).update(status='canceled')
+```

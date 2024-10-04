@@ -1,0 +1,38 @@
+# Attaching Subscriptions
+
+You must have valid Ansible Automation Platform subscriptions attached before installing Ansible Automation Platform.
+
+
+[NOTE]
+----
+Attaching subscriptions is unnecessary if your Red Hat account has enabled Simple Content Access Mode.
+However, you must register to Red Hat Subscription Management (RHSM) or Red Hat Satellite before installing Ansible Automation Platform.
+----
+
+1. To find the pool_id of your subscription, enter the following command:
+
+# subscription-manager list --available --all | grep "Ansible Automation Platform" -B 3 -A 6
+
+The command returns the following:
+
+Subscription Name: Red Hat Ansible Automation Platform, Premium (5000 Managed Nodes)
+Provides: Red Hat Ansible Engine
+Red Hat Single Sign-On
+Red Hat Ansible Automation Platform
+SKU: MCT3695
+Contract: ********
+Pool ID: ********************
+Provides Management: No
+Available: 4999
+Suggested: 1
+2. To attach this subscription, enter the following command:
+
+# subscription-manager attach --pool=<pool_id>
+
+If all nodes have attached, then the repositories are found.
+3. To check whether the subscription attached successfully, enter the following command:
+
+# subscription-manager list --consumed
+4. To remove this subscription, enter the following command:
+
+#subscription-manager remove --pool=<pool_id>

@@ -1,0 +1,10 @@
+# Selecting an authentication type
+
+On the first screen of the wizard you can select the type of authenticator plugin you want to configure.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. Click btn:[Create authentication].
+
+The Create Authentication wizard is displayed, where you can follow the prompts to configure your preferred authentication method.
+3. Select the authenticator type from the Authentication type list. See Configuring an authentication type for the complete list of authentication plugins available.
+4. Click btn:[Next] to Configure authentication details.

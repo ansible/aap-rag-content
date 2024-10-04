@@ -1,0 +1,4 @@
+# automation content navigator doc subcommand settings
+
+The following table describes each parameter and setting options for the automation content navigator doc subcommand.
+

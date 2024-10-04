@@ -1,0 +1,12 @@
+# Deleting a team
+
+Before you can delete a team, you must have team permissions. When you delete a team, the inherited permissions members got from that team are revoked.
+
+1. From the navigation panel, select menu:Access Management[Teams].
+2. Select the check box for the team that you want to remove.
+3. Select the &#8942; icon and select Delete team.
+
+[NOTE]
+----
+You can delete multiple teams by selecting the checkbox next to each team you want to remove, and selecting Delete teams from the More actions &#8942; list.
+----

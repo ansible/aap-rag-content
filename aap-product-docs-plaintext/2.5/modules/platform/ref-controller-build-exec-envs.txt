@@ -1,0 +1,9 @@
+# Building an execution environment
+
+If your Ansible content depends on custom virtual environments instead of a default environment, you must take additional steps.
+You must install packages on each node, interact well with other software installed on the host system, and keep them in synchronization.
+
+To simplify this process, you can build container images that serve as Ansible
+Control nodes.
+These container images are referred to as automation execution environments, which you can create with ansible-builder.
+Ansible-runner can then make use of those images.

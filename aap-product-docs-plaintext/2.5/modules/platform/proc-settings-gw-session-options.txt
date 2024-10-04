@@ -1,0 +1,9 @@
+# Configuring platform sessions
+
+From the Platform gateway settings page, you can configure platform session settings.
+
+1. From the navigation panel, select menu:Settings[Platform gateway].
+2. The Platform gateway settings page is displayed.
+3. To configure the options, click btn:[Edit platform gateway settings].
+4. Enter the time in seconds before a session expires in the Session cookie age field.
+5. Click btn:[Save platform gateway settings] to save the changes or proceed to configure the other platform options available.

@@ -1,0 +1,40 @@
+# Configuring your controller LDAP security
+
+You can configure your LDAP SSL configuration for automation controller through any of the following options:
+
+* The automation controller user interface.
+* The platform gateway user interface. See the Configuring LDAP authentication section of the Access management and authentication guide for additional steps.
+* The following procedure steps.
+
+1. If you do not have a ldap_cacert_secret, you can create one with the following command:
+
+```
+$ oc create secret generic <resourcename>-custom-certs \
+    --from-file=ldap-ca.crt=<PATH/TO/YOUR/CA/PEM/FILE>  \ 1
+```
+
+Modify this to point to where your CA cert is stored.
+
+This will create a secret that looks like this:
+
+```
+$ oc get secret/mycerts -o yaml
+apiVersion: v1
+data:
+  ldap-ca.crt: <mysecret> 1
+kind: Secret
+metadata:
+  name: mycerts
+  namespace: awx
+type: Opaque
+```
+
+Automation controller looks for the data field ldap-ca.crt in the specified secret when using the ldap_cacert_secret.
+2. Under LDAP Certificate Authority Trust Bundle click the drop-down menu and select your ldap_cacert_secret.
+3. Under LDAP Password Secret, click the drop-down menu and select a secret.
+4. Under EE Images Pull Credentials Secret, click the drop-down menu and select a secret.
+5. Under Bundle Cacert Secret, click the drop-down menu and select a secret.
+6. Under Service Type, click the drop-down menu and select
+* ClusterIP
+* LoadBalancer
+* NodePort

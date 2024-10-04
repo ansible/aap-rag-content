@@ -1,0 +1,56 @@
+# Private automation hub
+
+Ansible automation hub is the central repository place for the certified collections, and functions as the main source of trusted, tested and supported content.
+With private automation hub, automation developers can collaborate and publish their own automation content and deliver Ansible code more easily within their organization.
+It is also the central repository for Ansible validated content, which is not supported, but is trusted and tested by Red Hat and our partners.
+Unresolved directive in assembly-private-automation-hub.adoc - include::hub/con-required-shared-filesystem.adoc[leveloffset=+1]
+:leveloffset: +1
+
+ Setting up the shared filesystem
+
+You must mount the shared file system on each automation hub node:
+
+1. Create the /var/lib/pulp directory.
+
+```
+# mkdir /var/lib/pulp
+```
+
+2. Mount the shared filesystem (this reference environment uses an NFS share).
+
+```
+# mount -t nfs4 <nfs_share_ip_address>:/ /var/lib/pulp
+```
+
+3. Confirm that the shared filesystem is successfully mounted:
+
+```
+$ df -h
+```
+
+
+# Enabling firewall services
+
+Because of the requirement of using a shared filesystem as part of a highly available Ansible automation hub environment, the following firewall services must be enabled to ensure that the filesystem is successfully mounted.
+
+On each Ansible automation hub node, you must:
+
+1. Ensure the following firewalld services (nfs, mountd, rpc-bind) are enabled.
+
+```
+# firewall-cmd --zone=public --add-service=nfs
+# firewall-cmd --zone=public --add-service=mountd
+# firewall-cmd --zone=public --add-service=rpc-bind
+```
+
+2. Reload firewalld for changes to take effect.
+
+```
+# firewall-cmd --reload
+```
+
+3. Verify the firewalld services are enabled.
+
+```
+# firewall-cmd --get-services
+```

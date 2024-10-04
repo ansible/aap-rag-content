@@ -1,0 +1,3 @@
+# Issue - Jobs are failing when run against localhost
+
+With Ansible Automation Platform 2 and its containerized execution environments, the usage of localhost has changed. For more information, see Converting playbooks for AAP 2 in the Red Hat Ansible Automation Platform Upgrade and Migration Guide.

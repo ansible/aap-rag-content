@@ -1,0 +1,21 @@
+# Event-Driven Ansible controller system requirements
+
+The Event-Driven Ansible controller is a single-node system capable of handling a variable number of long-running processes (such as rulebook activations) on-demand, depending on the number of CPU cores.
+
+[NOTE] If you want to use Event-Driven Ansible 2.5 with a 2.4 automation controller version, see Using Event-Driven Ansible 2.5 with Ansible Automation Platform 2.4.
+
+Use the following minimum requirements to run, by default, a maximum of 12 simultaneous activations:
+
+
+
+
+[IMPORTANT]
+----
+* If you are running Red Hat Enterprise Linux 8 and want to set your memory limits, you must have cgroup v2 enabled before you install Event-Driven Ansible.
+For specific instructions, see the Knowledge-Centered Support (KCS) article, Ansible Automation Platform Event-Driven Ansible controller for Red Hat Enterprise Linux 8 requires cgroupv2.
+* When you activate an Event-Driven Ansible rulebook under standard conditions, it uses about 250 MB of memory.
+However, the actual memory consumption can vary significantly based on the complexity of your rules and the volume and size of the events processed.
+In scenarios where a large number of events are anticipated or the rulebook complexity is high, conduct a preliminary assessment of resource usage in a staging environment.
+This ensures that your maximum number of activations is based on the capacity of your resources.
+For an example of setting Event-Driven Ansible controller maximumrunning activations, see Single automation controller, single automation hub, and single Event-Driven Ansible controller node with external (installer managed) database.
+----

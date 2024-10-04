@@ -1,0 +1,6 @@
+# Edit Users
+
+When editing a user, an automation controller system administrator can specify the user as being either a System Administrator (also referred to as the Superuser) or a System Auditor:
+
+* System administrators implicitly inherit all capabilities (read/write/execute) for all objects within the environment.
+* System Auditors implicitly inherit the read-only capability for all objects within the environment.

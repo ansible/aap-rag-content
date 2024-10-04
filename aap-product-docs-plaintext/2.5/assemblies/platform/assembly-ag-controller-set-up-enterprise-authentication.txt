@@ -1,0 +1,257 @@
+# Setting up enterprise authentication
+
+Set up authentication for the following enterprise systems:
+* Azure AD settings
+* LDAP Authentication
+* RADIUS settings
+* SAML settings
+* Transparent SAML Logins
+* Enabling Logging for SAML
+* TACACS+ settings
+* Generic OIDC settings
+
+[NOTE]
+----
+For LDAP authentication, see Setting up LDAP Authentication.
+----
+SAML, RADIUS, and TACACS+ users are categorized as "Enterprise" users.
+The following rules apply to Enterprise users:
+* Enterprise users can only be created through the first successful login attempt from the remote authentication backend.
+* Enterprise users cannot be created or authenticated if non-enterprise users with the same name have already been created in automation controller.
+* Automation controller passwords of enterprise users must always be empty and cannot be set by any user if they are enterprise backend-enabled.
+* If enterprise backends are disabled, an enterprise user can be converted to a normal automation controller user by setting the password field.
+
+[WARNING]
+----
+This operation is irreversible, as the converted automation controller user can no longer be treated as an enterprise user.
+----
+
+# Configuring Microsoft Azure active directory authentication
+
+To set up enterprise authentication for Microsoft Azure Active Directory (AD), you need to obtain an OAuth2 key and secret by registering your organization-owned application from Azure using the Quickstart: Register an application with the Microsoft identity platform.
+
+Each key and secret must belong to a unique application and cannot be shared or reused between different authentication backends. To register the application, you must supply it with your webpage URL, which is the Callback URL shown in the Authenticator details for your authenticator configuration. See dDisplaying authenticator details for instructions on accessing this information.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. Click btn:[Create authentication].
+3. Select Azuread from the Authentication type list and click btn:[Next].
+4. Enter a Name for this authentication configuration.
+5. Click btn:[Edit], copy and paste Microsoft’s Application (Client) ID to the OIDC Key field.
+
+Following instructions for registering your application with the Microsoft identity platform, supply the key (shown at one time only) to the client for authentication.
+6. Copy and paste the secret key created for your Microsoft Azure AD application to the OIDC Secret field.
+7. Optional: Enter any Additional Authenticator Fields that this authenticator can take. These fields are not validated and are passed directly back to the authenticator.
+
+[NOTE]
+----
+Values defined in this field override the dedicated fields provided in the UI.
+----
+8. To automatically create organizations, users, and teams upon successful login, select Create objects.
+9. To enable this authentication method upon creation, select Enabled.
+10. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.
+
+Click btn:[Next].
+
+To verify that the authentication is configured correctly, log out of Ansible Automation Platform and check that the login screen displays the logo of your authentication chosen method to enable logging in with those credentials.
+
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.
+
+For application registering basics in Microsoft Azure AD, see the What is the Microsoft identity platform? overview.
+
+# Configuring RADIUS authentication
+
+You can configure Ansible Automation Platform to centrally use RADIUS as a source for authentication information.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. Click btn:[Create authentication].
+3. Select Radius from the Authentication type list and click btn:[Next].
+4. Click btn:[Create authentication].
+5. Enter the host or IP of the RADIUS server in the RADIUS Server field. If you leave this field blank, RADIUS authentication is disabled.
+6. Enter the Shared secret for authenticating to RADIUS server.
+7. Optional: Enter any Additional Authenticator Fields that this authenticator can take. These fields are not validated and are passed directly back to the authenticator.
+
+[NOTE]
+----
+Values defined in this field override the dedicated fields provided in the UI.
+----
+8. To automatically create organizations, users, and teams upon successful login, select Create objects.
+9. To enable this authentication method upon creation, select Enabled.
+10. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.
+11. Click btn:[Next].
+
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.
+
+# Configuring SAML authentication
+
+SAML allows the exchange of authentication and authorization data between an Identity Provider (IdP) and a Service Provider (SP). Ansible Automation Platform is a SAML SP that can be configured to talk with one or more SAML IdPs in order to authenticate users. Based on groups and attributes optionally provided by the IdP users can be placed into teams and organizations in Ansible Automation Platform based on authenticator maps tied to this authenticator.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. Click btn:[Create authentication].
+3. Select SAML from the Authentication type list and click btn:[Next].
+4. Enter a Name for this SAML configuration.
+5. Enter the application-defined unique identifier used as the audience of the SAML service provider configuration in the SAML Service Provider Entity ID field. This is usually the URL for the service.
+6. Include the certificate content in the SAML Service Provider Public Certificate field.
+7. Include the private key content in the SAML Service Provider Private Key.
+8. Enter the URL to redirect the user to for login initiation in the IdP Login URL field.
+9. Enter the public cert used for secrets coming from the IdP in the IdP Public Cert field.
+10. Enter the entity ID returned in the assertion in the Entity ID.
+.Enter user details in the Groups, User Email, Username, User Last Name, User First Name and User Permanent ID fields.
+11. The SAML Assertion Consumer Service (ACS) URL field registers the service as a service provider (SP) with each identity provider (IdP) you have configured.
+12. Optional: Enter any Additional Authenticator Fields that this authenticator can take. These fields are not validated and are passed directly back to the authenticator.
+
+[NOTE]
+----
+Values defined in this field override the dedicated fields provided in the UI.
+----
+13. In the SAML Service Provider Organization Info field, provide the URL, display name, and the name of your app.
+
+```
+{
+  "en-US": {
+    "url": "http://www.example.com",
+    "displayname": "Example",
+    "name": "example"
+  }
+}
+```
+
+14. In the SAML Service Provider Technical Contact field, provide the name and email address of the technical contact for your service provider.
+
+```
+{
+"givenName": "Some User",
+"emailAddress": "suser@example.com"
+}
+```
+
+15. In the SAML Service Provider Support Contact field, provide the name and email address of the support contact for your service provider.
+
+```
+{
+"givenName": "Some User",
+"emailAddress": "suser@example.com"
+}
+```
+
+16. Optional: Provide extra configuration data in the SAML Service Provider extra configuration data field. This field is the equivalent to the SOCIAL_AUTH_SAML_SP_EXTRA in the API. For more information, see OneLogin’s SAML Python Toolkit to learn about the valid service provider extra (SP_EXTRA) parameters.
+17. Optional: Provide security settings in the SAML Security Config field. This field is the equivalent to the SOCIAL_AUTH_SAML_SECURITY_CONFIG field in the API.
+
+```
+// Indicates whether the <samlp:AuthnRequest> messages sent by this SP // will be signed. [Metadata of the SP will offer this info]
+"authnRequestsSigned": false,
+
+// Indicates a requirement for the <samlp:Response>, <samlp:LogoutRequest> // and <samlp:LogoutResponse> elements received by this SP to be signed.
+"wantMessagesSigned": false,
+
+// Indicates a requirement for the <saml:Assertion> elements received by // this SP to be signed. [Metadata of the SP will offer this info]
+"wantAssertionsSigned": false,
+```
+
+
+For more information and additional options, see OneLogin’s SAML Python Toolkit.
+18. Optional: In the SAML IDP to extra_data attribute mapping field, enter values to map  IDP attributes to extra_data attributes. For more information, see advanced SAML settings.
+19. To automatically create organizations, users, and teams upon successful login, select Create objects.
+20. To enable this authentication method upon creation, select Enabled.
+21. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.
+22. Click btn:[Next].
+
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.
+
+## Configuring transparent SAML logins
+
+For transparent logins to work, you must first get IdP-initiated logins to work.
+
+1. Set the RelayState on the IdP to the key of the IdP definition in the SAML Enabled Identity Providers field.
+2. When this is working, specify the redirect URL for non-logged-in users to somewhere other than the default automation controller login page by using the Login redirect override URL field in the Miscellaneous Authentication settings window of the Settings menu.
+You must set this to /sso/login/saml/?idp=<name-of-your-idp> for transparent SAML login, as shown in the following example:
+![Configure SAML login]
+
+[NOTE]
+----
+This example shows a typical IdP format, but might not be the correct format for your particular case.
+You might need to reach out to your IdP for the correct transparent redirect URL as that URL is not the same for all IdPs.
+----
+3. After you configure transparent SAML login, to log in using local credentials or a different SSO, go directly to https://<your-tower-server>/login.
+This provides the standard automation controller login page, including SSO authentication options, enabling you to log in with any configured method.
+
+## Enable logging for SAML
+
+You can enable logging messages for the SAML adapter in the same way that you can enable logging for LDAP.
+
+For more information, see the Enabling logging for LDAP section.
+
+# Configuring TACACS+ authentication
+
+Terminal Access Controller Access-Control System Plus (TACACS+) is a protocol that handles remote authentication and related services for networked access control through a centralized server. TACACS+ provides authentication, authorization and accounting (AAA) services, in which you can configure Ansible Automation Platform to use as a source for authentication.
+
+
+[NOTE]
+----
+This feature is deprecated and will be removed in a future release.
+----
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. Click btn:[Create authentication].
+3. Select TACACS+ from the Authentication type list and click btn:[Next].
+4. Enter a Name for this TACACS+ configuration.
+5. Enter the following information:
+* Hostname of TACACS+ Server: Provide the hostname or IP address of the TACACS+ server with which to authenticate. If you leave this field blank, TACACS+ authentication is disabled.
+* TACACS+ Authentication Protocol: The protocol used by the TACACS+ client. The options are ascii or pap.
+* Shared secret for authenticating to TACACS+ server: The secret key for TACACS+ authentication server.
+6. The TACACS+ client address sending enabled is disabled by default. To enable client address sending, select the checkbox.
+7. Optional: Enter any Additional Authenticator Fields that this authenticator can take. These fields are not validated and are passed directly back to the authenticator.
+
+[NOTE]
+----
+Values defined in this field override the dedicated fields provided in the UI.
+----
+8. To automatically create organizations, users, and teams upon successful login, select Create objects.
+9. To enable this authentication method upon creation, select Enabled.
+10. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.
+
+Click btn:[Next].
+
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.
+
+# Configuring generic OIDC authentication
+
+OpenID Connect (OIDC) uses the OAuth 2.0 framework. It enables third-party applications to verify the identity and obtain basic end-user information. The main difference between OIDC and SAML is that SAML has a service provider (SP)-to-IdP trust relationship, whereas OIDC establishes the trust with the channel (HTTPS) that is used to obtain the security token. To obtain the credentials needed to set up OIDC with Ansible Automation Platform, see the documentation from the IdP of your choice that has OIDC support.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. Click btn:[Create authentication].
+3. Select Generic OIDC from the Authentication type list and click btn:[Next].
+4. Enter a Name for this authentication configuration.
+5. Enter the following information:
+* OIDC Provider URL: The URL for your OIDC provider.
+* OIDC Key: The client ID from your third-party IdP.
+* OIDC Secret: The client secret from your IdP.
+6. Optional: Select the HTTP method to be used when requesting an access token from the Access Token Method list. The default method is POST.
+7. Optionally enter information for the following fields using the tooltips provided for instructions and required format:
+* Access Token Method - The default method is POST.
+* Access Token URL
+* Access Token Method
+* Authorization URL
+* ID Key
+* ID Token Issuer
+* JWKS URI
+* OIDC Public Key
+* Revoke Token Method - The default method is GET.
+* Revoke Token URL
+* Response Type
+* Token Endpoint Auth Method
+* Userinfo URL
+* Username Key
+8. Use the Verify OIDC Provider Certificate to enable or disable the OIDC provider SSL certificate verification.
+9. Use the Redirect State to enable or disable the state parameter in the redirect URI. It is recommended that this is enabled to prevent Cross Site Request Forgery (CSRF) attacks.
+10. Optional: Enter any Additional Authenticator Fields that this authenticator can take. These fields are not validated and are passed directly back to the authenticator.
+
+[NOTE]
+----
+Values defined in this field override the dedicated fields provided in the UI.
+----
+11. To automatically create organizations, users, and teams upon successful login, select Create objects.
+12. To enable this authentication method upon creation, select Enabled.
+13. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.
+14. Click btn:[Next].
+
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.

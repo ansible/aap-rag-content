@@ -1,0 +1,15 @@
+# Configure your automation hub operator route options
+
+The Red Hat Ansible Automation Platform operator installation form allows you to further configure your automation hub operator route options under Advanced configuration.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Automation Hub tab.
+5. For new instances, click btn:[Create AutomationHub].
+1. For existing instances, you can edit the YAML view by clicking the &#8942; icon and then btn:[Edit AutomationHub].
+6. Click btn:[Advanced configuration].
+7. Under Ingress type, click the drop-down menu and select Route.
+8. Under Route DNS host, enter a common host name that the route answers to.
+9. Under Route TLS termination mechanism, click the drop-down menu and select Edge or Passthrough.
+10. Under Route TLS credential secret, click the drop-down menu and select a secret from the list.

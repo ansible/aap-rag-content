@@ -1,0 +1,7 @@
+# Applications - Tokens
+
+Select the Tokens tab to display a list of the users that have tokens to access the application.
+
+
+
+Tokens can only access resources that an associated user can access, and can be limited further by specifying the scope of the token.

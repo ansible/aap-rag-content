@@ -1,0 +1,13 @@
+# Analytics Reports
+
+Reports for data collected are available through console.redhat.com.
+
+Other Automation Analytics data currently available and accessible through the platform UI include the following:
+
+Automation Calculator is a view-only version of the Automation Calculator utility that shows a report that represents (possible) savings to the subscriber.
+
+
+
+Host Metrics is an analytics report collected for host data such as, when they were first automated, when they were most recently automated, how many times they were automated, and how many times each host has been deleted.
+
+Subscription Usage reports the historical usage of your subscription. Subscription capacity and licenses consumed per month are displayed, with the ability to filter by the last year, two years, or three years.

@@ -1,0 +1,13 @@
+# Deleting a role
+
+Built in roles can not be deleted, however, you can delete custom roles from the Roles list view.
+
+1. From the navigation panel, select menu:Access Management[Roles].
+2. Select a tab for the component resource for which you want to create custom roles.
+
+[NOTE]
+----
+If you have multiple Ansible Automation Platform components installed, you will see selections for the roles associated with each component in the Roles menu bar. For example, Automation Execution for automation controller roles, Automation Decisions for Event-Driven Ansible roles.
+----
+3. Click the More Actions icon &#8942; next to the role you want and select Delete role.
+4. To delete roles in bulk, select the roles you want to delete from the Roles list view, click the More Actions icon &#8942;, and select Delete roles.

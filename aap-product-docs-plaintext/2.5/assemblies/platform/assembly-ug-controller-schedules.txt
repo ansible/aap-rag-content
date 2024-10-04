@@ -1,0 +1,96 @@
+# Schedules
+
+From the navigation panel, click menu:Automation Execution[Schedules] to access your configured schedules.
+The schedules list can be sorted by any of the attributes from each column using the directional arrows.
+You can also search by name, date, or the name of the month in which a schedule runs.
+Use the On or Off toggle to stop an active schedule or activate a stopped schedule.
+Click the Edit  icon to edit a schedule.
+![Schedules sample list]
+If you are setting up a template, a project, or an inventory source, click the Schedules tab on the Details page for that resource, to configure schedules for these resources.
+When you create a schedule, it has the following parameters:
+Name:: Click the schedule name to open its details.
+Related resource:: Describes the function of the schedule.
+Type:: This identifies whether the schedule is associated with a source control update or a system-managed job schedule.
+Next run:: The next scheduled run of this task.
+
+# Adding a new schedule
+
+You can create schedules from a template, project, or inventory source, and directly on the main Schedules page.
+
+To create a new schedule on the Schedules page:
+
+1. From the navigation panel, select menu:Automation Execution[Schedules].
+2. Click btn:[Create schedule]. This opens the Create Schedule window.
+3. Select a Resource type onto which this schedule is applied.
+
+Select from:
+* Job template
+* For Job template select a Job template from the menu.
+* Workflow job template
+* For Workflow job template select a Workflow job template from the menu.
+* Inventory source
+* For Inventory source select an Inventory and an Inventory source from the appropriate menu.
+* Project sync
+* For Project sync select a Project from the menu.
+* Management job template
+* For Management job template select a Workflow job template from the menu.
+
+To create a new schedule from a resource page:
+
+1. Click the Schedules tab of the resource that you are configuring.
+This can be a template, project, or inventory source.
+2. Click btn:[Create schedule]. This opens the Create Schedule window.
+
+1. For Job template and Project sync enter the appropriate details into the following fields:
+* Schedule name: Enter the name.
+* Optional: Description: Enter a description.
+* Start date/time: Enter the date and time to start the schedule.
+* Time zone: Select the time zone. The Start date/time that you enter must be in this time zone.
+
+The Schedule Details display when you establish a schedule, enabling you to review the schedule settings and a list of the scheduled occurrences in the selected Local Time Zone.
+
+[IMPORTANT]
+----
+Jobs are scheduled in UTC.
+Repeating jobs that run at a specific time of day can move relative to a local time zone when Daylight Savings Time shifts occur.
+The system resolves the local time zone based time to UTC when the schedule is saved.
+To ensure your schedules are correctly created, set your schedules in UTC time.
+----
+2. Click btn:[Next].
+The Define rules page is displayed.
+
+## Defining rules for the schedule
+
+Enter the following information:
+
+* Frequency:  Enter how frequently the schedule runs.
+* Interval:
+* Week Start: Select the day of the week that you want the week to begin.
+* Weekdays: Select the days of the week on which to run the schedule.
+* Months: Select the months of the year on which to run the schedule
+* Annual week(s) number: This field is used to declare numbered weeks of the year that the schedule should run.
+* Minute(s) of hour: This field is used to declare minute(s) of the hour that the schedule should run.
+* Hour of day: This field is used to declare the hours of day that the schedule should run.
+* Monthly day(s) number:  This field is used to declare ordinal days number of the month that the schedule should run.
+* Annual day(s) number: This field is used to declare ordinal number days of the year that the schedule should run.
+* Occurences: Use this field to filter down indexed rules based on those declared using the form fields in the Rule section.
+
+For more information, see the link to the iCalendar RFC for bysetpos field in the iCalendar documentation when you have set the rules for the schedule.
+* Count: The number of times this rule should be used.
+* Until: Use this rule until the specified date and time
+
+Click btn:[Save rule]
+The Schedule Rules summary page is displayed.
+
+Click btn:[Add rule] to add additional rules.
+Click btn:[Next].
+
+The Schedule Exceptions summary page is displayed.
+
+## Setting exceptions to the schedule
+
+On the Create Schedule page, click btn:[Create exception].
+
+Use the same format as for the schedule rules to create a schedule exception.
+
+Click btn:[Next] to save and review both the schedule and the exception.

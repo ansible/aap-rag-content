@@ -1,0 +1,74 @@
+# Creating the API token in automation hub
+
+Before you can interact with automation hub by uploading or downloading collections, you must create an API token. The automation hub API token authenticates your ansible-galaxy client to the Red Hat automation hub server.
+Your method for creating the API token differs according to the type of automation hub that you are using:
+* Automation hub uses Offline token management. See Creating the API token in automation hub.
+* Private automation hub uses API token management. See Creating the API token in private automation hub.
+
+# Creating the API token in automation hub
+
+In automation hub, you can create an API token by using Token management. The API token is a secret token used to protect your content.
+
+1. Navigate to Ansible Automation Platform on the Red Hat Hybrid Cloud Console.
+2. From the navigation panel, select menu:Automation Hub[Connect to Hub].
+3. Under Offline token, click btn:[Load Token].
+4. Click the btn:[Copy to clipboard] icon to copy the API token.
+5. Paste the API token into a file and store in a secure location.
+
+
+[IMPORTANT]
+----
+The API token is a secret token used to protect your content. Store your API token in a secure location.
+----
+
+The API token is now available for configuring automation hub as your default collections server or for uploading collections by using the ansible-galaxy command line tool.
+
+
+[NOTE]
+----
+The API token does not expire.
+----
+
+# Creating the API token in private automation hub
+
+In private automation hub, you can create an API token using API token management. The API token is a secret token used to protect your content.
+
+* Valid subscription credentials for Red Hat Ansible Automation Platform.
+
+1. Log in to your private automation hub.
+2. From the navigation panel, select menu:Automation Content[API token].
+3. Click btn:[Load Token].
+4. To copy the API token, click the btn:[Copy to clipboard] icon.
+5. Paste the API token into a file and store in a secure location.
+
+
+[IMPORTANT]
+----
+The API token is a secret token used to protect your content. Store your API token in a secure location.
+----
+
+The API token is now available for configuring automation hub as your default collections server or uploading collections using the ansible-galaxy command line tool.
+
+
+[NOTE]
+----
+The API token does not expire.
+----
+
+# Keeping your offline token active
+
+Offline tokens expire after 30 days of inactivity. You can keep your offline token from expiring by periodically refreshing your offline token.
+
+Keeping an online token active is useful when an application performs an action on behalf of the user; for example, this allows the application to perform a routine data backup when the user is offline.
+
+
+[NOTE]
+----
+If your offline token expires, you must request a new one.
+----
+
+* Run the following command to prevent your token from expiring:
+
+```
+curl https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token -d grant_type=refresh_token -d client_id="cloud-services" -d refresh_token="{{ user_token }}" --fail --silent --show-error --output /dev/null
+```

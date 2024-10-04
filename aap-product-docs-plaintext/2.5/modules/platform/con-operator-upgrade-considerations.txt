@@ -1,0 +1,9 @@
+# Upgrade considerations
+
+Red Hat Ansible Automation Platform version 2.0 was the first release of the Ansible Automation Platform Operator. If you are upgrading from version 2.0, continue to the Upgrading the Ansible Automation Platform Operator procedure.
+
+If you are using a version of OpenShift Container Platform that is not supported by the version of Red Hat Ansible Automation Platform to which you are upgrading, you must upgrade your OpenShift Container Platform cluster to a supported version before upgrading.
+
+Refer to the Red Hat Ansible Automation Platform Life Cycle to determine the OpenShift Container Platform version needed.
+
+For information about upgrading your cluster, refer to Updating clusters.

@@ -1,0 +1,12 @@
+# Retrieving the API token for your Red Hat Certified Collection
+
+You can synchronize Ansible Certified Content Collections curated by your organization from console.redhat.com to your private automation hub.
+The API token is a secret token used to protect your content.
+
+* You have organization administrator permissions to create the synclist on console.redhat.com.
+
+1. Log in to console.redhat.com as an organization administrator.
+2. Navigate to menu:Automation Hub[Connect to Hub].
+3. Under Offline token, click btn:[Load token].
+4. Click btn:[Copy to clipboard] to copy the API token.
+5. Paste the API token into a file and store in a secure location.

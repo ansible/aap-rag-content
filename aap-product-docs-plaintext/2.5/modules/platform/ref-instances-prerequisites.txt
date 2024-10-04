@@ -1,0 +1,18 @@
+# Prerequisites
+
+* Ensure that you have the minimum requirements for the RHEL virtual machine before proceeding.
+For more information, see the Red Hat Ansible Automation Platform system requirements.
+* RHEL nodes must properly be subscribed to.
+* RHEL subscription with baseos and appstream repositories must be enabled.
+* Ansible Automation Platform subscriptions and the proper Red Hat Ansible Automation Platform channel must be enabled:
+
+ansible-automation-platform-2.4-for-rhel-8-x86_64-rpms for RHEL 8
+ansible-automation-platform-2.4-for-rhel-9-x86_64-rpms for RHEL 9
+* The system that is going to run the ansible-playbook must have the ansible.receptor collection installed:
+* If your system has access to the internet, use:
+
+ansible-galaxy install -r requirements.yml
+
+Installing the receptor collection dependency from the requirements.yml file consistently retrieves the receptor version specified there.
+Additionally, it retrieves any other collection dependencies that might be needed in the future.
+* If your system does not have access to the internet, see Downloading a collection from Automation Hub to configure Automation Hub in Ansible Galaxy locally.

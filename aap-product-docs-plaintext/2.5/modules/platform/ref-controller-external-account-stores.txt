@@ -1,0 +1,5 @@
+# External account stores
+
+Maintaining a full set of users in automation controller can be a time-consuming task in a large organization.
+Automation controller supports connecting to external account sources by LDAP, SAML 2.0, and certain OAuth providers.
+Using this eliminates a source of error when working with permissions.

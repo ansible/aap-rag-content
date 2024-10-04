@@ -1,0 +1,11 @@
+# Modifying the number of simultaneous rulebook activations during Event-Driven Ansible controller installation
+
+By default, Event-Driven Ansible controller allows 12 activations to run simultaneously.
+You can modify this default value during installation by using the following procedure:
+
+Provide a variable to the VM installer:
+
+1. Navigate to the setup inventory file.
+2. Add automationedacontroller_max_running_activations in the [all:vars] section.
+For example, automationedacontroller_max_running_activations=16.
+3. Run the setup.

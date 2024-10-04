@@ -1,0 +1,110 @@
+# Configuring Red Hat automation hub as the primary source for content
+
+To access Ansible Certified Content Collections, configure Red Hat automation hub as your primary source of content. You can configure automation hub in the command-line interface (CLI) or the web console.
+
+# Using the CLI to configure Red Hat automation hub as the primary content source
+
+To configure automation hub, you must update the ansible.cfg configuration file. By default, the ansible.cfg configuration file is located in the /etc/ansible/ directory. With automation hub, you have access to certified, supported collections.
+
+* You have obtained the API token for the automation hub server. See Creating the Red Hat automation hub API token for more information.
+
+
+[IMPORTANT]
+----
+Creating a new token revokes any previous tokens generated for automation hub. Update any automation controller or scripts created with the previous token to include the new token.
+----
+
+1. Open the ansible.cfg file.
+2. Add the server_list option under the [galaxy] section and include one or more server names.
+3. Create a new section for each server name:
+
+```
+[galaxy_server._<server_name>_]
+```
+
+4. Set the url option for each server name:
+
+```
+https://<server_fully_qualified_domain_name>/api/galaxy/
+```
+
+5. Optional: Set the auth_url option. The community Ansible Galaxy does not require an auth_url.
+6. Set the API token for the automation hub server.
+
+The following ansible.cfg configuration file example shows how to configure multiple servers in prioritized order. Automation hub is configured as your primary source and an Ansible Galaxy server as a secondary source:
+
+
+```
+[galaxy]
+server_list = automation_hub, my_org_hub
+
+[galaxy_server.automation_hub]
+url=https://console.redhat.com/api/automation-hub/content/published/ 1
+auth_url=https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+
+token=my_ah_token
+
+[galaxy_server.my_org_hub]
+url=https://automation.my_org/api/galaxy/content/rh-certified/ 2
+username=my_user
+password=my_pass
+```
+
+
+Include a trailing slash / after the server URL.
+Include the /api/galaxy/content/rh-certified/ subdirectory in the automation hub server URL. You can replace rh-certified with community to reference the community repository if you prefer.
+
+
+[NOTE]
+----
+To prevent a 301 redirect, all API URLs must end with a trailing slash /.
+----
+
+You have now configured automation hub as your primary server. You can begin to download and install supported collections.
+
+For more information about server list configuration options and using Ansible Galaxy as an Ansible content source, see the Ansible Galaxy User Guide.
+
+# Using the web console to configure Red Hat automation hub as the primary content source
+
+To configure automation hub, you must create a credential and add it to the Organization’s Galaxy Credentials field. With automation hub, you have access to certified, supported collections.
+
+* You have obtained the API token for the automation hub server. See Creating the Red Hat automation hub API token for more information.
+
+
+[IMPORTANT]
+----
+Creating a new token revokes any previous tokens generated for automation hub. Update any automation controller or scripts created with the previous token.
+----
+
+1. Navigate to your automation controller.
+2. Create a new credential.
+1. Navigate to menu:Automation Execution[Infrastructure > Credentials].
+2. Click btn:[Add].
+3. Enter the name for your new credential in the Name field.
+4. Optional: Enter a description and enter or select the name of the organization with which the credential is associated.
+5. Under Organization, select the organization that you want to use the credential for.
+6. Select Ansible Galaxy/Automation Hub API Token as the credential type.
+7. Under Type Details, enter the Galaxy Server URL, Authentication Server URL, and API Token previously created.
+8. Click btn:[Save].
+3. Select the credential that you created from the Organization’s Galaxy Credentials field.
+1. Navigate to menu:Access Management[Organizations].
+2. Select the organization where want to add your Galaxy credentials.
+3. Click btn:[Edit].
+4. Under Galaxy Credentials, click the btn:[Search] icon.
+5. Select the credential that you created for automation hub, and place it at the beginning of the list.
+6. Optional: If you have a secondary source of content, such as Ansible Galaxy, place this credential after the credential that you created for automation hub.
+7. Click btn:[Select].
+8. Click btn:[Save].
+
+To validate the credential, update an existing source control management (SCM)-based project by selecting the project and clicking the btn:[Sync Project] icon.
+
+1. Navigate to your project repository.
+2. Select a project that uses a collections/requirements.yml file.
+3. Update the project by clicking the btn:[Sync Project] icon.
+
+If the Status of the project is Successful, then the credential is valid.
+
+You have now configured automation hub as your primary server. You can begin to download and install supported collections.
+
+* For more information about server list configuration options and using Ansible Galaxy as an Ansible content source, see the Ansible Galaxy User Guide.
+* For more information about creating and using credentials, see the Credentials section of Automation Controller User Guide v4.2.1.

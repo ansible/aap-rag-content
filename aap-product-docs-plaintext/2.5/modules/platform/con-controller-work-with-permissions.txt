@@ -1,0 +1,5 @@
+# Work with permissions
+
+Click the Team Access  or User Access tab to review, grand, edit, and remove associated permissions for users along with team members.
+
+Click btn:[Add roles] to create new permissions for this workflow template by following the prompts to assign them.

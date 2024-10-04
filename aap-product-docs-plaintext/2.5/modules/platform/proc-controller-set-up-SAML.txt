@@ -1,0 +1,75 @@
+# Configuring SAML authentication
+
+SAML allows the exchange of authentication and authorization data between an Identity Provider (IdP) and a Service Provider (SP). Ansible Automation Platform is a SAML SP that can be configured to talk with one or more SAML IdPs in order to authenticate users. Based on groups and attributes optionally provided by the IdP users can be placed into teams and organizations in Ansible Automation Platform based on authenticator maps tied to this authenticator.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. Click btn:[Create authentication].
+3. Select SAML from the Authentication type list and click btn:[Next].
+4. Enter a Name for this SAML configuration.
+5. Enter the application-defined unique identifier used as the audience of the SAML service provider configuration in the SAML Service Provider Entity ID field. This is usually the URL for the service.
+6. Include the certificate content in the SAML Service Provider Public Certificate field.
+7. Include the private key content in the SAML Service Provider Private Key.
+8. Enter the URL to redirect the user to for login initiation in the IdP Login URL field.
+9. Enter the public cert used for secrets coming from the IdP in the IdP Public Cert field.
+10. Enter the entity ID returned in the assertion in the Entity ID.
+.Enter user details in the Groups, User Email, Username, User Last Name, User First Name and User Permanent ID fields.
+11. The SAML Assertion Consumer Service (ACS) URL field registers the service as a service provider (SP) with each identity provider (IdP) you have configured.
+12. Optional: Enter any Additional Authenticator Fields that this authenticator can take. These fields are not validated and are passed directly back to the authenticator.
+
+[NOTE]
+----
+Values defined in this field override the dedicated fields provided in the UI.
+----
+13. In the SAML Service Provider Organization Info field, provide the URL, display name, and the name of your app.
+
+```
+{
+  "en-US": {
+    "url": "http://www.example.com",
+    "displayname": "Example",
+    "name": "example"
+  }
+}
+```
+
+14. In the SAML Service Provider Technical Contact field, provide the name and email address of the technical contact for your service provider.
+
+```
+{
+"givenName": "Some User",
+"emailAddress": "suser@example.com"
+}
+```
+
+15. In the SAML Service Provider Support Contact field, provide the name and email address of the support contact for your service provider.
+
+```
+{
+"givenName": "Some User",
+"emailAddress": "suser@example.com"
+}
+```
+
+16. Optional: Provide extra configuration data in the SAML Service Provider extra configuration data field. This field is the equivalent to the SOCIAL_AUTH_SAML_SP_EXTRA in the API. For more information, see OneLogin’s SAML Python Toolkit to learn about the valid service provider extra (SP_EXTRA) parameters.
+17. Optional: Provide security settings in the SAML Security Config field. This field is the equivalent to the SOCIAL_AUTH_SAML_SECURITY_CONFIG field in the API.
+
+```
+// Indicates whether the <samlp:AuthnRequest> messages sent by this SP // will be signed. [Metadata of the SP will offer this info]
+"authnRequestsSigned": false,
+
+// Indicates a requirement for the <samlp:Response>, <samlp:LogoutRequest> // and <samlp:LogoutResponse> elements received by this SP to be signed.
+"wantMessagesSigned": false,
+
+// Indicates a requirement for the <saml:Assertion> elements received by // this SP to be signed. [Metadata of the SP will offer this info]
+"wantAssertionsSigned": false,
+```
+
+
+For more information and additional options, see OneLogin’s SAML Python Toolkit.
+18. Optional: In the SAML IDP to extra_data attribute mapping field, enter values to map  IDP attributes to extra_data attributes. For more information, see advanced SAML settings.
+19. To automatically create organizations, users, and teams upon successful login, select Create objects.
+20. To enable this authentication method upon creation, select Enabled.
+21. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.
+22. Click btn:[Next].
+
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.

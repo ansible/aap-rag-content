@@ -1,0 +1,38 @@
+# Uninstalling containerized Ansible Automation Platform
+
+To uninstall a containerized deployment, run the uninstall.yml playbook:
+
+
+```
+$ ansible-playbook -i inventory ansible.containerized_installer.uninstall
+```
+
+
+This stops all systemd units and containers and then delete all resources used by the containerized installer such as:
+
+* config and data directories and files
+* systemd unit files
+* Podman containers and images
+* RPM packages
+
+To keep container images, you can set the container_keep_images variable to true.
+
+
+```
+$ ansible-playbook -i inventory ansible.containerized_installer.uninstall -e container_keep_images=true
+```
+
+
+To keep PostgreSQL databases, you can set the postgresql_keep_databases variable to true.
+
+
+```
+$ ansible-playbook -i inventory ansible.containerized_installer.uninstall -e postgresql_keep_databases=true
+```
+
+
+
+[NOTE]
+----
+Use the Ansible Automation Platform secret key values rather than the auto-generated ones.
+----

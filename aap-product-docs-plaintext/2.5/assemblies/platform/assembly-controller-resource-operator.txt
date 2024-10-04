@@ -1,0 +1,146 @@
+# Ansible Automation Platform Resource Operator
+
+# Resource Operator overview
+
+Resource Operator is a custom resource (CR) that you can deploy after you have created your platform gateway deployment.
+ With Resource Operator you can define projects, job templates, and inventories through the use of YAML files.
+ These YAML files are then used by automation controller to create these resources.
+ You can create the YAML through the Form view that prompts you for keys and values for your YAML code.
+ Alternatively, to work with YAML directly, you can select YAML view.
+
+There are currently two custom resources provided by the Resource Operator:
+
+* AnsibleJob: launches a job in the automation controller instance specified in the Kubernetes secret (automation controller host URL, token).
+* JobTemplate: creates a job template in the automation controller instance specified.
+
+# Using Resource Operator
+
+The Resource Operator itself does not do anything until the user creates an object.
+As soon as the user creates an AutomationControllerProject or AnsibleJob resource, the Resource Operator will start processing that object.
+
+* Install the Kubernetes-based cluster of your choice.
+* Deploy automation controller using the automation-controller-operator.
+
+After installing the automation-controller-resource-operator in your cluster, you must create a Kubernetes (k8s) secret with the connection information for your automation controller instance.
+Then you can use Resource Operator to create a k8s resource to manage your automation controller instance.
+
+# Connecting Resource Operator to platform gateway
+
+To connect Resource Operator with platform gateway you need to create a k8s secret with the connection information for your automation controller instance.
+
+
+[NOTE]
+----
+You can only create OAuth 2 Tokens for your own user through the API or UI, which means you can only configure or view tokens from your own user profile.
+----
+
+To create an OAuth2 token for your user in the platform gateway UI:
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. In the navigation panel, select menu:Access Management[Users].
+3. Select the username you want to create a token for.
+4. Select menu:Tokens[Automation Execution]
+5. Click btn:[Create Token].
+6. You can leave Applications empty. Add a description and select Read or Write for the Scope.
+
+
+[NOTE]
+----
+Make sure you provide a valid user when creating tokens.
+Otherwise, you will get an error message that you tried to issue the command without specifying a user, or supplying a username that does not exist.
+----
+
+# Creating a automation controller connection secret for Resource Operator
+
+To make your connection information available to the Resource Operator, create a k8s secret with the token and host value.
+
+1. The following is an example of the YAML for the connection secret.
+Save the following example to a file, for example, automation-controller-connection-secret.yml.
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: controller-access
+  type: Opaque
+stringData:
+  token: <generated-token>
+  host: https://my-controller-host.example.com/
+```
+
+2. Edit the file with your host and token value.
+3. Apply it to your cluster by running the kubectl create command:
+
+
+```
+kubectl create -f controller-connection-secret.yml
+```
+
+
+# Creating an AnsibleJob
+
+Launch an automation job on automation controller by creating an AnsibleJob resource.
+
+1. Specify the connection secret and job template you want to launch.
+
+```
+apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleJob
+metadata:
+  generateName: demo-job-1 # generate a unique suffix per 'kubectl create'
+spec:
+  connection_secret: controller-access
+  job_template_name: Demo Job Template
+```
+
+2. Configure features such as, inventory, extra variables, and time to live for the job.
+
+```
+spec:
+  connection_secret: controller-access
+  job_template_name: Demo Job Template
+  inventory: Demo Inventory                    # Inventory prompt on launch needs to be enabled
+  runner_image: quay.io/ansible/controller-resource-runner
+  runner_version: latest
+  job_ttl: 100
+  extra_vars:                                  # Extra variables prompt on launch needs to be enabled
+     test_var: test
+  job_tags: "provision,install,configuration"  # Specify tags to run
+  skip_tags: "configuration,restart"           # Skip tasks with a given tag
+```
+
+
+[NOTE]
+----
+You must enable  prompt on launch for inventories and extra variables if you are configuring those. To enable Prompt on launch, within the automation controller UI:
+From the menu:Resources[Templates] page, select your template and select the Prompt on launch checkbox next to Inventory and Variables sections.
+----
+3. Launch a workflow job template with an AnsibleJob object by specifying the workflow_template_name instead of job_template_name:
+
+```
+apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleJob
+metadata:
+  generateName: demo-job-1 # generate a unique suffix per 'kubectl create'
+spec:
+  connection_secret: controller-access
+  workflow_template_name: Demo Workflow Template
+```
+
+
+# Creating a JobTemplate
+
+* Create a job template on automation controller by creating a JobTemplate resource:
+
+```
+apiVersion: tower.ansible.com/v1alpha1
+kind: JobTemplate
+metadata:
+  name: jobtemplate-4
+spec:
+  connection_secret: controller-access
+  job_template_name: ExampleJobTemplate4
+  job_template_project: Demo Project
+  job_template_playbook: hello_world.yml
+  job_template_inventory: Demo Inventory
+```

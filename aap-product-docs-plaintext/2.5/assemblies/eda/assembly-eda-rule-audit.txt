@@ -1,0 +1,33 @@
+# Rule Audit
+
+Rule audit allows the auditing of rules which have been triggered by all the rules that were activated at some point.
+The Rule Audit list view shows you a list of every time an event came in that matched a condition within a rulebook and triggered an action.
+The list shows you rules within your rulebook and each heading matches up to a rule that has been executed.
+
+# Viewing rule audit details
+
+From the Rule Audit list view you can check the event that triggered specific actions.
+
+![Rule audit list view]
+
+1. From the navigation panel select menu:Automation Decisions[Rule Audit].
+2. Select the desired rule, this brings you to the Details tab.
+
+From here you can view when it was created, when it was last fired, and the rulebook activation that it corresponds to.
+
+# Viewing rule audit events
+
+1. From the navigation panel, select menu:Automation Decisions[Rule Audit].
+2. Select the desired rule, this brings you to the Details tab. To view all the events that triggered an action, select the Events tab.
+This shows you the event that triggered actions.
+3. Select an event to view the Event log, along with the Source type and Timestamp.
+
+![Event details]
+
+# Viewing rule audit actions
+
+1. From the navigation panel select menu:Automation Decisions[Rule Audit].
+2. Select the desired rule, then select the Actions tab.
+
+From here you can view executed actions that were taken.
+Some actions are linked out to Automation Execution where you can view the output.

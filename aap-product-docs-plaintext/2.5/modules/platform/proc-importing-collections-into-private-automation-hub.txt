@@ -1,0 +1,9 @@
+# Importing collections into private automation hub
+
+You can download a collection as a tarball file from Ansible automation hub for use in your private automation hub. Certified collections are available on the automation hub Hybrid Cloud Console, and community collections are on Ansible Galaxy. You must also download and install any dependencies needed for the collection.
+
+1. Navigate to link: console.redhat.com and log in with your Red Hat credentials.
+2. Click on the collection you want to download.
+3. Click btn:[Download tarball]
+4. To verify if a collection has dependencies, click the Dependencies tab.
+5. Download any dependencies needed for this collection.

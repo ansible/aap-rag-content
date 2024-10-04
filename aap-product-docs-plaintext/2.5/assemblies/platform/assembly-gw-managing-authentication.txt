@@ -1,0 +1,57 @@
+# Managing authentication in Ansible Automation Platform
+
+After you have configured your authentication settings, you can view a list of authenticators, search, sort and view the details for each authenticator configured on the system.
+
+# Authentication list view
+
+On the Authentication Methods page, you can view and manage the configured authentication methods for your organization.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+
+The Authentication Methods page is displayed.
+2. Click btn:[Create authentication] and follow the steps for creating an authentication method in Configuring an authentication type. Otherwise, proceed to step 3.
+3. From the menu bar, you can sort the list of authentication methods by using the arrows in the menu bar for Order, Name and Authentication type.
+4. Click the toggles to Enable or Disable authenticators.
+
+# Searching for an authenticator
+
+You can search for a previously configured authenticator from the Authentication list view.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. In the search bar, enter an appropriate keyword for the authentication method you want to search for and click the arrow icon.
+3. If you don’t find what you’re looking for, you can narrow your search. From the filter list, select Name or Authentication type depending on the search term you want to use.
+4. Scroll through the list of search results and select the authenticator you want to review.
+
+# Displaying authenticator details
+
+After you locate the authenticator you want to review, you can display the configuration details:
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. In the list view, select the authenticator name displayed in the Name column.
+
+The authenticator Details page is displayed.
+3. From the Details page, you can review the configuration settings applied to the authenticator.
+
+# Editing an authenticator
+
+You can modify the settings of previously configured authenticators from the Authentication list view.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. In the list view, you can either:
+1. Select the btn:[Edit]  icon next to authenticator you want to modify, or
+2. Select the authenticator name displayed in the Name column and click btn:[Edit authenticator] from the Details page.
+3. Modify the authentication details or mapping configurations as required.
+4. Click btn:[Save].
+
+# Deleting an authenticator
+
+You can modify the settings of previously configured authenticators from the Authentication list view.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. In the list view, select the checkbox next to the authenticator you want to delete.
+3. Select Delete authentication from the &#8942; list.
+
+[NOTE]
+----
+You can delete multiple authenticators by selecting the checkbox next to each authenticator you want to remove, and clicking Delete selected authentication from the &#8942; list on the menu bar.
+----

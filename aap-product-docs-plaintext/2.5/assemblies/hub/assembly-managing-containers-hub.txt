@@ -1,0 +1,543 @@
+# Manage containers in private automation hub
+
+Learn the administrator workflows and processes for configuring private automation hub remote registry and repositories.
+
+# Manage your private automation hub remote registry
+
+Manage container image repositories in your Ansible Automation Platform infrastructure by using the automation hub remote registry.
+You can perform the following tasks with Automation hub:
+
+* Control who can access individual container repositories
+* Change tags on images
+* View activity and image layers
+* Provide additional information related to each container repository
+
+## Container registries
+
+The automation hub remote registry is used for storing and managing execution environments.
+When you have built or sourced an execution environment, you can push that execution environment to the registry portion of private automation hub to create a container repository.
+
+* Push an execution environment to the automation hub remote registry.
+* Create a group with access to the container repository in the registry.
+* Add the new group to the container repository.
+* Add a README to the container repository to provide users with information and relevant links.
+
+# Configuring user access for container repositories in private automation hub
+
+To determine who can access and manage execution environments in your Ansible Automation Platform, you must configure user access for container repositories in your private automation hub.
+
+## Remote registry team permissions
+
+You can control how users can interact with execution environments managed in private automation hub.
+Use the following list of permissions to create teams with the right privileges for your remote registries.
+
+
+
+## Creating a new team in private automation hub
+
+You can create and assign permissions to a team in private automation hub that enables users to access specified features in the system.
+By default, new teams do not have any assigned permissions. You can add permissions when first creating a team or edit an existing team to add or remove permissions.
+
+For more information, see Teams in the Access management and authentication guide.
+
+# Populating your private automation hub container registry
+
+By default, private automation hub does not include execution environments.
+To populate your container registry, you must push a execution environment to it.
+
+You must follow a specific workflow to populate your private automation hub remote registry:
+
+* Pull execution environments from the Red Hat Ecosystem Catalog (registry.redhat.io)
+* Tag them
+* Push them to your private automation hub remote registry
+
+
+[IMPORTANT]
+----
+Image manifests and filesystem blobs were both originally served directly from registry.redhat.io and registry.access.redhat.com.
+As of 1 May 2023, filesystem blobs are served from quay.io instead.
+* Ensure that the Network ports and protocols listed in Table 5.4. Execution Environments (EE) are available to avoid problems pulling container images.
+Make this change to any firewall configuration that specifically enables outbound connections to registry.redhat.io or registry.access.redhat.com.
+Use the hostnames instead of IP addresses when configuring firewall rules.
+After making this change you can continue to pull execution environments from registry.redhat.io and registry.access.redhat.com. You do not require a quay.io login, or need to interact with the quay.io registry directly in any way to continue pulling Red Hat container images.
+However, manifests, sometimes called “subscription allocations”, on the web-based Red Hat Subscription Management are no longer supported as of early 2024 with one exception: If a system is part of a closed network or “air gapped” system that does not receive its updates from Red Hat’s servers directly, manifests are supported until the release of Red Hat Satellite 6.16. Keep up to date with Red Hat Satellite Release Dates for the announcement for Red Hat Satellite 6.16's release date announcement.
+----
+
+## Pulling execution environments for use in automation hub
+
+Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use. The following example details how to pull an execution environment from the Red Hat Ecosystem Catalog (registry.redhat.io).
+
+
+[IMPORTANT]
+----
+As of early 2024, Red Hat no longer supports manifests or manifest lists on the Red Hat Subscription Management web platform, which has also been used interchangeably with “subscription allocations.” Red Hat also no longer supports most manifest functionality in Red Hat Satellite with one exception:
+* Red Hat Satellite users in closed network or “air gapped” networks that do not receive their updates directly from Red Hat servers can currently still use access.redhat.com until the release of Red Hat Satellite 6.16.
+New Red Hat accounts automatically use Simple Content Access for their subscription tooling. New Red Hat accounts and existing Satellite customers who can connect to Red Hat's servers can find their manifests at console.redhat.com.
+----
+
+* You have permissions to pull execution environments from registry.redhat.io.
+* A Red Hat account with Simple Content Access enabled.
+
+1. If you need to access your manifest for your container images log in to Red Hat Console.
+2. Click the three-dot menu for the manifest you need for your execution environments, and click btn:[Export manifest].
+3. Log in to Podman by using your registry.redhat.io credentials:
+
+```
+$ podman login registry.redhat.io
+```
+
+4. Enter your username and password.
+5. Pull an execution environment:
+
+```
+$ podman pull registry.redhat.io/<ee_name>:<tag>
+```
+
+
+To verify that the execution environment you recently pulled is contained in the list, take these steps:
+
+1. List the images in local storage:
+
+```
+$ podman images
+```
+
+2. Check the execution environment name, and verify that the tag is correct.
+
+* See Red Hat Ecosystem Catalog Help for information on registering and getting execution environments.
+* See Creating and managing manifests for a connected Satellite Server to learn more about the changes coming to Red Hat subscription tooling.
+
+## Tagging execution environments for use in automation hub
+
+After you pull execution environments from a registry, tag them for use in your private automation hub remote registry.
+
+* You have pulled an execution environment from an external registry.
+* You have the FQDN or IP address of the automation hub instance.
+
+* Tag a local execution environment with the automation hub container repository:
+
+```
+$ podman tag registry.redhat.io/<ee_name>:<tag> <automation_hub_hostname>/<ee_name>
+```
+
+
+1. List the images in local storage:
+
+```
+$ podman images
+```
+
+2. Verify that the execution environment you recently tagged with your automation hub information is contained in the list.
+
+## Pushing an execution environment to private automation hub
+
+You can push tagged execution environments to private automation hub to create new containers and populate the remote registry.
+
+* You have permissions to create new containers.
+* You have the FQDN or IP address of the automation hub instance.
+
+1. Log in to Podman using your automation hub location and credentials:
+
+```
+$ podman login -u=<username> -p=<password> <automation_hub_url>
+```
+
+
+[WARNING]
+----
+Let Podman prompt you for your password when you log in. Entering your password at the same time as your username can expose your password to the shell history.
+----
+2. Push your execution environment to your automation hub remote registry:
+
+```
+$ podman push <automation_hub_url>/<ee_name>
+```
+
+
+The push operation re-compresses image layers during the upload, which is not guaranteed to be reproducible and is client-implementation dependent.
+This may lead to image-layer digest changes and a failed push operation, resulting in Error: Copying this image requires changing layer representation, which is not possible (image is signed or the destination specifies a digest).
+
+1. Log in to your Ansible Automation Platform.
+2. Navigate to menu:Automation Content[Execution Environments].
+3. Locate the container in the container repository list.
+
+# Setting up your container repository
+
+When you set up your container repository, you must add a description, include a README, add teams that can access the repository, and tag automation execution environmentss.
+
+## Prerequisites to setting up your remote registry
+
+* You are logged in to Ansible Automation Platform.
+* You have permissions to change the repository.
+
+## Adding a README to your container repository
+
+Add a README to your container repository to provide instructions to your users on how to work with the container.
+Automation hub container repositories support Markdown for creating a README.
+By default, the README is empty.
+
+* You have permissions to change containers.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Execution Environments].
+3. Select your execution environment.
+4. On the Detail tab, click btn:[Add].
+5. In the Raw Markdown text field, enter your README text in Markdown.
+6. Click btn:[Save] when you are finished.
+
+After you add a README, you can edit it at any time by clicking btn:[Edit] and repeating steps 4 and 5.
+
+## Providing access to your automation execution environmentss
+
+Provide access to your automation execution environmentss for users who need to work with the images.
+Adding a team allows you to modify the permissions the team can have to the container repository.
+You can use this option to extend or restrict permissions based on what the team is assigned.
+
+* You have change container namespace permissions.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Execution Environments].
+3. Select your automation execution environments.
+4. From the Team Access tab, click btn:[Add roles].
+5. Select the team or teams to which you want to grant access and click btn:[Next].
+6. Select the roles that you want to add to this execution environment and click btn:[Next].
+7. Click btn:[Finish].
+
+## Tagging container images
+
+Tag automation execution environmentss to add an additional name to automation execution environmentss stored in your automation hub container repository. If no tag is added to an automation execution environments, automation hub defaults to latest for the name.
+
+* You have change automation execution environments tags permissions.
+
+1. From the navigation panel, select menu:Automation Content[Execution Environments].
+2. Select your automation execution environments.
+3. Click the Images tab.
+4. Click the btn:[More Actions] icon &#8942;, and click btn:[Manage tags].
+5. Add a new tag in the text field and click btn:[Add].
+6. Optional: Remove current tags by clicking btn:[x] on any of the tags for that image.
+
+* Click the Activity tab and review the latest changes.
+
+## Creating a credential
+
+To pull automation execution environments images from a password or token-protected registry, you must create a credential.
+
+In earlier versions of Ansible Automation Platform, you were required to deploy a registry to store execution environment images.
+On Ansible Automation Platform 2.0 and later, the system operates as if you already have a remote registry up and running.
+To store execution environment images, add the credentials of only your selected remote registries.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Execution[Infrastructure > Credentials].
+3. Click btn:[Create credential] to create a new credential.
+4. Enter an authorization Name, Description, and Organization.
+5. In the Credential Type drop-down, select Container Registry.
+6. Enter the Authentication URL. This is the remote registry address.
+7. Enter the Username and Password or Token required to log in to the remote registry.
+8. Optional: To enable SSL verification, select Verify SSL.
+9. Click btn:[Create credential].
+
+Filling in at least one of the fields organization, user, or team is mandatory, and can be done through the user interface.
+
+# Pulling images from a container repository
+
+Pull automation execution environmentss from the automation hub remote registry to make a copy to your local machine.
+Automation hub provides the podman pull command for each latest automation execution environments in the container repository.
+You can copy and paste this command into your terminal, or use podman pull to copy an automation execution environments based on an automation execution environments tag.
+
+## Pulling an image
+
+You can pull automation execution environmentss from the automation hub remote registry to make a copy to your local machine.
+
+* You must have permission to view and pull from a private container repository.
+
+1. If you are pulling automation execution environmentss from a password or token-protected registry, create a credential before pulling the automation execution environments.
+2. From the navigation panel, select menu:Automation Content[Execution Environments].
+3. Select your automation execution environments.
+4. In the Pull this image entry, click btn:[Copy to clipboard].
+5. Paste and run the command in your terminal.
+
+* Run podman images to view images on your local machine.
+
+## Syncing images from a container repository
+
+You can pull automation execution environmentss from the automation hub remote registry to sync an image to your local machine.
+To sync an automation execution environments from a remote registry, you must first configure a remote registry.
+
+You must have permission to view and pull from a private container repository.
+
+1. From the navigation panel, select menu:Automation Content[Execution Environments].
+2. Add https://registry.redhat.io to the registry.
+3. Add any required credentials to authenticate.
+
+[NOTE]
+----
+Some remote registries are aggressive with rate limiting.
+Set a rate limit under Advanced Options.
+----
+4. From the navigation panel, select menu:Automation Content[Execution Environments].
+5. Click btn:[Create execution environment] in the page header.
+6. Select the registry you want to pull from.
+The Name field displays the name of the automation execution environments displayed on your local registry.
+
+[NOTE]
+----
+The Upstream name field is the name of the image on the remote server.
+For example, if the upstream name is set to "alpine" and the Name field is "local/alpine", the alpine image is downloaded from the remote and renamed to "local/alpine".
+----
+7. Set a list of tags to include or exclude.
+Syncing automation execution environmentss with a large number of tags is time consuming and uses a lot of disk space.
+
+* See Red Hat Container Registry Authentication for a list of registries.
+* See the What is Podman? documentation for options to use when pulling images.
+
+# Working with signed containers
+
+Automation execution environments are container images used by Ansible Automation Platform to run jobs.
+You can download this content to private automation hub, and publish it within your organization.
+
+## Deploying your system for container signing
+
+Automation hub implements image signing to offer better security for the execution environment container images.
+
+To deploy your system so that it is ready for container signing, create a signing script.
+
+
+[NOTE]
+----
+Installer looks for the script and key on the same server where installer is located.
+----
+
+1. From a terminal, create a signing script, and pass the script path as an installer parameter.
+
+Example:
+
+```
+#!/usr/bin/env bash
+
+# pulp_container SigningService will pass the next 4 variables to the script.
+MANIFEST_PATH=$1
+FINGERPRINT="$PULP_SIGNING_KEY_FINGERPRINT"
+IMAGE_REFERENCE="$REFERENCE"
+SIGNATURE_PATH="$SIG_PATH"
+
+# Create container signature using skopeo
+skopeo standalone-sign \
+  $MANIFEST_PATH \
+  $IMAGE_REFERENCE \
+  $FINGERPRINT \
+  --output $SIGNATURE_PATH
+
+# Optionally pass the passphrase to the key if password protected.
+# --passphrase-file /path/to/key_password.txt
+
+# Check the exit status
+STATUS=$?
+if [ $STATUS -eq 0 ]; then
+  echo {\"signature_path\": \"$SIGNATURE_PATH\"}
+else
+  exit $STATUS
+fi
+```
+
+2. Review the Ansible Automation Platform installer inventory file for options for container signing that begin with automationhub_*.
+
+```
+[all:vars]
+.
+.
+.
+
+automationhub_create_default_container_signing_service = True
+automationhub_container_signing_service_key = /absolute/path/to/key/to/sign
+automationhub_container_signing_service_script = /absolute/path/to/script/that/signs
+```
+
+3. Once installation is complete, log in to Ansible Automation Platform and navigate to menu:Automation Content[Signature Keys].
+4. Ensure that you have a key titled container-default, or container-anyname.
+
+
+[NOTE]
+----
+The container-default service is created by the Ansible Automation Platform installer.
+----
+
+## Adding containers remotely to automation hub
+
+You can add containers remotely to automation hub in one of the following two ways:
+
+* Create Remotes
+* Execution Environment
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Remote Registries].
+3. Click btn:[Create remote registry].
+* In the Name field, enter the name of the registry where the container resides.
+* In the URL field, enter the URL of the registry where the container resides.
+* In the Username field, enter the username if necessary.
+* In the Password field, enter the password if necessary.
+* Click btn:[Create remote registry].
+
+## Adding an execution environment
+
+Automation execution environments are container images that make it possible to incorporate system-level dependencies and collection-based content. Each execution environment allows you to have a customized image to run jobs, and each of them contain only what you need when running the job.
+
+1. From the navigation panel, select menu:Automation Content[Execution Environments].
+2. Click btn:[Create execution environment].
+3. Enter the name of the execution environment.
+4. Enter the upstream name.
+5. Under Registry, select the name of the registry from the drop-down menu.
+6. Enter tags in the Add tag(s) to include field.
+If the field is blank, all the tags are passed.
+You must specify which repository-specific tags to pass.
+7. Optional: Enter tags to exclude in Add tag(s) to exclude.
+8. Click btn:[Create automation execution environments].
+9. Synchronize the image.
+
+## Pushing container images from your local environment
+
+Use the following procedure to sign automation execution environmentss on a local system and push those signed automation execution environmentss to the automation hub registry.
+
+1. From a terminal, log in to Podman, or any container client currently in use:
+
+```
+> podman pull <container-name>
+```
+
+2. After the automation execution environments is pulled, add tags (for example: latest, rc, beta, or version numbers, such as 1.0; 2.3, and so on):
+
+```
+> podman tag <container-name> <server-address>/<container-name>:<tag name>
+```
+
+3. Sign the automation execution environments after changes have been made, and push it back up to the automation hub registry:
+
+```
+> podman push <server-address>/<container-name>:<tag name> --tls-verify=false --sign-by <reference to the gpg key on your local>
+```
+
+
+If the automation execution environments is not signed, it can only be pushed with any current signature embedded. Alternatively, you can use the following script to push the automation execution environments without signing it:
+
+```
+> podman push <server-address>/<container-name>:<tag name> --tls-verify=false
+```
+
+4. Once the automation execution environments has been pushed, navigate to menu:Automation Content[Execution Environments].
+5. To display the new execution environment, click the Refresh icon.
+6. Click the name of the image to view your pushed image.
+
+The details page for each automation execution environments indicates whether it has been signed. If the details page indicates that an image is Unsigned, you can sign the automation execution environments from automation hub using the following steps:
+
+1. Click the automation execution environments name to navigate to the details page.
+2. Click the btn:[More Actions] icon &#8942;.
+Three options are available:
+* Sign execution environment
+* Use in Controller
+* Delete execution environment
+3. Click Sign execution environment from the drop-down menu.
+
+The signing service signs the automation execution environments.
+After the automation execution environments is signed, the status changes to "signed".
+
+## Policies with signed images
+
+Policies can be used by podman or other image clients to ensure the validity of the image by assigning specific policies to that signature.
+
+## Using podman to ensure an image is signed by a specific signature
+
+When ensuring an automation execution environments is signed by specific signatures, the signature must be on your local environment.
+
+1. From the navigation panel, select menu:Automation Content[Signature Keys].
+2. Click the btn:[Download key] icon next to the signature that you are using. A new window should open to indicate you have downloaded the key.
+
+## Configuring the client to verify signatures
+
+To ensure an automation execution environments pulled from the remote registry is properly signed, you must first configure the automation execution environments with the proper public key in a policy file.
+
+* The client must have sudo privileges configured to verify signatures.
+
+1. Open your terminal and use the following command:
+
+```
+>  sudo <name of editor> /etc/containers/policy.json
+```
+
+
+The file that is displayed is similar to this:
+
+```
+{
+  "default": [{"type": "reject"}],
+  "transports": {
+  	"docker": {
+    	"quay.io": [{"type": "insecureAcceptAnything"}],
+    	"docker.io": [{"type": "insecureAcceptAnything"}],
+    	"<server-address>": [
+      	{
+          	    "type": "signedBy",
+          	    "keyType": "GPGKeys",
+          	    "keyPath": "/tmp/containersig.txt"
+      	}]
+  	}
+  }
+}
+```
+
+
+This file shows that neither quay.io, or docker.io will perform the verification, because the type is insecureAcceptAnything which overrides the default type of reject. However, <server-address> will perform the verification, because the parameter type is set to "signedBy".
+
+[NOTE]
+----
+The only keyType currently supported is GPG keys.
+----
+2. Under the <server-address> entry, modify the keyPath <1> to include the
+name of your key file.
+
+```
+{
+    	"default": [{"type": "reject"}],
+    	"transports": {
+        	"docker": {
+          	  "quay.io": [{"type": "insecureAcceptAnything"}],
+          	  "docker.io": [{"type": "insecureAcceptAnything"}],
+          	  "<server-address>": [{
+                	"type": "signedBy",
+                	"keyType": "GPGKeys",
+                	"keyPath": "/tmp/<key file name>",
+                	"signedIdentity": {
+                  	  "type": "matchExact"
+                    }
+            	  }]
+            }
+    	}
+}
+```
+
+3. Save and close the file.
+
+* Pull the file using Podman, or your client of choice:
+
+
+```
+> podman pull <server-address>/<container-name>:<tag name> --tls-verify=false
+```
+
+
+This response verifies the automation execution environments has been signed with no errors. If the automation execution environments is not signed, the command fails.
+
+* For more information about policy.json, see documentation for containers-policy.json.
+
+# Deleting a container repository
+
+Delete a remote repository from your Ansible Automation Platform to manage your disk space.
+You can delete repositories from the Red Hat Ansible Automation Platform interface in the Execution Environment list view.
+
+* You have permissions to manage repositories.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Execution Environments].
+3. On the container repository that you want to delete, click the btn:[More Actions] icon &#8942;, and click btn:[Delete execution environment].
+4. When the confirmation message is displayed, click the checkbox and click btn:[Delete execution environment].
+
+* Return to the automation execution environmentss list view.
+If the automation execution environments has been successfully deleted, it will no longer be in the list.

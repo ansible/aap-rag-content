@@ -1,0 +1,7 @@
+# Instances and ports used by automation controller and automation hub
+
+Ports and instances used by automation controller and also required by the on-premise automation hub node are as follows:
+
+* Port 80, 443 (normal automation controller and automation hub ports)
+* Port 22 (ssh - ingress only required)
+* Port 5432 (database instance - if the database is installed on an external instance, it must be opened to automation controller instances)

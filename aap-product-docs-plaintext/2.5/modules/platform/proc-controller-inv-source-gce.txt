@@ -1,0 +1,16 @@
+# Google Compute Engine
+
+Use the following procedure to configure a Google-sourced inventory:
+
+1. From the navigation panel, select menu:Automation Execution[Infrastructure > Inventories].
+2. Select the inventory name you want a source to and click the Sources tab.
+3. Click btn:[Create source].
+4. In the Add new source page, select Google Compute Engine from the Source list.
+5. The Create source window expands with the required Credential field.
+Choose from an existing GCE Credential.
+For more information, see [Credentials].
+6. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
+7. Use the Source Variables field to override variables used by the gcp_compute inventory plugin.
+Enter variables by using either JSON or YAML syntax.
+Use the radio button to toggle between the two.
+For more information about these variables, see the gcp_compute inventory plugin documentation.

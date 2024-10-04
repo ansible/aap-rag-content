@@ -1,0 +1,56 @@
+# Uploading content to Red Hat automation hub
+
+Automation hub distributes certified, supported collections from partners to customers. Each collection includes content such as modules, roles, plugins and documentation. The first time you upload a collection to automation hub, our Partner Engineering team reviews it for certification.
+You can manage your collections by uploading or deleting collections using the automation hub user interface or the ansible-galaxy client.
+
+# Uploading a collection to automation hub
+
+If you want to share a collection that you have created with the rest of the Ansible community, you can upload it to automation hub. When you upload a collection to automation hub, our Partner Engineering team reviews it for certification.
+
+You can upload the collection by using either the automation hub user interface or the ansible-galaxy client.
+
+* You have configured the ansible-galaxy client for Red Hat Automation Hub.
+* You have at least one namespace.
+* You have run all content through ansible-test sanity.
+* You are a Red Hat Connect Partner. Learn more at Red Hat Partner Connect.
+
+Using the automation hub user interface:
+
+1. From the navigation panel, select menu:Automation Content[Namespaces].
+2. On the My namespaces tab, locate the namespace to which you want to upload a collection.
+3. Click View collections and click btn:[Upload collection].
+4. In the New collection modal, click btn:[Select file]. Locate the file on your system.
+5. Click btn:[Upload].
+
+Using the ansible-galaxy client:
+
+* Enter the following command:
+
+```
+ansible-galaxy collection publish path/to/my_namespace-my_collection-1.0.0.tar.gz --api-key=SECRET
+```
+
+
+* After you upload your collections, they enter the partner certification process. Our Partner Engineering team will contact you with the certification status of your collection.
+
+# Deleting a collection on automation hub
+
+You can further manage your collections by deleting unwanted collections, if the collection is not dependent on other collections. The Dependencies tab on a collection displays a list of other collections that use the current collection.
+
+* The collection being deleted does not have dependencies with other collections.
+* You have Delete Collections permissions.
+
+1. Log in to your private automation hub.
+2. From the navigation panel, select menu:Automation Content[Collections].
+3. Before deleting the collection, check to see if it has collections that are dependent on it:
+* Click the Dependencies tab for that collection. If it is blank, you will be able to delete the collection. If the Dependencies tab is not blank, you must delete these dependencies before you can delete the collection.
+4. Click the collection to delete.
+5. Click the btn:[More Actions] icon &#8942;, and then select an option:
+1. Delete entire collection to delete all versions in this collection.
+2. Delete version [number] to delete the current version of this collection. You can change versions by using the Version drop-down menu.
+
+[NOTE]
+----
+If the selected collection has any dependencies with other collections, these actions are disabled until you delete those dependencies. Click the Dependencies tab to see a list of dependencies to delete.
+----
+6. When the confirmation window opens, verify that the collection or version number is correct, and then select Delete.

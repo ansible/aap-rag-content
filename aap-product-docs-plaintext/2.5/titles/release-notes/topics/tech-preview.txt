@@ -1,0 +1,25 @@
+# Technology preview
+
+# Technology Preview
+
+Technology Preview features are not supported with Red&#160;Hat production service level agreements (SLAs) and might not be functionally complete.
+Red&#160;Hat does not recommend using them in production.
+These features provide early access to upcoming product features, enabling customers to test functionality and provide feedback during the development process.
+
+For more information about the support scope of Red&#160;Hat Technology Preview features, see Technology Preview Features Support Scope.
+
+The following are Technology Preview features:
+
+* Starting with Ansible Automation Platform 2.4, the Platform Resource Operator can be used to create the following resources in automation controller by applying YAML to your OpenShift cluster:
+* Inventories
+* Projects
+* Instance Groups
+* Credentials
+* Schedules
+* Workflow Job Templates
+* Launch Workflows
+
+You can now configure the Controller Access Token for each resource with the connection_secret parameter, rather than the tower_auth_secret parameter. This change is compatible with earlier versions, but the tower_auth_secret parameter is now deprecated and will be removed in a future release.
+
+* For the most recent list of Technology Preview features, see Ansible Automation Platform - Preview Features.
+* For information about execution node enhancements on OpenShift deployments, see Managing Capacity With Instances.

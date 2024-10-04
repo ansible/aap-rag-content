@@ -1,0 +1,31 @@
+# Upgrading Ansible Automation Platform Operator on OpenShift Container Platform
+
+The Ansible Automation Platform Operator simplifies the installation, upgrade and deployment of new Red Hat Ansible Automation Platform instances in your OpenShift Container Platform environment.
+
+# Upgrade considerations
+
+Red Hat Ansible Automation Platform version 2.0 was the first release of the Ansible Automation Platform Operator. If you are upgrading from version 2.0, continue to the Upgrading the Ansible Automation Platform Operator procedure.
+
+If you are using a version of OpenShift Container Platform that is not supported by the version of Red Hat Ansible Automation Platform to which you are upgrading, you must upgrade your OpenShift Container Platform cluster to a supported version before upgrading.
+
+Refer to the Red Hat Ansible Automation Platform Life Cycle to determine the OpenShift Container Platform version needed.
+
+For information about upgrading your cluster, refer to Updating clusters.
+
+# Prerequisites
+
+To upgrade to a newer version of Ansible Automation Platform Operator, it is recommended that you do the following:
+
+* Create AutomationControllerBackup and AutomationHubBackup objects. For help with this see Creating Red Hat Ansible Automation Platform backup resources
+* Review the release notes for the new Ansible Automation Platform version to which you are upgrading and any intermediate versions.
+
+# Upgrading the Ansible Automation Platform Operator
+
+To upgrade to the latest version of Ansible Automation Platform Operator on OpenShift Container Platform, do the following:
+
+1. Log in to OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select the Subscriptions tab.
+4. Under Upgrade status, click btn:[Upgrade Available].
+5. Click btn:[Preview InstallPlan].
+6. Click btn:[Approve].

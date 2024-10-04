@@ -1,0 +1,10 @@
+# Displaying user organizations
+
+Select a specific user to display the Details page, select the Organizations tab to display the list of organizations of which that user is a member.
+
+
+[NOTE]
+----
+Organization membership cannot be modified from this display panel.
+----
+

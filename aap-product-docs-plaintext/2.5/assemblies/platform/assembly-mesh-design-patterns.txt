@@ -1,0 +1,328 @@
+# Automation mesh design patterns
+
+The automation mesh topologies in this section provide examples you can use to design a mesh deployment in your environment. Examples range from a simple, hydrid node deployment to a complex pattern that deploys numerous automation controller instances, employing several execution and hop nodes.
+* You reviewed conceptual information on node types and relationsips
+
+[NOTE]
+----
+The following examples include images that illustrate the mesh topology.
+The arrows in the images indicate the direction of peering.
+After peering is established, the connection between the nodes allows bidirectional communication.
+----
+
+## Multiple hybrid nodes inventory file example
+
+This example inventory file deploys a control plane consisting of multiple hybrid nodes. The nodes in the control plane are automatically peered to one another.
+
+
+```yaml
+[automationcontroller]
+aap_c_1.example.com
+aap_c_2.example.com
+aap_c_3.example.com
+```
+
+
+The following image displays the topology of this mesh network.
+
+![The topology map of the multiple hybrid node mesh configuration consists of an automation controller group. The automation controller group contains three hybrid nodes: aap_c_1, aap_c_2, and aap_c_3. The control nodes are peered to one another as follows: aap_c_3 is peered to aap_c_1 and aap_c_1 is peered to aap_c_2.]
+
+The default node_type for nodes in the control plane is hybrid.
+You can explicitly set the node_type of individual nodes to hybrid in the [automationcontroller group]:
+
+
+```yaml
+[automationcontroller]
+aap_c_1.example.com node_type=hybrid
+aap_c_2.example.com node_type=hybrid
+aap_c_3.example.com node_type=hybrid
+```
+
+
+Alternatively, you can set the node_type of all nodes in the [automationcontroller] group.
+When you add new nodes to the control plane they are automatically set to hybrid nodes.
+
+
+```yaml
+[automationcontroller]
+aap_c_1.example.com
+aap_c_2.example.com
+aap_c_3.example.com
+
+[automationcontroller:vars]
+node_type=hybrid
+```
+
+
+If you think that you might add control nodes to your control plane in future, it is better to define a separate group for the hybrid nodes, and set the node_type for the group:
+
+
+```yaml
+[automationcontroller]
+aap_c_1.example.com
+aap_c_2.example.com
+aap_c_3.example.com
+
+[hybrid_group]
+aap_c_1.example.com
+aap_c_2.example.com
+aap_c_3.example.com
+
+[hybrid_group:vars]
+node_type=hybrid
+```
+
+
+## Single node control plane with single execution node
+
+This example inventory file deploys a single-node control plane and establishes a peer relationship to an execution node.
+
+
+```yaml
+[automationcontroller]
+aap_c_1.example.com
+
+[automationcontroller:vars]
+node_type=control
+peers=execution_nodes
+
+[execution_nodes]
+aap_e_1.example.com
+```
+
+
+The following image displays the topology of this mesh network.
+
+![The topology map shows an automation controller group and an execution node. The automation controller group contains a single control node: aap_c_1. The execution node is aap_e_1. The aap_c_1 node is peered to aap_e_1.]
+
+The [automationcontroller] stanza defines the control nodes.
+If you add a new node to the automationcontroller group, it will automatically peer with the aap_c_1.example.com node.
+
+The [automationcontroller:vars] stanza sets the node type to control for all nodes in the control plane and defines how the nodes peer to the execution nodes:
+
+* If you add a new node to the execution_nodes group, the control plane nodes automatically peer to it.
+* If you add a new node to the automationcontroller group, the node type is set to control.
+
+The [execution_nodes] stanza lists all the execution and hop nodes in the inventory.
+The default node type is execution. You can specify the node type for an individual node:
+
+
+```yaml
+[execution_nodes]
+aap_e_1.example.com node_type=execution
+```
+
+
+Alternatively, you can set the node_type of all execution nodes in the [execution_nodes] group.
+When you add new nodes to the group, they are automatically set to execution nodes.
+
+
+```yaml
+[execution_nodes]
+aap_e_1.example.com
+
+[execution_nodes:vars]
+node_type=execution
+```
+
+
+If you plan to add hop nodes to your inventory in future, it is better to define a separate group for the execution nodes, and set the node_type for the group:
+
+
+```yaml
+[execution_nodes]
+aap_e_1.example.com
+
+[local_execution_group]
+aap_e_1.example.com
+
+[local_execution_group:vars]
+node_type=execution
+```
+
+
+## Minimum resilient configuration
+
+This example inventory file deploys a control plane consisting of two control nodes, and two execution nodes.
+All nodes in the control plane are automatically peered to one another.
+All nodes in the control plane are peered with all nodes in the execution_nodes group.
+This configuration is resilient because the execution nodes are reachable from all control nodes.
+
+The capacity algorithm determines which control node is chosen when a job is launched.
+Refer to Automation controller Capacity Determination and Job Impact in the Automation Controller User Guide for more information.
+
+The following inventory file defines this configuration.
+
+
+```yaml
+[automationcontroller]
+aap_c_1.example.com
+aap_c_2.example.com
+
+[automationcontroller:vars]
+node_type=control
+peers=execution_nodes
+
+[execution_nodes]
+aap_e_1.example.com
+aap_e_2.example.com
+```
+
+
+The [automationcontroller] stanza defines the control nodes.
+All nodes in the control plane are peered to one another.
+If you add a new node to the automationcontroller group, it will automatically peer with the original nodes.
+
+The [automationcontroller:vars] stanza sets the node type to control for all nodes in the control plane and defines how the nodes peer to the execution nodes:
+
+* If you add a new node to the execution_nodes group, the control plane nodes automatically peer to it.
+* If you add a new node to the automationcontroller group, the node type is set to control.
+
+The following image displays the topology of this mesh network.
+
+![The topology map of the minimum resilient mesh configuration consists of an automation controller group and two execution nodes. The automation controller group consists of two control nodes: aap_c_1 and aap_c_2. The execution nodes are aap_e_1 and aap_e_2. The aap_c_1 node is peered to aap_c_2. Every control node is peered to every execution node.]
+
+## Segregated local and remote execution configuration
+
+This configuration adds a hop node and a remote execution node to the resilient configuration.
+The remote execution node is reachable from the hop node.
+
+You can use this setup if you are setting up execution nodes in a remote location, or if you need to run automation in a DMZ network.
+
+
+```yaml
+[automationcontroller]
+aap_c_1.example.com
+aap_c_2.example.com
+
+[automationcontroller:vars]
+node_type=control
+peers=instance_group_local
+
+[execution_nodes]
+aap_e_1.example.com
+aap_e_2.example.com
+aap_h_1.example.com node_type=hop
+aap_e_3.example.com
+
+[instance_group_local]
+aap_e_1.example.com
+aap_e_2.example.com
+
+[hop]
+aap_h_1.example.com
+
+[hop:vars]
+peers=automationcontroller
+
+[instance_group_remote]
+aap_e_3.example.com
+
+[instance_group_remote:vars]
+peers=hop
+```
+
+
+The following image displays the topology of this mesh network.
+
+![The topology map of the configuration consists of an automation controller group, a local execution group, a hop node group, and a remote execution node group. The automation controller group consists of two control nodes: aap_c_1 and aap_c_2. The local execution nodes are aap_e_1 and aap_e_2. Every control node is peered to every local execution node. The hop node group contains one hop node, aap_h_1. It is peered to the controller group. The remote execution node group contains one execution node, aap_e_3. It is peered to the hop node group.]
+
+The [automationcontroller:vars] stanza sets the node types for all nodes in the control plane and defines how the control nodes peer to the local execution nodes:
+
+* All nodes in the control plane are automatically peered to one another.
+* All nodes in the control plane are peered with all local execution nodes.
+
+If the name of a group of nodes begins with instance_group_, the installer recognises it as an instance group and adds it to the Ansible Automation Platform user interface.
+
+## Multi-hopped execution node
+
+In this configuration, resilient controller nodes are peered with resilient local execution nodes.
+Resilient local hop nodes are peered with the controller nodes.
+A remote execution node and a remote hop node are peered with the local hop nodes.
+
+You can use this setup if you need to run automation in a DMZ network from a remote network.
+
+
+```yaml
+[automationcontroller]
+aap_c_1.example.com
+aap_c_2.example.com
+aap_c_3.example.com
+
+[automationcontroller:vars]
+node_type=control
+peers=instance_group_local
+
+[execution_nodes]
+aap_e_1.example.com
+aap_e_2.example.com
+aap_e_3.example.com
+aap_e_4.example.com
+aap_h_1.example.com node_type=hop
+aap_h_2.example.com node_type=hop
+aap_h_3.example.com node_type=hop
+
+[instance_group_local]
+aap_e_1.example.com
+aap_e_2.example.com
+
+[instance_group_remote]
+aap_e_3.example.com
+
+[instance_group_remote:vars]
+peers=local_hop
+
+[instance_group_multi_hop_remote]
+aap_e_4.example.com
+
+[instance_group_multi_hop_remote:vars]
+peers=remote_multi_hop
+
+[local_hop]
+aap_h_1.example.com
+aap_h_2.example.com
+
+[local_hop:vars]
+peers=automationcontroller
+
+[remote_multi_hop]
+aap_h_3 peers=local_hop
+```
+
+
+The following image displays the topology of this mesh network.
+
+![The topology map of the configuration consists of an automation controller group, a local execution group, a hop node group, and a remote execution node group. The automation controller group consists of three control nodes: aap_c_1, aap_c_2, and aap_c_3. The local execution nodes are aap_e_1 and aap_e_2. Every control node is peered to every local execution node. The hop node group contains two hop nodes, aap_h_1 and aap_h_2. It is peered to the controller group. The remote execution node group contains one execution node, aap_e_3. It is peered to the hop node group. A remote hop node group, consisting of node aap_h_3, is peered with the local hop node group. An execution node, aap_e_4, is peered with the remote hop group]
+
+The [automationcontroller:vars] stanza sets the node types for all nodes in the control plane and defines how the control nodes peer to the local execution nodes:
+
+* All nodes in the control plane are automatically peered to one another.
+* All nodes in the control plane are peered with all local execution nodes.
+
+The [local_hop:vars] stanza peers all nodes in the [local_hop] group with all the control nodes.
+
+If the name of a group of nodes begins with instance_group_, the installer recognises it as an instance group and adds it to the Ansible Automation Platform user interface.
+
+## Outbound only connections to controller nodes
+
+This example inventory file deploys a control plane consisting of two control nodes, and several execution nodes.
+Only outbound connections are allowed to the controller nodes
+All nodes in the 'execution_nodes' group are peered with all nodes in the controller plane.
+
+
+```yaml
+[automationcontroller]
+controller-[1:2].example.com
+
+[execution_nodes]
+execution-[1:5].example.com
+
+[execution_nodes:vars]
+# connection is established *from* the execution nodes *to* the automationcontroller
+peers=automationcontroller
+```
+
+
+The following image displays the topology of this mesh network.
+
+![The topology map consists of an automation controller group, and local execution group. The automation controller group consists of two control nodes: aap_c_1, and aap_c_2. The local execution nodes are aap-e-1, aap-e-2, aap-e-3, aap-e-4, and aap-e-5. Every execution node is peered to every control node in an outgoing connection.]

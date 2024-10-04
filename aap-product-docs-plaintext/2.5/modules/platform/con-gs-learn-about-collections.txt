@@ -1,0 +1,20 @@
+# About content collections
+
+Ansible content collections are assemblages of automation content. There are two types of Ansible collections:
+* Ansible Certified Content Collections, which contain fully-supported roles and modules that are enterprise- and production-ready for use in your environments.
+* Ansible validated content collections, which provide you with a trusted, expert-guided approach for performing foundational operations and tasks in your product.
+Both types of content collections can be found in automation hub through the Hybrid Cloud Console.
+
+# Downloading content
+
+After collections are finalized, you can import them to a location where they can be distributed to others across your organization.
+
+1. Log in to Red Hat Ansible Automation Platform.
+2. From the navigation panel, select menu:Automation Content[Collections].
+The Collections page displays all collections across all repositories.
+You can search for a specific collection.
+3. Select the collection that you want to export.
+The collection details page opens.
+4. From the Install tab, select Download tarball.
+The .tar file is downloaded to your default browser downloads folder.
+You can now import it to the location of your choosing.

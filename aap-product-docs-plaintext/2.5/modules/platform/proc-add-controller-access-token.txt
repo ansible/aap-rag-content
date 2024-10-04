@@ -1,0 +1,25 @@
+# Connecting Resource Operator to platform gateway
+
+To connect Resource Operator with platform gateway you need to create a k8s secret with the connection information for your automation controller instance.
+
+
+[NOTE]
+----
+You can only create OAuth 2 Tokens for your own user through the API or UI, which means you can only configure or view tokens from your own user profile.
+----
+
+To create an OAuth2 token for your user in the platform gateway UI:
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. In the navigation panel, select menu:Access Management[Users].
+3. Select the username you want to create a token for.
+4. Select menu:Tokens[Automation Execution]
+5. Click btn:[Create Token].
+6. You can leave Applications empty. Add a description and select Read or Write for the Scope.
+
+
+[NOTE]
+----
+Make sure you provide a valid user when creating tokens.
+Otherwise, you will get an error message that you tried to issue the command without specifying a user, or supplying a username that does not exist.
+----

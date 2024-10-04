@@ -1,0 +1,7 @@
+# Edit an existing savings plan
+
+Edit any information about an existing savings plan by clicking on it from the savings planner list view.
+
+1. From the navigation panel, select menu:Automation Analytics[Savings Planner].
+2. On the automation savings plan, click Click the btn:[More Actions] icon &#8942;, then click btn:[Edit].
+3. Make any changes to the automation plan, then click btn:[Save].

@@ -1,0 +1,1 @@
+Upgrades from 2.4 Containerized Ansible Automation Platform Tech Preview to 2.5 Containerized Ansible Automation Platform are unsupported at this time.

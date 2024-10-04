@@ -1,0 +1,53 @@
+# Supported installation scenarios
+
+Red Hat supports the following installations scenarios for Red Hat Ansible Automation Platform:
+To edit inventory file parameters to specify a supported installation scenario, see Inventory file examples based on installation scenarios in the Red Hat Ansible Automation Platform Installation Guide.
+
+# Standalone automation controller with a database on the same node, or a non-installer managed database
+
+This scenario includes installation of automation controller, including the web front end, REST API backend, and database on a single machine. It installs PostgreSQL, and configures the automation controller to use that as its database. This is considered the standard automation controller installation scenario.
+
+# Standalone automation controller with an external managed database
+
+This scenario includes installation of the automation controller server on a single machine and configures communication with a remote PostgreSQL instance as its database. This remote PostgreSQL can be a server you manage, or can be provided by a cloud service such as Amazon RDS.
+
+# Single Event-Driven Ansible controller node with internal database
+
+This scenario includes installation of Event-Driven Ansible controller on a single machine with an internal database. It installs an installer managed PostgreSQL that is similar to the automation controller installation scenario.
+
+
+[IMPORTANT]
+----
+Automation controller must be installed before you populate the inventory file with the appropriate Event-Driven Ansible variables.
+----
+
+* Single automation controller, single automation hub, and single Event-Driven Ansible controller node with external (installer managed) database
+* Appendix A.5. Event-Driven Ansible controller variables
+
+# Standalone automation hub with a database on the same node, or a non-installer managed database
+
+This scenario includes installation of automation hub, including the web frontend, REST API backend, and database on a single machine. It installs PostgreSQL, and configures the automation hub to use that as its database.
+
+# Standalone automation hub with an external managed database
+
+This scenario includes installation of the automation hub server on a single machine, and installs a remote PostgreSQL database, managed by the Red Hat Ansible Automation Platform installer.
+
+# Platform installation with a database on the automation controller node, or non-installer managed database
+
+This scenario includes installation of automation controller and automation hub with a database on the automation controller node, or a non-installer managed database.
+
+# Platform installation with an external managed database
+
+This scenario includes installation of automation controller and automation hub and configures communication with a remote PostgreSQL instance as its database. This remote PostgreSQL can be a server you manage, or can be provided by a cloud service such as Amazon RDS.
+
+# Multi-machine cluster installation with an external managed database
+
+This scenario includes installation of multiple automation controller nodes and an automation hub instance and configures communication with a remote PostgreSQL instance as its database. This remote PostgreSQL can be a server you manage, or can be provided by a cloud service such as Amazon RDS. In this scenario, all automation controller are active and can execute jobs, and any node can receive HTTP requests.
+
+
+[NOTE]
+----
+* Running in a cluster setup requires any database that automation controller uses to be external-&#8203;PostgreSQL must be installed on a machine that is not one of the primary or secondary tower nodes. When in a redundant setup, the remote PostgreSQL version requirements is PostgreSQL 13.
+* See Clustering for more information on configuring a clustered setup.
+* Provide a reachable IP address for the [automationhub] host to ensure users can sync content from Private Automation Hub from a different node.
+----

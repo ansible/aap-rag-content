@@ -1,0 +1,25 @@
+# Additional custom build steps
+
+You can specify custom build commands for any build phase in the additional_build_steps section of the definition file. This allows fine-grained control over the build phases.
+
+Use the prepend_ and append_ commands to add directives to the Containerfile that run either before or after the main build steps are executed. The commands must conform to any rules required for the runtime system.
+
+See the following table for a list of values that can be used in additional_build_steps:
+
+
+
+The syntax for additional_build_steps supports both multi-line strings and lists. See the following examples:
+
+
+```
+prepend_final: |
+   RUN whoami
+   RUN cat /etc/os-release
+```
+
+
+```
+append_final:
+- RUN echo This is a post-install command!
+- RUN ls -la /etc
+```

@@ -1,0 +1,12 @@
+# Distinctions between automation hub and private automation hub
+
+Red Hat Ansible Automation Platform uses an automation hub as a central location for automation content that you can download and integrate into your Ansible automation. Two types of hubs are available:
+
+Automation hub:: Hosted by Red Hat on the Red Hat Hybrid Cloud Console, it contains only Red Hat supported or certified content.
+Private automation hub:: This is a self-hosted content management system. You can use it to access and manage all types of Ansible content and choose which Ansible content collections and versions are made available to your automation consumers.
+
+With a private automation hub, you can access these three types of content:
+
+* Red Hat certified and supported content found in automation hub on the Red Hat Hybrid Cloud Console.
+* Community content from Ansible Galaxy.
+* Private content created and curated by an organization and shared locally.

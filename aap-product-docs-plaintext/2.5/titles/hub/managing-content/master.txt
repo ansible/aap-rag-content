@@ -1,0 +1,1398 @@
+# Managing automation content
+
+# Providing feedback on Red Hat documentation
+
+If you have a suggestion to improve this documentation, or find an error, you can contact technical support at https://access.redhat.com to open a request.
+
+# Red Hat Certified, validated, and Ansible Galaxy content in automation hub
+
+Ansible Certified Content Collections are included in your subscription to Red Hat Ansible Automation Platform. Using Ansible automation hub, you can access and curate a unique set of collections from all forms of Ansible content.
+
+Red Hat Ansible content contains two types of content:
+
+* Ansible Certified Content Collections
+* Ansible validated content collections
+
+You can use both Ansible Certified Content Collections or Ansible validated content collections to build your automation library. For more information on the differences between Ansible Certified Content Collections and Ansible validated content collections, see the Knowledgebase article Ansible Certified Content Collections and Ansible validated content, or Ansible validated content in this guide.
+
+You can update these collections manually by downloading their packages.
+
+You can use Ansible automation hub to distribute the relevant Red Hat Ansible Certified Content Collections to your users by creating a requirements file or a synclist. Use a requirements file to install collections to your automation hub, as synclists can only be managed by users with platform administrator privileges.
+
+Before you can use a requirements file to install content, you must:
+
+1. Obtain an automation hub API token
+2. Use the API token to configure a remote repository in your local hub
+3. Then, Create a requirements file.
+
+## Configuring Ansible automation hub remote repositories to synchronize content
+
+Use remote configurations to configure your private automation hub to synchronize with Ansible Certified Content Collections hosted on console.redhat.com or with your collections in Ansible Galaxy.
+
+
+[IMPORTANT]
+----
+To synchronize content, you can now upload a manually-created requirements file from the rh-certified remote. Remotes are configurations that allow you to synchronize content to your custom repositories from an external collection source.
+As of the 2.4 release you can still synchronize content, but synclists are deprecated, and will be removed in a future version.
+----
+
+## What's the difference between Ansible Galaxy and Ansible automation hub?
+
+Collections published to Ansible Galaxy are the latest content published by the Ansible community and have no joint support claims associated with them.
+Ansible Galaxy is the recommended frontend directory for the Ansible community to access content.
+
+Collections published to Ansible automation hub are targeted to joint customers of Red Hat and selected partners.
+Customers need an Ansible subscription to access and download collections on Ansible automation hub.
+A certified collection means that Red Hat and partners have a strategic relationship in place and are ready to support joint customers, and that the collections may have had additional testing and validation done against them.
+
+## How do I request a namespace on Ansible Galaxy?
+
+To request a namespace through an Ansible Galaxy GitHub issue, follow these steps:
+
+* Send an email to ansiblepartners@redhat.com
+* Include the GitHub username used to sign up on Ansible Galaxy.
+
+You must have logged in at least once for the system to validate.
+
+After users are added as administrators of the namespace, you can use the self-serve process to add more administrators.
+
+## Are there any restrictions for Ansible Galaxy namespace naming?
+
+Collection namespaces must follow Python module name convention.
+This means collections should have short, all lowercase names.
+You can use underscores in the collection name if it improves readability.
+
+### Reasons to create remote configurations
+
+Each remote configuration located in  provides information for both the community and rh-certified repository about when the repository was last updated.
+You can add new content to Ansible automation hub at any time using the Edit and Sync features included on the  page.
+
+### Retrieving the API token for your Red Hat Certified Collection
+
+You can synchronize Ansible Certified Content Collections curated by your organization from console.redhat.com to your private automation hub.
+The API token is a secret token used to protect your content.
+
+* You have organization administrator permissions to create the synclist on console.redhat.com.
+
+1. Log in to console.redhat.com as an organization administrator.
+2. Navigate to .
+3. Under Offline token, click Load token.
+4. Click Copy to clipboard to copy the API token.
+5. Paste the API token into a file and store in a secure location.
+
+### Configuring the rh-certified remote repository and synchronizing Red Hat Ansible Certified Content Collection
+
+You can edit the rh-certified remote repository to synchronize collections from automation hub hosted on console.redhat.com to your private automation hub.
+By default, your private automation hub rh-certified repository includes the URL for the entire group of Ansible Certified Content Collections.
+
+To use only those collections specified by your organization, a private automation hub administrator can upload manually-created requirements files from the rh-certified remote.
+
+If you have collections A, B, and C in your requirements file, and a new collection X is added to console.redhat.com that you want to use, you must add X to your requirements file for private automation hub to synchronize it.
+
+* You have valid Modify Ansible repo content permissions.
+For more information on permissions, see Access management and authentication.
+* You have retrieved the Sync URL and API Token from the automation hub hosted service on console.redhat.com.
+* You have configured access to port 443. This is required for synchronizing certified collections. For more information, see the automation hub table in the Network ports and protocols chapter of Planning your installation.
+
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select .
+3. In the rh-certified remote repository, click Edit remote.
+4. In the URL field, paste the Sync URL.
+5. In the Token field, paste the token you acquired from console.redhat.com.
+6. Click Save remote.
+
+You can now synchronize collections between your organization synclist on console.redhat.com and your private automation hub.
+7. From the navigation panel, select . Next to rh-certified click the More Actions icon &#8942; and select Sync repository.
+8. On the modal that appears, you can toggle the following options:
+* Mirror: Select if you want your repository content to mirror the remote repository's content.
+* Optimize: Select if you want to sync only when no changes are reported by the remote server.
+9. Click Sync to complete the sync.
+
+The Sync status column updates to notify you whether the Red Hat Certified Content Collections synchronization is successful.
+
+* Navigate to  to confirm that your collections content has synchronized successfully.
+
+### Configuring the community remote repository and syncing Ansible Galaxy collections
+
+You can edit the community remote repository to synchronize chosen collections from Ansible Galaxy to your private automation hub.
+By default, your private automation hub community repository directs to galaxy.ansible.com/api/.
+
+* You have Modify Ansible repo content permissions.
+For more information on permissions, see Access management and authentication.
+* You have a requirements.yml file that identifies those collections to synchronize from Ansible Galaxy as in the following example:
+Requirements.yml example
+
+```
+collections:
+  # Install a collection from Ansible Galaxy.
+  - name: community.aws
+    version: 5.2.0
+    source: https://galaxy.ansible.com
+```
+
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. In the Details tab in the Community remote, click Edit remote.
+4. In the YAML requirements field, paste the contents of your requirements.yml file.
+5. Click Save remote.
+
+You can now synchronize collections identified in your requirements.yml file from Ansible Galaxy to your private automation hub.
+6. From the navigation panel, select . Next to the community repository, click the More Actions icon &#8942; and select Sync repository to sync collections between Ansible Galaxy and Ansible automation hub.
+7. On the modal that appears, you can toggle the following options:
+* Mirror: Select if you want your repository content to mirror the remote repository's content.
+* Optimize: Select if you want to sync only when no changes are reported by the remote server.
+8. Click Sync to complete the sync.
+
+The Sync status column updates to notify you whether the Ansible Galaxy collections synchronization to your Ansible automation hub is successful.
+
+* Navigate to  and select Community to confirm successful synchronization.
+
+### Configuring proxy settings
+
+If your private automation hub is behind a network proxy, you can configure proxy settings on the remote to sync content located outside of your local network.
+
+* You have valid Modify Ansible repo content permissions.
+For more information on permissions, see Access management and authentication
+* You have a proxy URL and credentials from your local network administrator.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. In either the rh-certified or Community remote, click the More Actions icon &#8942; and select Edit remote.
+4. Expand the Show advanced options drop-down menu.
+5. Enter your proxy URL, proxy username, and proxy password in the appropriate fields.
+6. Click Save remote.
+
+### Creating a requirements file
+
+We recommend using a requirements file to add collections to your automation hub. Requirements files are in YAML format and list the collections that you want to install in your automation hub. After you create your requirements.yml file listing the collections you want to install, you will then run the install command to add the collections to your hub instance.
+
+A standard requirements.yml file contains the following parameters:
+
+* name: the name of the collection formatted as <namespace>.<collection_name>
+* version: the collection version number
+
+1. Create your requirements file.
+
+In YAML format, collection information in your requirements file should look like this:
+
+```bash
+collections:
+ name: namespace.collection_name
+ version: 1.0.0
+```
+
+2. After you have created your requirements file listing information for each collection that you want to install, navigate to the directory where the file is located and run the following command:
+
+
+```bash
+$ ansible-galaxy collection install -r requirements.yml
+```
+
+
+#### Installing an individual collection from the command line
+
+To install an individual collection to your automation hub, run the following command:
+
+
+```bash
+$ ansible-galaxy collection install namespace.collection_name
+```
+
+
+## Synchronizing Ansible Content Collections in automation hub
+
+
+[IMPORTANT]
+----
+To synchronize content, you can now upload a manually-created requirements file from the rh-certified remote.
+Remotes are configurations that enable you to synchronize content to your custom repositories from an external collection source.
+As of the 2.4 release you can still synchronize content, but synclists are deprecated, and will be removed in a future version.
+----
+
+### Explanation of Red Hat Ansible Certified Content Collections synclists
+
+A synclist is a curated group of Red Hat Certified Collections assembled by your organization administrator.
+It synchronizes with your local Ansible automation hub.
+Use synclists to manage only the content that you want and exclude unnecessary collections.
+Design and manage your synclist from the content available as part of Red Hat content on console.redhat.com
+
+Each synclist has its own unique repository URL that you can designate as a remote source for content in automation hub.
+You securely access each synclist by using an API token.
+
+### Creating a synclist of Red Hat Ansible Certified Content Collections
+
+You can create a synclist of curated Red Hat Ansible Certified Content in Ansible automation hub on console.redhat.com.
+Your synclist repository is located on the automation hub navigation panel under , which is updated whenever you manage content within Ansible Certified Content Collections.
+
+All Ansible Certified Content Collections are included by default in your initial organization synclist.
+
+* You have a valid Ansible Automation Platform subscription.
+* You have organization administrator permissions for console.redhat.com.
+* The following domain names are part of either the firewall or the proxy's allowlist.
+They are required for successful connection and download of collections from automation hub or Galaxy server:
+* galaxy.ansible.com
+* cloud.redhat.com
+* console.redhat.com
+* sso.redhat.com
+* Ansible automation hub resources are stored in Amazon Simple Storage.
+The following domain names must be in the allow list:
+* automation-hub-prd.s3.us-east-2.amazonaws.com
+* ansible-galaxy.s3.amazonaws.com
+* SSL inspection is disabled either when using self signed certificates or for the Red Hat domains.
+
+1. Log in to console.redhat.com.
+2. Navigate to .
+3. Set the Sync toggle switch on each collection to exclude or include it on your synclist.
+
+[NOTE]
+----
+You will only see the Sync toggle switch if you have administrator permissions.
+----
+4. To initiate the remote repository synchronization, navigate to your Ansible Automation Platform and select .
+5. In the row containing the repository you want to sync, click the More Actions icon &#8942; and select Sync repository to initiate the remote repository synchronization to your private automation hub.
+6. Optional: If your remote repository is already configured, update the collections content that you made available to local users by manually synchronizing Red Hat Ansible Certified Content Collections to your private automation hub.
+
+## Collections and content signing in private automation hub
+
+As an automation administrator for your organization, you can configure private automation hub for signing and publishing Ansible content collections from different groups within your organization.
+
+For additional security, automation creators can configure Ansible-Galaxy CLI to verify these collections to ensure that they have not been changed after they were uploaded to automation hub.
+
+### Configuring content signing on private automation hub
+
+To successfully sign and publish Ansible Certified Content Collections, you must configure private automation hub for signing.
+
+* Your GnuPG key pairs have been securely set up and managed by your organization.
+* Your public-private key pair has proper access for configuring content signing on private automation hub.
+
+1. Create a signing script that accepts only a filename.
+
+[NOTE]
+----
+This script acts as the signing service and must generate an ascii-armored detached gpg signature for that file using the key specified through the PULP_SIGNING_KEY_FINGERPRINT environment variable.
+----
+
+The script prints out a JSON structure with the following format.
+
+```
+{"file": "filename", "signature": "filename.asc"}
+```
+
+
+All the file names are relative paths inside the current working directory.
+The file name must remain the same for the detached signature.
+Example:
+
+The following script produces signatures for content:
+
+```shell
+#!/usr/bin/env bash
+
+FILE_PATH=$1
+SIGNATURE_PATH="$1.asc"
+
+ADMIN_ID="$PULP_SIGNING_KEY_FINGERPRINT"
+PASSWORD="password"
+
+# Create a detached signature
+gpg --quiet --batch --pinentry-mode loopback --yes --passphrase \
+   $PASSWORD --homedir ~/.gnupg/ --detach-sign --default-key $ADMIN_ID \
+   --armor --output $SIGNATURE_PATH $FILE_PATH
+
+# Check the exit status
+STATUS=$?
+if [ $STATUS -eq 0 ]; then
+   echo {\"file\": \"$FILE_PATH\", \"signature\": \"$SIGNATURE_PATH\"}
+else
+   exit $STATUS
+fi
+```
+
+
+After you deploy a private automation hub with signing enabled to your Ansible Automation Platform cluster, new UI additions are displayed in collections.
+2. Review the Ansible Automation Platform installer inventory file for options that begin with automationhub_*.
+
+```
+[all:vars]
+.
+.
+.
+automationhub_create_default_collection_signing_service = True
+automationhub_auto_sign_collections = True
+automationhub_require_content_approval = True
+automationhub_collection_signing_service_key = /abs/path/to/galaxy_signing_service.gpg
+automationhub_collection_signing_service_script = /abs/path/to/collection_signing.sh
+```
+
+
+The two new keys (automationhub_auto_sign_collections and automationhub_require_content_approval) indicate that the collections must be signed and approved after they are uploaded to private automation hub.
+
+### Using content signing services in private automation hub
+
+After you have configured content signing on your private automation hub, you can manually sign a new collection or replace an existing signature with a new one.
+When users download a specific collection, this signature indicates that the collection is for them and has not been modified after certification.
+
+You can use content signing on private automation hub in the following scenarios:
+
+* Your system does not have automatic signing configured and you must use a manual signing process to sign collections.
+* The current signatures on the automatically configured collections are corrupted and need new signatures.
+* You need additional signatures for previously signed content.
+* You want to rotate signatures on your collections.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+The Approval dashboard opens and displays a list of collections.
+3. Click the thumbs up icon next to the collection you want to approve. On the modal that appears, check the box confirming that you want to approve the collection, and click Approve and sign collections.
+
+* Navigate to  to verify that the collections you signed and approved are displayed.
+
+### Downloading signature public keys
+
+After you sign and approve collections, download the signature public keys from the Ansible Automation Platform UI.
+You must download the public key before you add it to the local system keyring.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+The Signature Keys dashboard displays a list of multiple keys: collections and container images.
+* To verify collections, download the key prefixed with collections-.
+* To verify container images, download the key prefixed with container-.
+3. Choose one of the following methods to download your public key:
+* Click the Download Key icon to download the public key.
+* Click the Copy to clipboard next to the public key you want to copy.
+
+Use the public key that you copied to verify the content collection that you are installing.
+
+### Configuring Ansible-Galaxy CLI to verify collections
+
+You can configure Ansible-Galaxy CLI to verify collections.
+This ensures that downloaded collections are approved by your organization and have not been changed after they were uploaded to automation hub.
+
+If a collection has been signed by automation hub, the server provides ASCII armored, GPG-detached signatures to verify the authenticity of MANIFEST.json before using it to verify the collection&#8217;s contents.
+You must opt into signature verification by configuring a keyring for ansible-galaxy or providing the path with the --keyring option.
+
+* Signed collections are available in automation hub to verify signature.
+* Certified collections can be signed by approved roles within your organization.
+* Public key for verification has been added to the local system keyring.
+
+1. To import a public key into a non-default keyring for use with ansible-galaxy, run the following command.
+
+```
+gpg --import --no-default-keyring --keyring ~/.ansible/pubring.kbx my-public-key.asc
+```
+
+
+[NOTE]
+----
+In addition to any signatures provided by automation hub, signature sources can also be provided in the requirements file and on the command line.
+Signature sources should be URIs.
+----
+2. To verify the collection name provided on the CLI with an additional signature, run the following command:
+
+```
+ansible-galaxy collection install namespace.collection
+--signature https://examplehost.com/detached_signature.asc
+--signature file:///path/to/local/detached_signature.asc --keyring ~/.ansible/pubring.kbx
+```
+
+
+You can use this option multiple times to provide multiple signatures.
+3. Confirm that the collections in a requirements file list any additional signature sources following the collection's signatures key, as in the following example.
+
+```yaml
+# requirements.yml
+collections:
+  - name: ns.coll
+    version: 1.0.0
+    signatures:
+      - https://examplehost.com/detached_signature.asc
+      - file:///path/to/local/detached_signature.asc
+
+ansible-galaxy collection verify -r requirements.yml --keyring ~/.ansible/pubring.kbx
+```
+
+
+When you install a collection from automation hub, the signatures provided by the server are saved along with the installed collections to verify the collection&#8217;s authenticity.
+4. (Optional) If you need to verify the internal consistency of your collection again without querying the Ansible Galaxy server, run the same command you used previously using the --offline option.
+
+## Are there any recommendations for collection naming?
+
+Create a collection with company_name.product format.
+This format means that multiple products can have different collections under the company namespace.
+
+## How do I get a namespace on automation hub?
+
+By default namespaces used on Ansible Galaxy are also used on automation hub by the Ansible partner team.
+For any queries and clarifications contact ansiblepartners@redhat.com.
+
+## Ansible validated content
+
+Red Hat Ansible Automation Platform includes Ansible validated content, which complements existing Red Hat Ansible Certified Content.
+
+Ansible validated content provides an expert-led path for performing operational tasks on a variety of platforms from both Red Hat and our trusted partners.
+
+### Configuring validated collections with the installer
+
+When you download and run the RPM bundle installer, certified and validated collections are automatically uploaded.
+Certified collections are uploaded into the rh-certified repository.
+Validated collections are uploaded into the validated repository.
+
+You can change the default configuration by using two variables:
+
+* automationhub_seed_collections is a boolean that defines whether or not preloading is enabled.
+* automationhub_collection_seed_repository`is a variable that enables you to specify the type of content to upload when it is set to `true.
+Possible values are certified or validated.
+If this variable is missing, both content sets will be uploaded.
+
+
+[NOTE]
+----
+Changing the default configuration may require further platform configuration changes for other content you may use.
+----
+
+# Managing collections in automation hub
+
+As a content creator, you can use namespaces in automation hub to curate and manage collections. For example, you can:
+
+* Create teams with permissions to curate namespaces and upload collections to private automation hub
+* Add information and resources to the namespace to help end users of the collection in their automation tasks
+* Upload collections to the namespace
+* Review the namespace import logs to determine the success or failure of uploading the collection and its current approval status
+
+For information on creating content, see the Developing automation content.
+
+## Using namespaces to manage collections in automation hub
+
+Namespaces are unique locations in automation hub to which you can upload and publish content collections. Access to namespaces in automation hub is governed by teams with permission to manage the content and related information that appears there.
+
+You can use namespaces in automation hub to organize collections developed within your organization for internal distribution and use.
+
+If you are working with namespaces, you must have a team that has permissions to create, edit and upload collections to namespaces. Collections uploaded to a namespace require administrative approval before you can publish them and make them available for use.
+
+### Creating a new team for content curators
+
+You can create a new team in Ansible Automation Platform designed to support content curation in your organization. This team can contribute internally-developed collections for publication in private automation hub.
+
+To help content developers create a namespace and upload their internally developed collections to private automation hub, you must first create and edit a team and assign the required permissions.
+
+* You have administrative permissions in Ansible Automation Platform and can create teams.
+
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select  and click Create team.
+3. Enter Content Engineering as a Name for the team.
+4. Select an Organization for the team.
+5. Click Create team. You have created the new team and the team Details page opens.
+6. Select the Roles tab and then select the Automation Content tab.
+7. Click Add roles.
+8. Select Namespace from the Resource type list and click Next.
+9. Select the namespaces that will receive the new roles and click Next.
+10. Select the roles to apply to the selected namespaces and click Next.
+11. Review your selections and click Finish.
+12. Click Close to complete the process.
+
+The new team is created with the permissions that you assigned. You can then add users to the team.
+13. Click the Users tab on the Teams page.
+14. Click Add users.
+15. Select users and click Add users.
+
+For further instructions on managing access with teams, see Teams in the Access management and authentication guide.
+
+### Creating a namespace
+
+You can create a namespace to organize collections that your content developers upload to automation hub.
+When creating a namespace, you can assign a team in automation hub as owners of that namespace.
+
+* You have Add Namespaces and Upload to Namespaces permissions.
+
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Click Create namespace and enter a Name for your namespace.
+4. Optional: enter a description, company, logo URL, resources, or useful links in the appropriate fields.
+5. Click btn: [Create namespace].
+6. Select the Team Access tab and click Add roles to assign roles to your namespace.
+7. Select the team to which you want to grant a role, then click Next.
+8. Select the roles you want to apply to the selected team, and then click Next.
+9. Review your selections and click Finish.
+10. Click Close to complete the process.
+
+Your content developers can now upload collections to your new namespace and allow users in teams assigned as owners to upload collections.
+
+### Adding additional information and resources to a namespace
+
+You can add information and provide resources for your users to accompany collections included in the namespace. For example, you can add a logo and a description, and link users to your GitHub repository, issue tracker, or other online assets. You can also enter markdown text in the Resources field to include more information. This is helpful to users who use your collection in their automation tasks.
+
+* You have Change Namespaces permissions.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Select the namespace you want to edit.
+4. Click the Edit namespace.
+5. Enter the relevant information in the fields.
+6. Optional: enter markdown information in the Resources field.
+7. Click Save namespace.
+
+Your content developers can now upload collections to your new namespace, or allow users in teams assigned as owners to upload collections.
+
+When you create a namespace, teams with permissions to upload to it can start adding their collections for approval. Collections in the namespace appear in the Published repository after approval.
+
+### Uploading collections to your namespaces
+
+You can upload internally developed collections in tar.gz file format to your private automation hub namespace for review and approval by an automation hub administrator.
+When approved, the collection moves to the Published content repository where automation hub users can view and download it.
+
+
+[NOTE]
+----
+Format your collection file name as follows: <my_namespace-my_collection-1.0.0.tar.gz>
+----
+
+* You have a namespace to which you can upload the collection.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select  and select a namespace.
+3. Select the Collections tab.
+4. Click Upload collection.
+5. Click Browse next to the Collection file field.
+6. Select the collection to upload.
+7. Select one of the following options:
+* Staging repos
+* Repositories without pipeline
+8. Click Upload collection.
+
+To verify whether the collection uploaded successfully or if it failed, navigate to  and click the More Actions icon &#8942;, then select Imports. There you will find a summary of tests indicating whether the import was successful.
+
+### Reviewing your namespace import logs
+
+You can review the status of collections uploaded to your namespaces to evaluate success or failure of the process.
+
+Imported collections information includes:
+
+Status:: completed or failed
+Approval status:: waiting for approval or approved
+Version:: the version of the uploaded collection
+Import log:: activities executed during the collection import
+
+* You have access to a namespace to which you can upload collections.
+
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Select a namespace.
+4. Click the More Actions icon &#8942; and select Imports.
+5. Use the search field or locate an imported collection from the list.
+6. Click the imported collection.
+7. Review collection import details to determine the status of the collection in your namespace.
+
+### Deleting a namespace
+
+You can delete unwanted namespaces to manage storage on your automation hub server.
+You must first ensure that the namespace you want to delete does not contain a collection with dependencies.
+
+* The namespace you are deleting does not have a collection with dependencies.
+* You have Delete namespace permissions.
+
+1. Log in to your Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Click the namespace to be deleted.
+4. Click the More Actions icon &#8942;, then click Delete namespace.
+
+[NOTE]
+----
+If the Delete namespace button is disabled, the namespace contains a collection with dependencies. Review the collections in this namespace, and delete any dependencies.
+----
+
+The namespace that you deleted, as well as its associated collections, is now deleted and removed from the namespace list view.
+
+## Managing the publication process of internal collections in Automation Hub
+
+Use automation hub to manage and publish content collections developed within your organization. You can upload and group collections in namespaces. They need administrative approval to appear in the Published content repository. After you publish a collection, your users can access and download it for use.
+
+You can also reject submitted collections that do not meet organizational certification criteria.
+
+### About Approval
+
+You can manage uploaded collections in automation hub by using the Collection Approvals feature located in the navigation panel.
+
+Approval Dashboard:: By default, the Approval dashboard lists all collections with Needs Review status. You can check these for inclusion in your Published repository.
+Viewing collection details:: You can view more information about the collection by clicking the Version number.
+Filtering collections:: Filter collections by Namespace, Collection, or Repository to locate content and update its status.
+
+### Approving collections for internal publication
+
+You can approve collections uploaded to individual namespaces for internal publication and use. All collections awaiting review are located in .
+
+* You have Modify Ansible repo content permissions.
+
+1. From the navigation panel, select .
+
+Collections requiring approval have the status Needs review.
+2. Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
+3. Click the thumbs up icon to approve and sign the collection. Confirm your choice in the modal that appears.
+
+Approved collections are moved to the Published repository where users can view and download them for use.
+
+### Rejecting collections uploaded for review
+
+You can reject collections uploaded to individual namespaces. All collections awaiting review are located in .
+
+Collections requiring approval have the status Needs review.
+
+* You have Modify Ansible repo content permissions.
+
+1. From the navigation panel, select .
+2. Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
+3. Click the thumbs down icon to approve and sign the collection. Confirm your choice in the modal that appears.
+
+Collections you decline for publication are moved to the Rejected repository.
+
+## Repository management with automation hub
+
+As a platform administrator, you can create, edit, delete, and move automation content collections between repositories.
+
+### Types of repositories in automation hub
+
+In automation hub you can publish collections to two types of repositories, depending on whether you want your collection to be verified:
+
+Staging repositories:: Any user with permission to upload to a namespace can publish collections into these repositories. Collections in these repositories are not available in the search page. Instead, they are displayed on the approval dashboard for an administrator to verify. Staging repositories are marked with the pipeline=staging label.
+Custom repositories:: Any user with write permissions on the repository can publish collections to these repositories. Custom repositories can be public where all users can see them, or private where only users with view permissions can see them. These repositories are not displayed on the approval dashboard. If the repository owner enables search, the collection can appear in search results.
+
+By default, automation hub includes one staging repository that is automatically used when a repository is not specified for uploading collections. Users can create new staging repositories during repository creation.
+
+### Approval pipeline for custom repositories in automation hub
+
+In automation hub you can approve collections into any repository marked with the pipeline=approved label. By default, automation hub includes one repository for approved content, but you have the option to add more from the repository creation screen. You cannot directly publish into a repository marked with the pipeline=approved label. A collection must first go through a staging repository and be approved before being published into a 'pipleline=approved' repository.
+
+Auto approval:: When auto approve is enabled, any collection you upload to a staging repository is automatically promoted to all of the repositories marked as pipeline=approved.
+Approval required:: When auto approve is disabled, the administrator can view the approval dashboard and see collections that have been uploaded into any of the staging repositories. Sorting by Approved displays a list of approved repositories. From this list, the administrator can select one or more repositories to which the content should be promoted.
+
+If only one approved repository exists, the collection is automatically promoted into it and the administrator is not prompted to select a repository.
+Rejection:: Rejected collections are automatically placed into the rejected repository, which is pre-installed.
+
+### Role based access control to restrict access to custom repositories
+
+Use Role Based Access Control (RBAC) to restrict user access to custom repositories by defining access permissions based on user roles. By default, users can view all public repositories in their automation hub, but they cannot modify a repository unless their role allows them access to do so. The same logic applies to other operations on the repository. For example, you can remove a user&#8217;s ability to download content from a custom repository by changing their role permissions. See Access management and authentication for information about managing user access to automation hub.
+
+### Creating a custom repository in automation hub
+
+When you use Red Hat Ansible Automation Platform to create a repository, you can configure the repository to be private or hide it from search results.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Click Create repository.
+4. Enter a Name for your repository.
+5. In the Description field, describe the purpose of the repository.
+6. To retain previous versions of your repository each time you make a change, enter a figure in the field labeled Retained number of versions. The number of retained versions can range anywhere between 0 and unlimited. To save all versions, leave this set to null.
+
+[NOTE]
+----
+If you have a problem with a change to your custom repository, you can revert to a different repository version that you have retained.
+----
+7. In the Pipeline field, select a pipeline for the repository. This option defines who can publish a collection into the repository.
+Staging:: Anyone is allowed to publish automation content into the repository.
+Approved:: Collections added to this repository are required to go through the approval process by way of the staging repository. When auto approve is enabled, any collection uploaded to a staging repository is automatically promoted to all of the approved repositories.
+None:: Any user with permissions on the repository can publish to the repository directly, and the repository is not part of the approval pipeline.
+8. Optional: To hide the repository from search results, select Hide from search.
+9. Optional: To make the repository private, select Make private. This hides the repository from anyone who does not have permissions to view the repository.
+10. To sync the content from a remote repository into this repository, in the Remote field select the remote that contains the collections you want included in your custom repository. For more information, see Repository sync.
+11. Click Create repository.
+
+* After the repository is created, the details page is displayed.
+
+From here, you can provide access to your repository, review or add collections, and work with the saved versions of your custom repository.
+
+### Providing access to a custom automation hub repository
+
+By default, private repositories and the automation content collections are hidden from all users in the system. Public repositories can be viewed by all users, but cannot be modified. Use this procedure to provide access to your custom repository.
+
+1. Log in to private automation hub.
+2. From the navigation panel, select .
+3. Click into your repository in the list and select the Team Access tab.
+4. Click Add roles.
+5. Select the team to which you want to grant a role, then click Next.
+6. Select the roles you want to apply to the selected team, and then click Next.
+7. Review your selections and click Finish.
+8. Click Close to complete the process.
+
+See Access management and authentication for more information about implementing user access.
+
+### Adding collections to an automation hub repository
+
+After you create your repository, you can begin adding automation content collections to it.
+
+1. From the navigation panel, select .
+2. Click into your repository in the list.
+3. Select the Collection versions tab.
+4. Click Add Collections and select the collections that you want to add to your repository.
+5. Click Select.
+
+### Revert to a different automation hub repository version
+
+When automation content collections are added or removed from a repository, a new version is created. If a change to your repository causes a problem, you can revert to a previous version. Reverting is a safe operation and does not delete collections from the system, but rather, changes the content associated with the repository. The number of versions saved is defined in the Retained number of versions setting when a repository is created.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Click into your repository in the list and then select the Versions tab.
+4. Locate the version you want to revert to and click the More Actions icon &#8942;, and select Revert to this version.
+5. Check the box confirming your selection, and then click Revert to repository version.
+
+### Managing remote configurations in automation hub
+
+You can set up remote configurations to any server that is running automation hub. Remote configurations allow you to sync content to your custom repositories from an external collection source.
+
+#### Creating a remote configuration in automation hub
+
+You can use Red Hat Ansible Automation Platform to create a remote configuration to an external collection source. Then, you can sync the content from those collections to your custom repositories.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Click Create Remote.
+4. Enter a Name for the remote configuration.
+5. Enter the URL for the remote server, including the path for the specific repository.
+
+[NOTE]
+----
+To find the remote server URL and repository path, navigate to , select the More Actions icon &#8942;, and select Copy CLI configuration.
+----
+6. Configure the credentials to the remote server by entering a Token or Username and Password required to access the external collection.
+
+[NOTE]
+----
+To generate a token from the navigation panel, select , click Load token and copy the token that is loaded.
+----
+7. To access collections from console.redhat.com, enter the SSO URL to sign in to the identity provider (IdP).
+8. Select or create a Requirements file to identify the collections and version ranges to synchronize with your custom repository. For example, to download only the kubernetes and AWS collection versions 5.0.0 or later the requirements file would look like this:
+
+```
+Collections:
+ 	  - name: community.kubernetes
+	  - name: community.aws
+ 		version:”>=5.0.0”
+```
+
+
+[NOTE]
+----
+All collection dependencies are downloaded during the Sync process.
+----
+9. Optional: To configure your remote further, use the options available under Show advanced options:
+1. If there is a corporate proxy in place for your organization, enter a Proxy URL, Proxy Username and Proxy Password.
+2. Enable or disable transport layer security using the TLS validation checkbox.
+3. If digital certificates are required for authentication, enter a Client key and Client certificate.
+4. If you are using a self-signed SSL certificate for your server, enter the PEM encoded client certificate used for authentication in the CA certificate field.
+5. To accelerate the speed at which collections in this remote can be downloaded, specify the number of collections that can be downloaded in tandem in the Download concurrency field.
+6. To limit the number of queries per second on this remote, specify a Rate Limit.
+
+[NOTE]
+----
+Some servers can have a specific rate limit set, and if exceeded, synchronization fails.
+----
+
+#### Providing access to a remote configuration
+
+After you create a remote configuration, you must provide access to it before anyone can use it.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Click into your repository in the list, and then select the Team Access tab.
+4. Click Add roles.
+5. Select the team to which you want to grant a role, then click Next.
+6. Select the roles you want to apply to the selected team, and then click Next.
+7. Review your selections and click Finish.
+8. Click Close to complete the process.
+
+### Synchronizing repositories in automation hub
+
+You can distribute relevant automation content collections to your users by synchronizing repositories from one automation hub to another. To ensure you have the latest collection updates, synchronize your custom repository with the remote regularly.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Locate your repository in the list and click More Actions icon &#8942;, then select Sync repository.
+
+All collections in the configured remote are downloaded to your custom repository. To check the status of the collection sync, select  from the navigation panel.
+
+[NOTE]
+----
+To limit repository synchronization to specific collections within a remote, you can identify specific collections to be pulled by using a requirements.yml file. See Create a remote for more information.
+----
+
+For more information about using requirements files, see Creating a requirements file.
+
+### Exporting and importing collections in automation hub
+
+Ansible automation hub stores automation content collections within repositories. These collections are versioned by the automation content creator. Many versions of the same collection can exist in the same or different repositories at the same time.
+
+Collections are stored as .tar files that can be imported and exported. This storage format ensures that the collection you are importing to a new repository is the same one that was originally created and exported.
+
+#### Exporting an automation content collection in automation hub
+
+After collections are finalized, you can import them to a location where they can be distributed to others across your organization.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select . The Collections page displays all collections across all repositories. You can search for a specific collection.
+3. Click into the collection that you want to export. The collection details page opens.
+4. From the Install tab, select Download tarball. The .tar file is downloaded to your default browser downloads folder. You can now import it to the location of your choosing.
+
+#### Importing an automation content collection in automation hub
+
+As an automation content creator, you can import a collection to use in a custom repository. To use a collection in your custom repository, you must first import the collection into your namespace so the automation hub administrator can approve it.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select . The Namespaces page displays all of the namespaces available.
+3. Select the namespace to which you want to add your collection.
+4. Select the Collections tab.
+5. Click Upload Collection.
+6. Enter or browse to select a collection file.
+7. Select the repository pipeline to add the collection. The choices are Staging repos and Repositories without pipeline.
+8. Click Upload collection.
+
+The Imports screen displays a summary of tests and notifies you if the collection upload is successful or has failed. To find your imports, on your namespace click the More Actions icon &#8942; and select Imports.
+
+[NOTE]
+----
+If the collection is not approved, it is not displayed in the published repository.
+----
+
+* See Approval pipeline for more information about collection and repository approvals.
+
+# Manage containers in private automation hub
+
+Learn the administrator workflows and processes for configuring private automation hub remote registry and repositories.
+
+## Manage your private automation hub remote registry
+
+Manage container image repositories in your Ansible Automation Platform infrastructure by using the automation hub remote registry.
+You can perform the following tasks with Automation hub:
+
+* Control who can access individual container repositories
+* Change tags on images
+* View activity and image layers
+* Provide additional information related to each container repository
+
+### Container registries
+
+The automation hub remote registry is used for storing and managing execution environments.
+When you have built or sourced an execution environment, you can push that execution environment to the registry portion of private automation hub to create a container repository.
+
+* Push an execution environment to the automation hub remote registry.
+* Create a group with access to the container repository in the registry.
+* Add the new group to the container repository.
+* Add a README to the container repository to provide users with information and relevant links.
+
+## Configuring user access for container repositories in private automation hub
+
+To determine who can access and manage execution environments in your Ansible Automation Platform, you must configure user access for container repositories in your private automation hub.
+
+### Remote registry team permissions
+
+You can control how users can interact with execution environments managed in private automation hub.
+Use the following list of permissions to create teams with the right privileges for your remote registries.
+
+
+
+### Creating a new team in private automation hub
+
+You can create and assign permissions to a team in private automation hub that enables users to access specified features in the system.
+By default, new teams do not have any assigned permissions. You can add permissions when first creating a team or edit an existing team to add or remove permissions.
+
+For more information, see Teams in the Access management and authentication guide.
+
+## Populating your private automation hub container registry
+
+By default, private automation hub does not include execution environments.
+To populate your container registry, you must push a execution environment to it.
+
+You must follow a specific workflow to populate your private automation hub remote registry:
+
+* Pull execution environments from the Red Hat Ecosystem Catalog (registry.redhat.io)
+* Tag them
+* Push them to your private automation hub remote registry
+
+
+[IMPORTANT]
+----
+Image manifests and filesystem blobs were both originally served directly from registry.redhat.io and registry.access.redhat.com.
+As of 1 May 2023, filesystem blobs are served from quay.io instead.
+* Ensure that the Network ports and protocols listed in Table 5.4. Execution Environments (EE) are available to avoid problems pulling container images.
+Make this change to any firewall configuration that specifically enables outbound connections to registry.redhat.io or registry.access.redhat.com.
+Use the hostnames instead of IP addresses when configuring firewall rules.
+After making this change you can continue to pull execution environments from registry.redhat.io and registry.access.redhat.com. You do not require a quay.io login, or need to interact with the quay.io registry directly in any way to continue pulling Red Hat container images.
+However, manifests, sometimes called “subscription allocations”, on the web-based Red Hat Subscription Management are no longer supported as of early 2024 with one exception: If a system is part of a closed network or “air gapped” system that does not receive its updates from Red Hat’s servers directly, manifests are supported until the release of Red Hat Satellite 6.16. Keep up to date with Red Hat Satellite Release Dates for the announcement for Red Hat Satellite 6.16's release date announcement.
+----
+
+### Pulling execution environments for use in automation hub
+
+Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use. The following example details how to pull an execution environment from the Red Hat Ecosystem Catalog (registry.redhat.io).
+
+
+[IMPORTANT]
+----
+As of early 2024, Red Hat no longer supports manifests or manifest lists on the Red Hat Subscription Management web platform, which has also been used interchangeably with “subscription allocations.” Red Hat also no longer supports most manifest functionality in Red Hat Satellite with one exception:
+* Red Hat Satellite users in closed network or “air gapped” networks that do not receive their updates directly from Red Hat servers can currently still use access.redhat.com until the release of Red Hat Satellite 6.16.
+New Red Hat accounts automatically use Simple Content Access for their subscription tooling. New Red Hat accounts and existing Satellite customers who can connect to Red Hat's servers can find their manifests at console.redhat.com.
+----
+
+* You have permissions to pull execution environments from registry.redhat.io.
+* A Red Hat account with Simple Content Access enabled.
+
+1. If you need to access your manifest for your container images log in to Red Hat Console.
+2. Click the three-dot menu for the manifest you need for your execution environments, and click Export manifest.
+3. Log in to Podman by using your registry.redhat.io credentials:
+
+```
+$ podman login registry.redhat.io
+```
+
+4. Enter your username and password.
+5. Pull an execution environment:
+
+```
+$ podman pull registry.redhat.io/<ee_name>:<tag>
+```
+
+
+To verify that the execution environment you recently pulled is contained in the list, take these steps:
+
+1. List the images in local storage:
+
+```
+$ podman images
+```
+
+2. Check the execution environment name, and verify that the tag is correct.
+
+* See Red Hat Ecosystem Catalog Help for information on registering and getting execution environments.
+* See Creating and managing manifests for a connected Satellite Server to learn more about the changes coming to Red Hat subscription tooling.
+
+### Tagging execution environments for use in automation hub
+
+After you pull execution environments from a registry, tag them for use in your private automation hub remote registry.
+
+* You have pulled an execution environment from an external registry.
+* You have the FQDN or IP address of the automation hub instance.
+
+* Tag a local execution environment with the automation hub container repository:
+
+```
+$ podman tag registry.redhat.io/<ee_name>:<tag> <automation_hub_hostname>/<ee_name>
+```
+
+
+1. List the images in local storage:
+
+```
+$ podman images
+```
+
+2. Verify that the execution environment you recently tagged with your automation hub information is contained in the list.
+
+### Pushing an execution environment to private automation hub
+
+You can push tagged execution environments to private automation hub to create new containers and populate the remote registry.
+
+* You have permissions to create new containers.
+* You have the FQDN or IP address of the automation hub instance.
+
+1. Log in to Podman using your automation hub location and credentials:
+
+```
+$ podman login -u=<username> -p=<password> <automation_hub_url>
+```
+
+
+[WARNING]
+----
+Let Podman prompt you for your password when you log in. Entering your password at the same time as your username can expose your password to the shell history.
+----
+2. Push your execution environment to your automation hub remote registry:
+
+```
+$ podman push <automation_hub_url>/<ee_name>
+```
+
+
+The push operation re-compresses image layers during the upload, which is not guaranteed to be reproducible and is client-implementation dependent.
+This may lead to image-layer digest changes and a failed push operation, resulting in Error: Copying this image requires changing layer representation, which is not possible (image is signed or the destination specifies a digest).
+
+1. Log in to your Ansible Automation Platform.
+2. Navigate to .
+3. Locate the container in the container repository list.
+
+## Setting up your container repository
+
+When you set up your container repository, you must add a description, include a README, add teams that can access the repository, and tag automation execution environmentss.
+
+### Prerequisites to setting up your remote registry
+
+* You are logged in to Ansible Automation Platform.
+* You have permissions to change the repository.
+
+### Adding a README to your container repository
+
+Add a README to your container repository to provide instructions to your users on how to work with the container.
+Automation hub container repositories support Markdown for creating a README.
+By default, the README is empty.
+
+* You have permissions to change containers.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Select your execution environment.
+4. On the Detail tab, click Add.
+5. In the Raw Markdown text field, enter your README text in Markdown.
+6. Click Save when you are finished.
+
+After you add a README, you can edit it at any time by clicking Edit and repeating steps 4 and 5.
+
+### Providing access to your automation execution environmentss
+
+Provide access to your automation execution environmentss for users who need to work with the images.
+Adding a team allows you to modify the permissions the team can have to the container repository.
+You can use this option to extend or restrict permissions based on what the team is assigned.
+
+* You have change container namespace permissions.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Select your automation execution environments.
+4. From the Team Access tab, click Add roles.
+5. Select the team or teams to which you want to grant access and click Next.
+6. Select the roles that you want to add to this execution environment and click Next.
+7. Click Finish.
+
+### Tagging container images
+
+Tag automation execution environmentss to add an additional name to automation execution environmentss stored in your automation hub container repository. If no tag is added to an automation execution environments, automation hub defaults to latest for the name.
+
+* You have change automation execution environments tags permissions.
+
+1. From the navigation panel, select .
+2. Select your automation execution environments.
+3. Click the Images tab.
+4. Click the More Actions icon &#8942;, and click Manage tags.
+5. Add a new tag in the text field and click Add.
+6. Optional: Remove current tags by clicking x on any of the tags for that image.
+
+* Click the Activity tab and review the latest changes.
+
+### Creating a credential
+
+To pull automation execution environments images from a password or token-protected registry, you must create a credential.
+
+In earlier versions of Ansible Automation Platform, you were required to deploy a registry to store execution environment images.
+On Ansible Automation Platform 2.0 and later, the system operates as if you already have a remote registry up and running.
+To store execution environment images, add the credentials of only your selected remote registries.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Click Create credential to create a new credential.
+4. Enter an authorization Name, Description, and Organization.
+5. In the Credential Type drop-down, select Container Registry.
+6. Enter the Authentication URL. This is the remote registry address.
+7. Enter the Username and Password or Token required to log in to the remote registry.
+8. Optional: To enable SSL verification, select Verify SSL.
+9. Click Create credential.
+
+Filling in at least one of the fields organization, user, or team is mandatory, and can be done through the user interface.
+
+## Pulling images from a container repository
+
+Pull automation execution environmentss from the automation hub remote registry to make a copy to your local machine.
+Automation hub provides the podman pull command for each latest automation execution environments in the container repository.
+You can copy and paste this command into your terminal, or use podman pull to copy an automation execution environments based on an automation execution environments tag.
+
+### Pulling an image
+
+You can pull automation execution environmentss from the automation hub remote registry to make a copy to your local machine.
+
+* You must have permission to view and pull from a private container repository.
+
+1. If you are pulling automation execution environmentss from a password or token-protected registry, create a credential before pulling the automation execution environments.
+2. From the navigation panel, select .
+3. Select your automation execution environments.
+4. In the Pull this image entry, click Copy to clipboard.
+5. Paste and run the command in your terminal.
+
+* Run podman images to view images on your local machine.
+
+### Syncing images from a container repository
+
+You can pull automation execution environmentss from the automation hub remote registry to sync an image to your local machine.
+To sync an automation execution environments from a remote registry, you must first configure a remote registry.
+
+You must have permission to view and pull from a private container repository.
+
+1. From the navigation panel, select .
+2. Add https://registry.redhat.io to the registry.
+3. Add any required credentials to authenticate.
+
+[NOTE]
+----
+Some remote registries are aggressive with rate limiting.
+Set a rate limit under Advanced Options.
+----
+4. From the navigation panel, select .
+5. Click Create execution environment in the page header.
+6. Select the registry you want to pull from.
+The Name field displays the name of the automation execution environments displayed on your local registry.
+
+[NOTE]
+----
+The Upstream name field is the name of the image on the remote server.
+For example, if the upstream name is set to "alpine" and the Name field is "local/alpine", the alpine image is downloaded from the remote and renamed to "local/alpine".
+----
+7. Set a list of tags to include or exclude.
+Syncing automation execution environmentss with a large number of tags is time consuming and uses a lot of disk space.
+
+* See Red Hat Container Registry Authentication for a list of registries.
+* See the What is Podman? documentation for options to use when pulling images.
+
+## Working with signed containers
+
+Automation execution environments are container images used by Ansible Automation Platform to run jobs.
+You can download this content to private automation hub, and publish it within your organization.
+
+### Deploying your system for container signing
+
+Automation hub implements image signing to offer better security for the execution environment container images.
+
+To deploy your system so that it is ready for container signing, create a signing script.
+
+
+[NOTE]
+----
+Installer looks for the script and key on the same server where installer is located.
+----
+
+1. From a terminal, create a signing script, and pass the script path as an installer parameter.
+
+Example:
+
+```
+#!/usr/bin/env bash
+
+# pulp_container SigningService will pass the next 4 variables to the script.
+MANIFEST_PATH=$1
+FINGERPRINT="$PULP_SIGNING_KEY_FINGERPRINT"
+IMAGE_REFERENCE="$REFERENCE"
+SIGNATURE_PATH="$SIG_PATH"
+
+# Create container signature using skopeo
+skopeo standalone-sign \
+  $MANIFEST_PATH \
+  $IMAGE_REFERENCE \
+  $FINGERPRINT \
+  --output $SIGNATURE_PATH
+
+# Optionally pass the passphrase to the key if password protected.
+# --passphrase-file /path/to/key_password.txt
+
+# Check the exit status
+STATUS=$?
+if [ $STATUS -eq 0 ]; then
+  echo {\"signature_path\": \"$SIGNATURE_PATH\"}
+else
+  exit $STATUS
+fi
+```
+
+2. Review the Ansible Automation Platform installer inventory file for options for container signing that begin with automationhub_*.
+
+```
+[all:vars]
+.
+.
+.
+
+automationhub_create_default_container_signing_service = True
+automationhub_container_signing_service_key = /absolute/path/to/key/to/sign
+automationhub_container_signing_service_script = /absolute/path/to/script/that/signs
+```
+
+3. Once installation is complete, log in to Ansible Automation Platform and navigate to .
+4. Ensure that you have a key titled container-default, or container-anyname.
+
+
+[NOTE]
+----
+The container-default service is created by the Ansible Automation Platform installer.
+----
+
+### Adding containers remotely to automation hub
+
+You can add containers remotely to automation hub in one of the following two ways:
+
+* Create Remotes
+* Execution Environment
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. Click Create remote registry.
+* In the Name field, enter the name of the registry where the container resides.
+* In the URL field, enter the URL of the registry where the container resides.
+* In the Username field, enter the username if necessary.
+* In the Password field, enter the password if necessary.
+* Click Create remote registry.
+
+### Adding an execution environment
+
+Automation execution environments are container images that make it possible to incorporate system-level dependencies and collection-based content. Each execution environment allows you to have a customized image to run jobs, and each of them contain only what you need when running the job.
+
+1. From the navigation panel, select .
+2. Click Create execution environment.
+3. Enter the name of the execution environment.
+4. Enter the upstream name.
+5. Under Registry, select the name of the registry from the drop-down menu.
+6. Enter tags in the Add tag(s) to include field.
+If the field is blank, all the tags are passed.
+You must specify which repository-specific tags to pass.
+7. Optional: Enter tags to exclude in Add tag(s) to exclude.
+8. Click Create automation execution environments.
+9. Synchronize the image.
+
+### Pushing container images from your local environment
+
+Use the following procedure to sign automation execution environmentss on a local system and push those signed automation execution environmentss to the automation hub registry.
+
+1. From a terminal, log in to Podman, or any container client currently in use:
+
+```
+> podman pull <container-name>
+```
+
+2. After the automation execution environments is pulled, add tags (for example: latest, rc, beta, or version numbers, such as 1.0; 2.3, and so on):
+
+```
+> podman tag <container-name> <server-address>/<container-name>:<tag name>
+```
+
+3. Sign the automation execution environments after changes have been made, and push it back up to the automation hub registry:
+
+```
+> podman push <server-address>/<container-name>:<tag name> --tls-verify=false --sign-by <reference to the gpg key on your local>
+```
+
+
+If the automation execution environments is not signed, it can only be pushed with any current signature embedded. Alternatively, you can use the following script to push the automation execution environments without signing it:
+
+```
+> podman push <server-address>/<container-name>:<tag name> --tls-verify=false
+```
+
+4. Once the automation execution environments has been pushed, navigate to .
+5. To display the new execution environment, click the Refresh icon.
+6. Click the name of the image to view your pushed image.
+
+The details page for each automation execution environments indicates whether it has been signed. If the details page indicates that an image is Unsigned, you can sign the automation execution environments from automation hub using the following steps:
+
+1. Click the automation execution environments name to navigate to the details page.
+2. Click the More Actions icon &#8942;.
+Three options are available:
+* Sign execution environment
+* Use in Controller
+* Delete execution environment
+3. Click Sign execution environment from the drop-down menu.
+
+The signing service signs the automation execution environments.
+After the automation execution environments is signed, the status changes to "signed".
+
+### Policies with signed images
+
+Policies can be used by podman or other image clients to ensure the validity of the image by assigning specific policies to that signature.
+
+### Using podman to ensure an image is signed by a specific signature
+
+When ensuring an automation execution environments is signed by specific signatures, the signature must be on your local environment.
+
+1. From the navigation panel, select .
+2. Click the Download key icon next to the signature that you are using. A new window should open to indicate you have downloaded the key.
+
+### Configuring the client to verify signatures
+
+To ensure an automation execution environments pulled from the remote registry is properly signed, you must first configure the automation execution environments with the proper public key in a policy file.
+
+* The client must have sudo privileges configured to verify signatures.
+
+1. Open your terminal and use the following command:
+
+```
+>  sudo <name of editor> /etc/containers/policy.json
+```
+
+
+The file that is displayed is similar to this:
+
+```
+{
+  "default": [{"type": "reject"}],
+  "transports": {
+  	"docker": {
+    	"quay.io": [{"type": "insecureAcceptAnything"}],
+    	"docker.io": [{"type": "insecureAcceptAnything"}],
+    	"<server-address>": [
+      	{
+          	    "type": "signedBy",
+          	    "keyType": "GPGKeys",
+          	    "keyPath": "/tmp/containersig.txt"
+      	}]
+  	}
+  }
+}
+```
+
+
+This file shows that neither quay.io, or docker.io will perform the verification, because the type is insecureAcceptAnything which overrides the default type of reject. However, <server-address> will perform the verification, because the parameter type is set to "signedBy".
+
+[NOTE]
+----
+The only keyType currently supported is GPG keys.
+----
+2. Under the <server-address> entry, modify the keyPath <1> to include the
+name of your key file.
+
+```
+{
+    	"default": [{"type": "reject"}],
+    	"transports": {
+        	"docker": {
+          	  "quay.io": [{"type": "insecureAcceptAnything"}],
+          	  "docker.io": [{"type": "insecureAcceptAnything"}],
+          	  "<server-address>": [{
+                	"type": "signedBy",
+                	"keyType": "GPGKeys",
+                	"keyPath": "/tmp/<key file name>",
+                	"signedIdentity": {
+                  	  "type": "matchExact"
+                    }
+            	  }]
+            }
+    	}
+}
+```
+
+3. Save and close the file.
+
+* Pull the file using Podman, or your client of choice:
+
+
+```
+> podman pull <server-address>/<container-name>:<tag name> --tls-verify=false
+```
+
+
+This response verifies the automation execution environments has been signed with no errors. If the automation execution environments is not signed, the command fails.
+
+* For more information about policy.json, see documentation for containers-policy.json.
+
+## Deleting a container repository
+
+Delete a remote repository from your Ansible Automation Platform to manage your disk space.
+You can delete repositories from the Red Hat Ansible Automation Platform interface in the Execution Environment list view.
+
+* You have permissions to manage repositories.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. On the container repository that you want to delete, click the More Actions icon &#8942;, and click Delete execution environment.
+4. When the confirmation message is displayed, click the checkbox and click Delete execution environment.
+
+* Return to the automation execution environmentss list view.
+If the automation execution environments has been successfully deleted, it will no longer be in the list.

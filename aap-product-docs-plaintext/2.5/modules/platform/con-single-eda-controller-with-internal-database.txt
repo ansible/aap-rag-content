@@ -1,0 +1,12 @@
+# Single Event-Driven Ansible controller node with internal database
+
+This scenario includes installation of Event-Driven Ansible controller on a single machine with an internal database. It installs an installer managed PostgreSQL that is similar to the automation controller installation scenario.
+
+
+[IMPORTANT]
+----
+Automation controller must be installed before you populate the inventory file with the appropriate Event-Driven Ansible variables.
+----
+
+* Single automation controller, single automation hub, and single Event-Driven Ansible controller node with external (installer managed) database
+* Appendix A.5. Event-Driven Ansible controller variables

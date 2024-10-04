@@ -1,0 +1,3 @@
+# Logging and aggregation settings
+
+For information about these settings, see Setting up logging.

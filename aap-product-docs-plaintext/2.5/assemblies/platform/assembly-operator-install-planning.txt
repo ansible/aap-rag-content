@@ -1,0 +1,43 @@
+# Planning your Red Hat Ansible Automation Platform operator installation on Red Hat OpenShift Container Platform
+
+Red Hat Ansible Automation Platform is supported on both Red Hat Enterprise Linux and Red Hat Openshift.
+OpenShift operators help install and automate day-2 operations of complex, distributed software on Red Hat OpenShift Container Platform. The Ansible Automation Platform Operator enables you to deploy and manage Ansible Automation Platform components on Red Hat OpenShift Container Platform.
+You can use this section to help plan your Red Hat Ansible Automation Platform installation on your Red Hat OpenShift Container Platform environment. Before installing, review the supported installation scenarios to determine which meets your requirements.
+
+## About Ansible Automation Platform Operator
+
+The Ansible Automation Platform Operator provides cloud-native, push-button deployment of new Ansible Automation Platform instances in your OpenShift environment.
+The Ansible Automation Platform Operator includes resource types to deploy and manage instances of automation controller and private automation hub.
+It also includes automation controller job resources for defining and launching jobs inside your automation controller deployments.
+
+Deploying Ansible Automation Platform instances with a Kubernetes native operator offers several advantages over launching instances from a playbook deployed on Red Hat OpenShift Container Platform, including upgrades and full lifecycle support for your Red Hat Ansible Automation Platform deployments.
+
+You can install the Ansible Automation Platform Operator from the Red Hat Operators catalog in OperatorHub.
+
+For information about the Ansible Automation Platform Operator infrastructure topology see Container topologies in Tested deployment models.
+
+## OpenShift Container Platform version compatibility
+
+The Ansible Automation Platform Operator to install Ansible Automation Platform 2.5 is available on OpenShift Container Platform 4.9 and later versions.
+
+* See the Red Hat Ansible Automation Platform Life Cycle for the most current compatibility details.
+
+## Supported installation scenarios for Red Hat OpenShift Container Platform
+
+You can use the OperatorHub on the Red Hat OpenShift Container Platform web console to install Ansible Automation Platform Operator.
+
+Alternatively, you can install Ansible Automation Platform Operator from the OpenShift Container Platform command-line interface (CLI), oc. See  for help with this.
+
+After you have installed Ansible Automation Platform Operator you must create an Ansible Automation Platform custom resource (CR). This enables you to manage Ansible Automation Platform components from a single unified interface known as the platform gateway. As of version 2.5, you must create an Ansible Automation Platform CR, even if you have an existing automation controller,  automation hub, or Event-Driven Ansible, components.
+
+If existing components have already been deployed, you must specify these components on the Ansible Automation Platform CR. You must create the custom resource in the same namespace as the existing components.
+
+
+
+## Custom resources
+
+You can define custom resources for each primary installation workflows.
+
+## Additional resources
+
+* See Understanding OperatorHub to learn more about OpenShift Container Platform OperatorHub.

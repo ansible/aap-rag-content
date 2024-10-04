@@ -1,0 +1,19 @@
+# Installing ansible-core on the RHEL host
+
+1. From your RHEL host, install ansible-core:
+
+```
+sudo dnf install -y ansible-core
+```
+
+2. Optionally, you can install additional utilities that can be useful for troubleshooting purposes, for example wget, git, rsync, and vim:
+
+```
+sudo dnf install -y wget git rsync vim
+```
+
+3. Set a hostname that is a fully qualified domain name (FQDN):
+
+```
+sudo hostnamectl set-hostname <your_hostname>
+```

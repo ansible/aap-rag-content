@@ -1,0 +1,5 @@
+# View Ansible outputs for JSON commands when using automation controller
+
+When working with automation controller, you can use the API to obtain the Ansible outputs for commands in JSON format.
+
+To view the Ansible outputs, browse to https://&lt;controller server name&gt;/api/v2/jobs/&lt;job_id&gt;/job_events/

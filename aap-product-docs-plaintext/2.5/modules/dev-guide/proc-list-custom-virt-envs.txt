@@ -1,0 +1,22 @@
+# Listing custom virtual environments
+
+You can list the virtual environments on your automation controller instance using the awx-manage command.
+
+1. SSH into your automation controller instance and run:
+
+```
+$ awx-manage list_custom_venvs
+```
+
+
+A list of discovered virtual environments will appear.
+
+
+```
+# Discovered virtual environments:
+/var/lib/awx/venv/testing
+/var/lib/venv/new_env
+
+To export the contents of a virtual environment, re-run while supplying the path as an argument:
+awx-manage export_custom_venv /path/to/venv
+```

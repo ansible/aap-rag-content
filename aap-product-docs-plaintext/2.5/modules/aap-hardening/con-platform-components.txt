@@ -1,0 +1,5 @@
+# Ansible Automation Platform components
+
+Ansible Automation Platform is a modular platform that includes automation controller, automation hub, Event-Driven Ansible controller, and Insights for Ansible Automation Platform.
+
+For more information about the components provided within Ansible Automation Platform, see Red Hat Ansible Automation Platform components in the Red Hat Ansible Automation Platform Planning Guide.

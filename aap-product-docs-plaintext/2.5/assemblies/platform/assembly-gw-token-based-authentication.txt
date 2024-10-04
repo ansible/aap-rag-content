@@ -1,0 +1,317 @@
+# Configuring access to external applications with token-based authentication
+
+Token-based authentication permits authentication of third-party tools and services with the platform through integrated OAuth 2 token support, and allows you to access external applications without having to store your password on disk.
+For more information on the OAuth2 specification, see The OAuth 2.0 Authorization Framework.
+For more information on using the manage utility to create tokens, see Token and session management.
+
+# Applications
+
+Create and configure token-based authentication for external applications such as ServiceNow and Jenkins.
+With token-based authentication, external applications can easily integrate with Ansible Automation Platform.
+
+With OAuth 2 you can use tokens to share data with an application without disclosing login information.
+You can configure these tokens as read-only.
+
+You can create an application that is representative of the external application you are integrating with, then use it to create tokens for the application to use on behalf of its users.
+
+Associating these tokens with an application resource enables you to manage all tokens issued for a particular application.
+By separating the issue of tokens under OAuth Applications, you can revoke all tokens based on the application without having to revoke all tokens in the system.
+
+## Getting started with OAuth Applications
+
+You can access the OAuth Applications page from the navigation panel by selecting menu:Access Management[OAuth Applications]. From there you can view, create, sort and search for applications currently managed by Ansible Automation Platform and automation controller.
+
+If no applications exist, you can create one by clicking btn:[Create OAuth application].
+
+### Access Rules for applications and tokens
+
+Access rules for applications are as follows:
+
+* System administrators can view and manipulate all applications in the system.
+* Organization administrators can view and manipulate all applications belonging to organization members.
+* Other users can only view, update, and delete their own applications, but cannot create any new applications.
+* Tokens, on the other hand, are resources used to authenticate incoming requests and mask the permissions of the underlying user.
+
+Access rules for tokens are as follows:
+
+* Users can create a token if they are able to view the related application and can also create a personal token for themselves.
+* System administrators are able to view and manipulate every token in the system.
+* Organization administrators are able to view and manipulate all tokens belonging to organization members.
+* System Auditors can view all tokens and applications.
+* Other normal users are only able to view and manipulate their own tokens.
+
+
+[NOTE]
+----
+Users can only view the token or refresh the token value at the time of creation.
+----
+
+### Application functions
+
+Several OAuth 2 utilities are available for authorization, token refresh, and revoke.
+You can specify the following grant types when creating an application:
+
+Password:: This grant type is ideal for users who have native access to the web application and must be used when the client is the resource owner.
+Authorization code:: This grant type should be used when access tokens must be issued directly to an external application or service.
+
+
+[NOTE]
+----
+You can only use the authorization code type to acquire an access token when using an application. When integrating an external web application with Ansible Automation Platform, that web application might need to create OAuth2 tokens on behalf of users in that other web application. Creating an application in the platform with the authorization code grant type is the preferred way to do this because:
+* This allows an external application to obtain a token from Ansible Automation Platform for a user, using their credentials.
+* Compartmentalized tokens issued for a particular application enables those tokens to be easily managed. For example, revoking all tokens associated with that application without having to revoke all tokens in the system.
+----
+
+#### Requesting an access token after expiration
+
+The Gateway access token expiration defaults to 600 seconds (10 minutes).
+
+The best way to set up application integrations using the Authorization code grant type is to allowlist the origins for those cross-site requests. More generally, you must allowlist the service or application you are integrating with the platform, for which you want to provide access tokens.
+
+To do this, have your administrator add this allowlist to their local Ansible Automation Platform settings file:
+
+
+```
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"http://django-oauth-toolkit.herokuapp.com*",
+    r"http://www.example.com*"
+]
+```
+
+
+Where http://django-oauth-toolkit.herokuapp.com and http://www.example.com are applications requiring tokens with which to access the platform.
+
+## Creating a new application
+
+When integrating an external web application with automation controller the web application might need to create OAuth2 tokens on behalf of users of the web application.
+
+Creating an application with the Authorization Code grant type is the preferred way to do this for the following reasons:
+
+* External applications can obtain a token for users, using their credentials.
+* Compartmentalized tokens issued for a particular application, enables those tokens to be easily managed.
+For example, revoking all tokens associated with that application.
+
+1. From the navigation panel, select menu:Access Management[OAuth Applications].
+2. Click btn:[Create OAuth application].
+The Create Application page opens.
+3. Enter the following details:
+Name:: (required) Enter a name for the application you want to create.
+Description:: (optional) Include a short description for your application.
+Organization:: (required) Select an organization with which this application is associated.
+Authorization grant type:: (required) Select one of the grant types to use for the user to get tokens for this application.
+For more information, see Application functions for more information about grant types.
+Client Type:: (required) Select the level of security of the client device.
+Redirect URIS:: Provide a list of allowed URIs, separated by spaces.
+You need this if you specified the grant type to be Authorization code.
+4. Click btn:[Create OAuth application], or click btn:[Cancel] to abandon your changes.
+
+The Client ID and Client Secret display in a window. This will be the only time the client secret will be shown.
+
+[NOTE]
+----
+The Client Secret is only created when the Client type is set to Confidential.
+----
+5. Click the copy icon and save the client ID and client secret to integrate an external application with Ansible Automation Platform.
+
+# Adding tokens
+
+You can view a list of users that have tokens to access an application by selecting the Tokens tab in the OAuth Applications details page.
+
+
+[NOTE]
+----
+You can only create OAuth 2 Tokens for your own user, which means you can only configure or view tokens from your own user profile.
+----
+
+When authentication tokens have been configured, you can select the application to which the token is associated and the level of access that the token has.
+
+1. From the navigation panel, select menu:Access Management[Users].
+2. Select the username for your user profile to configure OAuth 2 tokens.
+3. Select the Tokens tab.
+
+When no tokens are present, the Tokens screen prompts you to add them.
+4. Click btn:[Create token] to open the Create Token window.
+5. Enter the following details:
+Application:: Enter the name of the application with which you want to associate your token. Alternatively, you can search for it by clicking btn:[Browse]. This opens a separate window that enables you to choose from the available options. Select Name from the filter list to filter by name if the list is extensive.
+
+[NOTE]
+----
+To create a Personal Access Token (PAT) that is not linked to any application, leave the Application field blank.
+----
+Description:: (optional) Provide a short description for your token.
+Scope:: (required) Specify the level of access you want this token to have. The scope of an OAuth 2 token can be set as one of the following:
+* Write: Allows requests sent with this token to add, edit and delete resources in the system.
+* Read: Limits actions to read only. Note that the write scope includes read scope.
+6. Click btn:[Create token], or click btn:[Cancel] to abandon your changes.
+
+The Token information is displayed with Token and Refresh Token information, and the expiration date of the token. This will be the only time the token and refresh token will be shown. You can view the token association and token information from the list view.
+7. Click the copy icon and save the token and refresh token for future use.
+
+You can verify that the application now shows the user with the appropriate token using the Tokens tab on the Applications details page.
+
+1. From the navigation panel, select menu:Access Management[OAuth Applications].
+2. Select the application you want to verify from the Applications list view.
+3. Select the Tokens tab.
+
+Your token should be displayed in the list of tokens associated with the application you chose.
+
+If you are a system administrator and have to create or remove tokens for other users, see the revoke and create commands in Token and session management.
+
+## Application token functions
+
+The refresh and revoke functions associated with tokens, for tokens at the /api/o/ endpoints can currently only be carried out with application tokens.
+
+### Refresh an existing access token
+
+The following example shows an existing access token with a refresh token provided:
+
+{
+    "id": 35,
+    "type": "access_token",
+    ...
+    "user": 1,
+    "token": "omMFLk7UKpB36WN2Qma9H3gbwEBSOc",
+    "refresh_token": "AL0NK9TTpv0qp54dGbC4VUZtsZ9r8z",
+    "application": 6,
+    "expires": "2017-12-06T03:46:17.087022Z",
+    "scope": "read write"
+}
+
+The /api/o/token/ endpoint is used for refreshing the access token:
+
+curl -X POST \
+    -d "grant_type=refresh_token&refresh_token=AL0NK9TTpv0qp54dGbC4VUZtsZ9r8z" \
+    -u "gwSPoasWSdNkMDtBN3Hu2WYQpPWCO9SwUEsKK22l:fI6ZpfocHYBGfm1tP92r0yIgCyfRdDQt0Tos9L8a4fNsJjQQMwp9569eIaUBsaVDgt2eiwOGe0bg5m5vCSstClZmtdy359RVx2rQK5YlIWyPlrolpt2LEpVeKXWaiybo" \
+    http://<controller>/api/o/token/ -i
+
+Where refresh_token is provided by refresh_token field of the preceding access token.
+
+The authentication information is of format <client_id>:<client_secret>, where client_id and client_secret are the corresponding fields of the underlying related application of the access token.
+
+
+[NOTE]
+----
+The special OAuth 2 endpoints only support using the x-www-form-urlencoded Content-type, so as a result, none of the
+api/o/* endpoints accept application/json.
+----
+
+On success, a response displays in JSON format containing the new (refreshed) access token with the same scope information as the previous one:
+
+HTTP/1.1 200 OK
+Server: nginx/1.12.2
+Date: Tue, 05 Dec 2017 17:54:06 GMT
+Content-Type: application/json
+Content-Length: 169
+Connection: keep-alive
+Content-Language: en
+Vary: Accept-Language, Cookie
+Pragma: no-cache
+Cache-Control: no-store
+Strict-Transport-Security: max-age=15768000
+
+{"access_token": "NDInWxGJI4iZgqpsreujjbvzCfJqgR", "token_type": "Bearer", "expires_in": 315360000000, "refresh_token": "DqOrmz8bx3srlHkZNKmDpqA86bnQkT", "scope": "read write"}
+
+The refresh operation replaces the existing token by deleting the original and then immediately creating a new token with the same scope and related application as the original one.
+
+Verify that the new token is present and the old one is deleted in the /api/v2/tokens/ endpoint.
+
+### Revoke an access token
+
+You can revoke an access token by deleting the token in the platform UI, or by using the /api/o/revoke-token/ endpoint.
+
+Revoking an access token by this method is the same as deleting the token resource object, but it enables you to delete a token by providing its token value, and the associated client_id (and client_secret if the application is confidential). For example:
+
+curl -X POST -d "token=rQONsve372fQwuc2pn76k3IHDCYpi7" \
+-u "gwSPoasWSdNkMDtBN3Hu2WYQpPWCO9SwUEsKK22l:fI6ZpfocHYBGfm1tP92r0yIgCyfRdDQt0Tos9L8a4fNsJjQQMwp9569eIaUBsaVDgt2eiwOGe0bg5m5vCSstClZmtdy359RVx2rQK5YlIWyPlrolpt2LEpVeKXWaiybo" \
+http://<controller>/api/o/revoke_token/ -i
+
+
+[NOTE]
+----
+* The special OAuth 2 endpoints only support using the x-www-form-urlencoded Content-type, so as a result, none of the
+api/o/* endpoints accept application/json.
+* The Allow External Users to Create Oauth2 Tokens (ALLOW_OAUTH2_FOR_EXTERNAL_USERS in the API) setting is disabled by default.
+External users refer to users authenticated externally with a service such as LDAP, or any of the other SSO services.
+This setting ensures external users cannot create their own tokens.
+If you enable then disable it, any tokens created by external users in the meantime will still exist, and are not automatically revoked.
+This setting can be configured from the menu:Settings[Platform gateway] menu.
+----
+
+Alternatively, to revoke OAuth2 tokens, you can use the manage utility, see Revoke oauth2 tokens.
+
+On success, a response of 200 OK is displayed.
+Verify the deletion by checking whether the token is present in the /api/v2/tokens/ endpoint.
+
+## Token and session management
+
+Automation controller supports the following commands for OAuth2 token management:
+
+* create_oauth2_token
+* revoke_oauth2_tokens
+* cleartokens
+* expire_sessions
+* clearsessions
+
+### create_oauth2_token
+
+Use the following command to create OAuth2 tokens (specify the username for example_user):
+
+$ awx-manage create_oauth2_token --user example_user
+
+New OAuth2 token for example_user: j89ia8OO79te6IAZ97L7E8bMgXCON2
+
+Ensure that you provide a valid user when creating tokens.
+Otherwise, an error message that you attempted to issue the command without specifying a user, or supplied a username that does not exist, is displayed.
+
+### revoke_oauth2_tokens
+
+Use this command to revoke OAuth2 tokens, both application tokens and personal access tokens (PAT).
+It revokes all application tokens (but not their associated refresh tokens), and revokes all
+personal access tokens. However, you can also specify a user for whom to
+revoke all tokens.
+
+To revoke all existing OAuth2 tokens use the following command:
+
+$ awx-manage revoke_oauth2_tokens
+
+To revoke all OAuth2 tokens and their refresh tokens use the following command:
+
+$ awx-manage revoke_oauth2_tokens --revoke_refresh
+
+To revoke all OAuth2 tokens for the user with id=example_user (specify the username for example_user):
+
+$ awx-manage revoke_oauth2_tokens --user example_user
+
+To revoke all OAuth2 tokens and refresh token for the user with id=example_user:
+
+$ awx-manage revoke_oauth2_tokens --user example_user --revoke_refresh
+
+### cleartokens
+
+Use this command to clear tokens which have already been revoked.
+
+For more information, see cleartokens in Django&#8217;s Oauth Toolkit documentation.
+
+### expire_sessions
+
+Use this command to terminate all sessions or all sessions for a specific user.
+
+Consider using this command when a user changes role in an organization, is removed from assorted groups in LDAP/AD, or the
+administrator wants to ensure the user can no longer execute jobs due to membership in these groups.
+
+$ awx-manage expire_sessions
+
+This command terminates all sessions by default.
+The users associated with those sessions are logged out.
+To only expire the sessions of a specific user, you can pass their username using the --user flag (replace example_user with the username in the following example):
+
+$ awx-manage expire_sessions --user example_user
+
+### clearsessions
+
+Use this command to delete all sessions that have expired.
+
+For more information, see Clearing the session store in Django&#8217;s Oauth Toolkit documentation.
+
+For more information on OAuth2 token management in the UI, see the Applications.

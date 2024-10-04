@@ -1,0 +1,15 @@
+# Planning considerations
+
+When planning an Ansible Automation Platform installation, ensure that the following components are included:
+
+* Installer-manged components
+* Automation controller
+* Event-Driven Ansible controller
+* Private automation hub
+* PostgreSQL database (if not external)
+* External services
+* Red Hat Insights for Red Hat Ansible Automation Platform
+* Automation hub
+* registry.redhat.io (default execution environment container registry)
+
+See the system requirements section of the Red Hat Ansible Automation Platform Planning Guide for additional information.

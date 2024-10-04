@@ -1,0 +1,47 @@
+# Hosts
+
+A system managed by Ansible Automation Platform, which may include a physical, virtual, cloud-based server, or other device.
+Typically a host is an operating system instance.
+Hosts are grouped in inventories and are sometimes referred to as a “nodes”.
+Ansible works against multiple managed nodes or “hosts” in your infrastructure at the same time, using a list or group of lists known as an inventory.
+Once your inventory is defined, you use patterns to select the hosts or groups you want Ansible to run against.
+
+# Viewing the host details
+
+To view the Host details for a job run.
+
+From the navigation panel, select menu:Automation Execution[Infrastructure > Hosts].
+The Hosts page displays the following information about the host affected by the selected event and its associated play and task:
+
+* The Host.
+* The Description.
+* The Inventory associated with that host.
+
+Selecting a particular host displays the Details page for that host.
+
+# Creating a host
+
+To create a new host.
+From the navigation panel, select menu:Automation Execution[Infrastructure > Hosts].
+Click btn:[Create host].
+On the Create Host page enter the following information:
+
+* Name: Enter a name for the host.
+* (Optional) Description: Enter a description for the host.
+* Inventory: Select the inventory to contain that host from the list.
+* Variables: Enter the inventory file variables associated with the host.
+
+Click btn:[Create host] to save your changes.
+
+From the navigation panel, select menu:Automation Execution[Infrastructure > Hosts].
+The Hosts page displays the following information about the host affected by the selected event and its associated play and task:
+
+* The type of run in the Play field.
+* The type of Task.
+* If applicable, the Ansible Module task, and any arguments for that module.
+
+![Host details]
+
+To view the results in JSON format, click the JSON tab.
+To view the output of the task, click Standard Out.
+To view errors from the output, click Standard Error.

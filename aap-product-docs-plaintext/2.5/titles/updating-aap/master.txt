@@ -1,0 +1,42 @@
+# Updating from Ansible Automation Platform 2.5 to 2.5.x
+
+# Providing feedback on Red Hat documentation
+
+If you have a suggestion to improve this documentation, or find an error, you can contact technical support at https://access.redhat.com to open a request.
+
+You can perform patch updates to your Ansible Automation Platform installation as updates are released. This only applies to updates from 2.5 to 2.5.x.
+
+
+[NOTE]
+----
+Upgrades from 2.4 to 2.5 are unsupported at this time. For more information, see https://access.redhat.com/solutions/7089196.
+----
+
+# RPM-based Ansible Automation Platform
+
+To update your RPM-based Ansible Automation Platform, start by reviewing the update considerations. You can then download the latest version of the Ansible Automation Platform installer, configure the inventory file in the installation bundle to reflect your environment, and then run the installer.
+
+## Update planning
+
+Before you begin the update process, review the following considerations to plan and prepare your Ansible Automation Platform deployment:
+
+* Even if you have a valid license from an earlier version, you must give your credentials or a subscription manifest upon upgrading to the latest version of Ansible Automation Platform. For more information, see Attaching your Red Hat Ansible Automation Platform subscription in Access management and authentication.
+* Clustered upgrades require special attention to instance and instance groups before upgrading. Ensure you capture your inventory or instance group details before upgrading. For more information, see Clustering in Configuring automation execution.
+* If you are currently running Event-Driven Ansible controller, disable all rulebook activations before upgrading to ensure that only new activations run after the upgrade process has completed. This prevents possibilities of orphaned containers running activations from the earlier version. For more information, see Enabling and disabling rulebook activations in Using automation decisions.
+
+# Ansible Automation Platform on OpenShift Container Platform
+
+## Updating Ansible Automation Platform on OpenShift Container Platform
+
+Perform a patch update for an installation of Ansible Automation Platform on OpenShift Container Platform.
+
+Most updates happen within a channel:
+
+1. A new update becomes available in the marketplace (through the redhat-operator CatalogSource).
+2. A new InstallPlan is automatically created for your Ansible Automation Platform subscription. If the subscription is set to Manual, the InstallPlan will need to be manually approved in the OpenShift UI. If the subscription is set to Automatic, it will upgrade as soon as the new version is available.
+
+[NOTE]
+----
+It is recommended that you set a manual install strategy on your Ansible Automation Platform Operator subscription (set when installing or upgrading the Operator) and you will be prompted to approve an upgrade when it becomes available in your selected update channel. Stable channels for each X.Y release (for example, stable-2.5) are available.
+----
+3. A new Subscription, CSV, and Operator containers will be created alongside the old Subscription, CSV, and containers. Then the old resources will be cleaned up if the new install was successful.

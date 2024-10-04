@@ -1,0 +1,13 @@
+# About Ansible Builder
+
+Ansible Builder is a command line tool that automates the process of building automation execution environments by using the metadata defined in various Ansible Collections or by the user.
+
+Before Ansible Builder was developed, Red Hat Ansible Automation Platform users could run into dependency issues and errors when creating custom virtual environments or containers that included all of the required dependencies installed.
+
+Now, with Ansible Builder, you can easily create a customizable automation execution environments definition file that specifies the content you want to be included in your automation execution environments such as collections, third-party Python requirements, and system-level packages. This allows you to fulfill all of the necessary requirements and dependencies to get jobs running.
+
+
+[NOTE]
+----
+Red Hat currently does not support users who choose to provide their own container images when building automation automation execution environments.
+----

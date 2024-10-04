@@ -1,0 +1,9 @@
+# Modifying the default memory limit for each rulebook activation during installation
+
+By default, each rulebook activation container has a 200MB memory limit.
+You can modify this default value during installation by using the following procedure:
+
+1. Navigate to the setup inventory file.
+2. Add automationedacontroller_podman_mem_limit in the [all:vars] section.
+For example, automationedacontroller_podman_mem_limit='400m'.
+3. Run the setup.

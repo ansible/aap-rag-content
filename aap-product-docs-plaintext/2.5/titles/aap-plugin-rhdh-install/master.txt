@@ -1,0 +1,962 @@
+# Installing Ansible plug-ins for Red Hat Developer Hub
+
+Thank you for your interest in Red Hat Ansible Automation Platform. Ansible Automation Platform is a commercial offering that helps teams manage complex multi-tier deployments by adding control, knowledge, and delegation to Ansible-powered environments.
+This guide describes how to install Ansible plug-ins for Red Hat Developer Hub.
+This document has been updated to include information for the latest release of Ansible Automation Platform.
+
+# Providing feedback on Red Hat documentation
+
+If you have a suggestion to improve this documentation, or find an error, you can contact technical support at https://access.redhat.com to open a request.
+
+# Ansible plug-ins for Red Hat Developer Hub
+
+## Red Hat Developer Hub
+
+Red Hat Developer Hub (RHDH) serves as an open developer platform designed for building developer portals.
+
+## Ansible plug-ins for Red Hat Developer Hub
+
+Ansible plug-ins for Red Hat Developer Hub deliver an Ansible-first Red Hat Developer Hub user experience that simplifies the automation experience for Ansible users of all skill levels.
+The Ansible plug-ins provide curated content and features to accelerate Ansible learner onboarding and streamline Ansible use case adoption across your organization.
+
+The Ansible plug-ins provide:
+
+* A customized home page and navigation tailored to Ansible users.
+* Curated Ansible learning paths to help users new to Ansible.
+* Software templates for creating Ansible playbook and collection projects that follow best practices.
+* Links to supported development environments and tools with opinionated configurations.
+
+## Architecture
+
+![Ansible plugin for Red Hat Developer Hub architecture]
+
+# Installing the Ansible plug-ins with a Helm chart on OpenShift Container Platform
+
+The following procedures describe how to install Ansible plug-ins in Red Hat Developer Hub instances on Red Hat OpenShift Container Platform using a Helm chart.
+
+The workflow is as follows:
+
+1. Download the Ansible plug-ins files.
+2. Create a plug-in registry in your OpenShift cluster to host the Ansible plug-ins.
+3. Add the plug-ins to the Helm chart.
+4. Create a custom ConfigMap.
+5. Add your custom ConfigMap to your Helm chart.
+6. Edit your custom ConfigMap and Helm chart according to the required and optional configuration procedures.
+
+[NOTE]
+----
+You can save changes to your Helm and ConfigMap after each update to your configuration.
+You do not have to make all the changes to these files in a single session.
+----
+
+## Prerequisites
+
+* Red Hat Developer Hub installed on Red Hat OpenShift Container Platform using a Helm chart.
+Follow the steps in the
+Installing Red Hat Developer Hub on OpenShift Container Platform with the Helm chart
+section of Installing Red Hat Developer Hub on OpenShift Container Platform.
+* A valid subscription to Red Hat Ansible Automation Platform.
+* A user with the OpenShift Container Platform administrator role has configured the appropriate roles and permissions within your project to create an application.
+* The Red Hat Developer Hub instance can query the automation controller API.
+
+## Downloading the Ansible plug-ins files
+
+1. Download the latest .tar file for the plug-ins from the Red Hat Ansible Automation Platform Product Software downloads page.
+The format of the filename is ansible-backstage-rhaap-bundle-x.y.z.tar.gz.
+Substitute the Ansible plug-ins release version, for example 1.0.0, for x.y.z.
+2. Create a directory on your local machine to store the .tar files.
+
+```
+$ mkdir /path/to/<ansible-backstage-plugins-local-dir-changeme>
+```
+
+3. Set an environment variable ($DYNAMIC_PLUGIN_ROOT_DIR) to represent the directory path.
+
+```
+$ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/<ansible-backstage-plugins-local-dir-changeme>
+```
+
+4. Extract the ansible-backstage-rhaap-bundle-<version-number>.tar.gz contents to $DYNAMIC_PLUGIN_ROOT_DIR.
+
+```
+$ tar --exclude='*code*' -xzf ansible-backstage-rhaap-bundle-x.y.z.tar.gz -C $DYNAMIC_PLUGIN_ROOT_DIR
+```
+
+
+Substitute the Ansible plug-ins release version, for example 1.0.0, for x.y.z.
+
+Run ls to verify that the extracted files are in the $DYNAMIC_PLUGIN_ROOT_DIR directory:
+
+
+```
+$ ls $DYNAMIC_PLUGIN_ROOT_DIR
+ansible-plugin-backstage-rhaap-x.y.z.tgz
+ansible-plugin-backstage-rhaap-x.y.z.tgz.integrity
+ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+ansible-plugin-backstage-rhaap-backend-x.y.z.tgz.integrity
+ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz.integrity
+```
+
+
+The files with the .integrity file type contain the plugin SHA value.
+The SHA value is used during the plug-in configuration.
+
+## Creating a plug-in registry
+
+Set up a plug-in registry in your OpenShift cluster to host the Ansible plug-ins and make them available for installation in Red Hat Developer Hub.
+
+1. Log in to your OpenShift Container Platform instance with credentials to create a new application.
+2. Open your Red Hat Developer Hub OpenShift project.
+
+```
+$ oc project <YOUR_DEVELOPER_HUB_PROJECT>
+```
+
+3. Run the following commands to create a plug-in registry build in the OpenShift cluster.
+
+```
+$ oc new-build httpd --name=plugin-registry --binary
+$ oc start-build plugin-registry --from-dir=$DYNAMIC_PLUGIN_ROOT_DIR --wait
+$ oc new-app --image-stream=plugin-registry
+```
+
+
+To verify that the plugin-registry was deployed successfully, open the Topology view in the Developer perspective on the Red Hat Developer Hub application in the OpenShift Web console.
+
+1. Click the plug-in registry to view the log.
+![Developer perspective]
+
+(1) Developer hub instance
+
+(2) Plug-in registry
+2. Click the terminal tab and login to the container.
+3. In the terminal, run ls to confirm that the .tar files are in the plugin registry.
+
+```
+sh-4.45 $1s -l
+total 3392
+-rw-rw-r-- 1 default root 3376269 Jul 22 13:48 ansible-plugin-backstagc-rhaap-1.0.0.tgz
+-rw-rw-r-- 1 default root 25156 Jul 22 13:48 ansible-plugin-backstage-rhaap-backend-1.0.0.tgz
+-rw-rw-r-- 1 default root 61520 Jul 22 13:48 ansible-plugin-scaffolder-backend-modulc-backstagc-rhaap-1.0.0.tgz
+```
+
+
+The version numbers and file names can differ.
+
+## Required configuration
+
+### Adding the Ansible plug-ins configuration
+
+1. In the OpenShift Developer UI, navigate to .
+2. Update the Helm chart configuration to add the dynamic plug-ins in the Red Hat Developer Hub instance.
+Under the plugins section in the YAML file, add the dynamic plug-ins that you want to enable.
+
+```
+global:
+  auth:
+    backend:
+      enabled: true
+  clusterRouterBase: <your-developer-hub-base-url>
+  dynamic:
+    includes:
+      - dynamic-plugins.default.yaml
+    plugins:
+      - disabled: false
+        integrity: <SHA512 Integrity key for ansible-plugin-backstage-rhaap plugin>
+        package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-x.y.z.tgz'
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-rhaap:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - disabled: false
+        integrity: <SHA512 Integrity key for ansible-plugin-scaffolder-backend-module-backstage-rhaap plugin>
+        package: >-
+          http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
+      - disabled: false
+        integrity: <SHA512 Integrity key for ansible-plugin-backstage-rhaap-backend plugin>
+        package: >-
+          http://plugin-registry:8080/ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-backstage-rhaap-backend: null
+```
+
+3. In the package sections, replace x.y.z  in the plug-in filenames with the correct version numbers for the Ansible plug-ins.
+4. For each Ansible plug-in, update the integrity values using the corresponding .integrity file content.
+5. Click Upgrade.
+
+The developer hub pods restart and the plug-ins are installed.
+
+Verify that the plug-ins have been installed:
+
+1. Open the Developer perspective for the Red Hat Developer Hub application in the OpenShift Web console.
+2. Check the install-dynamic-plugin container logs: the Ansible plug-ins are visible in Red Hat Developer Hub.
+![container logs for install-dynamic-plugin]
+
+### Adding the Ansible Development Tools sidecar container
+
+After the plug-ins are loaded, add the Ansible Development Container (ansible-devtools-server) in the Red Hat Developer Hub pod as a sidecar container.
+
+#### Adding a pull secret to the Red Hat Developer Hub Helm configuration
+
+The Ansible Development Container download requires a Red Hat Customer Portal account and Red Hat Service Registry account.
+
+1. Create a new Red Hat Registry Service account, if required.
+2. Click the token name under the Account name column.
+3. Select the OpenShift Secret tab and follow the instructions to add the pull secret to your Red Hat Developer Hub OpenShift project.
+4. Add the new secret to the Red Hat Developer Hub Helm configuration, replacing <your-redhat-registry-pull-secret> with the name of the secret you generated on the Red Hat Registry Service Account website:
+
+```
+upstream:
+  backstage:
+    ...
+    image:
+      ...
+      pullSecrets:
+        - <your-redhat-registry-pull-secret>
+    ...
+```
+
+
+For more information, refer to the Red Hat Container Registry documentation.
+
+#### Adding the Ansible Developer Tools container
+
+You must update the Helm chart configuration to add an extra container.
+
+1. Log in to the OpenShift UI.
+2. Navigate to  to open the Helm chart.
+3. Update the extraContainers section in the YAML file.
+
+Add the following code:
+
+```
+upstream:
+  backstage:
+    ...
+    extraContainers:
+      - command:
+          - adt
+          - server
+        image: >-
+          registry.redhat.io/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest
+        imagePullPolicy: IfNotPresent
+        name: ansible-devtools-server
+        ports:
+          - containerPort: 8000
+    ...
+```
+
+
+[NOTE]
+----
+The image pull policy is imagePullPolicy: IfNotPresent.
+The image is pulled only if it does not already exist on the node.
+Update it to imagePullPolicy: Always if you always want to use the latest image.
+----
+4. Click Upgrade.
+
+To verify that the container is running, check the container log:
+
+![View container log]
+
+### Adding a custom ConfigMap
+
+Create a Red Hat Developer Hub ConfigMap following the procedure in
+Adding a custom application configuration file to Red Hat OpenShift Container Platform
+in the Administration guide for Red Hat Developer Hub.
+The examples below use a custom ConfigMap named app-config-rhdh
+
+To edit your custom ConfigMap, log in to the OpenShift UI and navigate to .
+
+### Configuring the Ansible Dev Tools Server
+
+The creatorService URL is required for the Ansible plug-ins to provision new projects using the provided software templates.
+
+1. Edit your custom Red Hat Developer Hub config map, app-config-rhdh, that you created in
+Adding a custom ConfigMap.
+2. Add the following code to your Red Hat Developer Hub app-config-rhdh.yaml file.
+
+```
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: app-config-rhdh
+...
+data:
+  app-config-rhdh.yaml: |-
+    ansible:
+      creatorService:
+        baseUrl: 127.0.0.1
+        port: '8000'
+...
+```
+
+
+### Configuring Ansible Automation Platform details
+
+The Ansible plug-ins query your Ansible Automation Platform subscription status with the controller API using a token.
+
+
+[NOTE]
+----
+The Ansible plug-ins continue to function regardless of the Ansible Automation Platform subscription status.
+----
+
+1. Create a Personal Access Token (PAT) with “Read” scope in automation controller, following the
+Applications
+section of Access management and authentication.
+2. Edit your custom Red Hat Developer Hub config map, for example app-config-rhdh.
+3. Add your Ansible Automation Platform details to app-config-rhdh.yaml.
+1. Set the baseURL key with your automation controller URL.
+2. Set the token key with the generated token value that you created in Step 1.
+3. Set the checkSSL key to true or false.
+
+If checkSSL is set to true, the Ansible plug-ins verify whether the SSL certificate is valid.
+
+```
+data:
+  app-config-rhdh.yaml: |
+    ...
+    ansible:
+    ...
+      rhaap:
+        baseUrl: '<https://MyControllerUrl>'
+        token: '<AAP Personal Access Token>'
+        checkSSL: true
+```
+
+
+
+[NOTE]
+----
+You are responsible for protecting your Red Hat Developer Hub installation from external and unauthorized access.
+Manage the backend authentication key like any other secret.
+Meet strong password requirements, do not expose it in any configuration files, and only inject it into configuration files as an environment variable.
+----
+
+### Adding Ansible plug-ins software templates
+
+Red Hat Ansible provides software templates for Red Hat Developer Hub to provision new playbooks and collection projects based on Ansible best practices.
+
+1. Edit your custom Red Hat Developer Hub config map, for example app-config-rhdh.
+2. Add the following code to your Red Hat Developer Hub app-config-rhdh.yaml file.
+
+
+```
+data:
+  app-config-rhdh.yaml: |
+    catalog:
+      ...
+      locations:
+        ...
+        - type: url
+          target: https://github.com/ansible/ansible-rhdh-templates/blob/main/all.yaml
+          rules:
+            - allow: [Template]
+```
+
+
+For more information, refer to the
+Managing templates
+section of the Administration guide for Red Hat Developer Hub.
+
+### Configuring Role Based Access Control
+
+Red Hat Developer Hub offers Role-based Access Control (RBAC) functionality.
+RBAC can then be applied to the Ansible plug-ins content.
+
+Assign the following roles:
+
+* Members of the admin:superUsers group can select templates in the Create tab of the Ansible plug-ins to create playbook and collection projects.
+* Members of the admin:users group can view templates in the Create tab of the Ansible plug-ins.
+
+The following example adds RBAC to Red Hat Developer Hub.
+
+
+```
+data:
+  app-config-rhdh.yaml: |
+    plugins:
+    ...
+    permission:
+      enabled: true
+      rbac:
+        admin:
+          users:
+            - name: user:default/<user-scm-ida>
+          superUsers:
+            - name: user:default/<user-admin-idb>
+```
+
+
+For more information about permission policies and managing RBAC, refer to the
+Authorization
+guide for Red Hat Developer Hub.
+
+## Optional configuration for Ansible plug-ins
+
+### Enabling Red Hat Developer Hub authentication
+
+Red Hat Developer Hub (RHDH) provides integrations for multiple Source Control Management (SCM) systems.
+This is required by the plug-ins to create repositories.
+
+Refer to the
+Enabling authentication in Red Hat Developer Hub
+chapter of the Administration guide for Red Hat Developer Hub.
+
+### Configuring Ansible plug-ins optional integrations
+
+The Ansible plug-ins provide integrations with Ansible Automation Platform and other optional Red Hat products.
+
+To edit your custom ConfigMap, log in to the OpenShift UI and navigate to .
+
+#### Configuring OpenShift Dev Spaces
+
+When OpenShift Dev Spaces is configured for the Ansible plug-ins, users can click a link from the catalog item view in Red Hat Developer Hub and edit their provisioned Ansible Git projects using Dev Spaces.
+
+
+[NOTE]
+----
+OpenShift Dev Spaces is a separate product and it is optional.
+The plug-ins will function without it.
+It is a separate Red Hat product and is not included in the Ansible Automation Platform or Red Hat Developer Hub subscription.
+----
+
+If the OpenShift Dev Spaces link is not configured in the Ansible plug-ins, the Go to OpenShift Dev Spaces dashboard link in the 4.DEVELOP section of the Ansible plug-ins landing page redirects users to the
+Ansible development tools home page.
+
+* A Dev Spaces installation.
+Refer to the
+Installing Dev Spaces
+section of the Red Hat OpenShift Dev Spaces Administration guide.
+
+1. Edit your custom Red Hat Developer Hub config map, for example app-config-rhdh.
+2. Add the following code to your Red Hat Developer Hub app-config-rhdh.yaml file.
+
+```
+data:
+  app-config-rhdh.yaml: |-
+    ansible:
+      devSpaces:
+        baseUrl: >-
+          https://<Your OpenShift Dev Spaces URL>
+```
+
+3. Replace <Your OpenShft Dev Spaces URL>  with your OpenShift Dev Spaces URL.
+4. In the OpenShift Developer UI, select the Red Hat Developer Hub pod.
+5. Open Actions.
+6. Click Restart rollout.
+
+#### Configuring the private automation hub URL
+
+Private automation hub provides a centralized, on-premise repository for certified Ansible collections, execution environments and any additional, vetted content provided by your organization.
+
+If the private automation hub URL is not configured in the Ansible plug-ins, users are redirected to the
+Red Hat Hybrid Cloud Console automation hub.
+
+
+[NOTE]
+----
+The private automation hub configuration is optional but recommended.
+The Ansible plug-ins will function without it.
+----
+
+* A private automation hub instance.
+
+For more information on installing private automation hub, refer to the installation guides in the
+Ansible Automation Platform documentation.
+
+1. Edit your custom Red Hat Developer Hub config map, for example app-config-rhdh.
+2. Add the following code to your Red Hat Developer Hub app-config-rhdh.yaml file.
+
+```
+data:
+  app-config-rhdh.yaml: |-
+    ansible:
+    ...
+      automationHub:
+        baseUrl: '<https://MyOwnPAHUrl>'
+    ...
+```
+
+3. Replace <\https://MyOwnPAHUrl/>  with your private automation hub URL.
+4. In the OpenShift Developer UI, select the Red Hat Developer Hub pod.
+5. Open Actions.
+6. Click Restart rollout.
+
+## Full examples
+
+### Full app-config-rhdh ConfigMap example for Ansible plug-ins entries
+
+
+```
+kind: ConfigMap
+...
+metadata:
+  name: app-config-rhdh
+  ...
+data:
+  app-config-rhdh.yaml: |-
+    ansible:
+      creatorService:
+        baseUrl: 127.0.0.1
+        port: '8000'
+      rhaap:
+       baseUrl: '<https://MyControllerUrl>'
+       token: '<AAP Personal Access Token>'
+       checkSSL: <true or false>
+      # Optional integrations
+      devSpaces:
+        baseUrl: '<https://MyDevSpacesURL>'
+      automationHub:
+        baseUrl: '<https://MyPrivateAutomationHubURL>'
+
+    ...
+    catalog:
+      locations:
+        - type: url
+          target: https://github.com/ansible/ansible-rhdh-templates/blob/main/all.yaml
+          rules:
+            - allow: [Template]
+    ...
+```
+
+
+### Full Helm chart config example for Ansible plug-ins
+
+
+```
+global:
+  ...
+  dynamic:
+    ...
+    plugins:
+      - disabled: false
+        integrity: <SHA512 Integrity key for ansible-plugin-backstage-rhaap plugin>
+        package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-x.y.z.tgz'
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-rhaap:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - disabled: false
+        integrity: <SHA512 Integrity key for ansible-plugin-scaffolder-backend-module-backstage-rhaap plugin>
+        package: >-
+          http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
+      - disabled: false
+        integrity: <SHA512 Integrity key for ansible-plugin-backstage-rhaap-backend plugin>
+        package: >-
+          http://plugin-registry:8080/ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-backstage-rhaap-backend: null
+...
+upstream:
+  backstage:
+    ...
+    extraAppConfig:
+      - configMapRef: app-config-rhdh
+        filename: app-config-rhdh.yaml
+    extraContainers:
+      - command:
+          - adt
+          - server
+        image: >-
+          registry.redhat.io/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest
+        imagePullPolicy: IfNotPresent
+        name: ansible-devtools-server
+        ports:
+          - containerPort: 8000
+...
+```
+
+
+# Ansible plug-ins subscription warning messages
+
+The Ansible plug-ins display a subscription warning banner in the user interface in the following scenarios:
+
+* Unable to connect to Ansible Automation Platform
+* Unable to authenticate to Ansible Automation Platform
+* Invalid Ansible Automation Platform configuration
+* Ansible Automation Platform subscription is out of compliance
+* Invalid Ansible Automation Platform subscription
+
+## Unable to connect to Ansible Automation Platform
+
+The following warning indicates that the automation controller details are not configured, or the controller instance API is unreachable to query the subscription status.
+
+
+```
+Unable to connect to Ansible Automation Platform
+Verify that Ansible Automation Platform is reachable and correctly configured in the Ansible plug-ins.
+To get help, please refer to the Ansible plug-ins installation guide.
+```
+
+
+## Remediation steps
+
+1. Verify that Ansible Automation Platform is reachable and correctly configured in the rhaap section of the ConfigMap.
+2. Ensure the checkSSL key is correctly set for your environment.
+3. After correcting the configuration details, restart the Red Hat Developer Hub pod to initiate a subscription query.
+
+## Unable to authenticate to Ansible Automation Platform
+
+The following warning indicates that the Ansible plug-ins were not able to authenticate with Ansible Automation Platform to query the subscription status.
+
+
+```
+Unable to authenticate to Ansible Automation Platform
+Verify that the authentication details for Ansible Automation Platform are correctly configured in the Ansible plug-ins.
+For help, please refer to the Ansible plug-ins installation guide.
+```
+
+
+## Remediation steps
+
+1. Verify that the automation controller Personal Access Token (PAT) configured in the Ansible plug-ins is correct.
+For more information, refer to the
+Adding tokens
+section of TitleCentralAuth.
+2. After correcting the authentication details, restart the Red Hat Developer Hub pod to initiate a subscription query.
+
+## Invalid Ansible Automation Platform configuration
+
+The following warning indicates that the Ansible Automation Platform configuration section is invalid or incomplete.
+
+
+```
+Invalid resource for Ansible Automation Platform
+Verify that the resource url for Ansible Automation Platform are correctly configured in the Ansible plug-ins.
+For help, please refer to the Ansible plug-ins installation guide.
+```
+
+
+## Remediation steps
+
+1. Verify that the rhaap section of the Ansible plug-ins ConfigMap is correctly configured and contains all the necessary entries.
+For more information, refer to Configuring Ansible Automation Platform details.
+2. After correcting the configuration, restart the Red Hat Developer Hub pod to initiate a subscription query.
+
+## Ansible Automation Platform subscription is out of compliance
+
+The following warning indicates that the Ansible plug-ins successfully retrieved the Ansible Automation Platform subscription status.
+However, the subscription is out of compliance.
+
+
+```
+Subscription non-compliant
+The connected Ansible Automation Platform subscription is out of compliance.
+Contact your Red Hat account team to obtain a new subscription entitlement.
+Learn more about account compliance.
+```
+
+
+## Remediation steps
+
+1. Contact your Red Hat account team to obtain a new subscription entitlement.
+2. Learn more about account compliance.
+3. When the subscription is in compliance, restart the Red Hat Developer Hub pod to initiate a new subscription query.
+
+## Invalid Ansible Automation Platform subscription
+
+The following warning indicates that the Ansible plug-ins successfully retrieved the Ansible Automation Platform subscription status.
+However, the subscription type is invalid for Ansible Automation Platform.
+
+
+```
+Invalid subscription
+The connected Ansible Automation Platform subscription is invalid.
+Contact your Red Hat account team, or start an Ansible Automation Platform trial.
+```
+
+
+## Remediation steps
+
+1. Contact your Red Hat account team to obtain a new subscription entitlement or start an Ansible Automation Platform trial.
+2. When you have updated the subscription, restart the Red Hat Developer Hub pod to initiate a new subscription query.
+
+# Upgrading the Ansible plug-ins on OpenShift Container Platform
+
+To upgrade the Ansible plug-ins, you must update the plugin-registry application with the latest Ansible plug-ins files.
+
+## Downloading the Ansible plug-ins files
+
+1. Download the latest .tar file for the plug-ins from the Red Hat Ansible Automation Platform Product Software downloads page.
+The format of the filename is ansible-backstage-rhaap-bundle-x.y.z.tar.gz.
+Substitute the Ansible plug-ins release version, for example 1.0.0, for x.y.z.
+2. Create a directory on your local machine to store the .tar files.
+
+```
+$ mkdir /path/to/<ansible-backstage-plugins-local-dir-changeme>
+```
+
+3. Set an environment variable ($DYNAMIC_PLUGIN_ROOT_DIR) to represent the directory path.
+
+```
+$ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/<ansible-backstage-plugins-local-dir-changeme>
+```
+
+4. Extract the ansible-backstage-rhaap-bundle-<version-number>.tar.gz contents to $DYNAMIC_PLUGIN_ROOT_DIR.
+
+```
+$ tar --exclude='*code*' -xzf ansible-backstage-rhaap-bundle-x.y.z.tar.gz -C $DYNAMIC_PLUGIN_ROOT_DIR
+```
+
+
+Substitute the Ansible plug-ins release version, for example 1.0.0, for x.y.z.
+
+Run ls to verify that the extracted files are in the $DYNAMIC_PLUGIN_ROOT_DIR directory:
+
+
+```
+$ ls $DYNAMIC_PLUGIN_ROOT_DIR
+ansible-plugin-backstage-rhaap-x.y.z.tgz
+ansible-plugin-backstage-rhaap-x.y.z.tgz.integrity
+ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+ansible-plugin-backstage-rhaap-backend-x.y.z.tgz.integrity
+ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz.integrity
+```
+
+
+The files with the .integrity file type contain the plugin SHA value.
+The SHA value is used during the plug-in configuration.
+
+## Updating the plug-in registry
+
+Rebuild your plug-in registry application in your OpenShift cluster with the latest Ansible plug-ins files.
+
+1. Log in to your OpenShift Container Platform instance with credentials to create a new application.
+2. Open your Red Hat Developer Hub OpenShift project.
+
+```
+$ oc project <YOUR_DEVELOPER_HUB_PROJECT>
+```
+
+3. Run the following commands to update your plug-in registry build in the OpenShift cluster.
+
+```
+$ oc start-build plugin-registry --from-dir=$DYNAMIC_PLUGIN_ROOT_DIR --wait
+```
+
+4. When the registry has started, the output displays the following message:
+
+```
+Uploading directory "/path/to/dynamic_plugin_root" as binary input for the build …
+Uploading finished
+build.build.openshift.io/plugin-registry-1 started
+```
+
+
+Verify that the plugin-registry has been updated.
+
+1. In the OpenShift UI, click Topology.
+2. Click the redhat-developer-hub icon to view the pods for the plug-in registry.
+3. Click View logs for the plug-in registry pod.
+4. Open the Terminal tab and run ls to view the .tar files in the plug-in registry.
+5. Verify that the new .tar file has been uploaded.
+
+## Updating the Ansible plug-ins version numbers
+
+1. Log in to your OpenShift Container Platform instance.
+2. In the OpenShift Developer UI, navigate to .
+3. Update the Ansible plug-ins version numbers and associated .integrity file values.
+
+```
+...
+global:
+...
+    plugins:
+      - disabled: false
+        integrity: <SHA512 value>
+        package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-x.y.z.tgz'
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-rhaap:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - disabled: false
+        integrity: <SHA512 value>
+        package: >-
+          http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
+      - disabled: false
+        integrity: <SHA512 value>
+        package: >-
+          http://plugin-registry:8080/ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-backstage-rhaap-backend: null
+```
+
+4. Click Upgrade.
+
+The developer hub pods restart and the plug-ins are installed.
+
+1. In the OpenShift UI, click Topology.
+2. Make sure that the Red Hat Developer Hub instance is available.
+
+# Uninstalling the Ansible plug-ins from OpenShift Container Platform
+
+To uninstall the Ansible plug-ins, you must remove any software templates that use the ansible:content:create action from Red Hat Developer Hub, and remove the plug-ins configuration from the Helm chart in OpenShift.
+
+## Uninstalling
+
+1. In Red Hat Developer Hub, remove any software templates that use the ansible:content:create action.
+2. In the OpenShift Developer UI, navigate to .
+3. Remove the Ansible plug-ins configuration under the plugins section.
+
+```
+...
+global:
+...
+    plugins:
+      - disabled: false
+        integrity: <SHA512 value>
+        package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-x.y.z.tgz'
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-rhaap:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - disabled: false
+        integrity: <SHA512 value>
+        package: >-
+          http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
+      - disabled: false
+        integrity: <SHA512 value>
+        package: >-
+          http://plugin-registry:8080/ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-backstage-rhaap-backend: null
+```
+
+4. Remove the extraContainers section.
+
+```
+upstream:
+  backstage: |
+    ...
+    extraContainers:
+      - command:
+          - adt
+          - server
+        image: >-
+          registry.redhat.io/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest
+        imagePullPolicy: IfNotPresent
+        name: ansible-devtools-server
+        ports:
+          - containerPort: 8000
+    image:
+      pullPolicy: Always
+      pullSecrets:
+        - ...
+        - rhdh-secret-registry
+    ...
+```
+
+5. Click Upgrade.
+6. Edit your custom Red Hat Developer Hub config map, for example app-config-rhdh.
+7. Remove the ansible section.
+
+```
+data:
+  app-config-rhdh.yaml: |
+    ...
+    ansible:
+      analytics:
+        enabled: true
+      devSpaces:
+        baseUrl: '<https://MyOwnDevSpacesUrl/>'
+      creatorService:
+        baseUrl: '127.0.0.1'
+        port: '8000'
+      rhaap:
+        baseUrl: '<https://MyAapSubcriptionUrl>'
+        token: '<TopSecretAAPToken>'
+        checkSSL: true
+      automationHub:
+        baseUrl: '<https://MyOwnPAHUrl/>'
+```
+
+8. Restart the Red Hat Developer Hub deployment.
+9. Remove the plugin-registry OpenShift application.
+
+```
+oc delete all -l app=plugin-registry
+```
+
+
+# Red Hat Developer Hub data telemetry capturing
+
+Red Hat Developer Hub (RHDH) sends telemetry data to Red Hat using the backstage-plugin-analytics-provider-segment plug-in, which is enabled by default.
+This includes telemetry data from the Ansible plug-ins.
+
+Red Hat collects and analyzes the following data to improve your experience with Red Hat Developer Hub:
+
+* Events of page visits and clicks on links or buttons.
+* System-related information, for example, locale, timezone, user agent including browser and OS details.
+* Page-related information, for example, title, category, extension name, URL, path, referrer, and search parameters.
+* Anonymized IP addresses, recorded as 0.0.0.0.
+* Anonymized username hashes, which are unique identifiers used solely to identify the number of unique users of the RHDH application.
+* Feedback and sentiment provided in the Ansible plug-ins feedback form.
+
+With Red Hat Developer Hub, you can disable or customize the telemetry data collection feature.
+For more information, refer to the
+Telemetry data collection
+section of the Administration guide for Red Hat Developer Hub.

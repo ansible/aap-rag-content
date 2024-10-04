@@ -1,0 +1,4 @@
+# Reasons to create remote configurations
+
+Each remote configuration located in menu:Automation Content[Remotes] provides information for both the community and rh-certified repository about when the repository was last updated.
+You can add new content to Ansible automation hub at any time using the Edit and Sync features included on the menu:Automation Content[Repositories] page.

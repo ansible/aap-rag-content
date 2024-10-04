@@ -1,0 +1,5 @@
+# Ansible Automation Platform dashboard features
+
+The Ansible Automation Platform dashboard provides the following features:
+
+Manage view:: You can enable, disable, and sort dashboard components so only the features you need are visible on the dashboard.

@@ -1,0 +1,45 @@
+# Pushing container images from your local environment
+
+Use the following procedure to sign automation execution environmentss on a local system and push those signed automation execution environmentss to the automation hub registry.
+
+1. From a terminal, log in to Podman, or any container client currently in use:
+
+```
+> podman pull <container-name>
+```
+
+2. After the automation execution environments is pulled, add tags (for example: latest, rc, beta, or version numbers, such as 1.0; 2.3, and so on):
+
+```
+> podman tag <container-name> <server-address>/<container-name>:<tag name>
+```
+
+3. Sign the automation execution environments after changes have been made, and push it back up to the automation hub registry:
+
+```
+> podman push <server-address>/<container-name>:<tag name> --tls-verify=false --sign-by <reference to the gpg key on your local>
+```
+
+
+If the automation execution environments is not signed, it can only be pushed with any current signature embedded. Alternatively, you can use the following script to push the automation execution environments without signing it:
+
+```
+> podman push <server-address>/<container-name>:<tag name> --tls-verify=false
+```
+
+4. Once the automation execution environments has been pushed, navigate to menu:Automation Content[Execution Environments].
+5. To display the new execution environment, click the Refresh icon.
+6. Click the name of the image to view your pushed image.
+
+The details page for each automation execution environments indicates whether it has been signed. If the details page indicates that an image is Unsigned, you can sign the automation execution environments from automation hub using the following steps:
+
+1. Click the automation execution environments name to navigate to the details page.
+2. Click the btn:[More Actions] icon &#8942;.
+Three options are available:
+* Sign execution environment
+* Use in Controller
+* Delete execution environment
+3. Click Sign execution environment from the drop-down menu.
+
+The signing service signs the automation execution environments.
+After the automation execution environments is signed, the status changes to "signed".

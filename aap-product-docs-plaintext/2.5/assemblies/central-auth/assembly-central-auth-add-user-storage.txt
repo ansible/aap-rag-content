@@ -1,0 +1,19 @@
+# Adding a User Storage Provider (LDAP/Kerberos) to Ansible Automation Platform Central Authentication
+
+Ansible Automation Platform Central Authentication comes with a built-in LDAP/AD provider. You can add your LDAP provider to central authentication to be able to import user attributes from your LDAP database.
+
+* You are logged in as an SSO admin user.
+
+1. Log in to Ansible Automation Platform Central Authentication as an SSO admin user.
+2. From the navigation panel, select menu:Configure section[User Federation].
+
+
+[NOTE]
+----
+When using an LDAP User Federation in RH-SSO, a group mapper must be added to the client configuration, ansible-automation-platform, to expose the identity provider (IDP) groups to the SAML authentication. Refer to OIDC Token and SAML Assertion Mappings for more information on SAML assertion mappers.
+----
+
+1. From the Add provider list, select your LDAP provider to proceed to the LDAP configuration page.
+
+The following table lists the available options for your LDAP configuration:
+

@@ -1,0 +1,22 @@
+# Configuring RADIUS authentication
+
+You can configure Ansible Automation Platform to centrally use RADIUS as a source for authentication information.
+
+1. From the navigation panel, select menu:Access Management[Authentication Methods].
+2. Click btn:[Create authentication].
+3. Select Radius from the Authentication type list and click btn:[Next].
+4. Click btn:[Create authentication].
+5. Enter the host or IP of the RADIUS server in the RADIUS Server field. If you leave this field blank, RADIUS authentication is disabled.
+6. Enter the Shared secret for authenticating to RADIUS server.
+7. Optional: Enter any Additional Authenticator Fields that this authenticator can take. These fields are not validated and are passed directly back to the authenticator.
+
+[NOTE]
+----
+Values defined in this field override the dedicated fields provided in the UI.
+----
+8. To automatically create organizations, users, and teams upon successful login, select Create objects.
+9. To enable this authentication method upon creation, select Enabled.
+10. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.
+11. Click btn:[Next].
+
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.

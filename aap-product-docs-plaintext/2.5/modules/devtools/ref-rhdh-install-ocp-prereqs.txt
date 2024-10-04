@@ -1,0 +1,9 @@
+# Prerequisites
+
+* Red Hat Developer Hub installed on Red Hat OpenShift Container Platform using a Helm chart.
+Follow the steps in the
+Installing Red Hat Developer Hub on OpenShift Container Platform with the Helm chart
+section of Installing Red Hat Developer Hub on OpenShift Container Platform.
+* A valid subscription to Red Hat Ansible Automation Platform.
+* A user with the OpenShift Container Platform administrator role has configured the appropriate roles and permissions within your project to create an application.
+* The Red Hat Developer Hub instance can query the automation controller API.

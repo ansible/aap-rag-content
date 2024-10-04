@@ -1,0 +1,46 @@
+ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
+
+FROM registry.access.redhat.com/ubi9/python-311 as aap-rag-builder
+ARG EMBEDDING_MODEL
+
+USER 0
+WORKDIR /workdir
+
+COPY pyproject.toml pdm.lock Makefile .
+RUN make install-tools && pdm config python.use_venv false && make pdm-lock-check install-deps
+
+COPY aap-product-docs-plaintext ./aap-product-docs-plaintext
+
+COPY scripts/download_embeddings_model.py .
+RUN pdm run python download_embeddings_model.py -l ./embeddings_model -r ${EMBEDDING_MODEL}
+
+COPY scripts/generate_embeddings-aap.py .
+RUN set -e && for AAP_VERSION in $(ls -1 aap-product-docs-plaintext); do \
+        pdm run python generate_embeddings-aap.py -f aap-product-docs-plaintext/${AAP_VERSION} \
+            -mn ${EMBEDDING_MODEL} -o vector_db/aap_product_docs/${AAP_VERSION} \
+            -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') -v ${AAP_VERSION}; \
+    done
+
+FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:f182b500ff167918ca1010595311cf162464f3aa1cab755383d38be61b4d30aa
+COPY --from=aap-rag-builder /workdir/vector_db/aap_product_docs /rag/vector_db/aap_product_docs
+COPY --from=aap-rag-builder /workdir/embeddings_model /rag/embeddings_model
+
+# this directory is checked by ecosystem-cert-preflight-checks task in Konflux
+RUN mkdir /licenses
+COPY LICENSE /licenses/
+
+# Labels for enterprise contract
+LABEL com.redhat.component=aap-rag-content
+LABEL description="Red Hat Ansible Automation Platform RAG content"
+LABEL distribution-scope=private
+LABEL io.k8s.description="Red Hat Ansible Automation Platform RAG content"
+LABEL io.k8s.display-name="Ansible Automation Platform RAG content"
+LABEL io.ansible.tags="ansible,aap,ai,assistant,rag"
+LABEL name=aap-rag-content
+LABEL release=0.0.1
+LABEL url="https://github.com/ansible/aap-rag-content"
+LABEL vendor="Red Hat"
+LABEL version=0.0.1
+LABEL summary="Red Hat Ansible Automation Platform RAG content"
+
+USER 65532:65532

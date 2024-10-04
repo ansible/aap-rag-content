@@ -1,0 +1,13 @@
+# Issue - Jobs in private automation hub are failing with "denied: requested access to the resource is denied, unauthorized: Insufficient permissions" error message
+
+Jobs are failing with the error message "denied: requested access to the resource is denied, unauthorized: Insufficient permissions" when using an execution environment in private automation hub.
+
+This issue happens when your private automation hub is protected with a password or token and the registry credential is not assigned to the execution environment.
+
+1. Go to automation controller.
+2. From the navigation panel, select menu:Administration[Execution Environments].
+3. Click the execution environment assigned to the job template that is failing.
+4. Click btn:[Edit].
+5. Assign the appropriate Registry credential from your private automation hub to the execution environment.
+
+* For information about creating new credentials in automation controller, see Creating new credentials in Using automation execution.

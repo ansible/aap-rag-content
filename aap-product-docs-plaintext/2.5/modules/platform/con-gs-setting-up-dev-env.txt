@@ -1,0 +1,3 @@
+# Setting up your development environment
+
+Before you begin to create content, consult our guide to Developing automation content. There you can find information on Ansible development tools, which you can integrate into your environment, and learn how to scaffold a playbook project.

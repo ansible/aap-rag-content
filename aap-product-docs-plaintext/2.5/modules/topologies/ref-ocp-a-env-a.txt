@@ -1,0 +1,54 @@
+# Operator growth topology
+
+The growth topology is intended for organizations that do not require Ansible Automation Platform to be deployed with redundancy or higher compute for large volumes of automation.
+
+# Infrastructure topology
+
+The following diagram outlines the infrastructure topology that Red Hat has tested with the respective deployment model that customers may use when self-managing Ansible Automation Platform:
+
+![Operator growth topology diagram]
+
+A Single Node OpenShift (SNO) cluster has been tested with the following requirements: 32 GB RAM, 16 CPUs, 128 GB local disk, and 3000 IOPS.
+
+
+
+# Tested system configurations
+
+Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+
+
+
+# Example custom resource file
+
+Use the following example custom resource (CR) to add your Ansible Automation Platform instance to your project:
+
+
+```
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: <aap instance name>
+spec:
+  eda:
+    automation_server_ssl_verify: 'no'
+  hub:
+    storage_type: 's3'
+    object_storage_s3_secret: '<name of the Secret resource holding s3 configuration>'
+```
+
+# Nonfunctional requirements
+
+Ansible Automation Platform’s performance characteristics and capacity are impacted by its resource allocation and configuration. With OpenShift, each Ansible Automation Platform component is deployed as a pod. You can specify resource requests and limits for each pod.
+
+The Ansible Automation Platform custom resource allows you to configure resource allocation for OpenShift installations. Each configurable item has default settings. These settings are the minimum requirements for an installation, but may not meet your production workload needs.
+
+By default, each component’s deployments are set for minimum resource requests but no resource limits. OpenShift only schedules the pods with available resource requests, but the pods are allowed to consume unlimited RAM or CPU as long as the OpenShift worker node itself is not under node pressure.
+
+In the reference topology provided in this document, Ansible Automation Platform is deployed on a Single Node OpenShift (SNO) with 32 GB RAM, 16 CPUs, 128 GB Local disk, and 3000 IOPS. This is not a shared environment, so Ansible Automation Platform pods have full access to all of the compute resources of the OpenShift SNO. In this scenario, the capacity calculation for the automation controller task pods is derived from the underlying OCP node that runs the pod. It does not have access to the entire node. This capacity calculation influences how many concurrent jobs automation controller can run.
+
+OpenShift manages storage distinctly from VMs. This impacts how automation hub stores its artifacts. In the reference topology provided in this document, we use s3 storage because  automation hub requires a ReadWriteMany type storage, which is not a default storage type in OpenShift.
+
+# Network ports
+
+Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+

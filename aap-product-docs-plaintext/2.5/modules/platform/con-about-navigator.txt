@@ -1,0 +1,3 @@
+# Automation content navigator
+
+Automation content navigator is a textual user interface (TUI) that becomes the primary command line interface into the automation platform, covering use cases from content building, running automation locally in an execution environment, running automation in Ansible Automation Platform, and providing the foundation for future integrated development environments (IDEs).

@@ -1,0 +1,17 @@
+# Adding a subscription manifest to Ansible Automation Platform without an internet connection
+
+To add a subscription to Ansible Automation Platform without an internet connection, create and import a subscription manifest.
+
+1. Log in to the Red Hat Customer Portal.
+2. From the menu bar, select menu:Subscriptions[] and select the Subscriptions Allocations tab .
+3. Click btn:[New subscription allocation].
+4. Name the new subscription allocation.
+5. Select Satellite 6.8 from the Type list.
+6. Click btn:[Create]. The Details tab opens for your subscription allocation.
+7. Select the Subscriptions tab.
+8. Click btn:[Add Subscriptions].
+9. Find your Ansible Automation Platform subscription, and in the Entitlements box, add the number of entitlements you want to assign to your environment. A single entitlement is needed for each node that will be managed by Ansible Automation Platform: server, network device, etc.
+10. Click btn:[Submit].
+11. Click btn:[Export Manifest].
+
+This downloads a file manifest_<allocation name>_<date>.zip that be imported with automation controller after installation.

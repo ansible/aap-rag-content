@@ -1,0 +1,24 @@
+# Adding a team to an organization
+
+You can provide team access to an organization by adding roles to the team. To add roles to a team, the team must already exist in the organization. For more information, see Creating a team.
+To add roles for a team, the role must already exist. See Creating a role for more information.
+
+1. From the navigation panel, select menu:Access Management[Organizations].
+2. From the Organizations list view, select the organization to which you want to add team access.
+3. Click the Teams tab. If no teams exist, click btn:[Create team] to create a team and add it to this organization.
+4. Click btn:[Add roles].
+5. Select the roles you want the selected team to have. Scroll down for a complete list of roles.
+
+[NOTE]
+----
+If you have multiple Ansible Automation Platform components installed, you will see selections for the roles associated with each component in the Roles menu bar. For example, Automation Execution for automation controller roles, Automation Decisions for Event-Driven Ansible roles.
+----
+6. Click btn:[Next] to review the roles settings.
+7. Click btn:[Finish] to apply the roles to the selected teams. The Add roles dialog displays the updated roles assigned for each team.
+8. Click btn:[Close].
+
+[NOTE]
+----
+A team with associated roles retains them if they are reassigned to another organization.
+----
+9. To manage roles for teams in an organization, click the &#9881; icon next to the user and select Manage roles.

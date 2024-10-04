@@ -1,0 +1,23 @@
+# Connecting automation hub to a Red Hat Single Sign-On environment
+
+To connect automation hub to a Red Hat Single Sign-On installation, configure inventory variables in the inventory file before you run the installer setup script.
+You must configure a different set of variables when connecting to a Red Hat Single Sign-On installation managed by Ansible Automation Platform than when connecting to an external Red Hat Single Sign-On installation.
+
+# Inventory file variables for connecting automation hub to a Red Hat Single Sign-On instance
+
+If you are installing automation hub and Red Hat Single Sign-On together for the first time or you have an existing Ansible Automation Platform managed Red Hat Single Sign-On, configure the variables for Ansible Automation Platform managed Red Hat Single Sign-On.
+
+If you are installing automation hub and you intend to connect it to an existing externally managed Red Hat Single Sign-On instance, configure the variables for externally managed Red Hat Single Sign-On.
+
+For more information about these inventory variables, refer to Ansible automation hub variables in the Red Hat Ansible Automation Platform Installation Guide.
+
+The following variables can be configured for both Ansible Automation Platform managed and external Red Hat Single Sign-On:
+
+
+
+The following variables can be configured for Ansible Automation Platform managed Red Hat Single Sign-On only:
+
+
+
+The following variable can be configured for external Red Hat Single Sign-On only:
+

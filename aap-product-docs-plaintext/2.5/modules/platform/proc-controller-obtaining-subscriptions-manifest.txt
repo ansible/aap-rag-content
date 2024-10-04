@@ -1,0 +1,48 @@
+# Obtaining a subscriptions manifest
+
+To upload a subscriptions manifest, first set up your subscription allocations:
+1. Navigate to https://access.redhat.com/management/subscription_allocations.
+The Subscriptions Allocations page has no subscriptions until you create one.
+2. Click btn:[Create New subscription allocation].
+
+[NOTE]
+----
+If Create New subscription allocation does not display, or is disabled, you do not have the proper permissions to create subscription allocations.
+To create a subscription allocation, you must either be an Administrator on the Red Hat Customer Portal, or have the Manage Your Subscriptions role.
+Contact an access.redhat.com administrator, or organization administrator who can grant you permission to manage subscriptions.
+----
+3. Enter a Name for your subscription and select 6.15 from the Type drop-down menu.
+4. Click btn:[Create].
+
+When your subscriptions manifest is successfully created, the number indicated next to Entitlements indicates the number of entitlements associated with your subscription.
+
+# Setting up a subscriptions manifest
+
+To obtain a subscriptions manifest, you must add an entitlement to your subscriptions through the Subscriptions tab.
+
+1. Click the Subscriptions tab.
+2. If there are no subscriptions to display, click btn:[Add Subscriptions].
+3. On the following screen you can select and add entitlements to put in the manifest file.
+![Ansible Automation Platform subscriptions]
+
+You can select multiple Ansible Automation Platform subscriptions in your subscription allocation.
+Valid Ansible Automation Platform subscriptions commonly go by the name "Red Hat Ansible Automation…".
+4. Specify the number of entitlements or managed nodes to put in the manifest file.
+This enables you to split up a subscription, for example: 400 nodes on a development cluster and 600 nodes for the production cluster, out of a 1000 node subscription.
+
+[NOTE]
+----
+You can apply multiple subscriptions to a single installation by adding multiple subscriptions of the same type to a manifest file and uploading them.
+Similarly, you can apply a subset of a subscription by only allocating a part of the subscription when creating the manifest.
+----
+5. Click btn:[Submit].
+
+The allocations you specified, when successfully added, are displayed in the Subscriptions tab.
+6. Click the Details tab to access the subscription manifest file.
+7. Click btn:[Export Manifest] to export the manifest file for this subscription.
+A folder pre-pended with manifest_ is downloaded to your local drive.
+Multiple subscriptions with the same SKU are aggregated.
+8. When you have a subscription manifest, go to the Subscription screen.
+9. Click btn:[Browse] to upload the entire manifest file.
+10. Navigate to the location where the file is saved.
+Do not open it or upload individual parts of it.
