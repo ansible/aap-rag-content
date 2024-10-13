@@ -2,7 +2,7 @@
 
 You can run the setup script once you have finished updating the inventory file.
 
-1. Run the setup.sh script
+* Run the setup.sh script:
 
 ```
 $ ./setup.sh

@@ -58,5 +58,4 @@ The default value is awx_session_id which you can see later in the Set-Cookie he
 [NOTE]
 ----
 You can change the session expiration time by specifying it in the SESSION_COOKIE_AGE parameter.
-For more information, see Working with session limits.
 ----

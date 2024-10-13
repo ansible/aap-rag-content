@@ -1,4 +1,4 @@
-# Deploying clustered Redis on Ansible Automation Platform Operator
+# Deploying clustered Redis on Red Hat Ansible Automation Platform Operator
 
 When you create an Ansible Automation Platform instance through the Ansible Automation Platform Operator, standalone Redis is assigned by default.
 To deploy clustered Redis, use the following procedure.

@@ -492,3 +492,33 @@ If you are able to remove an instance, you receive a prompt for confirmation.
 You can still remove an instance even if it is active and jobs are running on it.
 Automation controller waits for jobs running on this node to complete before removing it.
 ----
+
+## Upgrading receptors
+
+To update your receptor to the latest version follow these steps:
+
+1. Check the current receptor version:
+
+```
+receptor --version
+```
+
+2. Update the receptor:
+
+```
+sudo dnf update ansible-runner receptor -y
+```
+
+3. Verify the installation. After the update is complete, check the receptor version again to verify the update:
+
+```
+receptor --version
+```
+
+4. Restart the receptor service:
+
+```
+sudo systemctl restart receptor
+```
+
+5. Ensure the receptor is working correctly and is properly connected to the controller or other nodes in the system.

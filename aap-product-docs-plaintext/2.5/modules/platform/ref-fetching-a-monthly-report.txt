@@ -1,4 +1,4 @@
-# fetching-a-monthly-report
+# Fetching a monthly report
 
 # On RHEL
 
@@ -12,9 +12,9 @@ scp -r username@controller_host:$METRICS_UTILITY_SHIP_PATH/data/<YYYY>/<MM>/ /lo
 
 The generated report will have the default name CCSP-&lt;YEAR&gt;-&lt;MONTH&gt;.xlsx and will be deposited in the ship path that you specified.
 
-# On Openshift Container Platform from the AAP operator
+# On OpenShift Container Platform from the Ansible Automation Platform operator
 
-Use the following playbook to fetch a monthly consumption report for AAP on Openshift Container Platform:
+Use the following playbook to fetch a monthly consumption report for Ansible Automation Platform on OpenShift Container Platform:
 
 
 ```
@@ -99,8 +99,3 @@ Use the following playbook to fetch a monthly consumption report for AAP on Open
         name: temp-pod
         state: absent
 ```
-
-
-Term 1:: Definition
-Term 2:: Definition
-

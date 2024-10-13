@@ -1,14 +1,10 @@
-# configuring-the-metrics-utility
+# Configuring metrics-utility
 
 # On RHEL
-
-## Prerequisites:
 
 * An active Ansible Automation Platform subscription
 
 Metrics-utility is included with Ansible Automation Platform, so no separate installation is needed. The following commands gather the relevant data and generate a CCSP report containing your usage metrics. You can configure these commands as cronjobs to ensure they run at the beginning of every month. See How to schedule jobs using the Linux ‘Cron’ utility for more on configuring using the cron syntax.
-
-## Procedure:
 
 1. In the cron file, set the following variables to ensure metrics-utility gathers the relevant data. To open the cron file for editing, run:
 
@@ -88,19 +84,19 @@ metrics-utility build_report
 
 The generated report will have the default name CCSP-&lt;YEAR&gt;-&lt;MONTH&gt;.xlsx and will be deposited in the ship path that you specified in step 2.
 
-# On Openshift Container Platform from the AAP operator
+# On OpenShift Container Platform from the Ansible Automation Platform operator
 
-Metrics-utility is included in the Openshift Container Platform image beginning with version 4.12. If your system does not have metrics-utility installed, update your OpenShift image to the latest version.
+Metrics-utility is included in the OpenShift Container Platform image beginning with version 4.12. If your system does not have metrics-utility installed, update your OpenShift image to the latest version.
 
-Follow the steps below to configure the run schedule for metrics-utility on Openshift Container Platform using the AAP operator.
+Follow the steps below to configure the run schedule for metrics-utility on OpenShift Container Platform using the Ansible Automation Platform operator.
 
 * A running OpenShift cluster
-* An operator-based installation of Ansible Automation Platform on OpenShift.
+* An operator-based installation of Ansible Automation Platform on OpenShift Container Platform.
 
 
 [NOTE]
 ----
-Metrics-utility will run as indicated by the parameters you set in the configuration file. The utility cannot be run manually on Openshift Container Platform.
+Metrics-utility will run as indicated by the parameters you set in the configuration file. The utility cannot be run manually on OpenShift Container Platform.
 ----
 
 ## Create a ConfigMap in the Openshift UI YAML view
@@ -129,17 +125,17 @@ data:
   METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER: "PROCUREMENT LEADER"
 ```
 
-4. Click the Create button.
+4. Click btn:[Create].
 5. To verify that the ConfigMap was created and the metric utility is installed, select ConfigMap from the navigation panel and look for your ConfigMap in the list.
 
 ## Deploy automation controller
 
-Deploy automation controller and specify variables for how often the metric collection utility gathers usage information and generates a report.
+Deploy automation controller and specify variables for how often metrics-utility gathers usage information and generates a report.
 
 1. From the navigation panel, select Installed Operators.
-2. Click on Ansible Automation Platform
-3. In the Operator details, select the Automaton Controller tab.
-4. Click the button labeled Create AutomationController.
+2. Select Ansible Automation Platform.
+3. In the Operator details, select the automation controller tab.
+4. Click btn:[Create automation controller]*.
 5. Select the YAML view option. The YAML now shows the default parameters for automation controller.
 The relevant parameters for metrics-utility are the following:
 
@@ -156,10 +152,4 @@ The relevant parameters for metrics-utility are the following:
 6. Find the metrics_utility_enabled parameter and change the variable to true.
 7. Find the metrics_utility_cronjob_gather_schedule parameter and enter a variable for how often the utility should gather usage information (for example, @hourly or @daily).
 8. Find the metrics_utility_cronjob_report_schedule parameter and enter a variable for how often the utility generates a report (for example, @daily or @monthly).
-9. Click the Create button.
-
-# NewDoc
-
-* This section is optional.
-* Provide a bulleted list of links to other closely-related material. These links can include link: and xref: macros.
-* Use an unnumbered bullet (*) if the list includes only one step.
+9. Click btn:[Create].

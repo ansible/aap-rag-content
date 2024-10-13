@@ -1,6 +1,6 @@
 # Enabling Automation hub collection and container signing
 
-Automation hub allows you to sign Ansible collections and container images. This feature is not enabled by default, and you must provide the GPG key.
+With automation hub you can sign Ansible collections and container images. This feature is not enabled by default, and you must provide the GPG key.
 
 
 ```

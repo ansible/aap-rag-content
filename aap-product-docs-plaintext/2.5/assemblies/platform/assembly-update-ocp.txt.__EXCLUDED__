@@ -1,8 +1,10 @@
+# Ansible Automation Platform on OpenShift Container Platform
+
+You can use an upgrade patch to update your operator-based Ansible Automation Platform.
+
 # Updating Ansible Automation Platform on OpenShift Container Platform
 
-Perform a patch update for an installation of Ansible Automation Platform on OpenShift Container Platform.
-
-Most updates happen within a channel:
+When you perform a patch update for an installation of Ansible Automation Platform on OpenShift Container Platform, most updates happen within a channel:
 
 1. A new update becomes available in the marketplace (through the redhat-operator CatalogSource).
 2. A new InstallPlan is automatically created for your Ansible Automation Platform subscription. If the subscription is set to Manual, the InstallPlan will need to be manually approved in the OpenShift UI. If the subscription is set to Automatic, it will upgrade as soon as the new version is available.

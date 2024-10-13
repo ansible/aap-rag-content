@@ -11,5 +11,4 @@ Further options include the following:
 
 * Fiddler
 * mitmproxy
-* Live HTTP headers FireFox extension
 * Paros

@@ -14,8 +14,8 @@ The different methods for obtaining OAuth2 access tokens in automation controlle
 * Application token: Implicit grant type
 * Application token: Authorization Code grant type
 
-A user needs to create an OAuth 2 token in the API or in the Users &gt; Tokens tab of the automation controller UI.
-For more information about creating tokens through the UI, see Users - Tokens.
+A user needs to create an OAuth 2 token in the API or in the menu:Access Management[OAuth Applications] tab of the platform gateway UI.
+For more information about creating tokens through the UI, see Adding tokens.
 
 For the purpose of this example, use the PAT method for creating a token in the API.
 After you create it, you can set the scope.
@@ -24,7 +24,7 @@ After you create it, you can set the scope.
 [NOTE]
 ----
 You can configure the expiration time of the token system-wide.
-For more information, see Using OAuth 2 Token System for Personal Access Tokens.
+For more information, see Configuring access to external applications with token-based authentication.
 ----
 
 Token authentication is best used for any programmatic use of the automation controller API, such as Python scripts or tools such as curl.
@@ -69,12 +69,12 @@ allow_redirects=False, verify=False)
 # prints json returned from controller with formatting
 print(json.dumps(response.json(), indent=4, sort_keys=True))
 
-For more information about obtaining OAuth2 access tokens and how to use OAuth 2 in the context of external applications, see Token-Based Authentication in the Configuring automation execution.
+For more information about obtaining OAuth2 access tokens and how to use OAuth 2 in the context of external applications, see Configuring access to external applications with token-based authentication.
 
 ## Enabling external users to create OAuth 2 tokens
 
 By default, external users such as those created by single sign-on are not able to generate OAuth tokens for security purposes.
 
-1. From the navigation panel, select Settings.
-2. Select Miscellaneous Authentication settings from the list of System options.
-3. Enable the option to Allow External Users to Create OAuth2 Tokens.
+1. From the navigation panel, select menu:Settings[Platform gateway].
+2. Select btn:[Edit platform gateway settings].
+3. Enable the option to Allow external users to create OAuth2 tokens.

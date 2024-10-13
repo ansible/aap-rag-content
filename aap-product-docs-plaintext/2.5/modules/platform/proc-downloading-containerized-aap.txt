@@ -1,6 +1,6 @@
 # Downloading Ansible Automation Platform
 
-Choose the installer you need based on your Red Hat Enterprise Linux environment internet connectivity and download the installer to your RHEL host.
+Choose the installer you need based on your Red Hat Enterprise Linux environment internet connectivity and download the installer to your Red Hat Enterprise Linux host.
 
 1. Download the latest installer .tar file from the Ansible Automation Platform download page.
 1. For online installations: Ansible Automation Platform 2.5 Containerized Setup

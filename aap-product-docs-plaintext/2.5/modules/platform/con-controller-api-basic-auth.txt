@@ -15,6 +15,6 @@ For more information about Basic authentication, see The 'Basic' HTTP Authentica
 
 You can disable Basic authentication for security purposes.
 
-1. From the navigation panel, select Settings.
-2. Select Miscellaneous Authentication settings from the list of System options.
-3. Disable the option to Enable HTTP Basic Auth.
+1. From the navigation panel, select menu:Settings[Platform gateway].
+2. Click btn:[Edit platform gateway settings].
+3. Disable the option Gateway basic auth enabled.

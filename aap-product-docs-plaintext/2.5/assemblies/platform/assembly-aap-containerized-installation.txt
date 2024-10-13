@@ -7,18 +7,23 @@ This guide helps you to understand the installation requirements and processes b
 ----
 Upgrades from 2.4 Containerized Ansible Automation Platform Tech Preview to 2.5 Containerized Ansible Automation Platform are unsupported at this time.
 ----
-* A Red Hat Enterprise Linux (RHEL) 9.2 based host. Minimal operating system (OS) base install is recommended.
+* A Red Hat Enterprise Linux (RHEL) 9.2 based host. Use a minimal operating system base install.
 * A non-root user for the Red Hat Enterprise Linux host, with sudo or other Ansible supported privilege escalation (sudo recommended). This user is responsible for the installation of containerized Ansible Automation Platform.
-* It is recommended that you set up SSH public key authentication for the non-root user. For guidelines on setting up SSH public key authentication for the non-root user, see How to configure SSH public key authentication for passwordless login.
+* SSH public key authentication for the non-root user. For guidelines on setting up SSH public key authentication for the non-root user, see How to configure SSH public key authentication for passwordless login.
 * SSH keys are only required when installing on remote hosts. If doing a self contained local VM based installation, you can use ansible_connection: local.
 * Internet access from the Red Hat Enterprise Linux host if you are using the default online installation method.
-* The appropriate network ports are open if a firewall is in place. For more information about the ports to open, see Container supported topologies in Tested deployment models.
+* The appropriate network ports are open if a firewall is in place. For more information about the ports to open, see Container topologies in Tested deployment models.
 
 # Tested deployment topologies
 
-Red Hat tests Ansible Automation Platform 2.5 with a defined set of topologies to provide you with opinionated deployment options. The tested topologies include infrastructure topology, tested system configurations, example inventory files, and network ports information.
+Red Hat tests Ansible Automation Platform 2.5 with a defined set of topologies to give you opinionated deployment options. The supported topologies include infrastructure topology diagrams, tested system configurations, example inventory files, and network ports information.
 
-For more information about the tested deployment topologies for containerized Ansible Automation Platform, see Container supported topologies in Tested deployment models.
+For containerized Ansible Automation Platform, there are two infrastructure topology shapes:
+
+1. Growth - (All-in-one) Intended for organizations that are getting started with Ansible Automation Platform. This topology allows for smaller footprint deployments.
+2. Enterprise - Intended for organizations that require Ansible Automation Platform deployments to have redundancy or higher compute for large volumes of automation. This is a more future-proofed scaled out architecture.
+
+For more information about the tested deployment topologies for containerized Ansible Automation Platform, see Container topologies in Tested deployment models.
 
 # System requirements
 
@@ -26,18 +31,24 @@ Each virtual machine (VM) has the following system requirements:
 
 
 
-# Preparing the RHEL host for containerized installation
+# Preparing the Red Hat Enterprise Linux host for containerized installation
 
-Containerized Ansible Automation Platform runs the component services as Podman based containers on top of a RHEL host. The installer takes care of this after the underlying host has been prepared.
+Containerized Ansible Automation Platform runs the component services as Podman based containers on top of a Red Hat Enterprise Linux host. Prepare the Red Hat Enterprise Linux host to ensure a successful installation.
 
-1. Log in to the RHEL host as your non-root user.
-2. Register your RHEL host with subscription-manager:
+1. Log in to the Red Hat Enterprise Linux host as your non-root user.
+2. Set a hostname that is a fully qualified domain name (FQDN):
+
+```
+sudo hostnamectl set-hostname <your_hostname>
+```
+
+3. Register your Red Hat Enterprise Linux host with subscription-manager:
 
 ```
 sudo subscription-manager register
 ```
 
-3. Run sudo dnf repolist to validate that only the BaseOS and AppStream repositories are setup and enabled on the host:
+4. Run sudo dnf repolist to validate that only the BaseOS and AppStream repositories are setup and enabled on the host:
 
 ```
 $ sudo dnf repolist
@@ -47,36 +58,30 @@ rhel-9-for-x86_64-appstream-rpms                           Red Hat Enterprise Li
 rhel-9-for-x86_64-baseos-rpms                              Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
 ```
 
-4. Ensure that only these repositories are available to the RHEL host. For more information about managing custom repositories, see:
-Chapter 10. Managing custom software repositories.
-5. Ensure that the host has DNS configured and can resolve host names and IP addresses by using a fully qualified domain name (FQDN). This is essential to ensure services can talk to one another.
-6. Install ansible-core:
+5. Ensure that only these repositories are available to the Red Hat Enterprise Linux host. For more information about managing custom repositories, see:
+Managing custom software repositories.
+6. Ensure that the host has DNS configured and can resolve host names and IP addresses by using a fully qualified domain name (FQDN). This is essential to ensure services can talk to one another.
+7. Install ansible-core:
 
 ```
 sudo dnf install -y ansible-core
 ```
 
-7. Optional: You can install additional utilities that can be useful for troubleshooting purposes, for example wget, git-core, rsync, and vim:
+8. Optional: You can install additional utilities that can be useful for troubleshooting purposes, for example wget, git-core, rsync, and vim:
 
 ```
 sudo dnf install -y wget git-core rsync vim
 ```
 
-8. Set a hostname that is a fully qualified domain name (FQDN):
-
-```
-sudo hostnamectl set-hostname <your_hostname>
-```
-
-9. Optional: To have the installer automatically pick up and apply your Ansible Automation Platform subscription manifest license, follow the steps in link: {BaseURL}/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/assembly-gateway-licensing#assembly-aap-obtain-manifest-files[Obtaining a manifest file].
+9. Optional: To have the installer automatically pick up and apply your Ansible Automation Platform subscription manifest license, follow the steps in Obtaining a manifest file.
 
 * For more information about registering your RHEL system, see Getting Started with RHEL System Registration.
-* For information about configuring unbound DNS, see Chapter 2. Setting up an unbound DNS server.
-* For information about configuring DNS using BIND, see Chapter 1. Setting up and configuring a BIND DNS server.
+* For information about configuring unbound DNS, see Setting up an unbound DNS server.
+* For information about configuring DNS using BIND, see Setting up and configuring a BIND DNS server.
 
 # Downloading Ansible Automation Platform
 
-Choose the installer you need based on your Red Hat Enterprise Linux environment internet connectivity and download the installer to your RHEL host.
+Choose the installer you need based on your Red Hat Enterprise Linux environment internet connectivity and download the installer to your Red Hat Enterprise Linux host.
 
 1. Download the latest installer .tar file from the Ansible Automation Platform download page.
 1. For online installations: Ansible Automation Platform 2.5 Containerized Setup
@@ -101,21 +106,28 @@ $ tar xfvz ansible-automation-platform-containerized-setup-bundle-<version>-<arc
 
 You can control the installation of Ansible Automation Platform with inventory files. Inventory files define the hosts and containers used and created, variables for components, and other information needed to customize the installation.
 
-## Example inventory files
+Example inventory files are provided in this document that you can copy and change to quickly get started.
 
-Example inventory files are provided in this document that you can copy and change to quickly get started. You can find additional example inventory files in Container supported topologies in Tested deployment models.
+Inventory files for the growth and enterprise topology are also found in the downloaded installer package:
+
+* The default one named inventory is for the enterprise topology pattern.
+* If you want to deploy the growth or all-in-one pattern you need to copy over or use the inventory-growth file instead.
+
+Additionally, you can find example inventory files in Container topologies in Tested deployment models.
 
 To use the example inventory files, replace the < > placeholders with your specific variables, and update the host names. Refer to the README.md file in the installation directory for more information about optional and required variables.
 
-Use the following example inventory file to perform an online installation for the containerized growth topology:
+## Inventory file for online installation for containerized growth topology (all-in-one)
+
+Use the following example inventory file to perform an online installation for the containerized growth topology (all-in-one):
 
 
 ```yaml
 # This is the Ansible Automation Platform growth installer inventory file
-# Please consult the documentation if you are unsure what to add
+# Please consult the docs if you are unsure what to add
 # For all optional variables please consult the included README.md
 # or the Red Hat documentation:
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation
 
 # This section is for your platform gateway hosts
 # -----------------------------------------------------
@@ -123,7 +135,7 @@ Use the following example inventory file to perform an online installation for t
 aap.example.org
 
 # This section is for your automation controller hosts
-# -------------------------------------------------
+# -----------------------------------------------------
 [automationcontroller]
 aap.example.org
 
@@ -138,14 +150,15 @@ aap.example.org
 aap.example.org
 
 # This section is for the Ansible Automation Platform database
-# --------------------------------------
+# -----------------------------------------------------
 [database]
 aap.example.org
 
 [all:vars]
 
 # Common variables
-# ----------------
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
+# -----------------------------------------------------
 postgresql_admin_username=postgres
 postgresql_admin_password=<set your own>
 
@@ -155,44 +168,46 @@ registry_password=<your RHN password>
 redis_mode=standalone
 
 # Platform gateway
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-gateway-variables
-# -----------
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-gateway-variables
+# -----------------------------------------------------
 gateway_admin_password=<set your own>
 gateway_pg_host=aap.example.org
 gateway_pg_password=<set your own>
 
 # Automation controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-controller-variables
-# --------------
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-controller-variables
+# -----------------------------------------------------
 controller_admin_password=<set your own>
 controller_pg_host=aap.example.org
 controller_pg_password=<set your own>
 
 # Automation hub
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-hub-variables
-# ------------------
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-hub-variables
+# -----------------------------------------------------
 hub_admin_password=<set your own>
 hub_pg_host=aap.example.org
 hub_pg_password=<set your own>
 
 # Event-Driven Ansible controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#event-driven-ansible-controller
-# ------------------
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# -----------------------------------------------------
 eda_admin_password=<set your own>
 eda_pg_host=aap.example.org
 eda_pg_password=<set your own>
 ```
 
 
+## Inventory file for online installation for containerized enterprise topology
+
 Use the following example inventory file to perform an online installation for the containerized enterprise topology:
 
 
 ```yaml
-# This is the Ansible Automation Platform installer inventory file
-# Please consult the documentation if you are unsure what to add
+# This is the Ansible Automation Platform enterprise installer inventory file
+# Please consult the docs if you are unsure what to add
 # For all optional variables please consult the included README.md
 # or the Red Hat documentation:
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation
 
 # This section is for your platform gateway hosts
 # -----------------------------------------------------
@@ -201,13 +216,13 @@ gateway1.example.org
 gateway2.example.org
 
 # This section is for your automation controller hosts
-# -------------------------------------------------
+# -----------------------------------------------------
 [automationcontroller]
 controller1.example.org
 controller2.example.org
 
 # This section is for your Ansible Automation Platform execution hosts
-# ------------------------------------------------
+# -----------------------------------------------------
 [execution_nodes]
 hop1.example.org receptor_type='hop'
 exec1.example.org
@@ -236,14 +251,14 @@ eda2.example.org
 [all:vars]
 
 # Common variables
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
-# ----------------
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
+# -----------------------------------------------------
 registry_username=<your RHN username>
 registry_password=<your RHN password>
 
 # Platform gateway
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-gateway-variables
-# -----------
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-gateway-variables
+# -----------------------------------------------------
 gateway_admin_password=<set your own>
 gateway_pg_host=externaldb.example.org
 gateway_pg_database=<set your own>
@@ -251,8 +266,8 @@ gateway_pg_username=<set your own>
 gateway_pg_password=<set your own>
 
 # Automation controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-controller-variables
-# --------------
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-controller-variables
+# -----------------------------------------------------
 controller_admin_password=<set your own>
 controller_pg_host=externaldb.example.org
 controller_pg_database=<set your own>
@@ -260,8 +275,8 @@ controller_pg_username=<set your own>
 controller_pg_password=<set your own>
 
 # Automation hub
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-hub-variables
-# ------------------
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-hub-variables
+# -----------------------------------------------------
 hub_admin_password=<set your own>
 hub_pg_host=externaldb.example.org
 hub_pg_database=<set your own>
@@ -269,8 +284,8 @@ hub_pg_username=<set your own>
 hub_pg_password=<set your own>
 
 # Event-Driven Ansible controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#event-driven-ansible-controller
-# ------------------
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# -----------------------------------------------------
 eda_admin_password=<set your own>
 eda_pg_host=externaldb.example.org
 eda_pg_database=<set your own>
@@ -278,6 +293,11 @@ eda_pg_username=<set your own>
 eda_pg_password=<set your own>
 ```
 
+
+* Redis can be colocated with any other node in a clustered installation.
+* By default the redis_mode is set to cluster.
+* redis_mode=cluster
+* For more information about Redis, see Caching and queueing system in Planning your installation.
 
 ## Additional information for configuring your inventory file
 
@@ -291,11 +311,7 @@ bundle_dir=<full path to the bundle directory>
 ```
 
 
-* Redis can be colocated with any other node in a clustered installation.
-* By default the redis_mode is set to cluster. To run in standalone mode, set redis_mode=standalone.
-* For more information about Redis, see the Caching and queueing system section of Planning your installation.
-
-To configure a HAProxy load balancer in front of platform gateway with a custom CA cert, set the following inventory file variables under the [all:vars] group:
+* To configure a HAProxy load balancer in front of platform gateway with a custom CA cert, set the following inventory file variables under the [all:vars] group:
 
 
 ```
@@ -310,6 +326,16 @@ gateway_main_url=<https://load_balancer_url>
 HAProxy SSL passthrough mode is not supported with platform gateway.
 ----
 
+* To define the location of your automation controller license file, set the following variable in the inventory file:
+
+
+```
+controller_license_file=<full_path_to_your_manifest_zip_file>
+```
+
+
+* To define the license file as part of the postinstall process instead, see Using the postinstall feature of containerized Ansible Automation Platform.
+
 ## Running the installation command
 
 Use the following command to install containerized Ansible Automation Platform:
@@ -320,7 +346,7 @@ ansible-playbook -i inventory ansible.containerized_installer.install
 ```
 
 
-* If your privilege escalation requires a password to be entered, append -K to the command line. You are then prompted for the BECOME password.
+* If your privilege escalation requires you to enter a password, append -K to the command line. You are then prompted for the BECOME password.
 * You can use increasing verbosity, up to 4 v's (-vvvv) to see the details of the installation process. However, it is important to note that this can significantly increase installation time, so it is recommended that you use it only as needed or requested by Red Hat support.
 
 # Using the postinstall feature of containerized Ansible Automation Platform
@@ -329,14 +355,20 @@ You can use the optional postinstall feature of containerized Ansible Automation
 
 * An Ansible Automation Platform license for this feature that is on the local filesystem so it can be automatically loaded from the inventory file.
 
-1. The postinstall feature is disabled by default. To use the postinstaller, add the following variables in your inventory file:
+1. The postinstall feature is disabled by default. To enable the postinstall feature, add the following variables in your inventory file:
 
 ```
 controller_postinstall=true
-controller_license_file=<full_path_to_your_manifest_zip_file>
 ```
 
-2. You can pull your configuration-as-code from a Git based repository. To do this, set the following variables to dictate where you pull the content from and where to store it for upload to the Ansible Automation Platform controller:
+2. To load your automation controller license as part of the postinstall process, set the following variables in your inventory file:
+
+```
+controller_license_file=<full_path_to_your_manifest_zip_file>
+controller_postinstall_dir=<full_path_to_your_postinstall_directory>
+```
+
+3. You can pull your configuration-as-code from a Git based repository. To do this, set the following variables to dictate where you pull the content from and where to store it for upload to the Ansible Automation Platform controller:
 
 ```
 controller_postinstall_repo_url=<url_to_your_config-as-code_git_repository>
@@ -344,7 +376,7 @@ controller_postinstall_dir=<full_path_to_your_config-as-code_directory>
 controller_postinstall_repo_ref=main
 ```
 
-3. The controller_postinstall_repo_url variable can define the postinstall repository URL which must include authentication information.
+4. The controller_postinstall_repo_url variable defines the postinstall repository URL which must include authentication information.
 
 ```
 http(s)://<host>/<repo>.git (public repository without HTTP(S) authentication)
@@ -358,7 +390,7 @@ git@<host>:<repo>.git (public or private repository with SSH authentication)
 When using SSH based authentication, the installer does not configure anything for you, so you must configure everything on the installer node.
 ----
 
-Definition files that are used by Ansible Builder to create automation execution environment images use the infra certified collections. The controller_configuration collection is preinstalled as part of the installation and uses the installation controller credentials you supply in the inventory file for access into the Ansible Automation Platform controller. You simply need to give the YAML configuration files.
+Definition files that are used by Ansible Builder to create automation execution environment images use the infra certified collections. The controller_configuration collection is preinstalled as part of the installation and uses the installation controller credentials you supply in the inventory file for access into the Ansible Automation Platform controller. You need to give the YAML configuration files.
 
 You can set up Ansible Automation Platform configuration attributes such as credentials, LDAP settings, users and teams, organizations, projects, inventories and hosts, job and workflow templates.
 
@@ -483,7 +515,7 @@ receptor_tls_key=/full/path/to/tls/key
 
 # Using custom Receptor signing keys
 
-Receptor signing is enabled by default unless receptor_disable_signing=true is set, and an RSA key pair (public and private) is generated by the installer. However, you can provide custom RSA public and private keys by setting the path variables:
+Receptor signing is enabled by default unless receptor_disable_signing=true is set, and an RSA key pair (public and private) is generated by the installer. However, you can give custom RSA public and private keys by setting the path variables:
 
 
 ```
@@ -494,7 +526,7 @@ receptor_signing_public_key=<full_path_to_public_key>
 
 # Enabling Automation hub collection and container signing
 
-Automation hub allows you to sign Ansible collections and container images. This feature is not enabled by default, and you must provide the GPG key.
+With automation hub you can sign Ansible collections and container images. This feature is not enabled by default, and you must provide the GPG key.
 
 
 ```
@@ -548,7 +580,7 @@ fqdn_of_your_hop_host receptor_type=hop receptor_peers='["<fqdn_of_your_executio
 
 # Adding a safe plugin variable to Event-Driven Ansible controller
 
-When using redhat.insights_eda or similar plug-ins to run rulebook activations in Event-Driven Ansible controller, you must add a safe plugin variable to a directory in Ansible Automation Platform. This ensures connecton between Event-Driven Ansible controller and the source plugin, and displays port mappings correctly.
+When using redhat.insights_eda or similar plugins to run rulebook activations in Event-Driven Ansible controller, you must add a safe plugin variable to a directory in Ansible Automation Platform. This ensures connection between Event-Driven Ansible controller and the source plugin, and displays port mappings correctly.
 
 1. Create a directory for the safe plugin variable: mkdir -p ./group_vars/automationedacontroller
 2. Create a file within that directory for your new setting (for example, touch ./group_vars/automationedacontroller/custom.yml)
@@ -577,7 +609,7 @@ $ ansible-playbook -i inventory ansible.containerized_installer.uninstall
 ```
 
 
-This stops all systemd units and containers and then delete all resources used by the containerized installer such as:
+This stops all systemd units and containers and then deletes all resources used by the containerized installer such as:
 
 * config and data directories and files
 * systemd unit files
@@ -603,5 +635,5 @@ $ ansible-playbook -i inventory ansible.containerized_installer.uninstall -e pos
 
 [NOTE]
 ----
-Use the Ansible Automation Platform secret key values rather than the auto-generated ones.
+Use the Ansible Automation Platform secret key values rather than the autogenerated ones.
 ----

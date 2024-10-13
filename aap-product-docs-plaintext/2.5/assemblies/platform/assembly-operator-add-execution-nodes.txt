@@ -1,4 +1,4 @@
-# Adding execution nodes to Ansible Automation Platform Operator
+# Adding execution nodes to Red Hat Ansible Automation Platform Operator
 
 You can enable the Ansible Automation Platform Operator with execution nodes by downloading and installing the install bundle.
 

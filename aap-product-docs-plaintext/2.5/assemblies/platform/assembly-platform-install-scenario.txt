@@ -606,7 +606,7 @@ The two new keys (automationhub_auto_sign_collections and automationhub_require_
 
 ### Adding a safe plugin variable to Event-Driven Ansible controller
 
-When using redhat.insights_eda or similar plug-ins to run rulebook activations in Event-Driven Ansible controller, you must add a safe plugin variable to a directory in Ansible Automation Platform. This ensures connecton between Event-Driven Ansible controller and the source plugin, and displays port mappings correctly.
+When using redhat.insights_eda or similar plugins to run rulebook activations in Event-Driven Ansible controller, you must add a safe plugin variable to a directory in Ansible Automation Platform. This ensures connection between Event-Driven Ansible controller and the source plugin, and displays port mappings correctly.
 
 1. Create a directory for the safe plugin variable: mkdir -p ./group_vars/automationedacontroller
 2. Create a file within that directory for your new setting (for example, touch ./group_vars/automationedacontroller/custom.yml)
