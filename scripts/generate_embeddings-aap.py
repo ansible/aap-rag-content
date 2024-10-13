@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import time
+from pathlib import Path
 from typing import Callable, Dict
 
 import faiss
@@ -21,6 +22,7 @@ AAP_DOCS_ROOT_URL = "https://github.com/ansible/aap-docs/blob/"
 AAP_DOCS_VERSION = "2.5"
 UNREACHABLE_DOCS: int = 0
 
+metadata = {}
 
 def ping_url(url: str) -> bool:
     """Check if the URL parameter is live."""
@@ -66,13 +68,12 @@ def aap_file_metadata_func(file_path: str) -> Dict:
     Args:
         file_path: str: file path in str
     """
-    docs_url = lambda file_path: (  # noqa: E731
-        AAP_DOCS_ROOT_URL
-        + AAP_DOCS_VERSION
-        + "/downstream"
-        + file_path.removeprefix(EMBEDDINGS_ROOT_DIR).removesuffix("txt")
-        + "adoc"
-    )
+    full_path = os.path.abspath(file_path)
+    key = ("downstream"
+           + full_path.removeprefix(EMBEDDINGS_ROOT_DIR).removesuffix("txt")
+           + "adoc")
+
+    docs_url = lambda x : metadata[key]["url"]
     return file_metadata_func(file_path, docs_url)
 
 
@@ -120,6 +121,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print(f"Arguments used: {args}")
 
+    with open(Path(args.folder).joinpath("metadata.json")) as f:
+        metadata = json.load(f)
+
     # OLS-823: sanitize directory
     PERSIST_FOLDER = os.path.normpath("/" + args.output).lstrip("/")
     if PERSIST_FOLDER == "":
@@ -144,8 +148,9 @@ if __name__ == "__main__":
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
     # Load documents
+    input_files = list(Path(args.folder).rglob("*.txt"))
     documents = SimpleDirectoryReader(
-        args.folder, recursive=True, file_metadata=aap_file_metadata_func
+        input_files=input_files, recursive=True, file_metadata=aap_file_metadata_func
     ).load_data()
 
     # Split based on header/section
