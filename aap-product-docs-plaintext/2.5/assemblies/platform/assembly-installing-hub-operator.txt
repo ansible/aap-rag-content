@@ -215,7 +215,7 @@ The automation hub user interface launches where you can sign in with the admini
 If you did not specify an administrator password during configuration, one was automatically created for you. To locate this password, go to your project, select menu:Workloads[Secrets] and open controller-admin-password. From there you can copy the password and paste it into the Automation hub password field.
 ----
 
-# Configuring an external database for automation hub on Ansible Automation Platform Operator
+# Configuring an external database for automation hub on Red Hat Ansible Automation Platform Operator
 
 For users who prefer to deploy Ansible Automation Platform with an external database, they can do so by configuring a secret with instance credentials and connection information, then applying it to their cluster using the oc create command.
 

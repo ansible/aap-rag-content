@@ -1,4 +1,4 @@
-# Installing on Openshift Container Platform
+# Installing on OpenShift Container Platform
 
 Thank you for your interest in Red Hat Ansible Automation Platform. Ansible Automation Platform is a commercial offering that helps teams manage complex multi-tier deployments by adding control, knowledge, and delegation to Ansible-powered environments.
 This guide helps you to understand the installation, migration and upgrade requirements for deploying the Ansible Automation Platform Operator on OpenShift Container Platform.
@@ -7,7 +7,7 @@ This guide helps you to understand the installation, migration and upgrade requi
 
 If you have a suggestion to improve this documentation, or find an error, you can contact technical support at https://access.redhat.com to open a request.
 
-# Planning your Red Hat Ansible Automation Platform operator installation on Red Hat OpenShift Container Platform
+# Planning your Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
 
 Red Hat Ansible Automation Platform is supported on both Red Hat Enterprise Linux and Red Hat Openshift.
 
@@ -37,7 +37,7 @@ The Ansible Automation Platform Operator to install Ansible Automation Platform 
 
 You can use the OperatorHub on the Red Hat OpenShift Container Platform web console to install Ansible Automation Platform Operator.
 
-Alternatively, you can install Ansible Automation Platform Operator from the OpenShift Container Platform command-line interface (CLI), oc. See  for help with this.
+Alternatively, you can install Ansible Automation Platform Operator from the OpenShift Container Platform command-line interface (CLI), oc. See Installing Red Hat Ansible Automation Platform Operator  from the OpenShift Container Platform CLI for help with this.
 
 After you have installed Ansible Automation Platform Operator you must create an Ansible Automation Platform custom resource (CR). This enables you to manage Ansible Automation Platform components from a single unified interface known as the platform gateway. As of version 2.5, you must create an Ansible Automation Platform CR, even if you have an existing automation controller,  automation hub, or Event-Driven Ansible, components.
 
@@ -53,7 +53,7 @@ You can define custom resources for each primary installation workflows.
 
 * See Understanding OperatorHub to learn more about OpenShift Container Platform OperatorHub.
 
-# Installing the Red Hat Ansible Automation Platform operator on Red Hat OpenShift Container Platform
+# Installing the Red Hat Ansible Automation Platform on Red Hat OpenShift Container Platform
 
 * You have installed the Red Hat Ansible Automation Platform catalog in OperatorHub.
 * You have created a StorageClass object for your platform and a persistent volume claim (PVC) with ReadWriteMany access mode. See Dynamic provisioning for details.
@@ -81,7 +81,7 @@ You can only install a single instance of the Ansible Automation Platform Operat
 Installing multiple instances in the same namespace can lead to improper operation for both operator instances.
 ----
 
-# Installing Ansible Automation Platform Operator from the OpenShift Container Platform CLI
+# Installing Red Hat Ansible Automation Platform Operator from the OpenShift Container Platform CLI
 
 Use these instructions to install the Ansible Automation Platform Operator on Red Hat OpenShift Container Platform from the OpenShift Container Platform command-line interface (CLI) using the oc command.
 
@@ -270,7 +270,7 @@ The platform gateway for Ansible Automation Platform enables you to manage the f
 * Red Hat Ansible Lightspeed (This feature is disabled by default, you must opt in to use it.)
 
 Before you can deploy the platform gateway you must have Ansible Automation Platform Operator installed in a namespace.
-If you have not installed Ansible Automation Platform Operator see .
+If you have not installed Ansible Automation Platform Operator see Installing the Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform.
 
 
 [NOTE]
@@ -278,7 +278,7 @@ If you have not installed Ansible Automation Platform Operator see .
 Platform gateway is only available under Ansible Automation Platform Operator version 2.5. Every component deployed under Ansible Automation Platform Operator 2.5 will also default to version 2.5.
 ----
 
-If you have the Ansible Automation Platform Operator and some or all of the Ansible Automation Platform components installed see  for how to proceed.
+If you have the Ansible Automation Platform Operator and some or all of the Ansible Automation Platform components installed see Deploying the platform gateway with existing Ansible Automation Platform componentsfor how to proceed.
 
 ## Linking your components to the platform gateway
 
@@ -553,7 +553,7 @@ Verify that the following operator pods provided by the Ansible Automation Platf
 A missing pod can indicate the need for a pull secret. Pull secrets are required for protected or private image registries. See Using image pull secrets for more information. You can diagnose this issue further by running oc describe pod <pod-name> to see if there is an ImagePullBackOff error on that pod.
 ----
 
-## Configuring an external database for automation controller on Red Hat Ansible Automation Platform operator
+## Configuring an external database for automation controller on Red Hat Ansible Automation Platform Operator
 
 For users who prefer to deploy Ansible Automation Platform with an external database, they can do so by configuring a secret with instance credentials and connection information, then applying it to their cluster using the oc create command.
 
@@ -862,7 +862,7 @@ The automation hub user interface launches where you can sign in with the admini
 If you did not specify an administrator password during configuration, one was automatically created for you. To locate this password, go to your project, select  and open controller-admin-password. From there you can copy the password and paste it into the Automation hub password field.
 ----
 
-## Configuring an external database for automation hub on Ansible Automation Platform Operator
+## Configuring an external database for automation hub on Red Hat Ansible Automation Platform Operator
 
 For users who prefer to deploy Ansible Automation Platform with an external database, they can do so by configuring a secret with instance credentials and connection information, then applying it to their cluster using the oc create command.
 
@@ -1034,7 +1034,7 @@ When ansible_collect_download_count is enabled, automation hub will display a do
 
 * For more information on running operators on OpenShift Container Platform, navigate to the OpenShift Container Platform product documentation and click the Operators - Working with Operators in OpenShift Container Platform guide.
 
-# Deploying clustered Redis on Ansible Automation Platform Operator
+# Deploying clustered Redis on Red Hat Ansible Automation Platform Operator
 
 When you create an Ansible Automation Platform instance through the Ansible Automation Platform Operator, standalone Redis is assigned by default.
 To deploy clustered Redis, use the following procedure.
@@ -1504,7 +1504,7 @@ Ensure the indentation is correct when entering these settings.
 
 * For more information on running operators on OpenShift Container Platform, see Working with Operators in OpenShift Container Platform in the OpenShift Container Platform product documentation.
 
-# Adding execution nodes to Ansible Automation Platform Operator
+# Adding execution nodes to Red Hat Ansible Automation Platform Operator
 
 You can enable the Ansible Automation Platform Operator with execution nodes by downloading and installing the install bundle.
 

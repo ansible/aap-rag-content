@@ -277,7 +277,7 @@ $ sudo dnf install --enablerepo=ansible-automation-platform-2.5-for-rhel-8-x86_6
 ```
 
 
-v.2.5 for RHEL 9 for x86-64
+v.2.5 for RHEL 9 for x86_64
 
 ```
 $ sudo dnf install --enablerepo=ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms ansible-automation-platform-installer
@@ -360,6 +360,12 @@ pg_password='<password>'
 registry_url='registry.redhat.io'
 registry_username='<registry username>'
 registry_password='<registry password>'
+
+automationgateway_admin_password=""
+automationgateway_pg_host=""
+automationgateway_pg_database=""
+automationgateway_pg_username=""
+automationgateway_pg_password=""
 ```
 
 

@@ -421,3 +421,40 @@ If you are able to remove an instance, you receive a prompt for confirmation.
 You can still remove an instance even if it is active and jobs are running on it.
 Automation controller waits for jobs running on this node to complete before removing it.
 ----
+
+# Upgrading receptors
+
+A software update addresses any issues or bugs to provide a better experience of working with the technology. Anyone with administrative rights can update the receptor on an execution node.
+
+Red&#160;Hat recommends performing updates to the receptor after any Ansible Automation Platform control plane updates. This ensures you are using the latest version. Best practice is to perform regular updates outside of any updates to the control plane.
+
+1. Check the current receptor version:
+
+```
+receptor --version
+```
+
+2. Update the receptor:
+
+```
+sudo dnf update ansible-runner receptor -y
+```
+
+
+[NOTE]
+----
+To upgrade all packages (not just the receptor), use dnf update, then reboot with reboot.
+----
+3. Verify the installation. After the update is complete, check the receptor version again to verify the update:
+
+```
+receptor --version
+```
+
+4. Restart the receptor service:
+
+```
+sudo systemctl restart receptor
+```
+
+5. Ensure the receptor is working correctly and is properly connected to the controller or other nodes in the system.

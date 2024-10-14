@@ -1,4 +1,4 @@
-# Migrating Red Hat Ansible Automation Platform to Ansible Automation Platform Operator
+# Migrating Red Hat Ansible Automation Platform to Red Hat Ansible Automation Platform Operator
 
 Migrating your Red Hat Ansible Automation Platform deployment to the Ansible Automation Platform Operator allows you to take advantage of the benefits provided by a Kubernetes native operator, including simplified upgrades and full lifecycle support for your Red Hat Ansible Automation Platform deployments.
 Use these procedures to migrate any of the following deployments to the Ansible Automation Platform Operator:

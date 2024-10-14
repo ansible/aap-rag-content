@@ -1,4 +1,4 @@
-# Installing the Red Hat Ansible Automation Platform operator on Red Hat OpenShift Container Platform
+# Installing the Red Hat Ansible Automation Platform on Red Hat OpenShift Container Platform
 
 * You have installed the Red Hat Ansible Automation Platform catalog in OperatorHub.
 * You have created a StorageClass object for your platform and a persistent volume claim (PVC) with ReadWriteMany access mode. See Dynamic provisioning for details.

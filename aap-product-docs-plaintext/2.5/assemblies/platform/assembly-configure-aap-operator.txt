@@ -6,13 +6,13 @@ The platform gateway for Ansible Automation Platform enables you to manage the f
 * Event-Driven Ansible
 * Red Hat Ansible Lightspeed (This feature is disabled by default, you must opt in to use it.)
 Before you can deploy the platform gateway you must have Ansible Automation Platform Operator installed in a namespace.
-If you have not installed Ansible Automation Platform Operator see .
+If you have not installed Ansible Automation Platform Operator see Installing the Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform.
 
 [NOTE]
 ----
 Platform gateway is only available under Ansible Automation Platform Operator version 2.5. Every component deployed under Ansible Automation Platform Operator 2.5 will also default to version 2.5.
 ----
-If you have the Ansible Automation Platform Operator and some or all of the Ansible Automation Platform components installed see  for how to proceed.
+If you have the Ansible Automation Platform Operator and some or all of the Ansible Automation Platform components installed see Deploying the platform gateway with existing Ansible Automation Platform componentsfor how to proceed.
 
 # Linking your components to the platform gateway
 

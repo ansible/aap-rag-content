@@ -1,4 +1,4 @@
-# Configuring an external database for automation controller on Red Hat Ansible Automation Platform operator
+# Configuring an external database for automation controller on Red Hat Ansible Automation Platform Operator
 
 For users who prefer to deploy Ansible Automation Platform with an external database, they can do so by configuring a secret with instance credentials and connection information, then applying it to their cluster using the oc create command.
 

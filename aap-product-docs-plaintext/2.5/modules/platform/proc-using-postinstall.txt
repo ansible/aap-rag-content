@@ -4,14 +4,20 @@ You can use the optional postinstall feature of containerized Ansible Automation
 
 * An Ansible Automation Platform license for this feature that is on the local filesystem so it can be automatically loaded from the inventory file.
 
-1. The postinstall feature is disabled by default. To use the postinstaller, add the following variables in your inventory file:
+1. The postinstall feature is disabled by default. To enable the postinstall feature, add the following variables in your inventory file:
 
 ```
 controller_postinstall=true
-controller_license_file=<full_path_to_your_manifest_zip_file>
 ```
 
-2. You can pull your configuration-as-code from a Git based repository. To do this, set the following variables to dictate where you pull the content from and where to store it for upload to the Ansible Automation Platform controller:
+2. To load your automation controller license as part of the postinstall process, set the following variables in your inventory file:
+
+```
+controller_license_file=<full_path_to_your_manifest_zip_file>
+controller_postinstall_dir=<full_path_to_your_postinstall_directory>
+```
+
+3. You can pull your configuration-as-code from a Git based repository. To do this, set the following variables to dictate where you pull the content from and where to store it for upload to the Ansible Automation Platform controller:
 
 ```
 controller_postinstall_repo_url=<url_to_your_config-as-code_git_repository>
@@ -19,7 +25,7 @@ controller_postinstall_dir=<full_path_to_your_config-as-code_directory>
 controller_postinstall_repo_ref=main
 ```
 
-3. The controller_postinstall_repo_url variable can define the postinstall repository URL which must include authentication information.
+4. The controller_postinstall_repo_url variable defines the postinstall repository URL which must include authentication information.
 
 ```
 http(s)://<host>/<repo>.git (public repository without HTTP(S) authentication)
@@ -33,7 +39,7 @@ git@<host>:<repo>.git (public or private repository with SSH authentication)
 When using SSH based authentication, the installer does not configure anything for you, so you must configure everything on the installer node.
 ----
 
-Definition files that are used by Ansible Builder to create automation execution environment images use the infra certified collections. The controller_configuration collection is preinstalled as part of the installation and uses the installation controller credentials you supply in the inventory file for access into the Ansible Automation Platform controller. You simply need to give the YAML configuration files.
+Definition files that are used by Ansible Builder to create automation execution environment images use the infra certified collections. The controller_configuration collection is preinstalled as part of the installation and uses the installation controller credentials you supply in the inventory file for access into the Ansible Automation Platform controller. You need to give the YAML configuration files.
 
 You can set up Ansible Automation Platform configuration attributes such as credentials, LDAP settings, users and teams, organizations, projects, inventories and hosts, job and workflow templates.
 

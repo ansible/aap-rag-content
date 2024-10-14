@@ -7,7 +7,8 @@ Creating execution environments for Ansible Automation Platform is a common task
 * RPM repositories such as the RHEL or UBI repositories (cdn.redhat.com) for adding or updating RPMs to the execution environment image, if needed.
 * registry.redhat.io for access to the base container images.
 
-Building an execution environment image in a disconnected environment requires mirroring content from these locations. See Importing Collections into private automation hub for information about importing collections from Ansible Galaxy or automation hub into a private automation hub.
+Building an execution environment image in a disconnected environment requires mirroring content from these locations.
+For information about importing collections from Ansible Galaxy or automation hub into a private automation hub, see Importing an automation content collection in automation hub .
 
 Mirrored PyPI content once transferred into the disconnected network can be made available by using a web server or an artifact repository such as Nexus. The RHEL and UBI repository content can be exported from an internet-facing Red Hat Satellite Server, copied into the disconnected environment, then imported into a disconnected Satellite so it is available for building custom execution environments. See ISS Export Sync in an Air-Gapped Scenario for details.
 

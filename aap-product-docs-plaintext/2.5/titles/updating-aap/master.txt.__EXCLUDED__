@@ -1,0 +1,218 @@
+# Updating from Ansible Automation Platform 2.5 to 2.5.x
+
+# Providing feedback on Red Hat documentation
+
+If you have a suggestion to improve this documentation, or find an error, you can contact technical support at https://access.redhat.com to open a request.
+
+You can perform patch updates to your Ansible Automation Platform installation as updates are released. This only applies to updates from 2.5 to 2.5.x.
+
+
+[NOTE]
+----
+Upgrades from 2.4 to 2.5 are unsupported at this time. For more information, see this Knowledgebase article.
+----
+
+# RPM-based Ansible Automation Platform
+
+To update your RPM-based Ansible Automation Platform, start by reviewing the update considerations. You can then download the latest version of the Ansible Automation Platform installer, configure the inventory file in the installation bundle to reflect your environment, and then run the installer.
+
+## Update planning
+
+Before you begin the update process, review the following considerations to plan and prepare your Ansible Automation Platform deployment:
+
+* Even if you have a valid license from an earlier version, you must give your credentials or a subscription manifest upon upgrading to the latest version of Ansible Automation Platform. For more information, see Attaching your Red Hat Ansible Automation Platform subscription in Access management and authentication.
+* Clustered upgrades require special attention to instance and instance groups before upgrading. Ensure you capture your inventory or instance group details before upgrading. For more information, see Clustering in Configuring automation execution.
+* If you are currently running Event-Driven Ansible controller, disable all rulebook activations before upgrading to ensure that only new activations run after the upgrade process has completed. This prevents possibilities of orphaned containers running activations from the earlier version. For more information, see Enabling and disabling rulebook activations in Using automation decisions.
+
+## Choosing and obtaining a Red Hat Ansible Automation Platform installer
+
+Choose the Red Hat Ansible Automation Platform installer you need based on your Red Hat Enterprise Linux environment internet connectivity. Review the following scenarios to decide which Red Hat Ansible Automation Platform installer meets your needs.
+
+### Installing with internet access
+
+Choose the Red Hat Ansible Automation Platform installer if your Red Hat Enterprise Linux environment is connected to the internet. Installing with internet access retrieves the latest required repositories, packages, and dependencies. Choose one of the following ways to set up your Ansible Automation Platform installer.
+
+1. Navigate to the Red Hat Ansible Automation Platform download page.
+2. Click Download Now for the Ansible Automation Platform <latest-version> Setup.
+3. Extract the files:
+
+```
+$ tar xvzf ansible-automation-platform-setup-<latest-version>.tar.gz
+```
+
+
+1. Install Ansible Automation Platform Installer Package
+
+v.2.5 for RHEL 8 for x86_64
+
+```
+$ sudo dnf install --enablerepo=ansible-automation-platform-2.5-for-rhel-8-x86_64-rpms ansible-automation-platform-installer
+```
+
+
+v.2.5 for RHEL 9 for x86_64
+
+```
+$ sudo dnf install --enablerepo=ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms ansible-automation-platform-installer
+```
+
+
+
+[NOTE]
+----
+dnf install enables the repo as the repo is disabled by default.
+----
+
+When you use the RPM installer, the files are placed under the /opt/ansible-automation-platform/installer directory.
+
+### Installing without internet access
+
+Use the Red Hat Ansible Automation Platform Bundle installer if you are unable to access the internet, or would prefer not to install separate components and dependencies from online repositories. Access to Red Hat Enterprise Linux repositories is still needed. All other dependencies are included in the tar archive.
+
+1. Go to the Red Hat Ansible Automation Platform download page.
+2. Click Download Now for the Ansible Automation Platform <latest-version> Setup Bundle.
+3. Extract the files:
+
+```
+$ tar xvzf ansible-automation-platform-setup-bundle-<latest-version>.tar.gz
+```
+
+
+## Backing up RPM-based Ansible Automation Platform
+
+Back up an existing Ansible Automation Platform instance by running the setup.sh script with the backup_dir flag, which saves the content and configuration of your current environment:
+
+1. Go to your Ansible Automation Platform installation directory.
+2. Run the setup.sh script following the example below:
+
+```
+$ ./setup.sh -e 'backup_dir=/ansible/mybackup' -e 'use_compression=True' @credentials.yml -b
+```
+
+* backup_dir specifies a directory to save your backup to.
+* @credentials.yml passes the password variables and their values that are encrypted by ansible-vault.
+
+With a successful backup, a backup file is created at /ansible/mybackup/<platform_installation_directory_name>.tar.gz.
+
+Additional resources
+
+* For more information about backing up and restoring, see Backup and restore in Configuring automation execution.
+
+## Setting up the inventory file
+
+Before upgrading your Red Hat Ansible Automation Platform installation, edit the inventory file so that it matches your desired configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can modify the parameters to match any changes to your environment.
+
+1. Navigate to the installation program directory.
+
+Bundled installer
+
+```
+$ cd ansible-automation-platform-setup-bundle-<version_number>-<arch_version>
+```
+
+
+Online installer
+
+```
+$ cd ansible-automation-platform-setup-<version_number>
+```
+
+2. Update the inventory file to match your desired configuration. You can use the same inventory file from an existing Ansible Automation Platform installation if there are no changes to the environment.
+
+
+[NOTE]
+----
+Provide a reachable IP address or fully qualified domain name (FQDN) for all hosts to ensure that users can synchronize and install content from Ansible automation hub from a different node. Do not use localhost. If localhost is used, the upgrade will be stopped as part of preflight checks.
+----
+
+## Running the Red Hat Ansible Automation Platform installer setup script
+
+You can run the setup script once you have finished updating the inventory file.
+
+* Run the setup.sh script:
+
+```
+$ ./setup.sh
+```
+
+
+The installation will begin.
+
+# Container-based Ansible Automation Platform
+
+To update your container-based Ansible Automation Platform, start by reviewing the update considerations. You can then download the latest version of the Ansible Automation Platform installer, configure the inventory file in the installation bundle to reflect your environment, and then run the installer.
+
+## Updating container-based Ansible Automation Platform
+
+Perform a patch update for a container-based installation of Ansible Automation Platform.
+
+You have done the following:
+
+* Reviewed the release notes for the associated patch release.
+* Created a backup of your Ansible Automation Platform deployment. For more information, see Backing up controller-based Ansible Automation Platform.
+
+1. Download the latest version of the containerized installer from the Ansible Automation Platform download.
+1. For online installations Ansible Automation Platform 2.5 Containerized Setup
+2. For offline or bundled installations: Ansible Automation Platform 2.5 Containerized Setup Bundle
+2. Copy the installer .tar file onto your Red Hat Enterprise Linux host.
+3. Decide where you want the installer to reside on the filesystem. Installation related files will be created under this location and require at least 10 GB for the initial installation.
+4. Unpack the installer .tar file into your installation directory, and go to the unpacked directory.
+1. To unpack the online installer:
+
+```
+$ tar xfvz ansible-automation-platform-containerized-setup-<version>.tar.gz
+```
+
+2. To unpack the offline or bundled installer:
+
+```
+$ tar xfvz ansible-automation-platform-containerized-setup-bundle-<version>-<arch name>.tar.gz
+```
+
+5. Edit the inventory file so that it matches your desired configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can modify the parameters to match any changes to your environment.
+6. Run the install command:
+
+```
+$ ansible-playbook -i inventory ansible.containerized_installer.install
+```
+
+* If your privilege escalation requires a password to be entered, append -K to the command. You will then be prompted for the BECOME password.
+* You can use increasing verbosity, up to 4 v’s (-vvvv) to see the details of the installation process. However it is important to note that this can significantly increase installation time, so it is recommended that you use it only as needed or requested by Red Hat support.
+
+The installation will begin.
+
+## Backing up container-based Ansible Automation Platform
+
+Perform a back up of your container-based Ansible Automation Platform installer.
+
+1. Go to the Red Hat Ansible Automation Platform installation directory on your Red Hat Enterprise Linux host.
+2. Run the backup.yml playbook:
+
+```
+$ ansible-playbook -i inventory ansible.containerized_installer.backup
+```
+
+
+This will backup the important data deployed by the containerized installer such as:
+* PostgreSQL databases
+* Configuration files
+* Data files
+
+By default, the backup directory is set to ~/backups but this can be changed by using the backup_dir variable in your inventory file.
+
+# Ansible Automation Platform on OpenShift Container Platform
+
+You can use an upgrade patch to update your operator-based Ansible Automation Platform.
+
+## Updating Ansible Automation Platform on OpenShift Container Platform
+
+When you perform a patch update for an installation of Ansible Automation Platform on OpenShift Container Platform, most updates happen within a channel:
+
+1. A new update becomes available in the marketplace (through the redhat-operator CatalogSource).
+2. A new InstallPlan is automatically created for your Ansible Automation Platform subscription. If the subscription is set to Manual, the InstallPlan will need to be manually approved in the OpenShift UI. If the subscription is set to Automatic, it will upgrade as soon as the new version is available.
+
+[NOTE]
+----
+It is recommended that you set a manual install strategy on your Ansible Automation Platform Operator subscription (set when installing or upgrading the Operator) and you will be prompted to approve an upgrade when it becomes available in your selected update channel. Stable channels for each X.Y release (for example, stable-2.5) are available.
+----
+3. A new Subscription, CSV, and Operator containers will be created alongside the old Subscription, CSV, and containers. Then the old resources will be cleaned up if the new install was successful.

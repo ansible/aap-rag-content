@@ -252,3 +252,56 @@ The following are documentation enhancements in Ansible Automation Platform 2.5:
 
 The following table summarizes title changes for the 2.5 release.
 
+
+
+# Ansible Automation Platform patch release October 14, 2024
+
+The following fixes have been implemented in this release of Red Hat Ansible Automation Platform.
+
+## Fixed issues
+
+### Ansible Automation Platform
+
+* Fixed an issue in platform gateway where examining output logs for UWSGI shows a message that can be viewed as insensitive. (AAP-33213)
+* Fixed external Redis port configuration issue, which resulted in a cluster_host error when trying to connect to Redis. (AAP-32691)
+* Fixed a faulty conditional which was causing managed Redis to be deployed even if an external Redis was being configured. (AAP-31607)
+* After the initial deployment of Ansible Automation Platform, if you make changes to the automation controller, automation hub, or Event-Driven Ansible sections of the Ansible Automation Platform CR specification, those changes are now propagated to the component custom resources. (AAP-32350)
+* Fixed addressing issues when the filter keep_keys is used, all keys are removed from the dictionary. The keepkey fix is available in the updated ansible.utils collection. (AAP-32960)
+* Fixed an issue in cisco.ios.ios_static_routes where the metric distance is to be populated in the forward_router_address attribute. (AAP-32960)
+* Fixed an issue where Ansible Automation Platform Operator is not transferring metric settings to the controller. (AAP-32073)
+* Fixed an issue where you have a schedule on a resource, such as a job template, that prompts for credentials, and you update the credential to be different from what is on the resource by default, the new credential is not submitted to the API and it does not get updated. (AAP-31957)
+* Fixed an issue where setting *pg_host= without any other context no longer results in an empty HOST section of settings.py in controller. (AAP-32440)
+
+# Ansible Automation Platform patch release October 7, 2024
+
+The following enhancements and fixes have been implemented in this release of Red Hat Ansible Automation Platform.
+
+## Enhancements
+
+* Event-Driven Ansible workers and scheduler add timeout and retry resilience when communicating with a Redis cluster. (AAP-32139)
+* Removed the MTLS credential type that was incorrectly added. (AAP-31848)
+
+## Fixed issues
+
+### Ansible Automation Platform
+
+* Fixed conditional that was skipping necessary tasks in the restore role, which was causing restores to not finish reconciling. (AAP-30437)
+* Systemd services in the containerized installer are now set with restart policy set to always by default. (AAP-31824)
+* FLUSHDB is now modified to account for shared usage of a Redis database. It now respects access limitations by removing only those keys that the client has permissions to. (AAP-32138)
+* Added a fix to ensure default extra_vars values are rendered in the Prompt on launch wizard. (AAP-30585)
+* Filtered out the unused ANSIBLE_BASE_ settings from the environment variable in job execution. (AAP-32208)
+
+### Event-Driven Ansible
+
+* Configured the setting EVENT_STREAM_MTLS_BASE_URL to the correct default to ensure MTLS is disallowed in the RPM installer. (AAP-32027)
+* Configured the setting EVENT_STREAM_MTLS_BASE_URL to the correct default to ensure MTLS is disallowed in the containerized installer. (AAP-31851)
+* Fixed a bug where the Event-Driven Ansible workers and scheduler are unable to reconnect to the Redis cluster if a primary Redis node enters a failed state and a new primary node is promoted. See the KCS article Redis failover causes Event-Driven Ansible activation failures that include the steps that were necessary before this bug was fixed. (AAP-30722)
+
+## Advisories
+
+The following errata advisories are included in this release:
+
+* RHBA-2024:7756
+* RHBA-2024:7760
+* RHBA-2024:7766
+* RHBA-2024:7810

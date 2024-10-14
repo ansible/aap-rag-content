@@ -23,7 +23,6 @@ Further options include the following:
 
 * Fiddler
 * mitmproxy
-* Live HTTP headers FireFox extension
 * Paros
 
 # Browsing with the API
@@ -438,7 +437,6 @@ The default value is awx_session_id which you can see later in the Set-Cookie he
 [NOTE]
 ----
 You can change the session expiration time by specifying it in the SESSION_COOKIE_AGE parameter.
-For more information, see Working with session limits.
 ----
 
 ## Basic authentication
@@ -458,9 +456,9 @@ For more information about Basic authentication, see The 'Basic' HTTP Authentica
 
 You can disable Basic authentication for security purposes.
 
-1. From the navigation panel, select Settings.
-2. Select Miscellaneous Authentication settings from the list of System options.
-3. Disable the option to Enable HTTP Basic Auth.
+1. From the navigation panel, select .
+2. Click Edit platform gateway settings.
+3. Disable the option Gateway basic auth enabled.
 
 ## OAuth 2 token authentication
 
@@ -478,8 +476,8 @@ The different methods for obtaining OAuth2 access tokens in automation controlle
 * Application token: Implicit grant type
 * Application token: Authorization Code grant type
 
-A user needs to create an OAuth 2 token in the API or in the Users &gt; Tokens tab of the automation controller UI.
-For more information about creating tokens through the UI, see Users - Tokens.
+A user needs to create an OAuth 2 token in the API or in the  tab of the platform gateway UI.
+For more information about creating tokens through the UI, see Adding tokens.
 
 For the purpose of this example, use the PAT method for creating a token in the API.
 After you create it, you can set the scope.
@@ -488,7 +486,7 @@ After you create it, you can set the scope.
 [NOTE]
 ----
 You can configure the expiration time of the token system-wide.
-For more information, see Using OAuth 2 Token System for Personal Access Tokens.
+For more information, see Configuring access to external applications with token-based authentication.
 ----
 
 Token authentication is best used for any programmatic use of the automation controller API, such as Python scripts or tools such as curl.
@@ -533,15 +531,15 @@ allow_redirects=False, verify=False)
 # prints json returned from controller with formatting
 print(json.dumps(response.json(), indent=4, sort_keys=True))
 
-For more information about obtaining OAuth2 access tokens and how to use OAuth 2 in the context of external applications, see Token-Based Authentication in the Configuring automation execution.
+For more information about obtaining OAuth2 access tokens and how to use OAuth 2 in the context of external applications, see Configuring access to external applications with token-based authentication.
 
 ## Enabling external users to create OAuth 2 tokens
 
 By default, external users such as those created by single sign-on are not able to generate OAuth tokens for security purposes.
 
-1. From the navigation panel, select Settings.
-2. Select Miscellaneous Authentication settings from the list of System options.
-3. Enable the option to Allow External Users to Create OAuth2 Tokens.
+1. From the navigation panel, select .
+2. Select Edit platform gateway settings.
+3. Enable the option to Allow external users to create OAuth2 tokens.
 
 ## Single sign-on authentication
 
@@ -552,4 +550,4 @@ You can configure SSO authentication by using automation controller inside a lar
 Once you have configured an SSO method in automation controller, an option for that SSO is available on the login screen.
 If you click that option, it redirects you to the Identity Provider, in this case GitHub, where you present your credentials. If the Identity Provider verifies you successfully, automation controller makes a user linked to your GitHub user (if this is your first time logging in with this SSO method), and logs you in.
 
-For the various types of supported SSO authentication methods, see Setting up social authentication and Setting up enterprise authentication in the Configuring automation execution.
+For the various types of supported SSO authentication methods, see Configuring an authentication type.
