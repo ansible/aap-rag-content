@@ -116,13 +116,10 @@ class ParseAAPDocs:
             if adoc["url"]:
                 print(f"A URL is already set for {adoc['project_file_name']}")
             else:
-                if context["name"]:
-                    if context["url"] == context["base_url"]:
-                        adoc["url"] = f"{context['url']}/index#{id}"
-                    else:
-                        adoc["url"] = f"{context['url']}#{id}"
+                if context["url"] == context["base_url"]:
+                    adoc["url"] = f"{context['url']}/index#{id}"
                 else:
-                    adoc["url"] = f"{context['url']}/{id}"
+                    adoc["url"] = f"{context['url']}#{id}"
                 if self.do_validate and not self.validate(adoc):
                     sys.exit(1)
                 print(
