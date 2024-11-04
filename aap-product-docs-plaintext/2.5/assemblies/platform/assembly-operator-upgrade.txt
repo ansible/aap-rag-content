@@ -1,0 +1,133 @@
+# Upgrading Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+
+The Ansible Automation Platform Operator simplifies the installation, upgrade, and deployment of new Red Hat Ansible Automation Platform instances in your OpenShift Container Platform environment.
+
+# Overview
+
+You can use this document for help with upgrading Ansible Automation Platform 2.4 to 2.5 on Red Hat OpenShift Container Platform.
+This document applies to upgrades of Ansible Automation Platform 2.5 to later versions of 2.5.
+
+The Ansible Automation Platform Operator manages deployments, upgrades, backups, and restores of automation controller and automation hub.
+It also handles deployments of AnsibleJob and JobTemplate resources from the Ansible Automation Platform Resource Operator.
+
+Each operator version has default automation controller and automation hub versions.
+When the operator is upgraded, it also upgrades the automation controller and automation hub deployments it manages, unless overridden in the spec.
+
+OpenShift deployments of Ansible Automation Platform use the built-in Operator Lifecycle Management (OLM) functionality.
+For more information, see Operator Lifecycle Manager concepts and resources.
+OpenShift does this by using Subscription, CSV, InstallPlan, and OperatorGroup objects.
+Most users will not have to interact directly with these resources.
+They are created when the Ansible Automation Platform Operator is installed from OperatorHub and managed through the Subscriptions tab in the OpenShift console UI.
+For more information, refer to Accessing the web console.
+
+
+
+# Upgrade considerations
+
+If you are upgrading from version 2.4, continue to the Upgrading the Ansible Automation Platform Operator.
+
+If your OpenShift Container Platform version is not supported by the Red Hat Ansible Automation Platform version you are upgrading to, you must upgrade your OpenShift Container Platform cluster to a supported version first.
+
+Refer to the Red Hat Ansible Automation Platform Life Cycle to determine the OpenShift Container Platform version needed.
+
+For information about upgrading your cluster, refer to Updating clusters.
+
+# Prerequisites
+
+To upgrade to a newer version of Ansible Automation Platform Operator, you must:
+
+* Create AutomationControllerBackup and AutomationHubBackup objects. For help with this see Backup and recovery for operator environments
+* Review the Release notes for the new Ansible Automation Platform version to which you are upgrading and any intermediate versions.
+* Determine the type of upgrade you want to perform. See the Channel Upgrades section for more information.
+
+# Channel upgrades
+
+Upgrading to version 2.5 from Ansible Automation Platform 2.4 involves retrieving updates from a “channel”.
+A channel refers to a location where you can access your update.
+It currently resides in the OpenShift console UI.
+
+
+
+## In-channel upgrades
+
+Most upgrades occur within a channel as follows:
+
+1. A new update becomes available in the marketplace, through the redhat-operator CatalogSource.
+2. The system automatically creates a new InstallPlan for your Ansible Automation Platform subscription.
+* If set to Manual, the InstallPlan needs manual approval in the OpenShift UI.
+* If set to Automatic, it upgrades as soon as the new version is available.
+
+[NOTE]
+----
+Set a manual install strategy on your Ansible Automation Platform Operator subscription during installation or upgrade. You will be prompted to approve upgrades when available in your chosen update channel. Stable channels, like stable-2.5, are available for each X.Y release.
+----
+3. A new subscription, CSV, and operator containers are created alongside the old ones.
+The old resources are cleaned up after a successful install.
+
+## Cross-channel upgrades
+
+Upgrading between X.Y channels is always manual and intentional.
+Stable channels for major and minor versions are in the Operator Catalog.
+Currently, only version 2.x is available, so there are few channels.
+It is recommended to stay on the latest minor version channel for the latest patches.
+
+If the subscription is set for manual upgrades, you must approve the upgrade in the UI. Then, the system upgrades the Operator to the latest version in that channel.
+
+
+[NOTE]
+----
+It is recommended to set a manual install strategy on your Ansible Automation Platform Operator subscription during installation or upgrade.
+You will be prompted to approve upgrades when they become available in your chosen update channel.
+Stable channels, such as stable-2.5, are available for each X.Y release.
+----
+
+The containers provided in the latest channel are updated regularly for OS upgrades and critical fixes. This allows customers to receive critical patches and CVE fixes faster. Larger changes and new features are saved for minor and major releases.
+
+For each major or minor version channel, there is a corresponding "cluster-scoped" channel available. Cluster-scoped channels deploy operators that can manage all namespaces, while non-cluster-scoped channels can only manage resources in their own namespace.
+
+
+[IMPORTANT]
+----
+Cluster-scoped bundles are not compatible with namespace-scoped bundles. Do not try to switch between normal (stable-2.4 for example) channels and cluster-scoped (stable-2.4-cluster-scoped) channels, as this is not supported.
+----
+
+# Upgrading the Ansible Automation Platform Operator
+
+To upgrade to the latest version of Ansible Automation Platform Operator on OpenShift Container Platform, you can do the following:
+
+* Read the Release notes for 2.5
+* [Optional] You need to deploy all of your Red Hat Ansible Automation Platform services (automation controller, automation hub, Event-Driven Ansible) to the same, single namespace before upgrading to 2.5 (only for existing deployments). For more information see, Migrating from one namespace to another.
+* Review the Backup and recovery for operator environments guide and backup your services:
+* AutomationControllerBackup
+* AutomationHubBackup
+* EDABackup
+
+1. Log in to OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select the Ansible Automation Platform Operator installed on your project namespace.
+4. Select the Subscriptions tab.
+5. Change the channel from stable-2.4 to stable-2.5. An InstallPlan is created for the user.
+6. Click btn:[Preview InstallPlan].
+7. Click btn:[Approve].
+8. Create a Custom Resource (CR) using the Ansible Automation Platform UI.
+The automation controller and automation hub UIs remain until all SSO configuration is supported in the platform gateway UI.
+
+For more information on configuring your updated Ansible Automation Platform Operator, see Configuring the Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform.
+
+# Creating Ansible Automation Platform custom resources
+
+Create an Ansible Automation Platform custom resource (CR) that specifies the names of your existing deployments, in the same namespace.
+
+You can find examples for Ansible Automation Platform CR for various deployment scenarios in the Appendix.
+
+1. For example, use the fresh install Ansible Automation Platform CR (aap-fresh-install.yml).
+2. Wait for the Ansible Automation Platform CR to show the Successful status.
+3. Navigate to the Route URL listed in the status (or the Routes page) to access the new CR.
+
+
+[NOTE]
+----
+You can override the operator’s default image for automation controller, automation hub, or platform-resource app images by specifying the preferred image on the YAML spec.
+This enables upgrading a specific deployment, like a controller, without updating the operator.
+The recommended approach however, is to upgrade the operator and use the default image values.
+----

@@ -10,6 +10,11 @@ You must add the context for /var/lib/pulp pulpcore_static and run the Ansible A
 
 * You have already configured a NFS export on your server.
 
+[NOTE]
+----
+The NFS share is hosted on an external server and is not a part of high availability automation hub deployment.
+----
+
 1. Create a mount point at /var/lib/pulp:
 
 ```

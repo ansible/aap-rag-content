@@ -508,7 +508,7 @@ When creating a namespace, you can assign a team in automation hub as owners of 
 2. From the navigation panel, select .
 3. Click Create namespace and enter a Name for your namespace.
 4. Optional: enter a description, company, logo URL, resources, or useful links in the appropriate fields.
-5. Click btn: [Create namespace].
+5. Click Create namespace.
 6. Select the Team Access tab and click Add roles to assign roles to your namespace.
 7. Select the team to which you want to grant a role, then click Next.
 8. Select the roles you want to apply to the selected team, and then click Next.
@@ -640,7 +640,7 @@ Collections requiring approval have the status Needs review.
 
 1. From the navigation panel, select .
 2. Find the collection you want to review in the list. You can also filter collections by Namespace, Repository, and Status using the search bar.
-3. Click the thumbs down icon to approve and sign the collection. Confirm your choice in the modal that appears.
+3. Click the thumbs down icon to reject the collection. Confirm your choice in the modal that appears.
 
 Collections you decline for publication are moved to the Rejected repository.
 
@@ -897,12 +897,12 @@ For more information, see Teams in the Access management and authentication guid
 
 ## Populating your private automation hub container registry
 
-By default, private automation hub does not include execution environments.
-To populate your container registry, you must push a execution environment to it.
+By default, private automation hub does not include automation execution environments.
+To populate your container registry, you must push an execution environment to it.
 
 You must follow a specific workflow to populate your private automation hub remote registry:
 
-* Pull execution environments from the Red Hat Ecosystem Catalog (registry.redhat.io)
+* Pull automation execution environments from the Red Hat Ecosystem Catalog (registry.redhat.io)
 * Tag them
 * Push them to your private automation hub remote registry
 
@@ -915,7 +915,7 @@ As of 1 May 2023, filesystem blobs are served from quay.io instead.
 Make this change to any firewall configuration that specifically enables outbound connections to registry.redhat.io or registry.access.redhat.com.
 Use the hostnames instead of IP addresses when configuring firewall rules.
 After making this change you can continue to pull execution environments from registry.redhat.io and registry.access.redhat.com. You do not require a quay.io login, or need to interact with the quay.io registry directly in any way to continue pulling Red Hat container images.
-However, manifests, sometimes called “subscription allocations”, on the web-based Red Hat Subscription Management are no longer supported as of early 2024 with one exception: If a system is part of a closed network or “air gapped” system that does not receive its updates from Red Hat’s servers directly, manifests are supported until the release of Red Hat Satellite 6.16. Keep up to date with Red Hat Satellite Release Dates for the announcement for Red Hat Satellite 6.16's release date announcement.
+However, manifests, sometimes called “subscription allocations”, on the web-based Red Hat Subscription Management are no longer supported as of early 2024 with one exception: If a system is part of a closed network or “air gapped” system that does not receive its updates from Red Hat's servers directly, manifests are supported until the release of Red Hat Satellite 6.16. Keep up to date with Red Hat Satellite Release Dates for Red Hat Satellite 6.16's release date announcement.
 ----
 
 ### Pulling execution environments for use in automation hub
@@ -930,11 +930,11 @@ As of early 2024, Red Hat no longer supports manifests or manifest lists on the 
 New Red Hat accounts automatically use Simple Content Access for their subscription tooling. New Red Hat accounts and existing Satellite customers who can connect to Red Hat's servers can find their manifests at console.redhat.com.
 ----
 
-* You have permissions to pull execution environments from registry.redhat.io.
+* You have permissions to pull automation execution environments from registry.redhat.io.
 * A Red Hat account with Simple Content Access enabled.
 
 1. If you need to access your manifest for your container images log in to Red Hat Console.
-2. Click the three-dot menu for the manifest you need for your execution environments, and click Export manifest.
+2. Click the three-dot menu for the manifest you need for your automation execution environments, and click Export manifest.
 3. Log in to Podman by using your registry.redhat.io credentials:
 
 ```
@@ -1018,7 +1018,7 @@ This may lead to image-layer digest changes and a failed push operation, resulti
 
 ## Setting up your container repository
 
-When you set up your container repository, you must add a description, include a README, add teams that can access the repository, and tag automation execution environmentss.
+When you set up your container repository, you must add a description, include a README, add teams that can access the repository, and tag automation execution environments.
 
 ### Prerequisites to setting up your remote registry
 
@@ -1042,9 +1042,9 @@ By default, the README is empty.
 
 After you add a README, you can edit it at any time by clicking Edit and repeating steps 4 and 5.
 
-### Providing access to your automation execution environmentss
+### Providing access to your automation execution environments
 
-Provide access to your automation execution environmentss for users who need to work with the images.
+Provide access to your automation execution environments for users who need to work with the images.
 Adding a team allows you to modify the permissions the team can have to the container repository.
 You can use this option to extend or restrict permissions based on what the team is assigned.
 
@@ -1052,7 +1052,7 @@ You can use this option to extend or restrict permissions based on what the team
 
 1. Log in to Ansible Automation Platform.
 2. From the navigation panel, select .
-3. Select your automation execution environments.
+3. Select your automation execution environment.
 4. From the Team Access tab, click Add roles.
 5. Select the team or teams to which you want to grant access and click Next.
 6. Select the roles that you want to add to this execution environment and click Next.
@@ -1060,9 +1060,9 @@ You can use this option to extend or restrict permissions based on what the team
 
 ### Tagging container images
 
-Tag automation execution environmentss to add an additional name to automation execution environmentss stored in your automation hub container repository. If no tag is added to an automation execution environments, automation hub defaults to latest for the name.
+Tag automation execution environments to add an additional name to automation execution environments stored in your automation hub container repository. If no tag is added to an automation execution environment, automation hub defaults to latest for the name.
 
-* You have change automation execution environments tags permissions.
+* You have change automation execution environment tags permissions.
 
 1. From the navigation panel, select .
 2. Select your automation execution environments.
@@ -1095,17 +1095,17 @@ Filling in at least one of the fields organization, user, or team is mandatory, 
 
 ## Pulling images from a container repository
 
-Pull automation execution environmentss from the automation hub remote registry to make a copy to your local machine.
+Pull automation execution environments from the automation hub remote registry to make a copy to your local machine.
 Automation hub provides the podman pull command for each latest automation execution environments in the container repository.
 You can copy and paste this command into your terminal, or use podman pull to copy an automation execution environments based on an automation execution environments tag.
 
 ### Pulling an image
 
-You can pull automation execution environmentss from the automation hub remote registry to make a copy to your local machine.
+You can pull automation execution environments from the automation hub remote registry to make a copy to your local machine.
 
 * You must have permission to view and pull from a private container repository.
 
-1. If you are pulling automation execution environmentss from a password or token-protected registry, create a credential before pulling the automation execution environments.
+1. If you are pulling automation execution environments from a password or token-protected registry, create a credential before pulling the automation execution environments.
 2. From the navigation panel, select .
 3. Select your automation execution environments.
 4. In the Pull this image entry, click Copy to clipboard.
@@ -1115,8 +1115,8 @@ You can pull automation execution environmentss from the automation hub remote r
 
 ### Syncing images from a container repository
 
-You can pull automation execution environmentss from the automation hub remote registry to sync an image to your local machine.
-To sync an automation execution environments from a remote registry, you must first configure a remote registry.
+You can pull automation execution environments from the automation hub remote registry to sync an image to your local machine.
+To sync an automation execution environment from a remote registry, you must first configure a remote registry.
 
 You must have permission to view and pull from a private container repository.
 
@@ -1140,7 +1140,7 @@ The Upstream name field is the name of the image on the remote server.
 For example, if the upstream name is set to "alpine" and the Name field is "local/alpine", the alpine image is downloaded from the remote and renamed to "local/alpine".
 ----
 7. Set a list of tags to include or exclude.
-Syncing automation execution environmentss with a large number of tags is time consuming and uses a lot of disk space.
+Syncing automation execution environments with a large number of tags is time consuming and uses a lot of disk space.
 
 * See Red Hat Container Registry Authentication for a list of registries.
 * See the What is Podman? documentation for options to use when pulling images.
@@ -1250,7 +1250,7 @@ You must specify which repository-specific tags to pass.
 
 ### Pushing container images from your local environment
 
-Use the following procedure to sign automation execution environmentss on a local system and push those signed automation execution environmentss to the automation hub registry.
+Use the following procedure to sign automation execution environments on a local system and push those signed automation execution environments to the automation hub registry.
 
 1. From a terminal, log in to Podman, or any container client currently in use:
 
@@ -1394,5 +1394,5 @@ You can delete repositories from the Red Hat Ansible Automation Platform interfa
 3. On the container repository that you want to delete, click the More Actions icon &#8942;, and click Delete execution environment.
 4. When the confirmation message is displayed, click the checkbox and click Delete execution environment.
 
-* Return to the automation execution environmentss list view.
+* Return to the automation execution environments list view.
 If the automation execution environments has been successfully deleted, it will no longer be in the list.

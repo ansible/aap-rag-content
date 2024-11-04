@@ -1,10 +1,10 @@
 # Container growth topology
 
-The growth topology is intended for organizations that do not require Ansible Automation Platform 2.5 to be deployed with redundancy or higher compute for large volumes of automation.
+The growth topology is intended for organizations that are getting started with Ansible Automation Platform and do not require redundancy or higher compute for large volumes of automation. This topology allows for smaller footprint deployments.
 
 # Infrastructure topology
 
-The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
+The following diagram outlines the infrastructure topology that Red&#160;Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 ![Container growth topology diagram]
 
@@ -14,19 +14,19 @@ A single VM has been tested with the following component requirements: 16 GB RAM
 
 # Tested system configurations
 
-Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+Red&#160;Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
 
 
 
 # Network ports
 
-Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
 
 
 
 # Example growth inventory file
 
-Use the following example inventory file to perform an installation for this topology:
+Use the example inventory file to perform an installation for this topology:
 
 
 ```yaml
@@ -62,6 +62,8 @@ aap.example.org
 aap.example.org
 
 [all:vars]
+# Ansible
+ansible_connection=local
 
 # Common variables
 # https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
@@ -102,3 +104,10 @@ eda_admin_password=<set your own>
 eda_pg_host=aap.example.org
 eda_pg_password=<set your own>
 ```
+
+
+
+[NOTE]
+----
+SSH keys are only required when installing on remote hosts. If doing a self contained local VM based installation, you can use ansible_connection=local.
+----

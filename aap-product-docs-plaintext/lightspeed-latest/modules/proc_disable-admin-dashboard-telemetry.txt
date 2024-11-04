@@ -1,0 +1,18 @@
+# Disabling the Admin dashboard telemetry
+
+Red Hat Ansible Lightspeed collects the Admin dashboard telemetry data by default. The data provides insight into how your organization users are using the Ansible Lightspeed service. If you no longer want to collect analytics telemetry data for your organization, you can disable the Admin dashboard telemetry.
+
+After you disable the Admin dashboard telemetry, the Ansible Lightspeed service no longer collects the analytics telemetry data for your organization. The earlier telemetry data is still available on the Admin dashboard, but no latest data is displayed. If you re-enable the Admin dashboard telemetry, the Ansible Lightspeed service starts collecting data for your organization, and the metrics are displayed on the Admin dashboard after 24 hours.
+
+* You have organization administrator privileges to a Red Hat Customer Portal organization with a valid Red Hat Ansible Automation Platform  subscription.
+
+1. Log in to the Ansible Lightspeed portal as an organization administrator.
+2. From the login screen, click Admin Portal.
+3. Under Admin Portal, click Telemetry.
+4. To disable the Admin dashboard telemetry, select Operational telemetry data only.
+
+[NOTE]
+----
+To re-enable the Admin dashboard telemetry, select Admin dashboard telemetry data.
+----
+5. Click Save.

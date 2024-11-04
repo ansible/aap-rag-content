@@ -18,7 +18,7 @@ This is the equal of passing the --become option to the ansible-playbook command
 For more information, see Provisioning Callbacks.
 * Enable webhook: If checked, you turn on the ability to interface with a predefined SCM system web service that is used to launch a job template.
 GitHub and GitLab are the supported SCM systems.
-* If you enable webhooks, other fields display, prompting for additional information:
+If you enable webhooks, other fields display, prompting for additional information:
 * Webhook service: Select which service to listen for webhooks from.
 * Webhook URL: Automatically populated with the URL for the webhook service to POST requests to.
 * Webhook key: Generated shared secret to be used by the webhook service to sign payloads sent to automation controller.

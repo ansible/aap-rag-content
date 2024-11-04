@@ -221,7 +221,7 @@ groups:
 limit: is_shutdown:&product_dev
 
 This constructed inventory input creates a group for both categories and uses the limit (host pattern) to only return hosts that
-are in the intersection of those two groups, which is documented in Patterns:targeting hosts and groups.
+are in the intersection of those two groups, which is documented in Patterns: targeting hosts and groups.
 
 When a variable is or is not defined (depending on the host), you can give a default.
 For example, use | default("running") if you know what value it should have when it is not defined.
@@ -418,7 +418,6 @@ The Inventories window displays a list of the inventories that are currently ava
 * Optional: Description: Enter an arbitrary description as appropriate.
 * Organization: Required. Choose among the available organizations.
 * Only applicable to Smart Inventories: Smart host filter: Populate the hosts for this inventory by using a search filter.
-
 Example
 
 name__icontains=RedHat.
@@ -698,7 +697,7 @@ The Notifications tab is only present when you have saved the newly-created sour
 ----
 4. If notifications are already set up, use the toggles to enable or disable the notifications to use with your particular source.
 For more information, see Enable and Disable Notifications.
-5. If you have not set up notifications, see Notifications for more information.
+5. If you have not set up notifications, see Notifiers for more information.
 6. Review your entries and selections.
 7. Click btn:[Save].
 
@@ -736,7 +735,8 @@ Use the following procedure to configure a project-sourced inventory:
 5. Enter the following details in the additional fields:
 * Optional: Source control branch/tag/commit: Enter the SCM branch, tags, commit hashes, arbitrary refs, or revision number (if applicable) from the source control (Git or Subversion) to checkout.
 
-This field only displays if the sourced project has the Allow branch override option checked. For further information, see SCM Types - Git and Subversion.
+This field only displays if the sourced project has the Allow branch override option checked.
+For further information, see SSCM Types - Configuring playbooks to use Git and Subversion.
 
 
 

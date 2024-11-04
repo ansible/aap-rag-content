@@ -4,9 +4,9 @@ You can configure some automation controller options by using the Settings menu 
 
 The Settings page enables an administrator to configure the following:
 
-* Configuring Subscriptions
+* Configuring subscriptions
 * Platform gateway
-* User Preferences
+* User preferences
 * Configuring jobs
 * Setting up logging
 * Troubleshooting options

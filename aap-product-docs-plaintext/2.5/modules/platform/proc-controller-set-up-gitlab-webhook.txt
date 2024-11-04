@@ -29,7 +29,7 @@ You cannot access this token again in GitLab.
 3. Go to a GitLab repository where you want to configure webhooks.
 4. From the navigation panel, select menu:Settings[Integrations].
 5. To complete the Add webhook page, you must check the Enable Webhook option in a job template or workflow job template.
-For more information, see step 3 in both Creating a job template and Creating a workflow template.
+For more information, see step 3 in both Creating a job template and Creating a workflow job template.
 6. Complete the following fields:
 * URL: Copy the contents of the Webhook URL from the job template and paste it here.
 The results are sent to this address from GitLab.

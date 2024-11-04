@@ -59,26 +59,34 @@ You can manage access to an organization by selecting an organization from the O
 You can provide a user with access to an organization by adding them to the organization and managing the roles associated with the user. To add a user to an organization, the user must already exist. For more information, see Creating a user.
 To add roles for a user, the role must already exist. See Creating a role for more information.
 
+The following tab selections are available when adding users to an organization. When user accounts from the automation controller organization have been migrated to Ansible Automation Platform 2.5 during the upgrade process, the Automation Execution tab shows content based on whether the users were added to the organization prior to migration.
+
+Ansible Automation Platform:: Reflects all users added to the organization at the platform level. From this tab, you can add users as organization members and, optionally provide specific organization level roles.
+Automation Execution:: Reflects users that were added directly to the automation controller organization prior to an upgrade and migration. From this tab, you can only view existing memberships in automation controller and remove those memberships but not you can not add new memberships.
+
+New user memberships to an organization must be added at the platform level.
+
 1. From the navigation panel, select menu:Access Management[Organizations].
 2. From the Organizations list view, select the organization to which you want to add a user.
 3. Click the Users tab to add users.
-4. Click btn:[Add users] and select one or more users from the list by clicking the checkbox next to the name to add them as members.
-5. Click btn:[Next].
-6. Select the roles you want the selected user to have. Scroll down for a complete list of roles.
+4. Select the Ansible Automation Platform tab and click btn:[Add users] to add user access to the team, or select the Automation Execution tab to view or remove user access from the team.
+5. Select one or more users from the list by clicking the checkbox next to the name to add them as members.
+6. Click btn:[Next].
+7. Select the roles you want the selected user to have. Scroll down for a complete list of roles.
 
 [NOTE]
 ----
 If you have multiple Ansible Automation Platform components installed, you will see selections for the roles associated with each component in the Roles menu bar. For example, Automation Execution for automation controller roles, Automation Decisions for Event-Driven Ansible roles.
 ----
-7. Click btn:[Next] to review the roles settings.
-8. Click btn:[Finish] to apply the roles to the selected users, and to add them as members. The Add roles dialog displays the updated roles assigned for each user.
+8. Click btn:[Next] to review the roles settings.
+9. Click btn:[Finish] to apply the roles to the selected users, and to add them as members. The Add roles dialog displays the updated roles assigned for each user.
 
 [NOTE]
 ----
 A user with associated roles retains them if they are reassigned to another organization.
 ----
-9. To remove a particular user from the organization, select Remove user from the More actions &#8942; list next to the user. This launches a confirmation dialog, asking you to confirm the removal.
-10. To manage roles for users in an organization, click the &#9881; icon next to the user and select Manage roles.
+10. To remove a particular user from the organization, select Remove user from the More actions &#8942; list next to the user. This launches a confirmation dialog, asking you to confirm the removal.
+11. To manage roles for users in an organization, click the &#9881; icon next to the user and select Manage roles.
 
 ### Adding an administrator to an organization
 
@@ -212,11 +220,20 @@ The Details page opens, where you can review and edit your team information.
 
 To add a user to a team, the user must already have been created. For more information, see Creating a user. Adding a user to a team adds them as a member only. Use the Roles tab to assign a role for different resources to the selected team.
 
+The following tab selections are available when adding users to a team. When user accounts from automation controller or automation hub organizations have been migrated to Ansible Automation Platform 2.5 during the upgrade process, the Automation Execution and Automation Content tabs show content based on whether the users were added to those organizations prior to migration.
+
+Ansible Automation Platform:: Reflects all users added to the organization at the platform level. From this tab, you can add users as organization members and, optionally provide specific organization level roles.
+Automation Execution:: Reflects users that were added directly to the automation controller organization prior to an upgrade and migration. From this tab, you can only view existing memberships in automation controller and remove those memberships but you can not add new memberships. New organization memberships must be added through the platform.
+Automation Content:: Reflects users that were added directly to the automation hub organization prior to an upgrade and migration. From this tab, you can only view existing memberships in automation hub and remove those memberships but you can not add new memberships.
+
+New user memberships to a team must be added at the platform level.
+
 1. From the navigation panel, select menu:Access Management[Teams].
 2. Select the team to which you want to add users.
-3. Select the Users tab and click btn:[Add users].
-4. Select one or more users from the list by clicking the checkbox next to the name to add them as members of this team.
-5. Click btn:[Add users].
+3. Select the Users tab.
+4. Select the Ansible Automation Platform tab and click btn:[Add users] to add user access to the team, or select the Automation Execution or Automation Content tab to view or remove user access from the team.
+5. Select one or more users from the list by clicking the checkbox next to the name to add them as members of this team.
+6. Click btn:[Add users].
 
 ## Removing users from a team
 
@@ -313,6 +330,8 @@ You can view User type and Email beside the user name on the Users page.
 
 The Users page displays the existing users for your installation. From here, you can search for a specific user, filter the list of users, or change the sort order for the list.
 
+When user accounts have been migrated to Ansible Automation Platform 2.5 during the upgrade process, these accounts are also displayed in the Users list view. Users previously designated as automation controller or automation hub administrators are labeled as Normal in the User type column. You can see whether these users have administrator privileges, by editing the account. See Editing a user for instructions.
+
 1. From the navigation panel, select menu:Access Management[Users].
 2. In the Search bar, enter an appropriate keyword for the user you want to search for and click the arrow icon.
 3. From the menu bar, you can sort the list of users by using the arrows for  Username, Email, First name, Last name or Last login to toggle your sorting preference.
@@ -352,10 +371,25 @@ If you log in as yourself, and view the details of your user profile, you can ma
 
 You can modify the properties of a user account after it is created.
 
+In upgrade scenarios, there might be pre-existing user accounts from automation controller or automation hub services. When editing these user accounts, the User type checkboxes indicate whether the account had service level administrator privileges. You can revoke or assign administrator permissions for the individual services and designate the user as either an Ansible Automation Platform Administrator, Ansible Automation Platform Auditor or normal user. Assigning administrator privileges to all of the individual services automatically designates the user as an Ansible Automation Platform Administrator. See Creating a user for more information about user types.
+
+To see whether a user had service level auditor privileges, you must refer to the API.
+
+
+[NOTE]
+----
+Users previously designated as automation controller or automation hub administrators are labeled as Normal in the User type column in the Users list view. You can see whether these users have administrator privileges, from the Edit Users page.
+----
+
 1. From the navigation panel, select menu:Access Management[Users].
 2. Select the check box for the user that you want to modify.
 3. Click the Pencil icon and select Edit user.
 4. The Edit user page is displayed where you can modify user details such as, Password, Email, User type, and Organization.
+
+[NOTE]
+----
+If the user account was migrated to Ansible Automation Platform 2.5 during the upgrade process and had administrator privileges for an individual service, additional User type checkboxes will be available. You can use these checkboxes to revoke or add individual privileges or designate the user as a platform administrator, system auditor or normal user.
+----
 5. After your changes are complete, click Save user.
 
 ## Deleting a user

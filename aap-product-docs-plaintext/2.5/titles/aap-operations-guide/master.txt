@@ -56,8 +56,8 @@ $ ./setup.sh
 The automation mesh component of the Red Hat Ansible Automation Platform simplifies the process of distributing automation across multi-site deployments. For enterprises with multiple isolated IT environments, automation mesh provides a consistent and reliable way to deploy and scale up automation across your execution nodes using a peer-to-peer mesh communication network.
 
 * For information about automation mesh and the various ways to design your automation mesh for your environment:
-* For a VM-based installation, see the Red Hat Ansible Automation Platform automation mesh guide for VM-based installations.
-* For an operator-based installation, see the Red Hat Ansible Automation Platform automation mesh for operator-based installations.
+* For a VM-based installation, see the Automation mesh for VM environments.
+* For an operator-based installation, see the Automation mesh for managed cloud or operator environments
 
 # Configuring proxy support for Red Hat Ansible Automation Platform
 
@@ -338,10 +338,7 @@ The following procedure describes how to change the SSL certificate and key in t
 
 1. Copy the new SSL certificates and keys to a path relative to the Ansible Automation Platform installer.
 2. Add the absolute paths of the SSL certificates and keys to the inventory file.
-Refer to the Automation controller variables,
-Automation hub variables, and Event-Driven Ansible controller variables sections of the
-Red Hat Ansible Automation Platform Installation Guide
-for guidance on setting these variables.
+Refer to the Automation controller variables, Automation hub variables, and Event-Driven Ansible controller variables sections of RPM installation for guidance on setting these variables.
 * Automation controller: web_server_ssl_cert, web_server_ssl_key, custom_ca_cert
 * Automation hub: automationhub_ssl_cert, automationhub_ssl_key, custom_ca_cert
 * Event-Driven Ansible controller: automationedacontroller_ssl_cert, automationedacontroller_ssl_key, custom_ca_cert

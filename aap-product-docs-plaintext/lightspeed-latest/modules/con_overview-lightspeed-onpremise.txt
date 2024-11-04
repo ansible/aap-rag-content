@@ -1,0 +1,40 @@
+# Overview
+
+This section provides information about the system requirements, prerequisites, and the process for setting up a Red Hat Ansible Lightspeed on-premise deployment.
+
+# System requirements
+
+Your system must meet the following minimum system requirements to install and run the Red Hat Ansible Lightspeed on-premise deployment.
+
+
+
+To see the rest of the Red Hat Ansible Automation Platform system requirements, see the topic System requirements in the Red Hat Ansible Automation Platform Planning Guide.
+
+
+[NOTE]
+----
+You must also have installed IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data. The installation includes a base model that you can use to set up your Red Hat Ansible Lightspeed on-premise deployment. For installation information, see the IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data documentation.
+----
+
+# Prerequisites
+
+* You have administrator privileges for Red Hat Ansible Automation Platform.
+* You have installed IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data.
+* Your system meets the minimum system requirements to set up Red Hat Ansible Lightspeed on-premise deployment.
+* You have obtained an API key and a model ID from IBM watsonx Code Assistant.
+
+For information about obtaining an API key and model ID from IBM watsonx Code Assistant, see the IBM watsonx Code Assistant documentation. For information about installing IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data, see the watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data documentation.
+* You have an existing external PostgreSQL database configured for the Red Hat Ansible Automation Platform, or have a database created for you when configuring the Red Hat Ansible Lightspeed on-premise deployment.
+
+# Process for configuring a Red Hat Ansible Lightspeed on-premise deployment
+
+Perform the following tasks to install and configure a Red Hat Ansible Lightspeed on-premise deployment:
+
+1. Install the Red Hat Ansible Automation Platform operator
+2. Create an OAuth application
+3. Create connections secrets for Red Hat Ansible Automation Platform and IBM watsonx Code Assistant both
+4. Create and deploy a Red Hat Ansible Lightspeed instance
+5. Update the Redirect URI to connect to your Red Hat Ansible Lightspeed on-premise deployment
+6. Install and configure Ansible Visual Studio Code extension to connect to Red Hat Ansible Lightspeed on-premise deployment
+7. Optional: If you want to connect to a different IBM watsonx Code Assistant, update the connection secrets on an existing Red Hat Ansible Automation Platform operator
+8. Optional: Monitor your Red Hat Ansible Lightspeed on-premise deployment

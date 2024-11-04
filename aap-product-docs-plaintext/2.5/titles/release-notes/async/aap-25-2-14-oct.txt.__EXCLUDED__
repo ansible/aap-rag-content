@@ -15,3 +15,12 @@ The following fixes have been implemented in this release of Red Hat Ansible Aut
 * Fixed an issue where Ansible Automation Platform Operator is not transferring metric settings to the controller. (AAP-32073)
 * Fixed an issue where you have a schedule on a resource, such as a job template, that prompts for credentials, and you update the credential to be different from what is on the resource by default, the new credential is not submitted to the API and it does not get updated. (AAP-31957)
 * Fixed an issue where setting *pg_host= without any other context no longer results in an empty HOST section of settings.py in controller. (AAP-32440)
+
+# Advisories
+
+The following errata advisories are included in this release:
+
+* RHBA-2024:8079 - Product Release Update
+* RHBA-2024:8084 - Container Release Update
+* RHBA-2024:8096 - Cluster Scoped Container Release Update
+* RHBA-2024:8141 - Setup Bundle Release Update

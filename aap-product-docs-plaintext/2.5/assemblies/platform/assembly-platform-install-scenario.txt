@@ -49,27 +49,6 @@ Do not use localhost.
 * Enter your Red Hat Registry Service Account credentials in registry_username and registry_password to link to the Red Hat container registry.
 * The inventory file variables registry_username and registry_password are only required if a non-bundle installer is used.
 
-## Setting registry_username and registry_password
-
-If you intend to use the registry_username and registry_password variables in an inventory file you are recommended to use the following method to create a Registry Service Account to set a token with an expiration in the plaintext inventory/vars.yml file instead of using a plaintext username and password, for reasons of security.
-
-Registry service accounts provide named tokens that can be used in environments where credentials are shared, such as deployment systems.
-
-1. Navigate to https://access.redhat.com/terms-based-registry/accounts
-2. On the Registry Service Accounts page click btn:[New Service Account].
-3. Enter a name for the account using only the accepted characters.
-4. Optionally enter a description for the account.
-5. Click btn:[Create account].
-6. Find the created account in the list.
-The list of accounts is long so you might have to click btn:[Next] multiple times before finding the account you created.
-Alternatively, if you know the name of your token, you can go directly to the page by entering the URL https://access.redhat.com/terms-based-registry/token/<name-of-your-token>
-7. Click the name of the account that you created.
-8. A token page opens, displaying a generated Username (different to the account name) and a token.
-
-If no Username and token are displayed, click btn:[Regenerate token]. You can also click this to generate a new Username and token.
-9. Copy the service account name and use it to set registry_username.
-10. Copy the token and use it to set registry_password.
-
 ### Single platform gateway and automation controller with an external (installer managed) database
 
 Use this example to see what is minimally needed within the inventory file to deploy single instances of platform gateway and automation controller with an external (installer managed) database.
@@ -403,6 +382,11 @@ You must add the context for /var/lib/pulp pulpcore_static and run the Ansible A
 
 * You have already configured a NFS export on your server.
 
+[NOTE]
+----
+The NFS share is hosted on an external server and is not a part of high availability automation hub deployment.
+----
+
 1. Create a mount point at /var/lib/pulp:
 
 ```
@@ -624,6 +608,54 @@ automationedacontroller_additional_settings:
 ----
 You can also extend the automationedacontroller_additional_settings variable beyond SAFE_PLUGINS in the Django configuration file, /etc/ansible-automation-platform/eda/settings.yaml
 ----
+
+## Setting registry_username and registry_password
+
+If you intend to use the registry_username and registry_password variables in an inventory file you are recommended to use the following method to create a Registry Service Account to set a token with an expiration in the plaintext inventory/vars.yml file instead of using a plaintext username and password, for reasons of security.
+
+Registry service accounts provide named tokens that can be used in environments where credentials are shared, such as deployment systems.
+
+1. Navigate to https://access.redhat.com/terms-based-registry/accounts
+2. On the Registry Service Accounts page click btn:[New Service Account].
+3. Enter a name for the account using only the accepted characters.
+4. Optionally enter a description for the account.
+5. Click btn:[Create account].
+6. Find the created account in the list.
+The list of accounts is long so you might have to click btn:[Next] multiple times before finding the account you created.
+Alternatively, if you know the name of your token, you can go directly to the page by entering the URL https://access.redhat.com/terms-based-registry/token/<name-of-your-token>
+7. Click the name of the account that you created.
+8. A token page opens, displaying a generated Username (different to the account name) and a token.
+
+If no Username and token are displayed, click btn:[Regenerate token]. You can also click this to generate a new Username and token.
+9. Copy the service account name and use it to set registry_username.
+10. Copy the token and use it to set registry_password.
+
+### Configuring Redis
+
+Ansible Automation Platform offers a centralized Redis instance in both standalone and clustered topologies.
+
+In RPM deployments, the Redis mode is set to cluster by default. You can change this setting in the inventory file [all:vars] section as in the following example:
+
+
+```
+[all:vars]
+admin_password='<password>'
+pg_host='data.example.com'
+pg_port='5432'
+pg_database='awx'
+pg_username='awx'
+pg_password='<password>'
+pg_sslmode='prefer'  # set to 'verify-full' for client-side enforced SSL
+
+registry_url='registry.redhat.io'
+registry_username='<registry username>'
+registry_password='<registry password>'
+
+redis_mode=cluster
+```
+
+
+For more information about Redis, see Caching and queueing system in Planning your installation.
 
 # Running the Red Hat Ansible Automation Platform installer setup script
 

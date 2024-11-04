@@ -49,7 +49,7 @@ groups:
 limit: is_shutdown:&product_dev
 
 This constructed inventory input creates a group for both categories and uses the limit (host pattern) to only return hosts that
-are in the intersection of those two groups, which is documented in Patterns:targeting hosts and groups.
+are in the intersection of those two groups, which is documented in Patterns: targeting hosts and groups.
 
 When a variable is or is not defined (depending on the host), you can give a default.
 For example, use | default("running") if you know what value it should have when it is not defined.

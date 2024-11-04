@@ -1,0 +1,35 @@
+# Configuring Red Hat Ansible Lightspeed to use custom models
+
+After you create and deploy a custom model in IBM watsonx Code Assistant, you must configure Red Hat Ansible Lightspeed so that you can use the custom model for your organization.
+You can specify one of the following configurations for using the custom model:
+* Enable access for all users in your organization
+
+You can configure a custom model as the default model for your organization. All users in your organization can use the custom model.
+* Enable access for select Ansible users in your organization
+
+Using the model-override setting in the Ansible VS Code extension, select Ansible users can tune their Ansible Lightspeed service to use a custom model instead of the default model.
+
+# Configuring the custom model for all Ansible users in your organization
+
+You can configure the custom model as the default model for your organization, so that all users in your organization can use the custom model.
+
+1. Log in to the Ansible Lightspeed with IBM watsonx Code Assistant Hybrid Cloud Console as an organization administrator.
+2. Specify the model ID of the custom model:
+1. Click Model Settings.
+2. Under Model ID, click Add Model ID. A screen to enter the Model ID is displayed.
+3. Enter the Model ID of the custom model.
+4. Optional: Click Test model ID to validate the model ID.
+5. Click Save.
+
+# Configuring the custom model for select Ansible users in your organization
+
+Using the model-override setting in the Ansible VS Code extension, select Ansible users can tune their Ansible Lightspeed service to use a custom model instead of the default model. For example, If you are using Red Hat Ansible Lightspeed as both an organization administrator and an end user, you can test the custom model for select Ansible users before making it available for all users in your organization.
+
+1. Log in to the VS Code application using your Red Hat account.
+2. From the Activity bar, click the Extensions icon .
+3. From the Installed Extensions list, select Ansible.
+4. From the Ansible extension page, click the Settings icon and select Extension Settings.
+5. From the list of settings, select Ansible Lightspeed.
+6. In the Model ID Override field, enter the model ID of the custom model.
+
+Your settings are automatically saved in VS Code, and you can now use the custom model.

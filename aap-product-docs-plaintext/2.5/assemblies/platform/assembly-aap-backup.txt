@@ -105,7 +105,7 @@ A backup tarball of the specified deployment is created and available for data r
 
 [NOTE]
 ----
-If Successful is False, the backup has failed. Check the automation controller operator logs for the error to fix the issue.
+If the status is Failure, the backup has failed. Check the automation controller operator logs for the error to fix the issue.
 ----
 
 # Using YAML to back up the Automation controller deployment

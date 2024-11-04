@@ -10,11 +10,11 @@ As of early 2024, Red Hat no longer supports manifests or manifest lists on the 
 New Red Hat accounts automatically use Simple Content Access for their subscription tooling. New Red Hat accounts and existing Satellite customers who can connect to Red Hat's servers can find their manifests at console.redhat.com.
 ----
 
-* You have permissions to pull execution environments from registry.redhat.io.
+* You have permissions to pull automation execution environments from registry.redhat.io.
 * A Red Hat account with Simple Content Access enabled.
 
 1. If you need to access your manifest for your container images log in to Red Hat Console.
-2. Click the three-dot menu for the manifest you need for your execution environments, and click btn:[Export manifest].
+2. Click the three-dot menu for the manifest you need for your automation execution environments, and click btn:[Export manifest].
 3. Log in to Podman by using your registry.redhat.io credentials:
 
 ```

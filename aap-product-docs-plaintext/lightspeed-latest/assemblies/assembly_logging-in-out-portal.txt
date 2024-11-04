@@ -1,0 +1,22 @@
+# Logging in and out of the Ansible Lightspeed portal
+
+You can access Ansible Lightspeed through the Ansible Lightspeed portal. After you enter your Red Hat Single Sign-On (RH-SSO) account credentials, your account is authenticated and you are granted access. Your assigned user role is displayed on the login screen of the Ansible Lightspeed portal.
+
+# Logging in to the Ansible Lightspeed portal
+
+1. Go to the Ansible Lightspeed portal login page.
+2. Click menu:Log in[Log in with Red Hat].
+3. Enter your Red Hat account username and password.
+
+On successful authentication, the login screen is displayed along with your username and your assigned user role.
+
+# Logging out of the Ansible Lightspeed Service
+
+To log out of the Ansible Lightspeed Service, you must log out of both the Ansible Lightspeed VS Code extension and the Ansible Lightspeed portal.
+
+* Log out of the Ansible Lightspeed VS Code extension:
+* Click the Person icon . You will see a list of accounts that VS Code is logged into.
+* Select menu:Ansible Lightspeed[Sign Out].
+* Log out of the Ansible Lightspeed portal:
+* Navigate to the Ansible Lightspeed portal login page.
+* Click Log out.

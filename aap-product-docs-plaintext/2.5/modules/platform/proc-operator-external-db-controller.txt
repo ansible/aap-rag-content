@@ -9,7 +9,7 @@ Using an external database lets you share and reuse resources and manually manag
 
 [NOTE]
 ----
-The same external database (PostgreSQL instance) can be used for both automation hub and automation controller as long as the database names are different. In other words, you can have multiple databases with different names inside a single PostgreSQL instance.
+The same external database (PostgreSQL instance) can be used for both automation hub, automation controller, and platform gateway as long as the database names are different. In other words, you can have multiple databases with different names inside a single PostgreSQL instance.
 ----
 
 The following section outlines the steps to configure an external database for your automation controller on a Ansible Automation Platform Operator.

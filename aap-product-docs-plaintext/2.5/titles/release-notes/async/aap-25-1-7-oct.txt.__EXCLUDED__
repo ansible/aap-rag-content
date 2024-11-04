@@ -27,7 +27,7 @@ The following enhancements and fixes have been implemented in this release of Re
 
 The following errata advisories are included in this release:
 
-* RHBA-2024:7756
-* RHBA-2024:7760
-* RHBA-2024:7766
-* RHBA-2024:7810
+* RHBA-2024:7756 - Product Release Update
+* RHBA-2024:7760 - Container Release Update
+* RHBA-2024:7766 - Cluster Scoped Container Release Update
+* RHBA-2024:7810 - Setup Bundle Release Update

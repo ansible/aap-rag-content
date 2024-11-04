@@ -10,7 +10,7 @@ Upgrades from 2.4 Containerized Ansible Automation Platform Tech Preview to 2.5 
 * A Red Hat Enterprise Linux (RHEL) 9.2 based host. Use a minimal operating system base install.
 * A non-root user for the Red Hat Enterprise Linux host, with sudo or other Ansible supported privilege escalation (sudo recommended). This user is responsible for the installation of containerized Ansible Automation Platform.
 * SSH public key authentication for the non-root user. For guidelines on setting up SSH public key authentication for the non-root user, see How to configure SSH public key authentication for passwordless login.
-* SSH keys are only required when installing on remote hosts. If doing a self contained local VM based installation, you can use ansible_connection: local.
+* SSH keys are only required when installing on remote hosts. If doing a self contained local VM based installation, you can use ansible_connection=local.
 * Internet access from the Red Hat Enterprise Linux host if you are using the default online installation method.
 * The appropriate network ports are open if a firewall is in place. For more information about the ports to open, see Container topologies in Tested deployment models.
 
@@ -119,7 +119,7 @@ To use the example inventory files, replace the < > placeholders with your speci
 
 ## Inventory file for online installation for containerized growth topology (all-in-one)
 
-Use the following example inventory file to perform an online installation for the containerized growth topology (all-in-one):
+Use the example inventory file to perform an online installation for the containerized growth topology (all-in-one):
 
 
 ```yaml
@@ -155,6 +155,8 @@ aap.example.org
 aap.example.org
 
 [all:vars]
+# Ansible
+ansible_connection=local
 
 # Common variables
 # {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
@@ -199,7 +201,7 @@ eda_pg_password=<set your own>
 
 ## Inventory file for online installation for containerized enterprise topology
 
-Use the following example inventory file to perform an online installation for the containerized enterprise topology:
+Use the example inventory file to perform an online installation for the containerized enterprise topology:
 
 
 ```yaml
@@ -253,6 +255,8 @@ eda2.example.org
 # Common variables
 # {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
 # -----------------------------------------------------
+postgresql_admin_username=<set your own>
+postgresql_admin_password=<set your own>
 registry_username=<your RHN username>
 registry_password=<your RHN password>
 
@@ -334,8 +338,6 @@ controller_license_file=<full_path_to_your_manifest_zip_file>
 ```
 
 
-* To define the license file as part of the postinstall process instead, see Using the postinstall feature of containerized Ansible Automation Platform.
-
 ## Running the installation command
 
 Use the following command to install containerized Ansible Automation Platform:
@@ -349,72 +351,6 @@ ansible-playbook -i inventory ansible.containerized_installer.install
 * If your privilege escalation requires you to enter a password, append -K to the command line. You are then prompted for the BECOME password.
 * You can use increasing verbosity, up to 4 v's (-vvvv) to see the details of the installation process. However, it is important to note that this can significantly increase installation time, so it is recommended that you use it only as needed or requested by Red Hat support.
 
-# Using the postinstall feature of containerized Ansible Automation Platform
-
-You can use the optional postinstall feature of containerized Ansible Automation Platform to define and load the configuration during the initial installation. This uses a configuration-as-code approach, where you simply define your configuration to be loaded as YAML files.
-
-* An Ansible Automation Platform license for this feature that is on the local filesystem so it can be automatically loaded from the inventory file.
-
-1. The postinstall feature is disabled by default. To enable the postinstall feature, add the following variables in your inventory file:
-
-```
-controller_postinstall=true
-```
-
-2. To load your automation controller license as part of the postinstall process, set the following variables in your inventory file:
-
-```
-controller_license_file=<full_path_to_your_manifest_zip_file>
-controller_postinstall_dir=<full_path_to_your_postinstall_directory>
-```
-
-3. You can pull your configuration-as-code from a Git based repository. To do this, set the following variables to dictate where you pull the content from and where to store it for upload to the Ansible Automation Platform controller:
-
-```
-controller_postinstall_repo_url=<url_to_your_config-as-code_git_repository>
-controller_postinstall_dir=<full_path_to_your_config-as-code_directory>
-controller_postinstall_repo_ref=main
-```
-
-4. The controller_postinstall_repo_url variable defines the postinstall repository URL which must include authentication information.
-
-```
-http(s)://<host>/<repo>.git (public repository without HTTP(S) authentication)
-http(s)://<user>:<password>@<host>:<repo>.git (private repository with HTTP(S) authentication)
-git@<host>:<repo>.git (public or private repository with SSH authentication)
-```
-
-
-[NOTE]
-----
-When using SSH based authentication, the installer does not configure anything for you, so you must configure everything on the installer node.
-----
-
-Definition files that are used by Ansible Builder to create automation execution environment images use the infra certified collections. The controller_configuration collection is preinstalled as part of the installation and uses the installation controller credentials you supply in the inventory file for access into the Ansible Automation Platform controller. You need to give the YAML configuration files.
-
-You can set up Ansible Automation Platform configuration attributes such as credentials, LDAP settings, users and teams, organizations, projects, inventories and hosts, job and workflow templates.
-
-The following example shows a sample your-config.yml file defining and loading controller job templates. The example demonstrates a simple change to the  example provided with an Ansible Automation Platform installation.
-
-
-```
-/full_path_to_your_configuration_as_code/
-├── controller
-    	└── job_templates.yml
-```
-
-
-
-```
-controller_templates:
- - name: Demo Job Template
-   execution_environment: Default execution environment
-   instance_groups:
- 	- default
-   inventory: Demo Inventory
-```
-
-
 # Accessing Ansible Automation Platform
 
 After the installation completes, the default protocol and ports used for Ansible Automation Platform are 80 (HTTP) and 443 (HTTPS).
@@ -423,16 +359,16 @@ You can customize the ports with the following variables:
 
 
 ```
-gateway_nginx_http_port: 8500
-gateway_nginx_https_port: 8501
+envoy_http_port=80
+envoy_https_port=443
 ```
 
 
-If you want to disable HTTPS, set gateway_nginx_disable_https to true:
+If you want to disable HTTPS, set envoy_disable_https to true:
 
 
 ```
-gateway_nginx_disable_https: true
+envoy_disable_https=true
 ```
 
 
@@ -598,6 +534,64 @@ automationedacontroller_additional_settings:
 ----
 You can also extend the automationedacontroller_additional_settings variable beyond SAFE_PLUGINS in the Django configuration file, /etc/ansible-automation-platform/eda/settings.yaml
 ----
+
+# Updating container-based Ansible Automation Platform
+
+Perform a patch update for a container-based installation of Ansible Automation Platform from 2.5 to 2.5.x.
+
+You have done the following:
+
+* Reviewed the release notes for the associated patch release. For more information, see the Ansible Automation Platform Release notes.
+* Created a backup of your Ansible Automation Platform deployment. For more information, see Backing up controller-based Ansible Automation Platform.
+
+1. Download the latest version of the containerized installer from the Ansible Automation Platform download.
+1. For online installations Ansible Automation Platform 2.5 Containerized Setup
+2. For offline or bundled installations: Ansible Automation Platform 2.5 Containerized Setup Bundle
+2. Copy the installer .tar file onto your Red Hat Enterprise Linux host.
+3. Decide where you want the installer to reside on the filesystem. Installation related files will be created under this location and require at least 10 GB for the initial installation.
+4. Unpack the installer .tar file into your installation directory, and go to the unpacked directory.
+1. To unpack the online installer:
+
+```
+$ tar xfvz ansible-automation-platform-containerized-setup-<version>.tar.gz
+```
+
+2. To unpack the offline or bundled installer:
+
+```
+$ tar xfvz ansible-automation-platform-containerized-setup-bundle-<version>-<arch name>.tar.gz
+```
+
+5. Edit the inventory file so that it matches your required configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can change the parameters to match any modifications to your environment.
+6. Run the install command:
+
+```
+$ ansible-playbook -i inventory ansible.containerized_installer.install
+```
+
+* If your privilege escalation requires a password to be entered, append -K to the command. You will then be prompted for the BECOME password.
+* You can use increasing verbosity, up to 4 v’s (-vvvv) to see the details of the installation process. However it is important to note that this can significantly increase installation time, so it is recommended that you use it only as needed or requested by Red Hat support.
+
+The installation will begin.
+
+# Backing up container-based Ansible Automation Platform
+
+Perform a back up of your container-based installation of Ansible Automation Platform.
+
+1. Go to the Red Hat Ansible Automation Platform installation directory on your Red Hat Enterprise Linux host.
+2. Run the backup.yml playbook:
+
+```
+$ ansible-playbook -i inventory ansible.containerized_installer.backup
+```
+
+
+This will backup the important data deployed by the containerized installer such as:
+* PostgreSQL databases
+* Configuration files
+* Data files
+
+By default, the backup directory is set to ~/backups. You can change this by using the backup_dir variable in your inventory file.
 
 # Uninstalling containerized Ansible Automation Platform
 

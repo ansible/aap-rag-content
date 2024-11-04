@@ -8,10 +8,6 @@ If you have a suggestion to improve this documentation, or find an error, you ca
 
 Red Hat Ansible Automation Platform simplifies the development and operation of automation workloads for managing enterprise application infrastructure lifecycles. Ansible Automation Platform works across multiple IT domains, including operations, networking, security, and development, as well as across diverse hybrid environments. Simple to adopt, use, and understand, Ansible Automation Platform provides the tools needed to rapidly implement enterprise-wide automation, no matter where you are in your automation journey.
 
-## Upgrades are unsupported at this time
-
-At the initial release of Ansible Automation Platform 2.5, upgrades from earlier releases are unsupported. Only new installations are supported. Upgrade support will follow shortly after the initial 2.5 release. However, you can deploy Event-Driven Ansible 2.5 with an existing 2.4 automation controller. For more information, see Event-Driven Ansible 2.5 with automation controller 2.4.
-
 ## What is included in the Ansible Automation Platform
 
 
@@ -126,9 +122,9 @@ For more information, see Developing Ansible automation content.
 
 * Added the ability to provide mounts.conf or copy from a local or remote source when installing Podman. (AAP-16214)
 * Updated the inventory file to include the SSL key and certificate parameters for provided SSL web certificates. (AAP-13728)
-* Added an Ansible Automation Platform operator-version label on k8s resources created by the operator. (AAP-31058)
-* Added installation variables to support Postgres certificate authentication for user-provided databases. (AAP-1095)
-* Updated nginx to version 1.22. (AAP-15128)
+* Added an Ansible Automation Platform operator-version label on Kubernetes resources created by the operator. (AAP-31058)
+* Added installation variables to support PostgreSQL certificate authentication for user-provided databases. (AAP-1095)
+* Updated NGINX to version 1.22. (AAP-15128)
 * Added a new configuration endpoint for the REST API. (AAP-13639)
 * Allowed adjustment of RuntimeDirectorySize for Podman environments at the time of installation. (AAP-11597)
 * Added support for the SAFE_PLUGINS_FOR_PORT_FORWARD setting for eda-server to the installation program. (AAP-21503)
@@ -137,6 +133,7 @@ For more information, see Developing Ansible automation content.
 * The eda-server now opens the ports for a rulebook with a source plugin that requires inbound connections only if that plugin is allowed in the settings. (AAP-17416)
 * The Event-Driven Ansible settings are now moved to a dedicated YAML file. (AAP-13276)
 * Starting with Ansible Automation Platform 2.5, customers using the controller collection (ansible.controller) have the platform collection (ansible.platform) as a single point of entry, and must use the platform collection to seed organizations, users, and teams. (AAP-31517)
+* Users are opted in for Automation Analytics by default when activating automation controller on first time log in. (ANSTRAT-875)
 
 # Deprecated features
 
@@ -254,13 +251,85 @@ The following table summarizes title changes for the 2.5 release.
 
 
 
-# Ansible Automation Platform patch release October 14, 2024
+# Patch releases
+
+Security, bug fixes, and enhancements for Ansible Automation Platform 2.5 are released as asynchronous erratas. All Ansible Automation Platform erratas are available on the Download Red Hat Ansible Automation Platform page.
+
+As a Red&#160;Hat Customer Portal user, you can enable errata notifications in the account settings for Red&#160;Hat Subscription Management (RHSM). When errata notifications are enabled, you receive notifications through email whenever new erratas relevant to your registered systems are released.
+
+
+[NOTE]
+----
+Red Hat Customer Portal user accounts must have systems registered and consuming Ansible Automation Platform entitlements for Ansible Automation Platform errata notification emails to generate.
+----
+
+The patch releases section of the release notes will be updated over time to give notes on enhancements and bug fixes for patch releases of Ansible Automation Platform 2.5.
+
+* For more information about asynchronous errata support in Ansible Automation Platform, see Red Hat Ansible Automation Platform Life Cycle.
+* For information about Common Vulnerabilities and Exposures (CVEs), see What is a CVE? and Red Hat CVE Database.
+
+## Ansible Automation Platform patch release October 28, 2024
+
+The following enhancements and bug fixes have been implemented in this release of Ansible Automation Platform.
+
+### Enhancements
+
+#### Ansible Automation Platform
+
+* With this update, upgrades from Ansible Automation Platform 2.4 to 2.5 are supported for RPM and Operator-based deployments. For more information on how to upgrade, see RPM upgrade and migration. (ANSTRAT-809)
+* Upgrades from 2.4 Containerized Ansible Automation Platform Tech Preview to 2.5 Containerized Ansible Automation Platform are unsupported at this time.
+* Upgrades for Event-Driven Ansible are unsupported from Ansible Automation Platform 2.4 to Ansible Automation Platform 2.5.
+
+#### Ansible Automation Platform Operator
+
+* An informative redirect page is now shown when you go to the automation hub URL root. (AAP-30915)
+
+#### Container-based Ansible Automation Platform
+
+* The TLS Certificate Authority private key can now use a passphrase. (AAP-33594)
+* Automation hub is populated with container images (decision and execution environments) and Ansible collections. (AAP-33759)
+* The automation controller, Event-Driven Ansible, and automation hub legacy UIs now display a redirect page to the Platform UI rather than a blank page. (AAP-33794)
+
+#### RPM-based Ansible Automation Platform
+
+* Added platform Redis to RPM-based Ansible Automation Platform. This allows a 6 node cluster for a Redis high availability (HA) deployment. Removed the variable aap_caching_mtls and replaced it with redis_disable_tls and redis_disable_mtls which are boolean flags that disable Redis server TLS and Redis client certificate authentication. (AAP-33773)
+* An informative redirect page is now shown when going to automation controller, Event-Driven Ansible, or automation hub URL. (AAP-33827)
+
+### Bug fixes
+
+#### Ansible Automation Platform
+
+* Removed the Legacy external password option from the Authentication Type list. (AAP-31506)
+* Ansible Galaxy's sessionauth class is now always the first in the list of authentication classes so that the platform UI can successfully authenticate. (AAP-32146)
+* CVE-2024-10033 - automation-gateway: Fixed a Cross-site Scripting (XSS) vulnerability on the automation-gateway component that allowed a malicious user to perform actions that impact users.
+* CVE-2024-22189 - receptor: Resolved an issue in quic-go that would allow an attacker to trigger a denial of service by sending a large number of NEW_CONNECTION_ID frames that retire old connection IDs.
+
+#### Automation controller
+
+* CVE-2024-41989 - automation-controller: Before this update, in Django, if floatformat received a string representation of a number in scientific notation with a large exponent, it could lead to significant memory consumption. With this update, decimals with more than 200 digits are now returned as is.
+* CVE-2024-45230 - automation-controller: Resolved an issue in Python's Django urlize() and urlizetrunc() functions where excessive input with a specific sequence of characters would lead to denial of service.
+
+#### Automation hub
+
+* Refactored the dynaconf hooks to preserve the necessary authentication classes for Ansible Automation Platform 2.5 deployments. (AAP-31680)
+* During role migrations, model permissions are now re-added to roles to preserve ownership. (AAP-31417)
+
+#### Ansible Automation Platform Operator
+
+* The port is now correctly set when configuring the platform gateway cache redis_host setting when using an external Redis cache. (AAP-33279)
+* Added checksums to the automation hub deployments so that pods are cycled to pick up changes to the PostgreSQL configuration and galaxy server settings Kubernetes secrets. (AAP-33518)
+
+#### Container-based Ansible Automation Platform
+
+* Fixed the uninstall playbook execution when the environment was already uninstalled. (AAP-32981)
+
+## Ansible Automation Platform patch release October 14, 2024
 
 The following fixes have been implemented in this release of Red Hat Ansible Automation Platform.
 
-## Fixed issues
+### Fixed issues
 
-### Ansible Automation Platform
+#### Ansible Automation Platform
 
 * Fixed an issue in platform gateway where examining output logs for UWSGI shows a message that can be viewed as insensitive. (AAP-33213)
 * Fixed external Redis port configuration issue, which resulted in a cluster_host error when trying to connect to Redis. (AAP-32691)
@@ -272,18 +341,27 @@ The following fixes have been implemented in this release of Red Hat Ansible Aut
 * Fixed an issue where you have a schedule on a resource, such as a job template, that prompts for credentials, and you update the credential to be different from what is on the resource by default, the new credential is not submitted to the API and it does not get updated. (AAP-31957)
 * Fixed an issue where setting *pg_host= without any other context no longer results in an empty HOST section of settings.py in controller. (AAP-32440)
 
-# Ansible Automation Platform patch release October 7, 2024
+### Advisories
+
+The following errata advisories are included in this release:
+
+* RHBA-2024:8079 - Product Release Update
+* RHBA-2024:8084 - Container Release Update
+* RHBA-2024:8096 - Cluster Scoped Container Release Update
+* RHBA-2024:8141 - Setup Bundle Release Update
+
+## Ansible Automation Platform patch release October 7, 2024
 
 The following enhancements and fixes have been implemented in this release of Red Hat Ansible Automation Platform.
 
-## Enhancements
+### Enhancements
 
 * Event-Driven Ansible workers and scheduler add timeout and retry resilience when communicating with a Redis cluster. (AAP-32139)
 * Removed the MTLS credential type that was incorrectly added. (AAP-31848)
 
-## Fixed issues
+### Fixed issues
 
-### Ansible Automation Platform
+#### Ansible Automation Platform
 
 * Fixed conditional that was skipping necessary tasks in the restore role, which was causing restores to not finish reconciling. (AAP-30437)
 * Systemd services in the containerized installer are now set with restart policy set to always by default. (AAP-31824)
@@ -291,17 +369,17 @@ The following enhancements and fixes have been implemented in this release of Re
 * Added a fix to ensure default extra_vars values are rendered in the Prompt on launch wizard. (AAP-30585)
 * Filtered out the unused ANSIBLE_BASE_ settings from the environment variable in job execution. (AAP-32208)
 
-### Event-Driven Ansible
+#### Event-Driven Ansible
 
 * Configured the setting EVENT_STREAM_MTLS_BASE_URL to the correct default to ensure MTLS is disallowed in the RPM installer. (AAP-32027)
 * Configured the setting EVENT_STREAM_MTLS_BASE_URL to the correct default to ensure MTLS is disallowed in the containerized installer. (AAP-31851)
 * Fixed a bug where the Event-Driven Ansible workers and scheduler are unable to reconnect to the Redis cluster if a primary Redis node enters a failed state and a new primary node is promoted. See the KCS article Redis failover causes Event-Driven Ansible activation failures that include the steps that were necessary before this bug was fixed. (AAP-30722)
 
-## Advisories
+### Advisories
 
 The following errata advisories are included in this release:
 
-* RHBA-2024:7756
-* RHBA-2024:7760
-* RHBA-2024:7766
-* RHBA-2024:7810
+* RHBA-2024:7756 - Product Release Update
+* RHBA-2024:7760 - Container Release Update
+* RHBA-2024:7766 - Cluster Scoped Container Release Update
+* RHBA-2024:7810 - Setup Bundle Release Update

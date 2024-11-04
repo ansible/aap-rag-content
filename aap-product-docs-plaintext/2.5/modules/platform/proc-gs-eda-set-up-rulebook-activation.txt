@@ -2,7 +2,6 @@
 
 * You have set up a project.
 * You have set up a decision environment.
-* You have set up an automation controller token. See Setting up an automation controller token in the Using automation decisions guide for more information.
 
 1. From the navigation panel, select menu:Automation Decisions[Rulebook Activations].
 2. Click btn:[Create rulebook activation].
@@ -16,7 +15,7 @@
 
 [NOTE]
 ----
-The credentials that display in this field are customized based on your rulebook activation and only include the following credential types: Vault, Red Hat Ansible Automation Platform, or any custom credential types that you have created. For more information about credentials, see Setting up credentials for Event-Driven Ansible controller in the Using automation execution guide.
+The credentials that display in this field are customized based on your rulebook activation and only include the following credential types: Vault, Red Hat Ansible Automation Platform, or any custom credential types that you have created. For more information about credentials, see Credentials in the Using automation decisions guide.
 ----
 * Decision environment: A decision environment is a container image to run Ansible rulebooks.
 

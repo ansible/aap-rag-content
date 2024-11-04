@@ -426,7 +426,7 @@ To learn more about roles, see What is an Ansible Role-and how is it used?.
 
 ### Creating a role
 
-You can create roles using the Ansible Galaxy CLI tool, which is included with your Ansible Automation Platform bundle. Access role-specific commands from the roles subcommand:
+You can create roles using the Ansible Galaxy CLI tool, which is included with your Ansible Automation Platform bundle. Access role-specific commands from the role subcommand:
 
 
 ```bash
@@ -434,21 +434,20 @@ ansible-galaxy role init <role_name>
 ```
 
 
-Standalone roles outside of collections are still supported, but we recommend that you create new roles inside of a collection to take advantage of all the features Ansible Automation Platform has to offer.
+Standalone roles outside of Collections are supported.
+Create new roles inside a Collection to take advantage of the features Ansible Automation Platform has to offer.
 
-## Creating a role
-
-1. In your terminal, navigate to the roles directory inside a collection.
+1. In a terminal, navigate to the roles directory inside a collection.
 2. Create a role called my_role inside the collection:
 
-```bash
-$ansible-galaxy role init my_role
+```
+$ ansible-galaxy role init my_role
 ```
 
 
 The collection now includes a role named my_role inside the roles directory, as you can see in this example:
 
-```bash
+```
 ~/.ansible/collections/ansible_collections/<my_namespace>/<my_collection_name>
     ...
     └── roles/
@@ -472,14 +471,16 @@ The collection now includes a role named my_role inside the roles directory, as 
                 └── main.yml
 ```
 
-3. A custom role skeleton directory can be supplied by using the --role-skeleton argument. This allows organizations to create standardized templates for new roles to suit their needs.
+3. A custom role skeleton directory can be supplied by using the --role-skeleton argument.
+This allows organizations to create standardized templates for new roles to suit their needs.
 
-```bash
-$ansible-galaxy role init my_role --role-skeleton ~/role_skeleton
+```
+$ ansible-galaxy role init my_role --role-skeleton ~/role_skeleton
 ```
 
 
-This creates a role named my_role by copying the contents of ~/role_skeleton into my_role. The contents of role_skeleton can be any files or folders that are valid inside a role directory.
+This creates a role named my_role by copying the contents of ~/role_skeleton into my_role.
+The contents of role_skeleton can be any files or folders that are valid inside a role directory.
 
 ## About content collections
 
@@ -489,20 +490,6 @@ Ansible content collections are assemblages of automation content. There are two
 * Ansible validated content collections, which provide you with a trusted, expert-guided approach for performing foundational operations and tasks in your product.
 
 Both types of content collections can be found in automation hub through the Hybrid Cloud Console.
-
-### Downloading content
-
-After collections are finalized, you can import them to a location where they can be distributed to others across your organization.
-
-1. Log in to Red Hat Ansible Automation Platform.
-2. From the navigation panel, select .
-The Collections page displays all collections across all repositories.
-You can search for a specific collection.
-3. Select the collection that you want to export.
-The collection details page opens.
-4. From the Install tab, select Download tarball.
-The .tar file is downloaded to your default browser downloads folder.
-You can now import it to the location of your choosing.
 
 ## Publishing to a collection
 
@@ -557,7 +544,7 @@ $ ansible-galaxy collection publish path/to/my_namespace-my_collection-1.0.0.tar
 
 ## Build and use an execution environment
 
-All automation in Red Hat Ansible Automation Platform runs on container images called automation execution environmentss.
+All automation in Red Hat Ansible Automation Platform runs on container images called automation execution environments.
 
 Automation execution environments are consistent and shareable container images that serve as Ansible control nodes.
 Automation execution environments reduce the challenge of sharing Ansible content that has external dependencies.
@@ -703,18 +690,13 @@ Projects are useful as a way to group your automation content according to the o
 
 You can set up an automation execution project in the platform UI.
 
-Procedure
-. From the navigation panel, select .
-. On the Projects page, click Create project to launch the Create Project window.
-
-+
-
-1. Enter the appropriate details into the following required fields:
+1. From the navigation panel, select .
+2. On the Projects page, click Create project to launch the Create Project window.
+3. Enter the appropriate details into the following required fields:
 * Name (required)
 * Optional: Description
 * Organization (required): A project must have at least one organization. Select one organization now to create the project. When the project is created you can add additional organizations.
 * Optional: Execution Environment: Enter the name of the execution environment or search from a list of existing ones to run this project.
-For more information, see Migrating to automation execution environments in the Upgrade and migration.
 * Source Control Type (required): Select an SCM type associated with this project from the menu.
 Options in the following sections become available depending on the type chosen.
 For more information, see Managing playbooks manually or Managing playbooks using source control.
@@ -722,7 +704,7 @@ For more information, see Managing playbooks manually or Managing playbooks usin
 Specify the GPG key to use for validating content signature during project synchronization.
 If the content has been tampered with, the job will not run.
 For more information, see Project signing and verification.
-2. Click Create project.
+4. Click Create project.
 
 ## Creating an automation decision project
 
@@ -791,68 +773,6 @@ Set the prevent_instance_group_fallback option for smart inventories through the
 
 After creating the new inventory, you can proceed with configuring permissions, groups, hosts, sources, and viewing completed jobs, if applicable to the type of inventory.
 
-### Browsing and creating inventories
-
-The Inventories window displays a list of the inventories that are currently available.
-You can sort the inventory list by name and searched type, organization, description, owners and modifiers of the inventory, or additional criteria.
-
-1. From the navigational panel, select .
-2. Click Create inventory, and select the type of inventory to create.
-3. Enter the appropriate details into the following fields:
-* Name: Enter a name appropriate for this inventory.
-* Optional: Description: Enter an arbitrary description as appropriate.
-* Organization: Required. Choose among the available organizations.
-* Only applicable to Smart Inventories: Smart Host Filter: Populate the hosts for this inventory by using a search filter.
-
-Example
-
-name__icontains=RedHat.
-
-These options are based on the organization you chose.
-
-Filters are similar to tags in that tags are used to filter certain hosts that contain those names.
-Therefore, to populate the Smart Host Filter field, specify a tag that contains the hosts you want, not the hosts themselves.
-
-Filters are case-sensitive.
-* Instance Groups: Select the instance group or groups for this inventory to run on.
-
-You can select many instance groups and sort them in the order that you want them run.
-* Optional: Labels: Supply labels that describe this inventory, so they can be used to group and filter inventories and jobs.
-* Only applicable to constructed inventories: Input inventories: Specify the source inventories to include in this constructed inventory.
-Empty groups from input inventories are copied into the constructed inventory.
-* Optional:(Only applicable to constructed inventories): Cached timeout (seconds): Set the length of time you want the cache plugin data to timeout.
-* Only applicable to constructed inventories: Verbosity: Control the level of output that Ansible produces as the playbook executes related to inventory sources associated with constructed inventories.
-
-Select the verbosity from:
-* Normal
-* Verbose
-* More verbose
-* Debug
-* Connection Debug
-* WinRM Debug
-* Verbose logging includes the output of all commands.
-* More verbose provides more detail than Verbose.
-* Debug logging is exceedingly verbose and includes information about SSH operations that can be useful in certain support instances. Most users do not need to see debug mode output.
-* Connection Debug enables you to run ssh in verbose mode, providing debugging information about the SSH connection progress.
-* WinRM Debug used for verbosity specific to windows remote management
-
-Click the  icon for information on How to use the constructed inventory plugin.
-* Only applicable to constructed inventories: Limit: Restricts the number of returned hosts for the inventory source associated with the constructed inventory.
-You can paste a group name into the limit field to only include hosts in that group.
-For more information, see the Source vars setting.
-* Only applicable to standard inventories: Options: Check the Prevent Instance Group Fallback option to enable only the instance groups listed in the Instance Groups field to execute the job.
-If unchecked, all available instances in the execution pool are used based on the hierarchy.
-* Variables (Source vars for constructed inventories):
-* Variables Variable definitions and values to apply to all hosts in this inventory.
-Enter variables by using either JSON or YAML syntax.
-Use the radio button to toggle between the two.
-* Source vars for constructed inventories creates groups, specifically under the groups key of the data.
-It accepts Jinja2 template syntax, renders it for every host, makes a true or false evaluation, and includes the host in the group (from the key of the entry) if the result is true.
-This is particularly useful because you can paste that group name into the limit field to only include hosts in that group.
-4. Click Create inventory.
-
-After saving the new inventory, you can proceed with configuring permissions, groups, hosts, sources, and view completed jobs, if applicable to the type of inventory.
-
 ## Work with job templates
 
 A job template is a definition and set of parameters for running an Ansible job.
@@ -886,7 +806,7 @@ This is the equal of passing the --become option to the ansible-playbook command
 For more information, see Provisioning Callbacks.
 * Enable webhook: If checked, you turn on the ability to interface with a predefined SCM system web service that is used to launch a job template.
 GitHub and GitLab are the supported SCM systems.
-* If you enable webhooks, other fields display, prompting for additional information:
+If you enable webhooks, other fields display, prompting for additional information:
 * Webhook service: Select which service to listen for webhooks from.
 * Webhook URL: Automatically populated with the URL for the webhook service to POST requests to.
 * Webhook key: Generated shared secret to be used by the webhook service to sign payloads sent to automation controller.
@@ -911,12 +831,6 @@ You must first save the template before launching, otherwise, Launch template re
 1. From the navigation panel, select .
 2. Verify that the newly created template appears on the Templates page.
 
-### Running a job template
-
-One benefit of automation controller is the push-button deployment of Ansible playbooks.
-You can configure a template to store all the parameters that you would normally pass to the Ansible playbook on the command line.
-In addition to the playbooks, the template passes the inventory, credentials, extra variables, and all options and settings that you can specify on the command line.
-
 ### Editing a job template
 
 As part of the initial setup, you can leave the default Demo Job Template as it is, but you can edit it later.
@@ -937,7 +851,6 @@ In Event-Driven Ansible, a rulebook activation is a process running in the backg
 
 * You have set up a project.
 * You have set up a decision environment.
-* You have set up an automation controller token. See Setting up an automation controller token in the Using automation decisions guide for more information.
 
 1. From the navigation panel, select .
 2. Click Create rulebook activation.
@@ -951,7 +864,7 @@ In Event-Driven Ansible, a rulebook activation is a process running in the backg
 
 [NOTE]
 ----
-The credentials that display in this field are customized based on your rulebook activation and only include the following credential types: Vault, Red Hat Ansible Automation Platform, or any custom credential types that you have created. For more information about credentials, see Setting up credentials for Event-Driven Ansible controller in the Using automation execution guide.
+The credentials that display in this field are customized based on your rulebook activation and only include the following credential types: Vault, Red Hat Ansible Automation Platform, or any custom credential types that you have created. For more information about credentials, see Credentials in the Using automation decisions guide.
 ----
 * Decision environment: A decision environment is a container image to run Ansible rulebooks.
 
@@ -1186,7 +1099,7 @@ PLAY RECAP ******************************************************************
 ```
 
 
-* For more information on playbooks, see Getting Started with Ansible Playbooks.
+* For more information on playbooks, see Getting started with playbooks.
 * If you need help writing a playbook, see
 Red Hat Ansible Lightspeed with IBM watsonx Code Assistant.
 
@@ -1200,19 +1113,13 @@ To learn more about roles, see What is an Ansible Role-and how is it used?.
 
 ### Creating a role
 
-You can create roles using the Ansible Galaxy CLI tool, which is included with your Ansible Automation Platform bundle. Access role-specific commands from the roles subcommand:
+You can create roles using the Ansible Galaxy CLI tool, which is included with your Ansible Automation Platform bundle. Access role-specific commands from the role subcommand:
 
 
 ```bash
 ansible-galaxy role init <role_name>
 ```
 
-
-Standalone roles outside of collections are still supported, but we recommend that you create new roles inside of a collection to take advantage of all the features Ansible Automation Platform has to offer.
-
-### Creating a role
-
-You can create roles using the Ansible Galaxy CLI tool, which is included with your Ansible Automation Platform bundle. Access role-specific commands from the role subcommand:
 
 Standalone roles outside of Collections are supported.
 Create new roles inside a Collection to take advantage of the features Ansible Automation Platform has to offer.
@@ -1262,8 +1169,6 @@ $ ansible-galaxy role init my_role --role-skeleton ~/role_skeleton
 This creates a role named my_role by copying the contents of ~/role_skeleton into my_role.
 The contents of role_skeleton can be any files or folders that are valid inside a role directory.
 
-For more information on creating roles, see [Aine’s new devtools content].
-
 ## About automation content
 
 Use the following Ansible concepts to create successful Ansible Playbooks and automation execution environments before beginning your Ansible development project.
@@ -1276,39 +1181,6 @@ Ansible content collections are assemblages of automation content. There are two
 * Ansible validated content collections, which provide you with a trusted, expert-guided approach for performing foundational operations and tasks in your product.
 
 Both types of content collections can be found in automation hub through the Hybrid Cloud Console.
-
-#### Downloading content
-
-After collections are finalized, you can import them to a location where they can be distributed to others across your organization.
-
-1. Log in to Red Hat Ansible Automation Platform.
-2. From the navigation panel, select .
-The Collections page displays all collections across all repositories.
-You can search for a specific collection.
-3. Select the collection that you want to export.
-The collection details page opens.
-4. From the Install tab, select Download tarball.
-The .tar file is downloaded to your default browser downloads folder.
-You can now import it to the location of your choosing.
-
-### Browse content
-
-Ansible Certified Content Collections are included in your subscription to Red Hat Ansible Automation Platform.
-Using Ansible automation hub, you can access and curate a unique set of collections from all forms of Ansible content.
-
-Red Hat Ansible content contains two types of content:
-
-* Ansible Certified Content Collections
-* Ansible validated content collections
-
-Ansible validated content collections are available in your private automation hub through the Platform Installer.
-When you download Ansible Automation Platform with the bundled installer, validated content is pre-populated into the private automation hub by default,
-but only if you enable the private automation hub as part of the inventory.
-
-If you are not using the bundle installer, you can use a Red Hat-supplied Ansible Playbook to install validated content.
-For further information, see Ansible validated content.
-
-You can update validated collections manually by downloading their updated packages in automation hub.
 
 ### Downloading content
 
@@ -1388,7 +1260,7 @@ $ ansible-galaxy collection publish path/to/my_namespace-my_collection-1.0.0.tar
 
 ## Build and use an execution environment
 
-All automation in Red Hat Ansible Automation Platform runs on container images called automation execution environmentss.
+All automation in Red Hat Ansible Automation Platform runs on container images called automation execution environments.
 
 Automation execution environments are consistent and shareable container images that serve as Ansible control nodes.
 Automation execution environments reduce the challenge of sharing Ansible content that has external dependencies.
@@ -1521,7 +1393,7 @@ The Templates list view shows job templates that are currently available. The de
 
 From this screen you can launch, edit, and copy a job template.
 
-For more information about templates see the Job templates and Workflow job templates sections of the Using automation execution.
+For more information about templates see the Job Templates and Workflow job templates sections of the Using automation execution guide.
 
 ## About inventories
 

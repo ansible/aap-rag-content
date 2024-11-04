@@ -1,0 +1,12 @@
+# Ansible Automation Platform upgrades
+
+Currently, it is possible to perform Ansible Automation Platform upgrades using one of the following supported upgrade paths.
+
+
+[IMPORTANT]
+----
+Upgrading from Event-Driven Ansible 2.4 is not supported. If you’re using Event-Driven Ansible 2.4 in production, contact Red Hat before you upgrade.
+----
+
+Before beginning your upgrade be sure to review the prerequisites and upgrade planning sections of this guide.
+

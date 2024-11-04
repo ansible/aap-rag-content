@@ -1,8 +1,8 @@
 # Tagging container images
 
-Tag automation execution environmentss to add an additional name to automation execution environmentss stored in your automation hub container repository. If no tag is added to an automation execution environments, automation hub defaults to latest for the name.
+Tag automation execution environments to add an additional name to automation execution environments stored in your automation hub container repository. If no tag is added to an automation execution environment, automation hub defaults to latest for the name.
 
-* You have change automation execution environments tags permissions.
+* You have change automation execution environment tags permissions.
 
 1. From the navigation panel, select menu:Automation Content[Execution Environments].
 2. Select your automation execution environments.

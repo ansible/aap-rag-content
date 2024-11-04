@@ -61,6 +61,6 @@ PLAY RECAP ******************************************************************
 ```
 
 
-* For more information on playbooks, see Getting Started with Ansible Playbooks.
+* For more information on playbooks, see Getting started with playbooks.
 * If you need help writing a playbook, see
 Red Hat Ansible Lightspeed with IBM watsonx Code Assistant.

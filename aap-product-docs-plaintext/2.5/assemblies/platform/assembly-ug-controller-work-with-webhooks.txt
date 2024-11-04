@@ -5,7 +5,7 @@ Automation controller currently provides webhook integration with GitHub and Git
 Set up a webhook using the following services:
 * Setting up a GitHub webhook
 * Setting up a GitLab webhook
-* Viewing a payload output
+* Viewing the payload output
 The webhook post-status-back functionality for GitHub and GitLab is designed to work only under certain CI events.
 Receiving another kind of event results in messages such as the following in the service log:
 awx.main.models.mixins Webhook event did not have a status API endpoint associated, skipping.
@@ -44,7 +44,7 @@ You cannot access this token again in GitHub.
 3. Go to a GitHub repository where you want to configure webhooks and select menu:Settings[].
 4. From the navigation panel, select menu:Webhooks[Add webhook].
 5. To complete the Add webhook page, you must check the Enable Webhook option in a job template or workflow job template.
-For more information, see step 3 in both Creating a job template and Creating a workflow template.
+For more information, see step 3 in both Creating a job template and Creating a workflow job template.
 6. Complete the following fields:
 * Payload URL: Copy the contents of the Webhook URL from the job template and paste it here.
 The results are sent to this address from GitHub.
@@ -57,7 +57,7 @@ To have the job status (pending, error, success) sent back to GitHub, you must s
 * Active: Leave this checked.
 7. Click btn:[Add webhook].
 8. When your webhook is configured, it is displayed in the list of webhooks active for your repository, along with the ability to edit or delete it.
-Click on a webhook, to go to the Manage webhook screen.
+Click a webhook, to go to the Manage webhook screen.
 9. Scroll to view the delivery attempts made to your webhook and whether they succeeded or failed.
 
 For more information, see the Webhooks documentation.
@@ -93,7 +93,7 @@ You cannot access this token again in GitLab.
 3. Go to a GitLab repository where you want to configure webhooks.
 4. From the navigation panel, select menu:Settings[Integrations].
 5. To complete the Add webhook page, you must check the Enable Webhook option in a job template or workflow job template.
-For more information, see step 3 in both Creating a job template and Creating a workflow template.
+For more information, see step 3 in both Creating a job template and Creating a workflow job template.
 6. Complete the following fields:
 * URL: Copy the contents of the Webhook URL from the job template and paste it here.
 The results are sent to this address from GitLab.

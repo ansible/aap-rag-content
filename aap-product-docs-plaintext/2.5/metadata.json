@@ -975,6 +975,9 @@
     "project_file_name": "downstream/assemblies/eda/assembly-eda-set-up-rhaap-credential.adoc",
     "path_name": "aap-docs/downstream/assemblies/eda/assembly-eda-set-up-rhaap-credential.adoc",
     "includes": [
+      "downstream/modules/eda/con-replacing-controller-tokens.adoc",
+      "downstream/modules/eda/proc-eda-delete-rulebook-activations-with-cont-tokens.adoc",
+      "downstream/modules/eda/proc-eda-delete-controller-token.adoc",
       "downstream/modules/eda/proc-eda-set-up-rhaap-credential.adoc"
     ],
     "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-set-up-rhaap-credential-type",
@@ -1734,13 +1737,14 @@
       "downstream/modules/platform/proc-preparing-the-rhel-host-for-containerized-installation.adoc",
       "downstream/modules/platform/proc-downloading-containerized-aap.adoc",
       "downstream/modules/platform/proc-installing-containerized-aap.adoc",
-      "downstream/modules/platform/proc-using-postinstall.adoc",
       "downstream/modules/platform/ref-accessing-control-auto-hub-eda-control.adoc",
       "downstream/modules/platform/ref-using-custom-tls-certificates.adoc",
       "downstream/modules/platform/ref-using-custom-receptor-signing-keys.adoc",
       "downstream/modules/platform/ref-enabling-automation-hub-collection-and-container-signing.adoc",
       "downstream/modules/platform/ref-adding-execution-nodes.adoc",
       "downstream/modules/platform/proc-add-eda-safe-plugin-var.adoc",
+      "downstream/modules/platform/proc-update-aap-container.adoc",
+      "downstream/modules/platform/proc-backup-aap-container.adoc",
       "downstream/modules/platform/proc-uninstalling-containerized-aap.adoc"
     ],
     "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/index#aap-containerized-installation",
@@ -1776,9 +1780,10 @@
       "downstream/modules/platform/proc-aap-migration.adoc",
       "downstream/modules/platform/proc-aap-create_controller.adoc",
       "downstream/modules/platform/proc-aap-create_hub.adoc",
+      "downstream/modules/platform/proc-aap-create_eda.adoc",
       "downstream/modules/platform/proc-post-migration-cleanup.adoc"
     ],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#aap-migration",
     "id": "aap-migration",
     "context": "aap-migration",
     "content_type": null,
@@ -1835,10 +1840,9 @@
     "project_file_name": "downstream/assemblies/platform/assembly-aap-upgrades.adoc",
     "path_name": "aap-docs/downstream/assemblies/platform/assembly-aap-upgrades.adoc",
     "includes": [
-      "downstream/modules/platform/con-aap-upgrades.adoc",
-      "downstream/modules/platform/con-aap-upgrades-legacy.adoc"
+      "downstream/modules/platform/con-aap-upgrades.adoc"
     ],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#aap-upgrades",
     "id": "aap-upgrades",
     "context": "aap-upgrades",
     "content_type": null,
@@ -1851,9 +1855,12 @@
       "downstream/modules/platform/con-aap-upgrade-planning.adoc",
       "downstream/modules/platform/proc-choosing-obtaining-installer.adoc",
       "downstream/modules/platform/proc-editing-inventory-file-for-updates.adoc",
-      "downstream/modules/platform/proc-running-setup-script-for-updates.adoc"
+      "downstream/modules/platform/con-backup-aap.adoc",
+      "downstream/modules/platform/proc-running-setup-script-for-updates.adoc",
+      "downstream/modules/platform/proc-upgrade-controller-hub-eda-unified-ui.adoc",
+      "downstream/modules/platform/proc-account-linking.adoc"
     ],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#aap-upgrading-platform",
     "id": "aap-upgrading-platform",
     "context": "aap-upgrading-platform",
     "content_type": null,
@@ -2129,6 +2136,18 @@
     "content_type": null,
     "nesting_assembly": false
   },
+  "downstream/assemblies/platform/assembly-appendix-operator-crs.adoc": {
+    "project_file_name": "downstream/assemblies/platform/assembly-appendix-operator-crs.adoc",
+    "path_name": "aap-docs/downstream/assemblies/platform/assembly-appendix-operator-crs.adoc",
+    "includes": [
+      "downstream/modules/platform/ref-operator-crs.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#appendix-operator-crs_performance-considerations",
+    "id": "appendix-operator-crs_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": true
+  },
   "downstream/assemblies/platform/assembly-appendix-troubleshoot-containerized-aap.adoc": {
     "project_file_name": "downstream/assemblies/platform/assembly-appendix-troubleshoot-containerized-aap.adoc",
     "path_name": "aap-docs/downstream/assemblies/platform/assembly-appendix-troubleshoot-containerized-aap.adoc",
@@ -2201,6 +2220,7 @@
       "downstream/modules/platform/proc-operator-link-components.adoc",
       "downstream/modules/platform/proc-operator-access-aap.adoc",
       "downstream/modules/platform/proc-operator-deploy-central-config.adoc",
+      "downstream/modules/platform/proc-operator-external-db-gateway.adoc",
       "downstream/modules/platform/proc-operator-aap-faq.adoc"
     ],
     "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#configure-aap-operator_operator-platform-doc",
@@ -3206,7 +3226,7 @@
       "downstream/modules/platform/con-gs-create-automation-content.adoc",
       "downstream/modules/platform/con-gs-define-events-rulebooks.adoc",
       "downstream/modules/platform/con-gs-ansible-roles.adoc",
-      "downstream/modules/platform/proc-gs-creating-a-role.adoc",
+      "downstream/modules/platform/proc-creating-ansible-role.adoc",
       "downstream/modules/platform/con-gs-learn-about-collections.adoc",
       "downstream/modules/platform/proc-gs-publish-to-a-collection.adoc",
       "downstream/modules/platform/proc-gs-upload-collection.adoc",
@@ -3218,11 +3238,9 @@
       "downstream/modules/platform/proc-gs-auto-dev-create-automation-execution-proj.adoc",
       "downstream/modules/platform/proc-gs-auto-dev-create-automation-decision-proj.adoc",
       "downstream/modules/platform/con-gs-auto-dev-about-inv.adoc",
-      "downstream/modules/platform/proc-controller-create-inventory.adoc",
       "downstream/modules/platform/con-gs-auto-dev-job-templates.adoc",
       "downstream/modules/platform/proc-controller-getting-started-with-job-templates.adoc",
       "downstream/modules/platform/proc-gs-auto-dev-create-template.adoc",
-      "downstream/modules/platform/proc-gs-auto-dev-run-template.adoc",
       "downstream/modules/platform/proc-controller-edit-job-template.adoc",
       "downstream/modules/platform/con-gs-rulebook-activations.adoc",
       "downstream/modules/platform/proc-gs-eda-set-up-rulebook-activation.adoc",
@@ -3248,7 +3266,6 @@
       "downstream/modules/platform/proc-creating-ansible-role.adoc",
       "downstream/modules/platform/con-gs-ansible-content.adoc",
       "downstream/modules/platform/con-gs-learn-about-collections.adoc",
-      "downstream/modules/platform/proc-gs-browse-content.adoc",
       "downstream/modules/platform/proc-gs-downloading-content.adoc",
       "downstream/modules/platform/proc-gs-publish-to-a-collection.adoc",
       "downstream/modules/platform/con-gs-manage-collections.adoc",
@@ -3533,8 +3550,8 @@
       "downstream/modules/platform/proc-install-cli-aap-operator.adoc",
       "downstream/modules/platform/proc-cli-get-controller-pwd.adoc"
     ],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#installing-aap-operator-cli_{Context}",
-    "id": "installing-aap-operator-cli_{Context}",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#installing-aap-operator-cli_operator-platform-doc",
+    "id": "installing-aap-operator-cli_{context}",
     "context": "installing-aap-operator-cli",
     "content_type": null,
     "nesting_assembly": true
@@ -3648,7 +3665,7 @@
       "downstream/modules/platform/proc-modifying-the-run-schedule.adoc"
     ],
     "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#metrics-utility",
-    "id": "metrics-utility_{context}",
+    "id": "metrics-utility",
     "context": "metrics-utility",
     "content_type": "ASSEMBLY",
     "nesting_assembly": true
@@ -3767,11 +3784,14 @@
     "project_file_name": "downstream/assemblies/platform/assembly-operator-upgrade.adoc",
     "path_name": "aap-docs/downstream/assemblies/platform/assembly-operator-upgrade.adoc",
     "includes": [
+      "downstream/modules/platform/con-operator-upgrade-overview.adoc",
       "downstream/modules/platform/con-operator-upgrade-considerations.adoc",
       "downstream/modules/platform/con-operator-upgrade-prereq.adoc",
-      "downstream/modules/platform/proc-operator-upgrade.adoc"
+      "downstream/modules/platform/con-operator-channel-upgrade.adoc",
+      "downstream/modules/platform/proc-operator-upgrade.adoc",
+      "downstream/modules/platform/proc-operator-create_crs.adoc"
     ],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#operator-upgrade_operator-platform-doc",
     "id": "operator-upgrade_{context}",
     "context": "operator-upgrade",
     "content_type": null,
@@ -3820,7 +3840,6 @@
       "downstream/modules/platform/proc-editing-inventory-file.adoc",
       "downstream/modules/platform/con-install-scenario-examples.adoc",
       "downstream/modules/platform/con-install-scenario-recommendations.adoc",
-      "downstream/modules/platform/proc-set-registry-username-password.adoc",
       "downstream/modules/platform/ref-gateway-controller-ext-db.adoc",
       "downstream/modules/platform/ref-gateway-controller-hub-ext-db.adoc",
       "downstream/modules/platform/ref-gateway-controller-hub-eda-ext-db.adoc",
@@ -3830,6 +3849,8 @@
       "downstream/modules/platform/proc-apply-selinux-context.adoc",
       "downstream/modules/hub/proc-configure-content-signing-on-pah.adoc",
       "downstream/modules/platform/proc-add-eda-safe-plugin-var.adoc",
+      "downstream/modules/platform/proc-set-registry-username-password.adoc",
+      "downstream/modules/platform/ref-redis-config-enterprise-topology.adoc",
       "downstream/modules/platform/proc-running-setup-script.adoc",
       "downstream/modules/platform/proc-verify-aap-installation.adoc",
       "downstream/modules/platform/con-adding-subscription-manifest.adoc"
@@ -4186,7 +4207,7 @@
     "includes": [
       "downstream/modules/platform/proc-update-aap-on-ocp.adoc"
     ],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#update-ocp",
     "id": "update-ocp",
     "context": null,
     "content_type": null,
@@ -4372,6 +4393,8 @@
     "project_file_name": "downstream/assemblies/topologies/assembly-rpm-topologies.adoc",
     "path_name": "aap-docs/downstream/assemblies/topologies/assembly-rpm-topologies.adoc",
     "includes": [
+      "downstream/modules/topologies/ref-rpm-a-env-a.adoc",
+      "downstream/modules/topologies/ref-rpm-a-env-b.adoc",
       "downstream/modules/topologies/ref-rpm-b-env-a.adoc",
       "downstream/modules/topologies/ref-rpm-b-env-b.adoc"
     ],
@@ -6461,6 +6484,16 @@
     "content_type": null,
     "nesting_assembly": false
   },
+  "downstream/modules/eda/con-replacing-controller-tokens.adoc": {
+    "project_file_name": "downstream/modules/eda/con-replacing-controller-tokens.adoc",
+    "path_name": "aap-docs/downstream/modules/eda/con-replacing-controller-tokens.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#replacing-controller-tokens",
+    "id": "replacing-controller-tokens",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
   "downstream/modules/eda/con-rulebook-actions.adoc": {
     "project_file_name": "downstream/modules/eda/con-rulebook-actions.adoc",
     "path_name": "aap-docs/downstream/modules/eda/con-rulebook-actions.adoc",
@@ -6541,6 +6574,16 @@
     "content_type": null,
     "nesting_assembly": false
   },
+  "downstream/modules/eda/proc-eda-delete-controller-token.adoc": {
+    "project_file_name": "downstream/modules/eda/proc-eda-delete-controller-token.adoc",
+    "path_name": "aap-docs/downstream/modules/eda/proc-eda-delete-controller-token.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-delete-controller-token",
+    "id": "eda-delete-controller-token",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
   "downstream/modules/eda/proc-eda-delete-credential.adoc": {
     "project_file_name": "downstream/modules/eda/proc-eda-delete-credential.adoc",
     "path_name": "aap-docs/downstream/modules/eda/proc-eda-delete-credential.adoc",
@@ -6557,6 +6600,16 @@
     "includes": [],
     "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-delete-project",
     "id": "eda-delete-project",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/modules/eda/proc-eda-delete-rulebook-activations-with-cont-tokens.adoc": {
+    "project_file_name": "downstream/modules/eda/proc-eda-delete-rulebook-activations-with-cont-tokens.adoc",
+    "path_name": "aap-docs/downstream/modules/eda/proc-eda-delete-rulebook-activations-with-cont-tokens.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-delete-rulebook-activations-with-cont-tokens",
+    "id": "eda-delete-rulebook-activations-with-cont-tokens",
     "context": null,
     "content_type": null,
     "nesting_assembly": false
@@ -7965,7 +8018,7 @@
     "project_file_name": "downstream/modules/platform/con-aap-migration-considerations.adoc",
     "path_name": "aap-docs/downstream/modules/platform/con-aap-migration-considerations.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#aap-migration-considerations",
     "id": "aap-migration-considerations",
     "context": null,
     "content_type": null,
@@ -7975,7 +8028,7 @@
     "project_file_name": "downstream/modules/platform/con-aap-migration-prepare.adoc",
     "path_name": "aap-docs/downstream/modules/platform/con-aap-migration-prepare.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#aap-migration-prepare",
     "id": "aap-migration-prepare",
     "context": null,
     "content_type": null,
@@ -7985,7 +8038,7 @@
     "project_file_name": "downstream/modules/platform/con-aap-upgrade-planning.adoc",
     "path_name": "aap-docs/downstream/modules/platform/con-aap-upgrade-planning.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#aap-upgrade-planning_aap-upgrading-platform",
     "id": "aap-upgrade-planning_{context}",
     "context": null,
     "content_type": null,
@@ -8015,7 +8068,7 @@
     "project_file_name": "downstream/modules/platform/con-aap-upgrades.adoc",
     "path_name": "aap-docs/downstream/modules/platform/con-aap-upgrades.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#aap-upgrades_aap-upgrades",
     "id": "aap-upgrades_{context}",
     "context": null,
     "content_type": null,
@@ -8155,7 +8208,7 @@
     "project_file_name": "downstream/modules/platform/con-backup-aap.adoc",
     "path_name": "aap-docs/downstream/modules/platform/con-backup-aap.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#con-backup-aap_aap-upgrading-platform",
     "id": "con-backup-aap_{context}",
     "context": null,
     "content_type": null,
@@ -9570,8 +9623,8 @@
     "project_file_name": "downstream/modules/platform/con-ocp-supported-install.adoc",
     "path_name": "aap-docs/downstream/modules/platform/con-ocp-supported-install.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#con-ocp-supported-install_operator-install-planning",
-    "id": "con-ocp-supported-install_{context}",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#ocp-supported-install_operator-install-planning",
+    "id": "ocp-supported-install_{context}",
     "context": null,
     "content_type": null,
     "nesting_assembly": false
@@ -9596,6 +9649,16 @@
     "content_type": null,
     "nesting_assembly": false
   },
+  "downstream/modules/platform/con-operator-channel-upgrade.adoc": {
+    "project_file_name": "downstream/modules/platform/con-operator-channel-upgrade.adoc",
+    "path_name": "aap-docs/downstream/modules/platform/con-operator-channel-upgrade.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#operator-channel-upgrade_operator-upgrade",
+    "id": "operator-channel-upgrade_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
   "downstream/modules/platform/con-operator-custom-resources.adoc": {
     "project_file_name": "downstream/modules/platform/con-operator-custom-resources.adoc",
     "path_name": "aap-docs/downstream/modules/platform/con-operator-custom-resources.adoc",
@@ -9610,8 +9673,18 @@
     "project_file_name": "downstream/modules/platform/con-operator-upgrade-considerations.adoc",
     "path_name": "aap-docs/downstream/modules/platform/con-operator-upgrade-considerations.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#operator-upgrade-considerations",
     "id": "operator-upgrade-considerations",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/modules/platform/con-operator-upgrade-overview.adoc": {
+    "project_file_name": "downstream/modules/platform/con-operator-upgrade-overview.adoc",
+    "path_name": "aap-docs/downstream/modules/platform/con-operator-upgrade-overview.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#operator-upgrade-overview",
+    "id": "operator-upgrade-overview",
     "context": null,
     "content_type": null,
     "nesting_assembly": false
@@ -9620,7 +9693,7 @@
     "project_file_name": "downstream/modules/platform/con-operator-upgrade-prereq.adoc",
     "path_name": "aap-docs/downstream/modules/platform/con-operator-upgrade-prereq.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#operator-upgrade-prereq_operator-upgrade",
     "id": "operator-upgrade-prereq_{context}",
     "context": null,
     "content_type": null,
@@ -9882,8 +9955,18 @@
     "project_file_name": "downstream/modules/platform/proc-aap-create_controller.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-aap-create_controller.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#aap-create_controller",
     "id": "aap-create_controller",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/modules/platform/proc-aap-create_eda.adoc": {
+    "project_file_name": "downstream/modules/platform/proc-aap-create_eda.adoc",
+    "path_name": "aap-docs/downstream/modules/platform/proc-aap-create_eda.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#aap-create_eda",
+    "id": "aap-create_eda",
     "context": null,
     "content_type": null,
     "nesting_assembly": false
@@ -9892,7 +9975,7 @@
     "project_file_name": "downstream/modules/platform/proc-aap-create_hub.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-aap-create_hub.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#aap-create_hub",
     "id": "aap-create_hub",
     "context": null,
     "content_type": null,
@@ -9932,7 +10015,7 @@
     "project_file_name": "downstream/modules/platform/proc-aap-migration-backup.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-aap-migration-backup.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#aap-migration-backup",
     "id": "aap-migration-backup",
     "context": null,
     "content_type": null,
@@ -9942,7 +10025,7 @@
     "project_file_name": "downstream/modules/platform/proc-aap-migration.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-aap-migration.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#aap-data-migration_aap-migration",
     "id": "aap-data-migration_{context}",
     "context": null,
     "content_type": null,
@@ -9986,6 +10069,16 @@
     "id": "accessing-rpm-repositories-for-locally-mounted-dvd_{context}",
     "context": null,
     "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/modules/platform/proc-account-linking.adoc": {
+    "project_file_name": "downstream/modules/platform/proc-account-linking.adoc",
+    "path_name": "aap-docs/downstream/modules/platform/proc-account-linking.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#account-linking_aap-upgrading-platform",
+    "id": "account-linking_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
     "nesting_assembly": false
   },
   "downstream/modules/platform/proc-add-controller-access-token.adoc": {
@@ -10062,7 +10155,7 @@
     "project_file_name": "downstream/modules/platform/proc-backup-aap-container.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-backup-aap-container.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/aap-containerized-installation#proc-backup-aap-container",
     "id": "proc-backup-aap-container",
     "context": null,
     "content_type": null,
@@ -10162,8 +10255,8 @@
     "project_file_name": "downstream/modules/platform/proc-choosing-obtaining-installer.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-choosing-obtaining-installer.adoc",
     "includes": [],
-    "url": null,
-    "id": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#proc-choosing-obtaining-installer_aap-upgrading-platform",
+    "id": "proc-choosing-obtaining-installer_{context}",
     "context": null,
     "content_type": null,
     "nesting_assembly": false
@@ -10292,8 +10385,8 @@
     "project_file_name": "downstream/modules/platform/proc-configuring-the-metrics-utility.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-configuring-the-metrics-utility.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/metrics-utility#configuring-the-metrics-utility_metrics-utility",
-    "id": "configuring-the-metrics-utility_{context}",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/metrics-utility#configuring-the-metrics-utility",
+    "id": "configuring-the-metrics-utility",
     "context": null,
     "content_type": "PROCEDURE",
     "nesting_assembly": false
@@ -10877,7 +10970,7 @@
     "project_file_name": "downstream/modules/platform/proc-controller-create-inventory.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-controller-create-inventory.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/assembly-gs-key-functionality#controller-creating-inventory",
+    "url": null,
     "id": "controller-creating-inventory",
     "context": null,
     "content_type": null,
@@ -12039,7 +12132,7 @@
     "project_file_name": "downstream/modules/platform/proc-create-postresql-secret.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-create-postresql-secret.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#create-postresql-secret_aap-migration",
     "id": "create-postresql-secret_{context}",
     "context": null,
     "content_type": null,
@@ -12049,7 +12142,7 @@
     "project_file_name": "downstream/modules/platform/proc-create-secret-key-secret.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-create-secret-key-secret.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#create-secret-key-secret_aap-migration",
     "id": "create-secret-key-secret_{context}",
     "context": null,
     "content_type": null,
@@ -12079,7 +12172,7 @@
     "project_file_name": "downstream/modules/platform/proc-creating-ansible-role.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-creating-ansible-role.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/assembly-gs-key-functionality#creating-ansible-role_assembly-gs-auto-op",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/assembly-gs-key-functionality#creating-ansible-role_assembly-gs-auto-dev",
     "id": "creating-ansible-role_{context}",
     "context": null,
     "content_type": null,
@@ -12209,7 +12302,7 @@
     "project_file_name": "downstream/modules/platform/proc-editing-inventory-file-for-updates.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-editing-inventory-file-for-updates.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#editing-inventory-file-for-updates_aap-upgrading-platform",
     "id": "editing-inventory-file-for-updates_{context}",
     "context": null,
     "content_type": null,
@@ -12319,7 +12412,7 @@
     "project_file_name": "downstream/modules/platform/proc-gs-auto-dev-run-template.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-gs-auto-dev-run-template.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/assembly-gs-key-functionality#proc-gs-auto-dev-run-template",
+    "url": null,
     "id": "proc-gs-auto-dev-run-template",
     "context": null,
     "content_type": null,
@@ -12379,7 +12472,7 @@
     "project_file_name": "downstream/modules/platform/proc-gs-browse-content.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-gs-browse-content.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/assembly-gs-key-functionality#con-gs-browse-content_assembly-gs-auto-op",
+    "url": null,
     "id": "con-gs-browse-content_{context}",
     "context": null,
     "content_type": null,
@@ -12389,7 +12482,7 @@
     "project_file_name": "downstream/modules/platform/proc-gs-creating-a-role.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-gs-creating-a-role.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/assembly-gs-key-functionality#gs-creating-a-role_assembly-gs-auto-dev",
+    "url": null,
     "id": "gs-creating-a-role_{context}",
     "context": null,
     "content_type": "PROCEDURE",
@@ -12932,8 +13025,8 @@
     "project_file_name": "downstream/modules/platform/proc-install-cli-aap-operator.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-install-cli-aap-operator.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-install-cli-aap-operatorinstalling-aap-operator-cli",
-    "id": "proc-install-cli-aap-operator{context}",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#install-cli-aap-operator_installing-aap-operator-cli",
+    "id": "install-cli-aap-operator_{context}",
     "context": null,
     "content_type": null,
     "nesting_assembly": false
@@ -13088,6 +13181,16 @@
     "content_type": null,
     "nesting_assembly": false
   },
+  "downstream/modules/platform/proc-operator-create_crs.adoc": {
+    "project_file_name": "downstream/modules/platform/proc-operator-create_crs.adoc",
+    "path_name": "aap-docs/downstream/modules/platform/proc-operator-create_crs.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#operator-create-crs_operator-upgrade",
+    "id": "operator-create-crs_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
   "downstream/modules/platform/proc-operator-deploy-central-config.adoc": {
     "project_file_name": "downstream/modules/platform/proc-operator-deploy-central-config.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-operator-deploy-central-config.adoc",
@@ -13114,6 +13217,16 @@
     "includes": [],
     "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-operator-external-db-controller",
     "id": "proc-operator-external-db-controller",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/modules/platform/proc-operator-external-db-gateway.adoc": {
+    "project_file_name": "downstream/modules/platform/proc-operator-external-db-gateway.adoc",
+    "path_name": "aap-docs/downstream/modules/platform/proc-operator-external-db-gateway.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-operator-external-db-gateway",
+    "id": "proc-operator-external-db-gateway",
     "context": null,
     "content_type": null,
     "nesting_assembly": false
@@ -13152,7 +13265,7 @@
     "project_file_name": "downstream/modules/platform/proc-operator-upgrade.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-operator-upgrade.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#upgrading-operator_operator-upgrade",
     "id": "upgrading-operator_{context}",
     "context": null,
     "content_type": null,
@@ -13162,7 +13275,7 @@
     "project_file_name": "downstream/modules/platform/proc-post-migration-cleanup.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-post-migration-cleanup.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#post-migration-cleanup_aap-migration",
     "id": "post-migration-cleanup_{context}",
     "context": null,
     "content_type": null,
@@ -13282,7 +13395,7 @@
     "project_file_name": "downstream/modules/platform/proc-running-setup-script-for-updates.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-running-setup-script-for-updates.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#proc-running-setup-script-for-updates",
     "id": "proc-running-setup-script-for-updates",
     "context": null,
     "content_type": null,
@@ -13502,7 +13615,7 @@
     "project_file_name": "downstream/modules/platform/proc-update-aap-container.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-update-aap-container.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/aap-containerized-installation#proc-update-aap-container",
     "id": "proc-update-aap-container",
     "context": null,
     "content_type": null,
@@ -13512,7 +13625,7 @@
     "project_file_name": "downstream/modules/platform/proc-update-aap-on-ocp.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-update-aap-on-ocp.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#update-aap-on-ocp",
     "id": "update-aap-on-ocp",
     "context": null,
     "content_type": null,
@@ -13536,6 +13649,16 @@
     "id": "proc-update-rhsso-client_{context}",
     "context": null,
     "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/modules/platform/proc-upgrade-controller-hub-eda-unified-ui.adoc": {
+    "project_file_name": "downstream/modules/platform/proc-upgrade-controller-hub-eda-unified-ui.adoc",
+    "path_name": "aap-docs/downstream/modules/platform/proc-upgrade-controller-hub-eda-unified-ui.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#upgrade-controller-hub-eda-unified-ui_aap-upgrading-platform",
+    "id": "upgrade-controller-hub-eda-unified-ui_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
     "nesting_assembly": false
   },
   "downstream/modules/platform/proc-upgrade-installer.adoc": {
@@ -13582,7 +13705,7 @@
     "project_file_name": "downstream/modules/platform/proc-using-postinstall.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-using-postinstall.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/aap-containerized-installation#using-postinstall_aap-containerized-installation",
+    "url": null,
     "id": "using-postinstall_{context}",
     "context": null,
     "content_type": "PROCEDURE",
@@ -13632,7 +13755,7 @@
     "project_file_name": "downstream/modules/platform/proc-verify-network-connectivity.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-verify-network-connectivity.adoc",
     "includes": [],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#verify-network-connectivity_aap-migration",
     "id": "verify-network-connectivity_{context}",
     "context": null,
     "content_type": null,
@@ -17045,6 +17168,16 @@
     "content_type": "REFERENCE",
     "nesting_assembly": false
   },
+  "downstream/modules/platform/ref-operator-crs.adoc": {
+    "project_file_name": "downstream/modules/platform/ref-operator-crs.adoc",
+    "path_name": "aap-docs/downstream/modules/platform/ref-operator-crs.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#operator-crs",
+    "id": "operator-crs",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
   "downstream/modules/platform/ref-operator-mesh-prerequisites.adoc": {
     "project_file_name": "downstream/modules/platform/ref-operator-mesh-prerequisites.adoc",
     "path_name": "aap-docs/downstream/modules/platform/ref-operator-mesh-prerequisites.adoc",
@@ -17139,6 +17272,16 @@
     "id": "ref-receptor-inventory-variables",
     "context": null,
     "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/modules/platform/ref-redis-config-enterprise-topology.adoc": {
+    "project_file_name": "downstream/modules/platform/ref-redis-config-enterprise-topology.adoc",
+    "path_name": "aap-docs/downstream/modules/platform/ref-redis-config-enterprise-topology.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_installation/assembly-platform-install-scenario#redis-config-enterprise-topology_platform-install-scenario",
+    "id": "redis-config-enterprise-topology_{context}",
+    "context": null,
+    "content_type": "REFERENCE",
     "nesting_assembly": false
   },
   "downstream/modules/platform/ref-removing-instances.adoc": {
@@ -17644,6 +17787,26 @@
     "content_type": null,
     "nesting_assembly": false
   },
+  "downstream/modules/topologies/ref-rpm-a-env-a.adoc": {
+    "project_file_name": "downstream/modules/topologies/ref-rpm-a-env-a.adoc",
+    "path_name": "aap-docs/downstream/modules/topologies/ref-rpm-a-env-a.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/tested_deployment_models/index#rpm-a-env-a",
+    "id": "rpm-a-env-a",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/modules/topologies/ref-rpm-a-env-b.adoc": {
+    "project_file_name": "downstream/modules/topologies/ref-rpm-a-env-b.adoc",
+    "path_name": "aap-docs/downstream/modules/topologies/ref-rpm-a-env-b.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/tested_deployment_models/index#rpm-a-env-b",
+    "id": "rpm-a-env-b",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
   "downstream/modules/topologies/ref-rpm-b-env-a.adoc": {
     "project_file_name": "downstream/modules/topologies/ref-rpm-b-env-a.adoc",
     "path_name": "aap-docs/downstream/modules/topologies/ref-rpm-b-env-a.adoc",
@@ -18033,14 +18196,18 @@
       "downstream/attributes/attributes.adoc",
       "downstream/assemblies/platform/assembly-operator-install-planning.adoc",
       "downstream/assemblies/platform/assembly-install-aap-operator.adoc",
+      "downstream/assemblies/platform/assembly-update-ocp.adoc",
       "downstream/assemblies/platform/assembly-installing-aap-operator-cli.adoc",
       "downstream/assemblies/platform/assembly-configure-aap-operator.adoc",
       "downstream/assemblies/platform/assembly-installing-controller-operator.adoc",
       "downstream/assemblies/platform/assembly-installing-hub-operator.adoc",
       "downstream/modules/platform/proc-operator-deploy-redis.adoc",
       "downstream/assemblies/platform/assembly-using-rhsso-operator-with-automation-hub.adoc",
+      "downstream/assemblies/platform/assembly-aap-migration.adoc",
+      "downstream/assemblies/platform/assembly-operator-upgrade.adoc",
       "downstream/assemblies/platform/assembly-operator-add-execution-nodes.adoc",
-      "downstream/assemblies/platform/assembly-controller-resource-operator.adoc"
+      "downstream/assemblies/platform/assembly-controller-resource-operator.adoc",
+      "downstream/assemblies/platform/assembly-appendix-operator-crs.adoc"
     ],
     "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index",
     "id": null,
@@ -18439,6 +18606,8 @@
       "downstream/titles/release-notes/topics/aap-25-known-issues.adoc",
       "downstream/titles/release-notes/topics/aap-25-fixed-issues.adoc",
       "downstream/titles/release-notes/topics/docs-25.adoc",
+      "downstream/titles/release-notes/async/async-updates.adoc",
+      "downstream/titles/release-notes/async/aap-25-3-28-oct.adoc",
       "downstream/titles/release-notes/async/aap-25-2-14-oct.adoc",
       "downstream/titles/release-notes/async/aap-25-1-7-oct.adoc"
     ],
@@ -18468,13 +18637,20 @@
     "content_type": null,
     "nesting_assembly": false
   },
+  "downstream/titles/release-notes/async/aap-25-3-28-oct.adoc": {
+    "project_file_name": "downstream/titles/release-notes/async/aap-25-3-28-oct.adoc",
+    "path_name": "aap-docs/downstream/titles/release-notes/async/aap-25-3-28-oct.adoc",
+    "includes": [],
+    "url": null,
+    "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
   "downstream/titles/release-notes/async/async-updates.adoc": {
     "project_file_name": "downstream/titles/release-notes/async/async-updates.adoc",
     "path_name": "aap-docs/downstream/titles/release-notes/async/async-updates.adoc",
-    "includes": [
-      "downstream/titles/release-notes/async/rpm-version-table.adoc",
-      "downstream/titles/release-notes/async/installer-version-table.adoc"
-    ],
+    "includes": [],
     "url": null,
     "id": null,
     "context": null,
@@ -18494,6 +18670,16 @@
   "downstream/titles/release-notes/async/rpm-version-table.adoc": {
     "project_file_name": "downstream/titles/release-notes/async/rpm-version-table.adoc",
     "path_name": "aap-docs/downstream/titles/release-notes/async/rpm-version-table.adoc",
+    "includes": [],
+    "url": null,
+    "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/titles/release-notes/topics/aap-25-2-patch-release-7-oct-2024.adoc": {
+    "project_file_name": "downstream/titles/release-notes/topics/aap-25-2-patch-release-7-oct-2024.adoc",
+    "path_name": "aap-docs/downstream/titles/release-notes/topics/aap-25-2-patch-release-7-oct-2024.adoc",
     "includes": [],
     "url": null,
     "id": null,
@@ -18654,8 +18840,7 @@
     "includes": [
       "downstream/attributes/attributes.adoc",
       "downstream/assemblies/platform/assembly-update-rpm.adoc",
-      "downstream/assemblies/platform/assembly-update-container.adoc",
-      "downstream/assemblies/platform/assembly-update-ocp.adoc"
+      "downstream/assemblies/platform/assembly-update-container.adoc"
     ],
     "url": null,
     "id": null,
@@ -18669,13 +18854,9 @@
     "includes": [
       "downstream/attributes/attributes.adoc",
       "downstream/assemblies/platform/assembly-aap-upgrades.adoc",
-      "downstream/assemblies/platform/assembly-aap-upgrading-platform.adoc",
-      "downstream/assemblies/platform/assembly-migrate-legacy-venv-to-ee.adoc",
-      "downstream/assemblies/platform/assembly-migrate-isolated-execution-nodes.adoc",
-      "downstream/assemblies/platform/assembly-content-migration.adoc",
-      "downstream/assemblies/platform/assembly-converting-playbooks-for-aap2.adoc"
+      "downstream/assemblies/platform/assembly-aap-upgrading-platform.adoc"
     ],
-    "url": null,
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index",
     "id": null,
     "context": "upgrade-and-migration",
     "content_type": null,

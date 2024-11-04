@@ -12,20 +12,6 @@ API node type:: Responds to the HTTP REST API of Event-Driven Ansible controller
 Worker node type:: Runs an Event-Driven Ansible worker, which is the component of Event-Driven Ansible that not only manages projects and activations, but also executes the activations themselves.
 Hybrid node type:: Is a combination of the API node and the worker node.
 
-The following example shows how you would set up an inventory file for horizontal scaling of Event-Driven Ansible controller on Red Hat Enterprise Linux VMs using the host group name [automationedacontroller] and the node type variable eda_node_type:
-
-
-```
-[automationedacontroller]
-
-3.88.116.111
-routable_hostname=automationedacontroller-api.example.com eda_node_type=api
-
-# worker node
-3.88.116.112 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker
-```
-
-
 ## Sizing and scaling guidelines
 
 API nodes process user requests (interactions with the UI or API) while worker nodes process the activations and other background tasks required for Event-Driven Ansible to function properly. The number of API nodes you require correlates to the desired number of users of the application and the number of worker nodes correlates to the desired number of activations you want to run.

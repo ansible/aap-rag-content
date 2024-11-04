@@ -5,18 +5,13 @@ Projects are useful as a way to group your automation content according to the o
 
 You can set up an automation execution project in the platform UI.
 
-Procedure
-. From the navigation panel, select menu:Automation Execution[Projects].
-. On the Projects page, click btn:[Create project] to launch the Create Project window.
-
-+
-
-1. Enter the appropriate details into the following required fields:
+1. From the navigation panel, select menu:Automation Execution[Projects].
+2. On the Projects page, click btn:[Create project] to launch the Create Project window.
+3. Enter the appropriate details into the following required fields:
 * Name (required)
 * Optional: Description
 * Organization (required): A project must have at least one organization. Select one organization now to create the project. When the project is created you can add additional organizations.
 * Optional: Execution Environment: Enter the name of the execution environment or search from a list of existing ones to run this project.
-For more information, see Migrating to automation execution environments in the Upgrade and migration.
 * Source Control Type (required): Select an SCM type associated with this project from the menu.
 Options in the following sections become available depending on the type chosen.
 For more information, see Managing playbooks manually or Managing playbooks using source control.
@@ -24,4 +19,4 @@ For more information, see Managing playbooks manually or Managing playbooks usin
 Specify the GPG key to use for validating content signature during project synchronization.
 If the content has been tampered with, the job will not run.
 For more information, see Project signing and verification.
-2. Click btn:[Create project].
+4. Click btn:[Create project].

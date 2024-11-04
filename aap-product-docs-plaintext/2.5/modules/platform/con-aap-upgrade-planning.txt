@@ -1,0 +1,29 @@
+# Ansible Automation Platform upgrade planning
+
+Before you begin the upgrade process, review the following considerations to plan and prepare your Ansible Automation Platform deployment:
+
+* See System requirements in the Planning your installation guide to ensure you have the topologies that fit your use case.
+
+[NOTE]
+----
+2.4 to 2.5 upgrades now include Platform gateway. Ensure you review the 2.5 Network ports and protocols for architectural changes.
+----
+
+[IMPORTANT]
+----
+When upgrading from Ansible Automation Platform 2.4 to 2.5, the API endpoints for the automation controller, automation hub, and Event-Driven Ansible controller are all available for use. These APIs are being deprecated and will be disabled in an upcoming release. This grace period is to allow for migration to the new APIs put in place with the platform gateway.
+----
+* Verify that you have a valid subscription before upgrading from a previous version of Ansible Automation Platform. Existing subscriptions are carried over during the upgrade process.
+* Ensure you have a backup of an Ansible Automation Platform 2.4 environment before upgrading in case any issues occur. See Backup and restore and Backup and recovery for operator environments for the specific topology of the environment.
+* Ensure you capture your inventory or instance group details before upgrading.
+* Upgrades of Event-Driven Ansible version 2.4 to 2.5 are not supported. Database migrations between Event-Driven Ansible 2.4 and Event-Driven Ansible 2.5 are not compatible. For more information, see automation controller and automation hub 2.4 and Event-Driven Ansible 2.5 with unified UI upgrades.
+
+If you are currently running Event-Driven Ansible controller 2.5, it is recommended that you disable all Event-Driven Ansible activations before upgrading to ensure that only new activations run after the upgrade process is complete.
+* Automation controller OAuth applications on the platform UI are not supported for 2.4 to 2.5 migration. See this Knowledgebase article for more information. To learn how to recreate your OAuth applications, see Applications in the Access management and authentication guide.
+* During the upgrade process, user accounts from the individual services are migrated. If there are accounts from multiple services, they must be linked to access the unified platform. See Account linking for details.
+* Ansible Automation Platform 2.5 offers a centralized Redis instance in both standalone and clustered topologies. For information on how to configure Redis, see Configuring Redis in the RPM installation guide.
+
+* Attaching a subscription
+* Backup and restore
+* Clustering
+* Planning your installation

@@ -21,7 +21,7 @@ Only workflow templates have the workflow visualizer  icon as a shortcut for acc
 Workflow templates can be used as building blocks for another workflow template.
 You can enable Prompt on Launch by setting up several settings in a workflow template, which you can edit at the workflow job template level.
 These do not affect the values assigned at the individual workflow template level.
-For further instructions, see the Workflow Visualizer section.
+For further instructions, see the Workflow visualizer section.
 ----
 
 # Creating a workflow job template
@@ -116,7 +116,7 @@ For more information on job surveys, including how to create a survey and option
 # Workflow visualizer
 
 The Workflow Visualizer provides a graphical way of linking together job templates, workflow templates, project syncs, and inventory syncs to build a workflow template.
-Before you build a workflow template, see the Workflows section for considerations associated with various scenarios on parent, child, and sibling nodes.
+Before you build a workflow template, see the Workflows in automation controller section for considerations associated with various scenarios on parent, child, and sibling nodes.
 
 ## Building a workflow
 

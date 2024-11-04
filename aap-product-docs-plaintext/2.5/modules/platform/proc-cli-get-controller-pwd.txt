@@ -31,7 +31,7 @@ The address for the platform gateway instance is example-ansible-automation-plat
 
 # Fetching the platform gateway password
 
-The YAML block for the platform gateway instance in sub.yaml assigns values to the name and admin_user keys.
+The YAML block for the platform gateway instance in the AnsibleAutomationPlatform object assigns values to the name and admin_user keys.
 Use these values in the following command to fetch the password for the platform gateway instance.
 
 
@@ -40,7 +40,7 @@ oc get secret/<your instance name>-<admin_user>-password -o yaml
 ```
 
 
-The default value for admin_user is admin. Modify the command if you changed the admin username in sub.yaml.
+The default value for admin_user is admin. Modify the command if you changed the admin username in the AnsibleAutomationPlatform object.
 
 The following example retrieves the password for a platform gateway object called example:
 
@@ -50,7 +50,7 @@ oc get secret/example-admin-password -o yaml
 ```
 
 
-The password for the platform gateway instance is listed in the metadata field in the output:
+The base64 encoded password for the platform gateway instance is listed in the metadata field in the output:
 
 
 ```

@@ -1,0 +1,3 @@
+# Replacing controller tokens in Red Hat Ansible Automation Platform 2.5
+
+To use Event-Driven Ansible controller in Red Hat Ansible Automation Platform 2.5, you must replace legacy controller tokens configured in your environment with Red Hat Ansible Automation Platform credentials because controller tokens have been deprecated.
