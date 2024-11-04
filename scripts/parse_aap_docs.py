@@ -1,3 +1,8 @@
+"""
+Parse Asciidoc files in the aap-docs repository to calculate the URLs on the product
+documentation site
+"""
+# pylint: disable=C0103,R0902,R0912,R0913,R0917,R1732
 import argparse
 import copy
 import json
@@ -19,19 +24,26 @@ class ParseAAPDocs:
     https://redhat-documentation.github.io/modular-docs/
     """
 
-    def __init__(self, base_dir, project_document_path, files_to_skip, do_validate=False):
+    def __init__(
+        self, base_dir, project_document_path, files_to_skip, git_branch, do_validate=False
+    ):
         """
         Initialize the ParseAAPDocs object
 
         :param base_dir: aap-docs local repository
         :param project_document_path: a relative path where Asciidoc sources are stored
         :param files_to_skip: a list of Ascii files paths to be ignored in the processing
+        :param git_branch: a git branch of aap-docs repo that is used for the input source
         :param do_validate: whether a validation of URL is executed or not
         """
         self.base_dir = base_dir
         self.project_document_path = project_document_path
         self.files_to_skip = files_to_skip
+        self.git_branch = git_branch
         self.do_validate = do_validate
+        self.attributes_dict = {}
+        self.title_dict = {}
+        self.adocs_dict = {}
 
     def run(self):
         """
@@ -58,12 +70,11 @@ class ParseAAPDocs:
         """
         url = adoc["url"]
         try:
-            response = requests.get(url, allow_redirects=False)
+            response = requests.get(url, allow_redirects=False, timeout=10)
             if response.status_code == 200:
                 return True
-            else:
-                print(f"INVALID: {url} status_code={response.status_code}")
-                return False
+            print(f"INVALID: {url} status_code={response.status_code}")
+            return False
         except requests.ConnectionError:
             print(f"INVALID: {url} ConnectionError")
             return False
@@ -102,24 +113,24 @@ class ParseAAPDocs:
         :param context: The current context
         :return: None
         """
-        id = None
+        _id = None
         nesting_assembly = adoc["nesting_assembly"]
         context_save = copy.copy(context) if nesting_assembly else None
 
         if adoc["id"]:
-            id = adoc["id"]
-            if "{context}" in id:
+            _id = adoc["id"]
+            if "{context}" in _id:
                 if context["name"] is None:
-                    id = id.replace("_{context}", "")
+                    _id = _id.replace("_{context}", "")
                 else:
-                    id = id.replace("{context}", context["name"])
+                    _id = _id.replace("{context}", context["name"])
             if adoc["url"]:
                 print(f"A URL is already set for {adoc['project_file_name']}")
             else:
                 if context["url"] == context["base_url"]:
-                    adoc["url"] = f"{context['url']}/index#{id}"
+                    adoc["url"] = f"{context['url']}/index#{_id}"
                 else:
-                    adoc["url"] = f"{context['url']}#{id}"
+                    adoc["url"] = f"{context['url']}#{_id}"
                 if self.do_validate and not self.validate(adoc):
                     sys.exit(1)
                 print(
@@ -127,8 +138,8 @@ class ParseAAPDocs:
                 )
 
         if adoc["context"]:
-            if not context["name"] and id:
-                context["url"] = f"{context['url']}/{id}"
+            if not context["name"] and _id:
+                context["url"] = f"{context['url']}/{_id}"
             context["name"] = adoc["context"]
 
         for include in adoc["includes"]:
@@ -169,7 +180,7 @@ class ParseAAPDocs:
             )
         )
         for docinfo in docinfo_files:
-            for line in open(docinfo):
+            for line in open(docinfo, encoding="utf8"):
                 m = title_pattern.match(line)
                 if m:
                     title = m.group(1).strip()
@@ -192,7 +203,7 @@ class ParseAAPDocs:
         :param adoc_path: A path to an Ascii document.
         :return: id, context, content_type, nesting_assembly
         """
-        id = None
+        _id = None
         id_pattern = re.compile(r'\[id=["\']([^"\']+)["\']\]')
         context = None
         context_pattern = re.compile(r":context:\s*(.+)")
@@ -208,11 +219,11 @@ class ParseAAPDocs:
         #
         nesting_assembly = False
         nesting_assembly_pattern = re.compile(r"ifdef::parent.+\[:context: {parent-context}\]")
-        for line in open(adoc_path):
+        for line in open(adoc_path, encoding="utf8"):
             line = line.strip()
             m = id_pattern.match(line)
             if m:
-                id = m.group(1)
+                _id = m.group(1)
             m = context_pattern.match(line)
             if m:
                 context = m.group(1)
@@ -223,7 +234,7 @@ class ParseAAPDocs:
             if m:
                 nesting_assembly = True
 
-        return id, context, content_type, nesting_assembly
+        return _id, context, content_type, nesting_assembly
 
     def get_dict(self):
         """
@@ -236,13 +247,13 @@ class ParseAAPDocs:
             path_name = str(adoc)
             i = path_name.find(f"{self.project_document_path}/")
             project_file_name = path_name[i:]
-            id, context, content_type, nesting_assembly = self.parse_adoc(path_name)
+            _id, context, content_type, nesting_assembly = self.parse_adoc(path_name)
             d[project_file_name] = {
                 "project_file_name": project_file_name,
                 "path_name": path_name,
                 "includes": [],
                 "url": None,
-                "id": id,
+                "id": _id,
                 "context": context,
                 "content_type": content_type,
                 "nesting_assembly": nesting_assembly,
@@ -278,7 +289,7 @@ class ParseAAPDocs:
         """
         include_pattern = re.compile(r"^\s*include::([\w\./\-_]+).*$")
         for k, v in self.adocs_dict.items():
-            for line in open(v["path_name"]):
+            for line in open(v["path_name"], encoding="utf8"):
                 m = include_pattern.match(line)
                 if m:
                     include_file = m.group(1)
@@ -309,8 +320,6 @@ class ParseAAPDocs:
 
         :return: None (self.attributes_dict and self.title_dict are updated).
         """
-        self.attributes_dict = {}
-        self.title_dict = {}
         pattern = re.compile(r":(\w+):\s*(.+)$")
         menu_pattern = re.compile(r"^menu:([\w ]+)\[([\w >]+)\]$")
         attributes_adoc = (
@@ -319,10 +328,11 @@ class ParseAAPDocs:
             .joinpath("attributes")
             .joinpath("attributes.adoc")
         )
-        for line in open(attributes_adoc):
+
+        def parse_line(line):
             line = line.strip()
             if len(line) == 0 or line.startswith("//"):
-                continue
+                return
             m = pattern.match(line)
             if m:
                 key = m.group(1)
@@ -334,28 +344,51 @@ class ParseAAPDocs:
                 if key.startswith("Title"):
                     self.title_dict[value] = key[len("Title") :]
 
+        for line in open(attributes_adoc, encoding="utf8"):
+            parse_line(line)
+
+        # If the git_branch is "lightspeed-latest", parse additional lines
+        # so that the tool can pickup the output URL. The information is not
+        # included in the attributes.adoc in the lightspeed-latest branch.
+
+        ADDITIONAL_LINES = """// Lightspeed branch titles/lightspeed-user-guide
+:TitleLightspeedUserGuide: Red Hat Ansible Lightspeed with IBM watsonx Code Assistant User Guide
+:URLLightspeedUserGuide: {BaseURL}/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide
+:LinkLightspeedUserGuide: {URLLightspeedUserGuide}[{TitleLightspeedUserGuide}]"""  # noqa: E501
+        if self.git_branch == "lightspeed-latest":
+            for line in ADDITIONAL_LINES.split("\n"):
+                parse_line(line)
+
 
 def main():
+    """
+    Main routine
+    :return:
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument("--aap_docs_dir", "-i")
     parser.add_argument("--output_dir", "-o")
     parser.add_argument("--validate", action="store_true")
+    parser.add_argument("--git-branch", "-b")
 
     args = parser.parse_args()
 
+    project_document_path = "lightspeed" if args.git_branch == "lightspeed-latest" else "downstream"
+
     # Parse Asciidoc files in a local aap_docs repo and calculate document URLs
     base_dir = args.aap_docs_dir
-    project_document_path = "downstream"
     files_to_skip = [
         "downstream/titles/aap-hardening/master.adoc",
-        "downstream/titles/upgrade/master.adoc",
+        # "downstream/titles/upgrade/master.adoc",
         "downstream/titles/playbooks/playbooks-reference/master.adoc",
     ]
-    parse_aap_docs = ParseAAPDocs(base_dir, project_document_path, files_to_skip, do_validate=args.validate)
+    parse_aap_docs = ParseAAPDocs(
+        base_dir, project_document_path, files_to_skip, args.git_branch, do_validate=args.validate
+    )
     parse_aap_docs.run()
 
     # Save parsed results as metadata.json
-    with open(Path(args.output_dir).joinpath("metadata.json"), "w") as f:
+    with open(Path(args.output_dir).joinpath("metadata.json"), "w", encoding="utf8") as f:
         json.dump(parse_aap_docs.adocs_dict, f, indent=2)
 
 

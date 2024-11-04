@@ -2,6 +2,7 @@ ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
 
 FROM registry.access.redhat.com/ubi9/python-311 as aap-rag-builder
 ARG EMBEDDING_MODEL
+ARG AAP_VERSION=2.5
 
 USER 0
 WORKDIR /workdir
@@ -15,11 +16,12 @@ COPY scripts/download_embeddings_model.py .
 RUN pdm run python download_embeddings_model.py -l ./embeddings_model -r ${EMBEDDING_MODEL}
 
 COPY scripts/generate_embeddings-aap.py .
-RUN set -e && for AAP_VERSION in $(ls -1 aap-product-docs-plaintext); do \
-        pdm run python generate_embeddings-aap.py -f aap-product-docs-plaintext/${AAP_VERSION} \
-            -mn ${EMBEDDING_MODEL} -o vector_db/aap_product_docs/${AAP_VERSION} \
-            -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') -v ${AAP_VERSION}; \
-    done
+RUN set -e && pdm run python generate_embeddings-aap.py \
+  -f aap-product-docs-plaintext \
+  -mn ${EMBEDDING_MODEL} \
+  -o vector_db/aap_product_docs/${AAP_VERSION} \
+  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
+  -v ${AAP_VERSION}
 
 FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:f182b500ff167918ca1010595311cf162464f3aa1cab755383d38be61b4d30aa
 COPY --from=aap-rag-builder /workdir/vector_db/aap_product_docs /rag/vector_db/aap_product_docs

@@ -1,28 +1,32 @@
 """Utility script to generate embeddings."""
-
+# pylint: disable=C0103,C3001,E0401,E0606,W0603,W0718
 import argparse
 import json
 import os
 import time
 from pathlib import Path
-from typing import Callable, Dict
+from typing import Callable
+from typing import Dict
 
 import faiss
 import requests
-from llama_index.core import Settings, SimpleDirectoryReader, VectorStoreIndex
+from llama_index.core import Settings
+from llama_index.core import SimpleDirectoryReader
+from llama_index.core import VectorStoreIndex
 from llama_index.core.llms.utils import resolve_llm
-
-# from llama_index.core.node_parser import MarkdownNodeParser
 from llama_index.core.schema import TextNode
 from llama_index.core.storage.storage_context import StorageContext
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.vector_stores.faiss import FaissVectorStore
+
+# from llama_index.core.node_parser import MarkdownNodeParser
 
 AAP_DOCS_ROOT_URL = "https://github.com/ansible/aap-docs/blob/"
 AAP_DOCS_VERSION = "2.5"
 UNREACHABLE_DOCS: int = 0
 
 metadata = {}
+
 
 def ping_url(url: str) -> bool:
     """Check if the URL parameter is live."""
@@ -37,8 +41,8 @@ def get_file_title(file_path: str) -> str:
     """Extract title from the plaintext doc file."""
     title = ""
     try:
-        with open(file_path, "r") as file:
-            title = file.readline().rstrip("\n").lstrip("# ")
+        with open(file_path, encoding="utf8") as infile:
+            title = infile.readline().rstrip("\n").lstrip("# ")
     except Exception:  # noqa: S110
         pass
     return title
@@ -69,11 +73,16 @@ def aap_file_metadata_func(file_path: str) -> Dict:
         file_path: str: file path in str
     """
     full_path = os.path.abspath(file_path)
-    key = ("downstream"
-           + full_path.removeprefix(EMBEDDINGS_ROOT_DIR).removesuffix("txt")
-           + "adoc")
+    doc_dir = "lightspeed" if "lightspeed-latest" in full_path else "downstream"
 
-    docs_url = lambda x : metadata[key]["url"]
+    doc_path = full_path.removeprefix(EMBEDDINGS_ROOT_DIR).removesuffix("txt")
+    i = doc_path.index("/", 1)
+    if i >= 0:
+        doc_path = doc_path[i:]
+    key = doc_dir + doc_path + "adoc"
+
+    print(f"DEBUG: file_path={file_path},  key={key}, EMBEDDINGS_ROOT_DIR={EMBEDDINGS_ROOT_DIR}, doc_path={doc_path}, doc_dir={doc_dir}")
+    docs_url = lambda x: metadata[key]["url"]  # noqa: E731
     return file_metadata_func(file_path, docs_url)
 
 
@@ -86,7 +95,6 @@ def got_whitespace(text: str) -> bool:
 
 
 if __name__ == "__main__":
-
     start_time = time.time()
 
     parser = argparse.ArgumentParser(description="embedding cli for task execution")
@@ -102,12 +110,8 @@ if __name__ == "__main__":
         "--model-name",
         help="HF repo id of the embedding model",
     )
-    parser.add_argument(
-        "-c", "--chunk", type=int, default=380, help="Chunk size for embedding"
-    )
-    parser.add_argument(
-        "-l", "--overlap", type=int, default=0, help="Chunk overlap for embedding"
-    )
+    parser.add_argument("-c", "--chunk", type=int, default=380, help="Chunk size for embedding")
+    parser.add_argument("-l", "--overlap", type=int, default=0, help="Chunk overlap for embedding")
     parser.add_argument(
         "-em",
         "--exclude-metadata",
@@ -121,8 +125,17 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print(f"Arguments used: {args}")
 
-    with open(Path(args.folder).joinpath("metadata.json")) as f:
-        metadata = json.load(f)
+    with open(
+        Path(args.folder).joinpath(args.aap_version).joinpath("metadata.json"),
+        encoding="utf8",
+    ) as f:
+        metadata_main = json.load(f)
+    with open(
+        Path(args.folder).joinpath("lightspeed-latest").joinpath("metadata.json"),
+        encoding="utf8",
+    ) as f:
+        metadata_lightspeed = json.load(f)
+        metadata = metadata_main | metadata_lightspeed
 
     # OLS-823: sanitize directory
     PERSIST_FOLDER = os.path.normpath("/" + args.output).lstrip("/")
@@ -169,7 +182,7 @@ if __name__ == "__main__":
             #     node.excluded_embed_metadata_keys.extend(args.exclude_metadata)
             good_nodes.append(node)
         else:
-            print("skipping node without whitespace: " + node.__repr__())
+            print("skipping node without whitespace: " + node.repr())
 
     # Create & save Index
     index = VectorStoreIndex(
@@ -179,22 +192,23 @@ if __name__ == "__main__":
     index.set_index_id(args.index)
     index.storage_context.persist(persist_dir=PERSIST_FOLDER)
 
-    metadata: dict = {}
-    metadata["execution-time"] = time.time() - start_time
-    metadata["llm"] = "None"
-    metadata["embedding-model"] = args.model_name
-    metadata["index-id"] = args.index
-    metadata["vector-db"] = "faiss.IndexFlatIP"
-    metadata["embedding-dimension"] = embedding_dimension
-    metadata["chunk"] = args.chunk
-    metadata["overlap"] = args.overlap
-    metadata["total-embedded-files"] = len(documents)
+    _metadata: dict = {}
+    _metadata["execution-time"] = time.time() - start_time
+    _metadata["llm"] = "None"
+    _metadata["embedding-model"] = args.model_name
+    _metadata["index-id"] = args.index
+    _metadata["vector-db"] = "faiss.IndexFlatIP"
+    _metadata["embedding-dimension"] = embedding_dimension
+    _metadata["chunk"] = args.chunk
+    _metadata["overlap"] = args.overlap
+    _metadata["total-embedded-files"] = len(documents)
 
-    with open(os.path.join(PERSIST_FOLDER, "metadata.json"), "w") as file:
-        file.write(json.dumps(metadata))
+    with open(os.path.join(PERSIST_FOLDER, "metadata.json"), "w", encoding="utf8") as file:
+        file.write(json.dumps(_metadata))
 
     if UNREACHABLE_DOCS > 0:
-        print("WARNING:\n"
+        print(
+            "WARNING:\n"
             f"There were documents with {UNREACHABLE_DOCS} unreachable URLs, "
             "grep the log for UNREACHABLE.\n"
             "Please update the plain text."
