@@ -65,14 +65,14 @@ For more information, see OpenStack credential type.
 
 # Remote command execution
 
-Use remote command execution to perform a simple tasks, such as adding a single user, updating a single security vulnerability, or restarting a failing service.
+Use remote command execution to perform a simple task, such as adding a single user, updating a single security vulnerability, or restarting a failing service.
 Any task that you can describe as a single Ansible play can be run on a host or group of hosts in your inventory.
 You can manage your systems quickly and easily.
 Because of an RBAC engine and detailed audit logging, you know which user has completed a specific task.
 
 # System tracking
 
-You can collect facts using the fact caching feature. For more information, see Fact Caching.
+You can collect facts by using the fact caching feature. For more information, see Fact Caching.
 
 # Integrated notifications
 
@@ -153,7 +153,7 @@ This increases reliability, offers faster job completion, and improved cluster u
 
 For example, you can change a parameter across 15,000 switches at scale, or gather information across your multi-thousand-node RHEL estate.
 
-For more information, see Job Slicing.
+For more information, see Job slicing.
 
 # Support for deployment in a FIPS-enabled environment
 

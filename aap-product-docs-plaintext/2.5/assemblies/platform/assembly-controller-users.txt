@@ -14,6 +14,8 @@ You can view User type and Email beside the user name on the Users page.
 
 The Users page displays the existing users for your installation. From here, you can search for a specific user, filter the list of users, or change the sort order for the list.
 
+When user accounts have been migrated to Ansible Automation Platform 2.5 during the upgrade process, these accounts are also displayed in the Users list view. Users previously designated as automation controller or automation hub administrators are labeled as Normal in the User type column. You can see whether these users have administrator privileges, by editing the account. See Editing a user for instructions.
+
 1. From the navigation panel, select menu:Access Management[Users].
 2. In the Search bar, enter an appropriate keyword for the user you want to search for and click the arrow icon.
 3. From the menu bar, you can sort the list of users by using the arrows for  Username, Email, First name, Last name or Last login to toggle your sorting preference.
@@ -53,10 +55,25 @@ If you log in as yourself, and view the details of your user profile, you can ma
 
 You can modify the properties of a user account after it is created.
 
+In upgrade scenarios, there might be pre-existing user accounts from automation controller or automation hub services. When editing these user accounts, the User type checkboxes indicate whether the account had service level administrator privileges. You can revoke or assign administrator permissions for the individual services and designate the user as either an Ansible Automation Platform Administrator, Ansible Automation Platform Auditor or normal user. Assigning administrator privileges to all of the individual services automatically designates the user as an Ansible Automation Platform Administrator. See Creating a user for more information about user types.
+
+To see whether a user had service level auditor privileges, you must refer to the API.
+
+
+[NOTE]
+----
+Users previously designated as automation controller or automation hub administrators are labeled as Normal in the User type column in the Users list view. You can see whether these users have administrator privileges, from the Edit Users page.
+----
+
 1. From the navigation panel, select menu:Access Management[Users].
 2. Select the check box for the user that you want to modify.
 3. Click the Pencil icon and select Edit user.
 4. The Edit user page is displayed where you can modify user details such as, Password, Email, User type, and Organization.
+
+[NOTE]
+----
+If the user account was migrated to Ansible Automation Platform 2.5 during the upgrade process and had administrator privileges for an individual service, additional User type checkboxes will be available. You can use these checkboxes to revoke or add individual privileges or designate the user as a platform administrator, system auditor or normal user.
+----
 5. After your changes are complete, click Save user.
 
 # Deleting a user

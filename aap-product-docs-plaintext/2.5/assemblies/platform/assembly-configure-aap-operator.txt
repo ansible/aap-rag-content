@@ -1,6 +1,6 @@
 # Configuring the Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
 
-The platform gateway for Ansible Automation Platform enables you to manage the following Ansible Automation Platform components to form a single user interface:
+The  platform gateway for Ansible Automation Platform enables you to manage the following Ansible Automation Platform components to form a single user interface:
 * Automation controller
 * Automation hub
 * Event-Driven Ansible
@@ -10,9 +10,9 @@ If you have not installed Ansible Automation Platform Operator see Installing th
 
 [NOTE]
 ----
-Platform gateway is only available under Ansible Automation Platform Operator version 2.5. Every component deployed under Ansible Automation Platform Operator 2.5 will also default to version 2.5.
+Platform gateway is only available under Ansible Automation Platform Operator version 2.5. Every component deployed under Ansible Automation Platform Operator 2.5 defaults to version 2.5.
 ----
-If you have the Ansible Automation Platform Operator and some or all of the Ansible Automation Platform components installed see Deploying the platform gateway with existing Ansible Automation Platform componentsfor how to proceed.
+If you have the Ansible Automation Platform Operator and some or all of the Ansible Automation Platform components installed see Deploying the platform gateway with existing Ansible Automation Platform components for how to proceed.
 
 # Linking your components to the platform gateway
 
@@ -76,7 +76,7 @@ This redirects you to the Analytics page.
 10. Click btn:[Next].
 
 You now have access to the platform gateway user interface.
-If you cannot access the Ansible Automation Platform see  for help with troubleshooting and debugging.
+If you cannot access the Ansible Automation Platform see Frequently asked questions on platform gateway for help with troubleshooting and debugging.
 
 # Deploying the platform gateway with existing Ansible Automation Platform components
 
@@ -93,47 +93,114 @@ The following procedure simulates a scenario where you have automation controlle
 7. Click btn:[YAML view] and copy in the following:
 
 ```
-    apiVersion: aap.ansible.com/v1alpha1
-        kind: AnsibleAutomationPlatform
-        metadata:
-          name: example-aap
-          namespace: aap
-        spec:
-          # Platform
-          image_pull_policy: IfNotPresent
-          # Components
-          controller:
-            disabled: false
-            name: existing-controller-name
-          eda:
-            disabled: false
-          hub:
-            disabled: false
-            ## uncomment if using file storage for Content pod
-            storage_type: file
-            file_storage_storage_class: <your-read-write-many-storage-class>
-            file_storage_size: 10Gi
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: example-aap
+  namespace: aap
+spec:
+  # Platform
+  image_pull_policy: IfNotPresent
 
-            ## uncomment if using S3 storage for Content pod
-            # storage_type: S3
-            # object_storage_s3_secret: example-galaxy-object-storage
+  # Components
+  controller:
+    disabled: false
+    name: existing-controller-name
+  eda:
+    disabled: false
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: <your-read-write-many-storage-class>
+    file_storage_size: 10Gi
 
-            ## uncomment if using Azure storage for Content pod
-            # storage_type: azure
-            # object_storage_azure_secret: azure-secret-name
-          lightspeed:
-            disabled: true
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage
 ```
 
 1. For new components, if you do not specify a name, a default name is generated.
 8. Click btn:[Create].
-9. To access your new instance, see .
+9. To access your new instance, see Accessing the platform gateway.
 
 
 [NOTE]
 ----
 If you have an existing controller with a managed Postgres pod, after creating the Ansible Automation Platform resource your automation controller instance will continue to use that original Postgres pod. If you were to do a fresh install you would have a single Postgres managed pod for all instances.
 ----
+
+# Configuring an external database for platform gateway on Red Hat Ansible Automation Platform Operator
+
+For users who prefer to deploy Ansible Automation Platform with an external database, they can do so by configuring a secret with instance credentials and connection information, then applying it to their cluster using the oc create command.
+
+By default, the Ansible Automation Platform Operator automatically creates and configures a managed PostgreSQL pod in the same namespace as your Ansible Automation Platform deployment. You can deploy Ansible Automation Platform with an external database instead of the managed PostgreSQL pod that the Ansible Automation Platform Operator automatically creates.
+
+Using an external database lets you share and reuse resources and manually manage backups, upgrades, and performance optimizations.
+
+
+[NOTE]
+----
+The same external database (PostgreSQL instance) can be used for both automation hub, automation controller, and platform gateway as long as the database names are different. In other words, you can have multiple databases with different names inside a single PostgreSQL instance.
+----
+
+The following section outlines the steps to configure an external database for your platform gateway on a Ansible Automation Platform Operator.
+
+The external database must be a PostgreSQL database that is the version supported by the current release of Ansible Automation Platform.
+
+
+[NOTE]
+----
+Ansible Automation Platform 2.5 supports PostgreSQL 15.
+----
+
+The external postgres instance credentials and connection information must be stored in a secret, which is then set on the platform gateway spec.
+
+1. Create a postgres_configuration_secret YAML file, following the template below:
+
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: external-postgres-configuration
+  namespace: <target_namespace> 1
+stringData:
+  host: "<external_ip_or_url_resolvable_by_the_cluster>" 2
+  port: "<external_port>" 3
+  database: "<desired_database_name>"
+  username: "<username_to_connect_as>"
+  password: "<password_to_connect_with>" 4
+  sslmode: "prefer" 5
+  type: "unmanaged"
+type: Opaque
+```
+
+Namespace to create the secret in. This should be the same namespace you want to deploy to.
+The resolvable hostname for your database node.
+External port defaults to 5432.
+Value for variable password should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
+The variable sslmode is valid for external databases only. The allowed values are: prefer, disable, allow, require, verify-ca, and verify-full.
+2. Apply external-postgres-configuration-secret.yml to your cluster using the oc create command.
+
+```
+$ oc create -f external-postgres-configuration-secret.yml
+```
+
+3. When creating your AnsibleAutomationPlatform custom resource object, specify the secret on your spec, following the example below:
+
+```
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: example-aap
+  Namespace: aap
+spec:
+  database:
+     database_secret: automation-platform-postgres-configuration
+```
+
 
 # Frequently asked questions on platform gateway
 

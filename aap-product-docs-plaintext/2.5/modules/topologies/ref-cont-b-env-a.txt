@@ -4,7 +4,7 @@ The enterprise topology is intended for organizations that require Ansible Autom
 
 # Infrastructure topology
 
-The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
+The following diagram outlines the infrastructure topology that Red&#160;Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 ![Container enterprise topology diagram]
 
@@ -12,21 +12,27 @@ Each VM has been tested with the following component requirements: 16 GB RAM, 4 
 
 
 
+
+[NOTE]
+----
+6 VMs are required for a Redis high availability (HA) compatible deployment. Redis can be colocated on each Ansible Automation Platform component VM except for automation controller, execution nodes, or the PostgreSQL database.
+----
+
 # Tested system configurations
 
-Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+Red&#160;Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
 
 
 
 # Network ports
 
-Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
 
 
 
 # Example enterprise inventory file
 
-Use the following example inventory file to perform an installation for this topology:
+Use the example inventory file to perform an installation for this topology:
 
 
 ```yaml
@@ -80,6 +86,8 @@ eda2.example.org
 # Common variables
 # https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
 # -----------------------------------------------------
+postgresql_admin_username=<set your own>
+postgresql_admin_password=<set your own>
 registry_username=<your RHN username>
 registry_password=<your RHN password>
 

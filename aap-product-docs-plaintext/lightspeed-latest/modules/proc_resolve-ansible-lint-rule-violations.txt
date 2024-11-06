@@ -1,0 +1,42 @@
+# Resolving ansible-lint rule violations
+
+By default, the content parser tool uses ansible-lint rules to scan your Ansible files and ensure that the content adheres to Ansible best practices. If rule violations are found, the content parser tool excludes these files from the generated output. In such scenarios, it is recommended that you fix the files with rule violations before uploading the training data set to IBM watsonx Code Assistant.
+By default, ansible-lint applies the rules that are configured in ansible-lint/src/ansiblelint/rules while scanning your Ansible files. For more information about ansible-lint rules, see the Ansible Lint documentation.
+
+# How does the content parser tool handle rule violations?
+
+* Using autofixes
+
+The content parser tool runs ansible-lint with the --fix=all option to perform autofixes, which can fix or simplify fixing issues identified by that rule.
+
+If ansible-lint identifies rule violations that have an associated autofix, it automatically fixes or simplifies the issues that violate the rules. If ansible-lint identifies rule violations that do not have an associated autofix, it reports these instances as rule violations which you must fix manually.
+For more information about autofixes, see Autofix in Ansible Lint Documentation.
+* Using syntax-checks
+
+Ansible-lint also performs syntax checks while scanning your Ansible files. If any syntax-check errors are found, ansible-lint stops processing the files.
+For more information about syntax-check errors, see syntax-check in Ansible Lint Documentation.
+
+The content parser tool handles syntax-check rule violations in the following manner:
+* If syntax-check errors are found in the first execution of ansible-lint, the content parser tool generates a list of files that contain the rule violations.
+* If one or more syntax-check errors are found in the first execution of ansible-lint, the content parser tool runs ansible-lint again but excludes the files with syntax-check errors. After the scan is completed, the content parser tool generates a list of files that contain rule violations. The list includes all files that caused syntax-check errors as well as other rule violations.  The content parser tool excludes files with rule violations in all future scans, and the final training data set does not include data from the excluded files.
+
+Use one of the following methods to resolve ansible-lint rule violations:
+
+* Run the content parser tool with the  --no-exclude option
+
+If any rule violations, including syntax-check errors, are found, the execution is aborted with an error and no training data set is created.
+* Limit the set of rules that ansible-lint uses to scan your data with the --profile option
+
+It is recommended that you fix the files with rule violations. However, if you do not want to modify the source files, you can limit the set of rules that ansible-lint uses to scan your data.
+To limit the set of rules that ansible-lint uses to scan your data, specify the --profile option with a predefined profile (for example, min, basic, moderate, safety, shared, or production profiles) or by using ansible-lint configuration files. For more information, see the Ansible Lint documentation.
+* Run the content parser tool by skipping ansible-lint preprocessing
+
+You can run the content parser without ansible-lint preprocessing. The content parser tool generates a training data set without scanning for ansible-lint rule violations.
+
+To run the content parser tool without ansible-lint preprocessing, execute the following command:
+$ ansible-content-parser source output -S
+
+Where:
+* source: Specifies the source of the training data set.
+* output: Specifies the output of the training data set.
+* -S or --skip-ansible-lint: Specifies to skip ansible-lint preprocessing while generating the training data set.

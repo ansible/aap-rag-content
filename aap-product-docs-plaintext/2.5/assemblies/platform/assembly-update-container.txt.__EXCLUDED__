@@ -4,11 +4,11 @@ To update your container-based Ansible Automation Platform, start by reviewing t
 
 # Updating container-based Ansible Automation Platform
 
-Perform a patch update for a container-based installation of Ansible Automation Platform.
+Perform a patch update for a container-based installation of Ansible Automation Platform from 2.5 to 2.5.x.
 
 You have done the following:
 
-* Reviewed the release notes for the associated patch release.
+* Reviewed the release notes for the associated patch release. For more information, see the Ansible Automation Platform Release notes.
 * Created a backup of your Ansible Automation Platform deployment. For more information, see Backing up controller-based Ansible Automation Platform.
 
 1. Download the latest version of the containerized installer from the Ansible Automation Platform download.
@@ -29,7 +29,7 @@ $ tar xfvz ansible-automation-platform-containerized-setup-<version>.tar.gz
 $ tar xfvz ansible-automation-platform-containerized-setup-bundle-<version>-<arch name>.tar.gz
 ```
 
-5. Edit the inventory file so that it matches your desired configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can modify the parameters to match any changes to your environment.
+5. Edit the inventory file so that it matches your required configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can change the parameters to match any modifications to your environment.
 6. Run the install command:
 
 ```
@@ -43,7 +43,7 @@ The installation will begin.
 
 # Backing up container-based Ansible Automation Platform
 
-Perform a back up of your container-based Ansible Automation Platform installer.
+Perform a back up of your container-based installation of Ansible Automation Platform.
 
 1. Go to the Red Hat Ansible Automation Platform installation directory on your Red Hat Enterprise Linux host.
 2. Run the backup.yml playbook:
@@ -58,4 +58,4 @@ This will backup the important data deployed by the containerized installer such
 * Configuration files
 * Data files
 
-By default, the backup directory is set to ~/backups but this can be changed by using the backup_dir variable in your inventory file.
+By default, the backup directory is set to ~/backups. You can change this by using the backup_dir variable in your inventory file.

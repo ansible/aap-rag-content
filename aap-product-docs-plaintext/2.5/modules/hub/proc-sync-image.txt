@@ -1,7 +1,7 @@
 # Syncing images from a container repository
 
-You can pull automation execution environmentss from the automation hub remote registry to sync an image to your local machine.
-To sync an automation execution environments from a remote registry, you must first configure a remote registry.
+You can pull automation execution environments from the automation hub remote registry to sync an image to your local machine.
+To sync an automation execution environment from a remote registry, you must first configure a remote registry.
 
 You must have permission to view and pull from a private container repository.
 
@@ -25,7 +25,7 @@ The Upstream name field is the name of the image on the remote server.
 For example, if the upstream name is set to "alpine" and the Name field is "local/alpine", the alpine image is downloaded from the remote and renamed to "local/alpine".
 ----
 7. Set a list of tags to include or exclude.
-Syncing automation execution environmentss with a large number of tags is time consuming and uses a lot of disk space.
+Syncing automation execution environments with a large number of tags is time consuming and uses a lot of disk space.
 
 * See Red Hat Container Registry Authentication for a list of registries.
 * See the What is Podman? documentation for options to use when pulling images.

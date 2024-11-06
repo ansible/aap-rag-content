@@ -103,7 +103,7 @@ You must specify which repository-specific tags to pass.
 
 # Pushing container images from your local environment
 
-Use the following procedure to sign automation execution environmentss on a local system and push those signed automation execution environmentss to the automation hub registry.
+Use the following procedure to sign automation execution environments on a local system and push those signed automation execution environments to the automation hub registry.
 
 1. From a terminal, log in to Podman, or any container client currently in use:
 

@@ -1,0 +1,17 @@
+# Creating Ansible Automation Platform custom resources
+
+Create an Ansible Automation Platform custom resource (CR) that specifies the names of your existing deployments, in the same namespace.
+
+You can find examples for Ansible Automation Platform CR for various deployment scenarios in the Appendix.
+
+1. For example, use the fresh install Ansible Automation Platform CR (aap-fresh-install.yml).
+2. Wait for the Ansible Automation Platform CR to show the Successful status.
+3. Navigate to the Route URL listed in the status (or the Routes page) to access the new CR.
+
+
+[NOTE]
+----
+You can override the operator’s default image for automation controller, automation hub, or platform-resource app images by specifying the preferred image on the YAML spec.
+This enables upgrading a specific deployment, like a controller, without updating the operator.
+The recommended approach however, is to upgrade the operator and use the default image values.
+----

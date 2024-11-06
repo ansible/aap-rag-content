@@ -57,42 +57,61 @@ spec:
   source: redhat-operators
   sourceNamespace: openshift-marketplace
 ---
-apiVersion: automationcontroller.ansible.com/v1beta1
-kind: AutomationController
-metadata:
-  name: example
-  namespace: ansible-automation-platform
-spec:
-  replicas: 1
 ```
 
 
 This file creates a Subscription object called ansible-automation-platform that subscribes the ansible-automation-platform namespace to the ansible-automation-platform-operator operator.
-
-It then creates an AutomationController object called example in the ansible-automation-platform namespace.
-
-To change the automation controller name from example, edit the name field in the kind: AutomationController section of sub.yaml and replace <automation_controller_name> with the name you want to use:
-
-```
-apiVersion: automationcontroller.ansible.com/v1beta1
-kind: AutomationController
-metadata:
-  name: <automation_controller_name>
-  namespace: ansible-automation-platform
-```
-
 4. Run the oc apply command to create the objects specified in the sub.yaml file:
 
 ```
 oc apply -f sub.yaml
 ```
 
-
-To verify that the namespace has been successfully subscribed to the ansible-automation-platform-operator operator, run the oc get subs command:
-
+5. Verify the CSV PHASE reports "Succeeded" before proceeding using the oc get csv -n ansible-automation-platform command:
 
 ```
-$ oc get subs -n ansible-automation-platform
+oc get csv -n ansible-automation-platform
+
+NAME                               DISPLAY                       VERSION              REPLACES                           PHASE
+aap-operator.v2.5.0-0.1728520175   Ansible Automation Platform   2.5.0+0.1728520175   aap-operator.v2.5.0-0.1727875185   Succeeded
+```
+
+6. Create an AnsibleAutomationPlatform object called example in the ansible-automation-platform namespace.
+
+To change the Ansible Automation Platform and its components from  from example, edit the name field in the metadata: section and replace example with the name you want to use:
+
+```
+oc apply -f - <<EOF
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: example
+  namespace: ansible-automation-platform
+spec:
+  # Platform
+  image_pull_policy: IfNotPresent
+  # Components
+  controller:
+    disabled: false
+  eda:
+    disabled: false
+  hub:
+    disabled: false
+    ## Modify to contain your RWM storage class name
+    storage_type: file
+    file_storage_storage_class: <your-read-write-many-storage-class>
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+  lightspeed:
+    disabled: true
+EOF
 ```
 
 
@@ -133,7 +152,7 @@ The address for the platform gateway instance is example-ansible-automation-plat
 
 ## Fetching the platform gateway password
 
-The YAML block for the platform gateway instance in sub.yaml assigns values to the name and admin_user keys.
+The YAML block for the platform gateway instance in the AnsibleAutomationPlatform object assigns values to the name and admin_user keys.
 Use these values in the following command to fetch the password for the platform gateway instance.
 
 
@@ -142,7 +161,7 @@ oc get secret/<your instance name>-<admin_user>-password -o yaml
 ```
 
 
-The default value for admin_user is admin. Modify the command if you changed the admin username in sub.yaml.
+The default value for admin_user is admin. Modify the command if you changed the admin username in the AnsibleAutomationPlatform object.
 
 The following example retrieves the password for a platform gateway object called example:
 
@@ -152,7 +171,7 @@ oc get secret/example-admin-password -o yaml
 ```
 
 
-The password for the platform gateway instance is listed in the metadata field in the output:
+The base64 encoded password for the platform gateway instance is listed in the metadata field in the output:
 
 
 ```

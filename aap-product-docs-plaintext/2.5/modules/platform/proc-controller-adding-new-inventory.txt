@@ -18,7 +18,6 @@ The Inventories window displays a list of the inventories that are currently ava
 * Optional: Description: Enter an arbitrary description as appropriate.
 * Organization: Required. Choose among the available organizations.
 * Only applicable to Smart Inventories: Smart host filter: Populate the hosts for this inventory by using a search filter.
-
 Example
 
 name__icontains=RedHat.

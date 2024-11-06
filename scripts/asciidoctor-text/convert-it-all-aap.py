@@ -1,15 +1,11 @@
 #!/usr/bin/python
-
+# pylint: disable=C0103,R1732
 """Utility script to convert AAP docs from adoc to plain text."""
-
 import argparse
 import os
 import re
 import subprocess
 import sys
-
-import yaml
-
 from pathlib import Path
 
 if __name__ == "__main__":
@@ -24,30 +20,29 @@ if __name__ == "__main__":
         required=True,
         help="The input directory for the aap-docs repo",
     )
-    parser.add_argument(
-        "--output-dir", "-o", required=True, help="The output directory for text"
-    )
-    parser.add_argument(
-        "--attributes", "-a", help="An optional file containing attributes"
-    )
+    parser.add_argument("--output-dir", "-o", required=True, help="The output directory for text")
+    parser.add_argument("--git-branch", "-b", help="aap-docs git branch name")
 
     args = parser.parse_args(sys.argv[1:])
 
+    doc_dir = "lightspeed" if args.git_branch == "lightspeed-latest" else "downstream"
+    attributes = f"aap-docs/{doc_dir}/attributes/attributes.adoc"
+
     attribute_map = {}
-    attribute_list: list = []   
-    if args.attributes is not None:
-        pattern = re.compile(r'^:(\w+):\s+(.+)\s*$')
-        for line in open(args.attributes, "r"):
+    attribute_list: list = []
+    if attributes is not None:
+        pattern = re.compile(r"^:(\w+):\s+(.+)\s*$")
+        for line in open(attributes, encoding="utf8"):
             line = line.strip()
-            if len(line) == 0 or line.startswith('//'):
+            if len(line) == 0 or line.startswith("//"):
                 continue
             m = pattern.match(line)
             if m:
                 attribute_map[m.group(1)] = m.group(2)
-        
+
         attribute_map_copy = attribute_map.copy()
-        pattern2 = re.compile(r'^.*{(\w+)}.*$')
-        for k,v in attribute_map.items():
+        pattern2 = re.compile(r"^.*{(\w+)}.*$")
+        for k, v in attribute_map.items():
             m = pattern2.match(v)
             if m:
                 key = m.group(1)
@@ -55,8 +50,8 @@ if __name__ == "__main__":
                     v = v.replace("{" + key + "}", attribute_map[key])
             attribute_map_copy[k] = v
 
-        for k,v in attribute_map_copy.items():
-            attribute_list = [*attribute_list, "-a", k + "=%s" % v]
+        for k, v in attribute_map_copy.items():
+            attribute_list = [*attribute_list, "-a", f"{k}={v}"]
         print(attribute_list)
 
     output_dir = os.path.normpath(args.output_dir)
@@ -68,7 +63,7 @@ if __name__ == "__main__":
 
     for filename in mega_file_list:
         input_file = str(filename)
-        filename = input_file.replace(args.input_dir + '/downstream/', '').replace(".adoc", "")
+        filename = input_file.replace(args.input_dir + f"/{doc_dir}/", "").replace(".adoc", "")
         output_file = os.path.join(output_dir, filename + ".txt")
         print(f"{input_file} -> {output_file}")
         os.makedirs(os.path.dirname(os.path.realpath(output_file)), exist_ok=True)

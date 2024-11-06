@@ -1,10 +1,10 @@
 # Pulling an image
 
-You can pull automation execution environmentss from the automation hub remote registry to make a copy to your local machine.
+You can pull automation execution environments from the automation hub remote registry to make a copy to your local machine.
 
 * You must have permission to view and pull from a private container repository.
 
-1. If you are pulling automation execution environmentss from a password or token-protected registry, create a credential before pulling the automation execution environments.
+1. If you are pulling automation execution environments from a password or token-protected registry, create a credential before pulling the automation execution environments.
 2. From the navigation panel, select menu:Automation Content[Execution Environments].
 3. Select your automation execution environments.
 4. In the Pull this image entry, click btn:[Copy to clipboard].

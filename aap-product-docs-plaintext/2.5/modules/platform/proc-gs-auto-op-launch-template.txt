@@ -12,4 +12,4 @@ The Templates list view shows job templates that are currently available. The de
 
 From this screen you can launch, edit, and copy a job template.
 
-For more information about templates see the Job templates and Workflow job templates sections of the Using automation execution.
+For more information about templates see the Job Templates and Workflow job templates sections of the Using automation execution guide.

@@ -1,6 +1,6 @@
 # Build and use an execution environment
 
-All automation in Red Hat Ansible Automation Platform runs on container images called automation execution environmentss.
+All automation in Red Hat Ansible Automation Platform runs on container images called automation execution environments.
 
 Automation execution environments are consistent and shareable container images that serve as Ansible control nodes.
 Automation execution environments reduce the challenge of sharing Ansible content that has external dependencies.

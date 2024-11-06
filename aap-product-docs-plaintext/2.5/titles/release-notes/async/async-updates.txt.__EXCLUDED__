@@ -1,19 +1,16 @@
-# Asynchronous updates
+# Patch releases
 
-Security, bug fix, and enhancement updates for Ansible Automation Platform 2.5 are released as asynchronous erratas. All Ansible Automation Platform erratas are available on the Download Red Hat Ansible Automation Platform page in the Customer Portal.
-As a Red Hat Customer Portal user, you can enable errata notifications in the account settings for Red Hat Subscription Management (RHSM). When errata notifications are enabled, you receive notifications through email whenever new erratas relevant to your registered systems are released.
+Security, bug fixes, and enhancements for Ansible Automation Platform 2.5 are released as asynchronous erratas. All Ansible Automation Platform erratas are available on the Download Red Hat Ansible Automation Platform page.
+
+As a Red&#160;Hat Customer Portal user, you can enable errata notifications in the account settings for Red&#160;Hat Subscription Management (RHSM). When errata notifications are enabled, you receive notifications through email whenever new erratas relevant to your registered systems are released.
+
 
 [NOTE]
 ----
 Red Hat Customer Portal user accounts must have systems registered and consuming Ansible Automation Platform entitlements for Ansible Automation Platform errata notification emails to generate.
 ----
-The Asynchronous updates section of the release notes will be updated over time to give notes on enhancements and bug fixes for asynchronous errata releases of Ansible Automation Platform 2.5.
+
+The patch releases section of the release notes will be updated over time to give notes on enhancements and bug fixes for patch releases of Ansible Automation Platform 2.5.
+
 * For more information about asynchronous errata support in Ansible Automation Platform, see Red Hat Ansible Automation Platform Life Cycle.
 * For information about Common Vulnerabilities and Exposures (CVEs), see What is a CVE? and Red Hat CVE Database.
-
-# RPM releases
-
-
-
-# Installer releases
-

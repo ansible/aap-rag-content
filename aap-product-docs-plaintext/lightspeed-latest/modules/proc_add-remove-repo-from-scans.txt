@@ -1,0 +1,12 @@
+# Adding or removing repositories from the Ansible code bot
+
+You can enable the Ansible code bot for a repository, or remove repositories that you no longer want to manage.
+
+1. Log in to the Ansible code bot dashboard.
+2. Click Manage Code Bot on GitHub.
+3. In GitHub, click your profile photo > Settings.
+4. Under Integrations, click Applications.
+5. From the Repository access area, perform one of the following tasks:
+* Add a new repository: From the Select repositories list, select the repository that you want to add. The newly-added repository is displayed on the Ansible code bot dashboard.
+* Remove an existing repository: From the Select repositories list, click the Cross icon beside the repository that you want to delete. The deleted repository details are no longer visible on the Ansible code bot dashboard.
+6. Click Save.

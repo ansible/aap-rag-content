@@ -7,6 +7,7 @@ then
 fi
 
 AAP_VERSION=$1
+LIGHTSPEED_LATEST=lightspeed-latest
 BASE_DIR=aap-product-docs-plaintext
 
 set -eou pipefail
@@ -17,15 +18,22 @@ if [ ! -d ${BASE_DIR} ]; then
     mkdir ${BASE_DIR}
 fi
 
-rm -rf ${BASE_DIR}/${AAP_VERSION}
+for git_branch in ${AAP_VERSION} ${LIGHTSPEED_LATEST}
+do
+  rm -rf ${BASE_DIR}/${git_branch}
+  git clone --single-branch --branch ${git_branch} https://github.com/ansible/aap-docs.git
+  python scripts/asciidoctor-text/convert-it-all-aap.py \
+    -i aap-docs \
+    -o ${BASE_DIR}/${git_branch}  \
+    -b ${git_branch}
 
-git clone --single-branch --branch ${AAP_VERSION} https://github.com/ansible/aap-docs.git
-
-python scripts/asciidoctor-text/convert-it-all-aap.py -i aap-docs \
-    -o ${BASE_DIR}/${AAP_VERSION} -a aap-docs/downstream/attributes/attributes.adoc
-
-python scripts/parse_aap_docs.py -i aap-docs -o ${BASE_DIR}/${AAP_VERSION}
-
-python scripts/filter_text_files.py -i ${BASE_DIR}/${AAP_VERSION}
-
-rm -rf ${BASE_DIR}/${AAP_VERSION}/archive
+  python scripts/parse_aap_docs.py \
+    -i aap-docs \
+    -o ${BASE_DIR}/${git_branch} \
+    -b ${git_branch}
+  python scripts/filter_text_files.py \
+    -i ${BASE_DIR}/${git_branch} \
+    -b ${git_branch}
+  rm -rf ${BASE_DIR}/${git_branch}/archive
+  rm -rf aap-docs
+done

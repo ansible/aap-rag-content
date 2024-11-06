@@ -1,6 +1,0 @@
-# Prerequisites
-
-To upgrade to a newer version of Ansible Automation Platform Operator, it is recommended that you do the following:
-
-* Create AutomationControllerBackup and AutomationHubBackup objects. For help with this see Creating Red Hat Ansible Automation Platform backup resources
-* Review the release notes for the new Ansible Automation Platform version to which you are upgrading and any intermediate versions.

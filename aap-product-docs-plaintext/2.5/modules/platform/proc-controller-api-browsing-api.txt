@@ -1,6 +1,6 @@
 1. Go to the automation controller REST API in a web browser at:
 
-https://&lt;server name&gt;/api/
+https://&lt;server name&gt;/api/controller/v2
 2. Click the "v2" link next to "current versions" or "available versions".
 Automation controller supports version 2 of the API.
 3. Perform a GET with just the /api/ endpoint to get the current_version, which is the recommended version.

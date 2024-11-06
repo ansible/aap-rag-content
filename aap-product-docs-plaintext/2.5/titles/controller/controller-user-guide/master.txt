@@ -78,14 +78,14 @@ For more information, see OpenStack credential type.
 
 ## Remote command execution
 
-Use remote command execution to perform a simple tasks, such as adding a single user, updating a single security vulnerability, or restarting a failing service.
+Use remote command execution to perform a simple task, such as adding a single user, updating a single security vulnerability, or restarting a failing service.
 Any task that you can describe as a single Ansible play can be run on a host or group of hosts in your inventory.
 You can manage your systems quickly and easily.
 Because of an RBAC engine and detailed audit logging, you know which user has completed a specific task.
 
 ## System tracking
 
-You can collect facts using the fact caching feature. For more information, see Fact Caching.
+You can collect facts by using the fact caching feature. For more information, see Fact Caching.
 
 ## Integrated notifications
 
@@ -166,7 +166,7 @@ This increases reliability, offers faster job completion, and improved cluster u
 
 For example, you can change a parameter across 15,000 switches at scale, or gather information across your multi-thousand-node RHEL estate.
 
-For more information, see Job Slicing.
+For more information, see Job slicing.
 
 ## Support for deployment in a FIPS-enabled environment
 
@@ -252,9 +252,9 @@ You can configure some automation controller options by using the Settings menu 
 
 The Settings page enables an administrator to configure the following:
 
-* Configuring Subscriptions
+* Configuring subscriptions
 * Platform gateway
-* User Preferences
+* User preferences
 * Configuring jobs
 * Setting up logging
 * Troubleshooting options
@@ -1755,7 +1755,7 @@ Only workflow templates have the workflow visualizer  icon as a shortcut for acc
 Workflow templates can be used as building blocks for another workflow template.
 You can enable Prompt on Launch by setting up several settings in a workflow template, which you can edit at the workflow job template level.
 These do not affect the values assigned at the individual workflow template level.
-For further instructions, see the Workflow Visualizer section.
+For further instructions, see the Workflow visualizer section.
 ----
 
 ## Creating a workflow job template
@@ -1850,7 +1850,7 @@ For more information on job surveys, including how to create a survey and option
 ## Workflow visualizer
 
 The Workflow Visualizer provides a graphical way of linking together job templates, workflow templates, project syncs, and inventory syncs to build a workflow template.
-Before you build a workflow template, see the Workflows section for considerations associated with various scenarios on parent, child, and sibling nodes.
+Before you build a workflow template, see the Workflows in automation controller section for considerations associated with various scenarios on parent, child, and sibling nodes.
 
 ### Building a workflow
 
@@ -2336,7 +2336,7 @@ For more information, see the link to the iCalendar RFC for bysetpos field in th
 * Count: The number of times this rule should be used.
 * Until: Use this rule until the specified date and time
 
-Click Save rule
+Click Save rule.
 The Schedule Rules summary page is displayed.
 
 Click Add rule to add additional rules.
@@ -2477,20 +2477,12 @@ For more information, see Job branch overriding.
 * Delete - Deletes the local repository in its entirety before  performing an update.
 Depending on the size of the repository this can significantly increase the amount of time required to complete an update.
 * Track submodules - Tracks the latest commit. There is more information in the tooltip .
-* Update revision on launch - Updates the revision of the project to the current revision in the remote source control, and caching the roles directory from Galaxy  or
-Collections support.
+* Update revision on launch - Updates the revision of the project to the current revision in the remote source control, and caching the roles directory from Ansible Galaxy support or Collections support.
 Automation controller ensures that the local revision matches and that the roles and collections are up-to-date with the last update.
 In addition, to avoid job overflows if jobs are spawned faster than the project can synchronize, selecting this enables you to configure a Cache Timeout to cache previous project synchronizations for a given number of seconds.
 * Allow branch override - Enables a job template or an inventory source that uses this project to start with a specified SCM branch or revision other than that of the project.
 For more information, see Job branch overriding.
 7. Click Save project.
-
-
-[TIP]
-----
-Using a GitHub link is an easy way to use a playbook.
-To help get you started, use the helloworld.yml file available here.
-----
 
 #### SCM Type - Configuring playbooks to use Red Hat Insights
 
@@ -2983,7 +2975,7 @@ The following link statuses are also shown in the Legend:
 You can use the Details page to remove the instance, run a health check on the instance on an as-needed basis, or unassign jobs from the instance. By default, jobs can be assigned to each node.
 However, you can disable it to exclude the node from having any jobs running on it.
 6. Additional resources
-For more information about creating new nodes and scaling the mesh, see Managing Capacity with Instances.
+For more information about creating new nodes and scaling the mesh, see Managing capacity with Instances.
 
 # Inventories
 
@@ -3214,7 +3206,7 @@ groups:
 limit: is_shutdown:&product_dev
 
 This constructed inventory input creates a group for both categories and uses the limit (host pattern) to only return hosts that
-are in the intersection of those two groups, which is documented in Patterns:targeting hosts and groups.
+are in the intersection of those two groups, which is documented in Patterns: targeting hosts and groups.
 
 When a variable is or is not defined (depending on the host), you can give a default.
 For example, use | default("running") if you know what value it should have when it is not defined.
@@ -3411,7 +3403,6 @@ The Inventories window displays a list of the inventories that are currently ava
 * Optional: Description: Enter an arbitrary description as appropriate.
 * Organization: Required. Choose among the available organizations.
 * Only applicable to Smart Inventories: Smart host filter: Populate the hosts for this inventory by using a search filter.
-
 Example
 
 name__icontains=RedHat.
@@ -3691,7 +3682,7 @@ The Notifications tab is only present when you have saved the newly-created sour
 ----
 4. If notifications are already set up, use the toggles to enable or disable the notifications to use with your particular source.
 For more information, see Enable and Disable Notifications.
-5. If you have not set up notifications, see Notifications for more information.
+5. If you have not set up notifications, see Notifiers for more information.
 6. Review your entries and selections.
 7. Click Save.
 
@@ -3729,7 +3720,8 @@ Use the following procedure to configure a project-sourced inventory:
 5. Enter the following details in the additional fields:
 * Optional: Source control branch/tag/commit: Enter the SCM branch, tags, commit hashes, arbitrary refs, or revision number (if applicable) from the source control (Git or Subversion) to checkout.
 
-This field only displays if the sourced project has the Allow branch override option checked. For further information, see SCM Types - Git and Subversion.
+This field only displays if the sourced project has the Allow branch override option checked.
+For further information, see SSCM Types - Configuring playbooks to use Git and Subversion.
 
 
 
@@ -4520,8 +4512,8 @@ The following view displays the capacity levels based on policy algorithms:
 
 ![Instance groups list view]
 
-* For more information about the policy or rules associated with instance groups, see the Instance Groups section of the Configuring automation execution.
-* For more information about connecting your instance group to a container, see Container Groups.
+* For more information about the policy or rules associated with instance groups, see the Instance groups section of the Configuring automation execution.
+* For more information about connecting your instance group to a container, see Container groups.
 
 ## Creating an instance group
 
@@ -4574,7 +4566,7 @@ Each job displays the following details:
 * Who started the job and applicable resources associated with it, such as the template, inventory, project, and execution environment
 
 The instances are run in accordance with instance group policies.
-For more information, see Instance Group Policies.
+For more information, see Instance group policies.
 
 # Instance and container groups
 
@@ -4883,7 +4875,44 @@ An OpenShift or Kubernetes Bearer Token.
 The following procedure explains how to create a service account in an OpenShift cluster or Kubernetes, to be used to run jobs in a container group through automation controller.
 After the service account is created, its credentials are provided to automation controller in the form of an OpenShift or Kubernetes API Bearer Token credential.
 
-1. To create a service account, download and use the sample service account, containergroup sa and modify it as needed to obtain the credentials.
+1. To create a service account, download and use the sample service account, containergroup sa and change it as needed to obtain the credentials:
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: containergroup-service-account
+  namespace: containergroup-namespace
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: role-containergroup-service-account
+  namespace: containergroup-namespace
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+- apiGroups: [""]
+  resources: ["pods/log"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+- apiGroups: [""]
+  resources: ["pods/attach"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: role-containergroup-service-account-binding
+  namespace: containergroup-namespace
+subjects:
+- kind: ServiceAccount
+  name: containergroup-service-account
+  namespace: containergroup-namespace
+roleRef:
+  kind: Role
+  name: role-containergroup-service-account
+  apiGroup: rbac.authorization.k8s.io
 2. Apply the configuration from containergroup-sa.yml:
 
 oc apply -f containergroup-sa.yml
@@ -4899,7 +4928,7 @@ oc get secret $SA_SECRET -o json | jq '.data["ca.crt"]' | xargs | base64 --decod
 6. Use the contents of containergroup-sa.token and containergroup-ca.crt to provide the information for the OpenShift or Kubernetes API Bearer Token required for the container group.
 
 To create a container group, create an OpenShift or Kubernetes API Bearer Token credential to use with your container group.
-For more information, see Creating a credential.
+For more information, see Creating new credentials.
 
 1. From the navigation panel, select .
 2. Click Create group and select Create container group.
@@ -5811,7 +5840,7 @@ If a user moves to a different team or leaves the organization, you do not have 
 [NOTE]
 ----
 Automation controller encrypts passwords and key information in the database and never makes secret information visible through the API.
-For further information, see the Configuring automation execution.
+For further information, see Configuring automation execution.
 ----
 
 ## How credentials work
@@ -5820,6 +5849,18 @@ Automation controller uses SSH to connect to remote hosts.
 To pass the key from automation controller to SSH, the key must be decrypted before it can be written to a named pipe.
 Automation controller uses that pipe to send the key to SSH, so that the key is never written to disk.
 If passwords are used, automation controller handles them by responding directly to the password prompt and decrypting the password before writing it to the prompt.
+
+
+[NOTE]
+----
+It is possible to create duplicate credentials with the same name and without an organization.
+However, it is not possible to create two duplicate credentials in the same organization.
+1. Create two machine credentials with the same name but without an organization.
+2. Use the module ansible.controller.export to export the credentials.
+3. Use the module ansible.controller.import in a different automation execution node.
+4. Check the imported credentials.
+When you export two duplicate credentials and then import them in a different node, only one credential is imported.
+----
 
 ## Creating new credentials
 
@@ -6000,7 +6041,7 @@ For more information, see CyberArk Conjur Secrets Manager Lookup.
 
 Select this credential to enable you to access GitHub by using a Personal Access Token (PAT), which you can get through GitHub.
 
-For more information, see Working with Webhooks.
+For more information, see Setting up a GitHub webhook.
 
 GitHub PAT credentials require a value in the Token field, which is provided in your GitHub profile settings.
 
@@ -6010,7 +6051,7 @@ Use this credential to establish an API connection to GitHub for use in webhook 
 
 Select this credential to enable you to access GitLab by using a Personal Access Token (PAT), which you can get through GitLab.
 
-For more information, see Working with Webhooks.
+For more information, see Setting up a GitLab webhook.
 
 GitLab PAT credentials require a value in the Token field, which is provided in your GitLab profile settings.
 
@@ -7354,7 +7395,7 @@ If you save the notifications template without editing the custom message (or ed
 * For more information, see Using variables with Jinja2 in the Ansible documentation.
 * Automation controller requires valid syntax to retrieve the correct data to display the messages.
 
-For a list of supported attributes and the proper syntax construction, see the Supported Attributes for Custom Notifications section.
+For a list of supported attributes and the proper syntax construction, see the Supported attributes for custom notifications section.
 
 ## Enable and disable notifications
 
@@ -7555,7 +7596,7 @@ Set up a webhook using the following services:
 
 * Setting up a GitHub webhook
 * Setting up a GitLab webhook
-* Viewing a payload output
+* Viewing the payload output
 
 The webhook post-status-back functionality for GitHub and GitLab is designed to work only under certain CI events.
 Receiving another kind of event results in messages such as the following in the service log:
@@ -7596,7 +7637,7 @@ You cannot access this token again in GitHub.
 3. Go to a GitHub repository where you want to configure webhooks and select .
 4. From the navigation panel, select .
 5. To complete the Add webhook page, you must check the Enable Webhook option in a job template or workflow job template.
-For more information, see step 3 in both Creating a job template and Creating a workflow template.
+For more information, see step 3 in both Creating a job template and Creating a workflow job template.
 6. Complete the following fields:
 * Payload URL: Copy the contents of the Webhook URL from the job template and paste it here.
 The results are sent to this address from GitHub.
@@ -7609,7 +7650,7 @@ To have the job status (pending, error, success) sent back to GitHub, you must s
 * Active: Leave this checked.
 7. Click Add webhook.
 8. When your webhook is configured, it is displayed in the list of webhooks active for your repository, along with the ability to edit or delete it.
-Click on a webhook, to go to the Manage webhook screen.
+Click a webhook, to go to the Manage webhook screen.
 9. Scroll to view the delivery attempts made to your webhook and whether they succeeded or failed.
 
 For more information, see the Webhooks documentation.
@@ -7645,7 +7686,7 @@ You cannot access this token again in GitLab.
 3. Go to a GitLab repository where you want to configure webhooks.
 4. From the navigation panel, select .
 5. To complete the Add webhook page, you must check the Enable Webhook option in a job template or workflow job template.
-For more information, see step 3 in both Creating a job template and Creating a workflow template.
+For more information, see step 3 in both Creating a job template and Creating a workflow job template.
 6. Complete the following fields:
 * URL: Copy the contents of the Webhook URL from the job template and paste it here.
 The results are sent to this address from GitLab.
@@ -7782,7 +7823,7 @@ For more information, see the link General tips from the Ansible documentation.
 [NOTE]
 ----
 * Avoid using the playbooks vars_prompt feature, as automation controller does not interactively permit vars_prompt questions.
-If you cannot avoid using vars_prompt, see the Surveys functionality.
+If you cannot avoid using vars_prompt, see the Surveys in job templates functionality.
 * Avoid using the playbooks pause feature without a timeout, as automation controller does not permit canceling a pause interactively.
 If you cannot avoid using pause, you must set a timeout.
 ----

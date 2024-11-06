@@ -1,0 +1,921 @@
+{
+  "lightspeed/aap-common/assembly-aap-common.adoc": {
+    "project_file_name": "lightspeed/aap-common/assembly-aap-common.adoc",
+    "path_name": "aap-docs/lightspeed/aap-common/assembly-aap-common.adoc",
+    "includes": [
+      "lightspeed/aap-common/making-open-source-more-inclusive.adoc"
+    ],
+    "url": null,
+    "id": "ansible-automation-platform",
+    "context": "aap-common",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/aap-common/external-site-disclaimer.adoc": {
+    "project_file_name": "lightspeed/aap-common/external-site-disclaimer.adoc",
+    "path_name": "aap-docs/lightspeed/aap-common/external-site-disclaimer.adoc",
+    "includes": [],
+    "url": null,
+    "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/aap-common/making-open-source-more-inclusive.adoc": {
+    "project_file_name": "lightspeed/aap-common/making-open-source-more-inclusive.adoc",
+    "path_name": "aap-docs/lightspeed/aap-common/making-open-source-more-inclusive.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#making-open-source-more-inclusive",
+    "id": "making-open-source-more-inclusive",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/aap-common/providing-direct-documentation-feedback.adoc": {
+    "project_file_name": "lightspeed/aap-common/providing-direct-documentation-feedback.adoc",
+    "path_name": "aap-docs/lightspeed/aap-common/providing-direct-documentation-feedback.adoc",
+    "includes": [],
+    "url": null,
+    "id": "providing-direct-documentation-feedback",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/assemblies/assembly-lightspeed-intro.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly-lightspeed-intro.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly-lightspeed-intro.adoc",
+    "includes": [
+      "lightspeed/modules/con-lightspeed-about.adoc",
+      "lightspeed/modules/con_lightspeed-key-features.adoc",
+      "lightspeed/modules/con_lightspeed-process.adoc",
+      "lightspeed/modules/con_training-data.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#lightspeed-intro",
+    "id": "lightspeed-intro",
+    "context": "lightspeed-intro",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_assigning-seat-licenses.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_assigning-seat-licenses.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_assigning-seat-licenses.adoc",
+    "includes": [
+      "lightspeed/modules/proc_assign-seat-licenses.adoc",
+      "lightspeed/modules/proc_remove-seat-licenses.adoc"
+    ],
+    "url": null,
+    "id": "assigning-seat-licenses_{context}",
+    "context": "assigning-seat-licenses",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_configure-code-assistant.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_configure-code-assistant.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_configure-code-assistant.adoc",
+    "includes": [
+      "lightspeed/modules/proc_log-in-administrator-portal.adoc",
+      "lightspeed/modules/proc_obtain-config-wca-and-model-id.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#configure-lightspeed-cloud-service_set-up-lightspeed",
+    "id": "configure-lightspeed-cloud-service_{context}",
+    "context": "configure-lightspeed-cloud-service",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_configuring-custom-models.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_configuring-custom-models.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_configuring-custom-models.adoc",
+    "includes": [
+      "lightspeed/modules/con_ansible-content-parser.adoc",
+      "lightspeed/modules/proc_install-content-parser.adoc",
+      "lightspeed/modules/proc_generate-training-data-set.adoc",
+      "lightspeed/modules/proc_view-content-parser-output.adoc",
+      "lightspeed/modules/proc_resolve-ansible-lint-rule-violations.adoc",
+      "lightspeed/modules/proc_merge-multiple-jsonl-files.adoc",
+      "lightspeed/modules/proc_create-deploy-custom-model-ibm.adoc",
+      "lightspeed/modules/proc_configure-custom-models-lightspeed.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#configuring-custom-models_set-up-lightspeed",
+    "id": "configuring-custom-models_{context}",
+    "context": "configuring-custom-models",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_configuring-lightspeed-onpremise.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_configuring-lightspeed-onpremise.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_configuring-lightspeed-onpremise.adoc",
+    "includes": [
+      "lightspeed/modules/con_overview-lightspeed-onpremise.adoc",
+      "lightspeed/modules/proc_install-aap-lightspeed-operator.adoc",
+      "lightspeed/modules/proc_create-oauth-app.adoc",
+      "lightspeed/modules/proc_create-connection-secrets.adoc",
+      "lightspeed/modules/proc_create-lightspeed-instance.adoc",
+      "lightspeed/modules/proc_update-redirect-uri.adoc",
+      "lightspeed/modules/proc_configure-vscode-extension-onpremise-deployment.adoc",
+      "lightspeed/modules/proc_update-connection-secrets.adoc",
+      "lightspeed/modules/proc_monitor-onpremise-deployment.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#configuring-lightspeed-onpremise_set-up-lightspeed",
+    "id": "configuring-lightspeed-onpremise_{context}",
+    "context": "configuring-lightspeed-onpremise",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_configuring-vscode-extension.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_configuring-vscode-extension.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_configuring-vscode-extension.adoc",
+    "includes": [
+      "lightspeed/modules/proc_install-vscode-extension.adoc",
+      "lightspeed/modules/proc_configure-vscode-extension.adoc",
+      "lightspeed/modules/proc_login-vscode-extension.adoc",
+      "lightspeed/modules/proc_log-out-of-portal.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#configuring-with-code-assistant_lightspeed-user-guide",
+    "id": "configuring-with-code-assistant_{context}",
+    "context": "configuring-with-code-assistant",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_generating-playbooks.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_generating-playbooks.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_generating-playbooks.adoc",
+    "includes": [
+      "lightspeed/modules/con_playbook-generation-best-practices.adoc",
+      "lightspeed/modules/proc_generate-playbook.adoc",
+      "lightspeed/modules/proc_view-playbook-explanation.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#generating-playbooks_lightspeed-user-guide",
+    "id": "generating-playbooks_{context}",
+    "context": "generating-playbooks",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_logging-in-lightspeed-admin-portal.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_logging-in-lightspeed-admin-portal.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_logging-in-lightspeed-admin-portal.adoc",
+    "includes": [
+      "lightspeed/modules/proc_log-in-administrator-portal.adoc"
+    ],
+    "url": null,
+    "id": "logging-in-lightspeed-admin-portal_{context}",
+    "context": "logging-in-lightspeed-admin-portal",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_logging-in-out-portal.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_logging-in-out-portal.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_logging-in-out-portal.adoc",
+    "includes": [
+      "lightspeed/modules/proc_log-into-portal.adoc",
+      "lightspeed/modules/proc_log-out-of-portal.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#logging-in-out-portal_lightspeed-user-guide",
+    "id": "logging-in-out-portal_{context}",
+    "context": "logging-in-out-lightspeed-portal",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_managing-admin-dashboard-telemetry.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_managing-admin-dashboard-telemetry.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_managing-admin-dashboard-telemetry.adoc",
+    "includes": [
+      "lightspeed/modules/proc_view-admin-dashboard.adoc",
+      "lightspeed/modules/proc_disable-admin-dashboard-telemetry.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#managing-admin-dashboard-telemetry_lightspeed-user-guide",
+    "id": "managing-admin-dashboard-telemetry_{context}",
+    "context": "managing-admin-dashboard-telemetry",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_requesting-task-recommendations.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_requesting-task-recommendations.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_requesting-task-recommendations.adoc",
+    "includes": [
+      "lightspeed/modules/con_overview-and-best-practices.adoc",
+      "lightspeed/modules/proc_single-task-recs.adoc",
+      "lightspeed/modules/proc_multi-task-recs.adoc",
+      "lightspeed/modules/proc_view-training-matches.adoc",
+      "lightspeed/modules/proc_provide-feedback.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#requesting-task-recommendations_lightspeed-user-guide",
+    "id": "requesting-task-recommendations_{context}",
+    "context": "requesting-task-recommendations",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_setting-up-lightspeed.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_setting-up-lightspeed.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_setting-up-lightspeed.adoc",
+    "includes": [
+      "lightspeed/modules/con_wca-key-model-id.adoc",
+      "lightspeed/assemblies/assembly_configure-code-assistant.adoc",
+      "lightspeed/assemblies/assembly_configuring-lightspeed-onpremise.adoc",
+      "lightspeed/assemblies/assembly_configuring-custom-models.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#set-up-lightspeed_lightspeed-user-guide",
+    "id": "set-up-lightspeed_{context}",
+    "context": "set-up-lightspeed",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_starting-lightspeed-trial.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_starting-lightspeed-trial.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_starting-lightspeed-trial.adoc",
+    "includes": [
+      "lightspeed/modules/proc_start-lightspeed-trial.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#start-lightspeed-trial_lightspeed-user-guide",
+    "id": "start-lightspeed-trial_{context}",
+    "context": "start-lightspeed-trial",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_troubleshooting-lightspeed.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_troubleshooting-lightspeed.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_troubleshooting-lightspeed.adoc",
+    "includes": [
+      "lightspeed/modules/proc_troubleshooting-lightspeed-config.adoc",
+      "lightspeed/modules/proc_troubleshooting-lightspeed-onpremise-config.adoc",
+      "lightspeed/modules/proc_troubleshooting-vscode.adoc",
+      "lightspeed/modules/proc_troubleshooting-code-bot.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#troubleshooting-lightspeed_lightspeed-user-guide",
+    "id": "troubleshooting-lightspeed_{context}",
+    "context": "troubleshooting-lightspeed",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/assemblies/assembly_using-code-bot-for-suggestions.adoc": {
+    "project_file_name": "lightspeed/assemblies/assembly_using-code-bot-for-suggestions.adoc",
+    "path_name": "aap-docs/lightspeed/assemblies/assembly_using-code-bot-for-suggestions.adoc",
+    "includes": [
+      "lightspeed/modules/proc_install-code-bot.adoc",
+      "lightspeed/modules/con-manage-repo-scans.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#using-code-bot-for-suggestions_lightspeed-user-guide",
+    "id": "using-code-bot-for-suggestions_{context}",
+    "context": "using-code-bot-for-suggestions",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/attributes/attributes.adoc": {
+    "project_file_name": "lightspeed/attributes/attributes.adoc",
+    "path_name": "aap-docs/lightspeed/attributes/attributes.adoc",
+    "includes": [],
+    "url": null,
+    "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/con-lightspeed-about.adoc": {
+    "project_file_name": "lightspeed/modules/con-lightspeed-about.adoc",
+    "path_name": "aap-docs/lightspeed/modules/con-lightspeed-about.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#lightspeed-about_lightspeed-intro",
+    "id": "lightspeed-about_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/con-manage-repo-scans.adoc": {
+    "project_file_name": "lightspeed/modules/con-manage-repo-scans.adoc",
+    "path_name": "aap-docs/lightspeed/modules/con-manage-repo-scans.adoc",
+    "includes": [
+      "lightspeed/modules/proc_manually-scan-repo.adoc",
+      "lightspeed/modules/proc_configure-repo-scan.adoc",
+      "lightspeed/modules/proc_view-repo-scan-history.adoc",
+      "lightspeed/modules/proc_add-remove-repo-from-scans.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#manage-repo-scans_using-code-bot-for-suggestions",
+    "id": "manage-repo-scans_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/con_ansible-content-parser.adoc": {
+    "project_file_name": "lightspeed/modules/con_ansible-content-parser.adoc",
+    "path_name": "aap-docs/lightspeed/modules/con_ansible-content-parser.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#ansible-content-parser_configuring-custom-models",
+    "id": "ansible-content-parser_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/con_lightspeed-key-features.adoc": {
+    "project_file_name": "lightspeed/modules/con_lightspeed-key-features.adoc",
+    "path_name": "aap-docs/lightspeed/modules/con_lightspeed-key-features.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#lightspeed-key-features_lightspeed-intro",
+    "id": "lightspeed-key-features_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/con_lightspeed-process.adoc": {
+    "project_file_name": "lightspeed/modules/con_lightspeed-process.adoc",
+    "path_name": "aap-docs/lightspeed/modules/con_lightspeed-process.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#lightspeed-process_lightspeed-intro",
+    "id": "lightspeed-process_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/con_overview-and-best-practices.adoc": {
+    "project_file_name": "lightspeed/modules/con_overview-and-best-practices.adoc",
+    "path_name": "aap-docs/lightspeed/modules/con_overview-and-best-practices.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#overview-and-best-practices_requesting-task-recommendations",
+    "id": "overview-and-best-practices_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/con_overview-lightspeed-onpremise.adoc": {
+    "project_file_name": "lightspeed/modules/con_overview-lightspeed-onpremise.adoc",
+    "path_name": "aap-docs/lightspeed/modules/con_overview-lightspeed-onpremise.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#overview-lightspeed-onpremise_configuring-lightspeed-onpremise",
+    "id": "overview-lightspeed-onpremise_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/con_playbook-generation-best-practices.adoc": {
+    "project_file_name": "lightspeed/modules/con_playbook-generation-best-practices.adoc",
+    "path_name": "aap-docs/lightspeed/modules/con_playbook-generation-best-practices.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#playbook-generation-best-practices_generating-playbooks",
+    "id": "playbook-generation-best-practices_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/con_telemetry-data-collection-notice.adoc": {
+    "project_file_name": "lightspeed/modules/con_telemetry-data-collection-notice.adoc",
+    "path_name": "aap-docs/lightspeed/modules/con_telemetry-data-collection-notice.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#telemetry-data-collection-notice_lightspeed-intro",
+    "id": "telemetry-data-collection-notice_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/con_training-data.adoc": {
+    "project_file_name": "lightspeed/modules/con_training-data.adoc",
+    "path_name": "aap-docs/lightspeed/modules/con_training-data.adoc",
+    "includes": [
+      "lightspeed/modules/con_telemetry-data-collection-notice.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#training-data_lightspeed-intro",
+    "id": "training-data_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/con_wca-key-model-id.adoc": {
+    "project_file_name": "lightspeed/modules/con_wca-key-model-id.adoc",
+    "path_name": "aap-docs/lightspeed/modules/con_wca-key-model-id.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#wca-key-model-id_set-up-lightspeed",
+    "id": "wca-key-model-id_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_add-remove-repo-from-scans.adoc": {
+    "project_file_name": "lightspeed/modules/proc_add-remove-repo-from-scans.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_add-remove-repo-from-scans.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#add-remove-repo-from-scans_using-code-bot-for-suggestions",
+    "id": "add-remove-repo-from-scans_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_assign-seat-licenses.adoc": {
+    "project_file_name": "lightspeed/modules/proc_assign-seat-licenses.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_assign-seat-licenses.adoc",
+    "includes": [],
+    "url": null,
+    "id": "assign-seat-licenses_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_configure-custom-models-lightspeed.adoc": {
+    "project_file_name": "lightspeed/modules/proc_configure-custom-models-lightspeed.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_configure-custom-models-lightspeed.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#configure-custom-models-lightspeed_configuring-custom-models",
+    "id": "configure-custom-models-lightspeed_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_configure-repo-scan.adoc": {
+    "project_file_name": "lightspeed/modules/proc_configure-repo-scan.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_configure-repo-scan.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#configure-repo-scan_using-code-bot-for-suggestions",
+    "id": "configure-repo-scan_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_configure-vscode-extension-onpremise-deployment.adoc": {
+    "project_file_name": "lightspeed/modules/proc_configure-vscode-extension-onpremise-deployment.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_configure-vscode-extension-onpremise-deployment.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#configure-vscode-extension-onpremise-deployment_configuring-lightspeed-onpremise",
+    "id": "configure-vscode-extension-onpremise-deployment_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_configure-vscode-extension.adoc": {
+    "project_file_name": "lightspeed/modules/proc_configure-vscode-extension.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_configure-vscode-extension.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#configure-vscode-extension_configuring-with-code-assistant",
+    "id": "configure-vscode-extension_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_create-connection-secrets.adoc": {
+    "project_file_name": "lightspeed/modules/proc_create-connection-secrets.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_create-connection-secrets.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#create-connection-secrets_configuring-lightspeed-onpremise",
+    "id": "create-connection-secrets_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_create-deploy-custom-model-ibm.adoc": {
+    "project_file_name": "lightspeed/modules/proc_create-deploy-custom-model-ibm.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_create-deploy-custom-model-ibm.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#create-deploy-custom-model-ibm_configuring-custom-models",
+    "id": "create-deploy-custom-model-ibm_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_create-lightspeed-instance.adoc": {
+    "project_file_name": "lightspeed/modules/proc_create-lightspeed-instance.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_create-lightspeed-instance.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#create-lightspeed-instance_configuring-lightspeed-onpremise",
+    "id": "create-lightspeed-instance_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_create-oauth-app.adoc": {
+    "project_file_name": "lightspeed/modules/proc_create-oauth-app.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_create-oauth-app.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#create-oauth-app_configuring-lightspeed-onpremise",
+    "id": "create-oauth-app_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_disable-admin-dashboard-telemetry.adoc": {
+    "project_file_name": "lightspeed/modules/proc_disable-admin-dashboard-telemetry.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_disable-admin-dashboard-telemetry.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#disable-admin-dashboard-telemetry_managing-admin-dashboard-telemetry",
+    "id": "disable-admin-dashboard-telemetry_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_generate-playbook.adoc": {
+    "project_file_name": "lightspeed/modules/proc_generate-playbook.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_generate-playbook.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#generate-playbook_generating-playbooks",
+    "id": "generate-playbook_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_generate-training-data-set.adoc": {
+    "project_file_name": "lightspeed/modules/proc_generate-training-data-set.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_generate-training-data-set.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#generate-training-data-set_configuring-custom-models",
+    "id": "generate-training-data-set_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_install-aap-lightspeed-operator.adoc": {
+    "project_file_name": "lightspeed/modules/proc_install-aap-lightspeed-operator.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_install-aap-lightspeed-operator.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#install-aap-lightspeed-operator_configuring-lightspeed-onpremise",
+    "id": "install-aap-lightspeed-operator_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_install-code-bot.adoc": {
+    "project_file_name": "lightspeed/modules/proc_install-code-bot.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_install-code-bot.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#install-code-bot_using-code-bot-for-suggestions",
+    "id": "install-code-bot_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_install-content-parser.adoc": {
+    "project_file_name": "lightspeed/modules/proc_install-content-parser.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_install-content-parser.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#install-content-parser_configuring-custom-models",
+    "id": "install-content-parser_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_install-vscode-extension.adoc": {
+    "project_file_name": "lightspeed/modules/proc_install-vscode-extension.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_install-vscode-extension.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#install-vscode-extension_configuring-with-code-assistant",
+    "id": "install-vscode-extension_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_log-in-administrator-portal.adoc": {
+    "project_file_name": "lightspeed/modules/proc_log-in-administrator-portal.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_log-in-administrator-portal.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#log-in-administrator-portal_configure-lightspeed-cloud-service",
+    "id": "log-in-administrator-portal_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_log-into-portal.adoc": {
+    "project_file_name": "lightspeed/modules/proc_log-into-portal.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_log-into-portal.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#log-into-portal_logging-in-out-lightspeed-portal",
+    "id": "log-into-portal_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_log-out-of-portal.adoc": {
+    "project_file_name": "lightspeed/modules/proc_log-out-of-portal.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_log-out-of-portal.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#log-out-of-portal_logging-in-out-lightspeed-portal",
+    "id": "log-out-of-portal_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_login-vscode-extension.adoc": {
+    "project_file_name": "lightspeed/modules/proc_login-vscode-extension.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_login-vscode-extension.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#login-vscode-extension_configuring-with-code-assistant",
+    "id": "login-vscode-extension_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_manually-scan-repo.adoc": {
+    "project_file_name": "lightspeed/modules/proc_manually-scan-repo.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_manually-scan-repo.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#manually-scan-repo_using-code-bot-for-suggestions",
+    "id": "manually-scan-repo_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_merge-multiple-jsonl-files.adoc": {
+    "project_file_name": "lightspeed/modules/proc_merge-multiple-jsonl-files.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_merge-multiple-jsonl-files.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#merge-multiple-jsonl-files_configuring-custom-models",
+    "id": "merge-multiple-jsonl-files_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_monitor-onpremise-deployment.adoc": {
+    "project_file_name": "lightspeed/modules/proc_monitor-onpremise-deployment.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_monitor-onpremise-deployment.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#monitor-lightspeed-onpremise-deployment_configuring-lightspeed-onpremise",
+    "id": "monitor-lightspeed-onpremise-deployment_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_multi-task-recs.adoc": {
+    "project_file_name": "lightspeed/modules/proc_multi-task-recs.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_multi-task-recs.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#multi-task-recs_requesting-task-recommendations",
+    "id": "multi-task-recs_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_obtain-config-wca-and-model-id.adoc": {
+    "project_file_name": "lightspeed/modules/proc_obtain-config-wca-and-model-id.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_obtain-config-wca-and-model-id.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#obtain-config-wca-and-model-id_configure-lightspeed-cloud-service",
+    "id": "obtain-config-wca-and-model-id_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_provide-feedback.adoc": {
+    "project_file_name": "lightspeed/modules/proc_provide-feedback.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_provide-feedback.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#provide-feedback_requesting-task-recommendations",
+    "id": "provide-feedback_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_remove-seat-licenses.adoc": {
+    "project_file_name": "lightspeed/modules/proc_remove-seat-licenses.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_remove-seat-licenses.adoc",
+    "includes": [],
+    "url": null,
+    "id": "remove-seat-licenses_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_resolve-ansible-lint-rule-violations.adoc": {
+    "project_file_name": "lightspeed/modules/proc_resolve-ansible-lint-rule-violations.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_resolve-ansible-lint-rule-violations.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#resolve-ansible-lint-rule-violations_configuring-custom-models",
+    "id": "resolve-ansible-lint-rule-violations_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_single-task-recs.adoc": {
+    "project_file_name": "lightspeed/modules/proc_single-task-recs.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_single-task-recs.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#single-task-recs_requesting-task-recommendations",
+    "id": "single-task-recs_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_start-lightspeed-trial.adoc": {
+    "project_file_name": "lightspeed/modules/proc_start-lightspeed-trial.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_start-lightspeed-trial.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#start-lightspeed-trial_start-lightspeed-trial",
+    "id": "start-lightspeed-trial_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_troubleshooting-code-bot.adoc": {
+    "project_file_name": "lightspeed/modules/proc_troubleshooting-code-bot.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_troubleshooting-code-bot.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#troubleshooting-code-bot_troubleshooting-lightspeed",
+    "id": "troubleshooting-code-bot_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_troubleshooting-lightspeed-config.adoc": {
+    "project_file_name": "lightspeed/modules/proc_troubleshooting-lightspeed-config.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_troubleshooting-lightspeed-config.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#troubleshooting-lightspeed-config_troubleshooting-lightspeed",
+    "id": "troubleshooting-lightspeed-config_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_troubleshooting-lightspeed-onpremise-config.adoc": {
+    "project_file_name": "lightspeed/modules/proc_troubleshooting-lightspeed-onpremise-config.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_troubleshooting-lightspeed-onpremise-config.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#troubleshooting-lightspeed-onpremise-config_troubleshooting-lightspeed",
+    "id": "troubleshooting-lightspeed-onpremise-config_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_troubleshooting-vscode.adoc": {
+    "project_file_name": "lightspeed/modules/proc_troubleshooting-vscode.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_troubleshooting-vscode.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#troubleshooting-vscode_troubleshooting-lightspeed",
+    "id": "troubleshooting-vscode_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_update-connection-secrets.adoc": {
+    "project_file_name": "lightspeed/modules/proc_update-connection-secrets.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_update-connection-secrets.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#update-connection-secrets_configuring-lightspeed-onpremise",
+    "id": "update-connection-secrets_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_update-redirect-uri.adoc": {
+    "project_file_name": "lightspeed/modules/proc_update-redirect-uri.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_update-redirect-uri.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#update-redirect-uri_configuring-lightspeed-onpremise",
+    "id": "update-redirect-uri_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_view-admin-dashboard.adoc": {
+    "project_file_name": "lightspeed/modules/proc_view-admin-dashboard.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_view-admin-dashboard.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#view-admin-dashboard_managing-admin-dashboard-telemetry",
+    "id": "view-admin-dashboard_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_view-content-parser-output.adoc": {
+    "project_file_name": "lightspeed/modules/proc_view-content-parser-output.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_view-content-parser-output.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#view-content-parser-output_configuring-custom-models",
+    "id": "view-content-parser-output_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_view-playbook-explanation.adoc": {
+    "project_file_name": "lightspeed/modules/proc_view-playbook-explanation.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_view-playbook-explanation.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#view-playbook-explanation_generating-playbooks",
+    "id": "view-playbook-explanation_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_view-repo-scan-history.adoc": {
+    "project_file_name": "lightspeed/modules/proc_view-repo-scan-history.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_view-repo-scan-history.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#view-repo-scan-history_using-code-bot-for-suggestions",
+    "id": "view-repo-scan-history_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/modules/proc_view-training-matches.adoc": {
+    "project_file_name": "lightspeed/modules/proc_view-training-matches.adoc",
+    "path_name": "aap-docs/lightspeed/modules/proc_view-training-matches.adoc",
+    "includes": [],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#view-training-matches_requesting-task-recommendations",
+    "id": "view-training-matches_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/snippets/assembly-rn-template.adoc": {
+    "project_file_name": "lightspeed/snippets/assembly-rn-template.adoc",
+    "path_name": "aap-docs/lightspeed/snippets/assembly-rn-template.adoc",
+    "includes": [],
+    "url": null,
+    "id": "rn-<release-date>",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "lightspeed/titles/lightspeed-release-notes/master.adoc": {
+    "project_file_name": "lightspeed/titles/lightspeed-release-notes/master.adoc",
+    "path_name": "aap-docs/lightspeed/titles/lightspeed-release-notes/master.adoc",
+    "includes": [
+      "lightspeed/attributes/attributes.adoc",
+      "lightspeed/aap-common/making-open-source-more-inclusive.adoc",
+      "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-intro.adoc",
+      "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-august2024.adoc",
+      "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-june2024.adoc",
+      "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-7march2024.adoc",
+      "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-15feb2024.adoc",
+      "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-25oct2023.adoc"
+    ],
+    "url": null,
+    "id": null,
+    "context": "lightspeed-release-notes",
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-intro.adoc": {
+    "project_file_name": "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-intro.adoc",
+    "path_name": "aap-docs/lightspeed/titles/lightspeed-release-notes/modules/lightspeed-intro.adoc",
+    "includes": [],
+    "url": null,
+    "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-15feb2024.adoc": {
+    "project_file_name": "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-15feb2024.adoc",
+    "path_name": "aap-docs/lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-15feb2024.adoc",
+    "includes": [],
+    "url": null,
+    "id": "lightspeed-key-features-15feb2024_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-25oct2023.adoc": {
+    "project_file_name": "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-25oct2023.adoc",
+    "path_name": "aap-docs/lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-25oct2023.adoc",
+    "includes": [],
+    "url": null,
+    "id": "lightspeed-key-features-25oct2023_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-7march2024.adoc": {
+    "project_file_name": "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-7march2024.adoc",
+    "path_name": "aap-docs/lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-7march2024.adoc",
+    "includes": [],
+    "url": null,
+    "id": "lightspeed-key-features-7march2024_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-august2024.adoc": {
+    "project_file_name": "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-august2024.adoc",
+    "path_name": "aap-docs/lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-august2024.adoc",
+    "includes": [],
+    "url": null,
+    "id": "lightspeed-key-features-august2024_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-june2024.adoc": {
+    "project_file_name": "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-june2024.adoc",
+    "path_name": "aap-docs/lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-june2024.adoc",
+    "includes": [],
+    "url": null,
+    "id": "lightspeed-key-features-june2024_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/titles/lightspeed-user-guide/master.adoc": {
+    "project_file_name": "lightspeed/titles/lightspeed-user-guide/master.adoc",
+    "path_name": "aap-docs/lightspeed/titles/lightspeed-user-guide/master.adoc",
+    "includes": [
+      "lightspeed/attributes/attributes.adoc",
+      "lightspeed/aap-common/making-open-source-more-inclusive.adoc",
+      "lightspeed/assemblies/assembly-lightspeed-intro.adoc",
+      "lightspeed/assemblies/assembly_starting-lightspeed-trial.adoc",
+      "lightspeed/assemblies/assembly_setting-up-lightspeed.adoc",
+      "lightspeed/assemblies/assembly_logging-in-out-portal.adoc",
+      "lightspeed/assemblies/assembly_configuring-vscode-extension.adoc",
+      "lightspeed/assemblies/assembly_requesting-task-recommendations.adoc",
+      "lightspeed/assemblies/assembly_generating-playbooks.adoc",
+      "lightspeed/assemblies/assembly_using-code-bot-for-suggestions.adoc",
+      "lightspeed/assemblies/assembly_managing-admin-dashboard-telemetry.adoc",
+      "lightspeed/assemblies/assembly_troubleshooting-lightspeed.adoc"
+    ],
+    "url": "https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index",
+    "id": null,
+    "context": "lightspeed-user-guide",
+    "content_type": null,
+    "nesting_assembly": false
+  }
+}

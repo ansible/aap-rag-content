@@ -660,7 +660,43 @@ If your rulebook activation received the event data from the event stream type y
 
 # Red Hat Ansible Automation Platform credential
 
-The Red Hat Ansible Automation Platform credential type can connect to automation controller through the use of an automation controller URL and a username and password. After you have created this credential type, it can be attached to a rulebook and used to run rulebook activations.
+When Event-Driven Ansible controller is deployed on Ansible Automation Platform 2.5, you can create a Red Hat Ansible Automation Platform credential to connect to automation controller through the use of an automation controller URL and a username and password. After it has been created, you can attach the Red Hat Ansible Automation Platform credential to a rulebook and use it to run rulebook activations. These credentials provide a simple way to configure communication between automation controller and Event-Driven Ansible controller, enabling your rulebook activations to launch job templates.
+
+
+[NOTE]
+----
+If you deployed Event-Driven Ansible controller with Ansible Automation Platform 2.4, you probably used controller tokens to connect automation controller and Event-Driven Ansible controller. These controller tokens have been deprecated in Ansible Automation Platform 2.5. To delete deprecated controller tokens and the rulebook activations associated with them, complete the following procedures starting with Replacing controller tokens in Ansible Automation Platform 2.5 before proceeding with Setting up a Red Hat Ansible Automation Platform credential.
+----
+
+## Replacing controller tokens in Red Hat Ansible Automation Platform 2.5
+
+To use Event-Driven Ansible controller in Red Hat Ansible Automation Platform 2.5, you must replace legacy controller tokens configured in your environment with Red Hat Ansible Automation Platform credentials because controller tokens have been deprecated.
+
+### Deleting rulebook activations with controller tokens
+
+To replace the controller tokens, you must delete the rulebook activations that were associated with them.
+
+1. Log in to the Ansible Automation Platform Dashboard.
+2. From the top navigation panel, select .
+3. Select the rulebook activations that have controller tokens.
+4. Select the More Actions icon &#8942; next to the Rulebook Activation enabled/disabled toggle.
+5. Select Delete rulebook activation.
+6. In the window, select Yes, I confirm that I want to delete these X rulebook activations.
+7. Select Delete rulebook activations.
+
+### Deleting controller tokens
+
+Before you can set up Red Hat Ansible Automation Platform credentials, you must delete any existing controller tokens.
+
+* You have deleted all rulebook activations that use controller tokens.
+
+1. Log in to the Ansible Automation Platform Dashboard.
+2. From the top navigation panel, select your profile.
+3. Click User details.
+4. Select the Tokens tab.
+5. Delete all of your previous controller tokens.
+
+After deleting the controller tokens and rulebook activations, proceed with Setting up a Red Hat Ansible Automation Platform credential.
 
 ## Setting up a Red Hat Ansible Automation Platform credential
 
@@ -669,7 +705,7 @@ You can create a Red Hat Ansible Automation Platform credential type to run your
 * You have created a user.
 * You have obtained the URL and the credentials to access automation controller.
 
-1. Log in to the Ansible Automation Platform.
+1. Log in to the Ansible Automation Platform Dashboard.
 2. From the navigation panel, select .
 3. Click Create credential.
 4. Insert the following:
@@ -689,7 +725,7 @@ When you select the credential type, the Type Details section is displayed with 
 For Event-Driven Ansible controller 2.5 with automation controller 2.4, use the following example: https://<your_controller_host>
 For Ansible Automation Platform 2.5, use the following example: https://<your_gateway_host>/api/controller/
 ----
-6. Enter a valid Username and Password or Oauth Token.
+6. Enter a valid Username and Password, or Oauth Token.
 7. Click Create credential.
 
 After you create this credential, you can use it for configuring your rulebook activations.
@@ -756,7 +792,8 @@ Credential:: Select 0 or more credentials for this rulebook activation. This fie
 
 [NOTE]
 ----
-The credentials that display in this field are customized based on your rulebook activation and only include the following credential types: Vault, Red Hat Ansible Automation Platform, or any custom credential types that you have created. For more information about credentials, see Credentials.
+* The credentials that display in this field are customized based on your rulebook activation and only include the following credential types: Vault, Red Hat Ansible Automation Platform, or any custom credential types that you have created. For more information about credentials, see Credentials.
+* If you plan to use a Red Hat Ansible Automation Platform credential, you can only select 1 Red Hat Ansible Automation Platform credential type for a rulebook activation.
 ----
 Decision environment:: Decision environments are a container image to run Ansible rulebooks.
 

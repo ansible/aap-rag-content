@@ -1291,7 +1291,7 @@ Where http://django-oauth-toolkit.herokuapp.com and http://www.example.com are a
 
 ### Creating a new application
 
-When integrating an external web application with automation controller the web application might need to create OAuth2 tokens on behalf of users of the web application.
+When integrating an external web application with Ansible Automation Platform, the web application might need to create OAuth2 tokens on behalf of users of the web application.
 
 Creating an application with the Authorization Code grant type is the preferred way to do this for the following reasons:
 
@@ -1367,7 +1367,7 @@ If you are a system administrator and have to create or remove tokens for other 
 
 ### Application token functions
 
-The refresh and revoke functions associated with tokens, for tokens at the /api/o/ endpoints can currently only be carried out with application tokens.
+The refresh and revoke functions associated with tokens, for tokens at the /o/ endpoints can currently only be carried out with application tokens.
 
 #### Refresh an existing access token
 
@@ -1385,12 +1385,12 @@ The following example shows an existing access token with a refresh token provid
     "scope": "read write"
 }
 
-The /api/o/token/ endpoint is used for refreshing the access token:
+The /o/token/ endpoint is used for refreshing the access token:
 
 curl -X POST \
     -d "grant_type=refresh_token&refresh_token=AL0NK9TTpv0qp54dGbC4VUZtsZ9r8z" \
     -u "gwSPoasWSdNkMDtBN3Hu2WYQpPWCO9SwUEsKK22l:fI6ZpfocHYBGfm1tP92r0yIgCyfRdDQt0Tos9L8a4fNsJjQQMwp9569eIaUBsaVDgt2eiwOGe0bg5m5vCSstClZmtdy359RVx2rQK5YlIWyPlrolpt2LEpVeKXWaiybo" \
-    http://<controller>/api/o/token/ -i
+    http://<gateway>/o/token/ -i
 
 Where refresh_token is provided by refresh_token field of the preceding access token.
 
@@ -1400,7 +1400,7 @@ The authentication information is of format <client_id>:<client_secret>, where c
 [NOTE]
 ----
 The special OAuth 2 endpoints only support using the x-www-form-urlencoded Content-type, so as a result, none of the
-api/o/* endpoints accept application/json.
+/o/* endpoints accept application/json.
 ----
 
 On success, a response displays in JSON format containing the new (refreshed) access token with the same scope information as the previous one:
@@ -1421,23 +1421,23 @@ Strict-Transport-Security: max-age=15768000
 
 The refresh operation replaces the existing token by deleting the original and then immediately creating a new token with the same scope and related application as the original one.
 
-Verify that the new token is present and the old one is deleted in the /api/v2/tokens/ endpoint.
+Verify that the new token is present and the old one is deleted in the gateway/api/v1/tokens/ endpoint.
 
 #### Revoke an access token
 
-You can revoke an access token by deleting the token in the platform UI, or by using the /api/o/revoke-token/ endpoint.
+You can revoke an access token by deleting the token in the platform UI, or by using the /o/revoke-token/ endpoint.
 
 Revoking an access token by this method is the same as deleting the token resource object, but it enables you to delete a token by providing its token value, and the associated client_id (and client_secret if the application is confidential). For example:
 
 curl -X POST -d "token=rQONsve372fQwuc2pn76k3IHDCYpi7" \
 -u "gwSPoasWSdNkMDtBN3Hu2WYQpPWCO9SwUEsKK22l:fI6ZpfocHYBGfm1tP92r0yIgCyfRdDQt0Tos9L8a4fNsJjQQMwp9569eIaUBsaVDgt2eiwOGe0bg5m5vCSstClZmtdy359RVx2rQK5YlIWyPlrolpt2LEpVeKXWaiybo" \
-http://<controller>/api/o/revoke_token/ -i
+http://<gateway>/o/revoke_token/ -i
 
 
 [NOTE]
 ----
 * The special OAuth 2 endpoints only support using the x-www-form-urlencoded Content-type, so as a result, none of the
-api/o/* endpoints accept application/json.
+/o/* endpoints accept application/json.
 * The Allow External Users to Create Oauth2 Tokens (ALLOW_OAUTH2_FOR_EXTERNAL_USERS in the API) setting is disabled by default.
 External users refer to users authenticated externally with a service such as LDAP, or any of the other SSO services.
 This setting ensures external users cannot create their own tokens.
@@ -1448,11 +1448,11 @@ This setting can be configured from the  menu.
 Alternatively, to revoke OAuth2 tokens, you can use the manage utility, see Revoke oauth2 tokens.
 
 On success, a response of 200 OK is displayed.
-Verify the deletion by checking whether the token is present in the /api/v2/tokens/ endpoint.
+Verify the deletion by checking whether the token is present in the gateway/api/v1/tokens/ endpoint.
 
 ### Token and session management
 
-Automation controller supports the following commands for OAuth2 token management:
+Ansible Automation Platform supports the following commands for OAuth2 token management:
 
 * create_oauth2_token
 * revoke_oauth2_tokens
@@ -1586,26 +1586,34 @@ You can manage access to an organization by selecting an organization from the O
 You can provide a user with access to an organization by adding them to the organization and managing the roles associated with the user. To add a user to an organization, the user must already exist. For more information, see Creating a user.
 To add roles for a user, the role must already exist. See Creating a role for more information.
 
+The following tab selections are available when adding users to an organization. When user accounts from the automation controller organization have been migrated to Ansible Automation Platform 2.5 during the upgrade process, the Automation Execution tab shows content based on whether the users were added to the organization prior to migration.
+
+Ansible Automation Platform:: Reflects all users added to the organization at the platform level. From this tab, you can add users as organization members and, optionally provide specific organization level roles.
+Automation Execution:: Reflects users that were added directly to the automation controller organization prior to an upgrade and migration. From this tab, you can only view existing memberships in automation controller and remove those memberships but not you can not add new memberships.
+
+New user memberships to an organization must be added at the platform level.
+
 1. From the navigation panel, select .
 2. From the Organizations list view, select the organization to which you want to add a user.
 3. Click the Users tab to add users.
-4. Click Add users and select one or more users from the list by clicking the checkbox next to the name to add them as members.
-5. Click Next.
-6. Select the roles you want the selected user to have. Scroll down for a complete list of roles.
+4. Select the Ansible Automation Platform tab and click Add users to add user access to the team, or select the Automation Execution tab to view or remove user access from the team.
+5. Select one or more users from the list by clicking the checkbox next to the name to add them as members.
+6. Click Next.
+7. Select the roles you want the selected user to have. Scroll down for a complete list of roles.
 
 [NOTE]
 ----
 If you have multiple Ansible Automation Platform components installed, you will see selections for the roles associated with each component in the Roles menu bar. For example, Automation Execution for automation controller roles, Automation Decisions for Event-Driven Ansible roles.
 ----
-7. Click Next to review the roles settings.
-8. Click Finish to apply the roles to the selected users, and to add them as members. The Add roles dialog displays the updated roles assigned for each user.
+8. Click Next to review the roles settings.
+9. Click Finish to apply the roles to the selected users, and to add them as members. The Add roles dialog displays the updated roles assigned for each user.
 
 [NOTE]
 ----
 A user with associated roles retains them if they are reassigned to another organization.
 ----
-9. To remove a particular user from the organization, select Remove user from the More actions &#8942; list next to the user. This launches a confirmation dialog, asking you to confirm the removal.
-10. To manage roles for users in an organization, click the &#9881; icon next to the user and select Manage roles.
+10. To remove a particular user from the organization, select Remove user from the More actions &#8942; list next to the user. This launches a confirmation dialog, asking you to confirm the removal.
+11. To manage roles for users in an organization, click the &#9881; icon next to the user and select Manage roles.
 
 #### Adding an administrator to an organization
 
@@ -1739,11 +1747,20 @@ The Details page opens, where you can review and edit your team information.
 
 To add a user to a team, the user must already have been created. For more information, see Creating a user. Adding a user to a team adds them as a member only. Use the Roles tab to assign a role for different resources to the selected team.
 
+The following tab selections are available when adding users to a team. When user accounts from automation controller or automation hub organizations have been migrated to Ansible Automation Platform 2.5 during the upgrade process, the Automation Execution and Automation Content tabs show content based on whether the users were added to those organizations prior to migration.
+
+Ansible Automation Platform:: Reflects all users added to the organization at the platform level. From this tab, you can add users as organization members and, optionally provide specific organization level roles.
+Automation Execution:: Reflects users that were added directly to the automation controller organization prior to an upgrade and migration. From this tab, you can only view existing memberships in automation controller and remove those memberships but you can not add new memberships. New organization memberships must be added through the platform.
+Automation Content:: Reflects users that were added directly to the automation hub organization prior to an upgrade and migration. From this tab, you can only view existing memberships in automation hub and remove those memberships but you can not add new memberships.
+
+New user memberships to a team must be added at the platform level.
+
 1. From the navigation panel, select .
 2. Select the team to which you want to add users.
-3. Select the Users tab and click Add users.
-4. Select one or more users from the list by clicking the checkbox next to the name to add them as members of this team.
-5. Click Add users.
+3. Select the Users tab.
+4. Select the Ansible Automation Platform tab and click Add users to add user access to the team, or select the Automation Execution or Automation Content tab to view or remove user access from the team.
+5. Select one or more users from the list by clicking the checkbox next to the name to add them as members of this team.
+6. Click Add users.
 
 ### Removing users from a team
 
@@ -1840,6 +1857,8 @@ You can view User type and Email beside the user name on the Users page.
 
 The Users page displays the existing users for your installation. From here, you can search for a specific user, filter the list of users, or change the sort order for the list.
 
+When user accounts have been migrated to Ansible Automation Platform 2.5 during the upgrade process, these accounts are also displayed in the Users list view. Users previously designated as automation controller or automation hub administrators are labeled as Normal in the User type column. You can see whether these users have administrator privileges, by editing the account. See Editing a user for instructions.
+
 1. From the navigation panel, select .
 2. In the Search bar, enter an appropriate keyword for the user you want to search for and click the arrow icon.
 3. From the menu bar, you can sort the list of users by using the arrows for  Username, Email, First name, Last name or Last login to toggle your sorting preference.
@@ -1879,10 +1898,25 @@ If you log in as yourself, and view the details of your user profile, you can ma
 
 You can modify the properties of a user account after it is created.
 
+In upgrade scenarios, there might be pre-existing user accounts from automation controller or automation hub services. When editing these user accounts, the User type checkboxes indicate whether the account had service level administrator privileges. You can revoke or assign administrator permissions for the individual services and designate the user as either an Ansible Automation Platform Administrator, Ansible Automation Platform Auditor or normal user. Assigning administrator privileges to all of the individual services automatically designates the user as an Ansible Automation Platform Administrator. See Creating a user for more information about user types.
+
+To see whether a user had service level auditor privileges, you must refer to the API.
+
+
+[NOTE]
+----
+Users previously designated as automation controller or automation hub administrators are labeled as Normal in the User type column in the Users list view. You can see whether these users have administrator privileges, from the Edit Users page.
+----
+
 1. From the navigation panel, select .
 2. Select the check box for the user that you want to modify.
 3. Click the Pencil icon and select Edit user.
 4. The Edit user page is displayed where you can modify user details such as, Password, Email, User type, and Organization.
+
+[NOTE]
+----
+If the user account was migrated to Ansible Automation Platform 2.5 during the upgrade process and had administrator privileges for an individual service, additional User type checkboxes will be available. You can use these checkboxes to revoke or add individual privileges or designate the user as a platform administrator, system auditor or normal user.
+----
 5. After your changes are complete, click Save user.
 
 ### Deleting a user

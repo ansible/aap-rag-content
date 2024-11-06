@@ -18,7 +18,7 @@ For information about the Ansible Automation Platform Operator infrastructure to
 
 ## OpenShift Container Platform version compatibility
 
-The Ansible Automation Platform Operator to install Ansible Automation Platform 2.5 is available on OpenShift Container Platform 4.9 and later versions.
+The Ansible Automation Platform Operator to install Ansible Automation Platform 2.5 is available on OpenShift Container Platform 4.12 through to 4.17 and later versions.
 
 * See the Red Hat Ansible Automation Platform Life Cycle for the most current compatibility details.
 
@@ -26,7 +26,7 @@ The Ansible Automation Platform Operator to install Ansible Automation Platform 
 
 You can use the OperatorHub on the Red Hat OpenShift Container Platform web console to install Ansible Automation Platform Operator.
 
-Alternatively, you can install Ansible Automation Platform Operator from the OpenShift Container Platform command-line interface (CLI), oc. See Installing Red Hat Ansible Automation Platform Operator  from the OpenShift Container Platform CLI for help with this.
+Alternatively, you can install Ansible Automation Platform Operator from the OpenShift Container Platform command-line interface (CLI), oc. See Installing Red Hat Ansible Automation Platform Operator from the OpenShift Container Platform CLI for help with this.
 
 After you have installed Ansible Automation Platform Operator you must create an Ansible Automation Platform custom resource (CR). This enables you to manage Ansible Automation Platform components from a single unified interface known as the platform gateway. As of version 2.5, you must create an Ansible Automation Platform CR, even if you have an existing automation controller,  automation hub, or Event-Driven Ansible, components.
 

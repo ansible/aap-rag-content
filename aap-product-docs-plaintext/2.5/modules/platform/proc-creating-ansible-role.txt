@@ -2,6 +2,12 @@
 
 You can create roles using the Ansible Galaxy CLI tool, which is included with your Ansible Automation Platform bundle. Access role-specific commands from the role subcommand:
 
+
+```bash
+ansible-galaxy role init <role_name>
+```
+
+
 Standalone roles outside of Collections are supported.
 Create new roles inside a Collection to take advantage of the features Ansible Automation Platform has to offer.
 
@@ -49,5 +55,3 @@ $ ansible-galaxy role init my_role --role-skeleton ~/role_skeleton
 
 This creates a role named my_role by copying the contents of ~/role_skeleton into my_role.
 The contents of role_skeleton can be any files or folders that are valid inside a role directory.
-
-For more information on creating roles, see [Aine’s new devtools content].

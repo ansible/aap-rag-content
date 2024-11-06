@@ -1,9 +1,9 @@
 # Populating your private automation hub container registry
 
-By default, private automation hub does not include execution environments.
-To populate your container registry, you must push a execution environment to it.
+By default, private automation hub does not include automation execution environments.
+To populate your container registry, you must push an execution environment to it.
 You must follow a specific workflow to populate your private automation hub remote registry:
-* Pull execution environments from the Red Hat Ecosystem Catalog (registry.redhat.io)
+* Pull automation execution environments from the Red Hat Ecosystem Catalog (registry.redhat.io)
 * Tag them
 * Push them to your private automation hub remote registry
 
@@ -15,7 +15,7 @@ As of 1 May 2023, filesystem blobs are served from quay.io instead.
 Make this change to any firewall configuration that specifically enables outbound connections to registry.redhat.io or registry.access.redhat.com.
 Use the hostnames instead of IP addresses when configuring firewall rules.
 After making this change you can continue to pull execution environments from registry.redhat.io and registry.access.redhat.com. You do not require a quay.io login, or need to interact with the quay.io registry directly in any way to continue pulling Red Hat container images.
-However, manifests, sometimes called “subscription allocations”, on the web-based Red Hat Subscription Management are no longer supported as of early 2024 with one exception: If a system is part of a closed network or “air gapped” system that does not receive its updates from Red Hat’s servers directly, manifests are supported until the release of Red Hat Satellite 6.16. Keep up to date with Red Hat Satellite Release Dates for the announcement for Red Hat Satellite 6.16's release date announcement.
+However, manifests, sometimes called “subscription allocations”, on the web-based Red Hat Subscription Management are no longer supported as of early 2024 with one exception: If a system is part of a closed network or “air gapped” system that does not receive its updates from Red Hat's servers directly, manifests are supported until the release of Red Hat Satellite 6.16. Keep up to date with Red Hat Satellite Release Dates for Red Hat Satellite 6.16's release date announcement.
 ----
 
 # Pulling execution environments for use in automation hub
@@ -30,11 +30,11 @@ As of early 2024, Red Hat no longer supports manifests or manifest lists on the 
 New Red Hat accounts automatically use Simple Content Access for their subscription tooling. New Red Hat accounts and existing Satellite customers who can connect to Red Hat's servers can find their manifests at console.redhat.com.
 ----
 
-* You have permissions to pull execution environments from registry.redhat.io.
+* You have permissions to pull automation execution environments from registry.redhat.io.
 * A Red Hat account with Simple Content Access enabled.
 
 1. If you need to access your manifest for your container images log in to Red Hat Console.
-2. Click the three-dot menu for the manifest you need for your execution environments, and click btn:[Export manifest].
+2. Click the three-dot menu for the manifest you need for your automation execution environments, and click btn:[Export manifest].
 3. Log in to Podman by using your registry.redhat.io credentials:
 
 ```

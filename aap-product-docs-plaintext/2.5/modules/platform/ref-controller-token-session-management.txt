@@ -1,6 +1,6 @@
 # Token and session management
 
-Automation controller supports the following commands for OAuth2 token management:
+Ansible Automation Platform supports the following commands for OAuth2 token management:
 
 * create_oauth2_token
 * revoke_oauth2_tokens

@@ -339,7 +339,7 @@ Strict-Transport-Security: max-age=15768000
 
 # Application token functions
 
-The refresh and revoke functions associated with tokens, for tokens at the /api/o/ endpoints can currently only be carried out with application tokens.
+The refresh and revoke functions associated with tokens, for tokens at the /o/ endpoints can currently only be carried out with application tokens.
 
 ## Refresh an existing access token
 
@@ -357,12 +357,12 @@ The following example shows an existing access token with a refresh token provid
     "scope": "read write"
 }
 
-The /api/o/token/ endpoint is used for refreshing the access token:
+The /o/token/ endpoint is used for refreshing the access token:
 
 curl -X POST \
     -d "grant_type=refresh_token&refresh_token=AL0NK9TTpv0qp54dGbC4VUZtsZ9r8z" \
     -u "gwSPoasWSdNkMDtBN3Hu2WYQpPWCO9SwUEsKK22l:fI6ZpfocHYBGfm1tP92r0yIgCyfRdDQt0Tos9L8a4fNsJjQQMwp9569eIaUBsaVDgt2eiwOGe0bg5m5vCSstClZmtdy359RVx2rQK5YlIWyPlrolpt2LEpVeKXWaiybo" \
-    http://<controller>/api/o/token/ -i
+    http://<gateway>/o/token/ -i
 
 Where refresh_token is provided by refresh_token field of the preceding access token.
 
@@ -372,7 +372,7 @@ The authentication information is of format <client_id>:<client_secret>, where c
 [NOTE]
 ----
 The special OAuth 2 endpoints only support using the x-www-form-urlencoded Content-type, so as a result, none of the
-api/o/* endpoints accept application/json.
+/o/* endpoints accept application/json.
 ----
 
 On success, a response displays in JSON format containing the new (refreshed) access token with the same scope information as the previous one:
@@ -393,23 +393,23 @@ Strict-Transport-Security: max-age=15768000
 
 The refresh operation replaces the existing token by deleting the original and then immediately creating a new token with the same scope and related application as the original one.
 
-Verify that the new token is present and the old one is deleted in the /api/v2/tokens/ endpoint.
+Verify that the new token is present and the old one is deleted in the gateway/api/v1/tokens/ endpoint.
 
 ## Revoke an access token
 
-You can revoke an access token by deleting the token in the platform UI, or by using the /api/o/revoke-token/ endpoint.
+You can revoke an access token by deleting the token in the platform UI, or by using the /o/revoke-token/ endpoint.
 
 Revoking an access token by this method is the same as deleting the token resource object, but it enables you to delete a token by providing its token value, and the associated client_id (and client_secret if the application is confidential). For example:
 
 curl -X POST -d "token=rQONsve372fQwuc2pn76k3IHDCYpi7" \
 -u "gwSPoasWSdNkMDtBN3Hu2WYQpPWCO9SwUEsKK22l:fI6ZpfocHYBGfm1tP92r0yIgCyfRdDQt0Tos9L8a4fNsJjQQMwp9569eIaUBsaVDgt2eiwOGe0bg5m5vCSstClZmtdy359RVx2rQK5YlIWyPlrolpt2LEpVeKXWaiybo" \
-http://<controller>/api/o/revoke_token/ -i
+http://<gateway>/o/revoke_token/ -i
 
 
 [NOTE]
 ----
 * The special OAuth 2 endpoints only support using the x-www-form-urlencoded Content-type, so as a result, none of the
-api/o/* endpoints accept application/json.
+/o/* endpoints accept application/json.
 * The Allow External Users to Create Oauth2 Tokens (ALLOW_OAUTH2_FOR_EXTERNAL_USERS in the API) setting is disabled by default.
 External users refer to users authenticated externally with a service such as LDAP, or any of the other SSO services.
 This setting ensures external users cannot create their own tokens.
@@ -420,4 +420,4 @@ This setting can be configured from the menu:Settings[Platform gateway] menu.
 Alternatively, to revoke OAuth2 tokens, you can use the manage utility, see Revoke oauth2 tokens.
 
 On success, a response of 200 OK is displayed.
-Verify the deletion by checking whether the token is present in the /api/v2/tokens/ endpoint.
+Verify the deletion by checking whether the token is present in the gateway/api/v1/tokens/ endpoint.

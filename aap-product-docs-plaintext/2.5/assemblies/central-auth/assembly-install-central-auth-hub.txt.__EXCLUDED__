@@ -12,12 +12,14 @@ Choose the Red Hat Ansible Automation Platform installer you need based on your 
 A valid Red Hat customer account is required to access Red Hat Ansible Automation Platform installer downloads on the Red Hat Customer Portal.
 ----
 
+## Installing with internet access
+
 Choose the Red Hat Ansible Automation Platform installer if your Red Hat Enterprise Linux environment is connected to the internet. Installing with internet access retrieves the latest required repositories, packages, and dependencies. Choose one of the following ways to set up your Ansible Automation Platform installer.
 
 Tarball install
 
 1. Navigate to the Red Hat Ansible Automation Platform download page.
-2. Click btn:[Download Now] for the Ansible Automation Platform <latest-version> Setup.
+2. In the Product software tab, click btn:[Download Now] for the Ansible Automation Platform <latest-version> Setup.
 3. Extract the files:
 
 ```
@@ -27,34 +29,32 @@ $ tar xvzf ansible-automation-platform-setup-<latest-version>.tar.gz
 
 RPM install
 
-1. Install Ansible Automation Platform Installer Package
+1. Install the Ansible Automation Platform Installer Package.
 
-v.2.5 for RHEL 8 for x86_64
-
-```
-$ sudo dnf install --enablerepo=ansible-automation-platform-2.4-for-rhel-8-x86_64-rpms ansible-automation-platform-installer
-```
-
-
-v.2.5 for RHEL 9 for x86-64
+v.2.5 for RHEL 8 for x86_64:
 
 ```
-$ sudo dnf install --enablerepo=ansible-automation-platform-2.4-for-rhel-9-x86_64-rpms ansible-automation-platform-installer
+$ sudo dnf install --enablerepo=ansible-automation-platform-2.5-for-rhel-8-x86_64-rpms ansible-automation-platform-installer
 ```
 
 
+v.2.5 for RHEL 9 for x86-64:
 
-[NOTE]
-----
+```
+$ sudo dnf install --enablerepo=ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms ansible-automation-platform-installer
+```
+
+
 dnf install enables the repo as the repo is disabled by default.
-----
 
 When you use the RPM installer, the files are placed under the /opt/ansible-automation-platform/installer directory.
+
+## Installing without internet access
 
 Use the Red Hat Ansible Automation Platform Bundle installer if you are unable to access the internet, or would prefer not to install separate components and dependencies from online repositories. Access to Red Hat Enterprise Linux repositories is still needed. All other dependencies are included in the tar archive.
 
 1. Navigate to the Red Hat Ansible Automation Platform download page.
-2. Click btn:[Download Now] for the Ansible Automation Platform <latest-version> Setup Bundle.
+2. In the Product software tab, click btn:[Download Now] for the Ansible Automation Platform <latest-version> Setup Bundle.
 3. Extract the files:
 
 ```

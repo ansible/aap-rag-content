@@ -1,0 +1,25 @@
+# Configuring Red Hat Ansible Lightspeed cloud service
+
+Use this procedure to configure the Red Hat Ansible Lightspeed cloud service.
+
+* You have obtained an API key and a model ID from IBM watsonx Code Assistant that you want to use in Red Hat Ansible Lightspeed.
+
+For information about how to obtain an API key and model ID from IBM watsonx Code Assistant, see the IBM watsonx Code Assistant documentation.
+
+1. Log in to the Ansible Lightspeed portal as an organization administrator.
+2. From the login screen, click Admin Portal.
+3. Specify the API key of your IBM watsonx Code Assistant instance:
+1. Under IBM Cloud API Key, click Add API key. A screen to enter the API Key is displayed.
+2. Enter the API Key.
+3. Optional: Click Test to validate the API key.
+4. Click Save.
+4. Specify the model ID of the model that you want to use:
+1. Click Model Settings.
+2. Under Model ID, click Add Model ID. A screen to enter the Model Id is displayed.
+3. Enter the Model ID that you obtained in the previous procedure as the default model for your organization.
+4. Optional: Click Test model ID to validate the model ID.
+5. Click Save.
+
+When the API key and model ID is successfully validated, Red Hat Ansible Lightspeed is connected to your IBM watsonx Code Assistant instance.
+
+* Troubleshooting Red Hat Ansible Lightspeed configuration errors

@@ -1,0 +1,778 @@
+# Setting up Red Hat Ansible Lightspeed for your organization
+
+As a Red Hat customer portal administrator, you must configure Red Hat Ansible Lightspeed to connect to your IBM watsonx Code Assistant instance. This chapter provides information about configuring both the Red Hat Ansible Lightspeed cloud service and on-premise deployment.
+
+# Configuration requirements
+
+## Licensing requirements
+
+* Red Hat Ansible Lightspeed cloud service
+
+To use the Red Hat Ansible Lightspeed cloud service, you must meet one of the following requirements:
+* Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
+* Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.
+
+[NOTE]
+----
+A Red Hat Ansible Lightspeed trial account does not require an IBM watsonx Code Assistant subscription.
+----
+* Red Hat Ansible Lightspeed on-premise deployment
+
+To use an on-premise deployment of Red Hat Ansible Lightspeed, your organization must have the following subscriptions:
+* A trial or paid subscription to the Red Hat Ansible Automation Platform
+* An installation of IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data
+
+## Setup requirements
+
+To set up Red Hat Ansible Lightspeed for your organization, you need the following IBM watsonx Code Assistant information:
+
+* API key
+
+A unique API key authenticates all requests made from Red Hat Ansible Lightspeed to IBM watsonx Code Assistant. Each Red Hat organization with a valid Ansible Automation Platform subscription must have a configured API key. When an authenticated RH-SSO user creates a task request in Red Hat Ansible Lightspeed, the API key associated with the user&#8217;s Red Hat organization is used to authenticate the request to IBM watsonx Code Assistant.
+* Model ID
+
+A unique model ID identifies an IBM watsonx Code Assistant model in your IBM Cloud account. The model ID that you configure in the Ansible Lightspeed administrator portal is used as the default model, and can be accessed by all Ansible Lightspeed users within your organization.
+
+
+[IMPORTANT]
+----
+You must configure both the API key and the model ID when you are initially configuring Red Hat Ansible Lightspeed.
+----
+
+# Setting up Red Hat Ansible Lightspeed cloud service
+
+As a Red Hat customer portal administrator, you must configure Red Hat Ansible Lightspeed cloud service to connect to your IBM watsonx Code Assistant instance.
+
+## Logging in to the Ansible Lightspeed administrator portal
+
+Use the Ansible Lightspeed administrator portal to connect Red Hat Ansible Lightspeed to IBM watsonx Code Assistant.
+
+* You have organization administrator privileges to a Red Hat Customer Portal organization with a valid Red Hat Ansible Automation Platform subscription.
+
+1. Log in to the Ansible Lightspeed portal as an organization administrator.
+2. Click menu:Log in[Log in with Red Hat].
+3. Enter your Red Hat account username and password. The Ansible Lightspeed Service uses Red Hat Single Sign-On (RH-SSO) for authentication.
+
+As part of the authentication process, the Ansible Lightspeed Service checks whether your organization has an active Ansible Automation Platform subscription. On successful authentication, the login screen is displayed along with your username and your assigned user role.
+4. From the login screen, click Admin Portal.
+
+You are redirected to the Red Hat Ansible Lightspeed with IBM watsonx Code Assistant administrator portal where you can connect Red Hat Ansible Lightspeed to your IBM watsonx Code Assistant instance.
+
+## Configuring Red Hat Ansible Lightspeed cloud service
+
+Use this procedure to configure the Red Hat Ansible Lightspeed cloud service.
+
+* You have obtained an API key and a model ID from IBM watsonx Code Assistant that you want to use in Red Hat Ansible Lightspeed.
+
+For information about how to obtain an API key and model ID from IBM watsonx Code Assistant, see the IBM watsonx Code Assistant documentation.
+
+1. Log in to the Ansible Lightspeed portal as an organization administrator.
+2. From the login screen, click Admin Portal.
+3. Specify the API key of your IBM watsonx Code Assistant instance:
+1. Under IBM Cloud API Key, click Add API key. A screen to enter the API Key is displayed.
+2. Enter the API Key.
+3. Optional: Click Test to validate the API key.
+4. Click Save.
+4. Specify the model ID of the model that you want to use:
+1. Click Model Settings.
+2. Under Model ID, click Add Model ID. A screen to enter the Model Id is displayed.
+3. Enter the Model ID that you obtained in the previous procedure as the default model for your organization.
+4. Optional: Click Test model ID to validate the model ID.
+5. Click Save.
+
+When the API key and model ID is successfully validated, Red Hat Ansible Lightspeed is connected to your IBM watsonx Code Assistant instance.
+
+* Troubleshooting Red Hat Ansible Lightspeed configuration errors
+
+# Setting up Red Hat Ansible Lightspeed on-premise deployment
+
+As an Red Hat Ansible Automation Platform administrator, you can set up a Red Hat Ansible Lightspeed on-premise deployment and connect it to an IBM watsonx Code Assistant instance. After the on-premise deployment is successful, you can start using the Ansible Lightspeed service with the Ansible Visual Studio (VS) Code extension.
+
+The following capabilities are not yet supported on Red Hat Ansible Lightspeed on-premise deployment:
+
+* Generating playbooks and viewing playbook explanations
+* Viewing telemetry data on the Admin dashboard
+
+
+[NOTE]
+----
+Red Hat Ansible Lightspeed on-premise deployments are supported on Red Hat Ansible Automation Platform version 2.4 and later.
+----
+
+## Overview
+
+This section provides information about the system requirements, prerequisites, and the process for setting up a Red Hat Ansible Lightspeed on-premise deployment.
+
+### System requirements
+
+Your system must meet the following minimum system requirements to install and run the Red Hat Ansible Lightspeed on-premise deployment.
+
+
+
+To see the rest of the Red Hat Ansible Automation Platform system requirements, see the topic System requirements in the Red Hat Ansible Automation Platform Planning Guide.
+
+
+[NOTE]
+----
+You must also have installed IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data. The installation includes a base model that you can use to set up your Red Hat Ansible Lightspeed on-premise deployment. For installation information, see the IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data documentation.
+----
+
+### Prerequisites
+
+* You have administrator privileges for Red Hat Ansible Automation Platform.
+* You have installed IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data.
+* Your system meets the minimum system requirements to set up Red Hat Ansible Lightspeed on-premise deployment.
+* You have obtained an API key and a model ID from IBM watsonx Code Assistant.
+
+For information about obtaining an API key and model ID from IBM watsonx Code Assistant, see the IBM watsonx Code Assistant documentation. For information about installing IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data, see the watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data documentation.
+* You have an existing external PostgreSQL database configured for the Red Hat Ansible Automation Platform, or have a database created for you when configuring the Red Hat Ansible Lightspeed on-premise deployment.
+
+### Process for configuring a Red Hat Ansible Lightspeed on-premise deployment
+
+Perform the following tasks to install and configure a Red Hat Ansible Lightspeed on-premise deployment:
+
+1. Install the Red Hat Ansible Automation Platform operator
+2. Create an OAuth application
+3. Create connections secrets for Red Hat Ansible Automation Platform and IBM watsonx Code Assistant both
+4. Create and deploy a Red Hat Ansible Lightspeed instance
+5. Update the Redirect URI to connect to your Red Hat Ansible Lightspeed on-premise deployment
+6. Install and configure Ansible Visual Studio Code extension to connect to Red Hat Ansible Lightspeed on-premise deployment
+7. Optional: If you want to connect to a different IBM watsonx Code Assistant, update the connection secrets on an existing Red Hat Ansible Automation Platform operator
+8. Optional: Monitor your Red Hat Ansible Lightspeed on-premise deployment
+
+## Installing the Red Hat Ansible Automation Platform operator
+
+Use this procedure to install the Ansible Automation Platform operator on the Red Hat OpenShift Container Platform.
+
+* You have installed and configured automation controller.
+
+1. Log in to the Red Hat OpenShift Container Platform as an administrator.
+2. Create a namespace:
+1. Go to menu:Administration[Namespaces].
+2. Click Create Namespace.
+3. Enter a unique name for the namespace.
+4. Click Create.
+3. Install the operator:
+1. Go to menu:Operators[OperatorHub].
+2. Select the namespace where you want to install the Red Hat Ansible Automation Platform operator.
+3. Search for the Ansible Automation Platform operator.
+4. From the search results, select the Ansible Automation Platform (provided by Red Hat) tile.
+5. Select an Update Channel. You can select either stable-2.x or stable-2.x-cluster-scoped as the channel.
+6. Select the destination namespace if you selected “stable-2.x” as the update channel.
+7. Select Install. It takes a few minutes for the operator to be installed.
+4. Click View Operator to see the details of your newly installed Red Hat Ansible Automation Platform operator.
+
+## Creating an OAuth application
+
+Use this procedure to create an OAuth application for your Red Hat Ansible Lightspeed on-premise deployment.
+
+* You have an operational Ansible automation controller instance.
+
+1. Log in to the automation controller as an administrator.
+2. Under Administration, click menu:Applications[Add].
+3. Enter the following information:
+1. Name: Specify a unique name for your application.
+2. Organization: Select a preferred organization.
+3. Authorization grant type: Select Authorization code.
+4. Redirect URIs: Enter a temporary URL for now, for example, https://temp/.
+
+The exact Red Hat Ansible Lightspeed application URL is generated after the on-premise deployment is completed. After the deployment is completed, you must change the Redirect URI to point to the generated Red Hat Ansible Lightspeed application URL. For more information, see Updating the Redirect URIs.
+5. From the Client type list, select Confidential.
+4. Click Save.
+
+A pop-up window is displayed along with the generated application client ID and client secret.
+5. Copy and save both the generated client ID and client secret for future use.
+
+[IMPORTANT]
+----
+This is the only time the pop-up window is displayed. Therefore, ensure that you copy both the client ID and client secret, as you need these tokens to create connections secrets for Red Hat Ansible Automation Platform and IBM watsonx Code Assistant both.
+----
+
+The following image is an example of the generated client ID and client secret:
+![{Example of a generated client ID and client secret]
+
+* Troubleshooting Red Hat Ansible Lightspeed on-premise deployment errors
+
+## Creating connection secrets
+
+You must create an authorization secret to connect to Red Hat Ansible Automation Platform, and a model secret to connect to IBM watsonx Code Assistant. If you need to trust a custom Certificate Authority, you must create a bundle secret.
+
+* You have installed the Ansible Automation Platform operator on the Red Hat OpenShift Container Platform.
+* You have created an OAuth application in the automation controller.
+* You have obtained an API key and a model ID from IBM watsonx Code Assistant.
+
+For information about obtaining an API key and model ID from IBM watsonx Code Assistant, see the IBM watsonx Code Assistant documentation. For information about installing IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data, see the watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data documentation.
+
+### Creating authorization and model secrets
+
+Use this procedure to create secrets to connect to both Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
+
+1. Go to the Red Hat OpenShift Container Platform.
+2. Select menu:Workloads[Secrets].
+3. Click menu:Create[Key/value secret].
+4. From the Projects list, select the namespace that you created when you installed the Red Hat Ansible Automation Platform operator.
+5. Create an authorization secret to connect to the Red Hat Ansible Automation Platform:
+1. Click menu:Create[Key/value secret].
+2. In Secret name, enter a unique name for the secret. For example, auth-aiconnect.
+3. Add the following keys and their associated values individually:
+
+
+[IMPORTANT]
+----
+Ensure that you do not accidentally add any whitespace characters (extra line, space, and so on) to the value fields. If there are any extra or erroneous characters in the secret, the connection to Red Hat Ansible Automation Platform fails.
+----
+4. Click Create.
+
+The following image is an example of an authorization secret:
+![{Example of an authorization secret]
+6. Similarly, create a model secret to connect to an IBM watsonx Code Assistant model:
+1. Click menu:Create[Key/value secret].
+2. In Secret name, enter a unique name for the secret. For example, model-aiconnect.
+3. Add the following keys and their associated values individually:
+
+
+[IMPORTANT]
+----
+Ensure that you do not accidentally add any whitespace characters (extra line, space, and so on) to the value fields. If there are any extra or erroneous characters in the secret, the connection to IBM watsonx Code Assistant fails.
+----
+4. Click Create.
+
+After you create the authorization and model secrets, you must select the secrets when you  create and deploy a Red Hat Ansible Lightspeed instance.
+
+### Creating a bundle secret to trust a custom Certificate Authority
+
+If you encounter a scenario where you need to trust a custom Certificate Authority, you can customize a few variables for the Red Hat Ansible Lightspeed instance. Trusting a custom Certificate Authority enables the Red Hat Ansible Lightspeed instance to access network services configured with SSL certificates issued locally, such as cloning a project from an internal Git server via HTTPS.
+
+If you encounter the following error when syncing projects, it indicates that you need to customize the variables.
+
+fatal: unable to access 'https://private.repo./mine/ansible-rulebook.git': SSL certificate problem: unable to get local issuer certificate
+
+Use one of the following methods to create a custom bundle secret using the CLI:
+
+* Using a Certificate Authority secret
+
+Create a bundle_cacert_secret using  the following command:
+
+# kubectl create secret generic <resourcename>-custom-certs \
+    --from-file=bundle-ca.crt=<PATH/TO/YOUR/CA/PEM/FILE> 1
+Where:
+
+&lt;1&gt;: Path of the self-signed certificate. Modify the file path to point to where your self-signed certificates are stored. The Red Hat Ansible Lightspeed instance looks for the data field bundle-ca.crt in the specified bundle_cacert_secret secret.
+
+The following is an example of a bundle CA certificate:
+
+spec:
+  ...
+  bundle_cacert_secret: <resourcename>-custom-certs
+* Using the kustomization.yaml configuration file
+
+Use the following command:
+
+secretGenerator:
+  - name: <resourcename>-custom-certs
+    files:
+      - bundle-ca.crt=<path+filename>
+    options:
+      disableNameSuffixHash: true
+
+After you create the bundle secret, you must select the secret when you  create and deploy a Red Hat Ansible Lightspeed instance.
+
+* Troubleshooting Red Hat Ansible Lightspeed on-premise deployment errors
+
+## Creating and deploying a Red Hat Ansible Lightspeed instance
+
+Use this procedure to create and deploy a Red Hat Ansible Lightspeed instance to your namespace.
+
+* You have created connection secrets for both Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
+
+1. Go to Red Hat OpenShift Container Platform.
+2. Select menu:Operators[Installed Operators].
+3. From the Projects list, select the namespace where you want to install the Red Hat Ansible Lightspeed instance and where you created the connection secrets.
+4. Locate and select the Ansible Automation Platform (provided by Red Hat) operator that you installed earlier.
+5. Select menu:All instances[Create new].
+6. From the Create new list, select the Ansible Lightspeed modal.
+7. Ensure that you have selected Form view as the configuration mode.
+8. Provide the following information:
+1. Name: Enter a unique name for your Red Hat Ansible Lightspeed instance.
+2. Secret where the authentication information can be found: Select the authentication secret that you created to connect to the Red Hat Ansible Automation Platform.
+3. Secret where the model configuration can be found: Select the model secret that you created to connect to IBM watsonx Code Assistant.
+9. Optional: If you created a bundle secret to trust a custom Certificate Authority, select the bundle_cacert_secret from menu:Advanced[Bundle CA Certificate Secret] list.
+10. Click Create.
+
+The Red Hat Ansible Lightspeed instance takes a few minutes to deploy to your namespace. After the installation status is displayed as Successful, the Ansible Lightspeed portal URL is available under menu:Networking[Routes] in Red Hat OpenShift Container Platform.
+
+* Troubleshooting Red Hat Ansible Lightspeed on-premise deployment errors
+
+## Updating the Redirect URIs
+
+When Ansible users log in or log out of Ansible Lightspeed service, the Red Hat Ansible Automation Platform redirects the user&#8217;s browser to a specified URL. You must configure the redirect URLs so that users can log in and log out of the application successfully.
+
+* You have created and deployed a Red Hat Ansible Lightspeed instance to your namespace.
+
+1. Get the URL of the Ansible Lightspeed instance:
+1. Go to Red Hat OpenShift Container Platform.
+2. Select menu:Networking[Routes].
+3. Locate the Red Hat Ansible Lightspeed instance that you created.
+4. Copy the Location URL of the Red Hat Ansible Lightspeed instance.
+2. Update the login redirect URI:
+1. In the automation controller, go to menu:Administration[Applications].
+2. Select the Lightspeed Oauth application that you created.
+3. In the Redirect URIs field of the Oauth application, enter the URL in the following format:
+
+\https://<lightspeed_route>/complete/aap/
+
+An example of the URL is https://lightspeed-on-prem-web-service.com/complete/aap/.
+
+[IMPORTANT]
+----
+The Redirect URL must include the following information:
+* The prefix https://
+* The <lightspeed_route> URL, which is the URL of the Red Hat Ansible Lightspeed instance that you copied earlier
+* The suffix /complete/aap/ that includes a backslash sign (/) at the end
+----
+4. Click Save.
+3. Update the logout redirect URI based on your setup:
+
+Procedure when both the Red Hat Ansible Lightspeed instance and automation controller are installed using Ansible Automation Platform operator:
+1. Log in to the cluster on which the Ansible Automation Platform instance is running.
+2. Identify the AutomationController custom resource.
+3. Select [YAML view].
+4. Add the following entry to the YAML file:
+
+```yaml
+  spec:
+  ...
+  extra_settings:
+    - setting: LOGOUT_ALLOWED_HOSTS
+      value: "'<lightspeed_route-HostName>'"
+  ```
+
+[IMPORTANT]
+----
+Ensure the following while specifying the value: parameter:
+* Specify the hostname without the network protocol, such as https://.
+
+For example, the correct hostname would be my-aiconnect-instance.somewhere.com, and not https://my-aiconnect-instance.somewhere.com.
+* Use the single and double quotes exactly as specified in the codeblock.
+
+If you change the single quotes to double quotes and vice versa, you will encounter errors when logging out.
+* Use a comma to specify multiple instances of Red Hat Ansible Lightspeed deployment.
+
+If you are running multiple instances of Red Hat Ansible Lightspeed application with a single Red Hat Ansible Automation Platform deployment, add a comma (,) and then add the other hostname values. For example, you can add multiple hostnames, such as "'my-lightspeed-instance1.somewhere.com','my-lightspeed-instance2.somewhere.com'"
+----
+5. Apply the revised YAML. This task restarts the automation controller pods.
+
+Procedure when the Ansible Automation Platform operator is run on a virtual machine:
+
+1. Log in to the virtual machine with the Ansible Automation Platform controller.
+2. In the /etc/tower/conf.d/custom.py file, add the following parameter:
+LOGOUT_ALLOWED_HOSTS = "<lightspeed_route-HostName>"
+
+[IMPORTANT]
+----
+* If the /etc/tower/conf.d/custom.py file does not exist, create it.
+* Specify the hostname without the network protocol, such as https://.
+
+For example, the correct hostname would be my-aiconnect-instance.somewhere.com, and not https://my-aiconnect-instance.somewhere.com.
+* Use the single and double quotes in pairs; do not mix single quotes with double quotes.
+----
+3. Restart the automation controller by executing the following command:
+$ automation-controller-service restart
+
+Procedure when the platform gateway is run on a virtual machine:
+
+1. Log in to the virtual machine with the platform gateway.
+2. Add the following parameter in either the gateway/settings.py file or in the ansible-automation-platform/gateway/settings.py file:
+LOGOUT_ALLOWED_HOSTS = "<lightspeed_route-HostName>"
+
+[IMPORTANT]
+----
+* Specify the hostname without the network protocol, such as https://.
+
+For example, the correct hostname would be my-aiconnect-instance.somewhere.com, and not https://my-aiconnect-instance.somewhere.com.
+* Use double quotes exactly as specified in the codeblock.
+----
+
+* Troubleshooting Red Hat Ansible Lightspeed on-premise deployment errors
+
+## Configuring Ansible VS Code extension for Red Hat Ansible Lightspeed on-premise deployment
+
+To access the on-premise deployment of Red Hat Ansible Lightspeed, all Ansible users within your organization must install the Ansible Visual Studio (VS) Code extension in their VS Code editor, and configure the extension to connect to the on-premise deployment.
+
+* You have installed VS Code version 1.70.1 or later.
+
+1. Open the VS Code application.
+2. From the Activity bar, click the Extensions icon.
+3. From the Installed Extensions list, select Ansible.
+4. From the Ansible extension page, click the Settings icon () and select Extension Settings.
+5. Select Ansible Lightspeed settings and specify the following information:
+* In the URL for Ansible Lightspeed field, enter the Route URL of the Red Hat Ansible Lightspeed on-premise deployment. Ansible users must have Ansible Automation Platform controller credentials.
+* Optional: If you want to use a custom model instead of the default model, in the Model ID Override field, enter the custom model ID. Your settings are automatically saved in VS Code.
+
+After configuring Ansible VS Code extension to connect to Red Hat Ansible Lightspeed on-premise deployment, you must log in to Ansible Lightspeed through the Ansible VS Code extension.
+
+[NOTE]
+----
+If your organization recently subscribed to the Red Hat Ansible Automation Platform, it might take a few hours for Red Hat Ansible Lightspeed to detect the new subscription. In VS Code, use the Refresh button in the Ansible extension from the Activity bar to check again.
+----
+
+* Troubleshooting Red Hat Ansible Lightspeed on-premise deployment errors
+
+## Updating connection secrets on an existing Red Hat Ansible Automation Platform operator
+
+After you have set up the Red Hat Ansible Lightspeed on-premise deployment successfully, you can modify the deployment if you want to connect to another IBM watsonx Code Assistant model. For example, you connected to the default IBM watsonx Code Assistant model but now want to connect to a custom model instead. To connect to another IBM watsonx Code Assistant model, you must create new connection secrets, and then update the connection secrets and parameters on an existing Red Hat Ansible Automation Platform operator.
+
+* You have set up a Red Hat Ansible Lightspeed on-premise deployment.
+* You have obtained an API key and a model ID of the IBM watsonx Code Assistant model you want to connect to.
+* You have created new authorization and model connection secrets for the IBM watsonx Code Assistant model that you want to connect to. For information about creating authorization and model connection secrets, see Creating connection secrets.
+
+1. Go to the Red Hat OpenShift Container Platform.
+2. Select menu:Operators[Installed Operators].
+3. From the Projects list, select the namespace where you installed the Red Hat Ansible Lightspeed instance.
+4. Locate and select the Ansible Automation Platform (provided by Red Hat) operator that you installed earlier.
+5. Select the Ansible Lightspeed tab.
+6. Find and select the instance you want to update.
+7. Click menu:Actions[Edit AnsibleLightspeed]. The editor switches to a text or YAML view.
+8. Scroll the text to find the spec: section.
+
+)
+9. Find the entry for the secret you have changed and saved under a new name.
+10. Change the name of the secrets to the new secrets.
+11. Click Save.
+
+The new AnsibleLightspeed Pods are created. After the new pods are running successfully, the old AnsibleLightspeed Pods are terminated.
+
+* Troubleshooting Red Hat Ansible Lightspeed on-premise deployment errors
+
+## Monitoring your Red Hat Ansible Lightspeed on-premise deployment
+
+After the Red Hat Ansible Lightspeed on-premise deployment is successful, use the following procedure to monitor the metrics on an API endpoint /metrics.
+
+1. Create a system auditor user:
+1. Create a user with a system auditor role in the the Red Hat Ansible Automation Platform. Refer to the procedure in the topic Creating a user in the Automation Controller User Guide.
+2. Verify that you can log in to the Ansible Lightspeed portal for on-premise deployment (\https://<lightspeed_route>/) as the newly-created system auditor user, and then log out.
+2. Create a token for the system auditor user:
+1. Log in to the Ansible Lightspeed portal for on-premise deployment (\https://<lightspeed_route>/admin) as an administrator by using the following credentials:
+* Username: admin
+* Password: The secret that is named as <lightspeed-custom-resource-name>-admin-password in the Red Hat OpenShift Container Platform cluster namespace where Red Hat Ansible Lightspeed is deployed.
+2. On the Django administration window, select Users from the Users area. A list of users is displayed.
+3. Verify that the user with the system auditor role is listed in the Users list.
+4. From the Django Oauth toolkit area, select menu:Access tokens[Add].
+5. Provide the following information and click Save:
+* User: Use the magnifying glass icon to search and select the user with the system auditor role.
+* Token: Specify a token for the user. Copy this token for later use.
+* Id token: Select the token ID.
+* Application: Select Ansible Lightspeed for VS Code.
+* Expires: Select the date and time when you want the token to expire.
+* Scope: Specify the scope as read write.
+
+An access token is created for the user with a system auditor role.
+6. Log out from the Ansible Lightspeed portal for on-premise deployment.
+3. Monitor your Red Hat Ansible Lightspeed on-premise deployment, by using the authorization token of the user with the system auditor role, to access the metrics endpoint \https://<lightspeed_route>/metrics.
+
+# Configuring custom models
+
+As an organization administrator, you can create and use fine-tuned, custom models that are trained on your organization&#8217;s existing Ansible content. With this capability, you can tune the models to your organization&#8217;s automation patterns and improve the code recommendation experience.
+
+After you create a custom model, you can specify one of the following access types:
+
+* Enable access for all users in your organization
+
+You can configure the custom model as the default model for your organization. All users in your organization can use the custom model.
+* Enable access for select Ansible users in your organization
+
+Using the model-override setting in the Ansible VS Code extension, select Ansible users can tune their Ansible Lightspeed service to use a custom model instead of the default model.
+
+## Process for configuring custom models
+
+To configure a custom model, perform the following tasks:
+
+1. Create a training data set by using the content parser tool
+2. Create and deploy a custom model by using IBM watsonx Code Assistant
+3. Configure Red Hat Ansible Lightspeed to use the custom model
+
+## Creating a training data set by using the content parser tool
+
+Use the content parser tool, a command-line interface (CLI) tool, to scan your existing Ansible files and generate a custom model training data set. The training data set includes a list of Ansible files and their paths relative to the project root. You can then upload this data set to IBM watsonx Code Assistant, and use it to create a custom model that is trained on your organization&#8217;s existing Ansible content.
+
+### Methods of creating training data sets
+
+You can generate a training data set by using one of the following methods:
+
+* With ansible-lint preprocessing
+
+By default, the content parser tool generates training data sets by using ansible-lint preprocessing. The content parser tool uses ansible-lint rules to scan your Ansible files and ensure that the content adheres to Ansible best practices. If rule violations are found, the content parser tool excludes these files from the generated output. In such scenarios, you must resolve the rule violations, and run the content parser tool once again so that the generated output includes all your Ansible files.
+* Without ansible-lint preprocessing
+
+You can generate a training data set without ansible-lint preprocessing. In this method, the content parser tool does not scan your Ansible files for ansible-lint rule violations; therefore, the training data set includes all files. Although the training data set includes all files, it might not adhere to Ansible best practices and could affect the quality of your code recommendation experience.
+
+### Supported data sources
+
+The content parser tool scans the following directories and file formats:
+
+* Local directories
+* Archived files, such as .zip, .tar, .tar.gz, .tar.bz2, and .tar.xz files
+* Git repository URLs (includes both private and public repositories)
+
+### Process of creating a training data set
+
+To create a custom model training data set, perform the following tasks:
+
+1. Install the content parser tool on your computer
+2. Generate a custom model training data set
+3. View the generated training data set
+4. (Optional: If you generated a training data set with ansible-lint preprocessing and detected ansible-lint rule violations) Resolve ansible-lint rule violations
+5. (Optional: If you generated multiple training data sets) Merge multiple training data sets into a single JSONL file
+
+### Installing the content parser tool
+
+Install the content parser tool, a command-line interface (CLI) tool, on your computer.
+
+Ensure that your computer has one of the following supported OS:
+
+* Python version 3.10 or later.
+* UNIX OS, such as Linux or Mac OS.
+
+[NOTE]
+----
+Installation of the content parser tool on Microsoft Windows OS is not supported.
+----
+Procedure
+1. Create a working directory and set up venv Python virtual environment:
+
+$ python -m venv ./venv
+
+$ source ./venv/bin/activate
+2. Install the latest version of the content parser tool from the pip repository:
+
+$ pip install --upgrade pip
+
+$ pip install --upgrade ansible-content-parser
+3. Perform one of the following tasks:
+* To generate a training data set without ansible-lint preprocessing, go to section Generating a custom model training data set.
+* To generate a training data set with ansible-lint preprocessing, ensure that you have the latest version of ansible-lint installed on your computer:
+1. View the ansible-lint versions that are installed on your computer.
+
+$ ansible-content-parser --version
+
+$ ansible-lint --version
+
+A list of application versions and their dependencies are displayed.
+2. In the output, verify that the version of ansible-lint that was installed with the content parser tool is the same as that of the previously-installed ansible-lint. A mismatch in the installed ansible-lint versions causes inconsistent results from the content parser tool and ansible-lint.
+
+For example, in the following output, the content parser tool installation includes ansible-lint version 6.20.0 which is a mismatch from previously-installed ansible-lint version 6.13.1:
+
+$ ansible-content-parser --version
+ansible-content-parser 0.0.1 using ansible-lint:6.20.0 ansible-core:2.15.4
+$ ansible-lint --version
+ansible-lint 6.13.1 using ansible 2.15.4
+A new release of ansible-lint is available: 6.13.1 → 6.20.0
+3. If there is a mismatch in the ansible-lint versions, deactivate and reactivate venv Python virtual environment:
+
+$ deactivate
+
+$ source ./venv/bin/activate
+4. Verify that the version of ansible-lint that is installed with the content parser tool is the same as that of the previously-installed ansible-lint:
+
+$ ansible-content-parser --version
+
+$ ansible-lint --version
+
+For example, the following output shows that both ansible-lint installations on your computer are of version 6.20.0:
+
+$ ansible-content-parser --version
+ansible-content-parser 0.0.1 using ansible-lint:6.20.0 ansible-core:2.15.4
+$ ansible-lint --version
+ansible-lint 6.20.0 using ansible-core:2.15.4
+ansible-compat:4.1.10 ruamel-yaml:0.17.32 ruamel-yaml-clib:0.2.7
+
+### Generating a custom model training data set
+
+After installing the content parser tool, run it to scan your custom Ansible files and generate a custom model training data set. You can then upload the training data set to IBM watsonx Code Assistant and create a custom model for your organization. If you used ansible-lint preprocessing and encountered rule violations, you must resolve the rule violations before uploading the training data set to IBM watsonx Code Assistant.
+
+#### Methods of generating a training data set
+
+You can generate a training data set by using one of the following methods:
+
+* With ansible-lint preprocessing
+
+By default, the content parser tool generates training data sets by using ansible-lint preprocessing. The content parser tool uses ansible-lint rules to scan your Ansible files and ensure that the content adheres to Ansible best practices. If rule violations are found, the content parser tool excludes these files from the generated output. In such scenarios, you must resolve the rule violations, and run the content parser tool once again so that the generated output includes all your Ansible files.
+* Without ansible-lint preprocessing
+
+You can generate a training data set without ansible-lint preprocessing. In this method, the content parser tool does not scan your Ansible files for ansible-lint rule violations; therefore, the training data set includes all files. Although the training data set includes all files, it might not adhere to Ansible best practices and could affect the quality of your code recommendation experience.
+
+* You must have installed the content parser tool on your computer.
+* You must have verified that the version of ansible-lint that is installed with the content parser tool is the same as that of the previously-installed ansible-lint.
+
+1. Run the content parser tool to generate a training data set:
+* With ansible-lint preprocessing: $ ansible-content-parser source output
+* Without ansible-lint preprocessing: $ ansible-content-parser source output -S
+
+The following table lists the required parameters.
+
+
+For example:
+If the source is a Github URL https://github.com/ansible/ansible-tower-samples.git, and the output directory is /tmp/out, the command prompt is as follows:
+$ ansible-content-parser https://github.com/ansible/ansible-tower-samples.git /tmp/out
+2. Optional: To generate a training data set with additional information, specify the following parameters while running the content parser tool.
+
+Example of a command prompt for Github repository ansible-tower-samples
+
+$ ansible-content-parser --profile min \
+--source-license undefined \
+--source-description Samples \
+--repo-name ansible-tower-samples \
+--repo-url 'https://github.com/ansible/ansible-tower-samples' \
+git@github.com:ansible/ansible-tower-samples.git /var/tmp/out_dir
+Example of a generated training data set for Github repository ansible-tower-samples
+
+The training data set is formatted with Jeff Goldblum (jg), a command-line JSON processing tool.
+
+$ cat out_dir/ftdata.jsonl| jq
+{
+"data_source_description": "Samples",
+"input": "---\n- name: Hello World Sample\n hosts: all\n tasks:\n - name: Hello Message",
+"license": "undefined",
+"module": "debug",
+"output": " debug:\n msg: Hello World!",
+"path": "hello_world.yml",
+"repo_name": "ansible-tower-samples",
+"repo_url": "https://github.com/ansible/ansible-tower-samples"
+}
+
+### Viewing the generated training data set
+
+After the content parser tool scans your Ansible files, it generates the training data set in an output directory. The training data set includes a ftdata.jsonl file, which is the main output of the content parser tool. The file is available in JSON Lines file format, where each line entry represents a JSON object. You must upload this JSONL file to IBM watsonx Code Assistant to create a custom model.
+
+#### Structure of custom model training data set
+
+The following is the file structure of an output directory:
+
+output/
+  |-- ftdata.jsonl  # Training dataset 1
+  |-- report.txt   # A human-readable report 2
+  |
+  |-- repository/ 3
+  |     |-- (files copied from the source repository)
+  |
+  |-- metadata/ 4
+        |-- (metadata files generated during the execution)
+
+ftdata.jsonl: A training data set file, which is the main output of the content parser tool. The file is available in JSON Lines files format, where each line entry represents a JSON object. You must upload this JSONL file in IBM watsonx Code Assistant to create a custom model.
+report.txt: A human-readable text file that provides a summary of all content parser tool executions.
+repository: A directory that contains files from the source repository. Sometimes, ansible-lint updates the directory according to the configured rules, so the file contents of the output directory might differ from the source repository.
+metadata: A directory that contains multiple metadata files that are generated during each content parser tool execution.
+
+##### Using report.txt file to resolve ansible-lint rule violations
+
+The report.txt file, that can be used to resolve ansible-lint rule violations, contains the following information:
+
+* File counts per type: A list of files according to their file types, such as playbooks, tasks, handlers, and jinja2.
+* List of Ansible files that were identified: A list of files identified by ansible-lint with a file name, a file type, and whether the file was excluded from further processing, or automatically fixed by ansible-lint.
+* List of Ansible modules found in tasks: A list of modules identified by ansible-lint with a module name, a module type, and whether the file was excluded from further processing, or automatically fixed by ansible-lint.
+* Issues found by ansible-lint: A list of issues along with a brief summary of ansible-lint execution results. If ansible-lint encounters files with syntax-check errors in the first execution, then it initiates a second execution and excludes the files with errors from the scan. You can use this information to resolve ansible-lint rule violations.
+
+### Resolving ansible-lint rule violations
+
+By default, the content parser tool uses ansible-lint rules to scan your Ansible files and ensure that the content adheres to Ansible best practices. If rule violations are found, the content parser tool excludes these files from the generated output. In such scenarios, it is recommended that you fix the files with rule violations before uploading the training data set to IBM watsonx Code Assistant.
+
+By default, ansible-lint applies the rules that are configured in ansible-lint/src/ansiblelint/rules while scanning your Ansible files. For more information about ansible-lint rules, see the Ansible Lint documentation.
+
+#### How does the content parser tool handle rule violations?
+
+* Using autofixes
+
+The content parser tool runs ansible-lint with the --fix=all option to perform autofixes, which can fix or simplify fixing issues identified by that rule.
+
+If ansible-lint identifies rule violations that have an associated autofix, it automatically fixes or simplifies the issues that violate the rules. If ansible-lint identifies rule violations that do not have an associated autofix, it reports these instances as rule violations which you must fix manually.
+For more information about autofixes, see Autofix in Ansible Lint Documentation.
+* Using syntax-checks
+
+Ansible-lint also performs syntax checks while scanning your Ansible files. If any syntax-check errors are found, ansible-lint stops processing the files.
+For more information about syntax-check errors, see syntax-check in Ansible Lint Documentation.
+
+The content parser tool handles syntax-check rule violations in the following manner:
+* If syntax-check errors are found in the first execution of ansible-lint, the content parser tool generates a list of files that contain the rule violations.
+* If one or more syntax-check errors are found in the first execution of ansible-lint, the content parser tool runs ansible-lint again but excludes the files with syntax-check errors. After the scan is completed, the content parser tool generates a list of files that contain rule violations. The list includes all files that caused syntax-check errors as well as other rule violations.  The content parser tool excludes files with rule violations in all future scans, and the final training data set does not include data from the excluded files.
+
+Use one of the following methods to resolve ansible-lint rule violations:
+
+* Run the content parser tool with the  --no-exclude option
+
+If any rule violations, including syntax-check errors, are found, the execution is aborted with an error and no training data set is created.
+* Limit the set of rules that ansible-lint uses to scan your data with the --profile option
+
+It is recommended that you fix the files with rule violations. However, if you do not want to modify the source files, you can limit the set of rules that ansible-lint uses to scan your data.
+To limit the set of rules that ansible-lint uses to scan your data, specify the --profile option with a predefined profile (for example, min, basic, moderate, safety, shared, or production profiles) or by using ansible-lint configuration files. For more information, see the Ansible Lint documentation.
+* Run the content parser tool by skipping ansible-lint preprocessing
+
+You can run the content parser without ansible-lint preprocessing. The content parser tool generates a training data set without scanning for ansible-lint rule violations.
+
+To run the content parser tool without ansible-lint preprocessing, execute the following command:
+$ ansible-content-parser source output -S
+
+Where:
+* source: Specifies the source of the training data set.
+* output: Specifies the output of the training data set.
+* -S or --skip-ansible-lint: Specifies to skip ansible-lint preprocessing while generating the training data set.
+
+### Merging multiple training data sets into a single file
+
+For every execution, the content parser tool creates a training data set JSONL file named ftdata.jsonl that you upload to IBM watsonx Code Assistant for creating a custom model. If the content parser tool runs multiple times, multiple JSONL files are created. IBM watsonx Code Assistant supports a single JSONL file upload only; therefore, if you have multiple JSONL files, you must merge them into a single, concatenated file. You can also merge the multiple JSONL files that are generated in multiple subdirectories within a parent directory into a single file.
+
+1. Using the command prompt, go to the parent directory.
+2. Run the following command to create a single, concatenated file:
+find . -name ftdata.json | xargs cat > concatenated.json
+3. Optional: Rename the concatenated file for easy identification.
+
+You can now upload the merged JSONL file to IBM watsonx Code Assistant and create a custom model.
+
+## Create and deploy a custom model in IBM watsonx Code Assistant
+
+After the content parser tool generates a custom model training data set, upload the JSONL file ftdata.jsonl to IBM watsonx Code Assistant and create a custom model for your organization.
+
+
+[IMPORTANT]
+----
+IBM watsonx Code Assistant might take a few hours to create a custom model, depending on the size of your training data set. You must continue monitoring the IBM Tuning Studio for the status of custom model creation.
+----
+
+For information about how to create and deploy a custom model in IBM watsonx Code Assistant, see the IBM watsonx Code Assistant documentation.
+
+## Configuring Red Hat Ansible Lightspeed to use custom models
+
+After you create and deploy a custom model in IBM watsonx Code Assistant, you must configure Red Hat Ansible Lightspeed so that you can use the custom model for your organization.
+
+You can specify one of the following configurations for using the custom model:
+
+* Enable access for all users in your organization
+
+You can configure a custom model as the default model for your organization. All users in your organization can use the custom model.
+* Enable access for select Ansible users in your organization
+
+Using the model-override setting in the Ansible VS Code extension, select Ansible users can tune their Ansible Lightspeed service to use a custom model instead of the default model.
+
+### Configuring the custom model for all Ansible users in your organization
+
+You can configure the custom model as the default model for your organization, so that all users in your organization can use the custom model.
+
+1. Log in to the Ansible Lightspeed with IBM watsonx Code Assistant Hybrid Cloud Console as an organization administrator.
+2. Specify the model ID of the custom model:
+1. Click Model Settings.
+2. Under Model ID, click Add Model ID. A screen to enter the Model ID is displayed.
+3. Enter the Model ID of the custom model.
+4. Optional: Click Test model ID to validate the model ID.
+5. Click Save.
+
+### Configuring the custom model for select Ansible users in your organization
+
+Using the model-override setting in the Ansible VS Code extension, select Ansible users can tune their Ansible Lightspeed service to use a custom model instead of the default model. For example, If you are using Red Hat Ansible Lightspeed as both an organization administrator and an end user, you can test the custom model for select Ansible users before making it available for all users in your organization.
+
+1. Log in to the VS Code application using your Red Hat account.
+2. From the Activity bar, click the Extensions icon .
+3. From the Installed Extensions list, select Ansible.
+4. From the Ansible extension page, click the Settings icon and select Extension Settings.
+5. From the list of settings, select Ansible Lightspeed.
+6. In the Model ID Override field, enter the model ID of the custom model.
+
+Your settings are automatically saved in VS Code, and you can now use the custom model.

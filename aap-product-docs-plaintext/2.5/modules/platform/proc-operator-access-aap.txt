@@ -22,4 +22,4 @@ This redirects you to the Analytics page.
 10. Click btn:[Next].
 
 You now have access to the platform gateway user interface.
-If you cannot access the Ansible Automation Platform see  for help with troubleshooting and debugging.
+If you cannot access the Ansible Automation Platform see Frequently asked questions on platform gateway for help with troubleshooting and debugging.

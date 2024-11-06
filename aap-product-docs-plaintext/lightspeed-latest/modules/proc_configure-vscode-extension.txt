@@ -1,0 +1,29 @@
+# Configuring the Ansible VS Code extension
+
+You can configure the Ansible VS Code extension to enable Red Hat Ansible Lightspeed and specify it&#8217;s portal URL and IBM watsonx Code Assistant model ID.
+
+* Your organization administrator has configured an IBM watsonx Code Assistant model for your organization.
+
+1. Open the VS Code application.
+2. From the Activity bar, click the Extensions icon .
+3. From the Installed Extensions list, select Ansible.
+4. From the Ansible extension page, click the Settings icon and select Extension Settings.
+5. Select Ansible Lightspeed settings, and specify the following information:
+1. Select the Enable Ansible Lightspeed checkbox.
+2. In the URL for Ansible Lightspeed field, verify that you have the following URL: https://c.ai.ansible.redhat.com/.
+3. Select the Enable Ansible Lightspeed with watsonx Code Assistant inline suggestions checkbox.
+6. Optional: If you want to use the custom model instead of the default model, in the Model ID Override field, enter the custom model ID. The model-override setting enables you to override the default model and use the custom model, after your organization administrator has created a custom model and has shared the model ID with you separately.
+
+Your settings are automatically saved in VS Code.
+
+The following illustration displays the configured settings for the Ansible VS Code extension:
+
+![Configured settings for the Ansible VS Code extension]
+
+
+[NOTE]
+----
+If your organization recently subscribed to the Red Hat Ansible Automation Platform, it might take a few hours for Red Hat Ansible Lightspeed to detect the new subscription. In VS Code, use the Refresh button in the Ansible extension from the Activity bar to check again.
+----
+
+* Troubleshooting Ansible Visual Studio Code extension errors

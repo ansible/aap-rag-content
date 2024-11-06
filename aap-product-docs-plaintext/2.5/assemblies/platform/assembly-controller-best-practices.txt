@@ -19,7 +19,7 @@ For more information, see the link General tips from the Ansible documentation.
 [NOTE]
 ----
 * Avoid using the playbooks vars_prompt feature, as automation controller does not interactively permit vars_prompt questions.
-If you cannot avoid using vars_prompt, see the Surveys functionality.
+If you cannot avoid using vars_prompt, see the Surveys in job templates functionality.
 * Avoid using the playbooks pause feature without a timeout, as automation controller does not permit canceling a pause interactively.
 If you cannot avoid using pause, you must set a timeout.
 ----

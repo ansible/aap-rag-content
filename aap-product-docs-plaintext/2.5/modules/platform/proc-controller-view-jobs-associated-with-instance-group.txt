@@ -11,4 +11,4 @@ Each job displays the following details:
 * Who started the job and applicable resources associated with it, such as the template, inventory, project, and execution environment
 
 The instances are run in accordance with instance group policies.
-For more information, see Instance Group Policies.
+For more information, see Instance group policies.

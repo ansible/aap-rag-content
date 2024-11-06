@@ -31,7 +31,7 @@ In addition, OpenShift Data Foundation provides a ReadWriteMany or S3-compliant 
 To ensure successful installation of Ansible Automation Platform Operator, you must provision your storage type for automation hub initially to ReadWriteMany access mode.
 
 1. Go to menu:Storage[PersistentVolume].
-2. Click btn: Create PersistentVolume.
+2. Click btn:[Create PersistentVolume].
 3. In the first step, update the accessModes from the default ReadWriteOnce to ReadWriteMany.
 1. See Provisioning to update the access mode. for a detailed overview.
 4. Complete the additional steps in this section to create the persistent volume claim (PVC).
@@ -226,7 +226,7 @@ You can choose to use an external database instead if you prefer to use a dedica
 
 [NOTE]
 ----
-The same external database (PostgreSQL instance) can be used for both automation hub and automation controller as long as the database names are different. In other words, you can have multiple databases with different names inside a single PostgreSQL instance.
+The same external database (PostgreSQL instance) can be used for both automation hub, automation controller, and platform gateway as long as the database names are different. In other words, you can have multiple databases with different names inside a single PostgreSQL instance.
 ----
 
 The following section outlines the steps to configure an external database for your automation hub on a Ansible Automation Platform Operator.

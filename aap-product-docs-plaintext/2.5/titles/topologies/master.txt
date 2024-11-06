@@ -18,15 +18,15 @@ The following table outlines the different ways to install or deploy Ansible Aut
 
 The RPM installer deploys Ansible Automation Platform on Red Hat Enterprise Linux by using RPMs to install the platform on host machines. Customers manage the product and infrastructure lifecycle.
 
-## RPM enterprise topology
+## RPM growth topology
 
-The enterprise topology is intended for organizations that require Ansible Automation Platform to be deployed with redundancy or higher compute for large volumes of automation.
+The growth topology is intended for organizations that are getting started with Ansible Automation Platform and do not require redundancy or higher compute for large volumes of automation. This topology allows for smaller footprint deployments.
 
 ### Infrastructure topology
 
-The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
+The following diagram outlines the infrastructure topology that Red&#160;Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
-![RPM enterprise topology diagram]
+![RPM growth topology diagram]
 
 Each virtual machine (VM) has been tested with the following component requirements: 16 GB RAM, 4 CPUs, 60 GB local disk, and 3000 IOPS.
 
@@ -34,19 +34,208 @@ Each virtual machine (VM) has been tested with the following component requireme
 
 ### Tested system configurations
 
-Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+Red&#160;Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
 
 
 
 ### Network ports
 
-Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+
+
+
+### Example growth inventory file
+
+Use the example inventory file to perform an installation for this topology:
+
+
+```yaml
+# This is the growth installer inventory file
+# Please consult the docs if you are unsure what to add
+# For all optional variables please consult the Red Hat documentation:
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation
+
+# This section is for your platform gateway hosts
+# -----------------------------------------------------
+[automationgateway]
+gateway.example.org
+
+# This section is for your automation controller hosts
+# -----------------------------------------------------
+[automationcontroller]
+controller.example.org
+
+[automationcontroller:vars]
+peers=execution_nodes
+
+# This section is for your Ansible Automation Platform execution hosts
+# -----------------------------------------------------
+[execution_nodes]
+exec.example.org
+
+# This section is for your automation hub hosts
+# -----------------------------------------------------
+[automationhub]
+hub.example.org
+
+# This section is for your Event-Driven Ansible controller hosts
+# -----------------------------------------------------
+[automationedacontroller]
+eda.example.org
+
+# This section is for the Ansible Automation Platform database
+# -----------------------------------------------------
+[database]
+db.example.org
+
+[all:vars]
+
+# Common variables
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-general-inventory-variables
+# -----------------------------------------------------
+registry_username=<your RHN username>
+registry_password=<your RHN password>
+
+redis_mode=standalone
+
+# Platform gateway
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-gateway-variables
+# -----------------------------------------------------
+automationgateway_admin_password=<set your own>
+automationgateway_pg_host=db.example.org
+automationgateway_pg_password=<set your own>
+
+# Automation controller
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-controller-variables
+# -----------------------------------------------------
+admin_password=<set your own>
+pg_host=db.example.org
+pg_password=<set your own>
+
+# Automation hub
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-hub-variables
+# -----------------------------------------------------
+automationhub_admin_password=<set your own>
+automationhub_pg_host=db.example.org
+automationhub_pg_password=<set your own>
+
+# Event-Driven Ansible controller
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# -----------------------------------------------------
+automationedacontroller_admin_password=<set your own>
+automationedacontroller_pg_host=db.example.org
+automationedacontroller_pg_password=<set your own>
+```
+
+
+## RPM mixed growth topology
+
+The growth topology is intended for organizations that are getting started with Ansible Automation Platform and do not require redundancy or higher compute for large volumes of automation. This topology allows for smaller footprint deployments. The mixed topology has different versions of Ansible Automation Platform intended for configuring a new installation of Event-Driven Ansible controller 1.1 with automation controller 4.4 or 4.5.
+
+### Infrastructure topology
+
+The following diagram outlines the infrastructure topology that Red&#160;Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
+
+![RPM mixed growth topology diagram]
+
+Each virtual machine (VM) has been tested with the following component requirements: 16 GB RAM, 4 CPUs, 60 GB local disk, and 3000 IOPS.
+
+
+
+### Tested system configurations
+
+Red&#160;Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+
+
+
+### Network ports
+
+Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+
+
+
+### Example mixed growth inventory file
+
+Use the example inventory file to perform an installation for this topology:
+
+
+```yaml
+# This is the mixed growth installer inventory file
+# Please consult the docs if you are unsure what to add
+# For all optional variables please consult the Red Hat documentation:
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation
+
+# This section is for your platform gateway hosts
+# -----------------------------------------------------
+[automationgateway]
+gateway.example.org
+
+# This section is for your Event-Driven Ansible controller hosts
+# -----------------------------------------------------
+[automationedacontroller]
+eda.example.org
+
+[all:vars]
+
+# Common variables
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-general-inventory-variables
+# -----------------------------------------------------
+registry_username=<your RHN username>
+registry_password=<your RHN password>
+
+redis_mode=standalone
+
+# Platform gateway
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-gateway-variables
+# -----------------------------------------------------
+automationgateway_admin_password=<set your own>
+automationgateway_pg_host=db.example.org
+automationgateway_pg_password=<set your own>
+
+# Event-Driven Ansible controller
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# -----------------------------------------------------
+automationedacontroller_admin_password=<set your own>
+automationedacontroller_pg_host=db.example.org
+automationedacontroller_pg_password=<set your own>
+```
+
+
+## RPM enterprise topology
+
+The enterprise topology is intended for organizations that require Ansible Automation Platform to be deployed with redundancy or higher compute for large volumes of automation.
+
+### Infrastructure topology
+
+The following diagram outlines the infrastructure topology that Red&#160;Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
+
+![RPM enterprise topology diagram]
+
+Each virtual machine (VM) has been tested with the following component requirements: 16 GB RAM, 4 CPUs, 60 GB local disk, and 3000 IOPS.
+
+
+
+
+[NOTE]
+----
+6 VMs are required for a Redis high availability (HA) compatible deployment. Redis can be colocated on each Ansible Automation Platform component VM except for automation controller, execution nodes, or the PostgreSQL database.
+----
+
+### Tested system configurations
+
+Red&#160;Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+
+
+
+### Network ports
+
+Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
 
 
 
 ### Example enterprise inventory file
 
-Use the following example inventory file to perform an installation for this topology:
+Use the example inventory file to perform an installation for this topology:
 
 
 ```yaml
@@ -89,8 +278,15 @@ hub2.example.org
 eda1.example.org
 eda2.example.org
 
-[all:vars]
+[redis]
+gateway1.example.org
+gateway2.example.org
+hub1.example.org
+hub2.example.org
+eda1.example.org
+eda2.example.org
 
+[all:vars]
 # Common variables
 # https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-general-inventory-variables
 # -----------------------------------------------------
@@ -141,7 +337,7 @@ The enterprise topology is intended for organizations that require Ansible Autom
 
 ### Infrastructure topology
 
-The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
+The following diagram outlines the infrastructure topology that Red&#160;Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 ![RPM mixed enterprise topology diagram]
 
@@ -149,25 +345,31 @@ Each VM has been tested with the following component requirements: 16 GB RAM, 4 
 
 
 
+
+[NOTE]
+----
+6 VMs are required for a Redis high availability (HA) compatible deployment. Redis can be colocated on each Ansible Automation Platform 2.5 component VM except for automation controller, execution nodes, or the PostgreSQL database.
+----
+
 ### Tested system configurations
 
-Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+Red&#160;Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
 
 
 
 ### Network ports
 
-Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
 
 
 
-### Example enterprise inventory file
+### Example mixed enterprise inventory file
 
-Use the following example inventory file to perform an installation for this topology:
+Use the example inventory file to perform an installation for this topology:
 
 
 ```yaml
-# This is the enterprise installer inventory file
+# This is the mixed enterprise installer inventory file
 # Please consult the docs if you are unsure what to add
 # For all optional variables please consult the Red Hat documentation:
 # https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation
@@ -177,12 +379,22 @@ Use the following example inventory file to perform an installation for this top
 [automationgateway]
 gateway1.example.org
 gateway2.example.org
+gateway3.example.org
 
 # This section is for your Event-Driven Ansible controller hosts
 # -----------------------------------------------------
 [automationedacontroller]
 eda1.example.org
 eda2.example.org
+eda3.example.org
+
+[redis]
+gateway1.example.org
+gateway2.example.org
+gateway3.example.org
+eda1.example.org
+eda2.example.org
+eda3.example.org
 
 [all:vars]
 # Common variables
@@ -217,11 +429,11 @@ The containerized installer deploys Ansible Automation Platform on Red Hat Enter
 
 ## Container growth topology
 
-The growth topology is intended for organizations that do not require Ansible Automation Platform 2.5 to be deployed with redundancy or higher compute for large volumes of automation.
+The growth topology is intended for organizations that are getting started with Ansible Automation Platform and do not require redundancy or higher compute for large volumes of automation. This topology allows for smaller footprint deployments.
 
 ### Infrastructure topology
 
-The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
+The following diagram outlines the infrastructure topology that Red&#160;Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 ![Container growth topology diagram]
 
@@ -231,19 +443,19 @@ A single VM has been tested with the following component requirements: 16 GB RAM
 
 ### Tested system configurations
 
-Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+Red&#160;Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
 
 
 
 ### Network ports
 
-Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
 
 
 
 ### Example growth inventory file
 
-Use the following example inventory file to perform an installation for this topology:
+Use the example inventory file to perform an installation for this topology:
 
 
 ```yaml
@@ -279,6 +491,8 @@ aap.example.org
 aap.example.org
 
 [all:vars]
+# Ansible
+ansible_connection=local
 
 # Common variables
 # https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
@@ -321,13 +535,19 @@ eda_pg_password=<set your own>
 ```
 
 
+
+[NOTE]
+----
+SSH keys are only required when installing on remote hosts. If doing a self contained local VM based installation, you can use ansible_connection=local.
+----
+
 ## Container enterprise topology
 
 The enterprise topology is intended for organizations that require Ansible Automation Platform to be deployed with redundancy or higher compute for large volumes of automation.
 
 ### Infrastructure topology
 
-The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
+The following diagram outlines the infrastructure topology that Red&#160;Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 ![Container enterprise topology diagram]
 
@@ -335,21 +555,27 @@ Each VM has been tested with the following component requirements: 16 GB RAM, 4 
 
 
 
+
+[NOTE]
+----
+6 VMs are required for a Redis high availability (HA) compatible deployment. Redis can be colocated on each Ansible Automation Platform component VM except for automation controller, execution nodes, or the PostgreSQL database.
+----
+
 ### Tested system configurations
 
-Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+Red&#160;Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
 
 
 
 ### Network ports
 
-Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
 
 
 
 ### Example enterprise inventory file
 
-Use the following example inventory file to perform an installation for this topology:
+Use the example inventory file to perform an installation for this topology:
 
 
 ```yaml
@@ -403,6 +629,8 @@ eda2.example.org
 # Common variables
 # https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
 # -----------------------------------------------------
+postgresql_admin_username=<set your own>
+postgresql_admin_password=<set your own>
 registry_username=<your RHN username>
 registry_password=<your RHN password>
 
@@ -455,15 +683,22 @@ eda_pg_password=<set your own>
 
 # Operator topologies
 
-The Ansible Automation Platform Operator uses Red Hat OpenShift operators to deploy Ansible Automation Platform within Red Hat OpenShift. Customers manage the product and infrastructure lifecycle.
+The Ansible Automation Platform Operator uses Red Hat OpenShift Operators to deploy Ansible Automation Platform within Red Hat OpenShift. Customers manage the product and infrastructure lifecycle.
+
+
+[IMPORTANT]
+----
+You can only install a single instance of the Ansible Automation Platform Operator into a single namespace.
+Installing multiple instances in the same namespace can lead to improper operation for both Operator instances.
+----
 
 ## Operator growth topology
 
-The growth topology is intended for organizations that do not require Ansible Automation Platform to be deployed with redundancy or higher compute for large volumes of automation.
+The growth topology is intended for organizations that are getting started with Ansible Automation Platform and do not require redundancy or higher compute for large volumes of automation. This topology allows for smaller footprint deployments.
 
 ### Infrastructure topology
 
-The following diagram outlines the infrastructure topology that Red Hat has tested with the respective deployment model that customers may use when self-managing Ansible Automation Platform:
+The following diagram outlines the infrastructure topology that Red&#160;Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 ![Operator growth topology diagram]
 
@@ -473,7 +708,7 @@ A Single Node OpenShift (SNO) cluster has been tested with the following require
 
 ### Tested system configurations
 
-Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+Red&#160;Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
 
 
 
@@ -497,19 +732,19 @@ spec:
 
 ### Nonfunctional requirements
 
-Ansible Automation Platform’s performance characteristics and capacity are impacted by its resource allocation and configuration. With OpenShift, each Ansible Automation Platform component is deployed as a pod. You can specify resource requests and limits for each pod.
+Ansible Automation Platform&#8217;s performance characteristics and capacity are impacted by its resource allocation and configuration. With OpenShift, each Ansible Automation Platform component is deployed as a pod. You can specify resource requests and limits for each pod.
 
-The Ansible Automation Platform custom resource allows you to configure resource allocation for OpenShift installations. Each configurable item has default settings. These settings are the minimum requirements for an installation, but may not meet your production workload needs.
+Use the Ansible Automation Platform Custom Resource (CR) to configure resource allocation for OpenShift installations. Each configurable item has default settings. These settings are the minimum requirements for an installation, but might not meet your production workload needs.
 
-By default, each component’s deployments are set for minimum resource requests but no resource limits. OpenShift only schedules the pods with available resource requests, but the pods are allowed to consume unlimited RAM or CPU as long as the OpenShift worker node itself is not under node pressure.
+By default, each component&#8217;s deployments are set for minimum resource requests but no resource limits. OpenShift only schedules the pods with available resource requests, but the pods are allowed to consume unlimited RAM or CPU provided that the OpenShift worker node itself is not under node pressure.
 
-In the reference topology provided in this document, Ansible Automation Platform is deployed on a Single Node OpenShift (SNO) with 32 GB RAM, 16 CPUs, 128 GB Local disk, and 3000 IOPS. This is not a shared environment, so Ansible Automation Platform pods have full access to all of the compute resources of the OpenShift SNO. In this scenario, the capacity calculation for the automation controller task pods is derived from the underlying OCP node that runs the pod. It does not have access to the entire node. This capacity calculation influences how many concurrent jobs automation controller can run.
+In the Operator growth topology, Ansible Automation Platform is deployed on a Single Node OpenShift (SNO) with 32 GB RAM, 16 CPUs, 128 GB Local disk, and 3000 IOPS. This is not a shared environment, so Ansible Automation Platform pods have full access to all of the compute resources of the OpenShift SNO. In this scenario, the capacity calculation for the automation controller task pods is derived from the underlying OpenShift Container Platform node that runs the pod. It does not have access to the entire node. This capacity calculation influences how many concurrent jobs automation controller can run.
 
-OpenShift manages storage distinctly from VMs. This impacts how automation hub stores its artifacts. In the reference topology provided in this document, we use s3 storage because  automation hub requires a ReadWriteMany type storage, which is not a default storage type in OpenShift.
+OpenShift manages storage distinctly from VMs. This impacts how automation hub stores its artifacts. In the Operator growth topology, we use S3 storage because automation hub requires a ReadWriteMany type storage, which is not a default storage type in OpenShift.
 
 ### Network ports
 
-Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
 
 
 
@@ -519,7 +754,7 @@ The enterprise topology is intended for organizations that require Ansible Autom
 
 ### Infrastructure topology
 
-The following diagram outlines the infrastructure topology that Red Hat has tested with the respective deployment model that customers may use when self-managing Ansible Automation Platform:
+The following diagram outlines the infrastructure topology that Red&#160;Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 ![Operator enterprise topology diagram]
 
@@ -531,25 +766,25 @@ Each OpenShift Worker node has been tested with the following component requirem
 
 ### Tested system configurations
 
-Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+Red&#160;Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
 
 
 
 ### Nonfunctional requirements
 
-Ansible Automation Platform’s performance characteristics and capacity are impacted by its resource allocation and configuration. With OpenShift, each Ansible Automation Platform component is deployed as a pod. You can specify resource requests and limits for each pod.
+Ansible Automation Platform&#8217;s performance characteristics and capacity are impacted by its resource allocation and configuration. With OpenShift, each Ansible Automation Platform component is deployed as a pod. You can specify resource requests and limits for each pod.
 
-The Ansible Automation Platform custom resource allows you to configure resource allocation for OpenShift installations. Each configurable item has default settings. These settings are the exact configuration used within the context of this reference deployment architecture and presumes that the environment is being deployed and managed by an Enterprise IT organization for production purposes.
+Use the Ansible Automation Platform custom resource to configure resource allocation for OpenShift installations. Each configurable item has default settings. These settings are the exact configuration used within the context of this reference deployment architecture and presumes that the environment is being deployed and managed by an Enterprise IT organization for production purposes.
 
-By default, each component’s deployments are set for minimum resource requests but no resource limits. OpenShift only schedules the pods with available resource requests, but the pods are allowed to consume unlimited RAM or CPU as long as the OpenShift worker node itself is not under node pressure.
+By default, each component&#8217;s deployments are set for minimum resource requests but no resource limits. OpenShift only schedules the pods with available resource requests, but the pods are allowed to consume unlimited RAM or CPU provided that the OpenShift worker node itself is not under node pressure.
 
-In the reference topology provided in this document, Ansible Automation Platform is deployed on a Red Hat OpenShift on AWS (ROSA) Hosted Control Plane (HCP) cluster with 2 t3.xlarge worker nodes spread across 2 AZs within a single AWS Region. This is not a shared environment, so Ansible Automation Platform pods have full access to all of the compute resources of the ROSA HCP cluster. In this scenario, the capacity calculation for the automation controller task pods is derived from the underlying HCP worker node that runs the pod. It does not have access to the cpu/memory resources of the entire node. This capacity calculation influences how many concurrent jobs automation controller can run.
+In the Operator enterprise topology, Ansible Automation Platform is deployed on a Red Hat OpenShift on AWS (ROSA) Hosted Control Plane (HCP) cluster with 2 t3.xlarge worker nodes spread across 2 AZs within a single AWS Region. This is not a shared environment, so Ansible Automation Platform pods have full access to all of the compute resources of the ROSA HCP cluster. In this scenario, the capacity calculation for the automation controller task pods is derived from the underlying HCP worker node that runs the pod. It does not have access to the CPU or memory resources of the entire node. This capacity calculation influences how many concurrent jobs automation controller can run.
 
-OpenShift manages storage distinctly from VMs. This impacts how automation hub stores its artifacts. In the reference topology provided in this document, we use s3 storage because  automation hub requires a ReadWriteMany type storage, which is not a default storage type in OpenShift. Externally provided Redis, Posgres, and object storage for automation hub are specified. This provides the Ansible Automation Platform deployment with additional scalability and reliability features, including specialized backup, restore, and replication services as well as scalable storage.
+OpenShift manages storage distinctly from VMs. This impacts how automation hub stores its artifacts. In the Operator enterprise topology, we use S3 storage because automation hub requires a ReadWriteMany type storage, which is not a default storage type in OpenShift. Externally provided Redis, PostgreSQL, and object storage for automation hub are specified. This provides the Ansible Automation Platform deployment with additional scalability and reliability features, including specialized backup, restore, and replication services and scalable storage.
 
 ### Network ports
 
-Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
 
 
 
@@ -563,7 +798,7 @@ Each automation mesh VM has been tested with the following component requirement
 
 ## Network ports
 
-Automation mesh uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+Automation mesh uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
 
 
 

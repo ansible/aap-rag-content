@@ -138,17 +138,19 @@ $ ./setup.sh
 
 The installation will begin.
 
+If you are upgrading from Ansible Automation Platform 2.4 to 2.5, proceed to Linking your account to link your existing service level accounts to a single unified platform account.
+
 # Container-based Ansible Automation Platform
 
 To update your container-based Ansible Automation Platform, start by reviewing the update considerations. You can then download the latest version of the Ansible Automation Platform installer, configure the inventory file in the installation bundle to reflect your environment, and then run the installer.
 
 ## Updating container-based Ansible Automation Platform
 
-Perform a patch update for a container-based installation of Ansible Automation Platform.
+Perform a patch update for a container-based installation of Ansible Automation Platform from 2.5 to 2.5.x.
 
 You have done the following:
 
-* Reviewed the release notes for the associated patch release.
+* Reviewed the release notes for the associated patch release. For more information, see the Ansible Automation Platform Release notes.
 * Created a backup of your Ansible Automation Platform deployment. For more information, see Backing up controller-based Ansible Automation Platform.
 
 1. Download the latest version of the containerized installer from the Ansible Automation Platform download.
@@ -169,7 +171,7 @@ $ tar xfvz ansible-automation-platform-containerized-setup-<version>.tar.gz
 $ tar xfvz ansible-automation-platform-containerized-setup-bundle-<version>-<arch name>.tar.gz
 ```
 
-5. Edit the inventory file so that it matches your desired configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can modify the parameters to match any changes to your environment.
+5. Edit the inventory file so that it matches your required configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can change the parameters to match any modifications to your environment.
 6. Run the install command:
 
 ```
@@ -183,7 +185,7 @@ The installation will begin.
 
 ## Backing up container-based Ansible Automation Platform
 
-Perform a back up of your container-based Ansible Automation Platform installer.
+Perform a back up of your container-based installation of Ansible Automation Platform.
 
 1. Go to the Red Hat Ansible Automation Platform installation directory on your Red Hat Enterprise Linux host.
 2. Run the backup.yml playbook:
@@ -198,21 +200,4 @@ This will backup the important data deployed by the containerized installer such
 * Configuration files
 * Data files
 
-By default, the backup directory is set to ~/backups but this can be changed by using the backup_dir variable in your inventory file.
-
-# Ansible Automation Platform on OpenShift Container Platform
-
-You can use an upgrade patch to update your operator-based Ansible Automation Platform.
-
-## Updating Ansible Automation Platform on OpenShift Container Platform
-
-When you perform a patch update for an installation of Ansible Automation Platform on OpenShift Container Platform, most updates happen within a channel:
-
-1. A new update becomes available in the marketplace (through the redhat-operator CatalogSource).
-2. A new InstallPlan is automatically created for your Ansible Automation Platform subscription. If the subscription is set to Manual, the InstallPlan will need to be manually approved in the OpenShift UI. If the subscription is set to Automatic, it will upgrade as soon as the new version is available.
-
-[NOTE]
-----
-It is recommended that you set a manual install strategy on your Ansible Automation Platform Operator subscription (set when installing or upgrading the Operator) and you will be prompted to approve an upgrade when it becomes available in your selected update channel. Stable channels for each X.Y release (for example, stable-2.5) are available.
-----
-3. A new Subscription, CSV, and Operator containers will be created alongside the old Subscription, CSV, and containers. Then the old resources will be cleaned up if the new install was successful.
+By default, the backup directory is set to ~/backups. You can change this by using the backup_dir variable in your inventory file.

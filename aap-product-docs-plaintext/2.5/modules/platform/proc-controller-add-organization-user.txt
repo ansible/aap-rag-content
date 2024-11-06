@@ -3,23 +3,31 @@
 You can provide a user with access to an organization by adding them to the organization and managing the roles associated with the user. To add a user to an organization, the user must already exist. For more information, see Creating a user.
 To add roles for a user, the role must already exist. See Creating a role for more information.
 
+The following tab selections are available when adding users to an organization. When user accounts from the automation controller organization have been migrated to Ansible Automation Platform 2.5 during the upgrade process, the Automation Execution tab shows content based on whether the users were added to the organization prior to migration.
+
+Ansible Automation Platform:: Reflects all users added to the organization at the platform level. From this tab, you can add users as organization members and, optionally provide specific organization level roles.
+Automation Execution:: Reflects users that were added directly to the automation controller organization prior to an upgrade and migration. From this tab, you can only view existing memberships in automation controller and remove those memberships but not you can not add new memberships.
+
+New user memberships to an organization must be added at the platform level.
+
 1. From the navigation panel, select menu:Access Management[Organizations].
 2. From the Organizations list view, select the organization to which you want to add a user.
 3. Click the Users tab to add users.
-4. Click btn:[Add users] and select one or more users from the list by clicking the checkbox next to the name to add them as members.
-5. Click btn:[Next].
-6. Select the roles you want the selected user to have. Scroll down for a complete list of roles.
+4. Select the Ansible Automation Platform tab and click btn:[Add users] to add user access to the team, or select the Automation Execution tab to view or remove user access from the team.
+5. Select one or more users from the list by clicking the checkbox next to the name to add them as members.
+6. Click btn:[Next].
+7. Select the roles you want the selected user to have. Scroll down for a complete list of roles.
 
 [NOTE]
 ----
 If you have multiple Ansible Automation Platform components installed, you will see selections for the roles associated with each component in the Roles menu bar. For example, Automation Execution for automation controller roles, Automation Decisions for Event-Driven Ansible roles.
 ----
-7. Click btn:[Next] to review the roles settings.
-8. Click btn:[Finish] to apply the roles to the selected users, and to add them as members. The Add roles dialog displays the updated roles assigned for each user.
+8. Click btn:[Next] to review the roles settings.
+9. Click btn:[Finish] to apply the roles to the selected users, and to add them as members. The Add roles dialog displays the updated roles assigned for each user.
 
 [NOTE]
 ----
 A user with associated roles retains them if they are reassigned to another organization.
 ----
-9. To remove a particular user from the organization, select Remove user from the More actions &#8942; list next to the user. This launches a confirmation dialog, asking you to confirm the removal.
-10. To manage roles for users in an organization, click the &#9881; icon next to the user and select Manage roles.
+10. To remove a particular user from the organization, select Remove user from the More actions &#8942; list next to the user. This launches a confirmation dialog, asking you to confirm the removal.
+11. To manage roles for users in an organization, click the &#9881; icon next to the user and select Manage roles.

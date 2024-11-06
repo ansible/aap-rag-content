@@ -1,0 +1,53 @@
+# Generating a custom model training data set
+
+After installing the content parser tool, run it to scan your custom Ansible files and generate a custom model training data set. You can then upload the training data set to IBM watsonx Code Assistant and create a custom model for your organization. If you used ansible-lint preprocessing and encountered rule violations, you must resolve the rule violations before uploading the training data set to IBM watsonx Code Assistant.
+
+# Methods of generating a training data set
+
+You can generate a training data set by using one of the following methods:
+
+* With ansible-lint preprocessing
+
+By default, the content parser tool generates training data sets by using ansible-lint preprocessing. The content parser tool uses ansible-lint rules to scan your Ansible files and ensure that the content adheres to Ansible best practices. If rule violations are found, the content parser tool excludes these files from the generated output. In such scenarios, you must resolve the rule violations, and run the content parser tool once again so that the generated output includes all your Ansible files.
+* Without ansible-lint preprocessing
+
+You can generate a training data set without ansible-lint preprocessing. In this method, the content parser tool does not scan your Ansible files for ansible-lint rule violations; therefore, the training data set includes all files. Although the training data set includes all files, it might not adhere to Ansible best practices and could affect the quality of your code recommendation experience.
+
+* You must have installed the content parser tool on your computer.
+* You must have verified that the version of ansible-lint that is installed with the content parser tool is the same as that of the previously-installed ansible-lint.
+
+1. Run the content parser tool to generate a training data set:
+* With ansible-lint preprocessing: $ ansible-content-parser source output
+* Without ansible-lint preprocessing: $ ansible-content-parser source output -S
+
+The following table lists the required parameters.
+
+
+For example:
+If the source is a Github URL https://github.com/ansible/ansible-tower-samples.git, and the output directory is /tmp/out, the command prompt is as follows:
+$ ansible-content-parser https://github.com/ansible/ansible-tower-samples.git /tmp/out
+2. Optional: To generate a training data set with additional information, specify the following parameters while running the content parser tool.
+
+Example of a command prompt for Github repository ansible-tower-samples
+
+$ ansible-content-parser --profile min \
+--source-license undefined \
+--source-description Samples \
+--repo-name ansible-tower-samples \
+--repo-url 'https://github.com/ansible/ansible-tower-samples' \
+git@github.com:ansible/ansible-tower-samples.git /var/tmp/out_dir
+Example of a generated training data set for Github repository ansible-tower-samples
+
+The training data set is formatted with Jeff Goldblum (jg), a command-line JSON processing tool.
+
+$ cat out_dir/ftdata.jsonl| jq
+{
+"data_source_description": "Samples",
+"input": "---\n- name: Hello World Sample\n hosts: all\n tasks:\n - name: Hello Message",
+"license": "undefined",
+"module": "debug",
+"output": " debug:\n msg: Hello World!",
+"path": "hello_world.yml",
+"repo_name": "ansible-tower-samples",
+"repo_url": "https://github.com/ansible/ansible-tower-samples"
+}
