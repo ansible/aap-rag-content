@@ -18,7 +18,8 @@ def main():
     parser.add_argument("--git-branch", "-b")
 
     args = parser.parse_args()
-    project_document_path = "lightspeed" if args.git_branch == "lightspeed-latest" else "downstream"
+    project_document_path = "lightspeed" if args.git_branch == "lightspeed-latest" \
+        else "aap-clouds" if args.git_branch == "aap-clouds-latest" else "downstream"
 
     with open(Path(args.input_dir).joinpath("metadata.json"), encoding="utf8") as f:
         metadata = json.load(f)
@@ -31,7 +32,10 @@ def main():
     not_found = 0
     for text_file in text_files:
         relative_path_name = "/".join(text_file.parts[n:])
-        adoc_name = str(Path(project_document_path).joinpath(relative_path_name))
+        if project_document_path == ".":
+            adoc_name = relative_path_name
+        else:
+            adoc_name = str(Path(project_document_path).joinpath(relative_path_name))
         adoc_name = adoc_name.replace(".txt", ".adoc")
         if adoc_name in metadata:
             url = metadata[adoc_name]["url"]
