@@ -373,7 +373,8 @@ def main():
 
     args = parser.parse_args()
 
-    project_document_path = "lightspeed" if args.git_branch == "lightspeed-latest" else "downstream"
+    project_document_path = "lightspeed" if args.git_branch == "lightspeed-latest" \
+        else "." if args.git_branch == "aap-clouds-latest" else "downstream"
 
     # Parse Asciidoc files in a local aap_docs repo and calculate document URLs
     base_dir = args.aap_docs_dir

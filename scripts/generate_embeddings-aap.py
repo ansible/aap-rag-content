@@ -73,13 +73,17 @@ def aap_file_metadata_func(file_path: str) -> Dict:
         file_path: str: file path in str
     """
     full_path = os.path.abspath(file_path)
-    doc_dir = "lightspeed" if "lightspeed-latest" in full_path else "downstream"
+    doc_dir = "lightspeed" if args.git_branch == "lightspeed-latest" \
+        else "." if args.git_branch == "aap-clouds-latest" else "downstream"
 
-    doc_path = full_path.removeprefix(EMBEDDINGS_ROOT_DIR).removesuffix("txt")
+    doc_path = full_path.removeprefix(EMBEDDINGS_ROOT_DIR).removesuffix(".txt")
     i = doc_path.index("/", 1)
     if i >= 0:
-        doc_path = doc_path[i:]
-    key = doc_dir + doc_path + "adoc"
+        doc_path = doc_path[(i + 1):]
+    if doc_dir == ".":
+        key = f"{doc_path}.adoc"
+    else:
+        key = f"{doc_dir}/{doc_path}.adoc"
 
     print(f"DEBUG: file_path={file_path},  key={key}, EMBEDDINGS_ROOT_DIR={EMBEDDINGS_ROOT_DIR}, doc_path={doc_path}, doc_dir={doc_dir}")
     docs_url = lambda x: metadata[key]["url"]  # noqa: E731

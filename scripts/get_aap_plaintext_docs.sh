@@ -8,6 +8,7 @@ fi
 
 AAP_VERSION=$1
 LIGHTSPEED_LATEST=lightspeed-latest
+AAP_CLOUDS_LATEST=aap-clouds-latest
 BASE_DIR=aap-product-docs-plaintext
 
 set -eou pipefail
@@ -18,7 +19,7 @@ if [ ! -d ${BASE_DIR} ]; then
     mkdir ${BASE_DIR}
 fi
 
-for git_branch in ${AAP_VERSION} ${LIGHTSPEED_LATEST}
+for git_branch in ${AAP_VERSION} ${LIGHTSPEED_LATEST} ${AAP_COULDS_LATEST}
 do
   rm -rf ${BASE_DIR}/${git_branch}
   git clone --single-branch --branch ${git_branch} https://github.com/ansible/aap-docs.git

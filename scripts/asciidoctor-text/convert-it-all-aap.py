@@ -25,7 +25,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args(sys.argv[1:])
 
-    doc_dir = "lightspeed" if args.git_branch == "lightspeed-latest" else "downstream"
+    doc_dir = "lightspeed" if args.git_branch == "lightspeed-latest" \
+        else "." if args.git_branch == "aap-clouds-latest" else "downstream"
     attributes = f"aap-docs/{doc_dir}/attributes/attributes.adoc"
 
     attribute_map = {}
