@@ -32,10 +32,7 @@ def main():
     not_found = 0
     for text_file in text_files:
         relative_path_name = "/".join(text_file.parts[n:])
-        if project_document_path == ".":
-            adoc_name = relative_path_name
-        else:
-            adoc_name = str(Path(project_document_path).joinpath(relative_path_name))
+        adoc_name = str(Path(project_document_path).joinpath(relative_path_name))
         adoc_name = adoc_name.replace(".txt", ".adoc")
         if adoc_name in metadata:
             url = metadata[adoc_name]["url"]
