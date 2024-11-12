@@ -1,0 +1,1428 @@
+{
+  "aap-clouds/README.adoc": {
+    "project_file_name": "aap-clouds/README.adoc",
+    "path_name": "aap-docs/aap-clouds/README.adoc",
+    "includes": [],
+    "url": null,
+    "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/assembly-aap-command-generator.adoc": {
+    "project_file_name": "aap-clouds/aap-common/assembly-aap-command-generator.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/assembly-aap-command-generator.adoc",
+    "includes": [
+      "aap-clouds/aap-common/proc-aap-pull-command-container-image.adoc",
+      "aap-clouds/aap-common/proc-aap-list-available-playbooks.adoc",
+      "aap-clouds/aap-common/proc-aap-generate-command-data-file.adoc",
+      "aap-clouds/aap-common/proc-aap-populate-command-data-file.adoc",
+      "aap-clouds/aap-common/proc-aap-run-generated-command.adoc",
+      "aap-clouds/aap-common/ref-aap-using-playbooks.adoc"
+    ],
+    "url": null,
+    "id": "ap-command-generator",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/assembly-aap-common.adoc": {
+    "project_file_name": "aap-clouds/aap-common/assembly-aap-common.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/assembly-aap-common.adoc",
+    "includes": [
+      "aap-clouds/aap-common/making-open-source-more-inclusive.adoc"
+    ],
+    "url": null,
+    "id": "ansible-automation-platform",
+    "context": "aap-common",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/aap-common/assembly-appendix-release-notes.adoc": {
+    "project_file_name": "aap-clouds/aap-common/assembly-appendix-release-notes.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/assembly-appendix-release-notes.adoc",
+    "includes": [],
+    "url": null,
+    "id": "assembly-appendix-aap-release-notes",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/boilerplate.adoc": {
+    "project_file_name": "aap-clouds/aap-common/boilerplate.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/boilerplate.adoc",
+    "includes": [],
+    "url": null,
+    "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/external-site-disclaimer.adoc": {
+    "project_file_name": "aap-clouds/aap-common/external-site-disclaimer.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/external-site-disclaimer.adoc",
+    "includes": [],
+    "url": null,
+    "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/making-open-source-more-inclusive.adoc": {
+    "project_file_name": "aap-clouds/aap-common/making-open-source-more-inclusive.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/making-open-source-more-inclusive.adoc",
+    "includes": [],
+    "url": null,
+    "id": "making-open-source-more-inclusive",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/proc-aap-generate-command-data-file.adoc": {
+    "project_file_name": "aap-clouds/aap-common/proc-aap-generate-command-data-file.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/proc-aap-generate-command-data-file.adoc",
+    "includes": [],
+    "url": null,
+    "id": "proc-aap-generate-command-data-file",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/proc-aap-list-available-playbooks.adoc": {
+    "project_file_name": "aap-clouds/aap-common/proc-aap-list-available-playbooks.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/proc-aap-list-available-playbooks.adoc",
+    "includes": [],
+    "url": null,
+    "id": "proc-aap-list-available-playbooks",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/proc-aap-playbooks.adoc": {
+    "project_file_name": "aap-clouds/aap-common/proc-aap-playbooks.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/proc-aap-playbooks.adoc",
+    "includes": [],
+    "url": null,
+    "id": "proc-aap-playbooks",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/proc-aap-populate-command-data-file.adoc": {
+    "project_file_name": "aap-clouds/aap-common/proc-aap-populate-command-data-file.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/proc-aap-populate-command-data-file.adoc",
+    "includes": [],
+    "url": null,
+    "id": "proc-aap-populate-command-data-file",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/proc-aap-pull-command-container-image.adoc": {
+    "project_file_name": "aap-clouds/aap-common/proc-aap-pull-command-container-image.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/proc-aap-pull-command-container-image.adoc",
+    "includes": [],
+    "url": null,
+    "id": "proc-aap-pull-command-container-image",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/proc-aap-run-generated-command.adoc": {
+    "project_file_name": "aap-clouds/aap-common/proc-aap-run-generated-command.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/proc-aap-run-generated-command.adoc",
+    "includes": [],
+    "url": null,
+    "id": "proc-aap-run-generated-command",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/providing-feedback.adoc": {
+    "project_file_name": "aap-clouds/aap-common/providing-feedback.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/providing-feedback.adoc",
+    "includes": [],
+    "url": null,
+    "id": "providing-feedback",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/aap-common/ref-aap-using-playbooks.adoc": {
+    "project_file_name": "aap-clouds/aap-common/ref-aap-using-playbooks.adoc",
+    "path_name": "aap-docs/aap-clouds/aap-common/ref-aap-using-playbooks.adoc",
+    "includes": [],
+    "url": null,
+    "id": "ref-aap-using-playbooks",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/attributes/attributes.adoc": {
+    "project_file_name": "aap-clouds/attributes/attributes.adoc",
+    "path_name": "aap-docs/aap-clouds/attributes/attributes.adoc",
+    "includes": [],
+    "url": null,
+    "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/assembly-azure-access.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-azure-access.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-azure-access.adoc",
+    "includes": [
+      "aap-clouds/stories/assembly-azure-network-peering.adoc",
+      "aap-clouds/stories/assembly-azure-hub-spoke-peering.adoc",
+      "aap-clouds/stories/assembly-azure-vwan-peering.adoc",
+      "aap-clouds/stories/assembly-azure-direct-peering.adoc",
+      "aap-clouds/stories/topics/con-azure-user-defined-routing-tables.adoc",
+      "aap-clouds/stories/topics/con-azure-virtual-appliance-routing.adoc",
+      "aap-clouds/stories/topics/con-azure-private-dns.adoc",
+      "aap-clouds/stories/topics/proc-azure-accessing-aap.adoc",
+      "aap-clouds/stories/topics/proc-azure-license-association.adoc",
+      "aap-clouds/stories/topics/proc-azure-configure-ad-sso.adoc"
+    ],
+    "url": null,
+    "id": "azure-access",
+    "context": "azure-access",
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/assembly-azure-connecting-to-aap.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-azure-connecting-to-aap.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-azure-connecting-to-aap.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/proc-azure-nw-access-details.adoc",
+      "aap-clouds/stories/topics/proc-azure-nw-public-deploy.adoc",
+      "aap-clouds/stories/topics/proc-azure-nw-private-deploy.adoc",
+      "aap-clouds/stories/topics/proc-azure-nw-private-deploy-az-hosted-vm.adoc",
+      "aap-clouds/stories/topics/proc-azure-nw-private-deploy-vpn.adoc",
+      "aap-clouds/stories/topics/proc-azure-nw-private-deploy-ssh-tunnel.adoc",
+      "aap-clouds/stories/topics/proc-azure-accessing-aap.adoc",
+      "aap-clouds/stories/topics/proc-azure-license-association.adoc",
+      "aap-clouds/stories/topics/proc-azure-configure-ad-sso.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-connecting-to-aap",
+    "id": "azure-connecting-to-aap",
+    "context": "azure-connecting-to-aap",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/assembly-azure-deploy.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-azure-deploy.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-azure-deploy.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/proc-azure-locate-aap-marketplace.adoc",
+      "aap-clouds/stories/topics/proc-azure-provisioning-aap.adoc",
+      "aap-clouds/stories/topics/proc-azure-monitor-deployment-engine.adoc",
+      "aap-clouds/stories/topics/proc-azure-cancel-deployment.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-deploy",
+    "id": "azure-deploy",
+    "context": "azure-deploy",
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/assembly-azure-direct-peering.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-azure-direct-peering.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-azure-direct-peering.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/proc-azure-nw-direct-peering.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-direct-peering",
+    "id": "azure-direct-peering",
+    "context": "azure-direct-peering",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/assembly-azure-hub-spoke-peering.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-azure-hub-spoke-peering.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-azure-hub-spoke-peering.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/proc-azure-hub-spoke-peering.adoc",
+      "aap-clouds/stories/topics/proc-azure-find-cluster-cidr.adoc",
+      "aap-clouds/stories/topics/proc-azure-nw-peering-aap-subnet.adoc",
+      "aap-clouds/stories/topics/proc-azure-update-route-tables.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-hub-spoke-peering",
+    "id": "azure-hub-spoke-peering",
+    "context": "azure-hub-spoke-peering",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/assembly-azure-install-prerequisites.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-azure-install-prerequisites.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-azure-install-prerequisites.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/proc-azure-resource-quotas.adoc",
+      "aap-clouds/stories/topics/proc-azure-resource-providers.adoc",
+      "aap-clouds/stories/topics/con-azure-network.adoc",
+      "aap-clouds/stories/topics/con-azure-vnet-cidr.adoc",
+      "aap-clouds/stories/topics/con-azure-aks-cidr.adoc",
+      "aap-clouds/stories/topics/proc-azure-create-service-principal.adoc",
+      "aap-clouds/stories/topics/con-azure-policy.adoc",
+      "aap-clouds/stories/topics/con-azure-entitling-subscription.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#azure-install-prerequisites",
+    "id": "azure-install-prerequisites",
+    "context": "azure-install-prerequisites",
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/assembly-azure-install.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-azure-install.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-azure-install.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/proc-azure-resource-quotas.adoc",
+      "aap-clouds/stories/topics/proc-azure-resource-providers.adoc",
+      "aap-clouds/stories/topics/con-azure-network.adoc",
+      "aap-clouds/stories/topics/con-azure-vnet-cidr.adoc",
+      "aap-clouds/stories/topics/con-azure-aks-cidr.adoc",
+      "aap-clouds/stories/topics/proc-azure-create-service-principal.adoc",
+      "aap-clouds/stories/topics/con-azure-policy.adoc",
+      "aap-clouds/stories/topics/con-azure-entitling-subscription.adoc",
+      "aap-clouds/stories/topics/proc-azure-deploy-aap.adoc",
+      "aap-clouds/stories/topics/proc-azure-locate-aap-marketplace.adoc",
+      "aap-clouds/stories/topics/proc-azure-provisioning-aap.adoc",
+      "aap-clouds/stories/topics/proc-azure-monitor-deployment-engine.adoc",
+      "aap-clouds/stories/topics/proc-azure-cancel-deployment.adoc"
+    ],
+    "url": null,
+    "id": "azure-install",
+    "context": "azure-install",
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/assembly-azure-intro.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-azure-intro.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-azure-intro.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/con-azure-about.adoc",
+      "aap-clouds/stories/topics/con-azure-architecture.adoc",
+      "aap-clouds/stories/topics/con-azure-public-access.adoc",
+      "aap-clouds/stories/topics/con-azure-private-access.adoc",
+      "aap-clouds/stories/topics/con-azure-security.adoc",
+      "aap-clouds/stories/topics/con-azure-disaster-recovery.adoc",
+      "aap-clouds/stories/topics/con-azure-infrastructure-usage.adoc",
+      "aap-clouds/stories/topics/con-azure-lifecycle.adoc",
+      "aap-clouds/stories/topics/con-azure-scaling.adoc",
+      "aap-clouds/stories/topics/con-azure-migration.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#intro-to-aap-on-azure",
+    "id": "intro-to-aap-on-azure",
+    "context": "azure-intro",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/assembly-azure-network-peering.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-azure-network-peering.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-azure-network-peering.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-network-peering",
+    "id": "azure-network-peering",
+    "context": "azure-install",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/assembly-azure-post-deployment-requirements.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-azure-post-deployment-requirements.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-azure-post-deployment-requirements.adoc",
+    "includes": [
+      "aap-clouds/stories/assembly-azure-network-peering.adoc",
+      "aap-clouds/stories/assembly-azure-hub-spoke-peering.adoc",
+      "aap-clouds/stories/assembly-azure-vwan-peering.adoc",
+      "aap-clouds/stories/assembly-azure-direct-peering.adoc",
+      "aap-clouds/stories/topics/con-azure-user-defined-routing-tables.adoc",
+      "aap-clouds/stories/topics/con-azure-virtual-appliance-routing.adoc",
+      "aap-clouds/stories/topics/con-azure-private-dns.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-post-deployment-requirements",
+    "id": "azure-post-deployment-requirements",
+    "context": "azure-post-deployment-requirements",
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/assembly-azure-support.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-azure-support.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-azure-support.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/ref-azure-limited-support-status.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#assembly-azure-support",
+    "id": "assembly-azure-support",
+    "context": "azure-support",
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/assembly-azure-vwan-peering.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-azure-vwan-peering.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-azure-vwan-peering.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/proc-azure-peer-vwan-hub-to-aap.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-vwan-peering",
+    "id": "azure-vwan-peering",
+    "context": "azure-vwan-peering",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/assembly-saas-aap-best-practices.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-saas-aap-best-practices.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-saas-aap-best-practices.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/con-saas-automation-for-instance-groups.adoc",
+      "aap-clouds/stories/topics/con-saas-sync-with-pah.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#saas-aap-best-practices",
+    "id": "saas-aap-best-practices",
+    "context": "saas-aap-best-practices",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/assembly-saas-install.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-saas-install.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-saas-install.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/proc-saas-set-up.adoc"
+    ],
+    "url": null,
+    "id": "saas-install",
+    "context": "saas-install",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/assembly-saas-intro.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-saas-intro.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-saas-intro.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#saas-intro",
+    "id": "saas-intro",
+    "context": "saas-intro",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/assembly-saas-post-install-config.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-saas-post-install-config.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-saas-post-install-config.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#saas-post-install-config",
+    "id": "saas-post-install-config",
+    "context": "saas-post-install-config",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/assembly-saas-pull-push.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-saas-pull-push.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-saas-pull-push.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/con-saas-automation.adoc",
+      "aap-clouds/stories/topics/ref-saas-egress-model.adoc",
+      "aap-clouds/stories/topics/ref-saas-mesh-ingress-model.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#saas-pull-push",
+    "id": "saas-pull-push",
+    "context": "saas-pull-push",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/assembly-saas-service-definition.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-saas-service-definition.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-saas-service-definition.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/con-saas-account-management.adoc",
+      "aap-clouds/stories/topics/con-saas-control-plane.adoc",
+      "aap-clouds/stories/topics/con-saas-execution-plane.adoc",
+      "aap-clouds/stories/topics/con-saas-support.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#saas-service-definition",
+    "id": "saas-service-definition",
+    "context": "saas-service-definition",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/assembly-saas-set-up.adoc": {
+    "project_file_name": "aap-clouds/stories/assembly-saas-set-up.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/assembly-saas-set-up.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/proc-saas-set-up-public.adoc",
+      "aap-clouds/stories/topics/proc-saas-set-up-private.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#saas-set-up",
+    "id": "saas-set-up",
+    "context": "saas-set-up",
+    "content_type": null,
+    "nesting_assembly": true
+  },
+  "aap-clouds/stories/topics/con-azure-about.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-about.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-about.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/intro-to-aap-on-azure#con-azure-about_azure-intro",
+    "id": "con-azure-about_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-aks-cidr.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-aks-cidr.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-aks-cidr.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure_aks-cidr_azure-install-prerequisites",
+    "id": "azure_aks-cidr_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-architecture.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-architecture.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-architecture.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/intro-to-aap-on-azure#con-azure-architecture_azure-intro",
+    "id": "con-azure-architecture_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-disaster-recovery.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-disaster-recovery.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-disaster-recovery.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/intro-to-aap-on-azure#con-azure-disaster-recovery_azure-intro",
+    "id": "con-azure-disaster-recovery_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-entitling-subscription.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-entitling-subscription.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-entitling-subscription.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-entitling-subscription_azure-install-prerequisites",
+    "id": "azure-entitling-subscription_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-infrastructure-usage.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-infrastructure-usage.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-infrastructure-usage.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/intro-to-aap-on-azure#con-azure-infrastructure-usage_azure-intro",
+    "id": "con-azure-infrastructure-usage_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-lifecycle.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-lifecycle.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-lifecycle.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/intro-to-aap-on-azure#con-azure-lifecycle_azure-intro",
+    "id": "con-azure-lifecycle_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-migration.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-migration.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-migration.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/intro-to-aap-on-azure#con-azure-migration_azure-intro",
+    "id": "con-azure-migration_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-network.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-network.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-network.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#con-azure-network_azure-install-prerequisites",
+    "id": "con-azure-network_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-policy.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-policy.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-policy.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-policy_azure-install-prerequisites",
+    "id": "azure-policy_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-private-access.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-private-access.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-private-access.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/intro-to-aap-on-azure#con-aap-private-access_azure-intro",
+    "id": "con-aap-private-access_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-private-dns.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-private-dns.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-private-dns.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-private-dns_azure-post-deployment-requirements",
+    "id": "azure-private-dns_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-public-access.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-public-access.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-public-access.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/intro-to-aap-on-azure#con-aap-public-access_azure-intro",
+    "id": "con-aap-public-access_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-scaling.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-scaling.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-scaling.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/intro-to-aap-on-azure#con-azure-scaling_azure-intro",
+    "id": "con-azure-scaling_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-security.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-security.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-security.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/intro-to-aap-on-azure#con-aap-security_azure-intro",
+    "id": "con-aap-security_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-user-defined-routing-tables.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-user-defined-routing-tables.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-user-defined-routing-tables.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-user-defined-routing-tables_azure-post-deployment-requirements",
+    "id": "azure-user-defined-routing-tables_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-virtual-appliance-routing.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-virtual-appliance-routing.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-virtual-appliance-routing.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-virtual-appliance-routing_azure-post-deployment-requirements",
+    "id": "azure-virtual-appliance-routing_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-azure-vnet-cidr.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-azure-vnet-cidr.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-azure-vnet-cidr.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-vnet-cidr_azure-install-prerequisites",
+    "id": "azure-vnet-cidr_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-account-management.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-account-management.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-account-management.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/con-saas-billing.adoc",
+      "aap-clouds/stories/topics/con-saas-deployment-self-service.adoc",
+      "aap-clouds/stories/topics/con-saas-regions.adoc",
+      "aap-clouds/stories/topics/con-saas-sla.adoc",
+      "aap-clouds/stories/topics/con-saas-limited-support-status.adoc",
+      "aap-clouds/stories/topics/con-saas-responsibilities.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-account-management",
+    "id": "con-saas-account-management",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-application-monitoring-and-customer-audits.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-application-monitoring-and-customer-audits.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-application-monitoring-and-customer-audits.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#application-monitoring-and-customer-audits",
+    "id": "application-monitoring-and-customer-audits",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-automation-for-instance-groups.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-automation-for-instance-groups.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-automation-for-instance-groups.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-automation-for-instance-groups",
+    "id": "con-saas-automation-for-instance-groups",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-automation-mesh.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-automation-mesh.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-automation-mesh.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-automation-mesh",
+    "id": "con-saas-automation-mesh",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-automation.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-automation.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-automation.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-automation",
+    "id": "con-saas-automation",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-backup-and-diaster-recovery.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-backup-and-diaster-recovery.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-backup-and-diaster-recovery.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-backup-and-diaster-recovery",
+    "id": "con-saas-backup-and-diaster-recovery",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-billing.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-billing.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-billing.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-billing",
+    "id": "con-saas-billing",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-connectivity.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-connectivity.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-connectivity.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-connectivity",
+    "id": "con-saas-connectivity",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-control-plane.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-control-plane.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-control-plane.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/con-saas-customer-access.adoc",
+      "aap-clouds/stories/topics/con-saas-service-uptime.adoc",
+      "aap-clouds/stories/topics/con-saas-sre-access-and-management.adoc",
+      "aap-clouds/stories/topics/con-saas-backup-and-diaster-recovery.adoc",
+      "aap-clouds/stories/topics/con-saas-infastructure-monitoring.adoc",
+      "aap-clouds/stories/topics/con-saas-application-monitoring-and-customer-audits.adoc",
+      "aap-clouds/stories/topics/con-saas-status-notification.adoc",
+      "aap-clouds/stories/topics/con-saas-security.adoc",
+      "aap-clouds/stories/topics/con-saas-identity-and-access-management.adoc",
+      "aap-clouds/stories/topics/con-saas-encryption.adoc",
+      "aap-clouds/stories/topics/con-saas-hosted-components.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-control-plane",
+    "id": "con-saas-control-plane",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-customer-access.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-customer-access.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-customer-access.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-customer-access",
+    "id": "con-saas-customer-access",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-deployment-self-service.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-deployment-self-service.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-deployment-self-service.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-deployment-self-service",
+    "id": "con-saas-deployment-self-service",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-dns.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-dns.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-dns.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-dns",
+    "id": "con-saas-dns",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-encryption.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-encryption.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-encryption.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-encryption",
+    "id": "con-saas-encryption",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-execution-plane.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-execution-plane.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-execution-plane.adoc",
+    "includes": [
+      "aap-clouds/stories/topics/con-saas-shape.adoc",
+      "aap-clouds/stories/topics/con-saas-networking.adoc",
+      "aap-clouds/stories/topics/con-saas-automation-mesh.adoc",
+      "aap-clouds/stories/topics/con-saas-connectivity.adoc",
+      "aap-clouds/stories/topics/con-saas-monitoring.adoc",
+      "aap-clouds/stories/topics/con-saas-dns.adoc",
+      "aap-clouds/stories/topics/con-saas-networking-with-overlapping-CIDR-blocks.adoc",
+      "aap-clouds/stories/topics/con-saas-updates-and-maintenance.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-execution-plane",
+    "id": "con-saas-execution-plane",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-hosted-components.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-hosted-components.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-hosted-components.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-hosted-components",
+    "id": "con-saas-hosted-components",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-identity-and-access-management.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-identity-and-access-management.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-identity-and-access-management.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-identity-and-access-management",
+    "id": "con-saas-identity-and-access-management",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-infastructure-monitoring.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-infastructure-monitoring.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-infastructure-monitoring.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-infrastructure-monitoring",
+    "id": "con-saas-infrastructure-monitoring",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-limited-support-status.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-limited-support-status.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-limited-support-status.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-limited-support-status",
+    "id": "con-saas-limited-support-status",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-monitoring.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-monitoring.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-monitoring.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-monitoring",
+    "id": "con-saas-monitoring",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-networking-with-overlapping-CIDR-blocks.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-networking-with-overlapping-CIDR-blocks.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-networking-with-overlapping-CIDR-blocks.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-networking-with-overlapping-CIDR-blocks",
+    "id": "con-saas-networking-with-overlapping-CIDR-blocks",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-networking.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-networking.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-networking.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-networking",
+    "id": "con-saas-networking",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-regions.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-regions.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-regions.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-regions",
+    "id": "con-saas-regions",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-responsibilities.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-responsibilities.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-responsibilities.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-responsibilities",
+    "id": "con-saas-responsibilities",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-security.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-security.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-security.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-security",
+    "id": "con-saas-security",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-service-uptime.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-service-uptime.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-service-uptime.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-service-uptime",
+    "id": "con-saas-service-uptime",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-shape.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-shape.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-shape.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-shape",
+    "id": "con-saas-shape",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-sla.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-sla.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-sla.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-sla",
+    "id": "con-saas-sla",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-sre-access-and-management.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-sre-access-and-management.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-sre-access-and-management.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-sre-access-and-management",
+    "id": "con-saas-sre-access-and-management",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-status-notification.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-status-notification.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-status-notification.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-status-notification",
+    "id": "con-saas-status-notification",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-support.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-support.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-support.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-support",
+    "id": "con-saas-support",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-sync-with-pah.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-sync-with-pah.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-sync-with-pah.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-sync-with-pah",
+    "id": "con-saas-sync-with-pah",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-saas-updates-and-maintenance.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-saas-updates-and-maintenance.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-updates-and-maintenance.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-updates-and-maintenance",
+    "id": "con-saas-updates-and-maintenance",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-tech-note-cmd-generator-aws-credentials.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-tech-note-cmd-generator-aws-credentials.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-tech-note-cmd-generator-aws-credentials.adoc",
+    "includes": [],
+    "url": null,
+    "id": "con-tech-note-cmd-generator-aws-credentials",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/con-tech-note-linux-files-owned-by-root.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/con-tech-note-linux-files-owned-by-root.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/con-tech-note-linux-files-owned-by-root.adoc",
+    "includes": [],
+    "url": null,
+    "id": "con-tech-note-linux-files-owned-by-root",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-accessing-aap.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-accessing-aap.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-accessing-aap.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-accessing-aap_azure-connecting-to-aap",
+    "id": "proc-azure-accessing-aap_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-cancel-deployment.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-cancel-deployment.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-cancel-deployment.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-cancel-deployment_azure-deploy",
+    "id": "azure-cancel-deployment_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-configure-ad-sso.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-configure-ad-sso.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-configure-ad-sso.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-configure-ad-sso_azure-connecting-to-aap",
+    "id": "proc-azure-configure-ad-sso_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-create-service-principal.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-create-service-principal.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-create-service-principal.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-create-service-principal_azure-install-prerequisites",
+    "id": "proc-azure-create-service-principal_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-deploy-aap.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-deploy-aap.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-deploy-aap.adoc",
+    "includes": [],
+    "url": null,
+    "id": "proc-azure-proc-azure-deploy-aap_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-entitling-subscription.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-entitling-subscription.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-entitling-subscription.adoc",
+    "includes": [],
+    "url": null,
+    "id": "azure-entitling-subscription_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-find-cluster-cidr.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-find-cluster-cidr.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-find-cluster-cidr.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-find-cluster-cidr_azure-hub-spoke-peering",
+    "id": "proc-azure-find-cluster-cidr_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-hub-spoke-peering.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-hub-spoke-peering.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-hub-spoke-peering.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-hub-spoke-peering_azure-hub-spoke-peering",
+    "id": "proc-azure-hub-spoke-peering_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-license-association.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-license-association.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-license-association.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-license-association_azure-connecting-to-aap",
+    "id": "proc-azure-license-association_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-locate-aap-marketplace.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-locate-aap-marketplace.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-locate-aap-marketplace.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-locate-aap-marketplace_azure-deploy",
+    "id": "proc-azure-locate-aap-marketplace_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-monitor-deployment-engine.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-monitor-deployment-engine.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-monitor-deployment-engine.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-monitor-deployment-engine_azure-deploy",
+    "id": "azure-monitor-deployment-engine_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-nw-access-details.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-nw-access-details.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-nw-access-details.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-nw-access-details_azure-connecting-to-aap",
+    "id": "proc-azure-nw-access-details_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-nw-direct-peering.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-nw-direct-peering.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-nw-direct-peering.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-nw-direct-peering_azure-direct-peering",
+    "id": "proc-azure-nw-direct-peering_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-nw-peering-aap-subnet.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-nw-peering-aap-subnet.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-nw-peering-aap-subnet.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-nw-peering-aap-subnet_azure-hub-spoke-peering",
+    "id": "proc-azure-nw-peering-aap-subnet_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-nw-private-deploy-az-hosted-vm.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-nw-private-deploy-az-hosted-vm.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-nw-private-deploy-az-hosted-vm.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-nw-private-deploy-az-hosted-vm_azure-connecting-to-aap",
+    "id": "proc-azure-nw-private-deploy-az-hosted-vm_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-nw-private-deploy-ssh-tunnel.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-nw-private-deploy-ssh-tunnel.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-nw-private-deploy-ssh-tunnel.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-nw-private-deploy-ssh-tunnel_azure-connecting-to-aap",
+    "id": "proc-azure-nw-private-deploy-ssh-tunnel_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-nw-private-deploy-vpn.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-nw-private-deploy-vpn.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-nw-private-deploy-vpn.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-nw-private-deploy-vpn_azure-connecting-to-aap",
+    "id": "proc-azure-nw-private-deploy-vpn_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-nw-private-deploy.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-nw-private-deploy.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-nw-private-deploy.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-nw-private-deploy_azure-connecting-to-aap",
+    "id": "proc-azure-nw-private-deploy_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-nw-public-deploy.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-nw-public-deploy.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-nw-public-deploy.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-nw-public-deploy_azure-connecting-to-aap",
+    "id": "proc-azure-nw-public-deploy_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-peer-vwan-hub-to-aap.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-peer-vwan-hub-to-aap.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-peer-vwan-hub-to-aap.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-peer-vwan-hub-to-aap_azure-vwan-peering",
+    "id": "proc-peer-vwan-hub-to-aap_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-private-dns.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-private-dns.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-private-dns.adoc",
+    "includes": [],
+    "url": null,
+    "id": "azure-private-dns_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-provisioning-aap.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-provisioning-aap.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-provisioning-aap.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-provisioning-aap_azure-deploy",
+    "id": "proc-azure-provisioning-aap_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-resource-providers.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-resource-providers.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-resource-providers.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-resource-providers_azure-install-prerequisites",
+    "id": "proc-azure-resource-providers_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-resource-quotas.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-resource-quotas.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-resource-quotas.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-resource-quotas_azure-install-prerequisites",
+    "id": "proc-azure-resource-quotas_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-update-route-tables.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-update-route-tables.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-update-route-tables.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-update-route-tables_azure-hub-spoke-peering",
+    "id": "proc-azure-update-route-tables_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-azure-user-defined-routing-tables.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-azure-user-defined-routing-tables.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-user-defined-routing-tables.adoc",
+    "includes": [],
+    "url": null,
+    "id": "azure-user-defined-routing-tables_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-create-credentials-cmd-generator.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-create-credentials-cmd-generator.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-create-credentials-cmd-generator.adoc",
+    "includes": [],
+    "url": null,
+    "id": "prod-create-credentials-cmd-generator",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-saas-set-up-private.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-saas-set-up-private.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-saas-set-up-private.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#proc-saas-set-up-private",
+    "id": "proc-saas-set-up-private",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-saas-set-up-public.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-saas-set-up-public.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-saas-set-up-public.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#proc-saas-set-up-public",
+    "id": "proc-saas-set-up-public",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/proc-saas-set-up.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/proc-saas-set-up.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/proc-saas-set-up.adoc",
+    "includes": [],
+    "url": null,
+    "id": "proc-saas-set-up",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/ref-azure-limited-support-status.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/ref-azure-limited-support-status.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/ref-azure-limited-support-status.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-limited-support-status_azure-support",
+    "id": "azure-limited-support-status_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/ref-azure-policy.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/ref-azure-policy.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/ref-azure-policy.adoc",
+    "includes": [],
+    "url": null,
+    "id": "azure-policy_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/ref-azure-virtual-appliance-routing.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/ref-azure-virtual-appliance-routing.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/ref-azure-virtual-appliance-routing.adoc",
+    "includes": [],
+    "url": null,
+    "id": "azure-virtual-appliance-routing_{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/ref-saas-egress-model.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/ref-saas-egress-model.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/ref-saas-egress-model.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#ref-saas-egress-model",
+    "id": "ref-saas-egress-model",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/stories/topics/ref-saas-mesh-ingress-model.adoc": {
+    "project_file_name": "aap-clouds/stories/topics/ref-saas-mesh-ingress-model.adoc",
+    "path_name": "aap-docs/aap-clouds/stories/topics/ref-saas-mesh-ingress-model.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#ref-saas-mesh-ingress-model",
+    "id": "ref-saas-mesh-ingress-model",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/titles/aap-on-azure/stories.adoc": {
+    "project_file_name": "aap-clouds/titles/aap-on-azure/stories.adoc",
+    "path_name": "aap-docs/aap-clouds/titles/aap-on-azure/stories.adoc",
+    "includes": [
+      "aap-clouds/aap-common/external-site-disclaimer.adoc",
+      "aap-clouds/stories/assembly-azure-intro.adoc",
+      "aap-clouds/stories/assembly-azure-install-prerequisites.adoc",
+      "aap-clouds/stories/assembly-azure-deploy.adoc",
+      "aap-clouds/stories/assembly-azure-post-deployment-requirements.adoc",
+      "aap-clouds/stories/assembly-azure-connecting-to-aap.adoc",
+      "aap-clouds/stories/assembly-azure-support.adoc"
+    ],
+    "url": null,
+    "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/titles/aap-on-azure/master.adoc": {
+    "project_file_name": "aap-clouds/titles/aap-on-azure/master.adoc",
+    "path_name": "aap-docs/aap-clouds/titles/aap-on-azure/master.adoc",
+    "includes": [
+      "aap-clouds/attributes/attributes.adoc",
+      "aap-clouds/titles/aap-on-azure/stories.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index",
+    "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/titles/saas-aws/master.adoc": {
+    "project_file_name": "aap-clouds/titles/saas-aws/master.adoc",
+    "path_name": "aap-docs/aap-clouds/titles/saas-aws/master.adoc",
+    "includes": [
+      "aap-clouds/attributes/attributes.adoc",
+      "aap-clouds/titles/saas-aws/title-attributes.adoc",
+      "aap-clouds/titles/saas-aws/stories.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index",
+    "id": "{ProjectNameID}-{context}",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/titles/saas-aws/stories.adoc": {
+    "project_file_name": "aap-clouds/titles/saas-aws/stories.adoc",
+    "path_name": "aap-docs/aap-clouds/titles/saas-aws/stories.adoc",
+    "includes": [
+      "aap-clouds/aap-common/external-site-disclaimer.adoc",
+      "aap-clouds/stories/assembly-saas-intro.adoc",
+      "aap-clouds/stories/assembly-saas-pull-push.adoc",
+      "aap-clouds/stories/assembly-saas-set-up.adoc",
+      "aap-clouds/stories/assembly-saas-post-install-config.adoc",
+      "aap-clouds/stories/assembly-saas-service-definition.adoc",
+      "aap-clouds/stories/assembly-saas-aap-best-practices.adoc"
+    ],
+    "url": null,
+    "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/titles/saas-aws/title-attributes.adoc": {
+    "project_file_name": "aap-clouds/titles/saas-aws/title-attributes.adoc",
+    "path_name": "aap-docs/aap-clouds/titles/saas-aws/title-attributes.adoc",
+    "includes": [],
+    "url": null,
+    "id": null,
+    "context": "saas-aws",
+    "content_type": null,
+    "nesting_assembly": false
+  }
+}

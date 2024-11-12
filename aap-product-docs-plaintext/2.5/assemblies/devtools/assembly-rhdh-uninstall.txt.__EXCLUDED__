@@ -1,0 +1,179 @@
+# Uninstalling the Ansible plug-ins
+
+# Uninstalling a Helm chart installation
+
+1. In Red Hat Developer Hub, remove any software templates that use the ansible:content:create action.
+2. In the OpenShift Developer UI, navigate to menu:Helm[developer-hub > Actions > Upgrade > Yaml view].
+3. Remove the Ansible plug-ins configuration under the plugins section.
+
+```
+...
+global:
+...
+    plugins:
+      - disabled: false
+        integrity: <SHA512 value>
+        package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-x.y.z.tgz'
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-rhaap:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - disabled: false
+        integrity: <SHA512 value>
+        package: >-
+          http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
+      - disabled: false
+        integrity: <SHA512 value>
+        package: >-
+          http://plugin-registry:8080/ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-backstage-rhaap-backend: null
+```
+
+4. Remove the extraContainers section.
+
+```
+upstream:
+  backstage: |
+    ...
+    extraContainers:
+      - command:
+          - adt
+          - server
+        image: >-
+          registry.redhat.io/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest
+        imagePullPolicy: IfNotPresent
+        name: ansible-devtools-server
+        ports:
+          - containerPort: 8000
+    image:
+      pullPolicy: Always
+      pullSecrets:
+        - ...
+        - rhdh-secret-registry
+    ...
+```
+
+5. Click btn:[Upgrade].
+6. Edit your custom Red Hat Developer Hub config map, for example app-config-rhdh.
+7. Remove the ansible section.
+
+```
+data:
+  app-config-rhdh.yaml: |
+    ...
+    ansible:
+      analytics:
+        enabled: true
+      devSpaces:
+        baseUrl: '<https://MyOwnDevSpacesUrl/>'
+      creatorService:
+        baseUrl: '127.0.0.1'
+        port: '8000'
+      rhaap:
+        baseUrl: '<https://MyAapSubcriptionUrl>'
+        token: '<TopSecretAAPToken>'
+        checkSSL: true
+      automationHub:
+        baseUrl: '<https://MyOwnPAHUrl/>'
+```
+
+8. Restart the Red Hat Developer Hub deployment.
+9. Remove the plugin-registry OpenShift application.
+
+```
+oc delete all -l app=plugin-registry
+```
+
+
+# Uninstalling an Operator installation
+
+To delete the dynamic plug-ins from your installation, you must edit the ConfigMaps
+that reference Ansible.
+
+The deployment auto reloads when the ConfigMaps are updated.
+You do not need to reload the deployment manually .
+
+1. Open the custom ConfigMap where you referenced the dynamic plug-ins, rhaap-dynamic-plugins-config.
+1. Locate the dynamic plug-ins in the plugins: block.
+* To disable the dynamic plug-ins, update the disabled attribute to true for the three dynamic plug-ins.
+* To delete the dynamic plug-ins, delete the lines that reference the dynamic plug-ins from the plugins: block:
+
+```
+     - disabled: false
+       package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-x.y.z.tgz'
+       integrity: <SHA512 value>
+	 ...
+     - disabled: false
+       package: >-
+         http://plugin-registry:8080/ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+       integrity: <SHA512 value>
+       ...
+     - disabled: false
+       package: >-
+         http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+       integrity: <SHA512 value>
+```
+
+2. Click btn:[Save].
+2. To completely remove all the Ansible plugins remove the entire list entries that contain
+
+```
+http://plugin-registry:8080/ansible-plugin-backstage-rhaap-x.y.z.tgz
+http://plugin-registry:8080/ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+```
+
+3. Open the custom Red Hat Developer HubConfigMap, app-config-rhdh.
+1. Remove the locations: block to delete the templates from the RHDH instance.
+2. Remove the ansible: block to delete the Ansible-specific configuration.
+
+```
+kind: ConfigMap
+apiVersion: v1
+metadata:
+ name: rhdh-app-config
+data:
+ app-config-custom.yaml: |
+   app:
+     baseUrl: https://<RHDH_ROUTE>
+   backend:
+     baseUrl: https://<RHDH_ROUTE>
+     cors:
+       origin: https://<RHDH_ROUTE>
+   catalog:
+     rules:
+       - allow: [Component, System, Group, Resource, Location, Template, API, User]
+     locations:
+       - type: url
+         target: https://github.com/ansible/ansible-rhdh-templates/blob/main/all.yaml
+         rules:
+           - allow: [Template]
+   ansible:
+     devSpaces:
+       baseUrl: 'https://devspaces.apps.ansible-rhdh-dev.testing.ansible.com/'
+     creatorService:
+       baseUrl: '127.0.0.1'
+       port: '8000'
+     rhaap:
+       baseUrl: 'https://controller.acme.demoredhat.com'
+       token: ...<REDACTED>
+       checkSSL: false
+```
+
+4. Click btn:[Save].

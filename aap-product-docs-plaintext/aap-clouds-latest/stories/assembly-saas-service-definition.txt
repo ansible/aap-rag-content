@@ -1,0 +1,244 @@
+# Red Hat Ansible Automation Platform Service on AWS Service Definition
+
+# Account management
+
+This section provides an overview of the billing and environment management operations.
+
+## Billing
+
+Red Hat Ansible Automation Platform Service on AWS is billed through Amazon Web Services (AWS).
+Pricing is based on the number of managed active nodes and related infrastructure management costs.
+Discount tiers are available for pre-purchasing managed active nodes at the start of a billing cycle.
+
+The service includes one Ansible Automation Platform deployment and 10 Red Hat Enterprise Linux (RHEL) entitlements for running your automation execution plane.
+
+## Deployment-self-service
+
+You can self-service deployments including, but not limited to, the following operations:
+
+* Buy and deploy an Ansible Automation Platform on AWS environment.
+* Cancel an Ansible Automation Platform on AWS environment subscription.
+
+## Regions and availability zones
+
+Each supported region is paired with a companion AWS region where backup data is stored in the event of a primary region catastrophe that requires restoration in another AWS region.
+Refer to Backup and diaster recovery for the list of supported and back up regions.
+
+## Service level agreement
+
+Any service level agreements (SLAs) for the service itself are defined in Appendix 4 (Online Subscription Services) of the Red Hat Enterprise Agreement Product Appendices.
+
+### Limited support status
+
+When a deployment transitions to "Limited Support" status, Red Hat will no longer troubleshoot execution plane issues.
+The SLA is no longer applicable and credits requested against the SLA are denied.
+However, this does not mean you lose all product support. A deployment can return to full support if you address the issues that caused the limited status.
+
+A deployment might move to a Limited Support status for several reasons, including:
+
+Lack of an execution plane:: A customer execution plane is required for automation.
+If you have not configured one or if it's in a degraded state, you must fix these issues before receiving automation support.
+Unsupported Execution Plane Dependencies:: Both Red Hat Enterprise Linux (RHEL) and OpenShift-based execution planes need regular maintenance and upgrades to meet minimum supported versions for Ansible Automation Platform dependencies.
+You can upgrade these resources using various methods, such as Ansible for patching, Red Hat Satellite, or DNF automatic updates.
+Keeping your OS, cluster, and receptor resources updated with supported Ansible Automation Platform helps reduce support issues.
+
+## Responsibilities
+
+
+
+# Control plane
+
+The Ansible Automation Platform control plane includes the application UIs, APIs, components, and services used for managing automation.
+Red&#160;Hat manages these within its own infrastructure.
+
+## Customer access
+
+Your access to the control plane is specific to the Ansible Automation Platform user interfaces and APIs.
+
+During the initial configuration of an Ansible Automation Platform Service on AWS deployment, you receive the URL for your deployment.
+You can also find this information through the Red&#160;Hat Hybrid Cloud Console (HCC).
+
+The administrator account&#8217;s initial password is provided to the HCC user who performed the initial deployment.
+
+
+[IMPORTANT]
+----
+Change this password immediately after your first login to Ansible Automation Platform.
+----
+
+If you need help accessing your deployment, submit a support request through the Red Hat Customer Portal.
+
+## Service uptime
+
+Uptime for Red Hat Ansible Automation Platform Service on AWS is measured by user access and function of the Ansible Automation Platform control plane.
+This is measured through the uptime of the product web user interface and REST APIs.
+Measurements are calculated through successful HTTP response codes (200) to entry points of the UI and API.
+If either of these return an unsuccessful response code, or are unavailable and time out entirely, then the service will be considered to be in an outage state.
+Uptime of the execution plane, which is managed by customers, is not included as part of the uptime of the service.
+Customers are responsible for ensuring that the execution plane is redundant, scalable, and available in order to meet customer uptime objectives.
+
+## SRE access and management
+
+Site Reliability Engineering (SRE) access is limited to the infrastructure and services running Ansible Automation Platform.
+Red Hat only accesses the Ansible Automation Platform interfaces or APIs in exceptional cases, such as during support engagements.
+
+SRE access to control plane resources is restricted to operations that require human intervention and cannot be automated.
+Any access follows a request-and-approval process and is audited to ensure only authorized personnel can perform these operations.
+
+SREs access resources and audit data are collected when:
+
+* The SRE team requests access to cluster resources using a tool that allows temporary access. This tool generates a log entry detailing the time and the SRE team member who requested access.
+* Audit logs are created for any management operation performed on a customer instance and are sent to a centralized logging system.
+
+
+[IMPORTANT]
+----
+Red Hat erases job logs every 30 days.
+----
+
+## Backup and disaster recovery
+
+Red&#160;Hat maintains daily database and file system snapshots in a separate region from each deployment.
+
+
+
+This recovery data is used if an AWS regional outage cannot be resolved in a reasonable time.
+
+Customer data is replicated to a predefined secondary region based on the deployment region. The currently paired regions are:
+
+
+
+To recover an Ansible Automation Platform deployment in a different AWS region, a customer must submit a request specifying their preferred deployment region from the available options.
+Red&#160;Hat evaluates the request and begins building an instance in that region.
+Data from the previous instance is recovered from the customer’s business continuity region.
+The customer is responsible for any necessary post-deployment network configuration to integrate the new instance into their environment.
+
+
+[NOTE]
+----
+Backup data is not directly accessible to customers.
+The data is only used in the event of infrastructure failure, not customer configuration errors.
+Red Hat encourages using configuration-as-code practices to maintain a customer-hosted backup of your configuration.
+----
+
+## Infrastructure monitoring
+
+Red&#160;Hat is responsible for monitoring the control plane.
+You do not have access to add any additional monitoring to the resources that run the control plane.
+
+## Application monitoring and customer audits
+
+The Ansible Automation Platform activity stream provides detailed information about access to Ansible Automation Platform and usage.
+To retain this information for auditing or compliance, you must export the logs to supported logging services for retention and querying.
+
+## Status notification
+
+Red&#160;Hat communicates the health and status of Red Hat Ansible Automation Platform Service on AWS clusters through the Red&#160;Hat Hybrid Cloud Console, email notifications to the original deployment contact, and any additional contacts you specify.
+
+## Security
+
+### Identity and access management
+
+Ansible Automation Platform includes a built-in user model for configuring users and RBAC permissions that define access.
+Red&#160;Hat recommends using an enterprise identity provider with Ansible Automation Platform to implement multi-factor authentication for users.
+See the
+Access management and authentication
+guide for more information.
+
+
+[NOTE]
+----
+Red Hat advises keeping at least one local administrator account with a long, complex password for emergency access.
+----
+
+### Encryption
+
+Data is encrypted at rest in both the database and file system using Red&#160;Hat managed encryption keys.
+Data in transit is encrypted with TLS 1.2 or higher.
+
+## Hosted components
+
+The objective of this offering is to provide an Ansible Automation Platform deployment as a managed service,
+relieving customers of managing the Ansible Automation Platform control plane.
+Unless specified otherwise, all Ansible Automation Platform capabilities in the operator-based deployment model are supported.
+
+
+
+# Execution plane
+
+You can only run test and cleanup jobs on the default or controller execution planes. All other automation must be configured to run on your execution plane.
+
+As part of the Ansible Automation Platform Service on AWS subscription, you receive 10 Red Hat Enterprise Linux (RHEL) entitlements for running the execution plane. Additional RHEL or OpenShift licenses can be purchased separately.
+
+## Shape
+
+Your execution plane&#8217;s size and shape depend on the type of automation and the locations connected to the mesh. Use the following guidelines for your automation mesh implementation:
+
+* Ansible Automation Platform minimum requirements:
+* Hop Nodes: Required only when not using the push model. They typically require minimal resources. The shape of a hop node depends on the number of connected execution nodes. A virtual machine (VM) with 2 vCPUs and 2 GB RAM can route traffic for 2-4 execution nodes.
+* For help with configuring your automation mesh see
+Automation mesh for managed cloud or operator environments.
+* For automation in fewer locations (such as specific geographies or clouds), create a mesh with fewer VMs that can be scaled vertically. Most clouds and hypervisors allow shape changes with minimal downtime.
+* For CPU or RAM-intensive automation, use larger machine shapes.
+* For automation spanning multiple locations, create a mesh with nodes that connect to those locations.
+* Consider using different CPU architectures, like ARM, and reserved instances to reduce execution plane costs.
+* To configure redundancy in the automation mesh, set up at least two mesh nodes of the same shape in different availability zones within the same region, connecting each machine to both hosted hop nodes.
+* Use OpenShift if auto-scaling the execution plane is necessary.
+
+## Networking
+
+### Automation mesh
+
+Ansible Automation Platform Service on AWS provides default “mesh-ingress” hop nodes.
+These hosted hop nodes allow execution nodes to poll for automation work through egress from a customer’s private network, eliminating the need to open inbound firewall ports.
+Hosted hop nodes use port 443 for inbound traffic.
+
+The following is an example of an execution node in a private address space with egress-only internet access connected to Ansible Automation Platform Service on AWS through this model.
+
+
+
+You can also configure the automation mesh with outbound connectivity from the control plane to your execution plane, allowing you to specify the ports used by the automation mesh.
+
+You can use the Automation mesh for managed cloud or operator environments documentation for instructions.
+
+### Connectivity
+
+The execution plane can communicate with the control plane under the following conditions:
+
+* Polling (mesh-ingress): Execution nodes must route stateful egress traffic to the Ansible Automation Platform deployment domain over port 443.
+* Push: A configurable firewall port must be open in the customer’s remote networks to allow Ansible Automation Platform to push information to execution nodes.
+
+You can configure automation mesh nodes behind firewalls, proxy servers, and similar services.
+These services route or proxy traffic originating from Ansible Automation Platform without altering headers, payload, or other information that would affect functionality of the automation mesh.
+
+## Monitoring
+
+You can configure monitoring and hardening tools of your choice on the execution plane.
+You are responsible for their operation, functionality, and maintenance, ensuring they do not interfere with the execution plane&#8217;s operation.
+
+Any additional workloads on the execution plane requires extra resources from the virtual machines or OpenShift clusters where the tools are deployed.
+Make sure to size resources accordingly to accommodate these additional requirements.
+
+## DNS
+
+Execution nodes use the DNS configuration of the host machine for DNS queries. Configure DNS using standard RHEL network practices to ensure proper lookups during automation execution.
+
+## Networking with overlapping CIDR blocks
+
+Automation mesh connects the control plane to multiple networks that share the same Classless Inter-Domain Routing (CIDR) block (that is, the same class A address space repeated across different clouds or data centers).
+Execution nodes regard their deployment network as the local network. You must have at least one execution node instance paired with an instance group to target automation in each network.
+
+## Updates and maintenance
+
+Automation mesh execution nodes are designed to minimize the need for patching the execution plane when the control plane is updated.
+However, future updates to the technology will require customer involvement to update the components in each execution plane node.
+When patches are needed, customers should follow the process for updating an automation mesh node.
+For help with updating your receptor see the Updating Receptors section of the Automation mesh for managed cloud or operator environments.
+
+# Support
+
+Red Hat Ansible Automation Platform Service on AWS includes Red&#160;Hat Premium Support, accessible through the Red Hat Customer Portal.
+
+For support response times, refer to the Production Support Terms of Service.
+
+AWS support is subject to the customer’s existing support contract with AWS.

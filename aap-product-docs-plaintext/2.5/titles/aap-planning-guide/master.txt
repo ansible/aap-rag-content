@@ -15,7 +15,11 @@ To install Red Hat Ansible Automation Platform on your Red Hat OpenShift Contain
 
 # Red Hat Ansible Automation Platform Architecture
 
-As a modular platform, Ansible Automation Platform provides the flexibility to easily integrate components and customize your deployment to best meet your automation requirements. The following section provides a comprehensive architectural example of an Ansible Automation Platform deployment.
+Deploy all components of Ansible Automation Platform so that all features and capabilities are available for use without the need to take further action.
+
+Red Hat tests the installation of Ansible Automation Platform 2.5 based on a defined set of infrastructure topologies or reference architectures. Enterprise organizations can use one of the enterprise topologies for production deployments to ensure the highest level of uptime, performance, and continued scalability. Organizations or deployments that are resource constrained can use a "growth" topology.
+
+The following section provides a comprehensive architectural example of an Ansible Automation Platform deployment.
 
 ## Example Ansible Automation Platform architecture
 
@@ -224,6 +228,29 @@ The following default destination ports and installer inventory listed are confi
 ----
 * Hybrid nodes act as a combination of control and execution nodes, and therefore Hybrid nodes share the connections of both.
 * If receptor_listener_port is defined, the machine also requires an available open port on which to establish inbound TCP connections, for example, 27199.
+* It might be the case that some servers do not listen on receptor port (the default is 27199)
+
+Suppose you have a  Control plane with nodes A, B, C, D
+
+The RPM installer creates a strongly connected peering between the control plane nodes with a least privileged approach and opens the tcp listener only on those nodes where it is required. All the receptor connections are bidirectional, so once the connection is created, the receptor can communicate in both directions.
+
+The following is an example peering set up for three controller nodes:
+
+Controller node A --> Controller node B
+
+Controller node A --> Controller node C
+
+Controller node B --> Controller node C
+
+You can force the listener by setting
+
+receptor_listener=True
+
+However, a connection Controller B --> A is likely to be rejected as that connection already exists.
+
+This means that nothing connects to Controller A as Controller A is creating the connections to the other nodes, and the following command does not return anything on Controller A:
+
+[root@controller1 ~]# ss -ntlp | grep 27199 [root@controller1 ~]#
 ----
 
 
@@ -583,7 +610,11 @@ A table of predefined values for inventory file variables can be found in Invent
 
 # Overview of tested deployment models
 
-Red Hat tests Ansible Automation Platform 2.5 with a defined set of topologies to give you opinionated deployment options. While it is possible to install the Ansible Automation Platform on different infrastructure topologies and with different environment configurations, Red Hat provides full support for the topologies outlined in this document.
+Red Hat tests Ansible Automation Platform 2.5 with a defined set of topologies to give you opinionated deployment options. Deploy all components of Ansible Automation Platform so that all features and capabilities are available for use without the need to take further action.
+
+Red Hat tests the installation of Ansible Automation Platform 2.5 based on a defined set of infrastructure topologies or reference architectures. Enterprise organizations can use one of the enterprise topologies for production deployments to ensure the highest level of uptime, performance, and continued scalability. Organizations or deployments that are resource constrained can use a "growth" topology.
+
+It is possible to install the Ansible Automation Platform on different infrastructure topologies and with different environment configurations. Red Hat does not fully test topologies outside of published reference architectures. Use a tested topology for all new deployments.
 
 ## Installation and deployment models
 

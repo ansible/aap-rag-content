@@ -1,8 +1,8 @@
-# Uninstalling the Ansible plug-ins from OpenShift Container Platform
+# Uninstalling the Ansible plug-ins from a Helm installation on OpenShift Container Platform
 
 To uninstall the Ansible plug-ins, you must remove any software templates that use the ansible:content:create action from Red Hat Developer Hub, and remove the plug-ins configuration from the Helm chart in OpenShift.
 
-# Uninstalling
+# Uninstalling a Helm chart installation
 
 1. In Red Hat Developer Hub, remove any software templates that use the ansible:content:create action.
 2. In the OpenShift Developer UI, navigate to menu:Helm[developer-hub > Actions > Upgrade > Yaml view].

@@ -1,0 +1,13 @@
+# Identity and access management
+
+Ansible Automation Platform includes a built-in user model for configuring users and RBAC permissions that define access.
+Red&#160;Hat recommends using an enterprise identity provider with Ansible Automation Platform to implement multi-factor authentication for users.
+See the
+Access management and authentication
+guide for more information.
+
+
+[NOTE]
+----
+Red Hat advises keeping at least one local administrator account with a long, complex password for emergency access.
+----

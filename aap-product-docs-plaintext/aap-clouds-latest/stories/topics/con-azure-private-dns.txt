@@ -1,0 +1,6 @@
+# Private DNS
+
+Red Hat Ansible Automation Platform on Microsoft Azure uses Azure&#8217;s managed DNS services when deployed.
+
+For information on how to use private DNS records that cannot be resolved publicly, see
+Private DNS with Red Hat Ansible Automation Platform on Microsoft Azure.

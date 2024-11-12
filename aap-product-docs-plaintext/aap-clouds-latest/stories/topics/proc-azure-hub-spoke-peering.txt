@@ -1,0 +1,19 @@
+# Hub-and-spoke peering process overview
+
+* You have deployed Ansible Automation Platform on Microsoft Azure.
+* You have configured and tested an Azure VNet hub-and-spoke implementation in your Azure tenant. This prerequisite requires many Azure resources to be configured, including a Virtual Network Gateway.
+* You have configured transit routing between your spoke networks, including your VPNs. Refer to Configure VPN gateway transit for virtual network peering in the Microsoft Azure documentation for instructions.
+* You have identified the following:
+* The CIDR block(s) of your existing VNets (including VPNs & direct connects) that will need access to Ansible Automation Platform on Microsoft Azure UIs.
+* The CIDR block(s) of your existing VNets (including VPNs & direct connects) that will contain hosts or endpoints for Ansible automation.
+* The CIDR blocks of the Ansible Automation Platform on Microsoft Azure VNet from the managed resource group of the application. Refer to Finding the CIDR Block of the managed resource group for instructions.
+
+Before peering any networks, ensure that there is no network address space overlap between your private VNets and your Ansible Automation Platform on Microsoft Azure network.
+
+1. Find the CIDR Block for the Ansible Automation Platform on Microsoft Azure managed application Kubernetes cluster. See Finding the CIDR Block of the managed application Kubernetes cluster.
+2. Configure Network Peering with the Ansible Automation Platform Subnet. See Configuring Network Peering with the Ansible Automation Platform Subnet.
+3. Update the route tables:
+1. Configure route tables from your existing networks to send traffic to the managed application CIDR. You must add routes to the routing tables of every network requesting Ansible Automation Platform user interfaces and of every network that will have automation performed against its resources.
+See Routing to Ansible Automation Platform on Microsoft Azure.
+2. Configure routing to your VNets for each spoke network that you would like Ansible Automation Platform to communicate with, for automation or for accessing the user interfaces.
+See Routing to your VNets.

@@ -1,0 +1,4 @@
+# Entitling your subscription
+
+For information on obtaining a subscription entitlement and attaching it to Ansible Automation Platform, see
+Red Hat Ansible Automation Platform on Microsoft Azure Subscription Entitlement Association.

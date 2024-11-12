@@ -1,0 +1,12 @@
+# Network
+
+When you deploy Ansible Automation Platform on Microsoft Azure, you can configure the following networks in the Networking tab of the form:
+
+* The networking address range (CIDR block) for the VNet that your Ansible Automation Platform on Microsoft Azure application uses.
+* AKS network CIDR blocks.
+
+
+[NOTE]
+----
+Plan your networking configuration before you deploy the Ansible Automation Platform on Microsoft Azure application, because you cannot change it after deployment.
+----

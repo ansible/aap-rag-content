@@ -1,0 +1,72 @@
+# Microsoft Entra ID SSO configuration
+
+Follow the procedures below to configure SSO with Microsoft Entra ID. If your organization does not use Microsoft Entra ID for application authorization, you can create users in the user management system in Ansible Automation Platform.
+
+1. In a browser, navigate to the Automation controller URL and log in using the following credentials:
+* Username: admin
+* Password: Use the Administrator password you provided when you deployed the Ansible Automation Platform application.
+2. In the Automation controller console, click Settings in the menu options.
+3. Click Miscellaneous System settings under the System settings.
+4. Click Edit. Enter the Automation controller URL in the Base URl of the service field.
+5. Click Save.
+
+To set up enterprise authentication for Microsoft Entra ID, you must obtain an OAuth2 key and secret by registering your Ansible Automation Platform deployment in Azure.
+
+To register the automation controller instance in Azure, you must supply the Azure AD OAuth2 Callback URL from the automation controller settings.
+
+1. In a web browser, open the automation controller console.
+2. Click Settings in the menu to open the main settings page.
+3. Click Azure AD settings in the Authentication category to open the Details page.
+4. Copy the value for Azure AD OAuth2 Callback URL. You will need this value when you register your deployed application in Microsoft Entra ID.
+
+1. In a web browser, open the Azure portal.
+2. Ensure that you are using the tenant where you deployed Ansible Automation Platform.
+3. Type Microsoft Entra ID in the search bar.
+4. Select Microsoft Entra ID from the search results.
+5. Under Manage in the menu options, click App registrations.
+6. In the App registrations page, click + New registration.
+7. Configure the new registration as follows:
+* In the Name field, enter the same name that you used for the deployed application.
+* Select the default value for Supported account types.
+* Select Web for Redirect URI (optional).
+* In the Redirect URI (optional) field, enter the Azure AD OAuth2 Callback URL value that you fetched from automation controller.
+8. Click Register to create the registration.
+
+When registration is complete, the registration page for the Automation Controller application is displayed.
+
+1. In the Automation controller application registration page on Azure, copy and save the value of Application (client) ID.
+
+You will use this value for the Azure AD OAuth2 Key in the Ansible Automation Platform settings.
+2. Under Manage, click Certificates & secrets.
+3. Click Client secrets and then + New client secret.
+4. Provide a description for the new secret.
+
+It is not possible to automatically renew a certificate or identify when it is about to expire.
+
+It is useful to include the date in the description, for example: AAP Client Secret <Today&#8217;s Date in YYYY-MM-DD format>.
+5. Provide an expiration date for the new secret.
+
+The maximum lifetime for the certificate is 2 years. Unless you have specific security needs that prevent the creation of a long term certificate, select an expiration date of 24 months.
+6. Save the secret Value to a location on your local machine. Once you navigate away from this page it will be hidden and no longer retrievable.
+
+Add the key (Application (client) ID) and value (Value) of the secret that you generated in Azure to your Ansible Automation Platform instance.
+
+1. Open the automation controller console in a web browser.
+2. Click menu:Settings[Azure AD settings].
+3. Click Edit.
+4. Enter the information for the secret that you generated in Microsoft Entra ID:
+5. In Azure AD OAuth2 Key, paste the Application (client) ID.
+6. In Azure AD OAuth2 Secret, paste the secret Value.
+7. Click Save.
+
+1. Open the automation controller in a web browser.
+2. Under Resources, click Credentials.
+3. Click Add to open the Create New Credentials page.
+4. Enter a name for the new credential and select Azure Resource Manager for the credential type.
+5. Use the Service Principal details to fill out the values of the form:
+* Name: Choose a descriptive name for the credential, for example *Azure Infrastructure*.
+* Subscription ID: Enter the subscription id where your resources created in Azure should be associated. This is unique to your tenant. Your organization may have multiple subscription ids; consult your Azure administrator regarding the subscription id that you should use.
+* Client ID: Enter the appId value from the Service Principal creation.
+* Client Secret: Enter the password from the Service Principal creation.
+* Tenant ID: Enter the tenant from the Service Principal creation.
+6. Click Save to save the credential.

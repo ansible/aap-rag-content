@@ -1,0 +1,7 @@
+# Running the generated command
+
+1. Ensure that the mounted volume points to the directory where the data file is.
+
+This new command has the required parameters, environment variables and mounted volumes to run the playbook.
+2. Run the generated command.
+You can save this command to rerun it later if required.

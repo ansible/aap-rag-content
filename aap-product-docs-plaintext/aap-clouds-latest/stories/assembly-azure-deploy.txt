@@ -1,0 +1,126 @@
+# Deploying Red Hat Ansible Automation Platform on Microsoft Azure
+
+# Locating Ansible Automation Platform in Azure Marketplace
+
+1. In a browser, navigate to the Azure Marketplace.
+2. Click Private Products from the menu on the left of the screen.
+3. Search for Red Hat Ansible Automation Platform.
+4. Click the card that is returned in the search. Be sure to select the official offering from Red Hat.
+5. Click  btn:[Get it Now].
+6. Click btn:[Continue].
+7. The Overview tab contains important information about activating your subscription for Ansible Automation Platform.
+1. Read the entire Before you begin section.
+2. Follow the Click here link to enable your subscription. You cannot use Ansible Automation Platform without a valid subscription.
+8. Return to the Overview tab and click btn:[Create] to initiate the deployment process.
+
+# Provisioning Red Hat Ansible Automation Platform on Microsoft Azure
+
+When you initiate the deployment of the Red Hat Ansible Automation Platform managed app from Azure marketplace, a form is displayed in the Create Red Hat Ansible Automation Platform on Microsoft Azure window.
+
+Before you fill in the form, decide whether you want to create a public or private deployment of Ansible Automation Platform on Microsoft Azure:
+
+* Public deployments allow ingress to the Ansible Automation Platform on Microsoft Azure user interfaces over the public internet. No configuration is required to access the application URLs.
+* Private deployments are created in an isolated Azure VNet that blocks access from the public internet. To access Ansible Automation Platform on Microsoft Azure user interfaces, you must configure network peering and routing.
+
+You create the network configuration for the Ansible Automation Platform on Microsoft Azure VNet when you initiate the deployment.
+Refer to your network configuration plan before deploying the managed application.
+For information about planning your network configuration, see
+Network.
+
+Complete the form to provision Red Hat Ansible Automation Platform infrastructure and resources into your Azure tenant.
+
+1. Click the Basics tab and enter values for your deployment in the following fields in the form:
+* Subscription: Select Ansible on Clouds.
+* Resource Group: Create or select a resource group where you want to deploy the managed application.
+* Region: The Azure region where the application will be deployed.
+* Application Name: A unique name for the managed application.
+* Administrator Password: Create an adminstrator password for your deployment.
+
+The Administrator Password must contain at least 8 characters, and must include uppercase letters, lowercase letters, and numbers.
+* Confirm Administrator Password: Confirm the Administrator Password.
+* Access: Choose whether your deployment will be public or private.
+* Managed Resource Group: A resource group for the managed application infrastructure.
+
+Keep this resource group isolated from other resource groups, including the Resource Group where you will deploy the managed application.
+2. Store the information that you entered in the form in a secure place. You will need to provide the Administrator password to access automation controller and private automation hub.
+3. Click btn:[Next]
+4. Follow the steps in Red Hat Ansible Automation Platform on Microsoft Azure VNet Preparation to configure your network configuration.
+5. Click btn:[Next].
+6. Click the Business continuity tab.
+7. From the Disaster Recovery list, select an option to enable or disable disaster recovery.
+8. Select the Deployment tab.
+9. Note the following requirements in the description:
+* You must have a Red Hat account.
+* To use Ansible Automation Platform, you must have a valid subscription linked to your Red Hat account.
+* You must use the Deployment Driver during deployment.
+10. Select the checkboxes to indicate that you understand these requirements.
+11. Click btn:[Review + Create].
+12. If the information you entered in the form is valid, the window displays Validation Passed.
+13. Select I agree to accept the Co-Admin Access Permissions terms and conditions.
+14. Click btn:[Create] to begin the provisioning process for the application.
+
+The application will begin provisioning.
+
+You can use the deployment engine to view the progress of your deployment a few minutes after the Azure console displays "Your deployment is complete".
+See Monitoring deployments on the Ansible Automation Platform Deployment Engine for more information.
+
+It may take 30 minutes or longer for the infrastructure and software to fully provision.
+
+Once provisioning is complete, you can access and login to your new Ansible Automation Platform instance and launch automation controller and automation hub.
+
+# Monitoring deployments on the Ansible Automation Platform Deployment Engine
+
+The deployment engine displays information about your Ansible Automation Platform on Microsoft Azure deployment.
+You can monitor the progress of the deployment, restart failed deployment steps, and cancel the deployment.
+
+When you begin deploying Ansible Automation Platform on Microsoft Azure, the Azure interface displays the Overview page for the deployment.
+The Overview page displays the deployment status.
+
+1. When the status in the Overview page shows "Your deployment is complete", navigate to the deployed managed application.
+2. Click Parameters and Outputs in the Settings menu for the deployed managed application.
+
+Approximately 10 minutes into the deployment process, the Outputs section of the Parameters and Outputs page displays a link to the deploymentEngineUrl.
+3. Copy the link and paste it in another browser tab to open the login page for the deployment engine.
+4. Login to the deployment using the following credentials:
+* Username: admin
+* Password: Use the Administrator Password that you chose when configuring your deployment.
+5. The deployment driver displays a message indicating that your deployment is underway.
+Click btn:[Log in with Red Hat account]. The Red Hat login page opens.
+6. In the Red Hat login page, enter your credentials if you already have a Red Hat account.
+
+If you do not have a Red Hat account, click btn:[Register for a Red Hat account] to create one.
+
+After logging in with your Red Hat account, the Ansible Automation Platform Deployment Engine page opens.
+
+## Ansible Automation Platform Deployment Engine interface
+
+The Ansible Automation Platform Deployment Engine displays a list of the steps in the deployment process.
+A progress bar shows how far along the deployment is.
+Icons indicate the steps that have been completed, the steps that are in progress, and steps that have failed.
+
+To view extended information about a step that failed, click on the failed icon for that step.
+
+To restart a failed step, click btn:[Restart Step].
+
+# Canceling Red Hat Ansible Automation Platform on Microsoft Azure deployments
+
+You can gracefully cancel a Red Hat Ansible Automation Platform on Microsoft Azure deployment.
+
+1. Login to the deployment engine to display the progress of the deployment steps in the Ansible Automation Platform Deployment Engine page.
+Refer to
+Monitoring deployments on the Ansible Automation Platform Deployment Engine
+for information on accessing and logging into the Ansible Automation Platform Deployment Engine page.
+2. To cancel the deployment, click btn:[Cancel Deployment] and confirm.
+
+This action cancels all the remaining steps in the deployment, including the currently running step. It also cancels pending steps in the deployment.
+
+The status for the steps that have not been executed updates to Canceled.
+To view the deployment processes on Azure, navigate to the Overview page for the managed resource group in which you deployed Ansible Automation Platform and select Deployments.
+
+[IMPORTANT]
+----
+Canceling the deployment does not delete the managed application from your Azure subscription.
+To avoid incurring costs for the managed application and other resources that are still running, you must delete them.
+----
+3. To delete Azure resources, navigate to the resource group for your deployment in the Azure portal. Select the resources you want to delete and click btn:[Delete].
+For more information about deleting resources, refer to Manage Azure resources by using the Azure portal in the Microsoft Azure documentation.

@@ -1,0 +1,3 @@
+# Status notification
+
+Red&#160;Hat communicates the health and status of Red Hat Ansible Automation Platform Service on AWS clusters through the Red&#160;Hat Hybrid Cloud Console, email notifications to the original deployment contact, and any additional contacts you specify.

@@ -2,4 +2,4 @@
 
 The Ansible plug-ins provide integrations with Ansible Automation Platform and other optional Red Hat products.
 
-To edit your custom ConfigMap, log in to the OpenShift UI and navigate to menu:Select Project ( developerHubProj )[ConfigMaps &gt; {developer-hub}-app-config &gt; EditConfigMaps &gt; app-config-rhdh].
+To edit your custom ConfigMap, log in to the OpenShift UI and navigate to menu:Select Project ( developerHubProj )[ConfigMaps &gt; {developer-hub}-app-config-rhdh &gt; app-config-rhdh].

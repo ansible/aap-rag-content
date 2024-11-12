@@ -1,6 +1,8 @@
 # Red Hat Ansible Automation Platform Architecture
 
-As a modular platform, Ansible Automation Platform provides the flexibility to easily integrate components and customize your deployment to best meet your automation requirements. The following section provides a comprehensive architectural example of an Ansible Automation Platform deployment.
+Deploy all components of Ansible Automation Platform so that all features and capabilities are available for use without the need to take further action.
+Red Hat tests the installation of Ansible Automation Platform 2.5 based on a defined set of infrastructure topologies or reference architectures. Enterprise organizations can use one of the enterprise topologies for production deployments to ensure the highest level of uptime, performance, and continued scalability. Organizations or deployments that are resource constrained can use a "growth" topology.
+The following section provides a comprehensive architectural example of an Ansible Automation Platform deployment.
 
 # Example Ansible Automation Platform architecture
 

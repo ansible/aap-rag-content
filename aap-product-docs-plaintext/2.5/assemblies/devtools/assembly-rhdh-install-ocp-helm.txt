@@ -17,13 +17,32 @@ You do not have to make all the changes to these files in a single session.
 
 # Prerequisites
 
-* Red Hat Developer Hub installed on Red Hat OpenShift Container Platform using a Helm chart.
-Follow the steps in the
+* Red Hat Developer Hub installed on Red Hat OpenShift Container Platform.
+* For Helm installation, follow the steps in the
 Installing Red Hat Developer Hub on OpenShift Container Platform with the Helm chart
 section of Installing Red Hat Developer Hub on OpenShift Container Platform.
+* For Operator installation, follow the steps in the
+Installing Red Hat Developer Hub on OpenShift Container Platform with the Operator
+section of Installing Red Hat Developer Hub on OpenShift Container Platform.
 * A valid subscription to Red Hat Ansible Automation Platform.
-* A user with the OpenShift Container Platform administrator role has configured the appropriate roles and permissions within your project to create an application.
+* An OpenShift Container Platform instance with the appropriate permissions within your project to create an application.
 * The Red Hat Developer Hub instance can query the automation controller API.
+* Optional: To use the integrated learning paths, you must have outbound access to developers.redhat.com.
+
+# Recommended RHDH preconfiguration
+
+Red Hat recommends performing the following initial configuration tasks in RHDH.
+However, you can install the Ansible plug-ins for Red Hat Developer Hub before completing these tasks.
+
+* Setting up authentication in RHDH
+* Installing and configuring RBAC in RHDH
+
+
+[NOTE]
+----
+Red Hat provides a repository of software templates for RHDH that uses the publish:github action.
+To use these software templates, you must install the required GitHub dynamic plugins.
+----
 
 # Downloading the Ansible plug-ins files
 
@@ -68,9 +87,9 @@ ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz.integrity
 The files with the .integrity file type contain the plugin SHA value.
 The SHA value is used during the plug-in configuration.
 
-# Creating a plug-in registry
+# Creating a registry for the Ansible plug-ins
 
-Set up a plug-in registry in your OpenShift cluster to host the Ansible plug-ins and make them available for installation in Red Hat Developer Hub.
+Set up a registry in your OpenShift cluster to host the Ansible plug-ins and make them available for installation in Red Hat Developer Hub (RHDH).
 
 1. Log in to your OpenShift Container Platform instance with credentials to create a new application.
 2. Open your Red Hat Developer Hub OpenShift project.
@@ -100,11 +119,9 @@ To verify that the plugin-registry was deployed successfully, open the Topology 
 3. In the terminal, run ls to confirm that the .tar files are in the plugin registry.
 
 ```
-sh-4.45 $1s -l
-total 3392
--rw-rw-r-- 1 default root 3376269 Jul 22 13:48 ansible-plugin-backstagc-rhaap-1.0.0.tgz
--rw-rw-r-- 1 default root 25156 Jul 22 13:48 ansible-plugin-backstage-rhaap-backend-1.0.0.tgz
--rw-rw-r-- 1 default root 61520 Jul 22 13:48 ansible-plugin-scaffolder-backend-modulc-backstagc-rhaap-1.0.0.tgz
+ansible-plugin-backstage-rhaap-x.y.z.tgz
+ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
 ```
 
 
@@ -120,13 +137,7 @@ Under the plugins section in the YAML file, add the dynamic plug-ins that you wa
 
 ```
 global:
-  auth:
-    backend:
-      enabled: true
-  clusterRouterBase: <your-developer-hub-base-url>
-  dynamic:
-    includes:
-      - dynamic-plugins.default.yaml
+  ...
     plugins:
       - disabled: false
         integrity: <SHA512 Integrity key for ansible-plugin-backstage-rhaap plugin>
@@ -168,10 +179,26 @@ global:
 
 The developer hub pods restart and the plug-ins are installed.
 
-Verify that the plug-ins have been installed:
+To verify that the plug-ins have been installed, open the install-dynamic-plugin container logs and check that the Ansible plug-ins are visible in Red Hat Developer Hub:
 
 1. Open the Developer perspective for the Red Hat Developer Hub application in the OpenShift Web console.
-2. Check the install-dynamic-plugin container logs: the Ansible plug-ins are visible in Red Hat Developer Hub.
+2. Select the Topology view.
+3. Select the Red Hat Developer Hub deployment pod to open an information pane.
+4. Select the Resources tab of the information pane.
+5. In the Pods section, click View logs to open the Pod details page.
+6. In the Pod details page, select the Logs tab.
+7. Select install-dynamic-plugins from the drop-down list of containers to view the container log.
+8. In the install-dynamic-plugin container logs, search for the Ansible plug-ins.
+
+The following example from the log indicates a successful installation for one of the plug-ins:
+
+```
+=> Successfully installed dynamic plugin http://plugin-registry-1:8080/ansible-plugin-backstage-rhaap-1.1.0.tgz
+```
+
+
+The following image shows the container log in the Pod details page.
+The version numbers and file names can differ.
 ![container logs for install-dynamic-plugin]
 
 ## Adding the Ansible Development Tools sidecar container
@@ -390,7 +417,7 @@ chapter of the Administration guide for Red Hat Developer Hub.
 
 The Ansible plug-ins provide integrations with Ansible Automation Platform and other optional Red Hat products.
 
-To edit your custom ConfigMap, log in to the OpenShift UI and navigate to menu:Select Project ( developerHubProj )[ConfigMaps &gt; {developer-hub}-app-config &gt; EditConfigMaps &gt; app-config-rhdh].
+To edit your custom ConfigMap, log in to the OpenShift UI and navigate to menu:Select Project ( developerHubProj )[ConfigMaps &gt; {developer-hub}-app-config-rhdh &gt; app-config-rhdh].
 
 ### Configuring OpenShift Dev Spaces
 
@@ -404,7 +431,8 @@ The plug-ins will function without it.
 It is a separate Red Hat product and is not included in the Ansible Automation Platform or Red Hat Developer Hub subscription.
 ----
 
-If the OpenShift Dev Spaces link is not configured in the Ansible plug-ins, the Go to OpenShift Dev Spaces dashboard link in the 4.DEVELOP section of the Ansible plug-ins landing page redirects users to the
+If the OpenShift Dev Spaces link is not configured in the Ansible plug-ins,
+the Go to OpenShift Dev Spaces dashboard link in the DEVELOP section of the Ansible plug-ins landing page redirects users to the
 Ansible development tools home page.
 
 * A Dev Spaces installation.

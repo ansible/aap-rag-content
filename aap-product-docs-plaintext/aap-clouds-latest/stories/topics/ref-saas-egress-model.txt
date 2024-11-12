@@ -1,0 +1,5 @@
+# PULL connectivity
+
+Remote automation mesh nodes can access Ansible Automation Platform using a 'polling' or 'pull' model, which does not require opening ingress ports in the firewall.
+This model eliminates the need for hop nodes from your demilitarized zone (DMZ) to private networks if private networks have outbound internet connectivity.
+

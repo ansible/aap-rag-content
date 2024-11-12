@@ -1,0 +1,358 @@
+# Accessing Red Hat Ansible Automation Platform on Microsoft Azure
+
+# Post-deployment prerequisites
+
+## Private network peering for private deployments
+
+Ansible Automation Platform on Microsoft Azure is deployed into an independent managed resource group with its own Azure virtual network (VNet).
+
+When initially deployed, Ansible Automation Platform on Microsoft Azure’s VNet can only send requests to external networks through the public internet.
+
+To enable Ansible Automation Platform on Microsoft Azure to access resources in an internet-gapped deployment, when access to resources has to happen over private networks, you must configure Azure network peering between your private virtual networks and Red Hat Ansible Automation Platform on Microsoft Azure’s managed application VNet.
+
+You can configure your Azure VNets to enable private communication between multiple Azure VNets as well as private transit routing between Azure VNets and external VPN routed networks. These VPN networks can be on-premises or on other clouds.
+
+No two Azure networking configurations are the same. To enable user access to Ansible Automation Platform on Microsoft Azure, work with your Azure administrators to connect your deployment to your VNets and external VPN routed networks.
+
+
+[NOTE]
+----
+Network peering must be configured by Azure administrators in your organization who are familiar with Azure networking.
+Configuring network changes to your Azure account can cause outages or other disruptions.
+The network peering procedures described in this document are not supported by Red Hat, as the processes and services are controlled and managed by Microsoft Azure.
+Contact Microsoft for assistance in peering Azure networks.
+While every effort has been made to align with Microsoft’s documentation for this content, there may be drift in accuracy over time.
+Microsoft’s documentation is the definitive source for information about networking topics for Azure.
+----
+
+Azure offers different ways to peer private networks. These are typically divided into two categories:
+
+* Hub-and-spoke peering: In this topology, there is a centralized hub VNet that other virtual networks peer with.
+This hub network has mechanisms to route traffic through transit routing. Cloud networks, including VPN/Express Connect connections with on-premises and other cloud networks, can communicate through the hub VNet.
+* Azure Virtual WAN (VWAN): Azure Virtual WAN is a networking service that provides simplified hub-and-spoke network modeling across Azure, on-premises, and other VPN/Direct Connect networks. For more about VWAN, refer to Microsoft's Virtual WAN documentation.
+* Direct peering: Private networks are individually connected to one another with no routing hops between them. This is a simpler peering model: it is useful when you only want to connect a few networks.
+
+Refer to Choose between virtual network peering and VPN gateways in the Microsoft Application architecture fundamentals guide to determine the correct peering approach for your organization.
+
+### Hub-and-spoke peering (Transit routes)
+
+
+[NOTE]
+----
+Updating route tables incorrectly can break your network. Only execute the steps in these procedures if you are confident that you can reverse any unexpected network behavior.
+----
+
+#### Hub-and-spoke peering process overview
+
+* You have deployed Ansible Automation Platform on Microsoft Azure.
+* You have configured and tested an Azure VNet hub-and-spoke implementation in your Azure tenant. This prerequisite requires many Azure resources to be configured, including a Virtual Network Gateway.
+* You have configured transit routing between your spoke networks, including your VPNs. Refer to Configure VPN gateway transit for virtual network peering in the Microsoft Azure documentation for instructions.
+* You have identified the following:
+* The CIDR block(s) of your existing VNets (including VPNs & direct connects) that will need access to Ansible Automation Platform on Microsoft Azure UIs.
+* The CIDR block(s) of your existing VNets (including VPNs & direct connects) that will contain hosts or endpoints for Ansible automation.
+* The CIDR blocks of the Ansible Automation Platform on Microsoft Azure VNet from the managed resource group of the application. Refer to Finding the CIDR Block of the managed resource group for instructions.
+
+Before peering any networks, ensure that there is no network address space overlap between your private VNets and your Ansible Automation Platform on Microsoft Azure network.
+
+1. Find the CIDR Block for the Ansible Automation Platform on Microsoft Azure managed application Kubernetes cluster. See Finding the CIDR Block of the managed application Kubernetes cluster.
+2. Configure Network Peering with the Ansible Automation Platform Subnet. See Configuring Network Peering with the Ansible Automation Platform Subnet.
+3. Update the route tables:
+1. Configure route tables from your existing networks to send traffic to the managed application CIDR. You must add routes to the routing tables of every network requesting Ansible Automation Platform user interfaces and of every network that will have automation performed against its resources.
+See Routing to Ansible Automation Platform on Microsoft Azure.
+2. Configure routing to your VNets for each spoke network that you would like Ansible Automation Platform to communicate with, for automation or for accessing the user interfaces.
+See Routing to your VNets.
+
+##### Finding the CIDR Block of the managed resource group
+
+1. Navigate to the Resource Groups page in the Azure portal.
+2. Click the managed resource group for Red Hat Ansible Automation Platform on Microsoft Azure. The resource group name is prefixed with “-mrg”.
+3. Select the VNet within the resource group to view its settings in the Overview page.
+
+The CIDR block of the cluster is displayed in the Address Space.
+
+For further information, refer to View virtual networks and settings in the Microsoft Azure Virtual network guide.
+
+##### Configuring network peering with the Ansible Automation Platform subnet
+
+Within the Azure console, the Azure virtual network (VNet) is known as this virtual network, and the VNet that you want to peer with is known as remote virtual network.
+
+In the Virtual Networks page in the Azure portal, use the following settings to configure peering between the Azure VNet and the VNet that you want to peer with the Ansible Automation Platform on Microsoft Azure app:
+
+* Under This virtual network, select settings for the Ansible Automation Platform on Microsoft Azure virtual network:
+* Peering link name: <hub_to_aap_peering_link_name>
+* Traffic to remote virtual network: Allow
+* Traffic forwarded from remove virtual network: Allow
+* Virtual network gateway or Route Server: Use this network’s gateway or Route server
+* Under Remote virtual network, select settings for the virtual network that you want to peer with Azure:
+* Peering link name: <aap_to_hub_peering_link_name>
+* Traffic to remote virtual network: Allow
+* Traffic forwarded from remote virtual network: Allow
+* Virtual network gateway or Route Server: Use the remote virtual network’s gateway or Route server
+
+For further information on configuring peering, refer to Create a peering in the Microsoft Azure Virtual network guide.
+
+##### Updating the route tables
+
+Before you update the route tables, confirm that you satisfy the prerequisites for the hub-and-spoke peering process.
+
+1. Navigate to Route Tables in the Azure portal.
+2. As part of your hub-and-spoke configuration, you created one or more route tables to define the routes between the networks. Click on one of these route tables.
+3. From the route table menu bar, click Routes > Add.
+4. Configure routes from your existing networks to send traffic to Ansible Automation Platform. You must configure routes for any network requesting Ansible Automation Platform user interfaces and for any network that will have automation performed against its resources.
+For each route that you add, enter the following information:
+* Route name: Enter a route name for the Ansible Automation Platform managed application network
+* Address Prefix: The CIDR block of the managed application kubernetes cluster
+* Next Hop Type: Virtual network gateway
+5. Click OK to save the new route to the route list.
+
+Repeat this procedure for all other route tables where you want to route traffic to Ansible Automation Platform.
+
+Add a route for each spoke network that you would like Ansible Automation Platform to communicate with, for automation or for accessing the user interfaces.
+
+1. Navigate to Route Tables in the Azure portal.
+2. In the list of route tables, select the route table for the Ansible Automation Platform on Microsoft Azure managed application.
+
+The name of the Ansible Automation Platform route table uses the following convention:
+
+```
+aks-agentpool-<numbers>-routetable
+```
+
+3. From the route table menu bar, click Routes > Add.
+4. Configure routing to your VNets for each spoke network that you would like Ansible Automation Platform to communicate with, for both automation or accessing the user interfaces.
+5. For each route that you add, enter the following information:
+* Route name: Enter a route name for the spoke network that you want Ansible Automation Platform to route to
+* Address Prefix: The CIDR block of the spoke network
+* Next Hop Type: Virtual network gateway
+6. Click OK to save the new route to the route list.
+
+After you have configured the routing rules, traffic is routed to and from Ansible Automation Platform on Azure through your hub network.
+
+If your organization uses Azure firewall services or third-party firewall appliances through a Virtual Appliance connection, you must configure outbound connectivity from the managed application, to enable Red Hat to maintain your application and to enable automation against external resources.
+
+The easiest way to implement this is to create a firewall rule that allows all outbound traffic from port 443.
+
+If you choose not to allow all outbound traffic from  port 443, you must configure routes.
+
+* For Red Hat to manage and upgrade Ansible Automation Platform on Microsoft Azure and execute security patching, any machine in the Azure Kubernetes service (AKS) cluster must be allowed to submit a request to pull updates for containers used by Ansible Automation Platform.
+
+Add routes in the Ansible Automation Platform route table for outbound traffic from the full CIDR range of the Ansible Automation Platform on Microsoft Azure managed application to the domains listed in the Azure Virtual Appliance Routing with Ansible Automation Platform on Azure article on the Red Hat Customer Portal.
+* You must also allow traffic from your firewall to any other external domain or IP address that you want Ansible Automation Platform to run automation jobs against.
+Otherwise, your firewall will block connectivity between Ansible Automation Platform and destinations for automation.
+* Ansible Automation Platform requires a public DNS zone to provide SSL certificates.
+This public DNS zone is in the managed resource group of the deployment.
+The platform must be able to communicate via DNS queries with the servers listed in the DNS zone to complete certificate challenges with our upstream provider.
+Blocking this communication prevents successful certificate renewal.
+
+###### Additional resources
+
+For further information about adding routes to a route table in Azure, refer to Create a route in the Microsoft Azure Virtual network guide.
+
+### Azure Virtual WAN (VWAN)
+
+#### Peering a VWAN Hub to the Ansible Automation Platform on Microsoft Azure Network
+
+Before peering, you must connect a hub network, and at least one spoke network, to the hub network of the Azure VWAN to which you intend to connect Ansible Automation Platform on Microsoft Azure.
+
+* A pre-configured Azure VWAN.
+* One or more of the following connections to the VWAN:
+* A DMZ network that contains Azure virtual machines that users can remotely log into to access Ansible Automation Platform on Microsoft Azure.
+* A DMZ network that contains an Azure virtual machine that local machines can connect to with SSH tunneling to access Ansible Automation Platform on Microsoft Azure.
+* A VPN or Direct Connect service to your local network that routes traffic from local machines to Ansible Automation Platform on Microsoft Azure.
+
+1. Navigate to the Virtual Network Connections page for the VWAN that you want to peer with your Ansible Automation Platform instance.
+2. To create a connection between the VWAN hub and your Ansible Automation Platform instance, use the following settings:
+* Connection Name: <Ansible_Automation_Platform_connection_name>
+* Hubs: Select one or more VWAN hub networks that the managed application VNet will peer with.
+* Subscription: Select the subscription where Ansible Automation Platform on Microsoft Azure has been deployed.
+* Resource group: The managed resource group of the managed application. It is typically prefixed with “mrg-”.
+* Virtual network: The VNet of the managed application. There is only one VNet in the managed resource group.
+* Propagate to none: No
+* Associate Route Table: Select the default route table or the appropriate route table that your organization has configured for VWAN.
+* Propagate to Route Tables: Select one or more default route tables or the appropriate route table that your organization has configured for VWAN.
+* Propagate to labels: Select labels if your organization uses them.
+* Static routes: Do not complete this field.
+
+When network peering completes, traffic routes to and from Ansible Automation Platform on Microsoft Azure though your VWAN hub network.
+
+* Connect a virtual network to a Virtual WAN hub - portal (Microsoft Azure Virtual WAN documentation)
+
+### Direct peering
+
+You can use direct peering to directly connect virtual networks.
+When two networks are peered, Azure updates routes between them so that traffic automatically flows between them.
+
+The direct peering method is easier to configure than the hub-and-spoke model.
+However, the number of direct network peerings is limited.
+Direct peering becomes difficult to manage as the number of virtual networks grows, because each new network requires peering to all other networks.
+
+#### Configuring direct network peering
+
+You can configure network peering between your Azure network and your VNet in the Virtual Networks page of the Azure Portal.
+
+Within the Azure console, the Azure virtual network is known as this virtual network, and the VNet that you want to peer with is known as remote virtual network.
+
+In the Virtual Networks page in the Azure portal, use the following settings to configure the Azure network and the VNet that you want to peer with the Ansible Automation Platform on Microsoft Azure app:
+
+* Under This virtual network, select settings for the Ansible Automation Platform on Microsoft Azure virtual network:
+* Peering link name: <hub_to_aap_peering_link_name>
+* Traffic to remote virtual network: Allow
+* Traffic forwarded from remote virtual network: Allow
+* Virtual network gateway or Route Server: Use this network’s gateway or Route server
+* Under Remote virtual network, select settings for the virtual network that you want to peer with Azure:
+* Peering link name: <aap_to_hub_peering_link_name>
+* Subscription: Select the subscription where Ansible Automation Platform on Microsoft Azure has been deployed
+* Virtual network: Select the Ansible Automation Platform on Microsoft Azure virtual network: vnet-<aap_identifier>-<region>
+* Traffic to remote virtual network: Allow
+* Traffic forwarded from remote virtual network: Allow
+* Virtual network gateway or Route Server: Use the remote virtual network’s gateway or Route server
+
+After you have configured direct network peering, traffic routes between Ansible Automation Platform on Microsoft Azure and private hosts and IPs on your Vnet.
+
+For more detailed instructions for configuring peering, refer to Create a peering in the Microsoft Azure Virtual network guide.
+
+For further information on direct peering, refer to Virtual network peering in the Microsoft Azure Virtual network guide.
+
+## User defined routing tables
+
+You can create user defined routes from the VNET deployed with the managed application to internal network ranges, firewalls, virtual network appliances.
+
+For information on how to configure user defined routes, see
+Ansible on Azure User Defined Routes.
+
+## Virtual appliance routing
+
+The managed application requires access to systems external to your subscription.
+You must take into account expected outbound traffic that the offering requires in order to be managed by Red Hat and Microsoft.
+
+For information on domains that you must allow as a destination, see
+Azure Virtual Appliance Routing with Ansible Automation Platform on Azure.
+
+## Private DNS
+
+Red Hat Ansible Automation Platform on Microsoft Azure uses Azure&#8217;s managed DNS services when deployed.
+
+For information on how to use private DNS records that cannot be resolved publicly, see
+Private DNS with Red Hat Ansible Automation Platform on Microsoft Azure.
+
+# Accessing Red Hat Ansible Automation Platform on Microsoft Azure
+
+When you initiate the deployment of the Red Hat Ansible Automation Platform managed app from Azure marketplace, a form is displayed in the Create Red Hat Ansible Automation Platform on Microsoft Azure window.
+Complete the form to provision Ansible Automation Platform infrastructure and resources into your Azure tenant.
+
+1. In a web browser, navigate to Managed Applications in the Azure console.
+2. Select the instance of Red Hat Ansible Automation Platform on Microsoft Azure that you deployed.
+3. Select Parameters and Outputs in the Settings section in the left navigation menu.
+* The Parameters and Outputs page contains a link to the Ansible Automation Platform Landing page. The Ansible Automation Platform Landing page is available after deployment completes.
+From the Ansible Automation Platform Landing page, you can access your automation controller and automation hub instance and view announcements and notifications.
+You do not have to login to view the Ansible Automation Platform Landing page.
+* The Parameters and Outputs page also displays direct links to the automation controller and automation hub.
+4. Save the URL links for the Ansible Automation Platform Landing page, automation controller, and automation hub.
+The names for the links are automationControllerUrl, automationHubUrl, and landingPageUrl.
+5. Open the Ansible Automation Platform Landing page.
+
+## Ansible Automation Platform Landing page
+
+The Ansible Automation Platform Landing page is a convenient page for deployments of Ansible Automation Platform on Microsoft Azure.
+You can open the following views from the navigation pane:
+
+Overview:: Links to automation controller, automation hub, and Automation Analytics.
+![Ansible Automation Platform Landing page overview]
+Announcements:: You can view notifications about your subscription and global notifications about maintenance, upgrades, and resource downtime, for both public and private deployments of Ansible Automation Platform on Microsoft Azure.
+
+To view announcements, click the  bell icon.
+Automation Controller:: Displays links to the automation controller documentation.
+
+To open the automation controller from this view, click Launch Automation Controller.
+Automation Hub:: Displays links to the automation hub documentation.
+
+To open the automation hub from this view, click Launch Automation Hub.
+Automation Analytics:: Links to Automation Analytics documentation
+Documentation:: Links to Red Hat Ansible Automation Platform on Microsoft Azure documentation.
+
+## Logging in to automation controller
+
+* In a browser, navigate to the automation controller URL, and then log in using the following credentials:
+* Username: admin
+* Password: Use the Administrator password you provided when you deployed the Ansible Automation Platform application.
+
+The first time you login to Ansible Automation Platform on Microsoft Azure, you must configure a subscription and agree to the terms and conditions.
+
+## License association
+
+Red Hat provided a specific subscription entitlement manifest when you subscribed to Red Hat Ansible Automation Platform on Microsoft Azure.
+
+When asked to submit information about your license, select your license manifest file that you obtained from access.redhat.com.
+
+## Microsoft Entra ID SSO configuration
+
+Follow the procedures below to configure SSO with Microsoft Entra ID. If your organization does not use Microsoft Entra ID for application authorization, you can create users in the user management system in Ansible Automation Platform.
+
+1. In a browser, navigate to the Automation controller URL and log in using the following credentials:
+* Username: admin
+* Password: Use the Administrator password you provided when you deployed the Ansible Automation Platform application.
+2. In the Automation controller console, click Settings in the menu options.
+3. Click Miscellaneous System settings under the System settings.
+4. Click Edit. Enter the Automation controller URL in the Base URl of the service field.
+5. Click Save.
+
+To set up enterprise authentication for Microsoft Entra ID, you must obtain an OAuth2 key and secret by registering your Ansible Automation Platform deployment in Azure.
+
+To register the automation controller instance in Azure, you must supply the Azure AD OAuth2 Callback URL from the automation controller settings.
+
+1. In a web browser, open the automation controller console.
+2. Click Settings in the menu to open the main settings page.
+3. Click Azure AD settings in the Authentication category to open the Details page.
+4. Copy the value for Azure AD OAuth2 Callback URL. You will need this value when you register your deployed application in Microsoft Entra ID.
+
+1. In a web browser, open the Azure portal.
+2. Ensure that you are using the tenant where you deployed Ansible Automation Platform.
+3. Type Microsoft Entra ID in the search bar.
+4. Select Microsoft Entra ID from the search results.
+5. Under Manage in the menu options, click App registrations.
+6. In the App registrations page, click + New registration.
+7. Configure the new registration as follows:
+* In the Name field, enter the same name that you used for the deployed application.
+* Select the default value for Supported account types.
+* Select Web for Redirect URI (optional).
+* In the Redirect URI (optional) field, enter the Azure AD OAuth2 Callback URL value that you fetched from automation controller.
+8. Click Register to create the registration.
+
+When registration is complete, the registration page for the Automation Controller application is displayed.
+
+1. In the Automation controller application registration page on Azure, copy and save the value of Application (client) ID.
+
+You will use this value for the Azure AD OAuth2 Key in the Ansible Automation Platform settings.
+2. Under Manage, click Certificates & secrets.
+3. Click Client secrets and then + New client secret.
+4. Provide a description for the new secret.
+
+It is not possible to automatically renew a certificate or identify when it is about to expire.
+
+It is useful to include the date in the description, for example: AAP Client Secret <Today&#8217;s Date in YYYY-MM-DD format>.
+5. Provide an expiration date for the new secret.
+
+The maximum lifetime for the certificate is 2 years. Unless you have specific security needs that prevent the creation of a long term certificate, select an expiration date of 24 months.
+6. Save the secret Value to a location on your local machine. Once you navigate away from this page it will be hidden and no longer retrievable.
+
+Add the key (Application (client) ID) and value (Value) of the secret that you generated in Azure to your Ansible Automation Platform instance.
+
+1. Open the automation controller console in a web browser.
+2. Click menu:Settings[Azure AD settings].
+3. Click Edit.
+4. Enter the information for the secret that you generated in Microsoft Entra ID:
+5. In Azure AD OAuth2 Key, paste the Application (client) ID.
+6. In Azure AD OAuth2 Secret, paste the secret Value.
+7. Click Save.
+
+1. Open the automation controller in a web browser.
+2. Under Resources, click Credentials.
+3. Click Add to open the Create New Credentials page.
+4. Enter a name for the new credential and select Azure Resource Manager for the credential type.
+5. Use the Service Principal details to fill out the values of the form:
+* Name: Choose a descriptive name for the credential, for example *Azure Infrastructure*.
+* Subscription ID: Enter the subscription id where your resources created in Azure should be associated. This is unique to your tenant. Your organization may have multiple subscription ids; consult your Azure administrator regarding the subscription id that you should use.
+* Client ID: Enter the appId value from the Service Principal creation.
+* Client Secret: Enter the password from the Service Principal creation.
+* Tenant ID: Enter the tenant from the Service Principal creation.
+6. Click Save to save the credential.

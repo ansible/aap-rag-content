@@ -1,0 +1,18 @@
+# Backing up your RHDH Operator ConfigMap
+
+Before you install Ansible plug-ins for Red Hat Developer Hub, create a local copy of the ConfigMap for the RHDH Operator.
+You can use a section of the ConfigMap when you are populating a custom ConfigMap.
+
+1. Find the namespace for your RHDH Operator.
+
+When you installed the RHDH Operator, a namespace was created for it.
+Select Topology and look for the RHDH Operator in the Project dropdown list.
+The default namespace is rhdh-operator.
+2. Run the following command to make a copy of the ConfigMap for your RHDH Operator, backstage-default-config.
+
+Replace <rhdh-operator-namespace> with your RHDH Operator namespace, and <CopyOfRhdhOperatorConfig> with
+the filename you want to use for your copy of the RHDH Operator.
+
+```
+$ oc get configmap backstage-default-config -n <rhdh-operator-namespace> -o yaml > <CopyOfRhdhOperatorConfig>
+```

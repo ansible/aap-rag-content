@@ -1,0 +1,28 @@
+# Security
+
+Ansible Automation Platform on Microsoft Azure follows security best practices from both Red Hat and Microsoft.
+The following resources describe the security posture of the application and the infrastructure.
+
+* Data encryption in flight and at rest
+* All Azure Storage Services enable server-side encryption by default using service-managed keys
+* All Azure hosted services are committed to providing Encryption at Rest options
+* Azure encryption overview
+* All communications between services within AKS (for example, Ansible Automation Platform, Postgres, storage accounts) use TLS v1.2 or higher.
+* Azure security baseline for Azure Kubernetes Service (AKS)
+* Password storage
+* The customer-supplied Ansible Automation Platform admin password is encrypted in transit.
+It is accessible to SREs from the kubernetes API and can be reset by the SREs upon customer request.
+* Keys generated with industry standards
+* Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant
+* Key installation, rotation
+* Microsoft manages key rotation, backup, and redundancy
+* SSL/TLS traffic encryption
+* All communications between services within AKS (for example, Ansible Automation Platform, Postgres, storage accounts) use TLS v1.2 or higher.
+* All communications to Ansible Automation Platform UIs, either via the application gateway for public deployments or the nginx ingress for private deployments, use TLS v1.2 or higher.
+* API security
+* Any parts of the Ansible Automation Platform APIs that could leak any sensitive information are only accessible via authenticating as a known Ansible Automation Platform user and require that user to have the right level of authorization to use those APIs.
+In a private deployment, access to the Ansible Automation Platform APIs is only accessible to the customer via the route they choose to connect to the private deployment.
+* The Kubernetes API is private and only accessible from a private endpoint
+* Workload identity is enabled and it allows Kubernetes applications to access Azure cloud resources securely with Microsoft Entra ID.
+* Updates and patching
+* The Red Hat SREs regularly update the Kubernetes version, underlying node OS, and Ansible Automation Platform version to the latest available stable versions to get the latest features, bug fixes, and security fixes.

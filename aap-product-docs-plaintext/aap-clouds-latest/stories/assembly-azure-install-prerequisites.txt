@@ -1,0 +1,213 @@
+# Prerequisites for Installing Red Hat Ansible Automation Platform on Microsoft Azure
+
+# Azure requirements
+
+* A subscription for Microsoft Azure.
+* Contributor or Administrator access to that Azure subscription.
+* Access to the Azure CLI.
+
+# Ansible Automation Platform requirements
+
+* An account on the Red Hat Red Hat Customer Portal (access.redhat.com).
+* A specific subscription entitlement for Red Hat Ansible Automation Platform.
+
+# Azure resource quotas and infrastructure limits
+
+Microsoft imposes resource limits within each Azure region. The CPU limit is the most likely to impact Red Hat Ansible Automation Platform on Microsoft Azure.
+
+Before you install Ansible Automation Platform on Microsoft Azure, ensure that you have capacity to deploy the managed application into your desired region.
+Refer to Azure infrastructure usage for infrastructure requirements.
+
+## Regional vCPU limits
+
+The Azure resources used during the deployment of the managed application temporarily exceed the resource requirements in Azure infrastructure usage.
+The Total Regional vCPUs quota is temporarily consumed when deploying the managed application.
+
+Every Azure region has a separate Total Regional vCPUs quota.
+To prevent installation failure, ensure that you have at least 80 DS2_V3 vCPUs available in the Azure region where you want to deploy the managed application.
+
+The following steps describe how to view the resource quotas for your subscription the Azure console:
+
+1. In the Azure console, search for Quotas and open the My Quotas page.
+2. Select the region where you wish to deploy the managed application to view your allocation and usage metrics for that region.
+Ensure that you have selected a single region. Viewing all regions at once will not show the limitations of a single Azure region.
+
+## Regional StandardCore limits
+
+The StandardCore limit is a compute metric for the resources that are temporarily consumed when deploying the managed application.
+
+It is possible that the Ansible Automation Platform on Microsoft Azure can deploy without hitting the StandardCore limit.
+When a deployment fails because the consumed resources hit the StandardCore limit, the error message includes container group quota 'StandardCores' exceeded:
+
+
+```
+code: DeploymentFailed
+message:
+  At least one resource deployment operation failed. Please list deployment operations for details.
+  Please see https://aka.ms/DeployOperations for usage details.
+details:
+  - code: DeploymentScriptContainerGroupInvalidSettings
+    message:
+      Resource type 'Microsoft.ContainerInstance/containerGroups'
+      container group quota 'StandardCores' exceeded in region 'eastus'.
+      Limit: '10', Usage: '10' Requested: '1'.
+```
+
+
+The StandardCore metric is not displayed in the My Quotas page in the Azure console. To request the value of your regional limit, contact Microsoft directly.
+
+If your deployments fail because the consumed resources reach this limit, you must submit a resource increase request for StandardCore to Microsoft.
+Only submit a quota increase request if you encounter a deployment failure due to this issue.
+
+Use the following information to respond to questions from Microsoft support:
+
+Will the container groups be run in Linux or Windows?:: Linux
+What will the core and memory be in your Container Group instance?:: Red Hat recommends 20 cores, 16 GB
+When will you create all the Container Group Instances?:: During managed application deployment of Red Hat Ansible Automation Platform on Microsoft Azure
+How frequent will you create/delete the container groups?:: Only during managed application deployment of Red Hat Ansible Automation Platform on Microsoft Azure
+
+# Azure resource providers
+
+Microsoft uses Azure resource providers as a set of REST operations that enable functionality for a specific Azure service in an Azure subscription. For example, the Key Vault service consists of a resource provider named Microsoft.KeyVault. The resource provider defines REST operations for managing vaults, secrets, keys, and certificates.
+
+The resource provider defines the Azure resources you can deploy in your Azure subscription.
+
+## Required Azure Resource Providers
+
+Red Hat Ansible Automation Platform on Microsoft Azure installation requires specific Azure Resource Providers registered in your Azure subscription before you attempt a new installation:
+
+
+```
+"Microsoft.Compute"
+"Microsoft.ContainerService/"
+"Microsoft.DBforPostgreSQL/"
+"Microsoft.KeyVault/"
+"Microsoft.ManagedIdentity/"
+"Microsoft.Network/"
+"Microsoft.OperationalInsights/"
+"Microsoft.OperationsManagement/"
+"Microsoft.Resources/"
+"Microsoft.ResourceGraph"
+"Microsoft.Storage/"
+"Microsoft.Solutions"
+```
+
+
+## Registering Azure Resource Providers
+
+To  register Azure Resource Providers, follow the instructions in the How to manage resources section of the Azure documentation.
+
+# Network
+
+When you deploy Ansible Automation Platform on Microsoft Azure, you can configure the following networks in the Networking tab of the form:
+
+* The networking address range (CIDR block) for the VNet that your Ansible Automation Platform on Microsoft Azure application uses.
+* AKS network CIDR blocks.
+
+
+[NOTE]
+----
+Plan your networking configuration before you deploy the Ansible Automation Platform on Microsoft Azure application, because you cannot change it after deployment.
+----
+
+## VNet CIDR blocks
+
+You can configure the networking address range (CIDR block) for the VNet that your Ansible Automation Platform on Microsoft Azure application uses.
+You set the CIDR block for the application in the Configure virtual networks section of the form when you deploy Ansible Automation Platform on Microsoft Azure.
+
+When you are planning your network configuration, bear the following in mind:
+
+* The managed application requires at least a /24 Vnet that is divided into four subnets. The subnets have minimum address spacing.
+
+* Ensure that the VNet range you configure does not intersect with the default CIDR block for AKS clusters (10.0.0.0/16).
+The Azure user interface does not prevent you entering this range, but using the default AKS CIDR block for your VNet causes networking issues.
+* To ensure successful network peering and communication between Ansible Automation Platform on Microsoft Azure and your existing networks, your enterprise network ranges must not overlap with the VNet network range.
+* If you do not have any existing Azure VNets, the Azure user interface suggests a default CIDR block and range for the VNet.
+Do not accept these defaults. Instead, use the network configuration that you have planned.
+
+For information about planning the network address range and completing the networking configuration form on deployment, refer to
+Red Hat Ansible Automation Platform on Microsoft Azure VNet Preparation.
+
+## AKS CIDR Blocks
+
+You can configure the AKS network CIDR blocks.
+Traffic that originates from the AKS cluster will appear to come from the range configured in AKS, not from the VNET.
+
+When you are planning your AKS CIDR block configuration, bear the following in mind:
+
+* Ensure that these network ranges do not overlap with any existing network range in your enterprise network.
+* Do not use the following reserved network ranges:
+
+
+You can configure the AKS network CIDR blocks in the Configure AKS networks area of the networking tab.
+Do not accept the default values suggested in the Azure user interface.
+Instead, use the CIDR blocks that you have planned.
+The settings have the following requirements:
+
+
+
+# Creating a service principal
+
+To enable the Ansible Automation Platform application to access and manage Azure resources, you must provide authorization credentials after deployment.
+The Microsoft Azure collection supports service principal authentication.
+
+To create a service principal, you must have administrator privileges with tenancy-wide permissions on your Azure tenant.
+Your Ansible Automation Platform on Microsoft Azure deployment will be provisioned in the same Subscription ID as the service principal created in this step.
+
+1. Navigate to the Azure portal and click the Cloud Shell icon to open a bash Cloud Shell in your browser.
+2. Set the Azure CLI to use the subscription that you intend to use for automating Azure services. Run the following command from the shell:
+
+```
+az account set --subscription <your_subscription_id>
+```
+
+3. Run the following command using the Azure CLI to create a privileged service principal in Microsoft Entra ID:
+
+```
+az ad sp create-for-rbac --name ansible --role Contributor
+```
+
+
+The output displays the appID and tenant keys for the service principal:
+
+```
+{
+  "appId": "xxxxxxx-xxx-xxxx",
+  "displayName": "ansible",
+  "name": "xxxxxxx-xxx-xxxx",
+  "password": "xxxxxxx-xxx-xxxx",
+  "tenant": "xxxxxxx-xxx-xxxx"
+}
+```
+
+4. Store the service principal details securely, as they are displayed only when you create the secret. You will need them when you deploy Automation controller.
+
+## Maintaining your service principals
+
+Service principal credentials have a limited lifetime that is set in your Microsoft Entra ID configuration.
+Track the lifespan of the service principal if you intend to automate against Azure for an extended period of time.
+You can create a new one when needed.
+
+To view records of updated or deleted service principles, run the following Azure CLI command:
+
+
+```
+az ad sp list -o table | grep ansible
+```
+
+
+This command does not display the secrets for your service principals. Delete the service principal and create a new one if the secret is lost.
+
+When you create a new service principal to replace an expired or deleted one, you must update the credential that uses the service principal that you are replacing. If the credential is not updated, automations that use that credential will fail.
+
+# Azure Policy
+
+Azure Policy is a tool to help organizations enforce compliance of Azure resources to defined standards.
+
+For information on using Azure Policy with Ansible Automation Platform on Microsoft Azure, see
+Azure Policy and Ansible on Azure.
+
+# Entitling your subscription
+
+For information on obtaining a subscription entitlement and attaching it to Ansible Automation Platform, see
+Red Hat Ansible Automation Platform on Microsoft Azure Subscription Entitlement Association.

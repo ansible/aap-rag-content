@@ -630,7 +630,8 @@
     "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-install-ocp-helm.adoc",
     "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-install-ocp-helm.adoc",
     "includes": [
-      "downstream/modules/devtools/ref-rhdh-install-ocp-prereqs.adoc",
+      "downstream/modules/devtools/con-rhdh-install-ocp-prereqs.adoc",
+      "downstream/modules/devtools/con-rhdh-recommended-preconfig.adoc",
       "downstream/modules/devtools/proc-rhdh-download-plugins.adoc",
       "downstream/modules/devtools/proc-rhdh-create-plugin-registry.adoc",
       "downstream/assemblies/devtools/assembly-rhdh-ocp-required-installation.adoc",
@@ -640,6 +641,32 @@
     "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-install-ocp-helm_aap-plugin-rhdh-installing",
     "id": "rhdh-install-ocp-helm_{context}",
     "context": "rhdh-install-ocp",
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/assemblies/devtools/assembly-rhdh-install-ocp-operator.adoc": {
+    "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-install-ocp-operator.adoc",
+    "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-install-ocp-operator.adoc",
+    "includes": [
+      "downstream/modules/devtools/con-rhdh-install-ocp-prereqs.adoc",
+      "downstream/modules/devtools/con-rhdh-recommended-preconfig.adoc",
+      "downstream/modules/devtools/proc-rhdh-backup-operator-configmap.adoc",
+      "downstream/modules/devtools/proc-rhdh-create-custom-configmap-operator-install.adoc",
+      "downstream/modules/devtools/proc-rhdh-operator-add-custom-configmap-cr.adoc",
+      "downstream/modules/devtools/proc-rhdh-download-plugins.adoc",
+      "downstream/modules/devtools/proc-rhdh-create-plugin-registry.adoc",
+      "downstream/modules/devtools/proc-rhdh-install-dynamic-plugins-operator.adoc",
+      "downstream/modules/devtools/proc-rhdh-add-custom-configmap.adoc",
+      "downstream/modules/devtools/proc-rhdh-configure-devtools-server.adoc",
+      "downstream/modules/devtools/proc-rhdh-configure-aap-details.adoc",
+      "downstream/modules/devtools/proc-rhdh-add-plugin-software-templates.adoc",
+      "downstream/modules/devtools/proc-rhdh-configure-rbac.adoc",
+      "downstream/assemblies/devtools/assembly-rhdh-ocp-configure-optional.adoc",
+      "downstream/modules/devtools/ref-rhdh-full-aap-configmap-example.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-install-ocp-operator_rhdh-ocp-full-examples",
+    "id": "rhdh-install-ocp-operator_{context}",
+    "context": "rhdh-install-ocp-operator",
     "content_type": null,
     "nesting_assembly": false
   },
@@ -668,7 +695,7 @@
     ],
     "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-ocp-configure-optional_rhdh-ocp-required-installation",
     "id": "rhdh-ocp-configure-optional_{context}",
-    "context": "rhdh-ocp-configure-optional",
+    "context": "rhdh-ocp-configure-optional_{parent-context-of-rhdh-ocp-configure-optional}",
     "content_type": null,
     "nesting_assembly": false
   },
@@ -679,7 +706,7 @@
       "downstream/modules/devtools/ref-rhdh-full-aap-configmap-example.adoc",
       "downstream/modules/devtools/ref-rhdh-full-helm-chart-ansible-plugins.adoc"
     ],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-ocp-full-examples_rhdh-ocp-configure-optional",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-ocp-full-examples_rhdh-ocp-configure-optional_{parent-context-of-rhdh-ocp-configure-optional}",
     "id": "rhdh-ocp-full-examples_{context}",
     "context": "rhdh-ocp-full-examples",
     "content_type": null,
@@ -725,7 +752,7 @@
       "downstream/modules/devtools/proc-rhdh-warning-aap-ooc.adoc",
       "downstream/modules/devtools/proc-rhdh-warning-invalid-aap-subscription.adoc"
     ],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-subscription-warnings_rhdh-ocp-full-examples",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-subscription-warnings_rhdh-ocp-configure-optional_{parent-context-of-rhdh-ocp-configure-optional}",
     "id": "rhdh-subscription-warnings_{context}",
     "context": "rhdh-subscription-warnings",
     "content_type": null,
@@ -735,37 +762,79 @@
     "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-telemetry-capturing.adoc",
     "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-telemetry-capturing.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-configure-telemetry_rhdh-subscription-warnings",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-configure-telemetry_rhdh-uninstall-ocp-operator",
     "id": "rhdh-configure-telemetry_{context}",
     "context": null,
     "content_type": null,
     "nesting_assembly": false
   },
-  "downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp.adoc": {
-    "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp.adoc",
-    "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp.adoc",
+  "downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp-helm.adoc": {
+    "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp-helm.adoc",
+    "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp-helm.adoc",
     "includes": [
-      "downstream/modules/devtools/proc-rhdh-uninstall-ocp.adoc"
+      "downstream/modules/devtools/proc-rhdh-uninstall-ocp-helm.adoc"
     ],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-uninstall-ocp_rhdh-subscription-warnings",
-    "id": "rhdh-uninstall-ocp_{context}",
-    "context": "rhdh-uninstall-ocp",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-uninstall-ocp-helm_rhdh-upgrade-ocp-operator",
+    "id": "rhdh-uninstall-ocp-helm_{context}",
+    "context": "rhdh-uninstall-ocp-helm",
     "content_type": null,
-    "nesting_assembly": true
+    "nesting_assembly": false
   },
-  "downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp.adoc": {
-    "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp.adoc",
-    "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp.adoc",
+  "downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp-operator.adoc": {
+    "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp-operator.adoc",
+    "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp-operator.adoc",
+    "includes": [
+      "downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator-plugins-cm.adoc",
+      "downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator-rhdh-cm.adoc",
+      "downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator-sidecar.adoc",
+      "downstream/modules/devtools/proc-rhdh-uninstall-ocp-remove-sidecar-cr.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-uninstall-ocp-operatorrhdh-uninstall-ocp-helm",
+    "id": "rhdh-uninstall-ocp-operator{context}",
+    "context": "rhdh-uninstall-ocp-operator",
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/assemblies/devtools/assembly-rhdh-uninstall.adoc": {
+    "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-uninstall.adoc",
+    "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-uninstall.adoc",
+    "includes": [
+      "downstream/modules/devtools/proc-rhdh-uninstall-ocp-helm.adoc",
+      "downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator.adoc"
+    ],
+    "url": null,
+    "id": "rhdh-uninstall_{context}",
+    "context": "rhdh-uninstall",
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp-helm.adoc": {
+    "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp-helm.adoc",
+    "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp-helm.adoc",
     "includes": [
       "downstream/modules/devtools/proc-rhdh-download-plugins.adoc",
       "downstream/modules/devtools/proc-rhdh-update-plugin-registry.adoc",
-      "downstream/modules/devtools/proc-rhdh-update-plugins-version-numbers.adoc"
+      "downstream/modules/devtools/proc-rhdh-update-plugins-helm-version-numbers.adoc"
     ],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-upgrade-ocp_rhdh-subscription-warnings",
-    "id": "rhdh-upgrade-ocp_{context}",
-    "context": "rhdh-upgrade-ocp",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-upgrade-ocp-helm_rhdh-subscription-warnings",
+    "id": "rhdh-upgrade-ocp-helm_{context}",
+    "context": "rhdh-upgrade-ocp-helm",
     "content_type": null,
-    "nesting_assembly": true
+    "nesting_assembly": false
+  },
+  "downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp-operator.adoc": {
+    "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp-operator.adoc",
+    "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp-operator.adoc",
+    "includes": [
+      "downstream/modules/devtools/proc-rhdh-download-plugins.adoc",
+      "downstream/modules/devtools/proc-rhdh-update-plugin-registry.adoc",
+      "downstream/modules/devtools/proc-rhdh-update-plugins-operator-version-numbers.adoc"
+    ],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-upgrade-ocp-operator_rhdh-upgrade-ocp-helm",
+    "id": "rhdh-upgrade-ocp-operator_{context}",
+    "context": "rhdh-upgrade-ocp-operator",
+    "content_type": null,
+    "nesting_assembly": false
   },
   "downstream/assemblies/devtools/assembly-rhdh-using.adoc": {
     "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-using.adoc",
@@ -876,6 +945,7 @@
     "project_file_name": "downstream/assemblies/eda/assembly-eda-decision-environments.adoc",
     "path_name": "aap-docs/downstream/assemblies/eda/assembly-eda-decision-environments.adoc",
     "includes": [
+      "downstream/modules/eda/ref-eda-controller-install-builder.adoc",
       "downstream/modules/eda/proc-eda-build-a-custom-decision-environment.adoc",
       "downstream/modules/eda/proc-eda-set-up-new-decision-environment.adoc"
     ],
@@ -4237,7 +4307,6 @@
       "downstream/modules/platform/proc-create-keycloak-realm.adoc",
       "downstream/modules/platform/proc-create-keycloak-client.adoc",
       "downstream/modules/platform/proc-create-a-user.adoc",
-      "downstream/modules/platform/proc-installing-the-ansible-platform-operator.adoc",
       "downstream/modules/platform/proc-creating-a-secret.adoc",
       "downstream/modules/platform/proc-installing-hub-using-operator.adoc",
       "downstream/modules/platform/proc-determine-hub-route.adoc",
@@ -5565,6 +5634,26 @@
     "content_type": "CONCEPT",
     "nesting_assembly": false
   },
+  "downstream/modules/devtools/con-rhdh-install-ocp-prereqs.adoc": {
+    "project_file_name": "downstream/modules/devtools/con-rhdh-install-ocp-prereqs.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/con-rhdh-install-ocp-prereqs.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-install-ocp-prereqs_rhdh-install-ocp",
+    "id": "rhdh-install-ocp-prereqs_{context}",
+    "context": null,
+    "content_type": "CONCEPT",
+    "nesting_assembly": false
+  },
+  "downstream/modules/devtools/con-rhdh-recommended-preconfig.adoc": {
+    "project_file_name": "downstream/modules/devtools/con-rhdh-recommended-preconfig.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/con-rhdh-recommended-preconfig.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-recommended-preconfig_rhdh-install-ocp",
+    "id": "rhdh-recommended-preconfig_{context}",
+    "context": null,
+    "content_type": "CONCEPT",
+    "nesting_assembly": false
+  },
   "downstream/modules/devtools/proc-create-molecule-scenario.adoc": {
     "project_file_name": "downstream/modules/devtools/proc-create-molecule-scenario.adoc",
     "path_name": "aap-docs/downstream/modules/devtools/proc-create-molecule-scenario.adoc",
@@ -5935,6 +6024,16 @@
     "content_type": "PROCEDURE",
     "nesting_assembly": false
   },
+  "downstream/modules/devtools/proc-rhdh-backup-operator-configmap.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-backup-operator-configmap.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-backup-operator-configmap.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-backup-operator-configmap_rhdh-install-ocp-operator",
+    "id": "rhdh-backup-operator-configmap_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
+    "nesting_assembly": false
+  },
   "downstream/modules/devtools/proc-rhdh-configure-aap-details.adoc": {
     "project_file_name": "downstream/modules/devtools/proc-rhdh-configure-aap-details.adoc",
     "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-configure-aap-details.adoc",
@@ -5949,7 +6048,7 @@
     "project_file_name": "downstream/modules/devtools/proc-rhdh-configure-devspaces.adoc",
     "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-configure-devspaces.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-configure-devspaces_rhdh-ocp-configure-optional",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-configure-devspaces_rhdh-ocp-configure-optional_{parent-context-of-rhdh-ocp-configure-optional}",
     "id": "rhdh-configure-devspaces_{context}",
     "context": null,
     "content_type": "PROCEDURE",
@@ -5969,7 +6068,7 @@
     "project_file_name": "downstream/modules/devtools/proc-rhdh-configure-optional-integrations.adoc",
     "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-configure-optional-integrations.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-configure-optional-integrations_rhdh-ocp-configure-optional",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-configure-optional-integrations_rhdh-ocp-configure-optional_{parent-context-of-rhdh-ocp-configure-optional}",
     "id": "rhdh-configure-optional-integrations_{context}",
     "context": null,
     "content_type": "PROCEDURE",
@@ -5979,7 +6078,7 @@
     "project_file_name": "downstream/modules/devtools/proc-rhdh-configure-pah-url.adoc",
     "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-configure-pah-url.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-configure-pah-url_rhdh-ocp-configure-optional",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-configure-pah-url_rhdh-ocp-configure-optional_{parent-context-of-rhdh-ocp-configure-optional}",
     "id": "rhdh-configure-pah-url_{context}",
     "context": null,
     "content_type": "PROCEDURE",
@@ -5991,6 +6090,16 @@
     "includes": [],
     "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-configure-rbac_rhdh-ocp-required-installation",
     "id": "rhdh-configure-rbac_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
+    "nesting_assembly": false
+  },
+  "downstream/modules/devtools/proc-rhdh-create-custom-configmap-operator-install.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-create-custom-configmap-operator-install.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-create-custom-configmap-operator-install.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-create-operator-custom-configmap-operator-install_rhdh-install-ocp-operator",
+    "id": "rhdh-create-operator-custom-configmap-operator-install_{context}",
     "context": null,
     "content_type": "PROCEDURE",
     "nesting_assembly": false
@@ -6059,7 +6168,7 @@
     "project_file_name": "downstream/modules/devtools/proc-rhdh-enable-rhdh-authentication.adoc",
     "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-enable-rhdh-authentication.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-enable-rhdh-authentication_rhdh-ocp-configure-optional",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-enable-rhdh-authentication_rhdh-ocp-configure-optional_{parent-context-of-rhdh-ocp-configure-optional}",
     "id": "rhdh-enable-rhdh-authentication_{context}",
     "context": null,
     "content_type": "PROCEDURE",
@@ -6125,6 +6234,36 @@
     "content_type": "PROCEDURE",
     "nesting_assembly": false
   },
+  "downstream/modules/devtools/proc-rhdh-install-dynamic-plugins-operator.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-install-dynamic-plugins-operator.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-install-dynamic-plugins-operator.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-install-dynamic-plugins-operator_rhdh-install-ocp-operator",
+    "id": "rhdh-install-dynamic-plugins-operator_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
+    "nesting_assembly": false
+  },
+  "downstream/modules/devtools/proc-rhdh-operator-add-custom-configmap-cr.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-operator-add-custom-configmap-cr.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-operator-add-custom-configmap-cr.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-operator-add-custom-configmap-cr_rhdh-install-ocp-operator",
+    "id": "rhdh-operator-add-custom-configmap-cr_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
+    "nesting_assembly": false
+  },
+  "downstream/modules/devtools/proc-rhdh-operator-install-add-plugins-app-config.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-operator-install-add-plugins-app-config.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-operator-install-add-plugins-app-config.adoc",
+    "includes": [],
+    "url": null,
+    "id": "rhdh-operator-install-add-plugins-app-config_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
+    "nesting_assembly": false
+  },
   "downstream/modules/devtools/proc-rhdh-set-up-controller-project.adoc": {
     "project_file_name": "downstream/modules/devtools/proc-rhdh-set-up-controller-project.adoc",
     "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-set-up-controller-project.adoc",
@@ -6135,12 +6274,62 @@
     "content_type": "PROCEDURE",
     "nesting_assembly": false
   },
-  "downstream/modules/devtools/proc-rhdh-uninstall-ocp.adoc": {
-    "project_file_name": "downstream/modules/devtools/proc-rhdh-uninstall-ocp.adoc",
-    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-uninstall-ocp.adoc",
+  "downstream/modules/devtools/proc-rhdh-uninstall-ocp-helm.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-uninstall-ocp-helm.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-uninstall-ocp-helm.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#proc-rhdh-uninstall-ocp_rhdh-uninstall-ocp",
-    "id": "proc-rhdh-uninstall-ocp_{context}",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-uninstall-ocp-helm_rhdh-uninstall-ocp-helm",
+    "id": "rhdh-uninstall-ocp-helm_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
+    "nesting_assembly": false
+  },
+  "downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator-plugins-cm.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator-plugins-cm.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator-plugins-cm.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-uninstall-ocp-operator-plugins-cm_rhdh-uninstall-ocp-operator",
+    "id": "rhdh-uninstall-ocp-operator-plugins-cm_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
+    "nesting_assembly": false
+  },
+  "downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator-rhdh-cm.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator-rhdh-cm.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator-rhdh-cm.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-uninstall-ocp-operator-rhdh-cm_rhdh-uninstall-ocp-operator",
+    "id": "rhdh-uninstall-ocp-operator-rhdh-cm_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
+    "nesting_assembly": false
+  },
+  "downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator-sidecar.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator-sidecar.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator-sidecar.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-uninstall-ocp-operator-sidecar_rhdh-uninstall-ocp-operator",
+    "id": "rhdh-uninstall-ocp-operator-sidecar_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
+    "nesting_assembly": false
+  },
+  "downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-uninstall-ocp-operator.adoc",
+    "includes": [],
+    "url": null,
+    "id": "rhdh-uninstall-ocp-operator_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
+    "nesting_assembly": false
+  },
+  "downstream/modules/devtools/proc-rhdh-uninstall-ocp-remove-sidecar-cr.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-uninstall-ocp-remove-sidecar-cr.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-uninstall-ocp-remove-sidecar-cr.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-uninstall-ocp-operator-remove-sidecar-cr_rhdh-uninstall-ocp-operator",
+    "id": "rhdh-uninstall-ocp-operator-remove-sidecar-cr_{context}",
     "context": null,
     "content_type": "PROCEDURE",
     "nesting_assembly": false
@@ -6149,18 +6338,28 @@
     "project_file_name": "downstream/modules/devtools/proc-rhdh-update-plugin-registry.adoc",
     "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-update-plugin-registry.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-update-plugin-registry_rhdh-upgrade-ocp",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-update-plugin-registry_rhdh-upgrade-ocp-helm",
     "id": "rhdh-update-plugin-registry_{context}",
     "context": null,
     "content_type": "PROCEDURE",
     "nesting_assembly": false
   },
-  "downstream/modules/devtools/proc-rhdh-update-plugins-version-numbers.adoc": {
-    "project_file_name": "downstream/modules/devtools/proc-rhdh-update-plugins-version-numbers.adoc",
-    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-update-plugins-version-numbers.adoc",
+  "downstream/modules/devtools/proc-rhdh-update-plugins-helm-version-numbers.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-update-plugins-helm-version-numbers.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-update-plugins-helm-version-numbers.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-update-plugins-version-numbers_rhdh-upgrade-ocp",
-    "id": "rhdh-update-plugins-version-numbers_{context}",
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-update-plugins-helm-version-numbers_rhdh-upgrade-ocp-helm",
+    "id": "rhdh-update-plugins-helm-version-numbers_{context}",
+    "context": null,
+    "content_type": "PROCEDURE",
+    "nesting_assembly": false
+  },
+  "downstream/modules/devtools/proc-rhdh-update-plugins-operator-version-numbers.adoc": {
+    "project_file_name": "downstream/modules/devtools/proc-rhdh-update-plugins-operator-version-numbers.adoc",
+    "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-update-plugins-operator-version-numbers.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-update-plugins-operator-version-numbers_rhdh-upgrade-ocp-operator",
+    "id": "rhdh-update-plugins-operator-version-numbers_{context}",
     "context": null,
     "content_type": "PROCEDURE",
     "nesting_assembly": false
@@ -6331,16 +6530,6 @@
     "includes": [],
     "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-full-helm-chart-ansible-plugins_rhdh-ocp-full-examples",
     "id": "rhdh-full-helm-chart-ansible-plugins_{context}",
-    "context": null,
-    "content_type": "REFERENCE",
-    "nesting_assembly": false
-  },
-  "downstream/modules/devtools/ref-rhdh-install-ocp-prereqs.adoc": {
-    "project_file_name": "downstream/modules/devtools/ref-rhdh-install-ocp-prereqs.adoc",
-    "path_name": "aap-docs/downstream/modules/devtools/ref-rhdh-install-ocp-prereqs.adoc",
-    "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-install-ocp-prereqs_rhdh-install-ocp",
-    "id": "rhdh-install-ocp-prereqs_{context}",
     "context": null,
     "content_type": "REFERENCE",
     "nesting_assembly": false
@@ -6860,6 +7049,16 @@
     "includes": [],
     "url": null,
     "id": "deploying-eda-controller-with-aap-operator-on-ocp",
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "downstream/modules/eda/ref-eda-controller-install-builder.adoc": {
+    "project_file_name": "downstream/modules/eda/ref-eda-controller-install-builder.adoc",
+    "path_name": "aap-docs/downstream/modules/eda/ref-eda-controller-install-builder.adoc",
+    "includes": [],
+    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-controller-install-builder",
+    "id": "eda-controller-install-builder",
     "context": null,
     "content_type": null,
     "nesting_assembly": false
@@ -13095,7 +13294,7 @@
     "project_file_name": "downstream/modules/platform/proc-installing-the-ansible-platform-operator.adoc",
     "path_name": "aap-docs/downstream/modules/platform/proc-installing-the-ansible-platform-operator.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-installing-the-ansible-platform-operator_using-a-rhsso-operator",
+    "url": null,
     "id": "proc-installing-the-ansible-platform-operator_{context}",
     "context": null,
     "content_type": null,
@@ -18243,9 +18442,12 @@
       "downstream/attributes/attributes.adoc",
       "downstream/assemblies/devtools/assembly-rhdh-intro.adoc",
       "downstream/assemblies/devtools/assembly-rhdh-install-ocp-helm.adoc",
+      "downstream/assemblies/devtools/assembly-rhdh-install-ocp-operator.adoc",
       "downstream/assemblies/devtools/assembly-rhdh-subscription-warnings.adoc",
-      "downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp.adoc",
-      "downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp.adoc",
+      "downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp-helm.adoc",
+      "downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp-operator.adoc",
+      "downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp-helm.adoc",
+      "downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp-operator.adoc",
       "downstream/assemblies/devtools/assembly-rhdh-telemetry-capturing.adoc"
     ],
     "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index",

@@ -1,0 +1,9 @@
+# Connectivity
+
+The execution plane can communicate with the control plane under the following conditions:
+
+* Polling (mesh-ingress): Execution nodes must route stateful egress traffic to the Ansible Automation Platform deployment domain over port 443.
+* Push: A configurable firewall port must be open in the customer’s remote networks to allow Ansible Automation Platform to push information to execution nodes.
+
+You can configure automation mesh nodes behind firewalls, proxy servers, and similar services.
+These services route or proxy traffic originating from Ansible Automation Platform without altering headers, payload, or other information that would affect functionality of the automation mesh.

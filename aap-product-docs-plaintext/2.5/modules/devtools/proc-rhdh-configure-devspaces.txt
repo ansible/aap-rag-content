@@ -10,7 +10,8 @@ The plug-ins will function without it.
 It is a separate Red Hat product and is not included in the Ansible Automation Platform or Red Hat Developer Hub subscription.
 ----
 
-If the OpenShift Dev Spaces link is not configured in the Ansible plug-ins, the Go to OpenShift Dev Spaces dashboard link in the 4.DEVELOP section of the Ansible plug-ins landing page redirects users to the
+If the OpenShift Dev Spaces link is not configured in the Ansible plug-ins,
+the Go to OpenShift Dev Spaces dashboard link in the DEVELOP section of the Ansible plug-ins landing page redirects users to the
 Ansible development tools home page.
 
 * A Dev Spaces installation.
