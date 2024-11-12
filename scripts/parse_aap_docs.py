@@ -92,6 +92,8 @@ class ParseAAPDocs:
                 continue
             self.adocs_dict[title_doc]["url"] = self.adocs_dict[title_doc]["url"].replace(
                 "/html/", "/html-single/"
+            ).replace(
+                "/ansible_on_clouds/2.x_latest/", "/ansible_on_clouds/2.x/"
             )
             print(title_doc, self.adocs_dict[title_doc]["url"])
 

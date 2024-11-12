@@ -25,6 +25,10 @@ do
   git clone --single-branch --branch ${git_branch} https://github.com/ansible/aap-docs.git
 
   if [ "${git_branch}" == "${AAP_CLOUDS_LATEST}" ]; then
+    # For some reasons, "AAP on Azure" has a different structure from others.
+    # Following two lines are for correcting those differences.
+    mv aap-docs/titles/aap-on-azure/aap-on-azure.asciidoc aap-docs/titles/aap-on-azure/master.adoc
+    echo "<title>Red Hat Ansible Automation Platform on Microsoft Azure Guide</title>" > aap-docs/titles/aap-on-azure/docinfo.xml
     mv aap-docs aap-clouds
     mkdir aap-docs
     mv aap-clouds aap-docs
