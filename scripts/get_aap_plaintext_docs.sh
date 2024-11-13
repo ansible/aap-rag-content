@@ -8,6 +8,7 @@ fi
 
 AAP_VERSION=$1
 LIGHTSPEED_LATEST=lightspeed-latest
+AAP_CLOUDS_LATEST=aap-clouds-latest
 BASE_DIR=aap-product-docs-plaintext
 
 set -eou pipefail
@@ -18,10 +19,21 @@ if [ ! -d ${BASE_DIR} ]; then
     mkdir ${BASE_DIR}
 fi
 
-for git_branch in ${AAP_VERSION} ${LIGHTSPEED_LATEST}
+for git_branch in ${AAP_VERSION} ${LIGHTSPEED_LATEST} ${AAP_CLOUDS_LATEST}
 do
   rm -rf ${BASE_DIR}/${git_branch}
   git clone --single-branch --branch ${git_branch} https://github.com/ansible/aap-docs.git
+
+  if [ "${git_branch}" == "${AAP_CLOUDS_LATEST}" ]; then
+    # For some reasons, "AAP on Azure" has a different structure from others.
+    # Following two lines are for correcting those differences.
+    mv aap-docs/titles/aap-on-azure/aap-on-azure.asciidoc aap-docs/titles/aap-on-azure/master.adoc
+    echo "<title>Red Hat Ansible Automation Platform on Microsoft Azure Guide</title>" > aap-docs/titles/aap-on-azure/docinfo.xml
+    mv aap-docs aap-clouds
+    mkdir aap-docs
+    mv aap-clouds aap-docs
+  fi
+
   python scripts/asciidoctor-text/convert-it-all-aap.py \
     -i aap-docs \
     -o ${BASE_DIR}/${git_branch}  \

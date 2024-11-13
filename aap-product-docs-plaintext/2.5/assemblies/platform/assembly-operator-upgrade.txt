@@ -116,13 +116,43 @@ For more information on configuring your updated Ansible Automation Platform Ope
 
 # Creating Ansible Automation Platform custom resources
 
-Create an Ansible Automation Platform custom resource (CR) that specifies the names of your existing deployments, in the same namespace.
+After upgrading to the latest version of Ansible Automation Platform Operator on OpenShift Container Platform, you can create an Ansible Automation Platform custom resource (CR) that specifies the names of your existing deployments, in the same namespace.
 
-You can find examples for Ansible Automation Platform CR for various deployment scenarios in the Appendix.
+This example outlines the steps to deploy a new Event-Driven Ansible setup after upgrading to the latest version, with existing automation controller and automation hub deployments already in place.
 
-1. For example, use the fresh install Ansible Automation Platform CR (aap-fresh-install.yml).
-2. Wait for the Ansible Automation Platform CR to show the Successful status.
-3. Navigate to the Route URL listed in the status (or the Routes page) to access the new CR.
+The Appendix contains more examples of Ansible Automation Platform CRs for different deployments.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Navigate to menu:Operators[Installed Operators].
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select the Details tab.
+5. On the Ansible Automation Platform tile click btn:[Create instance].
+6. From the Create Ansible Automation Platform page enter a name for your instance in the Name field.
+7. Click btn:[YAML view] and paste the following YAML (aap-existing-controller-and-hub-new-eda.yml):
+
+```
+---
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  # Development purposes only
+  no_log: false
+
+  controller:
+    name: existing-controller
+    disabled: false
+
+  eda:
+    disabled: false
+
+  hub:
+    name: existing-hub
+    disabled: false
+```
+
+8. Click btn:[Create].
 
 
 [NOTE]
@@ -131,3 +161,8 @@ You can override the operator’s default image for automation controller, autom
 This enables upgrading a specific deployment, like a controller, without updating the operator.
 The recommended approach however, is to upgrade the operator and use the default image values.
 ----
+
+Navigate to your Ansible Automation Platform Operator deployment and click btn:[All instances] to verify whether all instances have deployed correctly.
+You should see the Ansible Automation Platform instance and the deployed AutomationController, EDA, and AutomationHub instances here.
+
+Alternatively, you can verify whether all instances deployed correctly by running oc get route in the command line.

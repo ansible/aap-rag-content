@@ -1,0 +1,34 @@
+# Direct peering
+
+You can use direct peering to directly connect virtual networks.
+When two networks are peered, Azure updates routes between them so that traffic automatically flows between them.
+The direct peering method is easier to configure than the hub-and-spoke model.
+However, the number of direct network peerings is limited.
+Direct peering becomes difficult to manage as the number of virtual networks grows, because each new network requires peering to all other networks.
+
+# Configuring direct network peering
+
+You can configure network peering between your Azure network and your VNet in the Virtual Networks page of the Azure Portal.
+
+Within the Azure console, the Azure virtual network is known as this virtual network, and the VNet that you want to peer with is known as remote virtual network.
+
+In the Virtual Networks page in the Azure portal, use the following settings to configure the Azure network and the VNet that you want to peer with the Ansible Automation Platform on Microsoft Azure app:
+
+* Under This virtual network, select settings for the Ansible Automation Platform on Microsoft Azure virtual network:
+* Peering link name: <hub_to_aap_peering_link_name>
+* Traffic to remote virtual network: Allow
+* Traffic forwarded from remote virtual network: Allow
+* Virtual network gateway or Route Server: Use this network’s gateway or Route server
+* Under Remote virtual network, select settings for the virtual network that you want to peer with Azure:
+* Peering link name: <aap_to_hub_peering_link_name>
+* Subscription: Select the subscription where Ansible Automation Platform on Microsoft Azure has been deployed
+* Virtual network: Select the Ansible Automation Platform on Microsoft Azure virtual network: vnet-<aap_identifier>-<region>
+* Traffic to remote virtual network: Allow
+* Traffic forwarded from remote virtual network: Allow
+* Virtual network gateway or Route Server: Use the remote virtual network’s gateway or Route server
+
+After you have configured direct network peering, traffic routes between Ansible Automation Platform on Microsoft Azure and private hosts and IPs on your Vnet.
+
+For more detailed instructions for configuring peering, refer to Create a peering in the Microsoft Azure Virtual network guide.
+
+For further information on direct peering, refer to Virtual network peering in the Microsoft Azure Virtual network guide.

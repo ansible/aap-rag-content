@@ -1,0 +1,3 @@
+# Public Deployments
+
+If you selected public access when you deployed Ansible Automation Platform on Microsoft Azure, you can access the Ansible Automation Platform application URLs over the public internet from a browser.

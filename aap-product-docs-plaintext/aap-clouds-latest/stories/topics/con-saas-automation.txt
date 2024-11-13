@@ -1,0 +1,12 @@
+# Automation using the Red Hat Ansible Automation Platform Service on AWS control plane
+
+The Red Hat Ansible Automation Platform Service on AWS offers a deployment of Ansible Automation Platform deployment purchased through AWS Marketplace. Red&#160;Hat configures and provisions an Ansible Automation Platform. The Red&#160;Hat team handles the setup and maintenance of the Ansible Automation Platform, ensuring reliability and security.
+
+While Red&#160;Hat manages the control plane, the execution plane is spread across your domains using automation mesh hop nodes and execution nodes.
+For help with configuring execution nodes see
+Automation mesh for managed cloud or operator environments.
+
+There are two ways to configure the communication between control nodes and execution nodes:
+
+* The PULL connectivity model (recommended)
+* The PUSH connectivity model

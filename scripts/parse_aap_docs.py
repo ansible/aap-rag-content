@@ -92,6 +92,8 @@ class ParseAAPDocs:
                 continue
             self.adocs_dict[title_doc]["url"] = self.adocs_dict[title_doc]["url"].replace(
                 "/html/", "/html-single/"
+            ).replace(
+                "/ansible_on_clouds/2.x_latest/", "/ansible_on_clouds/2.x/"
             )
             print(title_doc, self.adocs_dict[title_doc]["url"])
 
@@ -373,7 +375,8 @@ def main():
 
     args = parser.parse_args()
 
-    project_document_path = "lightspeed" if args.git_branch == "lightspeed-latest" else "downstream"
+    project_document_path = "lightspeed" if args.git_branch == "lightspeed-latest" \
+        else "aap-clouds" if args.git_branch == "aap-clouds-latest" else "downstream"
 
     # Parse Asciidoc files in a local aap_docs repo and calculate document URLs
     base_dir = args.aap_docs_dir

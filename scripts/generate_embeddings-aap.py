@@ -73,15 +73,15 @@ def aap_file_metadata_func(file_path: str) -> Dict:
         file_path: str: file path in str
     """
     full_path = os.path.abspath(file_path)
-    doc_dir = "lightspeed" if "lightspeed-latest" in full_path else "downstream"
+    doc_dir = "lightspeed" if "lightspeed-latest" in full_path \
+        else "aap-clouds" if "aap-clouds-latest" in full_path else "downstream"
 
-    doc_path = full_path.removeprefix(EMBEDDINGS_ROOT_DIR).removesuffix("txt")
+    doc_path = full_path.removeprefix(EMBEDDINGS_ROOT_DIR).removesuffix(".txt")
     i = doc_path.index("/", 1)
     if i >= 0:
         doc_path = doc_path[i:]
-    key = doc_dir + doc_path + "adoc"
+    key = doc_dir + doc_path + ".adoc"
 
-    print(f"DEBUG: file_path={file_path},  key={key}, EMBEDDINGS_ROOT_DIR={EMBEDDINGS_ROOT_DIR}, doc_path={doc_path}, doc_dir={doc_dir}")
     docs_url = lambda x: metadata[key]["url"]  # noqa: E731
     return file_metadata_func(file_path, docs_url)
 
@@ -129,13 +129,19 @@ if __name__ == "__main__":
         Path(args.folder).joinpath(args.aap_version).joinpath("metadata.json"),
         encoding="utf8",
     ) as f:
-        metadata_main = json.load(f)
+        metadata = json.load(f)
     with open(
         Path(args.folder).joinpath("lightspeed-latest").joinpath("metadata.json"),
         encoding="utf8",
     ) as f:
         metadata_lightspeed = json.load(f)
-        metadata = metadata_main | metadata_lightspeed
+        metadata = metadata | metadata_lightspeed
+    with open(
+        Path(args.folder).joinpath("aap-clouds-latest").joinpath("metadata.json"),
+        encoding="utf8",
+    ) as f:
+        metadata_aap_clouds = json.load(f)
+        metadata = metadata | metadata_aap_clouds
 
     # OLS-823: sanitize directory
     PERSIST_FOLDER = os.path.normpath("/" + args.output).lstrip("/")

@@ -11,7 +11,7 @@ If Create New subscription allocation does not display, or is disabled, you do n
 To create a subscription allocation, you must either be an Administrator on the Red Hat Customer Portal, or have the Manage Your Subscriptions role.
 Contact an access.redhat.com administrator, or organization administrator who can grant you permission to manage subscriptions.
 ----
-3. Enter a Name for your subscription and select 6.15 from the Type drop-down menu.
+3. Enter a Name for your subscription and select 6.16 from the Type drop-down menu.
 4. Click btn:[Create].
 
 When your subscriptions manifest is successfully created, the number indicated next to Entitlements indicates the number of entitlements associated with your subscription.

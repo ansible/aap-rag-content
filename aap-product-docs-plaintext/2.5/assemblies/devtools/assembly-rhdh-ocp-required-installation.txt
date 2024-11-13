@@ -8,13 +8,7 @@ Under the plugins section in the YAML file, add the dynamic plug-ins that you wa
 
 ```
 global:
-  auth:
-    backend:
-      enabled: true
-  clusterRouterBase: <your-developer-hub-base-url>
-  dynamic:
-    includes:
-      - dynamic-plugins.default.yaml
+  ...
     plugins:
       - disabled: false
         integrity: <SHA512 Integrity key for ansible-plugin-backstage-rhaap plugin>
@@ -56,10 +50,26 @@ global:
 
 The developer hub pods restart and the plug-ins are installed.
 
-Verify that the plug-ins have been installed:
+To verify that the plug-ins have been installed, open the install-dynamic-plugin container logs and check that the Ansible plug-ins are visible in Red Hat Developer Hub:
 
 1. Open the Developer perspective for the Red Hat Developer Hub application in the OpenShift Web console.
-2. Check the install-dynamic-plugin container logs: the Ansible plug-ins are visible in Red Hat Developer Hub.
+2. Select the Topology view.
+3. Select the Red Hat Developer Hub deployment pod to open an information pane.
+4. Select the Resources tab of the information pane.
+5. In the Pods section, click View logs to open the Pod details page.
+6. In the Pod details page, select the Logs tab.
+7. Select install-dynamic-plugins from the drop-down list of containers to view the container log.
+8. In the install-dynamic-plugin container logs, search for the Ansible plug-ins.
+
+The following example from the log indicates a successful installation for one of the plug-ins:
+
+```
+=> Successfully installed dynamic plugin http://plugin-registry-1:8080/ansible-plugin-backstage-rhaap-1.1.0.tgz
+```
+
+
+The following image shows the container log in the Pod details page.
+The version numbers and file names can differ.
 ![container logs for install-dynamic-plugin]
 
 # Adding the Ansible Development Tools sidecar container

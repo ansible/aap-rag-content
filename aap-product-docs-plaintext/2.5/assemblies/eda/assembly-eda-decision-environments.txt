@@ -1,15 +1,25 @@
 # Decision environments
 
-Decision environments are a container image to run Ansible Rulebook rulebooks.
+Decision environments are container images that run Ansible rulebooks.
 They create a common language for communicating automation dependencies, and give a standard way to build and distribute the automation environment.
 You can find the default decision environment in the Ansible-Rulebook.
-To create your own decision environment see Building a custom decision environment for Event-Driven Ansible within Ansible Automation Platform.
+To create your own decision environment, see Installing ansible-builder and Building a custom decision environment for Event-Driven Ansible within Ansible Automation Platform.
+
+# Installing ansible-builder
+
+To build images, you must have Podman or Docker installed, along with the ansible-builder Python package.
+
+The --container-runtime option must correspond to the Podman or Docker executable you intend to use.
+
+When building a decision environment image, it must support the architecture that Ansible Automation Platform is deployed with.
+
+For more information, see Quickstart for Ansible Builder or Creating and using execution environments.
 
 # Building a custom decision environment for Event-Driven Ansible
 
 Decision Environments are execution environments tailored towards running Ansible Rulebooks.
 
-Similar to execution environments that run Ansible rulebooks for automation controller, decision environments are designed to run rulebooks for Event-Driven Ansible controller.
+Similar to execution environments that run Ansible playbooks for automation controller, decision environments are designed to run rulebooks for Event-Driven Ansible controller.
 
 You can create a custom decision environment for Event-Driven Ansible that provides a custom maintained or third-party event source plugin that is not available in the default decision environment.
 
@@ -17,12 +27,14 @@ You can create a custom decision environment for Event-Driven Ansible that provi
 * Event-Driven Ansible
 * Ansible Builder > = 3.0
 
-* Add the de-supported decision environment.
-This image is built from a base image provided by Red Hat called de-minimal at Ansible Automation Platform supported decision environment.
+* Use de-minimal as the base image with Ansible Builder to build your custom decision environments.
+This image is built from a base image provided by Red Hat at Ansible Automation Platform supported decision environment.
 
-[NOTE]
+[IMPORTANT]
 ----
-Red Hat recommends using de-minimal as the base image with Ansible Builder to build your custom decision environments.
+* Use the correct Event-Driven Ansible controller decision environment in Ansible Automation Platform to prevent rulebook activation failure.
+* If you want to connect Event-Driven Ansible controller to Ansible Automation Platform 2.4, you must use registry.redhat.io/ansible-automation-platform-24/de-supported-rhel8:latest
+* If you want to connect Event-Driven Ansible controller to Ansible Automation Platform 2.5, you must use registry.redhat.io/ansible-automation-platform-25/de-supported-rhel8:latest
 ----
 
 The following is an example of the Ansible Builder definition file that uses de-minimal as a base image to build a custom decision environment with the ansible.eda collection:
@@ -33,7 +45,7 @@ version: 3
 
 images:
   base_image:
-    name: 'registry.redhat.io/ansible-automation-platform-24/de-minimal-rhel8:latest'
+    name: 'registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel8:latest'
 
 dependencies:
   galaxy:
@@ -55,7 +67,7 @@ version: 3
 
 images:
   base_image:
-    name: 'registry.redhat.io/ansible-automation-platform-24/de-minimal-rhel8:latest'
+    name: 'registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel8:latest'
 
 dependencies:
   galaxy:
@@ -76,11 +88,11 @@ options:
 
 # Setting up a new decision environment
 
-The following steps describe how to import a decision environment into your Event-Driven Ansible controller Dashboard.
+You can import a decision environment into your Event-Driven Ansible controller using a default or custom decision environment.
 
 * You have set up a credential, if necessary.
 For more information, see the Setting up credentials section.
-* You have pushed a decision environment image to an image repository or you chose to use the image de-supported provided at registry.redhat.io.
+* You have pushed a decision environment image to an image repository or you chose to use the de-minimal image that is provided by de-supported options located in registry.redhat.io.
 
 1. Log in to Ansible Automation Platform.
 2. Navigate to menu:Automation Decisions[Decision Environments].
@@ -90,7 +102,7 @@ Name:: Insert the name.
 Description:: This field is optional.
 Organization:: Select an organization to associate with the decision environment.
 Image:: This is the full image location, including the container registry, image name, and version tag.
-Credential:: This field is optional. This is the token needed to use the decision environment image.
+Credential:: This field is optional. This is the credential needed to use the decision environment image.
 5. Select btn:[Create decision environment].
 
 Your decision environment is now created and can be managed on the Decision Environments page.

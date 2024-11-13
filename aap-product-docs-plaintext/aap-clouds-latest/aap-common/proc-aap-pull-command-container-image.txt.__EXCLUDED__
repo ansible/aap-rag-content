@@ -1,0 +1,24 @@
+# Pulling the ansible-on-clouds-ops container image
+
+Pull the Docker image for the Ansible on Clouds operational container with the same tag version as your deployment. If you are unsure of the version you have deployed, see Command Generator and playbook gcp_get_aoc_version for more information on finding the currention of Ansible on Clouds deployment.
+
+
+[NOTE]
+----
+Before Pulling the docker image, ensure you are logged in to registry.redhat.io using docker. Use the following command to login to registry.redhat.io.
+$ docker login registry.redhat.io
+For more information about registry login, see Registry Authentication
+----
+
+For example, if your foundation deployment version is 2.4.20240215-00, you must pull the operational image with tag 2.4.20240215.
+
+Use the following commands:
+
+$ export IMAGE=registry.redhat.io/ansible-on-clouds/ansible-on-clouds-ops-rhel9:2.4.20240215
+$ docker pull $IMAGE --platform=linux/amd64
+
+
+[NOTE]
+----
+If your foundation deployment version is not 2.4.20240215-00, refer to the tables on the Released versions page for a matching deployment version, in the column Ansible on Clouds version, and find the corresponding operational image to use, in the column Ansible-on-clouds-ops container image, for the IMAGE environment variable.
+----

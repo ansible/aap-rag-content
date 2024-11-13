@@ -168,23 +168,20 @@ Operator based deployments do not support Control or Hybrid nodes.
 Options:
 * Enable instance: Check this box to make it available for jobs to run on an execution node.
 * Check the Managed by policy box to enable policy to dictate how the instance is assigned.
-* Check the Peers from control nodes box to enable control nodes to peer to this instance automatically.
-For nodes connected to automation controller, check the Peers from Control nodes box to create a direct communication link between that node and automation controller.
-For all other nodes:
-* If you are not adding a hop node, make sure Peers from Control is checked.
-* If you are adding a hop node, make sure Peers from Control is not checked.
-* For execution nodes that communicate with hop nodes, do not check this box.
-* To peer an execution node with a hop node, select the execution node, then select Peers tab.
-
-The Select Peers window is displayed.
-* Select the execution node to peer to the hop node.
-* Click btn:[Associate peers].
+* Peers from control nodes:
+* If you are configuring a hop node:
+* If the hop node needs to have requests pushed directly from automation controller, then check the Peers from Control box.
+* If the hop node is peered to another hop node, then make sure Peers from Control is not checked.
+* If you are configuring an execution node:
+* If the execution node needs to have requests pushed directly from automation controller, then check the Peers from Control box.
+* If the execution node is peered to a hop node, then make sure that Peers from Control is not checked.
+3. Click btn:[Associate peers].
 
 [NOTE]
 ----
 Execute the following steps from any computer that has SSH access to the newly created instance.
 ----
-3. Click the  icon next to Download Bundle to download the tar file that includes this new instance and the files necessary to install the created node into the automation mesh.
+4. Click the  icon next to Download Bundle to download the tar file that includes this new instance and the files necessary to install the created node into the automation mesh.
 
 The install bundle contains TLS certificates and keys, a certificate authority, and a proper Receptor configuration file.
 
@@ -198,9 +195,9 @@ group_vars/all.yml
 requirements.yml
 ```
 
-4. Extract the downloaded tar.gz Install Bundle from the location where you downloaded it.
+5. Extract the downloaded tar.gz Install Bundle from the location where you downloaded it.
 To ensure that these files are in the correct location on the remote machine, the install bundle includes the install_receptor.yml playbook.
-5. Before running the ansible-playbook command, edit the following fields in the inventory.yml file:
+6. Before running the ansible-playbook command, edit the following fields in the inventory.yml file:
 
 ```
 all:
@@ -217,7 +214,7 @@ all:
 * The content of the inventory.yml file serves as a template and contains variables for roles that are applied during the installation and configuration of a receptor node in a mesh topology.
 You can modify some of the other fields, or replace the file in its entirety for advanced scenarios.
 For more information, see Role Variables.
-6. For a node that uses a private DNS, add the following line to inventory.yml:
+7. For a node that uses a private DNS, add the following line to inventory.yml:
 
 ```
  ansible_ssh_common_args: <your ssh ProxyCommand setting>
@@ -225,10 +222,10 @@ For more information, see Role Variables.
 
 
 This instructs the install-receptor.yml playbook to use the proxy command to connect through the local DNS node to the private node.
-7. When the attributes are configured, click btn:[Save].
+8. When the attributes are configured, click btn:[Save].
 The Details page of the created instance opens.
-8. Save the file to continue.
-9. The system that is going to run the install bundle to setup the remote node and run ansible-playbook requires the ansible.receptor collection to be installed:
+9. Save the file to continue.
+10. The system that is going to run the install bundle to setup the remote node and run ansible-playbook requires the ansible.receptor collection to be installed:
 
 ```
 ansible-galaxy collection install ansible.receptor
@@ -244,14 +241,30 @@ ansible-galaxy install -r requirements.yml
 * Installing the receptor collection dependency from the requirements.yml file consistently retrieves the receptor version specified there.
 Additionally, it retrieves any other collection dependencies that might be needed in the future.
 * Install the receptor collection on all nodes where your playbook will run, otherwise an error occurs.
-10. If receptor_listener_port is defined, the machine also requires an available open port on which to establish inbound TCP connections, for example, 27199.
+11. If receptor_listener_port is defined, the machine also requires an available open port on which to establish inbound TCP connections, for example, 27199.
 Run the following command to open port 27199 for receptor communication (Make sure you have port 27199 open in your firewall):
 
 ```
 sudo firewall-cmd --permanent --zone=public --add-port=27199/tcp
 ```
 
-11. Run the following playbook on the machine where you want to update your automation mesh:
+
+[NOTE]
+----
+It might be the case that some servers do not listen on receptor port (the default is 27199)
+Suppose you have a  Control plane with nodes A, B, C, D
+The RPM installer creates a strongly connected peering between the control plane nodes with a least privileged approach and opens the tcp listener only on those nodes where it is required. All the receptor connections are bidirectional, so once the connection is created, the receptor can communicate in both directions.
+The following is an example peering set up for three controller nodes:
+Controller node A --> Controller node B
+Controller node A --> Controller node C
+Controller node B --> Controller node C
+You can force the listener by setting
+receptor_listener=True
+However, a connection Controller B --> A is likely to be rejected as that connection already exists.
+This means that nothing connects to Controller A as Controller A is creating the connections to the other nodes, and the following command does not return anything on Controller A:
+[root@controller1 ~]# ss -ntlp | grep 27199 [root@controller1 ~]#
+----
+12. Run the following playbook on the machine where you want to update your automation mesh:
 
 ```
 ansible-playbook -i inventory.yml install_receptor.yml

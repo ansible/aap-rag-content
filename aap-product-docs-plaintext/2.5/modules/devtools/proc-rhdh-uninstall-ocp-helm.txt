@@ -1,4 +1,4 @@
-# Uninstalling
+# Uninstalling a Helm chart installation
 
 1. In Red Hat Developer Hub, remove any software templates that use the ansible:content:create action.
 2. In the OpenShift Developer UI, navigate to menu:Helm[developer-hub > Actions > Upgrade > Yaml view].

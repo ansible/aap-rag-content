@@ -1,0 +1,4 @@
+# Encryption
+
+Data is encrypted at rest in both the database and file system using Red&#160;Hat managed encryption keys.
+Data in transit is encrypted with TLS 1.2 or higher.

@@ -1,0 +1,6 @@
+# Deployment-self-service
+
+You can self-service deployments including, but not limited to, the following operations:
+
+* Buy and deploy an Ansible Automation Platform on AWS environment.
+* Cancel an Ansible Automation Platform on AWS environment subscription.

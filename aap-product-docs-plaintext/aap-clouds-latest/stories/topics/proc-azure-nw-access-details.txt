@@ -1,0 +1,10 @@
+# Access details
+
+Regardless of whether Ansible Automation Platform was deployed with public or private access,
+a set of DNS records is created.
+The DNS records are created so that Ansible Automation Platform can be issued a valid TLS certificate for your deployment and to enable easy access to your applications.
+
+To view a list of the URLs for the Ansible Automation Platform applications, navigate to the Parameters and Outputs page of the Azure Marketplace managed application listing for your deployment.
+
+For more details about the Parameters and Outputs page, see
+Accessing Red Hat Ansible Automation Platform on Microsoft Azure.

@@ -1,0 +1,131 @@
+# Upgrading the Ansible plug-ins on an Operator installation on OpenShift Container Platform
+
+To upgrade the Ansible plug-ins, you must update the plugin-registry application with the latest Ansible plug-ins files.
+
+# Downloading the Ansible plug-ins files
+
+1. Download the latest .tar file for the plug-ins from the Red Hat Ansible Automation Platform Product Software downloads page.
+The format of the filename is ansible-backstage-rhaap-bundle-x.y.z.tar.gz.
+Substitute the Ansible plug-ins release version, for example 1.0.0, for x.y.z.
+2. Create a directory on your local machine to store the .tar files.
+
+```
+$ mkdir /path/to/<ansible-backstage-plugins-local-dir-changeme>
+```
+
+3. Set an environment variable ($DYNAMIC_PLUGIN_ROOT_DIR) to represent the directory path.
+
+```
+$ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/<ansible-backstage-plugins-local-dir-changeme>
+```
+
+4. Extract the ansible-backstage-rhaap-bundle-<version-number>.tar.gz contents to $DYNAMIC_PLUGIN_ROOT_DIR.
+
+```
+$ tar --exclude='*code*' -xzf ansible-backstage-rhaap-bundle-x.y.z.tar.gz -C $DYNAMIC_PLUGIN_ROOT_DIR
+```
+
+
+Substitute the Ansible plug-ins release version, for example 1.0.0, for x.y.z.
+
+Run ls to verify that the extracted files are in the $DYNAMIC_PLUGIN_ROOT_DIR directory:
+
+
+```
+$ ls $DYNAMIC_PLUGIN_ROOT_DIR
+ansible-plugin-backstage-rhaap-x.y.z.tgz
+ansible-plugin-backstage-rhaap-x.y.z.tgz.integrity
+ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+ansible-plugin-backstage-rhaap-backend-x.y.z.tgz.integrity
+ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz.integrity
+```
+
+
+The files with the .integrity file type contain the plugin SHA value.
+The SHA value is used during the plug-in configuration.
+
+# Updating the plug-in registry
+
+Rebuild your plug-in registry application in your OpenShift cluster with the latest Ansible plug-ins files.
+
+* You have downloaded the Ansible plug-ins files.
+* You have set an environment variable, for example ($DYNAMIC_PLUGIN_ROOT_DIR),
+to represent the path to the local directory where you have stored the .tar files.
+
+1. Log in to your OpenShift Container Platform instance with credentials to create a new application.
+2. Open your Red Hat Developer Hub OpenShift project.
+
+```
+$ oc project <YOUR_DEVELOPER_HUB_PROJECT>
+```
+
+3. Run the following commands to update your plug-in registry build in the OpenShift cluster.
+The commands assume that $DYNAMIC_PLUGIN_ROOT_DIR represents the directory for your .tar files.
+Replace this in the command if you have chosen a different environment variable name.
+
+```
+$ oc start-build plugin-registry --from-dir=$DYNAMIC_PLUGIN_ROOT_DIR --wait
+```
+
+
+```
+$ oc start-build plugin-registry --from-dir=$DYNAMIC_PLUGIN_ROOT_DIR --wait
+```
+
+4. When the registry has started, the output displays the following message:
+
+```
+Uploading directory "/path/to/dynamic_plugin_root" as binary input for the build …
+Uploading finished
+build.build.openshift.io/plugin-registry-1 started
+```
+
+
+Verify that the plugin-registry has been updated.
+
+1. In the OpenShift UI, click Topology.
+2. Click the redhat-developer-hub icon to view the pods for the plug-in registry.
+3. Click View logs for the plug-in registry pod.
+4. Open the Terminal tab and run ls to view the .tar files in the plug-in registry.
+5. Verify that the new .tar file has been uploaded.
+
+# Updating the Ansible plug-ins version numbers for an Operator installation
+
+1. Log in to your OpenShift Container Platform instance.
+2. In the OpenShift UI, open the ConfigMap where you added the Ansible plug-ins during installation.
+This example uses a ConfigMap file called rhaap-dynamic-plugins-config.
+3. Update x.y.z with the version numbers for the updated Ansible plug-ins.
+4. Update the integrity values for each plug-in with the .integrity value from the corresponding extracted Ansible plug-ins .tar file.
+
+```
+kind: ConfigMap
+apiVersion: v1
+metadata:
+ name: rhaap-dynamic-plugins-config
+data:
+ dynamic-plugins.yaml: |
+   ...
+   plugins: # Update the Ansible plug-in entries below with the updated plugin versions
+     - disabled: false
+       package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-x.y.z.tgz'
+       integrity: <SHA512 value> # Use hash in ansible-plugin-backstage-rhaap-x.y.z.tgz.integrity
+	 ...
+     - disabled: false
+       package: >-
+         http://plugin-registry:8080/ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+       integrity: <SHA512 value> # Use hash in ansible-plugin-backstage-rhaap-backend-x.y.z.tgz.integrity
+       ...
+     - disabled: false
+       package: >-
+         http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+       integrity: <SHA512 value> # Use hash in ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz.integrity
+	 ...
+```
+
+5. Click btn:[Save].
+
+The developer hub pods restart and the plug-ins are installed.
+
+1. In the OpenShift UI, click Topology.
+2. Make sure that the Red Hat Developer Hub instance is available.

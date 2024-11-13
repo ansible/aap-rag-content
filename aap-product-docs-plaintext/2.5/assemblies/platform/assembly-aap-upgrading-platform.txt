@@ -180,7 +180,8 @@ $ ./setup.sh
 
 The installation will begin.
 
-If you are upgrading from Ansible Automation Platform 2.4 to 2.5, proceed to Linking your account to link your existing service level accounts to a single unified platform account.
+If you are upgrading from Ansible Automation Platform 2.4 to 2.5, proceed to
+Linking your account to link your existing service level accounts to a single unified platform account.
 
 # Automation controller and automation hub 2.4 and Event-Driven Ansible 2.5 with unified UI upgrades
 

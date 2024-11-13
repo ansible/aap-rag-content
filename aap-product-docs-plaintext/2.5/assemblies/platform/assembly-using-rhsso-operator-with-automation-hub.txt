@@ -277,22 +277,6 @@ In this example the credential is called credential-ansible-automation-platform-
 When a user is created the Operator does not update the user&#8217;s password.
 Password changes are not reflected in the Secret.
 
-## Installing the Ansible Automation Platform Operator
-
-1. Log in to Red Hat OpenShift Container Platform.
-2. Navigate to menu:Operator[Operator Hub].
-3. Search for the Ansible Automation Platform Operator.
-4. Select the Ansible Automation Platform Operator project.
-5. Click on the Operator tile.
-6. Click btn:[Install].
-7. Select a Project to install the Operator into.
-Red Hat recommends using the Operator recommended Namespace name.
-1. If you want to install the Operator into a project other than the recommended one, select Create Project from the drop down menu.
-2. Enter the Project name.
-3. Click btn:[Create].
-8. Click btn:[Install].
-9. When the Operator has been installed, click btn:[View Operator].
-
 ## Creating a Red Hat Single Sign-On connection secret
 
 Use this procedure to create a connection secret for Red Hat Single Sign-On.
@@ -324,7 +308,7 @@ stringData:
 
 This name is used in the next step when creating the automation hub instance.
 If the secret was changed when creating the Keycloak client for automation hub be sure to change this value to match.
-Enter the value of the public_key copied in Installing the Ansible Automation Platform Operator.
+Enter the value of the public_key for your Ansible Automation Platform Operator deployment.
 7. Click btn:[Create] and wait for the process to complete.
 
 ## Installing automation hub using the Ansible Automation Platform Operator

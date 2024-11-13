@@ -18,7 +18,8 @@ def main():
     parser.add_argument("--git-branch", "-b")
 
     args = parser.parse_args()
-    project_document_path = "lightspeed" if args.git_branch == "lightspeed-latest" else "downstream"
+    project_document_path = "lightspeed" if args.git_branch == "lightspeed-latest" \
+        else "aap-clouds" if args.git_branch == "aap-clouds-latest" else "downstream"
 
     with open(Path(args.input_dir).joinpath("metadata.json"), encoding="utf8") as f:
         metadata = json.load(f)

@@ -1,0 +1,7 @@
+# Virtual appliance routing
+
+The managed application requires access to systems external to your subscription.
+You must take into account expected outbound traffic that the offering requires in order to be managed by Red Hat and Microsoft.
+
+For information on domains that you must allow as a destination, see
+Azure Virtual Appliance Routing with Ansible Automation Platform on Azure.

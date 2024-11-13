@@ -1,4 +1,4 @@
-# Updating the Ansible plug-ins version numbers
+# Updating the Ansible plug-ins version numbers for a Helm installation
 
 1. Log in to your OpenShift Container Platform instance.
 2. In the OpenShift Developer UI, navigate to menu:Helm[developer-hub > Actions > Upgrade > Yaml view].

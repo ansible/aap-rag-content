@@ -1,0 +1,14 @@
+# About Red Hat Ansible Automation Platform on Microsoft Azure
+
+Red Hat Ansible Automation Platform on Microsoft Azure is a managed application that you can deploy from the Azure Marketplace portal to a resource group in your Azure tenant.
+Ansible Automation Platform on Microsoft Azure provides access to a library of Ansible content collections, and it is integrated with key Azure services, so you can start deploying, configuring, and managing infrastructure and applications quickly.
+
+The following Red Hat Automation Platform components are available on Red Hat Ansible Automation Platform on Microsoft Azure:
+
+* Automation Controller
+* Automation Hub
+* Private Automation Hub
+* Ansible Content Collections, including the Microsoft collection for Azure
+* Automation Execution Environment
+* Ansible content tools, including access to Red Hat Insights for Red Hat Ansible Automation Platform
+* Automation mesh for managed cloud or operator environments

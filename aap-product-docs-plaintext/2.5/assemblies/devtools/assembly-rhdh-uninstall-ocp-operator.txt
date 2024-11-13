@@ -1,0 +1,123 @@
+# Uninstalling an Operator installation on OpenShift Container Platform
+
+To delete the dynamic plug-ins from your installation, you must edit the ConfigMaps
+that reference Ansible.
+The deployment auto reloads when the ConfigMaps are updated.
+You do not need to reload the deployment manually.
+
+# Removing the Ansible plug-ins from the ConfigMap
+
+1. Open the custom ConfigMap where you referenced the Ansible plug-ins.
+For this example, the ConfigMap name is rhaap-dynamic-plugins-config.
+2. Locate the dynamic plug-ins in the plugins: block.
+* To disable the plug-ins, update the disabled attribute to true for the three plug-ins.
+* To delete the plug-ins, delete the lines that reference the plug-ins from the plugins: block:
+
+```
+kind: ConfigMap
+apiVersion: v1
+metadata:
+ name: rhaap-dynamic-plugins-config
+data:
+ dynamic-plugins.yaml: |
+   ...
+   plugins: # Remove the Ansible plug-ins entries below the ‘plugins’ YAML key
+     - disabled: false
+       package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-x.y.z.tgz'
+       integrity: <SHA512 value>
+	 ...
+     - disabled: false
+       package: >-
+         http://plugin-registry:8080/ansible-plugin-backstage-rhaap-backend-x.y.z.tgz
+       integrity: <SHA512 value>
+       ...
+     - disabled: false
+       package: >-
+         http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-x.y.z.tgz
+       integrity: <SHA512 value>
+	 ...
+```
+
+3. Click btn:[Save].
+
+# Removing Ansible Automation Platform and Dev Spaces from the custom Red Hat Developer Hub ConfigMap
+
+1. Open the custom Red Hat Developer Hub ConfigMap where you added configuration for the templates and for connecting to Ansible Automation Platform and Dev Spaces.
+In this example, the Red Hat Developer Hub ConfigMap name is app-config-rhdh.
+
+```
+kind: ConfigMap
+apiVersion: v1
+metadata:
+ name: rhdh-app-config
+data:
+ app-config-custom.yaml: |
+   ...
+   catalog:
+     ...
+     locations: # Remove the YAML entry below the 'locations' YAML key
+       - type: url
+         target: https://github.com/ansible/ansible-rhdh-templates/blob/main/all.yaml
+         rules:
+           - allow: [Template]
+     ...
+   # Remove the entire 'ansible' YAML key and all sub-entries
+   ansible:
+     devSpaces:
+       baseUrl: '<https://YOUR_DEV_SPACES_URL>'
+     creatorService:
+       baseUrl: '127.0.0.1'
+       port: '8000'
+     rhaap:
+       baseUrl: '<https://YOUR_AAP_URL>'
+       token: <REDACTED>
+       checkSSL: false
+```
+
+2. Remove the url in the locations: block to delete the templates from the RHDH instance.
+3. Remove the ansible: block to delete the Ansible-specific configuration.
+4. Click btn:[Save].
+
+# Uninstalling the sidecar container
+
+## Removing the Sidecar container from the RHDH Custom Resource ConfigMap
+
+If you added extra configuration to the ConfigMap where you added the sidecar container (rhdh-custom-config in our example), then you cannot remove the reference to the ConfigMap from the RHDH Custom Resource.
+
+Instead, you must remove only the YAML code relating to the sidecar from the ConfigMap.
+
+
+```
+Add YAML code
+```
+
+
+## Removing the custom resource ConfigMap from the RHDH Operator Custom Resource
+
+If you created a custom resource ConfigMap
+as described in the Creating a custom Operator ConfigMap
+and you added only the Ansible development tools sidecar container to it, then you can remove the reference to the ConfigMap from the RHDH Custom Resource.
+
+
+[NOTE]
+----
+Ensure that you do not have any additional need for the custom ConfigMap before you remove it from the Custom Resource.
+----
+
+1. In the OpenShift console, select the Topology view.
+2. Click More actions &#8942; on the RHDH Operator Custom Resource and select Edit backstage to edit the Custom Resource.
+3. Remove the ConfigMap reference from the RHDH Operator Custom Resource.
+For this example, the ConfigMap name is rhdh-custom-config.
+
+```
+...
+spec:
+ application:
+	...
+ database:
+  	...
+ rawRuntimeConfig: # Remove the backstageConfig’ YAML key below
+   backstageConfig: rhdh-custom-config
+```
+
+4. Click btn:[Save].
