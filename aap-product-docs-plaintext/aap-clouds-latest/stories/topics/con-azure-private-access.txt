@@ -4,13 +4,13 @@ A private deployment of Ansible Automation Platform resides in an isolated Azure
 
 To access the URLs for the Ansible Automation Platform user interfaces, you must configure network peering.
 
-Once peering and routing are configured, users can access Ansible Automation Platform through a VM on a connected Azure subnet, or directly if your organization has transit routing set up between Azure and your local network.
+Once peering and routing are configured, you can access Ansible Automation Platform through a VM on a connected Azure subnet, or directly if your organization has transit routing set up between Azure and your local network.
 
 
 [NOTE]
 ----
 No two Azure networking configurations are the same.
-To allow user access to your Ansible Automation Platform URLs, your organization will need to work with your Azure administrators to connect the private access deployment.
+To allow user access to your Ansible Automation Platform URLs, your organization needs to work with your Azure administrators to connect the private access deployment.
 ----
 
 The following diagram outlines the application resources and architecture that are deployed into the managed application resource group on a private deployment of Ansible Automation Platform on Microsoft Azure into your Azure subscription.

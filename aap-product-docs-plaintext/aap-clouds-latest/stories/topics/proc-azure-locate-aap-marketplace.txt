@@ -1,8 +1,10 @@
 # Locating Ansible Automation Platform in Azure Marketplace
 
+Before you can start provisioning your Ansible Automation Platform on Microsoft Azure, you must find the offering on the Azure marketplace, enable your subscription, and initiate a deployment.
+
 1. In a browser, navigate to the Azure Marketplace.
 2. Click Private Products from the menu on the left of the screen.
-3. Search for Red Hat Ansible Automation Platform.
+3. Search for "Red Hat Ansible Automation Platform".
 4. Click the card that is returned in the search. Be sure to select the official offering from Red Hat.
 5. Click  btn:[Get it Now].
 6. Click btn:[Continue].

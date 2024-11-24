@@ -26,4 +26,4 @@ Red Hat Ansible Automation Platform on Microsoft Azure installation requires spe
 
 # Registering Azure Resource Providers
 
-To  register Azure Resource Providers, follow the instructions in the How to manage resources section of the Azure documentation.
+To  register Azure Resource Providers, follow the instructions in the Register resource provider section of the Azure documentation.

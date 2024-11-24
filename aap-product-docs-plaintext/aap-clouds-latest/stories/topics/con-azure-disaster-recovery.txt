@@ -4,7 +4,7 @@ When you deploy Ansible Automation Platform on Microsoft Azure, you must enable 
 There is no default setting for disaster recovery.
 
 The disaster recovery feature incurs additional Azure infrastructure costs.
-See Azure infrastructure usage for details of the Service Shape of the Storage account.
+See Ansible Automation Platform on Microsoft Azure infrastructure usage for details of the Service Shape of the Storage account.
 
 If you want to enable disaster recovery on an existing instance of Ansible Automation Platform on Microsoft Azure, contact Red Hat customer support.
 

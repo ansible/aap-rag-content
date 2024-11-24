@@ -250,14 +250,13 @@ Ansible Automation Platform supports the following commands for OAuth2 token man
 * create_oauth2_token
 * revoke_oauth2_tokens
 * cleartokens
-* expire_sessions
 * clearsessions
 
 ### create_oauth2_token
 
 Use the following command to create OAuth2 tokens (specify the username for example_user):
 
-$ awx-manage create_oauth2_token --user example_user
+$ aap-gateway-manage create_oauth2_token --user example_user
 
 New OAuth2 token for example_user: j89ia8OO79te6IAZ97L7E8bMgXCON2
 
@@ -273,40 +272,25 @@ revoke all tokens.
 
 To revoke all existing OAuth2 tokens use the following command:
 
-$ awx-manage revoke_oauth2_tokens
+$ aap-gateway-manage revoke_oauth2_tokens
 
 To revoke all OAuth2 tokens and their refresh tokens use the following command:
 
-$ awx-manage revoke_oauth2_tokens --revoke_refresh
+$ aap-gateway-manage revoke_oauth2_tokens --revoke_refresh
 
 To revoke all OAuth2 tokens for the user with id=example_user (specify the username for example_user):
 
-$ awx-manage revoke_oauth2_tokens --user example_user
+$ aap-gateway-manage revoke_oauth2_tokens --user example_user
 
 To revoke all OAuth2 tokens and refresh token for the user with id=example_user:
 
-$ awx-manage revoke_oauth2_tokens --user example_user --revoke_refresh
+$ aap-gateway-manage revoke_oauth2_tokens --user example_user --revoke_refresh
 
 ### cleartokens
 
 Use this command to clear tokens which have already been revoked.
 
 For more information, see cleartokens in Django&#8217;s Oauth Toolkit documentation.
-
-### expire_sessions
-
-Use this command to terminate all sessions or all sessions for a specific user.
-
-Consider using this command when a user changes role in an organization, is removed from assorted groups in LDAP/AD, or the
-administrator wants to ensure the user can no longer execute jobs due to membership in these groups.
-
-$ awx-manage expire_sessions
-
-This command terminates all sessions by default.
-The users associated with those sessions are logged out.
-To only expire the sessions of a specific user, you can pass their username using the --user flag (replace example_user with the username in the following example):
-
-$ awx-manage expire_sessions --user example_user
 
 ### clearsessions
 

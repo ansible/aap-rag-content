@@ -1,0 +1,28 @@
+# Ansible Automation Platform authentication
+
+Automation controller currently supports the following external authentication mechanisms through the platform gateway UI:
+
+* Local
+* LDAP
+* SAML
+* TACACS+
+* Radius
+* Azure Active Directory
+* Google OAuth
+* Generic OIDC
+* Keycloak
+* GitHub single sign-on
+* GitHub
+* GitHub Organization
+* GitHub team
+* GitHub enterprise
+* GitHub enterprise organization
+* GitHub enterprise team
+
+Choose an authentication mechanism that adheres to your organization&#8217;s authentication policies.
+The authentication mechanism used must ensure that the authentication-related traffic between Ansible Automation Platform and the authentication back-end is encrypted when the traffic occurs on a public or non-secure network (for example, LDAPS or LDAP over TLS, HTTPS for OAuth2 and SAML providers, etc.).
+
+For more information on authentication methods, see Configuring an authetication type.
+
+In the platform gateway, any “system administrator” account can edit, change, and update any inventory or automation definition.
+Restrict these account privileges to the minimum set of users possible for low-level Ansible Automation Platform configuration and disaster recovery.

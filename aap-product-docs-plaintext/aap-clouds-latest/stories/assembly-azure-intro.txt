@@ -5,33 +5,23 @@
 Red Hat Ansible Automation Platform on Microsoft Azure is a managed application that you can deploy from the Azure Marketplace portal to a resource group in your Azure tenant.
 Ansible Automation Platform on Microsoft Azure provides access to a library of Ansible content collections, and it is integrated with key Azure services, so you can start deploying, configuring, and managing infrastructure and applications quickly.
 
-The following Red Hat Automation Platform components are available on Red Hat Ansible Automation Platform on Microsoft Azure:
-
-* Automation Controller
-* Automation Hub
-* Private Automation Hub
-* Ansible Content Collections, including the Microsoft collection for Azure
-* Automation Execution Environment
-* Ansible content tools, including access to Red Hat Insights for Red Hat Ansible Automation Platform
-* Automation mesh for managed cloud or operator environments
-
 # Application Architecture
 
 Red Hat Ansible Automation Platform on Microsoft Azure is installed as a managed application.
 Red Hat manages both the underlying Azure resources and the software running on it while that infrastructure runs in your Azure tenant.
 
-The managed application resource group is completely separate from other resource groups in your tenant.
-Red Hat only has access to the managed application resource group, with no visibility into other tenant resources.
+The managed application resource group (RG) is completely separate from other RGs in your tenant.
+Red Hat only has access to the managed application RG, with no visibility into other tenant resources.
 
 For information about how this works and how resources and access are isolated from the rest of your Azure resources, refer to Azure managed applications overview in the Microsoft Azure managed applications guide.
 
-Ansible Automation Platform on Microsoft Azure uses the following resource groups:
+Ansible Automation Platform on Microsoft Azure uses the following RGs:
 
-* A new or existing resource group (RG) in your tenant.
-This resource group includes a single resource referring to the Ansible Automation Platform on Microsoft Azure managed application deployment.
-Red Hat has access to the managed app to perform support, maintenance, and upgrades, but the resource group is outside of Red Hat's management.
+* A new or existing RG in your tenant.
+This RG includes a single resource referring to the Ansible Automation Platform on Microsoft Azure managed application deployment.
+Red Hat has access to the managed app to perform support, maintenance, and upgrades, but the RG is outside of Red Hat's management.
 * A multi-tenant managed resource group (MRG) that contains most of the infrastructure needed to operate Ansible Automation Platform on Microsoft Azure.
-This multi-tenant resource group is shared between the Red Hat tenant and your tenant. Red Hat has full administrative control and you have read-only access to the resource group.
+This multi-tenant MRG is shared between the Red Hat tenant and your tenant. Red Hat has full administrative control and you have read-only access to the RG.
 * An AKS node pool resource group (NPRG).
 Microsoft requires the NPRG for AKS deployments. It contains resources that AKS uses to function.
 It is created on deployment, and it is outside of Red Hat's management.
@@ -40,7 +30,7 @@ Refer to Microsoft's AKS documentation for more information about NPRGs.
 
 [NOTE]
 ----
-Do not interact with any resources in the node pool resource group (NPRG) unless explicitly directed to by the Red Hat Ansible Automation Platform on Microsoft Azure SRE team.
+Do not interact with any resources in the NPRG unless explicitly directed to by the Red Hat Ansible Automation Platform on Microsoft Azure SRE team.
 Changes to resources in the NPRG cannot be protected by Red Hat and can cause irrecoverable damage to the application.
 Red Hat cannot restrict your ability to change or delete resources in the NPRG.
 ----
@@ -56,7 +46,7 @@ You can configure network peering from Ansible Automation Platform on Microsoft 
 Public deployments permit ingress to the Ansible Automation Platform on Microsoft Azure user interfaces over the public internet.
 Upon deployment, a domain name is issued to the Ansible Automation Platform on Microsoft Azure instance.
 No configuration is required to access Ansible Automation Platform.
-Users can navigate to the domain from the public internet and log in to the user interfaces.
+You can navigate to the domain from the public internet and log in to the user interfaces.
 
 The following diagram outlines the application resources and architecture that are deployed into the managed application resource group on a public deployment of Ansible Automation Platform on Microsoft Azure into your Azure subscription.
 The IP ranges change based on the networking address range you set on deployment.
@@ -69,13 +59,13 @@ A private deployment of Ansible Automation Platform resides in an isolated Azure
 
 To access the URLs for the Ansible Automation Platform user interfaces, you must configure network peering.
 
-Once peering and routing are configured, users can access Ansible Automation Platform through a VM on a connected Azure subnet, or directly if your organization has transit routing set up between Azure and your local network.
+Once peering and routing are configured, you can access Ansible Automation Platform through a VM on a connected Azure subnet, or directly if your organization has transit routing set up between Azure and your local network.
 
 
 [NOTE]
 ----
 No two Azure networking configurations are the same.
-To allow user access to your Ansible Automation Platform URLs, your organization will need to work with your Azure administrators to connect the private access deployment.
+To allow user access to your Ansible Automation Platform URLs, your organization needs to work with your Azure administrators to connect the private access deployment.
 ----
 
 The following diagram outlines the application resources and architecture that are deployed into the managed application resource group on a private deployment of Ansible Automation Platform on Microsoft Azure into your Azure subscription.
@@ -92,11 +82,11 @@ The following resources describe the security posture of the application and the
 * All Azure Storage Services enable server-side encryption by default using service-managed keys
 * All Azure hosted services are committed to providing Encryption at Rest options
 * Azure encryption overview
-* All communications between services within AKS (for example, Ansible Automation Platform, Postgres, storage accounts) use TLS v1.2 or higher.
+* All communications between services within Azure Kubernetes Service (AKS) (for example, Ansible Automation Platform, Postgres, storage accounts) use Transport Layer Security (TLS) v1.2 or higher.
 * Azure security baseline for Azure Kubernetes Service (AKS)
 * Password storage
 * The customer-supplied Ansible Automation Platform admin password is encrypted in transit.
-It is accessible to SREs from the kubernetes API and can be reset by the SREs upon customer request.
+It is accessible to site reliability engineers (SREs) from the Kubernetes API and can be reset by the SREs upon customer request.
 * Keys generated with industry standards
 * Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant
 * Key installation, rotation
@@ -118,7 +108,7 @@ When you deploy Ansible Automation Platform on Microsoft Azure, you must enable 
 There is no default setting for disaster recovery.
 
 The disaster recovery feature incurs additional Azure infrastructure costs.
-See Azure infrastructure usage for details of the Service Shape of the Storage account.
+See Ansible Automation Platform on Microsoft Azure infrastructure usage for details of the Service Shape of the Storage account.
 
 If you want to enable disaster recovery on an existing instance of Ansible Automation Platform on Microsoft Azure, contact Red Hat customer support.
 
@@ -129,7 +119,7 @@ For information about recovering your application after a service-impacting even
 
 # Ansible Automation Platform on Microsoft Azure infrastructure usage
 
-When you install Ansible Automation Platform on Microsoft Azure, the following infrastructure is deployed into your Microsoft Azure subscription:
+When you install Ansible Automation Platform on Microsoft Azure, you deploy the following infrastructure into your Microsoft Azure subscription:
 
 Managed identity:: A Microsoft Azure service that enables Ansible Automation Platform components to communicate with other Microsoft Azure services such as database, DNS, storage, and other services.
 Key vault:: A secure key vault used to store secrets that are unique to the Ansible Automation Platform deployment.
@@ -138,14 +128,14 @@ Private DNS Zone:: Manages local DNS requests for the services used by Ansible A
 Storage account:: The Microsoft Azure service is used for file and block storage such as local storage of projects and containers.
 
 Service Shape:
-* StorageV2 - Standard_LRS if disaster recovery is not enabled
-* StorageV2 - Standard_GRS if disaster recovery is enabled
+* If disaster recovery is not enabled: StorageV2 - Standard_LRS
+* If disaster recovery is enabled: StorageV2 - Standard_GRS
 Virtual network:: The Microsoft Azure service is used to manage all internal networking and dependent services such as the Azure Application Gateway.
 
 Service Shape: Application Gateway: WAF_v2
 Azure Kubernetes service (AKS):: The Kubernetes cluster used to deploy Ansible Automation Platform applications and services.
 
-Service Shape for all AAP plan sizes:
+Service Shape for all Ansible Automation Platform plan sizes:
 * Compute nodes: Standard_D4ds_v5 (4 vCPUs x 16 GiB)
 * Autoscaling minimum nodes: 3
 * Autoscaling maximum nodes: 20
@@ -159,7 +149,7 @@ Microsoft provides a Pricing calculator to estimate your costs for Microsoft Azu
 Red Hat has configured an example scenario in the pricing calculator: use the Red Hat Ansible Automation Platform on Azure Infrastructure Estimate to tune Kubernetes expected auto scaling variables based on your organization’s workloads.
 
 If Red Hat determines that a deployment’s automation might exceed the capabilities of the current tier of the deployment,
-then Red Hat SREs will work with you to upgrade the infrastructure tier based on automation needs.
+then Red Hat site reliability engineers  work with you to upgrade the infrastructure tier based on automation needs.
 
 # Lifecycle management
 

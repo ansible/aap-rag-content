@@ -1,6 +1,6 @@
 # Updating the route tables
 
-Before you update the route tables, confirm that you satisfy the prerequisites for the hub-and-spoke peering process.
+Before you update the route tables, confirm that you satisfy the Prerequisites for the hub-and-spoke peering process.
 1. Navigate to Route Tables in the Azure portal.
 2. As part of your hub-and-spoke configuration, you created one or more route tables to define the routes between the networks. Click on one of these route tables.
 3. From the route table menu bar, click Routes > Add.
@@ -36,7 +36,7 @@ If you choose not to allow all outbound traffic from  port 443, you must configu
 
 Add routes in the Ansible Automation Platform route table for outbound traffic from the full CIDR range of the Ansible Automation Platform on Microsoft Azure managed application to the domains listed in the Azure Virtual Appliance Routing with Ansible Automation Platform on Azure article on the Red Hat Customer Portal.
 * You must also allow traffic from your firewall to any other external domain or IP address that you want Ansible Automation Platform to run automation jobs against.
-Otherwise, your firewall will block connectivity between Ansible Automation Platform and destinations for automation.
+Otherwise, your firewall blocks connectivity between Ansible Automation Platform and destinations for automation.
 * Ansible Automation Platform requires a public DNS zone to provide SSL certificates.
 This public DNS zone is in the managed resource group of the deployment.
 The platform must be able to communicate via DNS queries with the servers listed in the DNS zone to complete certificate challenges with our upstream provider.

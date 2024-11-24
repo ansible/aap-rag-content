@@ -1,0 +1,7 @@
+# 11 December 2024
+
+This release Red Hat Ansible Lightspeed features the following enhancement:
+
+* Playbook generation and viewing playbook explanations are now supported on Red Hat Ansible Lightspeed on-premise deployments.
+
+Using the Ansible VS Code extension, you can create Ansible playbooks using a natural language interface in English. You can also view the explanations for new or existing playbooks. For more information, see Generating playbooks and viewing playbook explanations.

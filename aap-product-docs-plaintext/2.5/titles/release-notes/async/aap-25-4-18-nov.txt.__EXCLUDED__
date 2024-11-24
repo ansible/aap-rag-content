@@ -1,0 +1,48 @@
+# Ansible Automation Platform patch release November 18, 2024
+
+The following enhancements and bug fixes have been implemented in this release of Ansible Automation Platform.
+
+# Enhancements
+
+* With this release, a redirect page has now been implemented that will be exhibited when you navigate to the root / for each component's stand-alone URL. The API endpoint remains functional. This affects Event-Driven Ansible, automation controller, Ansible Automation Platform Operator, and OpenShift Container Platform.
+
+# Bug fixes
+
+## General
+
+With this update, the following CVEs have been addressed:
+
+CVE-2024-9902 ansible-core: Ansible-core user may read/write unauthorized content.
+
+CVE-2024-8775 ansible-core: Exposure of sensitive information in Ansible vault files due to improper logging.
+
+## Ansible Automation Platform
+
+* Fixed an issue where the user was unable to filter out hosts on inventory groups where it returned a Failed to load options on Ansible Automation Platform UI.
+
+## Execution Environment
+
+* Update pywinrm to 0.4.3 in ee-minimal and ee-supported container images to fix Python 3.11 compatibility.
+
+## Ansible Automation Platform Operator
+
+* Fixed a syntax error when bundle_cacert_secret was defined due to incorrect indentation.
+* Fixed an issue where the default operator catalog for Ansible Automation Platform aligned to cluster-scoped versus namespace-scoped.
+* Added the ability to set tolerations and node_selector for the Redis statefulset and the gateway deployment.
+* Ensure the platform URL status is set when Ingress is used to resolve an issue with Microsoft Azure on Cloud managed deployments. This is due to the Ansible Automation Platform operator failing to finish because it is looking for OpenShift Container Platform routes that are not available on Azure Kubernetes Service.
+* Fixed an issue where the Ansible Automation Platform Operator description did not render code block correctly.
+* It is necessary to specify the CONTROLLER_SSO_URL and AUTOMATION_HUB_SSO_URL settings in Gateway to fix the OIDC auth redirect flow.
+* It is necessary to set the SERVICE_BACKED_SSO_AUTH_CODE_REDIRECT_URL setting to fix the OIDC auth redirect flow.
+
+## container-based installation Ansible Automation Platform
+
+* Fixed an issue when the port value was not defined in the gateway_main_url variable, the containerized installer failed with incorrect execution environment image reference error.
+* Fixed an issue where the containerized installer used port number when specifying the image_url for a decision environment. The user should not add a port to image URLs when using the default value.
+
+## RPM-based Ansible Automation Platform
+
+* Fixed an issue where not setting up the gpg agent socket properly when multiple hub nodes are configured resulted in not creating a gpg socket file in /var/run/pulp.
+
+## Ansible development tools
+
+* Fixed an issue where missing data files were not included in the molecule RPM package.

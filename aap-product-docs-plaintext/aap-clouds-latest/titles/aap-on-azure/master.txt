@@ -20,33 +20,23 @@ Disclaimer: Links contained in this document to external websites are provided f
 Red Hat Ansible Automation Platform on Microsoft Azure is a managed application that you can deploy from the Azure Marketplace portal to a resource group in your Azure tenant.
 Ansible Automation Platform on Microsoft Azure provides access to a library of Ansible content collections, and it is integrated with key Azure services, so you can start deploying, configuring, and managing infrastructure and applications quickly.
 
-The following Red Hat Automation Platform components are available on Red Hat Ansible Automation Platform on Microsoft Azure:
-
-* Automation Controller
-* Automation Hub
-* Private Automation Hub
-* Ansible Content Collections, including the Microsoft collection for Azure
-* Automation Execution Environment
-* Ansible content tools, including access to Red Hat Insights for Red Hat Ansible Automation Platform
-* Automation mesh for managed cloud or operator environments
-
 ## Application Architecture
 
 Red Hat Ansible Automation Platform on Microsoft Azure is installed as a managed application.
 Red Hat manages both the underlying Azure resources and the software running on it while that infrastructure runs in your Azure tenant.
 
-The managed application resource group is completely separate from other resource groups in your tenant.
-Red Hat only has access to the managed application resource group, with no visibility into other tenant resources.
+The managed application resource group (RG) is completely separate from other RGs in your tenant.
+Red Hat only has access to the managed application RG, with no visibility into other tenant resources.
 
 For information about how this works and how resources and access are isolated from the rest of your Azure resources, refer to Azure managed applications overview in the Microsoft Azure managed applications guide.
 
-Ansible Automation Platform on Microsoft Azure uses the following resource groups:
+Ansible Automation Platform on Microsoft Azure uses the following RGs:
 
-* A new or existing resource group (RG) in your tenant.
-This resource group includes a single resource referring to the Ansible Automation Platform on Microsoft Azure managed application deployment.
-Red Hat has access to the managed app to perform support, maintenance, and upgrades, but the resource group is outside of Red Hat's management.
+* A new or existing RG in your tenant.
+This RG includes a single resource referring to the Ansible Automation Platform on Microsoft Azure managed application deployment.
+Red Hat has access to the managed app to perform support, maintenance, and upgrades, but the RG is outside of Red Hat's management.
 * A multi-tenant managed resource group (MRG) that contains most of the infrastructure needed to operate Ansible Automation Platform on Microsoft Azure.
-This multi-tenant resource group is shared between the Red Hat tenant and your tenant. Red Hat has full administrative control and you have read-only access to the resource group.
+This multi-tenant MRG is shared between the Red Hat tenant and your tenant. Red Hat has full administrative control and you have read-only access to the RG.
 * An AKS node pool resource group (NPRG).
 Microsoft requires the NPRG for AKS deployments. It contains resources that AKS uses to function.
 It is created on deployment, and it is outside of Red Hat's management.
@@ -55,7 +45,7 @@ Refer to Microsoft's AKS documentation for more information about NPRGs.
 
 [NOTE]
 ----
-Do not interact with any resources in the node pool resource group (NPRG) unless explicitly directed to by the Red Hat Ansible Automation Platform on Microsoft Azure SRE team.
+Do not interact with any resources in the NPRG unless explicitly directed to by the Red Hat Ansible Automation Platform on Microsoft Azure SRE team.
 Changes to resources in the NPRG cannot be protected by Red Hat and can cause irrecoverable damage to the application.
 Red Hat cannot restrict your ability to change or delete resources in the NPRG.
 ----
@@ -71,7 +61,7 @@ You can configure network peering from Ansible Automation Platform on Microsoft 
 Public deployments permit ingress to the Ansible Automation Platform on Microsoft Azure user interfaces over the public internet.
 Upon deployment, a domain name is issued to the Ansible Automation Platform on Microsoft Azure instance.
 No configuration is required to access Ansible Automation Platform.
-Users can navigate to the domain from the public internet and log in to the user interfaces.
+You can navigate to the domain from the public internet and log in to the user interfaces.
 
 The following diagram outlines the application resources and architecture that are deployed into the managed application resource group on a public deployment of Ansible Automation Platform on Microsoft Azure into your Azure subscription.
 The IP ranges change based on the networking address range you set on deployment.
@@ -84,13 +74,13 @@ A private deployment of Ansible Automation Platform resides in an isolated Azure
 
 To access the URLs for the Ansible Automation Platform user interfaces, you must configure network peering.
 
-Once peering and routing are configured, users can access Ansible Automation Platform through a VM on a connected Azure subnet, or directly if your organization has transit routing set up between Azure and your local network.
+Once peering and routing are configured, you can access Ansible Automation Platform through a VM on a connected Azure subnet, or directly if your organization has transit routing set up between Azure and your local network.
 
 
 [NOTE]
 ----
 No two Azure networking configurations are the same.
-To allow user access to your Ansible Automation Platform URLs, your organization will need to work with your Azure administrators to connect the private access deployment.
+To allow user access to your Ansible Automation Platform URLs, your organization needs to work with your Azure administrators to connect the private access deployment.
 ----
 
 The following diagram outlines the application resources and architecture that are deployed into the managed application resource group on a private deployment of Ansible Automation Platform on Microsoft Azure into your Azure subscription.
@@ -107,11 +97,11 @@ The following resources describe the security posture of the application and the
 * All Azure Storage Services enable server-side encryption by default using service-managed keys
 * All Azure hosted services are committed to providing Encryption at Rest options
 * Azure encryption overview
-* All communications between services within AKS (for example, Ansible Automation Platform, Postgres, storage accounts) use TLS v1.2 or higher.
+* All communications between services within Azure Kubernetes Service (AKS) (for example, Ansible Automation Platform, Postgres, storage accounts) use Transport Layer Security (TLS) v1.2 or higher.
 * Azure security baseline for Azure Kubernetes Service (AKS)
 * Password storage
 * The customer-supplied Ansible Automation Platform admin password is encrypted in transit.
-It is accessible to SREs from the kubernetes API and can be reset by the SREs upon customer request.
+It is accessible to site reliability engineers (SREs) from the Kubernetes API and can be reset by the SREs upon customer request.
 * Keys generated with industry standards
 * Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant
 * Key installation, rotation
@@ -133,7 +123,7 @@ When you deploy Ansible Automation Platform on Microsoft Azure, you must enable 
 There is no default setting for disaster recovery.
 
 The disaster recovery feature incurs additional Azure infrastructure costs.
-See Azure infrastructure usage for details of the Service Shape of the Storage account.
+See Ansible Automation Platform on Microsoft Azure infrastructure usage for details of the Service Shape of the Storage account.
 
 If you want to enable disaster recovery on an existing instance of Ansible Automation Platform on Microsoft Azure, contact Red Hat customer support.
 
@@ -144,7 +134,7 @@ For information about recovering your application after a service-impacting even
 
 ## Ansible Automation Platform on Microsoft Azure infrastructure usage
 
-When you install Ansible Automation Platform on Microsoft Azure, the following infrastructure is deployed into your Microsoft Azure subscription:
+When you install Ansible Automation Platform on Microsoft Azure, you deploy the following infrastructure into your Microsoft Azure subscription:
 
 Managed identity:: A Microsoft Azure service that enables Ansible Automation Platform components to communicate with other Microsoft Azure services such as database, DNS, storage, and other services.
 Key vault:: A secure key vault used to store secrets that are unique to the Ansible Automation Platform deployment.
@@ -153,14 +143,14 @@ Private DNS Zone:: Manages local DNS requests for the services used by Ansible A
 Storage account:: The Microsoft Azure service is used for file and block storage such as local storage of projects and containers.
 
 Service Shape:
-* StorageV2 - Standard_LRS if disaster recovery is not enabled
-* StorageV2 - Standard_GRS if disaster recovery is enabled
+* If disaster recovery is not enabled: StorageV2 - Standard_LRS
+* If disaster recovery is enabled: StorageV2 - Standard_GRS
 Virtual network:: The Microsoft Azure service is used to manage all internal networking and dependent services such as the Azure Application Gateway.
 
 Service Shape: Application Gateway: WAF_v2
 Azure Kubernetes service (AKS):: The Kubernetes cluster used to deploy Ansible Automation Platform applications and services.
 
-Service Shape for all AAP plan sizes:
+Service Shape for all Ansible Automation Platform plan sizes:
 * Compute nodes: Standard_D4ds_v5 (4 vCPUs x 16 GiB)
 * Autoscaling minimum nodes: 3
 * Autoscaling maximum nodes: 20
@@ -174,7 +164,7 @@ Microsoft provides a Pricing calculator to estimate your costs for Microsoft Azu
 Red Hat has configured an example scenario in the pricing calculator: use the Red Hat Ansible Automation Platform on Azure Infrastructure Estimate to tune Kubernetes expected auto scaling variables based on your organization’s workloads.
 
 If Red Hat determines that a deployment’s automation might exceed the capabilities of the current tier of the deployment,
-then Red Hat SREs will work with you to upgrade the infrastructure tier based on automation needs.
+then Red Hat site reliability engineers  work with you to upgrade the infrastructure tier based on automation needs.
 
 ## Lifecycle management
 
@@ -198,7 +188,7 @@ Red Hat does not provide a solution to migrate existing deployments to Ansible A
 
 * A subscription for Microsoft Azure.
 * Contributor or Administrator access to that Azure subscription.
-* Access to the Azure CLI.
+* Access to the Azure comand line interface (CLI).
 
 ## Ansible Automation Platform requirements
 
@@ -210,11 +200,11 @@ Red Hat does not provide a solution to migrate existing deployments to Ansible A
 Microsoft imposes resource limits within each Azure region. The CPU limit is the most likely to impact Red Hat Ansible Automation Platform on Microsoft Azure.
 
 Before you install Ansible Automation Platform on Microsoft Azure, ensure that you have capacity to deploy the managed application into your desired region.
-Refer to Azure infrastructure usage for infrastructure requirements.
+Refer to Ansible Automation Platform on Microsoft Azure infrastructure usage for infrastructure requirements.
 
 ### Regional vCPU limits
 
-The Azure resources used during the deployment of the managed application temporarily exceed the resource requirements in Azure infrastructure usage.
+The Azure resources used during the deployment of the managed application temporarily exceed the resource requirements in Ansible Automation Platform on Microsoft Azure infrastructure usage.
 The Total Regional vCPUs quota is temporarily consumed when deploying the managed application.
 
 Every Azure region has a separate Total Regional vCPUs quota.
@@ -224,7 +214,7 @@ The following steps describe how to view the resource quotas for your subscripti
 
 1. In the Azure console, search for Quotas and open the My Quotas page.
 2. Select the region where you wish to deploy the managed application to view your allocation and usage metrics for that region.
-Ensure that you have selected a single region. Viewing all regions at once will not show the limitations of a single Azure region.
+Ensure that you have selected a single region. Viewing all regions at once does not show the limitations of a single Azure region.
 
 ### Regional StandardCore limits
 
@@ -289,7 +279,7 @@ Red Hat Ansible Automation Platform on Microsoft Azure installation requires spe
 
 ### Registering Azure Resource Providers
 
-To  register Azure Resource Providers, follow the instructions in the How to manage resources section of the Azure documentation.
+To  register Azure Resource Providers, follow the instructions in the Register resource provider section of the Azure documentation.
 
 ## Network
 
@@ -325,7 +315,7 @@ Red Hat Ansible Automation Platform on Microsoft Azure VNet Preparation.
 ### AKS CIDR Blocks
 
 You can configure the AKS network CIDR blocks.
-Traffic that originates from the AKS cluster will appear to come from the range configured in AKS, not from the VNET.
+Traffic that originates from the AKS cluster appears to come from the range configured in AKS, not from the VNET.
 
 When you are planning your AKS CIDR block configuration, bear the following in mind:
 
@@ -346,16 +336,17 @@ To enable the Ansible Automation Platform application to access and manage Azure
 The Microsoft Azure collection supports service principal authentication.
 
 To create a service principal, you must have administrator privileges with tenancy-wide permissions on your Azure tenant.
-Your Ansible Automation Platform on Microsoft Azure deployment will be provisioned in the same Subscription ID as the service principal created in this step.
+Your Ansible Automation Platform on Microsoft Azure deployment provisions in the same Subscription ID as the service principal created in this step.
 
-1. Navigate to the Azure portal and click the Cloud Shell icon to open a bash Cloud Shell in your browser.
-2. Set the Azure CLI to use the subscription that you intend to use for automating Azure services. Run the following command from the shell:
+1. Navigate to the Azure portal
+2. Click the Cloud Shell icon to open a bash Cloud Shell in your browser.
+3. Set the Azure CLI to use the subscription that you intend to use for automating Azure services. Run the following command from the shell:
 
 ```
 az account set --subscription <your_subscription_id>
 ```
 
-3. Run the following command using the Azure CLI to create a privileged service principal in Microsoft Entra ID:
+4. Run the following command using the Azure CLI to create a privileged service principal in Microsoft Entra ID:
 
 ```
 az ad sp create-for-rbac --name ansible --role Contributor
@@ -374,7 +365,7 @@ The output displays the appID and tenant keys for the service principal:
 }
 ```
 
-4. Store the service principal details securely, as they are displayed only when you create the secret. You will need them when you deploy Automation controller.
+5. Store the service principal details securely, as they are displayed only when you create the secret. You will need them when you deploy Automation controller.
 
 ### Maintaining your service principals
 
@@ -410,9 +401,11 @@ Red Hat Ansible Automation Platform on Microsoft Azure Subscription Entitlement 
 
 ## Locating Ansible Automation Platform in Azure Marketplace
 
+Before you can start provisioning your Ansible Automation Platform on Microsoft Azure, you must find the offering on the Azure marketplace, enable your subscription, and initiate a deployment.
+
 1. In a browser, navigate to the Azure Marketplace.
 2. Click Private Products from the menu on the left of the screen.
-3. Search for Red Hat Ansible Automation Platform.
+3. Search for "Red Hat Ansible Automation Platform".
 4. Click the card that is returned in the search. Be sure to select the official offering from Red Hat.
 5. Click  btn:[Get it Now].
 6. Click btn:[Continue].
@@ -440,19 +433,19 @@ Complete the form to provision Red Hat Ansible Automation Platform infrastructur
 1. Click the Basics tab and enter values for your deployment in the following fields in the form:
 * Subscription: Select Ansible on Clouds.
 * Resource Group: Create or select a resource group where you want to deploy the managed application.
-* Region: The Azure region where the application will be deployed.
+* Region: The Azure region where the application is deployed.
 * Application Name: A unique name for the managed application.
 * Administrator Password: Create an adminstrator password for your deployment.
 
 The Administrator Password must contain at least 8 characters, and must include uppercase letters, lowercase letters, and numbers.
 * Confirm Administrator Password: Confirm the Administrator Password.
-* Access: Choose whether your deployment will be public or private.
+* Access: Choose whether your deployment is public or private.
 * Managed Resource Group: A resource group for the managed application infrastructure.
 
 Keep this resource group isolated from other resource groups, including the Resource Group where you will deploy the managed application.
-2. Store the information that you entered in the form in a secure place. You will need to provide the Administrator password to access automation controller and private automation hub.
+2. Store the information that you entered in the form in a secure place. You must provide the Administrator password to access automation controller and private automation hub.
 3. Click btn:[Next]
-4. Follow the steps in Red Hat Ansible Automation Platform on Microsoft Azure VNet Preparation to configure your network configuration.
+4. Follow the steps in Red Hat Ansible Automation Platform on Microsoft Azure Networking Preparation to configure your network configuration.
 5. Click btn:[Next].
 6. Click the Business continuity tab.
 7. From the Disaster Recovery list, select an option to enable or disable disaster recovery.
@@ -467,14 +460,14 @@ Keep this resource group isolated from other resource groups, including the Reso
 13. Select I agree to accept the Co-Admin Access Permissions terms and conditions.
 14. Click btn:[Create] to begin the provisioning process for the application.
 
-The application will begin provisioning.
+The application begins provisioning.
 
 You can use the deployment engine to view the progress of your deployment a few minutes after the Azure console displays "Your deployment is complete".
 See Monitoring deployments on the Ansible Automation Platform Deployment Engine for more information.
 
 It may take 30 minutes or longer for the infrastructure and software to fully provision.
 
-Once provisioning is complete, you can access and login to your new Ansible Automation Platform instance and launch automation controller and automation hub.
+After provisioning is complete, you can access and login to your new Ansible Automation Platform instance and launch automation controller and automation hub.
 
 ## Monitoring deployments on the Ansible Automation Platform Deployment Engine
 
@@ -537,13 +530,13 @@ For more information about deleting resources, refer to Manage Azure resources b
 
 ## Private network peering for private deployments
 
-Ansible Automation Platform on Microsoft Azure is deployed into an independent managed resource group with its own Azure virtual network (VNet).
+You deploy Ansible Automation Platform on Microsoft Azure into an independent managed resource group with its own Azure virtual network (VNet).
 
-When initially deployed, Ansible Automation Platform on Microsoft Azure’s VNet can only send requests to external networks through the public internet.
+Initially when you deploy, Ansible Automation Platform on Microsoft Azure’s VNet you can only send requests to external networks through the public internet.
 
-To enable Ansible Automation Platform on Microsoft Azure to access resources in an internet-gapped deployment, when access to resources has to happen over private networks, you must configure Azure network peering between your private virtual networks and Red Hat Ansible Automation Platform on Microsoft Azure’s managed application VNet.
+To enable Ansible Automation Platform on Microsoft Azure to access resources in an internet-gapped deployment, over private networks, configure Azure network peering between your private virtual networks and Red Hat Ansible Automation Platform on Microsoft Azure’s managed application VNet.
 
-You can configure your Azure VNets to enable private communication between multiple Azure VNets as well as private transit routing between Azure VNets and external VPN routed networks. These VPN networks can be on-premises or on other clouds.
+You can configure your Azure VNets for private communication between multiple Azure VNets and private transit routing between Azure VNets and external VPN routed networks. These VPN networks can be on-premises or on other clouds.
 
 No two Azure networking configurations are the same. To enable user access to Ansible Automation Platform on Microsoft Azure, work with your Azure administrators to connect your deployment to your VNets and external VPN routed networks.
 
@@ -581,8 +574,8 @@ Updating route tables incorrectly can break your network. Only execute the steps
 * You have configured and tested an Azure VNet hub-and-spoke implementation in your Azure tenant. This prerequisite requires many Azure resources to be configured, including a Virtual Network Gateway.
 * You have configured transit routing between your spoke networks, including your VPNs. Refer to Configure VPN gateway transit for virtual network peering in the Microsoft Azure documentation for instructions.
 * You have identified the following:
-* The CIDR block(s) of your existing VNets (including VPNs & direct connects) that will need access to Ansible Automation Platform on Microsoft Azure UIs.
-* The CIDR block(s) of your existing VNets (including VPNs & direct connects) that will contain hosts or endpoints for Ansible automation.
+* The CIDR blocks of your existing VNets (including VPNs and direct connects) that need access to Ansible Automation Platform on Microsoft Azure UIs.
+* The CIDR blocks of your existing VNets (including VPNs and direct connects) that  contain hosts or endpoints for Ansible Automation Platform on Microsoft Azure.
 * The CIDR blocks of the Ansible Automation Platform on Microsoft Azure VNet from the managed resource group of the application. Refer to Finding the CIDR Block of the managed resource group for instructions.
 
 Before peering any networks, ensure that there is no network address space overlap between your private VNets and your Ansible Automation Platform on Microsoft Azure network.
@@ -626,7 +619,7 @@ For further information on configuring peering, refer to Create a peering in the
 
 ##### Updating the route tables
 
-Before you update the route tables, confirm that you satisfy the prerequisites for the hub-and-spoke peering process.
+Before you update the route tables, confirm that you satisfy the Prerequisites for the hub-and-spoke peering process.
 
 1. Navigate to Route Tables in the Azure portal.
 2. As part of your hub-and-spoke configuration, you created one or more route tables to define the routes between the networks. Click on one of these route tables.
@@ -671,7 +664,7 @@ If you choose not to allow all outbound traffic from  port 443, you must configu
 
 Add routes in the Ansible Automation Platform route table for outbound traffic from the full CIDR range of the Ansible Automation Platform on Microsoft Azure managed application to the domains listed in the Azure Virtual Appliance Routing with Ansible Automation Platform on Azure article on the Red Hat Customer Portal.
 * You must also allow traffic from your firewall to any other external domain or IP address that you want Ansible Automation Platform to run automation jobs against.
-Otherwise, your firewall will block connectivity between Ansible Automation Platform and destinations for automation.
+Otherwise, your firewall blocks connectivity between Ansible Automation Platform and destinations for automation.
 * Ansible Automation Platform requires a public DNS zone to provide SSL certificates.
 This public DNS zone is in the managed resource group of the deployment.
 The platform must be able to communicate via DNS queries with the servers listed in the DNS zone to complete certificate challenges with our upstream provider.
@@ -696,7 +689,7 @@ Before peering, you must connect a hub network, and at least one spoke network, 
 1. Navigate to the Virtual Network Connections page for the VWAN that you want to peer with your Ansible Automation Platform instance.
 2. To create a connection between the VWAN hub and your Ansible Automation Platform instance, use the following settings:
 * Connection Name: <Ansible_Automation_Platform_connection_name>
-* Hubs: Select one or more VWAN hub networks that the managed application VNet will peer with.
+* Hubs: Select one or more VWAN hub networks that the managed application VNet peers with.
 * Subscription: Select the subscription where Ansible Automation Platform on Microsoft Azure has been deployed.
 * Resource group: The managed resource group of the managed application. It is typically prefixed with “mrg-”.
 * Virtual network: The VNet of the managed application. There is only one VNet in the managed resource group.
@@ -734,7 +727,7 @@ In the Virtual Networks page in the Azure portal, use the following settings to 
 * Virtual network gateway or Route Server: Use this network’s gateway or Route server
 * Under Remote virtual network, select settings for the virtual network that you want to peer with Azure:
 * Peering link name: <aap_to_hub_peering_link_name>
-* Subscription: Select the subscription where Ansible Automation Platform on Microsoft Azure has been deployed
+* Subscription: Select the subscription where you deployed Ansible Automation Platform on Microsoft Azure
 * Virtual network: Select the Ansible Automation Platform on Microsoft Azure virtual network: vnet-<aap_identifier>-<region>
 * Traffic to remote virtual network: Allow
 * Traffic forwarded from remote virtual network: Allow
@@ -789,8 +782,8 @@ If you selected public access when you deployed Ansible Automation Platform on M
 
 ## Private deployments
 
-If you selected private access when deploying Ansible Automation Platform on Microsoft Azure,
-then the DNS record issued to the Red Hat Ansible Automation Platform on Microsoft Azure application points to a private address within the CIDR block selected when the managed application was deployed.
+If you selected private access when you deployedAnsible Automation Platform on Microsoft Azure,
+then the DNS record issued to the Red Hat Ansible Automation Platform on Microsoft Azure application points to a private address within the CIDR block selected when you deploy the managed application.
 You must configure access to this address after you have created network peering.
 
 The configuration and access method that you choose to connect to Ansible Automation Platform on Microsoft Azure depends on how your organization manages Azure infrastructure.
@@ -800,7 +793,6 @@ The following are the most common options:
 
 * Azure hosted virtual machine
 * VPN
-* SSH tunnel
 
 ### Azure hosted virtual machine
 
@@ -811,7 +803,7 @@ Users can remotely log into the publicly accessible virtual machine from on-prem
 
 To access the Ansible Automation Platform web UIs on the Azure private network, users navigate to the URLs using the browser on the jumpbox VM.
 
-The DMZ VNet is connected to other Azure VNets through network peering, with routing rules established to send network traffic to the Ansible Automation Platform VNet.
+You connect the DMZ VNet to other Azure VNets through network peering, with routing rules established to send network traffic to the Ansible Automation Platform VNet.
 
 The following diagram shows the topology for an example configuration of private network access via an Azure virtual machine.
 
@@ -833,65 +825,9 @@ With this configuration, users can access Ansible Automation Platform through th
 
 ![aap on azure private nw access vpn]
 
-### SSH tunnel
-
-When VPN is not an option and your local users are more technical, the SSH tunnel approach is a secure alternative that enables users to access Ansible Automation Platform from a browser on a local machine.
-
-To implement this access model, create a lightweight Linux-based SSH server in a DMZ network, similar to the Azure Hosted Virtual Machine method.
-The SSH server does not require any workstation features, because it simply acts as a proxy between a user’s local machine and Ansible Automation Platform on Microsoft Azure.
-
-Each user must be configured as an SSH user on the server.
-Users can then establish an SSH tunnel from the local machine to the SSH server to route traffic for Ansible Automation Platform on Microsoft Azure.
-
-This approach is easier to implement on Linux and macOS host machines, but can be accomplished on Windows.
-
-1. Update your local hosts file so that the Ansible Automation Platform URLs route traffic to your local machine rather than the private IP that DNS records are configured with.
-Add the following line to your hosts file:
-
-```
-127.0.0.1 controller.<your_AAPonAzure_instance>.az.ansiblecloud.com
-```
-
-
-The following example shows the line in a hosts file:
-
-```
-##
-# Host Database
-#
-# localhost is used to configure the loopback interface
-# when the system is booting. Do not change this entry.
-#
-127.0.0.1       localhost
-255.255.255.255 broadcasthost
-::1             localhost
-
-127.0.0.1 controller.<your_AAPonAzure_instance>.az.ansiblecloud.com
-```
-
-2. As a user with root privileges, run the ssh command to establish an SSH tunnel.
-
-In the example below, SSH_server_IP represents the IP address of the SSH server in your DMZ.
-
-```
-sudo ssh azureuser@<SSH_server_IP> -i ~/.ssh/id_ssh_key -N -f -L 443:controller.<your_AAPonAzure_instance>.az.ansiblecloud.com:443
-```
-
-
-The -L flag makes your local system route traffic for the automation controller URL over port 443 (HTTPs).
-
-[NOTE]
-----
-You must use port 443 on both sides of the routing path. Using a different port on the local machine causes some Ansible Automation Platform features to not function properly.
-----
-
-When the SSH tunnel is established and your Azure routing is configured, you can access the automation controller URL from your local browser at https://controller.&lt;your_AAPonAzure_instance&gt;.az.ansiblecloud.com.
-
-![aap on azure private nw access ssh]
-
 ## Accessing Red Hat Ansible Automation Platform on Microsoft Azure
 
-When you initiate the deployment of the Red Hat Ansible Automation Platform managed app from Azure marketplace, a form is displayed in the Create Red Hat Ansible Automation Platform on Microsoft Azure window.
+When you initiate the deployment of the Red Hat Ansible Automation Platform managed app from Azure marketplace, a form displays in the Create Red Hat Ansible Automation Platform on Microsoft Azure window.
 Complete the form to provision Ansible Automation Platform infrastructure and resources into your Azure tenant.
 
 1. In a web browser, navigate to Managed Applications in the Azure console.
@@ -940,7 +876,7 @@ When asked to submit information about your license, select your license manifes
 
 ### Microsoft Entra ID SSO configuration
 
-Follow the procedures below to configure SSO with Microsoft Entra ID. If your organization does not use Microsoft Entra ID for application authorization, you can create users in the user management system in Ansible Automation Platform.
+Follow the procedures below to configure single sign-on (SSO) with Microsoft Entra ID (formerly known as Azure Active Directory). If your organization does not use Microsoft Entra ID for application authorization, you can create users in the user management system in Ansible Automation Platform.
 
 1. In a browser, navigate to the Automation controller URL and log in using the following credentials:
 * Username: admin
@@ -952,12 +888,12 @@ Follow the procedures below to configure SSO with Microsoft Entra ID. If your or
 
 To set up enterprise authentication for Microsoft Entra ID, you must obtain an OAuth2 key and secret by registering your Ansible Automation Platform deployment in Azure.
 
-To register the automation controller instance in Azure, you must supply the Azure AD OAuth2 Callback URL from the automation controller settings.
+To register the automation controller instance in Azure, you must supply the Microsoft Entra ID OAuth2 Callback URL from the automation controller settings.
 
 1. In a web browser, open the automation controller console.
 2. Click Settings in the menu to open the main settings page.
-3. Click Azure AD settings in the Authentication category to open the Details page.
-4. Copy the value for Azure AD OAuth2 Callback URL. You will need this value when you register your deployed application in Microsoft Entra ID.
+3. Click Microsoft Entra ID settings in the Authentication category to open the Details page.
+4. Copy the value for Microsoft Entra ID OAuth2 Callback URL. You will need this value when you register your deployed application in Microsoft Entra ID.
 
 1. In a web browser, open the Azure portal.
 2. Ensure that you are using the tenant where you deployed Ansible Automation Platform.
@@ -969,14 +905,14 @@ To register the automation controller instance in Azure, you must supply the Azu
 * In the Name field, enter the same name that you used for the deployed application.
 * Select the default value for Supported account types.
 * Select Web for Redirect URI (optional).
-* In the Redirect URI (optional) field, enter the Azure AD OAuth2 Callback URL value that you fetched from automation controller.
+* In the Redirect URI (optional) field, enter the Microsoft Entra ID OAuth2 Callback URL value that you fetched from automation controller.
 8. Click Register to create the registration.
 
 When registration is complete, the registration page for the Automation Controller application is displayed.
 
 1. In the Automation controller application registration page on Azure, copy and save the value of Application (client) ID.
 
-You will use this value for the Azure AD OAuth2 Key in the Ansible Automation Platform settings.
+You need this value for the Microsoft Entra IDOAuth2 Key in the Ansible Automation Platform settings.
 2. Under Manage, click Certificates & secrets.
 3. Click Client secrets and then + New client secret.
 4. Provide a description for the new secret.
@@ -987,16 +923,16 @@ It is useful to include the date in the description, for example: AAP Client Sec
 5. Provide an expiration date for the new secret.
 
 The maximum lifetime for the certificate is 2 years. Unless you have specific security needs that prevent the creation of a long term certificate, select an expiration date of 24 months.
-6. Save the secret Value to a location on your local machine. Once you navigate away from this page it will be hidden and no longer retrievable.
+6. Save the secret Value to a location on your local machine. After you navigate away from this page the secret value is no longer retrievable.
 
 Add the key (Application (client) ID) and value (Value) of the secret that you generated in Azure to your Ansible Automation Platform instance.
 
 1. Open the automation controller console in a web browser.
-2. Click menu:Settings[Azure AD settings].
+2. Click menu:Settings[Microsoft Entra ID settings].
 3. Click Edit.
 4. Enter the information for the secret that you generated in Microsoft Entra ID:
-5. In Azure AD OAuth2 Key, paste the Application (client) ID.
-6. In Azure AD OAuth2 Secret, paste the secret Value.
+5. In Microsoft Entra ID OAuth2 Key, paste the Application (client) ID.
+6. In Microsoft Entra ID OAuth2 Secret, paste the secret Value.
 7. Click Save.
 
 1. Open the automation controller in a web browser.
@@ -1005,7 +941,7 @@ Add the key (Application (client) ID) and value (Value) of the secret that you g
 4. Enter a name for the new credential and select Azure Resource Manager for the credential type.
 5. Use the Service Principal details to fill out the values of the form:
 * Name: Choose a descriptive name for the credential, for example *Azure Infrastructure*.
-* Subscription ID: Enter the subscription id where your resources created in Azure should be associated. This is unique to your tenant. Your organization may have multiple subscription ids; consult your Azure administrator regarding the subscription id that you should use.
+* Subscription ID: Enter the subscription ID where your resources created in Azure are associated. This is unique to your tenant. Your organization may have multiple subscription IDs; consult your Azure administrator regarding the subscription ID that you must use.
 * Client ID: Enter the appId value from the Service Principal creation.
 * Client Secret: Enter the password from the Service Principal creation.
 * Tenant ID: Enter the tenant from the Service Principal creation.
@@ -1025,7 +961,7 @@ For more information about Azure Virtual Appliance Routing, see the Azure Virtua
 
 Ansible Automation Platform on Microsoft Azure uses Azure&#8217;s managed DNS services when deployed.
 
-To use private DNS records that cannot be resolved publicly, you can either use Azure Private DNS zones that are peered to the managed application VNET, or you can make a submit request to Red Hat to submit DNS zones that should be forwarded to a customer-managed private DNS server.
+To use private DNS records that cannot be resolved publicly, you can either use Azure Private DNS zones that are peered to the managed application VNET, or you can make a submit request to Red Hat to submit DNS zones that must be forwarded to a customer-managed private DNS server.
 
 A limitation of Private DNS zones is that only one instance of a given zone may be linked to a Virtual Network.
 Attempting to link zones that match the names of Private DNS zones in the managed resource group causes conflicts.
@@ -1036,7 +972,7 @@ You can then unlink Private DNS zones in the managed resource group from the Vir
 
 Failure to properly maintain the records in the Private DNS zone can prevent the managed application from operating.
 
-The AKS Private DNS zone cannot be customer managed and still allow Red Hat to update or upgrade the managed AKS that is a part of this offering.
+The Azure Kubernetes Service (AKS) Private DNS zone cannot be customer managed and still allow Red Hat to update or upgrade the managed AKS that is a part of this offering.
 To allow Red Hat to upgrade the customer AKS to the latest version during the maintenance windows, do not unlink the <GUID>.privatelink.<region>.azmk8s.io Private DNS zone.
 For more information on this limitation, see "CreateOrUpdateVirtualNetworkLinkFailed" error when updating or upgrading an AKS cluster in the Microsoft Azure documentation.
 
@@ -1061,13 +997,13 @@ Customers may implement Azure infrastructure changes or policies that negatively
 In such scenarios, the deployment can transition into a limited support status.
 A deployment may move to a limited support status for many reasons, including the following scenarios:
 
-Inactive Ansible subscription(s):: Red Hat issues subscription entitlements through the application deployment process.  The entitlement expires one year after it is issued.  Customers are emailed prior to expiration to renew the entitlement.  This process will issue a new entitlement for the next year and can be imported into Ansible Automation Platform.
-Failure to renew:: When an entitlement expires, customers can continue to use Ansible Automation Platform on Microsoft Azure. However, Red Hat support will require a valid entitlement before assisting with support issues.
+Inactive Ansible subscriptions:: Red Hat issues subscription entitlements through the application deployment process.  The entitlement expires one year after it is issued.  Customers are emailed prior to expiration to renew the entitlement.  This process issues a new entitlement for the next year and can be imported into Ansible Automation Platform.
+Failure to renew:: When an entitlement expires, customers can continue to use Ansible Automation Platform on Microsoft Azure. However, Red Hat support requires a valid entitlement before assisting with support issues.
 Changes to customized policies:: Ansible Automation Platform on Microsoft Azure runs on infrastructure within a customer’s Azure tenant.  This means that customer Azure policies can affect the deployment and function of the platform.  Given the flexibility of Azure policy definitions, it is impossible to list all policies that can cause infrastructure or operational issues with the platform.  When those events happen, the Red Hat SRE team can help identify the policy causing the issue, and suggested remediation.  That remediation may require customer policy changes in order for the managed application to function correctly.
-Failure to remediate:: When a policy conflict arises, the Red Hat team will attempt to reach out to the customer to remediate. Some of these changes are time sensitive and can impact the platform’s operational function. Red Hat SRE team maintenance and upgrades tasks will be on hold until the customer resolves the policy issues.
+Failure to remediate:: When a policy conflict arises, the Red Hat team reaches out to the customer to remediate. Some of these changes are time sensitive and can impact the platform’s operational function. The Red Hat Site Reliability Engineering (SRE) team will pause maintenance and upgrades until the customer resolves the policy issues.
 Changes to firewall and network configurations:: When configuring egress routes from Ansible Automation Platform on Microsoft Azure, customers are required to route traffic to a set of domains on the public internet used for the deployment, monitoring and maintenance of the platform.
 Failure to set up:: The Ansible Automation Platform on Managed Azure will be in a state where it cannot be monitored or serviced by the Red Hat SRE team.
 Changes to quota limits:: A prerequisite for Ansible Automation Platform on Microsoft Azure requires adequate capacity to deploy the managed application in the selected region. Microsoft imposes restrictions on limits (CPU) in each region. It is expected that the customers set up their infrastructure with the specifications as listed in the Product Documentation.
 Failure to remediate:: As the Red Hat SRE team perform regular maintenance and improvements, the quota limitations in the region could prevent them to manage the deployment consistently and can eventually result in an inability to manage the offering.
-Incorrect CIDR ranges:: During initial deployment, customers can configure networking address range (CIDR block) for the VNet the Ansible Automation Platform uses. Once configured, Azure does not allow CIDR blocks to be changed once a network is created, and so a change would requires a redeployment of the managed Ansible Automation Platform application with the configurations specified in the documentation.
+Incorrect CIDR ranges:: During initial deployment, customers can configure networking address range (CIDR block) for the VNet the Ansible Automation Platform uses. After configuration, when you have created the network, you cannot change CIDR blocks. To male a change you must redeploy the managed Ansible Automation Platform application with the configurations specified in the documentation.
 Failure to remediate:: While the Azure user experiences allow customers to set CIDR blocks of choice, the use of the smaller CIDR ranges smaller than our guidelines can create the circumstance that your deployment is in limited supported state where the platform is unable to scale for both automation and management workloads.

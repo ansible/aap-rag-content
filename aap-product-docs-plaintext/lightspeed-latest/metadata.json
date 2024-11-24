@@ -823,6 +823,7 @@
       "lightspeed/attributes/attributes.adoc",
       "lightspeed/aap-common/making-open-source-more-inclusive.adoc",
       "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-intro.adoc",
+      "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-11dec2024.adoc",
       "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-august2024.adoc",
       "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-june2024.adoc",
       "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-7march2024.adoc",
@@ -841,6 +842,16 @@
     "includes": [],
     "url": null,
     "id": null,
+    "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-11dec2024.adoc": {
+    "project_file_name": "lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-11dec2024.adoc",
+    "path_name": "aap-docs/lightspeed/titles/lightspeed-release-notes/modules/lightspeed-rn-11dec2024.adoc",
+    "includes": [],
+    "url": null,
+    "id": "lightspeed-key-features-june2024_{context}",
     "context": null,
     "content_type": null,
     "nesting_assembly": false

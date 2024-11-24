@@ -1,6 +1,6 @@
 # Accessing Red Hat Ansible Automation Platform on Microsoft Azure
 
-When you initiate the deployment of the Red Hat Ansible Automation Platform managed app from Azure marketplace, a form is displayed in the Create Red Hat Ansible Automation Platform on Microsoft Azure window.
+When you initiate the deployment of the Red Hat Ansible Automation Platform managed app from Azure marketplace, a form displays in the Create Red Hat Ansible Automation Platform on Microsoft Azure window.
 Complete the form to provision Ansible Automation Platform infrastructure and resources into your Azure tenant.
 1. In a web browser, navigate to Managed Applications in the Azure console.
 2. Select the instance of Red Hat Ansible Automation Platform on Microsoft Azure that you deployed.

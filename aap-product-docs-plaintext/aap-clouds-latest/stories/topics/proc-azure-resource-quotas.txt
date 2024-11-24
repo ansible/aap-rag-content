@@ -2,11 +2,11 @@
 
 Microsoft imposes resource limits within each Azure region. The CPU limit is the most likely to impact Red Hat Ansible Automation Platform on Microsoft Azure.
 Before you install Ansible Automation Platform on Microsoft Azure, ensure that you have capacity to deploy the managed application into your desired region.
-Refer to Azure infrastructure usage for infrastructure requirements.
+Refer to Ansible Automation Platform on Microsoft Azure infrastructure usage for infrastructure requirements.
 
 # Regional vCPU limits
 
-The Azure resources used during the deployment of the managed application temporarily exceed the resource requirements in Azure infrastructure usage.
+The Azure resources used during the deployment of the managed application temporarily exceed the resource requirements in Ansible Automation Platform on Microsoft Azure infrastructure usage.
 The Total Regional vCPUs quota is temporarily consumed when deploying the managed application.
 
 Every Azure region has a separate Total Regional vCPUs quota.
@@ -16,7 +16,7 @@ The following steps describe how to view the resource quotas for your subscripti
 
 1. In the Azure console, search for Quotas and open the My Quotas page.
 2. Select the region where you wish to deploy the managed application to view your allocation and usage metrics for that region.
-Ensure that you have selected a single region. Viewing all regions at once will not show the limitations of a single Azure region.
+Ensure that you have selected a single region. Viewing all regions at once does not show the limitations of a single Azure region.
 
 # Regional StandardCore limits
 

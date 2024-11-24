@@ -198,7 +198,6 @@
       "aap-clouds/stories/topics/proc-azure-nw-private-deploy.adoc",
       "aap-clouds/stories/topics/proc-azure-nw-private-deploy-az-hosted-vm.adoc",
       "aap-clouds/stories/topics/proc-azure-nw-private-deploy-vpn.adoc",
-      "aap-clouds/stories/topics/proc-azure-nw-private-deploy-ssh-tunnel.adoc",
       "aap-clouds/stories/topics/proc-azure-accessing-aap.adoc",
       "aap-clouds/stories/topics/proc-azure-license-association.adoc",
       "aap-clouds/stories/topics/proc-azure-configure-ad-sso.adoc"
@@ -1156,7 +1155,7 @@
     "project_file_name": "aap-clouds/stories/topics/proc-azure-nw-private-deploy-ssh-tunnel.adoc",
     "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-nw-private-deploy-ssh-tunnel.adoc",
     "includes": [],
-    "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-nw-private-deploy-ssh-tunnel_azure-connecting-to-aap",
+    "url": null,
     "id": "proc-azure-nw-private-deploy-ssh-tunnel_{context}",
     "context": null,
     "content_type": null,
@@ -1367,6 +1366,16 @@
     "url": null,
     "id": null,
     "context": null,
+    "content_type": null,
+    "nesting_assembly": false
+  },
+  "aap-clouds/titles/aap-on-azure/title-attributes.adoc": {
+    "project_file_name": "aap-clouds/titles/aap-on-azure/title-attributes.adoc",
+    "path_name": "aap-docs/aap-clouds/titles/aap-on-azure/title-attributes.adoc",
+    "includes": [],
+    "url": null,
+    "id": null,
+    "context": "azure",
     "content_type": null,
     "nesting_assembly": false
   },

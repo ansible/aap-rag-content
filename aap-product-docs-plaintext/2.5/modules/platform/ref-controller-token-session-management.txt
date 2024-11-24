@@ -5,5 +5,4 @@ Ansible Automation Platform supports the following commands for OAuth2 token man
 * create_oauth2_token
 * revoke_oauth2_tokens
 * cleartokens
-* expire_sessions
 * clearsessions

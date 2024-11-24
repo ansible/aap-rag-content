@@ -38,6 +38,16 @@ If existing components have already been deployed, you must specify these compon
 
 You can define custom resources for each primary installation workflows.
 
+### Modifying the number of simultaneous rulebook activations during or after Event-Driven Ansible controller installation
+
+* If you plan to install Event-Driven Ansible on OpenShift Container Platform and modify the number of simultaneous rulebook activations, add the required EDA_MAX_RUNNING_ACTIVATIONS parameter to your custom resources. By default, Event-Driven Ansible controller allows 12 activations per node to run simultaneously. See the example in appendix EDA_MAX_RUNNING_ACTIVATIONS.
+
+
+[NOTE]
+----
+EDA_MAX_RUNNING_ACTIVATIONS for OpenShift Container Platform is a global value since there is no concept of worker nodes when installing Event-Driven Ansible on OpenShift Container Platform.
+----
+
 ## Additional resources
 
 * See Understanding OperatorHub to learn more about OpenShift Container Platform OperatorHub.

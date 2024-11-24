@@ -1,0 +1,142 @@
+# Ansible Automation Platform security automation use cases
+
+Ansible Automation Platform provides organizations the opportunity to automate many of the manual tasks required to maintain a strong IT security posture.
+Areas where security operations might be automated include security event response and remediation, routine security operations, compliance with security policies and regulations, and security hardening of IT infrastructure.
+
+# Red Hat Ansible Automation Platform as part of a Security Operations Center
+
+Protecting your organization is a critical task.
+Automating functions of your Security Operations Center (SOC) can help you streamline security operations, response, and remediation activities at scale to reduce the risk and cost of breaches.
+Red Hat Ansible Automation Platform can connect your security teams, tools, and processes for more successful automation adoption and use.
+Learn how automation can help you safeguard your business and respond to growing security threats faster.
+
+Simplify your security operations center provides an overview of the benefits to automating SOC operations, including such use cases as:
+
+* Investigation enrichment
+* Threat hunting
+* Incident response
+
+# Patch automation with Ansible Automation Platform
+
+Software patching is a fundamental activity of security and IT operations teams everywhere.
+Keeping patches up to date is critical to remediating software vulnerabilities and meeting compliance requirements, but patching systems manually at scale can be time-consuming and error-prone.
+Organizations should put thought into patch management strategies that meet their security, compliance, and business objectives, to prioritize the types of patches to apply (known exploits, critical or important vulnerabilities, optimizations, routine updates, new features, and so on) against the IT assets available across the enterprise.
+Once policies and priorities have been defined and a patching plan is established, the manual tasks involved in patch management can be automated using Red Hat Ansible Automation Platform to improve patch deployment speed and accuracy, reduce human error, and limit downtime.
+
+## Benefits of patch automation
+
+Automating the patching process provides a number of benefits:
+
+* Reduces error-prone manual effort.
+* Decreases time to deploy patches at scale.
+* Ensures consistency of patches across similar systems. Manual patching of similar systems can result in human error (forgetting one or more, patching using different versions) that impacts consistency.
+* Enables orchestration of complex patching scenarios where an update might require taking a system snapshot before applying a patch, or might require additional configuration changes when the patch is applied.
+
+## Patching examples
+
+The following playbooks are provided as patching examples, and should be modified to fit the target environment and tested thoroughly before being used in production.
+These examples use the ansible.builtin.dnf module for managing packages on RHEL and other operating systems that use the dnf package manager.
+Modules for patching other Linux operating systems, Microsoft Windows, and many network devices are also available.
+
+### Keeping everything up to date
+
+For some Red Hat Enterprise Linux servers, such as a lab or other non-production systems, you might want to install all available patches on a regular cadence.
+The following example playbook might be used in a job template that is scheduled to run weekly, and updates the system with all of the latest RPMs.
+
+
+```
+- name: Install all available RPM updates
+  hosts: target_hosts
+  become: true
+
+  tasks:
+    - name: Install latest RPMs
+      ansible.builtin.dnf:
+        name: '*'
+        state: latest
+```
+
+
+### Installing security updates only
+
+For organizations with a policy requiring that all RPMs including security errata be kept up to date, the following playbook might be used in a regularly scheduled job template.
+
+
+```
+- name: Install all security-related RPM updates
+  hosts: target_hosts
+  become: true
+
+  tasks:
+    - name: Install latest RPMs with security errata
+      ansible.builtin.dnf:
+        name: '*'
+        security: true
+        state: latest
+```
+
+
+### Specifying package versions
+
+For production systems, a well-established configuration management practice is to deploy only known, tested combinations of software to ensure that systems are configured correctly and perform as expected.
+This includes deploying only known versions of operating system software and patches to ensure that system updates do not introduce problems with production applications.
+
+
+[NOTE]
+----
+The following example playbook installs a specific version of the httpd RPM and its dependencies when the target host uses the RHEL 9 operating system.
+This playbook does not take action if the specified versions are already in place or if a different version of RHEL is installed.
+----
+
+
+```
+- name: Install specific RPM versions
+  hosts: target_hosts
+  gather_facts: true
+  become: true
+
+  vars:
+    httpd_packages_rhel9:
+      - httpd-2.4.53-11.el9_2.5
+      - httpd-core-2.4.53-11.el9_2.5
+      - httpd-filesystem-2.4.53-11.el9_2.5
+      - httpd-tools-2.4.53-11.el9_2.5
+      - mod_http2-1.15.19-4.el9_2.4
+      - mod_lua-2.4.53-11.el9_2.5
+
+  tasks:
+    - name: Install httpd and dependencies
+      ansible.builtin.dnf:
+        name: '{{ httpd_packages_rhel9 }}'
+        state: present
+        allow_downgrade: true
+    when:
+      - ansible_distribution == "RedHat"
+      - ansible_distribution_major_version == "9"
+```
+
+
+
+[NOTE]
+----
+By setting allow_downgrade: true, if a newer version of any defined package is installed on the system, it is downgraded to the specified version instead.
+----
+
+## Complex patching scenarios
+
+In Ansible Automation Platform, multiple automation jobs can be chained together into workflows, which can be used to coordinate multiple steps in a complex patching scenario.
+
+The following example complex patching scenario demonstrates taking virtual machine snapshots, patching the virtual machines, and creating tickets when an error is encountered in the workflow.
+
+1. Run a project sync to ensure the latest playbooks are available. In parallel, run an inventory sync to make sure the latest list of target hosts is available.
+2. Take a snapshot of each target host.
+1. If the snapshot task fails, submit a ticket with the relevant information.
+3. Patch each of the target hosts.
+1. If the patching task fails, restore the snapshot and submit a ticket with the relevant information.
+4. Delete each snapshot where the patching task was successful.
+
+The following workflow visualization shows how the components of the example complex patching scenario are executed:
+
+
+
+For more information on workflows, see Workflows in automation controller.

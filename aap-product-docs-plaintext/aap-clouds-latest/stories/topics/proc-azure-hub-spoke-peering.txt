@@ -4,8 +4,8 @@
 * You have configured and tested an Azure VNet hub-and-spoke implementation in your Azure tenant. This prerequisite requires many Azure resources to be configured, including a Virtual Network Gateway.
 * You have configured transit routing between your spoke networks, including your VPNs. Refer to Configure VPN gateway transit for virtual network peering in the Microsoft Azure documentation for instructions.
 * You have identified the following:
-* The CIDR block(s) of your existing VNets (including VPNs & direct connects) that will need access to Ansible Automation Platform on Microsoft Azure UIs.
-* The CIDR block(s) of your existing VNets (including VPNs & direct connects) that will contain hosts or endpoints for Ansible automation.
+* The CIDR blocks of your existing VNets (including VPNs and direct connects) that need access to Ansible Automation Platform on Microsoft Azure UIs.
+* The CIDR blocks of your existing VNets (including VPNs and direct connects) that  contain hosts or endpoints for Ansible Automation Platform on Microsoft Azure.
 * The CIDR blocks of the Ansible Automation Platform on Microsoft Azure VNet from the managed resource group of the application. Refer to Finding the CIDR Block of the managed resource group for instructions.
 
 Before peering any networks, ensure that there is no network address space overlap between your private VNets and your Ansible Automation Platform on Microsoft Azure network.

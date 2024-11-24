@@ -1,6 +1,13 @@
 # Configure an external authentication source
 
-As noted in the User authentication planning section, external authentication is recommended for user access to the automation controller. After you choose the authentication type that best suits your needs, navigate to Settings and select Authentication in the automation controller UI, click on the relevant link for your authentication back-end, and follow the relevant instructions for configuring the authentication connection.
+As noted in the User authentication planning section, external authentication is recommended for user access to the automation controller.
+After you choose the authentication type that best suits your needs:
+
+1. Navigate to menu:Access Management[Authentication Methods].
+2. Click btn:[Create authentication]
+3. Select the Authentication type you require from the menu.
+4. Click btn:[Next]
+5. On the Authentication details in the automation controller UI, click on the relevant link for your authentication back-end, and follow the relevant instructions for configuring the authentication connection.
 
 When using LDAP for external authentication with the automation controller, navigate to Settings and select Authentication and then select LDAP settings on the automation controller and ensure that one of the following is configured:
 

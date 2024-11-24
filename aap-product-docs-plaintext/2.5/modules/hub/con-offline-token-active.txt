@@ -7,7 +7,7 @@ Keeping an online token active is useful when an application performs an action 
 
 [NOTE]
 ----
-If your offline token expires, you must request a new one.
+If your offline token expires, you must obtain a new one.
 ----
 
 * Run the following command to prevent your token from expiring:
