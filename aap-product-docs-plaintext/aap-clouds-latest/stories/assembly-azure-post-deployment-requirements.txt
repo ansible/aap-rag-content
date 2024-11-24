@@ -2,13 +2,13 @@
 
 # Private network peering for private deployments
 
-Ansible Automation Platform on Microsoft Azure is deployed into an independent managed resource group with its own Azure virtual network (VNet).
+You deploy Ansible Automation Platform on Microsoft Azure into an independent managed resource group with its own Azure virtual network (VNet).
 
-When initially deployed, Ansible Automation Platform on Microsoft Azure’s VNet can only send requests to external networks through the public internet.
+Initially when you deploy, Ansible Automation Platform on Microsoft Azure’s VNet you can only send requests to external networks through the public internet.
 
-To enable Ansible Automation Platform on Microsoft Azure to access resources in an internet-gapped deployment, when access to resources has to happen over private networks, you must configure Azure network peering between your private virtual networks and Red Hat Ansible Automation Platform on Microsoft Azure’s managed application VNet.
+To enable Ansible Automation Platform on Microsoft Azure to access resources in an internet-gapped deployment, over private networks, configure Azure network peering between your private virtual networks and Red Hat Ansible Automation Platform on Microsoft Azure’s managed application VNet.
 
-You can configure your Azure VNets to enable private communication between multiple Azure VNets as well as private transit routing between Azure VNets and external VPN routed networks. These VPN networks can be on-premises or on other clouds.
+You can configure your Azure VNets for private communication between multiple Azure VNets and private transit routing between Azure VNets and external VPN routed networks. These VPN networks can be on-premises or on other clouds.
 
 No two Azure networking configurations are the same. To enable user access to Ansible Automation Platform on Microsoft Azure, work with your Azure administrators to connect your deployment to your VNets and external VPN routed networks.
 
@@ -46,8 +46,8 @@ Updating route tables incorrectly can break your network. Only execute the steps
 * You have configured and tested an Azure VNet hub-and-spoke implementation in your Azure tenant. This prerequisite requires many Azure resources to be configured, including a Virtual Network Gateway.
 * You have configured transit routing between your spoke networks, including your VPNs. Refer to Configure VPN gateway transit for virtual network peering in the Microsoft Azure documentation for instructions.
 * You have identified the following:
-* The CIDR block(s) of your existing VNets (including VPNs & direct connects) that will need access to Ansible Automation Platform on Microsoft Azure UIs.
-* The CIDR block(s) of your existing VNets (including VPNs & direct connects) that will contain hosts or endpoints for Ansible automation.
+* The CIDR blocks of your existing VNets (including VPNs and direct connects) that need access to Ansible Automation Platform on Microsoft Azure UIs.
+* The CIDR blocks of your existing VNets (including VPNs and direct connects) that  contain hosts or endpoints for Ansible Automation Platform on Microsoft Azure.
 * The CIDR blocks of the Ansible Automation Platform on Microsoft Azure VNet from the managed resource group of the application. Refer to Finding the CIDR Block of the managed resource group for instructions.
 
 Before peering any networks, ensure that there is no network address space overlap between your private VNets and your Ansible Automation Platform on Microsoft Azure network.
@@ -91,7 +91,7 @@ For further information on configuring peering, refer to Create a peering in the
 
 #### Updating the route tables
 
-Before you update the route tables, confirm that you satisfy the prerequisites for the hub-and-spoke peering process.
+Before you update the route tables, confirm that you satisfy the Prerequisites for the hub-and-spoke peering process.
 
 1. Navigate to Route Tables in the Azure portal.
 2. As part of your hub-and-spoke configuration, you created one or more route tables to define the routes between the networks. Click on one of these route tables.
@@ -136,7 +136,7 @@ If you choose not to allow all outbound traffic from  port 443, you must configu
 
 Add routes in the Ansible Automation Platform route table for outbound traffic from the full CIDR range of the Ansible Automation Platform on Microsoft Azure managed application to the domains listed in the Azure Virtual Appliance Routing with Ansible Automation Platform on Azure article on the Red Hat Customer Portal.
 * You must also allow traffic from your firewall to any other external domain or IP address that you want Ansible Automation Platform to run automation jobs against.
-Otherwise, your firewall will block connectivity between Ansible Automation Platform and destinations for automation.
+Otherwise, your firewall blocks connectivity between Ansible Automation Platform and destinations for automation.
 * Ansible Automation Platform requires a public DNS zone to provide SSL certificates.
 This public DNS zone is in the managed resource group of the deployment.
 The platform must be able to communicate via DNS queries with the servers listed in the DNS zone to complete certificate challenges with our upstream provider.
@@ -161,7 +161,7 @@ Before peering, you must connect a hub network, and at least one spoke network, 
 1. Navigate to the Virtual Network Connections page for the VWAN that you want to peer with your Ansible Automation Platform instance.
 2. To create a connection between the VWAN hub and your Ansible Automation Platform instance, use the following settings:
 * Connection Name: <Ansible_Automation_Platform_connection_name>
-* Hubs: Select one or more VWAN hub networks that the managed application VNet will peer with.
+* Hubs: Select one or more VWAN hub networks that the managed application VNet peers with.
 * Subscription: Select the subscription where Ansible Automation Platform on Microsoft Azure has been deployed.
 * Resource group: The managed resource group of the managed application. It is typically prefixed with “mrg-”.
 * Virtual network: The VNet of the managed application. There is only one VNet in the managed resource group.
@@ -199,7 +199,7 @@ In the Virtual Networks page in the Azure portal, use the following settings to 
 * Virtual network gateway or Route Server: Use this network’s gateway or Route server
 * Under Remote virtual network, select settings for the virtual network that you want to peer with Azure:
 * Peering link name: <aap_to_hub_peering_link_name>
-* Subscription: Select the subscription where Ansible Automation Platform on Microsoft Azure has been deployed
+* Subscription: Select the subscription where you deployed Ansible Automation Platform on Microsoft Azure
 * Virtual network: Select the Ansible Automation Platform on Microsoft Azure virtual network: vnet-<aap_identifier>-<region>
 * Traffic to remote virtual network: Allow
 * Traffic forwarded from remote virtual network: Allow

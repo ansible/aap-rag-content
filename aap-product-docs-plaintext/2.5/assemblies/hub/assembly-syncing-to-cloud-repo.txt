@@ -7,6 +7,8 @@ Use remote configurations to configure your private automation hub to synchroniz
 To synchronize content, you can now upload a manually-created requirements file from the rh-certified remote. Remotes are configurations that allow you to synchronize content to your custom repositories from an external collection source.
 As of the 2.4 release you can still synchronize content, but synclists are deprecated, and will be removed in a future version.
 ----
+Each remote configuration located in menu:Automation Content[Remotes] provides information for both the community and rh-certified repository about when the repository was last updated.
+You can add new content to Ansible automation hub at any time using the Edit and Sync features included on the menu:Automation Content[Repositories] page.
 ## What's the difference between Ansible Galaxy and Ansible automation hub?
 Collections published to Ansible Galaxy are the latest content published by the Ansible community and have no joint support claims associated with them.
 Ansible Galaxy is the recommended frontend directory for the Ansible community to access content.
@@ -24,23 +26,84 @@ Collection namespaces must follow Python module name convention.
 This means collections should have short, all lowercase names.
 You can use underscores in the collection name if it improves readability.
 
-# Reasons to create remote configurations
+# Token management in automation hub
 
-Each remote configuration located in menu:Automation Content[Remotes] provides information for both the community and rh-certified repository about when the repository was last updated.
-You can add new content to Ansible automation hub at any time using the Edit and Sync features included on the menu:Automation Content[Repositories] page.
+Before you can interact with automation hub by uploading or downloading collections, you must create an API token. The automation hub API token authenticates your ansible-galaxy client to the Red Hat automation hub server.
 
-# Retrieving the API token for your Red Hat Certified Collection
+Your method for creating the API token differs according to the type of automation hub that you are using:
 
-You can synchronize Ansible Certified Content Collections curated by your organization from console.redhat.com to your private automation hub.
-The API token is a secret token used to protect your content.
+* Automation hub uses offline token management. See Creating the offline token in automation hub.
+* Private automation hub uses API token management. See Creating the API token in private automation hub.
+* If you are using Keycloak to authenticate your private automation hub, follow the procedure for Creating the offline token in automation hub.
 
-* You have organization administrator permissions to create the synclist on console.redhat.com.
+## Creating the offline token in automation hub
 
-1. Log in to console.redhat.com as an organization administrator.
-2. Navigate to menu:Automation Hub[Connect to Hub].
-3. Under Offline token, click btn:[Load token].
-4. Click btn:[Copy to clipboard] to copy the API token.
+In automation hub, you can create an offline token by using Token management. The offline token is a secret token used to protect your content.
+
+1. Navigate to Ansible Automation Platform on the Red Hat Hybrid Cloud Console.
+2. From the navigation panel, select menu:Automation Hub[Connect to Hub].
+3. Under Offline token, click btn:[Load Token].
+4. Click the btn:[Copy to clipboard] icon to copy the offline token.
 5. Paste the API token into a file and store in a secure location.
+
+
+[IMPORTANT]
+----
+The offline token is a secret token used to protect your content. Store your token in a secure location.
+----
+
+The offline token is now available for configuring automation hub as your default collections server or for uploading collections by using the ansible-galaxy command line tool.
+
+
+[NOTE]
+----
+Your offline token expires after 30 days of inactivity. For more on obtaining a new offline token, see Keeping your offline token active.
+----
+
+## Creating the API token in private automation hub
+
+In private automation hub, you can create an API token using API token management. The API token is a secret token used to protect your content.
+
+* Valid subscription credentials for Red Hat Ansible Automation Platform.
+
+1. Log in to your private automation hub.
+2. From the navigation panel, select menu:Automation Content[API token].
+3. Click btn:[Load Token].
+4. To copy the API token, click the btn:[Copy to clipboard] icon.
+5. Paste the API token into a file and store in a secure location.
+
+
+[IMPORTANT]
+----
+The API token is a secret token used to protect your content. Store your API token in a secure location.
+----
+
+The API token is now available for configuring automation hub as your default collections server or uploading collections using the ansible-galaxy command line tool.
+
+
+[NOTE]
+----
+The API token does not expire.
+----
+
+## Keeping your offline token active
+
+Offline tokens expire after 30 days of inactivity. You can keep your offline token from expiring by periodically refreshing your offline token.
+
+Keeping an online token active is useful when an application performs an action on behalf of the user; for example, this allows the application to perform a routine data backup when the user is offline.
+
+
+[NOTE]
+----
+If your offline token expires, you must obtain a new one.
+----
+
+* Run the following command to prevent your token from expiring:
+
+```
+curl https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token -d grant_type=refresh_token -d client_id="cloud-services" -d refresh_token="{{ user_token }}" --fail --silent --show-error --output /dev/null
+```
+
 
 # Configuring the rh-certified remote repository and synchronizing Red Hat Ansible Certified Content Collection
 
@@ -127,7 +190,7 @@ For more information on permissions, see Access management and authentication
 
 # Creating a requirements file
 
-We recommend using a requirements file to add collections to your automation hub. Requirements files are in YAML format and list the collections that you want to install in your automation hub. After you create your requirements.yml file listing the collections you want to install, you will then run the install command to add the collections to your hub instance.
+Use a requirements file to add collections to your automation hub. Requirements files are in YAML format and list the collections that you want to install in your automation hub. After you create your requirements.yml file listing the collections you want to install, you will then run the install command to add the collections to your hub instance.
 
 A standard requirements.yml file contains the following parameters:
 

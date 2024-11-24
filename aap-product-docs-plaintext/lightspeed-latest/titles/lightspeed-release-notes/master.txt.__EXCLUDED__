@@ -26,6 +26,14 @@ To use an on-premise deployment of Red Hat Ansible Lightspeed, your organization
 * A trial or paid subscription to the Red Hat Ansible Automation Platform
 * An installation of IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data
 
+# 11 December 2024
+
+This release Red Hat Ansible Lightspeed features the following enhancement:
+
+* Playbook generation and viewing playbook explanations are now supported on Red Hat Ansible Lightspeed on-premise deployments.
+
+Using the Ansible VS Code extension, you can create Ansible playbooks using a natural language interface in English. You can also view the explanations for new or existing playbooks. For more information, see Generating playbooks and viewing playbook explanations.
+
 # 21 August 2024
 
 This release includes the following new feature:

@@ -17,19 +17,19 @@ Complete the form to provision Red Hat Ansible Automation Platform infrastructur
 1. Click the Basics tab and enter values for your deployment in the following fields in the form:
 * Subscription: Select Ansible on Clouds.
 * Resource Group: Create or select a resource group where you want to deploy the managed application.
-* Region: The Azure region where the application will be deployed.
+* Region: The Azure region where the application is deployed.
 * Application Name: A unique name for the managed application.
 * Administrator Password: Create an adminstrator password for your deployment.
 
 The Administrator Password must contain at least 8 characters, and must include uppercase letters, lowercase letters, and numbers.
 * Confirm Administrator Password: Confirm the Administrator Password.
-* Access: Choose whether your deployment will be public or private.
+* Access: Choose whether your deployment is public or private.
 * Managed Resource Group: A resource group for the managed application infrastructure.
 
 Keep this resource group isolated from other resource groups, including the Resource Group where you will deploy the managed application.
-2. Store the information that you entered in the form in a secure place. You will need to provide the Administrator password to access automation controller and private automation hub.
+2. Store the information that you entered in the form in a secure place. You must provide the Administrator password to access automation controller and private automation hub.
 3. Click btn:[Next]
-4. Follow the steps in Red Hat Ansible Automation Platform on Microsoft Azure VNet Preparation to configure your network configuration.
+4. Follow the steps in Red Hat Ansible Automation Platform on Microsoft Azure Networking Preparation to configure your network configuration.
 5. Click btn:[Next].
 6. Click the Business continuity tab.
 7. From the Disaster Recovery list, select an option to enable or disable disaster recovery.
@@ -44,11 +44,11 @@ Keep this resource group isolated from other resource groups, including the Reso
 13. Select I agree to accept the Co-Admin Access Permissions terms and conditions.
 14. Click btn:[Create] to begin the provisioning process for the application.
 
-The application will begin provisioning.
+The application begins provisioning.
 
 You can use the deployment engine to view the progress of your deployment a few minutes after the Azure console displays "Your deployment is complete".
 See Monitoring deployments on the Ansible Automation Platform Deployment Engine for more information.
 
 It may take 30 minutes or longer for the infrastructure and software to fully provision.
 
-Once provisioning is complete, you can access and login to your new Ansible Automation Platform instance and launch automation controller and automation hub.
+After provisioning is complete, you can access and login to your new Ansible Automation Platform instance and launch automation controller and automation hub.

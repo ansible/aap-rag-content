@@ -445,6 +445,12 @@ To control which users are allowed into the Ansible Automation Platform server, 
 
 As a platform administrator, you can configure LDAP as the source for account authentication information for Ansible Automation Platform users.
 
+
+[NOTE]
+----
+If the LDAP server you want to connect to has a certificate that is self-signed or signed by a corporate internal certificate authority (CA), the CA certificate must be added to the system’s trusted CAs. Otherwise, connection to the LDAP server will result in an error that the certificate issuer is not recognized.
+----
+
 When LDAP is configured, an account is created for any user who logs in with an LDAP username and password and they can be automatically placed into organizations as either regular users or organization administrators.
 
 Users created through an LDAP login should not change their username, first name, last name, or set a local password for themselves. Any changes made to this information is overwritten the next time the user logs in to the platform.
@@ -616,20 +622,20 @@ Click Next.
 
 To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.
 
-### Configuring Microsoft Azure active directory authentication
+### Configuring Microsoft Entra ID authentication
 
-To set up enterprise authentication for Microsoft Azure Active Directory (AD), you need to obtain an OAuth2 key and secret by registering your organization-owned application from Azure using the Quickstart: Register an application with the Microsoft identity platform.
+To set up enterprise authentication for Microsoft Entra ID, formerly known as Microsoft Azure Active Directory (AD), you need to obtain an OAuth2 key and secret by registering your organization-owned application from Azure using the Quickstart: Register an application with the Microsoft identity platform.
 
-Each key and secret must belong to a unique application and cannot be shared or reused between different authentication backends. To register the application, you must supply it with your webpage URL, which is the Callback URL shown in the Authenticator details for your authenticator configuration. See dDisplaying authenticator details for instructions on accessing this information.
+Each key and secret must belong to a unique application and cannot be shared or reused between different authentication backends. To register the application, you must supply it with your webpage URL, which is the Callback URL shown in the Authenticator details for your authenticator configuration. See Displaying authenticator details for instructions on accessing this information.
 
 1. From the navigation panel, select .
 2. Click Create authentication.
 3. Select Azuread from the Authentication type list and click Next.
 4. Enter a Name for this authentication configuration.
-5. Click Edit, copy and paste Microsoft’s Application (Client) ID to the OIDC Key field.
+5. Click Edit, copy and paste Microsoft's Application (Client) ID to the OIDC Key field.
 
 Following instructions for registering your application with the Microsoft identity platform, supply the key (shown at one time only) to the client for authentication.
-6. Copy and paste the secret key created for your Microsoft Azure AD application to the OIDC Secret field.
+6. Copy and paste the secret key created for your Microsoft Entra ID/Microsoft Azure AD application to the OIDC Secret field.
 7. Optional: Enter any Additional Authenticator Fields that this authenticator can take. These fields are not validated and are passed directly back to the authenticator.
 
 [NOTE]
@@ -639,14 +645,13 @@ Values defined in this field override the dedicated fields provided in the UI.
 8. To automatically create organizations, users, and teams upon successful login, select Create objects.
 9. To enable this authentication method upon creation, select Enabled.
 10. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.
-
-Click Next.
+11. Click Next.
 
 To verify that the authentication is configured correctly, log out of Ansible Automation Platform and check that the login screen displays the logo of your authentication chosen method to enable logging in with those credentials.
 
 To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.
 
-For application registering basics in Microsoft Azure AD, see the What is the Microsoft identity platform? overview.
+For application registering basics in Microsoft Entra ID/Microsoft Azure AD, see the What is the Microsoft identity platform? overview.
 
 ### Configuring Google OAuth2 authentication
 
@@ -1014,6 +1019,11 @@ Group:: The map is true or false  based on a user having, not having or having m
 If you are only keying off one group it doesn’t matter if you select "and" or "or".
 ----
 * Groups: This is a list of one or more groups coming from the authentication system that the user must be a member of. See the Operation field to determine the behavior of the trigger if more than one group is specified in the trigger.
+
+[NOTE]
+----
+Group identifiers are case-sensitive and must match the authenticator backend. For example, cn=johnsmith,dc=example,dc=com instead of CN=johnsmith,DC=example,DC=com.
+----
 Attribute:: The map is true or false based on a users attributes coming from the source system. When defining an attribute trigger, the authentication mapping expands to include the following selections:
 * Operation: This field includes conditional settings that trigger the handling of the rule based on the specified Attribute criteria. In version 2.5 this field indicates what will happen if the source system returns a list of  attributes instead of a single value. For example, if the source system returns multiple emails for a user and Operation was set to and, all of the given emails must match the Comparison for the trigger to be True. If Operation was set to or, any of the returned emails will set the trigger to True if they match the Comparison in the trigger.
 
@@ -1475,14 +1485,13 @@ Ansible Automation Platform supports the following commands for OAuth2 token man
 * create_oauth2_token
 * revoke_oauth2_tokens
 * cleartokens
-* expire_sessions
 * clearsessions
 
 #### create_oauth2_token
 
 Use the following command to create OAuth2 tokens (specify the username for example_user):
 
-$ awx-manage create_oauth2_token --user example_user
+$ aap-gateway-manage create_oauth2_token --user example_user
 
 New OAuth2 token for example_user: j89ia8OO79te6IAZ97L7E8bMgXCON2
 
@@ -1498,40 +1507,25 @@ revoke all tokens.
 
 To revoke all existing OAuth2 tokens use the following command:
 
-$ awx-manage revoke_oauth2_tokens
+$ aap-gateway-manage revoke_oauth2_tokens
 
 To revoke all OAuth2 tokens and their refresh tokens use the following command:
 
-$ awx-manage revoke_oauth2_tokens --revoke_refresh
+$ aap-gateway-manage revoke_oauth2_tokens --revoke_refresh
 
 To revoke all OAuth2 tokens for the user with id=example_user (specify the username for example_user):
 
-$ awx-manage revoke_oauth2_tokens --user example_user
+$ aap-gateway-manage revoke_oauth2_tokens --user example_user
 
 To revoke all OAuth2 tokens and refresh token for the user with id=example_user:
 
-$ awx-manage revoke_oauth2_tokens --user example_user --revoke_refresh
+$ aap-gateway-manage revoke_oauth2_tokens --user example_user --revoke_refresh
 
 #### cleartokens
 
 Use this command to clear tokens which have already been revoked.
 
 For more information, see cleartokens in Django&#8217;s Oauth Toolkit documentation.
-
-#### expire_sessions
-
-Use this command to terminate all sessions or all sessions for a specific user.
-
-Consider using this command when a user changes role in an organization, is removed from assorted groups in LDAP/AD, or the
-administrator wants to ensure the user can no longer execute jobs due to membership in these groups.
-
-$ awx-manage expire_sessions
-
-This command terminates all sessions by default.
-The users associated with those sessions are logged out.
-To only expire the sessions of a specific user, you can pass their username using the --user flag (replace example_user with the username in the following example):
-
-$ awx-manage expire_sessions --user example_user
 
 #### clearsessions
 

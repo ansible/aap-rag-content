@@ -1207,11 +1207,16 @@ are using.
 ## Setting up logging
 
 Use the following procedure to set up logging to any of the aggregator types.
+.Procedure
+. From the navigation panel, select .
+. On the Logging settings page, click Edit.
 
-1. From the navigation panel, select .
-2. On the Logging settings page, click Edit.
-![Logging settings page]
-3. You can configure the following options:
++
+image::logging-settings.png[Logging settings page]
+
++
+. You can configure the following options:
+
 * Logging Aggregator: Enter the hostname or IP address that you want to send logs to.
 * Logging Aggregator Port: Specify the port for the aggregator if it requires one.
 
@@ -1246,9 +1251,7 @@ It stores files in the directory specified by LOG_AGGREGATOR_MAX_DISK_USAGE_PATH
 * File system location for rsyslogd disk persistence: Location to persist logs that should be retried after an outage of the external log aggregator (defaults to /var/lib/awx).
 Equivalent to the rsyslogd queue.spoolDirectory setting.
 * Log Format For API 4XX Errors: Configure a specific error message. For more information, see API 4XX Error Configuration.
-
 Set the following options:
-
 * Log System Tracking Facts Individually: Click the tooltip  icon for additional information, such as whether or not you want to turn it on, or leave it off by default.
 1. Review your entries for your chosen logging aggregation.
 The following example is set up for Splunk:
@@ -1256,7 +1259,7 @@ The following example is set up for Splunk:
 
 * Enable External Logging: Select this checkbox if you want to send logs to an external log aggregator.
 * Enable/disable HTTPS certificate verification: Certificate verification is enabled by default for the HTTPS log protocol.
-Select this checkbox if yoiu want the log handler to verify the HTTPS certificate sent by the external log aggregator before establishing a connection.
+Select this checkbox if you want the log handler to verify the HTTPS certificate sent by the external log aggregator before establishing a connection.
 * Enable rsyslogd debugging: Select this checkbox to enable high verbosity debugging for rsyslogd.
 Useful for debugging connection issues for external log aggregation.
 1. Click Save or Cancel to abandon the changes.

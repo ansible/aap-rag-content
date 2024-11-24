@@ -19,8 +19,8 @@ If you selected public access when you deployed Ansible Automation Platform on M
 
 # Private deployments
 
-If you selected private access when deploying Ansible Automation Platform on Microsoft Azure,
-then the DNS record issued to the Red Hat Ansible Automation Platform on Microsoft Azure application points to a private address within the CIDR block selected when the managed application was deployed.
+If you selected private access when you deployedAnsible Automation Platform on Microsoft Azure,
+then the DNS record issued to the Red Hat Ansible Automation Platform on Microsoft Azure application points to a private address within the CIDR block selected when you deploy the managed application.
 You must configure access to this address after you have created network peering.
 
 The configuration and access method that you choose to connect to Ansible Automation Platform on Microsoft Azure depends on how your organization manages Azure infrastructure.
@@ -30,7 +30,6 @@ The following are the most common options:
 
 * Azure hosted virtual machine
 * VPN
-* SSH tunnel
 
 ## Azure hosted virtual machine
 
@@ -41,7 +40,7 @@ Users can remotely log into the publicly accessible virtual machine from on-prem
 
 To access the Ansible Automation Platform web UIs on the Azure private network, users navigate to the URLs using the browser on the jumpbox VM.
 
-The DMZ VNet is connected to other Azure VNets through network peering, with routing rules established to send network traffic to the Ansible Automation Platform VNet.
+You connect the DMZ VNet to other Azure VNets through network peering, with routing rules established to send network traffic to the Ansible Automation Platform VNet.
 
 The following diagram shows the topology for an example configuration of private network access via an Azure virtual machine.
 
@@ -63,65 +62,9 @@ With this configuration, users can access Ansible Automation Platform through th
 
 ![aap on azure private nw access vpn]
 
-## SSH tunnel
-
-When VPN is not an option and your local users are more technical, the SSH tunnel approach is a secure alternative that enables users to access Ansible Automation Platform from a browser on a local machine.
-
-To implement this access model, create a lightweight Linux-based SSH server in a DMZ network, similar to the Azure Hosted Virtual Machine method.
-The SSH server does not require any workstation features, because it simply acts as a proxy between a user’s local machine and Ansible Automation Platform on Microsoft Azure.
-
-Each user must be configured as an SSH user on the server.
-Users can then establish an SSH tunnel from the local machine to the SSH server to route traffic for Ansible Automation Platform on Microsoft Azure.
-
-This approach is easier to implement on Linux and macOS host machines, but can be accomplished on Windows.
-
-1. Update your local hosts file so that the Ansible Automation Platform URLs route traffic to your local machine rather than the private IP that DNS records are configured with.
-Add the following line to your hosts file:
-
-```
-127.0.0.1 controller.<your_AAPonAzure_instance>.az.ansiblecloud.com
-```
-
-
-The following example shows the line in a hosts file:
-
-```
-##
-# Host Database
-#
-# localhost is used to configure the loopback interface
-# when the system is booting. Do not change this entry.
-#
-127.0.0.1       localhost
-255.255.255.255 broadcasthost
-::1             localhost
-
-127.0.0.1 controller.<your_AAPonAzure_instance>.az.ansiblecloud.com
-```
-
-2. As a user with root privileges, run the ssh command to establish an SSH tunnel.
-
-In the example below, SSH_server_IP represents the IP address of the SSH server in your DMZ.
-
-```
-sudo ssh azureuser@<SSH_server_IP> -i ~/.ssh/id_ssh_key -N -f -L 443:controller.<your_AAPonAzure_instance>.az.ansiblecloud.com:443
-```
-
-
-The -L flag makes your local system route traffic for the automation controller URL over port 443 (HTTPs).
-
-[NOTE]
-----
-You must use port 443 on both sides of the routing path. Using a different port on the local machine causes some Ansible Automation Platform features to not function properly.
-----
-
-When the SSH tunnel is established and your Azure routing is configured, you can access the automation controller URL from your local browser at https://controller.&lt;your_AAPonAzure_instance&gt;.az.ansiblecloud.com.
-
-![aap on azure private nw access ssh]
-
 # Accessing Red Hat Ansible Automation Platform on Microsoft Azure
 
-When you initiate the deployment of the Red Hat Ansible Automation Platform managed app from Azure marketplace, a form is displayed in the Create Red Hat Ansible Automation Platform on Microsoft Azure window.
+When you initiate the deployment of the Red Hat Ansible Automation Platform managed app from Azure marketplace, a form displays in the Create Red Hat Ansible Automation Platform on Microsoft Azure window.
 Complete the form to provision Ansible Automation Platform infrastructure and resources into your Azure tenant.
 
 1. In a web browser, navigate to Managed Applications in the Azure console.
@@ -170,7 +113,7 @@ When asked to submit information about your license, select your license manifes
 
 ## Microsoft Entra ID SSO configuration
 
-Follow the procedures below to configure SSO with Microsoft Entra ID. If your organization does not use Microsoft Entra ID for application authorization, you can create users in the user management system in Ansible Automation Platform.
+Follow the procedures below to configure single sign-on (SSO) with Microsoft Entra ID (formerly known as Azure Active Directory). If your organization does not use Microsoft Entra ID for application authorization, you can create users in the user management system in Ansible Automation Platform.
 
 1. In a browser, navigate to the Automation controller URL and log in using the following credentials:
 * Username: admin
@@ -182,12 +125,12 @@ Follow the procedures below to configure SSO with Microsoft Entra ID. If your or
 
 To set up enterprise authentication for Microsoft Entra ID, you must obtain an OAuth2 key and secret by registering your Ansible Automation Platform deployment in Azure.
 
-To register the automation controller instance in Azure, you must supply the Azure AD OAuth2 Callback URL from the automation controller settings.
+To register the automation controller instance in Azure, you must supply the Microsoft Entra ID OAuth2 Callback URL from the automation controller settings.
 
 1. In a web browser, open the automation controller console.
 2. Click Settings in the menu to open the main settings page.
-3. Click Azure AD settings in the Authentication category to open the Details page.
-4. Copy the value for Azure AD OAuth2 Callback URL. You will need this value when you register your deployed application in Microsoft Entra ID.
+3. Click Microsoft Entra ID settings in the Authentication category to open the Details page.
+4. Copy the value for Microsoft Entra ID OAuth2 Callback URL. You will need this value when you register your deployed application in Microsoft Entra ID.
 
 1. In a web browser, open the Azure portal.
 2. Ensure that you are using the tenant where you deployed Ansible Automation Platform.
@@ -199,14 +142,14 @@ To register the automation controller instance in Azure, you must supply the Azu
 * In the Name field, enter the same name that you used for the deployed application.
 * Select the default value for Supported account types.
 * Select Web for Redirect URI (optional).
-* In the Redirect URI (optional) field, enter the Azure AD OAuth2 Callback URL value that you fetched from automation controller.
+* In the Redirect URI (optional) field, enter the Microsoft Entra ID OAuth2 Callback URL value that you fetched from automation controller.
 8. Click Register to create the registration.
 
 When registration is complete, the registration page for the Automation Controller application is displayed.
 
 1. In the Automation controller application registration page on Azure, copy and save the value of Application (client) ID.
 
-You will use this value for the Azure AD OAuth2 Key in the Ansible Automation Platform settings.
+You need this value for the Microsoft Entra IDOAuth2 Key in the Ansible Automation Platform settings.
 2. Under Manage, click Certificates & secrets.
 3. Click Client secrets and then + New client secret.
 4. Provide a description for the new secret.
@@ -217,16 +160,16 @@ It is useful to include the date in the description, for example: AAP Client Sec
 5. Provide an expiration date for the new secret.
 
 The maximum lifetime for the certificate is 2 years. Unless you have specific security needs that prevent the creation of a long term certificate, select an expiration date of 24 months.
-6. Save the secret Value to a location on your local machine. Once you navigate away from this page it will be hidden and no longer retrievable.
+6. Save the secret Value to a location on your local machine. After you navigate away from this page the secret value is no longer retrievable.
 
 Add the key (Application (client) ID) and value (Value) of the secret that you generated in Azure to your Ansible Automation Platform instance.
 
 1. Open the automation controller console in a web browser.
-2. Click menu:Settings[Azure AD settings].
+2. Click menu:Settings[Microsoft Entra ID settings].
 3. Click Edit.
 4. Enter the information for the secret that you generated in Microsoft Entra ID:
-5. In Azure AD OAuth2 Key, paste the Application (client) ID.
-6. In Azure AD OAuth2 Secret, paste the secret Value.
+5. In Microsoft Entra ID OAuth2 Key, paste the Application (client) ID.
+6. In Microsoft Entra ID OAuth2 Secret, paste the secret Value.
 7. Click Save.
 
 1. Open the automation controller in a web browser.
@@ -235,7 +178,7 @@ Add the key (Application (client) ID) and value (Value) of the secret that you g
 4. Enter a name for the new credential and select Azure Resource Manager for the credential type.
 5. Use the Service Principal details to fill out the values of the form:
 * Name: Choose a descriptive name for the credential, for example *Azure Infrastructure*.
-* Subscription ID: Enter the subscription id where your resources created in Azure should be associated. This is unique to your tenant. Your organization may have multiple subscription ids; consult your Azure administrator regarding the subscription id that you should use.
+* Subscription ID: Enter the subscription ID where your resources created in Azure are associated. This is unique to your tenant. Your organization may have multiple subscription IDs; consult your Azure administrator regarding the subscription ID that you must use.
 * Client ID: Enter the appId value from the Service Principal creation.
 * Client Secret: Enter the password from the Service Principal creation.
 * Tenant ID: Enter the tenant from the Service Principal creation.

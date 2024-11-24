@@ -5,7 +5,7 @@ These capabilities enable Ansible developers to use natural language prompts to 
 
 [NOTE]
 ----
-You can generate playbooks and view playbook explanations when connecting to the Red Hat Ansible Lightspeed cloud service. These features are not yet available with Red Hat Ansible Lightspeed on-premise deployments.
+You can generate playbooks and view playbook explanations when connecting to the Red Hat Ansible Lightspeed cloud service and on-premise deployments.
 ----
 
 # Best practices to generate playbooks

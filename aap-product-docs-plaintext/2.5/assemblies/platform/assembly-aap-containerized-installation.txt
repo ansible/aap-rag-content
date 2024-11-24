@@ -330,6 +330,18 @@ gateway_main_url=<https://load_balancer_url>
 HAProxy SSL passthrough mode is not supported with platform gateway.
 ----
 
+Shared storage is required when installing more than one instance of automation hub with a file storage backend. When installing a single instance of the automation hub, shared storage is optional.
+
+* To configure shared storage for automation hub, set the following variable in the inventory file, ensuring your network file system (NFS) share has read, write, and execute permissions:
+
+
+```
+hub_shared_data_path=<path_to_nfs_share>
+```
+
+
+* To change the mount options for your NFS share, use the hub_shared_data_mount_opts variable. This variable is optional and the default value is rw,sync,hard.
+
 * To define the location of your automation controller license file, set the following variable in the inventory file:
 
 

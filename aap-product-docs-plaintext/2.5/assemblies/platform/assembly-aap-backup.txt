@@ -71,8 +71,7 @@ Use this procedure to back up a deployment of the controller, including jobs, in
 4. Select the Automation Controller Backup tab.
 5. Click btn:[Create AutomationControllerBackup].
 6. Enter a Name for the backup.
-7. Enter the Deployment name of the deployed Ansible Automation Platform instance being backed up.
-For example, if your automation controller must be backed up and the deployment name is aap-controller, enter 'aap-controller' in the Deployment name field.
+7. In the Deployment name field, enter the name of the AutomationController custom resource object of the deployed Ansible Automation Platform instance being backed up. This name was created when you created your AutomationController object.
 8. If you want to use a custom, pre-created pvc:
 1. [Optional]: enter the name of the Backup persistent volume claim.
 2. [Optional]: enter the Backup PVC storage requirements, and Backup PVC storage class.

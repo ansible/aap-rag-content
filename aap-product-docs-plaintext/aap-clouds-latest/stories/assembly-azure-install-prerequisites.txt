@@ -4,7 +4,7 @@
 
 * A subscription for Microsoft Azure.
 * Contributor or Administrator access to that Azure subscription.
-* Access to the Azure CLI.
+* Access to the Azure comand line interface (CLI).
 
 # Ansible Automation Platform requirements
 
@@ -16,11 +16,11 @@
 Microsoft imposes resource limits within each Azure region. The CPU limit is the most likely to impact Red Hat Ansible Automation Platform on Microsoft Azure.
 
 Before you install Ansible Automation Platform on Microsoft Azure, ensure that you have capacity to deploy the managed application into your desired region.
-Refer to Azure infrastructure usage for infrastructure requirements.
+Refer to Ansible Automation Platform on Microsoft Azure infrastructure usage for infrastructure requirements.
 
 ## Regional vCPU limits
 
-The Azure resources used during the deployment of the managed application temporarily exceed the resource requirements in Azure infrastructure usage.
+The Azure resources used during the deployment of the managed application temporarily exceed the resource requirements in Ansible Automation Platform on Microsoft Azure infrastructure usage.
 The Total Regional vCPUs quota is temporarily consumed when deploying the managed application.
 
 Every Azure region has a separate Total Regional vCPUs quota.
@@ -30,7 +30,7 @@ The following steps describe how to view the resource quotas for your subscripti
 
 1. In the Azure console, search for Quotas and open the My Quotas page.
 2. Select the region where you wish to deploy the managed application to view your allocation and usage metrics for that region.
-Ensure that you have selected a single region. Viewing all regions at once will not show the limitations of a single Azure region.
+Ensure that you have selected a single region. Viewing all regions at once does not show the limitations of a single Azure region.
 
 ## Regional StandardCore limits
 
@@ -95,7 +95,7 @@ Red Hat Ansible Automation Platform on Microsoft Azure installation requires spe
 
 ## Registering Azure Resource Providers
 
-To  register Azure Resource Providers, follow the instructions in the How to manage resources section of the Azure documentation.
+To  register Azure Resource Providers, follow the instructions in the Register resource provider section of the Azure documentation.
 
 # Network
 
@@ -131,7 +131,7 @@ Red Hat Ansible Automation Platform on Microsoft Azure VNet Preparation.
 ## AKS CIDR Blocks
 
 You can configure the AKS network CIDR blocks.
-Traffic that originates from the AKS cluster will appear to come from the range configured in AKS, not from the VNET.
+Traffic that originates from the AKS cluster appears to come from the range configured in AKS, not from the VNET.
 
 When you are planning your AKS CIDR block configuration, bear the following in mind:
 
@@ -152,16 +152,17 @@ To enable the Ansible Automation Platform application to access and manage Azure
 The Microsoft Azure collection supports service principal authentication.
 
 To create a service principal, you must have administrator privileges with tenancy-wide permissions on your Azure tenant.
-Your Ansible Automation Platform on Microsoft Azure deployment will be provisioned in the same Subscription ID as the service principal created in this step.
+Your Ansible Automation Platform on Microsoft Azure deployment provisions in the same Subscription ID as the service principal created in this step.
 
-1. Navigate to the Azure portal and click the Cloud Shell icon to open a bash Cloud Shell in your browser.
-2. Set the Azure CLI to use the subscription that you intend to use for automating Azure services. Run the following command from the shell:
+1. Navigate to the Azure portal
+2. Click the Cloud Shell icon to open a bash Cloud Shell in your browser.
+3. Set the Azure CLI to use the subscription that you intend to use for automating Azure services. Run the following command from the shell:
 
 ```
 az account set --subscription <your_subscription_id>
 ```
 
-3. Run the following command using the Azure CLI to create a privileged service principal in Microsoft Entra ID:
+4. Run the following command using the Azure CLI to create a privileged service principal in Microsoft Entra ID:
 
 ```
 az ad sp create-for-rbac --name ansible --role Contributor
@@ -180,7 +181,7 @@ The output displays the appID and tenant keys for the service principal:
 }
 ```
 
-4. Store the service principal details securely, as they are displayed only when you create the secret. You will need them when you deploy Automation controller.
+5. Store the service principal details securely, as they are displayed only when you create the secret. You will need them when you deploy Automation controller.
 
 ## Maintaining your service principals
 

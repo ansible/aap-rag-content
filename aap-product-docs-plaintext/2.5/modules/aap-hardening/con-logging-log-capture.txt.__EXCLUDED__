@@ -1,7 +1,21 @@
 # Logging and log capture
 
-Visibility and analytics is an important pillar of Enterprise Security and Zero Trust Architecture. Logging is key to capturing actions and auditing. You can manage logging and auditing by using the built-in audit support described in the Auditing the system section of the Security hardening for Red Hat Enterprise Linux guide. Controller&#8217;s built-in logging and activity stream support automation controller logs all changes within automation controller and automation logs for auditing purposes. More detailed information is available in the Logging and Aggregation section of the automation controller documentation.
+Visibility and analytics is an important pillar of Enterprise Security and Zero Trust Architecture.
+Logging is key to capturing actions and auditing.
+You can manage logging and auditing by using the built-in audit support described in the Auditing the system section of the Security hardening for Red Hat Enterprise Linux guide.
+Ansible Automation Platform&#8217;s built-in logging and activity stream support Red Hat Ansible Automation Platform logs all changes within Red Hat Ansible Automation Platform and automation logs for auditing purposes.
+More detailed information is available in the Logging and Aggregation section of Configuring automation execution.
 
-This guide recommends that you configure Ansible Automation Platform and the underlying Red Hat Enterprise Linux systems to collect logging and auditing centrally, rather than reviewing it on the local system. Automation controller must be configured to use external logging to compile log records from multiple components within the controller server. The events occurring must be time-correlated to conduct accurate forensic analysis. This means that the controller server must be configured with an NTP server that is also used by the logging aggregator service, as well as the targets of the controller. The correlation must meet certain industry tolerance requirements. In other words, there might be a varying requirement that time stamps of different logged events must not differ by any amount greater than X seconds. This capability should be available in the external logging service.
+This guide recommends that you configure Ansible Automation Platform and the underlying Red Hat Enterprise Linux systems to collect logging and auditing centrally, rather than reviewing it on the local system.
+Ansible Automation Platform must be configured to use external logging to compile log records from multiple components within the Ansible Automation Platform server.
+The events occurring must be time-correlated to conduct accurate forensic analysis.
+This means that the Ansible Automation Platform server must be configured with an NTP server that is also used by the logging aggregator service, as well as the targets of Ansible Automation Platform.
+The correlation must meet certain industry tolerance requirements.
+In other words, there might be a varying requirement that time stamps of different logged events must not differ by any amount greater than x seconds.
+This capability should be available in the external logging service.
 
-Another critical capability of logging is the ability to use cryptography to protect the integrity of log tools. Log data includes all information (for example, log records, log settings, and log reports) needed to successfully log information system activity. It is common for attackers to replace the log tools or inject code into the existing tools to hide or erase system activity from the logs. To address this risk, log tools must be cryptographically signed so that you can identify when the log tools have been modified, manipulated, or replaced. For example, one way to validate that the log tool(s) have not been modified, manipulated or replaced is to use a checksum hash against the tool file(s). This ensures the integrity of the tool(s) has not been compromised.
+Another critical capability of logging is the ability to use cryptography to protect the integrity of log tools. Log data includes all information (for example, log records, log settings, and log reports) needed to successfully log information system activity.
+It is common for attackers to replace the log tools or inject code into the existing tools to hide or erase system activity from the logs.
+To address this risk, log tools must be cryptographically signed so that you can identify when the log tools have been modified, manipulated, or replaced.
+For example, one way to validate that the log tool(s) have not been modified, manipulated or replaced is to use a checksum hash against the tool file(s).
+This ensures the integrity of the tool(s) has not been compromised.

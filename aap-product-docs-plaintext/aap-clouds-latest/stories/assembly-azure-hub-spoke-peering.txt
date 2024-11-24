@@ -12,8 +12,8 @@ Updating route tables incorrectly can break your network. Only execute the steps
 * You have configured and tested an Azure VNet hub-and-spoke implementation in your Azure tenant. This prerequisite requires many Azure resources to be configured, including a Virtual Network Gateway.
 * You have configured transit routing between your spoke networks, including your VPNs. Refer to Configure VPN gateway transit for virtual network peering in the Microsoft Azure documentation for instructions.
 * You have identified the following:
-* The CIDR block(s) of your existing VNets (including VPNs & direct connects) that will need access to Ansible Automation Platform on Microsoft Azure UIs.
-* The CIDR block(s) of your existing VNets (including VPNs & direct connects) that will contain hosts or endpoints for Ansible automation.
+* The CIDR blocks of your existing VNets (including VPNs and direct connects) that need access to Ansible Automation Platform on Microsoft Azure UIs.
+* The CIDR blocks of your existing VNets (including VPNs and direct connects) that  contain hosts or endpoints for Ansible Automation Platform on Microsoft Azure.
 * The CIDR blocks of the Ansible Automation Platform on Microsoft Azure VNet from the managed resource group of the application. Refer to Finding the CIDR Block of the managed resource group for instructions.
 
 Before peering any networks, ensure that there is no network address space overlap between your private VNets and your Ansible Automation Platform on Microsoft Azure network.
@@ -57,7 +57,7 @@ For further information on configuring peering, refer to Create a peering in the
 
 ## Updating the route tables
 
-Before you update the route tables, confirm that you satisfy the prerequisites for the hub-and-spoke peering process.
+Before you update the route tables, confirm that you satisfy the Prerequisites for the hub-and-spoke peering process.
 
 1. Navigate to Route Tables in the Azure portal.
 2. As part of your hub-and-spoke configuration, you created one or more route tables to define the routes between the networks. Click on one of these route tables.
@@ -102,7 +102,7 @@ If you choose not to allow all outbound traffic from  port 443, you must configu
 
 Add routes in the Ansible Automation Platform route table for outbound traffic from the full CIDR range of the Ansible Automation Platform on Microsoft Azure managed application to the domains listed in the Azure Virtual Appliance Routing with Ansible Automation Platform on Azure article on the Red Hat Customer Portal.
 * You must also allow traffic from your firewall to any other external domain or IP address that you want Ansible Automation Platform to run automation jobs against.
-Otherwise, your firewall will block connectivity between Ansible Automation Platform and destinations for automation.
+Otherwise, your firewall blocks connectivity between Ansible Automation Platform and destinations for automation.
 * Ansible Automation Platform requires a public DNS zone to provide SSL certificates.
 This public DNS zone is in the managed resource group of the deployment.
 The platform must be able to communicate via DNS queries with the servers listed in the DNS zone to complete certificate challenges with our upstream provider.
