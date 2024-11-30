@@ -40,12 +40,13 @@ authors = []
 dependencies = [
     "PyYAML==6.0.1",
     "huggingface_hub==0.23.4",
-    "llama_index==0.10.55",
-    "llama-index-vector-stores-faiss==0.1.2",
-    "llama-index-embeddings-huggingface==0.2.2",
-    "llama-index-readers-file==0.1.30",
+    "llama-index==0.12.2",
+    "llama-index-vector-stores-faiss==0.3.0",
+    "llama-index-embeddings-huggingface==0.4.0",
+    "llama-index-readers-file==0.4.0",
     "faiss-cpu==1.8.0.post1",
     "requests>=2.32.3",
+    "llama-index-vector-stores-supabase==0.3.0",
 ]
 requires-python = "==3.11.*"
 readme = "README.md"

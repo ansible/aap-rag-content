@@ -18,6 +18,7 @@ from llama_index.core.schema import TextNode
 from llama_index.core.storage.storage_context import StorageContext
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.vector_stores.faiss import FaissVectorStore
+from llama_index.vector_stores.supabase import SupabaseVectorStore
 
 # from llama_index.core.node_parser import MarkdownNodeParser
 
@@ -122,6 +123,7 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--output", help="Vector DB output folder")
     parser.add_argument("-i", "--index", help="Product index")
     parser.add_argument("-v", "--aap-version", help="AAP version")
+    parser.add_argument("--use-pgvector", action="store_true")
     args = parser.parse_args()
     print(f"Arguments used: {args}")
 
@@ -162,8 +164,26 @@ if __name__ == "__main__":
     Settings.llm = resolve_llm(None)
 
     embedding_dimension = len(Settings.embed_model.get_text_embedding("random text"))
-    faiss_index = faiss.IndexFlatIP(embedding_dimension)
-    vector_store = FaissVectorStore(faiss_index=faiss_index)
+
+    if args.use_pgvector:
+        user = os.getenv("POSTGRES_USER")
+        password = os.getenv("POSTGRES_PASSWORD")
+        host = os.getenv("POSTGRES_HOST")
+        port = os.getenv("POSTGRES_PORT")
+        database = os.getenv("POSTGRES_DATABASE")
+
+        connection = f"postgresql://{user}:{password}@{host}:{port}/{database}"
+        collection_name = args.index.replace("-", "_")
+
+        vector_store = SupabaseVectorStore(
+            postgres_connection_string=connection,
+            collection_name=collection_name,
+            dimension=embedding_dimension,
+        )
+    else:
+        faiss_index = faiss.IndexFlatIP(embedding_dimension)
+        vector_store = FaissVectorStore(faiss_index=faiss_index)
+
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
     # Load documents
@@ -177,7 +197,10 @@ if __name__ == "__main__":
     # documents = md_parser.get_nodes_from_documents(documents)
 
     # Create chunks/nodes
-    nodes = Settings.text_splitter.get_nodes_from_documents(documents)
+    nodes = Settings.text_splitter.get_nodes_from_documents(
+        documents,
+        show_progress=args.use_pgvector,
+    )
 
     # Filter out invalid nodes
     good_nodes = []
@@ -194,23 +217,25 @@ if __name__ == "__main__":
     index = VectorStoreIndex(
         good_nodes,
         storage_context=storage_context,
+        show_progress=args.use_pgvector,
     )
-    index.set_index_id(args.index)
-    index.storage_context.persist(persist_dir=PERSIST_FOLDER)
 
-    _metadata: dict = {}
-    _metadata["execution-time"] = time.time() - start_time
-    _metadata["llm"] = "None"
-    _metadata["embedding-model"] = args.model_name
-    _metadata["index-id"] = args.index
-    _metadata["vector-db"] = "faiss.IndexFlatIP"
-    _metadata["embedding-dimension"] = embedding_dimension
-    _metadata["chunk"] = args.chunk
-    _metadata["overlap"] = args.overlap
-    _metadata["total-embedded-files"] = len(documents)
+    if not args.use_pgvector:
+        index.storage_context.persist(persist_dir=PERSIST_FOLDER)
 
-    with open(os.path.join(PERSIST_FOLDER, "metadata.json"), "w", encoding="utf8") as file:
-        file.write(json.dumps(_metadata))
+        _metadata: dict = {}
+        _metadata["execution-time"] = time.time() - start_time
+        _metadata["llm"] = "None"
+        _metadata["embedding-model"] = args.model_name
+        _metadata["index-id"] = args.index
+        _metadata["vector-db"] = "faiss.IndexFlatIP"
+        _metadata["embedding-dimension"] = embedding_dimension
+        _metadata["chunk"] = args.chunk
+        _metadata["overlap"] = args.overlap
+        _metadata["total-embedded-files"] = len(documents)
+
+        with open(os.path.join(PERSIST_FOLDER, "metadata.json"), "w", encoding="utf8") as file:
+            file.write(json.dumps(_metadata))
 
     if UNREACHABLE_DOCS > 0:
         print(

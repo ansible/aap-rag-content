@@ -23,22 +23,52 @@ make install-deps
 make install-deps-test
 ```
 
-## Extract plaintext files from aap-docs repo
+## Build RAG container image
+### Extract plaintext files from aap-docs repo
 
 ```commandline
  ./scripts/get_aap_plaintext_docs.sh 2.5
 ```
 
-## Build image
+### Build image
 ```commandline
 make build-image-aap
 ```
 
-## Push image to quay.io
+### Push image to quay.io
 _(It is pushed to Tami's account temporarily)_
 ```commandline
 podman login quay.io
 podman push aap-rag-content quay.io/ttakamiy/aap-rag-content
 ```
 
+## pgvector (Postgres vector extension) support
+
+Instead of building an image of RAG data using `FaissVectorStore`, you
+can store the vector data in a Postgresql DB with 
+[the pgvector extension](https://github.com/pgvector/pgvector).
+
+### Extract plaintext files from aap-docs repo
+
+This is the same procedure as the one that is required for building an image.
+```commandline
+ ./scripts/get_aap_plaintext_docs.sh 2.5
+```
+
+### Download embedding model
+In building an image, this step is invoked from container file. For using
+pgvector, you need to run the script using `Makefile`:
+```commandline
+make download-embeddings-model
+```
+
+### Start Postgres on localhost
+```commandline
+make start-postgresql
+```
+
+### Generate embeddings and store results
+```commandline
+make generate-embeddings-aap
+```
 

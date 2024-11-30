@@ -1,3 +1,10 @@
+POSTGRES_USER ?= postgres
+POSTGRES_PASSWORD ?= somesecret
+POSTGRES_HOST ?= localhost
+POSTGRES_PORT ?= 15432
+POSTGRES_DATABASE ?= postgres
+EMBEDDINGS_MODEL ?= sentence-transformers/all-mpnet-base-v2
+
 install-tools: ## Install required utilities/tools
 	@command -v pdm > /dev/null || { echo >&2 "pdm is not installed. Installing..."; pip install pdm; }
 
@@ -36,6 +43,36 @@ build-image: ## Build a rag-content container image.
 
 build-image-aap: ## Build a rag-content container image.
 	podman build -t aap-rag-content -f Containerfile-aap .
+
+start-postgres:
+	podman run -d --name pgvector --rm -e POSTGRES_PASSWORD=$(POSTGRES_PASSWORD) \
+	 -p $(POSTGRES_PORT):5432 \
+	 -v $(PWD)/postgresql/data:/var/lib/postgresql/data:Z ankane/pgvector
+
+start-postgres-debug:
+	podman run --name pgvector --rm -e POSTGRES_PASSWORD=$(POSTGRES_PASSWORD) \
+	 -p $(POSTGRES_PORT):5432 \
+	 -v $(PWD)/postgresql/data:/var/lib/postgresql/data:Z ankane/pgvector \
+	 postgres -c log_statement=all -c log_destination=stderr
+
+download-embeddings-model:
+	pdm run python scripts/download_embeddings_model.py \
+		-l ./embeddings_model \
+		-r ${EMBEDDINGS_MODEL}
+
+generate-embeddings-aap:
+	POSTGRES_USER=$(POSTGRES_USER) \
+	POSTGRES_PASSWORD=$(POSTGRES_PASSWORD) \
+	POSTGRES_HOST=$(POSTGRES_HOST) \
+	POSTGRES_PORT=$(POSTGRES_PORT) \
+	POSTGRES_DATABASE=$(POSTGRES_DATABASE) \
+	pdm run python scripts/generate_embeddings-aap.py \
+	 -f aap-product-docs-plaintext \
+	 -mn ${EMBEDDINGS_MODEL} \
+	 -o vector_db/aap_product_docs/2.5 \
+	 -i aap-product-docs-2_5 \
+	 -v 2.5 \
+	 --use-pgvector
 
 help: ## Show this help screen
 	@echo 'Usage: make <OPTIONS> ... <TARGETS>'
