@@ -8,6 +8,7 @@ USER 0
 WORKDIR /workdir
 
 COPY pyproject.toml pdm.lock Makefile .
+RUN /usr/bin/pip3.11 install --no-cache-dir pdm
 RUN make install-tools && pdm config python.use_venv false && make pdm-lock-check install-deps
 
 COPY aap-product-docs-plaintext ./aap-product-docs-plaintext
