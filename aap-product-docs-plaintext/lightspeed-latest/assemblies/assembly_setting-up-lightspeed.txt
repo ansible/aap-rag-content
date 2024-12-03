@@ -118,6 +118,7 @@ You must also have installed IBM watsonx Code Assistant for Red Hat Ansible Ligh
 
 ### Prerequisites
 
+* You have installed Red Hat Ansible Automation Platform on your Red Hat OpenShift Container Platform environment.
 * You have administrator privileges for Red Hat Ansible Automation Platform.
 * You have installed IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data.
 * Your system meets the minimum system requirements to set up Red Hat Ansible Lightspeed on-premise deployment.

@@ -122,9 +122,25 @@ The following illustration shows the training matches found in existing Ansible 
 
 # Requesting code recommendations for multiple tasks
 
-You can request multitask code recommendations by entering a sequence of natural language task prompts in Ansible VS Code extension. In a YAML file, start a comment by using a Pound key (#), and separate each prompt by using Ampersand (&amp;) symbols.
+You can request multitask code recommendations by entering a sequence of natural language task prompts in Ansible VS Code extension. In a YAML file, start your prompt with a pound symbol (#), and separate each prompt by using the ampersand symbol (&amp;).
 
-For example, to automate a multitask of installing PostgreSQL server and running the initial PostgreSQL setup command, you can enter the prompt # Install postgresql-server & run postgresql-setup command. The Ansible Lightspeed service reads the text, interacts with the IBM watsonx Code Assistant models, and generates the code recommendations.
+
+```
+# Install postgresql-server & run postgresql-setup command
+```
+
+
+For better readability, you can split your multitask inline prompts over multiple lines. To achieve this, end your current line with an ampersand symbol (&amp;) and start the next line with the hash symbol (#).
+
+
+```
+# Create a keypair called lightspeed-keypair & create a vpc & create vpc_id var &
+# create a security group that allows SSH & create subnet with 10.0.1.0/24 cidr &
+# create an internet gateway & create a route table
+```
+
+
+The Ansible Lightspeed service reads the text, interacts with the IBM watsonx Code Assistant model, and generates the code recommendations.
 
 * You meet one of the following requirements:
 * Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
@@ -160,9 +176,24 @@ Ansible and Lightspeed set as selected language mode
 
 For more information, see Creating playbooks in the Ansible Automation Platform Creator Guide.
 6. In the playbook, provide the following information to request multitask code recommendations:
-1. Start a new YAML file comment by entering a Pound key (#) at the correct indentation.
-2. Add a detailed natural language prompt in a sequence, separating each task by using an Ampersand (&) symbol.
-For example, to automate the multitask of installing PostgreSQL server and running the PostgreSQL setup command, enter the following  natural language prompt # Install postgresql-server & run postgresql-setup command.
+1. Start a new YAML file comment by entering a pound symbol (#) at the correct indentation.
+2. Add a detailed natural language prompt in a sequence, separating each task by using the ampersand symbol (&).
+Example of a multitask prompt
+
+```
+# Install postgresql-server & run postgresql-setup command
+```
+
+
+For better readability, split your multitask inline prompts over multiple lines. To achieve this, end your current line with an ampersand symbol (&amp;) and start the next line with the hash symbol (#).
+Example of a multitask prompt split over multiple lines
+
+```
+# Create a keypair called lightspeed-keypair & create a vpc & create vpc_id var &
+# create a security group that allows SSH & create subnet with 10.0.1.0/24 cidr &
+# create an internet gateway & create a route table
+```
+
 3. Press Enter directly after the task description. Keep the cursor at the same location in your file, and wait for the code recommendation results to populate.
 
 The Ansible Lightspeed service is engaged, and it starts generating code recommendations for multiple tasks.

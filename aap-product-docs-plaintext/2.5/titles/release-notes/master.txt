@@ -118,6 +118,12 @@ Ansible development tools comprise the following tools:
 
 For more information, see Developing Ansible automation content.
 
+## Red Hat Ansible Automation Platform Service on AWS
+
+Red Hat Ansible Automation Platform Service on AWS is a deployment of the Ansible Automation Platform control plane purchased through AWS Marketplace. Red&#160;Hat manages the service so that customer teams can focus on automation.
+
+For more information, see Red Hat Ansible Automation Platform Service on AWS.
+
 ## Enhancements
 
 * Added the ability to provide mounts.conf or copy from a local or remote source when installing Podman. (AAP-16214)
@@ -304,7 +310,7 @@ CVE-2024-8775 ansible-core: Exposure of sensitive information in Ansible vault f
 * It is necessary to specify the CONTROLLER_SSO_URL and AUTOMATION_HUB_SSO_URL settings in Gateway to fix the OIDC auth redirect flow.
 * It is necessary to set the SERVICE_BACKED_SSO_AUTH_CODE_REDIRECT_URL setting to fix the OIDC auth redirect flow.
 
-#### container-based installation Ansible Automation Platform
+#### Container-based Ansible Automation Platform
 
 * Fixed an issue when the port value was not defined in the gateway_main_url variable, the containerized installer failed with incorrect execution environment image reference error.
 * Fixed an issue where the containerized installer used port number when specifying the image_url for a decision environment. The user should not add a port to image URLs when using the default value.

@@ -19,11 +19,14 @@ To ensure that metrics-utility continues to work as configured, clear your repor
 
 # Configuring metrics-utility
 
-## On RHEL
+## On Red Hat Enterprise Linux
 
 * An active Ansible Automation Platform subscription
 
-Metrics-utility is included with Ansible Automation Platform, so no separate installation is needed. The following commands gather the relevant data and generate a CCSP report containing your usage metrics. You can configure these commands as cronjobs to ensure they run at the beginning of every month. See How to schedule jobs using the Linux ‘Cron’ utility for more on configuring using the cron syntax.
+Metrics-utility is included with Ansible Automation Platform, so you do not need a separate installation.
+The following commands gather the relevant data and generate a CCSP report containing your usage metrics.
+You can configure these commands as cronjobs to ensure they run at the beginning of every month.
+See How to schedule jobs using the Linux 'cron' utility for more on configuring using the cron syntax.
 
 1. In the cron file, set the following variables to ensure metrics-utility gathers the relevant data. To open the cron file for editing, run:
 
@@ -31,7 +34,7 @@ Metrics-utility is included with Ansible Automation Platform, so no separate ins
 crontab -e
 ```
 
-2. Specify the following variables to indicate where the report will be deposited in your file system:
+2. Specify the following variables to indicate where the report is deposited in your file system:
 
 ```
 export METRICS_UTILITY_SHIP_TARGET=directory
@@ -59,16 +62,15 @@ export METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER="PROCUREMENT LEADER"
 metrics-utility gather_automation_controller_billing_data --ship --until=10m
 ```
 
-5. To configure the run schedule, add the following parameters to the end of the file and specify how often you want metrics-utility to gather information and build a report using cron syntax. In the example below, the gather command is configured to run every hour at 00 minutes. The build_report command is configured to run every second day of each month at 4:00 am.
+5. To configure the run schedule, add the following parameters to the end of the file and specify how often you want metrics-utility to gather information and build a report using cron syntax. In the following example, the gather command is configured to run every hour at 00 minutes. The build_report command is configured to run every second day of each month at 4:00 AM.
 
 ```
 0 */1 * * * metrics-utility gather_automation_controller_billing_data --ship --until=10m
-0 4 2 * *  metrics-utili
-ty build_report
+0 4 2 * *  metrics-utility build_report
 ```
 
 6. Save and close the file.
-7. To verify that your changes are saved, run:
+7. To verify that you saved your changes, run:
 
 ```
 crontab -l
@@ -81,7 +83,7 @@ cat /var/log/cron
 ```
 
 
-The following is an example of the output. Note that time and date may vary depending on how your configure the run schedule:
+The following is an example of the output. Note that time and date might vary depending on how your configure the run schedule:
 
 ```
 May  8 09:45:03 ip-10-0-6-23 CROND[51623]: (root) CMDOUT (No billing data for month: 2024-04)
@@ -118,7 +120,7 @@ Follow the steps below to configure the run schedule for metrics-utility on Open
 Metrics-utility will run as indicated by the parameters you set in the configuration file. The utility cannot be run manually on OpenShift Container Platform.
 ----
 
-### Create a ConfigMap in the Openshift UI YAML view
+### Create a ConfigMap in the OpenShift UI YAML view
 
 1. From the navigation panel on the left side, select ConfigMaps, and then click the Create ConfigMap button.
 2. On the next screen, select the YAML view tab.

@@ -532,6 +532,36 @@ spec:
 ```
 
 
+## Enabling HTTPS redirect for single sign-on (SSO) for platform gateway on OpenShift Container Platform
+
+HTTPS redirect for SAML, allows you to log in once and access all of the platform gateway without needing to reauthenticate.
+
+* You have successfully configured SAML in the gateway from the Ansible Automation Platform Operator. Refer to Configuring SAML authentication for help with this.
+
+1. Log in to Red Hat OpenShift Container Platform.
+2. Go to .
+3. Select your Ansible Automation Platform Operator deployment.
+4. Select All Instances and go to your AnsibleAutomationPlatform instance.
+5. Click the  &#8942; icon and then select Edit AnsibleAutomationPlatform.
+6. In the YAML view paste the following YAML code under the spec: section:
+
+```
+spec:
+  extra_settings:
+    - setting: REDIRECT_IS_HTTPS
+      value: '"True"'
+```
+
+7. Click Save.
+
+After you have added the REDIRECT_IS_HTTPS setting, wait for the pod to redeploy automatically. You can verify this setting makes it into the pod by running:
+
+
+```
+oc exec -it <gateway-pod-name> -- grep REDIRECT /etc/ansible-automation-platform/gateway/settings.py
+```
+
+
 ## Frequently asked questions on platform gateway
 
 If I delete my Ansible Automation Platform deployment will I still have access to Automation Controller?:: No, automation controller, automation hub, and Event-Driven Ansible are nested within the deployment and are also deleted.
@@ -543,6 +573,7 @@ Alternatively, to display the status conditions you can run the get command:
 oc get automationcontroller <instance-name> -o jsonpath=Pipe "| jq"
 Can I track my migration in real time?:: To help track the status of the migration or to understand why migration might have failed you can look at the migration logs as they are running. Use the logs command:
 oc logs fresh-install-controller-migration-4.6.0-jwfm6 -f
+I have configured my SAML but authentication fails with this error: "Unable to complete social auth login" What can I do?:: You must update your Ansible Automation Platform instance to include the REDIRECT_IS_HTTPS extra setting. See Enabling single sign-on (SSO) for platform gateway on OpenShift Container Platform for help with this.
 
 # Configuring automation controller on Red Hat OpenShift Container Platform web console
 
