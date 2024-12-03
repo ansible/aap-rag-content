@@ -587,6 +587,12 @@ For more information and additional options, see OneLogin’s SAML Python Toolki
 21. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.
 22. Click Next.
 
+
+[NOTE]
+----
+You can configure an HTTPS redirect for SAML in operator-based deployments to simplify log in for your users. For the steps to configure this setting, see Enabling single sign-on (SSO) for platform gateway on OpenShift Container Platform.
+----
+
 To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.
 
 ### Configuring TACACS+ authentication
@@ -626,7 +632,8 @@ To control which users are allowed into the Ansible Automation Platform server, 
 
 To set up enterprise authentication for Microsoft Entra ID, formerly known as Microsoft Azure Active Directory (AD), you need to obtain an OAuth2 key and secret by registering your organization-owned application from Azure using the Quickstart: Register an application with the Microsoft identity platform.
 
-Each key and secret must belong to a unique application and cannot be shared or reused between different authentication backends. To register the application, you must supply it with your webpage URL, which is the Callback URL shown in the Authenticator details for your authenticator configuration. See Displaying authenticator details for instructions on accessing this information.
+Each key and secret must belong to a unique application and cannot be shared or reused between different authentication backends. To register the application, you must supply it with your webpage URL, which is the Callback URL shown in the Authenticator details for your authenticator configuration.
+See Displaying authenticator details for instructions on accessing this information.
 
 1. From the navigation panel, select .
 2. Click Create authentication.

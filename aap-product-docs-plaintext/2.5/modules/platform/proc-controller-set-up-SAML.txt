@@ -72,4 +72,10 @@ For more information and additional options, see OneLogin’s SAML Python Toolki
 21. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.
 22. Click btn:[Next].
 
+
+[NOTE]
+----
+You can configure an HTTPS redirect for SAML in operator-based deployments to simplify log in for your users. For the steps to configure this setting, see Enabling single sign-on (SSO) for platform gateway on OpenShift Container Platform.
+----
+
 To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.

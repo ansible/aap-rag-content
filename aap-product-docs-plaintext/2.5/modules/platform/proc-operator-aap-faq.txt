@@ -9,3 +9,4 @@ Alternatively, to display the status conditions you can run the get command:
 oc get automationcontroller <instance-name> -o jsonpath=Pipe "| jq"
 Can I track my migration in real time?:: To help track the status of the migration or to understand why migration might have failed you can look at the migration logs as they are running. Use the logs command:
 oc logs fresh-install-controller-migration-4.6.0-jwfm6 -f
+I have configured my SAML but authentication fails with this error: "Unable to complete social auth login" What can I do?:: You must update your Ansible Automation Platform instance to include the REDIRECT_IS_HTTPS extra setting. See Enabling single sign-on (SSO) for platform gateway on OpenShift Container Platform for help with this.

@@ -100,6 +100,12 @@ Ansible development tools comprise the following tools:
 
 For more information, see Developing Ansible automation content.
 
+# Red Hat Ansible Automation Platform Service on AWS
+
+Red Hat Ansible Automation Platform Service on AWS is a deployment of the Ansible Automation Platform control plane purchased through AWS Marketplace. Red&#160;Hat manages the service so that customer teams can focus on automation.
+
+For more information, see Red Hat Ansible Automation Platform Service on AWS.
+
 # Enhancements
 
 * Added the ability to provide mounts.conf or copy from a local or remote source when installing Podman. (AAP-16214)
