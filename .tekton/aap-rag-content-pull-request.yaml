@@ -38,7 +38,7 @@ spec:
   - name: hermetic
     value: "false"
   - name: build-args
-    value: [FLAVOR=gpu, HERMETIC=false]
+    value: [FLAVOR=cpu, HERMETIC=false]
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while reducing network traffic.
