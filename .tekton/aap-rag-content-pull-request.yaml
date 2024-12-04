@@ -14,20 +14,23 @@ metadata:
     appstudio.openshift.io/application: aap-rag-content
     appstudio.openshift.io/component: aap-rag-content
     pipelines.appstudio.openshift.io/type: build
-  name: aap-rag-content-on-pull-request
+  name: aap-rag-content-on-pr-{{pull_request_number}}
   namespace: ansible-lightspeed-tenant
 spec:
+  timeouts:
+    pipeline: "2h0m0s"
+    tasks: "2h0m0s"
   params:
   - name: git-url
     value: '{{source_url}}'
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/ansible-lightspeed-tenant/aap-rag-content:on-pr-{{revision}}
+    value: quay.io/ansible/aap-rag-content:pr-{{pull_request_number}}-{{revision}}
   - name: image-expires-after
     value: 5d
   - name: dockerfile
-    value: Dockerfile
+    value: Containerfile-aap
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
