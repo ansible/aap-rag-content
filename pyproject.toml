@@ -44,7 +44,7 @@ dependencies = [
     "llama-index-vector-stores-faiss==0.1.2",
     "llama-index-embeddings-huggingface==0.2.2",
     "llama-index-readers-file==0.1.30",
-    "faiss-cpu==1.8.0.post1",
+    "faiss-cpu==1.9.0.post1",
     "requests>=2.32.3",
 ]
 requires-python = "==3.11.*"
