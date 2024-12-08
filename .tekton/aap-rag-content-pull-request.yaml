@@ -31,6 +31,15 @@ spec:
     value: 5d
   - name: dockerfile
     value: Containerfile-aap
+  taskRunSpecs:
+  - pipelineTaskName: ecosystem-cert-preflight-checks
+    stepSpecs:
+    - name: check-container
+      computeResources:
+        requests:
+          memory: 4Gi
+        limits:
+          memory: 4Gi
   pipelineSpec:
     description: |
       This pipeline is ideal for building container images from a Containerfile while maintaining trust after pipeline customization.
