@@ -25,6 +25,8 @@ AAP_DOCS_ROOT_URL = "https://github.com/ansible/aap-docs/blob/"
 AAP_DOCS_VERSION = "2.5"
 UNREACHABLE_DOCS: int = 0
 
+ADDITIONAL_DOCS_DIR = "additional_docs"
+
 metadata = {}
 
 
@@ -85,6 +87,18 @@ def aap_file_metadata_func(file_path: str) -> Dict:
     docs_url = lambda x: metadata[key]["url"]  # noqa: E731
     return file_metadata_func(file_path, docs_url)
 
+def additional_docs_metadata_func(file_path: str) -> Dict:
+    """Populate metadata for additional docs.
+
+    Args:
+        file_path: str: file path in str
+    """
+    AAP_RAG_CONTENT_BASE_URL = "https://github.com/ansible/aap-rag-content/blob/main/"
+    docs_url = AAP_RAG_CONTENT_BASE_URL + str(file_path)
+    title = get_file_title(file_path)
+    msg = f"file_path: {file_path}, title: {title}, docs_url: {docs_url}"
+    print(msg)
+    return {"docs_url": docs_url, "title": title}
 
 def got_whitespace(text: str) -> bool:
     """Indicate if the parameter string contains whitespace."""
@@ -169,8 +183,18 @@ if __name__ == "__main__":
     # Load documents
     input_files = list(Path(args.folder).rglob("*.txt"))
     documents = SimpleDirectoryReader(
-        input_files=input_files, recursive=True, file_metadata=aap_file_metadata_func
+        input_files=input_files,
+        file_metadata=aap_file_metadata_func,
     ).load_data()
+
+    # Load additional documents
+    additional_input_files = list(Path(ADDITIONAL_DOCS_DIR).rglob("*.txt"))
+    if len(additional_input_files) > 0:
+        additional_docs = SimpleDirectoryReader(
+            input_files=additional_input_files,
+            file_metadata=additional_docs_metadata_func,
+        ).load_data()
+        documents.extend(additional_docs)
 
     # Split based on header/section
     # md_parser = MarkdownNodeParser()
