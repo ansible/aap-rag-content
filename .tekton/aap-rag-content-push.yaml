@@ -414,6 +414,8 @@ spec:
       params:
       - name: IMAGE
         value: $(tasks.build-image-index.results.IMAGE_URL)
+      - name: ADDITIONAL_TAGS
+        value: [ "latest", "1.0.$(tasks.clone-repository.results.commit-timestamp)" ]
       runAfter:
       - build-image-index
       taskRef:
