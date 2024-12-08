@@ -11,6 +11,7 @@ COPY pyproject.toml pdm.lock Makefile .
 RUN make install-tools && pdm config python.use_venv false && make pdm-lock-check install-deps
 
 COPY aap-product-docs-plaintext ./aap-product-docs-plaintext
+COPY additional_docs ./additional_docs
 
 COPY scripts/download_embeddings_model.py .
 RUN pdm run python download_embeddings_model.py -l ./embeddings_model -r ${EMBEDDING_MODEL}
