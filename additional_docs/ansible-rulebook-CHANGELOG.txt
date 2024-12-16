@@ -1,4 +1,4 @@
-# Ansible Rulebook (aka ansible-rulebook): Changelog
+# Ansible Rulebook (aka ansible-rulebook): Release Changelog
 
 ## [Unreleased]
 ### Changed
