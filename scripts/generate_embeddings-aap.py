@@ -212,7 +212,7 @@ if __name__ == "__main__":
             #     node.excluded_embed_metadata_keys.extend(args.exclude_metadata)
             good_nodes.append(node)
         else:
-            print("skipping node without whitespace: " + node.repr())
+            print("skipping node without whitespace: " + str(node))
 
     # Create & save Index
     index = VectorStoreIndex(

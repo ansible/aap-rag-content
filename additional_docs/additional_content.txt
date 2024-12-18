@@ -1,0 +1,17 @@
+# AAP Lifecycle Dates
+
+Here is a list of AAP Lifecycle Dates:
+- The date for AAP 2.5 General Availability (GA) is September 30, 2024
+- The date for AAP 2.5 Full Support Phase ending is September 30, 2025
+- The date for AAP 2.5 Maintenance Support 1 Phase ends on September 30, 2026
+- The date for AAP 2.5 Maintenance Support 2 Phase ends on September 30, 2027
+- The date for AAP 2.4 General Availability (GA) is June 27, 2023
+- The date for AAP 2.4 Full Support Phase ending is October 1, 2024
+- The date for AAP 2.4 Maintenance Support 1 Phase ends on June 27, 2025
+- The date for AAP 2.4 Maintenance Support 2 Phase ends on December 31, 2025
+
+# AAP support and maintenance definitions
+
+- The definition of Full Support Phase is that during the Full Support Phase, qualified Critical and Important Security Advisories (RHSAs) and Urgent and selected High Priority Bug Fix Advisories (RHBAs) will be released as they become available. Other errata advisories, such as Red Hat Enhancement Advisories (RHEAs), may be delivered as appropriate.
+- The definition of Maintenance Support 1 Phase is that during the Maintenance Support phase, qualified Critical and Important Security errata advisories (RHSAs) and Urgent and Selected High Priority Bug Fix errata advisories (RHBAs) will be released as they become available. Other bug fix (RHBA) and enhancement (RHEA) errata advisories may be released at Red Hat’s discretion, but should not be expected.
+- The definition of Maintenance Support 2 Phase is that during Maintenance Support 2, qualified Critical and Important Security errata advisories (RHSAs) will be issued and Urgent and Selected High Priority Bug Fix errata advisories (RHBAs) will likely not be delivered. Ansible Automation Platform releases in Maintenance Support 2 will be technically supported, however, software updates will likely not be provided for these releases.

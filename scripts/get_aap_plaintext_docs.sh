@@ -9,19 +9,28 @@ fi
 AAP_VERSION=$1
 LIGHTSPEED_LATEST=lightspeed-latest
 AAP_CLOUDS_LATEST=aap-clouds-latest
-BASE_DIR=aap-product-docs-plaintext
+AAP_DOCS_BASE_DIR=aap-product-docs-plaintext
+CHANGELOGS_FILE=additional_docs/components_versions.txt
 
 set -eou pipefail
 
 trap "rm -rf aap-docs" EXIT
 
-if [ ! -d ${BASE_DIR} ]; then
-    mkdir ${BASE_DIR}
+if [ ! -d ${AAP_DOCS_BASE_DIR} ]; then
+    mkdir ${AAP_DOCS_BASE_DIR}
 fi
+
+# Changelog's
+if [ ! ${CHANGELOGS_FILE} ]; then
+    touch ${CHANGELOGS_FILE}
+fi
+echo -e "# Ansible Components Versions\n\nHere are the most recent updates for Ansible components:\n" > $CHANGELOGS_FILE
+./scripts/generate_changelog.sh "Ansible Core (ansible-core)" "https://api.github.com/repos/ansible/ansible/releases/latest" $CHANGELOGS_FILE
+./scripts/generate_changelog.sh "Ansible Rulebook (ansible-rulebook)" "https://api.github.com/repos/ansible/ansible-rulebook/releases/latest" $CHANGELOGS_FILE
 
 for git_branch in ${AAP_VERSION} ${LIGHTSPEED_LATEST} ${AAP_CLOUDS_LATEST}
 do
-  rm -rf ${BASE_DIR}/${git_branch}
+  rm -rf ${AAP_DOCS_BASE_DIR}/${git_branch}
   git clone --single-branch --branch ${git_branch} https://github.com/ansible/aap-docs.git
 
   if [ "${git_branch}" == "${AAP_CLOUDS_LATEST}" ]; then
@@ -36,16 +45,16 @@ do
 
   python scripts/asciidoctor-text/convert-it-all-aap.py \
     -i aap-docs \
-    -o ${BASE_DIR}/${git_branch}  \
+    -o ${AAP_DOCS_BASE_DIR}/${git_branch}  \
     -b ${git_branch}
 
   python scripts/parse_aap_docs.py \
     -i aap-docs \
-    -o ${BASE_DIR}/${git_branch} \
+    -o ${AAP_DOCS_BASE_DIR}/${git_branch} \
     -b ${git_branch}
   python scripts/filter_text_files.py \
-    -i ${BASE_DIR}/${git_branch} \
+    -i ${AAP_DOCS_BASE_DIR}/${git_branch} \
     -b ${git_branch}
-  rm -rf ${BASE_DIR}/${git_branch}/archive
+  rm -rf ${AAP_DOCS_BASE_DIR}/${git_branch}/archive
   rm -rf aap-docs
 done
