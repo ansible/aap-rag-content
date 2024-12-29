@@ -58,3 +58,7 @@ do
   rm -rf ${AAP_DOCS_BASE_DIR}/${git_branch}/archive
   rm -rf aap-docs
 done
+
+python scripts/split_metadata.py \
+  -f ${AAP_DOCS_BASE_DIR} \
+  -v ${AAP_VERSION}
