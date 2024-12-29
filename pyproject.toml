@@ -23,7 +23,7 @@ distribution = false
 dev = [
     "black==24.10.0",
     "mypy==1.10.0",
-    "ruff==0.4.6",
+    "ruff==0.8.4",
     "types-requests==2.31.0"
 ]
 
