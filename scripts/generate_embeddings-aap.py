@@ -161,7 +161,7 @@ if __name__ == "__main__":
     documents = SimpleDirectoryReader(
         input_files=input_files,
         file_metadata=aap_file_metadata_func,
-    ).load_data()
+    ).load_data(num_workers=10)
 
     # Load additional documents
     additional_input_files = list(Path(ADDITIONAL_DOCS_DIR).rglob("*.txt"))
@@ -169,7 +169,7 @@ if __name__ == "__main__":
         additional_docs = SimpleDirectoryReader(
             input_files=additional_input_files,
             file_metadata=additional_docs_metadata_func,
-        ).load_data()
+        ).load_data(num_workers=10)
         documents.extend(additional_docs)
 
     # Split based on header/section
