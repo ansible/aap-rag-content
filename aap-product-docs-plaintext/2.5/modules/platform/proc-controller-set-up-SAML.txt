@@ -67,6 +67,25 @@ Values defined in this field override the dedicated fields provided in the UI.
 
 For more information and additional options, see OneLogin’s SAML Python Toolkit.
 18. Optional: In the SAML IDP to extra_data attribute mapping field, enter values to map  IDP attributes to extra_data attributes. For more information, see advanced SAML settings.
+
+[NOTE]
+----
+By default only the attributes in the SAML assertion identified in the fields: User Email, Username, User Last Name, User First Name, and User Permanent ID are available for Ansible Automation Platform authenticator maps.
+If you would like to make other attributes from the SAML assertion available for Ansible Automation Platform authenticator maps, you must include them in the SAML IDP to extra_data attribute mapping field. For example:
+
+```
+- Department
+- UserType
+- Organization
+```
+
+Alternatively, if you want all attributes returned by the SAML Assertion to be avialable for Ansible Automation Platform authenticator maps you can add the following setting to Additional Authenticator Fields:
+
+```
+GET_ALL_EXTRA_DATA: true
+```
+
+----
 19. To automatically create organizations, users, and teams upon successful login, select Create objects.
 20. To enable this authentication method upon creation, select Enabled.
 21. To remove a user for any groups they were previously added to when they authenticate from this source, select Remove users.

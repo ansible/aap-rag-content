@@ -1,0 +1,13 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controlling-data-collection.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controlling-data-collection.adoc",
+  "includes": [
+    "downstream/modules/platform/con-user-data-tracking.adoc",
+    "downstream/modules/platform/proc-control-data-collection.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/operating_ansible_automation_platform/index#assembly-controlling-data-collection",
+  "id": "assembly-controlling-data-collection",
+  "context": "data-collection",
+  "content_type": null,
+  "nesting_assembly": true
+}

@@ -1,0 +1,20 @@
+{
+  "project_file_name": "downstream/titles/develop-automation-content/master.adoc",
+  "path_name": "aap-docs/downstream/titles/develop-automation-content/master.adoc",
+  "includes": [
+    "downstream/attributes/attributes.adoc",
+    "downstream/assemblies/devtools/assembly-devtools-intro.adoc",
+    "downstream/assemblies/devtools/assembly-developer-workflow.adoc",
+    "downstream/assemblies/devtools/assembly-devtools-install.adoc",
+    "downstream/assemblies/devtools/assembly-creating-playbook-project.adoc",
+    "downstream/assemblies/devtools/assembly-writing-running-playbook.adoc",
+    "downstream/assemblies/devtools/assembly-publishing-playbook-collection-aap.adoc",
+    "downstream/assemblies/devtools/assembly-devtools-develop-collections.adoc",
+    "downstream/assemblies/devtools/assembly-devtools-create-roles-collection.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/developing_automation_content/index",
+  "id": null,
+  "context": "develop-automation-content",
+  "content_type": null,
+  "nesting_assembly": false
+}

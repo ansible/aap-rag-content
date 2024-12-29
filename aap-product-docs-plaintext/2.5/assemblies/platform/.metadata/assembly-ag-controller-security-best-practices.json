@@ -1,0 +1,20 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-ag-controller-security-best-practices.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-ag-controller-security-best-practices.adoc",
+  "includes": [
+    "downstream/modules/platform/con-controller-understand-architecture.adoc",
+    "downstream/modules/platform/con-controller-minimize-administrative-accounts.adoc",
+    "downstream/modules/platform/con-controller-minimize-system-access.adoc",
+    "downstream/modules/platform/con-controller-remove-access-credentials.adoc",
+    "downstream/modules/platform/con-controller-enforce-separation-duties.adoc",
+    "downstream/modules/platform/ref-controller-available-resources.adoc",
+    "downstream/modules/platform/ref-controller-existing-security.adoc",
+    "downstream/modules/platform/ref-controller-external-account-stores.adoc",
+    "downstream/modules/platform/ref-controller-django-password-policies.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-security-best-practices",
+  "id": "controller-security-best-practices",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

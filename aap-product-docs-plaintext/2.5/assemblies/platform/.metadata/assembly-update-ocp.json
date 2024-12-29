@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-update-ocp.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-update-ocp.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-update-aap-on-ocp.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#update-ocp",
+  "id": "update-ocp",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

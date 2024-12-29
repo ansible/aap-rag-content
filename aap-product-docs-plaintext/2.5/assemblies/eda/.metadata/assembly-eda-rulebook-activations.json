@@ -1,0 +1,19 @@
+{
+  "project_file_name": "downstream/assemblies/eda/assembly-eda-rulebook-activations.adoc",
+  "path_name": "aap-docs/downstream/assemblies/eda/assembly-eda-rulebook-activations.adoc",
+  "includes": [
+    "downstream/modules/eda/proc-eda-set-up-rulebook-activation.adoc",
+    "downstream/modules/eda/con-eda-rulebook-activation-list-view.adoc",
+    "downstream/modules/eda/proc-eda-view-activation-output.adoc",
+    "downstream/modules/eda/proc-eda-enable-rulebook-activations.adoc",
+    "downstream/modules/eda/proc-eda-restart-rulebook-activations.adoc",
+    "downstream/modules/eda/proc-eda-delete-rulebook-activations.adoc",
+    "downstream/modules/eda/proc-eda-activate-webhook.adoc",
+    "downstream/modules/eda/proc-eda-test-with-K8s.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-rulebook-activations",
+  "id": "eda-rulebook-activations",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

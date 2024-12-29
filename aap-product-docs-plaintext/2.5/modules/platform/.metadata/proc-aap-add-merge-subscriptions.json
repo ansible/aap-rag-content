@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-aap-add-merge-subscriptions.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-aap-add-merge-subscriptions.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#proc-add-merge-subscriptions",
+  "id": "proc-add-merge-subscriptions",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

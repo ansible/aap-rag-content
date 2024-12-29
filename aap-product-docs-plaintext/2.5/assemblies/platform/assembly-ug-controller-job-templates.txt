@@ -644,11 +644,8 @@ https://<CONTROLLER_SERVER_NAME>/api/v2/job_templates/7/callback/
 2. Ensure that the request from the host is a POST.
 The following is an example using curl (all on a single line):
 
-```
-curl -k -f -i -H 'Content-Type:application/json' -XPOST -d '{"host_config_key": "redhat"}' \
+curl -k -i -H 'Content-Type:application/json' -XPOST -d '{"host_config_key": "redhat"}' \
                   https://<CONTROLLER_SERVER_NAME>/api/v2/job_templates/7/callback/
-```
-
 3. Ensure that the requesting host is defined in your inventory for the callback to succeed.
 
 If automation controller fails to locate the host either by name or IP address in one of your defined inventories, the request is denied.

@@ -1,0 +1,15 @@
+{
+  "project_file_name": "downstream/assemblies/analytics/assembly-using-job-explorer.adoc",
+  "path_name": "aap-docs/downstream/assemblies/analytics/assembly-using-job-explorer.adoc",
+  "includes": [
+    "downstream/modules/analytics/con-jobs-explorer.adoc",
+    "downstream/modules/analytics/con-drill-down.adoc",
+    "downstream/modules/analytics/proc-top-template-job-explorer.adoc",
+    "downstream/modules/analytics/proc-ignoring-nested-workflows-jobs.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_analytics/index#assembly-using-job-explorer",
+  "id": "assembly-using-job-explorer",
+  "context": "assembly-using-job-explorer-ctxt",
+  "content_type": null,
+  "nesting_assembly": true
+}

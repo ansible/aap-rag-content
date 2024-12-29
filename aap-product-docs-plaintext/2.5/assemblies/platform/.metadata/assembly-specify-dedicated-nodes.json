@@ -1,0 +1,15 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-specify-dedicated-nodes.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-specify-dedicated-nodes.adoc",
+  "includes": [
+    "downstream/modules/platform/ref-assign-pods-to-nodes.adoc",
+    "downstream/modules/platform/proc-specify-nodes-job-execution.adoc",
+    "downstream/modules/platform/proc-set-custom-pod-timeout.adoc",
+    "downstream/modules/platform/ref-schedule-jobs-worker-nodes.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/performance_considerations_for_operator_environments/index#assembly-specify-dedicted-nodes",
+  "id": "assembly-specify-dedicted-nodes",
+  "context": "performance-considerations",
+  "content_type": null,
+  "nesting_assembly": false
+}

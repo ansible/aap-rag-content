@@ -1,0 +1,10 @@
+{
+  "project_file_name": "aap-clouds/stories/assembly-saas-post-install-config.adoc",
+  "path_name": "aap-docs/aap-clouds/stories/assembly-saas-post-install-config.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#saas-post-install-config",
+  "id": "saas-post-install-config",
+  "context": "saas-post-install-config",
+  "content_type": null,
+  "nesting_assembly": true
+}

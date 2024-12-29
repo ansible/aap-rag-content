@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/con-pod-specification-mods.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/con-pod-specification-mods.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/performance_considerations_for_operator_environments/index#con-pod-specification-mods_performance-considerations",
+  "id": "con-pod-specification-mods_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,20 @@
+{
+  "project_file_name": "lightspeed/assemblies/assembly_configuring-lightspeed-onpremise.adoc",
+  "path_name": "aap-docs/lightspeed/assemblies/assembly_configuring-lightspeed-onpremise.adoc",
+  "includes": [
+    "lightspeed/modules/con_overview-lightspeed-onpremise.adoc",
+    "lightspeed/modules/proc_install-aap-lightspeed-operator.adoc",
+    "lightspeed/modules/proc_create-oauth-app.adoc",
+    "lightspeed/modules/proc_create-connection-secrets.adoc",
+    "lightspeed/modules/proc_create-lightspeed-instance.adoc",
+    "lightspeed/modules/proc_update-redirect-uri.adoc",
+    "lightspeed/modules/proc_configure-vscode-extension-onpremise-deployment.adoc",
+    "lightspeed/modules/proc_update-connection-secrets.adoc",
+    "lightspeed/modules/proc_monitor-onpremise-deployment.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#configuring-lightspeed-onpremise_set-up-lightspeed",
+  "id": "configuring-lightspeed-onpremise_{context}",
+  "context": "configuring-lightspeed-onpremise",
+  "content_type": null,
+  "nesting_assembly": true
+}

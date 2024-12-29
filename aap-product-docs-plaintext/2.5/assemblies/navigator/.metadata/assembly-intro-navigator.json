@@ -1,0 +1,15 @@
+{
+  "project_file_name": "downstream/assemblies/navigator/assembly-intro-navigator.adoc",
+  "path_name": "aap-docs/downstream/assemblies/navigator/assembly-intro-navigator.adoc",
+  "includes": [
+    "downstream/modules/navigator/con-about-ansible-navigator.adoc",
+    "downstream/modules/navigator/con-navigator-modes.adoc",
+    "downstream/modules/navigator/ref-navigator-command-summary.adoc",
+    "downstream/modules/navigator/ref-navigator-command-comparison.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_content_navigator/index#assembly-intro-navigator_ansible-navigator",
+  "id": "assembly-intro-navigator_{context}",
+  "context": "intro-ansible-navigator",
+  "content_type": null,
+  "nesting_assembly": true
+}

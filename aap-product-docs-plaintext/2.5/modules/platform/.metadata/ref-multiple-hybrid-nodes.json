@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/ref-multiple-hybrid-nodes.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/ref-multiple-hybrid-nodes.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/automation_mesh_for_vm_environments/design-patterns#ref-multiple-hybrid-nodes",
+  "id": "ref-multiple-hybrid-nodes",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

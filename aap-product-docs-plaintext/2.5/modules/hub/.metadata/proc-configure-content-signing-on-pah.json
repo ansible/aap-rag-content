@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/hub/proc-configure-content-signing-on-pah.adoc",
+  "path_name": "aap-docs/downstream/modules/hub/proc-configure-content-signing-on-pah.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_installation/assembly-platform-install-scenario#proc-configure-content-signing-on-pah",
+  "id": "proc-configure-content-signing-on-pah",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

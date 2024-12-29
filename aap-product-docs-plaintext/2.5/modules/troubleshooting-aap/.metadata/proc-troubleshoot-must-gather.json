@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/troubleshooting-aap/proc-troubleshoot-must-gather.adoc",
+  "path_name": "aap-docs/downstream/modules/troubleshooting-aap/proc-troubleshoot-must-gather.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/troubleshooting_ansible_automation_platform/index#troubleshoot-must-gather",
+  "id": "troubleshoot-must-gather",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

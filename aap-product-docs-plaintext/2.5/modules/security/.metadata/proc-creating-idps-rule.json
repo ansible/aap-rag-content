@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/security/proc-creating-idps-rule.adoc",
+  "path_name": "aap-docs/downstream/modules/security/proc-creating-idps-rule.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/implementing_security_automation/index#proc-creating-ids-rule_idps",
+  "id": "proc-creating-ids-rule_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

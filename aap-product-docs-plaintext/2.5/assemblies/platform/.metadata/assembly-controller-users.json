@@ -1,0 +1,17 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controller-users.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controller-users.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-gw-users-list-view.adoc",
+    "downstream/modules/platform/proc-controller-creating-a-user.adoc",
+    "downstream/modules/platform/proc-gw-editing-a-user.adoc",
+    "downstream/modules/platform/proc-controller-deleting-a-user.adoc",
+    "downstream/modules/platform/ref-controller-user-roles.adoc",
+    "downstream/modules/platform/proc-gw-remove-roles-user.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#assembly-controller-users_gw-manage-rbac",
+  "id": "assembly-controller-users_{context}",
+  "context": "access-mgmt-users",
+  "content_type": null,
+  "nesting_assembly": true
+}

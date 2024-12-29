@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/devtools/con-rhdh-install-ocp-prereqs.adoc",
+  "path_name": "aap-docs/downstream/modules/devtools/con-rhdh-install-ocp-prereqs.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-install-ocp-prereqs_rhdh-install-ocp",
+  "id": "rhdh-install-ocp-prereqs_{context}",
+  "context": null,
+  "content_type": "CONCEPT",
+  "nesting_assembly": false
+}

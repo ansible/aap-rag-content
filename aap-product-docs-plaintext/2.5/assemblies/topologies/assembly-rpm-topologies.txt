@@ -34,10 +34,14 @@ Use the example inventory file to perform an installation for this topology:
 
 
 ```yaml
-# This is the growth installer inventory file
-# Please consult the docs if you are unsure what to add
-# For all optional variables please consult the Red Hat documentation:
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation
+# This is the Ansible Automation Platform installer inventory file intended for the RPM growth deployment topology.
+# Consult the Ansible Automation Platform product documentation about this topology's tested hardware configuration.
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/tested_deployment_models/rpm-topologies
+#
+# Consult the docs if you are unsure what to add
+# For all optional variables consult the Ansible Automation Platform documentation:
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation
+
 
 # This section is for your platform gateway hosts
 # -----------------------------------------------------
@@ -75,7 +79,7 @@ db.example.org
 [all:vars]
 
 # Common variables
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-general-inventory-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-general-inventory-variables
 # -----------------------------------------------------
 registry_username=<your RHN username>
 registry_password=<your RHN password>
@@ -83,28 +87,28 @@ registry_password=<your RHN password>
 redis_mode=standalone
 
 # Platform gateway
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-gateway-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-gateway-variables
 # -----------------------------------------------------
 automationgateway_admin_password=<set your own>
 automationgateway_pg_host=db.example.org
 automationgateway_pg_password=<set your own>
 
 # Automation controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-controller-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-controller-variables
 # -----------------------------------------------------
 admin_password=<set your own>
 pg_host=db.example.org
 pg_password=<set your own>
 
 # Automation hub
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-hub-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-hub-variables
 # -----------------------------------------------------
 automationhub_admin_password=<set your own>
 automationhub_pg_host=db.example.org
 automationhub_pg_password=<set your own>
 
 # Event-Driven Ansible controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-controller
 # -----------------------------------------------------
 automationedacontroller_admin_password=<set your own>
 automationedacontroller_pg_host=db.example.org
@@ -144,10 +148,13 @@ Use the example inventory file to perform an installation for this topology:
 
 
 ```yaml
-# This is the mixed growth installer inventory file
-# Please consult the docs if you are unsure what to add
-# For all optional variables please consult the Red Hat documentation:
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation
+# This is the Ansible Automation Platform installer inventory file intended for the mixed RPM growth deployment topology.
+# Consult the Ansible Automation Platform product documentation about this topology's tested hardware configuration.
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/tested_deployment_models/rpm-topologies
+#
+# Consult the docs if you are unsure what to add
+# For all optional variables consult the Red Hat documentation:
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation
 
 # This section is for your platform gateway hosts
 # -----------------------------------------------------
@@ -162,7 +169,7 @@ eda.example.org
 [all:vars]
 
 # Common variables
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-general-inventory-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-general-inventory-variables
 # -----------------------------------------------------
 registry_username=<your RHN username>
 registry_password=<your RHN password>
@@ -170,14 +177,14 @@ registry_password=<your RHN password>
 redis_mode=standalone
 
 # Platform gateway
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-gateway-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-gateway-variables
 # -----------------------------------------------------
 automationgateway_admin_password=<set your own>
 automationgateway_pg_host=db.example.org
 automationgateway_pg_password=<set your own>
 
 # Event-Driven Ansible controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-controller
 # -----------------------------------------------------
 automationedacontroller_admin_password=<set your own>
 automationedacontroller_pg_host=db.example.org
@@ -223,10 +230,10 @@ Use the example inventory file to perform an installation for this topology:
 
 
 ```yaml
-# This is the enterprise installer inventory file
-# Please consult the docs if you are unsure what to add
-# For all optional variables please consult the Red Hat documentation:
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation
+# This is the Ansible Automation Platform enterprise installer inventory file
+# Consult the docs if you are unsure what to add
+# For all optional variables consult the Red Hat documentation:
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation
 
 # This section is for your platform gateway hosts
 # -----------------------------------------------------
@@ -272,13 +279,13 @@ eda2.example.org
 
 [all:vars]
 # Common variables
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-general-inventory-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-general-inventory-variables
 # -----------------------------------------------------
 registry_username=<your RHN username>
 registry_password=<your RHN password>
 
 # Platform gateway
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-gateway-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-gateway-variables
 # -----------------------------------------------------
 automationgateway_admin_password=<set your own>
 automationgateway_pg_host=<set your own>
@@ -287,7 +294,7 @@ automationgateway_pg_username=<set your own>
 automationgateway_pg_password=<set your own>
 
 # Automation controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-controller-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-controller-variables
 # -----------------------------------------------------
 admin_password=<set your own>
 pg_host=<set your own>
@@ -296,7 +303,7 @@ pg_username=<set your own>
 pg_password=<set your own>
 
 # Automation hub
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-hub-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-hub-variables
 # -----------------------------------------------------
 automationhub_admin_password=<set your own>
 automationhub_pg_host=<set your own>
@@ -305,7 +312,7 @@ automationhub_pg_username=<set your own>
 automationhub_pg_password=<set your own>
 
 # Event-Driven Ansible controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-controller
 # -----------------------------------------------------
 automationedacontroller_admin_password=<set your own>
 automationedacontroller_pg_host=<set your own>
@@ -353,10 +360,10 @@ Use the example inventory file to perform an installation for this topology:
 
 
 ```yaml
-# This is the mixed enterprise installer inventory file
-# Please consult the docs if you are unsure what to add
-# For all optional variables please consult the Red Hat documentation:
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation
+# This is the Ansible Automation Platform mixed enterprise installer inventory file
+# Consult the docs if you are unsure what to add
+# For all optional variables consult the Red Hat documentation:
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation
 
 # This section is for your platform gateway hosts
 # -----------------------------------------------------
@@ -382,13 +389,13 @@ eda3.example.org
 
 [all:vars]
 # Common variables
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-general-inventory-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-general-inventory-variables
 # -----------------------------------------------------
 registry_username=<your RHN username>
 registry_password=<your RHN password>
 
 # Platform gateway
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-gateway-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#ref-gateway-variables
 # -----------------------------------------------------
 automationgateway_admin_password=<set your own>
 automationgateway_pg_host=<set your own>
@@ -397,7 +404,7 @@ automationgateway_pg_username=<set your own>
 automationgateway_pg_password=<set your own>
 
 # Event-Driven Ansible controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-controller
 # -----------------------------------------------------
 automationedacontroller_admin_password=<set your own>
 automationedacontroller_pg_host=<set your own>

@@ -1,0 +1,14 @@
+{
+  "project_file_name": "downstream/assemblies/eda/assembly-eda-decision-environments.adoc",
+  "path_name": "aap-docs/downstream/assemblies/eda/assembly-eda-decision-environments.adoc",
+  "includes": [
+    "downstream/modules/eda/ref-eda-controller-install-builder.adoc",
+    "downstream/modules/eda/proc-eda-build-a-custom-decision-environment.adoc",
+    "downstream/modules/eda/proc-eda-set-up-new-decision-environment.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-decision-environments",
+  "id": "eda-decision-environments",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

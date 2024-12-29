@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/titles/release-notes/topics/aap-25.adoc",
+  "path_name": "aap-docs/downstream/titles/release-notes/topics/aap-25.adoc",
+  "includes": [
+    "downstream/snippets/technology-preview.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/release_notes/index#eda-2.5-with-automation-controller-2.4",
+  "id": "eda-2.5-with-automation-controller-2.4",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/navigator/con-about-ansible-navigator.adoc",
+  "path_name": "aap-docs/downstream/modules/navigator/con-about-ansible-navigator.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_content_navigator/index#con-about-ansible-navigator_intro-ansible-navigator",
+  "id": "con-about-ansible-navigator_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

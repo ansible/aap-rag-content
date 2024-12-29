@@ -1,0 +1,19 @@
+{
+  "project_file_name": "aap-clouds/stories/topics/con-saas-execution-plane.adoc",
+  "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-execution-plane.adoc",
+  "includes": [
+    "aap-clouds/stories/topics/con-saas-shape.adoc",
+    "aap-clouds/stories/topics/con-saas-networking.adoc",
+    "aap-clouds/stories/topics/con-saas-automation-mesh.adoc",
+    "aap-clouds/stories/topics/con-saas-connectivity.adoc",
+    "aap-clouds/stories/topics/con-saas-monitoring.adoc",
+    "aap-clouds/stories/topics/con-saas-dns.adoc",
+    "aap-clouds/stories/topics/con-saas-networking-with-overlapping-CIDR-blocks.adoc",
+    "aap-clouds/stories/topics/con-saas-updates-and-maintenance.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-execution-plane",
+  "id": "con-saas-execution-plane",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

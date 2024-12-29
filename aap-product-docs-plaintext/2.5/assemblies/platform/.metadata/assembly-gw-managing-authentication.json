@@ -1,0 +1,16 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-gw-managing-authentication.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-gw-managing-authentication.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-gw-authentication-list-view.adoc",
+    "downstream/modules/platform/proc-gw-searching-authenticator.adoc",
+    "downstream/modules/platform/proc-gw-display-auth-details.adoc",
+    "downstream/modules/platform/proc-gw-edit-authenticator.adoc",
+    "downstream/modules/platform/proc-gw-delete-authenticator.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#gw-managing-authentication",
+  "id": "gw-managing-authentication",
+  "context": null,
+  "content_type": "ASSEMBLY",
+  "nesting_assembly": true
+}

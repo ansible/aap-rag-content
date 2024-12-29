@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/devtools/assembly-creating-playbook-project.adoc",
+  "path_name": "aap-docs/downstream/assemblies/devtools/assembly-creating-playbook-project.adoc",
+  "includes": [
+    "downstream/modules/devtools/proc-scaffolding-playbook-project.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/developing_automation_content/index#creating-playbook-project",
+  "id": "creating-playbook-project",
+  "context": "creating-playbook-project",
+  "content_type": null,
+  "nesting_assembly": true
+}

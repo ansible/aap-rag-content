@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controller-login.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controller-login.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-controller-logging-in.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-login",
+  "id": "controller-login",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,16 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controller-applications.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controller-applications.adoc",
+  "includes": [
+    "downstream/modules/platform/ref-controller-applications-getting-started.adoc",
+    "downstream/modules/platform/ref-gw-access-rules-apps-tokens.adoc",
+    "downstream/modules/platform/ref-gw-application-functions.adoc",
+    "downstream/modules/platform/ref-gw-request-token-after-expiration.adoc",
+    "downstream/modules/platform/proc-controller-create-application.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#assembly-controller-applications",
+  "id": "assembly-controller-applications",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,20 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-aap-platform-components.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-aap-platform-components.adoc",
+  "includes": [
+    "downstream/modules/platform/con-about-platform-gateway.adoc",
+    "downstream/modules/platform/con-about-automation-hub.adoc",
+    "downstream/modules/platform/con-about-pa-hub.adoc",
+    "downstream/modules/platform/con-about-ha-hub.adoc",
+    "downstream/modules/platform/con-about-eda-controller.adoc",
+    "downstream/modules/platform/con-overview-automation-mesh.adoc",
+    "downstream/modules/platform/con-about-execution-env.adoc",
+    "downstream/modules/platform/con-about-galaxy.adoc",
+    "downstream/modules/platform/con-about-navigator.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/planning_your_installation/index#ref-aap-components",
+  "id": "ref-aap-components",
+  "context": "planning",
+  "content_type": null,
+  "nesting_assembly": true
+}

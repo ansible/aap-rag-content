@@ -1,0 +1,18 @@
+{
+  "project_file_name": "downstream/assemblies/navigator/assembly-settings-navigator.adoc",
+  "path_name": "aap-docs/downstream/assemblies/navigator/assembly-settings-navigator.adoc",
+  "includes": [
+    "downstream/modules/navigator/con-about-navigator-settings.adoc",
+    "downstream/modules/navigator/ref-navigator-general-settings.adoc",
+    "downstream/modules/navigator/ref-navigator-config-settings.adoc",
+    "downstream/modules/navigator/ref-navigator-doc-settings.adoc",
+    "downstream/modules/navigator/ref-navigator-inventory-settings.adoc",
+    "downstream/modules/navigator/ref-navigator-replay-settings.adoc",
+    "downstream/modules/navigator/ref-navigator-run-settings.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_content_navigator/index#assembly-settings-navigator_ansible-navigator",
+  "id": "assembly-settings-navigator_{context}",
+  "context": "settings-navigator",
+  "content_type": null,
+  "nesting_assembly": true
+}

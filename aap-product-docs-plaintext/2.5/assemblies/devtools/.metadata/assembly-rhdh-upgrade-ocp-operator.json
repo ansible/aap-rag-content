@@ -1,0 +1,14 @@
+{
+  "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp-operator.adoc",
+  "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-upgrade-ocp-operator.adoc",
+  "includes": [
+    "downstream/modules/devtools/proc-rhdh-download-plugins.adoc",
+    "downstream/modules/devtools/proc-rhdh-update-plugin-registry.adoc",
+    "downstream/modules/devtools/proc-rhdh-update-plugins-operator-version-numbers.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-upgrade-ocp-operator_rhdh-upgrade-ocp-helm",
+  "id": "rhdh-upgrade-ocp-operator_{context}",
+  "context": "rhdh-upgrade-ocp-operator",
+  "content_type": null,
+  "nesting_assembly": false
+}

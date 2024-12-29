@@ -1,0 +1,15 @@
+{
+  "project_file_name": "aap-clouds/stories/assembly-azure-hub-spoke-peering.adoc",
+  "path_name": "aap-docs/aap-clouds/stories/assembly-azure-hub-spoke-peering.adoc",
+  "includes": [
+    "aap-clouds/stories/topics/proc-azure-hub-spoke-peering.adoc",
+    "aap-clouds/stories/topics/proc-azure-find-cluster-cidr.adoc",
+    "aap-clouds/stories/topics/proc-azure-nw-peering-aap-subnet.adoc",
+    "aap-clouds/stories/topics/proc-azure-update-route-tables.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-hub-spoke-peering",
+  "id": "azure-hub-spoke-peering",
+  "context": "azure-hub-spoke-peering",
+  "content_type": null,
+  "nesting_assembly": true
+}

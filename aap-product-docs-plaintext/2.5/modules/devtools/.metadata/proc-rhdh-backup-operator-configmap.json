@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/devtools/proc-rhdh-backup-operator-configmap.adoc",
+  "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-backup-operator-configmap.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-backup-operator-configmap_rhdh-install-ocp-operator",
+  "id": "rhdh-backup-operator-configmap_{context}",
+  "context": null,
+  "content_type": "PROCEDURE",
+  "nesting_assembly": false
+}

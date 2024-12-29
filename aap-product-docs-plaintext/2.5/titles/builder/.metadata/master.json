@@ -1,0 +1,21 @@
+{
+  "project_file_name": "downstream/titles/builder/master.adoc",
+  "path_name": "aap-docs/downstream/titles/builder/master.adoc",
+  "includes": [
+    "downstream/attributes/attributes.adoc",
+    "downstream/assemblies/builder/assembly-intro-to-builder.adoc",
+    "downstream/assemblies/builder/assembly-using-builder.adoc",
+    "downstream/assemblies/builder/assembly-common-ee-scenarios.adoc",
+    "downstream/assemblies/builder/assembly-publishing-exec-env.adoc",
+    "downstream/assemblies/hub/assembly-populate-container-registry.adoc",
+    "downstream/assemblies/hub/assembly-setup-container-repository.adoc",
+    "downstream/assemblies/hub/assembly-pull-image.adoc",
+    "downstream/assemblies/builder/assembly-open-source-license.adoc",
+    "downstream/modules/builder/con-ee-precedence.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/creating_and_using_execution_environments/index",
+  "id": null,
+  "context": "builder",
+  "content_type": null,
+  "nesting_assembly": false
+}

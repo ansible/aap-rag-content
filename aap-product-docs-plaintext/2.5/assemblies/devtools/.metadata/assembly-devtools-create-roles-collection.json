@@ -1,0 +1,19 @@
+{
+  "project_file_name": "downstream/assemblies/devtools/assembly-devtools-create-roles-collection.adoc",
+  "path_name": "aap-docs/downstream/assemblies/devtools/assembly-devtools-create-roles-collection.adoc",
+  "includes": [
+    "downstream/modules/devtools/con-devtools-plan-roles-collection.adoc",
+    "downstream/modules/devtools/con-devtools-roles-collection-prerequisites.adoc",
+    "downstream/modules/devtools/proc-devtools-scaffold-roles-collection.adoc",
+    "downstream/modules/devtools/proc-devtools-migrate-existing-roles-collection.adoc",
+    "downstream/modules/devtools/proc-devtools-create-new-role-in-collection.adoc",
+    "downstream/modules/devtools/proc-devtools-docs-roles-collection.adoc",
+    "downstream/modules/devtools/proc-devtools-publish-roles-collection-pah.adoc",
+    "downstream/modules/devtools/proc-devtools-use-roles-collections-aap.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/developing_automation_content/index#devtools-create-roles-collection_devtools-develop-collections",
+  "id": "devtools-create-roles-collection_{context}",
+  "context": "devtools-create-roles-collection",
+  "content_type": "ASSEMBLY",
+  "nesting_assembly": false
+}

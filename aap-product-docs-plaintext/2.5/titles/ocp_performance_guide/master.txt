@@ -578,12 +578,12 @@ During a Kubernetes upgrade, automation controller must be running.
 
 Make the following configuration changes in automation controller to minimize downtime during the upgrade.
 
-* Ansible Automation Platform 2.4
-* Ansible automation controller 4.4
-* OpenShift Container Platform
-* > 4.10.42
-* > 4.11.16
-* > 4.12.0
+* Ansible Automation Platform 2.4 or later
+* Ansible automation controller 4.4 or later
+* OpenShift Container Platform:
+* Later than 4.10.42
+* Later than 4.11.16
+* Later than 4.12.0
 * High availability (HA) deployment of Postgres
 * Multiple worker node that automation controller pods can be scheduled on
 

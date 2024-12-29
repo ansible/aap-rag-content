@@ -1,0 +1,15 @@
+{
+  "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-ocp-configure-optional.adoc",
+  "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-ocp-configure-optional.adoc",
+  "includes": [
+    "downstream/modules/devtools/proc-rhdh-enable-rhdh-authentication.adoc",
+    "downstream/modules/devtools/proc-rhdh-configure-optional-integrations.adoc",
+    "downstream/modules/devtools/proc-rhdh-configure-devspaces.adoc",
+    "downstream/modules/devtools/proc-rhdh-configure-pah-url.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-ocp-configure-optional_rhdh-ocp-required-installation",
+  "id": "rhdh-ocp-configure-optional_{context}",
+  "context": "rhdh-ocp-configure-optional_{parent-context-of-rhdh-ocp-configure-optional}",
+  "content_type": null,
+  "nesting_assembly": false
+}

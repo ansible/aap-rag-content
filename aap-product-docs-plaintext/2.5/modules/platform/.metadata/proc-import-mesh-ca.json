@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-import-mesh-ca.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-import-mesh-ca.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/automation_mesh_for_vm_environments/setting-up#importing-mesh-ca_setting-up",
+  "id": "importing-mesh-ca_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

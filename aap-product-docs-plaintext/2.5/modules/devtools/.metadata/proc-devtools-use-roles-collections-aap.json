@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/devtools/proc-devtools-use-roles-collections-aap.adoc",
+  "path_name": "aap-docs/downstream/modules/devtools/proc-devtools-use-roles-collections-aap.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/developing_automation_content/index#devtools-use-roles-collections-aap_devtools-create-roles-collection",
+  "id": "devtools-use-roles-collections-aap_{context}",
+  "context": null,
+  "content_type": "PROCEDURE",
+  "nesting_assembly": false
+}

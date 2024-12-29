@@ -8,7 +8,7 @@ Use the following procedure to configure an Microsoft Azure Resource Manager-sou
 4. In the Create source page, select Microsoft Azure Resource Manager from the Source list.
 5. Enter the following details in the additional fields:
 6. Optional: Credential: Choose from an existing Azure Credential.
-For more information, see Managing user credentials..
+For more information, see Managing user credentials.
 7. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
 8. Use the Source variables field to override variables used by the azure_rm inventory plugin.
 Enter variables by using either JSON or YAML syntax.

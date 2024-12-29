@@ -232,8 +232,8 @@ For more information about tuning your PostgreSQL server, see the PostgreSQL doc
 
 [IMPORTANT]
 ----
-Red Hat does not support the use of external (customer supported) databases, however they are used by customers.
-The following guidance on inital configuration, from a product installation perspective only, is provided to avoid related support requests.
+* Red Hat does not support the use of external (customer supported) databases, however they are used by customers. The following guidance on initial configuration, from a product installation perspective only, is provided to avoid related support requests.
+* When using an external database with the Ansible Automation Platform, you must create and maintain that database. Ensure that you clear your external database when uninstalling the Ansible Automation Platform.
 ----
 
 Use the following procedure to configure an external PostgreSQL compliant database for use with an Ansible Automation Platform component, for example automation controller, Event-Driven Ansible, automation hub, and platform gateway.
@@ -570,6 +570,7 @@ data.example.com
 
 [all:vars]
 admin_password='<password>'
+redis_mode=standalone
 pg_host='data.example.com'
 pg_port=5432
 pg_database='awx'
@@ -633,6 +634,7 @@ data.example.com
 
 [all:vars]
 admin_password='<password>'
+redis_mode=standalone
 pg_host='data.example.com'
 pg_port='5432'
 pg_database='awx'
@@ -732,6 +734,7 @@ data.example.com
 
 [all:vars]
 admin_password='<password>'
+redis_mode=standalone
 pg_host='data.example.com'
 pg_port='5432'
 pg_database='awx'
@@ -1205,7 +1208,7 @@ See Getting started with Ansible Automation Platform for post installation instr
 
 ## Adding a subscription manifest to Ansible Automation Platform
 
-Before you first log in, you must add your subscription information to the platform. To add a subscription to Ansible Automation Platform, see Obtaining a manifest file in the Access management and authentication.
+Before you first log in, you must add your subscription information to the platform. To add a subscription to Ansible Automation Platform, see Obtaining a manifest file in the Access management and authentication guide.
 
 # Horizontal Scaling in Red Hat Ansible Automation Platform
 

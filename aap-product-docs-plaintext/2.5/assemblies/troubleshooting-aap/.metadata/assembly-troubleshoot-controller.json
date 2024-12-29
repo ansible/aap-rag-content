@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/assemblies/troubleshooting-aap/assembly-troubleshoot-controller.adoc",
+  "path_name": "aap-docs/downstream/assemblies/troubleshooting-aap/assembly-troubleshoot-controller.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/troubleshooting_ansible_automation_platform/index#troubleshoot-controller",
+  "id": "troubleshoot-controller",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

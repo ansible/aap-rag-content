@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/hub/proc-deploying-your-system-for-container-signing.adoc",
+  "path_name": "aap-docs/downstream/modules/hub/proc-deploying-your-system-for-container-signing.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/assembly-creating-tokens-in-automation-hub#deploying-your-system-for-container-signing",
+  "id": "deploying-your-system-for-container-signing",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

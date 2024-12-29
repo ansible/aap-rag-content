@@ -1,0 +1,19 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controller-projects.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controller-projects.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-controller-adding-a-project.adoc",
+    "downstream/modules/platform/proc-controller-updating-a-project.adoc",
+    "downstream/modules/platform/ref-work-with-permissions.adoc",
+    "downstream/modules/platform/ref-projects-galaxy-support.adoc",
+    "downstream/modules/platform/ref-projects-collections-support.adoc",
+    "downstream/modules/platform/proc-controller-set-up-project.adoc",
+    "downstream/modules/platform/proc-controller-edit-project.adoc",
+    "downstream/modules/platform/proc-controller-sync-project.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/assembly-controller-user-interface#controller-projects",
+  "id": "controller-projects",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/con-automation-mesh-node-types.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/con-automation-mesh-node-types.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/automation_mesh_for_vm_environments/assembly-planning-mesh#con-automation-mesh-node-types",
+  "id": "con-automation-mesh-node-types",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

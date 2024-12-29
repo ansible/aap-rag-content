@@ -1,0 +1,12 @@
+{
+  "project_file_name": "lightspeed/modules/con_training-data.adoc",
+  "path_name": "aap-docs/lightspeed/modules/con_training-data.adoc",
+  "includes": [
+    "lightspeed/modules/con_telemetry-data-collection-notice.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#training-data_lightspeed-intro",
+  "id": "training-data_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

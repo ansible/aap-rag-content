@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-installing-without-internet.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-installing-without-internet.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/planning_your_installation/index#proc-installing-without-internet_planning",
+  "id": "proc-installing-without-internet_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

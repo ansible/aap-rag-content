@@ -1,0 +1,17 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-pod-spec-modifications.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-pod-spec-modifications.adoc",
+  "includes": [
+    "downstream/modules/platform/con-pod-specification-mods.adoc",
+    "downstream/modules/platform/proc-customizing-pod-specs.adoc",
+    "downstream/modules/platform/proc-enable-pods-ref-images.adoc",
+    "downstream/modules/platform/ref-resource-management-pods-containers.adoc",
+    "downstream/modules/platform/ref-requests-limits.adoc",
+    "downstream/modules/platform/ref-resource-types.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/performance_considerations_for_operator_environments/index#assembly-pod-spec-modifications",
+  "id": "assembly-pod-spec-modifications",
+  "context": "performance-considerations",
+  "content_type": null,
+  "nesting_assembly": false
+}

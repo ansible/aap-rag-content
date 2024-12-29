@@ -1,0 +1,13 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-controller-adding-a-project.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-controller-adding-a-project.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-projects-manage-playbooks-manually.adoc",
+    "downstream/modules/platform/ref-projects-manage-playbooks-with-source-control.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/assembly-controller-user-interface#proc-controller-adding-a-project",
+  "id": "proc-controller-adding-a-project",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

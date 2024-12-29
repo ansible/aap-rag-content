@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-controller-set-up-logging.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-controller-set-up-logging.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#proc-controller-set-up-logging",
+  "id": "proc-controller-set-up-logging",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

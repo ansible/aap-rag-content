@@ -1,0 +1,13 @@
+{
+  "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-ocp-full-examples.adoc",
+  "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-ocp-full-examples.adoc",
+  "includes": [
+    "downstream/modules/devtools/ref-rhdh-full-aap-configmap-example.adoc",
+    "downstream/modules/devtools/ref-rhdh-full-helm-chart-ansible-plugins.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-ocp-full-examples_rhdh-ocp-configure-optional_{parent-context-of-rhdh-ocp-configure-optional}",
+  "id": "rhdh-ocp-full-examples_{context}",
+  "context": "rhdh-ocp-full-examples",
+  "content_type": null,
+  "nesting_assembly": false
+}

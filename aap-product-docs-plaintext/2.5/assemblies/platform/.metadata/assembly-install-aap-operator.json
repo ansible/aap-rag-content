@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-install-aap-operator.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-install-aap-operator.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-install-aap-operator.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#install-aap-operator_operator-platform-doc",
+  "id": "install-aap-operator_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": true
+}

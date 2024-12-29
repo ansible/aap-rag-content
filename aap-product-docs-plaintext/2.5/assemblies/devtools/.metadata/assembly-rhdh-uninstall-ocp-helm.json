@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp-helm.adoc",
+  "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-uninstall-ocp-helm.adoc",
+  "includes": [
+    "downstream/modules/devtools/proc-rhdh-uninstall-ocp-helm.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-uninstall-ocp-helm_rhdh-upgrade-ocp-operator",
+  "id": "rhdh-uninstall-ocp-helm_{context}",
+  "context": "rhdh-uninstall-ocp-helm",
+  "content_type": null,
+  "nesting_assembly": false
+}

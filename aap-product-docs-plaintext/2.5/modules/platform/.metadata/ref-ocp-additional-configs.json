@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/ref-ocp-additional-configs.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/ref-ocp-additional-configs.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#ocp-additional-configs_installing-hub-operator",
+  "id": "ocp-additional-configs_{context}",
+  "context": null,
+  "content_type": "REFERENCE",
+  "nesting_assembly": false
+}

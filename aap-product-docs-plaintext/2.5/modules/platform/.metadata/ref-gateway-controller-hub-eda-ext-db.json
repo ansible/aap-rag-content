@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/ref-gateway-controller-hub-eda-ext-db.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/ref-gateway-controller-hub-eda-ext-db.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_installation/assembly-platform-install-scenario#ref-gateway-controller-hub-eda-ext-db",
+  "id": "ref-gateway-controller-hub-eda-ext-db",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

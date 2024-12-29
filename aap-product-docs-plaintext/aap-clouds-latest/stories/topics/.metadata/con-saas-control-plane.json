@@ -1,0 +1,22 @@
+{
+  "project_file_name": "aap-clouds/stories/topics/con-saas-control-plane.adoc",
+  "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-control-plane.adoc",
+  "includes": [
+    "aap-clouds/stories/topics/con-saas-customer-access.adoc",
+    "aap-clouds/stories/topics/con-saas-service-uptime.adoc",
+    "aap-clouds/stories/topics/con-saas-sre-access-and-management.adoc",
+    "aap-clouds/stories/topics/con-saas-backup-and-diaster-recovery.adoc",
+    "aap-clouds/stories/topics/con-saas-infastructure-monitoring.adoc",
+    "aap-clouds/stories/topics/con-saas-application-monitoring-and-customer-audits.adoc",
+    "aap-clouds/stories/topics/con-saas-status-notification.adoc",
+    "aap-clouds/stories/topics/con-saas-security.adoc",
+    "aap-clouds/stories/topics/con-saas-identity-and-access-management.adoc",
+    "aap-clouds/stories/topics/con-saas-encryption.adoc",
+    "aap-clouds/stories/topics/con-saas-hosted-components.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-control-plane",
+  "id": "con-saas-control-plane",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

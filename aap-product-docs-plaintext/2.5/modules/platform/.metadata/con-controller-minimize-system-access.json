@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/con-controller-minimize-system-access.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/con-controller-minimize-system-access.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-minimize-system-access",
+  "id": "controller-minimize-system-access",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

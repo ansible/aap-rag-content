@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/devtools/proc-rhdh-add-devtools-container.adoc",
+  "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-add-devtools-container.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-add-devtools-container_rhdh-ocp-required-installation",
+  "id": "rhdh-add-devtools-container_{context}",
+  "context": null,
+  "content_type": "PROCEDURE",
+  "nesting_assembly": false
+}

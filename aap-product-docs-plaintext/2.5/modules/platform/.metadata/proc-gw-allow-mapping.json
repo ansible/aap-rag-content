@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-gw-allow-mapping.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-gw-allow-mapping.adoc",
+  "includes": [
+    "downstream/snippets/snip-gw-mapping-next-steps.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#gw-allow-mapping",
+  "id": "gw-allow-mapping",
+  "context": null,
+  "content_type": "CONCEPT",
+  "nesting_assembly": false
+}

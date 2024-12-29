@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-apply-selinux-context.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-apply-selinux-context.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_installation/assembly-platform-install-scenario#proc-apply-selinux-context",
+  "id": "proc-apply-selinux-context",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

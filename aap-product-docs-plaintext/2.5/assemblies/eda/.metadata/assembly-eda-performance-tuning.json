@@ -1,0 +1,14 @@
+{
+  "project_file_name": "downstream/assemblies/eda/assembly-eda-performance-tuning.adoc",
+  "path_name": "aap-docs/downstream/assemblies/eda/assembly-eda-performance-tuning.adoc",
+  "includes": [
+    "downstream/modules/eda/con-characterizing-your-workload.adoc",
+    "downstream/modules/eda/con-system-level-monitoring.adoc",
+    "downstream/modules/eda/ref-performance-troubleshooting.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-performance-tuning",
+  "id": "eda-performance-tuning",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

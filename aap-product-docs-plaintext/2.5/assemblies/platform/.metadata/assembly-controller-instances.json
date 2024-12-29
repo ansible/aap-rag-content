@@ -1,0 +1,16 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controller-instances.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controller-instances.adoc",
+  "includes": [
+    "downstream/modules/platform/ref-operator-mesh-prerequisites.adoc",
+    "downstream/modules/platform/proc-controller-pulling-secret.adoc",
+    "downstream/modules/platform/proc-set-up-virtual-machines.adoc",
+    "downstream/modules/platform/proc-define-mesh-node-types.adoc",
+    "downstream/modules/platform/ref-removing-instances.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/assembly-controller-user-interface#assembly-controller-instances",
+  "id": "assembly-controller-instances",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

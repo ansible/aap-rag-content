@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-aap-generate-manifest-file.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-aap-generate-manifest-file.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#proc-aap-generate-manifest-file",
+  "id": "proc-aap-generate-manifest-file",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

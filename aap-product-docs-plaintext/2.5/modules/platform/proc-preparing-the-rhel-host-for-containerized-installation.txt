@@ -15,7 +15,7 @@ sudo hostnamectl set-hostname <your_hostname>
 sudo subscription-manager register
 ```
 
-4. Run sudo dnf repolist to validate that only the BaseOS and AppStream repositories are setup and enabled on the host:
+4. Run sudo dnf repolist to validate that only the BaseOS and AppStream repositories are set up and enabled on the host:
 
 ```
 $ sudo dnf repolist
@@ -25,8 +25,7 @@ rhel-9-for-x86_64-appstream-rpms                           Red Hat Enterprise Li
 rhel-9-for-x86_64-baseos-rpms                              Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
 ```
 
-5. Ensure that only these repositories are available to the Red Hat Enterprise Linux host. For more information about managing custom repositories, see:
-Managing custom software repositories.
+5. Ensure that only these repositories are available to the Red Hat Enterprise Linux host. For more information about managing custom repositories, see Managing custom software repositories.
 6. Ensure that the host has DNS configured and can resolve host names and IP addresses by using a fully qualified domain name (FQDN). This is essential to ensure services can talk to one another.
 7. Install ansible-core:
 
@@ -45,3 +44,4 @@ sudo dnf install -y wget git-core rsync vim
 * For more information about registering your RHEL system, see Getting Started with RHEL System Registration.
 * For information about configuring unbound DNS, see Setting up an unbound DNS server.
 * For information about configuring DNS using BIND, see Setting up and configuring a BIND DNS server.
+* For more information about ansible-core, see Ansible Core Documentation.

@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-gw-define-rules-triggers.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-gw-define-rules-triggers.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#gw-define-rules-triggers",
+  "id": "gw-define-rules-triggers",
+  "context": null,
+  "content_type": "PROCEDURE",
+  "nesting_assembly": false
+}

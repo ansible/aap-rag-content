@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-controller-adding-new-inventory.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-controller-adding-new-inventory.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/assembly-controller-user-interface#proc-controller-adding-new-inventory",
+  "id": "proc-controller-adding-new-inventory",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

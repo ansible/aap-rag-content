@@ -1,0 +1,20 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-gw-settings.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-gw-settings.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-controller-configure-subscriptions.adoc",
+    "downstream/modules/platform/proc-settings-platform-gateway.adoc",
+    "downstream/modules/platform/proc-settings-gw-security-options.adoc",
+    "downstream/modules/platform/proc-settings-gw-session-options.adoc",
+    "downstream/modules/platform/proc-settings-gw-password-security.adoc",
+    "downstream/modules/platform/proc-settings-gw-custom-login.adoc",
+    "downstream/modules/platform/proc-settings-gw-additional-options.adoc",
+    "downstream/modules/platform/proc-settings-user-preferences.adoc",
+    "downstream/modules/platform/proc-settings-troubleshooting.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#assembly-gw-settings",
+  "id": "assembly-gw-settings",
+  "context": null,
+  "content_type": "ASSEMBLY",
+  "nesting_assembly": false
+}

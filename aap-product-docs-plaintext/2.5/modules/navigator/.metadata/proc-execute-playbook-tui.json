@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/navigator/proc-execute-playbook-tui.adoc",
+  "path_name": "aap-docs/downstream/modules/navigator/proc-execute-playbook-tui.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_content_navigator/index#proc-execute-playbook-tui_execute-playbooks-navigator",
+  "id": "proc-execute-playbook-tui_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

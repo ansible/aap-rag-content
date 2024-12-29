@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/eda/assembly-eda-logging-strategy.adoc",
+  "path_name": "aap-docs/downstream/assemblies/eda/assembly-eda-logging-strategy.adoc",
+  "includes": [
+    "downstream/modules/eda/ref-eda-logging-samples.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-logging-strategy",
+  "id": "eda-logging-strategy",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

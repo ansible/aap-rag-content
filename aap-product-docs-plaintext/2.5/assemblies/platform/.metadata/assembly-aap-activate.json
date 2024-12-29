@@ -1,0 +1,13 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-aap-activate.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-aap-activate.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-aap-activate-with-credentials.adoc",
+    "downstream/modules/platform/proc-aap-activate-with-manifest.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#assembly-aap-activate",
+  "id": "assembly-aap-activate",
+  "context": "activate-aap",
+  "content_type": null,
+  "nesting_assembly": true
+}

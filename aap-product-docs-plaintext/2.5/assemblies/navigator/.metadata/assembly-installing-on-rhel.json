@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/navigator/assembly-installing-on-rhel.adoc",
+  "path_name": "aap-docs/downstream/assemblies/navigator/assembly-installing-on-rhel.adoc",
+  "includes": [
+    "downstream/modules/navigator/proc-installing-navigator-rhel-rpm.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_content_navigator/index#assembly-installing_on_rhel_ansible-navigator",
+  "id": "assembly-installing_on_rhel_{context}",
+  "context": "install-navigator-rhel",
+  "content_type": null,
+  "nesting_assembly": true
+}

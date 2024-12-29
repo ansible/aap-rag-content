@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/ref-containerized-troubleshoot-install.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/ref-containerized-troubleshoot-install.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/aap-containerized-installation#ref-containerized-troubleshoot-install",
+  "id": "ref-containerized-troubleshoot-install",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

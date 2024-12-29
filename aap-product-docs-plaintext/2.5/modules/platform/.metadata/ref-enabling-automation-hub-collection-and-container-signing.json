@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/ref-enabling-automation-hub-collection-and-container-signing.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/ref-enabling-automation-hub-collection-and-container-signing.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/aap-containerized-installation#enabling-automation-hub-collection-and-container-signing_aap-containerized-installation",
+  "id": "enabling-automation-hub-collection-and-container-signing_{context}",
+  "context": null,
+  "content_type": "REFERENCE",
+  "nesting_assembly": false
+}

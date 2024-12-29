@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/navigator/ref-navigator-command-summary.adoc",
+  "path_name": "aap-docs/downstream/modules/navigator/ref-navigator-command-summary.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_content_navigator/index#ref-navigator-command-summaryintro-ansible-navigator",
+  "id": "ref-navigator-command-summary{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

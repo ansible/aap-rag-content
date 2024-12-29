@@ -1,0 +1,15 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-appendix-troubleshoot-containerized-aap.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-appendix-troubleshoot-containerized-aap.adoc",
+  "includes": [
+    "downstream/modules/platform/ref-containerized-troubleshoot-diagnosing.adoc",
+    "downstream/modules/platform/ref-containerized-troubleshoot-install.adoc",
+    "downstream/modules/platform/ref-containerized-troubleshoot-config.adoc",
+    "downstream/modules/platform/ref-containerized-troubleshoot-ref.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/aap-containerized-installation#appendix-troubleshoot-containerized-aap",
+  "id": "appendix-troubleshoot-containerized-aap",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

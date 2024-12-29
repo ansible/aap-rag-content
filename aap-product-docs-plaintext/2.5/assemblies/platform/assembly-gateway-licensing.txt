@@ -139,7 +139,7 @@ Creating a new subscription allocation allows you to set aside subscriptions and
 
 1. From the Subscription Allocations page, click btn:[New Subscription Allocation].
 2. Enter a name for the allocation so that you can find it later.
-3. Select Type: Satellite 6.8 as the management application.
+3. Select Type: Satellite 6.16 as the management application.
 4. Click btn:[Create].
 
 * Add the subscriptions needed for Ansible Automation Platform to run properly.
@@ -202,6 +202,7 @@ You can also use your Satellite username and password if your cluster nodes are 
 
 After your subscription has been accepted, subscription details are displayed. A status of Compliant indicates your subscription is in compliance with the number of hosts you have automated within your subscription count. Otherwise, your status will show as Out of Compliance, indicating you have exceeded the number of hosts in your subscription.
 Other important information displayed include the following:
+
 Hosts automated:: Host count automated by the job, which consumes the license count
 Hosts imported:: Host count considering all inventory sources (does not impact hosts remaining)
 Hosts remaining:: Total host count minus hosts automated
@@ -236,6 +237,7 @@ If the btn:[BROWSE] button is disabled on the License page, clear the USERNAME a
 
 After your subscription has been accepted, subscription details are displayed. A status of Compliant indicates your subscription is in compliance with the number of hosts you have automated within your subscription count. Otherwise, your status will show as Out of Compliance, indicating you have exceeded the number of hosts in your subscription.
 Other important information displayed include the following:
+
 Hosts automated:: Host count automated by the job, which consumes the license count
 Hosts imported:: Host count considering all inventory sources (does not impact hosts remaining)
 Hosts remaining:: Total host count minus hosts automated

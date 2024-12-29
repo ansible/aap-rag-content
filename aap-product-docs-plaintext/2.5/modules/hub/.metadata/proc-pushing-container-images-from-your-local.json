@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/hub/proc-pushing-container-images-from-your-local.adoc",
+  "path_name": "aap-docs/downstream/modules/hub/proc-pushing-container-images-from-your-local.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/assembly-creating-tokens-in-automation-hub#pushing-container-images-from-your-local",
+  "id": "pushing-container-images-from-your-local",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

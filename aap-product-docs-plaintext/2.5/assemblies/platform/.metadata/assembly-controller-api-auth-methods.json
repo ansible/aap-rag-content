@@ -1,0 +1,15 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controller-api-auth-methods.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controller-api-auth-methods.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-controller-api-session-auth.adoc",
+    "downstream/modules/platform/con-controller-api-basic-auth.adoc",
+    "downstream/modules/platform/con-controller-api-oauth2-token.adoc",
+    "downstream/modules/platform/con-controller-api-sso-auth.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/automation_execution_api_overview/index#controller-api-auth-methods",
+  "id": "controller-api-auth-methods",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

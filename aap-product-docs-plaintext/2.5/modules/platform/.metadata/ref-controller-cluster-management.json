@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/ref-controller-cluster-management.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/ref-controller-cluster-management.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-controller-cluster-management",
+  "id": "ref-controller-cluster-management",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

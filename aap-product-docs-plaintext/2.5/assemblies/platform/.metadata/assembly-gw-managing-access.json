@@ -1,0 +1,15 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-gw-managing-access.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-gw-managing-access.adoc",
+  "includes": [
+    "downstream/assemblies/platform/assembly-controller-organizations.adoc",
+    "downstream/assemblies/platform/assembly-controller-teams.adoc",
+    "downstream/assemblies/platform/assembly-controller-users.adoc",
+    "downstream/assemblies/platform/assembly-gw-resources.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#gw-managing-access",
+  "id": "gw-managing-access",
+  "context": "gw-manage-rbac",
+  "content_type": "ASSEMBLY",
+  "nesting_assembly": false
+}

@@ -1,0 +1,13 @@
+{
+  "project_file_name": "lightspeed/assemblies/assembly_logging-in-out-portal.adoc",
+  "path_name": "aap-docs/lightspeed/assemblies/assembly_logging-in-out-portal.adoc",
+  "includes": [
+    "lightspeed/modules/proc_log-into-portal.adoc",
+    "lightspeed/modules/proc_log-out-of-portal.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#logging-in-out-portal_lightspeed-user-guide",
+  "id": "logging-in-out-portal_{context}",
+  "context": "logging-in-out-lightspeed-portal",
+  "content_type": null,
+  "nesting_assembly": true
+}

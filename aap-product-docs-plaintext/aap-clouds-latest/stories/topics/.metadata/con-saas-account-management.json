@@ -1,0 +1,17 @@
+{
+  "project_file_name": "aap-clouds/stories/topics/con-saas-account-management.adoc",
+  "path_name": "aap-docs/aap-clouds/stories/topics/con-saas-account-management.adoc",
+  "includes": [
+    "aap-clouds/stories/topics/con-saas-billing.adoc",
+    "aap-clouds/stories/topics/con-saas-deployment-self-service.adoc",
+    "aap-clouds/stories/topics/con-saas-regions.adoc",
+    "aap-clouds/stories/topics/con-saas-sla.adoc",
+    "aap-clouds/stories/topics/con-saas-limited-support-status.adoc",
+    "aap-clouds/stories/topics/con-saas-responsibilities.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-account-management",
+  "id": "con-saas-account-management",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

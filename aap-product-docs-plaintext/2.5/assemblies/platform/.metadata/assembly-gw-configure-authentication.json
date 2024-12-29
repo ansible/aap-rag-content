@@ -1,0 +1,18 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-gw-configure-authentication.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-gw-configure-authentication.adoc",
+  "includes": [
+    "downstream/modules/platform/con-gw-pluggable-authentication.adoc",
+    "downstream/modules/platform/con-gw-create-authentication.adoc",
+    "downstream/modules/platform/proc-gw-select-auth-type.adoc",
+    "downstream/modules/platform/proc-gw-configure-auth-details.adoc",
+    "downstream/modules/platform/proc-gw-define-rules-triggers.adoc",
+    "downstream/modules/platform/proc-gw-adjust-mapping-order.adoc",
+    "downstream/modules/platform/proc-gw-review-auth-settings.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#gw-configure-authentication",
+  "id": "gw-configure-authentication",
+  "context": null,
+  "content_type": "ASSEMBLY",
+  "nesting_assembly": true
+}

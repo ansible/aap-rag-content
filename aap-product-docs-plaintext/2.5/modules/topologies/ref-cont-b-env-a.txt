@@ -36,11 +36,11 @@ Use the example inventory file to perform an installation for this topology:
 
 
 ```yaml
-# This is the enterprise installer inventory file
-# Please consult the docs if you are unsure what to add
-# For all optional variables please consult the included README.md
+# This is the Ansible Automation Platform enterprise installer inventory file
+# Consult the docs if you are unsure what to add
+# For all optional variables consult the included README.md
 # or the Red Hat documentation:
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation
 
 # This section is for your platform gateway hosts
 # -----------------------------------------------------
@@ -84,7 +84,7 @@ eda2.example.org
 [all:vars]
 
 # Common variables
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-general-inventory-variables
 # -----------------------------------------------------
 postgresql_admin_username=<set your own>
 postgresql_admin_password=<set your own>
@@ -92,7 +92,7 @@ registry_username=<your RHN username>
 registry_password=<your RHN password>
 
 # Platform gateway
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-gateway-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-gateway-variables
 # -----------------------------------------------------
 gateway_admin_password=<set your own>
 gateway_pg_host=externaldb.example.org
@@ -101,7 +101,7 @@ gateway_pg_username=<set your own>
 gateway_pg_password=<set your own>
 
 # Automation controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-controller-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-controller-variables
 # -----------------------------------------------------
 controller_admin_password=<set your own>
 controller_pg_host=externaldb.example.org
@@ -110,7 +110,7 @@ controller_pg_username=<set your own>
 controller_pg_password=<set your own>
 
 # Automation hub
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-hub-variables
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#ref-hub-variables
 # -----------------------------------------------------
 hub_admin_password=<set your own>
 hub_pg_host=externaldb.example.org
@@ -119,7 +119,7 @@ hub_pg_username=<set your own>
 hub_pg_password=<set your own>
 
 # Event-Driven Ansible controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#event-driven-ansible-controller
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#event-driven-ansible-controller
 # -----------------------------------------------------
 eda_admin_password=<set your own>
 eda_pg_host=externaldb.example.org

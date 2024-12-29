@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-feedback.adoc",
+  "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-feedback.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-feedback_aap-plugin-rhdh-using",
+  "id": "rhdh-feedback_{context}",
+  "context": "rhdh-feedback",
+  "content_type": null,
+  "nesting_assembly": true
+}

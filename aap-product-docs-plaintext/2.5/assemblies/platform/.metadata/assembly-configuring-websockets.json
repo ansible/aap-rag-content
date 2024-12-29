@@ -1,0 +1,13 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-configuring-websockets.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-configuring-websockets.adoc",
+  "includes": [
+    "downstream/modules/platform/con-websocket-setup.adoc",
+    "downstream/modules/platform/proc-configuring-discovery.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/operating_ansible_automation_platform/index#assembly-configuring-websockets",
+  "id": "assembly-configuring-websockets",
+  "context": "configuring-websockets",
+  "content_type": null,
+  "nesting_assembly": true
+}

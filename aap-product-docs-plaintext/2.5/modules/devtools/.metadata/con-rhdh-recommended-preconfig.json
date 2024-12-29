@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/devtools/con-rhdh-recommended-preconfig.adoc",
+  "path_name": "aap-docs/downstream/modules/devtools/con-rhdh-recommended-preconfig.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-recommended-preconfig_rhdh-install-ocp",
+  "id": "rhdh-recommended-preconfig_{context}",
+  "context": null,
+  "content_type": "CONCEPT",
+  "nesting_assembly": false
+}

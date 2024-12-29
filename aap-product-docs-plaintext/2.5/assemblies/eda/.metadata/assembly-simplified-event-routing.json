@@ -1,0 +1,19 @@
+{
+  "project_file_name": "downstream/assemblies/eda/assembly-simplified-event-routing.adoc",
+  "path_name": "aap-docs/downstream/assemblies/eda/assembly-simplified-event-routing.adoc",
+  "includes": [
+    "downstream/modules/eda/con-event-streams.adoc",
+    "downstream/modules/eda/proc-eda-create-event-stream-credential.adoc",
+    "downstream/modules/eda/proc-eda-create-event-stream.adoc",
+    "downstream/modules/eda/proc-eda-config-remote-sys-to-events.adoc",
+    "downstream/modules/eda/proc-eda-verify-event-streams-work.adoc",
+    "downstream/modules/eda/proc-eda-replace-sources-with-event-streams.adoc",
+    "downstream/modules/eda/proc-eda-resend-webhook-data-event-streams.adoc",
+    "downstream/modules/eda/proc-eda-check-rule-audit-event-stream.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#simplified-event-routing",
+  "id": "simplified-event-routing",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

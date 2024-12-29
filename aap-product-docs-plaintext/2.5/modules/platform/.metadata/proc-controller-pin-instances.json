@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-controller-pin-instances.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-controller-pin-instances.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/assembly-controller-user-interface#controller-pin-instances",
+  "id": "controller-pin-instances",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

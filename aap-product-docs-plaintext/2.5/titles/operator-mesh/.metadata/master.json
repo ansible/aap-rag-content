@@ -1,0 +1,14 @@
+{
+  "project_file_name": "downstream/titles/operator-mesh/master.adoc",
+  "path_name": "aap-docs/downstream/titles/operator-mesh/master.adoc",
+  "includes": [
+    "downstream/attributes/attributes.adoc",
+    "downstream/assemblies/platform/assembly-planning-mesh.adoc",
+    "downstream/assemblies/platform/assembly-automation-mesh-operator-aap.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/automation_mesh_for_managed_cloud_or_operator_environments/index",
+  "id": null,
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,26 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-ag-controller-tips-and-tricks.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-ag-controller-tips-and-tricks.adoc",
+  "includes": [
+    "downstream/modules/platform/ref-controller-use-CLI-tool.adoc",
+    "downstream/modules/platform/ref-controller-change-admin-password.adoc",
+    "downstream/modules/platform/ref-controller-create-controller-admin.adoc",
+    "downstream/modules/platform/ref-controller-set-up-jump-host.adoc",
+    "downstream/modules/platform/ref-controller-view-ansible-outputs.adoc",
+    "downstream/modules/platform/ref-controller-locate-ansible-config-file.adoc",
+    "downstream/modules/platform/ref-controller-list-ansible-variables.adoc",
+    "downstream/modules/platform/ref-controller-allow-jinja-in-extra-vars.adoc",
+    "downstream/modules/platform/ref-controller-configure-host-name-notifications.adoc",
+    "downstream/modules/platform/ref-controller-launch-jobs-with-curl.adoc",
+    "downstream/modules/platform/ref-controller-filter-instances.adoc",
+    "downstream/modules/platform/ref-controller-use-an-unreleased-module.adoc",
+    "downstream/modules/platform/ref-controller-use-callback-plugins.adoc",
+    "downstream/modules/platform/ref-controller-connect-with-winrm.adoc",
+    "downstream/modules/platform/ref-controller-import-inventory-files.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-tips-and-tricks",
+  "id": "controller-tips-and-tricks",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

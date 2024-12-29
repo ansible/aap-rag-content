@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/con-hs-eda-controller.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/con-hs-eda-controller.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/aap-containerized-installation#con-hs-eda-controller",
+  "id": "con-hs-eda-controller",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}
