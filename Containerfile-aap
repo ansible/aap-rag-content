@@ -1,13 +1,25 @@
 ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
+ARG FLAVOR=cpu
+ARG HERMETIC=false
 
-FROM registry.access.redhat.com/ubi9/python-311 as aap-rag-builder
+FROM registry.access.redhat.com/ubi9/python-311 as cpu-base
 ARG EMBEDDING_MODEL
+ARG FLAVOR
+
+FROM nvcr.io/nvidia/cuda:12.6.2-devel-ubi9 as gpu-base
+ARG EMBEDDING_MODEL
+ARG FLAVOR
+RUN dnf install -y python3.11 python3.11-pip libcudnn9 libnccl
+
+FROM ${FLAVOR}-base as aap-rag-builder
+ARG EMBEDDING_MODEL
+ARG FLAVOR
 ARG AAP_VERSION=2.5
 
 USER 0
 WORKDIR /workdir
 
-COPY pyproject.toml pdm.lock Makefile .
+COPY pyproject.toml pdm.lock.* Makefile .
 RUN make install-tools && pdm config python.use_venv false && make pdm-lock-check install-deps
 
 COPY aap-product-docs-plaintext ./aap-product-docs-plaintext
@@ -16,8 +28,15 @@ COPY additional_docs ./additional_docs
 COPY scripts/download_embeddings_model.py .
 RUN pdm run python download_embeddings_model.py -l ./embeddings_model -r ${EMBEDDING_MODEL}
 
+RUN if [ "$FLAVOR" == "gpu" ]; then \
+        export LD_LIBRARY_PATH=/usr/local/cuda-12.6/compat:$LD_LIBRARY_PATH; \
+        pdm run python -c \
+        "import torch; print(torch.version.cuda); print(torch.cuda.is_available());"; \
+    fi
+
 COPY scripts/generate_embeddings-aap.py .
-RUN set -e && pdm run python generate_embeddings-aap.py \
+RUN export LD_LIBRARY_PATH=/usr/local/cuda-12.6/compat:$LD_LIBRARY_PATH; \
+	set -e && pdm run python generate_embeddings-aap.py \
   -f aap-product-docs-plaintext \
   -mn ${EMBEDDING_MODEL} \
   -o vector_db/aap_product_docs/${AAP_VERSION} \
