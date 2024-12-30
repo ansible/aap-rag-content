@@ -27,10 +27,15 @@ dev = [
     "types-requests==2.31.0"
 ]
 
-[[tool.pdm.source]]
-type = "find_links"
-url = "https://download.pytorch.org/whl/cpu/torch_stable.html"
-name = "torch"
+[project.optional-dependencies]
+cpu = [
+    "torch @ https://download.pytorch.org/whl/cpu/torch-2.3.1%2Bcpu-cp311-cp311-linux_x86_64.whl",
+    "faiss-cpu==1.9.0.post1",
+]
+gpu = [
+    "torch==2.3.1",
+    "faiss-gpu-cu12==1.9.0.post1",
+]
 
 [project]
 name = "aap-rag-content"
@@ -44,8 +49,7 @@ dependencies = [
     "llama-index-vector-stores-faiss==0.3.0",
     "llama-index-embeddings-huggingface==0.4.0",
     "llama-index-readers-file==0.4.1",
-    "faiss-cpu==1.9.0.post1",
-    "requests>=2.32.3",
+    "requests>=2.32.3"
 ]
 requires-python = "==3.11.*"
 readme = "README.md"
