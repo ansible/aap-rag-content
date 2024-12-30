@@ -152,8 +152,10 @@ if __name__ == "__main__":
     Settings.llm = resolve_llm(None)
 
     embedding_dimension = len(Settings.embed_model.get_text_embedding("random text"))
-    faiss_index = faiss.IndexFlatIP(embedding_dimension)
-    vector_store = FaissVectorStore(faiss_index=faiss_index)
+    cpu_index = faiss.IndexFlatIP(embedding_dimension)
+    gpu_resource = faiss.StandardGpuResources()
+    gpu_index = faiss.index_cpu_to_gpu(gpu_resource, 0, cpu_index)
+    vector_store = FaissVectorStore(faiss_index=gpu_index)
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
     # Load documents
@@ -195,6 +197,10 @@ if __name__ == "__main__":
         good_nodes,
         storage_context=storage_context,
     )
+
+    # Convert GPU index to CPU before saving
+    vector_store._faiss_index = faiss.index_gpu_to_cpu(vector_store._faiss_index)
+
     index.set_index_id(args.index)
     index.storage_context.persist(persist_dir=PERSIST_FOLDER)
 
