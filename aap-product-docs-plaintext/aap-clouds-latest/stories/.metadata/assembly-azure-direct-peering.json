@@ -1,0 +1,12 @@
+{
+  "project_file_name": "aap-clouds/stories/assembly-azure-direct-peering.adoc",
+  "path_name": "aap-docs/aap-clouds/stories/assembly-azure-direct-peering.adoc",
+  "includes": [
+    "aap-clouds/stories/topics/proc-azure-nw-direct-peering.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#azure-direct-peering",
+  "id": "azure-direct-peering",
+  "context": "azure-direct-peering",
+  "content_type": null,
+  "nesting_assembly": true
+}

@@ -1,3 +1,3 @@
 # Adding a subscription manifest to Ansible Automation Platform
 
-Before you first log in, you must add your subscription information to the platform. To add a subscription to Ansible Automation Platform, see Obtaining a manifest file in the Access management and authentication.
+Before you first log in, you must add your subscription information to the platform. To add a subscription to Ansible Automation Platform, see Obtaining a manifest file in the Access management and authentication guide.

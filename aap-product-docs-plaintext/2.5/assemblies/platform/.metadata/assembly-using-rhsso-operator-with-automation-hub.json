@@ -1,0 +1,19 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-using-rhsso-operator-with-automation-hub.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-using-rhsso-operator-with-automation-hub.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-create-keycloak-instance.adoc",
+    "downstream/modules/platform/proc-create-keycloak-realm.adoc",
+    "downstream/modules/platform/proc-create-keycloak-client.adoc",
+    "downstream/modules/platform/proc-create-a-user.adoc",
+    "downstream/modules/platform/proc-creating-a-secret.adoc",
+    "downstream/modules/platform/proc-installing-hub-using-operator.adoc",
+    "downstream/modules/platform/proc-determine-hub-route.adoc",
+    "downstream/modules/platform/proc-update-rhsso-client.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#using-rhsso-operator-with-automation-hub",
+  "id": "using-rhsso-operator-with-automation-hub",
+  "context": "using-a-rhsso-operator",
+  "content_type": null,
+  "nesting_assembly": true
+}

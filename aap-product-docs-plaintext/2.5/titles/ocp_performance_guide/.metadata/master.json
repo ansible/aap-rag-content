@@ -1,0 +1,16 @@
+{
+  "project_file_name": "downstream/titles/ocp_performance_guide/master.adoc",
+  "path_name": "aap-docs/downstream/titles/ocp_performance_guide/master.adoc",
+  "includes": [
+    "downstream/attributes/attributes.adoc",
+    "downstream/assemblies/platform/assembly-pod-spec-modifications.adoc",
+    "downstream/assemblies/platform/assembly-control-plane-adjustments.adoc",
+    "downstream/assemblies/platform/assembly-specify-dedicated-nodes.adoc",
+    "downstream/assemblies/platform/assembly-configure-controller-OCP.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/performance_considerations_for_operator_environments/index",
+  "id": null,
+  "context": "ocp-performance",
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,13 @@
+{
+  "project_file_name": "downstream/assemblies/topologies/assembly-ocp-topologies.adoc",
+  "path_name": "aap-docs/downstream/assemblies/topologies/assembly-ocp-topologies.adoc",
+  "includes": [
+    "downstream/modules/topologies/ref-ocp-a-env-a.adoc",
+    "downstream/modules/topologies/ref-ocp-b-env-a.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/tested_deployment_models/index#ocp-topologies",
+  "id": "ocp-topologies",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-reinstalling-containerized-aap.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-reinstalling-containerized-aap.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/aap-containerized-installation#reinstalling-containerized-aap_aap-containerized-installation",
+  "id": "reinstalling-containerized-aap_{context}",
+  "context": null,
+  "content_type": "PROCEDURE",
+  "nesting_assembly": false
+}

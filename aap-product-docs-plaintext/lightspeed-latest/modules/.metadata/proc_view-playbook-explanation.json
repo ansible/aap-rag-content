@@ -1,0 +1,10 @@
+{
+  "project_file_name": "lightspeed/modules/proc_view-playbook-explanation.adoc",
+  "path_name": "aap-docs/lightspeed/modules/proc_view-playbook-explanation.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#view-playbook-explanation_generating-playbooks",
+  "id": "view-playbook-explanation_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

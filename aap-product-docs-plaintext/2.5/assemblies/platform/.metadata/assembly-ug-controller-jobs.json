@@ -1,0 +1,31 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-ug-controller-jobs.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-ug-controller-jobs.adoc",
+  "includes": [
+    "downstream/modules/platform/con-controller-inventory-sync-jobs.adoc",
+    "downstream/modules/platform/ref-controller-inventory-sync-details.adoc",
+    "downstream/modules/platform/con-controller-scm-inventory-jobs.adoc",
+    "downstream/modules/platform/ref-controller-scm-inventory-details.adoc",
+    "downstream/modules/platform/con-controller-playbook-run-jobs.adoc",
+    "downstream/modules/platform/ref-controller-playbook-run-search.adoc",
+    "downstream/modules/platform/ref-controller-playbook-run-details.adoc",
+    "downstream/modules/platform/con-controller-playbook-access-info-sharing.adoc",
+    "downstream/modules/platform/ref-controller-isolation-functionality.adoc",
+    "downstream/modules/platform/con-controller-capacity-determination.adoc",
+    "downstream/modules/platform/con-controller-resource-determination-capacity.adoc",
+    "downstream/modules/platform/ref-controller-memory-relative-capacity.adoc",
+    "downstream/modules/platform/ref-controller-cpu-relative-capacity.adoc",
+    "downstream/modules/platform/con-controller-capacity-job-impacts.adoc",
+    "downstream/modules/platform/con-controller-impact-of-job-types.adoc",
+    "downstream/modules/platform/proc-controller-select-capacity.adoc",
+    "downstream/modules/platform/con-controller-job-branch-overriding.adoc",
+    "downstream/modules/platform/con-controller-source-tree-copy.adoc",
+    "downstream/modules/platform/con-controller-project-revision-behavior.adoc",
+    "downstream/modules/platform/ref-controller-git-refspec.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/assembly-controller-user-interface#controller-jobs",
+  "id": "controller-jobs",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

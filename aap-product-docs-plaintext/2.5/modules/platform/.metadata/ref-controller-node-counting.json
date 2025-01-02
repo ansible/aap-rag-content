@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/ref-controller-node-counting.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/ref-controller-node-counting.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#ref-controller-node-counting",
+  "id": "ref-controller-node-counting",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

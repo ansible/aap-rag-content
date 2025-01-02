@@ -1,0 +1,6 @@
+# Additional resources for tested deployment models
+
+This appendix provides a reference for the additional resources relevant to the tested deployment models outlined in Tested deployment models.
+
+* For additional information about each of the tested topologies described in this document, see the test-topologies GitHub repo.
+* For questions around IBM cloud specific configurations or issues, see IBM support.

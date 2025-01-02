@@ -1,0 +1,16 @@
+{
+  "project_file_name": "downstream/titles/aap-operator-backup/master.adoc",
+  "path_name": "aap-docs/downstream/titles/aap-operator-backup/master.adoc",
+  "includes": [
+    "downstream/attributes/attributes.adoc",
+    "downstream/assemblies/platform/assembly-aap-backup-recovery.adoc",
+    "downstream/assemblies/platform/assembly-aap-backup.adoc",
+    "downstream/assemblies/platform/assembly-aap-recovery.adoc",
+    "downstream/assemblies/platform/assembly-aap-troubleshoot-backup-recovery.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/backup_and_recovery_for_operator_environments/index",
+  "id": null,
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

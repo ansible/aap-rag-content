@@ -1,0 +1,14 @@
+{
+  "project_file_name": "downstream/assemblies/navigator/assembly-browse-collections-navigator.adoc",
+  "path_name": "aap-docs/downstream/assemblies/navigator/assembly-browse-collections-navigator.adoc",
+  "includes": [
+    "downstream/modules/navigator/con-navigator-collections.adoc",
+    "downstream/modules/navigator/proc-browse-collections-tui.adoc",
+    "downstream/modules/navigator/proc-review-docs-tui.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_content_navigator/index#assembly-review-collections-navigator_ansible-navigator",
+  "id": "assembly-review-collections-navigator_{context}",
+  "context": "browse-collections-navigator",
+  "content_type": null,
+  "nesting_assembly": true
+}

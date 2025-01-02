@@ -1,0 +1,16 @@
+{
+  "project_file_name": "downstream/titles/getting-started/master.adoc",
+  "path_name": "aap-docs/downstream/titles/getting-started/master.adoc",
+  "includes": [
+    "downstream/attributes/attributes.adoc",
+    "downstream/assemblies/platform/assembly-gs-key-functionality.adoc",
+    "downstream/assemblies/platform/assembly-gs-platform-admin.adoc",
+    "downstream/assemblies/platform/assembly-gs-auto-dev.adoc",
+    "downstream/assemblies/platform/assembly-gs-auto-op.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/index",
+  "id": null,
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

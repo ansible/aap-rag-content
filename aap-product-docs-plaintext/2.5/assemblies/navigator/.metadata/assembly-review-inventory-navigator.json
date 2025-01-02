@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/navigator/assembly-review-inventory-navigator.adoc",
+  "path_name": "aap-docs/downstream/assemblies/navigator/assembly-review-inventory-navigator.adoc",
+  "includes": [
+    "downstream/modules/navigator/proc-review-inventory-tui.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_content_navigator/index#assembly-review-inventory-navigator_ansible-navigator",
+  "id": "assembly-review-inventory-navigator_{context}",
+  "context": "review-inventory-navigator",
+  "content_type": null,
+  "nesting_assembly": true
+}

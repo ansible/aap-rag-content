@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-aap-troubleshoot-backup-recovery.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-aap-troubleshoot-backup-recovery.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-troubleshoot-same-name.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/backup_and_recovery_for_operator_environments/index#aap-troubleshoot-backup-recover",
+  "id": "aap-troubleshoot-backup-recover",
+  "context": "troubleshooting",
+  "content_type": null,
+  "nesting_assembly": true
+}

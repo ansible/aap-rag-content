@@ -1,0 +1,14 @@
+{
+  "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-intro.adoc",
+  "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-intro.adoc",
+  "includes": [
+    "downstream/modules/devtools/ref-rhdh-about-rhdh.adoc",
+    "downstream/modules/devtools/ref-rhdh-about-plugins.adoc",
+    "downstream/modules/devtools/ref-rhdh-architecture.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-intro_aap-plugin-rhdh-installing",
+  "id": "rhdh-intro_{context}",
+  "context": "rhdh-intro",
+  "content_type": null,
+  "nesting_assembly": true
+}

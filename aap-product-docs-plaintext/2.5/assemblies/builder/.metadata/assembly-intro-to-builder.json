@@ -1,0 +1,13 @@
+{
+  "project_file_name": "downstream/assemblies/builder/assembly-intro-to-builder.adoc",
+  "path_name": "aap-docs/downstream/assemblies/builder/assembly-intro-to-builder.adoc",
+  "includes": [
+    "downstream/modules/builder/con-about-ee.adoc",
+    "downstream/modules/builder/con-why-ee.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/creating_and_using_execution_environments/index#assembly-intro-to-builder",
+  "id": "assembly-intro-to-builder",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

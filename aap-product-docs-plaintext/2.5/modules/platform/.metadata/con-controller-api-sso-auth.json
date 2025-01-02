@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/con-controller-api-sso-auth.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/con-controller-api-sso-auth.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/automation_execution_api_overview/index#controller-api-sso-auth",
+  "id": "controller-api-sso-auth",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

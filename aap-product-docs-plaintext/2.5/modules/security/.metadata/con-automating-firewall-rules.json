@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/security/con-automating-firewall-rules.adoc",
+  "path_name": "aap-docs/downstream/modules/security/con-automating-firewall-rules.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/implementing_security_automation/index#con-automating-firewall-rules_firewall-policy-management",
+  "id": "con-automating-firewall-rules_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,14 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controller-api-filter.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controller-api-filter.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-controller-api-filtering.adoc",
+    "downstream/modules/platform/ref-controller-api-advanced-queries.adoc",
+    "downstream/modules/platform/ref-controller-api-field-lookups.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/automation_execution_api_overview/index#controller-api-filter",
+  "id": "controller-api-filter",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

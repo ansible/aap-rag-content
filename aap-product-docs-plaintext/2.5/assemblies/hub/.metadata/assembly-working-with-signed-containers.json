@@ -1,0 +1,18 @@
+{
+  "project_file_name": "downstream/assemblies/hub/assembly-working-with-signed-containers.adoc",
+  "path_name": "aap-docs/downstream/assemblies/hub/assembly-working-with-signed-containers.adoc",
+  "includes": [
+    "downstream/modules/hub/proc-deploying-your-system-for-container-signing.adoc",
+    "downstream/modules/hub/proc-adding-containers-remotely-to-the-automation-hub.adoc",
+    "downstream/modules/hub/proc-adding-an-execution-environment.adoc",
+    "downstream/modules/hub/proc-pushing-container-images-from-your-local.adoc",
+    "downstream/modules/hub/proc-using-policies-with-signed-images.adoc",
+    "downstream/modules/hub/proc-using-podman-ensure-image-signed.adoc",
+    "downstream/modules/hub/proc-configuring-the-client-to-verify-signatures.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/assembly-creating-tokens-in-automation-hub#working-with-signed-containers",
+  "id": "working-with-signed-containers",
+  "context": "working-with-signed-containers",
+  "content_type": null,
+  "nesting_assembly": true
+}

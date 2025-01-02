@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/hub/proc-sync-image.adoc",
+  "path_name": "aap-docs/downstream/modules/hub/proc-sync-image.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/creating_and_using_execution_environments/index#proc-sync-image-adoc_pulling-images-container-repository",
+  "id": "proc-sync-image-adoc_{context}",
+  "context": null,
+  "content_type": "PROCEDURE",
+  "nesting_assembly": false
+}

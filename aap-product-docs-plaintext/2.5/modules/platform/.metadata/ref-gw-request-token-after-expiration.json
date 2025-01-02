@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/ref-gw-request-token-after-expiration.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/ref-gw-request-token-after-expiration.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#gw-request-token-after-expiration",
+  "id": "gw-request-token-after-expiration",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

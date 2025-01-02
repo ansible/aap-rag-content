@@ -8,6 +8,7 @@ This section provides information about known issues in Ansible Automation Platf
 * Setting the pg_host= value without any other context no longer results in an empty HOST section of the settings.py in the automation controller. As a workaround, delete the pg_host= value or set it to pg_host=''. (AAP-31915)
 * Using Prompt on launch for variables for job templates, workflow job templates, workflow visualizer nodes, and schedules will not show the default variables when launching the job, or when configuring the workflows and schedules. (AAP-30585)
 * The unused ANSIBLE_BASE_ settings are included as environment variables in the job execution. These variables suffixed with SECRET are no longer used in the Ansible Automation Platform and might be ignored until they are removed in a future patch. (AAP-32208)
+* When installing the growth topology for the Ansible Automation Platform 2.5 containerized setup bundle, you must disable content syncing which is enabled by default. To disable this feature set the hub_seed_collections variable in the inventory file to false. See Container growth topology for a sample inventory file and see Automation hub variables for more information about this inventory file variable.
 
 # Event-Driven Ansible
 

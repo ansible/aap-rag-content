@@ -1,0 +1,15 @@
+{
+  "project_file_name": "aap-clouds/stories/assembly-saas-service-definition.adoc",
+  "path_name": "aap-docs/aap-clouds/stories/assembly-saas-service-definition.adoc",
+  "includes": [
+    "aap-clouds/stories/topics/con-saas-account-management.adoc",
+    "aap-clouds/stories/topics/con-saas-control-plane.adoc",
+    "aap-clouds/stories/topics/con-saas-execution-plane.adoc",
+    "aap-clouds/stories/topics/con-saas-support.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#saas-service-definition",
+  "id": "saas-service-definition",
+  "context": "saas-service-definition",
+  "content_type": null,
+  "nesting_assembly": true
+}

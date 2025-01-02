@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-UG-overview.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-UG-overview.adoc",
+  "includes": [
+    "downstream/modules/platform/con-controller-overview-details.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#assembly-UG-overview",
+  "id": "assembly-UG-overview",
+  "context": "overview-controller",
+  "content_type": null,
+  "nesting_assembly": true
+}

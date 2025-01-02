@@ -1,0 +1,13 @@
+{
+  "project_file_name": "downstream/modules/analytics/con-top-templates.adoc",
+  "path_name": "aap-docs/downstream/modules/analytics/con-top-templates.adoc",
+  "includes": [
+    "downstream/modules/analytics/proc-curate-templates.adoc",
+    "downstream/modules/analytics/proc-view-template-details.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_analytics/assembly-evaluating-automation-return#con-top-templates",
+  "id": "con-top-templates",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

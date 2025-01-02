@@ -1,0 +1,16 @@
+{
+  "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-example.adoc",
+  "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-example.adoc",
+  "includes": [
+    "downstream/modules/devtools/proc-rhdh-firewall-example-learn.adoc",
+    "downstream/modules/devtools/proc-rhdh-firewall-example-discover.adoc",
+    "downstream/modules/devtools/proc-rhdh-firewall-example-create-playbook.adoc",
+    "downstream/modules/devtools/proc-rhdh-firewall-example-new-playbook.adoc",
+    "downstream/modules/devtools/proc-rhdh-firewall-example-edit.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-example_aap-plugin-rhdh-using",
+  "id": "rhdh-example_{context}",
+  "context": "rhdh-example",
+  "content_type": null,
+  "nesting_assembly": true
+}

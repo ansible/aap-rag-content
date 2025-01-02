@@ -1478,11 +1478,8 @@ https://<CONTROLLER_SERVER_NAME>/api/v2/job_templates/7/callback/
 2. Ensure that the request from the host is a POST.
 The following is an example using curl (all on a single line):
 
-```
-curl -k -f -i -H 'Content-Type:application/json' -XPOST -d '{"host_config_key": "redhat"}' \
+curl -k -i -H 'Content-Type:application/json' -XPOST -d '{"host_config_key": "redhat"}' \
                   https://<CONTROLLER_SERVER_NAME>/api/v2/job_templates/7/callback/
-```
-
 3. Ensure that the requesting host is defined in your inventory for the callback to succeed.
 
 If automation controller fails to locate the host either by name or IP address in one of your defined inventories, the request is denied.
@@ -3790,7 +3787,7 @@ Use the following procedure to configure a Google-sourced inventory:
 4. In the Add new source page, select Google Compute Engine from the Source list.
 5. The Create source window expands with the required Credential field.
 Choose from an existing GCE Credential.
-For more information, see [Credentials].
+For more information, see Managing user credentials.
 6. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
 7. Use the Source Variables field to override variables used by the gcp_compute inventory plugin.
 Enter variables by using either JSON or YAML syntax.
@@ -3807,7 +3804,7 @@ Use the following procedure to configure an Microsoft Azure Resource Manager-sou
 4. In the Create source page, select Microsoft Azure Resource Manager from the Source list.
 5. Enter the following details in the additional fields:
 6. Optional: Credential: Choose from an existing Azure Credential.
-For more information, see Managing user credentials..
+For more information, see Managing user credentials.
 7. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in Adding a source.
 8. Use the Source variables field to override variables used by the azure_rm inventory plugin.
 Enter variables by using either JSON or YAML syntax.

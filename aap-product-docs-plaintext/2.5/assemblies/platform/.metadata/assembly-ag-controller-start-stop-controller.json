@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-ag-controller-start-stop-controller.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-ag-controller-start-stop-controller.adoc",
+  "includes": [
+    "downstream/modules/platform/con-controller-start-stop.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-start-stop-controller",
+  "id": "controller-start-stop-controller",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

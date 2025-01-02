@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/hub/proc-configure-ansible-galaxy-cli-verify.adoc",
+  "path_name": "aap-docs/downstream/modules/hub/proc-configure-ansible-galaxy-cli-verify.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/assembly-creating-tokens-in-automation-hub#proc-configure-ansible-galaxy-cli-verify",
+  "id": "proc-configure-ansible-galaxy-cli-verify",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,26 @@
+{
+  "project_file_name": "downstream/assemblies/devtools/assembly-rhdh-install-ocp-operator.adoc",
+  "path_name": "aap-docs/downstream/assemblies/devtools/assembly-rhdh-install-ocp-operator.adoc",
+  "includes": [
+    "downstream/modules/devtools/con-rhdh-install-ocp-prereqs.adoc",
+    "downstream/modules/devtools/con-rhdh-recommended-preconfig.adoc",
+    "downstream/modules/devtools/proc-rhdh-backup-operator-configmap.adoc",
+    "downstream/modules/devtools/proc-rhdh-create-custom-configmap-operator-install.adoc",
+    "downstream/modules/devtools/proc-rhdh-operator-add-custom-configmap-cr.adoc",
+    "downstream/modules/devtools/proc-rhdh-download-plugins.adoc",
+    "downstream/modules/devtools/proc-rhdh-create-plugin-registry.adoc",
+    "downstream/modules/devtools/proc-rhdh-install-dynamic-plugins-operator.adoc",
+    "downstream/modules/devtools/proc-rhdh-add-custom-configmap.adoc",
+    "downstream/modules/devtools/proc-rhdh-configure-devtools-server.adoc",
+    "downstream/modules/devtools/proc-rhdh-configure-aap-details.adoc",
+    "downstream/modules/devtools/proc-rhdh-add-plugin-software-templates.adoc",
+    "downstream/modules/devtools/proc-rhdh-configure-rbac.adoc",
+    "downstream/assemblies/devtools/assembly-rhdh-ocp-configure-optional.adoc",
+    "downstream/modules/devtools/ref-rhdh-full-aap-configmap-example.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-install-ocp-operator_rhdh-ocp-full-examples",
+  "id": "rhdh-install-ocp-operator_{context}",
+  "context": "rhdh-install-ocp-operator",
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,15 @@
+{
+  "project_file_name": "lightspeed/modules/con-manage-repo-scans.adoc",
+  "path_name": "aap-docs/lightspeed/modules/con-manage-repo-scans.adoc",
+  "includes": [
+    "lightspeed/modules/proc_manually-scan-repo.adoc",
+    "lightspeed/modules/proc_configure-repo-scan.adoc",
+    "lightspeed/modules/proc_view-repo-scan-history.adoc",
+    "lightspeed/modules/proc_add-remove-repo-from-scans.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#manage-repo-scans_using-code-bot-for-suggestions",
+  "id": "manage-repo-scans_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

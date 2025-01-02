@@ -1,0 +1,14 @@
+{
+  "project_file_name": "downstream/assemblies/hub/assembly-populate-container-registry.adoc",
+  "path_name": "aap-docs/downstream/assemblies/hub/assembly-populate-container-registry.adoc",
+  "includes": [
+    "downstream/modules/hub/proc-obtain-images.adoc",
+    "downstream/modules/hub/proc-tag-pulled-image.adoc",
+    "downstream/modules/hub/proc-push-container.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/creating_and_using_execution_environments/index#populate-container-registry",
+  "id": "populate-container-registry",
+  "context": "populate-container-registry",
+  "content_type": null,
+  "nesting_assembly": true
+}

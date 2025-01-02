@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/ref-postgresql-requirements.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/ref-postgresql-requirements.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_installation/index#ref-postgresql-requirements",
+  "id": "ref-postgresql-requirements",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,16 @@
+{
+  "project_file_name": "downstream/assemblies/analytics/assembly-automation-savings-planner.adoc",
+  "path_name": "aap-docs/downstream/assemblies/analytics/assembly-automation-savings-planner.adoc",
+  "includes": [
+    "downstream/modules/analytics/proc-create-savings-plan.adoc",
+    "downstream/modules/analytics/proc-edit-savings-plan.adoc",
+    "downstream/modules/analytics/proc-link-plan-job-template.adoc",
+    "downstream/modules/analytics/con-review-savings-calculations.adoc",
+    "downstream/modules/analytics/proc-filter-plans.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_analytics/index#assembly-automation-savings-planner",
+  "id": "assembly-automation-savings-planner",
+  "context": "assembly-automation-savings-planner-ctxt",
+  "content_type": null,
+  "nesting_assembly": true
+}

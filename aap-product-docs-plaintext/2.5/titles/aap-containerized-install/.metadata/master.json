@@ -1,0 +1,16 @@
+{
+  "project_file_name": "downstream/titles/aap-containerized-install/master.adoc",
+  "path_name": "aap-docs/downstream/titles/aap-containerized-install/master.adoc",
+  "includes": [
+    "downstream/attributes/attributes.adoc",
+    "downstream/assemblies/platform/assembly-aap-containerized-installation.adoc",
+    "downstream/assemblies/platform/assembly-horizontal-scaling.adoc",
+    "downstream/assemblies/platform/assembly-appendix-troubleshoot-containerized-aap.adoc",
+    "downstream/assemblies/platform/assembly-appendix-inventory-file-vars.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/index",
+  "id": null,
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

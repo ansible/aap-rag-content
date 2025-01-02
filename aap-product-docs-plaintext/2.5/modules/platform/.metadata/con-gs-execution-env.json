@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/con-gs-execution-env.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/con-gs-execution-env.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/assembly-gs-key-functionality#con-gs-execution-env_assembly-gs-auto-dev",
+  "id": "con-gs-execution-env_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

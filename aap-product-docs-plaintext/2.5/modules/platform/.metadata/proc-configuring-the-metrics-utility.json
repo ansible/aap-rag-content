@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-configuring-the-metrics-utility.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-configuring-the-metrics-utility.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/metrics-utility#configuring-the-metrics-utility",
+  "id": "configuring-the-metrics-utility",
+  "context": null,
+  "content_type": "PROCEDURE",
+  "nesting_assembly": false
+}

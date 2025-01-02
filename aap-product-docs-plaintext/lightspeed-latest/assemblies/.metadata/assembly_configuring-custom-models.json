@@ -1,0 +1,19 @@
+{
+  "project_file_name": "lightspeed/assemblies/assembly_configuring-custom-models.adoc",
+  "path_name": "aap-docs/lightspeed/assemblies/assembly_configuring-custom-models.adoc",
+  "includes": [
+    "lightspeed/modules/con_ansible-content-parser.adoc",
+    "lightspeed/modules/proc_install-content-parser.adoc",
+    "lightspeed/modules/proc_generate-training-data-set.adoc",
+    "lightspeed/modules/proc_view-content-parser-output.adoc",
+    "lightspeed/modules/proc_resolve-ansible-lint-rule-violations.adoc",
+    "lightspeed/modules/proc_merge-multiple-jsonl-files.adoc",
+    "lightspeed/modules/proc_create-deploy-custom-model-ibm.adoc",
+    "lightspeed/modules/proc_configure-custom-models-lightspeed.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#configuring-custom-models_set-up-lightspeed",
+  "id": "configuring-custom-models_{context}",
+  "context": "configuring-custom-models",
+  "content_type": null,
+  "nesting_assembly": true
+}

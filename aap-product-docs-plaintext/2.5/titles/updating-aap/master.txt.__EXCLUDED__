@@ -152,7 +152,7 @@ Perform a patch update for a container-based installation of Ansible Automation 
 You have done the following:
 
 * Reviewed the release notes for the associated patch release. For more information, see the Ansible Automation Platform Release notes.
-* Created a backup of your Ansible Automation Platform deployment. For more information, see Backing up controller-based Ansible Automation Platform.
+* Created a backup of your Ansible Automation Platform deployment. For more information, see Backing up container-based Ansible Automation Platform.
 
 1. Download the latest version of the containerized installer from the Ansible Automation Platform download.
 1. For online installations Ansible Automation Platform 2.5 Containerized Setup
@@ -172,7 +172,7 @@ $ tar xfvz ansible-automation-platform-containerized-setup-<version>.tar.gz
 $ tar xfvz ansible-automation-platform-containerized-setup-bundle-<version>-<arch name>.tar.gz
 ```
 
-5. Edit the inventory file so that it matches your required configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can change the parameters to match any modifications to your environment.
+5. Edit the inventory file to match your required configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can change the parameters to match any modifications to your environment.
 6. Run the install command:
 
 ```
@@ -182,14 +182,14 @@ $ ansible-playbook -i inventory ansible.containerized_installer.install
 * If your privilege escalation requires a password to be entered, append -K to the command. You will then be prompted for the BECOME password.
 * You can use increasing verbosity, up to 4 v’s (-vvvv) to see the details of the installation process. However it is important to note that this can significantly increase installation time, so it is recommended that you use it only as needed or requested by Red Hat support.
 
-The installation will begin.
+The update begins.
 
 ## Backing up container-based Ansible Automation Platform
 
 Perform a back up of your container-based installation of Ansible Automation Platform.
 
 1. Go to the Red Hat Ansible Automation Platform installation directory on your Red Hat Enterprise Linux host.
-2. Run the backup.yml playbook:
+2. Run the backup playbook command:
 
 ```
 $ ansible-playbook -i inventory ansible.containerized_installer.backup

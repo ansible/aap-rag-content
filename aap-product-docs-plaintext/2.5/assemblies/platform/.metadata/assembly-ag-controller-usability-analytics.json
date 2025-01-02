@@ -1,0 +1,33 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-ag-controller-usability-analytics.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-ag-controller-usability-analytics.adoc",
+  "includes": [
+    "downstream/modules/platform/ref-controller-automation-analytics.adoc",
+    "downstream/modules/platform/ref-controller-use-by-organization.adoc",
+    "downstream/modules/platform/ref-controller-jobs-run-by-organization.adoc",
+    "downstream/modules/platform/ref-controller-organization-status.adoc",
+    "downstream/modules/platform/ref-controller-data-collection-details.adoc",
+    "downstream/modules/platform/ref-controller-manifest-json.adoc",
+    "downstream/modules/platform/ref-controller-config-json.adoc",
+    "downstream/modules/platform/ref-controller-instance-info-json.adoc",
+    "downstream/modules/platform/ref-controller-counts-json.adoc",
+    "downstream/modules/platform/ref-controller-org-counts-json.adoc",
+    "downstream/modules/platform/ref-controller-cred-type-counts-json.adoc",
+    "downstream/modules/platform/ref-controller-inventory-counts-json.adoc",
+    "downstream/modules/platform/ref-controller-projects-scm-type-json.adoc",
+    "downstream/modules/platform/ref-controller-query-info-json.adoc",
+    "downstream/modules/platform/ref-controller-job-counts-json.adoc",
+    "downstream/modules/platform/ref-controller-job-instance-counts-json.adoc",
+    "downstream/modules/platform/ref-controller-unified-job-template-table-csv.adoc",
+    "downstream/modules/platform/ref-controller-unified-jobs-table-csv.adoc",
+    "downstream/modules/platform/ref-controller-workflow-job-template-node-table-csv.adoc",
+    "downstream/modules/platform/ref-controller-workflow-job-node-table-csv.adoc",
+    "downstream/modules/platform/ref-controller-events-table-csv.adoc",
+    "downstream/modules/platform/ref-controller-analytics-reports.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-usability-analytics-data-collection",
+  "id": "controller-usability-analytics-data-collection",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

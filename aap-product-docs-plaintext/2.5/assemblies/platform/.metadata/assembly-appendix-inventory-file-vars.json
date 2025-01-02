@@ -1,0 +1,20 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-appendix-inventory-file-vars.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-appendix-inventory-file-vars.adoc",
+  "includes": [
+    "downstream/modules/platform/ref-general-inventory-variables.adoc",
+    "downstream/modules/platform/ref-hub-variables.adoc",
+    "downstream/modules/platform/ref-controller-variables.adoc",
+    "downstream/modules/platform/ref-eda-controller-variables.adoc",
+    "downstream/modules/platform/ref-gateway-variables.adoc",
+    "downstream/modules/platform/ref-database-inventory-variables.adoc",
+    "downstream/modules/platform/ref-images-inventory-variables.adoc",
+    "downstream/modules/platform/ref-receptor-inventory-variables.adoc",
+    "downstream/modules/platform/ref-ansible-inventory-variables.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/aap-containerized-installation#appendix-inventory-files-vars",
+  "id": "appendix-inventory-files-vars",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

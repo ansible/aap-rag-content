@@ -27,8 +27,6 @@ UNREACHABLE_DOCS: int = 0
 
 ADDITIONAL_DOCS_DIR = "additional_docs"
 
-metadata = {}
-
 
 def ping_url(url: str) -> bool:
     """Check if the URL parameter is live."""
@@ -75,16 +73,12 @@ def aap_file_metadata_func(file_path: str) -> Dict:
         file_path: str: file path in str
     """
     full_path = os.path.abspath(file_path)
-    doc_dir = "lightspeed" if "lightspeed-latest" in full_path \
-        else "aap-clouds" if "aap-clouds-latest" in full_path else "downstream"
-
-    doc_path = full_path.removeprefix(EMBEDDINGS_ROOT_DIR).removesuffix(".txt")
-    i = doc_path.index("/", 1)
-    if i >= 0:
-        doc_path = doc_path[i:]
-    key = doc_dir + doc_path + ".adoc"
-
-    docs_url = lambda x: metadata[key]["url"]  # noqa: E731
+    i = full_path.rindex("/")
+    metadata_path = Path(full_path[:i]).joinpath(".metadata") \
+        .joinpath(full_path[(i+1):].replace(".txt", ".json"))
+    with open(metadata_path, encoding="utf8") as f:
+        metadata = json.load(f)
+        docs_url = lambda x: metadata["url"]
     return file_metadata_func(file_path, docs_url)
 
 def additional_docs_metadata_func(file_path: str) -> Dict:
@@ -139,24 +133,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print(f"Arguments used: {args}")
 
-    with open(
-        Path(args.folder).joinpath(args.aap_version).joinpath("metadata.json"),
-        encoding="utf8",
-    ) as f:
-        metadata = json.load(f)
-    with open(
-        Path(args.folder).joinpath("lightspeed-latest").joinpath("metadata.json"),
-        encoding="utf8",
-    ) as f:
-        metadata_lightspeed = json.load(f)
-        metadata = metadata | metadata_lightspeed
-    with open(
-        Path(args.folder).joinpath("aap-clouds-latest").joinpath("metadata.json"),
-        encoding="utf8",
-    ) as f:
-        metadata_aap_clouds = json.load(f)
-        metadata = metadata | metadata_aap_clouds
-
     # OLS-823: sanitize directory
     PERSIST_FOLDER = os.path.normpath("/" + args.output).lstrip("/")
     if PERSIST_FOLDER == "":
@@ -185,7 +161,7 @@ if __name__ == "__main__":
     documents = SimpleDirectoryReader(
         input_files=input_files,
         file_metadata=aap_file_metadata_func,
-    ).load_data()
+    ).load_data(num_workers=10)
 
     # Load additional documents
     additional_input_files = list(Path(ADDITIONAL_DOCS_DIR).rglob("*.txt"))
@@ -193,7 +169,7 @@ if __name__ == "__main__":
         additional_docs = SimpleDirectoryReader(
             input_files=additional_input_files,
             file_metadata=additional_docs_metadata_func,
-        ).load_data()
+        ).load_data(num_workers=10)
         documents.extend(additional_docs)
 
     # Split based on header/section

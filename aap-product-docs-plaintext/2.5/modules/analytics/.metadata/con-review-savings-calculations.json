@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/analytics/con-review-savings-calculations.adoc",
+  "path_name": "aap-docs/downstream/modules/analytics/con-review-savings-calculations.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_analytics/assembly-automation-savings-planner#con-review-savings-calculations_assembly-automation-savings-planner-ctxt",
+  "id": "con-review-savings-calculations_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/topologies/ref-cont-b-env-a.adoc",
+  "path_name": "aap-docs/downstream/modules/topologies/ref-cont-b-env-a.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/tested_deployment_models/index#cont-b-env-a",
+  "id": "cont-b-env-a",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

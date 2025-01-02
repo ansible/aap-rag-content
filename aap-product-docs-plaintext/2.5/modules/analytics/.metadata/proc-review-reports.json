@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/analytics/proc-review-reports.adoc",
+  "path_name": "aap-docs/downstream/modules/analytics/proc-review-reports.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_analytics/assembly-insights-reports#proc-review-reports",
+  "id": "proc-review-reports",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

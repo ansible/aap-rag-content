@@ -1,0 +1,15 @@
+{
+  "project_file_name": "downstream/titles/aap-plugin-rhdh-using/master.adoc",
+  "path_name": "aap-docs/downstream/titles/aap-plugin-rhdh-using/master.adoc",
+  "includes": [
+    "downstream/attributes/attributes.adoc",
+    "downstream/assemblies/devtools/assembly-rhdh-using.adoc",
+    "downstream/assemblies/devtools/assembly-rhdh-feedback.adoc",
+    "downstream/assemblies/devtools/assembly-rhdh-example.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_ansible_plug-ins_for_red_hat_developer_hub/index",
+  "id": null,
+  "context": "aap-plugin-rhdh-using",
+  "content_type": null,
+  "nesting_assembly": false
+}

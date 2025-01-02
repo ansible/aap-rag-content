@@ -1,0 +1,14 @@
+{
+  "project_file_name": "downstream/titles/security-guide/master.adoc",
+  "path_name": "aap-docs/downstream/titles/security-guide/master.adoc",
+  "includes": [
+    "downstream/attributes/attributes.adoc",
+    "downstream/assemblies/security/assembly-firewall-policy-manage.adoc",
+    "downstream/assemblies/security/assembly-idps.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/implementing_security_automation/index",
+  "id": null,
+  "context": "ansible-security",
+  "content_type": null,
+  "nesting_assembly": false
+}

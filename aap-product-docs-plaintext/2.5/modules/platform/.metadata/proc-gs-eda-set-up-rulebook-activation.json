@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-gs-eda-set-up-rulebook-activation.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-gs-eda-set-up-rulebook-activation.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/assembly-gs-key-functionality#gs-eda-set-up-rulebook-activation_assembly-gs-auto-dev",
+  "id": "gs-eda-set-up-rulebook-activation_{context}",
+  "context": null,
+  "content_type": "PROCEDURE",
+  "nesting_assembly": false
+}

@@ -1,0 +1,21 @@
+{
+  "project_file_name": "aap-clouds/stories/assembly-azure-intro.adoc",
+  "path_name": "aap-docs/aap-clouds/stories/assembly-azure-intro.adoc",
+  "includes": [
+    "aap-clouds/stories/topics/con-azure-about.adoc",
+    "aap-clouds/stories/topics/con-azure-architecture.adoc",
+    "aap-clouds/stories/topics/con-azure-public-access.adoc",
+    "aap-clouds/stories/topics/con-azure-private-access.adoc",
+    "aap-clouds/stories/topics/con-azure-security.adoc",
+    "aap-clouds/stories/topics/con-azure-disaster-recovery.adoc",
+    "aap-clouds/stories/topics/con-azure-infrastructure-usage.adoc",
+    "aap-clouds/stories/topics/con-azure-lifecycle.adoc",
+    "aap-clouds/stories/topics/con-azure-scaling.adoc",
+    "aap-clouds/stories/topics/con-azure-migration.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#intro-to-aap-on-azure",
+  "id": "intro-to-aap-on-azure",
+  "context": "azure-intro",
+  "content_type": null,
+  "nesting_assembly": true
+}

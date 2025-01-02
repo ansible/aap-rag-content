@@ -1,0 +1,15 @@
+{
+  "project_file_name": "downstream/assemblies/eda/assembly-eda-projects.adoc",
+  "path_name": "aap-docs/downstream/assemblies/eda/assembly-eda-projects.adoc",
+  "includes": [
+    "downstream/modules/eda/proc-eda-set-up-new-project.adoc",
+    "downstream/modules/eda/con-eda-projects-list-view.adoc",
+    "downstream/modules/eda/proc-eda-editing-a-project.adoc",
+    "downstream/modules/eda/proc-eda-delete-project.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-projects",
+  "id": "eda-projects",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/devtools/ref-rhdh-full-helm-chart-ansible-plugins.adoc",
+  "path_name": "aap-docs/downstream/modules/devtools/ref-rhdh-full-helm-chart-ansible-plugins.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-full-helm-chart-ansible-plugins_rhdh-ocp-full-examples",
+  "id": "rhdh-full-helm-chart-ansible-plugins_{context}",
+  "context": null,
+  "content_type": "REFERENCE",
+  "nesting_assembly": false
+}

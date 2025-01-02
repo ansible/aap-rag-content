@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/devtools/proc-rhdh-download-plugins.adoc",
+  "path_name": "aap-docs/downstream/modules/devtools/proc-rhdh-download-plugins.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-download-plugins_rhdh-install-ocp",
+  "id": "rhdh-download-plugins_{context}",
+  "context": null,
+  "content_type": "PROCEDURE",
+  "nesting_assembly": false
+}

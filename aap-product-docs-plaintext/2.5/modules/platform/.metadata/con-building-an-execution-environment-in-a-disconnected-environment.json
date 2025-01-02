@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/con-building-an-execution-environment-in-a-disconnected-environment.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/con-building-an-execution-environment-in-a-disconnected-environment.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/creating_and_using_execution_environments/index#building-an-execution-environment-in-a-disconnected-environment_builder",
+  "id": "building-an-execution-environment-in-a-disconnected-environment_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

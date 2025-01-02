@@ -1,0 +1,16 @@
+{
+  "project_file_name": "downstream/titles/playbooks/playbooks-getting-started/master.adoc",
+  "path_name": "aap-docs/downstream/titles/playbooks/playbooks-getting-started/master.adoc",
+  "includes": [
+    "downstream/attributes/attributes.adoc",
+    "downstream/assemblies/playbooks/assembly-intro-to-playbooks.adoc",
+    "downstream/assemblies/playbooks/assembly-networking-playbook.adoc",
+    "downstream/assemblies/playbooks/assembly-playbook-practical-example.adoc",
+    "downstream/assemblies/playbooks/assembly-open-source-license.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_playbooks/index",
+  "id": null,
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-troubleshoot-same-name.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-troubleshoot-same-name.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/backup_and_recovery_for_operator_environments/aap-troubleshoot-backup-recover#troubleshoot-same-name",
+  "id": "troubleshoot-same-name",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

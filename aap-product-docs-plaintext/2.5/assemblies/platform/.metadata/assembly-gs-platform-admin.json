@@ -1,0 +1,18 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-gs-platform-admin.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-gs-platform-admin.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-gs-logging-in.adoc",
+    "downstream/modules/platform/con-gs-config-authentication.adoc",
+    "downstream/modules/platform/con-gs-manage-RBAC.adoc",
+    "downstream/modules/platform/proc-controller-create-organization.adoc",
+    "downstream/modules/platform/proc-controller-creating-a-team.adoc",
+    "downstream/modules/platform/proc-gs-platform-admin-create-user.adoc",
+    "downstream/modules/platform/proc-gs-social-auth-github.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/assembly-gs-key-functionality#assembly-gs-platform-admin",
+  "id": "assembly-gs-platform-admin",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

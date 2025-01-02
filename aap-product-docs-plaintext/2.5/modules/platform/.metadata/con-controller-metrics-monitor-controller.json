@@ -1,0 +1,13 @@
+{
+  "project_file_name": "downstream/modules/platform/con-controller-metrics-monitor-controller.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/con-controller-metrics-monitor-controller.adoc",
+  "includes": [
+    "downstream/modules/platform/ref-controller-metrics-monitoring.adoc",
+    "downstream/modules/platform/con-controller-system-level-monitoring.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#con-controller-metrics-monitor-controller",
+  "id": "con-controller-metrics-monitor-controller",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

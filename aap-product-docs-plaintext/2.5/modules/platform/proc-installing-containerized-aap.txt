@@ -2,7 +2,7 @@
 
 You can control the installation of Ansible Automation Platform with inventory files. Inventory files define the hosts and containers used and created, variables for components, and other information needed to customize the installation.
 Example inventory files are provided in this document that you can copy and change to quickly get started.
-Inventory files for the growth and enterprise topology are also found in the downloaded installer package:
+Inventory files for the growth and enterprise topologies are also found in the downloaded installer package:
 * The default one named inventory is for the enterprise topology pattern.
 * If you want to deploy the growth or all-in-one pattern you need to copy over or use the inventory-growth file instead.
 Additionally, you can find example inventory files in Container topologies in Tested deployment models.
@@ -14,10 +14,14 @@ Use the example inventory file to perform an online installation for the contain
 
 
 ```yaml
-# This is the Ansible Automation Platform growth installer inventory file
-# Please consult the docs if you are unsure what to add
-# For all optional variables please consult the included README.md
-# or the Red Hat documentation:
+# This is the Ansible Automation Platform installer inventory file intended for the container growth deployment topology.
+# This inventory file expects to be run from the host where Ansible Automation Platform will be installed.
+# Consult the Ansible Automation Platform product documentation about this topology's tested hardware configuration.
+# {BaseURL}/red_hat_ansible_automation_platform/2.5/html/tested_deployment_models/container-topologies
+#
+# Consult the docs if you are unsure what to add
+# For all optional variables consult the included README.md
+# or the Ansible Automation Platform documentation:
 # {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation
 
 # This section is for your platform gateway hosts
@@ -80,6 +84,7 @@ controller_pg_password=<set your own>
 hub_admin_password=<set your own>
 hub_pg_host=aap.example.org
 hub_pg_password=<set your own>
+hub_seed_collections=false
 
 # Event-Driven Ansible controller
 # {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#event-driven-ansible-controller
@@ -90,6 +95,12 @@ eda_pg_password=<set your own>
 ```
 
 
+
+[WARNING]
+----
+* When installing the growth topology for the Ansible Automation Platform 2.5 containerized setup bundle, you must disable content syncing which is enabled by default. To disable this feature set the hub_seed_collections variable in the inventory file to false. See Container growth topology for a sample inventory file and see Automation hub variables for more information about this inventory file variable.
+----
+
 # Inventory file for online installation for containerized enterprise topology
 
 Use the example inventory file to perform an online installation for the containerized enterprise topology:
@@ -97,8 +108,8 @@ Use the example inventory file to perform an online installation for the contain
 
 ```yaml
 # This is the Ansible Automation Platform enterprise installer inventory file
-# Please consult the docs if you are unsure what to add
-# For all optional variables please consult the included README.md
+# Consult the docs if you are unsure what to add
+# For all optional variables consult the included README.md
 # or the Red Hat documentation:
 # {BaseURL}/red_hat_ansible_automation_platform/2.5/html/containerized_installation
 
@@ -247,9 +258,17 @@ Use the following command to install containerized Ansible Automation Platform:
 
 
 ```
+ansible-playbook -i <inventory_file_name> ansible.containerized_installer.install
+```
+
+
+For example:
+
+
+```
 ansible-playbook -i inventory ansible.containerized_installer.install
 ```
 
 
-* If your privilege escalation requires you to enter a password, append -K to the command line. You are then prompted for the BECOME password.
+* If your privilege escalation requires you to enter a password, append -K to the command. You are then prompted for the BECOME password.
 * You can use increasing verbosity, up to 4 v's (-vvvv) to see the details of the installation process. However, it is important to note that this can significantly increase installation time, so it is recommended that you use it only as needed or requested by Red Hat support.

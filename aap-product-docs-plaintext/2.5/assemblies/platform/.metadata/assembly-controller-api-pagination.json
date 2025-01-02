@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controller-api-pagination.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controller-api-pagination.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-controller-api-using-pagination.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/automation_execution_api_overview/index#controller-api-pagination",
+  "id": "controller-api-pagination",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

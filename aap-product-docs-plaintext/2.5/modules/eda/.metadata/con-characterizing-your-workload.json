@@ -1,0 +1,13 @@
+{
+  "project_file_name": "downstream/modules/eda/con-characterizing-your-workload.adoc",
+  "path_name": "aap-docs/downstream/modules/eda/con-characterizing-your-workload.adoc",
+  "includes": [
+    "downstream/modules/eda/con-modifying-simultaneous-activations.adoc",
+    "downstream/modules/eda/con-modifying-memory-limit.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#characterizing-your-workload",
+  "id": "characterizing-your-workload",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

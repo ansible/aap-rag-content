@@ -1,0 +1,17 @@
+{
+  "project_file_name": "downstream/assemblies/hub/assembly-repo-management.adoc",
+  "path_name": "aap-docs/downstream/assemblies/hub/assembly-repo-management.adoc",
+  "includes": [
+    "downstream/modules/hub/con-approval-pipeline.adoc",
+    "downstream/modules/hub/con-repo-rbac.adoc",
+    "downstream/modules/hub/proc-create-repository.adoc",
+    "downstream/modules/hub/proc-provide-repository-access.adoc",
+    "downstream/modules/hub/proc-adding-collections-repository.adoc",
+    "downstream/modules/hub/proc-revert-repository-version.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/assembly-creating-tokens-in-automation-hub#repo-management",
+  "id": "repo-management",
+  "context": "repo-management",
+  "content_type": null,
+  "nesting_assembly": true
+}

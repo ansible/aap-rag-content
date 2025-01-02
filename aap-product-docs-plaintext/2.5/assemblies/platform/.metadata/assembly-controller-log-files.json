@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controller-log-files.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controller-log-files.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#assembly-controller-log-files",
+  "id": "assembly-controller-log-files",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

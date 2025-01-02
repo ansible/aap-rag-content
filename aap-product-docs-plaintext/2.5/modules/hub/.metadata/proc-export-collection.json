@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/hub/proc-export-collection.adoc",
+  "path_name": "aap-docs/downstream/modules/hub/proc-export-collection.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/assembly-creating-tokens-in-automation-hub#proc-export-collection",
+  "id": "proc-export-collection",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

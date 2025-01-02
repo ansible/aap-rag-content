@@ -1,0 +1,30 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-ug-controller-notifications.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-ug-controller-notifications.adoc",
+  "includes": [
+    "downstream/modules/platform/con-controller-notification-hierarchy.adoc",
+    "downstream/modules/platform/con-controller-notification-workflow.adoc",
+    "downstream/modules/platform/proc-controller-create-notification-template.adoc",
+    "downstream/modules/platform/con-controller-notification-types.adoc",
+    "downstream/modules/platform/ref-controller-notification-email.adoc",
+    "downstream/modules/platform/ref-controller-notification-grafana.adoc",
+    "downstream/modules/platform/ref-controller-notification-irc.adoc",
+    "downstream/modules/platform/ref-controller-notification-mattermost.adoc",
+    "downstream/modules/platform/ref-controller-notification-pager-duty.adoc",
+    "downstream/modules/platform/ref-controller-notification-rocketchat.adoc",
+    "downstream/modules/platform/ref-controller-notification-slack.adoc",
+    "downstream/modules/platform/ref-controller-notification-twilio.adoc",
+    "downstream/modules/platform/ref-controller-notification-webhook.adoc",
+    "downstream/modules/platform/ref-controller-notification-webhook-payloads.adoc",
+    "downstream/modules/platform/proc-controller-create-custom-notifications.adoc",
+    "downstream/modules/platform/con-controller-enable-notifications.adoc",
+    "downstream/modules/platform/con-controller-configure-hostname-notifications.adoc",
+    "downstream/modules/platform/proc-controller-reset-tower-base.adoc",
+    "downstream/modules/platform/ref-controller-notifications-api.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/assembly-controller-user-interface#controller-notifications",
+  "id": "controller-notifications",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

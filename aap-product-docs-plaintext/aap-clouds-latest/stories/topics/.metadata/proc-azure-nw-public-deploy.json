@@ -1,0 +1,10 @@
+{
+  "project_file_name": "aap-clouds/stories/topics/proc-azure-nw-public-deploy.adoc",
+  "path_name": "aap-docs/aap-clouds/stories/topics/proc-azure-nw-public-deploy.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/azure-install-prerequisites#proc-azure-nw-public-deploy_azure-connecting-to-aap",
+  "id": "proc-azure-nw-public-deploy_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

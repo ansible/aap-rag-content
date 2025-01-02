@@ -3,6 +3,12 @@
 * When using an external database, ensure the [database] sections of your inventory file are properly set up.
 * To improve performance, do not colocate the database and the automation controller on the same server.
 
+
+[IMPORTANT]
+----
+When using an external database with Ansible Automation Platform, you must create and maintain that database. Ensure that you clear your external database when uninstalling the Ansible Automation Platform.
+----
+
 * If there is an [automationhub] group, you must include the variables automationhub_pg_host and automationhub_pg_port.
 * Add Ansible automation hub information in the [automationhub] group.
 * Do not install Ansible automation hub and automation controller on the same node.

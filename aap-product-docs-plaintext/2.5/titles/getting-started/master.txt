@@ -14,7 +14,7 @@ With Ansible Automation Platform, you can create, manage, and scale automation f
 
 The release of Ansible Automation Platform 2.5 introduces an updated, unified user interface (UI) that allows you to interact with and manage each part of the platform.
 
-Platform gateway is the service that handles authentication and authorization for the Ansible Automation Platform. It provides a single entry into the Ansible Automation Platform and serves the platform user interface so you can authenticate and access all of the Ansible Automation Platform services from a single location. For more information about the services available in the Ansible Automation Platform, refer to Key functionality and concepts in Getting started with Ansible Automation Platform.
+Platform gateway is the service that handles authentication and authorization for the Ansible Automation Platform. It provides a single entry into the Ansible Automation Platform and serves the platform user interface so you can authenticate and access all of the Ansible Automation Platform services from a single location.
 
 ## Activity stream
 

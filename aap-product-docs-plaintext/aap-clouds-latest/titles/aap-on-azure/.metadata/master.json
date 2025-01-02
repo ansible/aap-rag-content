@@ -1,0 +1,13 @@
+{
+  "project_file_name": "aap-clouds/titles/aap-on-azure/master.adoc",
+  "path_name": "aap-docs/aap-clouds/titles/aap-on-azure/master.adoc",
+  "includes": [
+    "aap-clouds/attributes/attributes.adoc",
+    "aap-clouds/titles/aap-on-azure/stories.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index",
+  "id": null,
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

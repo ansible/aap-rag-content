@@ -1,0 +1,13 @@
+{
+  "project_file_name": "aap-clouds/stories/assembly-saas-set-up.adoc",
+  "path_name": "aap-docs/aap-clouds/stories/assembly-saas-set-up.adoc",
+  "includes": [
+    "aap-clouds/stories/topics/proc-saas-set-up-public.adoc",
+    "aap-clouds/stories/topics/proc-saas-set-up-private.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#saas-set-up",
+  "id": "saas-set-up",
+  "context": "saas-set-up",
+  "content_type": null,
+  "nesting_assembly": true
+}

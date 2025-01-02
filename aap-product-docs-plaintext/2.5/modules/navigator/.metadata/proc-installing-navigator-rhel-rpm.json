@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/navigator/proc-installing-navigator-rhel-rpm.adoc",
+  "path_name": "aap-docs/downstream/modules/navigator/proc-installing-navigator-rhel-rpm.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_content_navigator/index#proc-installing-navigator-rhel-rpm_install-navigator-rhel",
+  "id": "proc-installing-navigator-rhel-rpm_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

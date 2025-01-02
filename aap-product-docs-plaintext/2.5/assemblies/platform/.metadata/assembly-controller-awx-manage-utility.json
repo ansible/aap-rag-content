@@ -1,0 +1,15 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controller-awx-manage-utility.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controller-awx-manage-utility.adoc",
+  "includes": [
+    "downstream/modules/platform/ref-controller-inventory-import.adoc",
+    "downstream/modules/platform/ref-controller-cleanup-old-data.adoc",
+    "downstream/modules/platform/ref-controller-cluster-management.adoc",
+    "downstream/modules/platform/ref-controller-analytics-gathering.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#assembly-controller-awx-manage-utility",
+  "id": "assembly-controller-awx-manage-utility",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

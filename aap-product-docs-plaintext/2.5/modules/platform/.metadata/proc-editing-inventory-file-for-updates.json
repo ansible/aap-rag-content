@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-editing-inventory-file-for-updates.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-editing-inventory-file-for-updates.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#editing-inventory-file-for-updates_aap-upgrading-platform",
+  "id": "editing-inventory-file-for-updates_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

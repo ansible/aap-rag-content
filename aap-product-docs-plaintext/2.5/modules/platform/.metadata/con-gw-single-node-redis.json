@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/con-gw-single-node-redis.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/con-gw-single-node-redis.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/planning_your_installation/index#gw-single-node-redis_planning",
+  "id": "gw-single-node-redis_{context}",
+  "context": null,
+  "content_type": "CONCEPT",
+  "nesting_assembly": false
+}

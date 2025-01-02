@@ -1,0 +1,10 @@
+{
+  "project_file_name": "lightspeed/modules/proc_disable-admin-dashboard-telemetry.adoc",
+  "path_name": "aap-docs/lightspeed/modules/proc_disable-admin-dashboard-telemetry.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#disable-admin-dashboard-telemetry_managing-admin-dashboard-telemetry",
+  "id": "disable-admin-dashboard-telemetry_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

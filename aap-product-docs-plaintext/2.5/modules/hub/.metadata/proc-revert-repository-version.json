@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/hub/proc-revert-repository-version.adoc",
+  "path_name": "aap-docs/downstream/modules/hub/proc-revert-repository-version.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/assembly-creating-tokens-in-automation-hub#proc-revert-repository-version",
+  "id": "proc-revert-repository-version",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

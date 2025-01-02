@@ -1,0 +1,13 @@
+{
+  "project_file_name": "aap-clouds/stories/assembly-saas-aap-best-practices.adoc",
+  "path_name": "aap-docs/aap-clouds/stories/assembly-saas-aap-best-practices.adoc",
+  "includes": [
+    "aap-clouds/stories/topics/con-saas-automation-for-instance-groups.adoc",
+    "aap-clouds/stories/topics/con-saas-sync-with-pah.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#saas-aap-best-practices",
+  "id": "saas-aap-best-practices",
+  "context": "saas-aap-best-practices",
+  "content_type": null,
+  "nesting_assembly": true
+}

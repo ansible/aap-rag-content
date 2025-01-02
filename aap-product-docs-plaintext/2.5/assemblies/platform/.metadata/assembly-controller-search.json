@@ -1,0 +1,16 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controller-search.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controller-search.adoc",
+  "includes": [
+    "downstream/modules/platform/ref-controller-search-tips.adoc",
+    "downstream/modules/platform/ref-controller-values-for-search-fields.adoc",
+    "downstream/modules/platform/ref-controller-search-values-related-fields.adoc",
+    "downstream/modules/platform/ref-controller-other-search-considerations.adoc",
+    "downstream/modules/platform/ref-controller-search-sort.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/assembly-controller-user-interface#assembly-controller-search",
+  "id": "assembly-controller-search",
+  "context": "search-controller",
+  "content_type": null,
+  "nesting_assembly": false
+}

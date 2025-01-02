@@ -1,0 +1,15 @@
+{
+  "project_file_name": "lightspeed/assemblies/assembly_configuring-vscode-extension.adoc",
+  "path_name": "aap-docs/lightspeed/assemblies/assembly_configuring-vscode-extension.adoc",
+  "includes": [
+    "lightspeed/modules/proc_install-vscode-extension.adoc",
+    "lightspeed/modules/proc_configure-vscode-extension.adoc",
+    "lightspeed/modules/proc_login-vscode-extension.adoc",
+    "lightspeed/modules/proc_log-out-of-portal.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#configuring-with-code-assistant_lightspeed-user-guide",
+  "id": "configuring-with-code-assistant_{context}",
+  "context": "configuring-with-code-assistant",
+  "content_type": null,
+  "nesting_assembly": true
+}

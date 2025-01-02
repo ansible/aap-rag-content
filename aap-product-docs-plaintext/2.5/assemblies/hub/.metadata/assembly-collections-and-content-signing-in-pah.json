@@ -1,0 +1,15 @@
+{
+  "project_file_name": "downstream/assemblies/hub/assembly-collections-and-content-signing-in-pah.adoc",
+  "path_name": "aap-docs/downstream/assemblies/hub/assembly-collections-and-content-signing-in-pah.adoc",
+  "includes": [
+    "downstream/modules/hub/proc-configure-content-signing-on-pah.adoc",
+    "downstream/modules/hub/proc-using-content-signing-services-in-pah.adoc",
+    "downstream/modules/hub/proc-downloading-signature-public-keys.adoc",
+    "downstream/modules/hub/proc-configure-ansible-galaxy-cli-verify.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/assembly-creating-tokens-in-automation-hub#assembly-collections-and-content-signing-in-pah",
+  "id": "assembly-collections-and-content-signing-in-pah",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

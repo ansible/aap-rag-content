@@ -1,0 +1,21 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-gw-token-based-authentication.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-gw-token-based-authentication.adoc",
+  "includes": [
+    "downstream/assemblies/platform/assembly-controller-applications.adoc",
+    "downstream/modules/platform/proc-controller-apps-create-tokens.adoc",
+    "downstream/modules/platform/ref-controller-app-token-functions.adoc",
+    "downstream/modules/platform/ref-controller-refresh-existing-token.adoc",
+    "downstream/modules/platform/ref-controller-revoke-access-token.adoc",
+    "downstream/modules/platform/ref-controller-token-session-management.adoc",
+    "downstream/modules/platform/ref-controller-create-oauth2-token.adoc",
+    "downstream/modules/platform/ref-controller-revoke-oauth2-token.adoc",
+    "downstream/modules/platform/ref-controller-clear-tokens.adoc",
+    "downstream/modules/platform/ref-controller-clear-sessions.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/assembly-gateway-licensing#gw-token-based-authentication",
+  "id": "gw-token-based-authentication",
+  "context": null,
+  "content_type": "ASSEMBLY",
+  "nesting_assembly": true
+}

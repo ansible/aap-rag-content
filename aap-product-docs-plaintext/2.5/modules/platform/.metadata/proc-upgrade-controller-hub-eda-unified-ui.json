@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/platform/proc-upgrade-controller-hub-eda-unified-ui.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/proc-upgrade-controller-hub-eda-unified-ui.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#upgrade-controller-hub-eda-unified-ui_aap-upgrading-platform",
+  "id": "upgrade-controller-hub-eda-unified-ui_{context}",
+  "context": null,
+  "content_type": "PROCEDURE",
+  "nesting_assembly": false
+}

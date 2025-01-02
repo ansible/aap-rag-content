@@ -57,12 +57,18 @@ automationgateway_pg_password=""
 
 The first part of the inventory file specifies the hosts or groups that Ansible can work with.
 For more information on registry_username and registry_password, see Setting registry_username and registry_password.
-Platform gateway is the service that handles authentication and authorization for the Ansible Automation Platform. It provides a single entry into the Ansible Automation Platform and serves the platform user interface so you can authenticate and access all of the Ansible Automation Platform services from a single location. For more information about the services available in the Ansible Automation Platform, refer to Key functionality and concepts in Getting started with Ansible Automation Platform.
+Platform gateway is the service that handles authentication and authorization for the Ansible Automation Platform. It provides a single entry into the Ansible Automation Platform and serves the platform user interface so you can authenticate and access all of the Ansible Automation Platform services from a single location.
 
 # Guidelines for hosts and groups
 
 * When using an external database, ensure the [database] sections of your inventory file are properly set up.
 * To improve performance, do not colocate the database and the automation controller on the same server.
+
+
+[IMPORTANT]
+----
+When using an external database with Ansible Automation Platform, you must create and maintain that database. Ensure that you clear your external database when uninstalling the Ansible Automation Platform.
+----
 
 * If there is an [automationhub] group, you must include the variables automationhub_pg_host and automationhub_pg_port.
 * Add Ansible automation hub information in the [automationhub] group.

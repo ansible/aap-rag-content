@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/devtools/proc-devtools-setup-registry-redhat-io.adoc",
+  "path_name": "aap-docs/downstream/modules/devtools/proc-devtools-setup-registry-redhat-io.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/developing_automation_content/index#devtools-setup-registry-redhat-io_installing-devtools",
+  "id": "devtools-setup-registry-redhat-io_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

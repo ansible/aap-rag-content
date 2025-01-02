@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/analytics/assembly-insights-reports.adoc",
+  "path_name": "aap-docs/downstream/assemblies/analytics/assembly-insights-reports.adoc",
+  "includes": [
+    "downstream/modules/analytics/proc-review-reports.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_analytics/index#assembly-insights-reports",
+  "id": "assembly-insights-reports",
+  "context": "assembly-insights-reports-ctxt",
+  "content_type": null,
+  "nesting_assembly": true
+}

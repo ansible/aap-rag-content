@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/modules/platform/ref-projects-collections-support.adoc",
+  "path_name": "aap-docs/downstream/modules/platform/ref-projects-collections-support.adoc",
+  "includes": [
+    "downstream/modules/platform/proc-projects-using-collections-with-hub.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/assembly-controller-user-interface#ref-projects-collections-support",
+  "id": "ref-projects-collections-support",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

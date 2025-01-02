@@ -1,0 +1,13 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-controller-api-access-resources.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-controller-api-access-resources.adoc",
+  "includes": [
+    "downstream/modules/platform/ref-controller-api-config-settings.adoc",
+    "downstream/modules/platform/con-controller-api-identifier-format-protocol.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/automation_execution_api_overview/index#controller-api-access-resources",
+  "id": "controller-api-access-resources",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

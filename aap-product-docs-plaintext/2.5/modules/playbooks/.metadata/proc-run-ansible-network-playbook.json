@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/playbooks/proc-run-ansible-network-playbook.adoc",
+  "path_name": "aap-docs/downstream/modules/playbooks/proc-run-ansible-network-playbook.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_playbooks/index#proc-run-ansible-network-playbook",
+  "id": "proc-run-ansible-network-playbook",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

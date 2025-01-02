@@ -1,0 +1,14 @@
+{
+  "project_file_name": "aap-clouds/titles/saas-aws/master.adoc",
+  "path_name": "aap-docs/aap-clouds/titles/saas-aws/master.adoc",
+  "includes": [
+    "aap-clouds/attributes/attributes.adoc",
+    "aap-clouds/titles/saas-aws/title-attributes.adoc",
+    "aap-clouds/titles/saas-aws/stories.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index",
+  "id": "{ProjectNameID}-{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}

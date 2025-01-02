@@ -1,0 +1,16 @@
+{
+  "project_file_name": "lightspeed/assemblies/assembly_requesting-task-recommendations.adoc",
+  "path_name": "aap-docs/lightspeed/assemblies/assembly_requesting-task-recommendations.adoc",
+  "includes": [
+    "lightspeed/modules/con_overview-and-best-practices.adoc",
+    "lightspeed/modules/proc_single-task-recs.adoc",
+    "lightspeed/modules/proc_multi-task-recs.adoc",
+    "lightspeed/modules/proc_view-training-matches.adoc",
+    "lightspeed/modules/proc_provide-feedback.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#requesting-task-recommendations_lightspeed-user-guide",
+  "id": "requesting-task-recommendations_{context}",
+  "context": "requesting-task-recommendations",
+  "content_type": null,
+  "nesting_assembly": true
+}

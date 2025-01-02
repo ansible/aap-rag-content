@@ -1,0 +1,12 @@
+{
+  "project_file_name": "downstream/assemblies/platform/assembly-aap-upgrades.adoc",
+  "path_name": "aap-docs/downstream/assemblies/platform/assembly-aap-upgrades.adoc",
+  "includes": [
+    "downstream/modules/platform/con-aap-upgrades.adoc"
+  ],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_upgrade_and_migration/index#aap-upgrades",
+  "id": "aap-upgrades",
+  "context": "aap-upgrades",
+  "content_type": null,
+  "nesting_assembly": true
+}

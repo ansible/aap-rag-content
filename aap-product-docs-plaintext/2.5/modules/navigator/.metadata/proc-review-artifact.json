@@ -1,0 +1,10 @@
+{
+  "project_file_name": "downstream/modules/navigator/proc-review-artifact.adoc",
+  "path_name": "aap-docs/downstream/modules/navigator/proc-review-artifact.adoc",
+  "includes": [],
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_content_navigator/index#proc-review-artifact_execute-playbooks-navigator",
+  "id": "proc-review-artifact_{context}",
+  "context": null,
+  "content_type": null,
+  "nesting_assembly": false
+}
