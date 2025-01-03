@@ -15,3 +15,7 @@ Here is a list of AAP Lifecycle Dates:
 - The definition of Full Support Phase is that during the Full Support Phase, qualified Critical and Important Security Advisories (RHSAs) and Urgent and selected High Priority Bug Fix Advisories (RHBAs) will be released as they become available. Other errata advisories, such as Red Hat Enhancement Advisories (RHEAs), may be delivered as appropriate.
 - The definition of Maintenance Support 1 Phase is that during the Maintenance Support phase, qualified Critical and Important Security errata advisories (RHSAs) and Urgent and Selected High Priority Bug Fix errata advisories (RHBAs) will be released as they become available. Other bug fix (RHBA) and enhancement (RHEA) errata advisories may be released at Red Hat’s discretion, but should not be expected.
 - The definition of Maintenance Support 2 Phase is that during Maintenance Support 2, qualified Critical and Important Security errata advisories (RHSAs) will be issued and Urgent and Selected High Priority Bug Fix errata advisories (RHBAs) will likely not be delivered. Ansible Automation Platform releases in Maintenance Support 2 will be technically supported, however, software updates will likely not be provided for these releases.
+
+# AAP Subscription
+
+Red Hat Ansible Automation Platform (AAP) is not free. It requires a subscription to authorize its use. You can obtain a subscription by using your Red Hat customer or Satellite credentials when launching Ansible Automation Platform or by uploading a subscriptions manifest file.
