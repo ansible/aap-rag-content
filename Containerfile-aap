@@ -24,9 +24,11 @@ RUN set -e && pdm run python generate_embeddings-aap.py \
   -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
   -v ${AAP_VERSION}
 
-FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:daa61d6103e98bccf40d7a69a0d4f8786ec390e2204fd94f7cc49053e9949360
-COPY --from=aap-rag-builder /workdir/vector_db/aap_product_docs /rag/vector_db/aap_product_docs
+FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:daa61d6103e98bccf40d7a69a0d4f8786ec390e2204fd94f7cc49053e9949360 as embeddings_model_image
 COPY --from=aap-rag-builder /workdir/embeddings_model /rag/embeddings_model
+
+FROM embeddings_model_image
+COPY --from=aap-rag-builder /workdir/vector_db/aap_product_docs /rag/vector_db/aap_product_docs
 
 # this directory is checked by ecosystem-cert-preflight-checks task in Konflux
 RUN mkdir /licenses
