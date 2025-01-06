@@ -153,15 +153,24 @@ if __name__ == "__main__":
 
     embedding_dimension = len(Settings.embed_model.get_text_embedding("random text"))
     faiss_index = faiss.IndexFlatIP(embedding_dimension)
+    try:
+        gpu_resource = faiss.StandardGpuResources()
+        faiss_index = faiss.index_cpu_to_gpu(gpu_resource, 0, faiss_index)
+    except AssertionError:
+        gpu_resource = None
     vector_store = FaissVectorStore(faiss_index=faiss_index)
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
+
+    # Retrieve the number of CPUs
+    cpu_count = os.cpu_count()
+    print(f"CPU Count: {cpu_count}")
 
     # Load documents
     input_files = list(Path(args.folder).rglob("*.txt"))
     documents = SimpleDirectoryReader(
         input_files=input_files,
         file_metadata=aap_file_metadata_func,
-    ).load_data(num_workers=10)
+    ).load_data(num_workers=cpu_count)
 
     # Load additional documents
     additional_input_files = list(Path(ADDITIONAL_DOCS_DIR).rglob("*.txt"))
@@ -169,7 +178,7 @@ if __name__ == "__main__":
         additional_docs = SimpleDirectoryReader(
             input_files=additional_input_files,
             file_metadata=additional_docs_metadata_func,
-        ).load_data(num_workers=10)
+        ).load_data(num_workers=cpu_count)
         documents.extend(additional_docs)
 
     # Split based on header/section
@@ -195,6 +204,11 @@ if __name__ == "__main__":
         good_nodes,
         storage_context=storage_context,
     )
+
+    # If a GPU index is used, convert it into a CPU index before saving
+    if gpu_resource is not None:
+        vector_store._faiss_index = faiss.index_gpu_to_cpu(vector_store._faiss_index)
+
     index.set_index_id(args.index)
     index.storage_context.persist(persist_dir=PERSIST_FOLDER)
 
