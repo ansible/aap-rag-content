@@ -1,0 +1,38 @@
+ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
+ARG FLAVOR=cpu
+
+FROM registry.access.redhat.com/ubi9/python-311 as aap-rag-builder
+ARG EMBEDDING_MODEL
+ARG FLAVOR
+
+USER 0
+WORKDIR /workdir
+
+COPY pyproject.toml pdm.lock.* Makefile .
+RUN make install-tools && pdm config python.use_venv false && make pdm-lock-check install-deps
+
+COPY scripts/download_embeddings_model.py .
+RUN pdm run python download_embeddings_model.py -l ./embeddings_model -r ${EMBEDDING_MODEL}
+
+FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:daa61d6103e98bccf40d7a69a0d4f8786ec390e2204fd94f7cc49053e9949360
+COPY --from=aap-rag-builder /workdir/embeddings_model /rag/embeddings_model
+
+# this directory is checked by ecosystem-cert-preflight-checks task in Konflux
+RUN mkdir /licenses
+COPY LICENSE /licenses/
+
+# Labels for enterprise contract
+LABEL com.redhat.component=aap-rag-embeddings-image
+LABEL description="Red Hat Ansible Automation Platform RAG embeddings image"
+LABEL distribution-scope=private
+LABEL io.k8s.description="Red Hat Ansible Automation Platform RAG embeddings image"
+LABEL io.k8s.display-name="Ansible Automation Platform RAG embeddings image"
+LABEL io.ansible.tags="ansible,aap,ai,assistant,rag,embeddings"
+LABEL name=aap-rag-embeddings-image
+LABEL release=0.0.1
+LABEL url="https://github.com/ansible/aap-rag-embeddings-image"
+LABEL vendor="Red Hat"
+LABEL version=0.0.1
+LABEL summary="Red Hat Ansible Automation Platform RAG embeddings image"
+
+USER 65532:65532

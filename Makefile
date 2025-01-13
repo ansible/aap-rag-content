@@ -50,6 +50,9 @@ build-image: ## Build a rag-content container image.
 build-image-aap: ## Build a rag-content container image.
 	podman build -t aap-rag-content -f Containerfile-aap .
 
+build-image-embeddings: ## Build an embeddings container image.
+	podman build -t aap-rag-embeddings-image -f Containerfile-embeddings .
+
 help: ## Show this help screen
 	@echo 'Usage: make <OPTIONS> ... <TARGETS>'
 	@echo ''
