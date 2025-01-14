@@ -38,7 +38,14 @@ make build-image-aap
 _(It is pushed to Tami's account temporarily)_
 ```commandline
 podman login quay.io
-podman push aap-rag-content quay.io/ttakamiy/aap-rag-content
+podman push aap-rag-content quay.io/ansible/aap-rag-content
 ```
 
+## Embeddings image
+This repository also builds a container image that contains embedding
+models.  For kicking off the embedding image build, create a pull request
+whose target is the `embeddings` branch.
+
+`quay.io/ansible/aap-rag-embeddings-image` is the name of the embedding
+image to be built.
 
