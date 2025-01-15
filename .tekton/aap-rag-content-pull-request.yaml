@@ -42,7 +42,10 @@ spec:
       red_hat_content/documentation/red_hat_ansible_automation_platform/2.5
       red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest
   - name: build-args
-    value: [FLAVOR=gpu,MIMIR_ENC_SECRET={{ MIMIR_ENC_SECRET }},TARGET_DIRS={{ TARGET_DIRS }}]
+    value:
+      - FLAVOR=gpu
+      - MIMIR_ENC_SECRET={{ MIMIR_ENC_SECRET }}
+      - TARGET_DIRS={{ TARGET_DIRS }}
   taskRunSpecs:
   - pipelineTaskName: ecosystem-cert-preflight-checks
     stepSpecs:
