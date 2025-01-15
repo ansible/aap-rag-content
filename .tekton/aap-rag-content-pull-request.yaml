@@ -218,6 +218,16 @@ spec:
       env:
       - name: TMPDIR
         value: /workspace/buildah-tmp
+      - name: MIMIR_ENC_SECRET
+        valueFrom:
+          secretKeyRef:
+            name: mimir-encryption-key
+            key: MIMIR_ENC_SECRET
+      - name: TARGET_DIRS
+        value: >-
+          red_hat_content/documentation/ansible_on_clouds/2.x
+          red_hat_content/documentation/red_hat_ansible_automation_platform/2.5
+          red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest
       params:
       - name: PLATFORM
         value: linux-g6xlarge/amd64

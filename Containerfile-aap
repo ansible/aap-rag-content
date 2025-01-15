@@ -22,7 +22,6 @@ WORKDIR /workdir
 COPY pyproject.toml pdm.lock.* Makefile .
 RUN make install-tools && pdm config python.use_venv false && make pdm-lock-check install-deps
 
-COPY aap-product-docs-plaintext ./aap-product-docs-plaintext
 COPY additional_docs ./additional_docs
 
 COPY scripts/download_embeddings_model.py .
@@ -34,10 +33,13 @@ RUN if [ "$FLAVOR" == "gpu" ]; then \
         "import torch; print(torch.version.cuda); print(torch.cuda.is_available());"; \
     fi
 
+COPY scripts/download-mimir.sh .
+RUN ./download-mimir.sh
+
 COPY scripts/generate_embeddings-aap.py .
 RUN export LD_LIBRARY_PATH=/usr/local/cuda-12.6/compat:$LD_LIBRARY_PATH; \
 	set -e && pdm run python generate_embeddings-aap.py \
-  -f aap-product-docs-plaintext \
+  -f red_hat_content \
   -mn ${EMBEDDING_MODEL} \
   -o vector_db/aap_product_docs/${AAP_VERSION} \
   -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
