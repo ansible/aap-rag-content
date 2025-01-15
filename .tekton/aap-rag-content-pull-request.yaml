@@ -31,8 +31,21 @@ spec:
     value: 5d
   - name: dockerfile
     value: Containerfile-aap
+  - name: MIMIR_ENC_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: mimir-encryption-key
+        key: MIMIR_ENC_SECRET
+  - name: TARGET_DIRS
+    value: >-
+      red_hat_content/documentation/ansible_on_clouds/2.x
+      red_hat_content/documentation/red_hat_ansible_automation_platform/2.5
+      red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest
   - name: build-args
-    value: [FLAVOR=gpu]
+    value:
+      - FLAVOR=gpu
+      - MIMIR_ENC_SECRET={{ MIMIR_ENC_SECRET }}
+      - TARGET_DIRS={{ TARGET_DIRS }}
   taskRunSpecs:
   - pipelineTaskName: ecosystem-cert-preflight-checks
     stepSpecs:
@@ -218,16 +231,6 @@ spec:
       env:
       - name: TMPDIR
         value: /workspace/buildah-tmp
-      - name: MIMIR_ENC_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: mimir-encryption-key
-            key: MIMIR_ENC_SECRET
-      - name: TARGET_DIRS
-        value: >-
-          red_hat_content/documentation/ansible_on_clouds/2.x
-          red_hat_content/documentation/red_hat_ansible_automation_platform/2.5
-          red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest
       params:
       - name: PLATFORM
         value: linux-g6xlarge/amd64
@@ -247,8 +250,6 @@ spec:
         value: $(tasks.clone-repository.results.commit)
       - name: BUILD_ARGS
         value:
-        - -e MIMIR_ENC_SECRET=$(MIMIR_ENC_SECRET)
-        - -e TARGET_DIRS=$(TARGET_DIRS)
         - $(params.build-args[*])
       - name: BUILD_ARGS_FILE
         value: $(params.build-args-file)
