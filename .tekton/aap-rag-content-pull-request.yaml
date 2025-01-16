@@ -44,8 +44,6 @@ spec:
   - name: build-args
     value:
       - FLAVOR=gpu
-      - MIMIR_ENC_SECRET={{ MIMIR_ENC_SECRET }}
-      - TARGET_DIRS={{ TARGET_DIRS }}
   taskRunSpecs:
   - pipelineTaskName: ecosystem-cert-preflight-checks
     stepSpecs:
@@ -251,6 +249,8 @@ spec:
       - name: BUILD_ARGS
         value:
         - $(params.build-args[*])
+        - $(params.MIMIR_ENC_SECRET)
+        - $(params.TARGET_DIRS)
       - name: BUILD_ARGS_FILE
         value: $(params.build-args-file)
       runAfter:
