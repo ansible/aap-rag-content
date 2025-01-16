@@ -218,7 +218,7 @@ spec:
       - name: output
         workspace: workspace
       - name: basic-auth
-        workspace: gitlab-auth
+        workspace: git-auth
     - name: prefetch-dependencies
       params:
       - name: input
@@ -531,8 +531,6 @@ spec:
     - name: workspace
     - name: git-auth
       optional: true
-    - name: gitlab-auth
-      optional: true
     - name: netrc
       optional: true
   taskRunTemplate: {}
@@ -551,7 +549,4 @@ spec:
   - name: git-auth
     secret:
       secretName: '{{ git_auth_secret }}'
-  - name: gitlab-auth
-    secret:
-      secretName: mimir-gitlab-secret
 status: {}
