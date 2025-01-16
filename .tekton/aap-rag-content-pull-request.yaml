@@ -34,10 +34,7 @@ spec:
   - name: build-args
     value: [FLAVOR=gpu]
   - name: mimir-enc-secret
-    valueFrom:
-      secretKeyRef:
-        name: mimir-encryption-key
-        key: MIMIR_ENC_SECRET
+    value: dummy
   - name: target-dirs
     value: >-
       red_hat_content/documentation/ansible_on_clouds/2.x
