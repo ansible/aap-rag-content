@@ -248,8 +248,8 @@ spec:
       - name: BUILD_ARGS
         value:
         - $(params.build-args[*])
-        - -e MIMIR_ENC_SECRET=$MIMIR_ENC_SECRET
-        - -e TARGET_DIRS=$TARGET_DIRS
+        - MIMIR_ENC_SECRET=$MIMIR_ENC_SECRET
+        - TARGET_DIRS=$TARGET_DIRS
       - name: BUILD_ARGS_FILE
         value: $(params.build-args-file)
       runAfter:
