@@ -36,10 +36,9 @@ spec:
   - name: mimir-enc-secret
     value: dummy
   - name: target-dirs
-    value: >-
-      red_hat_content/documentation/ansible_on_clouds/2.x
-      red_hat_content/documentation/red_hat_ansible_automation_platform/2.5
-      red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest
+    value: "red_hat_content/documentation/ansible_on_clouds/2.x 
+    red_hat_content/documentation/red_hat_ansible_automation_platform/2.5
+    red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest"
 
   taskRunSpecs:
   - pipelineTaskName: ecosystem-cert-preflight-checks
@@ -193,6 +192,33 @@ spec:
         workspace: workspace
       - name: basic-auth
         workspace: git-auth
+    - name: clone-repository-2
+      params:
+      - name: url
+        value: https://gitlab.cee.redhat.com/jsprague/mimir-extracted-content-for-ai.git
+      - name: revision
+        value: latest
+      runAfter:
+      - clone-repository
+      taskRef:
+        params:
+        - name: name
+          value: git-clone
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-git-clone:0.1@sha256:d091a9e19567a4cbdc5acd57903c71ba71dc51d749a4ba7477e689608851e981
+        - name: kind
+          value: task
+        resolver: bundles
+      when:
+      - input: $(tasks.init.results.build)
+        operator: in
+        values:
+        - "true"
+      workspaces:
+      - name: output
+        workspace: workspace
+      - name: basic-auth
+        workspace: gitlab-auth
     - name: prefetch-dependencies
       params:
       - name: input
@@ -200,7 +226,7 @@ spec:
       - name: dev-package-managers
         value: "true"
       runAfter:
-      - clone-repository
+      - clone-repository-2
       taskRef:
         params:
         - name: name
@@ -523,4 +549,7 @@ spec:
   - name: git-auth
     secret:
       secretName: '{{ git_auth_secret }}'
+  - name: gitlab-auth
+    secret:
+      secretName: mimir-gitlab-secret
 status: {}
