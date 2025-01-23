@@ -15,7 +15,7 @@ COPY scripts/download_embeddings_model.py .
 RUN pdm run python download_embeddings_model.py -l ./embeddings_model -r ${EMBEDDING_MODEL}
 
 FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:b87097994ed62fbf1de70bc75debe8dacf3ea6e00dd577d74503ef66452c59d6
-COPY --from=aap-rag-builder /workdir/embeddings_model /rag/embeddings_model
+COPY --from=aap-rag-builder /workdir/embeddings_model /app-root/embeddings_model
 
 # this directory is checked by ecosystem-cert-preflight-checks task in Konflux
 RUN mkdir /licenses

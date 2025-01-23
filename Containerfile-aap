@@ -45,7 +45,6 @@ RUN export LD_LIBRARY_PATH=/usr/local/cuda-12.6/compat:$LD_LIBRARY_PATH; \
 
 FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:b87097994ed62fbf1de70bc75debe8dacf3ea6e00dd577d74503ef66452c59d6
 COPY --from=aap-rag-builder /workdir/vector_db/aap_product_docs /rag/vector_db/aap_product_docs
-COPY --from=aap-rag-builder /workdir/embeddings_model /rag/embeddings_model
 
 # this directory is checked by ecosystem-cert-preflight-checks task in Konflux
 RUN mkdir /licenses
