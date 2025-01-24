@@ -1,6 +1,10 @@
+ARG LIGHTSPEED_RAG_EMBEDDINGS_IMAGE=quay.io/ansible/aap-rag-embeddings-image:latest
+
 ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
 ARG FLAVOR=cpu
 ARG HERMETIC=false
+
+FROM ${LIGHTSPEED_RAG_EMBEDDINGS_IMAGE} as lightspeed-rag-embeddings
 
 FROM registry.access.redhat.com/ubi9/python-311 as cpu-base
 ARG EMBEDDING_MODEL
@@ -25,8 +29,7 @@ RUN make install-tools && pdm config python.use_venv false && make pdm-lock-chec
 COPY aap-product-docs-plaintext ./aap-product-docs-plaintext
 COPY additional_docs ./additional_docs
 
-COPY scripts/download_embeddings_model.py .
-RUN pdm run python download_embeddings_model.py -l ./embeddings_model -r ${EMBEDDING_MODEL}
+COPY --from=lightspeed-rag-embeddings /rag/embeddings_model ./embeddings_model
 
 RUN if [ "$FLAVOR" == "gpu" ]; then \
         export LD_LIBRARY_PATH=/usr/local/cuda-12.6/compat:$LD_LIBRARY_PATH; \
@@ -45,7 +48,6 @@ RUN export LD_LIBRARY_PATH=/usr/local/cuda-12.6/compat:$LD_LIBRARY_PATH; \
 
 FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:b87097994ed62fbf1de70bc75debe8dacf3ea6e00dd577d74503ef66452c59d6
 COPY --from=aap-rag-builder /workdir/vector_db/aap_product_docs /rag/vector_db/aap_product_docs
-COPY --from=aap-rag-builder /workdir/embeddings_model /rag/embeddings_model
 
 # this directory is checked by ecosystem-cert-preflight-checks task in Konflux
 RUN mkdir /licenses
