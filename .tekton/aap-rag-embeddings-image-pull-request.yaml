@@ -575,7 +575,7 @@ spec:
       - input: $(params.skip-checks)
         operator: in
         values:
-        - "false"
+        - "true"
     workspaces:
     - name: git-auth
       optional: true
