@@ -35,7 +35,6 @@ make build-image-aap
 ```
 
 ## Push image to quay.io
-_(It is pushed to Tami's account temporarily)_
 ```commandline
 podman login quay.io
 podman push aap-rag-content quay.io/ansible/aap-rag-content
