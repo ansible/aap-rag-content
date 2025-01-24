@@ -158,6 +158,9 @@ if __name__ == "__main__":
         faiss_index = faiss.index_cpu_to_gpu(gpu_resource, 0, faiss_index)
     except AssertionError:
         gpu_resource = None
+    except AttributeError:
+        gpu_resource = None
+
     vector_store = FaissVectorStore(faiss_index=faiss_index)
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
