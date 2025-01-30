@@ -87,8 +87,19 @@ def additional_docs_metadata_func(file_path: str) -> Dict:
     Args:
         file_path: str: file path in str
     """
-    AAP_RAG_CONTENT_BASE_URL = "https://github.com/ansible/aap-rag-content/blob/main/"
-    docs_url = AAP_RAG_CONTENT_BASE_URL + str(file_path)
+    full_path = os.path.abspath(file_path)
+    i = full_path.rindex("/")
+    metadata_path = Path(full_path[:i]).joinpath(".metadata") \
+        .joinpath(full_path[(i+1):].replace(".txt", ".json"))
+
+    if metadata_path.is_dir():
+        with open(metadata_path, encoding="utf8") as f:
+            metadata = json.load(f)
+            docs_url = metadata["url"]
+    else:
+        AAP_RAG_CONTENT_BASE_URL = "https://github.com/ansible/aap-rag-content/blob/main/"
+        docs_url = AAP_RAG_CONTENT_BASE_URL + str(file_path)
+
     title = get_file_title(file_path)
     msg = f"file_path: {file_path}, title: {title}, docs_url: {docs_url}"
     print(msg)
