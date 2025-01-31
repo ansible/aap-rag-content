@@ -92,7 +92,7 @@ def additional_docs_metadata_func(file_path: str) -> Dict:
     metadata_path = Path(full_path[:i]).joinpath(".metadata") \
         .joinpath(full_path[(i+1):].replace(".txt", ".json"))
 
-    if metadata_path.is_dir():
+    if metadata_path.exists():
         with open(metadata_path, encoding="utf8") as f:
             metadata = json.load(f)
             docs_url = lambda x: metadata["url"]
