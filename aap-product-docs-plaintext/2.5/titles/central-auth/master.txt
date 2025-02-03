@@ -457,6 +457,12 @@ When LDAP is configured, an account is created for any user who logs in with an 
 
 Users created through an LDAP login should not change their username, first name, last name, or set a local password for themselves. Any changes made to this information is overwritten the next time the user logs in to the platform.
 
+
+[IMPORTANT]
+----
+Migration of LDAP authentication settings are not supported for 2.4 to 2.5 in the platform UI. If you are upgrading from Ansible Automation Platform 2.4 to 2.5, be sure to save your authentication provider data before upgrading.
+----
+
 1. From the navigation panel, select .
 2. Click Create authentication.
 3. Select LDAP from the Authentication type list and click Next.
@@ -517,7 +523,9 @@ To control which users are allowed into the Ansible Automation Platform server, 
 
 ### Configuring SAML authentication
 
-SAML allows the exchange of authentication and authorization data between an Identity Provider (IdP) and a Service Provider (SP). Ansible Automation Platform is a SAML SP that can be configured to talk with one or more SAML IdPs in order to authenticate users. Based on groups and attributes optionally provided by the IdP users can be placed into teams and organizations in Ansible Automation Platform based on authenticator maps tied to this authenticator.
+SAML allows the exchange of authentication and authorization data between an Identity Provider (IdP) and a Service Provider (SP).
+Ansible Automation Platform is a SAML SP that you can configure to talk with one or more SAML IdPs to authenticate users.
+Based on groups and attributes optionally provided by the IdP, users can be placed into teams and organizations in Ansible Automation Platform based on authenticator maps tied to this authenticator.
 
 1. From the navigation panel, select .
 2. Click Create authentication.
@@ -549,7 +557,7 @@ Values defined in this field override the dedicated fields provided in the UI.
 }
 ```
 
-14. In the SAML Service Provider Technical Contact field, provide the name and email address of the technical contact for your service provider.
+14. In the SAML Service Provider Technical Contact field, give the name and email address of the technical contact for your service provider.
 
 ```
 {
@@ -558,7 +566,7 @@ Values defined in this field override the dedicated fields provided in the UI.
 }
 ```
 
-15. In the SAML Service Provider Support Contact field, provide the name and email address of the support contact for your service provider.
+15. In the SAML Service Provider Support Contact field, give the name and email address of the support contact for your service provider.
 
 ```
 {
@@ -582,13 +590,13 @@ Values defined in this field override the dedicated fields provided in the UI.
 ```
 
 
-For more information and additional options, see OneLogin’s SAML Python Toolkit.
+For more information and additional options, see OneLogin's SAML Python Toolkit.
 18. Optional: In the SAML IDP to extra_data attribute mapping field, enter values to map  IDP attributes to extra_data attributes. For more information, see advanced SAML settings.
 
 [NOTE]
 ----
-By default only the attributes in the SAML assertion identified in the fields: User Email, Username, User Last Name, User First Name, and User Permanent ID are available for Ansible Automation Platform authenticator maps.
-If you would like to make other attributes from the SAML assertion available for Ansible Automation Platform authenticator maps, you must include them in the SAML IDP to extra_data attribute mapping field. For example:
+By default only the attributes in the SAML Assertion identified in the fields: User Email, Username, User Last Name, User First Name, and User Permanent ID are available for Ansible Automation Platform authenticator maps.
+If you want to make other attributes from the SAML Assertion available for Ansible Automation Platform authenticator maps, you must include them in the SAML IDP to extra_data attribute mapping field. For example:
 
 ```
 - Department
@@ -596,7 +604,7 @@ If you would like to make other attributes from the SAML assertion available for
 - Organization
 ```
 
-Alternatively, if you want all attributes returned by the SAML Assertion to be avialable for Ansible Automation Platform authenticator maps you can add the following setting to Additional Authenticator Fields:
+Alternatively, if you want all attributes returned by the SAML Assertion to be available for Ansible Automation Platform authenticator maps you can add the following setting to Additional Authenticator Fields:
 
 ```
 GET_ALL_EXTRA_DATA: true
@@ -615,6 +623,12 @@ You can configure an HTTPS redirect for SAML in operator-based deployments to si
 ----
 
 To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to Mapping.
+
+#### Configuring transparent SAML logins
+
+For transparent logins to work, you must first get IdP-initiated logins to work.
+
+* Set the RelayState on the IdP to "IdP".
 
 ### Configuring TACACS+ authentication
 
@@ -1162,7 +1176,7 @@ When a Team and/or Organization is specified together with the appropriate Role,
 
 Role mapping can be specified separately for each account authentication.
 
-1. After configuring the authentication details for your authentication type, select Team from the Add authentication mapping list.
+1. After configuring the authentication details for your authentication type, select Role from the Add authentication mapping list.
 2. Enter a unique rule Name to identify the rule.
 3. Select a Trigger from the list. See Authenticator map triggers for more information about map triggers.
 4. Select Revoke to remove the role for the user when none of the trigger conditions are matched.
@@ -1180,13 +1194,9 @@ The mapping precedence is determined by the order in which the mappings are list
 
 ### Superuser mapping
 
-Role mapping is the mapping of a user either to a global role, such as Platform Auditor, or team or organization role.
+Superuser mapping is the mapping of a user to the superuser role, such as System Administrator.
 
-When a Team and/or Organization is specified together with the appropriate Role, the behavior is identical with Organization mapping or Team mapping.
-
-Role mapping can be specified separately for each account authentication.
-
-1. After configuring the authentication details for your authentication type, select Team from the Add authentication mapping list.
+1. After configuring the authentication details for your authentication type, select Superuser from the Add authentication mapping list.
 2. Enter a unique rule Name to identify the rule.
 3. Select a Trigger from the list. See Authenticator map triggers for more information about map triggers.
 4. Select Revoke to remove the superuser role from the user when none of the trigger conditions are matched.
@@ -1271,6 +1281,12 @@ For more information on using the manage utility to create tokens, see Token and
 
 Create and configure token-based authentication for external applications such as ServiceNow and Jenkins.
 With token-based authentication, external applications can easily integrate with Ansible Automation Platform.
+
+
+[IMPORTANT]
+----
+Automation controller OAuth applications on the platform UI are not supported for 2.4 to 2.5 migration. See this Knowledgebase article for more information.
+----
 
 With OAuth 2 you can use tokens to share data with an application without disclosing login information.
 You can configure these tokens as read-only.
@@ -2100,7 +2116,7 @@ If you have multiple Ansible Automation Platform components installed, you will 
 
 # Configuring Ansible Automation Platform
 
-You can configure Ansible Automation platform from the Settings menu using the following selections:
+You can configure Ansible Automation Platform from the Settings menu using the following selections:
 
 * Subscriptions
 * Platform gateway
@@ -2126,7 +2142,7 @@ You can use the Subscription menu to view the details of your subscription, such
 
 ## Platform gateway
 
-The Platform gateway is the service that handles authentication and authorization for Ansible Automation Platform.
+The platform gateway is the service that handles authentication and authorization for Ansible Automation Platform.
 It provides a single ingress into the Platform and serves the Platform&#8217;s user interface.
 
 From the  menu, you can configure Platform gateway,
@@ -2155,7 +2171,7 @@ Turning this off prevents all basic authentication (local users), so customers n
 
 Turning it off with only local authentication configured also prevents all access to the UI.
 
-Social auth username in full email: Enabling this setting alerts social authentication to use the full email as username instead of the full name.
+Social auth username is full email: Enabling this setting alerts social authentication to use the full email as username instead of the full name.
 
 Gateway token name: The header name to push from the proxy to the backend service.
 

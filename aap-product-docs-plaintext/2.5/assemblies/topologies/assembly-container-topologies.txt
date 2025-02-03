@@ -14,6 +14,8 @@ The following diagram outlines the infrastructure topology that Red&#160;Hat has
 
 A single VM has been tested with the following component requirements: 16 GB RAM, 4 CPUs, 60 GB local disk, and 3000 IOPS. Resources, such as storage, can be increased based on the needs of the deployment.
 
+If performing a bundled installation with hub_seed_collections=true, then 32 GB RAM is recommended. Note that with this configuration the install time is going to increase and can take 45 or more minutes alone to complete seeding the collections.
+
 
 
 ## Tested system configurations
@@ -115,12 +117,6 @@ eda_pg_password=<set your own>
 ```
 
 
-
-[WARNING]
-----
-* When installing the growth topology for the Ansible Automation Platform 2.5 containerized setup bundle, you must disable content syncing which is enabled by default. To disable this feature set the hub_seed_collections variable in the inventory file to false. See Container growth topology for a sample inventory file and see Automation hub variables for more information about this inventory file variable.
-----
-
 SSH keys are only required when installing on remote hosts. If doing a self contained local VM based installation, you can use ansible_connection=local.
 
 # Container enterprise topology
@@ -140,7 +136,7 @@ Each VM has been tested with the following component requirements: 16 GB RAM, 4 
 
 [NOTE]
 ----
-6 VMs are required for a Redis high availability (HA) compatible deployment. Redis can be colocated on each Ansible Automation Platform component VM except for automation controller, execution nodes, or the PostgreSQL database.
+* 6 VMs are required for a Redis high availability (HA) compatible deployment. When installing Ansible Automation Platform with the containerized installer, Redis can be colocated on any Ansible Automation Platform component VMs of your choice except for execution nodes or the PostgreSQL database. They might also be assigned VMs specifically for Redis use.
 ----
 
 ## Tested system configurations

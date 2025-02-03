@@ -15,7 +15,7 @@ An OpenShift or Kubernetes Bearer Token.
 The following procedure explains how to create a service account in an OpenShift cluster or Kubernetes, to be used to run jobs in a container group through automation controller.
 After the service account is created, its credentials are provided to automation controller in the form of an OpenShift or Kubernetes API Bearer Token credential.
 
-1. To create a service account, download and use the sample service account, containergroup sa and change it as needed to obtain the credentials:
+1. To create a service account, download and use the following sample service account example, containergroup sa and change it as required to obtain the credentials:
 
 ---
 apiVersion: v1

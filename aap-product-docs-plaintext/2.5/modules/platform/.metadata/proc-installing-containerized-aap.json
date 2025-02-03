@@ -1,9 +1,7 @@
 {
   "project_file_name": "downstream/modules/platform/proc-installing-containerized-aap.adoc",
   "path_name": "aap-docs/downstream/modules/platform/proc-installing-containerized-aap.adoc",
-  "includes": [
-    "downstream/snippets/known-issue-container-content-syncing.adoc"
-  ],
+  "includes": [],
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/aap-containerized-installation#installing-containerized-aap_aap-containerized-installation",
   "id": "installing-containerized-aap_{context}",
   "context": null,

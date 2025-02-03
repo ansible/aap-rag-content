@@ -97,6 +97,6 @@ With this update, the following CVEs have been addressed:
 * Fixed an issue whereby multiple Red Hat Ansible Automation Platform credentials were being attached to activations.(AAP-34025)
 * Fixed an issue where there was an erroneous dependency on the existence of an organization named Default.(AAP-33551)
 * Fixed an issue where occasionally an activation is reported as running, before it is ready to receive events.(AAP-31225)
-* Fixed an issue where the user could not edit auto-generated injector vars while creating {EEDAName} custom credentials.(AAP-29752)
+* Fixed an issue where the user could not edit auto-generated injector vars while creating Event-Driven Ansible custom credentials.(AAP-29752)
 * Fixed an issue where in some cases the file_watch source plugin in an Event-Driven Ansible collection raised the QueueFull exception.(AAP-29139)
 * Fixed an issue where the Event-Driven Ansible database increased in size continuously, even if the database was unused. Addend the purge_record script to clean up outdated database records.(AAP-30684)

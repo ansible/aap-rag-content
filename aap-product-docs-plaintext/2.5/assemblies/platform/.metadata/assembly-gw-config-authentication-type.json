@@ -5,6 +5,7 @@
     "downstream/modules/platform/proc-gw-local-authentication.adoc",
     "downstream/modules/platform/proc-controller-set-up-LDAP.adoc",
     "downstream/modules/platform/proc-controller-set-up-SAML.adoc",
+    "downstream/modules/platform/proc-controller-configure-transparent-SAML.adoc",
     "downstream/modules/platform/proc-controller-set-up-azure.adoc",
     "downstream/modules/platform/proc-controller-google-oauth2-settings.adoc",
     "downstream/modules/platform/proc-controller-set-up-generic-oidc.adoc",

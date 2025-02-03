@@ -1,6 +1,6 @@
 # Configuring Ansible Automation Platform
 
-You can configure Ansible Automation platform from the Settings menu using the following selections:
+You can configure Ansible Automation Platform from the Settings menu using the following selections:
 * Subscriptions
 * Platform gateway
 * User Preferences
@@ -24,7 +24,7 @@ You can use the Subscription menu to view the details of your subscription, such
 
 # Platform gateway
 
-The Platform gateway is the service that handles authentication and authorization for Ansible Automation Platform.
+The platform gateway is the service that handles authentication and authorization for Ansible Automation Platform.
 It provides a single ingress into the Platform and serves the Platform&#8217;s user interface.
 
 From the menu:Settings[Platform gateway] menu, you can configure Platform gateway,
@@ -53,7 +53,7 @@ Turning this off prevents all basic authentication (local users), so customers n
 
 Turning it off with only local authentication configured also prevents all access to the UI.
 
-Social auth username in full email: Enabling this setting alerts social authentication to use the full email as username instead of the full name.
+Social auth username is full email: Enabling this setting alerts social authentication to use the full email as username instead of the full name.
 
 Gateway token name: The header name to push from the proxy to the backend service.
 

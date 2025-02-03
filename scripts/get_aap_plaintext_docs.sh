@@ -21,12 +21,15 @@ if [ ! -d ${AAP_DOCS_BASE_DIR} ]; then
 fi
 
 # Changelog's
-if [ ! ${CHANGELOGS_FILE} ]; then
-    touch ${CHANGELOGS_FILE}
-fi
-echo -e "# Ansible Components Versions\n\nHere are the most recent updates for Ansible components:\n" > $CHANGELOGS_FILE
-./scripts/generate_changelog.sh "Ansible Core (ansible-core)" "https://api.github.com/repos/ansible/ansible/releases/latest" $CHANGELOGS_FILE
-./scripts/generate_changelog.sh "Ansible Rulebook (ansible-rulebook)" "https://api.github.com/repos/ansible/ansible-rulebook/releases/latest" $CHANGELOGS_FILE
+./scripts/generate_changelog.sh "Ansible Core (ansible-core)" \
+  "https://api.github.com/repos/ansible/ansible/releases/latest" \
+  "https://github.com/ansible/ansible" \
+  "additional_docs/ansible-core.txt"
+
+./scripts/generate_changelog.sh "Ansible Rulebook (ansible-rulebook)" \
+  "https://api.github.com/repos/ansible/ansible-rulebook/releases/latest" \
+  "https://github.com/ansible/ansible-rulebook" \
+  "additional_docs/ansible-rulebook.txt"
 
 for git_branch in ${AAP_VERSION} ${LIGHTSPEED_LATEST} ${AAP_CLOUDS_LATEST}
 do

@@ -12,6 +12,7 @@ The following procedures form the user configuration:
 * Simplified event routing
 * Red Hat Ansible Automation Platform credential
 * Rulebook activations
+* Rulebook activations troubleshooting
 * Rule audit
 * Performance tuning for Event-Driven Ansible controller
 * Event filter plugins

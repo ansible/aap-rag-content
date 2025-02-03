@@ -252,7 +252,7 @@ oc exec -it <gateway-pod-name> -- grep REDIRECT /etc/ansible-automation-platform
 
 # Frequently asked questions on platform gateway
 
-If I delete my Ansible Automation Platform deployment will I still have access to Automation Controller?:: No, automation controller, automation hub, and Event-Driven Ansible are nested within the deployment and are also deleted.
+If I delete my Ansible Automation Platform deployment will I still have access to automation controller?:: No, automation controller, automation hub, and Event-Driven Ansible are nested within the deployment and are also deleted.
 Something went wrong with my deployment but I'm not sure what, how can I find out?:: You can follow along in the command line while the operator is reconciling, this can be helpful for debugging.
 Alternatively you can click into the deployment instance to see the status conditions being updated as the deployment goes on.
 Is it still possible to view individual component logs?:: When troubleshooting you should examine the Ansible Automation Platform instance for the main logs and then each individual component (EDA, AutomationHub, AutomationController) for more specific information.

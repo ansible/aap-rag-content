@@ -12,6 +12,12 @@ When LDAP is configured, an account is created for any user who logs in with an 
 
 Users created through an LDAP login should not change their username, first name, last name, or set a local password for themselves. Any changes made to this information is overwritten the next time the user logs in to the platform.
 
+
+[IMPORTANT]
+----
+Migration of LDAP authentication settings are not supported for 2.4 to 2.5 in the platform UI. If you are upgrading from Ansible Automation Platform 2.4 to 2.5, be sure to save your authentication provider data before upgrading.
+----
+
 1. From the navigation panel, select menu:Access Management[Authentication Methods].
 2. Click btn:[Create authentication].
 3. Select LDAP from the Authentication type list and click btn:[Next].

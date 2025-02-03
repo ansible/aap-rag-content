@@ -2,8 +2,8 @@
 
 You can add containers remotely to automation hub in one of the following two ways:
 
-* Create Remotes
-* Execution Environment
+* By creating remotes
+* By using an automation execution environment
 
 1. Log in to Ansible Automation Platform.
 2. From the navigation panel, select menu:Automation Content[Remote Registries].

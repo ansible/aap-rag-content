@@ -1,6 +1,6 @@
 # Platform gateway
 
-The Platform gateway is the service that handles authentication and authorization for Ansible Automation Platform.
+The platform gateway is the service that handles authentication and authorization for Ansible Automation Platform.
 It provides a single ingress into the Platform and serves the Platform&#8217;s user interface.
 
 From the menu:Settings[Platform gateway] menu, you can configure Platform gateway,

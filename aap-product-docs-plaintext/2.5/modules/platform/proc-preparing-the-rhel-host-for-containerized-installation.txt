@@ -39,7 +39,7 @@ sudo dnf install -y ansible-core
 sudo dnf install -y wget git-core rsync vim
 ```
 
-9. Optional: To have the installer automatically pick up and apply your Ansible Automation Platform subscription manifest license, follow the steps in Obtaining a manifest file.
+9. Optional: To have the installation program automatically pick up and apply your Ansible Automation Platform subscription manifest license, follow the steps in Obtaining a manifest file.
 
 * For more information about registering your RHEL system, see Getting Started with RHEL System Registration.
 * For information about configuring unbound DNS, see Setting up an unbound DNS server.

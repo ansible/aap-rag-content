@@ -1,7 +1,9 @@
 {
   "project_file_name": "downstream/modules/platform/proc-update-aap-container.adoc",
   "path_name": "aap-docs/downstream/modules/platform/proc-update-aap-container.adoc",
-  "includes": [],
+  "includes": [
+    "downstream/snippets/container-upgrades.adoc"
+  ],
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/containerized_installation/aap-containerized-installation#proc-update-aap-container",
   "id": "proc-update-aap-container",
   "context": null,

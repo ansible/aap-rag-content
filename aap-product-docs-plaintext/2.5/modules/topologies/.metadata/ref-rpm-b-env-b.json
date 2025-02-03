@@ -1,7 +1,9 @@
 {
   "project_file_name": "downstream/modules/topologies/ref-rpm-b-env-b.adoc",
   "path_name": "aap-docs/downstream/modules/topologies/ref-rpm-b-env-b.adoc",
-  "includes": [],
+  "includes": [
+    "downstream/snippets/inventory-rpm-b-env-b.adoc"
+  ],
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/tested_deployment_models/index#rpm-b-env-b",
   "id": "rpm-b-env-b",
   "context": null,
