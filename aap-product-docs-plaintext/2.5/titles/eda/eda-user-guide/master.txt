@@ -21,6 +21,7 @@ The following procedures form the user configuration:
 * Simplified event routing
 * Red Hat Ansible Automation Platform credential
 * Rulebook activations
+* Rulebook activations troubleshooting
 * Rule audit
 * Performance tuning for Event-Driven Ansible controller
 * Event filter plugins
@@ -151,9 +152,24 @@ Fields can have multiple properties, depending on the credential type you select
 
 ## Injector Configuration
 
-You can use the Injector configuration field to take the fields from input configuration field and map them into extra_vars that can be sent to ansible-rulebook when running the activation. The Injector currently only supports extra_vars.
+You can use Injector configuration to extract information from Input configuration fields and map them into injector types that can be sent to ansible-rulebook when running a rulebook activation. Event-Driven Ansible supports the following types of injectors:
 
-Injectors enable you to tailor the fields so that they can be injected into a rulebook as extra_vars, which cannot have duplicate keys at the top level. If you have two sources in a rulebook that both require a parameter called username and password, the injectors, along with the rulebook, help you tailor the arguments for each source.
+* Environment variables (env) - Used in source plugins for the underlying package or shared library.
+* Ansible extra variables (extra_vars) - Used for substitution in the rulebook conditions, actions or source plugin parameters.
+* File-based templating (file) - Used to create file contents from the credential inputs such as certificates and keys, which might be required by source plugins. File injectors provide a way to deliver these certificates and keys to ansible-rulebook at runtime without having to store them in decision environments. As a result, ansible-rulebook creates temporary files and the file names can be accessed using eda.filename variables, which are automatically created for you after the files have been created (for instance,  "{{eda.filename.my_cert}}”).
+
+
+[IMPORTANT]
+----
+When creating extra_vars in rulebook activations and credential type injectors, avoid using eda or ansible as key names since that conflicts with internal usage and might cause failure in both rulebook activations and credential type creation.
+----
+
+Injectors enable you to adjust the fields so that they can be injected into a rulebook as one of the above-mentioned injector types, which cannot have duplicate keys at the top level. If you have two sources in a rulebook that both require parameters such as username and password, the injectors, along with the rulebook, help you adapt the arguments for each source.
+
+To view a sample injector and input, see the following GitHub gists, respectively:
+
+* credential injectors
+* gssapi input credential type
 
 ## Creating a new credential type
 
@@ -436,11 +452,11 @@ Event streams are an easy way to connect your sources to your rulebooks. This ca
 
 Event streams can send events from remote systems to Event-Driven Ansible controller. In a typical set-up, a server sends data to an event stream over the internet to an Event-Driven Ansible event stream receiver. When the data comes over the internet, the request must be authenticated. Depending on the webhook vendor or remote system, the authentication method could differ.
 
-Event-Driven Ansible controller supports 7 different event stream types.
+Event-Driven Ansible controller supports six different event stream types.
 
 
 
-Event-Driven Ansible controller also supports 4 other specialized event streams that are based on the 7 basic event stream types:
+Event-Driven Ansible controller also supports four other specialized event streams that are based on the six basic event stream types:
 
 * GitLab Event Stream
 * GitHub Event Stream
@@ -985,6 +1001,77 @@ kubectl port-forward svc/<ACTIVATION_SVC_NAME> 5000:5000
 curl -H "Content-Type: application/json" -X POST test-sync-bug-dynatrace.apps.aap-dt.ocp4.testing.ansible.com -d '{}'
 ```
 
+
+# Rulebook activations troubleshooting
+
+Occasionally, rulebook activations might fail due to a variety of reasons that can be resolved. This section contains a list of possible issues and how you can resolve them.
+
+## Activation stuck in Pending state
+
+Perform the following steps if your rulebook activation is stuck in Pending state.
+
+1. Confirm whether there are other running activations and if you have reached the limits (for example, memory or CPU limits).
+1. If there are other activations running, terminate one or more of them, if possible.
+2. If not, check that the default worker, Redis, and activation worker are all running. If all systems are working as expected, check your eda-server internal logs in the worker, scheduler, API, and nginx containers and services to see if the problem can be determined.
+
+[NOTE]
+----
+These logs reveal the source of the issue, such as an exception thrown by the code, a runtime error with network issues, or an error with the rulebook code. If your internal logs do not provide information that leads to resolution, report the issue to Red Hat support.
+----
+3. If you need to make adjustments, see the Modifying the number of simultaneous rulebook activations.
+
+[NOTE]
+----
+To adjust the maximum number of simultaneous activations for Ansible Automation Platform Operator on OpenShift Container Platform deployments, see Modifying the number of simultaneous rulebook activations during or after Event-Driven Ansible controller installation in Installing on OpenShift Container Platform.
+----
+
+## Activation keeps restarting
+
+Perform the following steps if your rulebook activation keeps restarting.
+
+1. Log in to Ansible Automation Platform.
+2. From the navigation panel, select .
+3. From the Rulebook Activations page, select the activation in your list that keeps restarting. The Details page is displayed.
+4. Click the History tab for more information and select the rulebook activation that keeps restarting. The Details tab is displayed and shows the output information.
+5. Check the Restart policy field for your activation.
+
+There are three selections available: On failure (restarts a rulebook activation when the container process fails), Always (always restarts regardless of success or failure with no more than 5 restarts), or Never (never restarts when the container process ends).
+1. Confirm that your rulebook activation Restart policy is set to On failure. This is an indication that an issue is causing it to fail.
+2. To possibly diagnose the problem, check the YAML code and the instance logs of the rulebook activation for errors.
+3. If you cannot find a solution with the restart policy values, proceed to the next steps related to the Log level.
+6. Check your log level for your activation.
+1. If your default log level is Error, go back to the Rulebook Activation page and recreate your activation following procedures in Setting up rulebook a activation.
+2. Change the Log level to Debug.
+3. Run the activation again and navigate to the History tab from the activation details page.
+4. On the History page, click one of your recent activations and view the Output.
+
+## Event streams not sending events to activation
+
+If you are using event streams to send events to your rulebook activations, occasionally those events might not be successfully routed to your rulebook activation.
+
+* Try the following options to resolve this.
+1. Ensure that each of your event streams in Event-Driven Ansible controller is not in Test mode . This means activations would not receive the events.
+2. Verify that the origin service is sending the request properly.
+3. Check that the network connection to your platform gateway instance is stable. If you have set up event streams, this is the entry of the event stream request from the sender.
+4. Verify that the proxy in the platform gateway is running.
+5. Confirm that the event stream worker is up and running, and able to process the request.
+6. Verify that your credential is correctly set up in the event stream.
+7. Confirm that the request complies with the authentication mechanism determined by the set credential (for example, basic must contain a header with the credentials or HMAC must contain the signature of the content in a header, and similar).
+
+[NOTE]
+----
+The credentials might have been changed in Event-Driven Ansible controller, but not updated in the origin service.
+----
+8. Verify that the rulebook that is running in the activation reacts to these events. This would indicate that you wrote down the event source and added actions that consume the events coming in. Otherwise, the event does reach the activation but there is nothing to activate it.
+9. If you are using self-signed certificates, you might want to disable certificate validation when sending webhooks from vendors. Most of the vendors have an option to disable certificate validation for testing or non-production environments.
+
+## Cannot connect to the 2.5 automation controller when running activations
+
+You might experience a failed connection to automation controller when you run your activations.
+
+1. To help resolve the issue, confirm that you have set up a Red Hat Ansible Automation Platform credential and have obtained the correct automation controller URL.
+1. If you have not set up a Red Hat Ansible Automation Platform credential, follow the procedures in Setting up a Red Hat Ansible Automation Platform credential. Ensure that this credential has the host set to the following URL format: https://<your_gateway>/api/controller
+2. When you have completed this process, try setting up your rulebook activation again.
 
 # Rule Audit
 

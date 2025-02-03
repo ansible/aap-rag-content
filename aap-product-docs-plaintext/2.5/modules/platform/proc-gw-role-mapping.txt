@@ -6,7 +6,7 @@ When a Team and/or Organization is specified together with the appropriate Role,
 
 Role mapping can be specified separately for each account authentication.
 
-1. After configuring the authentication details for your authentication type, select Team from the Add authentication mapping list.
+1. After configuring the authentication details for your authentication type, select Role from the Add authentication mapping list.
 2. Enter a unique rule Name to identify the rule.
 3. Select a Trigger from the list. See Authenticator map triggers for more information about map triggers.
 4. Select Revoke to remove the role for the user when none of the trigger conditions are matched.

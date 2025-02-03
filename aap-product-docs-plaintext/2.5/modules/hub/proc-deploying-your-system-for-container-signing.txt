@@ -1,8 +1,6 @@
 # Deploying your system for container signing
 
-Automation hub implements image signing to offer better security for the execution environment container images.
-
-To deploy your system so that it is ready for container signing, create a signing script.
+To deploy your system so that it is ready for container signing, first ensure that you have enabled automation content collection and container signing. Then you can create a signing script, or add and sign an execution environment manually.
 
 
 [NOTE]

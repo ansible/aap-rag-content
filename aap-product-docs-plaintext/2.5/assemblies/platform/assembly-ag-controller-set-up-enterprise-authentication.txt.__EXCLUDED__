@@ -83,7 +83,9 @@ To control which users are allowed into the Ansible Automation Platform server, 
 
 # Configuring SAML authentication
 
-SAML allows the exchange of authentication and authorization data between an Identity Provider (IdP) and a Service Provider (SP). Ansible Automation Platform is a SAML SP that can be configured to talk with one or more SAML IdPs in order to authenticate users. Based on groups and attributes optionally provided by the IdP users can be placed into teams and organizations in Ansible Automation Platform based on authenticator maps tied to this authenticator.
+SAML allows the exchange of authentication and authorization data between an Identity Provider (IdP) and a Service Provider (SP).
+Ansible Automation Platform is a SAML SP that you can configure to talk with one or more SAML IdPs to authenticate users.
+Based on groups and attributes optionally provided by the IdP, users can be placed into teams and organizations in Ansible Automation Platform based on authenticator maps tied to this authenticator.
 
 1. From the navigation panel, select menu:Access Management[Authentication Methods].
 2. Click btn:[Create authentication].
@@ -115,7 +117,7 @@ Values defined in this field override the dedicated fields provided in the UI.
 }
 ```
 
-14. In the SAML Service Provider Technical Contact field, provide the name and email address of the technical contact for your service provider.
+14. In the SAML Service Provider Technical Contact field, give the name and email address of the technical contact for your service provider.
 
 ```
 {
@@ -124,7 +126,7 @@ Values defined in this field override the dedicated fields provided in the UI.
 }
 ```
 
-15. In the SAML Service Provider Support Contact field, provide the name and email address of the support contact for your service provider.
+15. In the SAML Service Provider Support Contact field, give the name and email address of the support contact for your service provider.
 
 ```
 {
@@ -148,13 +150,13 @@ Values defined in this field override the dedicated fields provided in the UI.
 ```
 
 
-For more information and additional options, see OneLogin’s SAML Python Toolkit.
+For more information and additional options, see OneLogin's SAML Python Toolkit.
 18. Optional: In the SAML IDP to extra_data attribute mapping field, enter values to map  IDP attributes to extra_data attributes. For more information, see advanced SAML settings.
 
 [NOTE]
 ----
-By default only the attributes in the SAML assertion identified in the fields: User Email, Username, User Last Name, User First Name, and User Permanent ID are available for Ansible Automation Platform authenticator maps.
-If you would like to make other attributes from the SAML assertion available for Ansible Automation Platform authenticator maps, you must include them in the SAML IDP to extra_data attribute mapping field. For example:
+By default only the attributes in the SAML Assertion identified in the fields: User Email, Username, User Last Name, User First Name, and User Permanent ID are available for Ansible Automation Platform authenticator maps.
+If you want to make other attributes from the SAML Assertion available for Ansible Automation Platform authenticator maps, you must include them in the SAML IDP to extra_data attribute mapping field. For example:
 
 ```
 - Department
@@ -162,7 +164,7 @@ If you would like to make other attributes from the SAML assertion available for
 - Organization
 ```
 
-Alternatively, if you want all attributes returned by the SAML Assertion to be avialable for Ansible Automation Platform authenticator maps you can add the following setting to Additional Authenticator Fields:
+Alternatively, if you want all attributes returned by the SAML Assertion to be available for Ansible Automation Platform authenticator maps you can add the following setting to Additional Authenticator Fields:
 
 ```
 GET_ALL_EXTRA_DATA: true
@@ -186,18 +188,7 @@ To control which users are allowed into the Ansible Automation Platform server, 
 
 For transparent logins to work, you must first get IdP-initiated logins to work.
 
-1. Set the RelayState on the IdP to the key of the IdP definition in the SAML Enabled Identity Providers field.
-2. When this is working, specify the redirect URL for non-logged-in users to somewhere other than the default automation controller login page by using the Login redirect override URL field in the Miscellaneous Authentication settings window of the Settings menu.
-You must set this to /sso/login/saml/?idp=<name-of-your-idp> for transparent SAML login, as shown in the following example:
-![Configure SAML login]
-
-[NOTE]
-----
-This example shows a typical IdP format, but might not be the correct format for your particular case.
-You might need to reach out to your IdP for the correct transparent redirect URL as that URL is not the same for all IdPs.
-----
-3. After you configure transparent SAML login, to log in using local credentials or a different SSO, go directly to https://<your-tower-server>/login.
-This provides the standard automation controller login page, including SSO authentication options, enabling you to log in with any configured method.
+* Set the RelayState on the IdP to "IdP".
 
 ## Enable logging for SAML
 

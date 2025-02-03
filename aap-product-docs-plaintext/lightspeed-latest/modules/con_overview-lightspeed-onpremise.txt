@@ -8,7 +8,7 @@ Your system must meet the following minimum system requirements to install and r
 
 
 
-To see the rest of the Red Hat Ansible Automation Platform system requirements, see the topic System requirements in the Red Hat Ansible Automation Platform Planning Guide.
+To see the rest of the Red Hat Ansible Automation Platform system requirements, see the System requirements section of Planning your installation.
 
 
 [NOTE]

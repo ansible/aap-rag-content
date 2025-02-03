@@ -60,6 +60,17 @@ See, Tested deployment models for more information on topology options.
 These are minimum requirements and can be increased for larger workloads in increments of 2x (for example 16GB becomes 32GB and 4 vCPU becomes 8vCPU). See the horizontal scaling guide for more information.
 ----
 
+Enable the following repositories only when installing Red Hat Ansible Automation Platform:
+
+* RHEL BaseOS
+* RHEL AppStream
+
+
+[NOTE]
+----
+If you enable repositories besides those mentioned above, the Red Hat Ansible Automation Platform installation could fail unexpectedly.
+----
+
 The following are necessary for you to work with project updates and collections:
 
 * Ensure that the Network ports and protocols listed in Table 6.3. Automation Hub are available for successful connection and download of collections from automation hub or Ansible Galaxy server.
@@ -218,12 +229,12 @@ To determine if your automation controller instance has access to the database, 
 * Automation controller data is stored in the database.
 Database storage increases with the number of hosts managed, number of jobs run, number of facts stored in the fact cache, and number of tasks in any individual job.
 For example, a playbook runs every hour (24 times a day) across 250 hosts, with 20 tasks, stores over 800000 events in the database every week.
-* If not enough space is reserved in the database, the old job runs and facts must be cleaned on a regular basis. For more information, see Management Jobs in the Configuring automation execution.
+* If not enough space is reserved in the database, the old job runs and facts must be cleaned on a regular basis. For more information, see Management Jobs in the Configuring automation execution guide.
 ----
 
 Optionally, you can configure the PostgreSQL database as separate nodes that are not managed by the Red Hat Ansible Automation Platform installer.
 When the Ansible Automation Platform installer manages the database server, it configures the server with defaults that are generally recommended for most workloads.
-For more information about the settings you can use to improve database performance, see Database Settings.
+For more information about the settings you can use to improve database performance, see PostgreSQL database configuration and maintenance for automation controller in the Configuring automation execution guide.
 
 For more information about tuning your PostgreSQL server, see the PostgreSQL documentation.
 
@@ -232,13 +243,12 @@ For more information about tuning your PostgreSQL server, see the PostgreSQL doc
 
 [IMPORTANT]
 ----
-* Red Hat does not support the use of external (customer supported) databases, however they are used by customers. The following guidance on initial configuration, from a product installation perspective only, is provided to avoid related support requests.
-* When using an external database with the Ansible Automation Platform, you must create and maintain that database. Ensure that you clear your external database when uninstalling the Ansible Automation Platform.
+When using an external database with Ansible Automation Platform, you must create and maintain that database. Ensure that you clear your external database when uninstalling Ansible Automation Platform.
 ----
 
 Use the following procedure to configure an external PostgreSQL compliant database for use with an Ansible Automation Platform component, for example automation controller, Event-Driven Ansible, automation hub, and platform gateway.
 
-1. Install and then connect to a PostgreSQL compliant database server with superuser privileges.
+1. Connect to a PostgreSQL compliant database server with superuser privileges.
 
 ```
 # psql -h <db.example.com> -U superuser -p 5432 -d postgres <Password for user superuser>:
@@ -369,8 +379,7 @@ Use the following inventory file snippet to configure each component&#8217;s dat
 # automationgateway_pgclient_sslkey=/path/to/key # Path to the key file
 ```
 
-8. Run the installer.
-If you are using a PostgreSQL database, the database is owned by the connecting user and must have a createDB or administrator role assigned to it.
+8. Run the installer. If you are using a PostgreSQL database, the database is owned by the connecting user and must have a createDB or administrator role assigned to it.
 9. Check that you can connect to the created database with the credentials provided in the inventory file.
 10. Check the permission of the user. The user should have the createDB or administrator role.
 
@@ -1116,29 +1125,33 @@ automationedacontroller_additional_settings:
 
 [NOTE]
 ----
-You can also extend the automationedacontroller_additional_settings variable beyond SAFE_PLUGINS in the Django configuration file, /etc/ansible-automation-platform/eda/settings.yaml
+You can also extend the automationedacontroller_additional_settings variable beyond SAFE_PLUGINS in the Django configuration file /etc/ansible-automation-platform/eda/settings.yaml.
 ----
 
 ### Setting registry_username and registry_password
 
-If you intend to use the registry_username and registry_password variables in an inventory file you are recommended to use the following method to create a Registry Service Account to set a token with an expiration in the plaintext inventory/vars.yml file instead of using a plaintext username and password, for reasons of security.
+When using the registry_username and registry_password variables for an online non-bundled installation, you need to create a new registry service account.
 
-Registry service accounts provide named tokens that can be used in environments where credentials are shared, such as deployment systems.
+Registry service accounts are named tokens that can be used in environments where credentials will be shared, such as deployment systems.
 
-1. Navigate to https://access.redhat.com/terms-based-registry/accounts
+1. Go to https://access.redhat.com/terms-based-registry/accounts.
 2. On the Registry Service Accounts page click New Service Account.
-3. Enter a name for the account using only the accepted characters.
+3. Enter a name for the account using only the allowed characters.
 4. Optionally enter a description for the account.
-5. Click Create account.
-6. Find the created account in the list.
-The list of accounts is long so you might have to click Next multiple times before finding the account you created.
-Alternatively, if you know the name of your token, you can go directly to the page by entering the URL https://access.redhat.com/terms-based-registry/token/<name-of-your-token>
+5. Click Create.
+6. Find the created account in the list by searching for your name in the search field.
 7. Click the name of the account that you created.
-8. A token page opens, displaying a generated Username (different to the account name) and a token.
+8. Alternatively, if you know the name of your token, you can go directly to the page by entering the URL:
 
-If no Username and token are displayed, click Regenerate token. You can also click this to generate a new Username and token.
-9. Copy the service account name and use it to set registry_username.
-10. Copy the token and use it to set registry_password.
+```
+https://access.redhat.com/terms-based-registry/token/<name-of-your-token>
+```
+
+9. A token page opens, displaying a generated username (different from the account name) and a token.
+
+If no token is displayed, click Regenerate Token. You can also click this to generate a new username and token.
+10. Copy the username (for example "1234567|testuser") and use it to set the variable registry_username.
+11. Copy the token and use it to set the variable registry_password.
 
 #### Configuring Redis
 
@@ -1230,8 +1243,7 @@ The following example shows how you can set up an inventory file for horizontal 
 ```
 [automationedacontroller]
 
-3.88.116.111
-routable_hostname=automationedacontroller-api.example.com eda_node_type=api
+3.88.116.111 routable_hostname=automationedacontroller-api.example.com eda_node_type=api
 
 # worker node
 3.88.116.112 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker
@@ -1250,7 +1262,7 @@ To set up a multi-node deployment, follow the procedure in Setting up horizontal
 
 ### Setting up horizontal scaling for Event-Driven Ansible controller
 
-To scale up (add more nodes) or scale down (remove nodes), you must update the content of the inventory to add or remove nodes and rerun the installer.
+To scale up (add more nodes) or scale down (remove nodes), you must update the content of the inventory file to add or remove nodes and rerun the installation program.
 
 1. Update the inventory to add two more worker nodes:
 

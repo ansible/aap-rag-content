@@ -80,7 +80,7 @@ Ansible and Lightspeed set as selected language mode
 4. Clear the Ansible › Validation › Lint: Enabled checkbox.
 5. Create a playbook or use an existing playbook.
 
-For more information, see Creating playbooks in the Ansible Automation Platform Creator Guide.
+For more information, see the Getting started with playbooks guide.
 6. In the playbook, provide the following information to request code recommendations for a single task:
 1. Add a new Ansible task by starting a new line with - name: at the correct indentation.
 2. Add a detailed natural language prompt in the task description after - name: on the same line.
@@ -174,7 +174,7 @@ Ansible and Lightspeed set as selected language mode
 4. Clear the Ansible › Validation › Lint: Enabled checkbox.
 5. Create a playbook or use an existing playbook.
 
-For more information, see Creating playbooks in the Ansible Automation Platform Creator Guide.
+For more information, see the Getting started with playbooks guide.
 6. In the playbook, provide the following information to request multitask code recommendations:
 1. Start a new YAML file comment by entering a pound symbol (#) at the correct indentation.
 2. Add a detailed natural language prompt in a sequence, separating each task by using the ampersand symbol (&).

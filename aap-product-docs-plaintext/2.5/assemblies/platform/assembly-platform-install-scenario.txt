@@ -598,43 +598,30 @@ The two new keys (automationhub_auto_sign_collections and automationhub_require_
 
 When using redhat.insights_eda or similar plugins to run rulebook activations in Event-Driven Ansible controller, you must add a safe plugin variable to a directory in Ansible Automation Platform. This ensures connection between Event-Driven Ansible controller and the source plugin, and displays port mappings correctly.
 
-1. Create a directory for the safe plugin variable: mkdir -p ./group_vars/automationedacontroller
-2. Create a file within that directory for your new setting (for example, touch ./group_vars/automationedacontroller/custom.yml)
-3. Add the variable automationedacontroller_additional_settings to extend the default settings.yaml template for Event-Driven Ansible controller and add the SAFE_PLUGINS field with a list of plugins to enable. For example:
-
-```
-automationedacontroller_additional_settings:
-   SAFE_PLUGINS:
-     - ansible.eda.webhook
-     - ansible.eda.alertmanager
-```
-
-
-[NOTE]
-----
-You can also extend the automationedacontroller_additional_settings variable beyond SAFE_PLUGINS in the Django configuration file, /etc/ansible-automation-platform/eda/settings.yaml
-----
-
 ## Setting registry_username and registry_password
 
-If you intend to use the registry_username and registry_password variables in an inventory file you are recommended to use the following method to create a Registry Service Account to set a token with an expiration in the plaintext inventory/vars.yml file instead of using a plaintext username and password, for reasons of security.
+When using the registry_username and registry_password variables for an online non-bundled installation, you need to create a new registry service account.
 
-Registry service accounts provide named tokens that can be used in environments where credentials are shared, such as deployment systems.
+Registry service accounts are named tokens that can be used in environments where credentials will be shared, such as deployment systems.
 
-1. Navigate to https://access.redhat.com/terms-based-registry/accounts
+1. Go to https://access.redhat.com/terms-based-registry/accounts.
 2. On the Registry Service Accounts page click btn:[New Service Account].
-3. Enter a name for the account using only the accepted characters.
+3. Enter a name for the account using only the allowed characters.
 4. Optionally enter a description for the account.
-5. Click btn:[Create account].
-6. Find the created account in the list.
-The list of accounts is long so you might have to click btn:[Next] multiple times before finding the account you created.
-Alternatively, if you know the name of your token, you can go directly to the page by entering the URL https://access.redhat.com/terms-based-registry/token/<name-of-your-token>
+5. Click btn:[Create].
+6. Find the created account in the list by searching for your name in the search field.
 7. Click the name of the account that you created.
-8. A token page opens, displaying a generated Username (different to the account name) and a token.
+8. Alternatively, if you know the name of your token, you can go directly to the page by entering the URL:
 
-If no Username and token are displayed, click btn:[Regenerate token]. You can also click this to generate a new Username and token.
-9. Copy the service account name and use it to set registry_username.
-10. Copy the token and use it to set registry_password.
+```
+https://access.redhat.com/terms-based-registry/token/<name-of-your-token>
+```
+
+9. A token page opens, displaying a generated username (different from the account name) and a token.
+
+If no token is displayed, click btn:[Regenerate Token]. You can also click this to generate a new username and token.
+10. Copy the username (for example "1234567|testuser") and use it to set the variable registry_username.
+11. Copy the token and use it to set the variable registry_password.
 
 ### Configuring Redis
 

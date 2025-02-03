@@ -1,9 +1,9 @@
 # Backing up container-based Ansible Automation Platform
 
-Perform a back up of your container-based installation of Ansible Automation Platform.
+Perform a backup of your container-based installation of Ansible Automation Platform.
 
 1. Go to the Red Hat Ansible Automation Platform installation directory on your Red Hat Enterprise Linux host.
-2. Run the backup playbook command:
+2. Run the backup playbook:
 
 ```
 $ ansible-playbook -i inventory ansible.containerized_installer.backup

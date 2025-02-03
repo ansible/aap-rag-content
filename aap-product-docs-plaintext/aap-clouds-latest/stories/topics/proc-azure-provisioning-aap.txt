@@ -33,16 +33,17 @@ Keep this resource group isolated from other resource groups, including the Reso
 5. Click btn:[Next].
 6. Click the Business continuity tab.
 7. From the Disaster Recovery list, select an option to enable or disable disaster recovery.
-8. Select the Deployment tab.
-9. Note the following requirements in the description:
+8. From the Tags tab, you can select the resources you want to apply a tag to, otherwise, the default applies.
+9. Select the Deployment tab.
+10. Note the following requirements in the description:
 * You must have a Red Hat account.
 * To use Ansible Automation Platform, you must have a valid subscription linked to your Red Hat account.
 * You must use the Deployment Driver during deployment.
-10. Select the checkboxes to indicate that you understand these requirements.
-11. Click btn:[Review + Create].
-12. If the information you entered in the form is valid, the window displays Validation Passed.
-13. Select I agree to accept the Co-Admin Access Permissions terms and conditions.
-14. Click btn:[Create] to begin the provisioning process for the application.
+11. Select the checkboxes to indicate that you understand these requirements.
+12. Click btn:[Review + Create].
+13. If the information you entered in the form is valid, the window displays Validation Passed.
+14. Select I agree to accept the Co-Admin Access Permissions terms and conditions.
+15. Click btn:[Create] to begin the provisioning process for the application.
 
 The application begins provisioning.
 

@@ -5,9 +5,7 @@ You can download this content to private automation hub, and publish it within y
 
 # Deploying your system for container signing
 
-Automation hub implements image signing to offer better security for the execution environment container images.
-
-To deploy your system so that it is ready for container signing, create a signing script.
+To deploy your system so that it is ready for container signing, first ensure that you have enabled automation content collection and container signing. Then you can create a signing script, or add and sign an execution environment manually.
 
 
 [NOTE]
@@ -73,8 +71,8 @@ The container-default service is created by the Ansible Automation Platform inst
 
 You can add containers remotely to automation hub in one of the following two ways:
 
-* Create Remotes
-* Execution Environment
+* By creating remotes
+* By using an automation execution environment
 
 1. Log in to Ansible Automation Platform.
 2. From the navigation panel, select menu:Automation Content[Remote Registries].
@@ -85,25 +83,28 @@ You can add containers remotely to automation hub in one of the following two wa
 * In the Password field, enter the password if necessary.
 * Click btn:[Create remote registry].
 
-# Adding an execution environment
+# Adding and signing an execution environment
 
 Automation execution environments are container images that make it possible to incorporate system-level dependencies and collection-based content. Each execution environment allows you to have a customized image to run jobs, and each of them contain only what you need when running the job.
 
 1. From the navigation panel, select menu:Automation Content[Execution Environments].
-2. Click btn:[Create execution environment].
-3. Enter the name of the execution environment.
-4. Enter the upstream name.
-5. Under Registry, select the name of the registry from the drop-down menu.
-6. Enter tags in the Add tag(s) to include field.
+2. Click btn:[Create execution environment] and enter the relevant information in the fields that appear.
+1. The Name field displays the name of the execution environment on your local registry.
+2. The Upstream name field is the name of the image on the remote server.
+3. Under Registry, select the name of the registry from the drop-down menu.
+4. Optional: Enter tags in the Add tag(s) to include field.
 If the field is blank, all the tags are passed.
 You must specify which repository-specific tags to pass.
-7. Optional: Enter tags to exclude in Add tag(s) to exclude.
-8. Click btn:[Create automation execution environments].
-9. Synchronize the image.
+5. Optional: Enter tags to exclude in the Add tag(s) to exclude field.
+3. Click btn:[Create execution environment]. You should see your new automation execution environment in the list that appears.
+4. Sync and sign your new automation execution environment.
+1. Click the btn:[More Actions] icon &#8942; and select Sync execution environment.
+2. Click the btn:[More Actions] icon &#8942; and select Sign execution environment.
+5. Click on your new automation execution environment. On the Details page, find the Signed label to determine that your automation execution environment has been signed.
 
 # Pushing container images from your local environment
 
-Use the following procedure to sign automation execution environments on a local system and push those signed automation execution environments to the automation hub registry.
+Use the following procedure to sign an automation execution environment on a local system and push the signed execution environment to the automation hub registry.
 
 1. From a terminal, log in to Podman, or any container client currently in use:
 
@@ -111,32 +112,32 @@ Use the following procedure to sign automation execution environments on a local
 > podman pull <container-name>
 ```
 
-2. After the automation execution environments is pulled, add tags (for example: latest, rc, beta, or version numbers, such as 1.0; 2.3, and so on):
+2. After the execution environment is pulled, add tags (for example: latest, rc, beta, or version numbers, such as 1.0; 2.3, and so on):
 
 ```
 > podman tag <container-name> <server-address>/<container-name>:<tag name>
 ```
 
-3. Sign the automation execution environments after changes have been made, and push it back up to the automation hub registry:
+3. Sign the execution environment after changes have been made, and push it back up to the automation hub registry:
 
 ```
 > podman push <server-address>/<container-name>:<tag name> --tls-verify=false --sign-by <reference to the gpg key on your local>
 ```
 
 
-If the automation execution environments is not signed, it can only be pushed with any current signature embedded. Alternatively, you can use the following script to push the automation execution environments without signing it:
+If the execution environment is not signed, it can only be pushed with any current signature embedded. Alternatively, you can use the following script to push the execution environment without signing it:
 
 ```
 > podman push <server-address>/<container-name>:<tag name> --tls-verify=false
 ```
 
-4. Once the automation execution environments has been pushed, navigate to menu:Automation Content[Execution Environments].
+4. Once the execution environment has been pushed, navigate to menu:Automation Content[Execution Environments].
 5. To display the new execution environment, click the Refresh icon.
 6. Click the name of the image to view your pushed image.
 
-The details page for each automation execution environments indicates whether it has been signed. If the details page indicates that an image is Unsigned, you can sign the automation execution environments from automation hub using the following steps:
+The details page for each execution environment indicates whether it has been signed. If the details page indicates that an image is Unsigned, you can sign the execution environment from automation hub using the following steps:
 
-1. Click the automation execution environments name to navigate to the details page.
+1. Click the execution environment name to navigate to the details page.
 2. Click the btn:[More Actions] icon &#8942;.
 Three options are available:
 * Sign execution environment
@@ -144,8 +145,8 @@ Three options are available:
 * Delete execution environment
 3. Click Sign execution environment from the drop-down menu.
 
-The signing service signs the automation execution environments.
-After the automation execution environments is signed, the status changes to "signed".
+The signing service signs the execution environment.
+After the execution environment is signed, the status changes to "signed".
 
 # Policies with signed images
 

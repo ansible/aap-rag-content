@@ -8,12 +8,35 @@ Choose the Red Hat Ansible Automation Platform installer if your Red Hat Enterpr
 
 1. Navigate to the Red Hat Ansible Automation Platform download page.
 2. Click btn:[Download Now] for the Ansible Automation Platform <latest-version> Setup.
-3. Extract the files:
+3. Transfer the file to the target server using scp or curl:
+1. Using scp:
+1. Run the following command, replacing private_key.pem, user, and server_ip with your appropriate values:
+
 
 ```
-$ tar xvzf ansible-automation-platform-setup-<latest-version>.tar.gz
+$ scp -i private_key.pem aap-bundled-installer.tar.gz user@server_ip:
 ```
 
+
+1. Using curl:
+1. If the setup file URL is available, you can download it directly to the target server using curl. Replace <download_url> with the file URL:
+
+
+```
+$ curl -0 <download_url>
+```
+
+
+
+[NOTE]
+----
+If the file needs to be extracted after downloading, run the following command:
+
+```
+$ tar xvzf aap-bundled-installer.tar.gz
+```
+
+----
 
 1. Install Ansible Automation Platform Installer Package
 

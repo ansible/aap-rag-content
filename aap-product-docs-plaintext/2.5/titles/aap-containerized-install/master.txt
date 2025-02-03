@@ -13,10 +13,10 @@ This guide helps you to understand the installation requirements and processes b
 
 [NOTE]
 ----
-Upgrades from 2.4 Containerized Ansible Automation Platform Tech Preview to 2.5 Containerized Ansible Automation Platform are unsupported at this time.
+Upgrades from 2.4 Containerized Ansible Automation Platform Tech Preview to 2.5 Containerized Ansible Automation Platform are not supported at this time.
 ----
 
-* A Red Hat Enterprise Linux (RHEL) 9.2 based host. Use a minimal operating system base install.
+* A host running Red Hat Enterprise Linux (RHEL) 9.2 or later. Use a minimal operating system base install.
 * A non-root user for the Red Hat Enterprise Linux host, with sudo or other Ansible supported privilege escalation (sudo recommended). This user is responsible for the installation of containerized Ansible Automation Platform.
 * SSH public key authentication for the non-root user. For guidelines on setting up SSH public key authentication for the non-root user, see How to configure SSH public key authentication for passwordless login.
 * SSH keys are only required when installing on remote hosts. If doing a self contained local VM based installation, you can use ansible_connection=local.
@@ -39,6 +39,8 @@ For more information about the tested deployment topologies for containerized An
 Each virtual machine (VM) has the following system requirements:
 
 
+
+If performing a bundled installation of the growth topology with hub_seed_collections=true, then 32 GB RAM is recommended. Note that with this configuration the install time is going to increase and can take 45 or more minutes alone to complete seeding the collections.
 
 ## Preparing the Red Hat Enterprise Linux host for containerized installation
 
@@ -81,7 +83,7 @@ sudo dnf install -y ansible-core
 sudo dnf install -y wget git-core rsync vim
 ```
 
-9. Optional: To have the installer automatically pick up and apply your Ansible Automation Platform subscription manifest license, follow the steps in Obtaining a manifest file.
+9. Optional: To have the installation program automatically pick up and apply your Ansible Automation Platform subscription manifest license, follow the steps in Obtaining a manifest file.
 
 * For more information about registering your RHEL system, see Getting Started with RHEL System Registration.
 * For information about configuring unbound DNS, see Setting up an unbound DNS server.
@@ -90,14 +92,14 @@ sudo dnf install -y wget git-core rsync vim
 
 ## Downloading Ansible Automation Platform
 
-Choose the installer you need based on your Red Hat Enterprise Linux environment internet connectivity and download the installer to your Red Hat Enterprise Linux host.
+Choose the installation program you need based on your Red Hat Enterprise Linux environment internet connectivity and download the installation program to your Red Hat Enterprise Linux host.
 
 1. Download the latest installer .tar file from the Ansible Automation Platform download page.
 1. For online installations: Ansible Automation Platform 2.5 Containerized Setup
 2. For offline or bundled installations: Ansible Automation Platform 2.5 Containerized Setup Bundle
-2. Copy the installer .tar file and the optional manifest .zip file onto your Red Hat Enterprise Linux host.
-3. Decide where you want the installer to reside on the file system. Installation related files are created under this location and require at least 10 GB for the initial installation.
-4. Unpack the installer .tar file into your installation directory, and go to the unpacked directory.
+2. Copy the installation program .tar file and the optional manifest .zip file onto your Red Hat Enterprise Linux host.
+3. Decide where you want the installation program to reside on the file system. Installation related files are created under this location and require at least 10 GB for the initial installation.
+4. Unpack the installation program .tar file into your installation directory, and go to the unpacked directory.
 1. To unpack the online installer:
 
 ```
@@ -111,7 +113,7 @@ $ tar xfvz ansible-automation-platform-containerized-setup-bundle-<version>-<arc
 ```
 
 
-## Installing containerized Ansible Automation Platform
+## Configuring the inventory file
 
 You can control the installation of Ansible Automation Platform with inventory files. Inventory files define the hosts and containers used and created, variables for components, and other information needed to customize the installation.
 
@@ -148,7 +150,7 @@ Use the example inventory file to perform an online installation for the contain
 aap.example.org
 
 # This section is for your automation controller hosts
-# -----------------------------------------------------
+# -------------------------------------------------
 [automationcontroller]
 aap.example.org
 
@@ -163,7 +165,7 @@ aap.example.org
 aap.example.org
 
 # This section is for the Ansible Automation Platform database
-# -----------------------------------------------------
+# --------------------------------------
 [database]
 aap.example.org
 
@@ -212,12 +214,6 @@ eda_pg_host=aap.example.org
 eda_pg_password=<set your own>
 ```
 
-
-
-[WARNING]
-----
-* When installing the growth topology for the Ansible Automation Platform 2.5 containerized setup bundle, you must disable content syncing which is enabled by default. To disable this feature set the hub_seed_collections variable in the inventory file to false. See Container growth topology for a sample inventory file and see Automation hub variables for more information about this inventory file variable.
-----
 
 ### Inventory file for online installation for containerized enterprise topology
 
@@ -318,7 +314,7 @@ eda_pg_password=<set your own>
 ```
 
 
-* Redis can be colocated with any other node in a clustered installation.
+* 6 VMs are required for a Redis high availability (HA) compatible deployment. When installing Ansible Automation Platform with the containerized installer, Redis can be colocated on any Ansible Automation Platform component VMs of your choice except for execution nodes or the PostgreSQL database. They might also be assigned VMs specifically for Redis use.
 * By default the redis_mode is set to cluster.
 * redis_mode=cluster
 * For more information about Redis, see Caching and queueing system in Planning your installation.
@@ -370,61 +366,98 @@ controller_license_file=<full_path_to_your_manifest_zip_file>
 ```
 
 
-### Running the installation command
+### Setting up an external (customer supported) database
 
-Use the following command to install containerized Ansible Automation Platform:
 
+[IMPORTANT]
+----
+When using an external database with Ansible Automation Platform, you must create and maintain that database. Ensure that you clear your external database when uninstalling Ansible Automation Platform.
+----
+
+Use the following procedure to configure an external PostgreSQL compliant database for use with an Ansible Automation Platform component, for example automation controller, Event-Driven Ansible, automation hub, and platform gateway.
+
+1. Connect to a PostgreSQL compliant database server with a user that has superuser privileges.
 
 ```
-ansible-playbook -i <inventory_file_name> ansible.containerized_installer.install
+# psql -h <hostname> -U <username> -p <port_number> -d <database_name>
 ```
 
 
 For example:
 
-
 ```
-ansible-playbook -i inventory ansible.containerized_installer.install
-```
-
-
-* If your privilege escalation requires you to enter a password, append -K to the command. You are then prompted for the BECOME password.
-* You can use increasing verbosity, up to 4 v's (-vvvv) to see the details of the installation process. However, it is important to note that this can significantly increase installation time, so it is recommended that you use it only as needed or requested by Red Hat support.
-
-## Accessing Ansible Automation Platform
-
-After the installation completes, the default protocol and ports used for Ansible Automation Platform are 80 (HTTP) and 443 (HTTPS).
-
-You can customize the ports with the following variables:
-
-
-```
-envoy_http_port=80
-envoy_https_port=443
+# psql -h db.example.com -U superuser -p 5432 -d postgres
 ```
 
+2. Create the user, database, and password with the createDB or administrator role assigned to the user.
+For further information, see Database Roles.
+3. Add the database credentials and host details to the installation program's inventory file under the [all:vars] group.
+4. Optional: mutual TLS (mTLS) authentication is disabled by default. To configure each component’s database with mTLS authentication, add the following variables to your inventory file under the [all:vars] group and ensure each component has a different TLS certificate and key:
 
-If you want to disable HTTPS, set envoy_disable_https to true:
+```yaml
+# Platform gateway
+gateway_pg_cert_auth=true
+gateway_pg_tls_cert=/path/to/gateway.cert
+gateway_pg_tls_key=/path/to/gateway.key
+gateway_pg_sslmode=verify-full
 
+# Automation controller
+controller_pg_cert_auth=true
+controller_pg_tls_cert=/path/to/awx.cert
+controller_pg_tls_key=/path/to/awx.key
+controller_pg_sslmode=verify-full
+
+# Automation hub
+hub_pg_cert_auth=true
+hub_pg_tls_cert=/path/to/pulp.cert
+hub_pg_tls_key=/path/to/pulp.key
+hub_pg_sslmode=verify-full
+
+# Event-Driven Ansible controller
+eda_pg_cert_auth=true
+eda_pg_tls_cert=/path/to/eda.cert
+eda_pg_tls_key=/path/to/eda.key
+eda_pg_sslmode=verify-full
+```
+
+5. Run the installer. If you are using a PostgreSQL database, the database is owned by the connecting user and must have a createDB or administrator role assigned to it.
+6. Check that you can connect to the created database with the credentials provided in the inventory file.
+7. Check the permission of the user. The user should have the createDB or administrator role.
+
+
+[NOTE]
+----
+During this procedure, you must check the External Database coverage. For further information, see https://access.redhat.com/articles/4010491
+----
+
+### Setting registry_username and registry_password
+
+When using the registry_username and registry_password variables for an online non-bundled installation, you need to create a new registry service account.
+
+Registry service accounts are named tokens that can be used in environments where credentials will be shared, such as deployment systems.
+
+1. Go to https://access.redhat.com/terms-based-registry/accounts.
+2. On the Registry Service Accounts page click New Service Account.
+3. Enter a name for the account using only the allowed characters.
+4. Optionally enter a description for the account.
+5. Click Create.
+6. Find the created account in the list by searching for your name in the search field.
+7. Click the name of the account that you created.
+8. Alternatively, if you know the name of your token, you can go directly to the page by entering the URL:
 
 ```
-envoy_disable_https=true
+https://access.redhat.com/terms-based-registry/token/<name-of-your-token>
 ```
 
+9. A token page opens, displaying a generated username (different from the account name) and a token.
 
-The platform UI is available by default at:
+If no token is displayed, click Regenerate Token. You can also click this to generate a new username and token.
+10. Copy the username (for example "1234567|testuser") and use it to set the variable registry_username.
+11. Copy the token and use it to set the variable registry_password.
 
+### Using custom TLS certificates
 
-```
-https://<gateway-node>:443
-```
-
-
-Log in as the admin user with the password you created for gateway_admin_password.
-
-## Using custom TLS certificates
-
-By default, the installer generates TLS certificates and keys for all services that are signed by a custom Certificate Authority (CA). You can provide a custom TLS certificate and key for each service. If that certificate is signed by a custom CA, you must provide the CA TLS certificate and key.
+By default, the installation program generates TLS certificates and keys for all services that are signed by a custom Certificate Authority (CA). You can provide a custom TLS certificate and key for each service. If that certificate is signed by a custom CA, you must provide the CA TLS certificate and key.
 
 * Certificate Authority
 
@@ -489,9 +522,9 @@ receptor_tls_key=/full/path/to/tls/key
 ```
 
 
-## Using custom Receptor signing keys
+### Using custom Receptor signing keys
 
-Receptor signing is enabled by default unless receptor_disable_signing=true is set, and an RSA key pair (public and private) is generated by the installer. However, you can give custom RSA public and private keys by setting the path variables:
+Receptor signing is enabled by default unless receptor_disable_signing=true is set, and an RSA key pair (public and private) is generated by the installation program. However, you can set custom RSA public and private keys by using the following variables:
 
 
 ```
@@ -500,29 +533,154 @@ receptor_signing_public_key=<full_path_to_public_key>
 ```
 
 
-## Enabling Automation hub collection and container signing
+### Enabling automation content collection and container signing
 
-With automation hub you can sign Ansible collections and container images. This feature is not enabled by default, and you must provide the GPG key.
+Automation content signing is disabled by default. To enable it, the following installation variables are required in the inventory file:
 
 
 ```
+#Collection signing
 hub_collection_signing=true
-hub_collection_signing_key=<full_path_to_collections_gpg_key>
+hub_collection_signing_key=<full_path_to_collection_gpg_key>
+
+#Container signing
 hub_container_signing=true
-hub_container_signing_key=<full_path_to_containers_gpg_key>
+hub_container_signing_key=<full_path_to_container_gpg_key>
 ```
 
 
-When the GPG key is protected by a passphrase, you must provide the passphrase.
+The following variables are required if the keys are protected by a passphrase:
 
 
 ```
-hub_collection_signing_pass=<collections_gpg_key_passphrase>
-hub_container_signing_pass=<containers_gpg_key_passphrase>
+#Collection signing
+hub_collection_signing_pass=<gpg_key_passphrase>
+
+#Container signing
+hub_container_signing_pass=<gpg_key_passphrase>
 ```
 
 
-## Adding execution nodes
+The hub_collection_signing_key and hub_container_signing_key variables require the set up of keys before running an installation.
+
+Automation content signing currently only supports GnuPG (GPG) based signature keys. For more information about GPG, see the GnuPG man page.
+
+
+[NOTE]
+----
+The algorithm and cipher used is the responsibility of the customer.
+----
+
+1. On a RHEL9 server run the following command to create a new key pair for collection signing:
+
+```
+gpg --gen-key
+```
+
+2. Enter your information for "Real name" and "Email address":
+
+Example output:
+
+```
+gpg --gen-key
+gpg (GnuPG) 2.3.3; Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Note: Use "gpg --full-generate-key" for a full featured key generation dialog.
+
+GnuPG needs to construct a user ID to identify your key.
+
+Real name: Joe Bloggs
+Email address: jbloggs@example.com
+You selected this USER-ID:
+    "Joe Bloggs <jbloggs@example.com>"
+
+Change (N)ame, (E)mail, or (O)kay/(Q)uit? O
+```
+
+
+If this fails, your environment does not have the necessary prerequisite packages installed for GPG. Install the necessary packages to proceed.
+3. A dialog box will appear and ask you for a passphrase. This is optional but recommended.
+4. The keys are then generated, and produce output similar to the following:
+
+```
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+gpg: key 022E4FBFB650F1C4 marked as ultimately trusted
+gpg: revocation certificate stored as '/home/aapuser/.gnupg/openpgp-revocs.d/F001B037976969DD3E17A829022E4FBFB650F1C4.rev'
+public and secret key created and signed.
+
+pub   rsa3072 2024-10-25 [SC] [expires: 2026-10-25]
+      F001B037976969DD3E17A829022E4FBFB650F1C4
+uid                      Joe Bloggs <jbloggs@example.com>
+sub   rsa3072 2024-10-25 [E] [expires: 2026-10-25]
+```
+
+
+Note the expiry date that you can set based on company standards and needs.
+5. You can view all of your GPG keys by running the following command:
+
+```
+gpg --list-secret-keys --keyid-format=long
+```
+
+6. To export the public key run the following command:
+
+```
+gpg --export -a --output collection-signing-key.pub <email_address_used_to_generate_key>
+```
+
+7. To export the private key run the following command:
+
+```
+gpg -a --export-secret-keys <email_address_used_to_generate_key> > collection-signing-key.priv
+```
+
+8. If a passphrase is detected, you will be prompted to enter the passphrase.
+9. To view the private key file contents, run the following command:
+
+```
+cat collection-signing-key.priv
+```
+
+
+Example output:
+
+```
+-----BEGIN PGP PRIVATE KEY BLOCK-----
+
+lQWFBGcbN14BDADTg5BsZGbSGMHypUJMuzmIffzzz4LULrZA8L/I616lzpBHJvEs
+sSN6KuKY1TcIwIDCCa/U5Obm46kurpP2Y+vNA1YSEtMJoSeHeamWMDd99f49ItBp
+
+<snippet>
+
+j920hRy/3wJGRDBMFa4mlQg=
+=uYEF
+-----END PGP PRIVATE KEY BLOCK-----
+```
+
+10. Repeat steps 1 to 9 to create a key pair for container signing.
+11. Add the following variables to the inventory file and run the installation to create the signing services:
+
+```
+#Collection signing
+hub_collection_signing=true
+hub_collection_signing_key=/home/aapuser/aap/ansible-automation-platform-containerized-setup-2.5-2/collection-signing-key.priv
+# This variable is required if the key is protected by a passphrase
+hub_collection_signing_pass=<password>
+
+#Container signing
+hub_container_signing=true
+hub_container_signing_key=/home/aapuser/aap/ansible-automation-platform-containerized-setup-2.5-2/container-signing-key.priv
+# This variable is required if the key is protected by a passphrase
+hub_container_signing_pass=<password>
+```
+
+
+### Adding execution nodes
 
 The containerized installer can deploy remote execution nodes. The execution_nodes group in the inventory file handles this.
 
@@ -554,30 +712,81 @@ fqdn_of_your_hop_host receptor_type=hop receptor_peers='["<fqdn_of_your_executio
 ```
 
 
-## Adding a safe plugin variable to Event-Driven Ansible controller
+### Adding a safe plugin variable to Event-Driven Ansible controller
 
 When using redhat.insights_eda or similar plugins to run rulebook activations in Event-Driven Ansible controller, you must add a safe plugin variable to a directory in Ansible Automation Platform. This ensures connection between Event-Driven Ansible controller and the source plugin, and displays port mappings correctly.
 
-1. Create a directory for the safe plugin variable: mkdir -p ./group_vars/automationedacontroller
-2. Create a file within that directory for your new setting (for example, touch ./group_vars/automationedacontroller/custom.yml)
-3. Add the variable automationedacontroller_additional_settings to extend the default settings.yaml template for Event-Driven Ansible controller and add the SAFE_PLUGINS field with a list of plugins to enable. For example:
+1. Create a directory for the safe plugin variable:
 
 ```
-automationedacontroller_additional_settings:
-   SAFE_PLUGINS:
-     - ansible.eda.webhook
-     - ansible.eda.alertmanager
+mkdir -p ./group_vars/automationeda
+```
+
+2. Create a file within that directory for your new setting (for example, touch ./group_vars/automationeda/custom.yml)
+3. Add the variable eda_safe_plugins with a list of plugins to enable. For example:
+
+```
+eda_safe_plugins: ['ansible.eda.webhook', 'ansible.eda.alertmanager']
 ```
 
 
-[NOTE]
-----
-You can also extend the automationedacontroller_additional_settings variable beyond SAFE_PLUGINS in the Django configuration file, /etc/ansible-automation-platform/eda/settings.yaml
-----
+## Installing containerized Ansible Automation Platform
+
+Use the following command to install containerized Ansible Automation Platform:
+
+
+```
+ansible-playbook -i <inventory_file_name> ansible.containerized_installer.install
+```
+
+
+For example:
+
+
+```
+ansible-playbook -i inventory ansible.containerized_installer.install
+```
+
+
+* If your privilege escalation requires you to enter a password, append -K to the command. You are then prompted for the BECOME password.
+* You can use increasing verbosity, up to 4 v's (-vvvv) to see the details of the installation process. However, it is important to note that this can significantly increase installation time, so it is recommended that you use it only as needed or requested by Red Hat support.
+
+## Accessing Ansible Automation Platform
+
+After the installation completes, the default protocol and ports used for Ansible Automation Platform are 80 (HTTP) and 443 (HTTPS).
+
+You can customize the ports with the following variables:
+
+
+```
+envoy_http_port=80
+envoy_https_port=443
+```
+
+
+If you want to disable HTTPS, set envoy_disable_https to true:
+
+
+```
+envoy_disable_https=true
+```
+
+
+The platform UI is available by default at:
+
+
+```
+https://<gateway-node>:443
+```
+
+
+Log in as the admin user with the password you created for gateway_admin_password.
 
 ## Updating container-based Ansible Automation Platform
 
 Perform a patch update for a container-based installation of Ansible Automation Platform from 2.5 to 2.5.x.
+
+Upgrades from 2.4 Containerized Ansible Automation Platform Tech Preview to 2.5 Containerized Ansible Automation Platform are not supported at this time.
 
 You have done the following:
 
@@ -587,9 +796,9 @@ You have done the following:
 1. Download the latest version of the containerized installer from the Ansible Automation Platform download.
 1. For online installations Ansible Automation Platform 2.5 Containerized Setup
 2. For offline or bundled installations: Ansible Automation Platform 2.5 Containerized Setup Bundle
-2. Copy the installer .tar file onto your Red Hat Enterprise Linux host.
-3. Decide where you want the installer to reside on the filesystem. Installation related files will be created under this location and require at least 10 GB for the initial installation.
-4. Unpack the installer .tar file into your installation directory, and go to the unpacked directory.
+2. Copy the installation program .tar file onto your Red Hat Enterprise Linux host.
+3. Decide where you want the installation program to reside on the filesystem. Installation related files will be created under this location and require at least 10 GB for the initial installation.
+4. Unpack the installation program .tar file into your installation directory, and go to the unpacked directory.
 1. To unpack the online installer:
 
 ```
@@ -603,7 +812,7 @@ $ tar xfvz ansible-automation-platform-containerized-setup-bundle-<version>-<arc
 ```
 
 5. Edit the inventory file to match your required configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can change the parameters to match any modifications to your environment.
-6. Run the install command:
+6. Run the install playbook:
 
 ```
 $ ansible-playbook -i inventory ansible.containerized_installer.install
@@ -616,10 +825,10 @@ The update begins.
 
 ## Backing up container-based Ansible Automation Platform
 
-Perform a back up of your container-based installation of Ansible Automation Platform.
+Perform a backup of your container-based installation of Ansible Automation Platform.
 
 1. Go to the Red Hat Ansible Automation Platform installation directory on your Red Hat Enterprise Linux host.
-2. Run the backup playbook command:
+2. Run the backup playbook:
 
 ```
 $ ansible-playbook -i inventory ansible.containerized_installer.backup
@@ -637,7 +846,7 @@ By default, the backup directory is set to ~/backups. You can change this by usi
 
 When performing a reinstall following an uninstall that preserves the databases, you must use the previously generated Ansible Automation Platform secret key values to access the preserved databases.
 
-Before running the uninstall, collect the existing secret keys by running the following command:
+Before performing an uninstall, collect the existing secret keys by running the following command:
 
 
 ```
@@ -655,7 +864,7 @@ $ podman secret inspect --showsecret controller_secret_key | jq -r .[].SecretDat
 
 For more information about the *_secret_key variables, see Inventory file variables.
 
-To uninstall a containerized deployment, run the uninstall playbook command:
+To uninstall a containerized deployment, run the uninstall playbook:
 
 
 ```
@@ -688,7 +897,7 @@ $ ansible-playbook -i inventory ansible.containerized_installer.uninstall -e pos
 
 ## Reinstalling containerized Ansible Automation Platform
 
-To reinstall a containerized deployment after uninstalling and preserving the database, run the install playbook command and include the existing secret key value:
+To reinstall a containerized deployment after uninstalling and preserving the database, run the install playbook and include the existing secret key value:
 
 
 ```
@@ -712,17 +921,17 @@ API node type:: Responds to the HTTP REST API of Event-Driven Ansible controller
 Worker node type:: Runs an Event-Driven Ansible worker, which is the component of Event-Driven Ansible that not only manages projects and activations, but also executes the activations themselves.
 Hybrid node type:: Is a combination of the API node and the worker node.
 
-The following example shows how you can set up an inventory file for horizontal scaling of Event-Driven Ansible controller on Red Hat Enterprise Linux VMs using the host group name [automationeda] and the node type variable eda_node_type:
+The following example shows how you can set up an inventory file for horizontal scaling of Event-Driven Ansible controller on Red Hat Enterprise Linux VMs using the host group name [automationeda] and the node type variable eda_type:
 
 
 ```
 [automationeda]
 
 3.88.116.111
-routable_hostname=automationeda-api.example.com eda_node_type=api
+routable_hostname=automationeda-api.example.com eda_type=api
 
 # worker node
-3.88.116.112 routable_hostname=automationeda-api.example.com eda_node_type=worker
+3.88.116.112 routable_hostname=automationeda-api.example.com eda_type=worker
 ```
 
 
@@ -738,21 +947,21 @@ To set up a multi-node deployment, follow the procedure in Setting up horizontal
 
 ### Setting up horizontal scaling for Event-Driven Ansible controller
 
-To scale up (add more nodes) or scale down (remove nodes), you must update the content of the inventory to add or remove nodes and rerun the installer.
+To scale up (add more nodes) or scale down (remove nodes), you must update the content of the inventory file to add or remove nodes and rerun the installation program.
 
 1. Update the inventory to add two more worker nodes:
 
 ```
-[automationedacontroller]
+[automationeda]
 
-3.88.116.111 routable_hostname=automationedacontroller-api.example.com eda_node_type=api
+3.88.116.111 routable_hostname=automationeda-api.example.com eda_type=api
 
-3.88.116.112 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker
+3.88.116.112 routable_hostname=automationeda-api.example.com eda_type=worker
 
 # two more worker nodes
-3.88.116.113 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker
+3.88.116.113 routable_hostname=automationeda-api.example.com eda_type=worker
 
-3.88.116.114 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker
+3.88.116.114 routable_hostname=automationeda-api.example.com eda_type=worker
 ```
 
 2. Re-run the installer.

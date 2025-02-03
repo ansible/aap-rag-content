@@ -411,36 +411,36 @@ It also creates a service, and a route URL that is used by the control plane to 
 
 Use the following procedure to set up mesh nodes.
 
-1. Create a YAML file to  set up the mesh ingress node.
+1. Create a YAML file (in this case named oc_meshingress.yml) to  set up the mesh ingress node.
 
-The file resembles the following:
+Your file should resemble the following:
 
 ```
-apiVersion:
+apiVersion: automationcontroller.ansible.com/v1alpha1
 kind: AutomationControllerMeshIngress
 metadata:
     name:
     namespace:
 spec:
-    deployment name:
+    deployment_name: aap-controller
 ```
 
 
 Where:
 * apiVersion: defines the versioned schema of this representation of an object.
 Servers should convert recognized schemas to the latest internal value, and might reject unrecognized values.
+This value is static.
 * kind: Is the type of node to create.
-Set the value to AutomationControllerMeshIngress.
+
+Use the value AutomationControllerMeshIngress.
+
 AutomationControllerMeshIngress controls the deployment and configuration of mesh ingress on automation controller.
-* name: is the name of the mesh ingress node.
-* namespace: is which Kubernetes namespace to deploy the mesh ingress into.
-This must be in the same namespace as the automation controller that the mesh is connected to
-* deployment_name: You can find the deployment name by using:
+* name: enter a name for the mesh ingress node.
+* namespace: enter a name for the Kubernetes namespace to deploy the mesh ingress into.
 
-```
-oc get ansible-automation-platform.
-```
-
+This must be in the same namespace as the automation controller that the mesh is connected to.
+* deployment_name: is the automation controller instance that this mesh ingress is attached to.
+Provide the name of your automation controller instance.
 2. Apply this YAML file using:
 
 ```
@@ -448,8 +448,31 @@ oc apply -f oc_meshingress.yml
 ```
 
 
-This runs the playbook associated with AutomationControllerMeshIngress, and creates the hop node called <name>.
+Run this playbook to creates the AutomationControllerMeshIngress resource.
+The operator creates a hop node in automation controller with the name you supplied.
 3. When the MeshIngress instance has been created, it appears in the Instances page.
+
+[IMPORTANT]
+----
+Any instance that is to function as a remote execution node in "pull" mode need to be created after this procedure and must be configured as follows:
+
+```
+instance type: Execution
+listener port: keep empty
+options:
+    Enable instance: checked
+    Managed by Policy: as needed
+    Peers from control nodes: unchecked (this one is important)
+```
+
+----
+4. Associate this new instance with the hop node you created using the procedure in this paragraph
+5. Download the tarball.
+
+[NOTE]
+----
+Association with the hop node must be done before creating the tarball.
+----
 
 ## Pulling the secret for OpenShift Container Platform deployments
 
@@ -470,14 +493,20 @@ oc create secret generic ee-pull-secret \
      --from-literal=username=<username> \
      --from-literal=password=<password> \
      --from-literal=url=registry.redhat.io
-
-oc edit automationcontrollers <instance name>
 ```
 
-2. Add ee_pull_credentials_secret and ee-pull-secret to the specification using:
+2. Add ee_pull_credentials_secret and ee-pull-secret to the specification by editing the deployment specification:
 
 ```
-spec.ee_pull_credentials_secret=ee-pull-secret
+oc edit automationcontrollers aap-controller-o yaml
+```
+
+
+and add the following:
+
+```
+spec
+  ee_pull_credentials_secret=ee-pull-secret
 ```
 
 3. To manage instances from the automation controller UI, you must have System Administrator or System Auditor permissions.
