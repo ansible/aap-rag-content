@@ -1,0 +1,5 @@
+# Ansible Core (ansible-core) Versions
+
+Here is the most recent update for Ansible Core (ansible-core):
+
+- Ansible Core (ansible-core) Version v2.18.2 Released on Monday, January 27, 2025
