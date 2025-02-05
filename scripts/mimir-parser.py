@@ -131,9 +131,12 @@ def main():
         args = arg_parser.parse_args()
 
         if "TARGET_DIRS" not in os.environ:
+            # TEMPORARILY EXCLUDE AAP 2.5 DOCS AS MIMIR ARCHIVE DOES NOT CONTAIN THEM YET
             TARGET_DIRS="red_hat_content/documentation/ansible_on_clouds/2.x " + \
-                        "red_hat_content/documentation/red_hat_ansible_automation_platform/2.5 " + \
                         "red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest"
+            # TARGET_DIRS="red_hat_content/documentation/ansible_on_clouds/2.x " + \
+            #             "red_hat_content/documentation/red_hat_ansible_automation_platform/2.5 " + \
+            #             "red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest"
         else:
             TARGET_DIRS = os.getenv("TARGET_DIRS")
 
