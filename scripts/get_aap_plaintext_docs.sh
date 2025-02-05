@@ -31,7 +31,7 @@ fi
   "https://github.com/ansible/ansible-rulebook" \
   "additional_docs/ansible-rulebook.txt"
 
-for git_branch in ${AAP_VERSION} ${LIGHTSPEED_LATEST} ${AAP_CLOUDS_LATEST}
+for git_branch in ${AAP_VERSION}
 do
   rm -rf ${AAP_DOCS_BASE_DIR}/${git_branch}
   git clone --single-branch --branch ${git_branch} https://github.com/ansible/aap-docs.git
