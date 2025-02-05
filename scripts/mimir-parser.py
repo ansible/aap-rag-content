@@ -39,9 +39,10 @@ class MimirParser:
         if "title" in section:
             self.sections.append(section)
 
-        if "sections" in section:
-            for s in section["sections"]:
-                self.process_section(s, level + 1)
+            sections = section.get("sections", [])
+            if sections:
+                for s in sections:
+                    self.process_section(s, level + 1)
 
     def process_toc(self):
         with open(self.toc, encoding="utf-8") as f:
