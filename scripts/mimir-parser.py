@@ -87,9 +87,13 @@ class MimirParser:
                 title = re.sub(r"^Chapter\s*", "", title)
                 if title == title_to_match:
                     base_url = self.doc_metadata["extra"]["reference_url"]
-                    single_page_anchor = self.sections[section_index]['singlePageAnchor']
-                    # print(f"[[ {base_url}#{single_page_anchor} ]]")
-                    section_index += 1
+                    if section_index >= len(self.sections):
+                        print(f"WARNING: section_index {section_index} is larger than the size of the index {len(self.sections)}")
+                        single_page_anchor = "__singlePageAnchor__"
+                    else:
+                        single_page_anchor = self.sections[section_index]['singlePageAnchor']
+                        # print(f"[[ {base_url}#{single_page_anchor} ]]")
+                        section_index += 1
 
                     if f:
                         f.flush()
@@ -99,7 +103,10 @@ class MimirParser:
                     metadata_file = os.path.join(self.metadata_dir, f"{single_page_anchor}.json")
                     with open(metadata_file, "w") as meta:
                         metadata = dict()
-                        metadata["url"] = f"{base_url}#{single_page_anchor}"
+                        if single_page_anchor != "__singlePageAnchor__":
+                            metadata["url"] = f"{base_url}#{single_page_anchor}"
+                        else:
+                            metadata["url"] = f"{base_url}"
                         metadata["path"] = self.doc_metadata["__default__"]["path"]
 
                         # Remove the leading section/chapter number from titles
