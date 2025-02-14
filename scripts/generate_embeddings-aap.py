@@ -4,12 +4,14 @@ import argparse
 import json
 import os
 import time
+import traceback
 from pathlib import Path
 from typing import Callable
 from typing import Dict
 
 import faiss
 import requests
+import torch
 from llama_index.core import Settings
 from llama_index.core import SimpleDirectoryReader
 from llama_index.core import VectorStoreIndex
@@ -167,8 +169,13 @@ if __name__ == "__main__":
     faiss_index = faiss.IndexFlatIP(embedding_dimension)
     try:
         gpu_resource = faiss.StandardGpuResources()
-        faiss_index = faiss.index_cpu_to_gpu(gpu_resource, 0, faiss_index)
-    except AssertionError:
+#       faiss_index = faiss.index_cpu_to_gpu(gpu_resource, 0, faiss_index)
+        current_device = torch.cuda.current_device()
+        print(f"current_device: {current_device}")
+        faiss_index = faiss.index_cpu_to_gpu(gpu_resource, current_device, faiss_index)
+    except (AttributeError, AssertionError, RuntimeError) as e:
+        print("An error occurred. gpu_resource is set to None.")
+        traceback.print_exc()
         gpu_resource = None
     vector_store = FaissVectorStore(faiss_index=faiss_index)
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
