@@ -19,9 +19,10 @@ class DocFinder:
 
 
 class MimirParser:
-    def __init__(self, base_dir, out_dir):
+    def __init__(self, base_dir, out_dir, max_level):
         self.base_dir = base_dir
         self.out_dir = out_dir
+        self.max_level = max_level
         self.metadata_dir = os.path.join(self.out_dir, ".metadata")
 
         if not os.path.isdir(self.out_dir):
@@ -36,13 +37,16 @@ class MimirParser:
                               os.listdir(self.base_dir + "/single-page")))[0]
 
     def process_section(self, section, level):
+        if level >= self.max_level:
+            return
+
         if "title" in section:
             self.sections.append(section)
 
-            sections = section.get("sections", [])
-            if sections:
-                for s in sections:
-                    self.process_section(s, level + 1)
+        sections = section.get("sections", [])
+        if sections:
+            for s in sections:
+                self.process_section(s, level + 1)
 
     def process_toc(self):
         with open(self.toc, encoding="utf-8") as f:
@@ -56,7 +60,7 @@ class MimirParser:
         # Save Markdown files with .txt extension so that we can reuse the existing script
         out_file = os.path.join(self.out_dir, "__index__.txt")
         f = open(out_file, "w")
-        section_index = 1
+        section_index = 0
 
         for line in open(self.md, encoding="utf-8"):
             line = line.strip()
@@ -85,15 +89,12 @@ class MimirParser:
                 title = line.replace("\xa0", " ")
                 title = re.sub(r"^#+\s*", "", title)
                 title = re.sub(r"^Chapter\s*", "", title)
-                if title == title_to_match:
+                single_page_anchor = self.sections[section_index]['singlePageAnchor']
+                if title == title_to_match or single_page_anchor == None:
+                    if single_page_anchor == None:
+                        single_page_anchor = "__index__"
                     base_url = self.doc_metadata["extra"]["reference_url"]
-                    if section_index >= len(self.sections):
-                        print(f"WARNING: section_index {section_index} is larger than the size of the index {len(self.sections)}")
-                        single_page_anchor = "__singlePageAnchor__"
-                    else:
-                        single_page_anchor = self.sections[section_index]['singlePageAnchor']
-                        # print(f"[[ {base_url}#{single_page_anchor} ]]")
-                        section_index += 1
+                    section_index += 1
 
                     if f:
                         f.flush()
@@ -103,10 +104,10 @@ class MimirParser:
                     metadata_file = os.path.join(self.metadata_dir, f"{single_page_anchor}.json")
                     with open(metadata_file, "w") as meta:
                         metadata = dict()
-                        if single_page_anchor != "__singlePageAnchor__":
-                            metadata["url"] = f"{base_url}#{single_page_anchor}"
-                        else:
+                        if single_page_anchor == "__index__":
                             metadata["url"] = f"{base_url}"
+                        else:
+                            metadata["url"] = f"{base_url}#{single_page_anchor}"
                         metadata["path"] = self.doc_metadata["__default__"]["path"]
 
                         # Remove the leading section/chapter number from titles
@@ -136,6 +137,8 @@ def main():
     try:
         arg_parser = argparse.ArgumentParser()
         arg_parser.add_argument("-o", "--out-dir", default="aap-product-docs-plaintext")
+        arg_parser.add_argument("-m", "--max-level", default=3)
+
         args = arg_parser.parse_args()
 
         if "TARGET_DIRS" not in os.environ:
@@ -151,7 +154,7 @@ def main():
         doc_finder.run()
 
         for base_dir in doc_finder.base_dirs:
-            MimirParser(base_dir, os.path.join(args.out_dir, base_dir)).run()
+            MimirParser(base_dir, os.path.join(args.out_dir, base_dir), int(args.max_level)).run()
     finally:
         print(f"Execution time: {(time.time() - start):.3f} secs")
 
