@@ -1,8 +1,0 @@
-# Reviewing the authentication settings
-
-After you have defined the authentication details, configured the authentication maps, and specified the mapping order precedence, you can review and verify, or modify the settings before creating the authenticator.
-
-1. Review and verify the authentication settings.
-2. Click btn:[Finish] to create the authenticator.
-
-A notification is displayed if there are any issues with the authenticator or the map. If you encounter issues, click btn:[Back] or select a wizard section from the wizard menu to go back and add missing data or correct inaccurate data.

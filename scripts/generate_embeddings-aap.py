@@ -77,7 +77,7 @@ def aap_file_metadata_func(file_path: str) -> Dict:
     full_path = os.path.abspath(file_path)
     i = full_path.rindex("/")
     metadata_path = Path(full_path[:i]).joinpath(".metadata") \
-        .joinpath(full_path[(i+1):].replace(".txt", ".json"))
+        .joinpath(full_path[(i+1):].replace(".md", ".json"))
     with open(metadata_path, encoding="utf8") as f:
         metadata = json.load(f)
         docs_url = lambda x: metadata["url"]
@@ -185,7 +185,7 @@ if __name__ == "__main__":
     print(f"CPU Count: {cpu_count}")
 
     # Load documents
-    input_files = list(Path(args.folder).rglob("*.txt"))
+    input_files = list(Path(args.folder).rglob("*.md"))
     documents = SimpleDirectoryReader(
         input_files=input_files,
         file_metadata=aap_file_metadata_func,

@@ -1,3 +1,0 @@
-# Open source license
-
-Unresolved directive in assembly-open-source-license.adoc - include::../aap-common/apache-2.0-license.adoc[leveloffset=+1]

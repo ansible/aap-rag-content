@@ -1,4 +1,0 @@
-# Using podman to ensure an image is signed by a specific signature
-
-1. From the navigation panel, select menu:Automation Content[Signature Keys].
-2. Click the btn:[Download key] icon next to the signature that you are using. A new window should open to indicate you have downloaded the key.

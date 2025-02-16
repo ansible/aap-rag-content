@@ -1,9 +1,0 @@
-# Editing a project
-
-As part of the initial setup you can leave the default Demo Project as it is.
-You can edit it later.
-
-1. Open the project to edit it by using one of these methods:
-* Go to the project Details page and click btn:[Edit].
-* From the navigation panel, select menu:Automation Execution[Projects]. Click btn:[Edit] next to the project name and edit the appropriate details.
-2. Save your changes

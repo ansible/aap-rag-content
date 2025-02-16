@@ -1,6 +1,0 @@
-# Restarting automation controller services
-
-1. When encryption is completed on all nodes, perform a restart of services across the cluster using:
-
-# automation-controller-service restart
-2. Navigate to the UI, and verify you are able to run jobs across all nodes.

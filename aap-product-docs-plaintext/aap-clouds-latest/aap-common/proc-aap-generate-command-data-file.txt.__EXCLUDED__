@@ -1,9 +1,0 @@
-# Generating the data file
-
-1. Run the command generator.
-
-$ docker run --rm -v <local_directory_data_file>:/data $IMAGE command_generator_vars <playbook_name> --output-data-file /data/<data-file>.yml
-
-The outputs of this command are the command to run and the data file template.
-The data file is also saved in your <local_data_file_directory>.
-This is the template which you populate with your data.

@@ -1,7 +1,0 @@
-# Additional inventory file variables
-
-You can further configure your Red Hat Ansible Automation Platform installation by including additional variables in the inventory file.
-These configurations add optional features for managing your Red Hat Ansible Automation Platform.
-Add these variables by editing the inventory file using a text editor.
-
-A table of predefined values for inventory file variables can be found in Inventory file variables in the Red Hat Ansible Automation Platform Installation Guide.

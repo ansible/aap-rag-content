@@ -1,9 +1,0 @@
-# Install ansible-builder
-
-To build images, you must have Podman or Docker installed, along with the ansible-builder Python package.
-
-The --container-runtime option must correspond to the Podman or Docker executable you intend to use.
-
-When building an execution environment image, it must support the architecture that Ansible Automation Platform is deployed with.
-
-For more information, see Quickstart for Ansible Builder, or Creating and consuming execution environments.

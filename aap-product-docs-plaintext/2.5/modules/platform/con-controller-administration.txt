@@ -1,9 +1,0 @@
-# Administration
-
-The Administration menu provides access to the administrative options of automation controller.
-From here, you can create, view, and edit:
-
-* Activity Stream
-* Workflow Approvals
-* Notifiers
-* Management Jobs

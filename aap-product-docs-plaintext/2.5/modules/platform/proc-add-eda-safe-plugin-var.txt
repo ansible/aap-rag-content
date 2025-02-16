@@ -1,3 +1,0 @@
-# Adding a safe plugin variable to Event-Driven Ansible controller
-
-When using redhat.insights_eda or similar plugins to run rulebook activations in Event-Driven Ansible controller, you must add a safe plugin variable to a directory in Ansible Automation Platform. This ensures connection between Event-Driven Ansible controller and the source plugin, and displays port mappings correctly.

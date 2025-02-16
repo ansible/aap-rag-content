@@ -3,7 +3,17 @@ import configparser
 import json
 import os
 import re
+import subprocess
 import time
+import traceback
+
+# List of directories that are used as sources to generate RAG data.
+# These should be found in the Mimir archive (mimir-extract-latest.tgz.enc).
+SOURCE_DIRS = [
+    "red_hat_content/documentation/ansible_on_clouds/2.x",
+    "red_hat_content/documentation/red_hat_ansible_automation_platform/2.5",
+    "red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest",
+]
 
 class DocFinder:
     def __init__(self, target_dirs):
@@ -57,8 +67,7 @@ class MimirParser:
     def process_md(self):
         in_md_header = False
         config = "[__default__]\n"
-        # Save Markdown files with .txt extension so that we can reuse the existing script
-        out_file = os.path.join(self.out_dir, "__index__.txt")
+        out_file = os.path.join(self.out_dir, "__index__.md")
         f = open(out_file, "w")
         section_index = 0
 
@@ -116,8 +125,7 @@ class MimirParser:
 
                         json.dump(metadata, meta, indent=2)
 
-                    # Save Markdown files with .txt extension so that we can reuse the existing script
-                    out_file = os.path.join(self.out_dir, single_page_anchor + ".txt")
+                    out_file = os.path.join(self.out_dir, single_page_anchor + ".md")
                     f = open(out_file, "w")
 
             # print(line)
@@ -141,16 +149,30 @@ def main():
 
         args = arg_parser.parse_args()
 
-        if "TARGET_DIRS" not in os.environ:
-            TARGET_DIRS="red_hat_content/documentation/ansible_on_clouds/2.x " + \
-                        "red_hat_content/documentation/red_hat_ansible_automation_platform/2.5 " + \
-                        "red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest"
-        else:
-            TARGET_DIRS = os.getenv("TARGET_DIRS")
+        out_file = "mimir/mimir-extract-latest.tgz"
+        in_file = out_file + ".enc"
+        if os.path.exists(in_file):
+            try:
+                secret = os.getenv("MIMIR_ENC_SECRET")
+                if not secret:
+                    print("Envvar MIMIR_ENC_SECRET is not defined.")
+                    exit(1)
+                output = subprocess.run(f"openssl enc -aes-256-cbc -d -pbkdf2 -pass pass:{secret} -in {in_file} -out {out_file}".split(" "),
+                                        capture_output=True, text=True, check=True)
+                print(output)
+                dirs = " ".join(SOURCE_DIRS)
+                output = subprocess.run(f"tar xvzf {out_file} {dirs}".split(" "), capture_output=True, text=True, check=True)
+                print(output)
+            except subprocess.CalledProcessError:
+                traceback.print_stack()
+                exit(2)
+            finally:
+                if os.path.exists(in_file):
+                    os.unlink(in_file)
+                if os.path.exists(out_file):
+                    os.unlink(out_file)
 
-        target_dirs = TARGET_DIRS.split()
-
-        doc_finder = DocFinder(target_dirs)
+        doc_finder = DocFinder(SOURCE_DIRS)
         doc_finder.run()
 
         for base_dir in doc_finder.base_dirs:

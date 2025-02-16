@@ -1,8 +1,0 @@
-# Setting notifications
-
-Use the following procedure to review or set notifications associated with a management job:
-
-* For a particular cleanup job, select the Notifications tab.
-
-If none exist, see Creating a notification template in Using automation execution.
-

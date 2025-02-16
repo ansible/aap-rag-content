@@ -1,8 +1,0 @@
-# <release-date> release
-
-This release includes a number of enhancements, additions, and fixes that have been implemented in the Red Hat Ansible Automation Platform.
-
-Unresolved directive in assembly-rn-template.adoc - include::topics/aap-rn-template.adoc[leveloffset=+1]
-Unresolved directive in assembly-rn-template.adoc - include::topics/hub-rn-template.adoc[leveloffset=+1]
-Unresolved directive in assembly-rn-template.adoc - include::topics/controller-rn-template.adoc[leveloffset=+1]
-Unresolved directive in assembly-rn-template.adoc - include::topics/operator-rn-template.adoc[leveloffset=+1]

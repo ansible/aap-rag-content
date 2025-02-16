@@ -1,6 +1,0 @@
-# Troubleshooting: Keep your subscription in compliance
-
-Your subscription has two possible statuses:
-
-* Compliant: Indicates that your subscription is appropriate for the number of hosts that you have automated within your subscription count.
-* Out of compliance: Indicates that you have exceeded the number of hosts in your subscription.

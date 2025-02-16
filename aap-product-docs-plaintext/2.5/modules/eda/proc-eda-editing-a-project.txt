@@ -1,4 +1,0 @@
-# Editing a project
-
-1. From the Projects list view, select the btn:[More Actions] icon &#8942; next to the desired project. The Edit page is displayed.
-2. Enter the required changes and select btn:[Save project].

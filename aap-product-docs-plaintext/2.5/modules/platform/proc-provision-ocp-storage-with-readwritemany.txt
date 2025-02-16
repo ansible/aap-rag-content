@@ -1,9 +1,0 @@
-# Provisioning OCP storage with ReadWriteMany access mode
-
-To ensure successful installation of Ansible Automation Platform Operator, you must provision your storage type for automation hub initially to ReadWriteMany access mode.
-
-1. Go to menu:Storage[PersistentVolume].
-2. Click btn:[Create PersistentVolume].
-3. In the first step, update the accessModes from the default ReadWriteOnce to ReadWriteMany.
-1. See Provisioning to update the access mode. for a detailed overview.
-4. Complete the additional steps in this section to create the persistent volume claim (PVC).

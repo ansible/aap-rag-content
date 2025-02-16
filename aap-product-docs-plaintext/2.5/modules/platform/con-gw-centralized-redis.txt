@@ -1,3 +1,0 @@
-# Centralized Redis
-
-Ansible Automation Platform offers a centralized Redis instance in both standalone and clustered topologies. This enables resiliency by providing consistent performance and reliability.

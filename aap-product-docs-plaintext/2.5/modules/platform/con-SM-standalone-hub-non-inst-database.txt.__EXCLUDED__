@@ -1,3 +1,0 @@
-# Standalone automation hub with a database on the same node, or a non-installer managed database
-
-This scenario includes installation of automation hub, including the web frontend, REST API backend, and database on a single machine. It installs PostgreSQL, and configures the automation hub to use that as its database.

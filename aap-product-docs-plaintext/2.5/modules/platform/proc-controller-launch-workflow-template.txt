@@ -1,9 +1,0 @@
-# Launching a workflow job template
-
-* Launch a workflow job template by using one of these methods:
-* From the navigation panel, select menu:Automation Execution[Templates] and click the  icon next to the job template.
-* Click btn:[Launch template] in the Details tab of the workflow job template that you want to launch.
-
-Variables added for a workflow job template are automatically added in automation controller when launching, along with any extra variables set in the workflow job template and survey.
-
-Events related to approvals on workflows are displayed in the activity stream () with detailed information about the approval requests, if any.

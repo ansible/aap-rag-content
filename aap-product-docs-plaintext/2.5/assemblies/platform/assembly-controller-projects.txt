@@ -1,5 +1,0 @@
-A Project is a logical collection of Ansible playbooks, represented in automation controller.
-You can manage playbooks and playbook directories different ways:
-
-* By placing them manually under the Project Base Path on your automation controller server.
-* By placing your playbooks into a source code management (SCM) system supported by the automation controller.

@@ -1,7 +1,0 @@
-# Benefits of automation mesh
-
-The automation mesh component of the Red Hat Ansible Automation Platform simplifies the process of distributing automation across multi-site deployments. For enterprises with multiple isolated IT environments, automation mesh provides a consistent and reliable way to deploy and scale up automation across your execution nodes using a peer-to-peer mesh communication network.
-
-* For information about automation mesh and the various ways to design your automation mesh for your environment:
-* For a VM-based installation, see the Automation mesh for VM environments.
-* For an operator-based installation, see the Automation mesh for managed cloud or operator environments

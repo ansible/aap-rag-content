@@ -1,5 +1,0 @@
-# Migrating Ansible Engine images using Ansible Builder
-
-To migrate previous Ansible Engine images for use with Ansible Automation Platform 2.5, use the ansible-builder tool to automate the process of rebuilding images (including its custom plugins and dependencies) for use with automation execution environments.
-
-* See Creating and Consuming Execution Environments for more information about using Ansible Builder to build execution environments.

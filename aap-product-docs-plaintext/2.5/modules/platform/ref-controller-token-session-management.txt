@@ -1,8 +1,0 @@
-# Token and session management
-
-Ansible Automation Platform supports the following commands for OAuth2 token management:
-
-* create_oauth2_token
-* revoke_oauth2_tokens
-* cleartokens
-* clearsessions

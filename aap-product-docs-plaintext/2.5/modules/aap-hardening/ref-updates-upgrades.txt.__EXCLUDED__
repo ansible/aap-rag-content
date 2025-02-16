@@ -1,3 +1,0 @@
-# Updates and upgrades
-
-All upgrades should be no more than two major versions behind what you are currently upgrading to. For example, to upgrade to automation controller 4.3, you must first be on version 4.1.x because there is no direct upgrade path from version 3.8.x or earlier. Refer to Upgrading to Ansible Automation Platform for additional information. To run automation controller 4.3, you must also have Ansible 2.12 or later.
