@@ -1,7 +1,0 @@
-# Automation controller logs
-
-This logger also includes the common fields in Log message schema.
-
-In addition, this contains a msg field with the log message.
-Errors contain a separate traceback field.
-From the navigation panel, select menu:Settings[Logging]. On the Logging Settings page click btn:[Edit] and use the ENABLE EXTERNAL LOGGING option to enable or disable the logging components.

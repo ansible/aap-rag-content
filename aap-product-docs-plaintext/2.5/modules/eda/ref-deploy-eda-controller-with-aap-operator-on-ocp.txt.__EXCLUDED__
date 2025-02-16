@@ -1,5 +1,0 @@
-# Deploying Event-Driven Ansible controller with Ansible Automation Platform Operator on OpenShift Container Platform
-
-Event-Driven Ansible is not limited to Ansible Automation Platform on VMs. You can also access this feature on Ansible Automation Platform Operator on OpenShift Container Platform. To deploy Event-Driven Ansible with Ansible Automation Platform Operator, follow the instructions in Deploying Event-Driven Ansible controller with Ansible Automation Platform Operator on OpenShift Container Platform.
-
-After successful deployment, you can connect to event sources and resolve issues more efficiently.

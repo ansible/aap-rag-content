@@ -1,7 +1,0 @@
-# Support
-
-Red Hat Ansible Automation Platform Service on AWS includes Red&#160;Hat Premium Support, accessible through the Red Hat Customer Portal.
-
-For support response times, refer to the Production Support Terms of Service.
-
-AWS support is subject to the customer’s existing support contract with AWS.

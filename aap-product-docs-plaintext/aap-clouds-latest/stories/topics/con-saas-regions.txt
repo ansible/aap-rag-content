@@ -1,4 +1,0 @@
-# Regions and availability zones
-
-Each supported region is paired with a companion AWS region where backup data is stored in the event of a primary region catastrophe that requires restoration in another AWS region.
-Refer to Backup and diaster recovery for the list of supported and back up regions.

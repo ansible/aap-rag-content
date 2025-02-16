@@ -1,9 +1,0 @@
-# Setting up an external (customer supported) database
-
-
-[IMPORTANT]
-----
-When using an external database with Ansible Automation Platform, you must create and maintain that database. Ensure that you clear your external database when uninstalling Ansible Automation Platform.
-----
-
-Use the following procedure to configure an external PostgreSQL compliant database for use with an Ansible Automation Platform component, for example automation controller, Event-Driven Ansible, automation hub, and platform gateway.

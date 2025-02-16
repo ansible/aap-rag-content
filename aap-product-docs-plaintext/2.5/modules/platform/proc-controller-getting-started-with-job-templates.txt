@@ -1,6 +1,0 @@
-# Getting started with job templates
-
-As part of the initial setup, a Demo Job Template is created for you.
-
-1. To review existing templates, select menu:Automation Execution[Templates] from the navigation panel.
-2. Click btn:[Demo Job Template] to view its details.

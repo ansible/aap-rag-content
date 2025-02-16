@@ -1,9 +1,0 @@
-# Providing team access to a resource
-
-1. From the navigation panel, select a resource to which you want to provide team access. For example, menu:Automation Execution[Templates].
-2. Select the Team Access tab.
-3. Click btn:[Add roles].
-4. Click the checkbox beside the team to assign that team to your chosen type of resource and click btn:[Next].
-5. Select the roles you want applied to the team for the chosen resource and click btn:[Next].
-6. Review the settings and click btn:[Finish]. The Add roles dialog displays indicating whether the role assignments were successfully applied.
-7. You can remove resource access for a team by selecting the Remove role icon next to the team. This launches a confirmation dialog, asking you to confirm the removal.

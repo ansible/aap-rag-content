@@ -1,8 +1,0 @@
-# Setting up a project
-
-Automation controller simplifies the startup process by providing you with a Demo Project that you can work with initially.
-
-1. To review existing projects, select menu:Automation Execution[Projects] from the navigation panel.
-2. Click btn:[Demo Project] to view its details.
-
-![Demo Project]

@@ -1,3 +1,0 @@
-# Migration
-
-Red Hat does not provide a solution to migrate existing deployments to Ansible Automation Platform on Microsoft Azure.

@@ -1,7 +1,0 @@
-# Link a savings plan to a job template
-
-You can associate a job template to a savings plan to allow automation analytics to provide a more accurate time and cost savings estimate for completing this savings plan.
-
-1. From the navigation panel, select menu:Automation Analytics[Savings Planner].
-2. Click the btn:[More Actions] icon &#8942; and select Link Template.
-3. Click btn:[Save].

@@ -1,3 +1,0 @@
-# Automation execution jobs
-
-A job is an instance of Ansible Automation Platform launching an Ansible Playbook against an inventory of hosts.

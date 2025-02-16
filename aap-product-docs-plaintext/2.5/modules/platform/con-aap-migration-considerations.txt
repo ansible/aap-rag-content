@@ -1,4 +1,0 @@
-# Migration considerations
-
-If you are upgrading from any version of Ansible Automation Platform older than 2.4, you must upgrade through Ansible Automation Platform first.
-If you are on OpenShift Container Platform 3 and you want to upgrade to OpenShift Container Platform 4, you must provision a fresh OpenShift Container Platform version 4 cluster and then migrate the Ansible Automation Platform to the new cluster.

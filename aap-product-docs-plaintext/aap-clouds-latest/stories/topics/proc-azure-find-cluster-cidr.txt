@@ -1,9 +1,0 @@
-# Finding the CIDR Block of the managed resource group
-
-1. Navigate to the Resource Groups page in the Azure portal.
-2. Click the managed resource group for Red Hat Ansible Automation Platform on Microsoft Azure. The resource group name is prefixed with “-mrg”.
-3. Select the VNet within the resource group to view its settings in the Overview page.
-
-The CIDR block of the cluster is displayed in the Address Space.
-
-For further information, refer to View virtual networks and settings in the Microsoft Azure Virtual network guide.

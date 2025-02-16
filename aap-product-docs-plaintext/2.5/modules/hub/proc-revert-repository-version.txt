@@ -1,9 +1,0 @@
-# Revert to a different automation hub repository version
-
-When automation content collections are added or removed from a repository, a new version is created. If a change to your repository causes a problem, you can revert to a previous version. Reverting is a safe operation and does not delete collections from the system, but rather, changes the content associated with the repository. The number of versions saved is defined in the Retained number of versions setting when a repository is created.
-
-1. Log in to Ansible Automation Platform.
-2. From the navigation panel, select menu:Automation Content[Repositories].
-3. Click into your repository in the list and then select the Versions tab.
-4. Locate the version you want to revert to and click the btn:[More Actions] icon &#8942;, and select Revert to this version.
-5. Check the box confirming your selection, and then click btn:[Revert to repository version].

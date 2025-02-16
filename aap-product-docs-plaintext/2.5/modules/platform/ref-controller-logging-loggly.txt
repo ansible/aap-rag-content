@@ -1,6 +1,0 @@
-# Loggly
-
-For more information on sending logs through Loggly&#8217;s HTTP endpoint, see the Loggly documentation.
-
-Loggly uses the URL convention shown in the Logging Aggregator field in the following example:
-

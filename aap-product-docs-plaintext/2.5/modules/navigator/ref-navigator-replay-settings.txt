@@ -1,4 +1,0 @@
-# Automation content navigator replay subcommand settings
-
-The following table describes each parameter and setting options for the automation content navigator replay subcommand.
-

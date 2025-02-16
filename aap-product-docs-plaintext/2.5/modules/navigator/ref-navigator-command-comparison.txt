@@ -1,4 +1,0 @@
-# Relationship between Ansible and automation content navigator commands
-
-The automation content navigator commands run familiar Ansible CLI commands in -m stdout mode. You can use all the subcommands and options available in the related Ansible CLI command. Use ansible-navigator --help for details.
-

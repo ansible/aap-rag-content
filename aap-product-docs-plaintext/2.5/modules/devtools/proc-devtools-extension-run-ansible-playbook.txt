@@ -1,9 +1,0 @@
-# Running your playbook with ansible-playbook
-
-* To run a playbook, right-click the playbook name in the Explorer pane, then select menu:Run Ansible Playbook via[Run playbook via ansible-playbook].
-
-
-
-The output is displayed in the Terminal tab of the VS Code terminal.
-The ok=2 and failed=0 messages indicate that the playbook ran successfully.
-

@@ -1,9 +1,0 @@
-# Cluster management
-
-For more information about the awx-manage provision_instance and awx-manage deprovision_instance commands, see Clustering.
-
-
-[NOTE]
-----
-Do not run other awx-manage commands unless instructed by Ansible Support.
-----

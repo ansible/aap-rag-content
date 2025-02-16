@@ -1,5 +1,0 @@
-# Enabling and disabling rulebook activations
-
-1. Select the switch on the row level to enable or disable your chosen rulebook.
-2. In the window, select btn:[Yes, I confirm that I want to enable/disable these X rulebook activations].
-3. Select btn:[Enable/Disable rulebook activation].

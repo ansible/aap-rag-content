@@ -1,3 +1,0 @@
-# Service level agreement
-
-Any service level agreements (SLAs) for the service itself are defined in Appendix 4 (Online Subscription Services) of the Red Hat Enterprise Agreement Product Appendices.

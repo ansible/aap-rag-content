@@ -1,7 +1,0 @@
-# Controlling data collection from automation controller
-
-You can control how automation controller collects data from the menu:Settings[System] menu.
-
-1. Log in to your automation controller.
-2. From the navigation panel, select menu:Settings[System].
-3. Select Gather data for Automation Analytics to enable automation controller to gather data on automation and send it to Automation Analytics.

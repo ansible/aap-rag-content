@@ -1,4 +1,0 @@
-# Automation content navigator general settings
-
-The following table describes each general parameter and setting options for automation content navigator.
-

@@ -1,8 +1,0 @@
-# Logging Aggregator Services
-
-The logging aggregator service works with the following monitoring and data analysis systems:
-
-* Splunk
-* Loggly
-* Sumologic
-* Elastic Stack (formerly ELK stack)
