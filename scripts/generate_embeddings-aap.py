@@ -50,7 +50,7 @@ def get_file_title(file_path: str) -> str:
     return title
 
 
-def file_metadata_func(file_path: str, docs_url_func: Callable[[str], str]) -> Dict:
+def file_metadata_func(file_path: str, docs_url_func: Callable[[str], str], docs_title_func: Callable[[str], str])-> Dict:
     """Populate the docs_url and title metadata elements with docs URL and the page's title.
 
     Args:
@@ -58,7 +58,7 @@ def file_metadata_func(file_path: str, docs_url_func: Callable[[str], str]) -> D
         docs_url_func: Callable[[str], str]: lambda for the docs_url
     """
     docs_url = docs_url_func(file_path)
-    title = get_file_title(file_path)
+    title = docs_title_func(file_path)
     msg = f"file_path: {file_path}, title: {title}, docs_url: {docs_url}"
     if not ping_url(docs_url):
         global UNREACHABLE_DOCS
@@ -81,7 +81,8 @@ def aap_file_metadata_func(file_path: str) -> Dict:
     with open(metadata_path, encoding="utf8") as f:
         metadata = json.load(f)
         docs_url = lambda x: metadata["url"]
-    return file_metadata_func(file_path, docs_url)
+        docs_title = lambda x: metadata["title"]
+    return file_metadata_func(file_path, docs_url, docs_title)
 
 def additional_docs_metadata_func(file_path: str) -> Dict:
     """Populate metadata for additional docs.
@@ -98,7 +99,7 @@ def additional_docs_metadata_func(file_path: str) -> Dict:
         with open(metadata_path, encoding="utf8") as f:
             metadata = json.load(f)
             docs_url = lambda x: metadata["url"]
-        return file_metadata_func(file_path, docs_url)
+        return file_metadata_func(file_path, docs_url, get_file_title)
 
     AAP_RAG_CONTENT_BASE_URL = "https://github.com/ansible/aap-rag-content/blob/main/"
     docs_url = AAP_RAG_CONTENT_BASE_URL + str(file_path)
