@@ -1,0 +1,138 @@
+# AAP 2.5 Authentication (YouTube Video)
+
+**Author: Alex Dworjan**
+
+**Link: [AAP 2.5 Authentication](https://youtu.be/tqo3A9G7vt0)**
+
+**Date: January 2, 2025**
+
+
+**Introduction**
+ My name is Alex Dworjan, and I'm an Ansible specialist. Today, I’ll be walking through the Ansible Automation Platform 2.5 and the changes that have occurred regarding authentication.
+
+### **Changes in Authentication**
+
+So, what has actually changed from an authentication perspective?
+
+If you’re familiar with Ansible Tower through Automation Platform 2.4, you may recall that each individual component had its own separate UI, login, and setup.
+
+* The **controller** authentication was configured via the UI or through configuration as code.
+* **Automation Hub** authentication was managed through the installer itself.
+* **Event-Driven Ansible** had only local authentication available.
+
+This setup also meant that each component had its own separate organizations, teams, and role-based access control (RBAC).
+
+Now, in Automation Platform 2.5, authentication is centralized within the **platform UI**. However, role-based access control at the organization, team, or user level remains unchanged between versions 2.4 and 2.5.
+
+### **Setup Perspective**
+
+Authentication setup is now done via the UI or through configuration as code. Each authentication method—whether it’s **IDM, Active Directory, or SAML**—has unique parameters because each method has different requirements.
+
+For example:
+
+* LDAP authentication may require **bind users and mapped attributes**.
+* SAML authentication requires **entity IDs and certificates**.
+* Despite these differences, **authentication mapping is now consistent across all methods**.
+
+In previous versions, authentication mapping was a large **JSON list** that wasn’t intuitive. Now, it has shifted to a **rule-based** method. This allows:
+
+* Mapping **groups to teams**.
+* Mapping **LDAP attributes to organizations and roles**.
+* Eliminating concerns over **organization or team aliases** in SAML authentication.
+
+If you’re using SAML, you’ll need to ensure that all attributes are correctly mapped in the platform for **transparent login** to function properly.
+
+### **Demonstration**
+
+Now, let’s jump into a demonstration of these changes.
+
+Upon logging into the **Automation Platform UI**, you’ll see that the platform is broken into sections:
+
+* **Automation Controller**
+* **Event-Driven Ansible**
+* **Automation Hub**
+
+**Access management** (including organizations, teams, and users) is now centrally located in the **Access Management** section.
+
+Just like before, you can:
+
+* Assign **roles** to users.
+* Assign **permissions** at the **team level**.
+* Set up **authentication methods** for mapping users to teams and organizations.
+
+### **Authentication Methods**
+
+By default, several authentication methods are available, including:
+
+* **Local Database Authentication** (for locally created users).
+* **Azure AD, GitHub, Google OAuth, LDAP, and SAML**.
+
+#### **LDAP Authentication Setup**
+
+When setting up **LDAP**, you’ll configure:
+
+1. **LDAP Server URI**
+2. **Bind DN and password**
+3. **Group type (e.g., nested group names)**
+4. **User search and attribute mapping**
+
+One **new requirement** in Automation Platform 2.5 is the **LDAP group type parameter**, which was not required in previous versions.
+
+##### **Mapping Users & Groups in LDAP**
+
+* The **authentication mapping** is consistent across all methods.
+* You can create mappings such as:
+  * **Allow access** to the platform.
+  * **Assign users to an organization or team**.
+  * **Assign specific roles**.
+  * **Superuser access** (for admin-level users).
+
+For LDAP authentication, group-based mapping is commonly used. When setting up group mapping:
+
+* You define **which LDAP groups map to which teams and organizations**.
+* You can use **"AND" or "OR" operations** for multiple groups.
+* The platform allows **ordering of authentication mappings** to control how they are applied.
+
+Once LDAP authentication is set up, **users can log in with their LDAP credentials**, either via the UI or API.
+
+---
+
+#### **SAML Authentication Setup**
+
+Setting up SAML authentication differs from LDAP:
+
+* You need to define an **Entity ID**, **public certificate**, and **private key**.
+* You will receive SAML metadata from your **identity provider (IdP)**, such as Okta or Azure AD.
+* The certificate must include **"BEGIN CERTIFICATE" and "END CERTIFICATE"** tags.
+
+##### **Attribute Mapping in SAML**
+
+SAML mappings rely on **attributes** rather than LDAP groups. Common attributes include:
+
+* **Email, username, last name, first name**
+* **Custom attributes like department, organization, or user type**
+
+To ensure all attributes are available for mapping, you must configure:
+
+* **`get_all_extra_data: true`** (retrieves all attributes).
+* **`saml_idp_to_extra_data_attribute_mapping`** (manually lists attributes to be included).
+
+##### **Enabling Transparent SAML Login**
+
+A key change in **Automation Platform 2.5** is how **transparent login** (SP-initiated login) is handled.
+
+* Previously, you could set **any key** for transparent login.
+* Now, the **default relay state** must be set to **`IDP`** in your identity provider settings.
+
+To verify this, you can check the **API Gateway (`/api/v1/ui/auth/`)** for the correct **login URL** and **relay state**.
+
+### **Final Thoughts**
+
+The two biggest changes in SAML authentication are:
+
+1. **Default relay state must be set to `IDP`** for transparent login to work.
+2. **Ensuring additional attributes are mapped correctly** using `get_all_extra_data: true` or `saml_idp_to_extra_data_attribute_mapping`.
+
+For further details, refer to the official documentation, as it covers other authentication methods beyond LDAP and SAML.
+
+I hope this walkthrough has provided clarity on **authentication and authorization changes** in Ansible Automation Platform 2.5!
