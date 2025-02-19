@@ -47,7 +47,7 @@ dependencies = [
     "huggingface_hub==0.27.0",
     "llama_index==0.12.8",
     "llama-index-vector-stores-faiss==0.3.0",
-    "llama-index-embeddings-huggingface==0.4.0",
+    "llama-index-embeddings-huggingface==0.5.1",
     "llama-index-readers-file==0.4.1",
     "requests>=2.32.3"
 ]
