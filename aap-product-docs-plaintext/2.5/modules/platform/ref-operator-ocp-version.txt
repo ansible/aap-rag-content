@@ -1,5 +1,0 @@
-# OpenShift Container Platform version compatibility
-
-The Ansible Automation Platform Operator to install Ansible Automation Platform 2.5 is available on OpenShift Container Platform 4.12 through to 4.17 and later versions.
-
-* See the Red Hat Ansible Automation Platform Life Cycle for the most current compatibility details.

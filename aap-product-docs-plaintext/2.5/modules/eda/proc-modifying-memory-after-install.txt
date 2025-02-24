@@ -1,9 +1,0 @@
-# Modifying the default memory limit for each rulebook activation after installation
-
-By default, each rulebook activation container has a 200MB memory limit.
-You can modify this default value after installation by using the following procedure:
-
-1. Navigate to the environment file at /etc/ansible-automation-platform/eda/settings.yaml.
-2. Modify the default container memory limit.
-For example, PODMAN_MEM_LIMIT = '300m'.
-3. Restart the Event-Driven Ansible controller services using automation-eda-controller-service restart.

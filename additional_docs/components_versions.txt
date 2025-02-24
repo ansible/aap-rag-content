@@ -1,6 +1,0 @@
-# Ansible Components Versions
-
-Here are the most recent updates for Ansible components:
-
-- Ansible Core (ansible-core) Version v2.18.1 Released on Monday, December 02, 2024
-- Ansible Rulebook (ansible-rulebook) Version v1.1.2 Released on Monday, December 09, 2024

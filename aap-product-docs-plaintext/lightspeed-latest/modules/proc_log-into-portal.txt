@@ -1,7 +1,0 @@
-# Logging in to the Ansible Lightspeed portal
-
-1. Go to the Ansible Lightspeed portal login page.
-2. Click menu:Log in[Log in with Red Hat].
-3. Enter your Red Hat account username and password.
-
-On successful authentication, the login screen is displayed along with your username and your assigned user role.

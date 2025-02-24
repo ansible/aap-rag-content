@@ -1,3 +1,0 @@
-# Adding the Ansible Development Tools sidecar container
-
-After the plug-ins are loaded, add the Ansible Development Container (ansible-devtools-server) in the Red Hat Developer Hub pod as a sidecar container.

@@ -1,6 +1,0 @@
-# Saving your project in SCM
-
-Save your playbook project as a repository in your source control management system, for example GitHub.
-
-1. Initialize your project directory as a git repository.
-2. Push your project up to a source control system such as GitHub.

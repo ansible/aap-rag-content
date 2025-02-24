@@ -1,3 +1,0 @@
-# Standalone automation controller with an external managed database
-
-This scenario includes installation of the automation controller server on a single machine and configures communication with a remote PostgreSQL instance as its database. This remote PostgreSQL can be a server you manage, or can be provided by a cloud service such as Amazon RDS.

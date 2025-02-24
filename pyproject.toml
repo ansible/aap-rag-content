@@ -22,8 +22,8 @@ distribution = false
 [tool.pdm.dev-dependencies]
 dev = [
     "black==24.10.0",
-    "mypy==1.14.0",
-    "ruff==0.8.4",
+    "mypy==1.15.0",
+    "ruff==0.9.7",
     "types-requests==2.31.0"
 ]
 
@@ -33,7 +33,7 @@ cpu = [
     "faiss-cpu==1.9.0.post1",
 ]
 gpu = [
-    "torch==2.3.1",
+    "torch==2.6.0",
     "faiss-gpu-cu12==1.9.0.post1",
 ]
 
@@ -44,11 +44,11 @@ description = "RAG content for AAP chatbot"
 authors = []
 dependencies = [
     "PyYAML==6.0.2",
-    "huggingface_hub==0.27.0",
-    "llama_index==0.12.8",
+    "huggingface_hub==0.29.1",
+    "llama_index==0.12.19",
     "llama-index-vector-stores-faiss==0.3.0",
     "llama-index-embeddings-huggingface==0.5.1",
-    "llama-index-readers-file==0.4.1",
+    "llama-index-readers-file==0.4.5",
     "requests>=2.32.3"
 ]
 requires-python = "==3.11.*"

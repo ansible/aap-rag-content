@@ -1,0 +1,5 @@
+# Ansible Rulebook (ansible-rulebook) Versions
+
+Here is the most recent update for Ansible Rulebook (ansible-rulebook):
+
+- Ansible Rulebook (ansible-rulebook) Version v1.1.2 Released on Monday, December 09, 2024

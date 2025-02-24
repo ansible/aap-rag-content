@@ -1,4 +1,0 @@
-# Job runs by organization
-
-This chart represents automation controller use across all automation controller clusters by organization, calculated by the number of jobs run by that organization.
-

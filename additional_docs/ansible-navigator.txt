@@ -1,0 +1,5 @@
+# Ansible Navigator (ansible-navigator) Versions
+
+Here is the most recent update for Ansible Navigator (ansible-navigator):
+
+- Ansible Navigator (ansible-navigator) Version v25.1.0 Released on Tuesday, January 21, 2025

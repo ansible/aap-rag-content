@@ -1,8 +1,0 @@
-# Execution environment mount options
-
-Rebuilding an execution environment is one way to add certificates, but inheriting certificates from the host provides a more convenient solution.
-For VM-based installations, automation controller automatically mounts the system truststore in the execution environment when jobs run.
-
-You can customize execution environment mount options and mount paths in the Paths to expose to isolated jobs field of the Job Settings page, where Podman-style volume mount syntax is supported.
-
-For more information, see the Podman documentation.

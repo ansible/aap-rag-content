@@ -1,4 +1,0 @@
-# Trial and evaluation
-
-* Trial licenses for Ansible Automation Platform are available at the Red Hat product trial center.
-* Support is not included in a trial license or during an evaluation of the Ansible Automation Platform.

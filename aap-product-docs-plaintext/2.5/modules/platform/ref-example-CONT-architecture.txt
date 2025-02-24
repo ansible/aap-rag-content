@@ -1,5 +1,0 @@
-# Example containerized deployment architecture
-
-The following reference architecture provides an example setup of an enterprise deployment of containerized Ansible Automation Platform.
-
-![Reference architecture for an example setup of an enterprise containerized Ansible Automation Platform deployment]

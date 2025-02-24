@@ -1,5 +1,0 @@
-# Issue - Cannot locate certain packages that come bundled with the Ansible Automation Platform installer
-
-You cannot locate certain packages that come bundled with the Ansible Automation Platform installer, or you are seeing a "Repositories disabled by configuration" message.
-
-To resolve this issue, enable the repository by using the subscription-manager command in the command line. For more information about resolving this issue, see the Troubleshooting section of Attaching your Red Hat Ansible Automation Platform subscription in Access management and authentication.

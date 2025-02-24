@@ -1,7 +1,0 @@
-1. With the login information provided after your installation completed, open a web browser and log in to the automation controller by navigating to its server URL at: https://<CONTROLLER_SERVER_NAME>/
-2. Use the credentials specified during the installation process to login:
-* The default username is admin.
-* The password for admin is the value specified.
-3. Click the btn:[More Actions] icon &#8942; next to the desired user.
-4. Click btn:[Edit].
-5. Edit the required details and click btn:[Save].

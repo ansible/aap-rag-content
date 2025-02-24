@@ -1,9 +1,0 @@
-# Running the Red Hat Ansible Automation Platform installer
-
-With the inventory file updated, run the installer using the setup.sh playbook found in the installer package.
-
-1. Run the setup.sh playbook:
-
-```
-$ ./setup.sh
-```

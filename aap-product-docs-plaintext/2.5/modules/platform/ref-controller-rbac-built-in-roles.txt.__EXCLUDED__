@@ -1,8 +1,0 @@
-# Built-in roles
-
-The following table lists the RBAC system roles with a brief description of how that role is defined with regard to privileges in automation controller:
-
-
-
-A Singleton Role is a special role that grants system-wide permissions.
-Automation controller currently provides two built-in Singleton Roles but the ability to create or customize a Singleton Role is not supported at this time.

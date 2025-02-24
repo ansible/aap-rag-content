@@ -1,7 +1,0 @@
-# Running your playbook
-
-The Ansible VS Code extension provides two options to run your playbook:
-
-* ansible-playbook runs the playbook on your local machine using Ansible Core.
-* ansible-navigator runs the playbook in an execution environment in the same manner that Ansible Automation Platform runs an automation job.
-You specify the base image for the execution environment in the Ansible extension settings.

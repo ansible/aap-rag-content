@@ -1,7 +1,0 @@
-# Monitoring
-
-You can configure monitoring and hardening tools of your choice on the execution plane.
-You are responsible for their operation, functionality, and maintenance, ensuring they do not interfere with the execution plane&#8217;s operation.
-
-Any additional workloads on the execution plane requires extra resources from the virtual machines or OpenShift clusters where the tools are deployed.
-Make sure to size resources accordingly to accommodate these additional requirements.

@@ -1,5 +1,0 @@
-# cleartokens
-
-Use this command to clear tokens which have already been revoked.
-
-For more information, see cleartokens in Django&#8217;s Oauth Toolkit documentation.

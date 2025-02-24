@@ -4,12 +4,14 @@ import argparse
 import json
 import os
 import time
+import traceback
 from pathlib import Path
 from typing import Callable
 from typing import Dict
 
 import faiss
 import requests
+import torch
 from llama_index.core import Settings
 from llama_index.core import SimpleDirectoryReader
 from llama_index.core import VectorStoreIndex
@@ -48,7 +50,7 @@ def get_file_title(file_path: str) -> str:
     return title
 
 
-def file_metadata_func(file_path: str, docs_url_func: Callable[[str], str]) -> Dict:
+def file_metadata_func(file_path: str, docs_url_func: Callable[[str], str], docs_title_func: Callable[[str], str])-> Dict:
     """Populate the docs_url and title metadata elements with docs URL and the page's title.
 
     Args:
@@ -56,7 +58,7 @@ def file_metadata_func(file_path: str, docs_url_func: Callable[[str], str]) -> D
         docs_url_func: Callable[[str], str]: lambda for the docs_url
     """
     docs_url = docs_url_func(file_path)
-    title = get_file_title(file_path)
+    title = docs_title_func(file_path)
     msg = f"file_path: {file_path}, title: {title}, docs_url: {docs_url}"
     if not ping_url(docs_url):
         global UNREACHABLE_DOCS
@@ -75,11 +77,12 @@ def aap_file_metadata_func(file_path: str) -> Dict:
     full_path = os.path.abspath(file_path)
     i = full_path.rindex("/")
     metadata_path = Path(full_path[:i]).joinpath(".metadata") \
-        .joinpath(full_path[(i+1):].replace(".txt", ".json"))
+        .joinpath(full_path[(i+1):].replace(".md", ".json"))
     with open(metadata_path, encoding="utf8") as f:
         metadata = json.load(f)
         docs_url = lambda x: metadata["url"]
-    return file_metadata_func(file_path, docs_url)
+        docs_title = lambda x: metadata["title"]
+    return file_metadata_func(file_path, docs_url, docs_title)
 
 def additional_docs_metadata_func(file_path: str) -> Dict:
     """Populate metadata for additional docs.
@@ -87,8 +90,20 @@ def additional_docs_metadata_func(file_path: str) -> Dict:
     Args:
         file_path: str: file path in str
     """
+    full_path = os.path.abspath(file_path)
+    i = full_path.rindex("/")
+    metadata_path = Path(full_path[:i]).joinpath(".metadata") \
+        .joinpath(full_path[(i+1):].replace(".txt", ".json"))
+
+    if metadata_path.exists():
+        with open(metadata_path, encoding="utf8") as f:
+            metadata = json.load(f)
+            docs_url = lambda x: metadata["url"]
+        return file_metadata_func(file_path, docs_url, get_file_title)
+
     AAP_RAG_CONTENT_BASE_URL = "https://github.com/ansible/aap-rag-content/blob/main/"
     docs_url = AAP_RAG_CONTENT_BASE_URL + str(file_path)
+
     title = get_file_title(file_path)
     msg = f"file_path: {file_path}, title: {title}, docs_url: {docs_url}"
     print(msg)
@@ -155,8 +170,13 @@ if __name__ == "__main__":
     faiss_index = faiss.IndexFlatIP(embedding_dimension)
     try:
         gpu_resource = faiss.StandardGpuResources()
-        faiss_index = faiss.index_cpu_to_gpu(gpu_resource, 0, faiss_index)
-    except AssertionError:
+#       faiss_index = faiss.index_cpu_to_gpu(gpu_resource, 0, faiss_index)
+        current_device = torch.cuda.current_device()
+        print(f"current_device: {current_device}")
+        faiss_index = faiss.index_cpu_to_gpu(gpu_resource, current_device, faiss_index)
+    except (AttributeError, AssertionError, RuntimeError) as e:
+        print("An error occurred. gpu_resource is set to None.")
+        traceback.print_exc()
         gpu_resource = None
     vector_store = FaissVectorStore(faiss_index=faiss_index)
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
@@ -166,7 +186,7 @@ if __name__ == "__main__":
     print(f"CPU Count: {cpu_count}")
 
     # Load documents
-    input_files = list(Path(args.folder).rglob("*.txt"))
+    input_files = list(Path(args.folder).rglob("*.md"))
     documents = SimpleDirectoryReader(
         input_files=input_files,
         file_metadata=aap_file_metadata_func,
