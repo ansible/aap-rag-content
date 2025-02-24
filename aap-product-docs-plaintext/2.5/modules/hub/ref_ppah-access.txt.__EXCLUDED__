@@ -1,8 +1,0 @@
-# Accessing the development hub
-
-The protocol and ports default values are:
-
-* https protocol
-* ports 80/443
-
-The automation hub UI is available by default at `https://&lt;hub node&gt;`

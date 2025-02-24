@@ -1,5 +1,0 @@
-# Automation controller STIG considerations
-
-For organizations that use the Defense Information Systems Agency (DISA) Security Technical Implementation Guides (STIGs) as a part of their overall security strategy, a STIG for the Ansible Automation Platform automation controller is now available. The STIG only covers the automation controller component of Ansible Automation Platform at this time. When applying the STIG to an automation controller, there are a number of considerations to keep in mind.
-
-The automation controller STIG overview document states that it is meant to be used in conjunction with the STIG for Red Hat Enterprise Linux 8. This version of the automation controller STIG was released prior to a STIG for Red Hat Enterprise Linux 9 being available, so Red Hat Enterprise Linux 8 should be used as the underlying host OS when applying the automation controller STIG. Certain Red Hat Enterprise Linux 8 STIG controls will conflict with Ansible Automation Platform installation and operation, which can be mitigated as described in the following sections.

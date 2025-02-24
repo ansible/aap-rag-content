@@ -1,3 +1,0 @@
-# Red Hat Developer Hub
-
-Red Hat Developer Hub (RHDH) serves as an open developer platform designed for building developer portals.

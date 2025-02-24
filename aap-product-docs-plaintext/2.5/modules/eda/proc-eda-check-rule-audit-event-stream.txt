@@ -1,9 +1,0 @@
-# Check the Rule Audit for events on your new event stream
-
-When events have been sent and received by Event-Driven Ansible controller, you can confirm that actions have been triggered by going to the Rule Audit page and viewing the event stream results.
-
-1. Log in to Ansible Automation Platform.
-2. From the navigation panel, select menu:Automation Decisions[Rule Audit].
-
-If your rulebook activation received the event data from the event stream type you selected, the Rule Audit page displays the results similar to this image.
-

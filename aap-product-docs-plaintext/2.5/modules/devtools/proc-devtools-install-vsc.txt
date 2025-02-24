@@ -1,3 +1,0 @@
-# Installing VS Code
-
-* To install VS Code, follow the instructions on the Download Visual Studio Code page in the Visual Studio Code documentation.

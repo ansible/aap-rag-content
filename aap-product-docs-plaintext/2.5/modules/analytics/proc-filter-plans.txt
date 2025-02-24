@@ -1,6 +1,0 @@
-# Filter and sort plans on the list view page
-
-Find specific types of automation savings plans by filtering or sorting your savings planner list view.
-
-1. From the navigation panel, select menu:Automation Analytics[Savings Planner].
-2. To filter your saving plans based on type, or sort your savings plans by a certain order, select a filter option on the horizontal toolbar.

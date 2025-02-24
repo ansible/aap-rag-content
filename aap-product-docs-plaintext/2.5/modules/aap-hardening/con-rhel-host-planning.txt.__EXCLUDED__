@@ -1,6 +1,0 @@
-# Red Hat Enterprise Linux host planning
-
-The security of Ansible Automation Platform relies in part on the configuration of the underlying Red Hat Enterprise Linux servers.
-For this reason, the underlying Red Hat Enterprise Linux hosts for each Ansible Automation Platform component must be installed and configured in accordance with the Security hardening for Red Hat Enterprise Linux 8 or Security hardening for Red Hat Enterprise Linux 9 (depending on which operating system will be used), as well as any security profile requirements (CIS, STIG, HIPAA, and so on) used by your organization.
-For new deployments, this document recommends Red Hat Enterprise Linux 9 for all new deployments.
-When using the container-based installation method, Red Hat Enterprise Linux 9 is required.

@@ -1,9 +1,0 @@
-# Preparing for migration
-
-Before migrating your current Ansible Automation Platform deployment to Ansible Automation Platform Operator, you must back up your existing data, and create Kubernetes secrets for your secret key and postgresql configuration.
-
-
-[NOTE]
-----
-If you are migrating both automation controller and automation hub instances, repeat the steps in Creating a secret key secret and Creating a postgresql configuration secret for both and then proceed to Migrating data to the Ansible Automation Platform Operator.
-----

@@ -1,6 +1,0 @@
-# Hosted components
-
-The objective of this offering is to provide an Ansible Automation Platform deployment as a managed service,
-relieving customers of managing the Ansible Automation Platform control plane.
-Unless specified otherwise, all Ansible Automation Platform capabilities in the operator-based deployment model are supported.
-

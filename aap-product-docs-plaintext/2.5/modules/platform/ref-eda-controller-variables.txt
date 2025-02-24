@@ -1,2 +1,0 @@
-# Event-Driven Ansible controller variables
-

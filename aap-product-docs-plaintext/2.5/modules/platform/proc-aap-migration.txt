@@ -1,3 +1,0 @@
-# Migrating data to the Ansible Automation Platform Operator
-
-After you have set your secret key, postgresql credentials, verified network connectivity, and installed the Ansible Automation Platform Operator, you must create a custom resource controller object before you can migrate your data.

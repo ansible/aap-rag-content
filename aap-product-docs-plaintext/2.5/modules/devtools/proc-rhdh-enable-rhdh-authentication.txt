@@ -1,8 +1,0 @@
-# Enabling Red Hat Developer Hub authentication
-
-Red Hat Developer Hub (RHDH) provides integrations for multiple Source Control Management (SCM) systems.
-This is required by the plug-ins to create repositories.
-
-Refer to the
-Enabling authentication in Red Hat Developer Hub
-chapter of the Administration guide for Red Hat Developer Hub.

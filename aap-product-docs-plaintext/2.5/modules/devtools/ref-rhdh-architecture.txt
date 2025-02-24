@@ -1,3 +1,0 @@
-# Architecture
-
-![Ansible plugin for Red Hat Developer Hub architecture]
