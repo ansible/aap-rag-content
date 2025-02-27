@@ -20,6 +20,7 @@ from llama_index.core.schema import TextNode
 from llama_index.core.storage.storage_context import StorageContext
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.vector_stores.faiss import FaissVectorStore
+from llama_index.vector_stores.postgres import PGVectorStore
 
 # from llama_index.core.node_parser import MarkdownNodeParser
 
@@ -145,6 +146,12 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--output", help="Vector DB output folder")
     parser.add_argument("-i", "--index", help="Product index")
     parser.add_argument("-v", "--aap-version", help="AAP version")
+    parser.add_argument(
+        "--vector-store-type",
+        default="faiss",
+        choices=["faiss", "postgres"],
+        help="vector store type to be used."
+    )
     args = parser.parse_args()
     print(f"Arguments used: {args}")
 
@@ -167,18 +174,41 @@ if __name__ == "__main__":
     Settings.llm = resolve_llm(None)
 
     embedding_dimension = len(Settings.embed_model.get_text_embedding("random text"))
-    faiss_index = faiss.IndexFlatIP(embedding_dimension)
-    try:
-        gpu_resource = faiss.StandardGpuResources()
-#       faiss_index = faiss.index_cpu_to_gpu(gpu_resource, 0, faiss_index)
-        current_device = torch.cuda.current_device()
-        print(f"current_device: {current_device}")
-        faiss_index = faiss.index_cpu_to_gpu(gpu_resource, current_device, faiss_index)
-    except (AttributeError, AssertionError, RuntimeError) as e:
-        print("An error occurred. gpu_resource is set to None.")
-        traceback.print_exc()
-        gpu_resource = None
-    vector_store = FaissVectorStore(faiss_index=faiss_index)
+    gpu_resource = None
+    if args.vector_store_type == "faiss":
+        faiss_index = faiss.IndexFlatIP(embedding_dimension)
+        try:
+            gpu_resource = faiss.StandardGpuResources()
+    #       faiss_index = faiss.index_cpu_to_gpu(gpu_resource, 0, faiss_index)
+            current_device = torch.cuda.current_device()
+            print(f"current_device: {current_device}")
+            faiss_index = faiss.index_cpu_to_gpu(gpu_resource, current_device, faiss_index)
+        except (AttributeError, AssertionError, RuntimeError) as e:
+            print("An error occurred. gpu_resource is set to None.")
+            traceback.print_exc()
+            gpu_resource = None
+        vector_store = FaissVectorStore(faiss_index=faiss_index)
+    elif args.vector_store_type == "postgres":
+        user = os.getenv("POSTGRES_USER")
+        password = os.getenv("POSTGRES_PASSWORD")
+        host = os.getenv("POSTGRES_HOST")
+        port = os.getenv("POSTGRES_PORT")
+        database = os.getenv("POSTGRES_DATABASE")
+
+        table_name = args.index.replace("-", "_")
+
+        vector_store = PGVectorStore.from_params(
+            database=database,
+            host=host,
+            password=password,
+            port=port,
+            user=user,
+            table_name=table_name,
+            embed_dim=embedding_dimension,  # openai embedding dimension
+        )
+    else:
+        raise RuntimeError(f"Unknown vector store type: {args.vector_store_type}")
+
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
     # Retrieve the number of CPUs
@@ -237,7 +267,10 @@ if __name__ == "__main__":
     _metadata["llm"] = "None"
     _metadata["embedding-model"] = args.model_name
     _metadata["index-id"] = args.index
-    _metadata["vector-db"] = "faiss.IndexFlatIP"
+    if args.vector_store_type == "faiss":
+        _metadata["vector-db"] = "faiss.IndexFlatIP"
+    elif args.vector_store_type == "postgres":
+        _metadata["vector-db"] = "PGVectorStore"
     _metadata["embedding-dimension"] = embedding_dimension
     _metadata["chunk"] = args.chunk
     _metadata["overlap"] = args.overlap

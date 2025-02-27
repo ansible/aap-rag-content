@@ -10,6 +10,19 @@ else
 $(error Unsupported FLAVOR $(FLAVOR), must be 'cpu' or 'gpu')
 endif
 
+# Define arguments for pgvector support
+POSTGRES_USER ?= postgres
+POSTGRES_PASSWORD ?= somesecret
+POSTGRES_HOST ?= localhost
+POSTGRES_PORT ?= 15432
+POSTGRES_DATABASE ?= postgres
+EMBEDDINGS_MODEL ?= sentence-transformers/all-mpnet-base-v2
+
+OUTPUT_FOLDER ?= ./output
+PG_DUMP_FILE ?= backup.tar
+
+AAP_VERSION ?= 2.5
+
 install-tools: ## Install required utilities/tools
 	@command -v pdm > /dev/null || { echo >&2 "pdm is not installed. Installing..."; pip3.11 install pdm; }
 
@@ -52,6 +65,43 @@ build-image-aap: ## Build a rag-content container image.
 
 build-image-embeddings: ## Build an embeddings container image.
 	podman build -t aap-rag-embeddings-image -f Containerfile-embeddings .
+
+start-postgres: ## Start postgresql from the pgvector container image
+	podman run -d --name pgvector --rm -e POSTGRES_PASSWORD=$(POSTGRES_PASSWORD) \
+	 -p $(POSTGRES_PORT):5432 \
+	 -v $(PWD)/postgresql/data:/var/lib/postgresql/data:Z \
+	 pgvector/pgvector:pg16
+
+start-postgres-debug: ## Start postgresql from the pgvector container image with debugging enabled
+	mkdir -pv ./postgresql/data ./pg_dump
+	podman run --name pgvector --rm -e POSTGRES_PASSWORD=$(POSTGRES_PASSWORD) \
+	 -p $(POSTGRES_PORT):5432 \
+	 -v ./postgresql/data:/var/lib/postgresql/data:Z \
+	 -v ./pg_dump:/pg_dump:Z \
+	 pgvector/pgvector:pg16 \
+	 postgres -c log_statement=all -c log_destination=stderr
+
+generate-embeddings-postgres: ## Generate embeddings for postgres vector store
+	POSTGRES_USER=$(POSTGRES_USER) \
+	POSTGRES_PASSWORD=$(POSTGRES_PASSWORD) \
+	POSTGRES_HOST=$(POSTGRES_HOST) \
+	POSTGRES_PORT=$(POSTGRES_PORT) \
+	POSTGRES_DATABASE=$(POSTGRES_DATABASE) \
+	pdm run python ./scripts/generate_embeddings-aap.py \
+	 -f aap-product-docs-plaintext \
+	 -mn $(EMBEDDINGS_MODEL) \
+	 -o $(OUTPUT_FOLDER) \
+	 -i aap-product-docs-$(subst .,_,$(AAP_VERSION)) \
+	 -v ${AAP_VERSION} \
+	 -c 200 \
+	 -l 10 \
+	 --vector-store-type postgres
+
+dump-postgres: ## Dump database using pg_dump utility
+	podman exec pgvector pg_dump -U $(POSTGRES_USER) -Ft $(POSTGRES_DATABASE) -f /pg_dump/$(PG_DUMP_FILE)
+
+restore-postgres: ## Restore database using pg_restore utility
+	podman exec pgvector pg_restore -U $(POSTGRES_USER) -d $(POSTGRES_DATABASE) /pg_dump/$(PG_DUMP_FILE)
 
 help: ## Show this help screen
 	@echo 'Usage: make <OPTIONS> ... <TARGETS>'

@@ -23,22 +23,67 @@ make install-deps
 make install-deps-test
 ```
 
-## Extract plaintext files from aap-docs repo
+## Build aap-rag-content image manually
 
-```commandline
- ./scripts/get_aap_plaintext_docs.sh 2.5
-```
+Currently, aap-rag-content images are built with Gitlab.cee
+aap-rag-content repository, which references this repository
+as a git submodule. However, If you need to build an image manually
+from this repository, use the following steps.
 
-## Build image
+### Extract Markdown files from Mimir archive
+
+1. Obtain the access to the Mimir repository and clone the repository.
+2. Create the `./mimir` folder in the project root.
+3. Copy `mimir-extract-latest.tgz.enc` file to `./mimir`
+4. Run `./scripts/mimir-parser.py`, which will extract markdown
+   files in `./aap-product-docs-plaintext` folder.
+
+    ```commandline
+     ./scripts/mimir-parser.py
+    ```
+
+### Build image
 ```commandline
 make build-image-aap
 ```
 
-## Push image to quay.io
-_(It is pushed to Tami's account temporarily)_
+### Push image to quay.io
 ```commandline
 podman login quay.io
-podman push aap-rag-content quay.io/ttakamiy/aap-rag-content
+podman push aap-rag-content quay.io/ansible/aap-rag-content
+```
+
+## Experiment Postgres (PGVector) Vector Store
+
+By default, Faiss Vector Store is used for saving embeddings and
+the result is included in container images. You can also use
+Postgresql database as the vector store with its PGVector extension.
+
+### Start Postgres with PGVector extension
+```commandline
+make start-postgres-debug
+```
+The `data` directory of Postgres is created under `./postgresql/data`.
+
+### Generate embeddings
+```commandline
+make generate-embeddings-postgres
+```
+The result is saved in the `data_aap_product_docs_2_5` table.
+```commandline
+$ podman exec -it pgvector bash
+root@7894ab5c94e2:/# psql -U postgres
+psql (16.4 (Debian 16.4-1.pgdg120+2))
+Type "help" for help.
+
+postgres=# \dt
+                   List of relations
+ Schema |           Name            | Type  |  Owner
+--------+---------------------------+-------+----------
+ public | data_aap_product_docs_2_5 | table | postgres
+(1 row)
+
+postgres=#
 ```
 
 

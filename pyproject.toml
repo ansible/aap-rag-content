@@ -49,7 +49,8 @@ dependencies = [
     "llama-index-vector-stores-faiss==0.3.0",
     "llama-index-embeddings-huggingface==0.5.1",
     "llama-index-readers-file==0.4.5",
-    "requests>=2.32.3"
+    "requests>=2.32.3",
+    "llama-index-vector-stores-postgres>=0.4.2",
 ]
 requires-python = "==3.11.*"
 readme = "README.md"
