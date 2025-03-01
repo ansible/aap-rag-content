@@ -34,7 +34,7 @@ cpu = [
 ]
 gpu = [
     "torch==2.6.0",
-    "faiss-gpu-cu12==1.9.0.post1",
+    "faiss-gpu-cu12==1.10.0",
 ]
 
 [project]
