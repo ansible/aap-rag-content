@@ -30,7 +30,7 @@ dev = [
 [project.optional-dependencies]
 cpu = [
     "torch @ https://download.pytorch.org/whl/cpu/torch-2.3.1%2Bcpu-cp311-cp311-linux_x86_64.whl",
-    "faiss-cpu==1.9.0.post1",
+    "faiss-cpu==1.10.0",
 ]
 gpu = [
     "torch==2.6.0",
