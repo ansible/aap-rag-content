@@ -42,6 +42,18 @@ from this repository, use the following steps.
      ./scripts/mimir-parser.py
     ```
 
+#### How to include Knowlege Base articles
+
+If you want to include Knowledge Base articles, which are stored
+under the `red_hat_content/solutions` folder in the Mimir archive,
+run the `mimir-parser.py` with the `--add-kb-articles` option, i.e.,
+```commandline
+./scripts/mimir-parser.py --add-kb-articles
+```
+The script extracts only the articles whose `[products]` metadata 
+contains `Red Hat Ansible Automation Platform`. The metadata is 
+defined in the beginning of each Knowledge Base markdown file.
+
 ### Build image
 ```commandline
 make build-image-aap
