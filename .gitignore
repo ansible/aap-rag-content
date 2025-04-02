@@ -166,3 +166,5 @@ embeddings_model/
 
 # Vector DB
 vector_db/
+
+.vscode
