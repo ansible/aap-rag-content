@@ -73,6 +73,7 @@ class MimirParser:
     def process_md(self, md=None):
         in_md_header = False
         config = "[__default__]\n"
+        link_to_section = re.compile(r'\]\((#[\w\-_]+)\)')
 
         if self.kb_article:
             md_file = os.path.join(self.base_dir, md)
@@ -164,7 +165,11 @@ class MimirParser:
                     out_file = os.path.join(self.out_dir, single_page_anchor + ".md")
                     f = open(out_file, "w")
 
-            # print(line)
+            # Convert links to sections into links to full URLs
+            line_copy = line
+            for link in link_to_section.findall(line_copy):
+                line = line.replace(link, base_url + link)
+
             if f:
                 print(line, file=f)
 
