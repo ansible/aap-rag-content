@@ -195,6 +195,10 @@ def main():
 
         args = arg_parser.parse_args()
 
+        print("Following files are found in the mimir directory:")
+        for f in os.listdir("mimir"):
+            print(f"  - {f}")
+
         out_file = "mimir/mimir-extract-latest.tgz"
         in_file = out_file + ".enc"
         if os.path.exists(in_file):
@@ -212,6 +216,8 @@ def main():
                     print("Extracting knowledge base articles...")
                     output = subprocess.run(f"tar xzf {out_file} {KNOWLEDGE_BASE_ARTICLES_DIR}".split(" "), capture_output=True, text=True,
                                             check=True)
+                    print(output.stdout)
+                    print(output.stderr)
                     print("done!")
             except subprocess.CalledProcessError:
                 traceback.print_stack()
@@ -221,6 +227,8 @@ def main():
                     os.unlink(in_file)
                 if os.path.exists(out_file):
                     os.unlink(out_file)
+        else:
+            print(f"{in_file} is not found. Skip the file extraction step.")
 
         if args.add_kb_articles:
             MimirParser(KNOWLEDGE_BASE_ARTICLES_DIR, os.path.join(args.out_dir, KNOWLEDGE_BASE_ARTICLES_DIR),
