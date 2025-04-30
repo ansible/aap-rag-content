@@ -27,6 +27,7 @@ from llama_index.vector_stores.postgres import PGVectorStore
 AAP_DOCS_ROOT_URL = "https://github.com/ansible/aap-docs/blob/"
 AAP_DOCS_VERSION = "2.5"
 UNREACHABLE_DOCS: int = 0
+HERMETIC_BUILD = False
 
 ADDITIONAL_DOCS_DIR = "additional_docs"
 
@@ -61,10 +62,11 @@ def file_metadata_func(file_path: str, docs_url_func: Callable[[str], str], docs
     docs_url = docs_url_func(file_path)
     title = docs_title_func(file_path)
     msg = f"file_path: {file_path}, title: {title}, docs_url: {docs_url}"
-    if not ping_url(docs_url):
-        global UNREACHABLE_DOCS
-        UNREACHABLE_DOCS += 1
-        msg += ", UNREACHABLE"
+    if not HERMETIC_BUILD:
+        if not ping_url(docs_url):
+            global UNREACHABLE_DOCS
+            UNREACHABLE_DOCS += 1
+            msg += ", UNREACHABLE"
     print(msg)
     return {"docs_url": docs_url, "title": title}
 
@@ -147,6 +149,9 @@ if __name__ == "__main__":
     parser.add_argument("-i", "--index", help="Product index")
     parser.add_argument("-v", "--aap-version", help="AAP version")
     parser.add_argument(
+        "-hb", "--hermetic-build", type=bool, default=False, help="Hermetic build"
+    )
+    parser.add_argument(
         "--vector-store-type",
         default="faiss",
         choices=["faiss", "postgres"],
@@ -165,6 +170,7 @@ if __name__ == "__main__":
         EMBEDDINGS_ROOT_DIR = EMBEDDINGS_ROOT_DIR[:-1]
 
     AAP_DOCS_VERSION = args.aap_version
+    HERMETIC_BUILD = args.hermetic_build
 
     os.environ["HF_HOME"] = args.model_dir
     os.environ["TRANSFORMERS_OFFLINE"] = "1"
