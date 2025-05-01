@@ -5,7 +5,7 @@
 groups = ["default", "dev", "gpu"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:24452347b3d7b51bc0fa09975f5c15b9329c78b7bf599b6a689967e7a069c689"
+content_hash = "sha256:a19fc0d32402809d31d1f44a62c6e04a57f545e8060ad96a017bedb54609cdbb"
 
 [[metadata.targets]]
 requires_python = "==3.11.*"
@@ -287,7 +287,7 @@ files = [
 
 [[package]]
 name = "faiss-gpu-cu12"
-version = "1.9.0.post1"
+version = "1.10.0"
 requires_python = "<3.13,>=3.9"
 summary = "A library for efficient similarity search and clustering of dense vectors."
 groups = ["gpu"]
@@ -298,7 +298,7 @@ dependencies = [
     "packaging",
 ]
 files = [
-    {file = "faiss_gpu_cu12-1.9.0.post1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2c93038304ddbf51cc260422c4adf7ab001bfa30eb69203b3fe88899b02ca11b"},
+    {file = "faiss_gpu_cu12-1.10.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:52d96489990dde84137438937e46bb5786cd18d793a9c37fcce8b9b3f320660c"},
 ]
 
 [[package]]
@@ -803,7 +803,7 @@ files = [
 
 [[package]]
 name = "llama-index-vector-stores-postgres"
-version = "0.4.2"
+version = "0.5.1"
 requires_python = "<4.0,>=3.9"
 summary = "llama-index vector_stores postgres integration"
 groups = ["default"]
@@ -815,8 +815,8 @@ dependencies = [
     "sqlalchemy[asyncio]<2.1,>=1.4.49",
 ]
 files = [
-    {file = "llama_index_vector_stores_postgres-0.4.2-py3-none-any.whl", hash = "sha256:e99a02bf7d92934ac737445fef7e1c064b3c0e8dfc80ea0cf84bdb9dac209332"},
-    {file = "llama_index_vector_stores_postgres-0.4.2.tar.gz", hash = "sha256:4719a5c1cc4f9aa73820bcc6d35d763e9d7af7ad0b6dfdb5d776836af0ea0e00"},
+    {file = "llama_index_vector_stores_postgres-0.5.1-py3-none-any.whl", hash = "sha256:aed0e03613b0d2b6e812c7fa31d909198ecf3c1053478095baaf325ff5170c90"},
+    {file = "llama_index_vector_stores_postgres-0.5.1.tar.gz", hash = "sha256:871847544f3a5e89918120eea523d83e27aea5f2abb1aa364134b8a5b9eb460b"},
 ]
 
 [[package]]
