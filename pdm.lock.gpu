@@ -5,7 +5,7 @@
 groups = ["default", "dev", "gpu"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:8dcca0ad1be107d6eec49b892c2e147b3670ee1e3ae1c71cfff7421d9399f12f"
+content_hash = "sha256:cfb700b6959ae0b56cf07022f02f5584e0d841ed67c457195eaa938b8f527d36"
 
 [[metadata.targets]]
 requires_python = "==3.11.*"
@@ -135,6 +135,25 @@ files = [
 ]
 
 [[package]]
+name = "banks"
+version = "2.1.2"
+requires_python = ">=3.9"
+summary = "A prompt programming language"
+groups = ["default"]
+dependencies = [
+    "deprecated",
+    "eval-type-backport; python_version < \"3.10\"",
+    "griffe",
+    "jinja2",
+    "platformdirs",
+    "pydantic",
+]
+files = [
+    {file = "banks-2.1.2-py3-none-any.whl", hash = "sha256:7fba451069f6bea376483b8136a0f29cb1e6883133626d00e077e20a3d102c0e"},
+    {file = "banks-2.1.2.tar.gz", hash = "sha256:a0651db9d14b57fa2e115e78f68dbb1b36fe226ad6eef96192542908b1d20c1f"},
+]
+
+[[package]]
 name = "beautifulsoup4"
 version = "4.13.3"
 requires_python = ">=3.7.0"
@@ -229,7 +248,6 @@ version = "0.4.6"
 requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
 summary = "Cross-platform colored terminal text."
 groups = ["default", "dev"]
-marker = "platform_system == \"Windows\""
 files = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
@@ -376,6 +394,20 @@ files = [
     {file = "greenlet-3.1.1-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:1776fd7f989fc6b8d8c8cb8da1f6b82c5814957264d1f6cf818d475ec2bf6395"},
     {file = "greenlet-3.1.1-cp311-cp311-win_amd64.whl", hash = "sha256:48ca08c771c268a768087b408658e216133aecd835c0ded47ce955381105ba39"},
     {file = "greenlet-3.1.1.tar.gz", hash = "sha256:4ce3ac6cdb6adf7946475d7ef31777c26d94bccc377e070a7986bd2d5c515467"},
+]
+
+[[package]]
+name = "griffe"
+version = "1.7.3"
+requires_python = ">=3.9"
+summary = "Signatures for entire Python programs. Extract the structure, the frame, the skeleton of your project, to generate API documentation or find breaking changes in your API."
+groups = ["default"]
+dependencies = [
+    "colorama>=0.4",
+]
+files = [
+    {file = "griffe-1.7.3-py3-none-any.whl", hash = "sha256:c6b3ee30c2f0f17f30bcdef5068d6ab7a2a4f1b8bf1a3e74b56fffd21e1c5f75"},
+    {file = "griffe-1.7.3.tar.gz", hash = "sha256:52ee893c6a3a968b639ace8015bec9d36594961e156e23315c8e8e51401fa50b"},
 ]
 
 [[package]]
@@ -555,14 +587,14 @@ files = [
 
 [[package]]
 name = "llama-index"
-version = "0.12.19"
+version = "0.12.33"
 requires_python = "<4.0,>=3.9"
 summary = "Interface between LLMs and your data"
 groups = ["default"]
 dependencies = [
     "llama-index-agent-openai<0.5.0,>=0.4.0",
-    "llama-index-cli<0.5.0,>=0.4.0",
-    "llama-index-core<0.13.0,>=0.12.19",
+    "llama-index-cli<0.5.0,>=0.4.1",
+    "llama-index-core<0.13.0,>=0.12.33",
     "llama-index-embeddings-openai<0.4.0,>=0.3.0",
     "llama-index-indices-managed-llama-cloud>=0.4.0",
     "llama-index-llms-openai<0.4.0,>=0.3.0",
@@ -574,8 +606,8 @@ dependencies = [
     "nltk>3.8.1",
 ]
 files = [
-    {file = "llama_index-0.12.19-py3-none-any.whl", hash = "sha256:5ff5d3d3ae7a321cfccf16e76f07393e1a84f177d357c650eb9a0c3d1ba8bce7"},
-    {file = "llama_index-0.12.19.tar.gz", hash = "sha256:a13e1f95e78ae4ec8a53019583a6ff67bdadff296e800af85cc276ad748ae799"},
+    {file = "llama_index-0.12.33-py3-none-any.whl", hash = "sha256:300261e64174afe355afcf06037c5c38c4a5b17caf75db66664cd9c7a5b9dd17"},
+    {file = "llama_index-0.12.33.tar.gz", hash = "sha256:038da75552784f0e22379b6a816f36f74b31b28c6cbca063222c5f4225a2b497"},
 ]
 
 [[package]]
@@ -596,7 +628,7 @@ files = [
 
 [[package]]
 name = "llama-index-cli"
-version = "0.4.0"
+version = "0.4.1"
 requires_python = "<4.0,>=3.9"
 summary = "llama-index cli"
 groups = ["default"]
@@ -606,44 +638,45 @@ dependencies = [
     "llama-index-llms-openai<0.4.0,>=0.3.0",
 ]
 files = [
-    {file = "llama_index_cli-0.4.0-py3-none-any.whl", hash = "sha256:60d12f89e6b85e80a0cc3a8b531f05a911b5eebaebc37314411476d1ba685904"},
-    {file = "llama_index_cli-0.4.0.tar.gz", hash = "sha256:d6ab201359962a8a34368aeda3a49bbbe67e9e009c59bd925c4fb2be4ace3906"},
+    {file = "llama_index_cli-0.4.1-py3-none-any.whl", hash = "sha256:6dfc931aea5b90c256e476b48dfac76f48fb2308fdf656bb02ee1e4f2cab8b06"},
+    {file = "llama_index_cli-0.4.1.tar.gz", hash = "sha256:3f97f1f8f5f401dfb5b6bc7170717c176dcd981538017430073ef12ffdcbddfa"},
 ]
 
 [[package]]
 name = "llama-index-core"
-version = "0.12.19"
+version = "0.12.34.post1"
 requires_python = "<4.0,>=3.9"
 summary = "Interface between LLMs and your data"
 groups = ["default"]
 dependencies = [
-    "PyYAML>=6.0.1",
-    "SQLAlchemy[asyncio]>=1.4.49",
-    "aiohttp<4.0.0,>=3.8.6",
+    "aiohttp<4,>=3.8.6",
+    "banks<3,>=2.0.0",
     "dataclasses-json",
     "deprecated>=1.2.9.3",
-    "dirtyjson<2.0.0,>=1.0.8",
-    "eval-type-backport<0.3.0,>=0.2.0; python_version < \"3.10\"",
-    "filetype<2.0.0,>=1.2.0",
+    "dirtyjson<2,>=1.0.8",
+    "eval-type-backport<0.3,>=0.2.0; python_version < \"3.10\"",
+    "filetype<2,>=1.2.0",
     "fsspec>=2023.5.0",
     "httpx",
-    "nest-asyncio<2.0.0,>=1.5.8",
+    "nest-asyncio<2,>=1.5.8",
     "networkx>=3.0",
     "nltk>3.8.1",
     "numpy",
     "pillow>=9.0.0",
     "pydantic>=2.8.0",
+    "pyyaml>=6.0.1",
     "requests>=2.31.0",
+    "sqlalchemy[asyncio]>=1.4.49",
     "tenacity!=8.4.0,<10.0.0,>=8.2.0",
-    "tiktoken>=0.3.3",
-    "tqdm<5.0.0,>=4.66.1",
+    "tiktoken>=0.7.0",
+    "tqdm<5,>=4.66.1",
     "typing-extensions>=4.5.0",
     "typing-inspect>=0.8.0",
     "wrapt",
 ]
 files = [
-    {file = "llama_index_core-0.12.19-py3-none-any.whl", hash = "sha256:6dee42a7ed6de8873336f5725ad4e8131fee22c9eb70d98332eb124f5036d754"},
-    {file = "llama_index_core-0.12.19.tar.gz", hash = "sha256:4b5a6b024e7b9ccdfb2bfa471f8b02bef146109600cf5d011669394e97fc028c"},
+    {file = "llama_index_core-0.12.34.post1-py3-none-any.whl", hash = "sha256:2b8262b5ec6537d979e7fb1b3c0e56747055ae7321b8dcb184ef43eee1df6396"},
+    {file = "llama_index_core-0.12.34.post1.tar.gz", hash = "sha256:1673566b134c75e99f5f64e9ec8ca979078bee2e70efa40fd009562b68c18307"},
 ]
 
 [[package]]
@@ -1282,7 +1315,7 @@ name = "platformdirs"
 version = "4.3.6"
 requires_python = ">=3.8"
 summary = "A small Python package for determining appropriate platform-specific dirs, e.g. a `user data dir`."
-groups = ["dev"]
+groups = ["default", "dev"]
 files = [
     {file = "platformdirs-4.3.6-py3-none-any.whl", hash = "sha256:73e575e1408ab8103900836b97580d5307456908a03e92031bab39e4554cc3fb"},
     {file = "platformdirs-4.3.6.tar.gz", hash = "sha256:357fb2acbc885b0419afd3ce3ed34564c13c9b95c89360cd9563f73aa5e2b907"},
