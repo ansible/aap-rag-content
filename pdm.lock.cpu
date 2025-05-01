@@ -5,7 +5,7 @@
 groups = ["default", "cpu", "dev"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:cfb700b6959ae0b56cf07022f02f5584e0d841ed67c457195eaa938b8f527d36"
+content_hash = "sha256:af5ee3e406cec5e66dee8d7e24df1bfae627adaf47d83d6a283cb1d8b866f69e"
 
 [[metadata.targets]]
 requires_python = "==3.11.*"
@@ -698,7 +698,7 @@ files = [
 
 [[package]]
 name = "llama-index-embeddings-huggingface"
-version = "0.5.1"
+version = "0.5.3"
 requires_python = "<4.0,>=3.9"
 summary = "llama-index embeddings huggingface integration"
 groups = ["default"]
@@ -708,8 +708,8 @@ dependencies = [
     "sentence-transformers>=2.6.1",
 ]
 files = [
-    {file = "llama_index_embeddings_huggingface-0.5.1-py3-none-any.whl", hash = "sha256:cff600538e9616829d379ced09f08fc6d237e5599975d781ca52b599a419394e"},
-    {file = "llama_index_embeddings_huggingface-0.5.1.tar.gz", hash = "sha256:def1639bab8511e3ac0284520104b0c6dce9bc053b4dce38c127bd62bc28f7fc"},
+    {file = "llama_index_embeddings_huggingface-0.5.3-py3-none-any.whl", hash = "sha256:f181d6490ebb29f0e7ada93b53fdd9acf5808387cdd69b9f1b499a2380d38758"},
+    {file = "llama_index_embeddings_huggingface-0.5.3.tar.gz", hash = "sha256:3fecb363cc0d05890689aefc2d1bda2f02431857e0456fdaf2e8c4960f9daeaf"},
 ]
 
 [[package]]
