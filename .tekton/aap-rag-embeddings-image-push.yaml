@@ -387,12 +387,12 @@ spec:
         - "false"
     - name: sast-unicode-check
       params:
-        - name: image-url
-          value: $(tasks.build-image-index.results.IMAGE_URL)
-        - name: SOURCE_ARTIFACT
-          value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
-        - name: CACHI2_ARTIFACT
-          value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
+      - name: image-url
+        value: $(tasks.build-image-index.results.IMAGE_URL)
+      - name: SOURCE_ARTIFACT
+        value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
+      - name: CACHI2_ARTIFACT
+        value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
       runAfter:
         - build-image-index
       taskRef:
@@ -405,11 +405,10 @@ spec:
             value: task
         resolver: bundles
       when:
-        - input: $(params.skip-checks)
-          operator: in
-          values:
-            - "false"
-      workspaces: []
+      - input: $(params.skip-checks)
+        operator: in
+        values:
+        - "false"
     - name: clamav-scan
       params:
       - name: image-digest
@@ -603,7 +602,17 @@ spec:
       optional: true
     - name: netrc
       optional: true
-  taskRunTemplate: {}
+  taskRunSpecs:
+  - pipelineTaskName: ecosystem-cert-preflight-checks
+    stepSpecs:
+    - computeResources:
+        limits:
+          memory: 4Gi
+        requests:
+          memory: 4Gi
+      name: check-container
+  taskRunTemplate:
+    serviceAccountName: build-pipeline-aap-rag-embeddings-image
   workspaces:
   - name: git-auth
     secret:
