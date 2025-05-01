@@ -5,7 +5,7 @@
 groups = ["default", "dev", "gpu"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:a19fc0d32402809d31d1f44a62c6e04a57f545e8060ad96a017bedb54609cdbb"
+content_hash = "sha256:9f4fff61b2e6f2ac007c2a395f059a7d8459b48274644def5c11a703e86f2ea1"
 
 [[metadata.targets]]
 requires_python = "==3.11.*"
