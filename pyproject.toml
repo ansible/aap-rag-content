@@ -21,7 +21,7 @@ distribution = false
 
 [tool.pdm.dev-dependencies]
 dev = [
-    "black==24.10.0",
+    "black==25.1.0",
     "mypy==1.15.0",
     "ruff==0.11.7",
     "types-requests==2.32.0.20250328"
