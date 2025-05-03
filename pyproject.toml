@@ -33,7 +33,7 @@ cpu = [
     "faiss-cpu==1.10.0",
 ]
 gpu = [
-    "torch==2.6.0",
+    "torch==2.7.0",
     "faiss-gpu-cu12==1.10.0",
 ]
 
