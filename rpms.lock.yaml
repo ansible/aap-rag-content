@@ -81,4 +81,11 @@ arches:
     name: libcudnn9-cuda-11
     evr: 9.10.0.56-1
     sourcerpm: cudnn9-cuda-11-9.10.0.56-1.src.rpm
+  - url: https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/libcusparselt0-0.7.1.0-1.x86_64.rpm
+    repoid: cuda
+    size: 288121905
+    checksum: sha256:5c10a38471d9f966f023d33eb6c268615383485a2682e3de1a6175c262dff271
+    name: libcusparselt0
+    evr: 0.7.1.0-1
+    sourcerpm: libcusparselt0-0.7.1.0-1.src.rpm
   source: []
