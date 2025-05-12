@@ -32,13 +32,13 @@ COPY additional_docs ./additional_docs
 COPY --from=lightspeed-rag-embeddings /rag/embeddings_model ./embeddings_model
 
 RUN if [ "$FLAVOR" == "gpu" ]; then \
-        export LD_LIBRARY_PATH=/usr/local/cuda-12.6/compat:$LD_LIBRARY_PATH; \
+        export LD_LIBRARY_PATH=/usr/local/cuda-12.9/compat:$LD_LIBRARY_PATH; \
         pdm run python -c \
         "import torch; print(torch.version.cuda); print(torch.cuda.is_available());"; \
     fi
 
 COPY scripts/generate_embeddings-aap.py .
-RUN export LD_LIBRARY_PATH=/usr/local/cuda-12.6/compat:$LD_LIBRARY_PATH; \
+RUN export LD_LIBRARY_PATH=/usr/local/cuda-12.9/compat:$LD_LIBRARY_PATH; \
 	set -e && pdm run python generate_embeddings-aap.py \
   -f aap-product-docs-plaintext \
   -mn ${EMBEDDING_MODEL} \
