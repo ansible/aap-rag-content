@@ -185,7 +185,6 @@ if __name__ == "__main__":
         faiss_index = faiss.IndexFlatIP(embedding_dimension)
         try:
             gpu_resource = faiss.StandardGpuResources()
-            faiss_index = faiss.index_cpu_to_gpu(gpu_resource, 0, faiss_index)
             current_device = torch.cuda.current_device()
             print(f"current_device: {current_device}")
             faiss_index = faiss.index_cpu_to_gpu(gpu_resource, current_device, faiss_index)
