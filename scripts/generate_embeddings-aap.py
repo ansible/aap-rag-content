@@ -9,9 +9,9 @@ from pathlib import Path
 from typing import Callable
 from typing import Dict
 
+import torch
 import faiss
 import requests
-import torch
 from llama_index.core import Settings
 from llama_index.core import SimpleDirectoryReader
 from llama_index.core import VectorStoreIndex
