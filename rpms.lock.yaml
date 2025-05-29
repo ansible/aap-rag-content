@@ -25,20 +25,20 @@ arches:
     name: mpdecimal
     evr: 2.5.1-3.el9
     sourcerpm: mpdecimal-2.5.1-3.el9.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/p/python3.11-3.11.9-7.el9_5.3.x86_64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/p/python3.11-3.11.11-2.el9.x86_64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 28320
-    checksum: sha256:c8be086341ca561871a4c96a0bcd2f20b6797ccb59d7f0994d5e056efe1e35c0
+    size: 28175
+    checksum: sha256:10314a36977558472732adcb2bda7c0b2588022d4a9fd1c7775ae66426428197
     name: python3.11
-    evr: 3.11.9-7.el9_5.3
-    sourcerpm: python3.11-3.11.9-7.el9_5.3.src.rpm
-  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/p/python3.11-libs-3.11.9-7.el9_5.3.x86_64.rpm
+    evr: 3.11.11-2.el9
+    sourcerpm: python3.11-3.11.11-2.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/p/python3.11-libs-3.11.11-2.el9.x86_64.rpm
     repoid: ubi-9-appstream-rpms
-    size: 10714150
-    checksum: sha256:4d144e01b7c09954fcba601885c9184ef666e794a6141204ffe5cf8d066905d7
+    size: 10701215
+    checksum: sha256:ac5126f5ed46e295ebc4cb042f1bbe8b24669811aa47df36f83d29fd9e8b3f09
     name: python3.11-libs
-    evr: 3.11.9-7.el9_5.3
-    sourcerpm: python3.11-3.11.9-7.el9_5.3.src.rpm
+    evr: 3.11.11-2.el9
+    sourcerpm: python3.11-3.11.11-2.el9.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/p/python3.11-pip-22.3.1-5.el9.noarch.rpm
     repoid: ubi-9-appstream-rpms
     size: 3358530
@@ -67,6 +67,20 @@ arches:
     name: python3.11-setuptools-wheel
     evr: 65.5.1-3.el9
     sourcerpm: python3.11-setuptools-65.5.1-3.el9.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/appstream/os/Packages/w/wget-1.21.1-8.el9_4.x86_64.rpm
+    repoid: ubi-9-appstream-rpms
+    size: 807555
+    checksum: sha256:a5366a624f63487a0cfc5fc2fe15148d6c31be27c80cf00815f25324e3d0d729
+    name: wget
+    evr: 1.21.1-8.el9_4
+    sourcerpm: wget-1.21.1-8.el9_4.src.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/l/libpsl-0.21.1-5.el9.x86_64.rpm
+    repoid: ubi-9-baseos-rpms
+    size: 67454
+    checksum: sha256:ad1a62ef07682bb64a476c1a49f5cfc7abc9beb44775e7e511bf737e9a6bf99d
+    name: libpsl
+    evr: 0.21.1-5.el9
+    sourcerpm: libpsl-0.21.1-5.el9.src.rpm
   - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/l/libtirpc-1.3.3-9.el9.x86_64.rpm
     repoid: ubi-9-baseos-rpms
     size: 98934
@@ -74,13 +88,20 @@ arches:
     name: libtirpc
     evr: 1.3.3-9.el9
     sourcerpm: libtirpc-1.3.3-9.el9.src.rpm
-  - url: https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/libcudnn9-cuda-12-9.10.0.56-1.x86_64.rpm
+  - url: https://cdn-ubi.redhat.com/content/public/ubi/dist/ubi9/9/x86_64/baseos/os/Packages/p/publicsuffix-list-dafsa-20210518-3.el9.noarch.rpm
+    repoid: ubi-9-baseos-rpms
+    size: 60882
+    checksum: sha256:e6ec3390a736b085f403168c512a6b2b6f8e12a8fd5a4459f1c7dbbff2b67c33
+    name: publicsuffix-list-dafsa
+    evr: 20210518-3.el9
+    sourcerpm: publicsuffix-list-20210518-3.el9.src.rpm
+  - url: https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/libcudnn9-cuda-12-9.10.1.4-1.x86_64.rpm
     repoid: cuda
-    size: 709899202
-    checksum: sha256:b687606a274dcc2f74840436e401eec64869d42d6ad05ae43f958a832c15cea2
+    size: 709898494
+    checksum: sha256:cebfed838418ef954a6ce1c990c01eedca0048bd91ff69205980d6b6d03205ee
     name: libcudnn9-cuda-12
-    evr: 9.10.0.56-1
-    sourcerpm: cudnn9-cuda-12-9.10.0.56-1.src.rpm
+    evr: 9.10.1.4-1
+    sourcerpm: cudnn9-cuda-12-9.10.1.4-1.src.rpm
   - url: https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/libcusparselt0-0.7.1.0-1.x86_64.rpm
     repoid: cuda
     size: 288121905
