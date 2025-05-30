@@ -7,27 +7,14 @@ lint.select = ["D", "E", "F", "W", "C", "S", "I", "TCH", "SLOT", "RUF", "C90", "
 lint.extend-select = ["D401"]
 
 lint.ignore = []
+lint.pydocstyle.convention = "google"
 
 target-version = "py311"
-lint.pydocstyle.convention = "google"
 line-length = 100
 
 [tool.mypy]
 disable_error_code = ["union-attr", "return-value", "arg-type", "import-untyped"]
 ignore_missing_imports = true
-
-[tool.pdm]
-distribution = false
-
-[project.optional-dependencies]
-cpu = [
-    "torch @ https://download.pytorch.org/whl/cpu/torch-2.7.0%2Bcpu-cp311-cp311-manylinux_2_28_x86_64.whl",
-    "faiss-cpu==1.10.0",
-]
-gpu = [
-    "torch==2.7.0",
-    "faiss-gpu-cu12==1.10.0",
-]
 
 [project]
 name = "aap-rag-content"
@@ -43,7 +30,45 @@ dependencies = [
     "llama-index-readers-file==0.4.5",
     "requests>=2.32.3",
     "llama-index-vector-stores-postgres>=0.4.2",
-    "llama-stack>=0.2.7",
+    "llama-stack==0.2.7",
+    "torch @ https://download.pytorch.org/whl/cpu/torch-2.6.0%2Bcpu-cp311-cp311-linux_x86_64.whl",
+    "torchvision @ https://download.pytorch.org/whl/cpu/torchvision-0.21.0%2Bcpu-cp311-cp311-linux_x86_64.whl",
+    "faiss-cpu==1.10.0",
+    "chromadb-client>=1.0.11",
+    "opentelemetry-exporter-otlp-proto-http>=1.33.1",
+    "mcp>=1.9.2",
+    "emoji>=2.14.1",
+    "matplotlib>=3.10.3",
+    "opentelemetry-sdk>=1.33.1",
+    "scikit-learn>=1.6.1",
+    "aiosqlite>=0.21.0",
+    "chardet>=5.2.0",
+    "numpy>=2.2.6",
+    "autoevals>=0.0.129",
+    "pillow>=11.2.1",
+    "redis>=6.2.0",
+    "tree-sitter>=0.24.0",
+    "blobfile>=3.0.0",
+    "pythainlp>=5.1.2",
+    "psycopg2-binary>=2.9.10",
+    "pymongo>=4.13.0",
+    "transformers>=4.50.3",
+    "pypdf>=5.5.0",
+    "pandas>=2.2.3",
+    "openai>=1.82.1",
+    "nltk>=3.9.1",
+    "tqdm>=4.67.1",
+    "datasets>=3.6.0",
+    "scipy>=1.15.3",
+    "sqlalchemy[asyncio]>=2.0.41",
+    "sentencepiece>=0.2.0",
+    "langdetect>=1.0.9",
+    "fastapi>=0.115.12",
+    "fire>=0.7.0",
+    "httpx>=0.28.1",
+    "uvicorn>=0.34.2",
+    "sentence-transformers",
+    "llama-stack-client==0.2.7",
 ]
 requires-python = "==3.11.*"
 readme = "README.md"
@@ -51,8 +76,8 @@ license = "LICENSE"
 
 [dependency-groups]
 dev = [
-    "black==24.10.0",
-    "mypy==1.15.0",
-    "ruff==0.11.7",
-    "types-requests==2.32.0.20250328",
+    "black",
+    "mypy",
+    "ruff",
+    "types-requests",
 ]
