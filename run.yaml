@@ -1,0 +1,33 @@
+version: '2'
+image_name: remote-vllm
+apis:
+- inference
+- tool_runtime
+- vector_io
+providers:
+  inference:
+  - provider_id: sentence-transformers
+    provider_type: inline::sentence-transformers
+    config: {}
+  vector_io:
+  - provider_id: faiss
+    provider_type: inline::faiss
+    config:
+      kvstore:
+        type: sqlite
+        namespace: null
+        db_path: ${env.SQLITE_STORE_DIR:~/.llama/distributions/remote-vllm}/faiss_store.db
+  tool_runtime:
+  - provider_id: rag-runtime
+    provider_type: inline::rag-runtime
+    config: {}
+models:
+- metadata:
+    embedding_dimension: 384
+  model_id: all-MiniLM-L6-v2
+  provider_id: sentence-transformers
+  model_type: embedding
+vector_dbs: []
+tool_groups:
+- toolgroup_id: builtin::rag
+  provider_id: rag-runtime
