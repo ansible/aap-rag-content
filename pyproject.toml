@@ -16,6 +16,20 @@ line-length = 100
 disable_error_code = ["union-attr", "return-value", "arg-type", "import-untyped"]
 ignore_missing_imports = true
 
+# https://docs.astral.sh/uv/guides/integration/pytorch/
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cpu" },
+]
+torchvision = [
+  { index = "pytorch-cpu" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
 [project]
 name = "aap-rag-content"
 version = "0.1.0"
@@ -31,8 +45,8 @@ dependencies = [
     "requests>=2.32.3",
     "llama-index-vector-stores-postgres>=0.4.2",
     "llama-stack==0.2.9",
-    "torch @ https://download.pytorch.org/whl/cpu/torch-2.6.0%2Bcpu-cp311-cp311-linux_x86_64.whl",
-    "torchvision @ https://download.pytorch.org/whl/cpu/torchvision-0.21.0%2Bcpu-cp311-cp311-linux_x86_64.whl",
+    "torch>=2.6.0",
+    "torchvision>=0.21.0",
     "faiss-cpu==1.10.0",
     "chromadb-client>=1.0.11",
     "opentelemetry-exporter-otlp-proto-http>=1.33.1",
