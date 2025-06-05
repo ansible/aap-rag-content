@@ -16,15 +16,15 @@ providers:
       kvstore:
         type: sqlite
         namespace: null
-        db_path: ${env.SQLITE_STORE_DIR:~/.llama/distributions/remote-vllm}/faiss_store.db
+        db_path: ${env.SQLITE_STORE_DIR:./llama_stack_vector_db}/faiss_store.db
   tool_runtime:
   - provider_id: rag-runtime
     provider_type: inline::rag-runtime
     config: {}
 models:
 - metadata:
-    embedding_dimension: 384
-  model_id: all-MiniLM-L6-v2
+    embedding_dimension: 768
+  model_id: ./embeddings_model
   provider_id: sentence-transformers
   model_type: embedding
 vector_dbs: []

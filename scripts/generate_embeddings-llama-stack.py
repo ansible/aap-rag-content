@@ -50,8 +50,8 @@ class DocumentIngestionTool:
         client.vector_dbs.register(
             vector_db_id=self.index,
             provider_id=provider_id,
-            embedding_model="all-MiniLM-L6-v2",
-            embedding_dimension=384,
+            embedding_model="./embeddings_model",
+            embedding_dimension=768,
         )
         return client
 
