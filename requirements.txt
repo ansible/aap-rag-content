@@ -1341,6 +1341,28 @@ tokenizers==0.21.1 \
     --hash=sha256:e78e413e9e668ad790a29456e677d9d3aa50a9ad311a40905d6861ba7692cf41 \
     --hash=sha256:ed248ab5279e601a30a4d67bdb897ecbe955a50f1e7bb62bd99f07dd11c2f5b6
     # via transformers
+torch==2.7.0 ; sys_platform == 'darwin' \
+    --hash=sha256:0a8d43caa342b9986101ec5feb5bbf1d86570b5caa01e9cb426378311258fdde
+    # via
+    #   aap-rag-content
+    #   sentence-transformers
+    #   torchvision
+torch==2.7.0+cpu ; sys_platform != 'darwin' \
+    --hash=sha256:6b7edcbf8bb0b9ac2e6c001434797c5ec3f25394f91eb0ed7aeeeeed9ad4500f \
+    --hash=sha256:ce510375ed79223db3ec144fe14cbcffc8a361ac57f39674397ff2d8db3b2c21 \
+    --hash=sha256:e32f385dc0b5007ca410035c3b91ef4b1b34b142e9bcdb31d3f0224b7748e992
+    # via
+    #   aap-rag-content
+    #   sentence-transformers
+    #   torchvision
+torchvision==0.22.0 ; (platform_machine == 'aarch64' and sys_platform == 'linux') or sys_platform == 'darwin' \
+    --hash=sha256:191ea28321fc262d8aa1a7fe79c41ff2848864bf382f9f6ea45c41dde8313792 \
+    --hash=sha256:6c5620e10ffe388eb6f4744962106ed7cf1508d26e6fdfa0c10522d3249aea24
+    # via aap-rag-content
+torchvision==0.22.0+cpu ; (platform_machine != 'aarch64' and sys_platform == 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux') \
+    --hash=sha256:670082705cfb51a35ae35090b5a0e66ec09e6d9c3845e16417399adec7a17ff2 \
+    --hash=sha256:b180a2c568665b8ffa442ff3d7dfdba0eaf99c0ea22e987f6c47ade3cc13eadf
+    # via aap-rag-content
 tqdm==4.67.1 \
     --hash=sha256:26445eca388f82e72884e0d580d5464cd801a3ea01e63e5601bdff9ba6a48de2 \
     --hash=sha256:f8aef9c52c08c13a65f30ea34f4e5aac3fd1a34959879d7e59e63027286627f2
