@@ -1,11 +1,5 @@
 --index-url=https://download.pytorch.org/whl/cpu
-torch==2.7.0 ; sys_platform == 'darwin' \
-    --hash=sha256:0a8d43caa342b9986101ec5feb5bbf1d86570b5caa01e9cb426378311258fdde
-    # via
-    #   aap-rag-content
-    #   sentence-transformers
-    #   torchvision
-torch==2.7.0+cpu ; sys_platform != 'darwin' \
+torch==2.7.0+cpu \
     --hash=sha256:6b7edcbf8bb0b9ac2e6c001434797c5ec3f25394f91eb0ed7aeeeeed9ad4500f \
     --hash=sha256:ce510375ed79223db3ec144fe14cbcffc8a361ac57f39674397ff2d8db3b2c21 \
     --hash=sha256:e32f385dc0b5007ca410035c3b91ef4b1b34b142e9bcdb31d3f0224b7748e992
@@ -13,11 +7,7 @@ torch==2.7.0+cpu ; sys_platform != 'darwin' \
     #   aap-rag-content
     #   sentence-transformers
     #   torchvision
-torchvision==0.22.0 ; (platform_machine == 'aarch64' and sys_platform == 'linux') or sys_platform == 'darwin' \
-    --hash=sha256:191ea28321fc262d8aa1a7fe79c41ff2848864bf382f9f6ea45c41dde8313792 \
-    --hash=sha256:6c5620e10ffe388eb6f4744962106ed7cf1508d26e6fdfa0c10522d3249aea24
-    # via aap-rag-content
-torchvision==0.22.0+cpu ; (platform_machine != 'aarch64' and sys_platform == 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux') \
+torchvision==0.22.0+cpu \
     --hash=sha256:670082705cfb51a35ae35090b5a0e66ec09e6d9c3845e16417399adec7a17ff2 \
     --hash=sha256:b180a2c568665b8ffa442ff3d7dfdba0eaf99c0ea22e987f6c47ade3cc13eadf
     # via aap-rag-content
