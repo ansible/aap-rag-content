@@ -1,4 +1,4 @@
-packages: [python3.11, tar, gzip, openssl, diffutils]
+packages: [diffutils, gzip]
 contentOrigin:
   repofiles: ["./ubi.repo"]
 arches: [x86_64]
