@@ -1,0 +1,10 @@
+torch==2.7.0 \
+    --hash=sha256:0a8d43caa342b9986101ec5feb5bbf1d86570b5caa01e9cb426378311258fdde
+    # via
+    #   aap-rag-content
+    #   sentence-transformers
+    #   torchvision
+torchvision==0.22.0 \
+    --hash=sha256:191ea28321fc262d8aa1a7fe79c41ff2848864bf382f9f6ea45c41dde8313792 \
+    --hash=sha256:6c5620e10ffe388eb6f4744962106ed7cf1508d26e6fdfa0c10522d3249aea24
+    # via aap-rag-content
