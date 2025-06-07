@@ -41,7 +41,7 @@ dependencies = [
     "llama_index==0.12.33",
     "llama-index-vector-stores-faiss==0.3.0",
     "llama-index-embeddings-huggingface==0.5.3",
-    "llama-index-readers-file==0.4.5",
+    "llama-index-readers-file==0.4.9",
     "requests>=2.32.3",
     "llama-index-vector-stores-postgres>=0.4.2",
     "llama-stack==0.2.9",
