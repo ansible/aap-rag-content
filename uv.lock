@@ -88,7 +88,7 @@ requires-dist = [
     { name = "langdetect", specifier = ">=1.0.9" },
     { name = "llama-index", specifier = "==0.12.33" },
     { name = "llama-index-embeddings-huggingface", specifier = "==0.5.3" },
-    { name = "llama-index-readers-file", specifier = "==0.4.5" },
+    { name = "llama-index-readers-file", specifier = "==0.4.9" },
     { name = "llama-index-vector-stores-faiss", specifier = "==0.3.0" },
     { name = "llama-index-vector-stores-postgres", specifier = ">=0.4.2" },
     { name = "llama-stack", specifier = "==0.2.9" },
@@ -1162,7 +1162,7 @@ wheels = [
 
 [[package]]
 name = "llama-index-readers-file"
-version = "0.4.5"
+version = "0.4.9"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "beautifulsoup4" },
@@ -1171,9 +1171,9 @@ dependencies = [
     { name = "pypdf" },
     { name = "striprtf" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a3/90/6228b5412b4bedcd36daf2f6defeb4d9e2119e6f12ee7b56bf0b199ff3c0/llama_index_readers_file-0.4.5.tar.gz", hash = "sha256:3ce5c8ad7f285bb7ff828c5b2e20088856ac65cf96640287eca770b69a21df88", size = 22328, upload-time = "2025-02-11T04:47:57.704Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6a/aa/517a79b9fa57ff42dc3d0ae801676b794c81bbceacc2350c948ebe9cfa7e/llama_index_readers_file-0.4.9.tar.gz", hash = "sha256:b705fd42a2875af03d343c66b28138471800cd13a67efcc48ae2983b39d816c7", size = 22710, upload-time = "2025-06-05T04:26:00.705Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d0/e9/88dde09f422dc28290cb24053dbc4e98a3ba3eb9625ede1ce87469614963/llama_index_readers_file-0.4.5-py3-none-any.whl", hash = "sha256:704ac6b549f0ec59c0bd796007fceced2fff89a44b03d7ee36bce2d26b39e526", size = 39249, upload-time = "2025-02-11T04:47:55.907Z" },
+    { url = "https://files.pythonhosted.org/packages/65/65/ebc692d80f55501771eec0854cea90c9f7ecdbd688a74e89357ef8afa285/llama_index_readers_file-0.4.9-py3-none-any.whl", hash = "sha256:71f1d0d2ea22012bf233ed4afb9b9b6b2f098d26286e38ed82e3c4af685e07bd", size = 40976, upload-time = "2025-06-05T04:25:59.397Z" },
 ]
 
 [[package]]
