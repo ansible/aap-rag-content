@@ -457,9 +457,9 @@ llama-index==0.12.33 \
     --hash=sha256:038da75552784f0e22379b6a816f36f74b31b28c6cbca063222c5f4225a2b497 \
     --hash=sha256:300261e64174afe355afcf06037c5c38c4a5b17caf75db66664cd9c7a5b9dd17
     # via aap-rag-content
-llama-index-agent-openai==0.4.8 \
-    --hash=sha256:a03e8609ada0355b408d4173cd7663708f826f23328f9719fba00ea20b6851b6 \
-    --hash=sha256:ba76f21e1b7f0f66e326dc419c2cc403cbb614ae28f7904540b1103695965f68
+llama-index-agent-openai==0.4.9 \
+    --hash=sha256:153cc0f49dcaa0cc44795e2d3ea20efb7dd1251368c0d7704a6e26aac6611c9d \
+    --hash=sha256:d696b014ef5652cdae3fe934cc2146fb05ffa978a242d432a2ae895524935c20
     # via
     #   llama-index
     #   llama-index-program-openai
