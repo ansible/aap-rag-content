@@ -38,7 +38,7 @@ authors = []
 dependencies = [
     "PyYAML==6.0.2",
     "huggingface_hub==0.29.1",
-    "llama_index==0.12.33",
+    "llama_index==0.12.40",
     "llama-index-vector-stores-faiss==0.3.0",
     "llama-index-embeddings-huggingface==0.5.3",
     "llama-index-readers-file==0.4.5",
