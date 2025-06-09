@@ -1,15 +1,3 @@
-# Default to CPU if not specified
-FLAVOR ?= cpu
-
-# Define behavior based on the flavor
-ifeq ($(FLAVOR),cpu)
-TORCH_GROUP := cpu
-else ifeq ($(FLAVOR),gpu)
-TORCH_GROUP := gpu
-else
-$(error Unsupported FLAVOR $(FLAVOR), must be 'cpu' or 'gpu')
-endif
-
 # Define arguments for pgvector support
 POSTGRES_USER ?= postgres
 POSTGRES_PASSWORD ?= somesecret
@@ -24,22 +12,16 @@ PG_DUMP_FILE ?= backup.tar
 AAP_VERSION ?= 2.5
 
 install-tools: ## Install required utilities/tools
-	@command -v pdm > /dev/null || { echo >&2 "pdm is not installed. Installing..."; pip3.11 install pdm; }
+	@command -v uv > /dev/null || { echo >&2 "uv is not installed. Installing..."; curl -LsSf https://astral.sh/uv/install.sh | sh; }
 
-pdm-lock-check: ## Check that the pdm.lock file is in a good shape
-	pdm lock --check --group cpu --lockfile pdm.lock.cpu
-	pdm lock --check --group gpu --lockfile pdm.lock.gpu
+uv-lock-check: ## Check that the uv.lock file is in a good shape
+	uv lock --check
 
-install-deps: install-tools pdm-lock-check ## Install all required dependencies, according to pdm.lock
-	pdm sync --group $(TORCH_GROUP) --lockfile pdm.lock.$(TORCH_GROUP)
+install-deps: install-tools uv-lock-check ## Install all required dependencies, according to uv.lock
+	uv sync --frozen
 
-install-deps-test: install-tools pdm-lock-check ## Install all required dev dependencies, according to pdm.lock
-	pdm sync --dev --group $(TORCH_GROUP) --lockfile pdm.lock.$(TORCH_GROUP)
-
-update-deps: ## Check pyproject.toml for changes, update the lock file if needed, then sync.
-	pdm update --update-all --group $(TORCH_GROUP) --lockfile pdm.lock.$(TORCH_GROUP)
-	pdm update --update-all --dev --group $(TORCH_GROUP) --lockfile pdm.lock.$(TORCH_GROUP)
-	pdm export --group $(TORCH_GROUP) --lockfile pdm.lock.$(TORCH_GROUP) -o requirements.$(TORCH_GROUP).txt
+export-deps: ## Check pyproject.toml for changes, update the lock file if needed, then sync.
+	uv export --format requirements.txt -o requirements.txt
 
 check-types: ## Checks type hints in sources
 	mypy --explicit-package-bases --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs scripts
@@ -88,7 +70,7 @@ generate-embeddings-postgres: ## Generate embeddings for postgres vector store
 	POSTGRES_HOST=$(POSTGRES_HOST) \
 	POSTGRES_PORT=$(POSTGRES_PORT) \
 	POSTGRES_DATABASE=$(POSTGRES_DATABASE) \
-	pdm run python ./scripts/generate_embeddings-aap.py \
+	python3 ./scripts/generate_embeddings-aap.py \
 	 -f aap-product-docs-plaintext \
 	 -mn $(EMBEDDINGS_MODEL) \
 	 -o $(OUTPUT_FOLDER) \
