@@ -439,9 +439,9 @@ kiwisolver==1.4.8 \
 langdetect==1.0.9 \
     --hash=sha256:cbc1fef89f8d062739774bd51eda3da3274006b3661d199c2655f6b3f6d605a0
     # via aap-rag-content
-llama-cloud==0.1.23 \
-    --hash=sha256:3d84a24a860f046d39a106c06742ec0ea39a574ac42bbf91706fe025f44e233e \
-    --hash=sha256:ce95b0705d85c99b3b27b0af0d16a17d9a81b14c96bf13c1063a1bd13d8d0446
+llama-cloud==0.1.26 \
+    --hash=sha256:2c0b2663e619b71c0645885ef622d6443725ab37bdc6ae5fb723e097f3af9459 \
+    --hash=sha256:b307f91b1ad97189b5278119ac4ad665931b65f240fb643b3e384d0a1fc81f56
     # via
     #   llama-cloud-services
     #   llama-index-indices-managed-llama-cloud
