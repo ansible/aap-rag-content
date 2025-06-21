@@ -92,7 +92,7 @@ requires-dist = [
     { name = "llama-index-vector-stores-faiss", specifier = "==0.3.0" },
     { name = "llama-index-vector-stores-postgres", specifier = ">=0.4.2" },
     { name = "llama-stack", specifier = "==0.2.9" },
-    { name = "llama-stack-client", specifier = "==0.2.9" },
+    { name = "llama-stack-client", specifier = "==0.2.12" },
     { name = "matplotlib", specifier = ">=3.10.3" },
     { name = "mcp", specifier = ">=1.9.2" },
     { name = "nltk", specifier = ">=3.9.1" },
@@ -1262,7 +1262,7 @@ wheels = [
 
 [[package]]
 name = "llama-stack-client"
-version = "0.2.9"
+version = "0.2.12"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -1279,9 +1279,9 @@ dependencies = [
     { name = "tqdm" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/91/86/80c2d87db0c4320c4e1cfb616d92c823e67d04b7cff41b32a14f188c0e43/llama_stack_client-0.2.9.tar.gz", hash = "sha256:529c24e17d3f2d57abc619c88b9989bf2a96dc1c90c3a80c5361e25a798e7729", size = 269660, upload-time = "2025-05-30T19:42:43.175Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/83/d5/0d3b1bfa342c1983c277d05eaf51214f9cf4b77345d416cff576e8f0172a/llama_stack_client-0.2.12.tar.gz", hash = "sha256:47260284f36ef40dbf4f04d2c2e6f4dfd407cf090930810617ccb9a690e029c3", size = 289939, upload-time = "2025-06-20T21:05:36.008Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/69/ca/f251a9c4e81cabc3f8f8c737db81cce0d9785b2d547627ddbb3563c02c26/llama_stack_client-0.2.9-py3-none-any.whl", hash = "sha256:20eca8fc6f6c2e3f7a20fa2cf45782a3c5dc20d430746d563de4966af6cd42e9", size = 307590, upload-time = "2025-05-30T19:42:41.855Z" },
+    { url = "https://files.pythonhosted.org/packages/68/eb/23c10e3a7d7a49a316e05ddcca8cd712a5a474eb6f904d08f7d3ae10d668/llama_stack_client-0.2.12-py3-none-any.whl", hash = "sha256:807145450e5f6bea9e20ab890d8327d07b45b1bbde712e3fcca54c298c792874", size = 340187, upload-time = "2025-06-20T21:05:33.561Z" },
 ]
 
 [[package]]

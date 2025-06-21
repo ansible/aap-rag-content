@@ -546,9 +546,9 @@ llama-stack==0.2.9 \
     --hash=sha256:03d06423e37507b811029a8a002265f8e861af6ff30e4bb99325e312bf23b0a8 \
     --hash=sha256:ef23be87393353839b5c10e4b883a00a262f6575c6579bf80e99db98aa4f4ae1
     # via aap-rag-content
-llama-stack-client==0.2.9 \
-    --hash=sha256:20eca8fc6f6c2e3f7a20fa2cf45782a3c5dc20d430746d563de4966af6cd42e9 \
-    --hash=sha256:529c24e17d3f2d57abc619c88b9989bf2a96dc1c90c3a80c5361e25a798e7729
+llama-stack-client==0.2.12 \
+    --hash=sha256:47260284f36ef40dbf4f04d2c2e6f4dfd407cf090930810617ccb9a690e029c3 \
+    --hash=sha256:807145450e5f6bea9e20ab890d8327d07b45b1bbde712e3fcca54c298c792874
     # via
     #   aap-rag-content
     #   llama-stack
