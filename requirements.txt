@@ -862,9 +862,9 @@ polyleven==0.9.0 \
     --hash=sha256:e58bbcd3f062043fa67e76e89f803eb308ea06fbb4dc6f32d7063c37f1c16dfd \
     --hash=sha256:ff60e2da0864b3d4bec2826eadbbb0a8967384d53bec9e693aad7b0089e1258c
     # via autoevals
-posthog==4.6.2 \
-    --hash=sha256:8135a60bc5e9d3b912138e1dd8f85d0d262a2789a9ee771b0a92347c49f7ad3d \
-    --hash=sha256:f72eb455f25ad9d7452c56ba73084195c7a32c5e88dbc213f2cf8fe137dbaff2
+posthog==5.4.0 \
+    --hash=sha256:284dfa302f64353484420b52d4ad81ff5c2c2d1d607c4e2db602ac72761831bd \
+    --hash=sha256:701669261b8d07cdde0276e5bc096b87f9e200e3b9589c5ebff14df658c5893c
     # via chromadb-client
 prompt-toolkit==3.0.51 \
     --hash=sha256:52742911fde84e2d423e2f9a4cf1de7d7ac4e51958f648d9540e0fb8db077b07 \
