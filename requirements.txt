@@ -229,9 +229,9 @@ faiss-cpu==1.10.0 \
     --hash=sha256:8ff6924b0f00df278afe70940ae86302066466580724c2f3238860039e9946f1 \
     --hash=sha256:cb80b530a9ded44a7d4031a7355a237aaa0ff1f150c1176df050e0254ea5f6f6
     # via aap-rag-content
-fastapi==0.115.12 \
-    --hash=sha256:1e2c2a2646905f9e83d32f04a3f86aff4a286669c6c950ca95b5fd68c2602681 \
-    --hash=sha256:e94613d6c05e27be7ffebdd6ea5f388112e5e430c8f7d6494a9d1d88d43e814d
+fastapi==0.115.13 \
+    --hash=sha256:0a0cab59afa7bab22f5eb347f8c9864b681558c278395e94035a741fc10cd865 \
+    --hash=sha256:55d1d25c2e1e0a0a50aceb1c8705cd932def273c102bff0b1c1da88b3c6eb307
     # via aap-rag-content
 filelock==3.18.0 \
     --hash=sha256:adbc88eabb99d2fec8c9c1b229b171f18afa655400173ddc653d5d01501fb9f2 \
