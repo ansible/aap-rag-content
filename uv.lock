@@ -89,7 +89,7 @@ requires-dist = [
     { name = "llama-index", specifier = "==0.12.40" },
     { name = "llama-index-embeddings-huggingface", specifier = "==0.5.3" },
     { name = "llama-index-readers-file", specifier = "==0.4.9" },
-    { name = "llama-index-vector-stores-faiss", specifier = "==0.3.0" },
+    { name = "llama-index-vector-stores-faiss", specifier = "==0.4.0" },
     { name = "llama-index-vector-stores-postgres", specifier = ">=0.4.2" },
     { name = "llama-stack", specifier = "==0.2.9" },
     { name = "llama-stack-client", specifier = "==0.2.9" },
@@ -1191,14 +1191,14 @@ wheels = [
 
 [[package]]
 name = "llama-index-vector-stores-faiss"
-version = "0.3.0"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "llama-index-core" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/de/ec/6890f61bbdd5afa52c4b133e145d06f22121334f7d615a1f6b8879beb35b/llama_index_vector_stores_faiss-0.3.0.tar.gz", hash = "sha256:c9df99dd00fe7058606ef4fce113535fa30b73edd650136be87c9b5b240df3f9", size = 3454, upload-time = "2024-11-17T22:55:00.069Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/26/96/77eba73911ac9d1eb0563b6f56d336e9e3fc18c5044301ca28eb12ee55a3/llama_index_vector_stores_faiss-0.4.0.tar.gz", hash = "sha256:59b58e4ec91880a5871a896bbdbd94cb781a447f92f400b5f08a62eb56a62e5c", size = 5901, upload-time = "2025-05-08T18:37:32.448Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/21/16/d3f512f47d40a27ee1c75ce86faa91004de9c20202ca376fe35bc92ba413/llama_index_vector_stores_faiss-0.3.0-py3-none-any.whl", hash = "sha256:2148163dba1222c855bd367a7b796bc35d46dc2e77d57bafd321ba14aac00177", size = 3868, upload-time = "2024-11-17T22:54:59.249Z" },
+    { url = "https://files.pythonhosted.org/packages/96/f0/91315cfd9a778cb17177976f7f8d3668d25dffc6cecc2da7cd66f87e2947/llama_index_vector_stores_faiss-0.4.0-py3-none-any.whl", hash = "sha256:092907b38c70b7f9698ad294836389b31fd3a1273ea1d93082993dd0925c8a4b", size = 7591, upload-time = "2025-05-08T18:37:31.709Z" },
 ]
 
 [[package]]
