@@ -496,9 +496,9 @@ llama-index-indices-managed-llama-cloud==0.7.4 \
     --hash=sha256:1d0ff874250c76615d0563409ebd887c5aac824382447054869a6be6335656bd \
     --hash=sha256:f014ba41b56d4aefe346647770734bc914a1fc8f77bf508d8eaf0e2089189ec8
     # via llama-index
-llama-index-llms-openai==0.4.4 \
-    --hash=sha256:5d3b96e4c9886effb44489a05eb824d7277e98e56e24bfbb8656cd42c4f0aa0a \
-    --hash=sha256:b3e4505b9c7a7ef1cb02353f9e79465169f00b45f20d882773d8f206f92e8e04
+llama-index-llms-openai==0.4.7 \
+    --hash=sha256:3b8d9d3c1bcadc2cff09724de70f074f43eafd5b7048a91247c9a41b7cd6216d \
+    --hash=sha256:564af8ab39fb3f3adfeae73a59c0dca46c099ab844a28e725eee0c551d4869f8
     # via
     #   llama-index
     #   llama-index-agent-openai
