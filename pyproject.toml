@@ -84,7 +84,7 @@ dependencies = [
     "sentence-transformers",
     "llama-stack-client==0.2.9",
 ]
-requires-python = "==3.11.*"
+requires-python = "==3.13.*"
 readme = "README.md"
 license = "LICENSE"
 
