@@ -49,7 +49,7 @@ dependencies = [
     "torchvision>=0.21.0",
     "faiss-cpu>=1.11.0",
     "sentence-transformers",
-    "llama-stack-client==0.2.12",
+    "llama-stack-client==0.2.13",
     "sentencepiece>=0.2.0",
     "tqdm>=4.67.1",
     "numpy>=2.3.0",
