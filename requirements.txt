@@ -328,9 +328,9 @@ llama-cloud==0.1.26 \
     # via
     #   llama-cloud-services
     #   llama-index-indices-managed-llama-cloud
-llama-cloud-services==0.6.31 \
-    --hash=sha256:2288776734a49dff2ccfbd961f67655b2e77a2962020b722255c47ba5a283b7c \
-    --hash=sha256:c6b09d29ec512467ccedb921c5af1d1799abd261668ada706285941aa45587c9
+llama-cloud-services==0.6.39 \
+    --hash=sha256:1514274da561ecb4b727a7061e51c633df151a1c88d412e5324af5e7d1a6af8c \
+    --hash=sha256:32b18562c1bc272cae736e1bcdd9736645400c88a6a82d1e792db29a2aa8a2cc
     # via llama-parse
 llama-index==0.12.44 \
     --hash=sha256:693c1c19c46855014c40ee627c6312af10ac4f6ca9fd08e7d905b403f1fdefa6 \
