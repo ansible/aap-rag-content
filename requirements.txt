@@ -383,9 +383,9 @@ llama-index-instrumentation==0.2.0 \
     --hash=sha256:1055ae7a3d19666671a8f1a62d08c90472552d9fcec7e84e6919b2acc92af605 \
     --hash=sha256:ae8333522487e22a33732924a9a08dfb456f54993c5c97d8340db3c620b76f13
     # via llama-index-workflows
-llama-index-llms-openai==0.4.5 \
-    --hash=sha256:4704412b298eec5f6e2c31b12a09512f8883829b5bb398ddc533329078af2af7 \
-    --hash=sha256:c22dd37597826c2c2f91f45e80e2d4313499560525ace3ac7ad1a50a54a67b17
+llama-index-llms-openai==0.4.7 \
+    --hash=sha256:3b8d9d3c1bcadc2cff09724de70f074f43eafd5b7048a91247c9a41b7cd6216d \
+    --hash=sha256:564af8ab39fb3f3adfeae73a59c0dca46c099ab844a28e725eee0c551d4869f8
     # via
     #   llama-index
     #   llama-index-agent-openai
