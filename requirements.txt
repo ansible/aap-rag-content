@@ -433,9 +433,9 @@ llama-parse==0.6.31 \
     --hash=sha256:5198060b8b0ebb50eb9e699d03ab667ceeb16a405580ff0d703aabeb6e0a6e41 \
     --hash=sha256:dbf072ace4e7c4ad248d56d9aaddb5dd856a76faa087df6748f3f20ccef9f4fe
     # via llama-index-readers-llama-parse
-llama-stack==0.2.12 \
-    --hash=sha256:355c8a3b1c4254967c52d85a1cb65448d89a2cad55630aa77346a41f2702c69d \
-    --hash=sha256:8dce9e670b3044dee838819b66d640573e1d25680c2f5e1068881b9d5d3452c4
+llama-stack==0.2.13 \
+    --hash=sha256:426c0cab38d561b25ce3f2eb757f26ea4bce9783ef80eb6d1dad1bb9bcc4e168 \
+    --hash=sha256:be59570fde5e39224ea8358e2b04e6d92dc37a36a24f5fdf20c853f02793aaa2
     # via aap-rag-content
 llama-stack-client==0.2.12 \
     --hash=sha256:47260284f36ef40dbf4f04d2c2e6f4dfd407cf090930810617ccb9a690e029c3 \

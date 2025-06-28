@@ -44,7 +44,7 @@ dependencies = [
     "llama-index-readers-file>=0.4.9",
     "requests>=2.32.3",
     "llama-index-vector-stores-postgres>=0.4.2",
-    "llama-stack==0.2.12",
+    "llama-stack==0.2.13",
     "torch>=2.6.0",
     "torchvision>=0.21.0",
     "faiss-cpu>=1.11.0",
