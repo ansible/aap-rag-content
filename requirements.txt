@@ -161,9 +161,9 @@ faiss-cpu==1.11.0 \
     --hash=sha256:bdc199311266d2be9d299da52361cad981393327b2b8aa55af31a1b75eaaf522 \
     --hash=sha256:c4a3d35993e614847f3221c6931529c0bac637a00eff0d55293e1db5cb98c85f
     # via aap-rag-content
-fastapi==0.115.12 \
-    --hash=sha256:1e2c2a2646905f9e83d32f04a3f86aff4a286669c6c950ca95b5fd68c2602681 \
-    --hash=sha256:e94613d6c05e27be7ffebdd6ea5f388112e5e430c8f7d6494a9d1d88d43e814d
+fastapi==0.115.14 \
+    --hash=sha256:6c0c8bf9420bd58f565e585036d971872472b4f7d3f6c73b698e10cffdefb3ca \
+    --hash=sha256:b1de15cdc1c499a4da47914db35d0e4ef8f1ce62b624e94e0e5824421df99739
     # via
     #   aap-rag-content
     #   llama-stack
