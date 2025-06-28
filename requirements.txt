@@ -429,9 +429,9 @@ llama-index-workflows==1.0.1 \
     --hash=sha256:07a68cf58040d469af8d05f56217418ae6404557f0254bff22a7481987818e3f \
     --hash=sha256:765844e143fac7fa1f25749be2479a9f75bf553d779a2fbec4f2caeeaa4ff1dd
     # via llama-index-core
-llama-parse==0.6.31 \
-    --hash=sha256:5198060b8b0ebb50eb9e699d03ab667ceeb16a405580ff0d703aabeb6e0a6e41 \
-    --hash=sha256:dbf072ace4e7c4ad248d56d9aaddb5dd856a76faa087df6748f3f20ccef9f4fe
+llama-parse==0.6.39 \
+    --hash=sha256:c9603c34d408ac5daa2889e94aab6ce3ff9d3a2e550a59b90cbec08b94e0958b \
+    --hash=sha256:d0bee844fdbc61b4d485df1e989d7afde770204842a7d3b2c51d299ffbd92477
     # via llama-index-readers-llama-parse
 llama-stack==0.2.12 \
     --hash=sha256:355c8a3b1c4254967c52d85a1cb65448d89a2cad55630aa77346a41f2702c69d \
