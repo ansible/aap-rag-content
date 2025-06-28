@@ -551,9 +551,9 @@ numpy==2.3.0 \
     #   scipy
     #   torchvision
     #   transformers
-openai==1.86.0 \
-    --hash=sha256:c64d5b788359a8fdf69bd605ae804ce41c1ce2e78b8dd93e2542e0ee267f1e4b \
-    --hash=sha256:c8889c39410621fe955c230cc4c21bfe36ec887f4e60a957de05f507d7e1f349
+openai==1.93.0 \
+    --hash=sha256:3d746fe5498f0dd72e0d9ab706f26c91c0f646bf7459e5629af8ba7c9dbdf090 \
+    --hash=sha256:988f31ade95e1ff0585af11cc5a64510225e4f5cd392698c675d0a9265b8e337
     # via
     #   llama-index-agent-openai
     #   llama-index-embeddings-openai
