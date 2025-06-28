@@ -973,9 +973,9 @@ sqlalchemy==2.0.41 \
     # via
     #   llama-index-core
     #   llama-index-vector-stores-postgres
-starlette==0.46.2 \
-    --hash=sha256:595633ce89f8ffa71a015caed34a5b2dc1c0cdb3f0f1fbd1e69339cf2abeec35 \
-    --hash=sha256:7f7361f34eed179294600af672f565727419830b54b7b084efe44bb82d2fccd5
+starlette==0.47.1 \
+    --hash=sha256:5e11c9f5c7c3f24959edbf2dffdc01bba860228acf657129467d8a7468591527 \
+    --hash=sha256:aef012dd2b6be325ffa16698f9dc533614fb1cebd593a906b90dc1025529a79b
     # via
     #   fastapi
     #   llama-stack
