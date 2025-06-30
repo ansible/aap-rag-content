@@ -52,17 +52,23 @@ class MimirParser:
                       list(filter(lambda x: x.endswith(".md"),
                                   os.listdir(self.base_dir + "/single-page")))[0]
 
-    def process_section(self, section, level):
+    def process_section(self, section, level, parent_titles=[]):
         if level >= self.max_level:
             return
 
+        section_title = None
         if "title" in section:
+            section_title = section["title"]
+            section["parent_titles"] = parent_titles
             self.sections.append(section)
 
         sections = section.get("sections", [])
         if sections:
             for s in sections:
-                self.process_section(s, level + 1)
+                self.process_section(
+                    s,
+                    level + 1,
+                    (parent_titles + [section_title]) if section_title else parent_titles)
 
     def process_toc(self):
         with open(self.toc, encoding="utf-8") as f:
@@ -130,11 +136,12 @@ class MimirParser:
                 continue
 
             if not self.kb_article and line.startswith("#"):
-                title_to_match = self.sections[section_index]["title"]
+                section = self.sections[section_index]
+                title_to_match = section["title"]
                 title = line.replace("\xa0", " ")
                 title = re.sub(r"^#+\s*", "", title)
                 title = re.sub(r"^Chapter\s*", "", title)
-                single_page_anchor = self.sections[section_index]['singlePageAnchor']
+                single_page_anchor = section['singlePageAnchor']
                 if title == title_to_match or single_page_anchor == None:
                     if single_page_anchor == None:
                         single_page_anchor = "__index__"
@@ -164,6 +171,9 @@ class MimirParser:
 
                     out_file = os.path.join(self.out_dir, single_page_anchor + ".md")
                     f = open(out_file, "w")
+
+                    for i, parent_title in enumerate(section["parent_titles"]):
+                        print(f"{'#' * (i + 1)} {parent_title}", file=f)
 
             # Convert links to sections into links to full URLs
             line_copy = line
