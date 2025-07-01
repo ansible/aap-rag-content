@@ -1,0 +1,11 @@
+# 5. Connecting to Red Hat Ansible Automation Platform
+## 5.4. Accessing Red Hat Ansible Automation Platform on Microsoft Azure
+### 5.4.1. License association
+
+
+
+
+Red Hat provided a specific subscription entitlement manifest when you subscribed to Red Hat Ansible Automation Platform on Microsoft Azure.
+
+When asked to submit information about your license, select your license manifest file that you obtained from access.redhat.com.
+

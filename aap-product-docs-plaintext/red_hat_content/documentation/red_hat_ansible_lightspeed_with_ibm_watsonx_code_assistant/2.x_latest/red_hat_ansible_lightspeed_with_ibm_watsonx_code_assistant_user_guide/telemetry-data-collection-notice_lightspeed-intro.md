@@ -1,0 +1,89 @@
+# 1. Introduction to Red Hat Ansible Lightspeed
+## 1.4. Data gathered to train the IBM watsonx Code Assistant models
+### 1.4.4. Telemetry data collection notice for the Admin dashboard
+
+
+
+
+In connection with your use of this Red Hat offering, Red Hat may collect telemetry data about your use of the software. This data allows Red Hat to monitor the software and to improve Red Hat offerings and support, including identifying, troubleshooting, and responding to issues that impact users. The data may also be used to enable you to track your entitlements to Red Hat subscriptions and take advantage of future Red Hat purchasing programs. It may also allow Red Hat to assist you in implementing upgrades to minimize service impact. The data may be shared internally within Red Hat to improve the user experience. If you are evaluating Red Hat software, the data will help Red Hat determine if you need assistance.
+
+#### 1.4.4.1. What information does Red Hat collect?
+
+
+
+
+Tools within the software monitor various metrics and this information is transmitted to Red Hat. The following metrics are monitored:
+
+-  **Operational telemetry data**
+
+This is the data that is required to operate and troubleshoot the Ansible Lightspeed service. For more information, refer the Enterprise Agreement. You cannot disable the collection of operational telemetry data.
+
+This includes the following data:
+
+
+- Organization you are logged into (Organization ID, account number)
+- Large language model (or models) that you are connected to
+
+-  **Admin dashboard telemetry data**
+
+This is the data that provides insight into how your organization users are using the Ansible Lightspeed service, and the metrics are displayed on the Admin dashboard.
+
+This includes the following data:
+
+
+- Prompts and content suggestions, including accept or reject of the content suggestions
+- User sentiment feedback
+
+You can also disable the Admin dashboard telemetry if you no longer want to collect and monitor the telemetry data. For more information about Admin dashboard telemetry, see [Viewing and managing Admin dashboard telemetry](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#view-manage-admin-dashboard-telemetry_administering-ansible-lightspeed) .
+
+
+
+
+
+Note
+No telemetry data is collected in an Red Hat Ansible Lightspeed on-premise deployment.
+
+
+
+#### 1.4.4.2. Personal Data
+
+
+
+
+Red Hat does not intend to collect personal information. If Red Hat discovers that personal information has been inadvertently received, Red Hat will delete such information. To the extent that any telemetry data constitutes personal data, refer to the [Red Hat Privacy Statement](https://www.redhat.com/en/about/privacy-policy) for more information about Red Hat’s privacy practices.
+
+
+<span id="retention"></span>
+###### Retention
+
+
+Red Hat retains and stores telemetry data only for as long as it’s needed for the purposes described above or as otherwise required or permitted by law.
+
+
+<span id="data_security"></span>
+###### Data Security
+
+
+Red Hat employs technical and organizational measures designed to protect the telemetry data. Data stored in the Red Hat cloud is being protected, where possible, through encryption. Data is also segmented, and therefore is not accessible across organizations.
+
+
+<span id="data_sharing"></span>
+###### Data Sharing
+
+
+Red Hat may share telemetry data with its business partners in an aggregated form that does not identify customers to help the partners better understand their markets and their customer’s use of Red Hat offerings or ensure the successful integration of products jointly supported by those partners.
+
+
+<span id="third_party_service_providers"></span>
+###### Third Party Service Providers
+
+
+Red Hat may engage certain service providers to assist in the collection and storage of the telemetry data.
+
+
+<span id="user_control_enabling_and_disabling_admin_dashboard_telemetry_collection"></span>
+###### User Control/ Enabling and Disabling Admin Dashboard Telemetry Collection
+
+
+You cannot disable collection of operational telemetry data. Operational telemetry data includes only data that is necessary to operate and troubleshoot the service. However, you can disable the collection of Admin Dashboard telemetry data. For more information, see [Disabling the Admin dashboard telemetry](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#disable-admin-dashboard-telemetry_administering-ansible-lightspeed) .
+

@@ -1,0 +1,13 @@
+# 2. Configuring proxy support for Red Hat Ansible Automation Platform
+## 2.4. Enable sticky sessions
+
+
+
+
+By default, an application load balancer routes each request independently to a registered target based on the chosen load-balancing algorithm. To avoid authentication errors when running multiple instances of automation hub behind a load balancer, you must enable sticky sessions. Enabling sticky sessions sets a custom application cookie that matches the cookie configured on the load balancer to enable stickiness. This custom cookie can include any of the cookie attributes required by the application.
+
+**Additional resources**
+
+- Refer to [Sticky sessions for your Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/sticky-sessions.html) for more information about enabling sticky sessions.
+
+

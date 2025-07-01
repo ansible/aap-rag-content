@@ -1,0 +1,20 @@
+# 8. 7 March 2024
+## 8.1. New features and enhancements
+
+
+
+
+-  **Ansible code bot General Availability**
+
+Previously, Red Hat Ansible Lightspeed provided the Ansible code bot as a Technology Preview release. Now, the Ansible code bot is available as General Availability release along with an improved performance and an Ansible code bot dashboard.
+
+The dashboard displays a list of your repositories where the code bot is installed, the status of your repository scans, and indicates whether the scan schedule is not set, or is set to manual or scheduled scan. From the dashboard, you can start a manual scan, view the scan history, and view the repository. For more information, see [Installing and configuring the Ansible code bot](https://access.redhat.com/documentation/en-us/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#using-code-bot-for-suggestions_lightspeed-user-guide) .
+
+
+-  **Ability to collect and manage the Admin dashboard telemetry**
+
+Red Hat Ansible Lightspeed now collects Admin dashboard telemetry data that provides insight into how your organization users are using the Ansible Lightspeed service, and displays the metrics on the Admin dashboard. If you no longer want to collect and manage the Admin dashboard telemetry, you can disable it for your organization. For more information, see [Viewing and managing Admin dashboard telemetry](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#view-manage-admin-dashboard-telemetry_administering-ansible-lightspeed) .
+
+
+
+

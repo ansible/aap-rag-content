@@ -1,0 +1,277 @@
+# 7. Implementing policy enforcement
+## 7.5. Policy enforcement inputs and outputs
+
+
+
+
+Use the following inputs and outputs to craft policies for use in policy enforcement.
+
+
+<span id="idm140477670110208"></span>
+**Table 7.1. Input data**
+
+|  **Input** |  **Type** |  **Description** |
+| --- | --- | --- |
+|  `id` | Integer | The job’s unique identifier. |
+|  `name` | String | Job template name. |
+|  `created` | Datetime (ISO 8601) | Timestamp indicating when the job was created. |
+|  `created by` | Object | Information about the user who created the job.
+
+-  `    id` (integer): Unique identifier for the user
+-  `    username` (string): creator username
+-  `    is_superuser` (boolean): indicates if the user is a superuser |
+|  `credentials` | List of objects | Credentials associated with job execution.
+
+-  `    id` (integer): the credential’s unique identifier
+-  `    name` (string): credential name
+-  `    description` (string): credential description
+-  `    organization` (integer or null): organization identifier associated with the credential
+-  `    credential_type` (integer): credential type identifier
+-  `    managed` (boolean): indicates if the credential is managed internally
+-  `    kind` (string): credential type ( such as `    ssh` , `    cloud` , or `    kubernetes` ) |
+|  `execution_environment` | Object | Details about the execution environment used for the job.
+
+-  `    id` (integer): the execution environment’s unique identifier
+-  `    name` (string): execution environment name
+-  `    image` (string): container image used for execution
+-  `    pull` (string): pull policy for the execution environment |
+|  `extra_vars` | JSON | Extra variables provided for job execution. |
+|  `forks` | Integer | The number of parallel processes used for job execution. |
+|  `hosts_count` | Integer | The number of hosts targeted by the job. |
+|  `instance_group` | Object | Information about the instance group handling the job, including:
+
+-  `    id` (integer): the instance group’s unique identifier
+-  `    name` (string): the instance group name
+-  `    capacity` (integer): the available capacity in the group
+-  `    jobs_running` (integer): the number of currently running jobs
+-  `    jobs_total` (integer): total jobs handled by the group
+-  `    max_concurrent_jobs` (integer): maximum concurrent jobs allowed
+-  `    max_forks` (integer): maximum forks allowed |
+|  `inventory` | Object | Inventory details used in the job execution, including:
+
+-  `    id` (integer): the inventory’s unique identifier
+-  `    name` (string): The inventory’s name
+-  `    description` (string): inventory description
+-  `    kind` (string): the inventory type
+-  `    total_hosts` (integer): the total number of hosts in the inventory
+-  `    total_groups` (integer): the total number of groups in the inventory
+-  `    has_inventory_sources` (boolean): indicates if the inventory has external sources
+-  `    total_inventory_sources` (integer): the number of external inventory sources
+-  `    has_active_failures` (boolean): indicates if there are active failures in the inventory
+-  `    hosts_with_active_failures` (boolean): the number of hosts with active failures
+-  `    inventory_sources` (array): external inventory sources associated with the inventory |
+|  `job_template` | Object | Information about the job template, including:
+
+-  `    id` (integer): the job template’s unique identifier
+-  `    name` (string): the job template’s name
+-  `    job_type` (string): type of job (for example, `    run` ) |
+|  `job_type` | Choice (String) | Type of job execution. Allowed values are:
+
+-  `    run`
+-  `    check`
+-  `    scan` |
+|  `job_type_name` | String | Human-readable name for the job type. |
+|  `labels` | List of objects | Labels associated with the job, including:
+
+-  `    id` (integer): the label’s unique identifier
+-  `    name` (string): the label name
+-  `    organization` (object): the organization associated with the label
+
+
+-  `        id` (integer): the organization’s unique identifier
+-  `        name` (string): the organization name |
+|  `launch_type` | Choice (String) | How the job was launched. Allowed values include:
+
+-  `    manual` : manual
+-  `    relaunch` : relaunch
+-  `    callback` : callback
+-  `    scheduled` : scheduled
+-  `    dependency` : dependency
+-  `    workflow` : workflow
+-  `    webhook` : webhook
+-  `    sync` : sync
+-  `    scm` : SCM update |
+|  `limit` | String | The limit applied to the job execution. |
+|  `launched_by` | Object | Information about the user who launched the job, including:
+
+-  `    id` (integer): the user’s unique identifier
+-  `    name` (string): the user name
+-  `    type` (type): the user type (for example, `    user` , `    system` , etc)
+-  `    url` (string): the user’s API URL |
+|  `organization` | Object | Information about the organization associated with the job, including:
+
+-  `    id` (integer): the organization’s unique identifier
+-  `    name` (name): the organization’s name |
+|  `playbook` | String | The playbook used in the job execution. |
+|  `project` | Object | Details about the project associated with the job, including:
+
+-  `    id` (integer): the project’s unique identifier
+-  `    name` (string): the project name
+-  `    status` (choice-string): the project status
+
+
+-  `        successful` : Successful
+-  `        failed` : failed
+-  `        error` : error
+
+-  `    scm_type` (string): source control type (such as`git`, or `    svn` )
+-  `    scm_url` (string): the source control repository URL
+-  `    scm_branch` (string): the branch used in the repository
+-  `    scm_refspec` (string): RefSpec for the repository
+-  `    scm_clean` (boolean): whether the SCM is cleaned before updates
+-  `    scm_track_submodules` (boolean): whether submodules are tracked
+-  `    scm_delete_on_update` (boolean): whether SCM deletes files on update |
+|  `scm_branch` | String | The specific branch to use for SCM. |
+|  `scm_revision` | String | SCM revision used for the job. |
+|  `workflow_job` | Object | Workflow job details, if the job is part of a workflow. |
+|  `workflow_job_template` | Object | Workflow job template details. |
+
+
+
+
+**Example**
+
+The following code block shows example input data from a demo job template launch:
+
+
+```
+{
+"id": 70,
+"name": "Demo Job Template",
+"created": "2025-03-19T19:07:03.329426Z",
+"created_by": {
+"id": 1,
+"username": "admin",
+"is_superuser": true,
+"teams": []
+},
+"credentials": [
+{
+"id": 3,
+"name": "Example Machine Credential",
+"description": "",
+"organization": null,
+"credential_type": 1,
+"managed": false,
+"kind": "ssh",
+"cloud": false,
+"kubernetes": false
+}
+],
+"execution_environment": {
+"id": 2,
+"name": "Default execution environment",
+"image": "registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8@sha256:b9f60d9ebbbb5fdc394186574b95dea5763b045ceff253815afeb435c626914d",
+"pull": ""
+},
+"extra_vars": {
+"example": "value"
+},
+"forks": 0,
+"hosts_count": 0,
+"instance_group": {
+"id": 2,
+"name": "default",
+"capacity": 0,
+"jobs_running": 1,
+"jobs_total": 38,
+"max_concurrent_jobs": 0,
+"max_forks": 0
+},
+"inventory": {
+"id": 1,
+"name": "Demo Inventory",
+"description": "",
+"kind": "",
+"total_hosts": 1,
+"total_groups": 0,
+"has_inventory_sources": false,
+"total_inventory_sources": 0,
+"has_active_failures": false,
+"hosts_with_active_failures": 0,
+"inventory_sources": []
+},
+"job_template": {
+"id": 7,
+"name": "Demo Job Template",
+"job_type": "run"
+},
+"job_type": "run",
+"job_type_name": "job",
+"labels": [
+{
+"id": 1,
+"name": "Demo label",
+"organization": {
+"id": 1,
+"name": "Default"
+}
+}
+],
+"launch_type": "workflow",
+"limit": "",
+"launched_by": {
+"id": 1,
+"name": "admin",
+"type": "user",
+"url": "/api/v2/users/1/"
+},
+"organization": {
+"id": 1,
+"name": "Default"
+},
+"playbook": "hello_world.yml",
+"project": {
+"id": 6,
+"name": "Demo Project",
+"status": "successful",
+"scm_type": "git",
+"scm_url": "https://github.com/ansible/ansible-tower-samples",
+"scm_branch": "",
+"scm_refspec": "",
+"scm_clean": false,
+"scm_track_submodules": false,
+"scm_delete_on_update": false
+},
+"scm_branch": "",
+"scm_revision": "",
+"workflow_job": {
+"id": 69,
+"name": "Demo Workflow"
+},
+"workflow_job_template": {
+"id": 10,
+"name": "Demo Workflow",
+"job_type": null
+}
+}
+```
+
+
+<span id="idm140477674684608"></span>
+**Table 7.2. Output data**
+
+|  **Input** |  **Type** |  **Description** |
+| --- | --- | --- |
+|  `allowed` | Boolean | Indicates whether the action is permitted |
+|  `violations` | List of strings | Reasons why the action is not permitted |
+
+
+
+
+**Example**
+
+The following code block shows an example of expected output from the OPA policy query:
+
+
+```
+{
+"allowed": false,
+"violations": [
+"No job execution is allowed",
+...
+],
+...
+}
+```
+
