@@ -163,5 +163,12 @@ cython_debug/
 
 # Vector DB
 vector_db/
+llama_stack_vector_db/
 
 .vscode
+
+# Work directory for Mimir archive
+mimir/
+
+# model.safetensors file
+model.safetensors

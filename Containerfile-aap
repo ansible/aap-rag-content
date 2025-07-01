@@ -1,45 +1,34 @@
-ARG LIGHTSPEED_RAG_EMBEDDINGS_IMAGE=quay.io/ansible/aap-rag-embeddings-image:latest
-
+FROM registry.access.redhat.com/ubi9/python-312 as aap-rag-builder
 ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
 ARG FLAVOR=cpu
 ARG HERMETIC=false
-
-FROM ${LIGHTSPEED_RAG_EMBEDDINGS_IMAGE} as lightspeed-rag-embeddings
-
-FROM registry.access.redhat.com/ubi9/python-311 as cpu-base
-ARG EMBEDDING_MODEL
-ARG FLAVOR
-
-FROM nvcr.io/nvidia/cuda:12.9.1-devel-ubi9 as gpu-base
-ARG EMBEDDING_MODEL
-ARG FLAVOR
-RUN dnf install -y python3.11 python3.11-pip libcudnn9 libnccl
-
-FROM ${FLAVOR}-base as aap-rag-builder
-ARG EMBEDDING_MODEL
-ARG FLAVOR
 ARG AAP_VERSION=2.5
 
 USER 0
 WORKDIR /workdir
 
-COPY pyproject.toml pdm.lock.* Makefile .
-RUN make install-tools && pdm config python.use_venv false && make pdm-lock-check install-deps
+COPY requirements-modified.txt ./requirements.txt
 
 COPY aap-product-docs-plaintext ./aap-product-docs-plaintext
 COPY additional_docs ./additional_docs
 
-COPY --from=lightspeed-rag-embeddings /rag/embeddings_model ./embeddings_model
-
-RUN if [ "$FLAVOR" == "gpu" ]; then \
-        export LD_LIBRARY_PATH=/usr/local/cuda-12.9/compat:$LD_LIBRARY_PATH; \
-        pdm run python -c \
-        "import torch; print(torch.version.cuda); print(torch.cuda.is_available());"; \
-    fi
+COPY embeddings_model ./embeddings_model
 
 COPY scripts/generate_embeddings-aap.py .
-RUN export LD_LIBRARY_PATH=/usr/local/cuda-12.9/compat:$LD_LIBRARY_PATH; \
-	set -e && pdm run python generate_embeddings-aap.py \
+COPY scripts/generate_embeddings-llama-stack.py .
+COPY run.yaml .
+
+RUN python3.12 -m venv .venv
+RUN source .venv/bin/activate
+RUN pip3.12 install --no-cache-dir -r requirements.txt
+
+RUN cd embeddings_model; if [ "$HERMETIC" == "true" ]; then \
+        cp /cachi2/output/deps/generic/model.safetensors model.safetensors; \
+    else \
+        curl -L -O https://huggingface.co/sentence-transformers/all-mpnet-base-v2/resolve/9a3225965996d404b775526de6dbfe85d3368642/model.safetensors; \
+    fi
+
+RUN set -e && python3.12 generate_embeddings-aap.py \
   -f aap-product-docs-plaintext \
   -mn ${EMBEDDING_MODEL} \
   -o vector_db/aap_product_docs/${AAP_VERSION} \
@@ -48,8 +37,21 @@ RUN export LD_LIBRARY_PATH=/usr/local/cuda-12.9/compat:$LD_LIBRARY_PATH; \
   -c 200 \
   -l 10
 
-FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:f172b3082a3d1bbe789a1057f03883c1113243564f01cd3020e27548b911d3f8
+RUN set -e && python3.12 generate_embeddings-llama-stack.py \
+  -f aap-product-docs-plaintext \
+  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
+  -c 200
+
+RUN cd llama_stack_vector_db; gzip faiss_store.db; sha256sum faiss_store.db.gz > faiss_store.db.gz.sha256
+
+FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:e12131db2e2b6572613589a94b7f615d4ac89d94f859dad05908aeb478fb090f
+
+# install diff and gzip
+RUN microdnf install -y diffutils gzip
+
 COPY --from=aap-rag-builder /workdir/vector_db/aap_product_docs /rag/vector_db/aap_product_docs
+COPY --from=aap-rag-builder /workdir/embeddings_model /rag/embeddings_model
+COPY --from=aap-rag-builder /workdir/llama_stack_vector_db /rag/llama_stack_vector_db
 
 # this directory is checked by ecosystem-cert-preflight-checks task in Konflux
 RUN mkdir /licenses
@@ -68,5 +70,8 @@ LABEL url="https://github.com/ansible/aap-rag-content"
 LABEL vendor="Red Hat"
 LABEL version=0.0.1
 LABEL summary="Red Hat Ansible Automation Platform RAG content"
+
+COPY entrypoint.sh /rag
+RUN chmod +x /rag/entrypoint.sh
 
 USER 65532:65532

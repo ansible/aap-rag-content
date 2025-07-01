@@ -229,6 +229,10 @@ def main():
                     print(output.stdout)
                     print(output.stderr)
                     print("done!")
+                print("Delete html files")
+                output = subprocess.run("find red_hat_content -name *.html -type f -delete".split(" "), capture_output=True,
+                                        text=True, check=True)
+                print(output)
             except subprocess.CalledProcessError:
                 traceback.print_stack()
                 exit(2)
