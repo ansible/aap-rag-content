@@ -5,20 +5,25 @@ POSTGRES_HOST ?= localhost
 POSTGRES_PORT ?= 15432
 POSTGRES_DATABASE ?= postgres
 EMBEDDINGS_MODEL ?= sentence-transformers/all-mpnet-base-v2
+RAG_CONTENT_IMAGE ?= quay.io/ansible/aap-rag-content:latest
 
 OUTPUT_FOLDER ?= ./output
 PG_DUMP_FILE ?= backup.tar
 
 AAP_VERSION ?= 2.5
-
-install-tools: ## Install required utilities/tools
-	@command -v uv > /dev/null || { echo >&2 "uv is not installed. Installing..."; curl -LsSf https://astral.sh/uv/install.sh | sh; }
+AAP_VERSION_STR := $(shell echo $(AAP_VERSION) | sed 's/\./_/g')
 
 uv-lock-check: ## Check that the uv.lock file is in a good shape
 	uv lock --check
 
-install-deps: install-tools uv-lock-check ## Install all required dependencies, according to uv.lock
+install-deps: uv-lock-check download-embeddings-model ## Install all required dependencies, according to uv.lock
 	uv sync --frozen
+
+download-embeddings-model:
+	@echo "Download model.safetensors file..."
+	podman run -d --rm --name rag-content $(RAG_CONTENT_IMAGE) sleep infinity
+	podman cp rag-content:/rag/embeddings_model/model.safetensors ./embeddings_model
+	podman kill rag-content
 
 export-deps: ## Check pyproject.toml for changes, update the lock file if needed, then sync.
 	uv export --format requirements.txt -o requirements.txt
@@ -39,6 +44,22 @@ update-docs: ## Update the plaintext OCP docs in ocp-product-docs-plaintext/
 		scripts/get_ocp_plaintext_docs.sh $$OCP_VERSION; \
 	done
 	scripts/get_runbooks.sh
+
+build-road-core-db:
+	uv run python3 scripts/generate_embeddings-aap.py \
+  -f aap-product-docs-plaintext \
+  -mn $(EMBEDDINGS_MODEL) \
+  -o vector_db/aap_product_docs/$(AAP_VERSION) \
+  -i aap-product-docs-$(AAP_VERSION_STR) \
+  -v $(AAP_VERSION) \
+  -c 4000 \
+  -l 10
+
+build-llama-stack-db:
+	uv run python3 scripts/generate_embeddings-llama-stack.py \
+  -f aap-product-docs-plaintext \
+  -i aap-product-docs-$(AAP_VERSION_STR) \
+  -c 200
 
 build-image: ## Build a rag-content container image.
 	podman build -t rag-content .

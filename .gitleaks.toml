@@ -1,0 +1,9 @@
+[allowlist]
+  description = "Global Allowlist"
+
+  # Ignore based on any subset of the file path
+  paths = [
+    # Ignore product docs
+    '''aap-product-docs-plaintext\/''',
+    '''red_hat_content\/documentation\/''',
+  ]
