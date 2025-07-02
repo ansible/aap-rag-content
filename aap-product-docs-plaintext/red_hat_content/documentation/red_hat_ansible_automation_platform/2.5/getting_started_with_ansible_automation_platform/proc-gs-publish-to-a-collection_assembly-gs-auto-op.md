@@ -1,0 +1,34 @@
+# 4. Getting started as an automation operator
+## 4.5. Publishing to a collection
+
+
+
+
+You can configure your projects to be uploaded to Git, or to the source control manager of your choice.
+
+**Procedure**
+
+1. From the navigation panel, selectAutomation Execution→Projects.
+1. Locate or create the project that you want to publish to your source control manager.
+1. In the project **Details** tab, select **Edit project** .
+1. Select **Git** from the **Source Control Type** drop-down menu.
+1. Enter the appropriate details into the following fields:
+
+
+1.  **Source Control URL** - see an example in the tooltip.
+1. Optional: **Source control branch/tag/commit** : Enter the SCM branch, tags, commit hashes, arbitrary refs, or revision number (if applicable) from the source control to checkout. Some commit hashes and references might not be available unless you also provide a custom refspec in the next field. If left blank, the default is `        HEAD` , which is the last checked out branch, tag, or commit for this project.
+1.  **Source Control Refspec** - This field is an option specific to Git source control and only advanced users familiar and comfortable with Git should specify which references to download from the remote repository. For more information, see [Job branch overriding](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-jobs#controller-job-branch-overriding) .
+1.  **Source Control Credential** - If authentication is required, select the appropriate source control credential.
+
+1. Optional: **Options** - select the launch behavior, if applicable:
+
+
+1.  **Clean** - Removes any local modifications before performing an update.
+1.  **Delete** - Deletes the local repository in its entirety before performing an update. Depending on the size of the repository this can significantly increase the amount of time required to complete an update.
+1.  **Track submodules** - Tracks the latest commit. See the tooltip for more information.
+1.  **Update Revision on Launch** - Updates the revision of the project to the current revision in the remote source control, and caches the roles directory from [Ansible Galaxy](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html) or [Collections support](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-projects#ref-projects-collections-support) . Automation controller ensures that the local revision matches and that the roles and collections are up-to-date with the last update. In addition, to avoid job overflows if jobs are spawned faster than the project can synchronize, selecting this enables you to configure a cache timeout to cache previous project synchronizations for a given number of seconds.
+1.  **Allow Branch Override** - Enables a job template or an inventory source that uses this project to start with a specified SCM branch or revision other than that of the project. For more information, see [Job branch overriding](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-jobs#controller-job-branch-overriding) .
+
+1. ClickSaveto save your project.
+
+

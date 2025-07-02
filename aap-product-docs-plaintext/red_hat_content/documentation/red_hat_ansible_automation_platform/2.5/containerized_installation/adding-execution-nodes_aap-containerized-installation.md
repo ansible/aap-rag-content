@@ -1,0 +1,47 @@
+# 2. Ansible Automation Platform containerized installation
+## 2.7. Advanced configuration options
+### 2.7.2. Adding execution nodes
+
+
+
+
+Containerized Ansible Automation Platform can deploy remote execution nodes.
+
+You can define remote execution nodes in the `[execution_nodes]` group of your inventory file:
+
+```
+[execution_nodes]
+&lt;fqdn_of_your_execution_host&gt;
+```
+
+By default, an execution node is configured with the following settings which can be modified as needed:
+
+```
+receptor_port=27199
+receptor_protocol=tcp
+receptor_type=execution
+```
+
+-  `    receptor_port` - The port number that receptor listens on for incoming connections from other receptor nodes.
+-  `    receptor_type` - The role of the node. Valid options include `    execution` or `    hop` .
+-  `    receptor_protocol` - The protocol used for communication. Valid options include `    tcp` or `    udp` .
+
+
+By default, all nodes in the `[execution_nodes]` group are added as peers for the controller node. To change the peer configuration, use the `receptor_peers` variable.
+
+Note
+The value of `receptor_peers` must be a comma-separated list of host names. Do not use inventory group names.
+
+
+
+Example configuration:
+
+```
+[execution_nodes]
+# Execution nodes
+exec1.example.com
+exec2.example.com
+# Hop node that peers with the two execution nodes above
+hop1.example.com receptor_type=hop receptor_peers='["exec1.example.com","exec2.example.com"]'
+```
+

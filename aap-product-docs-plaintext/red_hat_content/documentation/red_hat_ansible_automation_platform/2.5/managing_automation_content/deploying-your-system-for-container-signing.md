@@ -1,0 +1,43 @@
+# 3. Manage containers in private automation hub
+## 3.6. Working with signed containers
+### 3.6.1. Deploying your system for container signing
+
+
+
+
+To deploy your system so that it is ready for container signing, first ensure that you have [enabled automation content collection and container signing](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#enabling-automation-hub-collection-and-container-signing_aap-containerized-installation) . Then you can create a signing script, or [add and sign an execution environment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-containers-hub#adding-an-execution-environment) manually.
+
+Note
+Installer looks for the script and key on the same server where installer is located.
+
+
+
+**Procedure**
+
+1. From a terminal, create a signing script, and pass the script path as an installer parameter.
+
+**Example** :
+
+
+```
+#!/usr/bin/env bash        # pulp_container SigningService will pass the next 4 variables to the script.    MANIFEST_PATH=$1    FINGERPRINT="$PULP_SIGNING_KEY_FINGERPRINT"    IMAGE_REFERENCE="$REFERENCE"    SIGNATURE_PATH="$SIG_PATH"        # Create container signature using skopeo    skopeo standalone-sign \      $MANIFEST_PATH \      $IMAGE_REFERENCE \      $FINGERPRINT \      --output $SIGNATURE_PATH        # Optionally pass the passphrase to the key if password protected.    # --passphrase-file /path/to/key_password.txt        # Check the exit status    STATUS=$?    if [ $STATUS -eq 0 ]; then      echo {\"signature_path\": \"$SIGNATURE_PATH\"}    else      exit $STATUS    fi
+```
+
+
+1. Review the Ansible Automation Platform installer inventory file for options for container signing that begin with `    automationhub_*` .
+
+
+```
+[all:vars]    .    .    .        automationhub_create_default_container_signing_service = True    automationhub_container_signing_service_key = /absolute/path/to/key/to/sign    automationhub_container_signing_service_script = /absolute/path/to/script/that/signs
+```
+
+
+1. Once installation is complete, log in to Ansible Automation Platform and navigate toAutomation Content→Signature Keys.
+1. Ensure that you have a key titled **container-default** , or **container** - _anyname_ .
+
+
+Note
+The `container-default` service is created by the Ansible Automation Platform installer.
+
+
+

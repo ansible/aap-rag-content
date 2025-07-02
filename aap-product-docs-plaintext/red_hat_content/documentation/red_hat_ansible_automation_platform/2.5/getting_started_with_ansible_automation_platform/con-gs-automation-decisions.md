@@ -1,0 +1,15 @@
+# 1. Key functionality and concepts
+## 1.4. Automation decisions
+
+
+
+
+Red Hat Ansible Automation Platform includes Event-Driven Ansible, an automation engine that listens to your system’s event stream and reacts to events that you have specified with targeted automation tasks. In this way, Event-Driven Ansible manages routine automation tasks and responses, freeing you up to work on more complex tasks.
+
+Managed through Event-Driven Ansible controller, Ansible rulebooks are the framework for automation decisions. Ansible rulebooks are collections of rulesets, which in turn consist of one or more sources, rules, and conditions. Rulebooks tell the system what events to flag and how to respond to them. From the Automation Decisions section of the platform user interface, you can use rulebooks to connect and listen to event sources, and define actions that are triggered in response to certain events.
+
+**Additional resources**
+
+For more information about rulebook, events, and sources, see [Rulebook actions](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/index#con-gs-define-events-rulebooks) .
+
+

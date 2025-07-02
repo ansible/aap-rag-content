@@ -1,0 +1,88 @@
+# 12. Usage reporting with metrics-utility
+## 12.1. Configuring metrics-utility
+### 12.1.1. Configuring metrics-utility on Red Hat Enterprise Linux
+
+
+
+
+**Prerequisites:**
+
+- An active Ansible Automation Platform subscription
+
+
+Metrics-utility is included with Ansible Automation Platform, so you do not need a separate installation. The following commands gather the relevant data and generate a [CCSP](https://connect.redhat.com/en/programs/certified-cloud-service-provider) report containing your usage metrics. You can configure these commands as cronjobs to ensure they run at the beginning of every month. See [How to schedule jobs using the Linux 'cron' utility](https://www.redhat.com/sysadmin/linux-cron-command) for more on configuring using the cron syntax.
+
+**Procedure**
+
+1. Create two scripts in your user’s home director in order to set correct variables to ensure that `    metrics-utility` gathers all relevant data.
+
+
+1. In `        /home/my-user/cron-gather` :
+
+
+```
+#!/bin/sh                # Specify the following variables to indicate where the report is deposited in your file system        export METRICS_UTILITY_SHIP_TARGET=directory        export METRICS_UTILITY_SHIP_PATH=/awx_devel/awx-dev/metrics-utility/shipped_data/billing                # Run the following command to gather and store the data in the provided SHIP_PATH directory:        metrics-utility gather_automation_controller_billing_data --ship --until=10m
+```
+
+
+1. In `        /home/my-user/cron-report` :
+
+
+```
+#!/bin/sh                # Specify the following variables to indicate where the report is deposited in your file system        export METRICS_UTILITY_SHIP_TARGET=directory        export METRICS_UTILITY_SHIP_PATH=/awx_devel/awx-dev/metrics-utility/shipped_data/billing                # Set these variables to generate a report:        export METRICS_UTILITY_REPORT_TYPE=CCSPv2        export METRICS_UTILITY_PRICE_PER_NODE=11.55 # in USD        export METRICS_UTILITY_REPORT_SKU=MCT3752MO        export METRICS_UTILITY_REPORT_SKU_DESCRIPTION="EX: Red Hat Ansible Automation Platform, Full Support (1 Managed Node, Dedicated, Monthly)"        export METRICS_UTILITY_REPORT_H1_HEADING="CCSP Reporting &lt;Company&gt;: ANSIBLE Consumption"        export METRICS_UTILITY_REPORT_COMPANY_NAME="Company Name"        export METRICS_UTILITY_REPORT_EMAIL="email@email.com"        export METRICS_UTILITY_REPORT_RHN_LOGIN="test_login"        export METRICS_UTILITY_REPORT_COMPANY_BUSINESS_LEADER="BUSINESS LEADER"        export METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER="PROCUREMENT LEADER"                # Build the report        metrics-utility build_report
+```
+
+
+
+1. To ensure that these files are executable, run:
+
+
+```
+chmod a+x /home/my-user/cron-gather /home/my-user/cron-report
+```
+
+
+1. To open the cron file for editing, run:
+
+
+```
+crontab -e
+```
+
+
+1. To configure the run schedule, add the following parameters to the end of the file and specify how often you want `    metrics-utility` to gather information and build a report using [cron syntax](https://www.redhat.com/sysadmin/linux-cron-command) . In the following example, the `    gather` command is configured to run every hour at 00 minutes. The `    build_report` command is configured to run on the second day of each month at 4:00 AM.
+
+
+```
+0 */1 * * * /home/my-user/cron-gather    0 4 2 * * /home/my-user/cron-report
+```
+
+
+1. Save and close the file.
+1. To verify that you saved your changes, run:
+
+
+```
+crontab -l
+```
+
+
+1. To ensure that data is being collected, run:
+
+
+```
+cat /var/log/cron
+```
+
+The following is an example of the output. Note that time and date might vary depending on how your configure the run schedule:
+
+
+```
+May  8 09:45:03 ip-10-0-6-23 CROND[51623]: (root) CMDOUT (No billing data for month: 2024-04)    May  8 09:45:03 ip-10-0-6-23 CROND[51623]: (root) CMDEND (metrics-utility build_report)    May  8 09:45:19 ip-10-0-6-23 crontab[51619]: (root) END EDIT (root)    May  8 09:45:34 ip-10-0-6-23 crontab[51659]: (root) BEGIN EDIT (root)    May  8 09:46:01 ip-10-0-6-23 CROND[51688]: (root) CMD (metrics-utility gather_automation_controller_billing_data --ship --until=10m)    May  8 09:46:03 ip-10-0-6-23 CROND[51669]: (root) CMDOUT (/tmp/9e3f86ee-c92e-4b05-8217-72c496e6ffd9-2024-05-08-093402+0000-2024-05-08-093602+0000-0.tar.gz)    May  8 09:46:03 ip-10-0-6-23 CROND[51669]: (root) CMDEND (metrics-utility gather_automation_controller_billing_data --ship --until=10m)    May  8 09:46:26 ip-10-0-6-23 crontab[51659]: (root) END EDIT (root)
+```
+
+The generated report will have the default name CCSP-<YEAR>-<MONTH>.xlsx and will be deposited in the ship path that you specified in step 3.
+
+
+
+

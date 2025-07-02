@@ -1,0 +1,14 @@
+## Install and configure Red Hat Ansible Automation Platform Service on AWS
+
+
+Red Hat Customer Content Services
+
+[Legal Notice](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#idm140623181969040)
+**Abstract**
+
+Ansible Automation Platform helps teams manage complex multi-tier deployments by adding control, knowledge, and delegation to Ansible-powered environments. This guide helps you to understand the installation and use of Ansible Automation Platform Service on AWS. This document has been updated to include information for the latest release of Ansible Automation Platform Service on AWS.
+
+
+
+---
+

@@ -1,0 +1,24 @@
+# 5. Red Hat Ansible Automation Platform Service on AWS Service Definition
+## 5.3. Execution plane
+### 5.3.1. Shape
+
+
+
+
+Your execution plane’s size and shape depend on the type of automation and the locations connected to the mesh. Use the following guidelines for your automation mesh implementation:
+
+Ansible Automation Platform minimum requirements:
+
+- Hop Nodes: Red Hat Ansible Automation Platform Service on AWS includes two hop nodes that customers can use to peer with execution nodes. They typically require minimal resources. The shape of a hop node depends on the number of connected execution nodes. A virtual machine (VM) with 2 vCPUs and 2 GB RAM can route traffic for 2-4 execution nodes.
+
+
+- For help with configuring your automation mesh see [Automation mesh for managed cloud or operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/automation_mesh_for_managed_cloud_or_operator_environments/index) .
+
+- For automation in fewer locations (such as specific geographies or clouds), create a mesh with fewer VMs that can be scaled vertically. Most clouds and hypervisors allow shape changes with minimal downtime.
+- For CPU or RAM-intensive automation, use larger machine shapes.
+- For automation spanning multiple locations, create a mesh with nodes that connect to those locations.
+- Consider using different CPU architectures, like ARM, and reserved instances to reduce execution plane costs.
+- To configure redundancy in the automation mesh, set up at least two mesh nodes of the same shape in different availability zones within the same region, connecting each machine to both hosted hop nodes.
+- Use OpenShift if auto-scaling the execution plane is necessary.
+
+

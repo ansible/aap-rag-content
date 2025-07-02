@@ -1,0 +1,7 @@
+# Chapter 3. Manage containers in private automation hub
+
+
+
+
+Learn the administrator workflows and processes for configuring the private automation hub remote registry and repositories.
+

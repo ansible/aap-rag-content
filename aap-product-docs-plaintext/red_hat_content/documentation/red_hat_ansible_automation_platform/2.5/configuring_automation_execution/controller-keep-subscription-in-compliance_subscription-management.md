@@ -1,0 +1,37 @@
+# 11. Subscription management in Ansible Automation Platform and automation controller
+## 11.3. Keeping your subscription in compliance
+
+
+
+
+Your subscription has two possible statuses:
+
+-  **Compliant** : Indicates that your subscription is appropriate for the number of hosts that you have automated within your subscription count.
+-  **Out of compliance** : Indicates that you have exceeded the number of hosts in your subscription.
+
+
+Compliance is computed as follows:
+
+```
+managed &gt; manifest_limit    =&gt;  non-compliant
+managed =&lt; manifest_limit   =&gt;  compliant
+```
+
+Where: `managed` is the number of unique managed hosts without deletions, and `manifest_limit` is the number of managed hosts in the subscription manifest.
+
+Other important information displayed are:
+
+-  **Hosts automated** : The number of hosts automated by the job, which consumes the license count.
+-  **Hosts imported** : The number of hosts considering unique host names across all inventory sources. This number does not impact hosts remaining.
+-  **Hosts remaining** : The number of hosts minus the number of hosts automated.
+-  **Hosts deleted** : The number of hosts that were deleted, freeing the license capacity.
+-  **Active hosts previously deleted** : The number of hosts now active that were previously deleted.
+
+
+For example, if you have a subscription capacity of 10 hosts:
+
+- Starting with 9 hosts, 2 hosts were added and 3 hosts were deleted, you now have 8 hosts (compliant).
+- 3 hosts were automated again, now you have 11 hosts, which puts you over the subscription limit of 10 (non-compliant).
+- If you delete hosts, refresh the subscription details to see the change in count and status.
+
+

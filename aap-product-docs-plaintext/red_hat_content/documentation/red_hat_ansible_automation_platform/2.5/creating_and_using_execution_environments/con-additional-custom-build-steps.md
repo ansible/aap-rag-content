@@ -1,0 +1,75 @@
+# 3. Using Ansible Builder
+## 3.9. Additional custom build steps
+
+
+
+
+You can specify custom build commands for any build phase in the `additional_build_steps` section of the definition file. This allows fine-grained control over the build phases.
+
+Use the `prepend_` and `append_` commands to add directives to the `Containerfile` that run either before or after the main build steps are executed. The commands must conform to any rules required for the runtime system.
+
+See the following table for a list of values that can be used in `additional_build_steps` :
+
+| Value | Description |
+| --- | --- |
+|  `prepend_base` | Allows you to insert commands before building the base image. |
+|  `append_base` | Allows you to insert commands after building the base image. |
+|  `prepend_galaxy` | Allows you to insert before building the galaxy image. |
+|  `append_galaxy` | Allows you to insert after building the galaxy image. |
+|  `prepend_builder` | Allows you to insert commands before building the Python builder image. |
+|  `append_builder` | Allows you to insert commands after building the Python builder image. |
+|  `prepend_final` | Allows you to insert before building the final image. |
+|  `append_final` | Allows you to insert after building the final image. |
+
+
+The syntax for `additional_build_steps` supports both multi-line strings and lists. See the following examples:
+
+
+<span id="idm140019074634208"></span>
+**Example 3.1. A multi-line string entry**
+
+```
+prepend_final: |
+RUN whoami
+RUN cat /etc/os-release
+```
+
+
+
+
+
+<span id="idm140019074632224"></span>
+**Example 3.2. A list entry**
+
+```
+append_final:
+- RUN echo This is a post-install command!
+- RUN ls -la /etc
+```
+
+
+
+
+
+<span id="idm140019074630112"></span>
+**Example 3.3. Copying arbitrary files to execution environments**
+
+```
+additional_build_files:
+# copy arbitrary files next to this EE def into the build context - we can refer to them later...
+- src: files/rootCA.crt
+dest: configs
+
+additional_build_steps:
+prepend_base:
+# copy a custom CA cert into the base image and recompute the trust database
+# because this is in "base", all stages will inherit (including the final EE)
+- COPY _build/configs/rootCA.crt /usr/share/pki/ca-trust-source/anchors
+- RUN update-ca-trust
+```
+
+
+
+
+The `additional_build_files` section enable you to add `rootCA.crt` to the build context directory. When this file is copied to the build context directory, it can be used in the build process. To use the file, copy it from the build context directory using the COPY directive specified in the prepend_base step of the additional_build_steps section. You can perform any action based upon the copied file, such as in this example updating dynamic configuration of CA certificates by running RUN update-ca-trust.
+
