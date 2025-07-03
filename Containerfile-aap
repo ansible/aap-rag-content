@@ -3,6 +3,7 @@ ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
 ARG FLAVOR=cpu
 ARG HERMETIC=false
 ARG AAP_VERSION=2.5
+ARG BUILD_ROAD_CORE_DB=true
 
 USER 0
 WORKDIR /workdir
@@ -24,23 +25,35 @@ RUN pip3.12 install --no-cache-dir -r requirements.txt
 
 RUN cd embeddings_model; if [ "$HERMETIC" == "true" ]; then \
         cp /cachi2/output/deps/generic/model.safetensors model.safetensors; \
-    else \
+    elif [ ! -f model.safetensors ]; then  \
         curl -L -O https://huggingface.co/sentence-transformers/all-mpnet-base-v2/resolve/9a3225965996d404b775526de6dbfe85d3368642/model.safetensors; \
     fi
 
-RUN set -e && python3.12 generate_embeddings-aap.py \
-  -f aap-product-docs-plaintext \
-  -mn ${EMBEDDING_MODEL} \
-  -o vector_db/aap_product_docs/${AAP_VERSION} \
-  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
-  -v ${AAP_VERSION} \
-  -c 200 \
-  -l 10
+RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
+		set -e && python3.12 generate_embeddings-aap.py \
+		  -f aap-product-docs-plaintext \
+		  -mn ${EMBEDDING_MODEL} \
+		  -o vector_db/aap_product_docs/${AAP_VERSION} \
+		  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
+		  -v ${AAP_VERSION} \
+		  -c 200 \
+		  -l 10; \
+	else \
+		mkdir -p /workdir/vector_db/aap_product_docs; \
+	fi
 
-RUN set -e && python3.12 generate_embeddings-llama-stack.py \
-  -f aap-product-docs-plaintext \
-  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
-  -c 200
+RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
+		set -e && python3.12 generate_embeddings-llama-stack.py \
+		  -f aap-product-docs-plaintext \
+		  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
+		  -c 200; \
+	else \
+		set -e && python3.12 generate_embeddings-llama-stack.py \
+		  -f aap-product-docs-plaintext \
+		  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
+		  -c 200 \
+		  --skip-ping; \
+	fi
 
 RUN cd llama_stack_vector_db; gzip faiss_store.db; sha256sum faiss_store.db.gz > faiss_store.db.gz.sha256
 
