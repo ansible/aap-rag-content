@@ -52,7 +52,7 @@ build-road-core-db:
   -o vector_db/aap_product_docs/$(AAP_VERSION) \
   -i aap-product-docs-$(AAP_VERSION_STR) \
   -v $(AAP_VERSION) \
-  -c 4000 \
+  -c 200 \
   -l 10
 
 build-llama-stack-db:
