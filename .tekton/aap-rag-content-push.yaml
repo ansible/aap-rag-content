@@ -23,7 +23,7 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/ansible-lightspeed-tenant/aap-rag-content:{{revision}}
+    value: quay.io/ansible/aap-rag-content:{{revision}}
   - name: dockerfile
     value: Containerfile-aap
   pipelineSpec:
