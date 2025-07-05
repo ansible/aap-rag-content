@@ -332,9 +332,9 @@ llama-cloud-services==0.6.34 \
     --hash=sha256:02df81b03ed0286422a1cce0c650a3fe0eba385c88b12ac690a23153aab55432 \
     --hash=sha256:b56884ee0cc2298fd625b6b6d9f161e09340cb962cdb04006770ecf097e925ae
     # via llama-parse
-llama-index==0.12.45 \
-    --hash=sha256:2bbad370c18be396d3d21cc8ca7ab99e0ca6d5a86b8d3a2dd3645a762dba398b \
-    --hash=sha256:5473e104b26a6356513ac13555a2ae70f1820d04580c24627c16ac05f952fd74
+llama-index==0.12.46 \
+    --hash=sha256:c45756d76faf2c94de1476d2315601125fbe084f887b25c6abbcef71c860cb45 \
+    --hash=sha256:cf9af4035489294335c1c5f1f40f6ea6fa7be191d2cdffa6351f96578ed57376
     # via aap-rag-content
 llama-index-agent-openai==0.4.12 \
     --hash=sha256:6dbb6276b2e5330032a726b28d5eef5140825f36d72d472b231f08ad3af99665 \
