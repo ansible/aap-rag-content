@@ -322,9 +322,9 @@ jsonschema-specifications==2025.4.1 \
     --hash=sha256:4653bffbd6584f7de83a67e0d620ef16900b390ddc7939d56684d6c81e33f1af \
     --hash=sha256:630159c9f4dbea161a6a2205c3011cc4f18ff381b189fff48bb39b9bf26ae608
     # via jsonschema
-llama-cloud==0.1.26 \
-    --hash=sha256:2c0b2663e619b71c0645885ef622d6443725ab37bdc6ae5fb723e097f3af9459 \
-    --hash=sha256:b307f91b1ad97189b5278119ac4ad665931b65f240fb643b3e384d0a1fc81f56
+llama-cloud==0.1.30 \
+    --hash=sha256:a51e862303d44386e0822747d76d31100ef21bbfdb4670f7e37cee7fd975b69e \
+    --hash=sha256:c859965d6fd29242ad644335a0c7c8bdbe1fb62d1f01bef0bf372e877120ddad
     # via
     #   llama-cloud-services
     #   llama-index-indices-managed-llama-cloud
