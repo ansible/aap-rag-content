@@ -69,8 +69,20 @@ The generated DB is found in `/vector_db/aap_product_docs/2.5`
 ```commandline
 make build-llama-stack-db
 ```
-The generated DB is found in `/llama_stack_vector_db/aap_product_docs/2.5`
+The generated DB is found in `/llama_stack_vector_db`
 
+#### Add extra documents to the existing vector DB for llama-stack
+
+1. Create the folder `extra_docs` in the project root
+2. Copy extra documents to the created folder with `.txt` extension
+3. If any metadata needs to be added, create `.metadata` subfolder and create JSON file
+with the same file name as document. See the `additional_docs` for
+samples
+4. Run
+   ```commandline
+   make build-llama-stack-db-extra-docs
+   ```
+   The generated DB is found in `/llama_stack_vector_db`
 ### Build a container image
 ```commandline
 make build-image-aap

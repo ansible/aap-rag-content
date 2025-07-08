@@ -25,11 +25,12 @@ class SourceDocument:
 
 class DocumentIngestionTool:
 
-    def __init__(self, folder, chunk, index, skip_ping=False):
+    def __init__(self, folder, chunk, index, skip_ping=False, extra_docs_folder=None):
         self.folder = folder
         self.chunk = chunk
         self.index = index
         self.skip_ping = skip_ping
+        self.extra_docs_folder = extra_docs_folder
 
         self.client = self.setup_llama_stack()
 
@@ -172,20 +173,28 @@ class DocumentIngestionTool:
         """ Ingest product documentation and additional documents. """
         start_time = time.time()
 
-        # Load documents
-        input_files = list(Path(self.folder).rglob("*.md"))
-        documents = [
-            SourceDocument(f, self.aap_file_metadata_func(f))
-            for f in input_files
-        ]
-        self.insert_documents(documents, "doc")
+        if not self.extra_docs_folder:
+            # Load documents
+            input_files = list(Path(self.folder).rglob("*.md"))
+            documents = [
+                SourceDocument(f, self.aap_file_metadata_func(f))
+                for f in input_files
+            ]
+            self.insert_documents(documents, "doc")
 
-        additional_input_files = list((Path(self.folder) / "../additional_docs").rglob("*.txt"))
-        additional_docs = [
-            SourceDocument(f, self.additional_docs_metadata_func(f))
-            for f in additional_input_files
-        ]
-        self.insert_documents(additional_docs, "additional_doc")
+            additional_input_files = list((Path(self.folder) / "../additional_docs").rglob("*.txt"))
+            additional_docs = [
+                SourceDocument(f, self.additional_docs_metadata_func(f))
+                for f in additional_input_files
+            ]
+            self.insert_documents(additional_docs, "additional_doc")
+        else:
+            extra_input_files = list(Path(self.extra_docs_folder).rglob("*.txt"))
+            extra_docs = [
+                SourceDocument(f, self.additional_docs_metadata_func(f))
+                for f in extra_input_files
+            ]
+            self.insert_documents(extra_docs, "extra_doc")
 
         if UNREACHABLE_DOCS > 0:
             print(
@@ -204,11 +213,14 @@ def main():
     parser.add_argument("-c", "--chunk", type=int, default=380, help="Chunk size for embedding")
     parser.add_argument("-i", "--index", help="Product index")
     parser.add_argument("--skip-ping", action="store_true", help="Skip URL existence check")
+    parser.add_argument("--extra-docs-folder",
+                        help="Folder that stores extra docs to be added to the existing DB",
+                        default=None)
 
     args = parser.parse_args()
     print(f"Arguments used: {args}")
 
-    DocumentIngestionTool(args.folder, args.chunk,  args.index, args.skip_ping).run()
+    DocumentIngestionTool(args.folder, args.chunk,  args.index, args.skip_ping, args.extra_docs_folder).run()
 
 
 if __name__ == "__main__":

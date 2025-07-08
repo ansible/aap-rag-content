@@ -164,6 +164,8 @@ cython_debug/
 # Vector DB
 vector_db/
 llama_stack_vector_db/
+vector_db_save/
+llama_stack_vector_db_save/
 
 .vscode
 
@@ -172,3 +174,6 @@ mimir/
 
 # model.safetensors file
 model.safetensors
+
+# extra docs
+extra_docs/

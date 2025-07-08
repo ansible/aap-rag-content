@@ -20,9 +20,17 @@ install-deps: uv-lock-check download-embeddings-model ## Install all required de
 	uv sync --frozen
 
 download-embeddings-model:
-	@echo "Download model.safetensors file..."
+	@echo "Download model.safetensors file and existing vector DBs..."
 	podman run -d --rm --name rag-content $(RAG_CONTENT_IMAGE) sleep infinity
 	podman cp rag-content:/rag/embeddings_model/model.safetensors ./embeddings_model
+	rm -rf ./vector_db ./vector_db_save ./llama_stack_vector_db ./llama_stack_vector_db_save
+	mkdir -p ./vector_db ./vector_db_save ./llama_stack_vector_db ./llama_stack_vector_db_save
+	podman cp rag-content:/rag/embeddings_model/model.safetensors ./embeddings_model
+	podman cp rag-content:/rag/vector_db .
+	podman cp rag-content:/rag/llama_stack_vector_db .
+	podman cp rag-content:/rag/vector_db ./vector_db_save
+	podman cp rag-content:/rag/llama_stack_vector_db ./llama_stack_vector_db_save
+	gzip -d ./llama_stack_vector_db/faiss_store.db.gz
 	podman kill rag-content
 
 export-deps: ## Check pyproject.toml for changes, update the lock file if needed, then sync.
@@ -46,6 +54,8 @@ update-docs: ## Update the plaintext OCP docs in ocp-product-docs-plaintext/
 	scripts/get_runbooks.sh
 
 build-road-core-db:
+	rm -rf ./vector_db
+	mkdir -p ./vector_db
 	uv run python3 scripts/generate_embeddings-aap.py \
   -f aap-product-docs-plaintext \
   -mn $(EMBEDDINGS_MODEL) \
@@ -56,10 +66,24 @@ build-road-core-db:
   -l 10
 
 build-llama-stack-db:
+	rm -rf ./llama_stack_vector_db
+	mkdir -p ./llama_stack_vector_db
 	uv run python3 scripts/generate_embeddings-llama-stack.py \
   -f aap-product-docs-plaintext \
   -i aap-product-docs-$(AAP_VERSION_STR) \
   -c 200
+
+build-llama-stack-db-extra-docs:
+	rm -rf ./llama_stack_vector_db
+	mkdir -p ./llama_stack_vector_db
+	cp ./llama_stack_vector_db_save/llama_stack_vector_db/faiss_store.db.gz ./llama_stack_vector_db
+	gzip -d ./llama_stack_vector_db/faiss_store.db.gz
+	uv run python3 scripts/generate_embeddings-llama-stack.py \
+  -f aap-product-docs-plaintext \
+  -i aap-product-docs-$(AAP_VERSION_STR) \
+  -c 200 \
+  --skip-ping \
+  --extra-docs-folder extra_docs
 
 build-image: ## Build a rag-content container image.
 	podman build -t rag-content .
