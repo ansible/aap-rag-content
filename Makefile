@@ -39,6 +39,9 @@ export-deps: ## Check pyproject.toml for changes, update the lock file if needed
 check-types: ## Checks type hints in sources
 	mypy --explicit-package-bases --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs scripts
 
+print-llama-stack-deps: ## Print llama stack distribution dependencies
+	llama stack build --config build.yaml --image-type venv --print-deps-only
+
 format: ## Format the code into unified format
 	black scripts
 	ruff check scripts --fix --per-file-ignores=scripts/*:S101

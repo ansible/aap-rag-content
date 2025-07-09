@@ -16,7 +16,7 @@ providers:
       kvstore:
         type: sqlite
         namespace: null
-        db_path: ${env.SQLITE_STORE_DIR:./llama_stack_vector_db}/faiss_store.db
+        db_path: ${env.SQLITE_STORE_DIR:=./llama_stack_vector_db}/faiss_store.db
   tool_runtime:
   - provider_id: rag-runtime
     provider_type: inline::rag-runtime

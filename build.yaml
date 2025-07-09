@@ -1,0 +1,14 @@
+version: 2
+distribution_spec:
+  description: build yaml
+  providers:
+    inference:
+    - inline::sentence-transformers
+    vector_io:
+    - inline::faiss
+    tool_runtime:
+    - inline::rag-runtime
+image_type: venv
+additional_pip_packages:
+- aiosqlite
+- sqlalchemy[asyncio]

@@ -158,3 +158,16 @@ postgres=# \dt
 
 postgres=#
 ```
+
+## Llama Stack Dependencies
+
+Internally, llama-stack runs with the `run.yaml` and its configuration is
+defined in the `build.yaml` file.
+
+All dependencies that are required for running llama stack with providers are defined in
+`pyproject.toml`.  However, those dependencies might be changed when
+llama-stack is updated.  For checking those dependencies, run
+```commandline
+make print-llama-stack-deps
+```
+and manually update `pyproject.toml` if any changes are found.
