@@ -57,7 +57,7 @@ RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
 
 RUN cd llama_stack_vector_db; gzip faiss_store.db; sha256sum faiss_store.db.gz > faiss_store.db.gz.sha256
 
-FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:e12131db2e2b6572613589a94b7f615d4ac89d94f859dad05908aeb478fb090f
+FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:383329bf9c4f968e87e85d30ba3a5cb988a3bbde28b8e4932dcd3a025fd9c98c
 
 # install diff and gzip
 RUN microdnf install -y diffutils gzip
