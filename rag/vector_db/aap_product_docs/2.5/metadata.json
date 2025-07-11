@@ -1,0 +1,1 @@
+{"execution-time": 768.4266121387482, "llm": "None", "embedding-model": "sentence-transformers/all-mpnet-base-v2", "index-id": "aap-product-docs-2_5", "vector-db": "faiss.IndexFlatIP", "embedding-dimension": 768, "chunk": 200, "overlap": 10, "total-embedded-files": 1693}
