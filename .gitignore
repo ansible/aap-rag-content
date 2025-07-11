@@ -162,7 +162,7 @@ cython_debug/
 .idea/
 
 # Vector DB
-vector_db/
+# vector_db/  -- /rag/vector_db is needed for AAP 2.5 downstream build
 llama_stack_vector_db/
 vector_db_save/
 llama_stack_vector_db_save/
