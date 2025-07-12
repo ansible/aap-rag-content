@@ -272,9 +272,9 @@ httpx==0.28.1 \
     #   llama-stack
     #   llama-stack-client
     #   openai
-huggingface-hub==0.33.2 \
-    --hash=sha256:3749498bfa91e8cde2ddc2c1db92c79981f40e66434c20133b39e5928ac9bcc5 \
-    --hash=sha256:84221defaec8fa09c090390cd68c78b88e3c4c2b7befba68d3dc5aacbc3c2c5f
+huggingface-hub==0.33.4 \
+    --hash=sha256:09f9f4e7ca62547c70f8b82767eefadd2667f4e116acba2e3e62a5a81815a7bb \
+    --hash=sha256:6af13478deae120e765bfd92adad0ae1aec1ad8c439b46f23058ad5956cbca0a
     # via
     #   aap-rag-content
     #   llama-index-embeddings-huggingface
