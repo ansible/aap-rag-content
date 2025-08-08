@@ -7,7 +7,7 @@
 Your system must meet the following minimum system requirements to install and run Red Hat Ansible Automation Platform. A resilient deployment requires 10 virtual machines with a minimum of 16 gigabytes (GB) of RAM and 4 virtual CPUs (vCPU). See [Tested deployment models](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/tested_deployment_models) for more information on topology options.
 
 
-<span id="idm140675899595024"></span>
+<span id="idm140256916559728"></span>
 **Table 2.1. Base system**
 
 | Type | Description | Notes |
@@ -24,7 +24,7 @@ Your system must meet the following minimum system requirements to install and r
 
 
 
-<span id="idm140675898990016"></span>
+<span id="idm140256914703184"></span>
 **Table 2.2. Virtual machine requirements**
 
 | Component | RAM | VCPU | Disk IOPS | Storage |
@@ -66,6 +66,7 @@ The following are necessary for you to work with project updates and collections
 
 **Additional notes for Red Hat Ansible Automation Platform requirements**
 
+- The Ansible Automation Platform database backups are staged on each node at `    /var/backups/automation-platform` through the variable `    backup_dir` . You might need to mount a new volume to `    /var/backups` or change the staging location with the variable `    backup_dir` to prevent issues with disk space before running the `    ./setup.sh -b` script.
 - If performing a bundled Ansible Automation Platform installation, the installation setup.sh script attempts to install ansible-core (and its dependencies) from the bundle for you.
 - If you have installed Ansible-core manually, the Ansible Automation Platform installation setup.sh script detects that Ansible has been installed and does not attempt to reinstall it.
 

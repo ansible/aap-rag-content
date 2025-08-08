@@ -1,5 +1,5 @@
-# 7. Updating Red Hat Ansible Automation Platform on Red Hat OpenShift Container Platform
-## 7.1. Patch updating Ansible Automation Platform on OpenShift Container Platform
+# 8. Updating Red Hat Ansible Automation Platform on Red Hat OpenShift Container Platform
+## 8.1. Patch updating Ansible Automation Platform on OpenShift Container Platform
 
 
 

@@ -1,6 +1,6 @@
 # 14. Inventories
 ## 14.4. Add a new inventory
-### 14.4.4. Adding a source
+### 14.4.5. Adding a source
 
 
 

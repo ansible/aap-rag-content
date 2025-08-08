@@ -1,5 +1,5 @@
 # 3. Deploying Red Hat Ansible Automation Platform on Microsoft Azure
-## 3.4. Canceling Ansible Automation Platform on Microsoft Azure deployments
+## 3.5. Canceling Ansible Automation Platform on Microsoft Azure deployments
 
 
 

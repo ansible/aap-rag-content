@@ -1,6 +1,6 @@
 # 10. Patch releases
-## 10.19. Ansible Automation Platform patch release October 7, 2024
-### 10.19.3. Advisories
+## 10.20. Ansible Automation Platform patch release October 7, 2024
+### 10.20.3. Advisories
 
 
 
@@ -14,4 +14,4 @@ The following errata advisories are included in this release:
 
 
 
-<span id="idm140705012733024"></span>
+<span id="idm139797021516576"></span>

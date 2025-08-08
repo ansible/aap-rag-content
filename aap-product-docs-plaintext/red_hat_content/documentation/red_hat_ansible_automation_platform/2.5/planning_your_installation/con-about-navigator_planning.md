@@ -1,5 +1,5 @@
 # 2. Red Hat Ansible Automation Platform components
-## 2.9. Automation content navigator
+## 2.10. Automation content navigator
 
 
 

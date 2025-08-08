@@ -1,5 +1,5 @@
 # 2. Red Hat Ansible Automation Platform components
-## 2.7. Automation execution environments
+## 2.8. Automation execution environments
 
 
 

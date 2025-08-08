@@ -1,6 +1,6 @@
-# 2. RPM topologies
-## 2.4. RPM mixed enterprise topology
-### 2.4.1. Infrastructure topology
+# 3. Container topologies
+## 3.2. Container enterprise topology
+### 3.2.1. Infrastructure topology
 
 
 
@@ -8,55 +8,55 @@
 The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 
-<span id="idm139891622704928"></span>
-**Figure 2.4. Infrastructure topology diagram**
+<span id="idm139849915311456"></span>
+**Figure 3.2. Infrastructure topology diagram**
 
-![RPM mixed enterprise topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Tested_deployment_models-en-US/images/9fbcca2154d5b59b78b09181fce08cb3/rpm-b-env-b.png)
+![Container enterprise topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Tested_deployment_models-en-US/images/704824d330eb8422156d4d7cf034ee52/cont-b-env-a.png)
 
-
-
-
-Note
-Here, automation controller and automation hub are at 2.4x while the Event-Driven Ansible and platform gateway components are at 2.5
 
 
 
 Each VM has been tested with the following component requirements:
 
 
-<span id="idm139891621457312"></span>
-**Table 2.13. Virtual machine requirements**
+<span id="idm139849915306512"></span>
+**Table 3.5. Virtual machine requirements**
 
 | Requirement | Minimum requirement |
 | --- | --- |
 | RAM | 16 GB |
 | CPUs | 4 |
-| Local disk | 60 GB |
+| Local disk | - Total available disk space: 60 GB
+- Installation directory: 15 GB (if on a dedicated partition)
+-  `    /var/tmp` for online installations: 1 GB
+-  `    /var/tmp` for offline or bundled installations: 3 GB
+- Temporary directory (defaults to `    /tmp` ) for offline or bundled installations: 10GB |
 | Disk IOPS | 3000 |
 
 
 
 
 
-<span id="idm139891618695024"></span>
-**Table 2.14. Infrastructure topology**
+<span id="idm139849915226960"></span>
+**Table 3.6. Infrastructure topology**
 
-| VM count | Purpose | Ansible Automation Platform version | Example VM group names |
-| --- | --- | --- | --- |
-| 3 | Platform gateway with colocated Redis | 2.5 |  `automationgateway` |
-| 2 | Automation controller | 2.4 |  `automationcontroller` |
-| 2 | Private automation hub | 2.4 |  `automationhub` |
-| 3 | Event-Driven Ansible with colocated Redis | 2.5 |  `automationedacontroller` |
-| 1 | Automation mesh hop node | 2.4 |  `execution_nodes` |
-| 2 | Automation mesh execution node | 2.4 |  `execution_nodes` |
-| 1 | Externally managed database service | N/A | N/A |
-| 1 | HAProxy load balancer in front of platform gateway (externally managed) | N/A | N/A |
+| VM count | Purpose | Example VM group names |
+| --- | --- | --- |
+| 2 | Platform gateway with colocated Redis |  `automationgateway` |
+| 2 | Automation controller |  `automationcontroller` |
+| 2 | Private automation hub with colocated Redis |  `automationhub` |
+| 2 | Event-Driven Ansible with colocated Redis |  `automationeda` |
+| 1 | Automation mesh hop node |  `execution_nodes` |
+| 2 | Automation mesh execution node |  `execution_nodes` |
+| 1 | Externally managed database service | N/A |
+| 1 | HAProxy load balancer in front of platform gateway (externally managed) | N/A |
 
 
 
 
 Note
-6 VMs are required for a Redis high availability (HA) compatible deployment. Redis can be colocated on each Ansible Automation Platform 2.5 component VM except for automation controller, execution nodes, or the PostgreSQL database.
+- 6 VMs are required for a Redis high availability (HA) compatible deployment. When installing Ansible Automation Platform with the containerized installer, Redis can be colocated on any Ansible Automation Platform component VMs of your choice except for execution nodes or the PostgreSQL database. They might also be assigned VMs specifically for Redis use.
+
 
 
 

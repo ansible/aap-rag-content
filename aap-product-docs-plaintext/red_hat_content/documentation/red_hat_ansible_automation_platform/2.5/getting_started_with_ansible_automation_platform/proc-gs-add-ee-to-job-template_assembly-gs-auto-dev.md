@@ -43,14 +43,8 @@ If you do not set a type for pull, the value defaults to **Only pull the image i
 1. To add an execution environment to a job template, navigate toAutomation Execution→Templatesand select your template. ..ClickEdit templateand specify your execution environment in the field labeled **execution environment** .
 
 
-When you have added an execution environment to a job template, the template will be listed in the **Templates** tab in your execution environment details.
+**Verification**
 
-#### 3.7.2.1. About container registries
+After you add an execution environment to a job template, the template is listed in the **Templates** tab in your execution environment details.
 
-
-
-
-If you have many automation execution environments that you want to maintain, you can store them in a container registry linked to your private automation hub.
-
-For more information, see [Populating your private automation hub container registry](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/creating_and_using_execution_environments/assembly-populate-container-registry) from the Creating and using execution environments guide.
 

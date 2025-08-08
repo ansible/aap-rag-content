@@ -29,13 +29,20 @@ To access your **Ansible Automation Platform** instance:
 1. ClickSubscription manifestorUsername/password.
 1. Upload your manifest or enter your username and password.
 1. Select your subscription from the **Subscription** list.
-1. ClickNext.
-This redirects you to the **Analytics** page.
+1. ClickNext. This redirects you to the **Analytics** page.
 
 1. ClickNext.
 1. Select the **I agree to the terms of the license agreement** checkbox.
 1. ClickNext.
 
 
-You now have access to the platform gateway user interface. If you cannot access the Ansible Automation Platform see [Frequently asked questions on platform gateway](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#operator-aap-troubleshooting_configure-aap-operator) for help with troubleshooting and debugging.
+**Verification**
+
+You now have access to the platform gateway user interface.
+
+
+**Troubleshooting**
+
+If you cannot access the Ansible Automation Platform see [Frequently asked questions on platform gateway](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#operator-aap-troubleshooting_configure-aap-operator) for help with troubleshooting and debugging.
+
 

@@ -36,31 +36,28 @@ Each key and secret must belong to a unique application and cannot be shared or 
 1. If your Microsoft Entra ID is configured to provide user group information within a groups claim, ensure that the platform is configured with a **Groups Claim** name that matches your Microsoft Entra ID configuration. This allows the platform to correctly identify and associate groups for users logging in through Microsoft Entra ID.
 
 Note
-Groups coming from Microsoft Entra ID use unique IDs instead of group names. When creating group maps for a Microsoft Entra ID authenticator you must use the unique IDs.
+Groups coming from Microsoft Entra ID can be identified using either unique IDs or group names. When creating group mappings for a Microsoft Entra ID authenticator, you can use either the unique ID or the group name.
 
 By default, Microsoft Entra ID uses groups as the default group claim name. So, be sure to either set the value to the default or to any custom override you have set in your IdP. The current default is set to preserve the existing behavior unless explicitly changed.
 
 
 
 
-
-
-Following instructions for [registering your application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) , supply the key (shown at one time only) to the client for authentication.
-
-+ . Copy and paste the secret key created for your Microsoft Entra ID/Microsoft Azure AD application to the **OIDC Secret** field.
-
-+ . Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator.
-
-+
+1. Following instructions for [registering your application with the Microsoft identity platform](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) , supply the key (shown at one time only) to the client for authentication.
+1. Copy and paste the secret key created for your Microsoft Entra ID/Microsoft Azure AD application to the **OIDC Secret** field.
+1. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator.
 
 Note
 Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.
 
 
 
-+ . To automatically create organizations, users, and teams upon successful login, select **Create objects** . . To enable this authentication method upon creation, select **Enabled** . . To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users** .
 
-+ . ClickCreate Authentication Method.
+1. To automatically create organizations, users, and teams upon successful login, select **Create objects** .
+1. To enable this authentication method upon creation, select **Enabled** .
+1. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users** .
+1. ClickCreate Authentication Method.
+
 
 **Verification**
 
@@ -74,6 +71,6 @@ To control which users are allowed into the Ansible Automation Platform server, 
 
 **Additional resources**
 
-For application registering basics in Microsoft Entra ID/Microsoft Azure AD, see the [What is the Microsoft identity platform?](https://learn.microsoft.com/en-us/entra/identity-platform/v2-overview) overview.
+-  [What is the Microsoft identity platform?](https://learn.microsoft.com/en-us/entra/identity-platform/v2-overview)
 
 

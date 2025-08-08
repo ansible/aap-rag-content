@@ -12,7 +12,7 @@ To install and use Ansible development tools, you must meet the following requir
 - A containerization platform, for example Podman, Podman Desktop, Docker, or Docker Desktop.
 
 Note
-The installation procedure for Ansible development tools on Windows covers the use of Podman Desktop only. See [Installing Podman Desktop on a Windows machine](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/developing_automation_content/index#installing_podman_desktop_on_a_windows_machine) .
+The installation procedure for Ansible development tools on Windows covers the use of Podman Desktop only. See [Requirements for Ansible development tools on Windows](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/developing_automation_content/index#devtools-install-podman-desktop-wsl_installing-devtools) .
 
 
 

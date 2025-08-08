@@ -145,11 +145,18 @@ For information about using `microdnf` in containers based on UBI Minimal images
 
 
 
-Ansible development tools is bundled in the Ansible Automation Platform RPM (Red Hat Package Manager) package. Refer to the _ [RPM installation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation) _ documentation for information on installing Ansible Automation Platform.
+Ansible development tools are bundled in the Ansible Automation Platform RPM (Red Hat Package Manager) package. Refer to the _ [RPM installation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation) _ documentation for information on installing Ansible Automation Platform.
 
 **Prerequisites**
 
-- You have installed RHEL.
+- You have installed RHEL 8 or RHEL 9.
+
+Note
+RPM installation is not supported on RHEL 10.
+
+
+
+
 - You have registered your system with Red Hat Subscription Manager.
 - You have installed a containerization platform, for example Podman or Docker.
 
@@ -362,7 +369,7 @@ To learn more about the Ansible configuration file, see [Ansible Configuration S
 
 
 
-The instructions below describe how Ansible development tools help you to create and run your first playbook in VS Code.
+Ansible development tools help you to create and run playbooks in VS Code.
 
 **Prerequisites**
 
@@ -387,6 +394,13 @@ The instructions below describe how Ansible development tools help you to create
 
 
 
+1. If you want to add new content to the playbook, use the following rules:
+
+
+- Every playbook file must finish with a blank line.
+- Trailing spaces at the end of lines are not allowed.
+- Every playbook and every play require an identifier (name).
+
 1. Save your playbook file.
 
 
@@ -395,29 +409,16 @@ The instructions below describe how Ansible development tools help you to create
 
 
 
-The Ansible VS Code extension provides syntax highlighting and assists you with indentation in `.yml` files.
+The Ansible VS Code extension provides inline help, syntax highlighting, and assists you with indentation in `.yml` files.
 
-The following rules apply for playbook files:
-
-- Every playbook file must finish with a blank line.
-- Trailing spaces at the end of lines are not allowed.
-- Every playbook and every play require an identifier (name).
-
-
-### 5.3.1. Inline help
-
-
-
-
-The Ansible extension also provides inline help when you are editing your playbook file.
-
-- If you hover your mouse over a keyword or a module name, the Ansible extension provides documentation:
+1. Open a playbook in VS Code.
+1. Hover your mouse over a keyword or a module name: the Ansible extension provides documentation:
 
 ![Ansible-lint showing no errors in a playbook](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Developing_automation_content-en-US/images/e134cf2cc46c309472833e581fef773f/ansible-lint-keyword-help.png)
 
 
 
-- If you begin to type the name of a module, for example `    ansible.builtin.ping` , the extension provides a list of suggestions.
+1. If you begin to type the name of a module, for example `    ansible.builtin.ping` , the extension provides a list of suggestions.
 
 Select one of the suggestions to autocomplete the line.
 
@@ -427,7 +428,41 @@ Select one of the suggestions to autocomplete the line.
 
 
 
-## 5.4. Running your playbook
+## 5.4. Debugging your playbook
+
+
+
+
+Learn how to use VS Code to identify and understand error messages in playbooks.
+
+1. The following playbook contains multiple errors. Copy and paste it into a new file in VS Code.
+
+
+```
+- name:      hosts: localhost      tasks:       - name:         ansible.builtin.ping:
+```
+
+The errors are indicated with a wavy underline in VS Code.
+
+
+1. Hover your mouse over an error to view the details:
+
+![Popup message explaining a playbook error](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Developing_automation_content-en-US/images/afc6eabd5cb29b92ae87af7528c73ca2/ansible-lint-errors.png)
+
+
+
+1. Playbook files that contain errors are indicated with a number in the **Explorer** pane.
+1. Select the **Problems** tab of the VS Code terminal to view a list of the errors.
+
+![Playbook errors shown in Problems tab and explorer list](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Developing_automation_content-en-US/images/c7bd61a7d56db99093cb1390f508e5d0/ansible-lint-errors-explorer.png)
+
+
+`    $[0].tasks[0].name None is not of type 'string'` indicates that the playbook does not have a label.
+
+
+
+
+## 5.5. Running your playbook
 
 
 
@@ -438,7 +473,7 @@ The Ansible VS Code extension provides two options to run your playbook:
 -  `    ansible-navigator` runs the playbook in an execution environment in the same manner that Ansible Automation Platform runs an automation job. You specify the base image for the execution environment in the Ansible extension settings.
 
 
-### 5.4.1. Running your playbook with `ansible-playbook`
+### 5.5.1. Running your playbook with `ansible-playbook`
 
 
 
@@ -458,7 +493,7 @@ The output is displayed in the **Terminal** tab of the VS Code terminal. The `ok
 ![Success message for ansible-playbook execution](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Developing_automation_content-en-US/images/f7c82c475842a919188ec2aa473d5b0f/ansible-playbook-success.png)
 
 
-### 5.4.2. Running your playbook with `ansible-navigator`
+### 5.5.2. Running your playbook with `ansible-navigator`
 
 
 
@@ -491,7 +526,7 @@ Type the number next to a task to review the task results.
 
 For more information on running playbooks with automation content navigator, see [Executing a playbook from automation content navigator](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_content_navigator/assembly-execute-playbooks-navigator_ansible-navigator#proc-execute-playbook-tui_execute-playbooks-navigator) in the _Using content navigator_ Guide.
 
-### 5.4.3. Working with execution environments
+### 5.5.3. Working with execution environments
 
 
 
@@ -523,38 +558,6 @@ $ podman pull registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel9
 You can build and create custom execution environments with `ansible-builder` . For more information about working with execution environments locally, see [Creating and using execution environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/creating_and_using_execution_environments) .
 
 After customizing your execution environment, you can push your new image to the container registry in automation hub. See [Publishing an automation execution environment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/creating_and_using_execution_environments/index#assembly-publishing-exec-env) in the _Creating and using execution environments_ documentation.
-
-## 5.5. Debugging your playbook
-
-
-
-
-### 5.5.1. Error messages
-
-
-
-
-The following playbook contains multiple errors:
-
-```
-- name:
-hosts: localhost
-tasks:
-- name:
-ansible.builtin.ping:
-```
-
-The errors are indicated with a wavy underline in VS Code. Hover your mouse over an error to view the details:
-
-![Popup message explaining a playbook error](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Developing_automation_content-en-US/images/afc6eabd5cb29b92ae87af7528c73ca2/ansible-lint-errors.png)
-
-
-The errors are listed in the **Problems** tab of the VS Code terminal. Playbook files that contain errors are indicated with a number in the **Explorer** pane:
-
-![Playbook errors shown in Problems tab and explorer list](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Developing_automation_content-en-US/images/c7bd61a7d56db99093cb1390f508e5d0/ansible-lint-errors-explorer.png)
-
-
-`$[0].tasks[0].name None is not of type 'string'` indicates that the playbook does not have a label.
 
 ## 5.6. Testing your playbooks
 
@@ -825,14 +828,12 @@ Not every standalone role will seamlessly integrate into your collection without
 
 
 
-It is important to provide documentation for your roles so that other users understand what your roles do and how to use them.
+It is important to provide documentation for your roles and roles collection, so that other users understand what your roles do and how to use them.
 
-### 8.6.1. Documenting your roles
+1. To add documentation for a role, navigate to the role directory.
+1. Open the `    README.md` file in an editor. This file was added in the role directory when you scaffolded your collection directory.
+1. Provide the following information in the `    README.md` files for every role in your collection:
 
-
-
-
-When you scaffolded your collection directory, a `README.md` file was added in the role directory. Add your documentation for your role in this file. Provide the following information in the `README.md` files for every role in your collection:
 
 - Role description: A brief summary of what the role does
 - Requirements: List the collections, libraries, and required installations
@@ -847,15 +848,13 @@ When you scaffolded your collection directory, a `README.md` file was added in t
 
 - Example playbook: Show an example of a playbook that uses your role. Use comments in the playbook to help users understand where to set variables.
 
-
-The `README.md` file in [controller_configuration.ad_hoc_command_cancel](https://github.com/redhat-cop/controller_configuration/tree/devel/roles/ad_hoc_command_cancel) is an example of a role with standard documentation:
-
-### 8.6.2. Documenting your collection
+The `        README.md` file in [controller_configuration.ad_hoc_command_cancel](https://github.com/redhat-cop/controller_configuration/tree/devel/roles/ad_hoc_command_cancel) is an example of a role with standard documentation.
 
 
 
+1. To add documentation for your roles collection, navigate to the collection directory.
+1. In the `    README.md` file for your collection, provide the following information:
 
-In the `README.md` file for your collection, provide the following information:
 
 - Collection description: Describe what the collection does.
 - Requirements: List required collections.
@@ -863,6 +862,7 @@ In the `README.md` file for your collection, provide the following information:
 - Using the collection: Describe how to run the components of the collection.
 - Add a troubleshooting section.
 - Versioning: Describe the release cycle of your collection.
+
 
 
 ## 8.7. Publishing your collection in private automation hub
@@ -908,7 +908,7 @@ The following procedure describes the workflow to add a collection to an executi
 
 
 
-<span id="idm140370478208016"></span>
+<span id="idm139845121530144"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

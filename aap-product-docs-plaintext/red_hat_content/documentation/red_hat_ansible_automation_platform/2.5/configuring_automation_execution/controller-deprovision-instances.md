@@ -19,12 +19,11 @@ $ awx-manage deprovision_instance --hostname=&lt;name used in inventory file&gt;
 
 
 
-**Example**
+The following is an example deprovision command:
 
 ```
 $ awx-manage deprovision_instance --hostname=hostB
 ```
-
 
 Deprovisioning instance groups in automation controller does not automatically deprovision or remove instance groups. For more information, see the [Deprovisioning instance groups](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-instance-and-container-groups#controller-deprovision-instance-group) section in _Using automation execution_ .
 

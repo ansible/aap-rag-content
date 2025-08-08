@@ -50,7 +50,7 @@ collections:          - kubernetes.core
 1. In the execution environment definition file, specify the original `    ee-minimal` container’s URL and tag in the `    EE_BASE_IMAGE` field. In doing so, your final `    execution-environment.yml` file appears similar to the following:
 
 
-<span id="idm140019076451424"></span>
+<span id="idm139645553189760"></span>
 **Example 5.1. A customized `    execution-environment.yml` file**
 
 

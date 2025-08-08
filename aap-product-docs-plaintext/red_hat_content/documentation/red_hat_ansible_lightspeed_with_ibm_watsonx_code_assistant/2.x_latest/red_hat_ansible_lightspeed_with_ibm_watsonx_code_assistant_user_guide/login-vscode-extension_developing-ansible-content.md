@@ -7,11 +7,6 @@
 
 After installing and configuring the VS Code extension, you can log in to the Ansible Lightspeed service.
 
-#### 4.2.4.1. Sign-in options
-
-
-
-
 Red Hat Ansible Lightspeed provides different sign-in methods depending on whether you are using the cloud service or the on-premise deployment.
 
 -  **Ansible Lightspeed on-premise deployments**
@@ -35,10 +30,7 @@ If you are using a cloud development environment at a domain unknown by Ansible 
 
 
 
-#### 4.2.4.2. Procedure
-
-
-
+**Procedure**
 
 1. Open the VS Code application.
 1. Sign in using either the **Connect** button in the Ansible Lightspeed view or theAccountsmenu.

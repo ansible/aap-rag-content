@@ -13,10 +13,11 @@ There are two approaches to executing this filter:
 - Define one group. In the definition, include the condition that the group and host variables must match specific values. Use the `    limit` pattern to return all the hosts in the new group.
 
 
-**Example:**
+
+<span id="idm140389991894096"></span>
+**Example 14.1. Example**
 
 The following inventory file defines four hosts and sets group and host variables. It defines a product group, a sustaining group, and it sets two hosts to a shutdown state.
-
 
 The goal is to create a filter that returns only production hosts that are shutdown.
 
@@ -51,7 +52,7 @@ plugin: constructed    strict: true    groups:      is_shutdown: state | default
 
 This constructed inventory input creates a group for both categories and uses the `    limit` (host pattern) to only return hosts that are in the intersection of those two groups, which is documented in [Patterns: targeting hosts and groups](https://docs.ansible.com/ansible/latest/inventory_guide/intro_patterns.html) .
 
-When a variable is or is not defined (depending on the host), you can give a default. For example, use `    | default("running")` if you know what value it should have when it is not defined. This helps with debugging, as described in [Debugging tips](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-inv-debugging-tips) .
+When a variable is or is not defined (depending on the host), you can give a default. For example, use `    | default("running")` if you know what value it should have when it is not defined. This helps with debugging, as described in [Debugging tips](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-inventories#ref-controller-inv-debugging-tips) .
 
 
 1.  **Construct 1 group, limit to group** :
@@ -66,6 +67,9 @@ plugin: constructed    strict: true    groups:      shutdown_in_product_dev: sta
 `    limit` : `    shutdown_in_product_dev`
 
 This input creates one group that only includes hosts that match both criteria. The limit is then just the group name by itself, returning **host2** . The same as the earlier approach.
+
+
+
 
 
 

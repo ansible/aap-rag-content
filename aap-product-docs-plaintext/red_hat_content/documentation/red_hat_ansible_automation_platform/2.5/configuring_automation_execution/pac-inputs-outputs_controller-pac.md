@@ -1,5 +1,5 @@
 # 7. Implementing policy enforcement
-## 7.5. Policy enforcement inputs and outputs
+## 7.4. Policy enforcement inputs and outputs
 
 
 
@@ -7,7 +7,7 @@
 Use the following inputs and outputs to craft policies for use in policy enforcement.
 
 
-<span id="idm140477670110208"></span>
+<span id="idm139935537196960"></span>
 **Table 7.1. Input data**
 
 |  **Input** |  **Type** |  **Description** |
@@ -96,7 +96,7 @@ Use the following inputs and outputs to craft policies for use in policy enforce
 
 -  `    id` (integer): the user’s unique identifier
 -  `    name` (string): the user name
--  `    type` (type): the user type (for example, `    user` , `    system` , etc)
+-  `    type` (type): the user type (for example, `    user` or `    system` )
 -  `    url` (string): the user’s API URL |
 |  `organization` | Object | Information about the organization associated with the job, including:
 
@@ -129,10 +129,7 @@ Use the following inputs and outputs to craft policies for use in policy enforce
 
 
 
-**Example**
-
 The following code block shows example input data from a demo job template launch:
-
 
 ```
 {
@@ -248,7 +245,7 @@ The following code block shows example input data from a demo job template launc
 ```
 
 
-<span id="idm140477674684608"></span>
+<span id="idm139935536818192"></span>
 **Table 7.2. Output data**
 
 |  **Input** |  **Type** |  **Description** |
@@ -259,10 +256,7 @@ The following code block shows example input data from a demo job template launc
 
 
 
-**Example**
-
 The following code block shows an example of expected output from the OPA policy query:
-
 
 ```
 {

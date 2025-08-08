@@ -36,7 +36,7 @@ Your settings are automatically saved in VS Code.
 The following illustration displays the configured settings for the Ansible VS Code extension:
 
 
-<span id="idm139960286706096"></span>
+<span id="idm139976452410448"></span>
 **Figure 4.1. Configured settings for the Ansible VS Code extension**
 
 ![Configured settings for the Ansible VS Code extension](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/f0217e74e4b417bd4f6ae02ad6acb8c8/lightspeed-vs-code-settings.png)
@@ -51,6 +51,6 @@ If your organization recently subscribed to the Red Hat Ansible Automation Platf
 
 **Additional resources**
 
--  [Troubleshooting Ansible Visual Studio Code extension errors](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#troubleshooting-vscode_troubleshooting-lightspeed)
+-  [Troubleshooting Ansible Visual Studio Code extension errors](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#ref-troubleshooting-vscode_troubleshooting-lightspeed)
 
 

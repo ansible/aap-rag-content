@@ -1157,17 +1157,13 @@ Do not run other `awx-manage` commands unless instructed by Ansible Support.
 
 Use this command to gather analytics on-demand outside of the predefined window (the default is 4 hours):
 
-```
-$ awx-manage gather_analytics --ship
-```
+`$ awx-manage gather_analytics --ship`
 
 For customers with disconnected environments who want to collect usage information about unique hosts automated across a time period, use this command:
 
-```
-awx-manage host_metric --since YYYY-MM-DD --until YYYY-MM-DD --json
-```
+`awx-manage host_metric --since YYYY-MM-DD --json`
 
-The parameters `--since` and `--until` specify date ranges and are optional, but one of them has to be present.
+The `--since` parameter is optional.
 
 The `--json` flag specifies the output format and is optional.
 
@@ -1181,9 +1177,11 @@ You can backup and restore your system using the Ansible Automation Platform set
 For more information, see the [Backup and restore clustered environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/index#controller-backup-restore-clustered-environments) section.
 
 Note
-Ensure that you restore to the same version from which it was backed up. However, you must use the most recent minor version of a release to backup or restore your Ansible Automation Platform installation version. For example, if the current Ansible Automation Platform version you are on is 2.0.x, use only the latest 2.0 installer.
+When backing up Ansible Automation Platform, use the installation program that matches your currently installed version of Ansible Automation Platform.
 
-Backup and restore only works on PostgreSQL versions supported by your current platform version. For more information, see [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/platform-system-requirements) in the _Planning your installation_ .
+When restoring Ansible Automation Platform, use the latest installation program available at the time of the restore. For example, if you are restoring a backup taken from version `2.5-1` , use the latest `2.5-x` installation program available at the time of the restore.
+
+Backup and restore functionality only works with the PostgreSQL versions supported by your current Ansible Automation Platform version. For more information, see [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/platform-system-requirements) in _Planning your installation_ .
 
 
 
@@ -2148,7 +2146,7 @@ awx-manage createsuperuser
 Credentials supplied by automation controller do not flow to the jump host through ProxyCommand. They are only used for the end-node when the tunneled connection is set up.
 
 
-<span id="configure_a_fixed_user_keyfile_in_your_ssh_configuration_file"></span>
+<span id="configure_a_fixed_userkeyfile_in_your_ssh_configuration_file"></span>
 #### Configure a fixed user/keyfile in your SSH configuration file
 
 
@@ -2462,7 +2460,7 @@ Then, for each of the groups that have :vars listed, create a file called `inven
 The importer then handles the conversion correctly.
 
 
-<span id="idm140477686559312"></span>
+<span id="idm139935545949856"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

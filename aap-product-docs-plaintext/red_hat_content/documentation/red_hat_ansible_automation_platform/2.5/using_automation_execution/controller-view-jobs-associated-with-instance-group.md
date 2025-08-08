@@ -24,6 +24,6 @@ Each job displays the following details:
 
 **Additional resources**
 
-The instances are run in accordance with instance group policies. For more information, see [Instance group policies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-instance-group-policies) .
+-  [Instance group policies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-instance-group-policies) .
 
 

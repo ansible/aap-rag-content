@@ -32,14 +32,12 @@ spec:      extra_settings:        - setting: CSRF_TRUSTED_ORIGINS          value
 1. After you have configured your platform gateway, clickCreateat the bottom of the form view (OrSavein the case of editing existing instances).
 
 
-Red Hat OpenShift Container Platform creates the pods. This may take a few minutes. You can view the progress by navigating toWorkloads→Podsand locating the newly created instance.
-
 **Verification**
 
-Verify that the following operator pods provided by the Red Hat Ansible Automation Platform Operator installation from platform gateway are running:
+Red Hat OpenShift Container Platform creates the pods. This may take a few minutes. You can view the progress by navigating toWorkloads→Podsand locating the newly created instance. Verify that the following operator pods provided by the Red Hat Ansible Automation Platform Operator installation from platform gateway are running:
 
 
-| Operator manager controllers pods | Automation controller pods | Automation hub pods | Event-Driven Ansible (EDA) pods | platform gateway pods |
+| Operator manager controllers pods | {ControllerNameStart} pods | {HubNameStart} pods | {EDAName} (EDA) pods | {Gateway} pods |
 | --- | --- | --- | --- | --- |
 | The operator manager controllers for each of the four operators, include the following:
 

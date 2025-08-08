@@ -26,7 +26,7 @@ When you disable live streaming of events, they are only loaded on hard refresh 
 
 
 1. In the API, set `        UI_LIVE_UPDATES_ENABLED` to **False** .
-1. Navigate to your automation controller. Open the **Miscellaneous System Settings** window. Set the **Enable Activity Stream** toggle to **Off** .
+1. Go to your automation controller. Open the **Miscellaneous System Settings** window. Set the **Enable Activity Stream** toggle to **Off** .
 
 
 

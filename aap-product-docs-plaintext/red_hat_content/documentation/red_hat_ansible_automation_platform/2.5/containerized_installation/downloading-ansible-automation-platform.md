@@ -8,7 +8,7 @@ Choose the installation program you need based on your Red Hat Enterprise Linux 
 
 **Prerequisites**
 
-1. You are logged in to the Red Hat Enterprise Linux host as your non-root user.
+- You have logged in to the Red Hat Enterprise Linux host as your non-root user.
 
 
 **Procedure**
@@ -50,7 +50,7 @@ scp -i &lt;path_to_private_key&gt; ansible-automation-platform-containerized-set
 
 
 ```
-$ tar xfvz ansible-automation-platform-containerized-setup-&lt;version&gt;.tar.gz
+$ tar xfvz ansible-automation-platform-containerized-setup-&lt;version_number&gt;.tar.gz
 ```
 
 
@@ -58,7 +58,7 @@ $ tar xfvz ansible-automation-platform-containerized-setup-&lt;version&gt;.tar.g
 
 
 ```
-$ tar xfvz ansible-automation-platform-containerized-setup-bundle-&lt;version&gt;-&lt;arch_name&gt;.tar.gz
+$ tar xfvz ansible-automation-platform-containerized-setup-bundle-&lt;version_number&gt;-&lt;arch_name&gt;.tar.gz
 ```
 
 
@@ -67,6 +67,6 @@ $ tar xfvz ansible-automation-platform-containerized-setup-bundle-&lt;version&gt
 
 **Additional resources**
 
-- For more information about using `    scp` , see [scp(1) - Linux manual page](https://man7.org/linux/man-pages/man1/scp.1.html) .
+-  [scp(1) - Linux manual page](https://man7.org/linux/man-pages/man1/scp.1.html)
 
 

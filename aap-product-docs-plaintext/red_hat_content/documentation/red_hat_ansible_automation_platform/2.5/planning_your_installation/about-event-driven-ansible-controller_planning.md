@@ -1,5 +1,5 @@
 # 2. Red Hat Ansible Automation Platform components
-## 2.5. Event-Driven Ansible controller
+## 2.6. Event-Driven Ansible controller
 
 
 

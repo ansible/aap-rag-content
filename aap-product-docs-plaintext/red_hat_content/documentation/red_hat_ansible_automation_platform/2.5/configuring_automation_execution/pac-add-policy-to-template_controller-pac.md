@@ -1,6 +1,6 @@
 # 7. Implementing policy enforcement
-## 7.4. Configuring enforcement points
-### 7.4.3. Associating a policy with a job template
+## 7.3. Configuring enforcement points
+### 7.3.3. Associating a policy with a job template
 
 
 

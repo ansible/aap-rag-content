@@ -26,7 +26,7 @@ Creating a new subscription allocation allows you to set aside subscriptions and
 
 **Next steps**
 
--  [Add the subscriptions](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_installation/index#proc-add-merge-subscriptions) needed for Ansible Automation Platform to run properly.
+-  [Add the subscriptions](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-add-merge-subscriptions) .
 
 
 #### 1.2.6.2. Adding subscriptions to a subscription allocation
@@ -47,7 +47,7 @@ Once an allocation is created, you can add the subscriptions you need for Ansibl
 
 **Next steps**
 
--  [Download the manifest file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_installation/index#proc-aap-generate-manifest-file) from Red Hat Subscription Management.
+-  [Download the manifest file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-aap-generate-manifest-file) .
 
 
 #### 1.2.6.3. Downloading a manifest file
@@ -70,6 +70,6 @@ This downloads a file _manifest_ <allocation name>_<date>.zip_ to your default d
 
 **Next steps**
 
--  [Upload the manifest file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/assembly-gateway-licensing#proc-aap-activate-with-manifest) to activate Red Hat Ansible Automation Platform.
+-  [Upload the manifest file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/assembly-gateway-licensing#proc-aap-activate-with-manifest) .
 
 

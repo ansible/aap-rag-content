@@ -114,7 +114,7 @@ Example output:
 
 
 ```
-# Collection signing    hub_collection_signing=true    hub_collection_signing_key=/home/aapuser/aap/ansible-automation-platform-containerized-setup-2.5-2/collection-signing-key.priv    # This variable is required if the key is protected by a passphrase    hub_collection_signing_pass=&lt;password&gt;        # Container signing    hub_container_signing=true    hub_container_signing_key=/home/aapuser/aap/ansible-automation-platform-containerized-setup-2.5-2/container-signing-key.priv    # This variable is required if the key is protected by a passphrase    hub_container_signing_pass=&lt;password&gt;
+# Collection signing    hub_collection_signing=true    hub_collection_signing_key=/home/aapuser/aap/ansible-automation-platform-containerized-setup-&lt;version_number&gt;/collection-signing-key.priv    # This variable is required if the key is protected by a passphrase    hub_collection_signing_pass=&lt;password&gt;        # Container signing    hub_container_signing=true    hub_container_signing_key=/home/aapuser/aap/ansible-automation-platform-containerized-setup-&lt;version_number&gt;/container-signing-key.priv    # This variable is required if the key is protected by a passphrase    hub_container_signing_pass=&lt;password&gt;
 ```
 
 
@@ -122,6 +122,6 @@ Example output:
 
 **Additional resources**
 
-- For more information on working with signed containers following an installation, see [Working with signed containers](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-containers-hub#working-with-signed-containers) in the Managing automation content guide.
+-  [Working with signed containers](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-containers-hub#working-with-signed-containers)
 
 

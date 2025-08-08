@@ -17,6 +17,6 @@ Creating a new subscription allocation allows you to set aside subscriptions and
 
 **Next steps**
 
--  [Add the subscriptions](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#proc-add-merge-subscriptions) needed for Ansible Automation Platform to run properly.
+-  [Add the subscriptions](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-add-merge-subscriptions) .
 
 

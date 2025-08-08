@@ -45,6 +45,6 @@ When the API key and model ID is successfully validated, Red Hat Ansible Lightsp
 
 **Additional resources**
 
--  [Troubleshooting Red Hat Ansible Lightspeed configuration errors](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#troubleshooting-lightspeed-config_troubleshooting-lightspeed)
+-  [Troubleshooting Red Hat Ansible Lightspeed configuration errors](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#ref-troubleshooting-lightspeed-config_troubleshooting-lightspeed)
 
 

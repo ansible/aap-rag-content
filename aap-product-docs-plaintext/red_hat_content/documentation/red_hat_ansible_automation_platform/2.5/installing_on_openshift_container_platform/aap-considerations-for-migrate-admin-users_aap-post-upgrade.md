@@ -1,6 +1,6 @@
-# 6. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 6.7. Ansible Automation Platform post-upgrade steps
-### 6.7.1. Key considerations for migrating admin users
+# 7. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 7.7. Ansible Automation Platform post-upgrade steps
+### 7.7.1. Key considerations for migrating admin users
 
 
 

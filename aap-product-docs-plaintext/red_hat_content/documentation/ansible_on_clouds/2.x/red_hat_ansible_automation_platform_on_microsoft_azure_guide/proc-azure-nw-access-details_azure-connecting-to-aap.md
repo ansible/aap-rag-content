@@ -13,6 +13,6 @@ Regardless of whether Ansible Automation Platform was deployed with public or pr
 
 **Additional resources**
 
-For more details about the **Parameters and Outputs** page, see [Accessing Red Hat Ansible Automation Platform on Microsoft Azure](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-accessing-aap_azure-connecting-to-aap) .
+-  [Accessing Red Hat Ansible Automation Platform on Microsoft Azure](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-accessing-aap_azure-connecting-to-aap)
 
 

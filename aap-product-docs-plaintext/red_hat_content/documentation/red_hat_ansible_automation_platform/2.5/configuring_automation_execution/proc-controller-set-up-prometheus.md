@@ -37,5 +37,8 @@ If Prometheus is already running, you must restart it to apply the configuration
 
 
 
+**Next steps**
+
 Refer to the metrics endpoint in the automation controller API for your instance ( `api/v2/metrics` ) for more ways to query.
+
 

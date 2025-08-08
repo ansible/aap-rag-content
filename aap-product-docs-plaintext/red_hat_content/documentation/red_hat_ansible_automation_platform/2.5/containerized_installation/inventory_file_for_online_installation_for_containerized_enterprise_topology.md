@@ -102,7 +102,7 @@ eda_pg_password=&lt;set your own&gt;
 
 **Additional resources**
 
-- For more information about the container enterprise topology, see [Container enterprise topology](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/tested_deployment_models/container-topologies#infrastructure_topology_6) in _Tested deployment models_ .
-- For more information about Redis, see [Caching and queueing system](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/ha-redis_planning) in _Planning your installation_ .
+-  [Container enterprise topology](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/tested_deployment_models/container-topologies#infrastructure_topology_6)
+-  [Caching and queueing system](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/ha-redis_planning)
 
 

@@ -1,5 +1,5 @@
 # 3. Installing the Red Hat Edge Manager on Ansible Automation Platform
-## 3.4. Self-signed certificates
+## 3.3. Self-signed certificates
 
 
 

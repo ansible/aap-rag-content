@@ -9,7 +9,7 @@ The **Organizations** page displays the existing organizations for your installa
 
 **Procedure**
 
-1. From the navigation panel, selectmenu:Access Management→Organizations.
+1. From the navigation panel, selectAccess Management→Organizations.
 1. In the Search bar, enter an appropriate keyword for the organization you want to search for and click the arrow icon.
 1. From the menu bar, you can sort the list of organizations by using the arrows for **Name** to toggle your sorting preference.
 1. You can also sort the list by selecting **Name** , **Created** or **Last modified** from the **Sort** list.

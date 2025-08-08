@@ -1,5 +1,5 @@
 # 2. RPM topologies
-## 2.3. RPM enterprise topology
+## 2.2. RPM enterprise topology
 
 
 

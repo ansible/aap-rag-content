@@ -1,11 +1,11 @@
 # 10. Patch releases
-## 10.4. Ansible Automation Platform patch release May 7, 2025
-### 10.4.2. Technology Preview
+## 10.5. Ansible Automation Platform patch release May 7, 2025
+### 10.5.2. Technology Preview
 
 
 
 
-#### 10.4.2.1. Policy as Code
+#### 10.5.2.1. Policy as Code
 
 
 

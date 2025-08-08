@@ -19,11 +19,6 @@ Red Hat Support cannot assist with the suggestion quality reports. Content quali
 - From the [Red Hat customer portal](access.redhat.com) : Use this method to log bug reports and service disruption incidents, and feature requests.
 
 
-Note
-On the login screen of the [Ansible Lightspeed Portal](https://c.ai.ansible.redhat.com/) , there is a **Chat** link that redirects you to a Matrix channel. Use the Matrix channel to ask questions pertaining to your Ansible Lightspeed experience and request help to troubleshoot your issues. However, the Matrix channel is not an official Support channel, and issues raised in the Matrix chat would not be tracked through Red Hat Service Level Agreement (SLA). To raise a bug or a feature request, contact [Red Hat Support](https://access.redhat.com/support) and open a support ticket.
-
-
-
 **Prerequisites**
 
 Ensure that you meet **one** of the following requirements:
@@ -52,7 +47,7 @@ To raise a bug or feature request, contact [Red Hat Support](https://access.redh
 The following image shows an example of providing suggestion feedback:
 
 
-<span id="idm139960283655872"></span>
+<span id="idm139976450708400"></span>
 **Figure 4.9. Providing feedback on Ansible Lightspeed**
 
 ![Providing feedback on Ansible Lightspeed](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/5e53255f597a372422e0df6a58eb3968/lightspeed-provide-feedback.png)

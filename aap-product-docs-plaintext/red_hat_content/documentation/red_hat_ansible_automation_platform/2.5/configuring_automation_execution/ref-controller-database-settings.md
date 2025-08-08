@@ -18,7 +18,19 @@ To improve the performance of the PostgreSQL server, configure the following _Gr
 
 
 Note
-You must restart the database server after changing the value for shared_buffers.
+If you are compiling Postgres against OpenSSL 3.2, your system regresses to remove the parameter for User during startup. You can rectify this by using the BIO_get_app_data call instead of open_get_data. Only an administrator can make these changes, but it impacts all users connected to the PostgreSQL database. f you update your systems without the OpenSSL patch, you are not impacted, and you do not need to take action.
+
+
+
+Note
+You must restart the database server after changing the value for `shared_buffers` .
+
+
+
+Warning
+If you are compiling Postgres against OpenSSL 3.2, your system regresses to remove the parameter for User during startup. You can rectify this by using the BIO_get_app_data call instead of open_get_data. Only an administrator can make these changes, but it impacts all users connected to the PostgreSQL database.
+
+If you update your systems without the OpenSSL patch, you are not impacted, and you do not need to take action.
 
 
 
@@ -53,6 +65,6 @@ Set `maintenance_work_mem` higher than `work_mem` to improve performance for vac
 
 **Additional resources**
 
-For more information on autovacuuming settings, see [Automatic Vacuuming](https://www.postgresql.org/docs/13/runtime-config-autovacuum.html) .
+-  [Automatic Vacuuming](https://www.postgresql.org/docs/13/runtime-config-autovacuum.html)
 
 

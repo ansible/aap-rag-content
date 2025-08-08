@@ -1,6 +1,6 @@
 # 10. Patch releases
-## 10.7. Ansible Automation Platform patch release March 12, 2025
-### 10.7.4. Deprecated
+## 10.8. Ansible Automation Platform patch release March 12, 2025
+### 10.8.4. Deprecated
 
 
 

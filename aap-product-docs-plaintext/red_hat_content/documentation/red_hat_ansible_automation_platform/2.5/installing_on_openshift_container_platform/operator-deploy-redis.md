@@ -31,7 +31,10 @@ For more information about Redis, refer to Caching and queueing system in the _P
 1. Configure the rest of your instance as necessary, then clickCreate.
 
 
+**Verification**
+
 Your instance deploys with a cluster Redis with 6 Redis replicas as default.
+
 
 Note
 You can modify your automation hub default redis cache PVC volume size, for help with this see, [Modifying the default redis cache PVC volume size automation hub](https://access.redhat.com/articles/7117186) .

@@ -24,5 +24,8 @@ After you sign and approve collections, download the signature public keys from 
 
 
 
+**Verification**
+
 Use the public key that you copied to verify the content collection that you are installing.
+
 

@@ -43,7 +43,7 @@ The playbook explanation is displayed on the right panel of the VS Code screen.
 The following illustration shows an example of a playbook explanation:
 
 
-<span id="idm139960286057968"></span>
+<span id="idm139976454607904"></span>
 **Figure 4.6. Example of a playbook explanation**
 
 ![Example of a playbook explanation](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/98612898618da5b54f0c355a4303d127/lightspeed-playbook-explanation.png)

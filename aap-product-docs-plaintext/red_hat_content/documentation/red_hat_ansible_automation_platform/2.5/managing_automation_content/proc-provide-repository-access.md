@@ -19,5 +19,8 @@ By default, private repositories and the automation content collections are hidd
 1. ClickCloseto complete the process.
 
 
+**Additional resources**
+
 See [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication) for more information about implementing user access.
+
 

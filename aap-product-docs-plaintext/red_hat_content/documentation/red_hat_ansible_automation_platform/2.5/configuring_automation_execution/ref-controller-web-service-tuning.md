@@ -18,13 +18,13 @@ To optimize automation controller’s web service on the client side, follow the
 - Direct user to use dynamic inventory sources instead of individually creating inventory hosts by using the API.
 - Use webhook notifications instead of polling for job status.
 - Use the bulk APIs for host creation and job launching to batch requests.
-- Use token authentication. For automation clients that must make many requests very quickly, using tokens is a best practice, because depending on the type of user, there may be additional overhead when using basic authentication.
+- Use token authentication. For automation clients that must make many requests very quickly, using tokens is a best practice, because depending on the type of user, there might be additional overhead when using Basic authentication.
 
 
 **Additional resources**
 
-- For more information on workloads with high levels of API interaction, see [Scaling Automation Controller for API Driven Workloads](https://www.ansible.com/blog/scaling-automation-controller-for-api-driven-workloads) .
-- For more information on bulk API, see [Bulk API in Automation Controller](https://www.ansible.com/blog/bulk-api-in-automation-controller) .
-- For more information on how to generate and use tokens, see [Token-Based Authentication](https://docs.ansible.com/automation-controller/latest/html/administration/oauth2_token_auth.html#ag-oauth2-token-auth) .
+-  [Scaling Automation Controller for API Driven Workloads](https://www.ansible.com/blog/scaling-automation-controller-for-api-driven-workloads)
+-  [Bulk API in Automation Controller](https://www.ansible.com/blog/bulk-api-in-automation-controller)
+-  [Token-Based Authentication](https://docs.ansible.com/automation-controller/latest/html/administration/oauth2_token_auth.html#ag-oauth2-token-auth)
 
 

@@ -217,6 +217,7 @@ The following procedure describes how to change the SSL certificate and key in t
 - Automation controller: `        web_server_ssl_cert` , `        web_server_ssl_key` , `        custom_ca_cert`
 - Automation hub: `        automationhub_ssl_cert` , `        automationhub_ssl_key` , `        custom_ca_cert`
 - Event-Driven Ansible controller: `        automationedacontroller_ssl_cert` , `        automationedacontroller_ssl_key` , `        custom_ca_cert`
+
 Note
 The `    custom_ca_cert` must be the root certificate authority that signed the intermediate certificate authority. This file is installed in `    /etc/pki/ca-trust/source/anchors` .
 
@@ -538,7 +539,7 @@ true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
 
 
 
-<span id="idm140046645201968"></span>
+<span id="idm140184329121568"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

@@ -1,12 +1,21 @@
 # 3. Installing the Red Hat Edge Manager on Ansible Automation Platform
-## 3.3. Integrating with Ansible Automation Platform
+## 3.2. Set up the OAuth application for Ansible Automation Platform
+### 3.2.3. Integrating with Ansible Automation Platform
 
 
 
 
-To integrate the Red Hat Edge Manager with your Ansible Automation Platform instance, follow these additional steps.
+Integrate the Red Hat Edge Manager with your Ansible Automation Platform instance by modifying the `service-config.yaml` file to include authentication type, API URLs, OAuth client ID, and an optional OAuth token, followed by restarting the services.
 
 **Procedure**
+
+1. Stop the flightctl services before editing your `    service-config.yaml` file:
+
+
+```
+sudo systemctl stop flightctl.target
+```
+
 
 1. Configure the integration settings by editing the configuration file:
 

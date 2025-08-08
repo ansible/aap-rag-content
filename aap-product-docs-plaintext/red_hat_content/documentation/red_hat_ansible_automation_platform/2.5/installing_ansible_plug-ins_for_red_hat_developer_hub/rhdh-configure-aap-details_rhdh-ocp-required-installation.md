@@ -853,11 +853,6 @@ Verify that Ansible Automation Platform is reachable and correctly configured in
 To get help, please refer to the Ansible plug-ins installation guide.
 ```
 
-
-<span id="remediation_steps"></span>
-#### Remediation steps
-
-
 1. Verify that Ansible Automation Platform is reachable and correctly configured in the `    rhaap` section of the ConfigMap.
 1. Ensure the `    checkSSL` key is correctly set for your environment.
 1. After correcting the configuration details, restart the Red Hat Developer Hub pod to initiate a subscription query.
@@ -876,11 +871,6 @@ Verify that the authentication details for Ansible Automation Platform are corre
 For help, please refer to the Ansible plug-ins installation guide.
 ```
 
-
-<span id="remediation_steps_2"></span>
-#### Remediation steps
-
-
 1. Verify that the automation controller Personal Access Token (PAT) configured in the Ansible plug-ins is correct. For more information, refer to the [Adding tokens](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/gw-token-based-authentication#proc-controller-apps-create-tokens) section of _TitleCentralAuth_ .
 1. After correcting the authentication details, restart the Red Hat Developer Hub pod to initiate a subscription query.
 
@@ -897,11 +887,6 @@ Invalid resource for Ansible Automation Platform
 Verify that the resource url for Ansible Automation Platform are correctly configured in the Ansible plug-ins.
 For help, please refer to the Ansible plug-ins installation guide.
 ```
-
-
-<span id="remediation_steps_3"></span>
-#### Remediation steps
-
 
 1. Verify that the `    rhaap` section of the Ansible plug-ins ConfigMap is correctly configured and contains all the necessary entries. For more information, refer to [Configuring Ansible Automation Platform details](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-configure-aap-details_rhdh-ocp-required-installation) .
 1. After correcting the configuration, restart the Red Hat Developer Hub pod to initiate a subscription query.
@@ -921,11 +906,6 @@ Contact your Red Hat account team to obtain a new subscription entitlement.
 Learn more about account compliance.
 ```
 
-
-<span id="remediation_steps_4"></span>
-#### Remediation steps
-
-
 1. Contact your Red Hat account team to obtain a new subscription entitlement.
 1. Learn more about [account compliance](https://access.redhat.com/solutions/6988859) .
 1. When the subscription is in compliance, restart the Red Hat Developer Hub pod to initiate a new subscription query.
@@ -943,11 +923,6 @@ Invalid subscription
 The connected Ansible Automation Platform subscription is invalid.
 Contact your Red Hat account team, or start an Ansible Automation Platform trial.
 ```
-
-
-<span id="remediation_steps_5"></span>
-#### Remediation steps
-
 
 1. Contact your Red Hat account team to obtain a new subscription entitlement or [start an Ansible Automation Platform trial](http://red.ht/aap-rhdh-plugins-start-trial) .
 1. When you have updated the subscription, restart the Red Hat Developer Hub pod to initiate a new subscription query.
@@ -1387,7 +1362,7 @@ Red Hat collects and analyzes the following data to improve your experience with
 With Red Hat Developer Hub, you can disable or customize the telemetry data collection feature. For more information, refer to the [Telemetry data collection and analysis](https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.4/html/telemetry_data_collection_and_analysis/index) guide in the Red Hat Developer Hub documentation.
 
 
-<span id="idm139651272926544"></span>
+<span id="idm140630177428160"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

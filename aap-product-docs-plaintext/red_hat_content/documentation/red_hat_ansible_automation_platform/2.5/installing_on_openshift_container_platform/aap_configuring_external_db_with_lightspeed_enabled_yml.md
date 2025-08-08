@@ -1,6 +1,6 @@
-# 10. Appendix: Red Hat Ansible Automation Platform custom resources
-## 10.1. Custom resources
-### 10.1.11. aap-configuring-external-db-with-lightspeed-enabled.yml
+# 11. Appendix: Red Hat Ansible Automation Platform custom resources
+## 11.1. Custom resources
+### 11.1.11. aap-configuring-external-db-with-lightspeed-enabled.yml
 
 
 

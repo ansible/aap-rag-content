@@ -18,6 +18,6 @@ Once an allocation is created, you can add the subscriptions you need for Ansibl
 
 **Next steps**
 
--  [Download the manifest file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#proc-aap-generate-manifest-file) from Red Hat Subscription Management.
+-  [Download the manifest file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-aap-generate-manifest-file) .
 
 

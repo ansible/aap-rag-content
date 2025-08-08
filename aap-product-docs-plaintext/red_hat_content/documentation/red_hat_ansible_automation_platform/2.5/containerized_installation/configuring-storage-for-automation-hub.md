@@ -38,7 +38,7 @@ hub_s3_extra_settings:          AWS_S3_MAX_MEMORY_SIZE: 4096          AWS_S3_REG
 
 **Additional resources**
 
-- For more information about the list of parameters, see [django-storages documentation - Amazon S3](https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings) .
+-  [django-storages documentation - Amazon S3](https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings)
 
 
 #### 2.7.3.2. Configuring Azure Blob Storage for automation hub
@@ -72,7 +72,7 @@ hub_azure_extra_settings:          AZURE_LOCATION: foo          AZURE_SSL: True 
 
 **Additional resources**
 
-- For more information about the list of parameters, see [django-storages documentation - Azure Storage](https://django-storages.readthedocs.io/en/latest/backends/azure.html#settings) .
+-  [django-storages documentation - Azure Storage](https://django-storages.readthedocs.io/en/latest/backends/azure.html#settings)
 
 
 #### 2.7.3.3. Configuring Network File System (NFS) storage for automation hub

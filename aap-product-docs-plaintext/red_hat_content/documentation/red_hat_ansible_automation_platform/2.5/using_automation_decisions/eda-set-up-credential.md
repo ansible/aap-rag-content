@@ -18,5 +18,8 @@ You can create a credential to use with a source plugin or a private container r
 1. ClickCreate credential.
 
 
+**Next steps**
+
 After saving the credential, the credentials details page is displayed. From there or the **Credentials** list view, you can edit or delete it.
+
 

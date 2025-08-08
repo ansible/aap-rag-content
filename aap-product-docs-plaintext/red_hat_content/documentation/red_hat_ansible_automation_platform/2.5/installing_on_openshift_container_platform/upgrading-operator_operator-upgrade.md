@@ -1,5 +1,5 @@
-# 6. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 6.5. Upgrading the Ansible Automation Platform Operator
+# 7. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 7.5. Upgrading the Ansible Automation Platform Operator
 
 
 
@@ -36,5 +36,8 @@ Upgrading from Event-Driven Ansible 2.4 is not supported. If you are using Event
 1. Create a Custom Resource (CR) using the Ansible Automation Platform UI. The automation controller and automation hub UIs remain until all SSO configuration is supported in the platform gateway UI.
 
 
-For more information on configuring your updated Ansible Automation Platform Operator, see [Configuring the Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#configure-aap-operator_operator-platform-doc) .
+**Additional resources**
+
+-  [Configuring the Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#configure-aap-operator_operator-platform-doc)
+
 

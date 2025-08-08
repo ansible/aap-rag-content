@@ -1,38 +1,15 @@
 # 10. Patch releases
-## 10.13. Ansible Automation Platform patch release January 15, 2025
-### 10.13.1. Enhancements
+## 10.6. Ansible Automation Platform patch release April 9, 2025
+### 10.6.2. Enhancements
 
 
 
 
-#### 10.13.1.1. Ansible Automation Platform
+#### 10.6.2.1. Container-based Ansible Automation Platform
 
 
 
 
-- With this update, the `    ansible.controller` collection has been updated to 4.6.6.(AAP-38443)
-- Enhanced the **status API** , `    /api/gateway/v1/status/` , from the **services** property within the JSON to an array. Consumers of this API can still request the previous format with a URL query parameter `    service_keys=true` .(AAP-37903)
-
-
-#### 10.13.1.2. Ansible Automation Platform Operator
-
-
-
-
-- Added the ability to configure `    topology_spread_constraints, `node_selector, and `tolerations` for gateway deployments. (AAP-37193)
-
-
-#### 10.13.1.3. Container-based Ansible Automation Platform
-
-
-
-
-- TLS certificate and key files are now validated during the preflight role execution.
-
-
-- If the TLS certificate file is provided then the TLS key file must be provided.
-- If the TLS key file is provided then the TLS certificate file must be provided.
-- Both TLS certificate and key modulus should match.(AAP-37845)
-
+- Implemented variables for applying `    extra_settings` for automation controller, Event-Driven Ansible, platform gateway, and automation hub during installation.(AAP-42932)
 
 

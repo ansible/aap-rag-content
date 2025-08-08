@@ -18,7 +18,10 @@ oc get routes -n<span class="emphasis"><em><span class="Role ARG Spec Role ARG S
 
 **Verification**
 
-You can see in the following example, the `<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">example</span></em></span>` platform gateway is running in the `<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">ansible-automation-platform</span></em></span>` namespace.
+You can see in the following example, the `    <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">example</span></em></span>` platform gateway is running in the `    <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">ansible-automation-platform</span></em></span>` namespace.
+
+
+
 
 
 ```

@@ -1,6 +1,6 @@
 # 4. Management Jobs
-## 4.2. Cleanup Expired OAuth2 Tokens
-### 4.2.1. Cleanup Expired Sessions
+## 4.1. Removing old activity stream data
+### 4.1.3. Cleanup Expired Sessions
 
 
 

@@ -24,7 +24,7 @@ The operating system disk image has partitions, volumes, the file system, and th
 
 **Additional resources**
 
-- See [Building a bootc operating system image for the Red Hat Edge Manager](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-build-bootc)
-- See [Special considerations for building images](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-images-special-considerations) .
+-  [Building a bootc operating system image for the Red Hat Edge Manager](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-build-bootc)
+-  [Special considerations for building images](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-images-special-considerations)
 
 

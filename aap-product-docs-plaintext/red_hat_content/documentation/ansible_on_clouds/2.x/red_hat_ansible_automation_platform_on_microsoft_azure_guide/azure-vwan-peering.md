@@ -43,7 +43,10 @@ Before peering, you must connect a hub network, and at least one spoke network, 
 
 
 
+**Verification**
+
 When network peering completes, traffic routes to and from Ansible Automation Platform on Microsoft Azure though your VWAN hub network.
+
 
 **Additional resources**
 

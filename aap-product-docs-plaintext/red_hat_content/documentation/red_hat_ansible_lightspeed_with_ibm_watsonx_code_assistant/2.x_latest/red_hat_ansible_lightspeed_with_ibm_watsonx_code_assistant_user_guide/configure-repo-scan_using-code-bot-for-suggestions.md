@@ -1,6 +1,6 @@
 # 6. Installing and configuring the Ansible code bot
-## 6.2. Managing repository scans
-### 6.2.2. Configuring the Ansible code bot to scan your repository at regular intervals
+## 6.3. Managing repository scans
+### 6.3.2. Configuring the Ansible code bot to scan your repository at regular intervals
 
 
 

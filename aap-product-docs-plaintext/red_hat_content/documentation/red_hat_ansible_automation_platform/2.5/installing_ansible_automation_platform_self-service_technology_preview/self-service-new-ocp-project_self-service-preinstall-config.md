@@ -568,7 +568,7 @@ To re-enable telemetry data collection, delete these lines.
 
 
 
-<span id="idm140465048982272"></span>
+<span id="idm139630975122320"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

@@ -63,8 +63,8 @@ The following is a working example of JSON output that automation controller can
 
 **Additional resources**
 
-- For examples of inventory files, see [test-playbooks/inventories](https://github.com/ansible/test-playbooks/tree/main/inventories) .
-- For an example of an inventory script inside of that, see [inventories/changes.py](https://github.com/ansible/test-playbooks/blob/main/inventories/changes.py) .
-- For information about how to implement the inventory script, see the support article, [How to migrate inventory scripts from Red Hat Ansible tower to Red Hat Ansible Automation Platform?](https://access.redhat.com/solutions/6997130) .
+-  [test-playbooks/inventories](https://github.com/ansible/test-playbooks/tree/main/inventories)
+-  [inventories/changes.py](https://github.com/ansible/test-playbooks/blob/main/inventories/changes.py)
+-  [How to migrate inventory scripts from Red Hat Ansible tower to Red Hat Ansible Automation Platform?](https://access.redhat.com/solutions/6997130)
 
 

@@ -4,15 +4,18 @@
 
 
 
+Prepare your Red Hat Enterprise Linux host for the installation of the Red Hat Edge Manager by enabling the necessary repositories, installing the `flightctl-services` package, configuring the baseDomain, and then starting and verifying the running services.
+
 **Prerequisites**
 
 - An active Ansible Automation Platform subscription with a running instance and the necessary API URLs and OAuth credentials.
+- A separate machine from Ansible Automation Platform to install the Red Hat Edge Manager on.
 - Podman installed for managing containers.
 - A Red Hat Enterprise Linux host with:
 
 
 - Minimal installation
-- 4 cores and 16GB RAM (minimum recommended)
+- 4 cores and 16GB RAM (recommended)
 - Administrative access (root or sudo-capable user)
 - SSH access
 
@@ -21,6 +24,14 @@
 **Procedure**
 
 1. SSH into your Red Hat Enterprise Linux host.
+1. Authenticate and log in to the Red Hat Container Registry:
+
+
+```
+sudo podman login registry.redhat.io
+```
+
+
 1. Install the necessary repositories and packages:
 
 
@@ -28,7 +39,7 @@
 
 
 ```
-subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms
+sudo subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms
 ```
 
 
@@ -36,7 +47,7 @@ subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-9-x
 
 
 ```
-sudo dnf install -y flightctl-services        sudo systemctl enable flightctl.target
+sudo dnf install -y flightctl-services
 ```
 
 
@@ -59,17 +70,17 @@ You can check the currently configured `    baseDomain` using:
 
 
 ```
-cat /etc/flightctl/service-config.yaml | grep baseDomain:
+grep baseDomain: /etc/flightctl/service-config.yaml
 ```
 
 
 
 
-1. Start the services:
+1. Enable and start the services:
 
 
 ```
-sudo systemctl start flightctl.target
+sudo systemctl enable flightctl.target    sudo systemctl start flightctl.target
 ```
 
 
@@ -93,10 +104,22 @@ You should see these 7 services running:
 
 1. Go to the UI at the `    baseDomain` stored in the service configuration file:
 
-`    cat /etc/flightctl/service-config.yaml | grep baseDomain:`
+
+```
+grep baseDomain: /etc/flightctl/service-config.yaml
+```
 
 Visit the displayed `    baseDomain` in your web browser to access the UI.
 
 
 
+
+**Troubleshooting**
+
+If your services do not run correctly, use the following log command to troubleshoot further and remediate:
+
+
+```
+journalctl -u flightctl-&lt;impacted service&gt; -b --no-pager
+```
 

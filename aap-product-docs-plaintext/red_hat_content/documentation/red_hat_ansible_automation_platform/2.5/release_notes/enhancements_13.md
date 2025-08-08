@@ -1,39 +1,36 @@
 # 10. Patch releases
-## 10.11. Ansible Automation Platform patch release January 29, 2025
-### 10.11.1. Enhancements
+## 10.4. Ansible Automation Platform patch release May 28, 2025
+### 10.4.3. Enhancements
 
 
 
 
-#### 10.11.1.1. Ansible Automation Platform
+#### 10.4.3.1. Ansible Automation Platform
 
 
 
 
-- Using PostgreSQL TLS certificate authentication with an external database is now available.(AAP-38400)
+- Reduced the cognitive complexity level of `    validate_password()` method and reorganized the `    validate_authenticate_uid()` method to increase code readability.(AAP-45346)
+- For clarity and to prevent misconfiguration, the SAML authenticator now requires both a permanent user ID and a username.(AAP-45333)
+- Updated field names and help text in the System Settings UI to indicate client ID and client secret for service accounts, as well as client ID and client secret for analytics.(AAP-43119)
+- Validation/enforcement of expected service types removed because service types are now dynamic.(AAP-40130)
+- Enables configuration of control plane authentication for custom services. You should not modify it for pre-defined services.(AAP-40131)
+- Custom service type support added. Arbitrary service types and services can be created rather than a fixed list.(AAP-39812)
 
 
-#### 10.11.1.2. Event-Driven Ansible
-
-
-
-
-- The `    ansible.eda` collection has been updated to 2.3.1.(AAP-39057)
-- Users are now able to create a new Event-Driven Ansible credential by copying an existing one.(AAP-39249)
-- Added support for **file** and **env** injectors for credentials.(AAP-39091)
-
-
-#### 10.11.1.3. RPM-based Ansible Automation Platform
+#### 10.4.3.2. Red Hat Ansible Lightspeed
 
 
 
 
-- Implemented certificate authentication support (mTLS) for external databases.
+- It is now possible to disable SSL verification for Red Hat Ansible Lightspeed <→ Model Server communication.(AAP-45337)
 
 
-- Postgresql TLS certificate authentication is available for external databases.
-- Postgresql TLS certificate authentication can be turned on/off (off by default for backward compatibility).
-- Each component, automation controller, Event-Driven Ansible, platform gateway, and automation hub, now provides off the shelf (OTS) TLS certificate and key files (mandatory).(AAP-38400)
+#### 10.4.3.3. Automation controller
 
+
+
+
+- Updated Azure Key Vault plugin to use managed identity when creating credentials.(AAP-43461)
 
 

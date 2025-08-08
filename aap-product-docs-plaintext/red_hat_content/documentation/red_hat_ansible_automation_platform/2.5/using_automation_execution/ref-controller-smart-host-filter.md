@@ -29,7 +29,7 @@ The `host_filter` parameter permits:
 - "classic" Django queries may be embedded in the `    host_filter`
 
 
-**Examples:**
+**Examples** :
 
 ```
 /api/v2/hosts/?host_filter=name=localhost
@@ -40,7 +40,6 @@ The `host_filter` parameter permits:
 /api/v2/hosts/?host_filter=ansible_facts__ansible_env__PYTHONUNBUFFERED="true"
 /api/v2/hosts/?host_filter=(name=localhost or name=database) and (groups__name=east or groups__name="west coast") and ansible_facts__an
 ```
-
 
 You can search `host_filter` by **host name** , **group name** , and **Ansible facts** .
 

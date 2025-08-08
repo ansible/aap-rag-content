@@ -1,5 +1,5 @@
 # 7. Implementing policy enforcement
-## 7.3. Understanding OPA packages and rules
+## 7.2. Understanding OPA packages and rules
 
 
 

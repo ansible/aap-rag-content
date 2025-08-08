@@ -1,6 +1,6 @@
 # 14. Inventories
 ## 14.4. Add a new inventory
-### 14.4.3. Adding hosts to an inventory
+### 14.4.4. Adding hosts to an inventory
 
 
 
@@ -66,8 +66,6 @@ When a group is associated, it is displayed in the list of groups associated wit
 
 Note
 You can create hosts in bulk by using the newly added endpoint in the API, `/api/v2/bulk/host_create` . This endpoint accepts JSON and you can specify the target inventory and a list of hosts to add to the inventory. These hosts must be unique within the inventory. Either all hosts are added, or an error is returned indicating why the operation was not able to complete. Use the **OPTIONS** request to return the relevant schema.
-
-For more information, see [Bulk endpoints](https://docs.ansible.com/automation-controller/latest/html/controllerapi/api_ref.html#/Bulk) in the _Automation Controller API Guide_ .
 
 
 

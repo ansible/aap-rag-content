@@ -21,5 +21,8 @@ Collections requiring approval have the status **Needs review** .
 1. Click the thumbs down icon to reject the collection. Confirm your choice in the modal that appears.
 
 
+**Verification**
+
 Collections you decline for publication are moved to the **Rejected** repository.
+
 

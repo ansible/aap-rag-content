@@ -51,7 +51,7 @@ Instead, run such scripts or commands during image building so changes are part 
 
 **Additional resources**
 
-- See [Generic guidance for building images](https://bootc-dev.github.io/bootc/building/guidance.html) in the bootc documentation.
+-  [Generic guidance for building images](https://bootc-dev.github.io/bootc/building/guidance.html)
 
 
 ## 4.3. Building a _bootc_ operating system image for the Red Hat Edge Manager
@@ -63,13 +63,13 @@ To prepare your device to be managed by the Red Hat Edge Manager, build a `bootc
 
 For more information, see the following sections:
 
--  [Installing the Red Hat Edge Manager CLI](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-install-CLI)
--  [Optional: Requesting an enrollment certificate for early binding](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-request-cert)
--  [Optional: Using image pull secrets](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-image-pullsecrets)
--  [Building the operating system image with bootc](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-build-bootc-image)
--  [Signing and publishing the bootc operating system image by using Sigstore](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-build-sign-image)
--  [Building the operating system disk image](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-build-disk-image)
--  [Optional: Signing and publishing the operating system disk image to an Open Container Initiative registry](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-sign-disk-image)
+-  [Installing the Red Hat Edge Manager CLI](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_device_fleets_with_the_red_hat_edge_manager/assembly-edge-manager-images#edge-manager-install-CLI)
+-  [Optional: Requesting an enrollment certificate for early binding](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_device_fleets_with_the_red_hat_edge_manager/assembly-edge-manager-images#edge-manager-request-cert)
+-  [Optional: Using image pull secrets](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_device_fleets_with_the_red_hat_edge_manager/assembly-edge-manager-images#edge-manager-image-pullsecrets)
+-  [Building the operating system image with bootc](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_device_fleets_with_the_red_hat_edge_manager/assembly-edge-manager-images#edge-manager-build-bootc-image)
+-  [Signing and publishing the bootc operating system image by using Sigstore](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_device_fleets_with_the_red_hat_edge_manager/assembly-edge-manager-images#edge-manager-build-sign-image)
+-  [Building the operating system disk image](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_device_fleets_with_the_red_hat_edge_manager/assembly-edge-manager-images#edge-manager-build-disk-image)
+-  [Optional: Signing and publishing the operating system disk image to an Open Container Initiative registry](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_device_fleets_with_the_red_hat_edge_manager/assembly-edge-manager-images#edge-manager-sign-disk-image)
 
 
 ### 4.3.1. Prerequisites
@@ -96,23 +96,86 @@ To install the Red Hat Edge Manager CLI, complete the following steps:
 
 
 ```
-subscription-manager repos --enable rhacm-2.13-for-rhel-&lt;version&gt;-&lt;arch&gt;-rpms
+sudo subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms
 ```
 
-For a full list of available repositories for the Red Hat Edge Manager, see the _Additional resources_ section.
+For a full list of available repositories for the Red Hat Edge Manager, see the [Additional resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_device_fleets_with_the_red_hat_edge_manager/assembly-edge-manager-images#edge-manager-additional-resources-images) section.
 
 
 1. Install the `    flightctl` CLI with your package manager by running the following command:
 
 
 ```
-sudo dnf install flightctl-cli
+sudo dnf install flightctl
 ```
 
 
 
 
-### 4.3.3. Optional: Requesting an enrollment certificate for early binding
+If you [set up the OAuth application manually](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_device_fleets_with_the_red_hat_edge_manager/assembly-edge-manager-install#edge-manager-oauth-manually) , you also need to make sure that one utility `xdg-open` , `x-www-browser` , or `www-browser` is available, for example, by installing `xdg-utils` .
+
+### 4.3.3. Logging into the Red Hat Edge Manager through the CLI
+
+
+
+
+How you log in the Red Hat Edge Manager depends on whether you choose the [automatic](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_device_fleets_with_the_red_hat_edge_manager/assembly-edge-manager-install#edge-manager-oauth-auto) or [manual](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_device_fleets_with_the_red_hat_edge_manager/assembly-edge-manager-install#edge-manager-oauth-manually) method when you initially set up the application.
+
+**Procedure**
+
+- If you use the automatic setup you can create a personal access token, even only with Read scope (under the profile icon in the top right corner of your Ansible Automation Platform UI > **User details** > **Tokens** tab) and then use this token to log in directly through the CLI, with the following example syntax:
+
+
+```
+flightctl login https://&lt;your-edge-manager-ip-or-domain&gt;:3443 --token=&lt;your-aap-oauth-token&gt; --insecure-skip-tls-verify
+```
+
+
+- If you use the manual setup, use the **Client ID** to log in through a web-based process, with the following example syntax:
+
+
+```
+flightctl login https://&lt;your-edge-manager-ip-or-domain&gt;:3443 --web --client-id=&lt;your-aap-client-id&gt; --insecure-skip-tls-verify
+```
+
+
+- This opens in a web browser and asks you to approve.
+
+The `        --insecure-skip-tls-verify` parameter is used only if you have not generated your own valid certificates.
+
+
+
+
+
+**Next steps**
+
+Use the following commands to help you with the CLI:
+
+
+- To output a list of available commands, use:
+
+
+```
+flightctl
+```
+
+
+- To output both the flightctl CLI version and the back-end Red Hat Edge Manager version, use:
+
+
+```
+flightctl version
+```
+
+
+
+
+Important
+To ensure supportability and proper functionality, the version of the flightctl CLI must match the version of the Red Hat Edge Manager in use. Mismatched versions are not supported.
+
+
+
+### 4.3.4. Optional: Requesting an enrollment certificate for early binding
 
 
 
@@ -121,12 +184,7 @@ If you want to include an agent configuration in the image, complete the followi
 
 **Procedure**
 
-1. Authenticate with the Red Hat Edge Manager service by using the `    flightctl` CLI by running the following command:
-
-
-```
-flightctl login --username=&lt;your_user&gt; --password=&lt;your_password&gt; https://&lt;rhem_api_server_url&gt;
-```
+1. Log in to the flightctl CLI by following the steps in [Logging into the Red Hat Edge Manager through the CLI](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-log-into-CLI) .
 
 Note
 The CLI uses the certificate authority pool of the host to verify the identity of the Red Hat Edge Manager service. The verification can lead to a TLS verification error when using self-signed certificates, if you do not add your certificate authority certificate to the pool. You can bypass the server verification by adding the `    --insecure-skip-tls-verify` flag to your command.
@@ -157,7 +215,7 @@ enrollment-service:      authentication:        client-certificate-data: LS0tLS1
 
 
 
-### 4.3.4. Optional: Using image pull secrets
+### 4.3.5. Optional: Using image pull secrets
 
 
 
@@ -191,7 +249,7 @@ The pull secret must exist on the device before the secret can be consumed.
 
 For more information, see the [Additional resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-additional-resources-images) section.
 
-### 4.3.5. Building the operating system image with _bootc_
+### 4.3.6. Building the operating system image with _bootc_
 
 
 
@@ -274,7 +332,7 @@ sudo podman build -t ${OCI_IMAGE_REPO}:${OCI_IMAGE_TAG}
 
 
 
-### 4.3.6. Signing and publishing the _bootc_ operating system image by using Sigstore
+### 4.3.7. Signing and publishing the _bootc_ operating system image by using Sigstore
 
 
 
@@ -317,7 +375,7 @@ sudo podman push \        --sign-by-sigstore-private-key ./signingkey.private \ 
 
 
 
-### 4.3.7. Building the operating system disk image
+### 4.3.8. Building the operating system disk image
 
 
 
@@ -348,7 +406,7 @@ sudo podman run --rm -it --privileged --pull=newer \        --security-opt label
 
 When the `bootc-image-builder` completes, you can find the ISO disk image at the `${PWD}/output/bootiso/install.iso` path.
 
-### 4.3.8. Optional: Signing and publishing the operating system disk image to an Open Container Initiative registry
+### 4.3.9. Optional: Signing and publishing the operating system disk image to an Open Container Initiative registry
 
 
 
@@ -406,7 +464,7 @@ sudo podman manifest push --all \         --sign-by-sigstore-private-key ./signi
 
 
 
-### 4.3.9. Additional resources
+### 4.3.10. Additional resources
 
 
 
@@ -414,7 +472,7 @@ sudo podman manifest push --all \         --sign-by-sigstore-private-key ./signi
 - For more information about building the operating system image on different target platforms, see [Configuring container pull secrets](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/using_image_mode_for_rhel_to_build_deploy_and_manage_operating_systems/index#configuring-container-pull-secrets_managing-users-groups-ssh-key-and-secrets-in-image-mode-for-rhel) .
 
 
-### 4.3.10. Requirements for specific target platforms
+### 4.3.11. Requirements for specific target platforms
 
 
 
@@ -425,7 +483,7 @@ See the following platform considerations:
 -  [Building images for VMware vSphere](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-vmware)
 
 
-#### 4.3.10.1. Building images for Red Hat OpenShift Virtualization
+#### 4.3.11.1. Building images for Red Hat OpenShift Virtualization
 
 
 
@@ -460,7 +518,7 @@ RUN dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noar
 
 
 
-#### 4.3.10.2. Building the bootc image
+#### 4.3.11.2. Building the bootc image
 
 
 
@@ -489,7 +547,7 @@ sudo podman run --rm -it --privileged --pull=newer \        --security-opt label
 
 When the `bootc-image-builder` completes, you can find the disk image under `${PWD}/output/vmdk/disk.vmdk` .
 
-#### 4.3.10.3. Building the QCoW2 disk image
+#### 4.3.11.3. Building the QCoW2 disk image
 
 
 
@@ -518,7 +576,7 @@ sudo chown -R $(whoami):$(whoami) "${PWD}/output"    OCI_DISK_IMAGE_REPO=${OCI_I
 
 
 
-#### 4.3.10.4. Building images for VMware vSphere
+#### 4.3.11.4. Building images for VMware vSphere
 
 
 
@@ -751,6 +809,7 @@ See the following example:
 NAME           APPROVAL  APPROVER  APPROVED LABELS    &lt;device_name&gt;  Pending   &lt;none&gt;    &lt;none&gt;
 ```
 
+
 Note
 The unique device name is generated by the agent and you cannot change it. The agent chooses a base32-encoded hash of its public key as the device name.
 
@@ -770,6 +829,7 @@ See the following example output:
 ```
 NAME           APPROVAL  APPROVER  APPROVED LABELS    &lt;device_name&gt;  Approved  user      region=eu-west-1,site=factory-berlin
 ```
+
 
 
 
@@ -826,6 +886,7 @@ NAME           ALIAS    OWNER   SYSTEM  UPDATED     APPLICATIONS  LAST SEEN    &
 ```
 
 
+
 1. View the details of this device in YAML format by running the following command:
 
 
@@ -839,6 +900,7 @@ See the following example output:
 ```
 apiVersion: flightctl.io/v1alpha1    kind: Device    metadata:      name: &lt;device_name&gt;      labels:<span id="CO4-1"><!--Empty--></span><span class="callout">1</span>region: eu-west-1        site: factory-berlin    spec:      os:        image: quay.io/flightctl/rhel:9.5<span id="CO4-2"><!--Empty--></span><span class="callout">2</span>config:      - name: my-os-configuration<span id="CO4-3"><!--Empty--></span><span class="callout">3</span>configType: GitConfigProviderSpec        gitRef:          path: /configuration          repository: my-configuration-repo          targetRevision: production    status:      os:        image: quay.io/flightctl/rhel:9.5<span id="CO4-4"><!--Empty--></span><span class="callout">4</span>config:        renderedVersion: "1"<span id="CO4-5"><!--Empty--></span><span class="callout">5</span>applications:        data: {}<span id="CO4-6"><!--Empty--></span><span class="callout">6</span>summary:          status: Unknown<span id="CO4-7"><!--Empty--></span><span class="callout">7</span>resources:<span id="CO4-8"><!--Empty--></span><span class="callout">8</span>cpu: Healthy        disk: Healthy        memory: Healthy      systemInfo:<span id="CO4-9"><!--Empty--></span><span class="callout">9</span>architecture: amd64        bootID: 037750f7-f293-4c5b-b06e-481eef4e883f        operatingSystem: linux      summary:        info: ""        status: Online<span id="CO4-10"><!--Empty--></span><span class="callout">10</span>updated:        status: UpToDate<span id="CO4-11"><!--Empty--></span><span class="callout">11</span>lastSeen: "2024-08-28T11:45:34.812851905Z"<span id="CO4-12"><!--Empty--></span><span class="callout">12</span>[...]
 ```
+
 
 
 
@@ -2138,7 +2200,7 @@ sudo flightctl-must-gather
 
 
 
-<span id="idm140467246368928"></span>
+<span id="idm140539236684896"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

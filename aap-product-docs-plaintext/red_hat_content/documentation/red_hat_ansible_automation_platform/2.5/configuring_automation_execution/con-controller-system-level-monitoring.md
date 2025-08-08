@@ -13,7 +13,7 @@ Monitor the disk I/O and use of your system. The manner in which an automation c
 
 **Additional resources**
 
-- For more information about configuring monitoring, see [Metrics](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#assembly-controller-metrics) .
-- Additional insights into automation usage are available when you enable data collection for automation analytics. For more information, see [Automation analytics and Red Hat Insights for Red Hat Ansible Automation Platform](https://www.ansible.com/products/insights-for-ansible) .
+-  [Metrics](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#assembly-controller-metrics)
+-  [Automation analytics and Red Hat Insights for Red Hat Ansible Automation Platform](https://www.ansible.com/products/insights-for-ansible)
 
 

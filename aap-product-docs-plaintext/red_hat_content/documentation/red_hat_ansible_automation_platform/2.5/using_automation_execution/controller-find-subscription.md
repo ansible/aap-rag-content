@@ -8,9 +8,15 @@ When you log in to Ansible Automation Platform for the first time, you must add 
 
 If you have already added your subscription, you can update your subscription details in the platform by going toSettings→Subscription→Edit subscription.
 
-**Prerequisite**
+**Prerequisites**
 
+- You are an organization administrator.
 - You have [created a service account](https://docs.redhat.com/en/documentation/red_hat_hybrid_cloud_console/1-latest/html/creating_and_managing_service_accounts/proc-ciam-svc-acct-overview-creating-service-acct#proc-ciam-svc-acct-create-creating-service-acct) and saved the client ID and client secret.
+
+
+Note
+If you do not have administrative access, you can enter your Red Hat username and password in the Client ID and Client secret fields, respectively, to locate and add your subscription to your Ansible Automation Platform instance.
+
 
 
 **Procedure**

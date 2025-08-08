@@ -39,7 +39,7 @@ The following section outlines the steps to configure an external database for y
 
 **Prerequisite**
 
-The external database must be a PostgreSQL database that is the version supported by the current release of Ansible Automation Platform.
+The external database must be a PostgreSQL database that is the version supported by the current release of Ansible Automation Platform. The external postgres instance credentials and connection information must be stored in a secret, which is then set on the platform gateway spec.
 
 
 Note
@@ -48,9 +48,6 @@ Ansible Automation Platform 2.5 supports PostgreSQL 15.
 
 
 **Procedure**
-
-The external postgres instance credentials and connection information must be stored in a secret, which is then set on the platform gateway spec.
-
 
 1. Create a `    postgres_configuration_secret` YAML file, following the template below:
 

@@ -17,12 +17,15 @@ A scheduled task automatically updates these values on a weekly basis and delete
 
 
 
-1. Delete unnecessary hosts directly from the Host Metrics view by selecting the desired hosts and clickingDelete.
+1. Delete unnecessary hosts directly from the Host Metrics view by selecting the required hosts and clickingDelete.
 
 These are soft-deleted, meaning their records are not removed, but are not being used and thereby not counted towards your subscription.
 
 
 
 
-For more information, see [Configuring automation execution](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution) /index#controller-keep-subscription-in-compliance[Keeping your subscription in compliance].
+**Additional resources**
+
+-  [Configuring automation execution](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution) /index#controller-keep-subscription-in-compliance[Keeping your subscription in compliance]
+
 
