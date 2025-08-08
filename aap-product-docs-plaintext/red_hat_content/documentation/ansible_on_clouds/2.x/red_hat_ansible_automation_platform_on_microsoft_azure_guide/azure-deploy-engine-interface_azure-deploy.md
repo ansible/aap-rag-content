@@ -1,6 +1,6 @@
 # 3. Deploying Red Hat Ansible Automation Platform on Microsoft Azure
-## 3.3. Monitoring deployments on the Ansible Automation Platform Deployment Engine
-### 3.3.1. Ansible Automation Platform Deployment Engine interface
+## 3.4. Monitoring deployments on the Ansible Automation Platform Deployment Engine
+### 3.4.1. Ansible Automation Platform Deployment Engine interface
 
 
 

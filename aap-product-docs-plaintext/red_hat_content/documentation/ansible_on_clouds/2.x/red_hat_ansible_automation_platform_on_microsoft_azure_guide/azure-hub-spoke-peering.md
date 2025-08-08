@@ -64,7 +64,7 @@ The CIDR block of the cluster is displayed in the **Address Space** .
 
 **Additional resources**
 
-For further information, refer to [View virtual networks and settings](https://docs.microsoft.com/en-us/azure/virtual-network/manage-virtual-network#view-virtual-networks-and-settings) in the Microsoft Azure _Virtual network_ guide.
+-  [View virtual networks and settings](https://docs.microsoft.com/en-us/azure/virtual-network/manage-virtual-network#view-virtual-networks-and-settings)
 
 
 #### 4.1.1.3. Configuring network peering with the Ansible Automation Platform subnet
@@ -111,7 +111,7 @@ In the **Virtual Networks** page in the Azure portal, use the following settings
 
 **Additional resources**
 
-For further information on configuring peering, refer to [Create a peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering#create-a-peering) in the Microsoft Azure _Virtual network_ guide.
+-  [Create a peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering#create-a-peering)
 
 
 #### 4.1.1.4. Updating the route tables
@@ -141,9 +141,8 @@ use the **Route Tables** page in the Azure portal to route traffic to Ansible Au
 -  **Next Hop Type** : _Virtual network gateway_
 
 1. Click **OK** to save the new route to the route list.
+1. Repeat this procedure for all other route tables where you want to route traffic to Ansible Automation Platform.
 
-
-Repeat this procedure for all other route tables where you want to route traffic to Ansible Automation Platform.
 
 ##### 4.1.1.4.2. Routing to your VNets
 
@@ -204,6 +203,6 @@ If you choose not to allow all outbound traffic from port 443, you must configur
 
 **Additional resources**
 
-For further information about adding routes to a route table in Azure, refer to [Create a route](https://docs.microsoft.com/en-us/azure/virtual-network/manage-route-table#create-a-route) in the Microsoft Azure _Virtual network_ guide.
+- * [Create a route](https://docs.microsoft.com/en-us/azure/virtual-network/manage-route-table#create-a-route)
 
 

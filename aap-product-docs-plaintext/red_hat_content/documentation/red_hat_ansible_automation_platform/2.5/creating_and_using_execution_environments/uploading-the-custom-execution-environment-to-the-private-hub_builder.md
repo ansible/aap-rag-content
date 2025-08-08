@@ -129,7 +129,7 @@ You may add Your own copyright statement to Your modifications and may provide a
 END OF TERMS AND CONDITIONS
 
 
-<span id="idm140019075914176"></span>
+<span id="idm139645548473200"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

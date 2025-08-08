@@ -28,8 +28,8 @@ https://access.redhat.com/terms-based-registry/token/&lt;name-of-your-token&gt;
 
 1. A **token** page opens, displaying a generated username (different from the account name) and a token.
 
-If no token is displayed, clickRegenerate Token. You can also click this to generate a new username and token.
 
+1. If no token is displayed, clickRegenerate Token. You can also click this to generate a new username and token.
 
 1. Copy the username (for example "1234567|testuser") and use it to set the variable `    registry_username` .
 1. Copy the token and use it to set the variable `    registry_password` .

@@ -1,11 +1,15 @@
 # 10. Patch releases
-## 10.19. Ansible Automation Platform patch release October 7, 2024
-### 10.19.1. Enhancements
+## 10.13. Ansible Automation Platform patch release January 22, 2025
+### 10.13.1. Enhancements
 
 
 
 
-- Event-Driven Ansible workers and scheduler add timeout and retry resilience when communicating with a Redis cluster. (AAP-32139)
-- Removed the **MTLS** credential type that was incorrectly added. (AAP-31848)
+#### 10.13.1.1. Ansible Automation Platform
+
+
+
+
+- Legacy **Auth SSO URL** settings are now customizable if needed for gateway, controller, and hub overrides passed on the Ansible Automation Platform CR if provided. This is mainly useful if you are using a custom ingress controller.(AAP-37364)
 
 

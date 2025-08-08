@@ -13,7 +13,7 @@ You can configure websockets at `/etc/tower/conf.d/websocket_config.py` in all o
 Automation controller automatically handles discovery of other automation controller nodes through the Instance record in the database.
 
 Important
-Your automation controller nodes are designed to broadcast websocket traffic across a private, trusted subnet (and not the open Internet). Therefore, if you turn off HTTPS for websocket broadcasting, the websocket traffic, composed mostly of Ansible playbook stdout, is sent unencrypted between automation controller nodes.
+Your automation controller nodes are designed to broadcast websocket traffic across a private, trusted subnet (and not the open Internet). Therefore, if you turn off HTTPS for websocket broadcasting, the websocket traffic, composed mostly of Ansible Playbook stdout, is sent unencrypted between automation controller nodes.
 
 
 

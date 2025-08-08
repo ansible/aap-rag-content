@@ -81,7 +81,7 @@ The following is an example of the output. Note that time and date might vary de
 May  8 09:45:03 ip-10-0-6-23 CROND[51623]: (root) CMDOUT (No billing data for month: 2024-04)    May  8 09:45:03 ip-10-0-6-23 CROND[51623]: (root) CMDEND (metrics-utility build_report)    May  8 09:45:19 ip-10-0-6-23 crontab[51619]: (root) END EDIT (root)    May  8 09:45:34 ip-10-0-6-23 crontab[51659]: (root) BEGIN EDIT (root)    May  8 09:46:01 ip-10-0-6-23 CROND[51688]: (root) CMD (metrics-utility gather_automation_controller_billing_data --ship --until=10m)    May  8 09:46:03 ip-10-0-6-23 CROND[51669]: (root) CMDOUT (/tmp/9e3f86ee-c92e-4b05-8217-72c496e6ffd9-2024-05-08-093402+0000-2024-05-08-093602+0000-0.tar.gz)    May  8 09:46:03 ip-10-0-6-23 CROND[51669]: (root) CMDEND (metrics-utility gather_automation_controller_billing_data --ship --until=10m)    May  8 09:46:26 ip-10-0-6-23 crontab[51659]: (root) END EDIT (root)
 ```
 
-The generated report will have the default name CCSP-<YEAR>-<MONTH>.xlsx and will be deposited in the ship path that you specified in step 3.
+The generated report will have the default name CCSP-<YEAR>-<MONTH>.xlsx and will be deposited in the ship path that you specified in step 1a.
 
 
 

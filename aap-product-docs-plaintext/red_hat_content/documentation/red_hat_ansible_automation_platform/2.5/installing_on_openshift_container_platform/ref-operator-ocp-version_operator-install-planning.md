@@ -9,6 +9,6 @@ The Ansible Automation Platform Operator to install Ansible Automation Platform 
 
 **Additional resources**
 
-- See the [Red Hat Ansible Automation Platform Life Cycle](https://access.redhat.com/support/policy/updates/ansible-automation-platform) for the most current compatibility details.
+-  [Red Hat Ansible Automation Platform Life Cycle](https://access.redhat.com/support/policy/updates/ansible-automation-platform) .
 
 

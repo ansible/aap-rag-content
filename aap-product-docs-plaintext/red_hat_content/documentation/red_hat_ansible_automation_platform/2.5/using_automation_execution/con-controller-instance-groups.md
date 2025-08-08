@@ -17,7 +17,7 @@ When a job associated with one of the resources executes, it is assigned to the 
 
 Consider the following when working with instance groups:
 
-- You can define other groups and group instances in those groups. These groups must be prefixed with `    instance_group_` . Instances are required to be in the `    automationcontroller` or `    execution_nodes` group alongside other `    instance_group_` groups. In a clustered setup, at least one instance must be present in the `    automationcontroller` group, which appears as `    controlplane` in the API instance groups. For more information and example scenarios, see [Group policies for automationcontroller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-group-policies-automationcontroller) .
+- You can define other groups and group instances in those groups. These groups must be prefixed with `    instance_group_` . Instances are required to be in the `    automationcontroller` or `    execution_nodes` group alongside other `    instance_group_` groups. In a clustered setup, at least one instance must be present in the `    automationcontroller` group, which appears as `    controlplane` in the API instance groups. For more information and example scenarios, see [Group policies for automationcontroller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-instance-and-container-groups.xml#controller-group-policies-automationcontroller) .
 - You cannot modify the `    controlplane` instance group, and attempting to do so results in a permission denied error for any user.
 
 Therefore, the **Disassociate** option is not available in the **Instances** tab of `    controlplane` .
@@ -43,7 +43,9 @@ You can define custom groups in the inventory file by naming groups with `instan
 
 The current behavior expects a member of an `instance_group_*` to be part of `automationcontroller` or `execution_nodes` group.
 
-**Example**
+
+<span id="idm140389991662192"></span>
+**Example 18.1. Define instance groups**
 
 ```
 [automationcontroller]
@@ -59,14 +61,16 @@ peers=execution_nodes
 ```
 
 
-After you run installation program, the following error appears:
+
+
+After you run the installation program, the following error appears:
 
 ```
 TASK [ansible.automation_platform_installer.check_config_static : Validate mesh topology] ***
 fatal: [126-addr.tatu.home -&gt; localhost]: FAILED! =&gt; {"msg": "The host '110-addr.tatu.home' is not present in either [automationcontroller] or [execution_nodes]"}
 ```
 
-To fix this, move the box `110-addr.tatu.home` to an `execution_node` group:
+To fix this, move the box `110-addr.tatu.home` to an `execution_node` group, as follows:
 
 ```
 [automationcontroller]
@@ -89,7 +93,7 @@ TASK [ansible.automation_platform_installer.check_config_static : Validate mesh 
 ok: [126-addr.tatu.home -&gt; localhost] =&gt; {"changed": false, "mesh": {"110-addr.tatu.home": {"node_type": "execution", "peers": [], "receptor_control_filename": "receptor.sock", "receptor_control_service_name": "control", "receptor_listener": true, "receptor_listener_port": 8928, "receptor_listener_protocol": "tcp", "receptor_log_level": "info"}, "126-addr.tatu.home": {"node_type": "control", "peers": ["110-addr.tatu.home"], "receptor_control_filename": "receptor.sock", "receptor_control_service_name": "control", "receptor_listener": false, "receptor_listener_port": 27199, "receptor_listener_protocol": "tcp", "receptor_log_level": "info"}}}
 ```
 
-After you upgrade from automation controller 4.0 or earlier, the legacy `instance_group_` member likely has the awx code installed. This places that node in the `automationcontroller` group.
+After upgrading from automation controller 4.0 or earlier, the legacy `instance_group_` member likely has the awx code installed. This places that node in the `automationcontroller` group.
 
 ### 18.1.2. Configure instance groups from the API
 
@@ -104,7 +108,7 @@ Once created, you can associate instances with an instance group using:
 HTTP POST /api/v2/instance_groups/x/instances/ {'id': y}`
 ```
 
-An instance that is added to an instance group automatically reconfigures itself to listen on the group’s work queue. For more information, see the following section _Instance group policies_ .
+An instance that is added to an instance group automatically reconfigures itself to listen on the group’s work queue. For more information, see [Instance group policies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-instance-and-container-groups#controller-instance-group-policies) .
 
 ### 18.1.3. Instance group policies
 
@@ -137,8 +141,18 @@ For more information, see the [Managing Instance Groups](https://docs.redhat.com
 
 Take the following policy considerations into account:
 
-- Both `    policy_instance_percentage` and `    policy_instance_minimum` set minimum allocations. The rule that results in more instances assigned to the group takes effect. For example, if you have a `    policy_instance_percentage` of 50% and a `    policy_instance_minimum` of 2 and you start 6 instances, 3 of them are assigned to the instance group. If you reduce the number of total instances in the cluster to 2, then both of them are assigned to the instance group to satisfy `    policy_instance_minimum` . This enables you to set a lower limit on the amount of available resources.
-- Policies do not actively prevent instances from being associated with multiple instance groups, but this can be achieved by making the percentages add up to 100. If you have 4 instance groups, assign each a percentage value of 25 and the instances are distributed among them without any overlap.
+- Both `    policy_instance_percentage` and `    policy_instance_minimum` set minimum allocations. The rule that results in more instances assigned to the group takes effect.
+
+For example, if you have a `    policy_instance_percentage` of 50% and a `    policy_instance_minimum` of 2 and you start 6 instances, 3 of them are assigned to the instance group.
+
+If you reduce the number of total instances in the cluster to 2, then both of them are assigned to the instance group to satisfy `    policy_instance_minimum` . This enables you to set a lower limit on the amount of available resources.
+
+
+- Policies do not actively prevent instances from being associated with multiple instance groups, but this can be achieved by making the percentages add up to 100.
+
+If you have 4 instance groups, assign each a percentage value of 25 and the instances are distributed among them without any overlap.
+
+
 
 
 ### 18.1.5. Pinning instances manually to specific groups
@@ -174,8 +188,12 @@ HTTP PATCH /api/v2/instances/X/
 
 When you run a job associated with an instance group, note the following behaviors:
 
-- If you divide a cluster into separate instance groups, then the behavior is similar to the cluster as a whole. If you assign two instances to a group then either one is as likely to receive a job as any other in the same group.
-- As automation controller instances are brought online, it effectively expands the work capacity of the system. If you place those instances into instance groups, then they also expand that group’s capacity. If an instance is performing work and it is a member of multiple groups, then capacity is reduced from all groups for which it is a member. De-provisioning an instance removes capacity from the cluster wherever that instance was assigned. For more information, see the [Deprovisioning instance groups](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-deprovision-instance-group) section for more detail.
+- If you divide a cluster into separate instance groups, then the behavior is similar to the cluster as a whole.
+- If you assign two instances to a group then either one is as likely to receive a job as any other in the same group.
+- As automation controller instances are brought online, it effectively expands the work capacity of the system.
+- If you place those instances into instance groups, then they also expand that group’s capacity.
+- If an instance is performing work and it is a member of multiple groups, then capacity is reduced from all groups for which it is a member.
+- De-provisioning an instance removes capacity from the cluster wherever that instance was assigned. For more information, see the [Deprovisioning instance groups](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-instance-and-container-groups#controller-deprovision-instance-group) section.
 
 
 Note
@@ -201,16 +219,16 @@ If you associate instance groups with the job template, and all of these are at 
 
 You can still associate the global `default` group with a resource, such as any of the custom instance groups defined in the playbook. You can use this to specify a preferred instance group on the job template or inventory, but still enable the job to be submitted to any instance if those are out of capacity.
 
-**Examples**
-
 - If you associate `    group_a` with a job template and also associate the `    default` group with its inventory, you enable the `    default` group to be used as a fallback in case `    group_a` gets out of capacity.
 - In addition, it is possible to not associate an instance group with one resource but choose another resource as the fallback. For example, not associating an instance group with a job template and having it fall back to the inventory or the organization’s instance group.
 
 
-This presents the following two examples:
+This presents the following possibilites:
 
 1. Associating instance groups with an inventory (omitting assigning the job template to an instance group) ensures that any playbook run against a specific inventory runs only on the group associated with it. This is useful in the situation where only those instances have a direct link to the managed nodes.
-1. An administrator can assign instance groups to organizations. This enables the administrator to segment out the entire infrastructure and guarantee that each organization has capacity to run jobs without interfering with any other organization’s ability to run jobs.
+1. An administrator can assign instance groups to organizations.
+
+This enables the administrator to segment out the entire infrastructure and guarantee that each organization has capacity to run jobs without interfering with any other organization’s ability to run jobs.
 
 An administrator can assign multiple groups to each organization, similar to the following scenario:
 
@@ -250,7 +268,7 @@ If 2 jobs are running with 20 forks each, then a third job with a `task_impact` 
 
 For container groups, using the `max_forks` value is useful given that all jobs are submitted using the same `pod_spec` with the same resource requests, irrespective of the "forks" value of the job. The default `pod_spec` sets requests and not limits, so the pods can "burst" above their requested value without being throttled or reaped. By setting the `max_forks value` , you can help prevent a scenario where too many jobs with large forks values get scheduled concurrently and cause the OpenShift nodes to be oversubscribed with multiple pods using more resources than their requested value.
 
-To set the maximum values for the concurrent jobs and forks in an instance group, see [Creating an instance group](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-create-instance-group) .
+To set the maximum values for the concurrent jobs and forks in an instance group, see [Creating an instance group](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-instance-groups#controller-create-instance-group) .
 
 ### 18.1.9. Deprovisioning instance groups
 
@@ -276,16 +294,14 @@ automation-controller-service stop
 awx-manage deprovision_instance --hostname=&lt;name used in inventory file&gt;
 ```
 
-**Example**
+For example
+
+
 
 
 ```
 awx-manage deprovision_instance --hostname=hostB
 ```
-
-
-
-
 
 Deprovisioning instance groups in automation controller does not automatically deprovision or remove instance groups, even though re-provisioning often causes these to be unused. They can still show up in API endpoints and stats monitoring. You can remove these groups with the following command:
 
@@ -305,7 +321,11 @@ If you have isolated instance groups created in older versions of automation con
 
 
 
-Ansible Automation Platform supports container groups, which enable you to run jobs in automation controller regardless of whether automation controller is installed as a standalone, in a virtual environment, or in a container. Container groups act as a pool of resources within a virtual environment. You can create instance groups to point to an OpenShift container. These are job environments that are provisioned on-demand as a pod that exists only for the duration of the playbook run. This is known as the ephemeral execution model and ensures a clean environment for every job run.
+Ansible Automation Platform supports container groups, which enable you to run jobs in automation controller regardless of whether automation controller is installed as a standalone, in a virtual environment, or in a container.
+
+Container groups act as a pool of resources within a virtual environment.
+
+You can create instance groups to point to an OpenShift container. These are job environments that are provisioned on-demand as a pod that exists only for the duration of the playbook run. This is known as the ephemeral execution model and ensures a clean environment for every job run.
 
 In some cases, you might want to set container groups to be "always-on", which you can configure through the creation of an instance.
 
@@ -314,7 +334,7 @@ Container groups upgraded from versions before automation controller 4.0 revert 
 
 
 
-Container groups are different from execution environments in that execution environments are container images and do not use a virtual environment. For more information, see [Execution environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#assembly-controller-execution-environments) .
+Container groups are different from execution environments in that execution environments are container images and do not use a virtual environment. For more information, see [Execution environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-execution-environments) .
 
 ### 18.2.1. Creating a container group
 
@@ -382,10 +402,10 @@ oc get secret -n openshift-ingress wildcard-tls -o jsonpath='{.data.ca\.crt}' | 
 ```
 
 
-1. Use the contents of `    containergroup-sa.token` and `    containergroup-ca.crt` to provide the information for the [OpenShift or Kubernetes API Bearer Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-openShift) required for the container group.
+1. Use the contents of `    containergroup-sa.token` and `    containergroup-ca.crt` to provide the information for the [OpenShift or Kubernetes API Bearer Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-instance-and-container-groups#controller-create-service-account) required for the container group.
 
 
-To create a container group, create an [OpenShift or Kubernetes API Bearer Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-openShift) credential to use with your container group. For more information, see [Creating new credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-create-credential) .
+To create a container group, create a [OpenShift or Kubernetes API Bearer Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-instance-and-container-groups#controller-create-service-account) credential to use with your container group. For more information, see [Creating new credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#controller-create-credential) .
 
 ### 18.2.3. Customizing the pod specification
 
@@ -434,7 +454,7 @@ To verify the deployment and termination of your container:
 
 **Procedure**
 
-1. Create a mock inventory and associate the container group to it by populating the name of the container group in the **Instance groups** field. For more information, see [Add a new inventory](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#proc-controller-adding-new-inventory) .
+1. Create a mock inventory and associate the container group to it by populating the name of the container group in the **Instance groups** field. For more information, see [Add a new inventory](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-inventories#proc-controller-adding-new-inventory) .
 
 ![Create test inventory](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_execution-en-US/images/cb9aa2b00da6b771e9bbb2f738186dd0/ag-inventories-create-new-test-inventory.png)
 
@@ -499,7 +519,7 @@ Error creating pod: pods is forbidden: User "system: serviceaccount: aap:example
 Capacity limits and quotas for containers are defined by objects in the Kubernetes API:
 
 - To set limits on all pods within a given namespace, use the `    LimitRange` object. For more information see the [Quotas and Limit Ranges](https://docs.openshift.com/online/pro/dev_guide/compute_resources.html#overview) section of the OpenShift documentation.
-- To set limits directly on the pod definition launched by automation controller, see [Customizing the pod specification](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-customize-pod-spec) and the [Compute Resources](https://docs.openshift.com/online/pro/dev_guide/compute_resources.html#dev-compute-resources) section of the OpenShift documentation.
+- To set limits directly on the pod definition launched by automation controller, see [Customizing the pod specification](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-instance-and-container-groups#controller-customize-pod-spec) and the [Compute Resources](https://docs.openshift.com/online/pro/dev_guide/compute_resources.html#dev-compute-resources) section of the OpenShift documentation.
 
 
 Note
@@ -520,7 +540,7 @@ To manage instances from the UI, you must have System Administrator or System Au
 
 In general, the more processor cores (CPU) and memory (RAM) a node has, the more jobs that can be scheduled to run on that node at once.
 
-For more information, see [Automation controller capacity determination and job impact](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-capacity-determination) .
+For more information, see [Automation controller capacity determination and job impact](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/index#controller-capacity-determination) .
 
 ## 19.1. Prerequisites
 
@@ -799,15 +819,6 @@ ansible-galaxy install -r requirements.yml
 sudo firewall-cmd --permanent --zone=public --add-port=27199/tcp
 ```
 
-Note
-It might be the case that some servers do not listen on receptor port (the default is 27199)
-
-Suppose you have a Control plane with nodes A, B, C, D
-
-The RPM installer creates a strongly connected peering between the control plane nodes with a least privileged approach and opens the tcp listener only on those nodes where it is required. All the receptor connections are bidirectional, so once the connection is created, the receptor can communicate in both directions.
-
-
-
 
 1. Run the following playbook on the machine where you want to update your automation mesh:
 
@@ -838,6 +849,11 @@ sudo dnf install -y openssl
 ![Instances list view](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_execution-en-US/images/043e594ac0d2f7fcb63c477c4603dcc3/instances_list_view2.png)
 
 
+Note
+It might be the case that some servers do not listen on the receptor port (the default is 27199)
+
+Suppose you have a Control plane with nodes A, B, and C
+
 The following is a peering set up for three controller nodes:
 
 Controller node A -→ Controller node B
@@ -855,6 +871,10 @@ However, a connection Controller B -→ A is likely to be rejected as that conne
 This means that nothing connects to Controller A as Controller A is creating the connections to the other nodes, and the following command does not return anything on Controller A:
 
 `[root@controller1 ~]# ss -ntlp | grep 27199 [root@controller1 ~]#`
+
+The RPM installer creates a strongly connected peering between the control plane nodes with a least privileged approach and opens the tcp listener only on those nodes where it is required. All the receptor connections are bidirectional, so once the connection is created, the receptor can communicate in both directions.
+
+
 
 To remove an instance from the mesh, see [Removing instances](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-instances#ref-removing-instances) . r
 
@@ -893,19 +913,19 @@ You can still remove an instance even if it is active and jobs are running on it
 
 
 
-Unlike legacy virtual environments, execution environments are container images that make it possible to incorporate system-level dependencies and collection-based content. Each execution environment enables you to have a customized image to run jobs and has only what is necessary when running the job.
+execution environments are container images that make it possible to incorporate system-level dependencies and collection-based content. Each execution environment enables you to have a customized image to run jobs and has only what is necessary when running the job.
 
 The default view for the **Execution Environments** page is collapsed ( **Compact** ) with the execution environment name and its image name. Selecting the execution environment name expands the entry for more information.
 
 For each execution environment listed, you can use the![Edit](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_execution-en-US/images/e5cb7f9b0cfe60ab5ba421bd17ecbb6a/leftpencil.png)
 to edit the properties for the selected execution environment or the ⋮ to duplicate the execution environment. These are also avilable from the **Details** page.
 
-## 20.1. Building an execution environment
+## 20.1. Build an execution environment
 
 
 
 
-If your Ansible content depends on custom virtual environments instead of a default environment, you must take additional steps. You must install packages on each node, interact well with other software installed on the host system, and keep them in synchronization.
+If your Ansible content depends on custom virtual environments instead of a default environment, you must take additional steps. You must install packages on each node that interact well with other software installed on the host system, and keep them in synchronization.
 
 To simplify this process, you can build container images that serve as Ansible [Control nodes](https://docs.ansible.com/ansible/latest/network/getting_started/basic_concepts.html#control-node) . These container images are referred to as automation execution environments, which you can create with ansible-builder. Ansible-runner can then make use of those images.
 
@@ -949,12 +969,10 @@ The content from the output generated from migrating to execution environments h
 
 **Additional resources**
 
-For more information, see [Migrate legacy venvs to execution environments](https://docs.ansible.com/automation-controller/4.4/html/upgrade-migration-guide/upgrade_to_ees.html#migrate-new-venv) . If you did not migrate from a virtual environment, you can create a definition file with the required data described in the [Execution Environment Setup Reference](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#assembly-controller-ee-setup-reference) .
+-  [Migrate legacy venvs to execution environments](https://docs.ansible.com/automation-controller/4.4/html/upgrade-migration-guide/upgrade_to_ees.html#migrate-new-venv)
+-  [Execution Environment Setup Reference](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/creating_and_using_execution_environments/index#assembly-controller-ee-setup-reference)
+-  [Dependencies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-ee-setup-reference#ref-controller-dependencies)
 
-
-Collection developers can declare requirements for their content by providing the appropriate metadata.
-
-For more information, see [Dependencies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-dependencies) .
 
 ### 20.1.3. Example YAML file to build an image
 
@@ -1017,7 +1035,9 @@ For more information, see the [Podman documentation](https://docs.podman.io/en/l
 
 
 
-In some cases where the `/etc/ssh/*` files were added to the execution environment image due to customization of an execution environment, an SSH error can occur. For example, exposing the `/etc/ssh/ssh_config.d:/etc/ssh/ssh_config.d:O` path enables the container to be mounted, but the ownership permissions are not mapped correctly.
+In some cases where the `/etc/ssh/*` files were added to the execution environment image due to customization of an execution environment, an SSH error can occur.
+
+For example, exposing the `/etc/ssh/ssh_config.d:/etc/ssh/ssh_config.d:O` path enables the container to be mounted, but the ownership permissions are not mapped correctly.
 
 Use the following procedure if you meet this error, or have upgraded from an older version of automation controller:
 
@@ -1070,7 +1090,7 @@ When the playbook runs, the resulting Pod specification is similar to the follow
 
 
 
-With Ansible Automation Platform 2.1.2, only `O` and `z` options were available. Since Ansible Automation Platform 2.2, further options such as `rw` are available. This is useful when using NFS storage.
+This procedure describes how to configure paths exposed to isolated jobs, allowing volumes to be mounted from execution or hybrid nodes to job containers.
 
 **Procedure**
 
@@ -1136,7 +1156,11 @@ For more information about mount volumes, see the [--volume option of the podman
 
 **Prerequisites**
 
-- An execution environment must have been created using ansible-builder as described in [Build an execution environment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-execution-environments#ref-controller-build-exec-envs) . When an execution environment has been created, you can use it to run jobs. Use the automation controller UI to specify the execution environment to use in your job templates.
+- You must build an execution environment as described in [Build an execution environment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-execution-environments#ref-controller-build-exec-envs) before you can create it using automation controller.
+
+After building it, you must push it to a repository (such as quay) and then, when creating an execution environment in the UI with automation controller, you must point to that repository to use it in Ansible Automation Platform to use it, for example, in a job template.
+
+
 - Depending on whether an execution environment is made available for global use or tied to an organization, you must have the appropriate level of administrator privileges to use an execution environment in a job. Execution environments tied to an organization require Organization administrators to be able to run jobs with those execution environments.
 - Before running a job or job template that uses an execution environment that has a credential assigned to it, ensure that the credential contains a username, host, and password.
 
@@ -1237,17 +1261,17 @@ Use the following configuration YAML keys in your definition file.
 
 The Ansible Builder 3.x execution environment definition file accepts seven top-level sections:
 
--  [additional_build_files](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-additional-build-files)
--  [additional_build_steps](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-additional-build-steps)
--  [build_arg_defaults](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-build-arg-defaults)
--  [dependencies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-dependencies)
--  [images](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-images)
+-  [additional_build_files](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-ee-setup-reference#ref-controller-additional-build-files)
+-  [additional_build_steps](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-ee-setup-reference#ref-controller-additional-build-steps)
+-  [build_arg_defaults](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-ee-setup-reference#ref-controller-build-arg-defaults)
+-  [dependencies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-ee-setup-reference#ref-controller-dependencies)
+-  [images](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-ee-setup-reference#ref-controller-images)
 
 
--  [image verification](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-image-verification)
+-  [image verification](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-ee-setup-reference#ref-controller-image-verification)
 
--  [options](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-config-options)
--  [version](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-config-version)
+-  [options](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-ee-setup-reference#ref-controller-config-options)
+-  [version](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-ee-setup-reference#ref-controller-config-version)
 
 
 ### 21.2.1. additional_build_files
@@ -1577,7 +1601,9 @@ Automation controller encrypts passwords and key information in the database and
 
 Automation controller uses SSH to connect to remote hosts. To pass the key from automation controller to SSH, the key must be decrypted before it can be written to a named pipe. Automation controller uses that pipe to send the key to SSH, so that the key is never written to disk. If passwords are used, automation controller handles them by responding directly to the password prompt and decrypting the password before writing it to the prompt.
 
-The **Credentials** page shows credentials that are currently available. The default view is collapsed (Compact), showing the credential name, and credential type. From this screen you can edit![Edit](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_execution-en-US/images/e5cb7f9b0cfe60ab5ba421bd17ecbb6a/leftpencil.png)
+The **Credentials** page shows credentials that are currently available. The default view is collapsed (Compact), showing the credential name, and credential type.
+
+From this screen you can edit![Edit](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_execution-en-US/images/e5cb7f9b0cfe60ab5ba421bd17ecbb6a/leftpencil.png)
 , duplicate![Copy](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_execution-en-US/images/df17e3afcfb728d4887b97e8605bd65c/copy.png)
 or delete ⋮ a credential.
 
@@ -1617,7 +1643,7 @@ As part of the initial setup, two credentials are available for your use: Demo C
 - Optional **Organization** : The name of the organization with which the credential is associated. The default is **Default** .
 -  **Credential type** : enter or select the credential type you want to create.
 
-1. Enter the appropriate details depending on the type of credential selected, as described in [Credential types](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-types) .
+1. Enter the appropriate details depending on the type of credential selected, as described in [Credential types](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-types) .
 
 ![Credential types drop down list](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_execution-en-US/images/64863eaf88acdfbaf537933f0cf14cb7/credential-types-drop-down-menu.png)
 
@@ -1652,7 +1678,7 @@ If the action is not successful, a warning displays.
 1. Select the **Job templates** tab to select a job template to which you want to assign this credential.
 1. Chose a job template or select **Create job template** from the **Create template** list to assign the credential to additional job templates.
 
-For more information about creating new job templates, see the [Job templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-job-templates) section.
+For more information about creating new job templates, see [Job templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-job-templates) .
 
 
 
@@ -1664,41 +1690,41 @@ For more information about creating new job templates, see the [Job templates](h
 
 Automation controller supports the following credential types:
 
--  [Amazon Web Services](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-aws)
--  [Ansible Galaxy/Automation Hub API Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-galaxy-hub)
--  [AWS Secrets Manager Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-aws-secrets-lookup)
--  [Bitbucket Data Center HTTP Access Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-bitbucket)
--  [Centrify Vault Credential Provider Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-centrify-vault)
--  [Container Registry](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-container-registry)
--  [CyberArk Central Credential Provider Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-cyberark-central)
--  [CyberArk Conjur Secrets Manager Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-cyberark-conjur)
--  [GitHub Personal Access Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-gitHub-pat)
--  [GitLab Personal Access Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-gitLab-pat)
--  [Google Compute Engine](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-GCE)
--  [GPG Public Key](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-GPG-public-key)
--  [HashiCorp Vault Secret Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-hasiCorp-secret)
--  [HashiCorp Vault Signed SSH](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-hashiCorp-vault)
--  [Insights](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-insights)
--  [Machine](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-machine)
--  [Microsoft Azure Key Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-azure-key)
--  [Microsoft Azure Resource Manager](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-azure-resource)
--  [Network](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-network)
--  [OpenShift or Kubernetes API Bearer Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-openShift)
--  [OpenStack](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-openstack)
--  [Red Hat Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-aap)
--  [Red Hat Satellite 6](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-satellite)
--  [Red Hat Virtualization](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-virtualization)
--  [Source Control](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-source-control)
--  [Terraform Backend Configuration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-terraform)
--  [Thycotic DevOps Secrets Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-thycotic-vault)
--  [Thycotic Secret Server](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-thycotic-server)
--  [Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-vault)
--  [VMware vCenter](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-vmware-vcenter)
+-  [Amazon Web Services](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-aws)
+-  [Ansible Galaxy/Automation Hub API Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-galaxy-hub)
+-  [AWS Secrets Manager Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-aws-secrets-lookup)
+-  [Bitbucket Data Center HTTP Access Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-bitbucket)
+-  [Centrify Vault Credential Provider Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-centrify-vault)
+-  [Container Registry](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-container-registry)
+-  [CyberArk Central Credential Provider Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-cyberark-central)
+-  [CyberArk Conjur Secrets Manager Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ef-controller-credential-cyberark-conjur)
+-  [GitHub Personal Access Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-gitHub-pat)
+-  [GitLab Personal Access Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-gitLab-pat)
+-  [Google Compute Engine](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-GCE)
+-  [GPG Public Key](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-GPG-public-key)
+-  [HashiCorp Vault Secret Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-hasiCorp-secret)
+-  [HashiCorp Vault Signed SSH](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-hashiCorp-vault)
+-  [Insights](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-insights)
+-  [Machine](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-machine)
+-  [Microsoft Azure Key Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-azure-key)
+-  [Microsoft Azure Resource Manager](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-azure-resource)
+-  [Network](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-network)
+-  [OpenShift or Kubernetes API Bearer Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-openShift)
+-  [OpenStack](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-openstack)
+-  [Red Hat Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-aap)
+-  [Red Hat Satellite 6](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-satellite)
+-  [Red Hat Virtualization](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-virtualization)
+-  [Source Control](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-source-control)
+-  [Terraform Backend Configuration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-terraform)
+-  [Thycotic DevOps Secrets Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-thycotic-vault)
+-  [Thycotic Secret Server](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-thycotic-server)
+-  [Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-vault)
+-  [VMware vCenter](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-credential-vmware-vcenter)
 
 
 The credential types associated with AWS Secrets Manager, Centrify, CyberArk, HashiCorp Vault, Microsoft Azure Key Vault, and Thycotic are part of the credential plugins capability that enables an external system to lookup your secrets information.
 
-For more information, see [Secrets Management System](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/assembly-controller-secret-management) .
+For more information, see [Secrets Management System](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management) .
 
 ### 22.4.1. Amazon Web Services credential type
 
@@ -1719,7 +1745,7 @@ These are fields prompted in the user interface.
 
 Amazon Web Services credentials consist of the AWS **Access Key** and **Secret Key** .
 
-Automation controller provides support for EC2 STS tokens, also known as Identity and Access Management (IAM) STS credentials. _Security Token Service_ (STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS IAM users.
+Automation controller provides support for EC2 STS tokens, also known as _Identity and Access Management_ (IAM) STS credentials. _Security Token Service_ (STS) is a web service that enables you to request temporary, limited-privilege credentials for AWS IAM users.
 
 Note
 If the value of your tags in EC2 contain Booleans ( `yes/no/true/false` ), you must quote them.
@@ -1753,20 +1779,20 @@ secret_key: '{{ lookup("env", "AWS_SECRET_ACCESS_KEY") }}'
 security_token: '{{ lookup("env", "AWS_SECURITY_TOKEN") }}'
 ```
 
-### 22.4.2. Ansible Galaxy/Automation Hub API token credential type
+### 22.4.2. Ansible Galaxy/automation hub API token credential type
 
 
 
 
 Select this credential to access Ansible Galaxy or use a collection published on an instance of private automation hub.
 
-Entering the Galaxy server URL on this screen.
+Enter the Galaxy server URL on this screen.
 
 Populate the **Galaxy Server URL** field with the contents of the **Server URL** field at [Red Hat Hybrid Cloud Console](https://console.redhat.com/ansible/automation-hub/token) . Populate the **Auth Server URL** field with the contents of the **SSO URL** field at [Red Hat Hybrid Cloud Console](https://console.redhat.com/ansible/automation-hub/token) .
 
 **Additional resources**
 
-For more information, see [Using Collections with automation hub](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#proc-projects-using-collections-with-hub) .
+For more information, see [Using Collections with automation hub](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-projects#proc-projects-using-collections-with-hub) .
 
 
 ### 22.4.3. AWS secrets manager lookup
@@ -1774,7 +1800,7 @@ For more information, see [Using Collections with automation hub](https://docs.r
 
 
 
-This is considered part of the secret management capability. For more information, see [AWS Secrets Manager Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/assembly-controller-secret-management#ref-aws-secrets-manager-lookup)
+This is considered part of the secret management capability. For more information, see [AWS Secrets Manager Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-aws-secrets-manager-lookup)
 
 ### 22.4.4. BitBucket data center HTTP access token
 
@@ -1790,7 +1816,9 @@ For further information, see [HTTP access tokens](https://confluence.atlassian.c
 
 
 
-This is considered part of the secret management capability. For more information, see [Centrify Vault Credential Provider Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/assembly-controller-secret-management#ref-centrify-vault-lookup) .
+This is considered part of the secret management capability.
+
+For more information, see [Centrify Vault Credential Provider Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-centrify-vault-lookup) .
 
 ### 22.4.6. Container Registry credential type
 
@@ -1808,7 +1836,7 @@ You must specify a name. The **Authentication URL** field is pre-populated with 
 
 This is considered part of the secret management capability.
 
-For more information, see [CyberArk Central Credential Provider (CCP) Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/assembly-controller-secret-management#ref-cyberark-ccp-lookup) .
+For more information, see [CyberArk Central Credential Provider (CCP) Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-cyberark-ccp-lookup) .
 
 ### 22.4.8. CyberArk Conjur Secrets Manager Lookup credential type
 
@@ -1817,7 +1845,7 @@ For more information, see [CyberArk Central Credential Provider (CCP) Lookup](ht
 
 This is considered part of the secret management capability.
 
-For more information, see [CyberArk Conjur Secrets Manager Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/assembly-controller-secret-management#ref-cyberark-conjur-lookup) .
+For more information, see [CyberArk Conjur Secrets Manager Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-cyberark-conjur-lookup) .
 
 ### 22.4.9. GitHub Personal Access Token credential type
 
@@ -1910,7 +1938,7 @@ For more information, see [HashiCorp Vault Secret Lookup](https://docs.redhat.co
 
 This is considered part of the secret management capability.
 
-For more information, see [HashiCorp Vault Signed SSH](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/ref-hashicorp-signed-ssh) .
+For more information, see [HashiCorp Vault Signed SSH](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-credentials#ref-controller-credential-hasiCorp-secret) .
 
 ### 22.4.15. Insights credential type
 
@@ -2017,7 +2045,7 @@ password: '{{ ansible_password }}'
 
 This is considered part of the secret management capability.
 
-For more information, see [Microsoft Azure Key Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/assembly-controller-secret-management#ref-azure-key-vault-lookup) .
+For more information, see [Microsoft Azure Key Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-azure-key-vault-lookup) .
 
 ### 22.4.18. Microsoft Azure Resource Manager credential type
 
@@ -2037,7 +2065,7 @@ Microsoft Azure Resource Manager credentials require the following inputs:
 -  **Azure Cloud Environment** : The variable associated with Azure cloud or Azure stack environments.
 
 
-These fields are equal to the variables in the API.
+These fields are equivalent to the variables in the API.
 
 To pass service principal credentials, define the following variables:
 
@@ -2109,7 +2137,7 @@ When connecting to network devices, the credential type must match the connectio
 - For all other network connections ( `    httpapi` , `    netconf` , and `    network_cli` ), the credential type should be **Machine** .
 
 
-For more information about connection types available for network devices, see [Multiple Communication Protocols](https://docs.ansible.com/ansible/devel/network/getting_started/network_differences.html#multiple-communication-protocols) .
+For more information about connection types available for network devices, see [Multiple Communication Protocols](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/using_automation_execution/controller-credentials#ref-controller-multiple-connection-protocols) .
 
 Automation controller uses the following environment variables for Network credentials:
 
@@ -2133,7 +2161,7 @@ Provide the following information for network credentials:
 
 For more information, see [Porting Ansible Network Playbooks with New Connection Plugins](https://www.ansible.com/blog/porting-ansible-network-playbooks-with-new-connection-plugins) .
 
-### 22.4.20. Access network credentials in an ansible playbook
+#### 22.4.19.1. Access network credentials in an ansible playbook
 
 
 
@@ -2147,14 +2175,33 @@ username: '{{ lookup("env", "ANSIBLE_NET_USERNAME") }}'
 password: '{{ lookup("env", "ANSIBLE_NET_PASSWORD") }}'
 ```
 
-### 22.4.21. OpenShift or Kubernetes API Bearer Token credential type
+#### 22.4.19.2. Multiple communication protocols
+
+
+
+
+Because network modules execute on the control node instead of on the managed nodes, they can support multiple communication protocols. The communication protocols (XML over SSH, CLI over SSH, or API over HTTPS) selected for each network module depend on the platform and the purpose of the module. Some network modules support only one protocol, while some offer a choice.
+
+The most common protocol is CLI over SSH. You set the communication protocol with the ansible_connection variable:
+
+| Value of ansible_connection | Protocol | Requires | Persistent? |
+| --- | --- | --- | --- |
+|  `ansible.netcommon.network_cli` | CLI over SSH | network_os setting | yes |
+|  `ansible.netcommon.netconf` | XML over SSH | network_os setting | yes |
+|  `ansible.netcommon.httpapi` | API over HTTP/HTTPS | network_os setting | yes |
+|  `local` | depends on provider | provider setting | no |
+
+
+The `ansible_connection: local` is deprecated. Use one of the persistent connection types listed above instead. With persistent connections, you can define the hosts and credentials only once, rather than in every task. You must also set the `network_os` variable for the specific network platform you are communicating with.
+
+### 22.4.20. OpenShift or Kubernetes API Bearer Token credential type
 
 
 
 
 Select this credential type to create instance groups that point to a Kubernetes or OpenShift container.
 
-For more information, see [Instance and container groups](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-instance-and-container-groups) .
+For more information, see [Instance and container groups](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-instance-and-container-groups) .
 
 Provide the following information for container credentials:
 
@@ -2177,7 +2224,7 @@ If you do not want to give these roles to the service account, you can pre-creat
 - A CA certificate associated with the cluster
 
 
-#### 22.4.21.1. Creating a service account in an Openshift cluster
+#### 22.4.20.1. Creating a service account in an Openshift cluster
 
 
 
@@ -2231,7 +2278,7 @@ oc get secret $SA_SECRET -o json | jq '.data["ca.crt"]' | xargs | base64 --decod
 1. Use the contents of `    containergroup-sa.token` and `    containergroup-ca.crt` to provide the information for the [OpenShift or Kubernetes API Bearer Token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#ref-controller-credential-openShift) required for the container group.
 
 
-### 22.4.22. OpenStack credential type
+### 22.4.21. OpenStack credential type
 
 
 
@@ -2249,9 +2296,9 @@ Enter the following information for OpenStack credentials:
 - Optional: **Region Name** : Give the region name. For some cloud providers, like OVH, the region must be specified.
 
 
-If you are interested in using OpenStack Cloud Credentials, see [Use Cloud Credentials with a cloud inventory](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-cloud-credentials) , which includes a sample playbook.
+If you are interested in using OpenStack Cloud Credentials, see [Use Cloud Credentials with a cloud inventory](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-job-templates#controller-cloud-credentials) , which includes a sample playbook.
 
-### 22.4.23. Red Hat Ansible Automation Platform credential type
+### 22.4.22. Red Hat Ansible Automation Platform credential type
 
 
 
@@ -2291,7 +2338,7 @@ injectors={
 }
 ```
 
-#### 22.4.23.1. Access automation controller credentials in an Ansible Playbook
+#### 22.4.22.1. Access automation controller credentials in an Ansible Playbook
 
 
 
@@ -2306,7 +2353,7 @@ username: '{{ lookup("env", "CONTROLLER_USERNAME") }}'
 password: '{{ lookup("env", "CONTROLLER_PASSWORD") }}'
 ```
 
-### 22.4.24. Red Hat Satellite 6 credential type
+### 22.4.23. Red Hat Satellite 6 credential type
 
 
 
@@ -2315,9 +2362,7 @@ Select this credential type to enable synchronization of cloud inventory with Re
 
 Automation controller writes a Satellite configuration file based on fields prompted in the user interface. The absolute path to the file is set in the following environment variable:
 
-```
-FOREMAN_INI_PATH
-```
+`FOREMAN_INI_PATH`
 
 Satellite credentials have the following required inputs:
 
@@ -2326,7 +2371,7 @@ Satellite credentials have the following required inputs:
 -  **Password** : The password to use to connect to Satellite 6.
 
 
-### 22.4.25. Red Hat Virtualization credential type
+### 22.4.24. Red Hat Virtualization credential type
 
 
 
@@ -2349,7 +2394,7 @@ Provide the following information for Red Hat Virtualization credentials:
 - Optional: **CA File** : Provide an absolute path to the oVirt certificate file (it might end in `    .pem` , `    .cer` and `    .crt` extensions, but preferably `    .pem` for consistency)
 
 
-#### 22.4.25.1. Access virtualization credentials in an Ansible Playbook
+#### 22.4.24.1. Access virtualization credentials in an Ansible Playbook
 
 
 
@@ -2395,7 +2440,7 @@ injectors={
 )
 ```
 
-### 22.4.26. Source Control credential type
+### 22.4.25. Source Control credential type
 
 
 
@@ -2417,7 +2462,7 @@ If you are using a GitHub account for a Source Control credential and you have _
 
 
 
-### 22.4.27. Terraform backend configuration
+### 22.4.26. Terraform backend configuration
 
 
 
@@ -2446,25 +2491,25 @@ bucket = "my-terraform-state-bucket"    key = "path/to/terraform-state-file"    
 - Optional: **Google Cloud Platform account credentials**
 
 
-### 22.4.28. Thycotic DevOps Secrets Vault credential type
+### 22.4.27. Thycotic DevOps Secrets Vault credential type
 
 
 
 
 This is considered part of the secret management capability.
 
-For more information, see [Thycotic DevOps Secrets Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/assembly-controller-secret-management#ref-thycotic-devops-vault) .
+For more information, see [Thycotic DevOps Secrets Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-thycotic-devops-vault) .
 
-### 22.4.29. Thycotic secret server credential type
+### 22.4.28. Thycotic secret server credential type
 
 
 
 
 This is considered part of the secret management capability.
 
-For more information, see [Thycotic Secret Server](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/assembly-controller-secret-management#ref-thycotic-secret-server) .
+For more information, see [Thycotic Secret Server](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-thycotic-secret-server) .
 
-### 22.4.30. Ansible Vault credential type
+### 22.4.29. Ansible Vault credential type
 
 
 
@@ -2484,7 +2529,7 @@ Credentials that are used in scheduled jobs must not be configured as **Prompt o
 
 For more information about Ansible Vault, see [Protecting sensitive data with Ansible vault](http://docs.ansible.com/ansible/playbooks_vault.html) .
 
-### 22.4.31. VMware vCenter credential type
+### 22.4.30. VMware vCenter credential type
 
 
 
@@ -2514,7 +2559,7 @@ If the VMware guest tools are not running on the instance, VMware inventory sync
 
 
 
-#### 22.4.31.1. Access VMware vCenter credentials in an ansible playbook
+#### 22.4.30.1. Access VMware vCenter credentials in an ansible playbook
 
 
 
@@ -2965,7 +3010,7 @@ Each notification type has its own configuration and behavioral semantics. You m
 
 **Additional resources**
 
-For more information on configuring custom notifications, see [Create custom notifications](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-create-custom-notifications) . The following sections give further details on each type of notification.
+-  [Create custom notifications](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-create-custom-notifications)
 
 
 ### 25.4.1. Email
@@ -3016,7 +3061,7 @@ The IRC notification takes the form of an IRC bot that connects, delivers its me
 
 Provide the following details to set up an IRC notification:
 
-- Optional: **IRC server password** : IRC servers can require a password to connect. If the server does not require one, leave it blank. **IRC Server Port** : The IRC server port. **IRC Server Address** : The host name or address of the IRC server. **IRC Nick** : The bot’s nickname once it connects to the server. **Destination Channels or Users** : A list of users or channels to which the notification is sent.
+- Optional: **IRC server password** : IRC servers can require a password to connect. If the server does not require one leave it blank. **IRC Server Port** : The IRC server port. **IRC Server Address** : The hostname or address of the IRC server. **IRC Nick** : The bot’s nickname once it connects to the server. **Destination Channels or Users** : A list of users or channels to which the notification is sent.
 - Optional: **Disable SSL verification** : Check if you want the bot to use SSL when connecting.
 
 
@@ -3093,7 +3138,7 @@ Provide the following details to set up a Slack notification:
 -  **Notification color** : Specify a notification color. Acceptable colors are hex color code, for example: #3af or #789abc. When you have a bot or app set up, you must complete the following steps:
 
 
-1. Navigate to **Apps** .
+1. Go to **Apps** .
 1. Click the newly-created app and then go to **Add features and functionality** , which enables you to configure incoming webhooks, bots, and permissions, as well as **Install your app to your workspace** .
 
 
@@ -3128,13 +3173,13 @@ Provide the following details to set up a Twilio notification:
 
 
 
-The webhook notification type provides a simple interface for sending `POSTs` to a predefined web service. Automation controller `POSTs` to this address using application and JSON content type with the data payload containing the relevant details in JSON format. Some web service APIs expect HTTP requests to be in a certain format with certain fields.
+The webhook notification type provides a simple interface for sending `POSTs` to a predefined web service. Automation controller `POSTs` to this address by using application and JSON content type with the data payload containing the relevant details in JSON format. Some web service APIs expect HTTP requests to be in a certain format with certain fields.
 
 Configure the webhook notification with the following:
 
-- Configure the HTTP method, using `    POST` or `    PUT` .
+- Configure the HTTP method, usingBasic authentication `    PUT` .
 - The body of the outgoing request.
-- Configure authentication, using basic auth.
+- Configure authentication, using Basic authentication.
 
 
 Provide the following details to set up a webhook notification:
@@ -3252,21 +3297,20 @@ You can [customize the text content](https://docs.redhat.com/en/documentation/re
 -  **Workflow pending message body**
 -  **Workflow timed out message body**
 
-
-
 The message forms vary depending on the type of notification that you are configuring. For example, messages for Email and PagerDuty notifications appear to be a typical email, with a body and a subject, in which case, automation controller displays the fields as **Message** and **Message Body** . Other notification types only expect a **Message** for each type of event.
 
-The **Message** fields are pre-populated with a template containing a top-level variable, `job` coupled with an attribute, such as `id` or `name` . Templates are enclosed in curly brackets and can draw from a fixed set of fields provided by automation controller, shown in the pre-populated message fields:
+The **Message** fields are pre-populated with a template containing a top-level variable, `        job` coupled with an attribute, such as `        id` or `        name` . Templates are enclosed in curly brackets and can draw from a fixed set of fields provided by automation controller, shown in the pre-populated message fields:
 
 This pre-populated field suggests commonly displayed messages to a recipient who is notified of an event. You can customize these messages with different criteria by adding your own attributes for the job as needed. Custom notification messages are rendered using Jinja; the same templating engine used by Ansible playbooks.
 
 Messages and message bodies have different types of content, as the following points outline:
 
+
 - Messages are always just strings, one-liners only. New lines are not supported.
 - Message bodies are either a dictionary or a block of text:
 
 
-- The message body for Webhooks and PagerDuty uses dictionary definitions. The default message body for these is `        {{ job_metadata }}` , you can either leave that as it is or provide your own dictionary.
+- The message body for Webhooks and PagerDuty uses dictionary definitions. The default message body for these is `            {{ job_metadata }}` , you can either leave that as it is or provide your own dictionary.
 - The message body for email uses a block of text or a multi-line string. The default message body is:
 
 
@@ -3274,59 +3318,57 @@ Messages and message bodies have different types of content, as the following po
 {{ job_friendly_name }} #{{ job.id }} had status {{ job.status }}, view details at {{ url }} {{ job_metadata }}
 ```
 
-You can edit this text leaving `        {{ job_metadata }}` in, or drop `        {{ job_metadata }}` . Since the body is a block of text, it can be any string you want. `        {{ job_metadata }}` is rendered as a dictionary containing fields that describe the job being executed. In all cases, `        {{ job_metadata }}` includes the following fields:
+You can edit this text leaving `            {{ job_metadata }}` in, or drop `            {{ job_metadata }}` . Since the body is a block of text, it can be any string you want. `            {{ job_metadata }}` is rendered as a dictionary containing fields that describe the job being executed. In all cases, `            {{ job_metadata }}` includes the following fields:
 
 
--  `            id`
--  `            name`
--  `            url`
--  `            created_by`
--  `            started`
--  `            finished`
--  `            status`
--  `            traceback`
+-  `                id`
+-  `                name`
+-  `                url`
+-  `                created_by`
+-  `                started`
+-  `                finished`
+-  `                status`
+-  `                traceback`
 
-Note
-You cannot query individual fields within `            {{ job_metadata }}` . When you use `            {{ job_metadata }}` in a notification template, all data is returned.
-
-
+You cannot query individual fields within `                {{ job_metadata }}` . When you use `                {{ job_metadata }}` in a notification template, all data is returned.
 
 The resulting dictionary looks like the following:
 
 
 ```
-{"id": 18,             "name": "Project - Space Procedures",             "url": "https://host/#/jobs/project/18",             "created_by": "admin",             "started": "2019-10-26T00:20:45.139356+00:00",             "finished": "2019-10-26T00:20:55.769713+00:00",             "status": "successful",             "traceback": ""            }
+{"id": 18,                 "name": "Project - Space Procedures",                 "url": "https://host/#/jobs/project/18",                 "created_by": "admin",                 "started": "2019-10-26T00:20:45.139356+00:00",                 "finished": "2019-10-26T00:20:55.769713+00:00",                 "status": "successful",                 "traceback": ""                }
 ```
 
-If `            {{ job_metadata }}` is rendered in a job, it includes the following additional fields:
+If `                {{ job_metadata }}` is rendered in a job, it includes the following additional fields:
 
 
--  `            inventory`
--  `            project`
--  `            playbook`
--  `            credential`
--  `            limit`
--  `            extra_vars`
--  `            hosts`
+-  `                inventory`
+-  `                project`
+-  `                playbook`
+-  `                credential`
+-  `                limit`
+-  `                extra_vars`
+-  `                hosts`
 
 The resulting dictionary is similar to the following:
 
 
 ```
-{"id": 12,             "name": "JobTemplate - Launch Rockets",             "url": "https://host/#/jobs/playbook/12",             "created_by": "admin",             "started": "2019-10-26T00:02:07.943774+00:00",             "finished": null,             "status": "running",             "traceback": "",             "inventory": "Inventory - Fleet",             "project": "Project - Space Procedures",             "playbook": "launch.yml",             "credential": "Credential - Mission Control",             "limit": "",             "extra_vars": "{}",             "hosts": {}            }
+{"id": 12,                 "name": "JobTemplate - Launch Rockets",                 "url": "https://host/#/jobs/playbook/12",                 "created_by": "admin",                 "started": "2019-10-26T00:02:07.943774+00:00",                 "finished": null,                 "status": "running",                 "traceback": "",                 "inventory": "Inventory - Fleet",                 "project": "Project - Space Procedures",                 "playbook": "launch.yml",                 "credential": "Credential - Mission Control",                 "limit": "",                 "extra_vars": "{}",                 "hosts": {}                }
 ```
 
-If `            {{ job_metadata }}` is rendered in a workflow job, it includes the following additional field:
+If `                {{ job_metadata }}` is rendered in a workflow job, it includes the following additional field:
 
 
--  `            body` (This enumerates the nodes in the workflow job and includes a description of the job associated with each node)
+-  `                body` (This enumerates the nodes in the workflow job and includes a description of the job associated with each node)
 
 The resulting dictionary is similar to the following:
 
 
 ```
-{"id": 14,             "name": "Workflow Job Template - Launch Mars Mission",             "url": "https://host/#/workflows/14",             "created_by": "admin",             "started": "2019-10-26T00:11:04.554468+00:00",             "finished": "2019-10-26T00:11:24.249899+00:00",             "status": "successful",             "traceback": "",             "body": "Workflow job summary:                                 node #1 spawns job #15, \"Assemble Fleet JT\", which finished with status successful.                     node #2 spawns job #16, \"Mission Start approval node\", which finished with status successful.\n                     node #3 spawns job #17, \"Deploy Fleet\", which finished with status successful."            }
+{"id": 14,                 "name": "Workflow Job Template - Launch Mars Mission",                 "url": "https://host/#/workflows/14",                 "created_by": "admin",                 "started": "2019-10-26T00:11:04.554468+00:00",                 "finished": "2019-10-26T00:11:24.249899+00:00",                 "status": "successful",                 "traceback": "",                 "body": "Workflow job summary:                                         node #1 spawns job #15, \"Assemble Fleet JT\", which finished with status successful.                         node #2 spawns job #16, \"Mission Start approval node\", which finished with status successful.\n                         node #3 spawns job #17, \"Deploy Fleet\", which finished with status successful."                }
 ```
+
 
 
 
@@ -3342,11 +3384,9 @@ If you save the notifications template without editing the custom message (or ed
 
 **Additional resources**
 
-- For more information, see [Using variables with Jinja2](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#using-variables-with-jinja2) in the Ansible documentation.
-- Automation controller requires valid syntax to retrieve the correct data to display the messages.
+-  [Using variables with Jinja2](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#using-variables-with-jinja2)
+-  [Supported attributes for custom notifications](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-attributes-custom-notifications)
 
-
-For a list of supported attributes and the proper syntax construction, see the [Supported attributes for custom notifications](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-attributes-custom-notifications) section.
 
 ## 25.6. Enable and disable notifications
 
@@ -3372,7 +3412,7 @@ For workflow templates that have approval nodes, in addition to **Start** , **Su
 
 **Additional resources**
 
-For more information on working with these types of nodes, see [Approval nodes](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-approval-nodes) .
+-  [Approval nodes](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-approval-nodes)
 
 
 ## 25.7. Configure the host hostname for notifications
@@ -3440,7 +3480,7 @@ The following are the supported job attributes:
 -  `    allow_simultaneous` - (boolean) Indicates if multiple jobs can run simultaneously from the job template associated with this job.
 -  `    controller_node` - (string) The instance that manages the isolated execution environment.
 -  `    created` - (datetime) The timestamp when this job was created.
--  `    custom_virtualenv` - (string) The custom virtual environment used to execute the job.
+-  `    custom_virtualenv` - (string) The custom virtual environment used to run the job.
 -  `    description` - (string) An optional description of the job.
 -  `    diff_mode` - (boolean) If enabled, textual changes made to any templated files on the host are shown in the standard output.
 -  `    elapsed` - (decimal) The elapsed time in seconds that the job has run.
@@ -3453,7 +3493,7 @@ The following are the supported job attributes:
 -  `    job_explanation` - (string) The status field to indicate the state of the job if it was not able to run and capture `    stdout` .
 -  `    job_slice_count` - (integer) If run as part of a sliced job, this is the total number of slices (if 1, job is not part of a sliced job).
 -  `    job_slice_number` - (integer) If run as part of a sliced job, this is the ID of the inventory slice operated on (if not part of a sliced job, attribute is not used).
--  `    job_tags` - (string) Only tasks with specified tags execute.
+-  `    job_tags` - (string) Only tasks with specified tags run.
 -  `    job_type` - (choice) This can be `    run` , `    check` , or `    scan` .
 -  `    launch_type` - (choice) This can be `    manual` , `    relaunch` , `    callback` , `    scheduled` , `    dependency` , `    workflow` , `    sync` , or `    scm` .
 -  `    limit` - (string) The playbook execution limited to this set of hosts, if specified.
@@ -3560,7 +3600,7 @@ The following are the supported job attributes:
 
 
 
-You can reference information about a job in a custom notification message using grouped curly brackets {{ }}. Specific job attributes are accessed using dotted notation, for example, {{ job.summary_fields.inventory.name }}. You can add any characters used in front or around the braces, or plain text, for clarification, such as "#" for job ID and single-quotes to denote some descriptor. Custom messages can include a number of variables throughout the message:
+You can reference information about a job in a custom notification message by using grouped curly brackets {{ }}. Access specific job attributes by using dotted notation, for example, {{ job.summary_fields.inventory.name }}. You can add any characters used in front or around the braces, or plain text, for clarification, such as "#" for job ID and single-quotes to denote some descriptor. Custom messages can include several variables throughout the message:
 
 ```
 {{ job_friendly_name }} {{ job.id }} ran on {{ job.execution_node }} in {{ job.elapsed }} seconds.
@@ -3588,9 +3628,9 @@ The following are additional variables that can be added to the template:
 
 
 
-A Webhook enables you to execute specified commands between applications over the web. Automation controller currently provides webhook integration with GitHub and GitLab.
+Use webhooks to run specified commands between applications over the web. Automation controller currently provides webhook integration with GitHub and GitLab.
 
-Set up a webhook using the following services:
+Set up a webhook by using the following services:
 
 -  [Setting up a GitHub webhook](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-set-up-github-webhook)
 -  [Setting up a GitLab webhook](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-set-up-gitlab-webhook)
@@ -3616,7 +3656,7 @@ Automation controller has the ability to run jobs based on a triggered webhook e
 1. In the profile settings of your GitHub account, select **Settings** .
 1. From the navigation panel, select<> Developer Settings.
 1. On the **Developer Settings** page, select **Personal access tokens** .
-1. Select **Tokens(classic)**
+1. Select **Tokens (classic)**
 1. From the **Personal access tokens** screen, clickGenerate a personal access token.
 1. When prompted, enter your GitHub account password to continue.
 1. In the **Note** field, enter a brief description about what this PAT is used for.
@@ -3672,7 +3712,7 @@ When the token is generated, ensure that you copy the PAT, as you need it in ste
 
 **Additional resources**
 
-For more information, see the [Webhooks documentation](https://docs.github.com/en/webhooks) .
+-  [Webhooks documentation](https://docs.github.com/en/webhooks)
 
 
 ## 27.2. Setting up a GitLab webhook
@@ -3740,7 +3780,7 @@ When the token is generated, ensure that you copy the PAT, as you need it in ste
 
 **Additional resources**
 
-For more information, see [Webhooks](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html) .
+-  [Webhooks](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html)
 
 
 ## 27.3. Viewing the payload output
@@ -3757,11 +3797,13 @@ You can view the entire payload exposed as an extra variable.
 1. Select the **Details** tab.
 1. In the **Extra Variables** field, view the payload output from the `    awx_webhook_payload` variable, as shown in the following example:
 
-
 ![Webhooks extra variables payload](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_execution-en-US/images/f534a94752ebb695bb4a4e0c8dfb5310/ug-webhooks-jobs-extra-vars-payload.png)
 
 
 ![Webhook extra variables payload expanded](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_execution-en-US/images/8cef14342dfd738ae40fca1c770950ec/ug-webhooks-jobs-extra-vars-payload-expanded.png)
+
+
+
 
 
 # Chapter 28. Setting up Red Hat Insights for Red Hat Ansible Automation Platform Remediations
@@ -3775,12 +3817,16 @@ When a host is registered with Red Hat Insights, it is scanned continually for v
 
 Red Hat Insights users create a maintenance plan to group the fixes and can create a playbook to mitigate the problems. Automation controller tracks the maintenance plan playbooks through a Red Hat Insights project.
 
-Authentication to Red Hat Insights through Basic Authorization is backed by a special credential, which must first be established in automation controller. To run a Red Hat Insights maintenance plan, you need a Red Hat Insights project and inventory.
+Authentication to Red Hat Insights through Basic Authorization is backed by a special credential, which must first be established in automation controller.
+
+To run a Red Hat Insights maintenance plan, you need a Red Hat Insights project and inventory.
 
 ## 28.1. Creating Red Hat Insights credentials
 
 
 
+
+To create a Red Hat Insights credential, use the following procedure:
 
 **Procedure**
 
@@ -3855,14 +3901,14 @@ This process syncs your Red Hat Insights project with your Red Hat Insights acco
 
 The Insights playbook contains a `hosts:` line where the value is the host name supplied to red Hat insights, which can be different from the host name supplied to automation controller
 
-To create a new inventory to use with Red Hat Insights, see [Creating Insights credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#proc-controller-inv-source-insights) .
-
 ## 28.4. Remediating a Red Hat Insights inventory
 
 
 
 
-Remediation of a Red Hat Insights inventory enables automation controller to run Red Hat Insights playbooks with a single click. You can do this by creating a job template to run the Red Hat Insights remediation.
+Remediation of a Red Hat Insights inventory enables automation controller to run Red Hat Insights playbooks with a single click.
+
+You can do this by creating a job template to run the Red Hat Insights remediation.
 
 **Procedure**
 
@@ -3901,7 +3947,7 @@ When complete, the job results in the **Job Details** page.
 
 The following describes best practice for the use of automation controller:
 
-## 29.1. Use Source Control
+## 29.1. Use source control
 
 
 
@@ -3971,383 +4017,10 @@ For a Continuous Integration system, such as Jenkins, to spawn a job, it must ma
 
 
 
-
-<span id="ad_hoc"></span>
-#### Ad Hoc
-
-
-_Ad hoc_ refers to using Ansible to perform a quick command, using /usr/bin/ansible, rather than the orchestration language, which is `/usr/bin/ansible-playbook` . An example of an ad hoc command might be rebooting 50 machines in your infrastructure. Anything you can do ad hoc can be accomplished by writing a Playbook. Playbooks can also glue lots of other operations together.
-
-
-<span id="callback_plugin"></span>
-#### Callback Plugin
-
-
-Refers to user-written code that can intercept results from Ansible and act on them. Some examples in the GitHub project perform custom logging, send email, or play sound effects.
-
-
-<span id="control_groups"></span>
-#### Control Groups
-
-
-Also known as ' _cgroups_ ', a control group is a feature in the Linux kernel that enables resources to be grouped and allocated to run processes. In addition to assigning resources to processes, cgroups can also report use of resources by all processes running inside of the cgroup.
-
-
-<span id="check_mode"></span>
-#### Check Mode
-
-
-Refers to running Ansible with the `--check` option, which does not make any changes on the remote systems, but only outputs the changes that might occur if the command ran without this flag. This is analogous to so-called "dry run" modes in other systems. However, this does not take into account unexpected command failures or cascade effects (which is true of similar modes in other systems). Use Check mode to get an idea of what might happen, but it is not a substitute for a good staging environment.
-
-
-<span id="container_groups"></span>
-#### Container Groups
-
-
-Container Groups are a type of Instance Group that specify a configuration for provisioning a pod in a Kubernetes or OpenShift cluster where a job is run. These pods are provisioned on-demand and exist only for the duration of the playbook run.
-
-
-<span id="credentials"></span>
-#### Credentials
-
-
-Authentication details that can be used by automation controller to launch jobs against machines, to synchronize with inventory sources, and to import project content from a version control system. For more information, see [Credentials].
-
-
-<span id="credential_plugin"></span>
-#### Credential Plugin
-
-
-Python code that contains definitions for an external credential type, its metadata fields, and the code needed for interacting with a secret management system.
-
-
-<span id="distributed_job"></span>
-#### Distributed Job
-
-
-A job that consists of a job template, an inventory, and slice size. When executed, a distributed job slices each inventory into a number of "slice size" chunks, which are then used to run smaller job slices.
-
-
-<span id="external_credential_type"></span>
-#### External Credential Type
-
-
-A managed credential type used for authenticating with a secret management system.
-
-
-<span id="facts"></span>
-#### Facts
-
-
-Facts are things that are discovered about remote nodes. While they can be used in playbooks and templates just like variables, facts are things that are inferred, rather than set. Facts are automatically discovered when running plays by executing the internal setup module on the remote nodes. You never have to call the setup module explicitly: it just runs. It can be disabled to save time if it is not required. For the convenience of users who are switching from other configuration management systems, the fact module also pulls in facts from the `ohai` and `facter` tools if they are installed, which are fact libraries from Chef and Puppet, respectively.
-
-
-<span id="forks"></span>
-#### Forks
-
-
-Ansible and automation controller communicate with remote nodes in parallel. The level of parallelism can be set in several ways during the creation or editing of a Job Template, by passing `--forks` , or by editing the default in a configuration file. The default is a very conservative five forks, though if you have a lot of RAM, you can set this to a higher value, such as 50, for increased parallelism.
-
-
-<span id="group"></span>
-#### Group
-
-
-A set of hosts in Ansible that can be addressed as a set, of which many can exist within a single Inventory.
-
-
-<span id="group_vars"></span>
-#### Group Vars
-
-
-The `group_vars/` files are files that are stored in a directory with an inventory file, with an optional filename named after each group. This is a convenient place to put variables that are provided to a given group, especially complex data structures, so that these variables do not have to be embedded in the inventory file or playbook.
-
-
-<span id="handlers"></span>
-#### Handlers
-
-
-Handlers are like regular tasks in an Ansible playbook (see **Tasks** ), but are only run if the Task contains a "notify" directive and also indicates that it changed something. For example, if a configuration file is changed then the task referencing the configuration file templating operation might notify a service restart handler. This means services can be bounced only if they need to be restarted. Handlers can be used for things other than service restarts, but service restarts are the most common use.
-
-
-<span id="host"></span>
-#### Host
-
-
-A system managed by automation controller, which may include a physical, virtual, or cloud-based server, or other device (typically an operating system instance). Hosts are contained in an Inventory. Sometimes referred to as a "node".
-
-
-<span id="host_specifier"></span>
-#### Host Specifier
-
-
-Each Play in Ansible maps a series of tasks (which define the role, purpose, or orders of a system) to a set of systems. This "hosts:" directive in each play is often called the hosts specifier. It can select one system, many systems, one or more groups, or hosts that are in one group and explicitly not in another.
-
-
-<span id="instance_group"></span>
-#### Instance Group
-
-
-A group that contains instances for use in a clustered environment. An instance group provides the ability to group instances based on policy.
-
-
-<span id="inventory"></span>
-#### Inventory
-
-
-A collection of hosts against which Jobs can be launched.
-
-
-<span id="inventory_script"></span>
-#### Inventory Script
-
-
-A program that looks up hosts, group membership for hosts, and variable information from an external resource, whether that be a SQL database, a CMDB solution, or LDAP. This concept was adapted from Puppet (where it is called an "External Nodes Classifier") and works in a similar way.
-
-
-<span id="inventory_source"></span>
-#### Inventory Source
-
-
-Information about a cloud or other script to be merged into the current inventory group, resulting in the automatic population of Groups, Hosts, and variables about those groups and hosts.
-
-
-<span id="job"></span>
-#### Job
-
-
-One of many background tasks launched by automation controller, this is usually the instantiation of a Job Template, such as the launch of an Ansible playbook. Other types of jobs include inventory imports, project synchronizations from source control, or administrative cleanup actions.
-
-
-<span id="job_detail"></span>
-#### Job Detail
-
-
-The history of running a particular job, including its output and success/failure status.
-
-
-<span id="job_slice"></span>
-#### Job Slice
-
-
-See **Distributed Job** .
-
-
-<span id="job_template"></span>
-#### Job Template
-
-
-The combination of an Ansible playbook and the set of parameters required to launch it. For more information, see [Job templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-job-templates) .
-
-
-<span id="json"></span>
-#### JSON
-
-
-JSON is a text-based format for representing structured data based on JavaScript object syntax. Ansible and automation controller use JSON for return data from remote modules. This enables modules to be written in any language, not just Python.
-
-
-<span id="mesh"></span>
-#### Mesh
-
-
-Describes a network comprising of nodes. Communication between nodes is established at the transport layer by protocols such as TCP, UDP or Unix sockets.
-
 See also, **Node** .
 
 
-<span id="metadata"></span>
-#### Metadata
-
-
-Information for locating a secret in the external system once authenticated. The user provides this information when linking an external credential to a target credential field.
-
-
-<span id="node"></span>
-#### Node
-
-
-A node corresponds to entries in the instance database model, or the `/api/v2/instances/` endpoint, and is a machine participating in the cluster or mesh. The unified jobs API reports `controller_node` and `execution_node` fields. The execution node is where the job runs, and the controller node interfaces between the job and server functions.
-
-
-| Node Type | Description |
-| --- | --- |
-| Control | Nodes that run persistent services, and delegate jobs to hybrid and execution nodes. |
-| Hybrid | Nodes that run persistent services and execute jobs. |
-| Hop | Used for relaying across the mesh only. |
-| Execution | Nodes that run jobs delivered from control nodes (jobs submitted from the user’s Ansible automation) |
-
-
-
-<span id="notification_template"></span>
-#### Notification Template
-
-
-An instance of a notification type (Email, Slack, Webhook, etc.) with a name, description, and a defined configuration.
-
-
-<span id="notification"></span>
-#### Notification
-
-
-A Notification, such as Email, Slack or a Webhook, has a name, description and configuration defined in a Notification template. For example, when a job fails, a notification is sent using the configuration defined by the notification template.
-
-
-<span id="notify"></span>
-#### Notify
-
-
-The act of a task registering a change event and informing a handler task that another action needs to be run at the end of the play. If a handler is notified by multiple tasks, it is still only run once. Handlers are run in the order they are listed, not in the order that they are notified.
-
-
-<span id="organization"></span>
-#### Organization
-
-
-A logical collection of Users, Teams, Projects, and Inventories. Organization is the highest level in the object hierarchy.
-
-
-<span id="organization_administrator"></span>
-#### Organization Administrator
-
-
-An user with the rights to modify the Organization’s membership and settings, including making new users and projects within that organization. An organization administrator can also grant permissions to other users within the organization.
-
-
-<span id="permissions"></span>
-#### Permissions
-
-
-The set of privileges assigned to Users and Teams that provide the ability to read, modify, and administer Projects, Inventories, and other objects.
-
-
-<span id="plays"></span>
-#### Plays
-
-
-A play is minimally a mapping between a set of hosts selected by a host specifier (usually chosen by groups, but sometimes by hostname globs) and the tasks which run on those hosts to define the role that those systems perform. A playbook is a list of plays. There can be one or many plays in a playbook.
-
-
-<span id="playbook"></span>
-#### Playbook
-
-
-An Ansible playbook. For more information, see [Ansible playbooks](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html#) .
-
-
-<span id="policy"></span>
-#### Policy
-
-
-Policies dictate how instance groups behave and how jobs are executed.
-
-
-<span id="project"></span>
-#### Project
-
-
-A logical collection of Ansible playbooks, represented in automation controller.
-
-
-<span id="roles"></span>
-#### Roles
-
-
-Roles are units of organization in Ansible and automation controller. Assigning a role to a group of hosts (or a set of groups, or host patterns, etc.) implies that they implement a specific behavior. A role can include applying variable values, tasks, and handlers, or a combination of these things. Because of the file structure associated with a role, roles become redistributable units that enable you to share behavior among playbooks, or with other users.
-
-
-<span id="secret_management_system"></span>
-#### Secret Management System
-
-
-A server or service for securely storing and controlling access to tokens, passwords, certificates, encryption keys, and other sensitive data.
-
-
-<span id="schedule"></span>
-#### Schedule
-
-
-The calendar of dates and times for which a job should run automatically.
-
-
-<span id="sliced_job"></span>
-#### Sliced Job
-
-
-See **Distributed Job** .
-
-
-<span id="source_credential"></span>
-#### Source Credential
-
-
-An external credential that is linked to the field of a target credential.
-
-
-<span id="sudo"></span>
-#### Sudo
-
-
-Ansible does not require root logins and, since it is daemonless, does not require root level daemons (which can be a security concern in sensitive environments). Ansible can log in and perform many operations wrapped in a `sudo` command, and can work with both password-less and password-based sudo. Some operations that do not normally work with `sudo` (such as `scp` file transfer) can be achieved with Ansible’s _copy_ , _template_ , and _fetch_ modules while running in `sudo` mode.
-
-
-<span id="superuser"></span>
-#### Superuser
-
-
-An administrator of the server who has permission to edit any object in the system, whether or not it is associated with any organization. Superusers can create organizations and other superusers.
-
-
-<span id="survey"></span>
-#### Survey
-
-
-Questions asked by a job template at job launch time, configurable on the job template.
-
-
-<span id="target_credential"></span>
-#### Target Credential
-
-
-A non-external credential with an input field that is linked to an external credential.
-
-
-<span id="team"></span>
-#### Team
-
-
-A sub-division of an Organization with associated Users, Projects, Credentials, and Permissions. Teams provide a means to implement role-based access control schemes and delegate responsibilities across Organizations.
-
-
-<span id="user"></span>
-#### User
-
-
-An operator with associated permissions and credentials.
-
-
-<span id="webhook"></span>
-#### Webhook
-
-
-Webhooks enable communication and information sharing between applications. They are used to respond to commits pushed to SCMs and launch job templates or workflow templates.
-
-
-<span id="workflow_job_template"></span>
-#### Workflow Job Template
-
-
-A set consisting of any combination of job templates, project syncs, and inventory syncs, linked together in order to execute them as a single unit.
-
-
-<span id="yaml"></span>
-#### YAML
-
-
-A human-readable language that is often used for writing configuration files. Ansible and automation controller use YAML to define playbook configuration languages and also variable files. YAML has a minimum of syntax, is very clean, and is easy for people to skim. It is a good data format for configuration files and humans, but is also machine readable. YAML is popular in the dynamic language community and the format has libraries available for serialization in many languages. Examples include Python, Perl, or Ruby.
-
-
-<span id="idm140173724681600"></span>
+<span id="idm140390005286128"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

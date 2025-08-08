@@ -1,6 +1,6 @@
 # 3. Ansible Automation Platform post-upgrade steps
-## 3.4. Migrating LDAP users
-### 3.4.2. Legacy user login and account linking
+## 3.6. Migrating LDAP users
+### 3.6.2. Legacy user login and account linking
 
 
 

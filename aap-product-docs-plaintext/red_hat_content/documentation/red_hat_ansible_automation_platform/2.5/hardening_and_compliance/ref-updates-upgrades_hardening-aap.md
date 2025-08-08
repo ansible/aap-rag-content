@@ -34,5 +34,3 @@ To generate a new secret key, perform the following steps:
 
 A backup copy of the previous key is saved in `/etc/tower/` .
 
-
-<span id="idm140248005548752"></span>

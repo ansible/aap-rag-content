@@ -7,5 +7,5 @@ Ansible is an open source software project and is licensed under the GNU General
 
 You must have valid subscriptions attached before installing Ansible Automation Platform.
 
-For more information, see [Attaching Subscriptions](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#proc-attaching-subscriptions) .
+For more information, see [Attaching Subscriptions](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-attaching-subscriptions) .
 

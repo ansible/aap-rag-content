@@ -66,7 +66,7 @@ $ tar cvaf must-gather.tar.gz<span class="emphasis"><em><span class="Role ARG Sp
 
 **Additional resources**
 
-- For information about installing the OpenShift CLI ( `    oc` ), see [Installing the OpenShift CLI](https://docs.openshift.com/container-platform/4.15/cli_reference/openshift_cli/getting-started-cli.html) in the OpenShift Container Platform Documentation.
-- For information about running the `    oc adm inspect` command, see the [ocm adm inspect](https://docs.openshift.com/container-platform/4.15/cli_reference/openshift_cli/administrator-cli-commands.html#oc-adm-inspect) section in the OpenShift Container Platform Documentation.
+-  [Installing the OpenShift CLI](https://docs.openshift.com/container-platform/4.15/cli_reference/openshift_cli/getting-started-cli.html)
+-  [ocm adm inspect](https://docs.openshift.com/container-platform/4.15/cli_reference/openshift_cli/administrator-cli-commands.html#oc-adm-inspect)
 
 

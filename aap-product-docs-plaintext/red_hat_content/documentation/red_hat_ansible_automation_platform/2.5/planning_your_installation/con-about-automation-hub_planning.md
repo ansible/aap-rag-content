@@ -1,5 +1,5 @@
 # 2. Red Hat Ansible Automation Platform components
-## 2.2. Ansible automation hub
+## 2.3. Ansible automation hub
 
 
 

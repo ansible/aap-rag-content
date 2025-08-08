@@ -1,6 +1,6 @@
 # 3. Ansible Automation Platform post-upgrade steps
-## 3.4. Migrating LDAP users
-### 3.4.3. Migrating LDAP users without account linking
+## 3.6. Migrating LDAP users
+### 3.6.3. Migrating LDAP users without account linking
 
 
 
@@ -32,4 +32,4 @@ Ansible Automation Platform 2.4 LDAP configurations are renamed during the upgra
 Once you set up the auto migrate functionality, you should be able to login with LDAP in the platform gateway and any matching accounts from the legacy 2.4 LDAP authenticator will automatically be linked.
 
 
-<span id="idm140476458942400"></span>
+<span id="idm139969191273120"></span>

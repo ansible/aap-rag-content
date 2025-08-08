@@ -1,5 +1,5 @@
 # 2. Red Hat Ansible Automation Platform components
-## 2.6. Automation mesh
+## 2.7. Automation mesh
 
 
 

@@ -14,7 +14,7 @@ To view the Host details for a job run.
 
 - The **Name** of the Host.
 - The **Inventory** associated with that host. Selecting this inventory displays details of the inventory.
-- When the Host was **Created** and who by. Selecting the creator displays details of the creator.
+- When the Host was **Created** and by whom. Selecting the creator displays details of the creator.
 - When the Host was **Last modified** . Selecting the creator displays details of the creator.
 -  **Variables** associated with the Host. You can display the variables in YAML or JSON format.
 

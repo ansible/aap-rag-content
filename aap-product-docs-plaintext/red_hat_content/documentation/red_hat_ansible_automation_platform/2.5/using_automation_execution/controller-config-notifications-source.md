@@ -1,6 +1,6 @@
 # 14. Inventories
 ## 14.4. Add a new inventory
-### 14.4.5. Configuring notifications for the source
+### 14.4.6. Configuring notifications for the source
 
 
 
@@ -25,5 +25,8 @@ The **Notifications** tab is only present when you have saved the newly-created 
 1. ClickSave.
 
 
+**Next steps**
+
 When you define a source, it is displayed in the list of sources associated with the inventory. From the **Sources** tab you can perform a sync on a single source, or sync all of them at once. You can also perform additional actions such as scheduling a sync process, and edit or delete the source.
+
 

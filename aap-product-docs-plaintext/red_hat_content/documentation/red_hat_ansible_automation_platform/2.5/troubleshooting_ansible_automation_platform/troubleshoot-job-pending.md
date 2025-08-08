@@ -1,5 +1,6 @@
 # 6. Jobs
-## 6.3. Issue - Jobs in automation controller are stuck in a pending state
+## 6.1. Issue - Jobs are failing with “ERROR! couldn’t resolve module/action” error message
+### 6.1.1. Issue - Jobs in automation controller are stuck in a pending state
 
 
 

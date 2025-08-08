@@ -1,6 +1,6 @@
-# 10. Appendix: Red Hat Ansible Automation Platform custom resources
-## 10.1. Custom resources
-### 10.1.13. aap-fresh-install-with-settings.yml
+# 11. Appendix: Red Hat Ansible Automation Platform custom resources
+## 11.1. Custom resources
+### 11.1.12. aap-fresh-install-with-settings.yml
 
 
 

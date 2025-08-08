@@ -1,6 +1,6 @@
 # 7. Implementing policy enforcement
-## 7.4. Configuring enforcement points
-### 7.4.1. Associating a policy with an organization
+## 7.3. Configuring enforcement points
+### 7.3.1. Associating a policy with an organization
 
 
 

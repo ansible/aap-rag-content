@@ -20,7 +20,7 @@ Direct connections shown in the diagram between the Client and automation hub, E
 The following table indicates the destination port and the direction of network traffic:
 
 
-<span id="idm140318499036288"></span>
+<span id="idm140696950965584"></span>
 **Figure 6.1. Ansible Automation Platform Network ports and protocols**
 
 ![Interaction of Ansible Automation Platform components on the network with information about the ports and protocols that are used.](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Planning_your_installation-en-US/images/8991674f3ce4f960ede12744714b30c1/aap-network-ports-protocols.png)
@@ -34,7 +34,7 @@ The following default destination ports and installer inventory listed are confi
 
 
 
-<span id="idm140318500750704"></span>
+<span id="idm140696957063552"></span>
 **Table 6.1. Network ports and protocols**
 
 | Port | Protocol | Service | Source | Destination | Required for | Installer Inventory Variable |
@@ -143,7 +143,7 @@ This means that nothing connects to Controller A as Controller A is creating the
 
 
 
-<span id="idm140318499911008"></span>
+<span id="idm140696952219888"></span>
 **Table 6.2. Red Hat Insights for Red Hat Ansible Automation Platform**
 
 | URL | Required for |
@@ -157,7 +157,7 @@ This means that nothing connects to Controller A as Controller A is creating the
 
 
 
-<span id="idm140318504514992"></span>
+<span id="idm140696959081984"></span>
 **Table 6.3. Automation Hub**
 
 | URL | Required for |
@@ -176,7 +176,7 @@ https://automation-hub-prd.s3.us-east-2.amazonaws.com | Firewall access |
 
 
 
-<span id="idm140318500763472"></span>
+<span id="idm140696952898384"></span>
 **Table 6.4. Execution Environments (EE)**
 
 | URL | Required for |

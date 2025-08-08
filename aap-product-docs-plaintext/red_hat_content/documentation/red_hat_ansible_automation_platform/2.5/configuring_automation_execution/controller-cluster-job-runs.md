@@ -13,6 +13,5 @@ To support taking an instance offline temporarily, there is a property enabled d
 
 When you issue a `cancel` request on a running automation controller job, automation controller issues a `SIGINT` to the ansible-playbook process. While this causes Ansible to stop dispatching new tasks and exit, in many cases, module tasks that were already dispatched to remote hosts will run to completion. This behavior is similar to pressing `Ctrl-c` during a command-line Ansible run.
 
-
 With respect to software dependencies, if a running job is canceled, the job is removed but the dependencies remain.
 

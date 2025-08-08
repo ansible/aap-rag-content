@@ -1,11 +1,11 @@
 # 2. System requirements
 ## 2.6. PostgreSQL requirements
-### 2.6.2. Enabling the hstore extension for the automation hub PostgreSQL database
+### 2.6.4. Enabling the hstore extension for the automation hub PostgreSQL database
 
 
 
 
-Added in Ansible Automation Platform 2.5, the database migration script uses `hstore` fields to store information, therefore the `hstore` extension must be enabled in the automation hub PostgreSQL database.
+The database migration script uses `hstore` fields to store information, therefore the `hstore` extension must be enabled in the automation hub PostgreSQL database.
 
 This process is automatic when using the Ansible Automation Platform installer and a managed PostgreSQL server.
 

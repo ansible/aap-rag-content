@@ -1,5 +1,5 @@
 # 3. Ansible Automation Platform post-upgrade steps
-## 3.2. Migrating normal users
+## 3.4. Migrating normal users
 
 
 

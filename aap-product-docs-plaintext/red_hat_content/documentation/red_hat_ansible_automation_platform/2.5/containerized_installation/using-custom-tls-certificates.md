@@ -81,7 +81,7 @@ When providing custom TLS certificates for each individual service, consider the
 
 **Additional resources**
 
-- For more information about using TLS certificates, see [Securing networks](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/securing_networks/index) .
+-  [Securing networks](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/securing_networks/index)
 
 
 ##### 2.7.7.2.4. Providing a custom CA certificate

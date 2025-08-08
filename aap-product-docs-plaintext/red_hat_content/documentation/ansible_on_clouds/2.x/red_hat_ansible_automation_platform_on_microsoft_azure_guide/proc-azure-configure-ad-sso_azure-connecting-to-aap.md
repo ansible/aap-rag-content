@@ -36,7 +36,10 @@ To create a Microsoft Entra ID SSO configuration you must first register for Mic
 1. Click **Register** to create the registration.
 
 
+**Verification**
+
 When registration is complete, the registration page for the Ansible Automation Platform application is displayed.
+
 
 #### 5.4.2.2. Generating secrets for communication
 

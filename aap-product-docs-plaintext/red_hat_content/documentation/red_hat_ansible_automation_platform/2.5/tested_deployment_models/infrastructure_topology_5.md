@@ -1,6 +1,6 @@
-# 3. Container topologies
-## 3.1. Container growth topology
-### 3.1.1. Infrastructure topology
+# 4. Operator topologies
+## 4.1. Operator growth topology
+### 4.1.1. Infrastructure topology
 
 
 
@@ -8,50 +8,42 @@
 The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 
-<span id="idm139891619084448"></span>
-**Figure 3.1. Infrastructure topology diagram**
+<span id="idm139849912934640"></span>
+**Figure 4.1. Infrastructure topology diagram**
 
-![Container growth topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Tested_deployment_models-en-US/images/02b948e9d139f9a478e80ba4164dceae/cont-a-env-a.png)
-
-
+![Operator growth topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Tested_deployment_models-en-US/images/3a13707c5b317e9a4cd69aa815402091/ocp-a-env-a.png)
 
 
-A single VM has been tested with the following component requirements:
 
 
-<span id="idm139891619856592"></span>
-**Table 3.1. Virtual machine requirements**
+A Single Node OpenShift (SNO) cluster has been tested with the following requirements: 32 GB RAM, 16 CPUs, 128 GB local disk, and 3000 IOPS.
 
-| Requirement | Minimum requirement |
+
+<span id="idm139849912929632"></span>
+**Table 4.1. Infrastructure topology**
+
+| Count | Component |
 | --- | --- |
-| RAM | 16 GB |
-| CPUs | 4 |
-| Local disk | - 60 GB
-- Minimum of 15 GB dedicated to the installation directory if it is in a dedicated partition. |
-| Disk IOPS | 3000 |
+| 1 | Automation controller web pod |
+| 1 | Automation controller task pod |
+| 1 | Automation hub API pod |
+| 2 | Automation hub content pod |
+| 2 | Automation hub worker pod |
+| 1 | Automation hub Redis pod |
+| 1 | Event-Driven Ansible API pod |
+| 1 | Event-Driven Ansible activation worker pod |
+| 1 | Event-Driven Ansible default worker pod |
+| 1 | Event-Driven Ansible event stream pod |
+| 1 | Event-Driven Ansible scheduler pod |
+| 1 | Platform gateway pod |
+| 1 | Database pod |
+| 1 | Redis pod |
 
 
 
-
-Resources, such as storage, can be increased based on the needs of the deployment.
 
 Note
-If performing a bundled installation of the growth topology with `hub_seed_collections=true` , then 32 GB RAM is recommended. Note that with this configuration the install time is going to increase and can take 45 or more minutes alone to complete seeding the collections.
-
-
-
-
-<span id="idm139891618796400"></span>
-**Table 3.2. Infrastructure topology**
-
-| Purpose | Example group names |
-| --- | --- |
-| All Ansible Automation Platform components | -  `    automationgateway`
--  `    automationcontroller`
--  `    automationhub`
--  `    automationeda`
--  `    database` |
-
+You can deploy multiple isolated instances of Ansible Automation Platform into the same Red Hat OpenShift Container Platform cluster by using a namespace-scoped deployment model. This approach allows you to use the same cluster for several deployments.
 
 
 

@@ -1,5 +1,5 @@
 # 2. Red Hat Ansible Automation Platform components
-## 2.4. High availability automation hub
+## 2.5. High availability automation hub
 
 
 

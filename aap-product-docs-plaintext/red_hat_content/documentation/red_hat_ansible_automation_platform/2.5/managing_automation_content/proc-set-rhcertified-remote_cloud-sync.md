@@ -1,6 +1,6 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
 ## 1.1. Configuring Ansible automation hub remote repositories to synchronize content
-### 1.1.2. Configuring the rh-certified remote repository to sync Ansible Certified Content Collections
+### 1.1.5. Configuring the rh-certified remote repository to sync Ansible Certified Content Collections
 
 
 
@@ -28,5 +28,13 @@ If you have collections `A` , `B` , and `C` in your requirements file, and a new
 1. ClickSave remote.
 
 
-You can now synchronize collections from console.redhat.com to your private automation hub. See [Synchronizing Ansible content collections in automation hub](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-cert-valid-content#assembly-synclists) for syncing steps.
+**Result**
+
+You can now synchronize collections from console.redhat.com to your private automation hub.
+
+
+**Next steps**
+
+See [Synchronizing Ansible content collections in automation hub](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-cert-valid-content#assembly-synclists) for syncing steps.
+
 

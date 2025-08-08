@@ -14,12 +14,12 @@ The following table shows the tested topologies for Ansible Automation Platform 
 
 | Mode | Infrastructure | Description | Tested topologies |
 | --- | --- | --- | --- |
-| RPM | Virtual Machines/Bare Metal | The RPM installer deploys the Ansible Automation Platform on Red Hat Enterprise Linux using RPMs to install the platform on host machines. Customers manage the product and infrastructure lifecycle. | - RPM enterprise topology
-- RPM mixed enterprise topology |
-| Containers | Virtual Machines/Bare Metal | The containerized installer deploys the Ansible Automation Platform on Red Hat Enterprise Linux by using Podman that runs the platform in containers on host machines. Customers manage the product and infrastructure lifecycle. | - Container enterprise topology
-- Container growth topology |
-| Operator | Red Hat OpenShift | The operator uses Red Hat OpenShift operators to deploy the Ansible Automation Platform within Red Hat OpenShift. Customers manage the product and infrastructure lifecycle. | - Operator enterprise topology
-- Operator growth topology |
+| RPM | Virtual Machines/Bare Metal | The RPM installer deploys the Ansible Automation Platform on Red Hat Enterprise Linux using RPMs to install the platform on host machines. Customers manage the product and infrastructure lifecycle. | - RPM growth topology
+- RPM enterprise topology |
+| Containers | Virtual Machines/Bare Metal | The containerized installer deploys the Ansible Automation Platform on Red Hat Enterprise Linux by using Podman that runs the platform in containers on host machines. Customers manage the product and infrastructure lifecycle. | - Container growth topology
+- Container enterprise topology |
+| Operator | Red Hat OpenShift | The operator uses Red Hat OpenShift operators to deploy the Ansible Automation Platform within Red Hat OpenShift. Customers manage the product and infrastructure lifecycle. | - Operator growth topology
+- Operator enterprise topology |
 
 
 For more information, see [Tested deployment models](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/tested_deployment_models) .

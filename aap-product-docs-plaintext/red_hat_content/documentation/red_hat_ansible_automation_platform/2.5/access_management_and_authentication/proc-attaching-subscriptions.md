@@ -28,16 +28,6 @@ Do not use MCT4022 as a `    pool_id` for your subscription because it can cause
 
 
 
-**Example**
-
-An example output of the `    <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">subsciption-manager list</span></strong></span>` command. Obtain the `    pool_id` as seen in the `    Pool ID:` section:
-
-
-
-```
-Subscription Name: Red Hat Ansible Automation, Premium (5000 Managed Nodes)      Provides: Red Hat Ansible Engine      Red Hat Ansible Automation Platform      SKU: MCT3695      Contract: ````      Pool ID: &lt;pool_id&gt;      Provides Management: No      Available: 4999      Suggested: 1
-```
-
 
 1. Attach the subscription:
 

@@ -1,14 +1,22 @@
 # 3. Ansible Automation Platform post-upgrade steps
-## 3.1. Migrating admin users
+## 3.2. Migrating admin users
 
 
 
 
-Upgrades from Ansible Automation Platform 2.4 to 2.5 allows for the migration of administrators for each component with their existing component-level admin privileges maintained. However, escalation of privileges to platform gateway administrator is not automatic during the upgrade process. This ensures a secure privilege escalation process that can be customized to meet the organization’s specific needs.
+Follow this procedure to migrate admin users.
 
 **Prerequisites**
 
 - Review current admin roles for the individual services in your current deployment.
 - Confirm the users who will require platform gateway admin rights post-upgrade.
+
+
+**Procedure**
+
+1. From the navigation panel of the platform gateway, selectAccess Management→Users.
+1. Select the check box for the user that you want to modify.
+1. Click the Pencil icon and select **Edit user** .
+1. The Edit user page is displayed where you can see the service level administrator privileges assigned by the **User type** checkboxes. See [Editing a user](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/gw-managing-access#gw-editing-a-user) for more information on these user types.
 
 

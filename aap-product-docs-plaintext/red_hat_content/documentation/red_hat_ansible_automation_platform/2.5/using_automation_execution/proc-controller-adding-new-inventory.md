@@ -27,10 +27,7 @@ Use the following procedure to create a inventory:
 -  **Organization** : Required. Choose among the available organizations.
 - Only applicable to Smart Inventories: **Smart host filter** : Populate the hosts for this inventory by using a search filter.
 
-**Example**
-
-name__icontains=RedHat.
-
+For example "name__icontains=RedHat".
 
 These options are based on the organization you chose.
 
@@ -83,5 +80,8 @@ icon for information on **How to use the constructed inventory plugin** .
 1. ClickCreate inventory.
 
 
+**Next steps**
+
 After saving the new inventory, you can proceed with configuring permissions, groups, hosts, sources, and view completed jobs, if applicable to the type of inventory.
+
 

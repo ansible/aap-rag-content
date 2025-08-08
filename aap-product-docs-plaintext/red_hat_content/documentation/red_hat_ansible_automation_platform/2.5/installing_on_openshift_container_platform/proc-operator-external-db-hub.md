@@ -20,7 +20,7 @@ The following section outlines the steps to configure an external database for y
 
 **Prerequisite**
 
-The external database must be a PostgreSQL database that is the version supported by the current release of Ansible Automation Platform.
+The external database must be a PostgreSQL database that is the version supported by the current release of Ansible Automation Platform. The external postgres instance credentials and connection information will need to be stored in a secret, which will then be set on the automation hub spec.
 
 
 Note
@@ -29,9 +29,6 @@ Ansible Automation Platform 2.5 supports PostgreSQL 15.
 
 
 **Procedure**
-
-The external postgres instance credentials and connection information will need to be stored in a secret, which will then be set on the automation hub spec.
-
 
 1. Create a `    postgres_configuration_secret` YAML file, following the template below:
 
@@ -64,7 +61,7 @@ apiVersion: automationhub.ansible.com/v1beta1    kind: AutomationHub    metadata
 
 
 
-Added in Ansible Automation Platform 2.5, the database migration script uses `hstore` fields to store information, therefore the `hstore` extension must be enabled in the automation hub PostgreSQL database.
+The database migration script uses `hstore` fields to store information, therefore the `hstore` extension must be enabled in the automation hub PostgreSQL database.
 
 This process is automatic when using the Ansible Automation Platform installer and a managed PostgreSQL server.
 

@@ -59,7 +59,7 @@ $ ansible-playbook -i &lt;path_to_inventory_file&gt; ansible.containerized_insta
 1. The following is a list of the parameters you can use with the `        log_gathering` playbook:
 
 
-<span id="idm140359467042544"></span>
+<span id="idm140679179394976"></span>
 **Table A.1. Parameter reference**
 
 | Parameter name | Description | Default |
@@ -79,7 +79,7 @@ $ ansible-playbook -i &lt;path_to_inventory_file&gt; ansible.containerized_insta
 
 **Additional resources**
 
-- For more information about the `    sos` report tool, see [What is an sos report and how to create one in Red Hat Enterprise Linux?](https://access.redhat.com/solutions/3592)
+-  [What is an sos report and how to create one in Red Hat Enterprise Linux?](https://access.redhat.com/solutions/3592)
 
 
 ## A.2. Diagnosing the problem
@@ -239,89 +239,6 @@ nginx_user_headers=[]
 
 The current default setting of `20m` should prevent this issue.
 
-**The installation failed with a “502 Bad Gateway” when going to the controller UI**
-
-This error can be seen in the installation process output as the following:
-
-```
-TASK [ansible.containerized_installer.automationcontroller : Wait for the Controller API to te ready] ******************************************************
-fatal: [daap1.lan]: FAILED! =&gt; {"changed": false, "connection": "close", "content_length": "150", "content_type": "text/html", "date": "Fri, 29 Sep 2023 09:42:32 GMT", "elapsed": 0, "msg": "Status code was 502 and not [200]: HTTP Error 502: Bad Gateway", "redirected": false, "server": "nginx", "status": 502, "url": "https://daap1.lan:443/api/v2/ping/"}
-```
-
-Confirm that you have an `automation-controller-web` container running.
-
-This is used at the regular unprivileged user not at the system wide level. If you have used `su` to switch to the user running the containers, you must set your `XDG_RUNTIME_DIR` environment variable to the correct value to be able to interact with the user `systemctl` units:
-
-```
-export XDG_RUNTIME_DIR="/run/user/$UID"
-```
-
-To confirm that you have an `automation-controller-web` container running, use the following commands:
-
-```
-podman ps | grep web
-```
-
-```
-systemctl --user | grep web
-```
-
-No output from running these commands indicates a problem. To resolve the issue:
-
-1. Restart the `    automation-controller-web` service:
-
-
-```
-systemctl start automation-controller-web.service --user
-```
-
-
-1. Check the status of the service:
-
-
-```
-systemctl status automation-controller-web.service --user
-```
-
-The following example output indicates that the port is already, or still, in use by another service. In this case nginx:
-
-
-```
-Sep 29 10:55:16 daap1.lan automation-controller-web[29875]: nginx: [emerg] bind() to 0.0.0.0:443 failed (98: Address already in use)    Sep 29 10:55:16 daap1.lan automation-controller-web[29875]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
-```
-
-
-1. Run the following command to stop the nginx service:
-
-
-```
-sudo pkill nginx
-```
-
-
-1. Restart the automation-controller-web service and check the status:
-
-
-```
-systemctl start automation-controller-web.service --user
-```
-
-
-```
-systemctl status automation-controller-web.service --user
-```
-
-The output looks like the following if everything is running correctly:
-
-
-```
-Sep 29 10:59:26 daap1.lan automation-controller-web[30274]: WSGI app 0 (mountpoint='/') ready in 3 seconds on interpreter 0x1a458c10 pid: 17 (default app)    Sep 29 10:59:26 daap1.lan automation-controller-web[30274]: WSGI app 0 (mountpoint='/') ready in 3 seconds on interpreter 0x1a458c10 pid: 20 (default app)    Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,043 INFO     [-] daphne.cli Starting server at tcp:port=8051:interface=127.0.&gt;    Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,043 INFO     Starting server at tcp:port=8051:interface=127.0.0.1    Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,048 INFO     [-] daphne.server HTTP/2 support not enabled (install the http2 &gt;    Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,048 INFO     HTTP/2 support not enabled (install the http2 and tls Twisted ex&gt;    Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,049 INFO     [-] daphne.server Configuring endpoint tcp:port=8051:interface=1&gt;    Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,049 INFO     Configuring endpoint tcp:port=8051:interface=127.0.0.1    Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,051 INFO     [-] daphne.server Listening on TCP address 127.0.0.1:8051    Sep 29 10:59:27 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:27,051 INFO     Listening on TCP address 127.0.0.1:8051    Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: nginx entered RUNNING state, process has stayed up for &gt; th&gt;    Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: nginx entered RUNNING state, process has stayed up for &gt; th&gt;    Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: uwsgi entered RUNNING state, process has stayed up for &gt; th&gt;    Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: uwsgi entered RUNNING state, process has stayed up for &gt; th&gt;    Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: daphne entered RUNNING state, process has stayed up for &gt; t&gt;    Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: daphne entered RUNNING state, process has stayed up for &gt; t&gt;    Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: ws-heartbeat entered RUNNING state, process has stayed up f&gt;    Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: ws-heartbeat entered RUNNING state, process has stayed up f&gt;    Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: cache-clear entered RUNNING state, process has stayed up fo&gt;    Sep 29 10:59:54 daap1.lan automation-controller-web[30274]: 2023-09-29 09:59:54,139 INFO success: cache-clear entered RUNNING state, process has stayed up
-```
-
-
-1. Run the installation program again to ensure everything installs as expected.
-
-
 **When attempting to install containerized Ansible Automation Platform in Amazon Web Services you receive output that there is no space left on device**
 
 ```
@@ -329,7 +246,7 @@ TASK [ansible.containerized_installer.automationcontroller : Create the receptor
 fatal: [ec2-13-48-25-168.eu-north-1.compute.amazonaws.com]: FAILED! =&gt; {"changed": false, "msg": "Can't create container receptor", "stderr": "Error: creating container storage: creating an ID-mapped copy of layer \"98955f43cc908bd50ff43585fec2c7dd9445eaf05eecd1e3144f93ffc00ed4ba\": error during chown: storage-chown-by-maps: lchown usr/local/lib/python3.9/site-packages/azure/mgmt/network/v2019_11_01/operations/__pycache__/_available_service_aliases_operations.cpython-39.pyc: no space left on device: exit status 1\n", "stderr_lines": ["Error: creating container storage: creating an ID-mapped copy of layer \"98955f43cc908bd50ff43585fec2c7dd9445eaf05eecd1e3144f93ffc00ed4ba\": error during chown: storage-chown-by-maps: lchown usr/local/lib/python3.9/site-packages/azure/mgmt/network/v2019_11_01/operations/__pycache__/_available_service_aliases_operations.cpython-39.pyc: no space left on device: exit status 1"], "stdout": "", "stdout_lines": []}
 ```
 
-If you are installing a `/home` filesystem into a default Amazon Web Services marketplace RHEL instance, it might be too small since `/home` is part of the root `/` filesystem. To resolve this issue you must make more space available on the system.
+If you are installing a `/home` filesystem into a default Amazon Web Services marketplace RHEL instance, it might be too small since `/home` is part of the root `/` filesystem. To resolve this issue you must make more space available. For more information about the system requirements, see [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#system-requirements) .
 
 **"Install container tools" task fails due to unavailable packages**
 
@@ -683,7 +600,7 @@ The following tables contain information about the variables used in Ansible Aut
 The following variables control how Ansible Automation Platform interacts with remote hosts.
 
 
-<span id="idm140359469099536"></span>
+<span id="idm140679161516176"></span>
 **Table B.1. Ansible variables**
 
 | Variable | Description |
@@ -725,8 +642,8 @@ Do not change this variable unless `/bin/sh` is not installed on the target mach
 
 **Additional resources**
 
-- For more information about variables specific to certain plugins, see the documentation for [Ansible.Builtin](https://docs.ansible.com/ansible-core/devel/collections/ansible/builtin/index.html) .
-- For a list of global configuration options, see [Ansible Configuration Settings](https://docs.ansible.com/ansible-core/devel/reference_appendices/config.html) .
+-  [Ansible.Builtin](https://docs.ansible.com/ansible-core/devel/collections/ansible/builtin/index.html)
+-  [Ansible Configuration Settings](https://docs.ansible.com/ansible-core/devel/reference_appendices/config.html)
 
 
 ## B.2. Automation hub variables
@@ -736,74 +653,49 @@ Do not change this variable unless `/bin/sh` is not installed on the target mach
 
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
-|  `automationhub_admin_password` |  `hub_admin_password` | Automation hub administrator password.
-Use of special characters for this variable is limited. The password can include any printable ASCII character except `/` , `”` , or `@` . | Required |  |
-|  `automationhub_api_token` |  | Set the existing token for the installation program.
-For example, a regenerated token in the automation hub UI will invalidate an existing token. Use this variable to set that token in the installation program the next time you run the installation program. | Optional |  |
-|  `automationhub_auto_sign_collections` |  `hub_collection_auto_sign` | If a collection signing service is enabled, collections are not signed automatically by default.
-Set this variable to `true` to sign collections by default. | Optional |  `false` |
-|  `automationhub_backup_collections` |  | Ansible automation hub provides artifacts in `/var/lib/pulp` . These artifacts are automatically backed up by default.
-Set this variable to `false` to prevent backup or restore of `/var/lib/pulp` . | Optional |  `true` |
+|  `automationhub_admin_password` |  `hub_admin_password` | Automation hub administrator password. Use of special characters for this variable is limited. The password can include any printable ASCII character except `/` , `”` , or `@` . | Required |  |
+|  `automationhub_api_token` |  | Set the existing token for the installation program. For example, a regenerated token in the automation hub UI will invalidate an existing token. Use this variable to set that token in the installation program the next time you run the installation program. | Optional |  |
+|  `automationhub_auto_sign_collections` |  `hub_collection_auto_sign` | If a collection signing service is enabled, collections are not signed automatically by default. Set this variable to `true` to sign collections by default. | Optional |  `false` |
+|  `automationhub_backup_collections` |  | Ansible automation hub provides artifacts in `/var/lib/pulp` . These artifacts are automatically backed up by default. Set this variable to `false` to prevent backup or restore of `/var/lib/pulp` . | Optional |  `true` |
 |  `automationhub_client_max_body_size` |  `hub_nginx_client_max_body_size` | Maximum allowed size for data sent to automation hub through NGINX. | Optional |  `20m` |
 |  `automationhub_collection_download_count` |  | Denote whether or not the collection download count should be displayed in the UI. | Optional |  `false` |
-|  `automationhub_collection_seed_repository` |  | Controls the type of content to upload when `hub_seed_collections` is set to `true` .
-Valid options include: `certified` , `validated` | Optional | Both certified and validated are enabled by default. |
+|  `automationhub_collection_seed_repository` |  | Controls the type of content to upload when `hub_seed_collections` is set to `true` . Valid options include: `certified` , `validated` | Optional | Both certified and validated are enabled by default. |
 |  `automationhub_collection_signing_service_key` |  `hub_collection_signing_key` | Path to the collection signing key file. | Required if a collection signing service is enabled. |  |
 |  `automationhub_container_repair_media_type` |  | Denote whether or not to run the command `pulpcore-manager container-repair-media-type` .
 Valid options include: `true` , `false` , `auto` | Optional |  `auto` |
 |  `automationhub_container_signing_service_key` |  `hub_container_signing_key` | Path to the container signing key file. | Required if a container signing service is enabled. |  |
 |  `automationhub_create_default_collection_signing_service` |  `hub_collection_signing` | Set this variable to `true` to enable a collection signing service. | Optional |  `false` |
 |  `automationhub_create_default_container_signing_service` |  `hub_container_signing` | Set this variable to `true` to enable a container signing service. | Optional |  `false` |
-|  `automationhub_disable_hsts` |  `hub_nginx_disable_hsts` | Controls whether HTTP Strict Transport Security (HSTS) is enabled or disabled for automation hub.
-Set this variable to `true` to disable HSTS. | Optional |  `false` |
-|  `automationhub_disable_https` |  `hub_nginx_disable_https` | Controls whether HTTPS is enabled or disabled for automation hub.
-Set this variable to `true` to disable HTTPS. | Optional |  `false` |
-|  `automationhub_enable_api_access_log` |  | Controls whether logging is enabled or disabled at `/var/log/galaxy_api_access.log` .
-The file logs all user actions made to the platform, including username and IP address.
-Set this variable to `true` to enable this logging. | Optional |  `false` |
-|  `automationhub_enable_unauthenticated_collection_access` |  | Controls whether read-only access is enabled or disabled for unauthorized users viewing collections or namespaces for automation hub.
-Set this variable to `true` to enable read-only access. | Optional |  `false` |
-|  `automationhub_enable_unauthenticated_collection_download` |  | Controls whether or not unauthorized users can download read-only collections from automation hub.
-Set this variable to `true` to enable download of read-only collections. | Optional |  `false` |
+|  `automationhub_disable_hsts` |  `hub_nginx_disable_hsts` | Controls whether HTTP Strict Transport Security (HSTS) is enabled or disabled for automation hub. Set this variable to `true` to disable HSTS. | Optional |  `false` |
+|  `automationhub_disable_https` |  `hub_nginx_disable_https` | Controls whether HTTPS is enabled or disabled for automation hub. Set this variable to `true` to disable HTTPS. | Optional |  `false` |
+|  `automationhub_enable_api_access_log` |  | Controls whether logging is enabled or disabled at `/var/log/galaxy_api_access.log` . The file logs all user actions made to the platform, including username and IP address. Set this variable to `true` to enable this logging. | Optional |  `false` |
+|  `automationhub_enable_unauthenticated_collection_access` |  | Controls whether read-only access is enabled or disabled for unauthorized users viewing collections or namespaces for automation hub. Set this variable to `true` to enable read-only access. | Optional |  `false` |
+|  `automationhub_enable_unauthenticated_collection_download` |  | Controls whether or not unauthorized users can download read-only collections from automation hub. Set this variable to `true` to enable download of read-only collections. | Optional |  `false` |
 |  `automationhub_firewalld_zone` |  `hub_firewall_zone` | The firewall zone where automation hub related firewall rules are applied. This controls which networks can access automation hub based on the zone’s trust level. | Optional | RPM = no default set. Container = `public` . |
 |  `automationhub_force_change_admin_password` |  | Denote whether or not to require the change of the default administrator password for automation hub during installation.
 Set to `true` to require the user to change the default administrator password during installation. | Optional |  `false` |
-|  `automationhub_importer_settings` |  `hub_galaxy_importer` | Dictionary of settings to pass to the `galaxy-importer.cfg` configuration file. These settings control how the `galaxy-importer` service processes and validates Ansible content.
-Example values include: `ansible-doc` , `ansible-lint` , and `flake8` . | Optional |  |
+|  `automationhub_importer_settings` |  `hub_galaxy_importer` | Dictionary of settings to pass to the `galaxy-importer.cfg` configuration file. These settings control how the `galaxy-importer` service processes and validates Ansible content. Example values include: `ansible-doc` , `ansible-lint` , and `flake8` . | Optional |  |
 |  `automationhub_nginx_tls_files_remote` |  | Denote whether the web certificate sources are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional | The value defined in `automationhub_tls_files_remote` . |
-|  `automationhub_pg_cert_auth` |  `hub_pg_cert_auth` | Controls whether client certificate authentication is enabled or disabled on the automation hub PostgreSQL database.
-Set this variable to `true` to enable client certificate authentication. | Optional |  `false` |
-|  `automationhub_pg_database` |  `hub_pg_database` | Name of the PostgreSQL database used by automation hub. | Optional | RPM = `automationhub`
-Container = `pulp` |
-|  `automationhub_pg_host` |  `hub_pg_host` | Hostname of the PostgreSQL database used by automation hub. | Required | RPM = `127.0.0.1`
-Container = |
-|  `automationhub_pg_password` |  `hub_pg_password` | Password for the automation hub PostgreSQL database user.
-Use of special characters for this variable is limited. The `!` , `#` , `0` and `@` characters are supported. Use of other special characters can cause the setup to fail. | Optional |  |
+|  `automationhub_pg_cert_auth` |  `hub_pg_cert_auth` | Controls whether client certificate authentication is enabled or disabled on the automation hub PostgreSQL database. Set this variable to `true` to enable client certificate authentication. | Optional |  `false` |
+|  `automationhub_pg_database` |  `hub_pg_database` | Name of the PostgreSQL database used by automation hub. | Optional | RPM = `automationhub` . Container = `pulp` |
+|  `automationhub_pg_host` |  `hub_pg_host` | Hostname of the PostgreSQL database used by automation hub. | Required | RPM = `127.0.0.1` . Container = no default. |
+|  `automationhub_pg_password` |  `hub_pg_password` | Password for the automation hub PostgreSQL database user. Use of special characters for this variable is limited. The `!` , `#` , `0` and `@` characters are supported. Use of other special characters can cause the setup to fail. | Optional |  |
 |  `automationhub_pg_port` |  `hub_pg_port` | Port number for the PostgreSQL database used by automation hub. | Optional |  `5432` |
-|  `automationhub_pg_sslmode` |  `hub_pg_sslmode` | Controls the SSL/TLS mode to use when automation hub connects to the PostgreSQL database.
-Valid options include `verify-full` , `verify-ca` , `require` , `prefer` , `allow` , `disable` . | Optional |  `prefer` |
-|  `automationhub_pg_username` |  `hub_pg_username` | Username for the automation hub PostgreSQL database user. | Optional | RPM = `automationhub`
-Container = `pulp` |
+|  `automationhub_pg_sslmode` |  `hub_pg_sslmode` | Controls the SSL/TLS mode to use when automation hub connects to the PostgreSQL database. Valid options include `verify-full` , `verify-ca` , `require` , `prefer` , `allow` , `disable` . | Optional |  `prefer` |
+|  `automationhub_pg_username` |  `hub_pg_username` | Username for the automation hub PostgreSQL database user. | Optional | RPM = `automationhub` . Container = `pulp` . |
 |  `automationhub_pgclient_sslcert` |  `hub_pg_tls_cert` | Path to the PostgreSQL SSL/TLS certificate file for automation hub. | Required if using client certificate authentication. |  |
 |  `automationhub_pgclient_sslkey` |  `hub_pg_tls_key` | Path to the PostgreSQL SSL/TLS key file for automation hub. | Required if using client certificate authentication. |  |
 |  `automationhub_pgclient_tls_files_remote` |  | Denote whether the PostgreSQL client certificate sources are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional | The value defined in `automationhub_tls_files_remote` . |
-|  `automationhub_require_content_approval` |  | Controls whether content signing is enabled or disabled for automation hub.
-By default when you upload collections to automation hub, an administrator must approve it before they are made available to users.
-To disable the content approval flow, set the variable to `false` . | Optional |  `true` |
-|  `automationhub_restore_signing_keys` |  | Controls whether or not existing signing keys should be restored from a backup.
-Set to `false` to disable restoration of existing signing keys. | Optional |  `true` |
-|  `automationhub_seed_collections` |  `hub_seed_collections` | Controls whether or not pre-loading of collections is enabled.
-When you run the bundle installer, validated content is uploaded to the `validated` repository, and certified content is uploaded to the `rh-certified` repository. By default, certified content and validated content are both uploaded.
-If you do not want to pre-load content, set this variable to `false` .
-For the RPM-based installer, if you only want one type of content, set this variable to `true` and set the `automationhub_collection_seed_repository` variable to the type of content you want to include. | Optional |  `true` |
+|  `automationhub_require_content_approval` |  | Controls whether content signing is enabled or disabled for automation hub. By default when you upload collections to automation hub, an administrator must approve it before they are made available to users. To disable the content approval flow, set the variable to `false` . | Optional |  `true` |
+|  `automationhub_restore_signing_keys` |  | Controls whether or not existing signing keys should be restored from a backup. Set to `false` to disable restoration of existing signing keys. | Optional |  `true` |
+|  `automationhub_seed_collections` |  `hub_seed_collections` | Controls whether or not pre-loading of collections is enabled. When you run the bundle installer, validated content is uploaded to the `validated` repository, and certified content is uploaded to the `rh-certified` repository. By default, certified content and validated content are both uploaded. If you do not want to pre-load content, set this variable to `false` . For the RPM-based installer, if you only want one type of content, set this variable to `true` and set the `automationhub_collection_seed_repository` variable to the type of content you want to include. | Optional |  `true` |
 |  `automationhub_ssl_cert` |  `hub_tls_cert` | Path to the SSL/TLS certificate file for automation hub. | Optional |  |
 |  `automationhub_ssl_key` |  `hub_tls_key` | Path to the SSL/TLS key file for automation hub. | Optional |  |
 |  `automationhub_tls_files_remote` |  `hub_tls_remote` | Denote whether the automation hub provided certificate files are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional |  `false` |
 |  `automationhub_use_archive_compression` |  `hub_use_archive_compression` | Controls whether archive compression is enabled or disabled for automation hub. You can control this functionality globally by using `use_archive_compression` . | Optional |  `true` |
 |  `automationhub_use_db_compression` |  `hub_use_db_compression` | Controls whether database compression is enabled or disabled for automation hub. You can control this functionality globally by using `use_db_compression` . | Optional |  `true` |
 |  `automationhub_user_headers` |  `hub_nginx_user_headers` | List of additional NGINX headers to add to automation hub’s NGINX configuration. | Optional |  `[]` |
-|  `generate_automationhub_token` |  | Controls whether or not a token is generated for automation hub during installation. By default, a token is automatically generated during a fresh installation.
-If set to `true` , a token is regenerated during installation. | Optional |  `false` |
+|  `generate_automationhub_token` |  | Controls whether or not a token is generated for automation hub during installation. By default, a token is automatically generated during a fresh installation. If set to `true` , a token is regenerated during installation. | Optional |  `false` |
 |  |  `hub_extra_settings` | Defines additional settings for use by automation hub during installation.
 
 For example:
@@ -818,8 +710,7 @@ value: True
 |  |  `hub_azure_account_key` | Azure blob storage account key. | Required if using an Azure blob storage backend. |  |
 |  |  `hub_azure_account_name` | Account name associated with the Azure blob storage. | Required when using an Azure blob storage backend. |  |
 |  |  `hub_azure_container` | Name of the Azure blob storage container. | Optional |  `pulp` |
-|  |  `hub_azure_extra_settings` | Defines extra parameters for the Azure blob storage backend.
-For more information about the list of parameters, see [django-storages documentation - Azure Storage](https://django-storages.readthedocs.io/en/latest/backends/azure.html#settings) . | Optional |  `{}` |
+|  |  `hub_azure_extra_settings` | Defines extra parameters for the Azure blob storage backend. For more information about the list of parameters, see [django-storages documentation - Azure Storage](https://django-storages.readthedocs.io/en/latest/backends/azure.html#settings) . | Optional |  `{}` |
 |  |  `hub_collection_signing_pass` | Password for the automation content collection signing service. | Required if the collection signing service is protected by a passphrase. |  |
 |  |  `hub_collection_signing_service` | Service for signing collections. | Optional |  `ansible-default` |
 |  |  `hub_container_signing_pass` | Password for the automation content container signing service. | Required if the container signing service is protected by a passphrase. |  |
@@ -830,13 +721,11 @@ For more information about the list of parameters, see [django-storages document
 |  |  `hub_pg_socket` | UNIX socket used by automation hub to connect to the PostgreSQL database. | Optional |  |
 |  |  `hub_s3_access_key` | AWS S3 access key. | Required if using an AWS S3 storage backend. |  |
 |  |  `hub_s3_bucket_name` | Name of the AWS S3 storage bucket. | Optional |  `pulp` |
-|  |  `hub_s3_extra_settings` | Used to define extra parameters for the AWS S3 storage backend.
-For more information about the list of parameters, see [django-storages documentation - Amazon S3](https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings) . | Optional |  `{}` |
+|  |  `hub_s3_extra_settings` | Used to define extra parameters for the AWS S3 storage backend. For more information about the list of parameters, see [django-storages documentation - Amazon S3](https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings) . | Optional |  `{}` |
 |  |  `hub_s3_secret_key` | AWS S3 secret key. | Required if using an AWS S3 storage backend. |  |
 |  |  `hub_shared_data_mount_opts` | Mount options for the Network File System (NFS) share. | Optional |  `rw,sync,hard` |
 |  |  `hub_shared_data_path` | Path to the Network File System (NFS) share with read, write, and execute (RWX) access. The value must match the format `host:dir` , for example `nfs-server.example.com:/exports/hub` . | Required if installing more than one instance of automation hub with a `file` storage backend. When installing a single instance of automation hub, it is optional. |  |
-|  |  `hub_storage_backend` | Automation hub storage backend type.
-Possible values include: `azure` , `file` , `s3` . | Optional |  `file` |
+|  |  `hub_storage_backend` | Automation hub storage backend type. Possible values include: `azure` , `file` , `s3` . | Optional |  `file` |
 |  |  `hub_workers` | Number of automation hub workers. | Optional |  `2` |
 
 
@@ -848,32 +737,25 @@ Possible values include: `azure` , `file` , `s3` . | Optional |  `file` |
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `admin_email` |  `controller_admin_email` | Email address used by Django for the admin user for automation controller. | Optional |  `admin@example.com` |
-|  `admin_password` |  `controller_admin_password` | Automation controller administrator password.
-Use of special characters for this variable is limited. The password can include any printable ASCII character except `/` , `”` , or `@` . | Required |  |
+|  `admin_password` |  `controller_admin_password` | Automation controller administrator password. Use of special characters for this variable is limited. The password can include any printable ASCII character except `/` , `”` , or `@` . | Required |  |
 |  `admin_username` |  `controller_admin_user` | Username used to identify and create the administrator user in automation controller. | Optional |  `admin` |
 |  `automationcontroller_client_max_body_size` |  `controller_nginx_client_max_body_size` | Maximum allowed size for data sent to automation controller through NGINX. | Optional |  `5m` |
 |  `automationcontroller_use_archive_compression` |  `controller_use_archive_compression` | Controls whether archive compression is enabled or disabled for automation controller. You can control this functionality globally by using `use_archive_compression` . | Optional |  `true` |
 |  `automationcontroller_use_db_compression` |  `controller_use_db_compression` | Controls whether database compression is enabled or disabled for automation controller. You can control this functionality globally by using `use_db_compression` . | Optional |  `true` |
-|  `awx_pg_cert_auth` |  `controller_pg_cert_auth` | Controls whether client certificate authentication is enabled or disabled on the automation controller PostgreSQL database.
-Set this variable to `true` to enable client certificate authentication. | Optional |  `false` |
+|  `awx_pg_cert_auth` |  `controller_pg_cert_auth` | Controls whether client certificate authentication is enabled or disabled on the automation controller PostgreSQL database. Set this variable to `true` to enable client certificate authentication. | Optional |  `false` |
 |  `controller_firewalld_zone` |  `controller_firewall_zone` | The firewall zone where automation controller related firewall rules are applied. This controls which networks can access automation controller based on the zone’s trust level. | Optional |  `public` |
 |  `controller_nginx_tls_files_remote` |  | Denote whether the web certificate sources are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional | The value defined in `controller_tls_files_remote` . |
 |  `controller_pgclient_tls_files_remote` |  | Denote whether the PostgreSQL client certificate sources are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional | The value defined in `controller_tls_files_remote` . |
 |  `controller_tls_files_remote` |  `controller_tls_remote` | Denote whether the automation controller provided certificate files are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional |  `false` |
-|  `nginx_disable_hsts` |  `controller_nginx_disable_hsts` | Controls whether HTTP Strict Transport Security (HSTS) is enabled or disabled for automation controller.
-Set this variable to `true` to disable HSTS. | Optional |  `false` |
-|  `nginx_disable_https` |  `controller_nginx_disable_https` | Controls whether HTTPS is enabled or disabled for automation controller.
-Set this variable to `true` to disable HTTPS. | Optional |  `false` |
+|  `nginx_disable_hsts` |  `controller_nginx_disable_hsts` | Controls whether HTTP Strict Transport Security (HSTS) is enabled or disabled for automation controller. Set this variable to `true` to disable HSTS. | Optional |  `false` |
+|  `nginx_disable_https` |  `controller_nginx_disable_https` | Controls whether HTTPS is enabled or disabled for automation controller. Set this variable to `true` to disable HTTPS. | Optional |  `false` |
 |  `nginx_hsts_max_age` |  `controller_nginx_hsts_max_age` | Maximum duration (in seconds) that HTTP Strict Transport Security (HSTS) is enforced for automation controller. | Optional |  `63072000` |
-|  `nginx_http_port` |  `controller_nginx_http_port` | Port number that automation controller listens on for HTTP requests. | Optional | RPM = `80`
-Container = `8080` |
-|  `nginx_https_port` |  `controller_nginx_https_port` | Port number that automation controller listens on for HTTPS requests. | Optional | RPM = `443`
-Container = `8443` |
-|  `nginx_tls_protocols` |  `controller_nginx_https_protocols` | Protocols that automation controller supports when handling HTTPS traffic. | Optional | RPM = `[TLSv1.2]`
-Container = `[TLSv1.2, TLSv1.3]` |
+|  `nginx_http_port` |  `controller_nginx_http_port` | Port number that automation controller listens on for HTTP requests. | Optional | RPM = `80` . Container = `8080` |
+|  `nginx_https_port` |  `controller_nginx_https_port` | Port number that automation controller listens on for HTTPS requests. | Optional | RPM = `443` . Container = `8443` |
+|  `nginx_tls_protocols` |  `controller_nginx_https_protocols` | Protocols that automation controller supports when handling HTTPS traffic. | Optional | RPM = `[TLSv1.2]` . Container = `[TLSv1.2, TLSv1.3]` |
 |  `nginx_user_headers` |  `controller_nginx_user_headers` | List of additional NGINX headers to add to automation controller’s NGINX configuration. | Optional |  `[]` |
-|  `node_state` |  | The status of a node or group of nodes.
-Valid options include `active` , `deprovision` to remove a node from a cluster, or `iso_migrate` to migrate a legacy isolated node to an execution node. | Optional |  `active` |
+|  |  `controller_create_preload_data` | Controls whether or not to create preloaded content during installation. | Optional |  `true` |
+|  `node_state` |  | The status of a node or group of nodes. Valid options include `active` , `deprovision` to remove a node from a cluster, or `iso_migrate` to migrate a legacy isolated node to an execution node. | Optional |  `active` |
 |  `node_type` | See `receptor_type` for the container equivalent variable. | For the `[automationcontroller]` group the two options are:
 
 -  `    node_type=control` - The node only runs project and inventory updates, but not regular jobs.
@@ -883,17 +765,13 @@ Valid options include `active` , `deprovision` to remove a node from a cluster, 
 For the `[execution_nodes]` group the two options are:
 
 -  `    node_type=hop` - The node forwards jobs to an execution node.
--  `    node_type=execution` - The node can run jobs. | Optional | For `[automationcontroller]` = `hybrid`
-For `[execution_nodes]` = `execution` |
-|  `peers` | See `receptor_peers` for the container equivalent variable. | Used to indicate which nodes a specific host or group connects to. Wherever this variable is defined, an outbound connection to the specific host or group is established.
-This variable can be a comma-separated list of hosts and groups from the inventory. This is resolved into a set of hosts that is used to construct the `receptor.conf` file. | Optional |  |
+-  `    node_type=execution` - The node can run jobs. | Optional | For `[automationcontroller]` = `hybrid` , for `[execution_nodes]` = `execution` |
+|  `peers` | See `receptor_peers` for the container equivalent variable. | Used to indicate which nodes a specific host or group connects to. Wherever this variable is defined, an outbound connection to the specific host or group is established. This variable can be a comma-separated list of hosts and groups from the inventory. This is resolved into a set of hosts that is used to construct the `receptor.conf` file. | Optional |  |
 |  `pg_database` |  `controller_pg_database` | Name of the PostgreSQL database used by automation controller. | Optional |  `awx` |
 |  `pg_host` |  `controller_pg_host` | Hostname of the PostgreSQL database used by automation controller. | Required |  |
-|  `pg_password` |  `controller_pg_password` | Password for the automation controller PostgreSQL database user.
-Use of special characters for this variable is limited. The `!` , `#` , `0` and `@` characters are supported. Use of other special characters can cause the setup to fail. | Required if not using client certificate authentication. |  |
+|  `pg_password` |  `controller_pg_password` | Password for the automation controller PostgreSQL database user. Use of special characters for this variable is limited. The `!` , `#` , `0` and `@` characters are supported. Use of other special characters can cause the setup to fail. | Required if not using client certificate authentication. |  |
 |  `pg_port` |  `controller_pg_port` | Port number for the PostgreSQL database used by automation controller. | Optional |  `5432` |
-|  `pg_sslmode` |  `controller_pg_sslmode` | Controls the SSL/TLS mode to use when automation controller connects to the PostgreSQL database.
-Valid options include `verify-full` , `verify-ca` , `require` , `prefer` , `allow` , `disable` . | Optional |  `prefer` |
+|  `pg_sslmode` |  `controller_pg_sslmode` | Controls the SSL/TLS mode to use when automation controller connects to the PostgreSQL database. Valid options include `verify-full` , `verify-ca` , `require` , `prefer` , `allow` , `disable` . | Optional |  `prefer` |
 |  `pg_username` |  `controller_pg_username` | Username for the automation controller PostgreSQL database user. | Optional |  `awx` |
 |  `pgclient_sslcert` |  `controller_pg_tls_cert` | Path to the PostgreSQL SSL/TLS certificate file for automation controller. | Required if using client certificate authentication. |  |
 |  `pgclient_sslkey` |  `controller_pg_tls_key` | Path to the PostgreSQL SSL/TLS key file for automation controller. | Required if using client certificate authentication. |  |
@@ -926,20 +804,15 @@ value: true
 | --- | --- | --- | --- | --- |
 |  `install_pg_port` |  `postgresql_port` | Port number for the PostgreSQL database. | Optional |  `5432` |
 |  `postgres_firewalld_zone` |  `postgresql_firewall_zone` | The firewall zone where PostgreSQL related firewall rules are applied. This controls which networks can access PostgreSQL based on the zone’s trust level. | Optional | RPM = no default set. Container = `public` . |
-|  `postgres_max_connections` |  `postgresql_max_connections` | Maximum number of concurrent connections to the database if you are using an installer-managed database.
-See [PostgreSQL database configuration and maintenance for automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-improving-performance#ref-controller-database-settings) for help selecting a value. | Optional |  `1024` |
+|  `postgres_max_connections` |  `postgresql_max_connections` | Maximum number of concurrent connections to the database if you are using an installer-managed database. For more information see [PostgreSQL database configuration and maintenance for automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-improving-performance#ref-controller-database-settings) . | Optional |  `1024` |
 |  `postgres_ssl_cert` |  `postgresql_tls_cert` | Path to the PostgreSQL SSL/TLS certificate file. | Optional |  |
 |  `postgres_ssl_key` |  `postgresql_tls_key` | Path to the PostgreSQL SSL/TLS key file. | Optional |  |
 |  `postgres_use_ssl` |  `postgresql_disable_tls` | Controls whether SSL/TLS is enabled or disabled for the PostgreSQL database. | Optional |  `false` |
 |  |  `postgresql_admin_database` | Database name used for connections to the PostgreSQL database server. | Optional |  `postgres` |
-|  |  `postgresql_admin_password` | Password for the PostgreSQL admin user.
-When used, the installation program creates each component’s database and credentials. | Required if using `postgresql_admin_username` . |  |
-|  |  `postgresql_admin_username` | Username for the PostgreSQL admin user.
-When used, the installation program creates each component’s database and credentials. | Optional |  `postgres` |
+|  |  `postgresql_admin_password` | Password for the PostgreSQL admin user. When used, the installation program creates each component’s database and credentials. | Required if using `postgresql_admin_username` . |  |
+|  |  `postgresql_admin_username` | Username for the PostgreSQL admin user. When used, the installation program creates each component’s database and credentials. | Optional |  `postgres` |
 |  |  `postgresql_effective_cache_size` | Memory allocation available (in MB) for caching data. | Optional |  |
-|  |  `postgresql_keep_databases` | Controls whether or not to keep databases during uninstall.
-This variable applies to databases managed by the installation program only, and not external (customer-managed) databases.
-Set to `true` to keep databases during uninstall. | Optional |  `false` |
+|  |  `postgresql_keep_databases` | Controls whether or not to keep databases during uninstall. This variable applies to databases managed by the installation program only, and not external (customer-managed) databases. Set to `true` to keep databases during uninstall. | Optional |  `false` |
 |  |  `postgresql_log_destination` | Destination for server log output. | Optional |  `/dev/stderr` |
 |  |  `postgresql_password_encryption` | The algorithm for encrypting passwords. | Optional |  `scram-sha-256` |
 |  |  `postgresql_shared_buffers` | Memory allocation (in MB) for shared memory buffers. | Optional |  |
@@ -976,7 +849,7 @@ Set to `true` to keep databases during uninstall. | Optional |  `false` |
 |  `automationedacontroller_pg_database` |  `eda_pg_database` | Name of the PostgreSQL database used by Event-Driven Ansible. | Optional | RPM = `automationedacontroller` . Container = `eda` . |
 |  `automationedacontroller_pg_host` |  `eda_pg_host` | Hostname of the PostgreSQL database used by Event-Driven Ansible. | Required |  |
 |  `automationedacontroller_pg_password` |  `eda_pg_password` | Password for the Event-Driven Ansible PostgreSQL database user. Use of special characters for this variable is limited. The `!` , `#` , `0` and `@` characters are supported. Use of other special characters can cause the setup to fail. | Required if not using client certificate authentication. |  |
-|  `automationedacontroller_pg_port` |  `eda_pg_port` | Port number for the PostgreSQL database used by Event-Driven Ansible. | Optional |  `5342` |
+|  `automationedacontroller_pg_port` |  `eda_pg_port` | Port number for the PostgreSQL database used by Event-Driven Ansible. | Optional |  `5432` |
 |  `automationedacontroller_pg_sslmode` |  `eda_pg_sslmode` | Determines the level of encryption and authentication for client server connections. Valid options include `verify-full` , `verify-ca` , `require` , `prefer` , `allow` , `disable` . | Optional |  `prefer` |
 |  `automationedacontroller_pg_username` |  `eda_pg_username` | Username for the Event-Driven Ansible PostgreSQL database user. | Optional | RPM = `automationedacontroller` . Container = `eda` . |
 |  `automationedacontroller_pgclient_sslcert` |  `eda_pg_tls_cert` | Path to the PostgreSQL SSL/TLS certificate file for Event-Driven Ansible. | Required if using client certificate authentication. |  |
@@ -1031,9 +904,9 @@ For more information, see [Adding a safe plugin variable to Event-Driven Ansible
 |  `aap_ca_cert_size` |  | Bit size of the internally managed CA certificate private key. | Optional |  `4096` |
 |  `aap_ca_key_file` |  `ca_tls_key` | Path to the key file for the CA certificate provided in `aap_ca_cert_file` (RPM) and `ca_tls_cert` (Container). For more information, see [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#using-custom-tls-certificates_aap-containerized-installation) . | Optional |  |
 |  `aap_ca_passphrase_cipher` |  | Cipher used for signing the internally managed CA certificate private key. | Optional |  `aes256` |
-|  `aap_ca_regenerate` |  | Denotes whether or not to re-initiate the internally managed CA certificate key pair. | Optional |  `false` |
+|  `aap_ca_regenerate` |  | Denotes whether or not to regenerate the internally managed CA certificate key pair. | Optional |  `false` |
 |  `aap_service_cert_size` |  | Bit size of the component key pair managed by the internal CA. | Optional |  `4096` |
-|  `aap_service_regen_cert` |  | Denotes whether or not to re-initiate the component key pair managed by the internal CA. | Optional |  `false` |
+|  `aap_service_regen_cert` |  | Denotes whether or not to regenerate the component key pair managed by the internal CA. | Optional |  `false` |
 |  `aap_service_san_records` |  | A list of additional SAN records for signing a service. Assign these to components in the inventory file as host variables rather than group or all variables. All strings must also contain their corresponding SAN option prefix such as `DNS:` or `IP:` . | Optional |  `[]` |
 |  `backup_dest` |  | Directory local to `setup.sh` for the final backup file. | Optional | The value defined in `setup_dir` . |
 |  `backup_dir` |  `backup_dir` | Directory used to store backup files. | Optional | RPM = `/var/backups/automation-platform/` . Container = `~/backups` |
@@ -1056,9 +929,11 @@ You can control this functionality at a component level by using the `&lt;compon
 
 You can control this functionality at a component level by using the `&lt;component_name&gt;_use_db_compression` variables. | Optional |  `true` |
 |  |  `ca_tls_key_passphrase` | Passphrase used to decrypt the key provided in `ca_tls_key` . | Optional |  |
+|  |  `client_request_timeout` | Sets the HTTP timeout for end-user requests. The minimum value is `10` seconds. | Optional |  `30` |
 |  |  `container_compress` | Compression software to use for compressing container images. | Optional |  `gzip` |
 |  |  `container_keep_images` | Controls whether or not to keep container images when uninstalling Ansible Automation Platform. Set to `true` to keep container images when uninstalling Ansible Automation Platform. | Optional |  `false` |
 |  |  `container_pull_images` | Controls whether or not to pull newer container images during installation. Set to `false` to prevent pulling newer container images during installation. | Optional |  `true` |
+|  |  `images_tmp_dir` | The directory where the installation program temporarily stores container images during installation. | Optional | The system’s temporary directory. |
 |  |  `pcp_firewall_zone` | The firewall zone where Performance Co-Pilot related firewall rules are applied. This controls which networks can access Performance Co-Pilot based on the zone’s trust level. | Optional | public |
 |  |  `pcp_use_archive_compression` | Controls whether archive compression is enabled or disabled for Performance Co-Pilot. You can control this functionality globally by using `use_archive_compression` . | Optional |  `true` |
 |  |  `registry_auth` | Set whether or not to use registry authentication. When this variable is set to true, `registry_username` and `registry_password` are required. | Optional |  `true` |
@@ -1165,13 +1040,10 @@ value: 600
 
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
-|  `receptor_datadir` |  | The directory where receptor stores its runtime data and local artifacts.
-The target directory must be accessible to **awx** users.
-If the target directory is a temporary file system **tmpfs** , ensure it is remounted correctly after a reboot. Failure to do so results in the receptor no longer having a working directory. | Optional |  `/tmp/receptor` |
+|  `receptor_datadir` |  | The directory where receptor stores its runtime data and local artifacts. The target directory must be accessible to **awx** users. If the target directory is a temporary file system **tmpfs** , ensure it is remounted correctly after a reboot. Failure to do so results in the receptor no longer having a working directory. | Optional |  `/tmp/receptor` |
 |  `receptor_listener_port` |  `receptor_port` | Port number that receptor listens on for incoming connections from other receptor nodes. | Optional |  `27199` |
 |  `receptor_listener_protocol` |  `receptor_protocol` | Protocol that receptor will support when handling traffic. | Optional |  `tcp` |
-|  `receptor_log_level` |  `receptor_log_level` | Controls the verbosity of logging for receptor.
-Valid options include: `error` , `warning` , `info` , or `debug` . | Optional |  `info` |
+|  `receptor_log_level` |  `receptor_log_level` | Controls the verbosity of logging for receptor. Valid options include: `error` , `warning` , `info` , or `debug` . | Optional |  `info` |
 |  `receptor_tls` |  | Controls whether TLS is enabled or disabled for receptor. Set this variable to `false` to disable TLS. | Optional |  `true` |
 | See `node_type` for the RPM equivalent variable. |  `receptor_type` | For the `[automationcontroller]` group the two options are:
 
@@ -1182,20 +1054,16 @@ Valid options include: `error` , `warning` , `info` , or `debug` . | Optional | 
 For the `[execution_nodes]` group the two options are:
 
 -  `    receptor_type=hop` - The node forwards jobs to an execution node.
--  `    receptor_type=execution` - The node can run jobs. | Optional | For the `[automationcontroller]` group: `hybrid` .
-For the `[execution_nodes]` group: `execution` . |
+-  `    receptor_type=execution` - The node can run jobs. | Optional | For the `[automationcontroller]` group: `hybrid` . For the `[execution_nodes]` group: `execution` . |
 | See `peers` for the RPM equivalent variable |  `receptor_peers` | Used to indicate which nodes a specific host connects to. Wherever this variable is defined, an outbound connection to the specific host is established. The value must be a comma-separated list of hostnames. Do not use inventory group names.
 
 This is resolved into a set of hosts that is used to construct the `receptor.conf` file.
 
 For more information, see [Adding execution nodes](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#adding-execution-nodes_aap-containerized-installation) . | Optional |  `[]` |
-|  |  `receptor_disable_signing` | Controls whether signing of communications between receptor nodes is enabled or disabled.
-Set this variable to `true` to disable communication signing. | Optional |  `false` |
-|  |  `receptor_disable_tls` | Controls whether TLS is enabled or disabled for receptor.
-Set this variable to `true` to disable TLS. | Optional |  `false` |
+|  |  `receptor_disable_signing` | Controls whether signing of communications between receptor nodes is enabled or disabled. Set this variable to `true` to disable communication signing. | Optional |  `false` |
+|  |  `receptor_disable_tls` | Controls whether TLS is enabled or disabled for receptor. Set this variable to `true` to disable TLS. | Optional |  `false` |
 |  |  `receptor_firewall_zone` | The firewall zone where receptor related firewall rules are applied. This controls which networks can access receptor based on the zone’s trust level. | Optional |  `public` |
-|  |  `receptor_mintls13` | Controls whether or not receptor only accepts connections that use TLS 1.3 or higher.
-Set to `true` to only accept connections that use TLS 1.3 or higher. | Optional |  `false` |
+|  |  `receptor_mintls13` | Controls whether or not receptor only accepts connections that use TLS 1.3 or higher. Set to `true` to only accept connections that use TLS 1.3 or higher. | Optional |  `false` |
 |  |  `receptor_signing_private_key` | Path to the private key used by receptor to sign communications with other receptor nodes in the network. | Optional |  |
 |  |  `receptor_signing_public_key` | Path to the public key used by receptor to sign communications with other receptor nodes in the network. | Optional |  |
 |  |  `receptor_signing_remote` | Denote whether the receptor signing files are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional |  `false` |
@@ -1219,13 +1087,13 @@ Set to `true` to only accept connections that use TLS 1.3 or higher. | Optional 
 |  `redis_mode` |  `redis_mode` | The Redis mode to use for your Ansible Automation Platform installation. Valid options include: `standalone` and `cluster` . For more information about Redis, see [Caching and queueing system](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/ha-redis_planning) in _Planning your installation_ . | Optional |  `cluster` |
 |  `redis_server_regen_cert` |  | Denotes whether or not to regenerate the Ansible Automation Platform managed TLS key pair for Redis. | Optional |  `false` |
 |  `redis_tls_cert` |  `redis_tls_cert` | Path to the Redis server TLS certificate. | Optional |  |
-|  `redis_tls_files_remote` |  | Denote whether the Redis provided certificate files are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional |  `false` |
+|  `redis_tls_files_remote` |  `redis_tls_remote` | Denote whether the Redis provided certificate files are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional |  `false` |
 |  `redis_tls_key` |  `redis_tls_key` | Path to the Redis server TLS certificate key. | Optional |  |
 |  |  `redis_use_archive_compression` | Controls whether archive compression is enabled or disabled for Redis. You can control this functionality globally by using `use_archive_compression` . | Optional |  `true` |
 
 
 
-<span id="idm140359478264752"></span>
+<span id="idm140679163864480"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

@@ -15,6 +15,7 @@ To create a new host.
 
 -  **Name** : Enter a name for your host.
 - (Optional) **Description** : Enter a description for your host.
+-  **Inventory** : Select the inventory for this host to belong to.
 -  **Variables** : Enter the inventory file variables associated with your host.
 
 1. ClickCreate hostto save your changes.

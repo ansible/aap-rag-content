@@ -1,6 +1,6 @@
 # 14. Inventories
 ## 14.4. Add a new inventory
-### 14.4.6. Inventory sources
+### 14.4.7. Inventory sources
 
 
 
@@ -21,7 +21,7 @@ Choose a source which matches the inventory type against which a host can be ent
 -  [Terraform State](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#proc-controller-inv-source-terraform)
 
 
-#### 14.4.6.1. Sourcing from a Project
+#### 14.4.7.1. Sourcing from a Project
 
 
 
@@ -63,14 +63,14 @@ icon to choose from a list of projects. If the list is extensive, use the search
 1. Optional: To pass to the custom inventory script, you can set environment variables in the **Source variables** field. You can also place inventory scripts in source control and then run it from a project. For more information, see [Inventory File Importing](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-inventory-file-importing) in _Configuring automation execution_ .
 
 
-Note
+**Troubleshooting**
+
 If you are executing a custom inventory script from SCM, ensure that you set the execution bit ( `chmod +x` ) for the script in your upstream source control.
+
 
 If you do not, automation controller throws a `[Error 13] Permission denied` error on execution.
 
-
-
-#### 14.4.6.2. Amazon Web Services EC2
+#### 14.4.7.2. Amazon Web Services EC2
 
 
 
@@ -96,12 +96,12 @@ If automation controller is running on an EC2 instance with an assigned IAM Role
 1. Use the **Source variables** field to override variables used by the `    aws_ec2` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the [aws inventory plugin documentation](https://console.redhat.com/ansible/automation-hub/repo/published/amazon/aws/content/inventory/aws_ec2) .
 
 
-Note
+**Troubleshooting**
+
 If you only use `include_filters` , the AWS plugin always returns all the hosts. To use this correctly, the first condition on the `or` must be on `filters` and then build the rest of the `OR` conditions on a list of `include_filters` .
 
 
-
-#### 14.4.6.3. Google Compute Engine
+#### 14.4.7.3. Google Compute Engine
 
 
 
@@ -119,7 +119,7 @@ Use the following procedure to configure a Google-sourced inventory:
 1. Use the **Source Variables** field to override variables used by the `    gcp_compute` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the [gcp_compute inventory plugin documentation](https://console.redhat.com/ansible/automation-hub/repo/published/google/cloud/content/inventory/gcp_compute) .
 
 
-#### 14.4.6.4. Microsoft Azure resource manager
+#### 14.4.7.4. Microsoft Azure resource manager
 
 
 
@@ -138,7 +138,7 @@ Use the following procedure to configure an Microsoft Azure Resource Manager-sou
 1. Use the **Source variables** field to override variables used by the `    azure_rm` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the [azure_rm inventory plugin documentation](https://console.redhat.com/ansible/automation-hub/repo/published/azure/azcollection/content/inventory/azure_rm) .
 
 
-#### 14.4.6.5. VMware vCenter
+#### 14.4.7.5. VMware vCenter
 
 
 
@@ -160,12 +160,12 @@ Use the following procedure to configure a VMWare-sourced inventory.
 1. Use the **Source Variables** field to override variables used by the `    vmware_inventory` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the [vmware_inventory inventory plugin](https://github.com/ansible-collections/community.vmware/blob/main/plugins/inventory/vmware_vm_inventory.py) .
 
 
-Note
+**Troubleshooting**
+
 VMWare properties have changed from lower case to camel case. Automation controller provides aliases for the top-level keys, but lower case keys in nested properties have been discontinued. For a list of valid and supported properties, see [Using Virtual machine attributes in VMware dynamic inventory plugin](https://docs.ansible.com/ansible/4/scenario_guides/vmware_scenarios/vmware_inventory_vm_attributes.html) .
 
 
-
-#### 14.4.6.6. VMware ESXi
+#### 14.4.7.6. VMware ESXi
 
 
 
@@ -189,14 +189,17 @@ Use the following procedure to configure a VMWare-ESXI sourced inventory.
 1. Use the **Source Variables** field to override variables used by the `    vmware_inventory` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two.
 
 
-The VMware ESxi plugin is supplied [here](https://github.com/ansible-collections/vmware.vmware/blob/main/plugins/inventory/esxi_hosts.py) .
+**Troubleshooting**
 
-Note
 VMWare properties have changed from lower case to camel case. Automation controller provides aliases for the top-level keys, but lower case keys in nested properties have been discontinued. For a list of valid and supported properties, see [Using Virtual machine attributes in VMware dynamic inventory plugin](https://docs.ansible.com/ansible/4/scenario_guides/vmware_scenarios/vmware_inventory_vm_attributes.html) .
 
 
+**Additional resources**
 
-#### 14.4.6.7. Red Hat Satellite 6
+-  [VMware ESxi plugin](https://github.com/ansible-collections/vmware.vmware/blob/main/plugins/inventory/esxi_hosts.py)
+
+
+#### 14.4.7.7. Red Hat Satellite 6
 
 
 
@@ -218,11 +221,14 @@ Use the following procedure to configure a Red Hat Satellite-sourced inventory.
 1. Use the **Source Variables** field to specify parameters used by the `    foreman` inventory source. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the [Foreman inventory source](https://docs.ansible.com/ansible/latest/collections/theforeman/foreman/foreman_inventory.html) in the Ansible documentation.
 
 
+**Troubleshooting**
+
 If you meet an issue with the automation controller inventory not having the "related groups" from Satellite, you might need to define these variables in the inventory source. For more information, see [Red Hat Satellite 6](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-rh-satellite) .
+
 
 If you see the message, `"no foreman.id" variable(s) when syncing the inventory` , see the solution on the Red Hat Customer Portal at: [https://access.redhat.com/solutions/5826451](https://access.redhat.com/solutions/5826451) . Be sure to login with your customer credentials to access the full article.
 
-#### 14.4.6.8. Red Hat Insights
+#### 14.4.7.8. Red Hat Insights
 
 
 
@@ -244,7 +250,7 @@ Use the following procedure to configure a Red Hat Insights-sourced inventory.
 1. Use the **Source Variables** field to override variables used by the `    insights` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see [insights inventory plugin](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/insights/content/inventory/insights) .
 
 
-#### 14.4.6.9. OpenStack
+#### 14.4.7.9. OpenStack
 
 
 
@@ -266,7 +272,7 @@ Use the following procedure to configure an OpenStack-sourced inventory.
 1. Use the **Source Variables** field to override variables used by the `    openstack` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see [openstack inventory plugin](https://docs.ansible.com/ansible/latest/collections/openstack/cloud/openstack_inventory.html) .
 
 
-#### 14.4.6.10. Red Hat Virtualization
+#### 14.4.7.10. Red Hat Virtualization
 
 
 
@@ -293,7 +299,7 @@ Red Hat Virtualization (ovirt) inventory source requests are secure by default. 
 
 
 
-#### 14.4.6.11. Red Hat Ansible Automation Platform
+#### 14.4.7.11. Red Hat Ansible Automation Platform
 
 
 
@@ -315,7 +321,7 @@ Use the following procedure to configure an automation controller-sourced invent
 1. Use the **Source Variables** field to override variables used by the `    controller` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see [Controller inventory plugin](https://console.redhat.com/ansible/automation-hub/repo/published/ansible/controller/content/inventory/controller) . This requires your Red Hat Customer login.
 
 
-#### 14.4.6.12. Terraform State
+#### 14.4.7.12. Terraform State
 
 
 
@@ -363,11 +369,11 @@ Terraform provider for Ansible Automation Platform inventories are managed by Te
 
 **Additional resources**
 
-- For more information about Terraform execution environments, see the [Terraform EE](https://github.com/ansible-cloud/terraform_ee) readme that has an example execution environment configuration with a Terraform binary.
-- You can create inventories and hosts within the Terraform configuration by using the Terraform provider for Ansible Automation Platform. For more information, see the [AAP Provider](https://registry.terraform.io/providers/ansible/aap/latest/docs) section of the Terraform documentation.
+-  [Terraform EE](https://github.com/ansible-cloud/terraform_ee)
+-  [Red Hat Ansible Automation Platform provider](https://registry.terraform.io/providers/ansible/aap/latest/docs)
 
 
-#### 14.4.6.13. OpenShift Virtualization
+#### 14.4.7.13. OpenShift Virtualization
 
 
 
@@ -402,12 +408,12 @@ In the following example, the connections variable is used to specify access to 
 1. ClickSaveand then clickSyncto sync the inventory.
 
 
-#### 14.4.6.14. Export old inventory scripts
+#### 14.4.7.14. Export old inventory scripts
 
 
 
 
-Despite the removal of the custom inventory scripts API, the scripts are still saved in the database. The commands described in this section enable you to recover the scripts from the database in a format that is suitable for you to subsequently check into source control.
+Despite the removal of the custom inventory scripts API, the scripts are still saved in the database. Use the following commands to recover the scripts from the database in a format that is suitable for you to subsequently check into source control.
 
 Use the following commands:
 

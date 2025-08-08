@@ -6,8 +6,6 @@
 
 _Ad hoc_ refers to using Ansible to perform a quick command, using /usr/bin/ansible, rather than the orchestration language, which is /usr/bin/ansible-playbook. An example of an ad hoc command might be rebooting 50 machines in your infrastructure. Anything you can do ad hoc can be accomplished by writing a playbook. Playbooks can also glue many other operations together.
 
-Use the following procedure to run an ad hoc command:
-
 **Procedure**
 
 1. From the navigation panel, selectAutomation Execution→Infrastructure→Inventories.
@@ -22,7 +20,7 @@ Use the following procedure to run an ad hoc command:
 | command | apt_repository | mount | win_service |
 | --- | --- | --- | --- |
 | shell | apt_rpm | ping | win_updates |
-| yum | service | selinux | win_group |
+| yum | service | SELinux | win_group |
 | apt | group | setup | win_user |
 | apt_key | user | win_ping | win_user |
 

@@ -1,6 +1,6 @@
-# 10. Appendix: Red Hat Ansible Automation Platform custom resources
-## 10.1. Custom resources
-### 10.1.6. aap-existing-hub-controller-eda.yml
+# 11. Appendix: Red Hat Ansible Automation Platform custom resources
+## 11.1. Custom resources
+### 11.1.6. aap-existing-hub-controller-eda.yml
 
 
 

@@ -8,7 +8,7 @@ Smart Inventories are collections of hosts defined by a stored search that can b
 
 A Smart Inventory is identified by `KIND=smart` .
 
-You can define a Smart Inventory using the same method being used with Search. `InventorySource` is directly associated with an Inventory.
+You can define a Smart Inventory by using the same method being used with Search. `InventorySource` is directly associated with an Inventory.
 
 Note
 Smart inventories are deprecated and will be removed in a future release. Consider moving to constructed inventories for enhancements and replacement.

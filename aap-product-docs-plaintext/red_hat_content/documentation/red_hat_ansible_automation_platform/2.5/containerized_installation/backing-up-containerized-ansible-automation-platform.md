@@ -6,12 +6,16 @@
 
 Perform a backup of your container-based installation of Ansible Automation Platform.
 
+Note
+When backing up Ansible Automation Platform, use the installation program that matches your currently installed version of Ansible Automation Platform.
+
+Backup functionality only works with the PostgreSQL versions supported by your current Ansible Automation Platform version. For more information, see [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#system-requirements) .
+
+
+
 **Prerequisites**
 
-You have done the following:
-
-
-- Logged in to the Red Hat Enterprise Linux host as your dedicated non-root user.
+- You have logged in to the Red Hat Enterprise Linux host as your dedicated non-root user.
 
 
 **Procedure**
@@ -44,15 +48,13 @@ You have done the following:
 $ ansible-playbook -i &lt;path_to_inventory&gt; ansible.containerized_installer.backup
 ```
 
-
-
-
 This backs up the important data deployed by the containerized installer such as:
+
 
 - PostgreSQL databases
 - Configuration files
 - Data files
 
+1. By default, the backup directory is set to `    ./backups` . You can change this by using the `    backup_dir` variable in your `    inventory` file.
 
-By default, the backup directory is set to `./backups` . You can change this by using the `backup_dir` variable in your `inventory` file.
 

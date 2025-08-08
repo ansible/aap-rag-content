@@ -7,7 +7,7 @@
 
 Important
 - When using an external database with Ansible Automation Platform, you must create and maintain that database. Ensure that you clear your external database when uninstalling Ansible Automation Platform.
-- Red Hat Ansible Automation Platform 2.5 uses PostgreSQL 15 and requires the customer provided (external) database to have ICU support.
+- Red Hat Ansible Automation Platform requires customer provided (external) database to have ICU support.
 - During configuration of an external database, you must check the external database coverage. For more information, see [Red Hat Ansible Automation Platform Database Scope of Coverage](https://access.redhat.com/articles/4010491) .
 
 
@@ -69,26 +69,12 @@ For example:
 CREATE USER &lt;username&gt; WITH PASSWORD &lt;password&gt; CREATEDB;
 ```
 
-For example:
-
-
-```
-CREATE USER hub_user WITH PASSWORD &lt;password&gt; CREATEDB;
-```
-
 
 1. Create the database and add the user you created as the owner.
 
 
 ```
 CREATE DATABASE &lt;database_name&gt; OWNER &lt;username&gt;;
-```
-
-For example:
-
-
-```
-CREATE DATABASE hub_database OWNER hub_user;
 ```
 
 
@@ -107,7 +93,7 @@ CREATE DATABASE hub_database OWNER hub_user;
 
 
 
-Added in Ansible Automation Platform 2.5, the database migration script uses `hstore` fields to store information, therefore the `hstore` extension must be enabled in the automation hub PostgreSQL database.
+The database migration script uses `hstore` fields to store information, therefore the `hstore` extension must be enabled in the automation hub PostgreSQL database.
 
 This process is automatic when using the Ansible Automation Platform installer and a managed PostgreSQL server.
 

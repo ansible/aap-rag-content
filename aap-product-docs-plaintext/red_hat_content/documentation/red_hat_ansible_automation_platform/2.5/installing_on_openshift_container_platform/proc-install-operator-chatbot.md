@@ -32,14 +32,15 @@ Install the Ansible Automation Platform operator on OpenShift Container Platform
 
 
 
+**Verification**
+
 The installation process begins. When installation finishes, a modal appears notifying you that the Ansible Automation Platform Operator is installed in the specified namespace.
 
-**Verification**
 
 - ClickView Operatorto view your newly installed Ansible Automation Platform Operator and verify the following operator custom resources are present:
 
 
-| Automation controller | Automation hub | Event-Driven Ansible (EDA) | Red Hat Ansible Lightspeed |
+| {ControllerNameStart} | {HubNameStart} | {EDAName} (EDA) | {LightspeedShortName} |
 | --- | --- | --- | --- |
 | - Automation Controller
 - Automation Controller Backup

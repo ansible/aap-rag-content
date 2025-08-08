@@ -14,7 +14,7 @@ Additionally, growth topology and enterprise topology inventory files are availa
 
 
 - The default inventory file, named `        inventory` , is for the enterprise topology pattern.
-- To deploy the growth topology (all-in-one) pattern, you need to copy over or use the `        inventory-growth` file instead.
+- To deploy the growth topology (all-in-one) pattern, use the `        inventory-growth` file instead.
 
 - In [Container topologies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/tested_deployment_models/container-topologies) in _Tested deployment models_ .
 

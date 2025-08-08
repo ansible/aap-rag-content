@@ -1,5 +1,5 @@
 # 7. Implementing policy enforcement
-## 7.2. Configuring policy enforcement settings
+## 7.1. Configuring policy enforcement settings
 
 
 
@@ -23,7 +23,7 @@ If you do not configure the OPA server in your policy settings, policy evaluatio
 1. On the Policy Settings page, fill out the following fields:
 
 
-1. Depending on your authentication type, you may need to fill out the following fields.
+1. Depending on your authentication type, you might need to fill out the following fields.
 
 
 1. If you selected Token as your authentication type:

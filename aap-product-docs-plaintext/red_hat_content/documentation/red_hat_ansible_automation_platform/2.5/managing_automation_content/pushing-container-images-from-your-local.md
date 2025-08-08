@@ -61,5 +61,8 @@ The details page for each execution environment indicates whether it has been si
 1. Click **Sign execution environment** from the drop-down menu.
 
 
+**Verification**
+
 The signing service signs the execution environment. After the execution environment is signed, the status changes to "signed".
+
 

@@ -11,10 +11,7 @@ If you are installing Ansible development tools on a container in VS Code on Win
 - Podman Desktop
 
 
-#### 3.1.1.1. Installing WSL
-
-
-
+**Procedure**
 
 1. Install WSL2 without a distribution:
 
@@ -32,13 +29,6 @@ Edit the `    %USERPROFILE%/wsl.conf` file and add the following lines to force 
 ```
 [wsl2]    kernelCommandLine = cgroup_no_v1="all"
 ```
-
-
-
-
-#### 3.1.1.2. Installing Podman Desktop on a Windows machine
-
-
 
 
 1. Install Podman Desktop. Follow the instructions in [Installing Podman Desktop and Podman on Windows](https://podman-desktop.io/docs/installation/windows-install) in the Podman Desktop documentation.
@@ -62,14 +52,7 @@ $ podman run hello
 ```
 
 
-
-
-#### 3.1.1.3. Configuring settings for Podman Desktop
-
-
-
-
-1. Add a `    %USERPROFILE%\bin\docker.bat` file with the following content:
+1. Configure the settings for Podman Desktop. Add a `    %USERPROFILE%\bin\docker.bat` file with the following content:
 
 
 ```
@@ -79,7 +62,7 @@ $ podman run hello
 This avoids having to install Docker as required by the VS Code `    Dev Container` extension.
 
 
-1. Add the `    %USERPROFILE%\bin` directory to the `    PATH` .
+1. Add the `    %USERPROFILE%\bin` directory to the `    PATH` :
 
 
 1. Select **Settings** and search for "Edit environment variables for your account" to display all of the user environment variables.

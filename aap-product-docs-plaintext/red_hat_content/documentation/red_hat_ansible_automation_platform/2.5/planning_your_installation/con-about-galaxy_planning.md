@@ -1,5 +1,5 @@
 # 2. Red Hat Ansible Automation Platform components
-## 2.8. Ansible Galaxy
+## 2.9. Ansible Galaxy
 
 
 

@@ -23,7 +23,10 @@ You can add information and provide resources for your users to accompany collec
 1. ClickSave namespace.
 
 
+**Result**
+
 Your content developers can now upload collections to your new namespace, or allow users in teams assigned as owners to upload collections.
+
 
 When you create a namespace, teams with permissions to upload to it can start adding their collections for approval. Collections in the namespace appear in the **Published** repository after approval.
 

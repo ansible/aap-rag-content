@@ -47,10 +47,5 @@ For this example, for a workload on 300 managed hosts, executing 1000 tasks per 
 - Use the capacity change feature in the instance view of the UI on the control node to reduce the capacity down to 16, the lowest value, to reserve more of the control node’s capacity for processing events.
 
 
-**Additional Resources**
-
-- For more information about workloads with high levels of API interaction, see [Scaling Automation Controller for API Driven Workloads](https://www.ansible.com/blog/scaling-automation-controller-for-api-driven-workloads) .
-- For more information about managing capacity with instances, see [Managing capacity with Instances](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#assembly-controller-instances) .
-- For more information about operator-based deployments, see [Red Hat Ansible Automation Platform considerations for operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/performance_considerations_for_operator_environments/index) .
-
+For more information about workloads with high levels of API interaction, see [Scaling Automation Controller for API Driven Workloads](https://www.ansible.com/blog/scaling-automation-controller-for-api-driven-workloads) . For more information about managing capacity with instances, see [Managing capacity with Instances](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#assembly-controller-instances) . For more information about operator-based deployments, see [Red Hat Ansible Automation Platform considerations for operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/performance_considerations_for_operator_environments/index) .
 

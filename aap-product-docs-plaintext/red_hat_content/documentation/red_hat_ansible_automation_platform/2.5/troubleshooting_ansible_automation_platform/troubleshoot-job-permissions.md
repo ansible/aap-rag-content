@@ -1,5 +1,6 @@
 # 6. Jobs
-## 6.4. Issue - Jobs in private automation hub are failing with "denied: requested access to the resource is denied, unauthorized: Insufficient permissions" error message
+## 6.1. Issue - Jobs are failing with “ERROR! couldn’t resolve module/action” error message
+### 6.1.2. Issue - Jobs in private automation hub are failing with "denied: requested access to the resource is denied, unauthorized: Insufficient permissions" error message
 
 
 
@@ -19,6 +20,6 @@ This issue happens when your private automation hub is protected with a password
 
 **Additional resources**
 
-- For information about creating new credentials in automation controller, see [Creating new credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#controller-create-credential) in _Using automation execution_ .
+-  [Creating new credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#controller-create-credential)
 
 

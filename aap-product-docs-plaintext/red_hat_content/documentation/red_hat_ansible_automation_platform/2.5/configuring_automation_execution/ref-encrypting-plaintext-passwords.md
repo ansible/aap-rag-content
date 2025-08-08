@@ -1,6 +1,6 @@
 # 3. Performance tuning for automation controller
 ## 3.6. PostgreSQL database configuration and maintenance for automation controller
-### 3.6.1. Encrypting plaintext passwords in automation controller configuration files
+### 3.6.1. Encrypting plain text passwords in automation controller configuration files
 
 
 
@@ -11,6 +11,8 @@ Passwords stored in automation controller configuration files are stored in plai
 
 
 
+
+Supply the hash values that replace the plain text passwords within the automation controller configuration files.
 
 **Procedure**
 
@@ -57,8 +59,6 @@ Note that the `        $*_PASS` values are already in plain text in your invento
 
 
 
-
-These steps supply the hash values that replace the plain text passwords within the automation controller configuration files.
 
 #### 3.6.1.2. Encrypting the Postgres password
 

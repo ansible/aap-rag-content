@@ -26,5 +26,8 @@ You can create a namespace to organize collections that your content developers 
 1. ClickCloseto complete the process.
 
 
+**Next steps**
+
 Your content developers can now upload collections to your new namespace and allow users in teams assigned as owners to upload collections.
+
 

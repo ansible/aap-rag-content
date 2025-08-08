@@ -92,12 +92,12 @@ eda_pg_password=&lt;set your own&gt;
 -  `    ansible_connection=local` - Used for all-in-one installations where the installation program is run on the same node that hosts Ansible Automation Platform.
 
 
-- If the installation program is run from a separate node, do not include `        ansible_connection=local` . In this case, an SSH connection should be used instead.
+- If the installation program is run from a separate node, do not include `        ansible_connection=local` . In this case, use an SSH connection instead.
 
 
 
 **Additional resources**
 
-- For more information about the container growth topology (all-in-one), see [Container growth topology](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/tested_deployment_models/container-topologies#infrastructure_topology_5) in _Tested deployment models_ .
+-  [Container growth topology](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/tested_deployment_models/container-topologies#infrastructure_topology_5)
 
 

@@ -35,7 +35,7 @@ Vertically scaling a control node does not automatically increase the number of 
 
 
 
-An alternative to vertically scaling is horizontally scaling by deploying more control nodes. This allows spreading control tasks across more nodes as well as allowing web traffic to be spread over more nodes, given that you provision a load balancer to spread requests across nodes. Horizontally scaling by deploying more control nodes in many ways can be preferable as it additionally provides for more redundancy and workload isolation in the event that a control node goes down or experiences higher than normal load.
+An alternative to vertically scaling is horizontally scaling by deploying more control nodes. This allows spreading control tasks across more nodes and allowing web traffic to be spread over more nodes, given that you provision a load balancer to spread requests across nodes. Horizontally scaling by deploying more control nodes in many ways can be preferable as it additionally provides for more redundancy and workload isolation when a control node goes down or experiences higher than normal load.
 
 #### 3.2.2.2. Benefits of scaling execution nodes
 
@@ -57,7 +57,7 @@ An alternative to vertically scaling execution nodes is horizontally scaling the
 
 Because hop nodes use very low memory and CPU, vertically scaling these nodes does not impact capacity. Monitor the network bandwidth of any hop node that serves as the sole connection between many execution nodes and the control plane. If bandwidth use is saturated, consider changing the network.
 
-Horizontally scaling by adding more hop nodes could provide redundancy in the event that one hop node goes down, which can allow traffic to continue to flow between the control plane and the execution nodes.
+Horizontally scaling by adding more hop nodes could provide redundancy when one hop node goes down, which can allow traffic to continue to flow between the control plane and the execution nodes.
 
 #### 3.2.2.4. Ratio of control to execution capacity
 

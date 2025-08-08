@@ -18,13 +18,6 @@ For information about obtaining an API key and model ID from IBM watsonx Code As
 
 
 
-#### 3.3.4.1. Creating authorization and model secrets
-
-
-
-
-Use this procedure to create secrets to connect to both Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.
-
 **Procedure**
 
 1. Go to the Red Hat OpenShift Container Platform.
@@ -101,7 +94,7 @@ Ensure that you do not accidentally add any whitespace characters (extra line, s
 
 After you create the authorization and model secrets, you must select the secrets when you [create and deploy a Red Hat Ansible Lightspeed instance](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#create-lightspeed-instance_configuring-lightspeed-onpremise) .
 
-#### 3.3.4.2. Creating a bundle secret to trust a custom Certificate Authority
+#### 3.3.4.1. Creating a bundle secret to trust a custom Certificate Authority
 
 
 
@@ -157,6 +150,6 @@ After you create the bundle secret, you must select the secret when you [create 
 
 **Additional resources**
 
--  [Troubleshooting Red Hat Ansible Lightspeed on-premise deployment errors](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#troubleshooting-lightspeed-onpremise-config_troubleshooting-lightspeed)
+-  [Troubleshooting Red Hat Ansible Lightspeed on-premise deployment errors](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#ref-troubleshooting-lightspeed-onpremise-config_troubleshooting-lightspeed)
 
 

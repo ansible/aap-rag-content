@@ -1,4 +1,4 @@
-# Chapter 8. Adding execution nodes to Red Hat Ansible Automation Platform Operator
+# Chapter 9. Adding execution nodes to Red Hat Ansible Automation Platform Operator
 
 
 
@@ -72,6 +72,6 @@ watch podman ps
 
 **Additional resources**
 
-- For more information about managing instance groups see the [Managing Instance Groups](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-instance-groups) section of the Automation Controller User Guide.
+-  [Managing Instance Groups](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-instance-groups)
 
 

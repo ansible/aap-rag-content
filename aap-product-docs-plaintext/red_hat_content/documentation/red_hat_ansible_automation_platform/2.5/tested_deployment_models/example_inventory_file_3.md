@@ -1,6 +1,6 @@
-# 2. RPM topologies
-## 2.3. RPM enterprise topology
-### 2.3.4. Example inventory file
+# 3. Container topologies
+## 3.1. Container growth topology
+### 3.1.4. Example inventory file
 
 
 
@@ -8,94 +8,86 @@
 Use the example inventory file to perform an installation for this topology:
 
 ```
-# This is the Ansible Automation Platform enterprise installer inventory file
+# This is the Ansible Automation Platform installer inventory file intended for the container growth deployment topology.
+# This inventory file expects to be run from the host where Ansible Automation Platform will be installed.
+# Consult the Ansible Automation Platform product documentation about this topology's tested hardware configuration.
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/tested_deployment_models/container-topologies
+#
 # Consult the docs if you are unsure what to add
-# For all optional variables consult the Red Hat documentation:
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation
+# For all optional variables consult the included README.md
+# or the Ansible Automation Platform documentation:
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation
 
 # This section is for your platform gateway hosts
 # -----------------------------------------------------
 [automationgateway]
-gateway1.example.org
-gateway2.example.org
+aap.example.org
 
 # This section is for your automation controller hosts
 # -----------------------------------------------------
 [automationcontroller]
-controller1.example.org
-controller2.example.org
-
-[automationcontroller:vars]
-peers=execution_nodes
-
-# This section is for your Ansible Automation Platform execution hosts
-# -----------------------------------------------------
-[execution_nodes]
-hop1.example.org node_type='hop'
-exec1.example.org
-exec2.example.org
+aap.example.org
 
 # This section is for your automation hub hosts
 # -----------------------------------------------------
 [automationhub]
-hub1.example.org
-hub2.example.org
+aap.example.org
 
 # This section is for your Event-Driven Ansible controller hosts
 # -----------------------------------------------------
-[automationedacontroller]
-eda1.example.org
-eda2.example.org
+[automationeda]
+aap.example.org
 
-[redis]
-gateway1.example.org
-gateway2.example.org
-hub1.example.org
-hub2.example.org
-eda1.example.org
-eda2.example.org
+# This section is for the Ansible Automation Platform database
+# -----------------------------------------------------
+[database]
+aap.example.org
 
 [all:vars]
+# Ansible
+ansible_connection=local
+
 # Common variables
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#general-variables
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#general-variables
 # -----------------------------------------------------
+postgresql_admin_username=postgres
+postgresql_admin_password=&lt;set your own&gt;
+
 registry_username=&lt;your RHN username&gt;
 registry_password=&lt;your RHN password&gt;
 
+redis_mode=standalone
+
 # Platform gateway
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#platform-gateway-variables
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#platform-gateway-variables
 # -----------------------------------------------------
-automationgateway_admin_password=&lt;set your own&gt;
-automationgateway_pg_host=&lt;set your own&gt;
-automationgateway_pg_database=&lt;set your own&gt;
-automationgateway_pg_username=&lt;set your own&gt;
-automationgateway_pg_password=&lt;set your own&gt;
+gateway_admin_password=&lt;set your own&gt;
+gateway_pg_host=aap.example.org
+gateway_pg_password=&lt;set your own&gt;
 
 # Automation controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#controller-variables
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#controller-variables
 # -----------------------------------------------------
-admin_password=&lt;set your own&gt;
-pg_host=&lt;set your own&gt;
-pg_database=&lt;set your own&gt;
-pg_username=&lt;set your own&gt;
-pg_password=&lt;set your own&gt;
+controller_admin_password=&lt;set your own&gt;
+controller_pg_host=aap.example.org
+controller_pg_password=&lt;set your own&gt;
+controller_percent_memory_capacity=0.5
 
 # Automation hub
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#hub-variables
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#hub-variables
 # -----------------------------------------------------
-automationhub_admin_password=&lt;set your own&gt;
-automationhub_pg_host=&lt;set your own&gt;
-automationhub_pg_database=&lt;set your own&gt;
-automationhub_pg_username=&lt;set your own&gt;
-automationhub_pg_password=&lt;set your own&gt;
+hub_admin_password=&lt;set your own&gt;
+hub_pg_host=aap.example.org
+hub_pg_password=&lt;set your own&gt;
+hub_seed_collections=false
 
 # Event-Driven Ansible controller
-# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-variables
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/appendix-inventory-files-vars#event-driven-ansible-variables
 # -----------------------------------------------------
-automationedacontroller_admin_password=&lt;set your own&gt;
-automationedacontroller_pg_host=&lt;set your own&gt;
-automationedacontroller_pg_database=&lt;set your own&gt;
-automationedacontroller_pg_username=&lt;set your own&gt;
-automationedacontroller_pg_password=&lt;set your own&gt;
+eda_admin_password=&lt;set your own&gt;
+eda_pg_host=aap.example.org
+eda_pg_password=&lt;set your own&gt;
 ```
+
+SSH keys are only required when installing on remote hosts. If doing a self contained local VM based installation, you can use `ansible_connection=local` .
 

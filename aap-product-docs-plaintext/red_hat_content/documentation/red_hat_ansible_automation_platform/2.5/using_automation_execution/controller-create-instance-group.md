@@ -36,7 +36,10 @@ The default value of 0 for **Max concurrent jobs** and **Max forks** denotes no 
 1. ClickCreate instance group, or, if you have edited an existing Instance Group clickSave instance group
 
 
+**Next steps**
+
 When you have successfully created the instance group the **Details** tab of the newly created instance group enables you to review and edit your instance group information.
+
 
 You can also edit **Instances** and review **Jobs** associated with this instance group:
 

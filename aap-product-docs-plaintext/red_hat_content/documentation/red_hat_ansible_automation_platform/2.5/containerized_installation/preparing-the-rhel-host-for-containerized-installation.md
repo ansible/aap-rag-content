@@ -81,9 +81,9 @@ sudo dnf install -y wget git-core rsync vim
 
 **Additional resources**
 
-- For more information about registering your Red Hat Enterprise Linux host and attaching a subscription, see [Attaching your Red Hat Ansible Automation Platform Subscription](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/assembly-gateway-licensing#proc-attaching-subscriptions) .
-- For information about configuring unbound DNS, see [Setting up an unbound DNS server](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_networking_infrastructure_services/assembly_setting-up-an-unbound-dns-server_networking-infrastructure-services) .
-- For information about configuring DNS using BIND, see [Setting up and configuring a BIND DNS server](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_networking_infrastructure_services/assembly_setting-up-and-configuring-a-bind-dns-server_networking-infrastructure-services) .
-- For more information about `    ansible-core` , see [Ansible Core Documentation](https://docs.ansible.com/ansible/latest/) .
+-  [Attaching your Red Hat Ansible Automation Platform Subscription](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/assembly-gateway-licensing#proc-attaching-subscriptions)
+-  [Setting up an unbound DNS server](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_networking_infrastructure_services/assembly_setting-up-an-unbound-dns-server_networking-infrastructure-services)
+-  [Setting up and configuring a BIND DNS server](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_networking_infrastructure_services/assembly_setting-up-and-configuring-a-bind-dns-server_networking-infrastructure-services)
+-  [Ansible Core Documentation](https://docs.ansible.com/ansible/latest/)
 
 

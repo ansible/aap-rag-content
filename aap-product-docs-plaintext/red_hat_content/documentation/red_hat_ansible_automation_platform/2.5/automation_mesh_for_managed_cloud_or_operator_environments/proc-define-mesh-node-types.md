@@ -137,15 +137,6 @@ ansible-galaxy install -r requirements.yml
 sudo firewall-cmd --permanent --zone=public --add-port=27199/tcp
 ```
 
-Note
-It might be the case that some servers do not listen on receptor port (the default is 27199)
-
-Suppose you have a Control plane with nodes A, B, C, D
-
-The RPM installer creates a strongly connected peering between the control plane nodes with a least privileged approach and opens the tcp listener only on those nodes where it is required. All the receptor connections are bidirectional, so once the connection is created, the receptor can communicate in both directions.
-
-
-
 
 1. Run the following playbook on the machine where you want to update your automation mesh:
 
@@ -176,6 +167,11 @@ sudo dnf install -y openssl
 ![Instances list view](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Automation_mesh_for_managed_cloud_or_operator_environments-en-US/images/043e594ac0d2f7fcb63c477c4603dcc3/instances_list_view2.png)
 
 
+Note
+It might be the case that some servers do not listen on the receptor port (the default is 27199)
+
+Suppose you have a Control plane with nodes A, B, and C
+
 The following is a peering set up for three controller nodes:
 
 Controller node A -→ Controller node B
@@ -193,6 +189,10 @@ However, a connection Controller B -→ A is likely to be rejected as that conne
 This means that nothing connects to Controller A as Controller A is creating the connections to the other nodes, and the following command does not return anything on Controller A:
 
 `[root@controller1 ~]# ss -ntlp | grep 27199 [root@controller1 ~]#`
+
+The RPM installer creates a strongly connected peering between the control plane nodes with a least privileged approach and opens the tcp listener only on those nodes where it is required. All the receptor connections are bidirectional, so once the connection is created, the receptor can communicate in both directions.
+
+
 
 To remove an instance from the mesh, see [Removing instances](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/automation_mesh_for_managed_cloud_or_operator_environments/assembly-automation-mesh-operator-aap#ref-removing-instances) .
 

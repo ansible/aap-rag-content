@@ -1,31 +1,25 @@
 # 3. Ansible Automation Platform post-upgrade steps
-## 3.1. Migrating admin users
-### 3.1.1. Key considerations
+## 3.5. Migrating Single Sign-On (SSO) users
+### 3.5.1. Key considerations
 
 
 
 
-**Component-level admin privileges are retained:** Administrators for automation controller and automation hub will retain their existing admin privileges for those respective services post-upgrade. For example, an admin of automation controller will continue to have full administration privileges for automation controller resources.
+**SSO configurations are not migrated automatically during upgrade to 2.5:** While the legacy authentication settings are carried over during the upgrade process and allow seamless initial access to the platform after upgrade, SSO configurations must be manually migrated over to a new Ansible Automation Platform 2.5 authentication configuration. The legacy configuration acts as a reference to preserve existing authentication capabilities and facilitate the migration process. The legacy authentication configuration should not be modified directly or used after migration is complete.
 
-Note
-Users previously designated as automation controller or automation hub administrators are labeled as **Normal** in the **User type** column of the Users list view. This is a mischaracterization. You can verify that these users have, in fact, retained their service level administrator privileges, by editing the account:
+**SSO migration is supported in the UI:** Migration of legacy SSO accounts is supported in 2.5 UI, and is done by selecting your legacy authenticator from the **Auto migrate users from** list when you configure a new authentication method. This is the legacy authenticator from which to automatically migrate users to a new platform gateway authentication configuration.
 
-
-
-**Procedure**
-
-1. From the navigation panel of the platform gateway, selectAccess Management→Users.
-1. Select the check box for the user that you want to modify.
-1. Click the Pencil icon and select **Edit user** .
-1. The Edit user page is displayed where you can see the service level administrator privileges assigned by the **User type** checkboxes. See [Editing a user](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/gw-managing-access#gw-editing-a-user) for more information on these user types.
-
+**Migration of SSO must happen before users log in and start account linking:** You must enable the **Auto migrate users to** setting _after_ configuring SSO in 2.5 and _before_ any users log in.
 
 Note
-Only a platform administrator can escalate your privileges.
+Ansible Automation Platform 2.4 SSO configurations are renamed during the upgrade process and are displayed in the **Authentication Methods** list view with a prefix to indicate a legacy configuration: for example, `legacy_sso-saml-&lt;entity id&gt;` . The **Authentication type** is also listed as **legacy sso** . These configurations can not be modified.
 
 
 
-**Escalation to platform gateway admin must be manually configured post-upgrade:** During the upgrade process, admin privileges for individual services are not automatically translated to platform administrator privileges. Escalation to platform gateway admin must be granted by the platform administrator after upgrade and migration. Each service admin retains the original scope of their access until the access is changed.
+Once you set up the auto migrate functionality, you should be able to login with SSO in the platform gateway and it will automatically link any matching accounts from the legacy SSO authenticator.
 
-As a platform administrator, you can escalate a user’s privileges by selecting the **Ansible Automation Platform Administrator** checkbox.
+**Additional resources**
+
+[Ansible Automation Platform 2.4 to 2.5. Linking accounts post upgrade, and Setting up SAML authentication](https://interact.redhat.com/share/baxthgXBQZ3kSRKPLn5L)
+
 

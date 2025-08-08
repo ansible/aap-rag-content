@@ -1,6 +1,6 @@
 # 14. Inventories
 ## 14.4. Add a new inventory
-### 14.4.2. Adding groups to inventories
+### 14.4.3. Adding groups to inventories
 
 
 
@@ -38,9 +38,12 @@ Inventory sources are not associated with groups. Spawned groups are top-level a
 1. ClickCreate group.
 
 
+**Result**
+
 When you have added a group to a template, the Group **Details** page is displayed.
 
-#### 14.4.2.1. Adding groups within groups
+
+#### 14.4.3.1. Adding groups within groups
 
 
 
@@ -62,14 +65,15 @@ When you have added a group to a template, the Group **Details** page is display
 1. The **Create group** window closes and the newly created group is displayed as an entry in the list of groups associated with the group that it was created for.
 
 
-If you select to add an existing group, available groups appear in a separate selection window.
+**Next steps**
 
-When you select a group, it is displayed in the list of groups associated with the group.
-
-- To configure additional groups and hosts under the subgroup, click the name of the subgroup from the list of groups and repeat the steps listed in this section.
+If you select to add an existing group, available groups appear in a separate selection window. When you select a group, it is displayed in the list of groups associated with the group.
 
 
-#### 14.4.2.2. View or edit inventory groups
+- To configure additional groups and hosts under the subgroup, click the name of the subgroup from the list of groups and repeat the steps listed before.
+
+
+#### 14.4.3.2. View or edit inventory groups
 
 
 

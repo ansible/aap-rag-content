@@ -6,7 +6,7 @@
 
 The way jobs are run and reported to a _normal_ user of automation controller does not change. On the system side, note the following differences:
 
-- When a job is submitted from the API interface it is pushed into the dispatcher queue. Each automation controller instance connects to and receives jobs from that queue using a scheduling algorithm. Any instance in the cluster is just as likely to receive the work and execute the task. If an instance fails while executing jobs, then the work is marked as permanently failed.
+- When a job is submitted from the API interface it is pushed into the dispatcher queue. Each automation controller instance connects to and receives jobs from that queue using a scheduling algorithm. Any instance in the cluster is just as likely to receive the work and run the task. If an instance fails while executing jobs, then the work is marked as permanently failed.
 
 ![Clustering visual](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Configuring_automation_execution-en-US/images/03de43992ee1543870ff96a95c16fbfa/ug-clustering-visual.png)
 

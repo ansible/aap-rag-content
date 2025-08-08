@@ -29,6 +29,7 @@ OpenID Connect (OIDC) uses the OAuth 2.0 framework. It enables third-party appli
 -  **Access Token URL**
 -  **Access Token Method**
 -  **Authorization URL**
+-  **Callback URL** - The OIDC **Callback URL** field registers the service as a service provider (SP) with each OIDC provider you have configured. Leave this field blank. After you save this authentication method, it is auto generated. Configure your IdP to allow redirects to this URL as part of the authentication flow.
 -  **ID Key**
 -  **ID Token Issuer**
 -  **JWKS URI**

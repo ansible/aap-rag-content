@@ -53,17 +53,16 @@ Your newly created credential type is displayed in the list of credential types.
 1. Click theEdit credential type![Edit](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_decisions-en-US/images/e5cb7f9b0cfe60ab5ba421bd17ecbb6a/leftpencil.png)
 icon to modify the credential type options.
 
-Note
-On the **Edit** page, you can modify the details or delete the credential. If the **Delete** option is disabled, this means that the credential type is being used by a credential, and you must delete the credential type from all the credentials that use it before you can delete it.
-
-
-
-
-
 
 **Verification**
 
 - Verify that the newly created credential type can be selected from the **Credential Type** list when creating a new credential.
+
+
+**Next steps**
+
+- On the **Edit** page, you can modify the details or delete the credential.
+- If the **Delete** option is disabled, this means that the credential type is being used by a credential, and you must delete the credential type from all the credentials that use it before you can delete it.
 
 
 **Additional resources**

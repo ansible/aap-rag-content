@@ -18,7 +18,6 @@ Ansible Automation Platform supports container-based clusters by using Kubernete
 
 The following operating systems are supported for establishing a clustered environment:
 
-
 - Red Hat Enterprise Linux 8 or later
 
 

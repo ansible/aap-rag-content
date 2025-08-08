@@ -10,10 +10,9 @@ To ensure a consistent and secure setup of containerized Ansible Automation Plat
 
 Once configured, you can define the dedicated user for each host by adding `ansible_user=&lt;username&gt;` in your inventory file, for example: `aap.example.org ansible_user=aap` .
 
-**Procedure**
-
 Complete the following steps for each host:
 
+**Procedure**
 
 1. Log in to the host as the root user.
 1. Create a new user. Replace `    &lt;username&gt;` with the username you want, for example `    aap` .

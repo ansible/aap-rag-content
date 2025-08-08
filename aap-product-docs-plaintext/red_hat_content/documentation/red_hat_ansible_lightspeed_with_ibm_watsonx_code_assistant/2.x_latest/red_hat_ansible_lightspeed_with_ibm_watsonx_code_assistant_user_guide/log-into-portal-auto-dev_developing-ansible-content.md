@@ -7,7 +7,7 @@
 You can access Red Hat Ansible Lightspeed through the [Ansible Lightspeed portal](https://c.ai.ansible.redhat.com/) . After you enter your Red Hat Single Sign-On (RH-SSO) account credentials, your account is authenticated and you are granted access. Your assigned user role is displayed on the login screen of the Ansible Lightspeed portal.
 
 
-<span id="idm139960283524288"></span>
+<span id="idm139976453657568"></span>
 **Table 4.1. User login scenarios**
 
 |  **Scenario** |  **Result** |

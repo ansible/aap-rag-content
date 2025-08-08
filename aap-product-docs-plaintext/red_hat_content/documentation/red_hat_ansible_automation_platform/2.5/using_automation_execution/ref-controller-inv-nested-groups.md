@@ -32,7 +32,6 @@ Because `host1` is in `groupB` , it is also in `groupA` .
 
 Use the following YAML format to filter on nested group names:
 
-
 ```
 `source_vars`:
 
@@ -44,7 +43,6 @@ plugin: constructed
 **Filter on nested group property**
 
 Use the following YAML format to filter on a group variable, even if the host is indirectly a member of that group.
-
 
 In the inventory content, note that `host2` is not expected to have the variable `filter_var` defined, because it is not in any of the groups. Because `strict: true` is used, use a default value so that hosts without that variable are defined. Using this, `host2` , returns `false` from the expression, instead of producing an error. `host1` inherits the variable from its groups, and is returned.
 

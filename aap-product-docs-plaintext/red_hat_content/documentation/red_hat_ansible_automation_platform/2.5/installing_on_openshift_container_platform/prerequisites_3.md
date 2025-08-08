@@ -1,201 +1,213 @@
 # 3. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 3.3. Configuring automation hub on Red Hat OpenShift Container Platform web console
-### 3.3.1. Prerequisites
+## 3.2. Configuring automation controller on Red Hat OpenShift Container Platform web console
+### 3.2.1. Prerequisites
 
 
 
 
-- You have installed the Ansible Automation Platform Operator in Operator Hub.
+- You have installed the Red Hat Ansible Automation Platform catalog in Operator Hub.
+- For automation controller, a default StorageClass must be configured on the cluster for the operator to dynamically create needed PVCs. This is not necessary if an external PostgreSQL database is configured.
+- For Hub a StorageClass that supports ReadWriteMany must be available on the cluster to dynamically created the PVC needed for the content, redis and api pods. If it is not the default StorageClass on the cluster, you can specify it when creating your AutomationHub object.
 
 
-#### 3.3.1.1. Storage options for Ansible Automation Platform Operator installation on Red Hat OpenShift Container Platform
-
-
-
-
-Automation hub requires `ReadWriteMany` file-based storage, Azure Blob storage, or Amazon S3-compliant storage for operation so that multiple pods can access shared content, such as collections.
-
-The process for configuring object storage on the `AutomationHub` CR is similar for Amazon S3 and Azure Blob Storage.
-
-If you are using file-based storage and your installation scenario includes automation hub, ensure that the storage option for Ansible Automation Platform Operator is set to `ReadWriteMany` . `ReadWriteMany` is the default storage option.
-
-In addition, OpenShift Data Foundation provides a `ReadWriteMany` or S3-compliant implementation. Also, you can set up NFS storage configuration to support `ReadWriteMany` . This, however, introduces the NFS server as a potential, single point of failure.
-
-**Additional resources**
-
--  [Persistent storage using NFS](https://docs.openshift.com/container-platform/4.15/storage/persistent_storage/persistent-storage-nfs.html) in the OpenShift Container Platform _Storage_ guide
-- IBM’s [How do I create a storage class for NFS dynamic storage provisioning in an OpenShift environment?](https://www.ibm.com/support/pages/how-do-i-create-storage-class-nfs-dynamic-storage-provisioning-openshift-environment)
-
-
-##### 3.3.1.1.1. Provisioning OCP storage with `ReadWriteMany` access mode
+#### 3.2.1.1. Configuring your controller image pull policy
 
 
 
 
-To ensure successful installation of Ansible Automation Platform Operator, you must provision your storage type for automation hub initially to `ReadWriteMany` access mode.
+Use this procedure to configure the image pull policy on your automation controller.
 
 **Procedure**
 
-1. Go toStorage→PersistentVolume.
-1. ClickCreate PersistentVolume.
-1. In the first step, update the `    accessModes` from the default `    ReadWriteOnce` to `    ReadWriteMany` .
+1. Log in to Red Hat OpenShift Container Platform.
+1. Go toOperators→Installed Operators.
+1. Select your Ansible Automation Platform Operator deployment.
+1. Select the **Automation Controller** tab.
+1. For new instances, clickCreate AutomationController.
 
 
-1. See [Provisioning](https://docs.redhat.com/en/documentation/openshift_container_platform/4.10/html-single/storage/index#persistent-storage-nfs-provisioning_persistent-storage-nfs) to update the access mode. for a detailed overview.
+1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationController.
 
-1. Complete the additional steps in this section to create the persistent volume claim (PVC).
-
-
-##### 3.3.1.1.2. Configuring object storage on Amazon S3
+1. Clickadvanced Configuration. Under **Image Pull Policy** , click on the radio button to select
 
 
+-  **Always**
+-  **Never**
+-  **IfNotPresent**
+
+1. To display the option under **Image Pull Secrets** , click the arrow.
 
 
-Red Hat supports Amazon Simple Storage Service (S3) for automation hub. You can configure it when deploying the `AutomationHub` custom resource (CR), or you can configure it for an existing instance.
+1. Click+beside **Add Image Pull Secret** and enter a value.
 
-**Prerequisites**
-
-- Create an Amazon S3 bucket to store the objects.
-- Note the name of the S3 bucket.
+1. To display fields under the **Web container resource requirements** drop-down list, click the arrow.
 
 
-**Procedure**
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
 
-1. Create a Kubernetes secret containing the AWS credentials and connection details, and the name of your Amazon S3 bucket. The following example creates a secret called `    test-s3` :
-
-
-```
-$ oc -n $HUB_NAMESPACE apply -f- &lt;&lt;EOF    apiVersion: v1    kind: Secret    metadata:      name: 'test-s3'    stringData:      s3-access-key-id: $S3_ACCESS_KEY_ID      s3-secret-access-key: $S3_SECRET_ACCESS_KEY      s3-bucket-name: $S3_BUCKET_NAME      s3-region: $S3_REGION    EOF
-```
+1. To display fields under the **Task container resource requirements** drop-down list, click the arrow.
 
 
-1. Add the secret to the automation hub custom resource (CR) `    spec` :
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
+
+1. To display fields under the **EE Control Plane container resource requirements** drop-down list, click the arrow.
 
 
-```
-spec:      object_storage_s3_secret: test-s3
-```
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
+
+1. To display fields under the **PostgreSQL init container resource requirements (when using a managed service)** drop-down list, click the arrow.
 
 
-1. If you are applying this secret to an existing instance, restart the API pods for the change to take effect. `    &lt;hub-name&gt;` is the name of your hub instance.
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
+
+1. To display fields under the **Redis container resource requirements** drop-down list, click the arrow.
 
 
-```
-$ oc -n $HUB_NAMESPACE delete pod -l app.kubernetes.io/name=&lt;hub-name&gt;-api
-```
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
 
-##### 3.3.1.1.3. Configuring object storage on Azure Blob
+1. To display fields under the **PostgreSQL container resource requirements (when using a managed instance)** * drop-down list, click the arrow.
 
 
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
+
+1. To display the **PostgreSQL container storage requirements (when using a managed instance)** drop-down list, click the arrow.
 
 
-Red Hat supports Azure Blob Storage for automation hub. You can configure it when deploying the `AutomationHub` custom resource (CR), or you can configure it for an existing instance.
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
 
-**Prerequisites**
+1. Under Replicas, enter the number of instance replicas.
+1. Under **Remove used secrets on instance removal** , select **true** or **false** . The default is false.
+1. Under **Preload instance with data upon creation** , select **true** or **false** . The default is true.
 
-- Create an Azure Storage blob container to store the objects.
-- Note the name of the blob container.
+
+#### 3.2.1.2. Configuring your controller LDAP security
+
+
+
+
+You can configure your LDAP SSL configuration for automation controller through any of the following options:
+
+- The automation controller user interface.
+- The platform gateway user interface. See the [Configuring LDAP authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#controller-set-up-LDAP) section of the _Access management and authentication_ guide for additional steps.
+- The following procedure steps.
 
 
 **Procedure**
 
-1. Create a Kubernetes secret containing the credentials and connection details for your Azure account, and the name of your Azure Storage blob container. The following example creates a secret called `    test-azure` :
+1. Create a secret in your Ansible Automation Platform namespace for the `    bundle-ca.crt` file (the filename must be `    bundle-ca.crt` ):
 
 
 ```
-$ oc -n $HUB_NAMESPACE apply -f- &lt;&lt;EOF    apiVersion: v1    kind: Secret    metadata:      name: 'test-azure'    stringData:      azure-account-name: $AZURE_ACCOUNT_NAME      azure-account-key: $AZURE_ACCOUNT_KEY      azure-container: $AZURE_CONTAINER      azure-container-path: $AZURE_CONTAINER_PATH      azure-connection-string: $AZURE_CONNECTION_STRING    EOF
+$ oc create secret -n aap-namespace generic bundle-ca-secret --from-file=bundle-ca.crt
 ```
 
 
-1. Add the secret to the automation hub custom resource (CR) `    spec` :
+1. Add the `    bundle_cacert_secret` to the Ansible Automation Platform customer resource:
 
 
 ```
-spec:      object_storage_azure_secret: test-azure
+...    spec:      bundle_cacert_secret: bundle-ca-secret    ...
+```
+
+**Verification**
+
+You can verify the expected certificate by running:
+
+
+
+```
+oc exec -it deployment.apps/aap-gateway - openssl x509 -in /etc/pki/tls/certs/bundle-ca.crt -noout -text
 ```
 
 
-1. If you are applying this secret to an existing instance, restart the API pods for the change to take effect. `    &lt;hub-name&gt;` is the name of your hub instance.
 
 
-```
-$ oc -n $HUB_NAMESPACE delete pod -l app.kubernetes.io/name=&lt;hub-name&gt;-api
-```
-
-#### 3.3.1.2. Configure your automation hub operator route options
+#### 3.2.1.3. Configuring your automation controller operator route options
 
 
 
 
-The Red Hat Ansible Automation Platform operator installation form allows you to further configure your automation hub operator route options under **Advanced configuration** .
+The Red Hat Ansible Automation Platform operator installation form allows you to further configure your automation controller operator route options under **Advanced configuration** .
 
 **Procedure**
 
 1. Log in to Red Hat OpenShift Container Platform.
 1. Navigate toOperators→Installed Operators.
 1. Select your Ansible Automation Platform Operator deployment.
-1. Select the **Automation Hub** tab.
-1. For new instances, clickCreate AutomationHub.
+1. Select the **Automation Controller** tab.
+1. For new instances, clickCreate AutomationController.
 
 
-1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationHub.
+1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationController.
 
 1. ClickAdvanced configuration.
 1. Under **Ingress type** , click the drop-down menu and select **Route** .
 1. Under **Route DNS host** , enter a common host name that the route answers to.
-1. Under **Route TLS termination mechanism** , click the drop-down menu and select **Edge** or **Passthrough** .
+1. Under **Route TLS termination mechanism** , click the drop-down menu and select **Edge** or **Passthrough** . For most instances **Edge** should be selected.
 1. Under **Route TLS credential secret** , click the drop-down menu and select a secret from the list.
+1. Under **Enable persistence for _/var/lib/projects_ directory** select either true or false by moving the slider.
 
 
-#### 3.3.1.3. Configuring the ingress type for your automation hub operator
+#### 3.2.1.4. Configuring the ingress type for your automation controller operator
 
 
 
 
-The Ansible Automation Platform Operator installation form allows you to further configure your automation hub operator ingress under **Advanced configuration** .
+The Ansible Automation Platform Operator installation form allows you to further configure your automation controller operator ingress under **Advanced configuration** .
 
 **Procedure**
 
 1. Log in to Red Hat OpenShift Container Platform.
 1. Navigate toOperators→Installed Operators.
 1. Select your Ansible Automation Platform Operator deployment.
-1. Select the **Automation Hub** tab.
-1. For new instances, clickCreate AutomationHub.
+1. Select the **Automation Controller** tab.
+1. For new instances, clickCreate AutomationController.
 
 
-1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationHub.
+1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationController.
 
-1. ClickAdvanced Configuration.
+1. ClickAdvanced configuration.
 1. Under **Ingress type** , click the drop-down menu and select **Ingress** .
 1. Under **Ingress annotations** , enter any annotations to add to the ingress.
 1. Under **Ingress TLS secret** , click the drop-down menu and select a secret from the list.
 
 
-After you have configured your automation hub operator, clickCreateat the bottom of the form view. Red Hat OpenShift Container Platform creates the pods. This may take a few minutes.
+**Verification**
+
+After you have configured your automation controller operator, clickCreateat the bottom of the form view. Red Hat OpenShift Container Platform creates the pods. This may take a few minutes.
+
 
 You can view the progress by navigating toWorkloads→Podsand locating the newly created instance.
 
-**Verification**
+Verify that the following operator pods provided by the Ansible Automation Platform Operator installation from automation controller are running:
 
-Verify that the following operator pods provided by the Ansible Automation Platform Operator installation from automation hub are running:
-
-
-| Operator manager controllers | Automation controller | Automation hub |
-| --- | --- | --- |
-| The operator manager controllers for each of the 3 operators, include the following:
+| Operator manager controllers | {ControllerNameStart} | {HubNameStart} | {EDAName} (EDA) |
+| --- | --- | --- | --- |
+| The operator manager controllers for each of the three operators, include the following:
 
 - automation-controller-operator-controller-manager
 - automation-hub-operator-controller-manager
-- resource-operator-controller-manager | After deploying automation controller, you will see the addition of these pods:
+- resource-operator-controller-manager
+- aap-gateway-operator-controller-manager
+- ansible-lightspeed-operator-controller-manager
+- eda-server-operator-controller-manager | After deploying automation controller, you can see the addition of the following pods:
 
 - controller
-- controller-postgres | After deploying automation hub, you will see the addition of these pods:
+- controller-postgres
+- controller-web
+- controller-task | After deploying automation hub, you can see the addition of the following pods:
 
 - hub-api
 - hub-content
 - hub-postgres
 - hub-redis
-- hub-worker |
+- hub-worker | After deploying EDA, you can see the addition of the following pods:
+
+- eda-activation-worker
+- da-api
+- eda-default-worker
+- eda-event-stream
+- eda-scheduler |
 
 
 Note

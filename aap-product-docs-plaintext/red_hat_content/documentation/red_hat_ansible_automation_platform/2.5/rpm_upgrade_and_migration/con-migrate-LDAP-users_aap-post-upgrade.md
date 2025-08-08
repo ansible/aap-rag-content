@@ -1,5 +1,5 @@
 # 3. Ansible Automation Platform post-upgrade steps
-## 3.4. Migrating LDAP users
+## 3.6. Migrating LDAP users
 
 
 

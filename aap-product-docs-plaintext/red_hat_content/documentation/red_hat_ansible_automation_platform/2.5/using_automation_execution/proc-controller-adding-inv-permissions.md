@@ -15,16 +15,6 @@ Use the following procedure to add permissions to inventories:
 1. Select the checkbox next to a name to add one or more users or teams from the list as members.
 1. ClickNext.
 1. Select the roles you want the selected users or teams to have. Different resources have different options available.
-1. ClickFinishto apply the roles to the selected users or teams and to add them as members.
+1. ClickFinishto apply the roles to the selected users or teams and to add them as members. The updated roles assigned for each user and team are displayed.
 
-
-The updated roles assigned for each user and team are displayed.
-
-**Removing a permission**
-
-- To remove roles for a particular user, click the![Disassociate](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_execution-en-US/images/48c2fa70cf2a09ae0fafa81899b143fc/disassociate.png)
-icon next to its resource.
-
-
-This launches a confirmation window, asking you to confirm the disassociation.
 

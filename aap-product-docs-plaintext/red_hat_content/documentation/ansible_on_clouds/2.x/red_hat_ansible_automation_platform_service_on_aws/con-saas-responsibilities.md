@@ -23,5 +23,6 @@
 | Automation content | ┄ | ✓ |
 | Application integrations | ┄ | ✓ |
 | Identity and access | ┄ | ✓ |
+| Monitoring SSL and TLS certificate expiration | ┄ | ✓ |
 
 

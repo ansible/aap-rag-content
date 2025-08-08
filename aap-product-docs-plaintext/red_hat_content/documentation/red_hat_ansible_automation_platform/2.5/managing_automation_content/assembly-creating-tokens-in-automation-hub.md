@@ -9,7 +9,7 @@ Use remote configurations to configure your private automation hub to synchroniz
 Each remote configuration located inAutomation Content→Remotesprovides information for both the **community** and **rh-certified** repository about when the repository was **last updated** . You can add new content to Ansible automation hub at any time using the **Edit** and **Sync** features included on theAutomation Content→Repositoriespage.
 
 
-<span id="what_s_the_difference_between_ansible_galaxy_and_ansible_automation_hub"></span>
+<span id="whats_the_difference_between_ansible_galaxy_and_ansible_automation_hub"></span>
 #### What’s the difference between Ansible Galaxy and Ansible automation hub?
 
 

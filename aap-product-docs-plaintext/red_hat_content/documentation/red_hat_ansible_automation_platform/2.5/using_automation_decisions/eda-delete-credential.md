@@ -25,5 +25,8 @@ If your credential is still in use by other resources in your organization, a wa
 1. ClickDelete credential.
 
 
-You can delete multiple credentials at a time by selecting the checkbox next to each credential and clicking theMore Actionsicon **⋮** in the menu bar and then clickingDelete selected credentials.
+**Results**
+
+You can delete multiple credentials at a time by selecting the checkbox next to each credential, clicking theMore Actionsicon **⋮** in the menu bar, and then clickingDelete selected credentials.
+
 

@@ -15,6 +15,7 @@ Automation hub is a central repository for discovering, downloading, and managin
 
 - If private automation hub has been configured in the Ansible plug-ins, you are redirected to your **PrivateHubName** instance.
 - If private automation hub has not been configured in the Ansible plug-ins installation configuration, you will be redirected to the Red Hat Hybrid Console (RHCC) automation hub.
+
 In this example, you are redirected to the RHCC automation hub.
 
 

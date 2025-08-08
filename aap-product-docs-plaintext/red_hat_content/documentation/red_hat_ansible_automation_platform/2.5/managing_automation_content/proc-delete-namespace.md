@@ -28,5 +28,8 @@ If theDelete namespacebutton is disabled, the namespace contains a collection wi
 
 
 
+**Result**
+
 The namespace that you deleted, as well as its associated collections, is now deleted and removed from the namespace list view.
+
 

@@ -1,6 +1,6 @@
 # 7. Implementing policy enforcement
-## 7.4. Configuring enforcement points
-### 7.4.2. Associating a policy with an inventory
+## 7.3. Configuring enforcement points
+### 7.3.2. Associating a policy with an inventory
 
 
 

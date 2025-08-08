@@ -1,6 +1,6 @@
 # 4. Management Jobs
-## 4.2. Cleanup Expired OAuth2 Tokens
-### 4.2.2. Removing Old Job History
+## 4.1. Removing old activity stream data
+### 4.1.4. Removing Old Job History
 
 
 
@@ -20,7 +20,7 @@ The initial job run for an automation controller resource, such as Projects, or 
 
 You can review or set a schedule for cleaning up old job history by performing the same procedure described for activity stream management jobs.
 
-For more information, see [Scheduling deletion](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#proc-controller-scheduling-deletion) .
+For more information, see [Scheduling deletion]({ControllerAdminGuide}/assembly-controller-management-jobs#proc-controller-scheduling-deletion) .
 
-You can also set or review notifications associated with this management job in the same way as described in [Notifications](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#proc-controller-management-notifications) for activity stream management jobs, or for more information, see [Notifiers](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-notifications) in _Using automation execution_ .
+You can also set or review notifications associated with this management job in the same way as described in [Setting notifications]({ControllerAdminGuide}/assembly-controller-management-jobs#proc-controller-management-notifications) for activity stream management jobs, or for more information, see [Notifiers](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-notifications) in _Using automation execution_ .
 

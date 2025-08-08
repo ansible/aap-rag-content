@@ -21,5 +21,5 @@ Periods are not allowed by elastic search in names, and are replaced with "_" by
 -  `    inventory_id` : The inventory id the host is inside of.
 
 
-This logger also includes the common fields in [Log message schema](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-controller-log-message-schema) .
+This logger also includes the common fields in [Log message schema](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-logging-aggregation#ref-controller-log-message-schema) .
 

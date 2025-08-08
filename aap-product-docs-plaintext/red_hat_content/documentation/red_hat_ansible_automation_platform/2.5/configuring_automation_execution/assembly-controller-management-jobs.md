@@ -3,7 +3,9 @@
 
 
 
-**Management Jobs** assist in the cleaning of old data from automation controller, including system tracking information, tokens, job histories, and activity streams. You can use this if you have specific retention policies or need to decrease the storage used by your automation controller database.
+**Management Jobs** assist in the cleaning of old data from automation controller, including system tracking information, tokens, job histories, and activity streams.
+
+You can use this if you have specific retention policies or need to decrease the storage used by your automation controller database.
 
 From the navigation panel, selectAutomation Execution→Administration→Management Jobs.
 

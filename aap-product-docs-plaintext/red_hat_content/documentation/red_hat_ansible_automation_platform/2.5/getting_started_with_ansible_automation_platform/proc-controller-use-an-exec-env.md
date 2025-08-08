@@ -7,7 +7,11 @@
 
 **Prerequisites**
 
-- An execution environment must have been created using ansible-builder as described in [Build an execution environment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-execution-environments#ref-controller-build-exec-envs) . When an execution environment has been created, you can use it to run jobs. Use the automation controller UI to specify the execution environment to use in your job templates.
+- You must build an execution environment as described in [Build an execution environment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/assembly-controller-execution-environments#ref-controller-build-exec-envs) before you can create it using automation controller.
+
+After building it, you must push it to a repository (such as quay) and then, when creating an execution environment in the UI with automation controller, you must point to that repository to use it in Ansible Automation Platform to use it, for example, in a job template.
+
+
 - Depending on whether an execution environment is made available for global use or tied to an organization, you must have the appropriate level of administrator privileges to use an execution environment in a job. Execution environments tied to an organization require Organization administrators to be able to run jobs with those execution environments.
 - Before running a job or job template that uses an execution environment that has a credential assigned to it, ensure that the credential contains a username, host, and password.
 

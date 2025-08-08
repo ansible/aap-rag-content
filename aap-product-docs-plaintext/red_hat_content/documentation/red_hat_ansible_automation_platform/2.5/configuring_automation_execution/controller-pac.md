@@ -11,14 +11,12 @@ OPA, or [Open Policy Agent](https://www.openpolicyagent.org/docs/latest/) , is a
 
 Before you can implement policy enforcement in your Ansible Automation Platform instance, you must have:
 
-
-- An Ansible Automation Platform 2.5 deployment with the `    FEATURE_POLICY_AS_CODE_ENABLED` feature flag set to `    TRUE` .
 - Access to an OPA server that is reachable from your Ansible Automation Platform deployment.
 - Configured Ansible Automation Platform with settings required for authenticating to your OPA server.
 - Some familiarity with OPA and the Rego language, which is the language policies are written in.
 
 
-For policy enforcement to work correctly, you must both configure the OPA server in your policy settings, and associate a specific policy with a particular resource (for example, a particular organization, inventory, or job template).
+For policy enforcement to work correctly, you must both configure the OPA server in your policy settings, and associate a specific policy with a particular resource. For example, a particular organization, inventory, or job template.
 
 Note
 OPA API V1 is the only version currently supported in Ansible Automation Platform.

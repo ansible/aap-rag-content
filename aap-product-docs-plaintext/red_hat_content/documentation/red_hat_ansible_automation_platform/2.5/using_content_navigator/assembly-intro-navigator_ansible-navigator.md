@@ -11,3 +11,8 @@ As a content creator, you can use automation content navigator to develop Ansibl
 
 Automation content navigator also produces an artifact file you can use to help you develop your playbooks and troubleshoot problem areas.
 
+Note
+Automation content navigator is a component of Ansible development tools. To use automation content navigator, you must install Ansible development tools.
+
+
+
