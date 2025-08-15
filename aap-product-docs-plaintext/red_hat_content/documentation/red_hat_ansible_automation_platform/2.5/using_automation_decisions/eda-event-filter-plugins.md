@@ -17,8 +17,6 @@ Events are defined as python code and distributed as collections. The default [e
 
 You can chain event filters one after the other, and the updated data is sent from one filter to the next. Event filters are defined in the rulebook after a source is defined. When the rulebook starts the source plugin it associates the correct filters and transforms the data before putting it into the queue.
 
-**Example**
-
 ```
 sources:
 - name: azure_service_bus
@@ -32,8 +30,8 @@ exclude_keys: ['*_url', '_links', 'base', 'sender', 'owner', 'user']
 - dashes_to_underscores:
 ```
 
-
 In this example the data is first passed through the `json_filter` and then through the `dashes_to_underscores` filter. In the event payload, keys can only contain letters, numbers, and underscores. The period (.) is used to access nested keys.
 
 Since every event should record the origin of the event the filter `eda.builtin.insert_meta_info` is added automatically by ansible-rulebook to add the `source name` , `type` , and `received_at` . The `received_at` stores a date time in UTC ISO8601 format and includes the microseconds. The `uuid` stores the unique id for the event. The `meta key` is used to store metadata about the event and its needed to correctly report about the events in the aap-server.
+
 

@@ -47,7 +47,7 @@ To raise a bug or feature request, contact [Red Hat Support](https://access.redh
 The following image shows an example of providing suggestion feedback:
 
 
-<span id="idm139976450708400"></span>
+<span id="idm140693281426224"></span>
 **Figure 4.9. Providing feedback on Ansible Lightspeed**
 
 ![Providing feedback on Ansible Lightspeed](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/5e53255f597a372422e0df6a58eb3968/lightspeed-provide-feedback.png)

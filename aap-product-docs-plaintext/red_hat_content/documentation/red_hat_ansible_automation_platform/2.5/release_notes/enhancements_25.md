@@ -1,47 +1,49 @@
 # 10. Patch releases
-## 10.18. Ansible Automation Platform patch release October 28, 2024
-### 10.18.1. Enhancements
+## 10.16. Ansible Automation Platform patch release December 18, 2024
+### 10.16.1. Enhancements
 
 
 
 
-#### 10.18.1.1. Ansible Automation Platform
+#### 10.16.1.1. Ansible Automation Platform
 
 
 
 
-- With this update, upgrades from Ansible Automation Platform 2.4 to 2.5 are supported for RPM and Operator-based deployments. For more information on how to upgrade, see [RPM upgrade and migration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_upgrade_and_migration) . (ANSTRAT-809)
+- Added help text to all missing fields in Ansible Automation Platform gateway and `    django-ansible-base` . (AAP-37068)
+- Consistently formatted sentence structure for `    help_text` , and provided more context in the help text where it was vague.(AAP-37016)
+- Added dynamic preferences for usage by Automation Analytics.(AAP-36710)
 
 
-- Upgrades from 2.4 Containerized Ansible Automation Platform Tech Preview to 2.5 Containerized Ansible Automation Platform are unsupported.
-- Upgrades for Event-Driven Ansible are unsupported from Ansible Automation Platform 2.4 to Ansible Automation Platform 2.5.
+-  `        INSIGHTS_TRACKING_STATE` : Enables the service to gather data on automation and send it to Automation Analytics.
+-  `        RED_HAT_CONSOLE_URL` : This setting is used to to configure the upload URL for data collection for Automation Analytics.
+-  `        REDHAT_USERNAME` : Username used to send data to Automation Analytics.
+-  `        REDHAT_PASSWORD` : Password for the account used to send data to Automation Analytics.
+-  `        SUBSCRIPTIONS_USERNAME` : Username is used to retrieve subscription and content information.
+-  `        SUBSCRIPTIONS_PASSWORD` : Password is used to retrieve subscription and content information.
+-  `        AUTOMATION_ANALYTICS_GATHER_INTERVAL` : interval in seconds at which Automation Analytics gathers data.
+
+- Added an enabled flag for turning authenticator maps on or off. (AAP-36709)
+-  `    aap-metrics-utility` has been updated to 0.4.1. (AAP-36393)
+- Added the setting `    trusted_header_timeout_in_ns` to timegate `    X_TRUSTED_PROXY_HEADER` validation in the `    django-ansible-base` libraries used by Ansible Automation Platform components. (AAP-36712)
 
 
-
-#### 10.18.1.2. Ansible Automation Platform Operator
-
-
-
-
-- An informative redirect page is now shown when you go to the automation hub URL root. (AAP-30915)
-
-
-#### 10.18.1.3. Container-based Ansible Automation Platform
-
-
-
-
-- The TLS Certificate Authority private key can now use a passphrase. (AAP-33594)
-- Automation hub is populated with container images (decision and execution environments) and Ansible collections. (AAP-33759)
-- The automation controller, Event-Driven Ansible, and automation hub legacy UIs now display a redirect page to the Platform UI rather than a blank page. (AAP-33794)
-
-
-#### 10.18.1.4. RPM-based Ansible Automation Platform
+#### 10.16.1.2. Documentation updates
 
 
 
 
-- Added platform Redis to RPM-based Ansible Automation Platform. This allows a 6 node cluster for a Redis high availability (HA) deployment. Removed the variable `    aap_caching_mtls` and replaced it with `    redis_disable_tls` and `    redis_disable_mtls` which are boolean flags that disable Redis server TLS and Redis client certificate authentication. (AAP-33773)
-- An informative redirect page is now shown when going to automation controller, Event-Driven Ansible, or automation hub URL. (AAP-33827)
+- With this update, the Ansible Automation Platform Operator growth topology and Ansible Automation Platform Operator enterprise topology have been updated to include s390x (IBM Z) architecture test support.
+
+
+#### 10.16.1.3. Event-Driven Ansible
+
+
+
+
+- Extended the scope of the `    log_level` and debug settings. (AAP-33669)
+- A project can now be synced with the Event-Driven Ansible collection modules. (AAP-32264)
+- In the Rulebook activation create form, selecting a project is now required before selecting a rulebook.(AAP-28082)
+- TheCreate credentialsbutton is now visible irrespective of whether there are any existing credentials or not.(AAP-23707)
 
 

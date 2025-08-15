@@ -7,7 +7,7 @@
 Your system must meet the following minimum system requirements to install and run Red Hat Ansible Automation Platform. A resilient deployment requires 10 virtual machines with a minimum of 16 gigabytes (GB) of RAM and 4 virtual CPUs (vCPU). See [Tested deployment models](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/tested_deployment_models) for more information on topology options.
 
 
-<span id="idm140256916559728"></span>
+<span id="idm140681253239504"></span>
 **Table 2.1. Base system**
 
 | Type | Description | Notes |
@@ -24,7 +24,7 @@ Your system must meet the following minimum system requirements to install and r
 
 
 
-<span id="idm140256914703184"></span>
+<span id="idm140681253941968"></span>
 **Table 2.2. Virtual machine requirements**
 
 | Component | RAM | VCPU | Disk IOPS | Storage |

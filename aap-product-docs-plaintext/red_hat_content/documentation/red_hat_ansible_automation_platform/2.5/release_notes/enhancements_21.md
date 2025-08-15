@@ -1,38 +1,43 @@
 # 10. Patch releases
-## 10.14. Ansible Automation Platform patch release January 15, 2025
-### 10.14.1. Enhancements
+## 10.12. Ansible Automation Platform patch release February 13, 2025
+### 10.12.2. Enhancements
 
 
 
 
-#### 10.14.1.1. Ansible Automation Platform
+#### 10.12.2.1. General
 
 
 
 
-- With this update, the `    ansible.controller` collection has been updated to 4.6.6.(AAP-38443)
-- Enhanced the **status API** , `    /api/gateway/v1/status/` , from the **services** property within the JSON to an array. Consumers of this API can still request the previous format with a URL query parameter `    service_keys=true` .(AAP-37903)
+- The `    ansible.controller` collection has been updated to 4.6.8.(AAP-39848)
+-  `    ansible.platform` collection has been updated to 2.5.20250213.(AAP-39740)
+-  `    ansible.eda` collection has been updated to 2.4.0.(AAP-39577)
 
 
-#### 10.14.1.2. Ansible Automation Platform Operator
-
-
-
-
-- Added the ability to configure `    topology_spread_constraints, `node_selector, and `tolerations` for gateway deployments. (AAP-37193)
-
-
-#### 10.14.1.3. Container-based Ansible Automation Platform
+#### 10.12.2.2. Ansible Automation Platform
 
 
 
 
-- TLS certificate and key files are now validated during the preflight role execution.
+- It is now possible to configure automation hub without Redis PVC.(AAP-39600)
 
 
-- If the TLS certificate file is provided then the TLS key file must be provided.
-- If the TLS key file is provided then the TLS certificate file must be provided.
-- Both TLS certificate and key modulus should match.(AAP-37845)
+#### 10.12.2.3. Automation controller
 
+
+
+
+- This release sees the addition of `    client_id` and `    client_secret` fields to the Insights credential to support service accounts via console.redhat.com.(AAP-36565)
+- You are now able to specify the input for the `    client_id` and `    client_secret` for the insights credential via the `    awx.awx.credential_type` module.(AAP-37441)
+- Updated `    awxkit` by adding service account support for Insights credential type, specifically adding the fields `    client_id` and `    client_secret` to `    credential_input_fields` .(AAP-39352)
+
+
+#### 10.12.2.4. Automation execution environments
+
+
+
+
+- The **file** command has been added to **ee-minimal** and **ee-supported** container images.(AAP-40009)
 
 

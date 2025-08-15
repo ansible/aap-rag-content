@@ -10,5 +10,8 @@
 1. Select the desired rule, then select the **Actions** tab.
 
 
-From here you can view executed actions that were taken. Some actions are linked out to Automation Execution where you can view the output.
+**Results**
+
+From here, you can view executed actions that were taken. Some actions are linked out to Automation Execution where you can view the output.
+
 

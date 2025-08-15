@@ -59,7 +59,7 @@ $ ansible-playbook -i &lt;path_to_inventory_file&gt; ansible.containerized_insta
 1. The following is a list of the parameters you can use with the `        log_gathering` playbook:
 
 
-<span id="idm140679179394976"></span>
+<span id="idm140546002511024"></span>
 **Table A.1. Parameter reference**
 
 | Parameter name | Description | Default |
@@ -97,36 +97,38 @@ To get a list of the running container names run the following command:
 $ podman ps --all --format "{{.Names}}"
 ```
 
-Example output:
 
-```
-postgresql
-redis-unix
-redis-tcp
-receptor
-automation-controller-rsyslog
-automation-controller-task
-automation-controller-web
-automation-eda-api
-automation-eda-daphne
-automation-eda-web
-automation-eda-worker-1
-automation-eda-worker-2
-automation-eda-activation-worker-1
-automation-eda-activation-worker-2
-automation-eda-scheduler
-automation-gateway-proxy
-automation-gateway
-automation-hub-api
-automation-hub-content
-automation-hub-web
-automation-hub-worker-1
-automation-hub-worker-2
-```
+<span id="idm140546006015424"></span>
+**Table A.2. Container details**
+
+| Component group | Container name | Purpose |
+| --- | --- | --- |
+| Automation controller |  `automation-controller-rsyslog` | Handles centralized logging for automation controller. |
+| Automation controller |  `automation-controller-task` | Manages and runs tasks related to automation controller, such as running playbooks and interacting with inventories. |
+| Automation controller |  `automation-controller-web` | A web server that provides a REST API for automation controller. This is accessed and routed through platform gateway for user interaction. |
+| Event-Driven Ansible |  `automation-eda-api` | Exposes the API for Event-Driven Ansible, allowing external systems to trigger and manage event-driven automations. |
+| Event-Driven Ansible |  `automation-eda-daphne` | A web server for Event-Driven Ansible, handling WebSocket connections and serving static files. |
+| Event-Driven Ansible |  `automation-eda-web` | A web server that provides a REST API for Event-Driven Ansible. This is accessed and routed through platform gateway for user interaction. |
+| Event-Driven Ansible |  `automation-eda-worker-&lt;number&gt;` | These containers run the automation rules and playbooks based on incoming events. |
+| Event-Driven Ansible |  `automation-eda-activation-worker-&lt;number&gt;` | These containers manage the activation of automation rules, ensuring they run when specific conditions are met. |
+| Event-Driven Ansible |  `automation-eda-scheduler` | Responsible for scheduling and managing recurring tasks and rule activations. |
+| Platform gateway |  `automation-gateway-proxy` | Acts as a reverse proxy, routing incoming requests to the appropriate Ansible Automation Platform services. |
+| Platform gateway |  `automation-gateway` | Responsible for authentication, authorization, and overall request handling for the platform, all of which is exposed through a REST API and served by a web server. |
+| Automation hub |  `automation-hub-api` | Provides the API for automation hub, enabling interaction with collection content, user management, and other automation hub functionality. |
+| Automation hub |  `automation-hub-content` | Manages and serves Ansible Content Collections, roles, and modules stored in automation hub. |
+| Automation hub |  `automation-hub-web` | A web server that provides a REST API for automation hub. This is accessed and routed through platform gateway for user interaction. |
+| Automation hub |  `automation-hub-worker-&lt;number&gt;` | These containers handle background tasks for automation hub, such as content synchronization, indexing, and validation. |
+| Performance Co-Pilot |  `pcp` | If Performance Co-Pilot Monitoring is enabled, this container is used for system performance monitoring and data collection. |
+| PostgreSQL |  `postgresql` | Hosts the PostgreSQL database for Ansible Automation Platform. |
+| Receptor |  `receptor` | Facilitates secure and reliable communication within Ansible Automation Platform. |
+| Redis |  `redis-&lt;suffix&gt;` | Responsible for caching, real-time analytics and fast data retrieval. |
+
+
+
 
 **Inspecting the logs**
 
-To inspect any running container logs, run the `journalctl` command:
+Containerized Ansible Automation Platform uses `journald` for Podman logging. To inspect any running container logs, run the `journalctl` command:
 
 ```
 $ journalctl CONTAINER_NAME=&lt;container_name&gt;
@@ -212,6 +214,8 @@ registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel8    latest    
 
 
 
+Use this information to troubleshoot your containerized installation of Ansible Automation Platform.
+
 **The installation takes a long time, or has errors, what should I check?**
 
 1. Ensure your system meets the minimum requirements as outlined in [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#system-requirements) . Factors such as improper storage choices and high latency when distributing across many hosts will all have an impact on installation time.
@@ -272,6 +276,8 @@ sudo subscription-manager register
 
 
 
+Use this information to troubleshoot your containerized Ansible Automation Platform configuration.
+
 **Sometimes the post install for seeding my Ansible Automation Platform content errors out**
 
 This could manifest itself as output similar to this:
@@ -293,6 +299,8 @@ Re-run the installation program to ensure everything works as expected.
 
 
 
+
+Use this information to understand the architecture for your containerized Ansible Automation Platform deployment.
 
 **Can you give details of the architecture for the Ansible Automation Platform containerized design?**
 
@@ -600,7 +608,7 @@ The following tables contain information about the variables used in Ansible Aut
 The following variables control how Ansible Automation Platform interacts with remote hosts.
 
 
-<span id="idm140679161516176"></span>
+<span id="idm140546005837264"></span>
 **Table B.1. Ansible variables**
 
 | Variable | Description |
@@ -650,6 +658,8 @@ Do not change this variable unless `/bin/sh` is not installed on the target mach
 
 
 
+
+Inventory file variables for automation hub.
 
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
@@ -734,6 +744,8 @@ value: True
 
 
 
+Inventory file variables for automation controller.
+
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `admin_email` |  `controller_admin_email` | Email address used by Django for the admin user for automation controller. | Optional |  `admin@example.com` |
@@ -800,6 +812,8 @@ value: true
 
 
 
+Inventory file variables for the database used with Ansible Automation Platform.
+
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `install_pg_port` |  `postgresql_port` | Port number for the PostgreSQL database. | Optional |  `5432` |
@@ -824,6 +838,8 @@ value: true
 
 
 
+
+Inventory file variables for Event-Driven Ansible controller.
 
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
@@ -897,6 +913,8 @@ For more information, see [Adding a safe plugin variable to Event-Driven Ansible
 
 
 
+General inventory file variables for Ansible Automation Platform.
+
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `aap_ca_cert_file` |  `ca_tls_cert` | Path to the user provided CA certificate file used to generate SSL/TLS certificates for all Ansible Automation Platform services. For more information, see [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#using-custom-tls-certificates_aap-containerized-installation) . | Optional |  |
@@ -946,6 +964,8 @@ You can control this functionality at a component level by using the `&lt;compon
 
 
 
+Inventory file variables for images.
+
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `extra_images` |  | Additional container images to pull from the configured container registry during deployment. | Optional |  `ansible-builder-rhel8` |
@@ -971,6 +991,8 @@ You can control this functionality at a component level by using the `&lt;compon
 
 
 
+
+Inventory file variables for platform gateway.
 
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
@@ -1038,6 +1060,8 @@ value: 600
 
 
 
+Inventory file variables for Receptor.
+
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `receptor_datadir` |  | The directory where receptor stores its runtime data and local artifacts. The target directory must be accessible to **awx** users. If the target directory is a temporary file system **tmpfs** , ensure it is remounted correctly after a reboot. Failure to do so results in the receptor no longer having a working directory. | Optional |  `/tmp/receptor` |
@@ -1078,6 +1102,8 @@ For more information, see [Adding execution nodes](https://docs.redhat.com/en/do
 
 
 
+Inventory file variables for Redis.
+
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `redis_cluster_ip` |  `redis_cluster_ip` | The IPv4 address used by the Redis cluster to identify each host in the cluster. When defining hosts in the `[redis]` group, use this variable to identify the IPv4 address if the default is not what you want. Specific to container: Redis clusters cannot use hostnames or IPv6 addresses. | Optional | RPM = Discovered IPv4 address from Ansible facts. If IPv4 address is not available, IPv6 address is used. Container = Discovered IPv4 address from Ansible facts. |
@@ -1093,7 +1119,7 @@ For more information, see [Adding execution nodes](https://docs.redhat.com/en/do
 
 
 
-<span id="idm140679163864480"></span>
+<span id="idm140546004615280"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

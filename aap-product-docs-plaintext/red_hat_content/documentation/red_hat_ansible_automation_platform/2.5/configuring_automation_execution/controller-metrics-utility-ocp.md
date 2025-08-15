@@ -9,7 +9,7 @@
 
 Complete the following steps to configure the run schedule for `metrics-utility` on OpenShift Container Platform using the Ansible Automation Platform operator:
 
-#### 12.1.2.1. Create a ConfigMap in the OpenShift UI YAML view
+#### 12.1.2.1. Creating a ConfigMap in the OpenShift UI YAML view
 
 
 
@@ -23,7 +23,7 @@ To inject the `metrics-utility` cronjobs with configuration data, use the follow
 
 
 Note
-Metrics-utility runs as indicated by the parameters you set in the configuration file. You cannot run the utility cannot manually on OpenShift Container Platform.
+`metrics-utility` runs as indicated by the parameters you set in the configuration file. You cannot run the utility manually on OpenShift Container Platform.
 
 
 
@@ -45,7 +45,7 @@ apiVersion: v1    kind: ConfigMap    metadata:      name: automationcontroller-m
 
 **Verification**
 
-- To verify that you created the ConfigMap and the metric utility is installed, select **ConfigMap** from the navigation panel and look for your ConfigMap in the list.
+- To verify that you created the ConfigMap and `    metrics-utility` is installed, select **ConfigMap** from the navigation panel and look for your ConfigMap in the list.
 
 
 #### 12.1.2.2. Deploy automation controller
@@ -53,7 +53,7 @@ apiVersion: v1    kind: ConfigMap    metadata:      name: automationcontroller-m
 
 
 
-To deploy automation controller and specify variables for how often metrics-utility gathers usage information and generates a report, use the following procedure:
+To deploy automation controller and specify variables for how often `metrics-utility` gathers usage information and generates a report, use the following procedure:
 
 **Procedure**
 

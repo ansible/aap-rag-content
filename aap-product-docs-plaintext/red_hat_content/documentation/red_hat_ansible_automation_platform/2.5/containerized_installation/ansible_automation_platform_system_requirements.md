@@ -8,7 +8,7 @@
 Your system must meet the following minimum system requirements to install and run Red Hat Ansible Automation Platform.
 
 
-<span id="idm140679173416416"></span>
+<span id="idm140546013079024"></span>
 **Table 2.1. System configuration**
 
 | Type | Description | Notes |
@@ -30,7 +30,7 @@ Your system must meet the following minimum system requirements to install and r
 Each virtual machine (VM) has the following system requirements:
 
 
-<span id="idm140679173639712"></span>
+<span id="idm140546014132144"></span>
 **Table 2.2. Virtual machine requirements**
 
 | Requirement | Minimum requirement |

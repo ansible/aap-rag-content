@@ -34,5 +34,8 @@ For Ansible Automation Platform 2.5, use the following example: https://<your_ga
 1. ClickCreate credential.
 
 
+**Next step**
+
 After you create this credential, you can use it for configuring your rulebook activations.
+
 

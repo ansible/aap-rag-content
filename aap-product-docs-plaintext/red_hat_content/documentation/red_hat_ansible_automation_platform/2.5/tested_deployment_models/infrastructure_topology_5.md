@@ -8,7 +8,7 @@
 The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 
-<span id="idm139849912934640"></span>
+<span id="idm139937747651680"></span>
 **Figure 4.1. Infrastructure topology diagram**
 
 ![Operator growth topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Tested_deployment_models-en-US/images/3a13707c5b317e9a4cd69aa815402091/ocp-a-env-a.png)
@@ -19,7 +19,7 @@ The following diagram outlines the infrastructure topology that Red Hat has tes
 A Single Node OpenShift (SNO) cluster has been tested with the following requirements: 32 GB RAM, 16 CPUs, 128 GB local disk, and 3000 IOPS.
 
 
-<span id="idm139849912929632"></span>
+<span id="idm139937747646672"></span>
 **Table 4.1. Infrastructure topology**
 
 | Count | Component |

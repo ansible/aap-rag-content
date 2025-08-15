@@ -13,5 +13,8 @@ You can view the output of the activations in the **History** tab.
 1. Then select the activation instance you want to view. The **Output** for the activation instance is displayed.
 
 
-To view events that came in and triggered an action, you can use the [Rule Audit](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-rule-audit) section in the Event-Driven Ansible controller Dashboard.
+**Next steps**
+
+To view events that came in and triggered an action, navigate toAutomation Decisions→Rule Auditand follow instructions in the [Rule Audit](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_decisions/eda-rule-audit) section.
+
 

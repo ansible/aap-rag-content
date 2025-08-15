@@ -30,23 +30,28 @@ In previous versions of the Ansible Automation Platform Operator, it was necessa
 1. For **Name** enter the name for the recovery deployment.
 1. For **New Ansible Automation Platform Name** enter the new name for your Ansible Automation Platform instance.
 1.  **Backup Source** defaults to **CR** .
-1. For **Backup name** enter the name your chose when creating the backup.
+1. For **Backup name** enter the name you chose when creating the backup.
 1. ClickCreate.
 
 
+**Verification**
+
 Your backups starts restoring under the **AnsibleAutomationPlatformRestores** tab.
+
 
 Note
 The recovery is not complete until all the resources are successfully restored. Depending on the size of your database this this can take some time.
 
 
 
-**Verification**
-
 To verify that your recovery was successful you can:
-
 
 1. Go toWorkloads→Pods.
 1. Confirm that all pods are in a **Running** or **Completed** state.
+
+
+**Additional resources**
+
+-  [Installing on OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index)
 
 

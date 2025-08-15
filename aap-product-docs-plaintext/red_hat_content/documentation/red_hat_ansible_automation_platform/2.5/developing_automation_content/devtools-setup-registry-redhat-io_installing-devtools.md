@@ -7,8 +7,6 @@
 
 All container images available through the Red Hat container catalog are hosted on an image registry, `registry.redhat.io` . The registry requires authentication for access to images.
 
-To use the `registry.redhat.io` registry, you must have a Red Hat login. This is the same account that you use to log in to the Red Hat Customer Portal (access.redhat.com) and manage your Red Hat subscriptions.
-
 Note
 If you are planning to install the Ansible development tools on a container inside VS Code, you must log in to `registry.redhat.io` before launching VS Code so that VS Code can pull the `devtools` container from `registry.redhat.io` .
 
@@ -16,7 +14,36 @@ If you are running Ansible development tools on a container inside VS Code and y
 
 
 
-You can use the `podman login` or `docker login` commands with your credentials to access content on the registry.
+**Prerequisites**
+
+- To use the `    registry.redhat.io` registry, you must have a Red Hat login.
+
+This is the same account that you use to log in to the Red Hat Customer Portal (access.redhat.com) and manage your Red Hat subscriptions.
+
+
+
+
+**Procedure**
+
+1. Check whether you are already logged in to the `    registry.redhat.io` registry:
+
+
+```
+$ podman login --get-login registry.redhat.io
+```
+
+The command output displays your Red Hat login if you are logged in to `    registry.redhat.io` .
+
+
+1. If you are not logged in to `    registry.redhat.io` , use the `    podman login` command with your credentials to access content on the registry.
+
+
+```
+$ podman login registry.redhat.io    Username: my_redhat_username    Password: ***********
+```
+
+
+
 
 For more information about Red Hat container registry authentication, see [Red Hat Container Registry Authentication](https://access.redhat.com/RegistryAuthentication) on the Red Hat customer portal.
 

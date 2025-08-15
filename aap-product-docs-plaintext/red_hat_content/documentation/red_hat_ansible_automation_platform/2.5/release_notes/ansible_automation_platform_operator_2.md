@@ -1,11 +1,11 @@
 # 10. Patch releases
-## 10.1. Ansible Automation Platform patch release July 2, 2025
-### 10.1.5. Ansible Automation Platform Operator
+## 10.2. Ansible Automation Platform patch release July 2, 2025
+### 10.2.5. Ansible Automation Platform Operator
 
 
 
 
-#### 10.1.5.1. Enhancements
+#### 10.2.5.1. Enhancements
 
 
 
@@ -14,7 +14,7 @@
 - New installations of Red Hat Ansible Lightspeed using the Ansible Automation Platform Custom Resource will automatically integrate with Ansible Automation Platform’s **OAuth** mechanism. The `    auth_config_secret_name` setting is optional.(AAP-45686)
 
 
-#### 10.1.5.2. Bug fixes
+#### 10.2.5.2. Bug fixes
 
 
 

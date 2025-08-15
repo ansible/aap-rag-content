@@ -1,73 +1,54 @@
 # 10. Patch releases
-## 10.14. Ansible Automation Platform patch release January 15, 2025
-### 10.14.2. Bug fixes
+## 10.11. Ansible Automation Platform patch release February 25, 2025
+### 10.11.2. Bug fixes
 
 
 
 
-#### 10.14.2.1. CVE
+#### 10.11.2.1. Ansible Automation Platform
 
 
 
 
-With this update, the following CVEs have been addressed:
-
--  [CVE-2024-52304](https://access.redhat.com/security/cve/cve-2024-52304)  `    python3.11-aiohttp` : `    aiohttp` vulnerable to request smuggling due to incorrect parsing of chunk extensions.(AAP-36192)
--  [CVE-2024-55565](https://access.redhat.com/security/cve/cve-2024-55565)  `    automation-gateway` : `    nanoid` mishandles non-integer values.(AAP-37168)
--  [CVE-2024-53908](https://access.redhat.com/security/cve/cve-2024-53908)  `    automation-controller` : Potential SQL injection in `    HasKey(lhs, rhs)` on Oracle.(AAP-36769)
--  [CVE-2024-53907](https://access.redhat.com/security/cve/cve-2024-53907)  `    automation-controller` : Potential denial-of-service in `    django.utils.html.strip_tags()` .(AAP-36756)
--  [CVE-2024-11407](https://access.redhat.com/security/cve/cve-2024-11407)  `    automation-controller` : Denial-of-Service through data corruption in `    gRPC-C++` .(AAP-36745)
--  [CVE-2024-52304](https://access.redhat.com/security/cve/cve-2024-52304)  `    ansible-lightspeed-container` : `    aiohttp` vulnerable to request smuggling due to incorrect parsing of chunk extensions.(AAP-36185)
--  [CVE-2024-56201](https://access.redhat.com/security/cve/cve-2024-56201)  `    ansible-lightspeed-container` : Jinja has a sandbox breakout through malicious filenames.(AAP-38079)
--  [CVE-2024-56326](https://access.redhat.com/security/cve/cve-2024-56326)  `    ansible-lightspeed-container` : Jinja has a sandbox breakout through indirect reference to format method.(AAP-38056)
--  [CVE-2024-11407](https://access.redhat.com/security/cve/cve-2024-11407)  `    ansible-lightspeed-container` : Denial-of-Service through data corruption in `    gRPC-C++` .(AAP-36744)
-
-
-#### 10.14.2.2. Red Hat Ansible Automation Platform
-
-
-
-
-- Fixed **not found** error that occurred occasionally when navigating through the form wizards.(AAP-37495)
-- Fixed an issue where installing `    ansible-core` no longer installs `    python3-jmespath` on Red Hat Enterprise Linux 8.(AAP-18251)
-- Fixed an issue where `    ID_KEY` attribute was improperly used to determine the username field in social auth pipelines.(AAP-38300)
-- Fixed an issue where authenticator could create a **userid** and return a non-viable **authenticator_uid** .(AAP-38021)
-- Fixed an issue where a private key was displayed in plain text when downloading the OpenAPI schema file. This was not the private key used by gateway, but a random default key.(AAP-37843)
+- Fixed an issue where the subscription entitlement expiration notification was visible, even when the subscription was active.(AAP-39982)
+- Fixed an issue where upon UI reload/refresh, logs of a running job before the refresh would not appear until new logs were generated from the playbook.(AAP-38924)
+- Fixed an issue when the customer was unable to scale down replicas to put Ansible Automation Platform into idle mode.(AAP-39492)
+- After launching the **Workflow Job Template** , the launched job for a job template node in the workflow should contain the `    job_tags` and `    skip_tags` that were specified in the **launch prompt** step.(AAP-40395)
+- Fixed an issue where the user was not able to create a members role in Ansible Automation Platform 2.5.(AAP-37626)
+- Fixed an issue where a custom image showed Base64 encoded data.(AAP-26984)
+- Fixed an issue where a custom logo showed Base64 encoded data.(AAP-26909)
+- Fixed an issue that restricted users from executing jobs for which they had the correct permissions.(AAP-40398)
+- Fixed an issue where the workflow job template node extra vars were not saved.(AAP-40396)
+- Fixed an issue where the Creating and using execution environments guide had the incorrect ansible-core version.(AAP-40390)
+- Fixed an issue where you were not able to create a members role in Ansible Automation Platform 2.5.(AAP-40698)
+- Fixed an issue where the initial login to any of the services from platform gateway could result in the user being given access to the wrong account.(AAP-40617)
+- Fixed an issue where the service owned resources were not kept in sync with the platform gateway allowing for duplicate name values on user login.(AAP-40616)
+- Fixed an issue where users, organizations, and teams, became permanently out of sync if any user, organization, or team, was deleted from the platform gateway.(AAP-40615)
+- Fixed an issue where automation hub would fail to run the sync task if any users were deleted from the system.(AAP-40613)
 
 
-#### 10.14.2.3. Automation controller
+#### 10.11.2.2. Platform gateway
 
 
 
 
-- Fixed an issue that did not allow sending `    job_lifecycle` logs to external aggregators.(AAP-37537)
-- Fixed an issue where there was a date comparison mismatch for traceback from `    host_metric_summary_monthly` task.(AAP-37487)
-- Fixed an issue where the scheduled jobs with count set to a **non-zero** value would run unexpectedly. (AAP-37290)
-- Fixed an issue where a project’s requirements.yml could revert to a prior state in a cluster. (AAP-37228)
-- Fixed an issue where there would be an occasional error creating the event partition table before starting a job, when a large number of jobs were launched quickly. (AAP-37227)
-- Fixed an issue where temporary receptor files were not cleaned up after a job completed on nodes. (AAP-36904)
-- Fixed an issue where **POST** to `    /api/controller/login/` via the gateway resulted in a fatal response.(AAP-33911)
-- Fixed an issue when a job template was launched, the named URL returned a **404** error code.(AAP-37025)
+- Fixed an issue where ping and status checks with resolvable, but nonresponding, URLs could cause all platform gateway `    uwsgi` workers to hang until all were exhausted. The new settings are `    PING_PAGE_CHECK_TIMEOUT` and `    PING_PAGE_CHECK_IGNORE_CERT` .(AAP-39907)
 
 
-##### 10.14.2.3.1. Container-based Ansible Automation Platform
+#### 10.11.2.3. Event-Driven Ansible
 
 
 
 
-- Fixed an issue where the receptor TLS certificate content was not validated during the preflight role execution ensuring that the **x509 Subject Alt Name** (SAN) field contains the required ISO Object Identifier (OID) 1.3.6.1.4.1.2312.19.1. (AAP-37880)
-- Fixed an issue where the **Postgresql SSL** mode variables for controller, Event-Driven Ansible, gateway and automation hub were not validated during the preflight role execution. (AAP-37352)
-- Fixed an issue where the Ansible Automation Platform containerized setup installation would upload collections when inventory growth in the AIO installation was used.(AAP-38372)
-- Fixed an issue where the throttle capacity of controller in an AIO installation would allow for performance degradation.(AAP-38207)
+- Fixed an issue where credentials could be copied in AAP but could not be copied in Event-Driven Ansible.(AAP-35875)
 
 
-#### 10.14.2.4. RPM-based Ansible Automation Platform
+#### 10.11.2.4. Known Issues
 
 
 
 
-- Fixed an issue where adding a new automation hub host to an upgraded environment has caused the installation to fail. (AAP-38204)
-- Fixed an issue where the link to the documents in the installer **README.md** was broken. (AAP-37627)
-- Fixed an issue where the Gateway API status on Event-Driven Ansible proxy component returned **404** errors. (AAP-32816)
+- In the platform gateway, the tooltip for **Projects → Create Project - Project Base Path** is undefined.(AAP-27631)
+- Deploying the platform gateway on FIPS enabled RHEL 9 is currently not supported.(AAP-39146)
 
 

@@ -1,0 +1,25 @@
+# 4. Configuring access to external applications with token-based authentication
+## 4.3. Manage OAuth2 token creation for external users
+### 4.3.2. Implementing security controls for external user OAuth2 tokens
+
+
+
+
+After enabling OAuth2 token creation for external users, implement the following compensating controls to keep a strong security posture.
+
+**Procedure**
+
+-  **Limit token lifetime** : Configure a shorter duration for OAuth2 tokens to reduce the window of exposure.
+
+
+- In your Ansible Automation Platform settings, adjust the `        OAUTH2_ACCESS_TOKEN_EXPIRE_SECONDS value` . A value of 28800 (8 hours) is recommended, limiting token validity to a standard workday.
+
+-  **Enforce strict role-based access control (RBAC)** : Grant users only the minimum necessary permissions.
+
+
+- Assign users who create tokens to **Teams** with highly restrictive roles. Avoid granting broad permissions that could lead to privilege escalation.
+
+-  **Establish a clear offboarding process** : Integrate token revocation into your organizational offboarding procedures. Your HR and IT offboarding processes must include a step for an Ansible Automation Platform administrator to revoke all active tokens for a departing user. Tokens can be manually revoked from the user’s profile under the **Tokens** tab.
+-  **Audit and monitor** : Regularly review token-related activities for legitimacy in the **Activity Stream** .
+
+

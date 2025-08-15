@@ -1,11 +1,11 @@
 # 10. Patch releases
-## 10.3. Ansible Automation Platform patch release June 9, 2025
-### 10.3.5. Event-Driven Ansible
+## 10.4. Ansible Automation Platform patch release June 9, 2025
+### 10.4.5. Event-Driven Ansible
 
 
 
 
-#### 10.3.5.1. Enhancements
+#### 10.4.5.1. Enhancements
 
 
 
@@ -13,7 +13,7 @@
 - Rename env `    EDA_OIDC_TOKEN_URL` to `    DA_AUTOMATION_ANALYTICS_OIDC_TOKEN_URL` .(AAP-44862)
 
 
-#### 10.3.5.2. Bug Fixes
+#### 10.4.5.2. Bug Fixes
 
 
 

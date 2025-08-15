@@ -1,39 +1,25 @@
 # 10. Patch releases
-## 10.12. Ansible Automation Platform patch release January 29, 2025
-### 10.12.1. Enhancements
+## 10.9. Ansible Automation Platform patch release March 12, 2025
+### 10.9.3. Enhancements
 
 
 
 
-#### 10.12.1.1. Ansible Automation Platform
+#### 10.9.3.1. Event-Driven Ansible
 
 
 
 
-- Using PostgreSQL TLS certificate authentication with an external database is now available.(AAP-38400)
+- Event-Driven Ansible activation logging is now provided via the `    journald` driver.(AAP-39745)
+- Rulebook activations' log message field is now separated into timestamps and message fields.(AAP-39743)
+- Moved `    ansible.eda` collection from de-supported to de-minimal as elements of the collection are required for all Event-Driven Ansible images.(AAP-39749)
 
 
-#### 10.12.1.2. Event-Driven Ansible
-
-
-
-
-- The `    ansible.eda` collection has been updated to 2.3.1.(AAP-39057)
-- Users are now able to create a new Event-Driven Ansible credential by copying an existing one.(AAP-39249)
-- Added support for **file** and **env** injectors for credentials.(AAP-39091)
-
-
-#### 10.12.1.3. RPM-based Ansible Automation Platform
+#### 10.9.3.2. RPM-based Ansible Automation Platform
 
 
 
 
-- Implemented certificate authentication support (mTLS) for external databases.
-
-
-- Postgresql TLS certificate authentication is available for external databases.
-- Postgresql TLS certificate authentication can be turned on/off (off by default for backward compatibility).
-- Each component, automation controller, Event-Driven Ansible, platform gateway, and automation hub, now provides off the shelf (OTS) TLS certificate and key files (mandatory).(AAP-38400)
-
+- The `    setup.sh` script now has an option to collect `    sosreport` .(AAP-40085)
 
 

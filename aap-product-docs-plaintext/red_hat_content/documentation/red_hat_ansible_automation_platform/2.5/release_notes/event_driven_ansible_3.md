@@ -1,11 +1,11 @@
 # 10. Patch releases
-## 10.1. Ansible Automation Platform patch release July 2, 2025
-### 10.1.9. Event-Driven Ansible
+## 10.2. Ansible Automation Platform patch release July 2, 2025
+### 10.2.9. Event-Driven Ansible
 
 
 
 
-#### 10.1.9.1. Features
+#### 10.2.9.1. Features
 
 
 
@@ -14,7 +14,7 @@
 - Prior to this release, we suggested utilizing `    ansible.builtin.set_fact` within playbooks. We now advise using `    ansible.builtin.set_stats` as it enables seamless integration with job templates. We encourage migrating from `    ansible.builtin.set_fact` to `    ansible.builtin.set_stats` for optimal results, although `    ansible.builtin.set_fact` will continue to be supported.(AAP-46841)
 
 
-#### 10.1.9.2. Enhancements
+#### 10.2.9.2. Enhancements
 
 
 
@@ -23,7 +23,7 @@
 - Relevant settings and versions are emitted in logs when the worker starts.(AAP-40984)
 
 
-#### 10.1.9.3. Bug Fixes
+#### 10.2.9.3. Bug Fixes
 
 
 

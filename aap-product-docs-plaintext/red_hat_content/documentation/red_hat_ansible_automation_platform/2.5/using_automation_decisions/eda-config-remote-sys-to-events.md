@@ -20,9 +20,9 @@ The following example demonstrates how to configure webhooks in a remote system 
 1. Log in to your GitHub repository.
 1. Click **Your profile name → Your repositories** .
 
-
 Note
 If you do not have a repository, click **New** to create a new one, select an owner, add a **Repository name** , and click **Create repository** .
+
 
 
 
@@ -35,5 +35,8 @@ If you do not have a repository, click **New** to create a new one, select an ow
 1. Click **Add webhook** .
 
 
-After the webhook has been added, it attempts to send a test payload to ensure there is connectivity between the two systems (GitHub and Event-Driven Ansible controller). If it can successfully send the data you will see a green check mark next to the **Webhook URL** with the message, **Last delivery was successful** .
+**Results**
+
+After the webhook has been added, it attempts to send a test payload to ensure there is connectivity between the two systems (GitHub and Event-Driven Ansible controller). If it can successfully send the data, you will see a green check mark next to the **Webhook URL** with the message, **Last delivery was successful** .
+
 

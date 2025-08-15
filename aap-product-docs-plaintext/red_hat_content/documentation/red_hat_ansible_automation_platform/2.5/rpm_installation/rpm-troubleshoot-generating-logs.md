@@ -49,7 +49,7 @@ $ ./setup.sh -e 'case_number=0000000' -e 'clean=true' -e 'upload=true' -s
 ```
 
 
-<span id="idm140256916615472"></span>
+<span id="idm140681245848336"></span>
 **Table 6.1. Parameter Reference Table**
 
 | Parameter | Description | Default value |
@@ -81,7 +81,7 @@ The following tables contain information about the variables used in Ansible Aut
 The following variables control how Ansible Automation Platform interacts with remote hosts.
 
 
-<span id="idm140256907275072"></span>
+<span id="idm140681243208176"></span>
 **Table A.1. Ansible variables**
 
 | Variable | Description |
@@ -131,6 +131,8 @@ Do not change this variable unless `/bin/sh` is not installed on the target mach
 
 
 
+
+Inventory file variables for automation hub.
 
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
@@ -215,6 +217,8 @@ value: True
 
 
 
+Inventory file variables for automation controller.
+
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `admin_email` |  `controller_admin_email` | Email address used by Django for the admin user for automation controller. | Optional |  `admin@example.com` |
@@ -281,6 +285,8 @@ value: true
 
 
 
+Inventory file variables for the database used with Ansible Automation Platform.
+
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `install_pg_port` |  `postgresql_port` | Port number for the PostgreSQL database. | Optional |  `5432` |
@@ -305,6 +311,8 @@ value: true
 
 
 
+
+Inventory file variables for Event-Driven Ansible controller.
 
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
@@ -378,6 +386,8 @@ For more information, see [Adding a safe plugin variable to Event-Driven Ansible
 
 
 
+General inventory file variables for Ansible Automation Platform.
+
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `aap_ca_cert_file` |  `ca_tls_cert` | Path to the user provided CA certificate file used to generate SSL/TLS certificates for all Ansible Automation Platform services. For more information, see [Optional: Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/platform-system-requirements#optional_using_custom_tls_certificates) . | Optional |  |
@@ -427,6 +437,8 @@ You can control this functionality at a component level by using the `&lt;compon
 
 
 
+Inventory file variables for images.
+
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `extra_images` |  | Additional container images to pull from the configured container registry during deployment. | Optional |  `ansible-builder-rhel8` |
@@ -452,6 +464,8 @@ You can control this functionality at a component level by using the `&lt;compon
 
 
 
+
+Inventory file variables for platform gateway.
 
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
@@ -519,6 +533,8 @@ value: 600
 
 
 
+Inventory file variables for Receptor.
+
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `receptor_datadir` |  | The directory where receptor stores its runtime data and local artifacts. The target directory must be accessible to **awx** users. If the target directory is a temporary file system **tmpfs** , ensure it is remounted correctly after a reboot. Failure to do so results in the receptor no longer having a working directory. | Optional |  `/tmp/receptor` |
@@ -557,6 +573,8 @@ This is resolved into a set of hosts that is used to construct the `receptor.con
 
 
 
+Inventory file variables for Redis.
+
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `redis_cluster_ip` |  `redis_cluster_ip` | The IPv4 address used by the Redis cluster to identify each host in the cluster. When defining hosts in the `[redis]` group, use this variable to identify the IPv4 address if the default is not what you want. Specific to container: Redis clusters cannot use hostnames or IPv6 addresses. | Optional | RPM = Discovered IPv4 address from Ansible facts. If IPv4 address is not available, IPv6 address is used. Container = Discovered IPv4 address from Ansible facts. |
@@ -572,7 +590,7 @@ This is resolved into a set of hosts that is used to construct the `receptor.con
 
 
 
-<span id="idm140256920926896"></span>
+<span id="idm140681255072992"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

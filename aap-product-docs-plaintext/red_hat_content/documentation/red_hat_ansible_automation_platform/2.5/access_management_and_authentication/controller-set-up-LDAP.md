@@ -52,7 +52,7 @@ CN=josie,CN=users,DC=website,DC=com
 The group type defines the class name of the group, which manages the groups associated with users in your LDAP directory and is returned by the search specified in Step 14 of this procedure. The group type, along with group parameters and the group search, is used to find and assign groups to users during log in, and can also be evaluated during the mapping process. The following table lists the available group types, along with their descriptions and the necessary parameters for each. By default, LDAP groups will be mapped to Django groups by taking the first value of the cn attribute. You can specify a different attribute with `    name_attr` . For example, `    name_attr='cn'` .
 
 
-<span id="idm140211553466256"></span>
+<span id="idm140050077903840"></span>
 **Table 3.1. Available LDAP group types**
 
 |  **LDAP Group Type** |  **Description** |  **Initializer method ( _init_ )** |

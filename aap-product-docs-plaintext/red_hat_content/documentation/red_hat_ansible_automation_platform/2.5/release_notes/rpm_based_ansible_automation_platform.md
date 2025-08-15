@@ -1,22 +1,19 @@
 # 10. Patch releases
-## 10.1. Ansible Automation Platform patch release July 2, 2025
-### 10.1.11. RPM-based Ansible Automation Platform
+## 10.1. Ansible Automation Platform patch release July 30, 2025
+### 10.1.6. RPM-based Ansible Automation Platform
 
 
 
 
-#### 10.1.11.1. Bug Fixes
+#### 10.1.6.1. Bug Fixes
 
 
 
 
-- Fixed an issue where redis-platform would not restart on restore.(AAP-47689)
-- Fixed an issue where old service nodes were not removed from platform gateway when the installer ran with a new host or new host names.(AAP-47651)
-- Fixed an issue where restore was failing when a non-default port was used for Ansible Automation Platform managed database.(AAP-47639)
-- Fixed an issue where some pages didn’t render properly when non-default `    umask` was being used.(AAP-47377)
-- Fixed an issue where the Event-Driven Ansible script was not starting `    nginx` on restart.(AAP-46511)
-- Fixed an issue where the credentials associated to decision environments would not be updated with the site information defined in the source inventory during restore.(AAP-46271)
-- Fixed an issue where the receptor certificate tasks would require switching to a receptor user.(AAP-46189)
-- Fixed an issue where the firewall was not opening event stream ports.(AAP-45684)
+- Event-Driven Ansible node type is now properly checked during restore.(AAP-49004)
+- Fixed an issue where **gRPC** server port was not configured properly when non-default value was used.(AAP-48543)
+- Fixed an issue where the firewall role logic improperly restricted Event-Driven Ansible event stream ports. Firewall ports are now restricted to event hosts, enhancing network security for Event-Driven Ansible users.(AAP-49792)
+- Fixed an issue where the gunicorn timeout to Event-Driven Ansible API service unit was not passed.(AAP-49858)
+- Fixed an issue where envoy, nginx, web server, and jwt token timeouts were not aligned, and caused issues where requests time out but work continues, or tokens expire before they are used.(AAP-49153)
 
 

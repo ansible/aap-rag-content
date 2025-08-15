@@ -5,7 +5,7 @@
 
 
 
-Adjust the execution schedule of the `metrics-utility` within your Ansible Automation Platform deployment running on OpenShift Container Platform.
+To adjust the execution schedule of the `metrics-utility` within your Ansible Automation Platform deployment running on OpenShift Container Platform, use the following procedure:
 
 **Procedure**
 
@@ -19,10 +19,9 @@ Adjust the execution schedule of the `metrics-utility` within your Ansible Autom
 1. On the next screen, select the `    YAML` tab.
 1. In the `    YAML` file, find the following parameters and enter a variable representing how often `    metrics-utility` should gather data and how often it should produce a report:
 
+`    metrics_utility_cronjob_gather_schedule:`
 
-```
-metrics_utility_cronjob_gather_schedule:    metrics_utility_cronjob_report_schedule:
-```
+`    metrics_utility_cronjob_report_schedule:`
 
 
 1. ClickSave.
