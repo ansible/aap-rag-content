@@ -23,12 +23,13 @@ By default, Event-Driven Ansible controller allows 12 rulebook activations per n
 
 **Procedure**
 
-Provide a variable to the VM installer:
+1. Provide a variable to the VM installer:
 
 
 1. Navigate to the setup inventory file.
-1. Add `    automationedacontroller_max_running_activations` in the [all:vars] section. For example, `    automationedacontroller_max_running_activations=16` .
+1. Add `        automationedacontroller_max_running_activations` in the [all:vars] section. For example, `        automationedacontroller_max_running_activations=16` .
 1. Run the setup.
+
 
 
 #### 11.1.1.2. Modifying the number of simultaneous rulebook activations after Event-Driven Ansible controller installation
@@ -45,9 +46,9 @@ By default, Event-Driven Ansible controller allows 12 rulebook activations per n
 1. Use the following command to restart Event-Driven Ansible services: `    automation-eda-controller-service restart`
 
 
-**Additional Resources**
+**Additional references**
 
-- For more information about rulebook activations, see the [Rulebook activations](https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.4/html-single/event-driven_ansible_controller_user_guide/index#eda-rulebook-activations) .
-- For more information about modifying simultaneous rulebook activations during or after Event-Driven Ansible on OpenShift Container Platform, see the example in [eda_max_running_activations_yml](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/installing_on_openshift_container_platform/appendix-operator-crs_appendix-operator-crs#eda_max_running_activations_yml) .
+-  [Rulebook activations](https://access.redhat.com/documentation/en-us/red_hat_ansible_automation_platform/2.4/html-single/event-driven_ansible_controller_user_guide/index#eda-rulebook-activations)
+-  [eda_max_running_activations_yml](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/installing_on_openshift_container_platform/appendix-operator-crs_appendix-operator-crs#eda_max_running_activations_yml)
 
 

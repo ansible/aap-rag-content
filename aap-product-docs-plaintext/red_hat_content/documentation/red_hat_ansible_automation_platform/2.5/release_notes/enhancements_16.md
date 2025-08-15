@@ -1,25 +1,36 @@
 # 10. Patch releases
-## 10.8. Ansible Automation Platform patch release March 12, 2025
-### 10.8.3. Enhancements
+## 10.5. Ansible Automation Platform patch release May 28, 2025
+### 10.5.3. Enhancements
 
 
 
 
-#### 10.8.3.1. Event-Driven Ansible
+#### 10.5.3.1. Ansible Automation Platform
 
 
 
 
-- Event-Driven Ansible activation logging is now provided via the `    journald` driver.(AAP-39745)
-- Rulebook activations' log message field is now separated into timestamps and message fields.(AAP-39743)
-- Moved `    ansible.eda` collection from de-supported to de-minimal as elements of the collection are required for all Event-Driven Ansible images.(AAP-39749)
+- Reduced the cognitive complexity level of `    validate_password()` method and reorganized the `    validate_authenticate_uid()` method to increase code readability.(AAP-45346)
+- For clarity and to prevent misconfiguration, the SAML authenticator now requires both a permanent user ID and a username.(AAP-45333)
+- Updated field names and help text in the System Settings UI to indicate client ID and client secret for service accounts, as well as client ID and client secret for analytics.(AAP-43119)
+- Validation/enforcement of expected service types removed because service types are now dynamic.(AAP-40130)
+- Enables configuration of control plane authentication for custom services. You should not modify it for pre-defined services.(AAP-40131)
+- Custom service type support added. Arbitrary service types and services can be created rather than a fixed list.(AAP-39812)
 
 
-#### 10.8.3.2. RPM-based Ansible Automation Platform
+#### 10.5.3.2. Red Hat Ansible Lightspeed
 
 
 
 
-- The `    setup.sh` script now has an option to collect `    sosreport` .(AAP-40085)
+- It is now possible to disable SSL verification for Red Hat Ansible Lightspeed <→ Model Server communication.(AAP-45337)
+
+
+#### 10.5.3.3. Automation controller
+
+
+
+
+- Updated Azure Key Vault plugin to use managed identity when creating credentials.(AAP-43461)
 
 

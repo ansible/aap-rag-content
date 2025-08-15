@@ -114,3 +114,14 @@ When using a custom certificate for Receptor nodes, the certificate requires the
 
 Receptor does not support the usage of wildcard certificates. Additionally, each Receptor certificate must have the host FQDN specified in its SAN for TLS hostname validation to be correctly performed.
 
+#### 2.7.7.4. Redis certificate considerations
+
+
+
+
+When using custom TLS certificates for Redis-related services, consider the following for mutual TLS (mTLS) communication if specifying Extended Key Usage (EKU):
+
+- The Redis server certificate ( `    redis_tls_cert` ) should include the `    serverAuth` (web server authentication) and `    clientAuth` (client authentication) EKU.
+- The Redis client certificates ( `    gateway_redis_tls_cert` , `    eda_redis_tls_cert` ) should include the `    clientAuth` (client authentication) EKU.
+
+

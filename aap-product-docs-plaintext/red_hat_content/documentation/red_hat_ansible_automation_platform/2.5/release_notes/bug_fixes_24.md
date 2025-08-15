@@ -1,20 +1,25 @@
 # 10. Patch releases
-## 10.13. Ansible Automation Platform patch release January 22, 2025
-### 10.13.2. Bug fixes
+## 10.10. Ansible Automation Platform patch release March 01, 2025
+### 10.10.1. Bug fixes
 
 
 
 
-#### 10.13.2.1. Ansible Automation Platform
+#### 10.10.1.1. CVE
 
 
 
 
-- Fixed an issue where there was a `    service_id` mismatch between gateway and Event-Driven Ansible which was causing activation rulebooks to fail.(AAP-38172)
+With this update, the following CVE has been addressed:
+
+-  [CVE-2025-1801](https://access.redhat.com/security/cve/CVE-2025-1801)  `    automation-gateway` : `    aap-gateway` privilege escalation. (AAP-41180)
 
 
-Note
-This fix applies to OpenShift Container Platform only.
+#### 10.10.1.2. Platform gateway
 
+
+
+
+- Fixed an issue that caused the API to randomly return 401 errors. (AAP-41054)
 
 

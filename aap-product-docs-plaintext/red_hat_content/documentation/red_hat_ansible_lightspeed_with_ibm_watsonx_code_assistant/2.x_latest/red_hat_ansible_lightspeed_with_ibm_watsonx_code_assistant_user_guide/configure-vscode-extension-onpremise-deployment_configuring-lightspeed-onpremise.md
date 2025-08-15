@@ -1,6 +1,6 @@
 # 3. Setting up Red Hat Ansible Lightspeed for your organization
 ## 3.3. Setting up Red Hat Ansible Lightspeed on-premise deployment
-### 3.3.7. Configuring Ansible VS Code extension for Red Hat Ansible Lightspeed on-premise deployment
+### 3.3.5. Configuring Ansible VS Code extension for Red Hat Ansible Lightspeed on-premise deployment
 
 
 
@@ -13,6 +13,16 @@ To access the on-premise deployment of Red Hat Ansible Lightspeed, all Ansible u
 
 
 **Procedure**
+
+1. Obtain the URL of your Ansible Lightspeed instance:
+
+
+1. In Red Hat OpenShift Container Platform, selectNetworking→Routesand locate the Red Hat Ansible Lightspeed instance that was created.
+1. From the **Location** column, copy the URL of your Ansible Lightspeed instance.
+
+The URL will be in the following format: `        https://&lt;lightspeed_route&gt;/complete/aap/`
+
+
 
 1. Open the VS Code application.
 1. From the **Activity** bar, click the **Extensions** icon.
@@ -34,10 +44,5 @@ If your organization recently subscribed to the Red Hat Ansible Automation Platf
 
 
 
-
-
-**Additional resources**
-
--  [Troubleshooting Red Hat Ansible Lightspeed on-premise deployment errors](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#ref-troubleshooting-lightspeed-onpremise-config_troubleshooting-lightspeed)
 
 

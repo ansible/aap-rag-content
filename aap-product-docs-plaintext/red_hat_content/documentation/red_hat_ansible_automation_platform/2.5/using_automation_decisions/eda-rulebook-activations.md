@@ -22,7 +22,7 @@ A rulebook specifies actions to be performed when a rule is triggered. A rule ge
 
 To view further details, see [Actions](https://ansible.readthedocs.io/projects/rulebook/en/stable/actions.html) .
 
-A rulebook activation is a process running in the background defined by a decision environment executing a specific rulebook. You can set up your rulebook activation by following [Setting up a rulebook activation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-set-up-rulebook-activation) .
+A rulebook activation is a process running in the background defined by a decision environment executing a specific rulebook. You can set up your rulebook activation by following [Setting up a rulebook activation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_decisions/eda-rulebook-activations#eda-set-up-rulebook-activation) .
 
 Warning
 Red Hat does not recommend the use of a non-supported source plugin with 1 postgres database. This can pose a potential risk to your use of Ansible Automation Platform.

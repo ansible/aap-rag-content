@@ -10,7 +10,7 @@ From the menu bar, you can search for credentials in the **Name** search field.
 
 You also have the following options in the menu bar:
 
-- Choose how fields are shown in the list view by clicking theManage columnsicon. You have four options in which you can arrange your fields:
+-  **Manage columns** - You can choose how fields are shown in the list view by clicking this option. You have four ways you can arrange your fields:
 
 
 -  **Column** - Shows the column in the table.
@@ -18,6 +18,6 @@ You also have the following options in the menu bar:
 -  **Expanded** - Shows the column when the item is expanded as a detail.
 -  **Hidden** - Hides the column.
 
-- Choose between aList viewor aCard view, by clicking the icons.
+-  **List view** or **Card view** - You can choose between these views by clicking the applicable icons.
 
 

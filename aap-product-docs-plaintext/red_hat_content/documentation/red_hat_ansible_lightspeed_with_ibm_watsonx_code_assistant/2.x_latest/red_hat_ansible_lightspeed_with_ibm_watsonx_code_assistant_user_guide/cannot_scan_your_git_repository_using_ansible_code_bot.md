@@ -1,6 +1,6 @@
 # 7. Troubleshooting
-## 7.4. Troubleshooting Ansible code bot errors
-### 7.4.2. Cannot scan your Git repository using Ansible code bot
+## 7.3. Troubleshooting Ansible code bot errors
+### 7.3.2. Cannot scan your Git repository using Ansible code bot
 
 
 

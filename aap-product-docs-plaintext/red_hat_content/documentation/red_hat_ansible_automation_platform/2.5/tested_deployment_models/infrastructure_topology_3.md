@@ -8,7 +8,7 @@
 The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 
-<span id="idm139849915613104"></span>
+<span id="idm139937751581328"></span>
 **Figure 3.1. Infrastructure topology diagram**
 
 ![Container growth topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Tested_deployment_models-en-US/images/02b948e9d139f9a478e80ba4164dceae/cont-a-env-a.png)
@@ -19,7 +19,7 @@ The following diagram outlines the infrastructure topology that Red Hat has tes
 A single VM has been tested with the following component requirements:
 
 
-<span id="idm139849915608304"></span>
+<span id="idm139937750446592"></span>
 **Table 3.1. Virtual machine requirements**
 
 | Requirement | Minimum requirement |
@@ -42,7 +42,7 @@ If performing a bundled installation of the growth topology with `hub_seed_colle
 
 
 
-<span id="idm139849913369504"></span>
+<span id="idm139937752586544"></span>
 **Table 3.2. Infrastructure topology**
 
 | Purpose | Example group names |

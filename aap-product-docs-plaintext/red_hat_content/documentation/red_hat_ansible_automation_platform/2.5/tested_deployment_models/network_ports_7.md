@@ -7,7 +7,7 @@
 Automation mesh uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
 
 
-<span id="idm139849912741392"></span>
+<span id="idm139937753128592"></span>
 **Table 5.1. Network ports and protocols**
 
 | Port number | Protocol | Service | Source | Destination |
@@ -32,7 +32,7 @@ This appendix provides a reference for the additional resources relevant to the 
 
 
 
-<span id="idm139849922218000"></span>
+<span id="idm139937756252704"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

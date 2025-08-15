@@ -71,21 +71,3 @@ For information about obtaining an API key and model ID from IBM watsonx Code As
 - You have an existing external PostgreSQL database configured for the Red Hat Ansible Automation Platform, or have a database created for you when configuring the Red Hat Ansible Lightspeed on-premise deployment.
 
 
-#### 3.3.1.4. Process for configuring a Red Hat Ansible Lightspeed on-premise deployment
-
-
-
-
-Perform the following tasks to install and configure a Red Hat Ansible Lightspeed on-premise deployment:
-
-1.  [Install the Red Hat Ansible Automation Platform operator](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#install-aap-lightspeed-operator_configuring-lightspeed-onpremise)
-1.  [Create an OAuth application](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#create-oauth-app_configuring-lightspeed-onpremise)
-1.  [Create connections secrets for Red Hat Ansible Automation Platform and IBM watsonx Code Assistant both](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#create-connection-secrets_configuring-lightspeed-onpremise)
-1.  [Create and deploy a Red Hat Ansible Lightspeed instance](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#create-lightspeed-instance_configuring-lightspeed-onpremise)
-1.  [Update the Redirect URI to connect to your Red Hat Ansible Lightspeed on-premise deployment](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#update-redirect-uri_configuring-lightspeed-onpremise)
-1.  [Install and configure Ansible Visual Studio Code extension to connect to Red Hat Ansible Lightspeed on-premise deployment](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#configure-vscode-extension-onpremise-deployment_configuring-lightspeed-onpremise)
-1. Optional: If you want to connect to a different IBM watsonx Code Assistant, [update the connection secrets on an existing Red Hat Ansible Automation Platform operator](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#update-connection-secrets_configuring-lightspeed-onpremise)
-1. Optional: [Monitor your Red Hat Ansible Lightspeed on-premise deployment](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#monitor-lightspeed-onpremise-deployment_configuring-lightspeed-onpremise)
-1. Optional: [Use the Ansible Lightspeed REST API to build custom automation development and tooling workflow outside of VS Code](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#use-rest-api_configuring-lightspeed-onpremise)
-
-

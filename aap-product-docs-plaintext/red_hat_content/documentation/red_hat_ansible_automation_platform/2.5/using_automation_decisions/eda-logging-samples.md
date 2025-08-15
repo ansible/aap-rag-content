@@ -6,8 +6,6 @@
 
 When the following APIs are called for each operation, you see the following audit logs:
 
-**Rulebook activation**
-
 ```
 1. Create
 1. 2024-08-15 14:13:20,384 aap_eda.api.views.activation INFO   Action: Create / ResourceType: RulebookActivation / ResourceName: quick_start_project / ResourceID: 53 / Organization: Default
@@ -23,9 +21,6 @@ When the following APIs are called for each operation, you see the following aud
 2024-08-15 14:24:34,169 aap_eda.api.views.activation INFO      Action: Restart / ResourceType: RulebookActivation / ResourceName: quick_start_activation / ResourceID: 1 / Organization: Default
 ```
 
-
-**EventStream Logs**
-
 ```
 1. Create
 1. 2024-08-15 13:46:26,903 aap_eda.api.views.webhook INFO     Action: Create / ResourceType: EventStream / ResourceName: ZackTest / ResourceID: 1 / Organization: Default
@@ -39,9 +34,6 @@ When the following APIs are called for each operation, you see the following aud
 1. 2024-08-15 13:57:13,124 aap_eda.api.views.webhook INFO     Action: Delete / ResourceType: EventStream / ResourceName: ZackTest / ResourceID: None / Organization: Default
 ```
 
-
-**Decision Environment**
-
 ```
 1. Create
 1. 2024-08-15 14:10:53,311 aap_eda.api.views.decision_environment INFO     Action: Create / ResourceType: DecisionEnvironment / ResourceName: quick_start_de / ResourceID: 86 / Organization: Default
@@ -52,9 +44,6 @@ When the following APIs are called for each operation, you see the following aud
 4. Delete
 2024-08-15 14:11:42,369 aap_eda.api.views.decision_environment INFO     Action: Delete / ResourceType: DecisionEnvironment / ResourceName: quick_start_de / ResourceID: None / Organization: Default
 ```
-
-
-**Project**
 
 ```
 1. Create
@@ -69,9 +58,6 @@ When the following APIs are called for each operation, you see the following aud
 1. 2024-08-15 14:06:49,481 aap_eda.api.views.project INFO     Action: Delete / ResourceType: Project / ResourceName: quick_start_project / ResourceID: 86 / Organization: Default
 ```
 
-
-**Activation Start/Stop**
-
 ```
 1. Start
 1. 2024-08-15 14:21:29,076 aap_eda.services.activation.activation_manager INFO     Requested to start activation 1, starting.
@@ -85,5 +71,4 @@ eda-activation-worker-1  | 2024-08-15 14:40:52,562 rq.worker INFO     activation
 ```
 
 
-
-<span id="idm140406832578304"></span>
+<span id="idm140351375534672"></span>

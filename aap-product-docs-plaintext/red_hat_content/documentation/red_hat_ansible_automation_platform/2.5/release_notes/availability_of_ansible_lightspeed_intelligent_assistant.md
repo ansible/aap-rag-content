@@ -1,6 +1,6 @@
 # 3. Technology preview
 ## 3.1. Technology Preview
-### 3.1.1. Availability of Ansible Lightspeed intelligent assistant
+### 3.1.2. Availability of Ansible Lightspeed intelligent assistant
 
 
 

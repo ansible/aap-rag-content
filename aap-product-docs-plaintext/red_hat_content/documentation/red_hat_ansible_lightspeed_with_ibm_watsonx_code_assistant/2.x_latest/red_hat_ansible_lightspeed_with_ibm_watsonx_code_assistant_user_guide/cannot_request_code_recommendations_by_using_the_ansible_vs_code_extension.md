@@ -1,6 +1,6 @@
 # 7. Troubleshooting
-## 7.3. Troubleshooting Ansible Visual Studio Code extension errors
-### 7.3.2. Cannot request code recommendations by using the Ansible VS Code extension
+## 7.2. Troubleshooting Ansible Visual Studio Code extension errors
+### 7.2.2. Cannot request code recommendations by using the Ansible VS Code extension
 
 
 

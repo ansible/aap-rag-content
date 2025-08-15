@@ -9,7 +9,7 @@ Event streams can send events from remote systems to Event-Driven Ansible contro
 Event-Driven Ansible controller supports six different event stream types.
 
 
-<span id="idm140406831424032"></span>
+<span id="idm140351370516672"></span>
 **Table 10.1. Event Stream Types**
 
 | Type | Description | Vendors |

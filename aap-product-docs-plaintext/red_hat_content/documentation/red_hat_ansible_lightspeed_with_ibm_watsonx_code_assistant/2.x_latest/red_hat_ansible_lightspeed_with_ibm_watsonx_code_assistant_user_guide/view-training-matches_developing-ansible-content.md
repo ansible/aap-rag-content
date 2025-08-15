@@ -20,7 +20,7 @@ After you enter a natural language prompt in VS Code and see the generated code 
 For example, the following illustration shows the training matches for the multitask recommendation **Install postgresql-server & run postgresql-setup command** :
 
 
-<span id="idm139976463978704"></span>
+<span id="idm140693282411600"></span>
 **Figure 4.4. Training matches for a multitask recommendation**
 
 ![Training matches for multitask recommendation](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/1f0180015e378772f9d8876be53e9a9c/lightspeed-multitask-content-matches.png)

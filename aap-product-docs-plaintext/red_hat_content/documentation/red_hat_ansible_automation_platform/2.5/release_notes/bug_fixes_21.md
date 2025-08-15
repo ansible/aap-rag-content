@@ -1,54 +1,66 @@
 # 10. Patch releases
-## 10.10. Ansible Automation Platform patch release February 25, 2025
-### 10.10.2. Bug fixes
+## 10.7. Ansible Automation Platform patch release April 9, 2025
+### 10.7.3. Bug fixes
 
 
 
 
-#### 10.10.2.1. Ansible Automation Platform
+With this update, the following CVEs have been addressed:
+
+-  [CVE-2025-2877](https://access.redhat.com/security/cve/CVE-2025-2877)  `    ansible-rulebook` : exposure of inventory passwords in plain text when starting a rulebook activation with verbosity set to debug in Event-Driven Ansible.(AAP-42817)
+
+
+#### 10.7.3.1. Ansible Automation Platform
 
 
 
 
-- Fixed an issue where the subscription entitlement expiration notification was visible, even when the subscription was active.(AAP-39982)
-- Fixed an issue where upon UI reload/refresh, logs of a running job before the refresh would not appear until new logs were generated from the playbook.(AAP-38924)
-- Fixed an issue when the customer was unable to scale down replicas to put Ansible Automation Platform into idle mode.(AAP-39492)
-- After launching the **Workflow Job Template** , the launched job for a job template node in the workflow should contain the `    job_tags` and `    skip_tags` that were specified in the **launch prompt** step.(AAP-40395)
-- Fixed an issue where the user was not able to create a members role in Ansible Automation Platform 2.5.(AAP-37626)
-- Fixed an issue where a custom image showed Base64 encoded data.(AAP-26984)
-- Fixed an issue where a custom logo showed Base64 encoded data.(AAP-26909)
-- Fixed an issue that restricted users from executing jobs for which they had the correct permissions.(AAP-40398)
-- Fixed an issue where the workflow job template node extra vars were not saved.(AAP-40396)
-- Fixed an issue where the Creating and using execution environments guide had the incorrect ansible-core version.(AAP-40390)
-- Fixed an issue where you were not able to create a members role in Ansible Automation Platform 2.5.(AAP-40698)
-- Fixed an issue where the initial login to any of the services from platform gateway could result in the user being given access to the wrong account.(AAP-40617)
-- Fixed an issue where the service owned resources were not kept in sync with the platform gateway allowing for duplicate name values on user login.(AAP-40616)
-- Fixed an issue where users, organizations, and teams, became permanently out of sync if any user, organization, or team, was deleted from the platform gateway.(AAP-40615)
-- Fixed an issue where automation hub would fail to run the sync task if any users were deleted from the system.(AAP-40613)
+- Fixed an issue where job workflow templates failed with limits.(AAP-33726)
+- Fixed an issue where there was non-viable information disclosure for pen testing.(AAP-39977)
 
 
-#### 10.10.2.2. Platform gateway
+#### 10.7.3.2. Ansible Automation Platform Operator
 
 
 
 
-- Fixed an issue where ping and status checks with resolvable, but nonresponding, URLs could cause all platform gateway `    uwsgi` workers to hang until all were exhausted. The new settings are `    PING_PAGE_CHECK_TIMEOUT` and `    PING_PAGE_CHECK_IGNORE_CERT` .(AAP-39907)
+- Fixed an issue on the OpenShift Container Platform Route TLS termination that was always configured with the edge value.(AAP-42051)
 
 
-#### 10.10.2.3. Event-Driven Ansible
-
-
-
-
-- Fixed an issue where credentials could be copied in AAP but could not be copied in Event-Driven Ansible.(AAP-35875)
-
-
-#### 10.10.2.4. Known Issues
+#### 10.7.3.3. Container based Ansible Automation Platform
 
 
 
 
-- In the platform gateway, the tooltip for **Projects → Create Project - Project Base Path** is undefined.(AAP-27631)
-- Deploying the platform gateway on FIPS enabled RHEL 9 is currently not supported.(AAP-39146)
+- Fixed an issue where backup and restore jobs would fail to restore on `    CONT` jobs. Implemented validation and cleanup for service nodes on a restore to a new cluster.(AAP-42781)
+- Fixed an issue where podman logs did not show any log messages if the user was not part of the local **administrator** or `    systemd-journal` group.(AAP-42755)
+- Fixed an issue where the Ansible Automation Platform 2.5 containerized installer was unable to read custom configurations.(AAP-40798)
+- Fixed an issue where a remote user was not part of the `    systemd-journal` group and could not access container logs.(AAP-42755)
+
+
+#### 10.7.3.4. Automation execution environments
+
+
+
+
+- Fixed an issue where there was a Python 3.11 incompatibility by updating `    pykerberos` to 1.2.4 in `    ee-minimal` and `    ee-supported` container images.(AAP-42428)
+
+
+#### 10.7.3.5. Event-Driven Ansible
+
+
+
+
+- Fixed an issue where activations attached with some event streams could not be created in deployments configured with **Postgresql** with **mTLS** .(AAP-42268)
+
+
+#### 10.7.3.6. RPM-based Ansible Automation Platform
+
+
+
+
+- Fixed an issue where the token refresh prevented Event-Driven Ansible worker nodes from re-authenticating tokens.(AAP-42981)
+- Fixed an issue where the bundle installer failed to update automation controller and `    aap-metrics-utility` in the same run.(AAP-42632)
+- Fixed an issue where platform UI was not loading when the platform gateway was on a **FIPS** enabled Red Hat Enterprise Linux 9.(AAP-39146)
 
 

@@ -74,7 +74,7 @@ If you do not see the language mode section in your VS Code editor, from the Com
 If **Ansible** is already selected as the desired language but the **Lightspeed** entry is not displayed, re-select **Ansible** as the language mode. The following illustration shows **Lightspeed** entry on the VS Code status bar.
 
 
-<span id="idm139976454526304"></span>
+<span id="idm140693281569472"></span>
 **Figure 4.3. Ansible and Lightspeed set as selected language mode**
 
 ![Settings show Lightspeed as selected language mode](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/03ba1497281fc60846ce63163c57ecab/lightspeed-multitask-vs-code.png)

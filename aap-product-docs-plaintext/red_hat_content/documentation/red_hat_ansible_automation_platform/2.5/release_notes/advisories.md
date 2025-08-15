@@ -1,6 +1,6 @@
 # 10. Patch releases
-## 10.19. Ansible Automation Platform patch release October 14, 2024
-### 10.19.2. Advisories
+## 10.20. Ansible Automation Platform patch release October 14, 2024
+### 10.20.2. Advisories
 
 
 

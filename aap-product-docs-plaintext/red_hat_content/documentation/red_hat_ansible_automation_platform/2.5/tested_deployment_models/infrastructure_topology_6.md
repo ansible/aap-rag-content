@@ -8,7 +8,7 @@
 The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 
-<span id="idm139849914252400"></span>
+<span id="idm139937749405024"></span>
 **Figure 4.2. Infrastructure topology diagram**
 
 ![Operator enterprise topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Tested_deployment_models-en-US/images/d9ddd7c5a9eeececcb68fcaa798aaebb/ocp-b-env-a.png)
@@ -21,7 +21,7 @@ The following infrastructure topology describes an OpenShift Cluster with 3 prim
 Each OpenShift Worker node has been tested with the following component requirements: 16 GB RAM, 4 CPUs, 128 GB local disk, and 3000 IOPS.
 
 
-<span id="idm139849914246496"></span>
+<span id="idm139937749399120"></span>
 **Table 4.4. Infrastructure topology**
 
 | Count | Component |

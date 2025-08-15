@@ -1,53 +1,73 @@
 # 10. Patch releases
-## 10.18. Ansible Automation Platform patch release October 28, 2024
-### 10.18.2. Bug fixes
+## 10.15. Ansible Automation Platform patch release January 15, 2025
+### 10.15.2. Bug fixes
 
 
 
 
-#### 10.18.2.1. Ansible Automation Platform
+#### 10.15.2.1. CVE
 
 
 
 
-- Removed the **Legacy external password** option from the **Authentication Type** list. (AAP-31506)
-- Ansible Galaxy’s `    sessionauth` class is now always the first in the list of authentication classes so that the platform UI can successfully authenticate. (AAP-32146)
--  [CVE-2024-10033](https://access.redhat.com/security/cve/CVE-2024-10033) - `    automation-gateway` : Fixed a Cross-site Scripting (XSS) vulnerability on the `    automation-gateway` component that allowed a malicious user to perform actions that impact users.
--  [CVE-2024-22189](https://access.redhat.com/security/cve/CVE-2024-22189) - `    receptor` : Resolved an issue in `    quic-go` that would allow an attacker to trigger a denial of service by sending a large number of `    NEW_CONNECTION_ID` frames that retire old connection IDs.
+With this update, the following CVEs have been addressed:
+
+-  [CVE-2024-52304](https://access.redhat.com/security/cve/cve-2024-52304)  `    python3.11-aiohttp` : `    aiohttp` vulnerable to request smuggling due to incorrect parsing of chunk extensions.(AAP-36192)
+-  [CVE-2024-55565](https://access.redhat.com/security/cve/cve-2024-55565)  `    automation-gateway` : `    nanoid` mishandles non-integer values.(AAP-37168)
+-  [CVE-2024-53908](https://access.redhat.com/security/cve/cve-2024-53908)  `    automation-controller` : Potential SQL injection in `    HasKey(lhs, rhs)` on Oracle.(AAP-36769)
+-  [CVE-2024-53907](https://access.redhat.com/security/cve/cve-2024-53907)  `    automation-controller` : Potential denial-of-service in `    django.utils.html.strip_tags()` .(AAP-36756)
+-  [CVE-2024-11407](https://access.redhat.com/security/cve/cve-2024-11407)  `    automation-controller` : Denial-of-Service through data corruption in `    gRPC-C++` .(AAP-36745)
+-  [CVE-2024-52304](https://access.redhat.com/security/cve/cve-2024-52304)  `    ansible-lightspeed-container` : `    aiohttp` vulnerable to request smuggling due to incorrect parsing of chunk extensions.(AAP-36185)
+-  [CVE-2024-56201](https://access.redhat.com/security/cve/cve-2024-56201)  `    ansible-lightspeed-container` : Jinja has a sandbox breakout through malicious filenames.(AAP-38079)
+-  [CVE-2024-56326](https://access.redhat.com/security/cve/cve-2024-56326)  `    ansible-lightspeed-container` : Jinja has a sandbox breakout through indirect reference to format method.(AAP-38056)
+-  [CVE-2024-11407](https://access.redhat.com/security/cve/cve-2024-11407)  `    ansible-lightspeed-container` : Denial-of-Service through data corruption in `    gRPC-C++` .(AAP-36744)
 
 
-#### 10.18.2.2. Automation controller
-
-
-
-
--  [CVE-2024-41989](https://access.redhat.com/security/cve/CVE-2024-41989) - `    automation-controller` : Before this update, in Django, if `    floatformat` received a string representation of a number in scientific notation with a large exponent, it could lead to significant memory consumption. With this update, decimals with more than 200 digits are now returned as is.
--  [CVE-2024-45230](https://access.redhat.com/security/cve/CVE-2024-45230) - `    automation-controller` : Resolved an issue in Python’s Django `    urlize()` and `    urlizetrunc()` functions where excessive input with a specific sequence of characters would lead to denial of service.
-
-
-#### 10.18.2.3. Automation hub
-
-
-
-
-- Refactored the `    dynaconf` hooks to preserve the necessary authentication classes for Ansible Automation Platform 2.5 deployments. (AAP-31680)
-- During role migrations, model permissions are now re-added to roles to preserve ownership. (AAP-31417)
-
-
-#### 10.18.2.4. Ansible Automation Platform Operator
+#### 10.15.2.2. Red Hat Ansible Automation Platform
 
 
 
 
-- The port is now correctly set when configuring the platform gateway cache `    redis_host` setting when using an external Redis cache. (AAP-33279)
-- Added checksums to the automation hub deployments so that pods are cycled to pick up changes to the PostgreSQL configuration and galaxy server settings Kubernetes secrets. (AAP-33518)
+- Fixed **not found** error that occurred occasionally when navigating through the form wizards.(AAP-37495)
+- Fixed an issue where installing `    ansible-core` no longer installs `    python3-jmespath` on Red Hat Enterprise Linux 8.(AAP-18251)
+- Fixed an issue where `    ID_KEY` attribute was improperly used to determine the username field in social auth pipelines.(AAP-38300)
+- Fixed an issue where authenticator could create a **userid** and return a non-viable **authenticator_uid** .(AAP-38021)
+- Fixed an issue where a private key was displayed in plain text when downloading the OpenAPI schema file. This was not the private key used by gateway, but a random default key.(AAP-37843)
 
 
-#### 10.18.2.5. Container-based Ansible Automation Platform
+#### 10.15.2.3. Automation controller
 
 
 
 
-- Fixed the uninstall playbook execution when the environment was already uninstalled. (AAP-32981)
+- Fixed an issue that did not allow sending `    job_lifecycle` logs to external aggregators.(AAP-37537)
+- Fixed an issue where there was a date comparison mismatch for traceback from `    host_metric_summary_monthly` task.(AAP-37487)
+- Fixed an issue where the scheduled jobs with count set to a **non-zero** value would run unexpectedly. (AAP-37290)
+- Fixed an issue where a project’s requirements.yml could revert to a prior state in a cluster. (AAP-37228)
+- Fixed an issue where there would be an occasional error creating the event partition table before starting a job, when a large number of jobs were launched quickly. (AAP-37227)
+- Fixed an issue where temporary receptor files were not cleaned up after a job completed on nodes. (AAP-36904)
+- Fixed an issue where **POST** to `    /api/controller/login/` via the gateway resulted in a fatal response.(AAP-33911)
+- Fixed an issue when a job template was launched, the named URL returned a **404** error code.(AAP-37025)
+
+
+##### 10.15.2.3.1. Container-based Ansible Automation Platform
+
+
+
+
+- Fixed an issue where the receptor TLS certificate content was not validated during the preflight role execution ensuring that the **x509 Subject Alt Name** (SAN) field contains the required ISO Object Identifier (OID) 1.3.6.1.4.1.2312.19.1. (AAP-37880)
+- Fixed an issue where the **Postgresql SSL** mode variables for controller, Event-Driven Ansible, gateway and automation hub were not validated during the preflight role execution. (AAP-37352)
+- Fixed an issue where the Ansible Automation Platform containerized setup installation would upload collections when inventory growth in the AIO installation was used.(AAP-38372)
+- Fixed an issue where the throttle capacity of controller in an AIO installation would allow for performance degradation.(AAP-38207)
+
+
+#### 10.15.2.4. RPM-based Ansible Automation Platform
+
+
+
+
+- Fixed an issue where adding a new automation hub host to an upgraded environment has caused the installation to fail. (AAP-38204)
+- Fixed an issue where the link to the documents in the installer **README.md** was broken. (AAP-37627)
+- Fixed an issue where the Gateway API status on Event-Driven Ansible proxy component returned **404** errors. (AAP-32816)
 
 

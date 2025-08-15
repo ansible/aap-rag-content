@@ -8,7 +8,7 @@
 The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 
-<span id="idm139849915311456"></span>
+<span id="idm139937750980464"></span>
 **Figure 3.2. Infrastructure topology diagram**
 
 ![Container enterprise topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Tested_deployment_models-en-US/images/704824d330eb8422156d4d7cf034ee52/cont-b-env-a.png)
@@ -19,7 +19,7 @@ The following diagram outlines the infrastructure topology that Red Hat has tes
 Each VM has been tested with the following component requirements:
 
 
-<span id="idm139849915306512"></span>
+<span id="idm139937750975520"></span>
 **Table 3.5. Virtual machine requirements**
 
 | Requirement | Minimum requirement |
@@ -37,7 +37,7 @@ Each VM has been tested with the following component requirements:
 
 
 
-<span id="idm139849915226960"></span>
+<span id="idm139937751709696"></span>
 **Table 3.6. Infrastructure topology**
 
 | VM count | Purpose | Example VM group names |
@@ -56,6 +56,7 @@ Each VM has been tested with the following component requirements:
 
 Note
 - 6 VMs are required for a Redis high availability (HA) compatible deployment. When installing Ansible Automation Platform with the containerized installer, Redis can be colocated on any Ansible Automation Platform component VMs of your choice except for execution nodes or the PostgreSQL database. They might also be assigned VMs specifically for Redis use.
+- External Redis is not supported for containerized Ansible Automation Platform.
 
 
 

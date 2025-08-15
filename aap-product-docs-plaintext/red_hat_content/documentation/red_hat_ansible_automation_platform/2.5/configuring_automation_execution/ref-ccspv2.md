@@ -16,7 +16,7 @@ The primary use of this report is for partners under the [CCSP](https://connect.
 
 Set the report type using `METRICS_UTILITY_REPORT_TYPE=CCSPv2` .
 
-#### 12.5.1.1. Optional collectors for `gather` command
+### 12.5.2. Optional collectors for `gather` command
 
 
 
@@ -44,13 +44,15 @@ You can use the following optional collectors for the `gather` command:
 - This incrementally collects data from the `        main_indirectmanagednodeaudit` table in the automation controller database and contains information about indirectly managed nodes.
 
 
-
 ```
-# Example with all optional collectors
-export METRICS_UTILITY_OPTIONAL_COLLECTORS="main_host,main_jobevent,main_indirectmanagednodeaudit"
+# Example with all optional collectors        export METRICS_UTILITY_OPTIONAL_COLLECTORS="main_host,main_jobevent,main_indirectmanagednodeaudit"
 ```
 
-#### 12.5.1.2. Optional sheets for `build_report` command
+
+
+
+
+### 12.5.3. Optional sheets for `build_report` command
 
 
 
@@ -134,7 +136,7 @@ To outline the quality of data collected it also lists:
 
 
 
-#### 12.5.1.3. Filtering reports by organization
+### 12.5.4. Filtering reports by organization
 
 
 
@@ -150,7 +152,7 @@ This renders only the data from these organizations in the built report. This fi
 -  `    usage_by_modules`
 
 
-#### 12.5.1.4. Selecting a date range for your CCSPv2 report
+### 12.5.5. Selecting a date range for your CCSPv2 report
 
 
 
@@ -171,7 +173,7 @@ metrics-utility build_report --since=6months
 metrics-utility build_report --since=6months --force
 ```
 
-### 12.5.2. `RENEWAL_GUIDANCE`
+### 12.5.6. `RENEWAL_GUIDANCE`
 
 
 
@@ -185,7 +187,7 @@ This report is currently a tech preview solution. It is designed to provide more
 
 
 
-#### 12.5.2.1. Storage and invocation
+#### 12.5.6.1. Storage and invocation
 
 
 
@@ -203,7 +205,7 @@ export METRICS_UTILITY_SHIP_PATH=/path_to_built_report/...
 metrics-utility build_report --since=12months --ephemeral=1month
 ```
 
-#### 12.5.2.2. Showing ephemeral usage
+#### 12.5.6.2. Showing ephemeral usage
 
 
 
@@ -216,7 +218,7 @@ The `RENEWAL_GUIDANCE` report has the capability to list additional sheets with 
 metrics-utility build_report --since=12months --ephemeral=1month
 ```
 
-#### 12.5.2.3. Selecting a date range for your `RENEWAL_GUIDANCE` report
+#### 12.5.6.3. Selecting a date range for your `RENEWAL_GUIDANCE` report
 
 
 
@@ -234,14 +236,14 @@ metrics-utility build_report --since=12months
 metrics-utility build_report --since=12months --force
 ```
 
-### 12.5.3. CCSP
+### 12.5.7. CCSP
 
 
 
 
 `CCSP` is the original report format. It does not include many of the customization of CCSPv2, and it is intended to be used only for the CCSP partner program.
 
-#### 12.5.3.1. Optional collectors for `gather` command
+### 12.5.8. Optional collectors for `gather` command
 
 
 
@@ -275,7 +277,7 @@ You can use the following optional collectors for the `gather` command:
 export METRICS_UTILITY_OPTIONAL_COLLECTORS="main_host,main_jobevent,main_indirectmanagednodeaudit"
 ```
 
-#### 12.5.3.2. Optional sheets for `build_report` command
+### 12.5.9. Optional sheets for `build_report` command
 
 
 
@@ -289,18 +291,11 @@ You may use the following optional sheets for the `build_report` command:
 - This report takes additional parameters to customize the summary page. For more information, see the following example:
 
 
+```
+export METRICS_UTILITY_PRICE_PER_NODE=11.55 # in USD        export METRICS_UTILITY_REPORT_SKU=MCT3752MO        export METRICS_UTILITY_REPORT_SKU_DESCRIPTION="EX: Red Hat Ansible Automation Platform, Full Support (1 Managed Node, Dedicated, Monthly)"        export METRICS_UTILITY_REPORT_H1_HEADING="CCSP Reporting &lt;Company&gt;: ANSIBLE Consumption"        export METRICS_UTILITY_REPORT_COMPANY_NAME="Company Name"        export METRICS_UTILITY_REPORT_EMAIL="email@email.com"        export METRICS_UTILITY_REPORT_RHN_LOGIN="test_login"        export METRICS_UTILITY_REPORT_COMPANY_BUSINESS_LEADER="BUSINESS LEADER"        export METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER="PROCUREMENT LEADER"
+```
 
-```
-export METRICS_UTILITY_PRICE_PER_NODE=11.55 # in USD
-export METRICS_UTILITY_REPORT_SKU=MCT3752MO
-export METRICS_UTILITY_REPORT_SKU_DESCRIPTION="EX: Red Hat Ansible Automation Platform, Full Support (1 Managed Node, Dedicated, Monthly)"
-export METRICS_UTILITY_REPORT_H1_HEADING="CCSP Reporting &lt;Company&gt;: ANSIBLE Consumption"
-export METRICS_UTILITY_REPORT_COMPANY_NAME="Company Name"
-export METRICS_UTILITY_REPORT_EMAIL="email@email.com"
-export METRICS_UTILITY_REPORT_RHN_LOGIN="test_login"
-export METRICS_UTILITY_REPORT_COMPANY_BUSINESS_LEADER="BUSINESS LEADER"
-export METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER="PROCUREMENT LEADER"
-```
+
 
 -  `    managed_nodes`
 
@@ -335,7 +330,7 @@ export METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER="PROCUREMENT LEADER"
 export METRICS_UTILITY_OPTIONAL_CCSP_REPORT_SHEETS='ccsp_summary,managed_nodes,indirectly_managed_nodes,inventory_scope,usage_by_collections,usage_by_roles,usage_by_modules'
 ```
 
-#### 12.5.3.3. Selecting a date range for your CCSP report
+### 12.5.10. Selecting a date range for your CCSP report
 
 
 
@@ -399,16 +394,16 @@ Use the following procedure to use automation controller to configure and use ea
 1. Create an external credential for authenticating with the secret management system. At minimum, give a name for the external credential and select one of the following for the **Credential type** field:
 
 
--  [AWS Secrets Manager Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-aws-secrets-manager-lookup)
--  [Centrify Vault Credential Provider Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-centrify-vault-lookup)
--  [CyberArk Central Credential Provider (CCP) Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-cyberark-ccp-lookup)
--  [CyberArk Conjur Secrets Manager Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-cyberark-conjur-lookup)
--  [HashiCorp Vault Secret Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-hashicorp-vault-lookup)
--  [HashiCorp Vault Signed SSH](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-hashicorp-signed-ssh)
--  [Microsoft Azure Key Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-azure-key-vault-lookup)
--  [Thycotic DevOps Secrets Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-thycotic-devops-vault)
--  [Thycotic Secret Server](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-thycotic-secret-server)
--  [GitHub app token lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-github-app-token)
+-  [AWS Secrets Manager Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-aws-secrets-manager-lookup)
+-  [Centrify Vault Credential Provider Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-centrify-vault-lookup)
+-  [CyberArk Central Credential Provider (CCP) Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-cyberark-ccp-lookup)
+-  [CyberArk Conjur Secrets Manager Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-cyberark-conjur-lookup)
+-  [HashiCorp Vault Secret Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-hashicorp-vault-lookup)
+-  [HashiCorp Vault Signed SSH](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-hashicorp-signed-ssh)
+-  [Microsoft Azure Key Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-azure-key-vault-lookup)
+-  [Thycotic DevOps Secrets Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-thycotic-devops-vault)
+-  [Thycotic Secret Server](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-thycotic-secret-server)
+-  [Configuring a GitHub App Installation Access Token Lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#controller-github-app-token)
 
 In this example, the _Demo Credential_ is the target credential.
 
@@ -441,10 +436,7 @@ For more information, see the development documents for [Credential plugins](htt
 
 The information required for the **Metadata** tab of the input source.
 
-
-<span id="aws_secrets_manager_lookup"></span>
-##### AWS Secrets Manager Lookup
-
+**AWS Secrets Manager Lookup**
 
 | Metadata | Description |
 | --- | --- |
@@ -452,10 +444,7 @@ The information required for the **Metadata** tab of the input source.
 | AWS Secret Name (required) | Specify the AWS secret name that was generated by the AWS access key. |
 
 
-
-<span id="centrify_vault_credential_provider_lookup"></span>
-##### Centrify Vault Credential Provider Lookup
-
+**Centrify Vault Credential Provider Lookup**
 
 | Metadata | Description |
 | --- | --- |
@@ -463,10 +452,7 @@ The information required for the **Metadata** tab of the input source.
 | System Name | Specify the name used by the Centrify portal. |
 
 
-
-<span id="cyberark_central_credential_provider_lookup"></span>
-##### CyberArk Central Credential Provider Lookup
-
+**CyberArk Central Credential Provider Lookup**
 
 | Metadata | Description |
 | --- | --- |
@@ -476,10 +462,7 @@ The information required for the **Metadata** tab of the input source.
 | Reason | If required for the object’s policy, supply a reason for checking out the secret, as CyberArk logs those. |
 
 
-
-<span id="cyberark_conjur_secrets_lookup"></span>
-##### CyberArk Conjur Secrets Lookup
-
+**CyberArk Conjur Secrets Lookup**
 
 | Metadata | Description |
 | --- | --- |
@@ -487,10 +470,7 @@ The information required for the **Metadata** tab of the input source.
 | Secret Version | Specify a version of the secret, if necessary, otherwise, leave it empty to use the latest version. |
 
 
-
-<span id="hashivault_secret_lookup"></span>
-##### HashiVault Secret Lookup
-
+**HashiVault Secret Lookup**
 
 | Metadata | Description |
 | --- | --- |
@@ -500,10 +480,7 @@ The information required for the **Metadata** tab of the input source.
 | Secret Version (V2 Only) | Specify a version if necessary, otherwise, leave it empty to use the latest version. |
 
 
-
-<span id="hashicorp_signed_ssh"></span>
-##### HashiCorp Signed SSH
-
+**HashiCorp Signed SSH**
 
 | Metadata | Description |
 | --- | --- |
@@ -513,10 +490,7 @@ The information required for the **Metadata** tab of the input source.
 | Valid Principals | Specify a user (or users) other than the default, that you are requesting vault to authorize the cert for the stored key. Hashi vault has a default user for whom it signs, for example, ec2-user. |
 
 
-
-<span id="microsoft_azure_kms"></span>
-##### Microsoft Azure KMS
-
+**Microsoft Azure KMS**
 
 | Metadata | Description |
 | --- | --- |
@@ -524,20 +498,14 @@ The information required for the **Metadata** tab of the input source.
 | Secret Version | Specify a version of the secret, if necessary, otherwise, leave it empty to use the latest version. |
 
 
-
-<span id="thycotic_devops_secrets_vault"></span>
-##### Thycotic DevOps Secrets Vault
-
+**Thycotic DevOps Secrets Vault**
 
 | Metadata | Description |
 | --- | --- |
 | Secret Path (required) | Specify the path to where the secret information is stored, for example, /path/username. |
 
 
-
-<span id="thycotic_secret_server"></span>
-##### Thycotic Secret Server
-
+**Thycotic Secret Server**
 
 | Metadata | Description |
 | --- | --- |
@@ -2460,7 +2428,7 @@ Then, for each of the groups that have :vars listed, create a file called `inven
 The importer then handles the conversion correctly.
 
 
-<span id="idm139935545949856"></span>
+<span id="idm140603452571680"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

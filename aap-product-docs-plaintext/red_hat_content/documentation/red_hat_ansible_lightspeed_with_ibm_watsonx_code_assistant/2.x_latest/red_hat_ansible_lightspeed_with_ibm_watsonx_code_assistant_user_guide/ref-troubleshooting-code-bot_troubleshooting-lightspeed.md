@@ -1,5 +1,5 @@
 # 7. Troubleshooting
-## 7.4. Troubleshooting Ansible code bot errors
+## 7.3. Troubleshooting Ansible code bot errors
 
 
 

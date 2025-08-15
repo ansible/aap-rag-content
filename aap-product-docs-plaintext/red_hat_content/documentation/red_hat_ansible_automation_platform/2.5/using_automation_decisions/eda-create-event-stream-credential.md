@@ -22,5 +22,8 @@ You must create an event stream credential first before you can use an event str
 1. ClickCreate credential.
 
 
+**Results**
+
 The Details page is displayed. From there or the **Credentials** list view, you can edit or delete it.
+
 

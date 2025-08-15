@@ -1,6 +1,6 @@
 # 3. Technology preview
 ## 3.1. Technology Preview
-### 3.1.2. Ansible Automation Platform self-service technology preview
+### 3.1.3. Ansible Automation Platform self-service technology preview
 
 
 

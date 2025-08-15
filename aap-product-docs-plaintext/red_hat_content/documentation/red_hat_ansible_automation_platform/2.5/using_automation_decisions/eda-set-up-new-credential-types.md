@@ -67,6 +67,6 @@ icon to modify the credential type options.
 
 **Additional resources**
 
-For information about how to create a new credential, see [Setting up credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_decisions/index#eda-set-up-credential) .
+[Setting up credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_decisions/eda-credentials#eda-set-up-credential) .
 
 

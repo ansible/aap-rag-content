@@ -1,15 +1,38 @@
 # 10. Patch releases
-## 10.13. Ansible Automation Platform patch release January 22, 2025
-### 10.13.1. Enhancements
+## 10.11. Ansible Automation Platform patch release February 25, 2025
+### 10.11.1. Enhancements
 
 
 
 
-#### 10.13.1.1. Ansible Automation Platform
+#### 10.11.1.1. Platform gateway
 
 
 
 
-- Legacy **Auth SSO URL** settings are now customizable if needed for gateway, controller, and hub overrides passed on the Ansible Automation Platform CR if provided. This is mainly useful if you are using a custom ingress controller.(AAP-37364)
+- Previously `    gateway_proxy_url` was used for the proxy health check, but is no longer used in favor of the `    ENVOY_HOSTNAME` setting.(AAP-39907)
+
+
+#### 10.11.1.2. Event-Driven Ansible
+
+
+
+
+- In the credential type schema the format field can be set to binary_base64 to specify a file should be loaded as a binary file.(AAP-36581)
+
+
+- Sample Credential Type Schema
+- Inputs Configuration
+- fields:
+
+
+- id: keytab
+- type: string
+- label: Kerberos Keytab file
+- format: binary_base64 secret: true
+- help_text: Please select a Kerberos Keytab file
+- multiline: true
+
+
 
 

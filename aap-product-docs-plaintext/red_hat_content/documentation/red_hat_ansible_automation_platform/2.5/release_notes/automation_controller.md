@@ -1,26 +1,25 @@
 # 10. Patch releases
-## 10.1. Ansible Automation Platform patch release July 2, 2025
-### 10.1.6. Automation controller
+## 10.1. Ansible Automation Platform patch release July 30, 2025
+### 10.1.4. Automation controller
 
 
 
 
-#### 10.1.6.1. Features
+#### 10.1.4.1. Enhancements
 
 
 
 
-- Added AWX `    dispatcherd` integration.(AAP-45800)
+- Update the injectors for the Ansible Automation Platform credential type to work across collection.(AAP-47877)
 
 
-#### 10.1.6.2. Bug Fixes
+#### 10.1.4.2. Bug Fixes
 
 
 
 
-- Fixed a race condition where job templates with duplicate names in the same organization could be created.(AAP-45968)
-- Fixed an issue where `    ole_user_assignments` failed to query for `    object_ansible_id` . Enabled query filtering for fields `    user_ansible_id` , `    team_ansible_id` , and `    object_ansible_id` on the role assignment API endpoints.(AAP-45443)
-- Fixed an issue where some credential types were not populated after upgrading. This adds a new migration to accomplish this.(AAP-44233)
-- Fixed an issue where there were large numbers of jobs queued that were stuck in waiting status.(AAP-44143)
+- Removed API version from hard-coded URL in inventory plugin.(AAP-48443)
+- Fixed a **404** error for workflow nodes.(AAP-47362)
+- Fixed an issue where the automation controller pod was not working after an upgrade to `    aap-operator.v2.5.0-0.1750901870` .(AAP-48771)
 
 
