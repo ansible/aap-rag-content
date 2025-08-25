@@ -1,4 +1,5 @@
 """Utility script to generate embeddings."""
+
 import argparse
 import json
 import os
@@ -14,19 +15,29 @@ from llama_stack.distribution.library_client import LlamaStackAsLibraryClient
 UNREACHABLE_DOCS: int = 0
 ADDITIONAL_DOCS_DIR = "additional_docs"
 
+
 class SourceDocument:
     path: str
     metadata: Dict
 
-    def __init__(self, path: str, metadata: Dict):
+    def __init__(self, path: Path, metadata: Dict):
         self.path = path
         self.metadata = metadata
 
 
 class DocumentIngestionTool:
 
-    def __init__(self, folder, chunk, index, skip_ping=False, extra_docs_folder=None):
+    def __init__(
+        self,
+        folder: Path,
+        chunk,
+        index,
+        skip_ping=False,
+        additional_docs_folder: Path | None = None,
+        extra_docs_folder: Path | None = None,
+    ):
         self.folder = folder
+        self.additional_docs_folder = additional_docs_folder
         self.chunk = chunk
         self.index = index
         self.skip_ping = skip_ping
@@ -43,9 +54,13 @@ class DocumentIngestionTool:
         client.initialize()
 
         vector_providers = [
-            provider for provider in client.providers.list() if provider.api == "vector_io"
+            provider
+            for provider in client.providers.list()
+            if provider.api == "vector_io"
         ]
-        provider_id = vector_providers[0].provider_id  # Use the first available vector provider
+        provider_id = vector_providers[
+            0
+        ].provider_id  # Use the first available vector provider
 
         # Register a vector database
         client.vector_dbs.register(
@@ -64,23 +79,19 @@ class DocumentIngestionTool:
         except requests.exceptions.RequestException:
             return False
 
-
-    def get_file_title(self, file_path: str) -> str:
+    def get_file_title(self, file_path: Path) -> str:
         """Extract title from the plaintext doc file."""
-        title = ""
-        try:
-            with open(file_path, encoding="utf8") as infile:
-                title = infile.readline().rstrip("\n").lstrip("# ")
-        except Exception:  # noqa: S110
-            pass
-        return title
-
+        if not file_path.exists():
+            return title
+        infile = file_path.read_text(encoding="utf8")
+        return infile.readline().rstrip("\n").lstrip("# ")
 
     def file_metadata_func(
-            self,
-            file_path: str,
-            docs_url_func: Callable[[str], str],
-            docs_title_func: Callable[[str], str])-> Dict:
+        self,
+        file_path: str,
+        docs_url_func: Callable[[str], str],
+        docs_title_func: Callable[[str], str],
+    ) -> Dict:
         """Populate the docs_url and title metadata elements with docs URL and the page's title.
 
         Args:
@@ -89,7 +100,7 @@ class DocumentIngestionTool:
         """
         docs_url = docs_url_func(file_path)
         title = docs_title_func(file_path)
-        msg = f"file_path: {file_path}, title: {title}, docs_url: {docs_url}"
+        msg = f"{file_path=}, {title=}, {docs_url=}"
         if not self.skip_ping and not self.ping_url(docs_url):
             global UNREACHABLE_DOCS
             UNREACHABLE_DOCS += 1
@@ -97,45 +108,37 @@ class DocumentIngestionTool:
         print(msg)
         return {"docs_url": docs_url, "title": title}
 
-    def aap_file_metadata_func(self, file_path: str) -> Dict:
+    def aap_file_metadata_func(self, md_path: Path) -> Dict:
         """Populate metadata for an AAP docs page.
 
         Args:
             file_path: str: file path in str
         """
-        full_path = os.path.abspath(file_path)
-        i = full_path.rindex("/")
-        metadata_path = Path(full_path[:i]).joinpath(".metadata") \
-            .joinpath(full_path[(i+1):].replace(".md", ".json"))
-        with open(metadata_path, encoding="utf8") as f:
-            metadata = json.load(f)
-            docs_url = lambda x: metadata["url"]
-            docs_title = lambda x: metadata["title"]
-        return self.file_metadata_func(file_path, docs_url, docs_title)
+        metadata_path = Path(md_path.parent / ".metadata" / f"{md_path.stem}.json")
+        metadata = json.loads(metadata_path.read_text(encoding="utf8"))
+        docs_url = lambda x: metadata["url"]
+        docs_title = lambda x: metadata["title"]
+        return self.file_metadata_func(md_path, docs_url, docs_title)
 
-    def additional_docs_metadata_func(self, file_path: str) -> Dict:
+    def additional_docs_metadata_func(self, file_path: Path) -> Dict:
         """Populate metadata for additional docs.
 
         Args:
             file_path: str: file path in str
         """
-        full_path = os.path.abspath(file_path)
-        i = full_path.rindex("/")
-        metadata_path = Path(full_path[:i]).joinpath(".metadata") \
-            .joinpath(full_path[(i+1):].replace(".txt", ".json"))
-
+        metadata_path = file_path.parent / ".metadata"
         if metadata_path.exists():
-            with open(metadata_path, encoding="utf8") as f:
-                metadata = json.load(f)
-                docs_url = lambda x: metadata["url"]
+            metadata = json.loads(metadata_path.read_text(encoding="utf8"))
+            docs_url = lambda x: metadata["url"]
             return self.file_metadata_func(file_path, docs_url, self.get_file_title)
 
-        AAP_RAG_CONTENT_BASE_URL = "https://github.com/ansible/aap-rag-content/blob/main/"
+        AAP_RAG_CONTENT_BASE_URL = (
+            "https://github.com/ansible/aap-rag-content/blob/main/"
+        )
         docs_url = AAP_RAG_CONTENT_BASE_URL + str(file_path)
 
         title = self.get_file_title(file_path)
-        msg = f"file_path: {file_path}, title: {title}, docs_url: {docs_url}"
-        print(msg)
+        print(f"{file_path=}, {title=}, {docs_url=}")
         return {"docs_url": docs_url, "title": title}
 
     def insert_documents(self, documents: list[SourceDocument], prefix: str):
@@ -149,50 +152,49 @@ class DocumentIngestionTool:
         count = 0
         batch_size = 100
         for i, doc in enumerate(documents):
-            with open(doc.path) as f:
-                content = f.read()
-                rag_documents.append(
-                    RAGDocument(
-                        document_id=f"{prefix}-{i}",
-                        content=content,
-                        mime_type="text/plain",
-                        metadata=doc.metadata,
-                    )
+            content = doc.path.read_text(encoding="utf8")
+            rag_documents.append(
+                RAGDocument(
+                    document_id=f"{prefix}-{i}",
+                    content=content,
+                    mime_type="text/plain",
+                    metadata=doc.metadata,
                 )
-                if len(rag_documents) >= batch_size or len(rag_documents) + count == len(documents):
-                    count += len(rag_documents)
-                    print(f"count={count}")
-                    self.client.tool_runtime.rag_tool.insert(
-                        documents=rag_documents,
-                        vector_db_id=self.index,
-                        chunk_size_in_tokens=self.chunk,
-                    )
-                    rag_documents = []
+            )
+            if len(rag_documents) >= batch_size or len(rag_documents) + count == len(
+                documents
+            ):
+                count += len(rag_documents)
+                print(f"{count=}")
+                self.client.tool_runtime.rag_tool.insert(
+                    documents=rag_documents,
+                    vector_db_id=self.index,
+                    chunk_size_in_tokens=self.chunk,
+                )
+                rag_documents = []
 
     def run(self):
-        """ Ingest product documentation and additional documents. """
+        """Ingest product documentation and additional documents."""
         start_time = time.time()
 
-        if not self.extra_docs_folder:
-            # Load documents
-            input_files = list(Path(self.folder).rglob("*.md"))
-            documents = [
-                SourceDocument(f, self.aap_file_metadata_func(f))
-                for f in input_files
-            ]
-            self.insert_documents(documents, "doc")
+        # Load documents
+        documents = [
+            SourceDocument(f, self.aap_file_metadata_func(f))
+            for f in self.folder.rglob("*.md")
+        ]
+        self.insert_documents(documents, "doc")
 
-            additional_input_files = list((Path(self.folder) / "../additional_docs").rglob("*.txt"))
+        if self.additional_docs:
             additional_docs = [
                 SourceDocument(f, self.additional_docs_metadata_func(f))
-                for f in additional_input_files
+                for f in self.additional_docs.rglob("*.txt")
             ]
             self.insert_documents(additional_docs, "additional_doc")
-        else:
-            extra_input_files = list(Path(self.extra_docs_folder).rglob("*.txt"))
+
+        if self.extra_docs_folder:
             extra_docs = [
                 SourceDocument(f, self.additional_docs_metadata_func(f))
-                for f in extra_input_files
+                for f in self.extra_docs_folder.rglob("*.txt")
             ]
             self.insert_documents(extra_docs, "extra_doc")
 
@@ -207,20 +209,44 @@ class DocumentIngestionTool:
         elapsed_time = time.time() - start_time
         print(f"Elapsed time: {elapsed_time:.2f} secs")
 
+
 def main():
     parser = argparse.ArgumentParser(description="embedding cli for task execution")
-    parser.add_argument("-f", "--folder", help="Plain text folder path")
-    parser.add_argument("-c", "--chunk", type=int, default=380, help="Chunk size for embedding")
+    parser.add_argument("-f", "--folder", type=Path, help="Plain text folder path")
+    parser.add_argument(
+        "--additional-docs-folder", type=Path, help="Addional_doc path", default=None
+    )
+    parser.add_argument(
+        "-c", "--chunk", type=int, default=380, help="Chunk size for embedding"
+    )
     parser.add_argument("-i", "--index", help="Product index")
-    parser.add_argument("--skip-ping", action="store_true", help="Skip URL existence check")
-    parser.add_argument("--extra-docs-folder",
-                        help="Folder that stores extra docs to be added to the existing DB",
-                        default=None)
+    parser.add_argument(
+        "--skip-ping", action="store_true", help="Skip URL existence check"
+    )
+    parser.add_argument(
+        "--extra-docs-folder",
+        type=Path,
+        help="Folder that stores extra docs to be added to the existing DB",
+        default=None,
+    )
 
     args = parser.parse_args()
     print(f"Arguments used: {args}")
+    if not args.folder.is_dir():
+        print("--folder must point on a valid directory")
+        exit(1)
+    if not args.additional_docs_folder:
+        print("--additional-docs-folder was not set")
+    if args.additional_docs_folder and not args.additional_docs_folder.is_dir():
+        print(f"{args.additional_docs_folder=} doesn't exist!")
+        exit(1)
+    if args.extra_docs_folder and not args.extra_docs_folder.is_dir():
+        print("--extra-docs-folder must point on a valid directory")
+        exit(1)
 
-    DocumentIngestionTool(args.folder, args.chunk,  args.index, args.skip_ping, args.extra_docs_folder).run()
+    DocumentIngestionTool(
+        args.folder, args.chunk, args.index, args.skip_ping, args.extra_docs_folder
+    ).run()
 
 
 if __name__ == "__main__":
