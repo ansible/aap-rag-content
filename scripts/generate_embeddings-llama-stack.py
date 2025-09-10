@@ -245,7 +245,7 @@ def main():
         exit(1)
 
     DocumentIngestionTool(
-        args.folder, args.chunk, args.index, args.skip_ping, args.extra_docs_folder
+        args.folder, args.chunk, args.index, args.skip_ping, args.additional_docs_folder, args.extra_docs_folder
     ).run()
 
 
