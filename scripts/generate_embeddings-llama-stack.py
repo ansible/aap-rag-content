@@ -83,8 +83,8 @@ class DocumentIngestionTool:
         """Extract title from the plaintext doc file."""
         if not file_path.exists():
             return ""
-        infile = file_path.read_text(encoding="utf8")
-        return infile.readline().rstrip("\n").lstrip("# ")
+        file_content = file_path.read_text(encoding="utf8")
+        return file_content.rstrip("\n").lstrip("# ")
 
     def file_metadata_func(
         self,
