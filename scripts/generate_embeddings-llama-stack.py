@@ -126,7 +126,7 @@ class DocumentIngestionTool:
         Args:
             file_path: str: file path in str
         """
-        metadata_path = file_path.parent / ".metadata"
+        metadata_path = file_path.parent / ".metadata" / f"{file_path.stem}.json"
         if metadata_path.exists():
             metadata = json.loads(metadata_path.read_text(encoding="utf8"))
             docs_url = lambda x: metadata["url"]
