@@ -83,8 +83,8 @@ class DocumentIngestionTool:
         """Extract title from the plaintext doc file."""
         if not file_path.exists():
             return ""
-        infile = file_path.read_text(encoding="utf8")
-        return infile.readline().rstrip("\n").lstrip("# ")
+        file_content = file_path.read_text(encoding="utf8")
+        return file_content.rstrip("\n").lstrip("# ")
 
     def file_metadata_func(
         self,
@@ -126,7 +126,7 @@ class DocumentIngestionTool:
         Args:
             file_path: str: file path in str
         """
-        metadata_path = file_path.parent / ".metadata"
+        metadata_path = file_path.parent / ".metadata" / f"{file_path.stem}.json"
         if metadata_path.exists():
             metadata = json.loads(metadata_path.read_text(encoding="utf8"))
             docs_url = lambda x: metadata["url"]
@@ -245,7 +245,7 @@ def main():
         exit(1)
 
     DocumentIngestionTool(
-        args.folder, args.chunk, args.index, args.skip_ping, args.extra_docs_folder
+        args.folder, args.chunk, args.index, args.skip_ping, args.additional_docs_folder, args.extra_docs_folder
     ).run()
 
 

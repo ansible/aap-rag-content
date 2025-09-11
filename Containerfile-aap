@@ -45,11 +45,13 @@ RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
 RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
 		set -e && python3.12 generate_embeddings-llama-stack.py \
 		  -f aap-product-docs-plaintext \
+		  --additional-docs-folder additional_docs \
 		  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
 		  -c 200; \
 	else \
 		set -e && python3.12 generate_embeddings-llama-stack.py \
 		  -f aap-product-docs-plaintext \
+		  --additional-docs-folder additional_docs \
 		  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
 		  -c 200 \
 		  --skip-ping; \
