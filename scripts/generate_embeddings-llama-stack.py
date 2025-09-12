@@ -84,7 +84,7 @@ class DocumentIngestionTool:
         if not file_path.exists():
             return ""
         file_content = file_path.read_text(encoding="utf8")
-        return file_content.rstrip("\n").lstrip("# ")
+        return file_content.split("\n")[0].lstrip("# ")
 
     def file_metadata_func(
         self,
