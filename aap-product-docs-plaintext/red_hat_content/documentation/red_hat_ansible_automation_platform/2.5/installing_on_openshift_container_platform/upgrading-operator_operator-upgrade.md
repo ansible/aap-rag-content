@@ -1,10 +1,17 @@
-# 7. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 7.5. Upgrading the Ansible Automation Platform Operator
+# 8. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 8.5. Upgrading the Ansible Automation Platform Operator
 
 
 
 
-To upgrade to the latest version of Ansible Automation Platform Operator on OpenShift Container Platform, you can do the following:
+To upgrade to the latest version of Ansible Automation Platform Operator on OpenShift Container Platform, you can use the following procedure:
+
+Note
+If you are on version 2.4, it is recommended to skip 2.5 and upgrade straight to version 2.5.
+
+If you upgraded from 2.4 to 2.5, you must migrate your authentication methods and users before upgrading to 2.6 as that legacy authenticator functionality was removed.
+
+
 
 **Prerequisites**
 

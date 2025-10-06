@@ -1,6 +1,6 @@
 # 1. Red Hat Ansible Automation Platform installation overview
-## 1.2. Managing Ansible Automation Platform licensing, updates and support
-### 1.2.6. Obtaining a manifest file
+## 1.4. Managing Ansible Automation Platform licensing, updates and support
+### 1.4.6. Obtaining a manifest file
 
 
 
@@ -9,7 +9,7 @@ You can obtain a subscription manifest in the [Subscription Allocations](https:/
 
 To begin, login to the [Red Hat Customer Portal](https://access.redhat.com/) using your administrator user account and follow the procedures in this section.
 
-#### 1.2.6.1. Create a subscription allocation
+#### 1.4.6.1. Create a subscription allocation
 
 
 
@@ -29,7 +29,7 @@ Creating a new subscription allocation allows you to set aside subscriptions and
 -  [Add the subscriptions](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-add-merge-subscriptions) .
 
 
-#### 1.2.6.2. Adding subscriptions to a subscription allocation
+#### 1.4.6.2. Adding subscriptions to a subscription allocation
 
 
 
@@ -50,7 +50,7 @@ Once an allocation is created, you can add the subscriptions you need for Ansibl
 -  [Download the manifest file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-aap-generate-manifest-file) .
 
 
-#### 1.2.6.3. Downloading a manifest file
+#### 1.4.6.3. Downloading a manifest file
 
 
 
@@ -66,10 +66,5 @@ After an allocation is created and has the appropriate subscriptions on it, you 
 This downloads a file _manifest_ <allocation name>_<date>.zip_ to your default downloads folder.
 
 
-
-
-**Next steps**
-
--  [Upload the manifest file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/assembly-gateway-licensing#proc-aap-activate-with-manifest) .
 
 

@@ -1,10 +1,10 @@
-# 6. Roles
-## 6.4. Deleting a role
+# 5. Roles
+## 5.4. Deleting a role
 
 
 
 
-Built in roles can not be deleted, however, you can delete custom roles from the **Roles** list view.
+Built-in roles cannot be deleted, however, you can delete custom roles from the **Roles** list view.
 
 **Procedure**
 

@@ -1,35 +1,37 @@
 # 10. Patch releases
-## 10.4. Ansible Automation Platform patch release June 9, 2025
-### 10.4.2. Ansible Automation Platform
+## 10.3. Ansible Automation Platform patch release July 30, 2025
+### 10.3.3. Ansible Automation Platform
 
 
 
 
-#### 10.4.2.1. Features
+#### 10.3.3.1. Features
 
 
 
 
-- Adds `    ansible_base.lib.utils.address.classify_address` providing common recognition and parsing of machine addressing hostname, IPv4 and IPv6 with and without an appended `    :&lt;port&gt;` .(AAP-45910)
+-  `    PosixUIDGroupType` can be selected for LDAP Group Type.(AAP-49347)
 
 
-#### 10.4.2.2. Enhancements
-
-
-
-
-- LDAP filter validation improved such that all filters that meet LDAP standards including and/or should be properly validated.(AAP-46249)
-- Completely updated interface for managing authentication methods and mappings.(AAP-45750)
-- Default validity period for **Oauth** tokens reduced from 1000 years to 1 year. Existing tokens will NOT be updated. If you wish to reduce the validity period of existing tokens, please remove and re-issue them. The default validity period for **Oauth** tokens can be modified via the django setting `    ACCESS_TOKEN_EXPIRE_SECONDS in OAUTH2_PROVIDER` .(AAP-46187)
-
-
-#### 10.4.2.3. Bug fixes
+#### 10.3.3.2. Enhancements
 
 
 
 
-- Fixed an issue where there was a degraded logging performance notice removed on the job output page. Polling fallback functionality still exists.(AAP-46120)
-- Fixed an issue where the gateway proxy was not properly ejecting nodes failing health checks.(AAP-43931)
-- Fixed an issue where installations with Red Hat Ansible Lightspeed enabled were not handled properly during upgrade.(AAP-46154)
+- Optimized the handling of web socket messages from the Workflow Visualizer.(AAP-46800)
+
+
+#### 10.3.3.3. Bug fixes
+
+
+
+
+- Fixed the fields `    content_type` for role user assignments to indicate that null values are valid responses from the API.(AAP-49494)
+- Fixed the fields `    team_ansible_id` for role team assignments to indicate that null values can be POSTed to the API.(AAP-49812)
+- Fixed an issue where `    auto-complete` was not disabled on all forms for sensitive information such as usernames, passwords, secret keys, etc.(AAP-49079)
+- Fixed an issue related to workflow job template limits overriding workflow job template node limits upon save.(AAP-48946)
+- Fixed the **Min** and **Max** Limit values displayed on the **Edit Survey** form.(AAP-39933)
+- Fixed an issue where the case insensitivity for authentication map user attribute names and values and for group names was not available. Feature flag `    FEATURE_CASE_INSENSITIVE_AUTH_MAPS` must be set to true to enable case insensitive comparisons.(AAP-49327)
+- Fixed an issue that adds an OIDC Callback URL field that, after creation of authenticator, displays the URL to use in setting up the IdP. The URL field is displayed on the creation page and this field is to be left blank.(AAP-49874)
 
 

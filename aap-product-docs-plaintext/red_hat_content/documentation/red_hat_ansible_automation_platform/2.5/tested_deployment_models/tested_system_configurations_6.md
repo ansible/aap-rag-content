@@ -8,14 +8,12 @@
 Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
 
 
-<span id="idm139937754270400"></span>
+<span id="idm139984993540448"></span>
 **Table 4.5. Tested system configurations**
 
 | Type | Description |
 | --- | --- |
 | Subscription | Valid Red Hat Ansible Automation Platform subscription |
-| Operating system | Red Hat Enterprise Linux 9.2 or later minor versions of Red Hat Enterprise Linux 9 |
-| CPU architecture | x86_64, AArch64, s390x (IBM Z), ppc64le (IBM Power) |
 | Red Hat OpenShift | - Red Hat OpenShift on AWS Hosted Control Planes 4.15.16
 
 

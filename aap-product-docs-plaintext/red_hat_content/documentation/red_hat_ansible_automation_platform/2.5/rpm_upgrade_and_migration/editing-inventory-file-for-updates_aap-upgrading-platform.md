@@ -24,11 +24,7 @@ Provide a reachable IP address or fully qualified domain name (FQDN) for all hos
 
 
 
-
-
-**Provisioning new nodes in a cluster**
-
-- Add new nodes alongside existing nodes in the `    inventory` file as follows:
+1. Provision new nodes in a cluster, by adding new nodes alongside existing nodes in the `    inventory` file as follows:
 
 
 ```

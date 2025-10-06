@@ -24,8 +24,7 @@ For each interval cadence, Ansible code bot starts scanning your Git repositorie
 **Procedure**
 
 1. In GitHub, navigate to the repository that you want to scan.
-1. Create a `    .yml` configuration file named `    ansible-code-bot.yml` in your repository `    .github` folder.
-For example, `    .github/ansible-code-bot.yml` .
+1. Create a `    .yml` configuration file named `    ansible-code-bot.yml` in your repository `    .github` folder. For example, `    .github/ansible-code-bot.yml` .
 1. In the configuration file, specify the scan schedule in the `    interval` parameter. You can specify the `    interval` parameter as `    <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">daily</span></strong></span>` , `    <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">weekly</span></strong></span>` , or `    <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">monthly</span></strong></span>` . For example:
 
 
@@ -36,6 +35,8 @@ schedule:      interval: daily
 
 1. Commit your changes.
 
-
 The Ansible code bot starts scanning your repository per the schedule you configured at 9 AM UTC time.
+
+
+
 

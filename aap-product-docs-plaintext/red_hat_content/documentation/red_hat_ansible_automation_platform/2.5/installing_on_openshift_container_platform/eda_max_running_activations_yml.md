@@ -1,6 +1,6 @@
-# 11. Appendix: Red Hat Ansible Automation Platform custom resources
-## 11.1. Custom resources
-### 11.1.18. eda-max-running-activations.yml
+# 13. Appendix: Red Hat Ansible Automation Platform custom resources
+## 13.1. Custom resources
+### 13.1.18. eda-max-running-activations.yml
 
 
 
@@ -19,4 +19,4 @@ value: "15" # Setting this value to "-1" means there will be no limit
 ```
 
 
-<span id="idm140032594880912"></span>
+<span id="idm139902298668736"></span>

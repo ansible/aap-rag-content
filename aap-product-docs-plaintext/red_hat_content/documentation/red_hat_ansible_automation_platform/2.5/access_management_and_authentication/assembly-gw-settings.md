@@ -1,4 +1,4 @@
-# Chapter 7. Configuring Ansible Automation Platform
+# Chapter 6. Configuring Ansible Automation Platform
 
 
 

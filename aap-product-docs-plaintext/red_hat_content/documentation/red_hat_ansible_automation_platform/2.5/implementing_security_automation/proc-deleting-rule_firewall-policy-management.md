@@ -23,7 +23,7 @@ $ ansible-galaxy install ansible_security.acl_manager
 ```
 
 
-1. Using CLI, create a new playbook with the acl_manger role and set the parameters (e.g., source object, destination object, access rule between the two objects):
+1. Using CLI, create a new playbook with the acl_manger role and set the parameters, for example, source object, destination object, access rule between the two objects:
 
 
 ```
@@ -31,7 +31,7 @@ $ ansible-galaxy install ansible_security.acl_manager
 ```
 
 
-1. Run the playbook $ ansible-navigator run --ee false <playbook.yml>:
+1. Run the playbook `    $ ansible-navigator run --ee false &lt;playbook.yml&gt;` :
 
 ![Playbook with deleted firewall rule](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Implementing_security_automation-en-US/images/a28dc750b7226394546e12c4de260beb/security-delete-rule.png)
 

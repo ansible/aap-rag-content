@@ -13,7 +13,6 @@ You can request multitask code recommendations by entering a sequence of natural
 # Install postgresql-server &amp; run postgresql-setup command
 ```
 
-
 For better readability, you can split your multitask inline prompts over multiple lines. To achieve this, end your current line with an ampersand symbol (&) and start the next line with the hash symbol (#).
 
 **Example of a multitask prompt split over multiple lines**
@@ -23,7 +22,6 @@ For better readability, you can split your multitask inline prompts over multipl
 # create a security group that allows SSH &amp; create subnet with 10.0.1.0/24 cidr &amp;
 # create an internet gateway &amp; create a route table
 ```
-
 
 The Ansible Lightspeed service reads the text, interacts with the IBM watsonx Code Assistant model, and generates the code recommendations.
 
@@ -74,7 +72,7 @@ If you do not see the language mode section in your VS Code editor, from the Com
 If **Ansible** is already selected as the desired language but the **Lightspeed** entry is not displayed, re-select **Ansible** as the language mode. The following illustration shows **Lightspeed** entry on the VS Code status bar.
 
 
-<span id="idm140693281569472"></span>
+<span id="idm139816007109712"></span>
 **Figure 4.3. Ansible and Lightspeed set as selected language mode**
 
 ![Settings show Lightspeed as selected language mode](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/03ba1497281fc60846ce63163c57ecab/lightspeed-multitask-vs-code.png)
@@ -115,7 +113,6 @@ For more information, see the [Getting started with playbooks](https://docs.redh
 # Install postgresql-server &amp; run postgresql-setup command
 ```
 
-
 For better readability, split your multitask inline prompts over multiple lines. To achieve this, end your current line with an ampersand symbol (&) and start the next line with the hash symbol (#).
 
 **Example of a multitask prompt split over multiple lines**
@@ -124,7 +121,6 @@ For better readability, split your multitask inline prompts over multiple lines.
 ```
 # Create a keypair called lightspeed-keypair &amp; create a vpc &amp; create vpc_id var &amp;        # create a security group that allows SSH &amp; create subnet with 10.0.1.0/24 cidr &amp;        # create an internet gateway &amp; create a route table
 ```
-
 
 
 1. Press **Enter** directly after the task description. Keep the cursor at the same location in your file, and wait for the code recommendation results to populate.

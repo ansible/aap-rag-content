@@ -1,10 +1,10 @@
-# 4. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
-## 4.1. Overview
+# 5. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
+## 5.1. Overview
 
 
 
 
-The Ansible Lightspeed intelligent assistant is available on Ansible Automation Platform 2.5 on OpenShift Container Platform as a Technology Preview release. It is an intuitive chat interface embedded within the Ansible Automation Platform, utilizing generative artificial intelligence (AI) to answer questions about the Ansible Automation Platform.
+The Ansible Lightspeed intelligent assistant is available on Ansible Automation Platform 2.5 on OpenShift Container Platform as a Technology Preview release. It is an intuitive chat interface embedded within the Ansible Automation Platform, using generative artificial intelligence (AI) to answer questions about the Ansible Automation Platform.
 
 The Ansible Lightspeed intelligent assistant interacts with users in their natural language prompts in English, and uses Large Language Models (LLMs) to generate quick, accurate, and personalized responses. These responses empower Ansible users to work more efficiently, thereby improving productivity and the overall quality of their work.
 

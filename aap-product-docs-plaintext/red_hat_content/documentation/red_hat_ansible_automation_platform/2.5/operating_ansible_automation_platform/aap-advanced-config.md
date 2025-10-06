@@ -127,18 +127,208 @@ You can control how automation controller collects data from theSettings→Autom
 1. Select **Gather data for Automation Analytics** to enable automation controller to gather data on automation and send it to Automation Analytics.
 
 
-# Chapter 6. Renewing and changing the SSL certificate
+# Chapter 6. Renewing and changing the SSL/TLS certificates
 
 
 
 
-If your current SSL certificate has expired or will expire soon, you can either renew or replace the SSL certificate used by Ansible Automation Platform.
+If your current SSL/TLS certificates have expired or will expire soon, you can either renew or replace the SSL/TLS certificates used by Ansible Automation Platform.
 
-You must renew the SSL certificate if you need to regenerate the SSL certificate with new information such as new hosts.
+You must renew the SSL/TLS certificates if you need to regenerate them with new information such as new hosts.
 
-You must replace the SSL certificate if you want to use an SSL certificate signed by an internal certificate authority.
+You must replace the SSL/TLS certificates if you want to use certificates signed by an internal certificate authority.
 
-## 6.1. Renewing the self-signed SSL certificate
+## 6.1. Container-based installations
+
+
+
+
+You can change the TLS certificates and keys for your container-based Ansible Automation Platform installation. This process involves a preparation step, either providing new custom certificates or deleting or moving the old certificates, followed by running the installation program.
+
+### 6.1.1. Changing TLS certificates and keys using the installation program
+
+
+
+
+The following procedure describes how to update the TLS certificates and keys by using the installation program.
+
+**Procedure**
+
+1. To prepare the certificates and keys, choose one of the following methods:
+
+
+- To provide custom certificates - For each service that requires updated TLS certificates, copy the new certificates and keys to a path relative to the Ansible Automation Platform installer. Then update the inventory file variables with the absolute paths to the new files.
+
+
+```
+# Platform gateway        gateway_tls_cert=&lt;path_to_tls_certificate&gt;        gateway_tls_key=&lt;path_to_tls_key&gt;        gateway_pg_tls_cert=&lt;path_to_tls_certificate&gt;        gateway_pg_tls_key=&lt;path_to_tls_key&gt;        gateway_redis_tls_cert=&lt;path_to_tls_certificate&gt;        gateway_redis_tls_key=&lt;path_to_tls_key&gt;                # Automation controller        controller_tls_cert=&lt;path_to_tls_certificate&gt;        controller_tls_key=&lt;path_to_tls_key&gt;        controller_pg_tls_cert=&lt;path_to_tls_certificate&gt;        controller_pg_tls_key=&lt;path_to_tls_key&gt;                # Automation hub        hub_tls_cert=&lt;path_to_tls_certificate&gt;        hub_tls_key=&lt;path_to_tls_key&gt;        hub_pg_tls_cert=&lt;path_to_tls_certificate&gt;        hub_pg_tls_key=&lt;path_to_tls_key&gt;                # Event-Driven Ansible        eda_tls_cert=&lt;path_to_tls_certificate&gt;        eda_tls_key=&lt;path_to_tls_key&gt;        eda_pg_tls_cert=&lt;path_to_tls_certificate&gt;        eda_pg_tls_key=&lt;path_to_tls_key&gt;        eda_redis_tls_cert=&lt;path_to_tls_certificate&gt;        eda_redis_tls_key=&lt;path_to_tls_key&gt;                # PostgreSQL        postgresql_tls_cert=&lt;path_to_tls_certificate&gt;        postgresql_tls_key=&lt;path_to_tls_key&gt;                # Receptor        receptor_tls_cert=&lt;path_to_tls_certificate&gt;        receptor_tls_key=&lt;path_to_tls_key&gt;
+```
+
+
+- To generate new certificates - If you want the installation program to generate a new certificate for a service, delete or move the existing certificates and keys.
+
+
+<span id="idm139942724533968"></span>
+**Table 6.1. Certificate and key file paths per service**
+
+| Service | Certificate file path | Key file path |
+| --- | --- | --- |
+| Automation controller |  `~/aap/controller/etc/tower.cert` |  `~/aap/controller/etc/tower.key` |
+| Event-Driven Ansible |  `~/aap/eda/etc/eda.cert` |  `~/aap/eda/etc/eda.key` |
+| Platform gateway |  `~/aap/gateway/etc/gateway.cert` |  `~/aap/gateway/etc/gateway.key` |
+| Automation hub |  `~/aap/hub/etc/pulp.cert` |  `~/aap/hub/etc/pulp.key` |
+| PostgreSQL |  `~/aap/postgresql/server.crt` |  `~/aap/postgresql/server.key` |
+| Receptor |  `~/aap/receptor/etc/receptor.crt` |  `~/aap/receptor/etc/receptor.key` |
+| Redis |  `~/aap/redis/server.crt` |  `~/aap/redis/server.key` |
+
+
+
+
+
+
+1. After preparing your certificates, run the `    install` playbook from your installation directory:
+
+
+```
+ansible-playbook -i &lt;inventory_file_name&gt; ansible.containerized_installer.install
+```
+
+
+
+
+**Verification**
+
+Verify that the new TLS certificates are in use by checking that the services are running and accessible. To do this, check a specific endpoint by using `curl` :
+
+
+```
+$ curl -vk https://&lt;hostname_or_ip&gt;:&lt;port_number&gt;/api/v2/
+```
+
+The output of this command gives details about the TLS handshake. Look for the following output to confirm the correct certificate is being used:
+
+```
+*  SSL certificate verify OK
+```
+
+**Additional resources**
+
+-  [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#using-custom-tls-certificates)
+-  [Troubleshooting SSL/TLS issues](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/troubleshooting_ansible_automation_platform/troubleshoot-networking#troubleshooting-ssl-tls-issues)
+-  [Diagnosing the problem](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/troubleshooting-containerized-ansible-automation-platform#diagnosing-the-problem_troubleshooting-containerized-aap)
+
+
+## 6.2. Operator-based installations
+
+
+
+
+### 6.2.1. Changing the SSL certificate and key on automation controller on OpenShift Container Platform
+
+
+
+
+The following procedure describes how to change the SSL certificate and key for automation controller running on OpenShift Container Platform.
+
+**Procedure**
+
+1. Copy the signed SSL certificate and key to a secure location.
+1. Create a TLS secret within OpenShift:
+
+
+```
+oc create secret tls ${CONTROLLER_INSTANCE}-certs-$(date +%F) --cert=/path/to/ssl.crt --key=/path/to/ssl.key
+```
+
+
+1. Modify the automation controller custom resource to add `    route_tls_secret` and the name of the new secret to the spec section.
+
+
+```
+oc edit automationcontroller/${CONTROLLER_INSTANCE}
+```
+
+
+```
+...    spec:      route_tls_secret: automation-controller-certs-2023-04-06    ...
+```
+
+
+
+
+The name of the TLS secret is arbitrary. In this example, it is timestamped with the date that the secret is created, to differentiate it from other TLS secrets applied to the automation controller instance.
+
+
+1. Wait a few minutes for the changes to be applied.
+1. Verify that new SSL certificate and key have been installed:
+
+
+```
+true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
+```
+
+
+
+
+### 6.2.2. Changing the SSL certificate and key for automation hub on OpenShift Container Platform
+
+
+
+
+The following procedure describes how to change the SSL certificate and key for automation hub running on OpenShift Container Platform.
+
+**Procedure**
+
+1. Copy the signed SSL certificate and key to a secure location.
+1. Create a TLS secret within OpenShift:
+
+
+```
+oc create secret tls ${AUTOMATION_HUB_INSTANCE}-certs-$(date +%F) --cert=/path/to/ssl.crt --key=/path/to/ssl.key
+```
+
+
+1. Modify the automation hub custom resource to add `    route_tls_secret` and the name of the new secret to the spec section.
+
+
+```
+oc edit automationhub/${AUTOMATION_HUB_INSTANCE}
+```
+
+
+```
+...    spec:      route_tls_secret: automation-hub-certs-2023-04-06    ...
+```
+
+
+
+
+The name of the TLS secret is arbitrary. In this example, it is timestamped with the date that the secret is created, to differentiate it from other TLS secrets applied to the automation hub instance.
+
+
+1. Wait a few minutes for the changes to be applied.
+1. Verify that new SSL certificate and key have been installed:
+
+
+```
+true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
+```
+
+
+
+
+## 6.3. RPM-based installations
+
+
+
+
+To renew or change the SSL certificate for RPM-based installations, you can edit the inventory file and run the installation program. The installation program verifies that all Ansible Automation Platform components are working. The installation program can take a long time to run.
+
+Alternatively, you can change the SSL certificates manually. This is quicker, but there is no automatic verification.
+
+Red Hat recommends that you use the installation program to make changes to your Ansible Automation Platform instance.
+
+### 6.3.1. Renewing the self-signed SSL certificate
 
 
 
@@ -178,21 +368,14 @@ openssl verify -CAfile ansible-automation-platform-managed-ca-cert.crt /etc/pulp
 
 
 
-## 6.2. Changing SSL certificates
+### 6.3.2. Changing the SSL certificate and key using the installer
 
 
 
 
-To change the SSL certificate, you can edit the inventory file and run the installation program. The installation program verifies that all Ansible Automation Platform components are working. The installation program can take a long time to run.
+The following procedure describes how to change the SSL certificate and key in the inventory file.
 
-Alternatively, you can change the SSL certificates manually. This is quicker, but there is no automatic verification.
-
-Red Hat recommends that you use the installation program to make changes to your Ansible Automation Platform instance.
-
-### 6.2.1. Prerequisites
-
-
-
+**Prerequisites**
 
 - If there is an intermediate certificate authority, you must append it to the server certificate.
 - Both automation controller and automation hub use NGINX so the server certificate must be in PEM format.
@@ -200,13 +383,6 @@ Red Hat recommends that you use the installation program to make changes to your
 
 
 For further information, see the [ssl certificate section of the NGINX documentation](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate) .
-
-### 6.2.2. Changing the SSL certificate and key using the installer
-
-
-
-
-The following procedure describes how to change the SSL certificate and key in the inventory file.
 
 **Procedure**
 
@@ -227,7 +403,7 @@ The `    custom_ca_cert` must be the root certificate authority that signed the 
 1. Run the installation program.
 
 
-#### 6.2.2.1. Changing the SSL certificate and key manually on automation controller
+### 6.3.3. Changing the SSL certificate and key manually on automation controller
 
 
 
@@ -296,101 +472,7 @@ true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
 
 
 
-#### 6.2.2.2. Changing the SSL certificate and key on automation controller on OpenShift Container Platform
-
-
-
-
-The following procedure describes how to change the SSL certificate and key for automation controller running on OpenShift Container Platform.
-
-**Procedure**
-
-1. Copy the signed SSL certificate and key to a secure location.
-1. Create a TLS secret within OpenShift:
-
-
-```
-oc create secret tls ${CONTROLLER_INSTANCE}-certs-$(date +%F) --cert=/path/to/ssl.crt --key=/path/to/ssl.key
-```
-
-
-1. Modify the automation controller custom resource to add `    route_tls_secret` and the name of the new secret to the spec section.
-
-
-```
-oc edit automationcontroller/${CONTROLLER_INSTANCE}
-```
-
-
-```
-...    spec:      route_tls_secret: automation-controller-certs-2023-04-06    ...
-```
-
-
-
-
-The name of the TLS secret is arbitrary. In this example, it is timestamped with the date that the secret is created, to differentiate it from other TLS secrets applied to the automation controller instance.
-
-
-1. Wait a few minutes for the changes to be applied.
-1. Verify that new SSL certificate and key have been installed:
-
-
-```
-true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
-```
-
-
-
-
-#### 6.2.2.3. Changing the SSL certificate and key for automation hub on OpenShift Container Platform
-
-
-
-
-The following procedure describes how to change the SSL certificate and key for automation hub running on OpenShift Container Platform.
-
-**Procedure**
-
-1. Copy the signed SSL certificate and key to a secure location.
-1. Create a TLS secret within OpenShift:
-
-
-```
-oc create secret tls ${AUTOMATION_HUB_INSTANCE}-certs-$(date +%F) --cert=/path/to/ssl.crt --key=/path/to/ssl.key
-```
-
-
-1. Modify the automation hub custom resource to add `    route_tls_secret` and the name of the new secret to the spec section.
-
-
-```
-oc edit automationhub/${AUTOMATION_HUB_INSTANCE}
-```
-
-
-```
-...    spec:      route_tls_secret: automation-hub-certs-2023-04-06    ...
-```
-
-
-
-
-The name of the TLS secret is arbitrary. In this example, it is timestamped with the date that the secret is created, to differentiate it from other TLS secrets applied to the automation hub instance.
-
-
-1. Wait a few minutes for the changes to be applied.
-1. Verify that new SSL certificate and key have been installed:
-
-
-```
-true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
-```
-
-
-
-
-#### 6.2.2.4. Changing the SSL certificate and key on Event-Driven Ansible controller
+### 6.3.4. Changing the SSL certificate and key on Event-Driven Ansible controller
 
 
 
@@ -464,7 +546,7 @@ true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
 
 
 
-#### 6.2.2.5. Changing the SSL certificate and key manually on automation hub
+### 6.3.5. Changing the SSL certificate and key manually on automation hub
 
 
 
@@ -539,7 +621,7 @@ true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
 
 
 
-<span id="idm140184329121568"></span>
+<span id="idm139942719981840"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

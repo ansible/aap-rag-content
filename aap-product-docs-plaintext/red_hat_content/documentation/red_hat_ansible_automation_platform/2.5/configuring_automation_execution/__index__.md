@@ -3,7 +3,7 @@
 
 Red Hat Customer Content Services
 
-[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#idm140603452571680)
+[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#idm139817502353392)
 **Abstract**
 
 Learn how to manage automation controller through custom scripts, management jobs, and more.

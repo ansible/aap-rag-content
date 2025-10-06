@@ -11,7 +11,7 @@ Red Hat Ansible content contains two types of content:
 - Ansible validated content collections
 
 
-You can use both Ansible Certified Content Collections or Ansible validated content collections to build your automation library. For more information on the differences between Ansible Certified Content Collections and Ansible validated content collections, see the Knowledgebase article [Ansible Certified Content Collections and Ansible validated content](https://access.redhat.com/support/articles/ansible-automation-platform-certified-content) , or [Ansible validated content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/index#assembly-validated-content) in this guide.
+You can use both Ansible Certified Content Collections or Ansible validated content collections to build your automation library. For more information on the differences between Ansible Certified Content Collections and Ansible validated content collections, see the Knowledgebase article [Ansible Certified Content Collections and Ansible validated content](https://access.redhat.com/support/articles/ansible-automation-platform-certified-content) , or [Ansible validated content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-cert-valid-content#assembly-validated-content) in this guide.
 
 You can update these collections manually by downloading their packages.
 
@@ -19,8 +19,8 @@ You can use Ansible automation hub to distribute the relevant Red Hat Ansible Ce
 
 Before you can use a requirements file to install content, you must:
 
-1.  [Obtain an automation hub API token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/index#token-management-hub_cloud-sync)
-1.  [Use the API token to configure a remote repository in your local hub](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/index#proc-set-rhcertified-remote_cloud-sync)
-1. Then, [Create a requirements file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/index#create-requirements-file_cloud-sync) .
+1.  [Obtain an automation hub API token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-cert-valid-content#token-management-hub_cloud-sync)
+1.  [Use the API token to configure a remote repository in your local hub](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-cert-valid-content#proc-set-rhcertified-remote_cloud-sync)
+1. Then, [Create a requirements file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-cert-valid-content#create-requirements-file_cloud-sync) .
 
 

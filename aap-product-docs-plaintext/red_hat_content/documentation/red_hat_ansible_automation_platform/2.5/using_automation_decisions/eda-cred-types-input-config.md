@@ -14,7 +14,7 @@ The Input configuration has two attributes:
 Fields can have multiple properties, depending on the credential type you select.
 
 
-<span id="idm140351369732640"></span>
+<span id="idm140453481016336"></span>
 **Table 3.1. Input Configuration Field Properties**
 
 | Fields | Description | Mandatory (Y/N) |

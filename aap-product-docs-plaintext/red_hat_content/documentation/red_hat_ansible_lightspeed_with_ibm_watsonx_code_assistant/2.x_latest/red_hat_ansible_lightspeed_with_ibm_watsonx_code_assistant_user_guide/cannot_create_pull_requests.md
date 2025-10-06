@@ -1,6 +1,6 @@
 # 7. Troubleshooting
-## 7.3. Troubleshooting Ansible code bot errors
-### 7.3.3. Cannot create pull requests
+## 7.4. Troubleshooting Ansible code bot errors
+### 7.4.3. Cannot create pull requests
 
 
 
@@ -14,4 +14,4 @@ To resolve this error, ensure that:
 
 
 
-<span id="idm140693293066704"></span>
+<span id="idm139816010941632"></span>

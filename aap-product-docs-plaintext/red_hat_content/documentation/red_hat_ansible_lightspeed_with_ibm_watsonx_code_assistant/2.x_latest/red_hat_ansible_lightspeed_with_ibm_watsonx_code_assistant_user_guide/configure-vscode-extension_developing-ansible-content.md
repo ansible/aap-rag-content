@@ -30,13 +30,10 @@ You can configure the Ansible VS Code extension to enable Red Hat Ansible Lights
 
 Your settings are automatically saved in VS Code.
 
-
-
-
 The following illustration displays the configured settings for the Ansible VS Code extension:
 
 
-<span id="idm140693282439712"></span>
+<span id="idm139816010321424"></span>
 **Figure 4.1. Configured settings for the Ansible VS Code extension**
 
 ![Configured settings for the Ansible VS Code extension](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/f0217e74e4b417bd4f6ae02ad6acb8c8/lightspeed-vs-code-settings.png)
@@ -46,6 +43,9 @@ The following illustration displays the configured settings for the Ansible VS C
 
 Note
 If your organization recently subscribed to the Red Hat Ansible Automation Platform, it might take a few hours for Red Hat Ansible Lightspeed to detect the new subscription. In VS Code, use the **Refresh** button in the Ansible extension from the Activity bar to check again.
+
+
+
 
 
 

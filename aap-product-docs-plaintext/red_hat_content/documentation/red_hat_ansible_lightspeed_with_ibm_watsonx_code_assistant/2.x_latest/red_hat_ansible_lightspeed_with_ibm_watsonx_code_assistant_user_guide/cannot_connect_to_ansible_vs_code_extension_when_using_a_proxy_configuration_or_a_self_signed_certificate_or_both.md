@@ -1,6 +1,6 @@
 # 7. Troubleshooting
-## 7.2. Troubleshooting Ansible Visual Studio Code extension errors
-### 7.2.3. Cannot connect to Ansible VS code extension when using a proxy configuration or a self-signed certificate or both
+## 7.3. Troubleshooting Ansible Visual Studio Code extension errors
+### 7.3.3. Cannot connect to Ansible VS code extension when using a proxy configuration or a self-signed certificate or both
 
 
 

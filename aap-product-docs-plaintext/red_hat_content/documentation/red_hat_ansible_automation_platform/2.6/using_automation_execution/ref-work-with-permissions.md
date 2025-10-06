@@ -1,0 +1,12 @@
+# 11. Projects
+## 11.3. Work with permissions
+
+
+
+
+The set of permissions assigned to a project (role-based access controls) that provide the ability to read, change, and administer projects, inventories, job templates, and other elements are privileges.
+
+To access the project permissions, select the **User Access** or **Team Access** tab of the **Projects** page. This screen displays a list of users that currently have permissions to this project.
+
+You can sort and search this list by **Username** , **First Name** , or **Last Name** .
+

@@ -1,15 +1,15 @@
 # 10. Patch releases
-## 10.14. Ansible Automation Platform patch release January 22, 2025
-### 10.14.1. Enhancements
+## 10.9. Ansible Automation Platform patch release April 9, 2025
+### 10.9.2. Enhancements
 
 
 
 
-#### 10.14.1.1. Ansible Automation Platform
+#### 10.9.2.1. Container-based Ansible Automation Platform
 
 
 
 
-- Legacy **Auth SSO URL** settings are now customizable if needed for gateway, controller, and hub overrides passed on the Ansible Automation Platform CR if provided. This is mainly useful if you are using a custom ingress controller.(AAP-37364)
+- Implemented variables for applying `    extra_settings` for automation controller, Event-Driven Ansible, platform gateway, and automation hub during installation.(AAP-42932)
 
 

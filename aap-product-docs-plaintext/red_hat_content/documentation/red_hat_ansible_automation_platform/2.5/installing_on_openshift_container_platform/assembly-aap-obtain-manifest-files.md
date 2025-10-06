@@ -34,14 +34,14 @@ Creating a new subscription allocation allows you to set aside subscriptions and
 
 
 
-Once an allocation is created, you can add the subscriptions you need for Ansible Automation Platform to run properly. This step is necessary before you can download the manifest and add it to Ansible Automation Platform.
+After an allocation is created, you can add the subscriptions you need for Ansible Automation Platform to run properly. This step is necessary before you can download the manifest and add it to Ansible Automation Platform.
 
 **Procedure**
 
 1. From the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) page, click on the name of the **Subscription Allocation** to which you would like to add a subscription.
 1. Click the **Subscriptions** tab.
 1. ClickAdd Subscriptions.
-1. Enter the number of Ansible Automation Platform Entitlement(s) you plan to add.
+1. Enter the number of Ansible Automation Platform Entitlements you plan to add.
 1. ClickSubmit.
 
 
@@ -66,10 +66,5 @@ After an allocation is created and has the appropriate subscriptions on it, you 
 This downloads a file _manifest_ <allocation name>_<date>.zip_ to your default downloads folder.
 
 
-
-
-**Next steps**
-
--  [Upload the manifest file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/assembly-gateway-licensing#proc-aap-activate-with-manifest) .
 
 

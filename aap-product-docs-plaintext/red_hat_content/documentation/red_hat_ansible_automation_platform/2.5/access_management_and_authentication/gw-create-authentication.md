@@ -1,5 +1,5 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.3. Creating an authentication method
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.3. Creating an authentication method
 
 
 

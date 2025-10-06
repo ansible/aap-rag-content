@@ -1,5 +1,5 @@
-# 4. Configuring access to external applications with token-based authentication
-## 4.2. Adding tokens
+# 3. Configuring access to external applications with token-based authentication
+## 3.2. Adding tokens
 
 
 
@@ -50,6 +50,6 @@ Your token should be displayed in the list of tokens associated with the applica
 
 **Additional resources**
 
-If you are a system administrator and have to create or remove tokens for other users, see the revoke and create commands in [Token and session management](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#ref-controller-token-session-management) .
+-  [Token and session management](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#ref-controller-token-session-management)
 
 

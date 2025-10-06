@@ -54,7 +54,7 @@ satellites:
 The following table notes the behavior (hierarchy) of variable precedence in automation controller as it compares to variable precedence in Ansible.
 
 
-<span id="idm140390006816320"></span>
+<span id="idm139889436670672"></span>
 **Table 6.1. Automation controller Variable Precedence Hierarchy (last listed wins)**
 
 | Ansible | automation controller |

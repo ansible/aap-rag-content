@@ -1,6 +1,6 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.6. Mapping
-### 3.6.4. Authenticator map examples
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.6. Mapping
+### 2.6.4. Authenticator map examples
 
 
 
@@ -10,7 +10,6 @@ Use the following examples to explore the different conditions, like groups and 
 **Add users to an organization based on an attribute**
 
 In this example, you will add a user to the **Networking** organization if they have an `Organization` attribute with the value of `Networking` :
-
 
 ![Add users to an organization mapping example fully annotated with callout numbers that correlate with the following list that describes the function of each field](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Access_management_and_authentication-en-US/images/1c9a5e0970eddcaaed6e1c084d68b05a/am-org-mapping-full-annotation.png)
 
@@ -30,7 +29,6 @@ In this example, you will add a user to the **Networking** organization if they 
 
 In this example, you will add user to the `Apple` team if they have either of the following groups:
 
-
 ```
 cn=Administrators,ou=AAP,ou=example,o=com
 ```
@@ -48,14 +46,12 @@ cn=Operators,ou=AAP,ou=example,co=com
 
 In this example, you never escalate users to a superuser. But note, this rule does not revoke a user’s superuser permission because the revoke option is not set.
 
-
 ![Do not escalate privileges mapping example](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Access_management_and_authentication-en-US/images/331950d755c96f1644de7bdd0dced24b/am-do-not-escalate-privileges.png)
 
 
 **Escalate privileges based on a user having a group**
 
 In this example, you escalate user privileges to superuser if they belong to the following group:
-
 
 ```
 cn=Administrators,ou=AAP
@@ -67,7 +63,6 @@ cn=Administrators,ou=AAP
 **Using mapping order to create exceptions**
 
 Since maps are executed in order, it is possible to create exceptions. Expanding on the previous example for _Do not escalate privileges_ , you can add another rule with a higher order, such as, _Escalate privileges_ .
-
 
 The first rule ( _Do not escalate privileges_ ) prevents any user from being escalated to a superuser, but the second rule ( _Escalate privileges_ ) alters that decision to grant superuser privileges to a user if they are in the `Administrators` group.
 

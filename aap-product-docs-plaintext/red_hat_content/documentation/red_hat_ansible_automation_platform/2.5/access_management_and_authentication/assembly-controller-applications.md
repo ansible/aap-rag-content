@@ -1,5 +1,5 @@
-# 4. Configuring access to external applications with token-based authentication
-## 4.1. Applications
+# 3. Configuring access to external applications with token-based authentication
+## 3.1. Applications
 
 
 

@@ -8,9 +8,6 @@ You should use the **Ansible Automation Platform** instance as your default. Thi
 
 **Procedure**
 
-To access your **Ansible Automation Platform** instance:
-
-
 1. Log in to Red Hat OpenShift Container Platform.
 1. Navigate toNetworking→Routes
 1. Click the link under **Location** for **Ansible Automation Platform** .

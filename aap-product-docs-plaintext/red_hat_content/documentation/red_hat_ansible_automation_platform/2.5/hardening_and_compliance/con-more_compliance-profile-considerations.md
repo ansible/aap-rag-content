@@ -63,4 +63,4 @@ The following example procedure treats the "ansible" service account as a truste
 This example rule might require modification to work with any other `fapolicyd` rules that exist on the managed RHEL nodes, and must be thoroughly tested and approved by your security auditor before being put into production.
 
 
-<span id="idm140117155549792"></span>
+<span id="idm140606653046640"></span>

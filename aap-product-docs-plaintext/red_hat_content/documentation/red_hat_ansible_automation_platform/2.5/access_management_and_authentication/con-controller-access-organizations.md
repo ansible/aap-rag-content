@@ -1,13 +1,13 @@
-# 5. Managing access with role based access control
-## 5.1. Organizations
-### 5.1.3. Access to organizations
+# 4. Managing access with role-based access control
+## 4.1. Organizations
+### 4.1.3. Access to organizations
 
 
 
 
 You can manage access to an organization by selecting an organization from the **Organizations** list view and selecting the associated tabs for providing access to [Users](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#proc-controller-add-organization-user) , [Administrators](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#proc-gw-add-admin-organization) or [Teams](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#proc-gw-add-team-organization) .
 
-#### 5.1.3.1. Adding a user to an organization
+#### 4.1.3.1. Adding a user to an organization
 
 
 
@@ -47,7 +47,7 @@ A user with associated roles retains them if they are reassigned to another orga
 1. To manage roles for users in an organization, click the **⚙** icon next to the user and select **Manage roles** .
 
 
-#### 5.1.3.2. Adding an administrator to an organization
+#### 4.1.3.2. Adding an administrator to an organization
 
 
 
@@ -72,7 +72,7 @@ If the user had previously been added as a member to this organization, they wil
 
 
 
-#### 5.1.3.3. Adding a team to an organization
+#### 4.1.3.3. Adding a team to an organization
 
 
 
@@ -106,7 +106,7 @@ A team with associated roles retains them if they are reassigned to another orga
 1. To manage roles for teams in an organization, click the **⚙** icon next to the user and select **Manage roles** .
 
 
-#### 5.1.3.4. Deleting an organization
+#### 4.1.3.4. Deleting an organization
 
 
 

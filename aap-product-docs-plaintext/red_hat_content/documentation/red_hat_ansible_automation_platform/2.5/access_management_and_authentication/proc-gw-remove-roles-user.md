@@ -1,6 +1,6 @@
-# 5. Managing access with role based access control
-## 5.3. Users
-### 5.3.6. Removing roles from a user
+# 4. Managing access with role-based access control
+## 4.3. Users
+### 4.3.6. Removing roles from a user
 
 
 

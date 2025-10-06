@@ -1,6 +1,6 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.5. Configuring an authentication type
-### 3.5.9. Configuring GitHub authentication
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.5. Configuring an authentication type
+### 2.5.9. Configuring GitHub authentication
 
 
 

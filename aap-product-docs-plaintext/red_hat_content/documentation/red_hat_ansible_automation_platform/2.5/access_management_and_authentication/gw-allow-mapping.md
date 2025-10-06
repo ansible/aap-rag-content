@@ -1,6 +1,6 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.6. Mapping
-### 3.6.5. Allow mapping
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.6. Mapping
+### 2.6.5. Allow mapping
 
 
 

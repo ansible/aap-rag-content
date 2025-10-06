@@ -1,6 +1,6 @@
 # 1. Red Hat Ansible Automation Platform installation overview
-## 1.2. Managing Ansible Automation Platform licensing, updates and support
-### 1.2.3. Node counting in licenses
+## 1.4. Managing Ansible Automation Platform licensing, updates and support
+### 1.4.3. Node counting in licenses
 
 
 

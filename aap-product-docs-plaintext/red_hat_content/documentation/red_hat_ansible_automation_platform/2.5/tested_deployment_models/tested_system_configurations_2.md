@@ -8,7 +8,7 @@
 Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
 
 
-<span id="idm139937749927440"></span>
+<span id="idm139984997451600"></span>
 **Table 2.7. Tested system configurations**
 
 | Type | Description |  |

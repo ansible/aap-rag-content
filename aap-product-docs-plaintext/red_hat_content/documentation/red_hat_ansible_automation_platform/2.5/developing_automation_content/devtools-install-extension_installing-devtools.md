@@ -30,5 +30,5 @@ The following files are assigned the Ansible language:
 - YAML files whose filename contains "playbook": `    <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">playbook</span></strong></span>.yml` or `    <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">playbook</span></strong></span>.yaml`
 
 
-If the extension does not identify the language for your playbook files as Ansible, follow the procedure in [Associating the Ansible language to YAML files](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/developing_automation_content/index#devtools-extension-set-language_installing-devtools) .
+If the extension does not identify the language for your playbook files as Ansible, follow the procedure in [Associating the Ansible language to YAML files](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/developing_automation_content/installing-devtools#devtools-extension-set-language_installing-devtools) .
 

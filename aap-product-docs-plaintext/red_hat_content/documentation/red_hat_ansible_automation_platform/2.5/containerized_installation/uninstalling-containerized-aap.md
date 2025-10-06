@@ -13,7 +13,18 @@ Uninstall your container-based installation of Ansible Automation Platform.
 
 **Procedure**
 
-1. If you intend to reinstall Ansible Automation Platform and want to use the preserved databases, you must collect the existing secret keys by running the following command:
+1. If you intend to reinstall Ansible Automation Platform and want to use the preserved databases, you must collect the existing secret keys:
+
+
+1. First, list the available secrets:
+
+
+```
+$ podman secret list
+```
+
+
+1. Next, collect the secret keys by running the following command:
 
 
 ```
@@ -26,6 +37,7 @@ For example:
 ```
 $ podman secret inspect --showsecret controller_secret_key | jq -r .[].SecretData
 ```
+
 
 
 1. Run the `    uninstall` playbook:

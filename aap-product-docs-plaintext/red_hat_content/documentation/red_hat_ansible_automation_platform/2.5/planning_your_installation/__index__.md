@@ -3,7 +3,7 @@
 
 Red Hat Customer Content Services
 
-[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/planning_your_installation/index#idm140696951407312)
+[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/planning_your_installation/index#idm140401819121776)
 **Abstract**
 
 This guide provides requirements, options, and recommendations for installing Red Hat Ansible Automation Platform.

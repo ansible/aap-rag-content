@@ -1,6 +1,6 @@
 # 1. Installing Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
 ## 1.4. Installing Red Hat Ansible Automation Platform Operator from the Red Hat OpenShift Container Platform CLI
-### 1.4.2. Installing the Ansible Automation Platform Operator in a namespace
+### 1.4.1. Installing the Ansible Automation Platform Operator in a namespace
 
 
 
@@ -10,6 +10,12 @@ Use this procedure to subscribe a namespace to an operator.
 Important
 You cannot deploy Ansible Automation Platform in the default namespace on your OpenShift Cluster. The `aap` namespace is recommended. You can use a custom namespace, but it should run only Ansible Automation Platform.
 
+
+
+**Prerequisites**
+
+- Access to Red Hat OpenShift Container Platform using an account with operator installation permissions.
+- The OpenShift Container Platform CLI `    oc` command is installed on your local system. Refer to [Installing the OpenShift CLI](https://docs.redhat.com/en/documentation/openshift_container_platform/4.15/html/cli_tools/openshift-cli-oc#installing-openshift-cli) in the Red Hat OpenShift Container Platform product documentation for further information.
 
 
 **Procedure**
@@ -51,7 +57,7 @@ oc get csv -n ansible-automation-platform        NAME                           
 
 1. Create an `    AnsibleAutomationPlatform` object called `    <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">example</span></em></span>` in the `    ansible-automation-platform` namespace.
 
-To change the Ansible Automation Platform and its components from from `    <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">example</span></em></span>` , edit the _name_ field in the `    metadata:` section and replace example with the name you want to use:
+To change the Ansible Automation Platform and its components from `    <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">example</span></em></span>` , edit the _name_ field in the `    metadata:` section and replace example with the name you want to use:
 
 
 ```
@@ -61,7 +67,8 @@ oc apply -f - &lt;&lt;EOF    apiVersion: aap.ansible.com/v1alpha1    kind: Ansib
 
 
 
-For further information about subscribing namespaces to operators, see [Installing from OperatorHub using the CLI](https://docs.redhat.com/en/documentation/openshift_container_platform/4.15/html/operators/user-tasks#olm-installing-operator-from-operatorhub-using-cli_olm-installing-operators-in-namespace) in the Red Hat OpenShift Container Platform _Operators_ guide.
+**Additional resources**
 
-You can use the OpenShift Container Platform CLI to fetch the web address and the password of the Automation controller that you created.
+-  [Installing from OperatorHub using the CLI](https://docs.redhat.com/en/documentation/openshift_container_platform/4.15/html/operators/user-tasks#olm-installing-operator-from-operatorhub-using-cli_olm-installing-operators-in-namespace)
+
 

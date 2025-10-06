@@ -1,5 +1,5 @@
-# 3. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 3.3. Configuring automation hub on Red Hat OpenShift Container Platform web console
+# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 4.3. Configuring automation hub on Red Hat OpenShift Container Platform web console
 
 
 

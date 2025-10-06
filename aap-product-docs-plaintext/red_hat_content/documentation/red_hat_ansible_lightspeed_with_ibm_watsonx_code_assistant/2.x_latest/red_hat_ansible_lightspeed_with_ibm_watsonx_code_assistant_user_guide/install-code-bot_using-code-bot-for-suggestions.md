@@ -36,10 +36,12 @@ From the **Authorize Ansible code bot** page, the following actions occur:
 - Ansible code bot verifies that you are a part of an organization that has an active subscription to Red Hat Ansible Automation Platform.
 - GitHub requests read permissions to access the repositories associated with your account.
 
-
-
-
 On successful authorization, you are logged in to Ansible code bot dashboard. The dashboard displays all your repositories that have the Ansible code bot installed along with their scan status.
+
+
+
+
+
 
 **Verification**
 

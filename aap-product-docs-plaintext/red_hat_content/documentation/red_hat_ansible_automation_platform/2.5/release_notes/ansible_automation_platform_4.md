@@ -1,41 +1,52 @@
 # 10. Patch releases
-## 10.2. Ansible Automation Platform patch release July 2, 2025
+## 10.2. Ansible Automation Platform patch release August 27, 2025
 ### 10.2.3. Ansible Automation Platform
 
 
 
 
-#### 10.2.3.1. Enhancements
+#### 10.2.3.1. Features
 
 
 
 
-- Refactored `    V1RootView.get()` and improve reverse lookup logic.(AAP-47366)
-- Refactored `    process_statuses()` method to reduce its cognitive complexity.(AAP-47341)
-- All UI elements related to policy enforcement are visible to all users. See the [policy enforcement documentation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-pac) for more information. (AAP-47006)
-- On the inventory source form, for a source type of **VMware ESXi** the user will be able to select credentials of type **VMware vCenter** .(AAP-46784)
-- Reduced the cognitive complexity of method `    migrate_resource()` in `    migrate_service_data.py` from 56 to < =15.(AAP-45822)
-- Reduce the cognitive complexity of the `    process_fields()` method in `    serializers/preference.py` file.(AAP-45820)
-- Reduced the cognitive complexity of `    unique_fields_for_model()` method to below 15.(AAP-45819)
+- Added a new field on **Azure AD** authenticator called `    Field to use as username` which allows you to use an arbitrary field from the assertion as the username in Ansible Automation Platform.(AAP-49481)
 
 
-#### 10.2.3.2. Bug fixes
+#### 10.2.3.2. Enhancements
 
 
 
 
-- Fixed an issue that did not allow role assignments using `    object_ansible_id` in the `    role_user_assignment` module.(AAP-48042)
-- Fixed an issue that did not allow the `    object_id` field in the `    role_user_assignment` module to accept a list of items.(AAP-47979)
-- Fixed an example task in the `    ansible.platform.token` module.(AAP-47976)
-- Fixed an issue to `    aap_*` parameters in `    ansible.platform.token` module that resulted in user reminders not being sent out.(AAP-47975)
-- Fixed an API error messaging in the event a user logs in as the admin user via legacy **auth** on one component, then tries to do so via the other component.(AAP-47541)
-- Fixed an issue where API records could be missing or duplicated across pages.(AAP-47504)
-- Fixed a bug that was causing the UI to throw an error when launching a workflow job template with both **Prompt on Launch** and **Survey** enabled.(AAP-46813)
-- Fixed an issue where the platform gateway **OpenAPI** schema file was not being generated correctly.(AAP-46639)
-- Fixed an issue where modules in the `    ansible.platform` collection did not accept `    AAP_*` variable for authentication.(AAP-45363)
-- Fixed an issue where there was a missing option in the ansible.platform.user module to allow setting the `    is_platform_auditor` flag on a user.(AAP-45244)
-- Fixed an issue where an extra validation to handle incorrect user input in the variables field was needed, as the API did not return an error for it.(AAP-42563)
-- Fixed an issue with the **Hosts** links in the **Resource Counts** section of the overview page to redirect to the **Hosts** page, filtered by either **Show only ready hosts** or **Show only failed hosts** depending on which count was clicked on.(AAP-42288)
-- Fixed an issue where API records could be missing or duplicated across pages.(AAP-41842)
+- Enhanced Support for Streaming Chat Responses in Ansible Automation Platform. New settings added:
+
+
+-  `        stream_idle_timeout` : Controls timeout for idle streaming connections.
+-  `        max_stream_duration` : Sets maximum duration for streaming connections.
+(AAP-51756)
+
+- Allow for HTTP headers to be passed through **envoy** when https is offloaded by another device in front of **envoy** . This introduces two new settings:
+
+
+-  `        SECURE_PROXY_SSL_HEADER` indicating which headers should be allowed through. The defaults are `        HTTP_X_FORWARDED_PROTO` , `        https` .
+-  `        XDS_XFF_NUM_TRUSTED_HOPS` which says how many entries in the headers should be trusted. The default is 0 if there is only one device in front of **envoy** . Set to 1 if there are more, or increase as needed. These settings can only be changed in the `        /etc/ansible-automation-platform/gateway/settings.py` file.
+(AAP-51347)
+
+
+
+#### 10.2.3.3. Bug fixes
+
+
+
+
+- Fixed an issue where the **OpenAPI** spec did not reflect all query parameters available.(AAP-49824)
+- Fixed an issue where the `    LOGIN_REDIRECT_OVERRIDE` was not being respected.(AAP-49726)
+- Fixed an issue where the breadcrumb in a launch template sent users to the wrong URL.(AAP-44194)
+- Fixed an issue where legacy users were not properly migrated to platform gateway in some scenarios that were previously leaving the users in a partly migrated state.(AAP-43251)
+- Fixed an issue where the LDAP filter splitter/validator did not handle some valid filters.(AAP-51591)
+- Fixed an issue that removes the `    required` label from the organization field for galaxy credentials in automation controller credential create and edit forms.(AAP-51587)
+- Fixed an issue where subscription entitlement window displayed again after Ansible Automation Platform had been entitled when running in a load-balanced environment with multiple controller web pods.(AAP-43883)
+- Fixed an issue that did not allow all users to see the notifiers tab.(AAP-41342)
+- Fixed an issue where there was no limit field on the job details page.(AAP-36118)
 
 

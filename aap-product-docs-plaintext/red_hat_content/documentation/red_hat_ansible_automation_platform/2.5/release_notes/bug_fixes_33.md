@@ -1,53 +1,66 @@
 # 10. Patch releases
-## 10.19. Ansible Automation Platform patch release October 28, 2024
-### 10.19.2. Bug fixes
+## 10.9. Ansible Automation Platform patch release April 9, 2025
+### 10.9.3. Bug fixes
 
 
 
 
-#### 10.19.2.1. Ansible Automation Platform
+With this update, the following CVEs have been addressed:
+
+-  [CVE-2025-2877](https://access.redhat.com/security/cve/CVE-2025-2877)  `    ansible-rulebook` : exposure of inventory passwords in plain text when starting a rulebook activation with verbosity set to debug in Event-Driven Ansible.(AAP-42817)
+
+
+#### 10.9.3.1. Ansible Automation Platform
 
 
 
 
-- Removed the **Legacy external password** option from the **Authentication Type** list. (AAP-31506)
-- Ansible Galaxy’s `    sessionauth` class is now always the first in the list of authentication classes so that the platform UI can successfully authenticate. (AAP-32146)
--  [CVE-2024-10033](https://access.redhat.com/security/cve/CVE-2024-10033) - `    automation-gateway` : Fixed a Cross-site Scripting (XSS) vulnerability on the `    automation-gateway` component that allowed a malicious user to perform actions that impact users.
--  [CVE-2024-22189](https://access.redhat.com/security/cve/CVE-2024-22189) - `    receptor` : Resolved an issue in `    quic-go` that would allow an attacker to trigger a denial of service by sending a large number of `    NEW_CONNECTION_ID` frames that retire old connection IDs.
+- Fixed an issue where job workflow templates failed with limits.(AAP-33726)
+- Fixed an issue where there was non-viable information disclosure for pen testing.(AAP-39977)
 
 
-#### 10.19.2.2. Automation controller
-
-
-
-
--  [CVE-2024-41989](https://access.redhat.com/security/cve/CVE-2024-41989) - `    automation-controller` : Before this update, in Django, if `    floatformat` received a string representation of a number in scientific notation with a large exponent, it could lead to significant memory consumption. With this update, decimals with more than 200 digits are now returned as is.
--  [CVE-2024-45230](https://access.redhat.com/security/cve/CVE-2024-45230) - `    automation-controller` : Resolved an issue in Python’s Django `    urlize()` and `    urlizetrunc()` functions where excessive input with a specific sequence of characters would lead to denial of service.
-
-
-#### 10.19.2.3. Automation hub
+#### 10.9.3.2. Ansible Automation Platform Operator
 
 
 
 
-- Refactored the `    dynaconf` hooks to preserve the necessary authentication classes for Ansible Automation Platform 2.5 deployments. (AAP-31680)
-- During role migrations, model permissions are now re-added to roles to preserve ownership. (AAP-31417)
+- Fixed an issue on the OpenShift Container Platform Route TLS termination that was always configured with the edge value.(AAP-42051)
 
 
-#### 10.19.2.4. Ansible Automation Platform Operator
-
-
-
-
-- The port is now correctly set when configuring the platform gateway cache `    redis_host` setting when using an external Redis cache. (AAP-33279)
-- Added checksums to the automation hub deployments so that pods are cycled to pick up changes to the PostgreSQL configuration and galaxy server settings Kubernetes secrets. (AAP-33518)
-
-
-#### 10.19.2.5. Container-based Ansible Automation Platform
+#### 10.9.3.3. Container based Ansible Automation Platform
 
 
 
 
-- Fixed the uninstall playbook execution when the environment was already uninstalled. (AAP-32981)
+- Fixed an issue where the restore to a new node would fail. Implemented validation and cleanup for service nodes on a restore to a new cluster.(AAP-42781)
+- Fixed an issue where podman logs did not show any log messages if the user was not part of the local **administrator** or `    systemd-journal` group.(AAP-42755)
+- Fixed an issue where the containerized installer was unable to apply extra settings for automation controller, Event-Driven Ansible, platform gateway, and automation hub.(AAP-40798)
+- Fixed an issue where a remote user was not part of the `    systemd-journal` group and could not access container logs.(AAP-42755)
+
+
+#### 10.9.3.4. Automation execution environments
+
+
+
+
+- Fixed an issue where there was a Python 3.11 incompatibility by updating `    pykerberos` to 1.2.4 in `    ee-minimal` and `    ee-supported` container images.(AAP-42428)
+
+
+#### 10.9.3.5. Event-Driven Ansible
+
+
+
+
+- Fixed an issue where activations attached with some event streams could not be created in deployments configured with **Postgresql** with **mTLS** .(AAP-42268)
+
+
+#### 10.9.3.6. RPM-based Ansible Automation Platform
+
+
+
+
+- Fixed an issue where the token refresh prevented Event-Driven Ansible worker nodes from re-authenticating tokens.(AAP-42981)
+- Fixed an issue where the bundle installer failed to update automation controller and `    aap-metrics-utility` in the same run.(AAP-42632)
+- Fixed an issue where platform UI was not loading when the platform gateway was on a **FIPS** enabled Red Hat Enterprise Linux 9.(AAP-39146)
 
 

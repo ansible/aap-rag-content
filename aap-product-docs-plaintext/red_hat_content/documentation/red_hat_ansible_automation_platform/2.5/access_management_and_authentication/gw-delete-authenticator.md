@@ -1,6 +1,6 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.7. Managing authentication in Ansible Automation Platform
-### 3.7.5. Deleting an authenticator
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.7. Managing authentication in Ansible Automation Platform
+### 2.7.5. Deleting an authenticator
 
 
 

@@ -20,8 +20,8 @@ $ tar xvf \       ansible-automation-platform-setup-bundle-2.5-1.tar.gz    $ cd 
 1. Edit the inventory file to include variables based on your host names and desired password values.
 
 
-Note
-See section [3.2 Inventory file examples base on installation scenarios](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_installation/index#con-install-scenario-examples) for a list of examples that best fits your scenario.
+**Additional resources**
 
+-  [3.2 Inventory file examples base on installation scenarios](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/rpm_installation/index#con-install-scenario-examples)
 
 

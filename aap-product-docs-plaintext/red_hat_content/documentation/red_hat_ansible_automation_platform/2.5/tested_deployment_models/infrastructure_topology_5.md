@@ -8,7 +8,7 @@
 The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 
-<span id="idm139937747651680"></span>
+<span id="idm139984994646144"></span>
 **Figure 4.1. Infrastructure topology diagram**
 
 ![Operator growth topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Tested_deployment_models-en-US/images/3a13707c5b317e9a4cd69aa815402091/ocp-a-env-a.png)
@@ -16,16 +16,22 @@ The following diagram outlines the infrastructure topology that Red Hat has tes
 
 
 
+Important
+While Redis and PostgreSQL can be installed as part of the operator-based installation process, this diagram represents a Red Hat supported topology where both Redis and PostgreSQL are external to Ansible Automation Platform.
+
+
+
 A Single Node OpenShift (SNO) cluster has been tested with the following requirements: 32 GB RAM, 16 CPUs, 128 GB local disk, and 3000 IOPS.
 
 
-<span id="idm139937747646672"></span>
+<span id="idm139984994639344"></span>
 **Table 4.1. Infrastructure topology**
 
 | Count | Component |
 | --- | --- |
 | 1 | Automation controller web pod |
 | 1 | Automation controller task pod |
+| 1 | Automation hub web pod |
 | 1 | Automation hub API pod |
 | 2 | Automation hub content pod |
 | 2 | Automation hub worker pod |

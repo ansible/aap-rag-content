@@ -31,7 +31,7 @@ aap.example.org
 
 
 ```
-sudo hostnamectl set-hostname &lt;your_hostname&gt;
+$ sudo hostnamectl set-hostname &lt;your_hostname&gt;
 ```
 
 
@@ -40,7 +40,7 @@ sudo hostnamectl set-hostname &lt;your_hostname&gt;
 
 
 ```
-sudo subscription-manager register
+$ sudo subscription-manager register
 ```
 
 
@@ -51,20 +51,29 @@ sudo subscription-manager register
 $ sudo dnf repolist
 ```
 
-Example output:
+Example output for RHEL 9:
 
 
 ```
 Updating Subscription Management repositories.    repo id                                                    repo name    rhel-9-for-x86_64-appstream-rpms                           Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)    rhel-9-for-x86_64-baseos-rpms                              Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
 ```
 
+Example output for RHEL 10:
+
+
+```
+Updating Subscription Management repositories.    repo id                                                    repo name    rhel-10-for-x86_64-appstream-rpms                          Red Hat Enterprise Linux 10 for x86_64 - AppStream (RPMs)    rhel-10-for-x86_64-baseos-rpms                             Red Hat Enterprise Linux 10 for x86_64 - BaseOS (RPMs)
+```
+
+
+- For disconnected installations follow the steps in [Obtaining and configuring RPM source dependencies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-disconnected-installation#obtaining-and-configuring-rpm-dependencies) to access these repositories.
 
 1. Ensure the host can resolve host names and IP addresses using DNS. This is essential to ensure services can talk to one another.
 1. Install `    ansible-core` :
 
 
 ```
-sudo dnf install -y ansible-core
+$ sudo dnf install -y ansible-core
 ```
 
 
@@ -72,7 +81,7 @@ sudo dnf install -y ansible-core
 
 
 ```
-sudo dnf install -y wget git-core rsync vim
+$ sudo dnf install -y wget git-core rsync vim
 ```
 
 

@@ -1,10 +1,10 @@
-# 7. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 7.1. Overview
+# 8. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 8.1. Overview
 
 
 
 
-You can use this document for help with upgrading Ansible Automation Platform 2.4 to 2.5 on Red Hat OpenShift Container Platform. This document applies to upgrades of Ansible Automation Platform 2.5 to later versions of 2.5.
+You can use this document for help with upgrading Ansible Automation Platform versions 2.4 and 2.5 to 2.5 on Red Hat OpenShift Container Platform. This document applies to upgrades of Ansible Automation Platform 2.5 to later versions of 2.5.
 
 The Ansible Automation Platform Operator manages deployments, upgrades, backups, and restores of automation controller and automation hub. It also handles deployments of AnsibleJob and JobTemplate resources from the Ansible Automation Platform Resource Operator.
 

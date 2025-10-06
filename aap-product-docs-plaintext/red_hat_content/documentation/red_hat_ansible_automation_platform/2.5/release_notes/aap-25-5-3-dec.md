@@ -1,5 +1,5 @@
 # 10. Patch releases
-## 10.17. Ansible Automation Platform patch release December 3, 2024
+## 10.19. Ansible Automation Platform patch release December 3, 2024
 
 
 

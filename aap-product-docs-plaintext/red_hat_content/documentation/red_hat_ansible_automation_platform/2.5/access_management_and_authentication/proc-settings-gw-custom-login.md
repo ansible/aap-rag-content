@@ -1,6 +1,6 @@
-# 7. Configuring Ansible Automation Platform
-## 7.2. Platform gateway
-### 7.2.4. Configuring a custom platform log in
+# 6. Configuring Ansible Automation Platform
+## 6.2. Platform gateway
+### 6.2.4. Configuring a custom platform log in
 
 
 

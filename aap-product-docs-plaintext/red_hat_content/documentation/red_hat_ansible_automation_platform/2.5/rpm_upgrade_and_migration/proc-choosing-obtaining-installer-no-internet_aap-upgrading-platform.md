@@ -1,6 +1,6 @@
 # 2. Upgrading to Red Hat Ansible Automation Platform 2.5
 ## 2.3. Choosing and obtaining a Red Hat Ansible Automation Platform installer
-### 2.3.2. Installing without internet access
+### 2.3.1. Installing without internet access
 
 
 

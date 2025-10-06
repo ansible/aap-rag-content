@@ -1,5 +1,5 @@
 # 1. Key functionality and concepts
-## 1.8. Ansible Automation Platform installation and configuration
+## 1.9. Ansible Automation Platform installation and configuration
 
 
 

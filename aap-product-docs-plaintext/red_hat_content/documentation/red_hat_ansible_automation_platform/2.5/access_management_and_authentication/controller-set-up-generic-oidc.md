@@ -1,6 +1,6 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.5. Configuring an authentication type
-### 3.5.7. Configuring generic OIDC authentication
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.5. Configuring an authentication type
+### 2.5.7. Configuring generic OIDC authentication
 
 
 
@@ -60,5 +60,84 @@ Values defined in this field override the dedicated fields provided in the UI. A
 **Next steps**
 
 To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#gw-mapping) .
+
+
+#### 2.5.7.1. Troubleshoot Generic OIDC Single Sign-On authentication failures
+
+
+
+
+Authentication fails if the `OIDC JWT Algorithm` setting is not explicitly defined. The authentication code requires a list of acceptable algorithms, which it does not retrieve automatically from the OpenID Connect (OIDC) configuration endpoint.
+
+##### 2.5.7.1.1. Configuring JWT_Algorithms manually
+
+
+
+
+To resolve the authentication failure, manually provide the list of supported algorithms in the platform gateway configuration.
+
+**Procedure**
+
+1. From the navigation panel, selectAccess Management→Authentication Methods.
+1. Select your OIDC authenticator from the list.
+1. ClickEdit authenticationand locate the **OIDC JWT Algorithm(s)** field.
+1. Enter the list of supported algorithms as a YAML list or a JSON array. These algorithms are typically available from your IdP’s OpenID Connect (OIDC) discovery endpoint.
+
+**Example**
+
+
+```
+[        "PS384",        "ES384",        "RS384",        "HS256",        "HS512",        "ES256",        "RS256",        "HS384",        "ES512",        "PS256",        "PS512",        "RS512"    ]
+```
+
+
+1. Save your changes. The system uses these specified algorithms for token verification, resolving any authentication failures related to their absence.
+
+
+##### 2.5.7.1.2. Enabling debugging for enterprise authentication
+
+
+
+
+To further diagnose authentication issues, enable debug logging in platform gateway.
+
+**Procedure**
+
+1. Change the logging configuration in the platform gateway’s `    settings.py` file.
+1. Set the logging level for the `    ansible_base` logger to `    DEBUG` :
+
+
+```
+LOGGING['loggers']['ansible_base']['level'] = 'DEBUG'
+```
+
+After this change, detailed `    AuthTokenError` messages are displayed in the logs, providing specific information about the cause of the failure.
+
+
+
+
+##### 2.5.7.1.3. Troubleshooting Generic OIDC scope mismatches
+
+
+
+
+Authentication fails when the Identity Provider (IdP) does not support the default scopes automatically appended by the system.
+
+To prevent the system from appending this default scope, you must add a setting to your authenticator configuration.
+
+**Procedure**
+
+1. From the navigation panel, selectAccess Management→Authentication Methods.
+1. Select your OIDC authenticator from the list.
+1. ClickEdit authentication.
+1. In the **Additional Authenticator Fields** section, add the following attribute and value. This input box supports either YAML or JSON. Ensure you add this key-value pair on a new line if there are other fields present:
+
+
+```
+IGNORE_DEFAULT_SCOPE: True
+```
+
+
+1. Save your changes. The authenticator now only uses the scopes you explicitly defined, resolving any authentication failures related to unsupported scopes.
 
 

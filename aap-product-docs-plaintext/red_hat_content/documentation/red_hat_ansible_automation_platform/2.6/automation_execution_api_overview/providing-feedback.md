@@ -1,0 +1,7 @@
+# Providing feedback on Red Hat documentation
+
+
+
+
+If you have a suggestion to improve this documentation, or find an error, you can contact technical support at [https://access.redhat.com](https://access.redhat.com) to open a request.
+

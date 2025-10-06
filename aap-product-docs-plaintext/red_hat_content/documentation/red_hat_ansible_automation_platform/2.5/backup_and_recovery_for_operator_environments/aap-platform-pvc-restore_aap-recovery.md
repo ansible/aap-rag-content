@@ -6,7 +6,7 @@
 
 A persistent volume claim (PVC) is a storage volume that stores data for automation hub and automation controller applications. These PVCs are independent of the applications and persist even if an application is deleted. You can restore data from a PVC as an alternative to recovering from an **Ansible Automation Platform** backup.
 
-For more information see the _Finding and deleting PVCs_ section of the [Installing on OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/{PlayformVers}/html-single/installing_on_openshift_container_platform/index) guide.
+For more information see the [Finding and deleting PVCs](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-find-delete-PVCs_installing-controller-operator) section of the _Installing on OpenShift Container Platform_ guide.
 
 **Prerequisites**
 

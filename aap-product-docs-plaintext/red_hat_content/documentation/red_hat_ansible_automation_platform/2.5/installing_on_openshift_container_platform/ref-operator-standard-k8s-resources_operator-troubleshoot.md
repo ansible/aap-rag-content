@@ -1,0 +1,20 @@
+# 12. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+## 12.7. Standard Kubernetes resources
+
+
+
+
+Standard Kubernetes resources are a core part of the OpenShift Container Platform. The following table describes the standard resources you can inspect to troubleshoot the state and configuration of an application.
+
+|  **Resource name** |  **Description** |
+| --- | --- |
+|  `pod` | Smallest deployable unit containing one or more containers running the application workloads. |
+|  `deployment` | Manages pod configuration and scaling. |
+|  `pvc` | A PersistentVolumeClaim (PVC) is a request for storage resources, used for persistent data storage. |
+|  `service` | Exposes pods as network services with stable IP addresses and DNS names within the cluster. |
+|  `ingress` | Manages external HTTP and HTTPS access to services within the cluster. |
+|  `route` | An OpenShift-specific resource for exposing services externally (similar to an ingress). |
+|  `secrets` | Stores sensitive data like passwords, tokens, and certificates. |
+|  `serviceaccount` | Provides identity for processes running in pods to access permissions to other Kubernetes resources. |
+
+

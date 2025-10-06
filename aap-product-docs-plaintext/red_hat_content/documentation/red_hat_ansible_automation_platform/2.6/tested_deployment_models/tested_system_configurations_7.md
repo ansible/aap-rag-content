@@ -1,0 +1,8 @@
+# 5. Automation mesh nodes
+## 5.1. Tested system configurations
+
+
+
+
+Each automation mesh VM has been tested with the following component requirements: 16 GB RAM, 4 CPUs, 60 GB local disk, and 3000 IOPS.
+

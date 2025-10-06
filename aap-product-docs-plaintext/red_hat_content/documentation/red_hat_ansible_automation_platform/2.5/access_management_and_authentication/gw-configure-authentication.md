@@ -1,4 +1,4 @@
-# Chapter 3. Configuring authentication in the Ansible Automation Platform
+# Chapter 2. Configuring authentication in the Ansible Automation Platform
 
 
 

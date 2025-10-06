@@ -1,6 +1,6 @@
 # 1. Red Hat Ansible Automation Platform installation overview
-## 1.2. Managing Ansible Automation Platform licensing, updates and support
-### 1.2.7. Activating Red Hat Ansible Automation Platform
+## 1.4. Managing Ansible Automation Platform licensing, updates and support
+### 1.4.7. Activating Red Hat Ansible Automation Platform
 
 
 
@@ -22,7 +22,7 @@ Red Hat Ansible Automation Platform uses available subscriptions or a subscripti
 1. Upload a subscriptions manifest file either using the Red Hat Ansible Automation Platform interface or manually in an Ansible Playbook.
 
 
-#### 1.2.7.1. Activate with credentials
+#### 1.4.7.1. Activate with credentials
 
 
 
@@ -63,22 +63,14 @@ You can also use your Satellite username and password if your cluster nodes are 
 After your subscription has been accepted, subscription details are displayed. A status of _Compliant_ indicates your subscription is in compliance with the number of hosts you have automated within your subscription count. Otherwise, your status will show as _Out of Compliance_ , indicating you have exceeded the number of hosts in your subscription. Other important information displayed include the following:
 
 
-#### 1.2.7.2. Activate with a manifest file
+#### 1.4.7.2. Activate with a manifest file
 
 
 
 
 If you have a subscriptions manifest, you can upload the manifest file either by using the Red Hat Ansible Automation Platform interface.
 
-Note
-You are opted in for Automation Analytics by default when you activate the platform on first time log in. This helps Red Hat improve the product by delivering you a much better user experience. You can opt out, after activating Ansible Automation Platform, by doing the following:
-
-1. From the navigation panel, selectSettings→Automation Execution→System.
-1. Uncheck the **Gather data for Automation Analytics** option.
-1. ClickSave.
-
-
-
+You are opted in for Automation Analytics by default when you activate the platform on first time log in. This helps Red Hat improve the product by delivering you a much better user experience. However, you can opt out of Automation Analytics after the Ansible Automation Platform is activated. To opt out, selectSettings→Automation Execution→Systemfrom the navigation panel, uncheck the **Gather data for Automation Analytics** option, and then clickSave.
 
 **Prerequisites**
 

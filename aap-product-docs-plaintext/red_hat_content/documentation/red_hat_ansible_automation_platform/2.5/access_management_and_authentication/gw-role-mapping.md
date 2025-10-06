@@ -1,13 +1,13 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.6. Mapping
-### 3.6.8. Role mapping
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.6. Mapping
+### 2.6.8. Role mapping
 
 
 
 
 Role mapping is the mapping of a user either to a global role, such as Platform Auditor, or team or organization role.
 
-When a Team and/or Organization is specified together with the appropriate Role, the behavior is identical with Organization mapping or Team mapping.
+When a Team or Organization is specified together with the appropriate Role, the behavior is identical with Organization mapping or Team mapping.
 
 Role mapping can be specified separately for each account authentication.
 

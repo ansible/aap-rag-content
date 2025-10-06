@@ -1,5 +1,5 @@
-# 2. Automating Network Intrusion Detection and Prevention Systems (IDPS) with Ansible
-## 2.2. Automating your IDPS rules with Ansible
+# 2. Automating Network Intrusion Detection and Prevention Systems (IDPS) with Ansible Automation Platform
+## 2.2. Automating your IDPS rules with Ansible Automation Platform
 ### 2.2.1. Creating a new IDPS rule
 
 
@@ -80,5 +80,3 @@ Once you run the playbook, all of your tasks will be executed in addition to you
 To verify that your IDPS rules were successfully created, SSH to the Snort server and view the content of the `/etc/snort/rules/local.rules` file.
 
 
-
-<span id="idm139770379705312"></span>

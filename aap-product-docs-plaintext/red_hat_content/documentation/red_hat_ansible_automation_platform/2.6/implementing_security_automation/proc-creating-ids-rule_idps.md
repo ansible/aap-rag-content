@@ -1,0 +1,76 @@
+# 2. Automating Network Intrusion Detection and Prevention Systems (IDPS) with Ansible Automation Platform
+## 2.2. Automating your IDPS rules with Ansible Automation Platform
+### 2.2.1. Creating a new IDPS rule
+
+
+
+
+Use the `ids_rule` role to manage your rules and signatures for IDPS. For example, you can set a new rule that looks for a certain pattern aligning with a previous attack on your firewall.
+
+Note
+Currently, the `ids_rule` role only supports Snort IDPS.
+
+
+
+**Prerequisites**
+
+- You need `    root` privileges to make any changes on the Snort server.
+
+
+**Procedure**
+
+1. Install the `    ids_rule` role using the ansible-galaxy command:
+
+`    $ ansible-galaxy install ansible_security.ids_rule`
+
+
+1. Create a new playbook file titled `    add_snort_rule.yml` . Set the following parameters:
+
+
+```
+- name: Add Snort rule      hosts: snort
+```
+
+
+1. Add the `    become` flag to ensure that Ansible handles privilege escalation.
+
+
+```
+- name: Add Snort rule      hosts: snort      become: true
+```
+
+
+1. Specify the name of your IDPS provider by adding the following variables:
+
+
+```
+- name: Add Snort rule      hosts: snort      become: true          vars:        ids_provider: snort
+```
+
+
+1. Add the following tasks and task-specific variables, for example, rules, Snort rules file, and the state of the rule - present or absent, to the playbook:
+
+
+```
+- name: Add Snort rule      hosts: snort      become: true          vars:        ids_provider: snort          tasks:        -  name: Add snort password attack rule           include_role:             name: "ansible_security.ids_rule"           vars:             ids_rule: 'alert tcp any any -&gt; any any (msg:"Attempted /etc/passwd Attack"; uricontent:"/etc/passwd"; classtype:attempted-user; sid:99000004; priority:1; rev:1;)'             ids_rules_file: '/etc/snort/rules/local.rules'             ids_rule_state: present
+```
+
+Tasks are components that make changes on the target machine. Since you are using a role that defines these tasks, the `    include_role` is the only entry you need.
+
+The `    ids_rules_file` variable specifies a defined location for the `    local.rules` file, while the `    ids_rule_state` variable indicates that the rule should be created if it does not already exist.
+
+
+1. Run the playbook by executing the following command:
+
+`    $ ansible-navigator run add_snort_rule.ym --mode stdout`
+
+When the playbook runs, all of your tasks will be executed in addition to your newly created rules. Your playbook output confirms your PLAY, TASK, RUNNING HANDLER, and PLAY RECAP.
+
+
+
+
+**Verification**
+
+To verify that your IDPS rules were successfully created, SSH to the Snort server and view the content of the `/etc/snort/rules/local.rules` file.
+
+

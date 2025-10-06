@@ -408,7 +408,33 @@ In the following example, the connections variable is used to specify access to 
 1. ClickSaveand then clickSyncto sync the inventory.
 
 
-#### 14.4.7.14. Export old inventory scripts
+#### 14.4.7.14. Using a custom inventory plugin
+
+
+
+
+This describes how to use the `servicenow.itsm` collection inventory plugin to sync inventory on Ansible Automation Platform.
+
+**Procedure**
+
+1. Create and sync a project using a Source Control Git repository that includes the following files:
+
+
+```
+&gt;&gt; requirements.yml    ---    collections: - name: servicenow.itsm            &gt;&gt; inventories/myinventory.now.yml    # Create a file following the example below. It must have a configuration file extension ending in either "now.yml" or "now.yaml".    plugin: servicenow.itsm.now    query:    - os: = Linux Red Hat    - os: = Windows XP    keyed_groups:    - key: os      prefix: os
+```
+
+Note
+Refer to the official [Ansible documentation](https://console.redhat.com/ansible/automation-hub/repo/published/servicenow/itsm/content/inventory/now/) for detailed guidance on using and configuring the `    servicenow.itsm.now` plugin.
+
+
+
+
+1. Create an inventory by setting the source to **Sourced from a Project** , selecting the new project, and choose `    /(project root)` in the inventory file section.
+1. Synchronize the source in the inventory.
+
+
+#### 14.4.7.15. Export old inventory scripts
 
 
 

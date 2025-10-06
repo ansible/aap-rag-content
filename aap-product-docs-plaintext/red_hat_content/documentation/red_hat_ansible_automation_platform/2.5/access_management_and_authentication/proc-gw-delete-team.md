@@ -1,6 +1,6 @@
-# 5. Managing access with role based access control
-## 5.2. Teams
-### 5.2.8. Deleting a team
+# 4. Managing access with role-based access control
+## 4.2. Teams
+### 4.2.8. Deleting a team
 
 
 
@@ -10,7 +10,7 @@ Before you can delete a team, you must have team permissions. When you delete a 
 **Procedure**
 
 1. From the navigation panel, selectAccess Management→Teams.
-1. Select the check box for the team that you want to remove.
+1. Select the checkbox for the team that you want to remove.
 1. Select the ⋮ icon and select **Delete team** .
 
 Note

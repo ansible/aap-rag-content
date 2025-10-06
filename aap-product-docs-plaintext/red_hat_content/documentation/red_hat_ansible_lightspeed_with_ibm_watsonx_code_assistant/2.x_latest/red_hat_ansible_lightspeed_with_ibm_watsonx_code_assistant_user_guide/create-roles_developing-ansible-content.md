@@ -33,12 +33,9 @@ You can use the natural language interface in the Ansible VS Code extension to c
 1. Click **Generate a role** .
 
 -  **From the Command Palette** :
-
-
 - From the Command Palette of the VS Code editor, clickView→Command Palette, and then enter **> Ansible Lightspeed: Role generation** .
 
 The **Create a role with Ansible Lightspeed** page is displayed on the right panel of the VS Code screen.
-
 
 
 

@@ -1,0 +1,19 @@
+# 3. Performance tuning for automation controller
+## 3.3. Example capacity planning exercise
+
+
+
+
+After you have determined the workload capacity that you want to support, you must plan your deployment based on the requirements of the workload. To help you with your deployment, review the following planning exercise.
+
+For this example, the cluster must support the following capacity:
+
+- 300 managed hosts
+- 1,000 tasks per hour per host or 16 tasks per minute per host
+- 10 concurrent jobs
+- Forks set to 5 on playbooks. This is the default.
+- Average event size is 1 Mb
+
+
+The virtual machines have 4 CPU and 16 GB RAM, and disks that have 3000 IOPS.
+

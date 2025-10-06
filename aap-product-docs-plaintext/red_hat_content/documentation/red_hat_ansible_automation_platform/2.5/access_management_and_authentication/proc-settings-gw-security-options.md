@@ -1,6 +1,6 @@
-# 7. Configuring Ansible Automation Platform
-## 7.2. Platform gateway
-### 7.2.1. Configuring platform security
+# 6. Configuring Ansible Automation Platform
+## 6.2. Platform gateway
+### 6.2.1. Configuring platform security
 
 
 

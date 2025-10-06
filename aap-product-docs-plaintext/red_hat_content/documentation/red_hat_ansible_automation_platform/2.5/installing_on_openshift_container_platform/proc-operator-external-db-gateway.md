@@ -1,6 +1,6 @@
-# 3. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 3.1. Configuring platform gateway on Red Hat OpenShift Container Platform web console
-### 3.1.1. Configuring an external database for platform gateway on Red Hat Ansible Automation Platform Operator
+# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 4.1. Configuring platform gateway on Red Hat OpenShift Container Platform web console
+### 4.1.1. Configuring an external database for platform gateway on Red Hat Ansible Automation Platform Operator
 
 
 

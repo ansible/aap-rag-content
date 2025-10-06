@@ -1,26 +1,27 @@
 # 10. Patch releases
-## 10.2. Ansible Automation Platform patch release July 2, 2025
-### 10.2.8. Container-based Ansible Automation Platform
+## 10.2. Ansible Automation Platform patch release August 27, 2025
+### 10.2.7. Container-based Ansible Automation Platform
 
 
 
 
-#### 10.2.8.1. Enhancements
+#### 10.2.7.1. Enhancements
 
 
 
 
-- Validate that nodes are configured with at least 16G of RAM.(AAP-47542)
-- Containerized Ansible Automation Platform now supports RHEL 10 for enterprise topologies.(AAP-47083)
+- Implemented **PostgreSQL** extra settings parameter on the installer.(AAP-51533)
 
 
-#### 10.2.8.2. Bug Fixes
+#### 10.2.7.2. Bug Fixes
 
 
 
 
-- Fixed an issue where the TLS Certificate Authority (CA) certificate for Receptor mesh configuration when providing TLS certificates were not signed by the internal CA.(AAP-48065)
-- Fixed a missing user parameter for the sos report command on the `    log_gathering` playbook.(AAP-47718)
-- Fixed an issue where the `    jquery` version included in the redirect page did not match the version from the rest framework directory.(AAP-47074)
+- Fixed an issue where the **PostgreSQL** version failed during preflight with a customer provided CA certificate.(AAP-50884)
+- Fixed `    pcp` data permissions by migrating the data to a **Podman** volume instead of a bind mount.(AAP-50807)
+- Fixed an issue where the backup script incorrectly Included `    .snapshot` directories in the automation hub backup.(AAP-50784)
+- Fixed a bug where the **Redis** hostname fails to be set in a disconnected environment.(AAP-51532)
+- Fixed an issue where there was no exclusion parameter for containerized backup, that allowed users to specify snapshot paths to be excluded from the backup process.(AAP-46767)
 
 

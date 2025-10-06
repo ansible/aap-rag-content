@@ -44,7 +44,7 @@ You can define custom groups in the inventory file by naming groups with `instan
 The current behavior expects a member of an `instance_group_*` to be part of `automationcontroller` or `execution_nodes` group.
 
 
-<span id="idm140389991662192"></span>
+<span id="idm139889427950304"></span>
 **Example 18.1. Define instance groups**
 
 ```
@@ -1938,7 +1938,7 @@ For more information, see [HashiCorp Vault Secret Lookup](https://docs.redhat.co
 
 This is considered part of the secret management capability.
 
-For more information, see [HashiCorp Vault Signed SSH](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-credentials#ref-controller-credential-hasiCorp-secret) .
+For more information, see [HashiCorp Vault Signed SSH](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management#ref-hashicorp-vault-lookup) .
 
 ### 22.4.15. Insights credential type
 
@@ -2137,7 +2137,7 @@ When connecting to network devices, the credential type must match the connectio
 - For all other network connections ( `    httpapi` , `    netconf` , and `    network_cli` ), the credential type should be **Machine** .
 
 
-For more information about connection types available for network devices, see [Multiple Communication Protocols](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/using_automation_execution/controller-credentials#ref-controller-multiple-connection-protocols) .
+For more information about connection types available for network devices, see [Multiple Communication Protocols](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#ref-controller-multiple-connection-protocols) .
 
 Automation controller uses the following environment variables for Network credentials:
 
@@ -2469,7 +2469,9 @@ If you are using a GitHub account for a Source Control credential and you have _
 
 Terraform is a HashiCorp tool used to automate various infrastructure tasks. Select this credential type to enable synchronization with the Terraform inventory source.
 
-The Terraform credential requires the **Backend configuration** attribute which must contain the data from a [Terraform backend block](https://developer.hashicorp.com/terraform/language/backend) . You can paste, drag a file, browse to upload a file, or click the![Key](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_execution-en-US/images/fc669abfeec02bb8bda89a0de40c0391/leftkey.png)
+The Terraform credential requires the **Backend configuration** attribute which must contain the data from a [Terraform backend block](https://developer.hashicorp.com/terraform/language/backend) . Saving it stores the file path to the backend configuration in an environment variable `TF_BACKEND_CONFIG_FILE` that is made available to any job with the credential attached.
+
+You can paste, drag a file, browse to upload a file, or click the![Key](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_automation_execution-en-US/images/fc669abfeec02bb8bda89a0de40c0391/leftkey.png)
 icon to populate the field from an external [Secret Management System](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-secret-management) .
 
 Terraform backend configuration requires the following inputs:
@@ -4020,7 +4022,7 @@ For a Continuous Integration system, such as Jenkins, to spawn a job, it must ma
 See also, **Node** .
 
 
-<span id="idm140390005286128"></span>
+<span id="idm139889444421904"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

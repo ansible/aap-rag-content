@@ -1,5 +1,5 @@
 # 1. Red Hat Ansible Automation Platform installation overview
-## 1.1. Prerequisites
+## 1.3. Prerequisites
 
 
 
@@ -19,6 +19,6 @@ To prevent errors, upgrade your RHEL nodes fully before installing Ansible Autom
 
 **Additional resources**
 
-For more information about obtaining a platform installer or system requirements, see the [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/platform-system-requirements) in the _Planning your installation_ .
+-  [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/platform-system-requirements)
 
 

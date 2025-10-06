@@ -8,7 +8,7 @@
 You can control how users can interact with execution environments managed in private automation hub. Use the following list of permissions to create teams with the right privileges for your remote registries.
 
 
-<span id="idm139805716941232"></span>
+<span id="idm140615733205936"></span>
 **Table 3.1. List of team permissions used to manage containers in private automation hub**
 
 | Permission name | Description |

@@ -35,7 +35,7 @@ Ansible Automation Platform uses several secrets (passwords, keys, and so on) op
 The following table provides the location of these secrets for RPM-based installs of Ansible Automation Platform.
 
 
-<span id="idm140117151494368"></span>
+<span id="idm140606644606992"></span>
 **Table 2.1. Ansible Automation Platform operational secrets**
 
 |  **Automation controller secrets** |

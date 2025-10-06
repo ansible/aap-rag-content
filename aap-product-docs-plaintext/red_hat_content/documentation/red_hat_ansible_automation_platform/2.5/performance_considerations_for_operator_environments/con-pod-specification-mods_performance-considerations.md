@@ -14,10 +14,9 @@ Red Hat Ansible Automation Platform provides a simple default pod specification,
 
 A full list of options can be found in the [Openshift Online](https://docs.openshift.com/online/pro/architecture/core_concepts/pods_and_services.html) documentation.
 
-**Example of a pod that provides a long-running service.**
+**Example of a pod that provides a long-running service**
 
 This example demonstrates many features of pods, most of which are discussed in other topics and thus only briefly mentioned here:
-
 
 ```
 apiVersion: v1

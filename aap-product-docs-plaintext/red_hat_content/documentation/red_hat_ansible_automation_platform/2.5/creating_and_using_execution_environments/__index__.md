@@ -3,7 +3,7 @@
 
 Red Hat Customer Content Services
 
-[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/creating_and_using_execution_environments/index#idm139645548473200)
+[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/creating_and_using_execution_environments/index#idm140538093999952)
 **Abstract**
 
 This guide shows how to create consistent and reproducible automation execution environments for your Red Hat Ansible Automation Platform.

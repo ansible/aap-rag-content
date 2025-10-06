@@ -1,6 +1,6 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.7. Managing authentication in Ansible Automation Platform
-### 3.7.2. Searching for an authenticator
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.7. Managing authentication in Ansible Automation Platform
+### 2.7.2. Searching for an authenticator
 
 
 

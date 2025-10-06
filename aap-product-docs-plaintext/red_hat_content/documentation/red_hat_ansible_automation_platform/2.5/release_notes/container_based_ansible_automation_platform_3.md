@@ -1,27 +1,25 @@
 # 10. Patch releases
-## 10.4. Ansible Automation Platform patch release June 9, 2025
-### 10.4.4. Container-based Ansible Automation Platform
+## 10.3. Ansible Automation Platform patch release July 30, 2025
+### 10.3.5. Container-based Ansible Automation Platform
 
 
 
 
-#### 10.4.4.1. Enhancements
+#### 10.3.5.1. Enhancements
 
 
 
 
-- Allow users to skip automation controller demo data creation.(AAP-46482)
-- Validating the Automation hub NFS share path format during the preflight role execution.(AAP-46306)
+- Added an exclusion parameter for Container-based Ansible Automation Platform Backup, allowing users to specify snapshot paths to be excluded from the backup process.(AAP-50114)
 
 
-#### 10.4.4.2. Bug Fixes
+#### 10.3.5.2. Bug Fixes
 
 
 
 
-- Fixed an issue where the custom Certificate Authority (CA) TLS certificate was not passed to the external database validation during the preflight role execution.(AAP-46480)
-- Fixed a log redirection error for the Ansible automation hub, Event-Driven Ansible, and Unified UI containers.(AAP-46478)
-- Fixed an issue where `    ~/.local/bin` path was not added to the user $ `    PATH` environment variable during PostgreSQL database dump and restore.(AAP-46209)
-- Fixed the order of operations for handling service nodes to ensure only valid nodes are configured.(AAP-45551)
+- Fixed the issue where execution instances removed from the inventory would still be visible on the Topology View.(AAP-48615)
+- Fixed a bug when restoring automation hub to a new cluster when using NFS for the hub data filesystem.(AAP-48568)
+- Fixed permission issues when restoring automation hub when using NFS storage.(AAP-50118)
 
 

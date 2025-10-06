@@ -1,11 +1,11 @@
 # 10. Patch releases
-## 10.2. Ansible Automation Platform patch release July 2, 2025
-### 10.2.10. Receptor
+## 10.4. Ansible Automation Platform patch release July 2, 2025
+### 10.4.10. Receptor
 
 
 
 
-#### 10.2.10.1. Bug Fixes
+#### 10.4.10.1. Bug Fixes
 
 
 
