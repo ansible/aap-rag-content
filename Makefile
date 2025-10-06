@@ -10,8 +10,11 @@ RAG_CONTENT_IMAGE ?= quay.io/ansible/aap-rag-content:latest
 OUTPUT_FOLDER ?= ./output
 PG_DUMP_FILE ?= backup.tar
 
-AAP_VERSION ?= 2.5
+AAP_VERSION ?= 2.6
 AAP_VERSION_STR := $(shell echo $(AAP_VERSION) | sed 's/\./_/g')
+
+AAP_VERSION_2_5 ?= 2.5
+AAP_VERSION_2_5_STR := $(shell echo $(AAP_VERSION_2_5) | sed 's/\./_/g')
 
 uv-lock-check: ## Check that the uv.lock file is in a good shape
 	uv lock --check
@@ -62,9 +65,9 @@ build-road-core-db:
 	uv run python3 scripts/generate_embeddings-aap.py \
   -f aap-product-docs-plaintext \
   -mn $(EMBEDDINGS_MODEL) \
-  -o vector_db/aap_product_docs/$(AAP_VERSION) \
-  -i aap-product-docs-$(AAP_VERSION_STR) \
-  -v $(AAP_VERSION) \
+  -o vector_db/aap_product_docs/$(AAP_VERSION_2_5) \
+  -i aap-product-docs-$(AAP_VERSION_2_5_STR) \
+  -v $(AAP_VERSION_2_5) \
   -c 200 \
   -l 10
 
@@ -125,8 +128,8 @@ generate-embeddings-postgres: ## Generate embeddings for postgres vector store
 	 -f aap-product-docs-plaintext \
 	 -mn $(EMBEDDINGS_MODEL) \
 	 -o $(OUTPUT_FOLDER) \
-	 -i aap-product-docs-$(subst .,_,$(AAP_VERSION)) \
-	 -v ${AAP_VERSION} \
+	 -i aap-product-docs-$(subst .,_,$(AAP_VERSION_2_5)) \
+	 -v ${AAP_VERSION_2_5} \
 	 -c 200 \
 	 -l 10 \
 	 --vector-store-type postgres
