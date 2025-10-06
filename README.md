@@ -63,7 +63,7 @@ metadata JSON files.
 ```commandline
 make build-road-core-db
 ```
-The generated DB is found in `/vector_db/aap_product_docs/2.6`
+The generated DB is found in `/vector_db/aap_product_docs/2.5`
 
 ### Build a vector DB for llama-stack
 ```commandline
