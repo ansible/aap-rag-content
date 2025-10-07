@@ -1,13 +1,13 @@
-# 4. Configuring access to external applications with token-based authentication
-## 4.2. Adding tokens
-### 4.2.1. Application token functions
+# 3. Configuring access to external applications with token-based authentication
+## 3.2. Adding tokens
+### 3.2.1. Application token functions
 
 
 
 
 The `refresh` and `revoke` functions associated with tokens, for tokens at the `/o/` endpoints can currently only be carried out with application tokens.
 
-#### 4.2.1.1. Refresh an existing access token
+#### 3.2.1.1. Refresh an existing access token
 
 
 
@@ -68,7 +68,7 @@ The refresh operation replaces the existing token by deleting the original and t
 
 Verify that the new token is present and the old one is deleted in the `api/gateway/v1/tokens/` endpoint.
 
-#### 4.2.1.2. Revoke an access token
+#### 3.2.1.2. Revoke an access token
 
 
 

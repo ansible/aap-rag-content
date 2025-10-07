@@ -1,13 +1,13 @@
-# 7. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 7.7. Ansible Automation Platform post-upgrade steps
-### 7.7.5. Migrating Single Sign-On (SSO) users
+# 8. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 8.7. Ansible Automation Platform post-upgrade steps
+### 8.7.5. Migrating Single Sign-On (SSO) users
 
 
 
 
 When upgrading from Ansible Automation Platform 2.4 to 2.5, you must migrate your Single Sign-On (SSO) user accounts if you want to continue using SSO capabilities after the upgrade. Follow the steps in this procedure to ensure a smooth SSO user migration.
 
-#### 7.7.5.1. Key considerations
+#### 8.7.5.1. Key considerations
 
 
 

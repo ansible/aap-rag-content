@@ -33,9 +33,11 @@ apiVersion: aap.ansible.com/v1alpha1    kind: AnsibleAutomationPlatform    metad
 1. ClickCreate.
 1. To access your new instance, see [Accessing the platform gateway](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#operator-access-aap_install-aap-gateway) .
 
-
 Note
 If you have an existing controller with a managed Postgres pod, after creating the **Ansible Automation Platform** resource your automation controller instance will continue to use that original Postgres pod. If you were to do a fresh install you would have a single Postgres managed pod for all instances.
+
+
+
 
 
 

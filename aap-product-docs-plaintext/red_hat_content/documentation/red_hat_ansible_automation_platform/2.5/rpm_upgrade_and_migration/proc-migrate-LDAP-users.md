@@ -32,4 +32,4 @@ Ansible Automation Platform 2.4 LDAP configurations are renamed during the upgra
 Once you set up the auto migrate functionality, you should be able to login with LDAP in the platform gateway and any matching accounts from the legacy 2.4 LDAP authenticator will automatically be linked.
 
 
-<span id="idm139640182172048"></span>
+<span id="idm139664240634048"></span>

@@ -84,7 +84,7 @@ The Dev Containers VS Code extension requires a `.devcontainer` file to store se
 **Prerequisites**
 
 - You have installed a containerization platform, for example Podman, Podman Desktop, Docker, or Docker Desktop.
-- You have a Red Hat login and you have logged in to the Red Hat registry at `    registry.redhat.io` . For information about logging in to `    registry.redhat.io` , see [Authenticating with the Red Hat container registry](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/developing_automation_content/index#devtools-setup-registry-redhat-io_installing-devtools) .
+- You have a Red Hat login and you have logged in to the Red Hat registry at `    registry.redhat.io` . For information about logging in to `    registry.redhat.io` , see [Authenticating with the Red Hat container registry](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/developing_automation_content/installing-devtools#devtools-setup-registry-redhat-io_installing-devtools) .
 - You have installed VS Code.
 - You have installed the Ansible extension in VS Code.
 - You have installed the [Microsoft Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension in VS Code.
@@ -668,10 +668,10 @@ For example, you could store roles that manage the networking for an internal sy
 
 
 - You have installed VS Code and the Ansible extension.
-- You have installed the Microsoft Dev Containers extension in {VS Code.
+- You have installed the Microsoft Dev Containers extension in VS Code.
 - You have installed Ansible development tools.
 - You have installed a containerization platform, for example Podman, Podman Desktop, Docker, or Docker Desktop.
-- You have a Red Hat account and you can log in to the Red Hat container registry at `    registry.redhat.io` . For information about logging in to `    registry.redhat.io` , see [Authenticating with the Red Hat container registry](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/developing_automation_content/index#devtools-setup-registry-redhat-io_installing-devtools) .
+- You have a Red Hat account and you can log in to the Red Hat container registry at `    registry.redhat.io` . For information about logging in to `    registry.redhat.io` , see [Authenticating with the Red Hat container registry](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/developing_automation_content/installing-devtools#devtools-setup-registry-redhat-io_installing-devtools) .
 
 
 ## 8.3. Scaffolding a collection for your roles
@@ -908,7 +908,7 @@ The following procedure describes the workflow to add a collection to an executi
 
 
 
-<span id="idm139807939711840"></span>
+<span id="idm140638400423440"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

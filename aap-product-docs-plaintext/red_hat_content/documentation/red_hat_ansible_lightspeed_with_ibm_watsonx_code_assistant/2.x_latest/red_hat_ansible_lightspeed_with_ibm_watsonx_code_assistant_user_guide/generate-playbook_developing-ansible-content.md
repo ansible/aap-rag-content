@@ -27,7 +27,7 @@ You can use the natural language interface in the Ansible VS Code extension to g
 The following illustration displays the **Ansible Content Creator** page:
 
 
-<span id="idm140693285903728"></span>
+<span id="idm139816007880128"></span>
 **Figure 4.5. Settings to create Ansible playbooks**
 
 ![Settings to create Ansible playbooks](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/3b146832bd21067bd296aede46dc35f5/lightspeed-create-ansible-content.png)

@@ -9,7 +9,7 @@ The `creatorService` URL is required for the Ansible plug-ins to provision new p
 
 **Procedure**
 
-1. Edit your custom Red Hat Developer Hub config map, `    app-config-rhdh` , that you created in [Adding a custom ConfigMap](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_ansible_plug-ins_for_red_hat_developer_hub/index#rhdh-add-custom-configmap_rhdh-ocp-required-installation) .
+1. Edit your custom Red Hat Developer Hub config map, `    app-config-rhdh` , that you created in [Adding a custom ConfigMap](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/installing_ansible_plug-ins_for_red_hat_developer_hub/rhdh-install-ocp-helm_aap-plugin-rhdh-installing#rhdh-add-custom-configmap_rhdh-ocp-required-installation) .
 1. Add the following code to your Red Hat Developer Hub `    app-config-rhdh.yaml` file.
 
 

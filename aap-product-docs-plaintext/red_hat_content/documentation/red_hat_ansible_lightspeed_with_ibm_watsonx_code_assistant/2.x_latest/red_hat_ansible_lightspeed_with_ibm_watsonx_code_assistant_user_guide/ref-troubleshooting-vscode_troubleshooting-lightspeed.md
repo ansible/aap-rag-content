@@ -1,5 +1,5 @@
 # 7. Troubleshooting
-## 7.2. Troubleshooting Ansible Visual Studio Code extension errors
+## 7.3. Troubleshooting Ansible Visual Studio Code extension errors
 
 
 

@@ -1,20 +1,38 @@
 # 2. Upgrading to Red Hat Ansible Automation Platform 2.5
-## 2.7. Automation controller and automation hub 2.4 and Event-Driven Ansible 2.5 with unified UI upgrades
+## 2.8. Automation controller and automation hub 2.4 and Event-Driven Ansible 2.5 with unified UI upgrades
+### 2.8.2. Using migration path for 2.4 instances with managed databases
 
 
 
 
-Ansible Automation Platform 2.5 supports upgrades from Ansible Automation Platform 2.4 environments for all components, with the exception of Event-Driven Ansible. You can also configure a mixed environment with Event-Driven Ansible from 2.5 connected to a legacy 2.4 cluster. Combining install methods (OCP, RPM, Containerized) within such a topology is not supported by Ansible Automation Platform.
+Use this procedure if you have migration path for 2.4 instances with managed databases.
 
-Note
-If you are running the 2.4 version of Event-Driven Ansible in production, before you upgrade, contact Red Hat support or your account representative for more information on how to move to Ansible Automation Platform 2.5.
+**Prerequisites**
+
+- An inventory from 2.4 for automation controller and automation hub and a 2.5 inventory for unified UI (platform gateway) and Event-Driven Ansible. You must run upgrades on 2.4 services (using the inventory file to specify only automation controller and automation hub VMs) to get them to the initial version of Ansible Automation Platform 2.5 first. When all the services are at the same version, run an upgrade (using a complete inventory file) on all the services to go to the latest version of Ansible Automation Platform 2.5.
+
+
+Important
+DO NOT upgrade Event-Driven Ansible and the unified UI (platform gateway) to the latest version of Ansible Automation Platform 2.5 without first upgrading the individual services (automation controller and automation hub) to the initial version of Ansible Automation Platform 2.5.
 
 
 
-Supported topologies described in this document assume that:
+- Ensure you have upgraded to the latest version of Ansible Automation Platform 2.4 before upgrading your Red Hat Ansible Automation Platform.
 
-- 2.4 services will only include automation controller and automation hub.
-- 2.5 parts will always include Event-Driven Ansible and the unified UI (platform gateway).
-- Combining install methods for these topologies is not supported.
+
+**Procedure**
+
+-  **For standalone node managed database**
+
+
+- Convert the database node to an external one, removing it from the inventory. The PostgreSQL node will continue working and will not lose the Ansible Automation Platform-provided setup, but you are responsible for managing its configuration afterward.
+
+-  **For collocated managed database**
+
+
+1. Back up
+1. Restore with standalone managed database node instead of collocated
+1. Unmanaged standalone database
+
 
 

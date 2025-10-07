@@ -1,6 +1,6 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.5. Configuring an authentication type
-### 3.5.2. Configuring LDAP authentication
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.5. Configuring an authentication type
+### 2.5.2. Configuring LDAP authentication
 
 
 
@@ -52,8 +52,8 @@ CN=josie,CN=users,DC=website,DC=com
 The group type defines the class name of the group, which manages the groups associated with users in your LDAP directory and is returned by the search specified in Step 14 of this procedure. The group type, along with group parameters and the group search, is used to find and assign groups to users during log in, and can also be evaluated during the mapping process. The following table lists the available group types, along with their descriptions and the necessary parameters for each. By default, LDAP groups will be mapped to Django groups by taking the first value of the cn attribute. You can specify a different attribute with `    name_attr` . For example, `    name_attr='cn'` .
 
 
-<span id="idm140050077903840"></span>
-**Table 3.1. Available LDAP group types**
+<span id="idm140397708148192"></span>
+**Table 2.1. Available LDAP group types**
 
 |  **LDAP Group Type** |  **Description** |  **Initializer method ( _init_ )** |
 | --- | --- | --- |
@@ -168,5 +168,31 @@ If the field **LDAP User DN Template** is populated, it takes precedence over th
 **Next steps**
 
 To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#gw-mapping) .
+
+
+#### 2.5.2.1. Importing a certificate authority in automation controller for LDAPS integration
+
+
+
+
+You can authenticate to the automation controller server by using LDAP. However, if you change to using LDAPS (LDAP over SSL/TLS) to authenticate and the TLS certificate is not trusted by platform gateway, it fails with an error such as:
+
+```
+2025-08-26 16:40:56,141 WARNING   django_auth_ldap Caught LDAPError while authenticating: SERVER_DOWN({'result': -1, 'desc': "Can't contact LDAP server", 'ctrls': [], 'info': 'error:0A000086:SSL routines::certificate verify failed (self-signed certificate)'})
+```
+
+To get Ansible Automation Platform to trust the certificate coming from LDAP, perform the following procedure on all platform gateway instances.
+
+**Procedure**
+
+1. Place a copy of the LDAP servers certificate in the directory, `    /etc/pki/ca-trust/source/anchors/` .
+1. Run the command:
+
+
+```
+update-ca-trust
+```
+
+
 
 

@@ -1,6 +1,6 @@
-# 5. Managing access with role based access control
-## 5.4. Resources
-### 5.4.2. Providing user access to a resource
+# 4. Managing access with role-based access control
+## 4.4. Resources
+### 4.4.2. Providing user access to a resource
 
 
 

@@ -1,6 +1,6 @@
-# 5. Managing access with role based access control
-## 5.3. Users
-### 5.3.3. Editing a user
+# 4. Managing access with role-based access control
+## 4.3. Users
+### 4.3.3. Editing a user
 
 
 
@@ -21,7 +21,7 @@ Users previously designated as automation controller or automation hub administr
 **Procedure**
 
 1. From the navigation panel, selectAccess Management→Users.
-1. Select the check box for the user that you want to modify.
+1. Select the checkbox for the user that you want to modify.
 1. Click the **Pencil** icon and select **Edit user** .
 1. The **Edit** user page is displayed where you can modify user details such as, **Password** , **Email** , **User type** , and **Organization** .
 

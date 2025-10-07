@@ -1,6 +1,6 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.5. Configuring an authentication type
-### 3.5.3. Configuring SAML authentication
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.5. Configuring an authentication type
+### 2.5.3. Configuring SAML authentication
 
 
 
@@ -152,7 +152,7 @@ You can configure an HTTPS redirect for SAML in operator-based deployments to si
 To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#gw-mapping) .
 
 
-#### 3.5.3.1. Configuring transparent SAML logins
+#### 2.5.3.1. Configuring transparent SAML logins
 
 
 

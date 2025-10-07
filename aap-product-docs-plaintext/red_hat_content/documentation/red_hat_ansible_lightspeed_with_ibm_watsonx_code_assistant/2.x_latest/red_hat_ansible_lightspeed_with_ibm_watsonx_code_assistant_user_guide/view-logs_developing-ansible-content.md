@@ -14,16 +14,16 @@ The Ansible Visual Studio (VS Code) extension now records all Red Hat Ansible Li
 
 An **Output** panel is displayed at the bottom of the VS Code editor with a log of all user actions.
 
-
-
-
 Following is an example of an audit log:
 
 
-<span id="idm140693283709488"></span>
+<span id="idm139816009253712"></span>
 **Figure 4.8. Audit log**
 
 ![Audit log](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/756000f459f9d589fc89bfd86e240e8b/example_view_logs.png)
+
+
+
 
 
 

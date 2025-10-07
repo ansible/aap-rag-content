@@ -10,7 +10,7 @@ Centralized Redis is provided for the platform gateway and Event-Driven Ansible 
 This cache and queue system stores data in memory, rather than on a disk or solid-state drive (SSD), which helps deliver speed, reliability, and performance. In Ansible Automation Platform, the system caches the following types of data for the various services in Ansible Automation Platform:
 
 
-<span id="idm140696959635632"></span>
+<span id="idm140401810126832"></span>
 **Table 3.1. Data types cached by Centralized Redis**
 
 | Automation controller | Event-Driven Ansible server | Automation hub | Platform gateway |

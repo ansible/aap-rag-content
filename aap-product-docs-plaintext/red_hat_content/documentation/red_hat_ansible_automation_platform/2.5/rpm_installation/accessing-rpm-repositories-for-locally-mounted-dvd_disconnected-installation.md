@@ -57,8 +57,8 @@ www.redhat.com]
 
 
 
-**Additional Resources**
+**Additional resources**
 
-For further detail on setting up a repository see [Need to set up yum repository for locally-mounted DVD on Red Hat Enterprise Linux 8](https://access.redhat.com/solutions/3776721) .
+-  [Need to set up yum repository for locally-mounted DVD on Red Hat Enterprise Linux 8](https://access.redhat.com/solutions/3776721)
 
 

@@ -4,7 +4,12 @@
 
 
 
-1. Download the latest `    .tar` file for the plug-ins from the [Red Hat Ansible Automation Platform Product Software downloads page](https://access.redhat.com/downloads/content/480/ver=2.5/rhel---9/2.5/x86_64/product-software) . The format of the filename is `    ansible-backstage-rhaap-bundle-x.y.z.tar.gz` . Substitute the Ansible plug-ins release version, for example `    1.0.0` , for `    x.y.z` .
+1. In a browser, navigate to the [Red Hat Ansible Automation Platform Product Software downloads page](https://access.redhat.com/downloads/content/480/ver=2.5/rhel---9/2.5/x86_64/product-software) . and select the **Product Software** tab.
+1. Click **Download now** next to **Ansible plug-ins for Red Hat Developer Hub Setup Bundle** to download the latest version of the plug-ins.
+
+The format of the filename is `    ansible-rhdh-plugins-x.y.z.tar.gz` . Substitute the Ansible plug-ins release version, for example `    2.0.0` , for `    x.y.z` .
+
+
 1. Create a directory on your local machine to store the `    .tar` files.
 
 
@@ -21,14 +26,14 @@ $ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/&lt;ansible-backstage-plugins-local-di
 ```
 
 
-1. Extract the `    ansible-backstage-rhaap-bundle-&lt;version-number&gt;.tar.gz` contents to `    $DYNAMIC_PLUGIN_ROOT_DIR` .
+1. Extract the `    ansible-rhdh-plugins-&lt;version-number&gt;.tar.gz` contents to `    $DYNAMIC_PLUGIN_ROOT_DIR` .
 
 
 ```
-$ tar --exclude='*code*' -xzf ansible-backstage-rhaap-bundle-x.y.z.tar.gz -C $DYNAMIC_PLUGIN_ROOT_DIR
+$ tar --exclude='*code*' -xzf ansible-rhdh-plugins-x.y.z.tar.gz -C $DYNAMIC_PLUGIN_ROOT_DIR
 ```
 
-Substitute the Ansible plug-ins release version, for example `    1.0.0` , for `    x.y.z` .
+Substitute the Ansible plug-ins release version, for example `    2.0.0` , for `    x.y.z` .
 
 
 
@@ -42,8 +47,6 @@ Run `ls` to verify that the extracted files are in the `$DYNAMIC_PLUGIN_ROOT_DIR
 $ ls $DYNAMIC_PLUGIN_ROOT_DIR
 ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz
 ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz.integrity
-ansible-plugin-backstage-rhaap-backend-dynamic-x.y.z.tgz
-ansible-plugin-backstage-rhaap-backend-dynamic-x.y.z.tgz.integrity
 ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz
 ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz.integrity
 ```

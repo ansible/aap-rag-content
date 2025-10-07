@@ -7,7 +7,7 @@
 The following table outlines the different ways to install or deploy Ansible Automation Platform:
 
 
-<span id="idm140696957075840"></span>
+<span id="idm140401810582096"></span>
 **Table 4.1. Ansible Automation Platform installation and deployment models**
 
 | Mode | Infrastructure | Description | Tested topologies |

@@ -1,0 +1,23 @@
+# 2. Credentials
+## 2.1. Credentials list view
+
+
+
+
+When you log in to the Ansible Automation Platform and selectAutomation Decisions→Infrastructure→Credentials, the Credentials page has a pre-loaded **Decision Environment Container Registry** credential. When you create your own credentials, they will be added to this list view. .
+
+From the menu bar, you can search for credentials in the **Name** search field.
+
+You also have the following options in the menu bar:
+
+-  **Manage columns** - You can choose how fields are shown in the list view by clicking this option. You have four ways you can arrange your fields:
+
+
+-  **Column** - Shows the column in the table.
+-  **Description** - Shows the column when the item is expanded as a full width description.
+-  **Expanded** - Shows the column when the item is expanded as a detail.
+-  **Hidden** - Hides the column.
+
+-  **List view** or **Card view** - You can choose between these views by clicking the applicable icons.
+
+

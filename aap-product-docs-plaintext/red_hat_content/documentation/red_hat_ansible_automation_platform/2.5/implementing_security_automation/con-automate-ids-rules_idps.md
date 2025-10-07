@@ -1,5 +1,5 @@
-# 2. Automating Network Intrusion Detection and Prevention Systems (IDPS) with Ansible
-## 2.2. Automating your IDPS rules with Ansible
+# 2. Automating Network Intrusion Detection and Prevention Systems (IDPS) with Ansible Automation Platform
+## 2.2. Automating your IDPS rules with Ansible Automation Platform
 
 
 

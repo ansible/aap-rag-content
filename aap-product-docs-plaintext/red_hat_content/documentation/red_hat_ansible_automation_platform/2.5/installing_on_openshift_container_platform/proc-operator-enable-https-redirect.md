@@ -1,6 +1,6 @@
-# 3. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 3.1. Configuring platform gateway on Red Hat OpenShift Container Platform web console
-### 3.1.3. Enabling HTTPS redirect for single sign-on (SSO) for platform gateway on OpenShift Container Platform
+# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 4.1. Configuring platform gateway on Red Hat OpenShift Container Platform web console
+### 4.1.3. Enabling HTTPS redirect for single sign-on (SSO) for platform gateway on OpenShift Container Platform
 
 
 

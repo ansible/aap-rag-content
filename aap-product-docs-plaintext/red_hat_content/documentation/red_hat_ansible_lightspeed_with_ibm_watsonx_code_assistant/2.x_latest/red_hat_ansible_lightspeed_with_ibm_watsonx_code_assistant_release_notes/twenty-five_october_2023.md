@@ -1,5 +1,5 @@
 # 2. New features and enhancements
-## 2.10. 25 October 2023
+## 2.11. 25 October 2023
 
 
 
@@ -40,4 +40,4 @@ The Ansible code bot scans existing content collections, roles, and playbooks th
 
 
 
-<span id="idm140473716123488"></span>
+<span id="idm139828495435184"></span>

@@ -1,5 +1,5 @@
-# 7. Configuring Ansible Automation Platform
-## 7.3. User preferences
+# 6. Configuring Ansible Automation Platform
+## 6.3. User preferences
 
 
 

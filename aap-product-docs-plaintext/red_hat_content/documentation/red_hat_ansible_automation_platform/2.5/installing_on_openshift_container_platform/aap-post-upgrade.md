@@ -1,5 +1,5 @@
-# 7. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 7.7. Ansible Automation Platform post-upgrade steps
+# 8. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 8.7. Ansible Automation Platform post-upgrade steps
 
 
 

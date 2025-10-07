@@ -1,25 +1,18 @@
 # 10. Patch releases
-## 10.4. Ansible Automation Platform patch release June 9, 2025
-### 10.4.5. Event-Driven Ansible
+## 10.2. Ansible Automation Platform patch release August 27, 2025
+### 10.2.8. Event-Driven Ansible
 
 
 
 
-#### 10.4.5.1. Enhancements
+#### 10.2.8.1. Bug Fixes
 
 
 
 
-- Rename env `    EDA_OIDC_TOKEN_URL` to `    DA_AUTOMATION_ANALYTICS_OIDC_TOKEN_URL` .(AAP-44862)
-
-
-#### 10.4.5.2. Bug Fixes
-
-
-
-
-- Fixed an issue where the activation containers were not removed after a node goes offline.(AAP-45831)
-- Fixed an issue where the error reminding user to remap source with event stream should be under key source_mapping in the API return.(AAP-45105)
-- Fixed an issue where special characters such as `    []` were not allowed in the activation name on OCP deployment.(AAP-44691)
+- Fixed an issue where `    MQ_TLS` did not accept a boolean value.(AAP-51012)
+- Fixed an issue where project import state may become stuck at pending or running.(AAP-51643)
+- Fixed an issue where `    %20` is not permitted in project git URL.(AAP-51642)
+- Fix an issue where a user who belongs to a team with an Event-Driven Ansible organization project admin role could not see the organization.(AAP-50921)
 
 

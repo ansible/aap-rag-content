@@ -1,81 +1,92 @@
 # 1. Red Hat Ansible Automation Platform installation overview
-## 1.2. Managing Ansible Automation Platform licensing, updates and support
-### 1.2.5. Attaching your Red Hat Ansible Automation Platform subscription
+## 1.4. Managing Ansible Automation Platform licensing, updates and support
+### 1.4.5. Attaching your Red Hat Ansible Automation Platform subscription
 
 
 
 
-You **must** have valid subscriptions attached on all nodes before installing Red Hat Ansible Automation Platform. Attaching your Ansible Automation Platform subscription provides access to subscription-only resources necessary to proceed with the installation.
+You **must** have valid subscriptions on all nodes before installing Red Hat Ansible Automation Platform.
+
+Note
+Simple Content Access (SCA) is now the default subscription method for all Red Hat accounts. With SCA, you only need to register your systems to Red Hat Subscription Management (RHSM) or Satellite to access content. Traditional pool-based subscription attachment commands (such as `subscription-manager attach --pool` or `subscription-manager attach --auto` ) are no longer required. For more information, see [Simple Content Access](https://access.redhat.com/articles/simple-content-access) .
+
+
 
 **Procedure**
 
-1. Make sure your system is registered:
+1. Register your system with Red Hat Subscription Management:
 
 
 ```
 $ sudo subscription-manager register --username &lt;$INSERT_USERNAME_HERE&gt; --password &lt;$INSERT_PASSWORD_HERE&gt;
 ```
 
+With Simple Content Access (SCA), registration is the only step required to access Ansible Automation Platform content.
 
-1. Obtain the `    pool_id` for your Red Hat Ansible Automation Platform subscription:
 
 
-```
-$ sudo subscription-manager list --available --all | grep "Ansible Automation Platform" -B 3 -A 6
-```
 
 Note
-Do not use MCT4022 as a `    pool_id` for your subscription because it can cause Ansible Automation Platform subscription attachment to fail.
-
-
-
-
-1. Attach the subscription:
-
-
-```
-$ sudo subscription-manager attach --pool=&lt;pool_id&gt;
-```
-
-You have now attached your Red Hat Ansible Automation Platform subscriptions to all nodes.
-
-
-1. To remove this subscription, enter the following command:
-
-
-```
-$ sudo subscription-manager remove --pool=&lt;pool_id&gt;
-```
-
+For accounts still using legacy subscription pools, you might need to manually attach subscriptions using the commands shown in the troubleshooting section.
 
 
 
 **Verification**
 
-- Verify the subscription was successfully attached:
+1. Refresh the subscription information on your system:
 
 
 ```
-$ sudo subscription-manager list --consumed
+$ sudo subscription-manager refresh
 ```
+
+
+1. Verify your registration:
+
+
+```
+$ sudo subscription-manager identity
+```
+
+This command displays your system identity, name, organization name, and organization ID, confirming successful registration.
+
+
+
 
 **Troubleshooting**
 
-- If you are unable to locate certain packages that came bundled with the Ansible Automation Platform installer, or if you are seeing a `    <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Repositories disabled by configuration</span></em></span>` message, try enabling the repository by using the command:
-
-Red Hat Ansible Automation Platform 2.5 for RHEL 8
+- For legacy accounts not using SCA, you might need to manually attach subscriptions:
 
 
 ```
-$ sudo subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-8-x86_64-rpms
+$ sudo subscription-manager list --available --all | grep "Ansible Automation Platform" -B 3 -A 6    $ sudo subscription-manager attach --pool=&lt;pool_id&gt;
 ```
 
-Red Hat Ansible Automation Platform 2.5 for RHEL 9
+Note
+Do not use MCT4022 as a `    pool_id` as it can cause subscription attachment to fail.
+
+
+
+
+- For legacy accounts not using SCA, if you are unable to locate certain packages that came bundled with the Ansible Automation Platform installer, or if you are seeing a `    <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Repositories disabled by configuration</span></em></span>` message, use the following steps to identify and enable the required repository:
+
+
+1. List available repositories:
 
 
 ```
-$ sudo subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms
+$ sudo subscription-manager repos --list | grep -i ansible-automation-platform
 ```
+
+
+1. Identify the repository name that matches your RHEL version, Ansible Automation Platform version, and architecture (for example, `        ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms` ).
+1. Enable the repository:
+
+
+```
+$ sudo subscription-manager repos --enable &lt;repository_name&gt;
+```
+
 
 
 

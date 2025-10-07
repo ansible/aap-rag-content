@@ -1,6 +1,6 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.3. Creating an authentication method
-### 3.3.2. Defining authentication mapping rules and triggers
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.3. Creating an authentication method
+### 2.3.2. Defining authentication mapping rules and triggers
 
 
 
@@ -17,8 +17,8 @@ Authentication map types can be used with any type of authenticator. Each map ha
 
 
 -  [Allow](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#gw-allow-mapping)
--  [Organization](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#ref-controller-organization-mapping)
--  [Team](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#ref-controller-team-mapping)
+-  [Organization](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#proc-controller-organization-mapping)
+-  [Team](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#proc-controller-team-mapping)
 -  [Role](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#gw-role-mapping)
 -  [Is Superuser](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#gw-superuser-mapping)
 

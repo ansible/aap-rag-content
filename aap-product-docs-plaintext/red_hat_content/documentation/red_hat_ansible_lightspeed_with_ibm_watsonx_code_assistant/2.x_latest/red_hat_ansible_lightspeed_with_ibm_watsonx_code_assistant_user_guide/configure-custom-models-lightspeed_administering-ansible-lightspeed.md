@@ -23,7 +23,7 @@ Using the **model-override** setting in the Ansible VS Code extension, select An
 
 **Procedure**
 
-Choose one of the following configurations for your custom model:
+- Choose one of the following configurations for your custom model:
 
 
 -  **Configure the custom model for all Ansible users in your organization**
@@ -52,6 +52,7 @@ Choose one of the following configurations for your custom model:
 1. In the **Model ID Override** field, enter the model ID of the custom model.
 
 Your settings are automatically saved in VS Code, and you can now use the custom model.
+
 
 
 

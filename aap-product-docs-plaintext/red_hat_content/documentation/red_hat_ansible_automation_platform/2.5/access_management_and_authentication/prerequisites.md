@@ -1,5 +1,5 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.1. Prerequisites
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.1. Prerequisites
 
 
 

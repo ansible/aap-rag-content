@@ -15,7 +15,7 @@ Manually set up an OAuth application within your Ansible Automation Platform ins
 
 
 -  **Name** : Enter a name such as "Red Hat Edge Manager". This is the name visible in the Ansible Automation Platform UI.
--  **URL** : The `        baseDomain` of your Ansible Automation Platform UI with `        https://` .
+-  **URL** : The `        baseDomain` of your Red Hat Edge Manager UI with `        https://` .
 -  **Organization** : Select **Default** .
 -  **Authorization grant type** : Select **Authorization code** .
 -  **Client** : Select **Public** .

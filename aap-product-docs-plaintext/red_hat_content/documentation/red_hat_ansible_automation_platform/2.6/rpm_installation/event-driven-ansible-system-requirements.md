@@ -1,0 +1,24 @@
+# 2. System requirements
+## 2.5. Event-Driven Ansible controller system requirements
+
+
+
+
+The Event-Driven Ansible controller is a single-node system capable of handling a variable number of long-running processes (such as rulebook activations) on-demand, depending on the number of CPU cores.
+
+Use the following minimum requirements for Event-Driven Ansible controller:
+
+| Requirement | Required |
+| --- | --- |
+|  **RAM** | 16 GB |
+|  **CPUs** | 4 |
+|  **Local disk** | - Hard drive must be 40 GB minimum with at least 20 GB available under /var.
+- Storage volume must be rated for a minimum baseline of 3000 IOPS.
+- If the cluster has many large projects or decision environment images, consider doubling the GB in /var to avoid disk space errors. |
+
+
+Important
+When you activate an Event-Driven Ansible rulebook under standard conditions, it uses about 250 MB of memory. However, the actual memory consumption can vary significantly based on the complexity of your rules and the volume and size of the events processed. In scenarios where a large number of events are anticipated or the rulebook complexity is high, conduct a preliminary assessment of resource usage in a staging environment. This ensures that your maximum number of activations is based on the capacity of your resources.
+
+
+

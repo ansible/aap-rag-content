@@ -1,0 +1,40 @@
+# 2. Red Hat Edge Manager architecture
+## 2.1. Red Hat Edge Manager agent and service
+
+
+
+
+The Red Hat Edge Manager agent is a process running on each managed device that periodically communicates with the Red Hat Edge Manager service. The agent is responsible for the following tasks:
+
+- Enrolling devices into the service
+- Periodically checking with the service for changes in the device specification, such as changes to the operating system, configuration, and applications
+- Applying any updates independently from the service
+- Reporting status of the device and the applications
+
+
+The Red Hat Edge Manager service is responsible for the following tasks:
+
+- Authenticating and authorizing users and agents
+- Enrolling devices
+- Managing device inventory
+- Reporting status from individual devices or fleets
+
+
+The service also communicates with a database that stores the device inventory and the target device configuration. When communicating with the service, the agent polls the service for changes in the configuration. If the agent detects that the current configuration deviates from the target configuration, the agent attempts to apply the changes to the device.
+
+When the agent receives a new target configuration from the service, the agent does the following tasks:
+
+1. To avoid depending on network connectivity during the update, the agent downloads all required resources, such as the operating system image and application container images, over the network to disk.
+1. The agent updates the operating system image by delegating to `    bootc` .
+1. The agent updates configuration files on the file system of the device by overlaying a set of files that the service sends to the device.
+1. If necessary, the agent reboots into the new operating system. Otherwise, the agent signals system services and applications to reload the updated configuration.
+1. The agent updates applications running on Podman.
+
+
+If the update fails or the system does not return online after rebooting, the agent automatically rolls back to the earlier operating system image and configuration.
+
+Note
+You can keep fleet definitions in Git. The Red Hat Edge Manager periodically syncs with the fleet definitions in the database.
+
+
+

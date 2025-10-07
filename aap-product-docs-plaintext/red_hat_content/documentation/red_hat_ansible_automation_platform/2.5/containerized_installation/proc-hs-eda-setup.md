@@ -1,6 +1,6 @@
-# 3. Horizontal Scaling in Red Hat Ansible Automation Platform
-## 3.1. Horizontal scaling in Event-Driven Ansible controller
-### 3.1.2. Setting up horizontal scaling for Event-Driven Ansible controller
+# 4. Horizontal Scaling in Red Hat Ansible Automation Platform
+## 4.1. Horizontal scaling in Event-Driven Ansible controller
+### 4.1.2. Setting up horizontal scaling for Event-Driven Ansible controller
 
 
 
@@ -59,7 +59,7 @@ $ ansible-playbook -i &lt;path_to_inventory_file&gt; ansible.containerized_insta
 1. The following is a list of the parameters you can use with the `        log_gathering` playbook:
 
 
-<span id="idm140546002511024"></span>
+<span id="idm140416032459392"></span>
 **Table A.1. Parameter reference**
 
 | Parameter name | Description | Default |
@@ -98,7 +98,7 @@ $ podman ps --all --format "{{.Names}}"
 ```
 
 
-<span id="idm140546006015424"></span>
+<span id="idm140416029049648"></span>
 **Table A.2. Container details**
 
 | Component group | Container name | Purpose |
@@ -231,17 +231,13 @@ callbacks_enabled = ansible.posix.profile_tasks
 
 **Automation controller returns an error of 413**
 
-This error happens when `manifest.zip` license files that are larger than the `nginx_client_max_body_size` setting. If this error occurs, change the inventory file to include the following variables:
+This error occurs when `manifest.zip` license files that are larger than the `controller_nginx_client_max_body_size` setting. If this error occurs, update the inventory file to include the following variable:
 
 ```
-nginx_disable_hsts=false
-nginx_http_port=8081
-nginx_https_port=8444
-nginx_client_max_body_size=20m
-nginx_user_headers=[]
+controller_nginx_client_max_body_size=5m
 ```
 
-The current default setting of `20m` should prevent this issue.
+The default setting of `5m` should prevent this issue, but you can increase the value as needed.
 
 **When attempting to install containerized Ansible Automation Platform in Amazon Web Services you receive output that there is no space left on device**
 
@@ -608,7 +604,7 @@ The following tables contain information about the variables used in Ansible Aut
 The following variables control how Ansible Automation Platform interacts with remote hosts.
 
 
-<span id="idm140546005837264"></span>
+<span id="idm140416030874016"></span>
 **Table B.1. Ansible variables**
 
 | Variable | Description |
@@ -676,6 +672,7 @@ Valid options include: `true` , `false` , `auto` | Optional |  `auto` |
 |  `automationhub_container_signing_service_key` |  `hub_container_signing_key` | Path to the container signing key file. | Required if a container signing service is enabled. |  |
 |  `automationhub_create_default_collection_signing_service` |  `hub_collection_signing` | Set this variable to `true` to enable a collection signing service. | Optional |  `false` |
 |  `automationhub_create_default_container_signing_service` |  `hub_container_signing` | Set this variable to `true` to enable a container signing service. | Optional |  `false` |
+|  |  `hub_data_path_exclude` | automation hub backup path to exclude. | Optional |  `[]` |
 |  `automationhub_disable_hsts` |  `hub_nginx_disable_hsts` | Controls whether HTTP Strict Transport Security (HSTS) is enabled or disabled for automation hub. Set this variable to `true` to disable HSTS. | Optional |  `false` |
 |  `automationhub_disable_https` |  `hub_nginx_disable_https` | Controls whether HTTPS is enabled or disabled for automation hub. Set this variable to `true` to disable HTTPS. | Optional |  `false` |
 |  `automationhub_enable_api_access_log` |  | Controls whether logging is enabled or disabled at `/var/log/galaxy_api_access.log` . The file logs all user actions made to the platform, including username and IP address. Set this variable to `true` to enable this logging. | Optional |  `false` |
@@ -705,6 +702,7 @@ Set to `true` to require the user to change the default administrator password d
 |  `automationhub_use_archive_compression` |  `hub_use_archive_compression` | Controls whether archive compression is enabled or disabled for automation hub. You can control this functionality globally by using `use_archive_compression` . | Optional |  `true` |
 |  `automationhub_use_db_compression` |  `hub_use_db_compression` | Controls whether database compression is enabled or disabled for automation hub. You can control this functionality globally by using `use_db_compression` . | Optional |  `true` |
 |  `automationhub_user_headers` |  `hub_nginx_user_headers` | List of additional NGINX headers to add to automation hub’s NGINX configuration. | Optional |  `[]` |
+|  `ee_from_hub_only` |  | Controls whether automation hub is the only registry for execution environment images. If set to `true` , automation hub is the exclusive registry. If set to `false` , images are also pulled directly from Red Hat. | Optional |  `true` when using the bundle installer, otherwise `false` . |
 |  `generate_automationhub_token` |  | Controls whether or not a token is generated for automation hub during installation. By default, a token is automatically generated during a fresh installation. If set to `true` , a token is regenerated during installation. | Optional |  `false` |
 |  |  `hub_extra_settings` | Defines additional settings for use by automation hub during installation.
 
@@ -817,6 +815,22 @@ Inventory file variables for the database used with Ansible Automation Platform.
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
 |  `install_pg_port` |  `postgresql_port` | Port number for the PostgreSQL database. | Optional |  `5432` |
+|  `postgres_extra_settings` |  `postgresql_extra_settings` | Defines additional settings for use by PostgreSQL.
+
+Example usage for RPM:
+
+```
+postgresql_extra_settings:
+ssl_ciphers: 'HIGH:!aNULL:!MD5'
+```
+
+Example usage for containerized:
+
+```
+postgresql_extra_settings:
+- setting: ssl_ciphers
+value: 'HIGH:!aNULL:!MD5'
+``` | Optional |  |
 |  `postgres_firewalld_zone` |  `postgresql_firewall_zone` | The firewall zone where PostgreSQL related firewall rules are applied. This controls which networks can access PostgreSQL based on the zone’s trust level. | Optional | RPM = no default set. Container = `public` . |
 |  `postgres_max_connections` |  `postgresql_max_connections` | Maximum number of concurrent connections to the database if you are using an installer-managed database. For more information see [PostgreSQL database configuration and maintenance for automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-improving-performance#ref-controller-database-settings) . | Optional |  `1024` |
 |  `postgres_ssl_cert` |  `postgresql_tls_cert` | Path to the PostgreSQL SSL/TLS certificate file. | Optional |  |
@@ -1031,6 +1045,7 @@ Inventory file variables for platform gateway.
 |  `automationgateway_ssl_cert` |  `gateway_tls_cert` | Path to the SSL/TLS certificate file for platform gateway. | Optional |  |
 |  `automationgateway_ssl_key` |  `gateway_tls_key` | Path to the SSL/TLS key file for platform gateway. | Optional |  |
 |  `automationgateway_tls_files_remote` |  `gateway_tls_remote` | Denote whether the platform gateway provided certificate files are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional |  `false` |
+|  `automationgateway_uwsgi_processes` |  `gateway_uwsgi_processes` | The number of `uwsgi` processes for the platform gateway container. The value is calculated based on the number of available vCPUs (virtual CPUs). | Optional | The number of vCPUs multiplied by two, plus one. |
 |  `automationgateway_use_archive_compression` |  `gateway_use_archive_compression` | Controls whether archive compression is enabled or disabled for platform gateway. You can control this functionality globally by using `use_archive_compression` . | Optional |  `true` |
 |  `automationgateway_use_db_compression` |  `gateway_use_db_compression` | Controls whether database compression is enabled or disabled for platform gateway. You can control this functionality globally by using `use_db_compression` . | Optional |  `true` |
 |  `automationgateway_user_headers` |  `gateway_nginx_user_headers` | List of additional NGINX headers to add to platform gateway’s NGINX configuration. | Optional |  `[]` |
@@ -1119,7 +1134,7 @@ Inventory file variables for Redis.
 
 
 
-<span id="idm140546004615280"></span>
+<span id="idm140416028696608"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

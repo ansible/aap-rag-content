@@ -1,6 +1,6 @@
-# 3. Configuring authentication in the Ansible Automation Platform
-## 3.5. Configuring an authentication type
-### 3.5.4. Configuring TACACS+ authentication
+# 2. Configuring authentication in the Ansible Automation Platform
+## 2.5. Configuring an authentication type
+### 2.5.4. Configuring TACACS+ authentication
 
 
 

@@ -11,6 +11,8 @@
 1. ClickLog in→Log in with Red Hat.
 1. Enter your Red Hat account username and password.
 
-
 On successful authentication, the login screen is displayed along with your username and your assigned user role.
+
+
+
 

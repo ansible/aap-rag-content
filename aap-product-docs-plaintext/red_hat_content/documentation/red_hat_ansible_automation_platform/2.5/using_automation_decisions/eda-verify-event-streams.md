@@ -19,10 +19,11 @@ If you scroll down in the UI, you can also see the body of the payload with more
 The **Header** and **Body** sections for the event stream are displayed on the Details page. They differ based on the vendor who is sending the event. The header and body can be used to check the attributes in the event payload, which will help you in writing conditions in your rulebook.
 
 
-1. Toggle the **Forward events to rulebook activation** option to enable you to push your events to a rulebook activation. This moves the event stream to production mode and makes it easy to attach to rulebook activations.
-
-When this option is toggled off, your ability to forward events to a rulebook activation is disabled and the **This event stream is disabled** message is displayed.
+1. Toggle the **Forward events to rulebook activation** option to enable you to push your events to a rulebook activation.
 
 
+**Results**
+
+This moves the event stream to production mode and makes it easy to attach to rulebook activations. When this option is toggled off, your ability to forward events to a rulebook activation is disabled and the **This event stream is disabled** message is displayed.
 
 

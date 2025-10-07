@@ -1,6 +1,6 @@
-# 5. Managing access with role based access control
-## 5.3. Users
-### 5.3.2. Creating a user
+# 4. Managing access with role-based access control
+## 4.3. Users
+### 4.3.2. Creating a user
 
 
 
@@ -20,11 +20,14 @@ If you are modifying your own password, log out and log back in again for it to 
 
 
 
-1. Select the **Organization** to be assigned for this user. For information about creating a new organization, refer to [Creating an organization](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#proc-controller-create-organization) .
+1. Select the **Organization** to be assigned for this user. For information about creating a new organization, see [Creating an organization](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#proc-controller-create-organization) .
 1. ClickCreate user.
 
 
-When the user is successfully created, the **User** dialog opens. From here, you can review and modify the user’s Teams, Roles, Tokens and other membership details.
+**Next steps**
+
+When the user is successfully created, the **User** dialog opens. From here, you can review and change the user’s Teams, Roles, Tokens and other membership details.
+
 
 Note
 If the user is not newly-created, the details screen displays the last login activity of that user.

@@ -1,11 +1,16 @@
-# 4. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
-## 4.5. Deploying the Ansible Lightspeed intelligent assistant
-### 4.5.2. Creating a chatbot configuration secret
+# 5. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
+## 5.5. Deploying the Ansible Lightspeed intelligent assistant
+### 5.5.1. Creating a chatbot configuration secret
 
 
 
 
 Create a configuration secret for the Ansible Lightspeed intelligent assistant, so that you can connect the intelligent assistant to the Ansible Automation Platform operator.
+
+**Prerequisites**
+
+-  [You have installed and configured the Ansible Automation Platform operator](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-install-operator-chatbot) .
+
 
 **Procedure**
 
@@ -26,8 +31,8 @@ Create a configuration secret for the Ansible Lightspeed intelligent assistant, 
 
 Enter the provider type of your LLM setup by using one of the following values:
 
-- Red Hat Enterprise Linux AI: `    rhoai_vllm` (Default value)
-- Red Hat OpenShift AI: `    rhelai_vllm`
+- Red Hat Enterprise Linux AI: `    rhelai_vllm`
+- Red Hat OpenShift AI: `    rhoai_vllm` (Default value)
 - IBM watsonx.ai: `    watsonx`
 - OpenAI: `    openai`
 - Microsoft Azure OpenAI: `    azure_openai` |

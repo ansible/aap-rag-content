@@ -9,6 +9,6 @@ Ansible Automation Platform is a modular platform composed of separate component
 
 **Additional resources**
 
-For more information about the components provided within Ansible Automation Platform, see [Red Hat Ansible Automation Platform components](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/ref-aap-components) in _Planning your installation_ .
+-  [Red Hat Ansible Automation Platform components](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/ref-aap-components)
 
 

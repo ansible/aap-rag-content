@@ -187,8 +187,7 @@ The following table lists the required parameters.
 
 
 
-For example: If the source is a Github URL [https://github.com/ansible/ansible-tower-samples.git](https://github.com/ansible/ansible-tower-samples.git) , and the output directory is `    /tmp/out` , the command prompt is as follows:
-`    $ ansible-content-parser<a class="link" href="https://github.com/ansible/ansible-tower-samples.git">https://github.com/ansible/ansible-tower-samples.git</a>/tmp/out`
+For example: If the source is a Github URL `    https://github.com/ansible/ansible-tower-samples.git` , and the output directory is `    /tmp/out` , the command prompt is `    $ ansible-content-parser https://github.com/ansible/ansible-tower-samples.git /tmp/out` .
 
 
 1. Optional: To generate a training data set with additional information, specify the following parameters while running the content parser tool.
@@ -202,18 +201,16 @@ For example: If the source is a Github URL [https://github.com/ansible/ansible-t
 |  `-v` or `--verbose` | Displays the console logging information. |
 
 
-**Example of a command prompt for Github repository **ansible-tower-samples** **
+**Example of a command prompt for Github repository ansible-tower-samples**
 
 
 ```
 $ ansible-content-parser --profile min \    --source-license undefined \    --source-description Samples \    --repo-name ansible-tower-samples \    --repo-url 'https://github.com/ansible/ansible-tower-samples' \    git@github.com:ansible/ansible-tower-samples.git /var/tmp/out_dir
 ```
 
-
-**Example of a generated training data set for Github repository **ansible-tower-samples** **
+**Example of a generated training data set for Github repository ansible-tower-samples**
 
 The training data set is formatted with Jeff Goldblum (jg), a command-line JSON processing tool.
-
 
 
 ```
@@ -308,17 +305,17 @@ If the content parser tool finds ansible-lint rule violations in your Ansible fi
 
 **Procedure**
 
-Use one of the following methods to resolve ansible-lint rule violations:
+- Use one of the following methods to resolve ansible-lint rule violations:
 
 
-- Run the content parser tool with the `    --no-exclude` option
+- Run the content parser tool with the `        --no-exclude` option
 
 If any rule violations, including syntax-check errors, are found, the execution is aborted with an error and no training data set is created.
 
 
-- Limit the set of rules that ansible-lint uses to scan your data with the `    --profile` option
+- Limit the set of rules that ansible-lint uses to scan your data with the `        --profile` option
 
-It is recommended that you fix the files with rule violations. However, if you do not want to modify the source files, you can limit the set of rules that ansible-lint uses to scan your data. To limit the set of rules that ansible-lint uses to scan your data, specify the `    --profile` option with a predefined profile (for example, `    min` , `    basic` , `    moderate` , `    safety` , `    shared` , or `    production` profiles) or by using ansible-lint configuration files. For more information, see the [Ansible Lint documentation](https://ansible.readthedocs.io/projects/lint/) .
+It is recommended that you fix the files with rule violations. However, if you do not want to modify the source files, you can limit the set of rules that ansible-lint uses to scan your data. To limit the set of rules that ansible-lint uses to scan your data, specify the `        --profile` option with a predefined profile (for example, `        min` , `        basic` , `        moderate` , `        safety` , `        shared` , or `        production` profiles) or by using ansible-lint configuration files. For more information, see the [Ansible Lint documentation](https://ansible.readthedocs.io/projects/lint/) .
 
 
 - Run the content parser tool by skipping ansible-lint preprocessing
@@ -326,14 +323,16 @@ It is recommended that you fix the files with rule violations. However, if you d
 You can run the content parser without ansible-lint preprocessing. The content parser tool generates a training data set without scanning for ansible-lint rule violations.
 
 To run the content parser tool without ansible-lint preprocessing, execute the following command:
-`    $ ansible-content-parser<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">source</span></em></span><span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">output</span></em></span><span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">-S</span></em></span>`
+
+`        $ ansible-content-parser<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">source</span></em></span><span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">output</span></em></span><span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">-S</span></em></span>`
 
 Where:
 
 
--  `        <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">source</span></em></span>` : Specifies the source of the training data set.
--  `        <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">output</span></em></span>` : Specifies the output of the training data set.
--  `        <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">-S</span></em></span>` or `        <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">--skip-ansible-lint</span></em></span>` : Specifies to skip ansible-lint preprocessing while generating the training data set.
+-  `            <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">source</span></em></span>` : Specifies the source of the training data set.
+-  `            <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">output</span></em></span>` : Specifies the output of the training data set.
+-  `            <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">-S</span></em></span>` or `            <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">--skip-ansible-lint</span></em></span>` : Specifies to skip ansible-lint preprocessing while generating the training data set.
+
 
 
 
@@ -348,9 +347,14 @@ For every execution, the content parser tool creates a training data set JSONL f
 
 1. Using the command prompt, go to the parent directory.
 1. Run the following command to create a single, concatenated file:
+
 `    find . -name ftdata.json | xargs cat &gt; concatenated.json`
+
+
 1. Optional: Rename the concatenated file for easy identification.
 
-
 You can now upload the merged JSONL file to IBM watsonx Code Assistant and create a custom model.
+
+
+
 

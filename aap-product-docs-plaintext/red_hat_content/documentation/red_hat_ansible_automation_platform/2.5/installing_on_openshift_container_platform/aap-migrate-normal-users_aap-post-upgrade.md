@@ -1,13 +1,13 @@
-# 7. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 7.7. Ansible Automation Platform post-upgrade steps
-### 7.7.4. Migrating normal users
+# 8. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 8.7. Ansible Automation Platform post-upgrade steps
+### 8.7.4. Migrating normal users
 
 
 
 
 When you upgrade from Ansible Automation Platform 2.4 to 2.5, your existing user account is automatically migrated to a single platform account. However, if you have multiple component accounts (such as, automation controller, private automation hub and Event-Driven Ansible), your accounts must be linked to use the centralized features of the platform.
 
-#### 7.7.4.1. Additional resources
+#### 8.7.4.1. Additional resources
 
 
 
@@ -15,7 +15,7 @@ When you upgrade from Ansible Automation Platform 2.4 to 2.5, your existing user
 -  [Creating a user](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/gw-managing-access#proc-controller-creating-a-user)
 
 
-#### 7.7.4.2. Linking your account
+#### 8.7.4.2. Linking your account
 
 
 

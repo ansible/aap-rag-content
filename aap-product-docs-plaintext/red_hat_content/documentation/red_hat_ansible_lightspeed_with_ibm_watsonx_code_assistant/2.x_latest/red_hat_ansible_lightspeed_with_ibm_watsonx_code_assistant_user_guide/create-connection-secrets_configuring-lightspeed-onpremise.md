@@ -9,7 +9,7 @@ You must create a configuration secret to connect to an IBM watsonx Code Assista
 
 **Prerequisites**
 
-- You have installed the Ansible Automation Platform operator on the Red Hat OpenShift Container Platform.
+- You have installed the Ansible Automation Platform operator 2.5.0-0.1753402603 or later on the Red Hat OpenShift Container Platform.
 - You have created an OAuth application in the automation controller.
 - You have obtained an API key and a model ID from IBM watsonx Code Assistant.
 
@@ -37,10 +37,10 @@ Enter the username you use to connect to an IBM Cloud Pak for Data deployment. |
 
 - For on-premise deployment (IBM Cloud Pak for Data): `    wca-onprem`
 - For cloud deployment (IBM Cloud): `    wca` |
-|  `model_url` | Enter the URL of the IBM watsonx Code Assistant model. |
+|  `model_url` | Enter the URL of the IBM watsonx Code Assistant model. For cloud deployment, the model URL could be `https://api.dataplatform.cloud.ibm.com` . |
 |  `model_api_key` | Enter the API key of your IBM watsonx Code Assistant model that was generated during the model installation. |
 |  `model_id` | Enter the ID of your IBM watsonx Code Assistant model. |
-|  `model_verify_ssl` |  _Optional, and supported on Ansible Automation Platform 2.5 only_
+|  `model_verify_ssl` |  _Optional, and supported on Ansible Automation Platform 2.5 and later_
 
 This key controls whether the SSL certificate of the IBM watsonx Code Assistant model is verified.
 
@@ -62,6 +62,8 @@ Ensure that you do not accidentally add any whitespace characters (extra line, s
 
 1. Click **Create** .
 
-
 After you create the model configuration secret, you must update the YAML file of the Ansible Automation Platform operator.
+
+
+
 

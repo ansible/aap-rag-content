@@ -1,0 +1,25 @@
+# 3. Automation mesh design patterns
+## 3.6. Outbound only connections to controller nodes
+
+
+
+
+This example inventory file deploys a control plane consisting of two control nodes, and several execution nodes. Only outbound connections are allowed to the controller nodes All nodes in the 'execution_nodes' group are peered with all nodes in the controller plane.
+
+```
+[automationcontroller]
+controller-[1:2].example.com
+
+[execution_nodes]
+execution-[1:5].example.com
+
+[execution_nodes:vars]
+# connection is established *from* the execution nodes *to* the automationcontroller
+peers=automationcontroller
+```
+
+The following image displays the topology of this mesh network.
+
+![The topology map consists of an automation controller group, and local execution group. The automation controller group consists of two control nodes: aap_c_1, and aap_c_2. The local execution nodes are aap-e-1, aap-e-2, aap-e-3, aap-e-4, and aap-e-5. Every execution node is peered to every control node in an outgoing connection.](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Automation_mesh_for_VM_environments-en-US/images/1432c3f4af8047950c70aefd7f3993fe/mesh-one-way-communication.png)
+
+

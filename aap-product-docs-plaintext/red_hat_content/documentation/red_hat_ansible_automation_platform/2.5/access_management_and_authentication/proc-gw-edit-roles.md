@@ -1,10 +1,10 @@
-# 6. Roles
-## 6.3. Editing a role
+# 5. Roles
+## 5.3. Editing a role
 
 
 
 
-Built in roles can not be changed, however, you can modify custom roles from the **Roles** list view. The **Editable** column in the **Roles** list view indicates whether a role is _Built-in_ or _Editable_ .
+Built-in roles cannot be changed, however, you can modify custom roles from the **Roles** list view. The **Editable** column in the **Roles** list view indicates whether a role is _Built-in_ or _Editable_ .
 
 **Procedure**
 

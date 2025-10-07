@@ -8,7 +8,7 @@
 The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
 
 
-<span id="idm139937748222720"></span>
+<span id="idm139984996619248"></span>
 **Figure 2.2. Infrastructure topology diagram**
 
 ![RPM enterprise topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Tested_deployment_models-en-US/images/f2f3c928085ce3b7b53a92d554fbc14d/rpm-b-env-a.png)
@@ -19,7 +19,7 @@ The following diagram outlines the infrastructure topology that Red Hat has tes
 Each VM has been tested with the following component requirements:
 
 
-<span id="idm139937750574208"></span>
+<span id="idm139984996614448"></span>
 **Table 2.5. Virtual machine requirements**
 
 | Requirement | Minimum requirement |
@@ -33,7 +33,7 @@ Each VM has been tested with the following component requirements:
 
 
 
-<span id="idm139937752431552"></span>
+<span id="idm139984993273488"></span>
 **Table 2.6. Infrastructure topology**
 
 | VM count | Purpose | Example VM group names |

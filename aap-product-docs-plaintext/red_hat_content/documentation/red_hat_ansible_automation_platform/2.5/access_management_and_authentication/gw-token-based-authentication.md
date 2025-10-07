@@ -1,4 +1,4 @@
-# Chapter 4. Configuring access to external applications with token-based authentication
+# Chapter 3. Configuring access to external applications with token-based authentication
 
 
 

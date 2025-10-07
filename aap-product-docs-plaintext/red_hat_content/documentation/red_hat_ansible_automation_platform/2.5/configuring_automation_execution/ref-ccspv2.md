@@ -373,12 +373,15 @@ Automation controller provides a secret management system that include integrati
 
 These external secret values are fetched before running a playbook that needs them.
 
-**Additional resources**
-
-For more information about specifying secret management system credentials in the user interface, see [Managing user credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/index#controller-credentials) .
+## 13.1. Additional resources
 
 
-## 13.1. Configuring and linking secret lookups
+
+
+-  [Managing user credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/index#controller-credentials) .
+
+
+## 13.2. Configuring and linking secret lookups
 
 
 
@@ -429,7 +432,7 @@ For more information, see the [Metadata for credential input sources](https://do
 For more information, see the development documents for [Credential plugins](https://github.com/ansible/awx/blob/devel/docs/credentials/credential_plugins.md) .
 
 
-### 13.1.1. Metadata for credential input sources
+### 13.2.1. Metadata for credential input sources
 
 
 
@@ -513,7 +516,7 @@ The information required for the **Metadata** tab of the input source.
 | Secret Field | Specify the field to be used from the secret. |
 
 
-### 13.1.2. AWS Secrets Manager lookup
+### 13.2.2. AWS Secrets Manager lookup
 
 
 
@@ -526,7 +529,7 @@ When AWS Secrets Manager lookup is selected for **Credential type** , give the f
 -  **AWS Secret Key** (required): give the secret as obtained by the AWS IAM console
 
 
-### 13.1.3. Centrify Vault Credential Provider Lookup
+### 13.2.3. Centrify Vault Credential Provider Lookup
 
 
 
@@ -540,7 +543,7 @@ You need the Centrify Vault web service running to store secrets for this integr
 -  **OAuth2 Scope** : specify the scope of the OAuth2 client
 
 
-### 13.1.4. CyberArk Central Credential Provider (CCP) Lookup
+### 13.2.4. CyberArk Central Credential Provider (CCP) Lookup
 
 
 
@@ -555,7 +558,7 @@ The CyberArk Central Credential Provider web service must be running to store se
 -  **Verify SSL Certificates** : this option is only available when the URL uses HTTPS. Check this option to verify that the server’s SSL/TLS certificate is valid and trusted. For environments that use internal or private CA’s, leave this option unchecked to disable verification.
 
 
-### 13.1.5. CyberArk Conjur Secrets Manager Lookup
+### 13.2.5. CyberArk Conjur Secrets Manager Lookup
 
 
 
@@ -571,7 +574,7 @@ When you select **CyberArk Conjur Secrets Manager Lookup** for **Credential Type
 -  **Public Key Certificate** : include the `    BEGIN CERTIFICATE` and `    END CERTIFICATE` lines when pasting the public key, if provided by CyberArk
 
 
-### 13.1.6. HashiCorp Vault Secret Lookup
+### 13.2.6. HashiCorp Vault Secret Lookup
 
 
 
@@ -611,7 +614,7 @@ For more information about the Kubernetes auth method and its fields, see the [V
 
 For more information about the TLS certificate auth method and its fields, see the [Vault documentation for TLS certificates auth method](https://developer.hashicorp.com/vault/docs/auth/cert) .
 
-### 13.1.7. HashiCorp Vault Signed SSH
+### 13.2.7. HashiCorp Vault Signed SSH
 
 
 
@@ -642,7 +645,7 @@ For more information about the Kubernetes authentication method and its fields, 
 
 For more information about the TLS certificate auth method and its fields, see the [Vault documentation for TLS certificates auth method](https://developer.hashicorp.com/vault/docs/auth/cert) .
 
-### 13.1.8. Microsoft Azure Key Vault
+### 13.2.8. Microsoft Azure Key Vault
 
 
 
@@ -656,7 +659,7 @@ When you select **Microsoft Azure Key Vault** for **Credential Type** , give the
 -  **Cloud Environment** : select the applicable cloud environment to apply
 
 
-### 13.1.9. Thycotic DevOps Secrets Vault
+### 13.2.9. Thycotic DevOps Secrets Vault
 
 
 
@@ -669,7 +672,7 @@ When you select **Thycotic DevOps Secrets Vault** for **Credential Type** , give
 -  **Client Secret** (required): give the secret as obtained by the Thycotic secret management system
 
 
-### 13.1.10. Thycotic Secret Server
+### 13.2.10. Thycotic Secret Server
 
 
 
@@ -682,7 +685,7 @@ When you select **Thycotic Secrets Server** for **Credential Type** , give the f
 -  **Password** (required): give the password associated with the user
 
 
-### 13.1.11. Configuring a `GitHub App Installation Access Token Lookup`
+### 13.2.11. Configuring a `GitHub App Installation Access Token Lookup`
 
 
 
@@ -865,7 +868,7 @@ Automation controller is designed so that:
 
 If a secret value is used in a playbook, it is recommended that you use `no_log` on the task so that it is not accidentally logged.
 
-## 14.2. Connection security
+### 14.1.4. Connection security
 
 
 
@@ -884,26 +887,28 @@ You must have 'local' user access for the following users:
 
 
 
-### 14.2.1. Internal services
+### 14.1.5. Internal services
 
 
 
 
 Automation controller connects to the following services as part of internal operation:
 
-### 14.2.2. External access
+### 14.1.6. External access
 
 
 
 
-Automation controller is accessed via standard HTTP/HTTPS on standard ports, provided by Nginx. A self-signed certificate or key is installed by default; you can provide a locally appropriate certificate and key. SSL/TLS algorithm support is configured in the `/etc/nginx/nginx.conf` configuration file. An "intermediate" profile is used by default, that you can configure. You must reapply changes after each update.
+Automation controller is accessed using standard HTTP/HTTPS on standard ports, provided by Nginx. A self-signed certificate or key is installed by default; you can provide a locally appropriate certificate and key. SSL/TLS algorithm support is configured in the `/etc/nginx/nginx.conf` configuration file. An "intermediate" profile is used by default, that you can configure. You must reapply changes after each update.
 
-### 14.2.3. Managed nodes
-
-
+### 14.1.7. Managed nodes
 
 
-Automation controller connects to managed machines and services as part of automation. All connections to managed machines are done by standard secure mechanisms, such as SSH, WinRM, or SSL/TLS. Each of these inherits configuration from the system configuration for the feature in question, such as the system OpenSSL configuration.
+
+
+Automation controller connects to managed machines and services as part of automation. All connections to managed machines are done by standard secure mechanisms, such as SSH, WinRM, or SSL/TLS.
+
+Each of these inherits configuration from the system configuration for the feature in question, such as the system OpenSSL configuration.
 
 # Chapter 15. Security best practices
 
@@ -929,7 +934,7 @@ The use of source control, branching, and mandatory code review is best practice
 
 At a higher level, tools exist that enable creation of approvals and policy-based actions around arbitrary workflows, including automation. These tools can then use Ansible through the automation controller’s API to perform automation.
 
-You must use a secure default administrator password at the time of automation controller installation. For more information, see [Change the automation controller Administrator Password](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-controller-change-admin-password) .
+You must use a secure default administrator password at the time of automation controller installation. For more information, see [Change the automation controller Administrator Password](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-tips-and-tricks#ref-controller-change-admin-password) .
 
 Automation controller exposes services on certain well-known ports, such as port 80 for HTTP traffic and port 443 for HTTPS traffic. Do not expose automation controller on the open internet, which reduces the threat surface of your installation.
 
@@ -940,10 +945,10 @@ Automation controller exposes services on certain well-known ports, such as port
 
 Granting access to certain parts of the system exposes security risks. Apply the following practices to help secure access:
 
--  [Minimize administrative accounts](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-minimize-administrative-accounts)
--  [Minimize local system access](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-minimize-system-access)
--  [Remove access to credentials from users](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-remove-access-credentials)
--  [Enforce separation of duties](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-enforce-separation-duties)
+-  [Minimize administrative accounts](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-security-best-practices#controller-minimize-administrative-accounts)
+-  [Minimize local system access](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-security-best-practices#controller-minimize-system-access)
+-  [Remove access to credentials from users](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-security-best-practices#controller-remove-access-credentials)
+-  [Enforce separation of duties](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-security-best-practices#controller-enforce-separation-duties)
 
 
 ### 15.1.2. Minimize administrative accounts
@@ -983,9 +988,9 @@ Different pieces of automation might require access to a system at different lev
 
 Several resources exist in automation controller and elsewhere to ensure a secure platform. Consider using the following functionalities:
 
--  [Existing security functionality](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-existing-security)
--  [External account stores](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-external-account-stores)
--  [Django password policies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-django-password-policies)
+-  [Existing security functionality](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-security-best-practices#controller-existing-security)
+-  [External account stores](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-security-best-practices#controller-external-account-stores)
+-  [Django password policies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-security-best-practices#controller-django-password-policies)
 
 
 ### 15.2.1. Existing security functionality
@@ -993,11 +998,11 @@ Several resources exist in automation controller and elsewhere to ensure a secur
 
 
 
-Do not disable SELinux or automation controller’s existing multi-tenant containment. Use automation controller’s role-based access control (RBAC) to delegate the minimum level of privileges required to run automation. Use teams in automation controller to assign permissions to groups of users rather than to users individually.
+Note the following:
 
-**Additional resources**
-
-For more information, see [Role-Based Access Controls](https://docs.ansible.com/automation-controller/4.4/html/userguide/security.html#rbac-ug) in _Using automation execution_ .
+- Do not disable SELinux or automation controller’s existing multi-tenant containment.
+- Use automation controller’s role-based access control (RBAC) to delegate the minimum level of privileges required to run automation. For more information, see [Managing access with role based access control](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/gw-managing-access) .
+- Use teams in automation controller to assign permissions to groups of users rather than to users individually.
 
 
 ### 15.2.2. External account stores
@@ -1034,10 +1039,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 ```
 
+Ensure that you restart your automation controller instance for the change to take effect. For more information, see [Start, stop, and restart automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-start-stop-controller) .
+
 **Additional resources**
 
-- For more information, see [Password validation](https://docs.djangoproject.com/en/3.2/topics/auth/passwords/#module-django.contrib.auth.password_validation) in Django in addition to the preceding example.
-- Ensure that you restart your automation controller instance for the change to take effect. For more information, see [Start, stop, and restart automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-start-stop-controller) .
+[Password validation](https://docs.djangoproject.com/en/3.2/topics/auth/passwords/#module-django.contrib.auth.password_validation)
 
 
 # Chapter 16. The _awx-manage_ Utility
@@ -1058,17 +1064,13 @@ To use `awx-manage` properly, you must first create an inventory in automation c
 
 For help with `awx-manage` , run the following command:
 
-```
-awx-manage inventory_import [--help]
-```
+`awx-manage inventory_import [--help]`
 
 The `inventory_import` command synchronizes an automation controller inventory object with a text-based inventory file, dynamic inventory script, or a directory of one or more, as supported by core Ansible.
 
 When running this command, specify either an `--inventory-id` or `--inventory-name` , and the path to the Ansible inventory source ( `--source` ).
 
-```
-awx-manage inventory_import --source=/ansible/inventory/ --inventory-id=1
-```
+`awx-manage inventory_import --source=/ansible/inventory/ --inventory-id=1`
 
 By default, inventory data already stored in automation controller blends with data from the external source.
 
@@ -1078,9 +1080,7 @@ To specify that any existing hosts get variable data exclusively from the `--sou
 
 The default behavior adds any new variables from the external source, overwriting keys that already exist, but preserving any variables that were not sourced from the external data source.
 
-```
-awx-manage inventory_import --source=/ansible/inventory/ --inventory-id=1 --overwrite
-```
+`awx-manage inventory_import --source=/ansible/inventory/ --inventory-id=1 --overwrite`
 
 Note
 Edits and additions to Inventory host variables persist beyond an inventory synchronization as long as `--overwrite_vars` is not set.
@@ -1094,24 +1094,24 @@ Edits and additions to Inventory host variables persist beyond an inventory sync
 
 `awx-manage` has a variety of commands used to clean old data from automation controller. Automation controller administrators can use the automation controller **Management Jobs** interface for access or use the command line.
 
-```
-awx-manage cleanup_jobs [--help]
-```
+-  `    awx-manage cleanup_jobs [--help]`
 
 This permanently deletes the job details and job output for jobs older than a specified number of days.
 
-```
-awx-manage cleanup_activitystream [--help]
-```
 
-This permanently deletes any [Activity stream] data older than a specific number of days.
+-  `    awx-manage cleanup_activitystream [--help]`
+
+This permanently deletes any activity stream data older than a specific number of days.
+
+
+
 
 ## 16.3. Cluster management
 
 
 
 
-For more information about the `awx-manage provision_instance` and `awx-manage deprovision_instance` commands, see [Clustering](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-clustering) .
+For more information about the `awx-manage provision_instance` and `awx-manage deprovision_instance` commands, see [Clustering](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-clustering) .
 
 Note
 Do not run other `awx-manage` commands unless instructed by Ansible Support.
@@ -1140,7 +1140,7 @@ The `--json` flag specifies the output format and is optional.
 
 
 
-You can backup and restore your system using the Ansible Automation Platform setup playbook.
+You can backup and restore your system by using the Ansible Automation Platform setup playbook.
 
 For more information, see the [Backup and restore clustered environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/index#controller-backup-restore-clustered-environments) section.
 
@@ -1153,7 +1153,7 @@ Backup and restore functionality only works with the PostgreSQL versions support
 
 
 
-The Ansible Automation Platform setup playbook is invoked as `setup.sh` from the path where you unpacked the platform installer tarball. It uses the same inventory file used by the install playbook. The setup script takes the following arguments for backing up and restoring:
+The Ansible Automation Platform setup playbook is invoked as `setup.sh` from the path where you unpacked the platform installer tar file. It uses the same inventory file used by the install playbook. The setup script takes the following arguments for backing up and restoring:
 
 -  `    -b` : Perform a database backup rather than an installation.
 -  `    -r` : Perform a database restore rather than an installation.
@@ -1208,7 +1208,7 @@ These playbooks serve to backup and restore.
 - The restore backup restores the backed up files and data to a freshly installed and working second instance of automation controller.
 
 
-When restoring your system, the installer checks to see that the backup file exists before beginning the restoration. If the backup file is not available, your restoration fails.
+When restoring your system, installation program checks to see that the backup file exists before beginning the restoration. If the backup file is not available, your restoration fails.
 
 Note
 Make sure that your automation controller hosts are properly set up with SSH keys, user or pass variables in the hosts file, and that the user has `sudo` access.
@@ -1230,13 +1230,13 @@ Consider the following points when you backup and restore your system:
 The procedure for backup and restore for a clustered environment is similar to a single install, except for some of the following considerations:
 
 Note
-For more information on installing clustered environments, see the [Install and configure](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-cluster-install) section.
+For more information about installing clustered environments, see the [Install and configure](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#controller-cluster-install) section.
 
 
 
 - If restoring to a new cluster, ensure that the old cluster is shut down before proceeding because they can conflict with each other when accessing the database.
 - Per-node backups are only restored to nodes bearing the same hostname as the backup.
-- When restoring to an existing cluster, the restore contains the following:
+- When restoring to an existing cluster, the restore has the following:
 
 
 - A dump of the PostgreSQL database
@@ -1267,7 +1267,7 @@ Only users installing a trial of or a fresh installation of are opted-in for thi
 
 Automation controller collects user data automatically to help improve the product.
 
-For information on setting up Automation Analytics, see [Configuring Automation Analytics](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#proc-controller-configure-analytics) .
+For information about setting up Automation Analytics, see [Configuring Automation Analytics](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#proc-controller-configure-analytics) .
 
 ## 18.1. Automation Analytics
 
@@ -1373,9 +1373,9 @@ Automation Analytics collects the following classes of data from automation cont
 - Automation task details (success, host id, playbook/role, task name, and module used)
 
 
-You can use `awx-manage gather_analytics` (without `--ship` ) to inspect the data that automation controller sends, so that you can satisfy your data collection concerns. This creates a tarball that contains the analytics data that is sent to Red Hat.
+You can use `awx-manage gather_analytics` (without `--ship` ) to inspect the data that automation controller sends, so that you can satisfy your data collection concerns. This creates a .tar file that contains the analytics data that is sent to Red Hat.
 
-This file contains a number of JSON and CSV files. Each file contains a different set of analytics data.
+This file contains several JSON and CSV files. Each file contains a different set of analytics data.
 
 -  [manifest.json](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-controller-manifest-json)
 -  [config.json](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/configuring_automation_execution/index#ref-controller-config-json)
@@ -1604,7 +1604,7 @@ The following is an example `org_counts.json` file:
 
 
 
-The `cred_type_counts.json` file contains information on the different credential types in the cluster, and how many credentials exist for each type.
+The `cred_type_counts.json` file has information about different credential types in the cluster, and how many credentials exist for each type.
 
 The following is an example `cred_type_counts.json` file:
 
@@ -2015,7 +2015,6 @@ Instances have been reported where reusing the external database during subseque
 
 You perform a clustered installation. Then, you need to do this again and perform a second clustered installation reusing the same external database, only this subsequent installation failed.
 
-
 When setting up an external database that has been used in a prior installation, you must manually clear the database used for the clustered node before any additional installations can succeed.
 
 ## 19.6. Viewing private EC2 VPC instances in the automation controller inventory
@@ -2039,7 +2038,10 @@ vpc_destination_variable: private_ip_address
 1. ClickSaveand trigger an update of the group.
 
 
-Once this is done you can see your VPC instances.
+**Verification**
+
+Once you complete these steps, you can see your VPC instances.
+
 
 Note
 Automation controller must be running inside the VPC with access to those instances if you want to configure them.
@@ -2113,9 +2115,9 @@ awx-manage createsuperuser
 
 Credentials supplied by automation controller do not flow to the jump host through ProxyCommand. They are only used for the end-node when the tunneled connection is set up.
 
+### 20.4.1. Configure a fixed user/keyfile in your SSH configuration file
 
-<span id="configure_a_fixed_userkeyfile_in_your_ssh_configuration_file"></span>
-#### Configure a fixed user/keyfile in your SSH configuration file
+
 
 
 You can configure a fixed user/keyfile in your SSH configuration file in the ProxyCommand definition that sets up the connection through the jump host.
@@ -2131,66 +2133,59 @@ You can configure a fixed user/keyfile in your SSH configuration file in the Pro
 
 
 ```
-Host jumphost.example.com
-Hostname jumphost.example.com
-User &lt;jumphostuser&gt;
-Port &lt;jumphostport&gt;
-IdentityFile ~.ssh/id_rsa
-StrictHostKeyChecking no
-ProxyCommand ssh -W %h:%p jumphost.example.com
+Host jumphost.example.com        Hostname jumphost.example.com        User &lt;jumphostuser&gt;        Port &lt;jumphostport&gt;        IdentityFile ~.ssh/id_rsa        StrictHostKeyChecking no        ProxyCommand ssh -W %h:%p jumphost.example.com
 ```
+
 
 - The code specifies the configuration required to connect to the jump host 'jumphost.example.com'
 - Automation controller establishes an SSH connection from each node to the managed nodes.
-- Example values `    jumphost.example.com` , `    jumphostuser` , `    jumphostport` and `    ~/.ssh/id_rsa` must be changed according to your environment
-- Add a Host matching block to the already created SSH configuration file `    /var/lib/awx/.ssh/config`` on the node, for example:
+- Example values `        jumphost.example.com` , `        jumphostuser` , `        jumphostport` and `        ~/.ssh/id_rsa` must be changed according to your environment
+- Add a Host matching block to the already created SSH configuration file `        /var/lib/awx/.ssh/config`` on the node, for example:
 
 
 ```
-Host 192.0.*       ...
+Host 192.0.*           ...
 ```
 
 
-- The `    Host 192.0.*` line indicates that all hosts in that subnet use the settings defined in that block. Specifically all hosts in that subnet are accessed using the `    ProxyCommand` setting and connect through `    jumphost.example.com`
-- If `    Host *` is used to indicate that all hosts connect through the specified proxy, ensure that `    jumphost.example.com` is excluded from that matching, for example:
+- The `            Host 192.0.*` line indicates that all hosts in that subnet use the settings defined in that block. Specifically all hosts in that subnet are accessed using the `            ProxyCommand` setting and connect through `            jumphost.example.com`
+- If `            Host *` is used to indicate that all hosts connect through the specified proxy, ensure that `            jumphost.example.com` is excluded from that matching, for example:
 
 
 ```
-Host * !jumphost.example.com        ...
+Host * !jumphost.example.com                ...
 ```
 
+Using the Red Hat Ansible Automation Platform UI
 
 
 
-
-<span id="using_the_red_hat_ansible_automation_platform_ui"></span>
-##### Using the Red Hat Ansible Automation Platform UI
-
-
-**Procedure**
 
 1. On the navigation panel, selectSettings→Automation Execution→Job
 1. ClickEditand add `    /var/lib/awx .ssh:/home/runner/.ssh:0` to the **Paths to expose isolated jobs** field.
 1. ClickSaveto save your changes.
 
 
-
-<span id="configuring_jump_hosts_using_ansible_inventory_variables"></span>
-#### Configuring jump hosts using Ansible Inventory variables
+### 20.4.2. Configuring jump hosts using Ansible Inventory variables
 
 
-You can also add a jump host to your automation controller instance through Inventory variables.
+
+
+You can add a jump host to your automation controller instance through Inventory variables.
 
 These variables can be set at either the inventory, group, or host level. Use this method if you want to control the use of jump hosts inside automation controller using the inventory.
 
-- Navigate to your inventory and in the `    variables` field of whichever level you choose, add the following variables:
+**Procedure**
+
+- Go to your inventory and in the `    variables` field of whichever level you choose, add the following variables:
 
 
 ```
-ansible_user: &lt;user_name&gt;
-ansible_connection: ssh
-ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q &lt;user_name&gt;@&lt;jump_server_name&gt;"'
+ansible_user: &lt;user_name&gt;    ansible_connection: ssh    ansible_ssh_common_args: '-o ProxyCommand="ssh -W %h:%p -q &lt;user_name&gt;@&lt;jump_server_name&gt;"'
 ```
+
+
+
 
 ## 20.5. View Ansible outputs for JSON commands when using automation controller
 
@@ -2428,7 +2423,7 @@ Then, for each of the groups that have :vars listed, create a file called `inven
 The importer then handles the conversion correctly.
 
 
-<span id="idm140603452571680"></span>
+<span id="idm139817502353392"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

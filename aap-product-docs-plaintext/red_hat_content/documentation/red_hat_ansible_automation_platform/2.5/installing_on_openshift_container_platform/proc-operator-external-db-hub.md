@@ -1,6 +1,6 @@
-# 3. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 3.3. Configuring automation hub on Red Hat OpenShift Container Platform web console
-### 3.3.3. Configuring an external database for automation hub on Red Hat Ansible Automation Platform Operator
+# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 4.3. Configuring automation hub on Red Hat OpenShift Container Platform web console
+### 4.3.3. Configuring an external database for automation hub on Red Hat Ansible Automation Platform Operator
 
 
 
@@ -56,7 +56,7 @@ apiVersion: automationhub.ansible.com/v1beta1    kind: AutomationHub    metadata
 
 
 
-#### 3.3.3.1. Enabling the hstore extension for the automation hub PostgreSQL database
+#### 4.3.3.1. Enabling the hstore extension for the automation hub PostgreSQL database
 
 
 

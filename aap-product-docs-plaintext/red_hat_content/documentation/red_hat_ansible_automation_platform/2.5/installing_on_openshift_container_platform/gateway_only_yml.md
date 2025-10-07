@@ -1,6 +1,6 @@
-# 11. Appendix: Red Hat Ansible Automation Platform custom resources
-## 11.1. Custom resources
-### 11.1.17. gateway-only.yml
+# 13. Appendix: Red Hat Ansible Automation Platform custom resources
+## 13.1. Custom resources
+### 13.1.17. gateway-only.yml
 
 
 

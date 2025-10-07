@@ -12,6 +12,7 @@ import traceback
 SOURCE_DIRS = [
     "red_hat_content/documentation/ansible_on_clouds/2.x",
     "red_hat_content/documentation/red_hat_ansible_automation_platform/2.5",
+    "red_hat_content/documentation/red_hat_ansible_automation_platform/2.6",
     "red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest",
 ]
 KNOWLEDGE_BASE_ARTICLES_DIR = "red_hat_content/solutions"

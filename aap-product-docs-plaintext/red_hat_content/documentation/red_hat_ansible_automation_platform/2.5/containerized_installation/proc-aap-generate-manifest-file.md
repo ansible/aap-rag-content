@@ -18,8 +18,3 @@ This downloads a file _manifest_ <allocation name>_<date>.zip_ to your default d
 
 
 
-**Next steps**
-
--  [Upload the manifest file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/assembly-gateway-licensing#proc-aap-activate-with-manifest) .
-
-

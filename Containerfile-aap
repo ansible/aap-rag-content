@@ -2,7 +2,7 @@ FROM registry.access.redhat.com/ubi9/python-312 as aap-rag-builder
 ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
 ARG FLAVOR=cpu
 ARG HERMETIC=false
-ARG AAP_VERSION=2.5
+ARG AAP_VERSION=2.6
 ARG BUILD_ROAD_CORE_DB=true
 
 USER 0

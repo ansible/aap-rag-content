@@ -1,5 +1,5 @@
 # 10. Patch releases
-## 10.2. Ansible Automation Platform patch release July 2, 2025
+## 10.2. Ansible Automation Platform patch release August 27, 2025
 ### 10.2.2. CVE
 
 
@@ -7,9 +7,7 @@
 
 With this update, the following CVEs have been addressed:
 
--  [CVE-2025-22871](https://access.redhat.com/security/cve/CVE-2025-22871)  `    receptor` : Request smuggling due to acceptance of invalid chunked data in net/http.(AAP-45132)
--  [CVE-2025-22871](https://access.redhat.com/security/cve/CVE-2025-22871)  `    automation-gateway-proxy-openssl32` : Request smuggling due to acceptance of invalid chunked data in net/http.(AAP-45130)
--  [CVE-2025-22871](https://access.redhat.com/security/cve/CVE-2025-22871)  `    automation-gateway-proxy-openssl30` : Request smuggling due to acceptance of invalid chunked data in net/http.(AAP-45129)
--  [CVE-2025-22871](https://access.redhat.com/security/cve/CVE-2025-22871)  `    automation-gateway-proxy` : Request smuggling due to acceptance of invalid chunked data in net/http.(AAP-45128)
+-  [CVE-2025-48432](https://access.redhat.com/security/cve/CVE-2025-48432)  `    python3.11-django` : Django Path Injection Vulnerability.(AAP-50994)
+-  [CVE-2025-47273](https://access.redhat.com/security/cve/CVE-2025-47273)  `    automation-controller` : Path Traversal Vulnerability in setuptools `    PackageIndex` .(AAP-47384)
 
 

@@ -1,6 +1,6 @@
-# 4. Configuring access to external applications with token-based authentication
-## 4.2. Adding tokens
-### 4.2.2. Token and session management
+# 3. Configuring access to external applications with token-based authentication
+## 3.2. Adding tokens
+### 3.2.2. Token and session management
 
 
 
@@ -10,10 +10,12 @@ Ansible Automation Platform supports the following commands for OAuth2 token man
 -  [create_oauth2_token](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#ref-controller-create-oauth2-token)
 -  [revoke_oauth2_tokens](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#ref-controller-revoke-oauth2-token)
 -  [cleartokens](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#ref-controller-clear-sessions)
+
+
 -  [clearsessions](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#ref-controller-clear-sessions)
 
 
-#### 4.2.2.1. `create_oauth2_token`
+#### 3.2.2.1. `create_oauth2_token`
 
 
 
@@ -28,7 +30,7 @@ New OAuth2 token for example_user: j89ia8OO79te6IAZ97L7E8bMgXCON2
 
 Ensure that you provide a valid user when creating tokens. Otherwise, an error message that you attempted to issue the command without specifying a user, or supplied a username that does not exist, is displayed.
 
-#### 4.2.2.2. `revoke_oauth2_tokens`
+#### 3.2.2.2. `revoke_oauth2_tokens`
 
 
 
@@ -59,7 +61,7 @@ To revoke all OAuth2 tokens and refresh token for the user with `id=example_user
 $ aap-gateway-manage revoke_oauth2_tokens --user example_user --revoke_refresh
 ```
 
-#### 4.2.2.3. `cleartokens`
+#### 3.2.2.3. `cleartokens`
 
 
 
@@ -68,7 +70,7 @@ Use this command to clear tokens which have already been revoked.
 
 For more information, see [cleartokens](https://django-oauth-toolkit.readthedocs.io/en/latest/management_commands.html) in Django’s Oauth Toolkit documentation.
 
-#### 4.2.2.4. `clearsessions`
+#### 3.2.2.4. `clearsessions`
 
 
 

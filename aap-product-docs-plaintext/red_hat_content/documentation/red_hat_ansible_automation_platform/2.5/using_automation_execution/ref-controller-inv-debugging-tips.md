@@ -16,7 +16,7 @@ You can also set `strict: false` , and so enable the template to produce an erro
 You might still have to debug the intended function of the templates if they are not producing the expected inventory content. For example, if a `groups` group has a complex filter (like `shutdown_in_product_dev` ) but does not contain any hosts in the resultant constructed inventory, then use the `compose` parameter to help debug.
 
 
-<span id="idm140389988596480"></span>
+<span id="idm139889425497360"></span>
 **Example 14.2. Example**
 
 ```

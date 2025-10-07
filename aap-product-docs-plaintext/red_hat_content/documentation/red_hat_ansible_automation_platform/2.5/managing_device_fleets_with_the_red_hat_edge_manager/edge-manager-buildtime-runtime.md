@@ -270,7 +270,7 @@ Complete the following steps:
 
 
 ```
-FROM registry.redhat.io/rhel9/rhel-bootc:&lt;required_os_version&gt;<span id="CO2-1"><!--Empty--></span><span class="callout">1</span>RUN subscription-manager repos --enable rhacm-2.13-for-rhel-9-$(uname -m)-rpms &amp;&amp; \        dnf -y install flightctl-agent &amp;&amp; \        dnf -y clean all &amp;&amp; \        systemctl enable flightctl-agent.service &amp;&amp; \        systemctl mask bootc-fetch-apply-updates.timer<span id="CO2-2"><!--Empty--></span><span class="callout">2</span>
+FROM registry.redhat.io/rhel9/rhel-bootc:&lt;required_os_version&gt;<span id="CO2-1"><!--Empty--></span><span class="callout">1</span>RUN dnf --enablerepo ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms -y install flightctl-agent-0.7.2-1.el9fc  &amp;&amp; \        dnf -y clean all &amp;&amp; \        systemctl enable flightctl-agent.service &amp;&amp; \        systemctl mask bootc-fetch-apply-updates.timer<span id="CO2-2"><!--Empty--></span><span class="callout">2</span>
 ```
 
 Important
@@ -283,7 +283,7 @@ If your device relies on containers from a private repository, you must place th
 
 
 ```
-RUN dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm &amp;&amp; \            dnf -y install podman-compose &amp;&amp; \            dnf -y clean all &amp;&amp; \            systemctl enable podman.service
+RUN dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm &amp;&amp; \            dnf -y install podman-compose &amp;&amp; \            dnf -y clean all &amp;&amp; \            systemctl enable podman.service
 ```
 
 
@@ -326,7 +326,7 @@ OCI_IMAGE_TAG=v1
 
 
 ```
-sudo podman build -t ${OCI_IMAGE_REPO}:${OCI_IMAGE_TAG}
+sudo podman build -t ${OCI_IMAGE_REPO}:${OCI_IMAGE_TAG} .
 ```
 
 
@@ -504,7 +504,7 @@ Complete the generic steps with changes to the following steps:
 
 
 ```
-FROM registry.redhat.io/rhel9/bootc-image-builder:latest    RUN subscription-manager repos --enable rhacm-2.13-for-rhel-9-$(uname -m)-rpms &amp;&amp; \        dnf -y install flightctl-agent &amp;&amp; \        dnf -y clean all &amp;&amp; \        systemctl enable flightctl-agent.service    RUN dnf -y install cloud-init open-vm-tools &amp;&amp; \        dnf -y clean all &amp;&amp; \        ln -s ../cloud-init.target /usr/lib/systemd/system/default.target.wants &amp;&amp; \        systemctl enable vmtoolsd.service
+FROM registry.redhat.io/rhel9/bootc-image-builder:latest    RUN subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms        dnf -y install flightctl-agent &amp;&amp; \        dnf -y clean all &amp;&amp; \        systemctl enable flightctl-agent.service    RUN dnf -y install cloud-init open-vm-tools &amp;&amp; \        dnf -y clean all &amp;&amp; \        ln -s ../cloud-init.target /usr/lib/systemd/system/default.target.wants &amp;&amp; \        systemctl enable vmtoolsd.service
 ```
 
 
@@ -597,7 +597,7 @@ Complete the generic steps with changes to the following steps:
 
 
 ```
-FROM registry.redhat.io/rhel9/bootc-image-builder:latest    RUN subscription-manager repos --enable rhacm-2.13-for-rhel-9-$(uname -m)-rpms &amp;&amp; \        dnf -y install flightctl-agent &amp;&amp; \        dnf -y clean all &amp;&amp; \        systemctl enable flightctl-agent.service &amp;&amp; \    RUN dnf -y install cloud-init open-vm-tools &amp;&amp; \        dnf -y clean all &amp;&amp; \        ln -s ../cloud-init.target /usr/lib/systemd/system/default.target.wants &amp;&amp; \        systemctl enable vmtoolsd.service
+FROM registry.redhat.io/rhel9/bootc-image-builder:latest    RUN subscription-manager repos --enable ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms        dnf -y install flightctl-agent &amp;&amp; \        dnf -y clean all &amp;&amp; \        systemctl enable flightctl-agent.service &amp;&amp; \    RUN dnf -y install cloud-init open-vm-tools &amp;&amp; \        dnf -y clean all &amp;&amp; \        ln -s ../cloud-init.target /usr/lib/systemd/system/default.target.wants &amp;&amp; \        systemctl enable vmtoolsd.service
 ```
 
 
@@ -654,18 +654,18 @@ You can provision a virtual machine on OpenShift Virtualization by using a QCoW2
 
 If your operating system image does not already contain the Red Hat Edge Manager agent enrollment configuration, you can inject the configuration through the `cloud-init` user data at provisioning.
 
+### 5.2.1. Creating the `cloud-init` configuration
+
+
+
+
+The `cloud-init` configuration customizes a virtual machine instance on its first boot, allowing you to automatically enroll it as a new agent in your Red Hat Edge Manager service.
+
 **Prerequisites**
 
 - You installed the `    flightctl` CLI and logged in to your Red Hat Edge Manager service instance.
 - You installed the `    oc` CLI, used it to log in to your OpenShift cluster instance, and changed to the project in which you want to create your virtual machine.
 
-
-### 5.2.1. Creating the _cloud-init_ configuration
-
-
-
-
-To create the `cloud-init` configuration, complete the following steps:
 
 **Procedure**
 
@@ -726,8 +726,8 @@ oc apply -f my-bootc-vm.yaml
 
 **Additional resources**
 
-- For more information about how to inject the configuration through the `    cloud-init` user data, see the [Cloud-init documentation](https://cloudinit.readthedocs.io/en/latest/) .
-- See [Building images for Red Hat OpenShift Virtualization](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-virt) .
+-  [Cloud-init documentation](https://cloudinit.readthedocs.io/en/latest/)
+-  [Building images for Red Hat OpenShift Virtualization](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-virt)
 
 
 # Chapter 6. Manage devices
@@ -843,18 +843,18 @@ After you approve the enrollment request, the service issues the management cert
 
 To get more information about the devices in your inventory, you can use the Red Hat Edge Manager CLI.
 
-**Prerequisites**
-
-- You must install the Red Hat Edge Manager CLI. See [Installing the Red Hat Edge Manager CLI](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-install-CLI) .
-- You must enroll at least one device.
-
-
 ### 6.2.1. Viewing device inventory and device details on the web UI
 
 
 
 
-Complete the following steps:
+You can view details for enrolled devices, including their status and health, on the Red Hat Edge Manager web UI
+
+**Prerequisites**
+
+- You must install the Red Hat Edge Manager CLI. See [Installing the Red Hat Edge Manager CLI](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-install-CLI) .
+- You must enroll at least one device.
+
 
 **Procedure**
 
@@ -1130,10 +1130,11 @@ flightctl get devices --field-selector 'metadata.alias contains cluster'
 
 The `metadata.alias` field is checked with the containment operator `contains` to see if it has the value `cluster` .
 
+**Examples**
+
 **Example 1: Excluding a specific device by name**
 
 The following command filters out a specific device by its name:
-
 
 ```
 flightctl get devices --field-selector 'metadata.name!=c3tkb18x9fw32fzx5l556n0p0dracwbl4uiojxu19g2'
@@ -1143,7 +1144,6 @@ flightctl get devices --field-selector 'metadata.name!=c3tkb18x9fw32fzx5l556n0p0
 
 This command retrieves devices owned by `Fleet/pos-fleet` , located in the `us` region, and created in 2024:
 
-
 ```
 flightctl get devices --field-selector 'metadata.owner=Fleet/pos-fleet, metadata.creationTimestamp &gt;= 2024-01-01T00:00:00Z, metadata.creationTimestamp &lt; //2025-01-01T00:00:00Z' -l 'region=us'
 ```
@@ -1151,7 +1151,6 @@ flightctl get devices --field-selector 'metadata.owner=Fleet/pos-fleet, metadata
 **Example 3: Filter by Owner, Labels, and Device Status**
 
 This command retrieves devices owned by `Fleet/pos-fleet` , located in the `us` region, and with a `status.updated.status` of either `Unknown` or `OutOfDate` :
-
 
 ```
 flightctl get devices --field-selector 'metadata.owner=Fleet/pos-fleet, status.updated.status in (Unknown, OutOfDate)' -l 'region=us'
@@ -1449,7 +1448,7 @@ The Inline Config Provider takes a list of file specifications, where each file 
 
 **Additional resources**
 
-- For more information about device lifecycle hooks and the default rules used by the Red Hat Edge Manager agent, see [Use device lifecycle hooks](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-device-lifecycle) .
+-  [Use device lifecycle hooks](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-device-lifecycle)
 
 
 ### 6.4.2. Managing the device configuration from a Git repository on the CLI
@@ -1595,7 +1594,7 @@ The Red Hat Edge Manager agent includes a built-in set of rules defined in `/usr
 
 **Additional resources**
 
-- For more information, see [Configuring and managing networking](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_networking/index) .
+-  [Configuring and managing networking](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_networking/index)
 
 
 ## 6.6. Monitor device resources
@@ -1636,27 +1635,15 @@ Monitor the resources of your device through the CLI, providing you with the too
 
 - Add resource monitors in the `    resources:` section of the device’s specification.
 
-
 For example, add the following monitor for your disk:
 
+
 ```
-apiVersion: flightctl.io/v1alpha1
-kind: Device
-metadata:
-name: &lt;device_name&gt;
-spec:
-[...]
-resources:
-- monitorType: Disk
-samplingInterval: 5s<span id="CO6-1"><!--Empty--></span><span class="callout">1</span>path: /application_data<span id="CO6-2"><!--Empty--></span><span class="callout">2</span>alertRules:
-- severity: Warning<span id="CO6-3"><!--Empty--></span><span class="callout">3</span>duration: 30m
-percentage: 75
-description: Disk space for application data is &gt;75% full for over 30m.
-- severity: Critical<span id="CO6-4"><!--Empty--></span><span class="callout">4</span>duration: 10m
-percentage: 90
-description: Disk space for application data is &gt;90% full over 10m.
-[...]
+apiVersion: flightctl.io/v1alpha1    kind: Device    metadata:      name: &lt;device_name&gt;    spec:    [...]      resources:      - monitorType: Disk        samplingInterval: 5s<span id="CO6-1"><!--Empty--></span><span class="callout">1</span>path: /application_data<span id="CO6-2"><!--Empty--></span><span class="callout">2</span>alertRules:        - severity: Warning<span id="CO6-3"><!--Empty--></span><span class="callout">3</span>duration: 30m          percentage: 75          description: Disk space for application data is &gt;75% full for over 30m.        - severity: Critical<span id="CO6-4"><!--Empty--></span><span class="callout">4</span>duration: 10m          percentage: 90          description: Disk space for application data is &gt;90% full over 10m.    [...]
 ```
+
+
+
 
 # Chapter 7. Managing applications on an edge device
 
@@ -1667,13 +1654,6 @@ You can deploy, update, or remove applications on a device by updating the list 
 
 The Red Hat Edge Manager supports the `podman-compose` tool as the application runtime and format.
 
-**Prerequisites**
-
-- You must install the Red Hat Edge Manager CLI.
-- You must log in to the Red Hat Edge Manager service.
-- Your device must run an operating system image with the `    podman-compose` tool installed.
-
-
 For more information, see [Building a bootc operating system image for use with the Red Hat Edge Manager](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-build-bootc) .
 
 ## 7.1. Building an application package image
@@ -1683,7 +1663,12 @@ For more information, see [Building a bootc operating system image for use with 
 
 The Red Hat Edge Manager can download application packages from an Open Container Initiative (OCI) compatible registry. You can build an OCI container image that includes your application package in the `podman-compose` format and push the image to your OCI registry.
 
-Complete the following steps:
+**Prerequisites**
+
+- You must install the Red Hat Edge Manager CLI.
+- You must log in to the Red Hat Edge Manager service.
+- Your device must run an operating system image with the `    podman-compose` tool installed.
+
 
 **Procedure**
 
@@ -1775,7 +1760,6 @@ command: ["sleep", "infinity"]
 path: podman-compose.yaml
 [...]
 ```
-
 
 Note
 Inline compose applications can have two paths at most. You must name the first one `podman-compose.yaml` , and the second (override) `podman-compose.override.yaml` .
@@ -2067,7 +2051,6 @@ The `successThreshold` defines the percentage of successfully updated devices re
 
 The following shows an example YAML configuration for a fleet specification:
 
-
 ```
 apiVersion: v1alpha1
 kind: Fleet
@@ -2129,7 +2112,6 @@ A rollout disruption budget defines the acceptable level of service impact durin
 **Example**
 
 The following shows an example YAML configuration for a fleet specification:
-
 
 ```
 apiVersion: v1alpha1
@@ -2200,7 +2182,7 @@ sudo flightctl-must-gather
 
 
 
-<span id="idm140539236684896"></span>
+<span id="idm140538206110416"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

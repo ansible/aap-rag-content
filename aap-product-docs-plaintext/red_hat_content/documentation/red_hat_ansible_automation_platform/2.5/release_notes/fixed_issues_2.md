@@ -1,11 +1,11 @@
 # 10. Patch releases
-## 10.21. Ansible Automation Platform patch release October 7, 2024
-### 10.21.2. Fixed issues
+## 10.23. Ansible Automation Platform patch release October 7, 2024
+### 10.23.2. Fixed issues
 
 
 
 
-#### 10.21.2.1. Ansible Automation Platform
+#### 10.23.2.1. Ansible Automation Platform
 
 
 
@@ -17,7 +17,7 @@
 - Filtered out the unused **ANSIBLE_BASE_** settings from the environment variable in job execution. (AAP-32208)
 
 
-#### 10.21.2.2. Event-Driven Ansible
+#### 10.23.2.2. Event-Driven Ansible
 
 
 

@@ -25,7 +25,7 @@ See the following table for a list of values that can be used in `additional_bui
 The syntax for `additional_build_steps` supports both multi-line strings and lists. See the following examples:
 
 
-<span id="idm139645547976832"></span>
+<span id="idm140538101920544"></span>
 **Example 3.1. A multi-line string entry**
 
 ```
@@ -38,7 +38,7 @@ RUN cat /etc/os-release
 
 
 
-<span id="idm139645547974848"></span>
+<span id="idm140538097149808"></span>
 **Example 3.2. A list entry**
 
 ```
@@ -51,7 +51,7 @@ append_final:
 
 
 
-<span id="idm139645547972736"></span>
+<span id="idm140538097147696"></span>
 **Example 3.3. Copying arbitrary files to execution environments**
 
 ```

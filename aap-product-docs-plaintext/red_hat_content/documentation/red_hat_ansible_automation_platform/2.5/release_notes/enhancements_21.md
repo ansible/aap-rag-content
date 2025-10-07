@@ -1,43 +1,36 @@
 # 10. Patch releases
-## 10.12. Ansible Automation Platform patch release February 13, 2025
-### 10.12.2. Enhancements
+## 10.7. Ansible Automation Platform patch release May 28, 2025
+### 10.7.3. Enhancements
 
 
 
 
-#### 10.12.2.1. General
+#### 10.7.3.1. Ansible Automation Platform
 
 
 
 
-- The `    ansible.controller` collection has been updated to 4.6.8.(AAP-39848)
--  `    ansible.platform` collection has been updated to 2.5.20250213.(AAP-39740)
--  `    ansible.eda` collection has been updated to 2.4.0.(AAP-39577)
+- Reduced the cognitive complexity level of `    validate_password()` method and reorganized the `    validate_authenticate_uid()` method to increase code readability.(AAP-45346)
+- For clarity and to prevent misconfiguration, the SAML authenticator now requires both a permanent user ID and a username.(AAP-45333)
+- Updated field names and help text in the System Settings UI to indicate client ID and client secret for service accounts, as well as client ID and client secret for analytics.(AAP-43119)
+- Validation/enforcement of expected service types removed because service types are now dynamic.(AAP-40130)
+- Enables configuration of control plane authentication for custom services. You should not modify it for pre-defined services.(AAP-40131)
+- Custom service type support added. Arbitrary service types and services can be created rather than a fixed list.(AAP-39812)
 
 
-#### 10.12.2.2. Ansible Automation Platform
-
-
-
-
-- It is now possible to configure automation hub without Redis PVC.(AAP-39600)
-
-
-#### 10.12.2.3. Automation controller
+#### 10.7.3.2. Red Hat Ansible Lightspeed
 
 
 
 
-- This release sees the addition of `    client_id` and `    client_secret` fields to the Insights credential to support service accounts via console.redhat.com.(AAP-36565)
-- You are now able to specify the input for the `    client_id` and `    client_secret` for the insights credential via the `    awx.awx.credential_type` module.(AAP-37441)
-- Updated `    awxkit` by adding service account support for Insights credential type, specifically adding the fields `    client_id` and `    client_secret` to `    credential_input_fields` .(AAP-39352)
+- It is now possible to disable SSL verification for Red Hat Ansible Lightspeed <→ Model Server communication.(AAP-45337)
 
 
-#### 10.12.2.4. Automation execution environments
+#### 10.7.3.3. Automation controller
 
 
 
 
-- The **file** command has been added to **ee-minimal** and **ee-supported** container images.(AAP-40009)
+- Updated Azure Key Vault plugin to use managed identity when creating credentials.(AAP-43461)
 
 

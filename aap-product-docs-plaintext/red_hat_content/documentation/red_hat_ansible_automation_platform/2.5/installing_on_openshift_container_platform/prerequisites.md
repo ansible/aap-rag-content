@@ -1,55 +1,224 @@
-# 1. Installing Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 1.3. Installing the Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-### 1.3.1. Prerequisites
+# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 4.2. Configuring automation controller on Red Hat OpenShift Container Platform web console
+### 4.2.1. Prerequisites
 
 
 
 
-- You have installed the Red Hat Ansible Automation Platform catalog in OperatorHub.
-- You have created a `    StorageClass` object for your platform and a persistent volume claim (PVC) with `    ReadWriteMany` access mode. See [Dynamic provisioning](https://docs.openshift.com/container-platform/4.15/storage/dynamic-provisioning.html) for details.
-- To run Red Hat OpenShift Container Platform clusters on Amazon Web Services (AWS) with `    ReadWriteMany` access mode, you must add NFS or other storage.
+- You have installed the Red Hat Ansible Automation Platform catalog in Operator Hub.
+- For automation controller, a default StorageClass must be configured on the cluster for the operator to dynamically create needed PVCs. This is not necessary if an external PostgreSQL database is configured.
+- For Hub a StorageClass that supports ReadWriteMany must be available on the cluster to dynamically created the PVC needed for the content, redis and api pods. If it is not the default StorageClass on the cluster, you can specify it when creating your AutomationHub object.
 
 
-- For information about the AWS Elastic Block Store (EBS) or to use the `        aws-ebs` storage class, see [Persistent storage using AWS Elastic Block Store](https://docs.redhat.com/en/documentation/openshift_container_platform/4.10/html-single/storage/index#persistent-storage-aws) .
-- To use multi-attach `        ReadWriteMany` access mode for AWS EBS, see [Attaching a volume to multiple instances with Amazon EBS Multi-Attach](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html) .
+#### 4.2.1.1. Configuring your controller image pull policy
 
 
 
 
-<span id="proc-install-aap-operator_install-aap-operator"></span>
+Use this procedure to configure the image pull policy on your automation controller.
+
 **Procedure**
 
 1. Log in to Red Hat OpenShift Container Platform.
-1. Navigate toOperators→OperatorHub.
-1. Search for Ansible Automation Platform and clickInstall.
-1. Select an **Update Channel** :
+1. Go toOperators→Installed Operators.
+1. Select your Ansible Automation Platform Operator deployment.
+1. Select the **Automation Controller** tab.
+1. For new instances, clickCreate AutomationController.
 
 
--  **stable-2.x** : installs a namespace-scoped operator, which limits deployments of automation hub and automation controller instances to the namespace the operator is installed in, this is suitable for most cases. The stable-2.x channel does not require administrator privileges and utilizes fewer resources because it only monitors a single namespace.
--  **stable-2.x-cluster-scoped** : installs the Ansible Automation Platform Operator in a single namespace that manages Ansible Automation Platform custom resources and deployments in all namespaces. The Ansible Automation Platform Operator requires administrator privileges for all namespaces in the cluster.
+1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationController.
 
-1. Select **Installation Mode** , **Installed Namespace** , and **Approval Strategy** .
-1. ClickInstall.
+1. Clickadvanced Configuration. Under **Image Pull Policy** , click on the radio button to select
 
+
+-  **Always**
+-  **Never**
+-  **IfNotPresent**
+
+1. To display the option under **Image Pull Secrets** , click the arrow.
+
+
+1. Click+beside **Add Image Pull Secret** and enter a value.
+
+1. To display fields under the **Web container resource requirements** drop-down list, click the arrow.
+
+
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
+
+1. To display fields under the **Task container resource requirements** drop-down list, click the arrow.
+
+
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
+
+1. To display fields under the **EE Control Plane container resource requirements** drop-down list, click the arrow.
+
+
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
+
+1. To display fields under the **PostgreSQL init container resource requirements (when using a managed service)** drop-down list, click the arrow.
+
+
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
+
+1. To display fields under the **Redis container resource requirements** drop-down list, click the arrow.
+
+
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
+
+1. To display fields under the **PostgreSQL container resource requirements (when using a managed instance)** * drop-down list, click the arrow.
+
+
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
+
+1. To display the **PostgreSQL container storage requirements (when using a managed instance)** drop-down list, click the arrow.
+
+
+1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
+
+1. Under Replicas, enter the number of instance replicas.
+1. Under **Remove used secrets on instance removal** , select **true** or **false** . The default is false.
+1. Under **Preload instance with data upon creation** , select **true** or **false** . The default is true.
+
+
+#### 4.2.1.2. Configuring your controller LDAP security
+
+
+
+
+You can configure your LDAP SSL configuration for automation controller through any of the following options:
+
+- The automation controller user interface.
+- The platform gateway user interface. See the [Configuring LDAP authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#controller-set-up-LDAP) section of the _Access management and authentication_ guide for additional steps.
+- The following procedure steps.
+
+
+**Procedure**
+
+1. Create a secret in your Ansible Automation Platform namespace for the `    bundle-ca.crt` file (the filename must be `    bundle-ca.crt` ):
+
+
+```
+$ oc create secret -n aap-namespace generic bundle-ca-secret --from-file=bundle-ca.crt
+```
+
+
+1. Add the `    bundle_cacert_secret` to the Ansible Automation Platform customer resource:
+
+
+```
+...    spec:      bundle_cacert_secret: bundle-ca-secret    ...
+```
+
+**Verification**
+
+You can verify the expected certificate by running:
+
+
+
+```
+oc exec -it deployment.apps/aap-gateway - openssl x509 -in /etc/pki/tls/certs/bundle-ca.crt -noout -text
+```
+
+
+
+
+#### 4.2.1.3. Configuring your automation controller operator route options
+
+
+
+
+The Red Hat Ansible Automation Platform operator installation form allows you to further configure your automation controller operator route options under **Advanced configuration** .
+
+**Procedure**
+
+1. Log in to Red Hat OpenShift Container Platform.
+1. Navigate toOperators→Installed Operators.
+1. Select your Ansible Automation Platform Operator deployment.
+1. Select the **Automation Controller** tab.
+1. For new instances, clickCreate AutomationController.
+
+
+1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationController.
+
+1. ClickAdvanced configuration.
+1. Under **Ingress type** , click the drop-down menu and select **Route** .
+1. Under **Route DNS host** , enter a common host name that the route answers to.
+1. Under **Route TLS termination mechanism** , click the drop-down menu and select **Edge** or **Passthrough** . For most instances **Edge** should be selected.
+1. Under **Route TLS credential secret** , click the drop-down menu and select a secret from the list.
+1. Under **Enable persistence for _/var/lib/projects_ directory** select either true or false by moving the slider.
+
+Note
+After you have configured your route you can customize your hostname by adding `    route_host:` to the YAML for that automation controller instance.
+
+
+
+
+
+
+#### 4.2.1.4. Configuring the ingress type for your automation controller operator
+
+
+
+
+The Ansible Automation Platform Operator installation form allows you to further configure your automation controller operator ingress under **Advanced configuration** .
+
+**Procedure**
+
+1. Log in to Red Hat OpenShift Container Platform.
+1. Navigate toOperators→Installed Operators.
+1. Select your Ansible Automation Platform Operator deployment.
+1. Select the **Automation Controller** tab.
+1. For new instances, clickCreate AutomationController.
+
+
+1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationController.
+
+1. ClickAdvanced configuration.
+1. Under **Ingress type** , click the drop-down menu and select **Ingress** .
+1. Under **Ingress annotations** , enter any annotations to add to the ingress.
+1. Under **Ingress TLS secret** , click the drop-down menu and select a secret from the list.
 
 
 **Verification**
 
-The installation process begins. When installation finishes, a modal appears notifying you that the Ansible Automation Platform Operator is installed in the specified namespace.
+After you have configured your automation controller operator, clickCreateat the bottom of the form view. Red Hat OpenShift Container Platform creates the pods. This may take a few minutes.
 
 
-- ClickView Operatorto view your newly installed Ansible Automation Platform Operator and verify the following operator custom resources are present:
+You can view the progress by navigating toWorkloads→Podsand locating the newly created instance.
 
+Verify that the following operator pods provided by the Ansible Automation Platform Operator installation from automation controller are running:
 
-| {ControllerNameStart} | {HubNameStart} | {EDAName} (EDA) | {LightspeedShortName} |
+| Operator manager controllers | Automation controller | Automation hub | Event-Driven Ansible (EDA) |
 | --- | --- | --- | --- |
-| - Automation Controller
-- Automation Controller Backup
-- Automation Controller Restore
-- Automation Controller Mesh Ingress | - Automation Hub
-- Automation Hub Backup
-- Automation Hub Restore | - EDA
-- EDA Backup
-- EDA Restore | - Ansible Lightspeed |
+| The operator manager controllers for each of the three operators, include the following:
+
+- automation-controller-operator-controller-manager
+- automation-hub-operator-controller-manager
+- resource-operator-controller-manager
+- aap-gateway-operator-controller-manager
+- ansible-lightspeed-operator-controller-manager
+- eda-server-operator-controller-manager | After deploying automation controller, you can see the addition of the following pods:
+
+- controller
+- controller-postgres
+- controller-web
+- controller-task | After deploying automation hub, you can see the addition of the following pods:
+
+- hub-api
+- hub-content
+- hub-postgres
+- hub-redis
+- hub-worker | After deploying EDA, you can see the addition of the following pods:
+
+- eda-activation-worker
+- da-api
+- eda-default-worker
+- eda-event-stream
+- eda-scheduler |
+
+
+Note
+A missing pod can indicate the need for a pull secret. Pull secrets are required for protected or private image registries. See [Using image pull secrets](https://docs.openshift.com/container-platform/4.11/openshift_images/managing_images/using-image-pull-secrets.html) for more information. You can diagnose this issue further by running `oc describe pod &lt;pod-name&gt;` to see if there is an ImagePullBackOff error on that pod.
+
 
 

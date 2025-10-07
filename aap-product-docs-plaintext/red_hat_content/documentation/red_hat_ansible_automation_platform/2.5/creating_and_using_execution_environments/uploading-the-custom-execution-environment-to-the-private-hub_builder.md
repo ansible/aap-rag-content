@@ -66,7 +66,7 @@ If more than one execution environment fits a criteria (applies for 6 and 7), th
 
 
 
-# Open Source license
+# Chapter 7. Open Source license
 
 
 
@@ -74,7 +74,6 @@ If more than one execution environment fits a criteria (applies for 6 and 7), th
 **Apache license**
 
 Version 2.0, January 2004
-
 
 [http://www.apache.org/licenses/](http://www.apache.org/licenses/)
 
@@ -129,7 +128,7 @@ You may add Your own copyright statement to Your modifications and may provide a
 END OF TERMS AND CONDITIONS
 
 
-<span id="idm139645548473200"></span>
+<span id="idm140538093999952"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

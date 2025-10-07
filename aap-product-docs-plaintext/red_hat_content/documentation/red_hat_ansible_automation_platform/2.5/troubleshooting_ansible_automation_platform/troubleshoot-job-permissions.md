@@ -1,6 +1,6 @@
 # 6. Jobs
-## 6.1. Issue - Jobs are failing with “ERROR! couldn’t resolve module/action” error message
-### 6.1.2. Issue - Jobs in private automation hub are failing with "denied: requested access to the resource is denied, unauthorized: Insufficient permissions" error message
+## 6.2. Issue - Jobs are failing with “Timeout (12s) waiting for privilege escalation prompt” error message
+### 6.2.2. Issue - Jobs in private automation hub are failing with "denied: requested access to the resource is denied, unauthorized: Insufficient permissions" error message
 
 
 

@@ -8,7 +8,7 @@ You can configure the resource requirements of tasks and the web containers, at 
 
 Setting resource requests and limits is a best practice because a container that has both defined is given a higher _Quality of Service_ class. This means that if the underlying node is resource constrained and the cluster has to reap a pod to prevent running memory or other failure, the control plane pod is less likely to be reaped.
 
-These requests and limits apply to the control pods for automation controller and if limits are set, determine the _capacity_ of the instance. By default, controlling a job takes one unit of capacity. The memory and CPU limits of the task container are used to determine the capacity of control nodes. For more information about how this is calculated, see [Resouce determination for capacity algorithm](https://docs.ansible.com/automation-controller/latest/html/userguide/jobs.html#resource-determination-for-capacity-algorithm) .
+These requests and limits apply to the control pods for automation controller and if limits are set, determine the _capacity_ of the instance. By default, controlling a job takes one unit of capacity. The memory and CPU limits of the task container are used to determine the capacity of control nodes. For more information about how this is calculated, see [Automation controller capacity determination and job impact](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_execution/index#controller-capacity-determination) .
 
 See also [Jobs scheduled on the worker nodes](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/performance_considerations_for_operator_environments/index#ref-schedule-jobs-worker-nodes)
 

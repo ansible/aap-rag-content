@@ -1,5 +1,5 @@
-# 7. Configuring Ansible Automation Platform
-## 7.4. Troubleshooting options
+# 6. Configuring Ansible Automation Platform
+## 6.4. Troubleshooting options
 
 
 
@@ -23,4 +23,4 @@ You can use the **Troubleshooting** page to enable or disable certain flags that
 
 
 
-<span id="idm140050066590320"></span>
+<span id="idm140397700286224"></span>

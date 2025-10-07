@@ -1,6 +1,6 @@
-# 4. Configuring access to external applications with token-based authentication
-## 4.1. Applications
-### 4.1.1. Getting started with OAuth Applications
+# 3. Configuring access to external applications with token-based authentication
+## 3.1. Applications
+### 3.1.1. Getting started with OAuth Applications
 
 
 
@@ -32,7 +32,7 @@ Users can only view the token or refresh the token value at the time of creation
 
 
 
-#### 4.1.1.1. Application functions
+#### 3.1.1.1. Application functions
 
 
 
@@ -48,7 +48,7 @@ You can only use the authorization code type to acquire an access token when usi
 
 
 
-##### 4.1.1.1.1. Requesting an access token after expiration
+##### 3.1.1.1.1. Requesting an access token after expiration
 
 
 

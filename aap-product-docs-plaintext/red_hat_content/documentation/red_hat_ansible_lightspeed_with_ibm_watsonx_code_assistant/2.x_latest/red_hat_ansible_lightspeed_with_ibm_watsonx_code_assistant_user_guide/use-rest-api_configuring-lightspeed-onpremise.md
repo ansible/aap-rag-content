@@ -14,7 +14,7 @@ The Ansible Lightspeed REST API is available for Ansible Automation Platform 2.5
 
 **Prerequisite**
 
-- Ensure that you are using the Red Hat Ansible Automation Platform operator patch version 2.5-20250305.9 and Red Hat Ansible Lightspeed operator version 2.5.250225.
+- Ensure that you are using the Red Hat Ansible Automation Platform operator patch version 2.5-20250305.9 or later and Red Hat Ansible Lightspeed operator version 2.5.250225 or later.
 
 
 **Procedure**

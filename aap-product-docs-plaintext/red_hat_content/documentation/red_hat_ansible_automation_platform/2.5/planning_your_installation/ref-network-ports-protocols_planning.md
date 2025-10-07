@@ -13,20 +13,34 @@ In some of the following use cases, hop nodes are used instead of a direct link 
 
 
 Note
-Direct connections shown in the diagram between the Client and automation hub, Event-Driven Ansible, and automation controller only apply to systems upgraded from Red Hat Ansible Automation Platform 2.4 to Red Hat Ansible Automation Platform 2.5 to provide backward compatibility. The connection does not exist for Red Hat Ansible Automation Platform 2.5.
+The following diagraam shows client initiated connections between Ansible Automation Platform components. Direct connections shown in the diagram between the Client and automation hub, Event-Driven Ansible, and automation controller only apply to systems upgraded from Red Hat Ansible Automation Platform 2.4 to Red Hat Ansible Automation Platform 2.5 to provide backward compatibility.
+
+
+
+
+<span id="idm140401814442048"></span>
+**Figure 6.1. Ansible Automation Platform Client initiated network ports and protocols**
+
+![Interaction of Ansible Automation Platform components on the network with information about the ports and protocols that are used.](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Planning_your_installation-en-US/images/a20ef5c37cfe1b602560cf28cf3531de/network_client_initiated.png)
+
+
+
+
+Note
+The following diagram shows internally initiated connections between Ansible Automation Platform components for new installs Red Hat Ansible Automation Platform 2.5.
+
+
+
+
+<span id="idm140401811129952"></span>
+**Figure 6.2. Ansible Automation Platform Internally initiated network ports and protocols**
+
+![Interaction of Ansible Automation Platform components on the network with information about the ports and protocols that are used.](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Planning_your_installation-en-US/images/4c4a35c6cfb3689e7b35e9f47901cb0f/network_internally_initiated.png)
+
 
 
 
 The following table indicates the destination port and the direction of network traffic:
-
-
-<span id="idm140696950965584"></span>
-**Figure 6.1. Ansible Automation Platform Network ports and protocols**
-
-![Interaction of Ansible Automation Platform components on the network with information about the ports and protocols that are used.](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Planning_your_installation-en-US/images/8991674f3ce4f960ede12744714b30c1/aap-network-ports-protocols.png)
-
-
-
 
 Note
 The following default destination ports and installer inventory listed are configurable. If you choose to configure them to suit your environment, you might experience a change in behavior.
@@ -34,78 +48,109 @@ The following default destination ports and installer inventory listed are confi
 
 
 
-<span id="idm140696957063552"></span>
+<span id="idm140401811123184"></span>
 **Table 6.1. Network ports and protocols**
 
-| Port | Protocol | Service | Source | Destination | Required for | Installer Inventory Variable |
+| Node | Port | Source | Protocol | Service | Required for | Installer Inventory Variable |
 | --- | --- | --- | --- | --- | --- | --- |
-| 22 | TCP | SSH | Installer node | Automation hub | Installation (temporary) |  `ansible_port` |
-| 22 | TCP | SSH | Installer node | Controller node | Installation (temporary) |  `ansible_port` |
-| 22 | TCP | SSH | Installer node | Event-Driven Ansible node | Installation (temporary) |  `ansible_port` |
-| 22 | TCP | SSH | Installer node | Execution node | Installation (temporary) |  `ansible_port` |
-| 22 | TCP | SSH | Installer node | Hop node | Installation (temporary) |  `ansible_port` |
-| 22 | TCP | SSH | Installer node | Hybrid node | Installation (temporary) |  `ansible_port` |
-| 22 | TCP | SSH | Installer node | PostgreSQL database | Remote access during installation (temporary) |  `pg_port` |
-| 80/443 | TCP | HTTP/HTTPS | Installer node | Automation hub | Allows installer node to push the execution environment image to automation hub when using the bundle installer. | Fixed value |
-| 80/443 | TCP | HTTP/HTTPS | Event-Driven Ansible node | Automation hub | Pull container decision environments | Fixed value |
-| 80/443 | TCP | HTTP/HTTPS | Event-Driven Ansible node | Automation controller | Launch automation controller jobs | Fixed value |
-| 80/443 | TCP | HTTP/HTTPS | Automation controller | Automation hub | Pull collections | Fixed value |
-| 80/443 | TCP | HTTP/HTTPS | Execution node | Automation hub | Allows execution nodes to pull the execution environment image from automation hub. | Fixed value |
-| 80/443 | TCP | HTTP/HTTPS | HA Proxy load balancer/Ingress Node | Platform gateway | This is the ingress above the platform gateway that is customer controlled and can load balance requests to multiple gateways. | This port is customer managed outside of Ansible Automation Platform. |
-| 80/443 | TCP | HTTP/HTTPS | Platform gateway | Automation controller | Link between gateway and Ansible Automation Platform components |  |
-| 80/443 | TCP | HTTP/HTTPS | Platform gateway | Automation hub | Link between gateway and Ansible Automation Platform components |  |
-| 80/443 | TCP | HTTP/HTTPS | Platform gateway | Event-Driven Ansible | Link between gateway and Ansible Automation Platform components |  |
-| 80/443 | TCP | HTTP/HTTPS | HA Proxy load balancer/Ingress Node | Automation controller | Only relevant if accessing the component directly from Platform gateway |  `automationgateway_main_url` |
-| 80/443 | TCP | HTTP/HTTPS | HA Proxy load balancer/Ingress Node | Automation hub | Only relevant if accessing the component directly from Platform gateway |  `automationgatweway_main_url` |
-| 80/443 | TCP | HTTP/HTTPS | HA Proxy load balancer/Ingress Node | Event-Driven Ansible | Only relevant if accessing the component directly from Platform gateway |  `automationgateway_main_url` |
-| 443 | TCP | HTTPS | Remote execution node (Client) | Controller node | Web UI/API |  `nginx_https_port` |
-| 5432 | TCP | PostgreSQL | Controller node | PostgreSQL database | Open only if the internal database is used along with another component. Otherwise, this port should not be open. |  `automationcontroller_pg_port` |
-| 5432 | TCP | PostgreSQL | Event-Driven Ansible node | PostgreSQL database | Open only if the internal database is used along with another component. Otherwise, this port should not be open. |  `automationedacontroller_pg_port` |
-| 5432 | TCP | PostgreSQL | Automation hub | PostgreSQL database | Open only if the internal database is used along with another component. Otherwise, this port should not be open. |  `automationhub_pg_port` |
-| 5432 | TCP | PostgreSQL | Platform gateway | External database | Open only if the internal database is used along with another component. Otherwise, this port should not be open. |  `automationgateway_pg_port` |
-| 6379 | TCP | Redis | Event-Driven Ansible | Redis node | Job launching |  |
-| 6379 | TCP | Redis | Platform gateway | Redis node | Data storage and retrieval |  |
-| 6443 | TCP | HTTP/HTTPS | Controller node | OpenShift Container Platform | Only required when using container groups to run jobs. | Host name of OpenShift API server |
-| 8443 | TCP | HTTPS | Platform gateway | Platform gateway | nginx |  |
-| 16379 | TCP | Redis | Redis nodes | Redis nodes | Redis cluster bus port for a resilient Redis configuration |  |
-| 27199 | TCP | Receptor | Controller node | Execution node | Configurable
+| Automation hub | 22 | Installer node | TCP | SSH | Management of Ansible Automation Platform
+
+- Install
+- Configure
+- Upgrade |  `ansible_port` |
+| Automation hub | 80/443 | Installer node | TCP | HTTP/HTTPS | Enables installer node to push the execution environment image to automation hub when using the bundle installer. |  `ansible_port` |
+| Automation hub | 80/443 | Automation controller | TCP | HTTP/HTTPS | Pull collections |  |
+| Automation hub | 80/443 | Event-Driven Ansible node | TCP | HTTP/HTTPS | Pull container decision environments |  |
+| Automation hub | 80/443 | Execution node | TCP | HTTP/HTTPS | Allows execution nodes to pull the execution environment image from automation hub |  |
+| Automation hub | 80/443 | Gateway load balancer/Ingress node | TCP | HTTP/HTTPS | Only relevant if accessing the component directly from platform gateway |  `automationgateway_main_url` |
+| Automation hub | 443 | Platform gateway | TCP | HTTPS | Link between platform gateway and Ansible Automation Platform components |  |
+| Automation hub | 6379 | Event-Driven Ansible | TCP | Redis |  |  |
+| Automation controller | 22 | Installer node | TCP | SSH | Management of Ansible Automation Platform
+
+- Install
+- Configure
+- Upgrade |  `ansible_port` |
+| Automation controller | 80/443 | Event-Driven Ansible | TCP | HTTP/HTTPS | Launch automation controller jobs |  |
+| Automation controller | 80/443 | Platform gateway | TCP | HTTP/HTTPS | Link between platform gateway and Ansible Automation Platform components |  |
+| Automation controller | 80/443 | Gateway load balancer/Ingress node | TCP | HTTP/HTTPS | Only relevant if accessing the component directly from Platform gateway |  |
+| Automation controller | 27199 | Execution node | TCP | Receptor | Configurable
 
 Mesh nodes directly peered to controllers.
 
-Direct nodes involved. 27199 communication can be both ways (depending on installation inventory) for execution nodes |  `receptor_listener_port`
+Direct nodes involved.
+
+The execution nodes support bidirectional communication through port 27199. This is established in RPM installations through the installation inventory. You can establish the connection in either direction. But communications once established are always bidirectional.
+
+For more information on use of peers in inventory scripts, see [Defining automation mesh node types](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/automation_mesh_for_vm_environments/index#defining-node-types) |  `receptor_listener_port`
 
 `peers` |
-| 27199 | TCP | Receptor | Controller node | Hop node | Configurable
+| Event-Driven Ansible | 22 | Installer node | TCP | SSH | Management of Ansible Automation Platform
 
-ENABLE connections from hop nodes to Receptor port if relayed through hop nodes. |  `receptor_listener_port`
+- Install
+- Configure
+- Upgrade |  `ansible_port` |
+| Event-Driven Ansible | 80/443 | Platform gateway | TCP | HTTP/HTTPS | Link between platform gateway and Ansible Automation Platform components |  |
+| Event-Driven Ansible | 80/443 | Gateway load balancer/Ingress node | TCP | HTTP/HTTPS | Only relevant if accessing the component directly from platform gateway | `automationgateway_main_url |
+| Event-Driven Ansible | 8443 | Platform gateway | TCP | HTTPS | Receiving event stream traffic |  |
+| Execution node | 22 | Installer node | TCP | SSH | Management of Ansible Automation Platform
 
-`peers` |
-| 27199 | TCP | Receptor | Controller node | Hybrid node | Configurable
+- Install
+- Configure
+- Upgrade |  `ansible_port` |
+| Execution node | 443 | Gateway load balancer/Ingress node | TCP | HTTPS |  |  `automationgateway_main_url` |
+| Execution node | 27199 | Automation controller | TCP | Receptor | Configurable
 
-ENABLE connections from controllers to Receptor port if relayed through non-hop connected nodes. |  `receptor_listener_port`
+Mesh nodes directly peered to controllers.
 
-`peers` |
-| 27199 | TCP | Receptor | Execution node | Hop node | Configurable
+Direct nodes involved.
 
-Mesh 27199 communication can be both ways (depending on installation inventory) for execution nodes
+The execution nodes support bidirectional communication through port 27199. This is established in RPM installations through the installation inventory. You can establish the connection in either direction. But communications once established are always bidirectional.
 
-ALLOW connection from controller(s) to Receptor port |  `receptor_listener_port`
-
-`peers` |
-| 27199 | TCP | Receptor | Hop node | Execution node | Configurable
-
-Mesh 27199 communication can be both ways (depending on installation inventory) for execution nodes |  `receptor_listener_port`
-
-`peers` |
-| 27199 | TCP | Receptor | Execution node | Controller node | Configurable
-
-Mesh 27199 communication can be both ways (depending on installation inventory) for execution nodes
-
-ALLOW connection from controller(s) to Receptor port |  `receptor_listener_port`
+For more information on use of peers in inventory scripts, see [Defining automation mesh node types](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/automation_mesh_for_vm_environments/index#defining-node-types) |  `receptor_listener_port`
 
 `peers` |
-| 27199 | TCP | Receptor | OCP cluster | Execution node |  |  |
-| 8443 | TCP | HTTPS | Platform gateway | Event-Driven Ansible node | Receiving event stream traffic |  |
+| Execution node | 27199 | OpenShift Container Platform | TCP | Receptor |  |  |
+| Hop node | 22 | Installer node | TCP | SSH | Management of Ansible Automation Platform
+
+- Install
+- Configure
+- Upgrade |  `ansible_port` |
+| Hop node | 27199 | Automation controller | TCP | Receptor | Configurable ENABLE connections from hop nodes to Receptor port if relayed through hop nodes. |  `receptor_listener_port` |
+| Hop node | 27199 | Execution node | TCP | Receptor | Configurable
+
+Mesh nodes directly peered to controllers.
+
+Direct nodes involved.
+
+The execution nodes support bidirectional communication through port 27199. This is established in RPM installations through the installation inventory. You can establish the connection in either direction. But communications once established are always bidirectional.
+
+For more information on use of peers in inventory scripts, see [Defining automation mesh node types](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/automation_mesh_for_vm_environments/index#defining-node-types) |  `receptor_listener_port`
+
+`peers` |
+| Hybrid node | 22 | Installer node | TCP | SSH | Management of Ansible Automation Platform
+
+- Install
+- Configure
+- Upgrade |  `ansible_port` |
+| Hybrid node | 27199 | Automation controller | TCP | Receptor | Configurable ENABLE connections from automation controller to Receptor port if relayed through non-hop connected nodes. |  `receptor_listener_port`
+
+`peers` |
+| PostgreSQL database | 22 | Installer node | TCP | SSH | Management of Ansible Automation Platform
+
+- Install
+- Configure
+- Upgrade |  `pg_port` |
+| PostgreSQL database | 5432 | Automation controller | TCP | PostgreSQL | Open only if the internal database is used along with another component. Otherwise, this port should not be open. |  `automationcontroller_pg_port` |
+| PostgreSQL database | 5432 | Event-Driven Ansible | TCP | PostgreSQL | Open only if the internal database is used along with another component. Otherwise, this port should not be open. |  `automationedacontroller_pg_port` |
+| PostgreSQL | 5432 | Automation hub | TCP | PostgreSQL | Open only if the internal database is used along with another component. Otherwise, this port should not be open |  `automationhub_pg_port` |
+| OpenShift Container Platform | 6443 | Automation controller | TCP | HTTP/HTTPS | Only required when using container groups to run jobs. | Host name of OpenShift API server |
+| Redis node | 6379 | Automation controller | TCP | Redis | Job launching |  |
+| Redis node | 6379 | Event-Driven Ansible | TCP | Redis | Job launching |  |
+| Redis node | 6379 | Automation hub | TCP | Redis | Job launching |  |
+| Redis node | 6379 | Platform gateway | TCP | Redis | Data storage and retrieval |  |
+| Redis node | 16379 | Redis node | TCP | Redis | Redis cluster bus port for a resilient Redis configuration |  |
+| Mesh ingress | 443 | Execution node | Receptor | HTTPS | If using mesh ingress, ensure that outbound HTTPS (port 443) is allowed from the execution nodes to the OpenShift route URL. |  |
+| Platform gateway | 8443 | Platform gateway | TCP | HTTPS | nginx |  |
 
 
 
@@ -143,7 +188,7 @@ This means that nothing connects to Controller A as Controller A is creating the
 
 
 
-<span id="idm140696952219888"></span>
+<span id="idm140401814468096"></span>
 **Table 6.2. Red Hat Insights for Red Hat Ansible Automation Platform**
 
 | URL | Required for |
@@ -157,7 +202,7 @@ This means that nothing connects to Controller A as Controller A is creating the
 
 
 
-<span id="idm140696959081984"></span>
+<span id="idm140401811872656"></span>
 **Table 6.3. Automation Hub**
 
 | URL | Required for |
@@ -176,7 +221,7 @@ https://automation-hub-prd.s3.us-east-2.amazonaws.com | Firewall access |
 
 
 
-<span id="idm140696952898384"></span>
+<span id="idm140401810863872"></span>
 **Table 6.4. Execution Environments (EE)**
 
 | URL | Required for |

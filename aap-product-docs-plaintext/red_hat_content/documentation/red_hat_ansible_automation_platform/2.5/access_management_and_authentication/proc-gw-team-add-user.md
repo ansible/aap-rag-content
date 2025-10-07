@@ -1,6 +1,6 @@
-# 5. Managing access with role based access control
-## 5.2. Teams
-### 5.2.3. Adding users to a team
+# 4. Managing access with role-based access control
+## 4.2. Teams
+### 4.2.3. Adding users to a team
 
 
 

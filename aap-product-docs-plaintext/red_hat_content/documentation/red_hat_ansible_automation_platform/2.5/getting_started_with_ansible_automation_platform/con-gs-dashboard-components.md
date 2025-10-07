@@ -1,5 +1,5 @@
 # 1. Key functionality and concepts
-## 1.9. Dashboard components
+## 1.10. Dashboard components
 
 
 

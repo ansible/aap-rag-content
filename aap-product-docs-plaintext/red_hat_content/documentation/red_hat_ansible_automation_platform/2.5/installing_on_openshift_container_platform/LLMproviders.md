@@ -1,6 +1,5 @@
-# 4. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
-## 4.3. Ansible Automation Platform 2.5
-### 4.3.1. Large Language Model (LLM) provider
+# 5. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
+## 5.3. Large Language Model (LLM) provider requirements
 
 
 

@@ -5,7 +5,7 @@
 
 
 
-This uses the fields common to all loggers listed in [Log message schema](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/{PlatformVers)/html/configuring_automation_execution/assembly-controller-logging-aggregation#ref-controller-log-message-schema) .
+This uses the fields common to all loggers listed in [Log message schema](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-logging-aggregation#ref-controller-log-message-schema) .
 
 It has the following additional fields:
 

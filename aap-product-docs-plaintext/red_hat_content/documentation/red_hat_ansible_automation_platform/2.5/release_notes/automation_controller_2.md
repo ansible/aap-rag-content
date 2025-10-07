@@ -1,26 +1,23 @@
 # 10. Patch releases
-## 10.2. Ansible Automation Platform patch release July 2, 2025
+## 10.2. Ansible Automation Platform patch release August 27, 2025
 ### 10.2.6. Automation controller
 
 
 
 
-#### 10.2.6.1. Features
+#### 10.2.6.1. Bug Fixes
 
 
 
 
-- Added AWX `    dispatcherd` integration.(AAP-45800)
+- Fixed regression in `    ansible.controller` collection where the argument `    controller_oauthtoken` was wrongfully removed.
 
 
-#### 10.2.6.2. Bug Fixes
+- Fixed newly added `        aap_token` to function the same as `        controller_oauthtoken` .
+- Fixed the `        ansible.controller.controller_api` lookup plugin.
+(AAP-51289)
 
-
-
-
-- Fixed a race condition where job templates with duplicate names in the same organization could be created.(AAP-45968)
-- Fixed an issue where `    ole_user_assignments` failed to query for `    object_ansible_id` . Enabled query filtering for fields `    user_ansible_id` , `    team_ansible_id` , and `    object_ansible_id` on the role assignment API endpoints.(AAP-45443)
-- Fixed an issue where some credential types were not populated after upgrading. This adds a new migration to accomplish this.(AAP-44233)
-- Fixed an issue where there were large numbers of jobs queued that were stuck in waiting status.(AAP-44143)
+- Fixed an issue where the Ansible Galaxy credentials could not be created and edited without specifying an organization.(AAP-51614)
+- Fixed an issue where the subscription is attached before subscription credentials have been set, returned a **400 Bad Request** .(AAP-50322)
 
 

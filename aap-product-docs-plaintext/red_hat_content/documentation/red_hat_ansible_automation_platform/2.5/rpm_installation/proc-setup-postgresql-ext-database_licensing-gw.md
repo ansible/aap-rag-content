@@ -1,6 +1,6 @@
 # 2. System requirements
 ## 2.6. PostgreSQL requirements
-### 2.6.1. Setting up an external (customer supported) database
+### 2.6.2. Setting up an external (customer supported) database
 
 
 

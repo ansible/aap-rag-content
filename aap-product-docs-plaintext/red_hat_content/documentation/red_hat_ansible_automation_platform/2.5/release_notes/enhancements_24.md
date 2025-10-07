@@ -1,38 +1,25 @@
 # 10. Patch releases
-## 10.15. Ansible Automation Platform patch release January 15, 2025
-### 10.15.1. Enhancements
+## 10.11. Ansible Automation Platform patch release March 12, 2025
+### 10.11.3. Enhancements
 
 
 
 
-#### 10.15.1.1. Ansible Automation Platform
+#### 10.11.3.1. Event-Driven Ansible
 
 
 
 
-- With this update, the `    ansible.controller` collection has been updated to 4.6.6.(AAP-38443)
-- Enhanced the **status API** , `    /api/gateway/v1/status/` , from the **services** property within the JSON to an array. Consumers of this API can still request the previous format with a URL query parameter `    service_keys=true` .(AAP-37903)
+- Event-Driven Ansible activation logging is now provided via the `    journald` driver.(AAP-39745)
+- Rulebook activations' log message field is now separated into timestamps and message fields.(AAP-39743)
+- Moved `    ansible.eda` collection from de-supported to de-minimal as elements of the collection are required for all Event-Driven Ansible images.(AAP-39749)
 
 
-#### 10.15.1.2. Ansible Automation Platform Operator
-
-
-
-
-- Added the ability to configure `    topology_spread_constraints, `node_selector, and `tolerations` for gateway deployments. (AAP-37193)
-
-
-#### 10.15.1.3. Container-based Ansible Automation Platform
+#### 10.11.3.2. RPM-based Ansible Automation Platform
 
 
 
 
-- TLS certificate and key files are now validated during the preflight role execution.
-
-
-- If the TLS certificate file is provided then the TLS key file must be provided.
-- If the TLS key file is provided then the TLS certificate file must be provided.
-- Both TLS certificate and key modulus should match.(AAP-37845)
-
+- The `    setup.sh` script now has an option to collect `    sosreport` .(AAP-40085)
 
 
