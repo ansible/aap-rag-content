@@ -3,6 +3,7 @@ ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
 ARG FLAVOR=cpu
 ARG HERMETIC=false
 ARG AAP_VERSION=2.6
+ARG AAP_VERSION_2_5=2.5
 ARG BUILD_ROAD_CORE_DB=true
 
 USER 0
@@ -33,9 +34,9 @@ RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
 		set -e && python3.12 generate_embeddings-aap.py \
 		  -f aap-product-docs-plaintext \
 		  -mn ${EMBEDDING_MODEL} \
-		  -o vector_db/aap_product_docs/${AAP_VERSION} \
-		  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
-		  -v ${AAP_VERSION} \
+		  -o vector_db/aap_product_docs/${AAP_VERSION_2_5} \
+		  -i aap-product-docs-$(echo $AAP_VERSION_2_5 | sed 's/\./_/g') \
+		  -v ${AAP_VERSION_2_5} \
 		  -c 200 \
 		  -l 10; \
 	else \
