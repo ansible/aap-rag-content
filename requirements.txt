@@ -48,7 +48,6 @@ anyio==4.9.0 \
     --hash=sha256:9f76d541cad6e36af7beb62e978876f3b41e3e04f2c1fbf0884604c0a9c4d93c
     # via
     #   httpx
-    #   llama-api-client
     #   llama-stack-client
     #   openai
     #   starlette
@@ -196,7 +195,6 @@ distro==1.9.0 \
     --hash=sha256:2fa77c6fd8940f116ee1d6b94a2f90b13b5ea8d019b98bc8bafdcabcdd9bdbed \
     --hash=sha256:7bffd925d65168f85027d8da9af6bddab658135b840670a223589bc0c8ef02b2
     # via
-    #   llama-api-client
     #   llama-stack-client
     #   openai
 ecdsa==0.19.1 \
@@ -205,7 +203,6 @@ ecdsa==0.19.1 \
     # via python-jose
 faiss-cpu==1.11.0.post1 \
     --hash=sha256:00a837581b675f099c80c8c46908648dcf944a8992dd21e3887c61c6b110fe5f \
-    --hash=sha256:06b1ea9ddec9e4d9a41c8ef7478d493b08d770e9a89475056e963081eed757d1 \
     --hash=sha256:57f85dbefe590f8399a95c07e839ee64373cfcc6db5dd35232a41137e3deefeb \
     --hash=sha256:5d1262702c19aba2d23144b73f4b5730ca988c1f4e43ecec87edf25171cafe3d \
     --hash=sha256:68f6ce2d9c510a5765af2f5711bd76c2c37bd598af747f3300224bdccf45378c \
@@ -313,7 +310,6 @@ httpx==0.28.1 \
     --hash=sha256:d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad
     # via
     #   aap-rag-content
-    #   llama-api-client
     #   llama-cloud
     #   llama-index-core
     #   llama-stack
@@ -377,10 +373,6 @@ jsonschema-specifications==2025.4.1 \
     --hash=sha256:4653bffbd6584f7de83a67e0d620ef16900b390ddc7939d56684d6c81e33f1af \
     --hash=sha256:630159c9f4dbea161a6a2205c3011cc4f18ff381b189fff48bb39b9bf26ae608
     # via jsonschema
-llama-api-client==0.1.2 \
-    --hash=sha256:709011f2d506009b1b3b3bceea1c84f2a3a7600df1420fb256e680fcd7251387 \
-    --hash=sha256:8ad6e10726f74b2302bfd766c61c41355a9ecf60f57cde2961882d22af998941
-    # via llama-stack
 llama-cloud==0.1.35 \
     --hash=sha256:200349d5d57424d7461f304cdb1355a58eea3e6ca1e6b0d75c66b2e937216983 \
     --hash=sha256:b7abab4423118e6f638d2f326749e7a07c6426543bea6da99b623c715b22af71
@@ -492,13 +484,13 @@ llama-parse==0.6.52 \
     --hash=sha256:52a00f8f5b210c101331bb3fcc4c6e17ae39060543a4b292ab8db49dbbbc93ec \
     --hash=sha256:b98c795797f61184431cf86f6b77e7538b9645e3a488f2d1ee889efb808c172e
     # via llama-index-readers-llama-parse
-llama-stack==0.2.16 \
-    --hash=sha256:b9313acb150360467d7cccb54adb160b2fd585b7ab2505e88b5320c6bf766efe \
-    --hash=sha256:e1ffb5400c85bf23b97f8f48028cb85061bb87a72b741faace1a174215f5de32
+llama-stack==0.2.22 \
+    --hash=sha256:576752dedc9e9f0fb9da69f373d677d8b4f2ae4203428f676fa039b6813d8450 \
+    --hash=sha256:c6bbda6b5a4417b9a73ed36b9d581fd7ec689090ceefd084d9a078e7acbdc670
     # via aap-rag-content
-llama-stack-client==0.2.16 \
-    --hash=sha256:24294acc6bf40e79900a62f4fa61009acb9af7028b198b12c0ba8adab25c2049 \
-    --hash=sha256:5c0d13e6ac40143ce01cae4eec65fb39fe24e11f54b86afbd20f0033c38f83c0
+llama-stack-client==0.2.22 \
+    --hash=sha256:9a0bc756b91ebd539858eeaf1f231c5e5c6900e1ea4fcced726c6717f3d27ca7 \
+    --hash=sha256:b260d73aec56fcfd8fa601b3b34c2f83c4fbcfb7261a246b02bbdf6c2da184fe
     # via
     #   aap-rag-content
     #   llama-stack
@@ -610,9 +602,9 @@ numpy==2.2.6 \
     #   scipy
     #   torchvision
     #   transformers
-openai==1.97.1 \
-    --hash=sha256:4e96bbdf672ec3d44968c9ea39d2c375891db1acc1794668d8149d5fa6000606 \
-    --hash=sha256:a744b27ae624e3d4135225da9b1c89c107a2a7e5bc4c93e5b7b5214772ce7a4e
+openai==1.109.1 \
+    --hash=sha256:6bcaf57086cf59159b8e27447e4e7dd019db5d29a438072fbd49c290c7e65315 \
+    --hash=sha256:d173ed8dbca665892a6db099b4a2dfac624f94d20a93f46eb0b56aae940ed869
     # via
     #   llama-index-agent-openai
     #   llama-index-embeddings-openai
@@ -777,13 +769,12 @@ pycparser==2.22 ; platform_python_implementation != 'PyPy' \
     --hash=sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6 \
     --hash=sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc
     # via cffi
-pydantic==2.11.7 \
-    --hash=sha256:d989c3c6cb79469287b1569f7447a17848c998458d49ebe294e975b9baf0f0db \
-    --hash=sha256:dde5df002701f6de26248661f6835bbe296a47bf73990135c7d07ce741b9623b
+pydantic==2.12.2 \
+    --hash=sha256:25ff718ee909acd82f1ff9b1a4acfd781bb23ab3739adaa7144f19a6a4e231ae \
+    --hash=sha256:7b8fa15b831a4bbde9d5b84028641ac3080a4ca2cbd4a621a661687e741624fd
     # via
     #   banks
     #   fastapi
-    #   llama-api-client
     #   llama-cloud
     #   llama-cloud-services
     #   llama-index-core
@@ -792,22 +783,26 @@ pydantic==2.11.7 \
     #   llama-stack
     #   llama-stack-client
     #   openai
-pydantic-core==2.33.2 \
-    --hash=sha256:3c6db6e52c6d70aa0d00d45cdb9b40f0433b96380071ea80b09277dba021ddf7 \
-    --hash=sha256:4e61206137cbc65e6d5256e1166f88331d3b6238e082d9f74613b9b765fb9025 \
-    --hash=sha256:572c7e6c8bb4774d2ac88929e3d1f12bc45714ae5ee6d9a788a9fb35e60bb04b \
-    --hash=sha256:5f483cfb75ff703095c59e365360cb73e00185e01aaea067cd19acffd2ab20ea \
-    --hash=sha256:7cb8bc3605c29176e1b105350d2e6474142d7c1bd1d9327c4a9bdb46bf827acc \
-    --hash=sha256:8f57a69461af2a5fa6e6bbd7a5f60d3b7e6cebb687f55106933188e79ad155c1 \
-    --hash=sha256:96081f1605125ba0855dfda83f6f3df5ec90c61195421ba72223de35ccfb2f88 \
-    --hash=sha256:9cb1da0f5a471435a7bc7e439b8a728e8b61e59784b2af70d7c169f8dd8ae290 \
-    --hash=sha256:a7ec89dc587667f22b6a0b6579c249fca9026ce7c333fc142ba42411fa243cdc \
-    --hash=sha256:c52b02ad8b4e2cf14ca7b3d918f3eb0ee91e63b3167c32591e57c4317e134f8f \
-    --hash=sha256:cca3868ddfaccfbc4bfb1d608e2ccaaebe0ae628e1416aeb9c4d88c001bb45ab \
-    --hash=sha256:db4b41f9bd95fbe5acd76d89920336ba96f03e149097365afe1cb092fceb89a1 \
-    --hash=sha256:eb8c529b2819c37140eb51b914153063d27ed88e3bdc31b71198a198e921e011 \
-    --hash=sha256:f941635f2a3d96b2973e867144fde513665c87f13fe0e193c158ac51bfaaa7b2 \
-    --hash=sha256:fa854f5cf7e33842a892e5c73f45327760bc7bc516339fda888c75ae60edaeb6
+pydantic-core==2.41.4 \
+    --hash=sha256:025ba34a4cf4fb32f917d5d188ab5e702223d3ba603be4d8aca2f82bede432a4 \
+    --hash=sha256:304c54176af2c143bd181d82e77c15c41cbacea8872a2225dd37e6544dce9999 \
+    --hash=sha256:3a95d4590b1f1a43bf33ca6d647b990a88f4a3824a8c4572c708f0b45a5290ed \
+    --hash=sha256:4a9ab037b71927babc6d9e7fc01aea9e66dc2a4a34dff06ef0724a4049629f94 \
+    --hash=sha256:4f5d640aeebb438517150fdeec097739614421900e4a08db4a3ef38898798537 \
+    --hash=sha256:70e47929a9d4a1905a67e4b687d5946026390568a8e952b92824118063cee4d5 \
+    --hash=sha256:833eebfd75a26d17470b58768c1834dfc90141b7afc6eb0429c21fc5a21dcfb8 \
+    --hash=sha256:84d8854db5f55fead3b579f04bda9a36461dab0730c5d570e1526483e7bb8431 \
+    --hash=sha256:98f348cbb44fae6e9653c1055db7e29de67ea6a9ca03a5fa2c2e11a47cff0e47 \
+    --hash=sha256:9be1c01adb2ecc4e464392c36d17f97e9110fbbc906bcbe1c943b5b87a74aabd \
+    --hash=sha256:ab06d77e053d660a6faaf04894446df7b0a7e7aba70c2797465a0a1af00fc887 \
+    --hash=sha256:b9f5f30c402ed58f90c70e12eff65547d3ab74685ffe8283c719e6bead8ef53f \
+    --hash=sha256:bd8a5028425820731d8c6c098ab642d7b8b999758e24acae03ed38a66eca8335 \
+    --hash=sha256:c53ff33e603a9c1179a9364b0a24694f183717b2e0da2b5ad43c316c956901b2 \
+    --hash=sha256:d682cf1d22bab22a5be08539dca3d1593488a99998f9f412137bc323179067ff \
+    --hash=sha256:dd96e5d15385d301733113bcaa324c8bcf111275b7675a9c6e88bfb19fc05e3b \
+    --hash=sha256:e4dab9484ec605c3016df9ad4fd4f9a390bc5d816a3b10c6550f8424bb80b18c \
+    --hash=sha256:ec22626a2d14620a83ca583c6f5a4080fa3155282718b6055c2ea48d3ef35970 \
+    --hash=sha256:f9672ab4d398e1b602feadcffcdd3af44d5f5e6ddc15bc7d15d376d47e8e19f8
     # via pydantic
 pygments==2.19.2 \
     --hash=sha256:636cb2477cec7f8952536970bc533bc43743542f70392ae026374600add5b887 \
@@ -1020,7 +1015,6 @@ sniffio==1.3.1 \
     --hash=sha256:f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc
     # via
     #   anyio
-    #   llama-api-client
     #   llama-stack-client
     #   openai
 soupsieve==2.7 \
@@ -1155,7 +1149,6 @@ typing-extensions==4.14.1 \
     #   beautifulsoup4
     #   fastapi
     #   huggingface-hub
-    #   llama-api-client
     #   llama-index-core
     #   llama-stack-client
     #   mypy
@@ -1179,9 +1172,9 @@ typing-inspect==0.9.0 \
     # via
     #   dataclasses-json
     #   llama-index-core
-typing-inspection==0.4.1 \
-    --hash=sha256:389055682238f53b04f7badcb49b989835495a96700ced5dab2d8feae4b26f51 \
-    --hash=sha256:6ae134cc0203c33377d43188d4064e9b357dba58cff3185f22924610e70a9d28
+typing-inspection==0.4.2 \
+    --hash=sha256:4ed1cacbdc298c220f1bd249ed5287caa16f34d44ef4e9c3d0cbad5b521545e7 \
+    --hash=sha256:ba561c48a67c5958007083d386c3295464928b01faa735ab8547c5692e87f464
     # via pydantic
 tzdata==2025.2 \
     --hash=sha256:1a403fada01ff9221ca8044d701868fa132215d84beb92242d9acd2147f667a8 \
