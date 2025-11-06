@@ -4,12 +4,12 @@ ARG FLAVOR=cpu
 ARG HERMETIC=false
 ARG AAP_VERSION=2.6
 ARG AAP_VERSION_2_5=2.5
-ARG BUILD_ROAD_CORE_DB=true
+ARG BUILD_ROAD_CORE_DB=false
 
 USER 0
 WORKDIR /workdir
 
-COPY requirements-modified.txt ./requirements.txt
+COPY requirements.txt ./requirements.txt
 
 COPY aap-product-docs-plaintext ./aap-product-docs-plaintext
 COPY additional_docs ./additional_docs
@@ -21,8 +21,9 @@ COPY scripts/generate_embeddings-llama-stack.py .
 COPY run.yaml .
 
 RUN python3.12 -m venv .venv
+RUN pip3.12 install --upgrade pip
 RUN source .venv/bin/activate
-RUN pip3.12 install --no-cache-dir -r requirements.txt
+RUN pip3.12 install --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
 
 RUN cd embeddings_model; if [ "$HERMETIC" == "true" ]; then \
         cp /cachi2/output/deps/generic/model.safetensors model.safetensors; \
@@ -41,6 +42,7 @@ RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
 		  -l 10; \
 	else \
 		mkdir -p /workdir/vector_db/aap_product_docs; \
+        mkdir -p /opt/app-root/src/.llama/providers.d; \
 	fi
 
 RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
@@ -55,6 +57,7 @@ RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
 		  --additional-docs-folder additional_docs \
 		  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
 		  -c 200 \
+		  -v /workdir/llama_stack_vector_db/provider_vector_db_id.ind \
 		  --skip-ping; \
 	fi
 

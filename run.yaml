@@ -4,6 +4,7 @@ apis:
 - inference
 - tool_runtime
 - vector_io
+- files
 providers:
   inference:
   - provider_id: sentence-transformers
@@ -21,6 +22,15 @@ providers:
   - provider_id: rag-runtime
     provider_type: inline::rag-runtime
     config: {}
+  files:
+    - provider_id: localfs
+      provider_type: inline::localfs
+      config:
+        storage_dir: ./llama_stack_files
+        metadata_store:
+          type: sqlite
+          namespace: null
+          db_path: ./llama_stack_files/files.db
 models:
 - metadata:
     embedding_dimension: 768

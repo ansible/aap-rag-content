@@ -9,7 +9,7 @@ from pathlib import Path
 import requests
 
 from llama_stack_client.types.shared_params.document import Document as RAGDocument
-from llama_stack.distribution.library_client import LlamaStackAsLibraryClient
+from llama_stack.core.library_client import LlamaStackAsLibraryClient
 
 
 PROVIDER_NAME = "vector_io"
@@ -32,6 +32,7 @@ class DocumentIngestionTool:
         folder: Path,
         chunk,
         index,
+        vector_db_id_file_name: str,
         skip_ping=False,
         additional_docs_folder: Path | None = None,
         extra_docs_folder: Path | None = None,
@@ -43,7 +44,9 @@ class DocumentIngestionTool:
         self.skip_ping = skip_ping
         self.extra_docs_folder = extra_docs_folder
 
-        self.client = self.setup_llama_stack()
+        self.client, self.vector_dbs_identifier = self.setup_llama_stack()
+        with open(vector_db_id_file_name, "w") as fp:
+            fp.write(str(self.vector_dbs_identifier))
 
     def setup_llama_stack(self):
         client = LlamaStackAsLibraryClient(
@@ -63,13 +66,14 @@ class DocumentIngestionTool:
         ].provider_id  # Use the first available vector provider
 
         # Register a vector database
-        client.vector_dbs.register(
+        result = client.vector_dbs.register(
             vector_db_id=self.index,
             provider_id=provider_id,
             embedding_model="./embeddings_model",
             embedding_dimension=768,
         )
-        return client
+
+        return client, result.identifier
 
     def ping_url(self, url: str) -> bool:
         """Check if the URL parameter is live."""
@@ -168,7 +172,7 @@ class DocumentIngestionTool:
                 print(f"{count=}")
                 self.client.tool_runtime.rag_tool.insert(
                     documents=rag_documents,
-                    vector_db_id=self.index,
+                    vector_db_id=self.vector_dbs_identifier,
                     chunk_size_in_tokens=self.chunk,
                 )
                 rag_documents = []
@@ -229,6 +233,7 @@ def main():
         help="Folder that stores extra docs to be added to the existing DB",
         default=None,
     )
+    parser.add_argument("-v", "--vector-db-id-file-path", type=Path, help="Plain provider_vector_db_id file name")
 
     args = parser.parse_args()
     print(f"Arguments used: {args}")
@@ -245,7 +250,7 @@ def main():
         exit(1)
 
     DocumentIngestionTool(
-        args.folder, args.chunk, args.index, args.skip_ping, args.additional_docs_folder, args.extra_docs_folder
+        args.folder, args.chunk, args.index, args.vector_db_id_file_path, args.skip_ping, args.additional_docs_folder, args.extra_docs_folder
     ).run()
 
 
