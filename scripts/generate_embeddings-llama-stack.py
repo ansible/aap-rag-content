@@ -63,12 +63,30 @@ class DocumentIngestionTool:
         ].provider_id  # Use the first available vector provider
 
         # Register a vector database
-        client.vector_dbs.register(
-            vector_db_id=self.index,
-            provider_id=provider_id,
-            embedding_model="./embeddings_model",
-            embedding_dimension=768,
-        )
+        print(f"Registering vector database: {self.index} with provider: {provider_id}")
+        try:
+            result = client.vector_dbs.register(
+                vector_db_id=self.index,
+                provider_id=provider_id,
+                embedding_model="./embeddings_model",
+                embedding_dimension=768,
+            )
+            print(f"Registration result: {result}")
+            
+            registered_dbs = client.vector_dbs.list()
+            print(f"Registered vector databases: {registered_dbs}")
+            
+            if registered_dbs:
+                actual_db = [db for db in registered_dbs if hasattr(db, 'vector_db_name') and db.vector_db_name == self.index]
+                if actual_db:
+                    self.index = actual_db[0].identifier
+                    print(f"Using registered vector database identifier: {self.index}")
+                else:
+                    self.index = registered_dbs[0].identifier
+                    print(f"Fallback to first registered vector database identifier: {self.index}")
+        except Exception as e:
+            print(f"Error registering vector database: {e}")
+            raise
         return client
 
     def ping_url(self, url: str) -> bool:

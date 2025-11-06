@@ -22,7 +22,7 @@ COPY run.yaml .
 
 RUN python3.12 -m venv .venv
 RUN source .venv/bin/activate
-RUN pip3.12 install --no-cache-dir -r requirements.txt
+RUN pip3.12 install --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
 
 RUN cd embeddings_model; if [ "$HERMETIC" == "true" ]; then \
         cp /cachi2/output/deps/generic/model.safetensors model.safetensors; \
@@ -42,6 +42,8 @@ RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
 	else \
 		mkdir -p /workdir/vector_db/aap_product_docs; \
 	fi
+
+RUN mkdir -p /opt/app-root/src/.llama/providers.d
 
 RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
 		set -e && python3.12 generate_embeddings-llama-stack.py \
