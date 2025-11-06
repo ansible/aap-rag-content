@@ -9,7 +9,7 @@ from pathlib import Path
 import requests
 
 from llama_stack_client.types.shared_params.document import Document as RAGDocument
-from llama_stack.distribution.library_client import LlamaStackAsLibraryClient
+from llama_stack.core.library_client import LlamaStackAsLibraryClient
 
 
 PROVIDER_NAME = "vector_io"
