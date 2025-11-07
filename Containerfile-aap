@@ -31,6 +31,9 @@ RUN cd embeddings_model; if [ "$HERMETIC" == "true" ]; then \
         curl -L -O https://huggingface.co/sentence-transformers/all-mpnet-base-v2/resolve/9a3225965996d404b775526de6dbfe85d3368642/model.safetensors; \
     fi
 
+# Remove 2.5 doc before generating 2.6 DB
+RUN rm -rf ./aap-product-docs-plaintext/red_hat_content/documentation/red_hat_ansible_automation_platform/${AAP_VERSION_2_5}
+
 RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
 		set -e && python3.12 generate_embeddings-aap.py \
 		  -f aap-product-docs-plaintext \
