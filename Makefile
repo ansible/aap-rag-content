@@ -37,7 +37,7 @@ download-embeddings-model:
 	podman kill rag-content
 
 export-deps: ## Check pyproject.toml for changes, update the lock file if needed, then sync.
-	uv export --format requirements.txt -o requirements.txt
+	uv export --format requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu -o requirements.txt
 
 check-types: ## Checks type hints in sources
 	mypy --explicit-package-bases --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs scripts
