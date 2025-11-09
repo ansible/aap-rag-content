@@ -581,7 +581,7 @@ networkx==3.5 \
     # via
     #   llama-index-core
     #   torch
-nltk==3.9.1 \
+nltk==3.9.2 \
     --hash=sha256:4fa26829c5b00715afe3061398a8989dc643b92ce7dd93fb4585a70930d168a1 \
     --hash=sha256:87d127bd3de4bd89a4f81265e5fa59cb1b199b27440175370f7417d2bc7ae868
     # via
