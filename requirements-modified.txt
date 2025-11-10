@@ -748,7 +748,7 @@ protobuf==6.31.1 \
     # via
     #   googleapis-common-protos
     #   opentelemetry-proto
-psycopg2-binary==2.9.10 \
+psycopg2-binary==2.9.11 \
     --hash=sha256:155e69561d54d02b3c3209545fb08938e27889ff5a10c19de8d23eb5a41be8a5 \
     --hash=sha256:18c5ee682b9c6dd3696dad6e54cc7ff3a1a9020df6a5c0f861ef8bfd338c3ca0 \
     --hash=sha256:4b3df0e6990aa98acda57d983942eff13d824135fe2250e6522edaa782a06de2 \
