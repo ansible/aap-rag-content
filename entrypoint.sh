@@ -30,6 +30,19 @@ fi
 ls -l ${DESTDIR}/aap_faiss_store.db
 cat ${DESTDIR}/faiss_store.db.gz.sha256
 
+echo "Initialize RAG environment variables"
+cd /rag/llama_stack_vector_db
+diff provider_vector_db_id.ind ${DESTDIR}/provider_vector_db_id.ind
+if [[ $? != 0 ]]; then
+  cp provider_vector_db_id.ind ${DESTDIR}
+  echo -e "PROVIDER_VECTOR_DB_ID=$(cat provider_vector_db_id.ind)" > ${DESTDIR}/provider_rag.env
+  echo "RAG environment variables updated."
+else
+  echo "RAG environment variables already up-to-date."
+fi
+
+cat ${DESTDIR}/provider_rag.env
+echo ""
 
 echo "Initialize embedding model"
 cd /rag
