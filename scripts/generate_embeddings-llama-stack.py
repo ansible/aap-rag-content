@@ -8,6 +8,16 @@ from typing import Callable, Dict
 from pathlib import Path
 import requests
 
+# Performance optimization: enable tokenizer parallelism and set thread count
+# These must be set before importing torch/transformers
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "true")
+num_threads = os.environ.get("OMP_NUM_THREADS", str(os.cpu_count() or 4))
+os.environ.setdefault("OMP_NUM_THREADS", num_threads)
+os.environ.setdefault("MKL_NUM_THREADS", num_threads)
+
+import torch
+torch.set_num_threads(int(num_threads))
+
 from llama_stack_client.types.shared_params.document import Document as RAGDocument
 from llama_stack.core.library_client import LlamaStackAsLibraryClient
 
@@ -69,7 +79,7 @@ class DocumentIngestionTool:
         result = client.vector_dbs.register(
             vector_db_id=self.index,
             provider_id=provider_id,
-            embedding_model="./embeddings_model",
+            embedding_model="sentence-transformers/./embeddings_model",
             embedding_dimension=768,
         )
 
@@ -237,6 +247,7 @@ def main():
 
     args = parser.parse_args()
     print(f"Arguments used: {args}")
+    print(f"Using {torch.get_num_threads()} threads for PyTorch (OMP_NUM_THREADS={os.environ.get('OMP_NUM_THREADS')})")
     if not args.folder.is_dir():
         print("--folder must point on a valid directory")
         exit(1)
