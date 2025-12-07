@@ -69,7 +69,7 @@ class DocumentIngestionTool:
         result = client.vector_dbs.register(
             vector_db_id=self.index,
             provider_id=provider_id,
-            embedding_model="./embeddings_model",
+            embedding_model="sentence-transformers/embeddings_model",
             embedding_dimension=768,
         )
 
