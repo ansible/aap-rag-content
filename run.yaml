@@ -34,9 +34,10 @@ providers:
 models:
 - metadata:
     embedding_dimension: 768
-  model_id: ./embeddings_model
+  model_id: sentence-transformers/embeddings_model
   provider_id: sentence-transformers
   model_type: embedding
+  provider_model_id: ./embeddings_model
 vector_dbs: []
 tool_groups:
 - toolgroup_id: builtin::rag
