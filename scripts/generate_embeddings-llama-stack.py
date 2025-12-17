@@ -1,5 +1,8 @@
 """Utility script to generate embeddings."""
 
+import torch
+torch.set_num_threads(5)
+
 import argparse
 import json
 import os
