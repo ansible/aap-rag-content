@@ -405,8 +405,9 @@ filelock==3.18.0 \
     #   huggingface-hub
     #   torch
     #   transformers
-fire==0.7.0 \
-    --hash=sha256:961550f07936eaf65ad1dc8360f2b2bf8408fad46abbfa4d2a3794f8d2a95cdf
+fire==0.7.1 \
+    --hash=sha256:3b208f05c736de98fb343310d090dcc4d8c78b2a89ea4f32b837c586270a9cbf \
+    --hash=sha256:e43fd8a5033a9001e7e2973bab96070694b9f12f2e0ecf96d4683971b5ab1882
     # via
     #   aap-rag-content
     #   llama-stack
