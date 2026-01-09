@@ -10,7 +10,7 @@ The installation inventory file defines the architecture of the Ansible Automati
 The following table lists a number of security-relevant variables and their recommended values for an RPM-based deployment.
 
 
-<span id="idm140606644734080"></span>
+<span id="idm139835592515360"></span>
 **Table 2.2. Security-relevant inventory variables**
 
 |  **RPM deployment variable** |  **Recommended Value** |  **Details** |
@@ -35,7 +35,7 @@ The default is `false` . If these variables are absent from the installer invent
 The following table lists a number of security-relevant variables and their recommended values for a container-based deployment.
 
 
-<span id="idm140606648364688"></span>
+<span id="idm139835594972464"></span>
 **Table 2.3. Security-relevant containerized inventory variables**
 
 |  **Container deployment variable** |  **Recommended Value** |  **Details** |

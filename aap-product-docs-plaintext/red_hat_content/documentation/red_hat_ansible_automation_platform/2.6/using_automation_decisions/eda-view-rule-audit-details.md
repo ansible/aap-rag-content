@@ -4,7 +4,7 @@
 
 
 
-From the **Rule Audit** list view you can check the event that triggered specific actions.
+View the rule audit details to quickly identify the rulebook activation responsible, the event that matched the condition, and the overall execution history of the rule.
 
 **Procedure**
 

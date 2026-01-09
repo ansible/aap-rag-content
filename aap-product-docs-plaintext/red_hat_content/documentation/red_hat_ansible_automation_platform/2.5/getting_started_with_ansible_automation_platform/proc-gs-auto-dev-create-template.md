@@ -1,9 +1,11 @@
 # 3. Getting started as an automation developer
-## 3.12. Work with job templates
-### 3.12.3. Creating a job template
+## 3.13. Work with job templates
+### 3.13.3. Creating a job template
 
 
 
+
+Use the following procedure to create a job template.
 
 **Procedure**
 
@@ -130,8 +132,10 @@ See [Credential Types](https://docs.redhat.com/en/documentation/red_hat_ansible_
 
 1. ClickCreate job template, when you have completed configuring the details of the job template.
 
-
 Creating the template does not exit the job template page but advances to the Job Template **Details** tab. After saving the template, you can clickLaunch templateto start the job. You can also clickEditto add or change the attributes of the template, such as permissions, notifications, view completed jobs, and add a survey (if the job type is not a scan). You must first save the template before launching, otherwise,Launch templateremains disabled.
+
+
+
 
 **Verification**
 

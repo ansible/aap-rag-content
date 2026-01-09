@@ -3,7 +3,7 @@
 
 
 
-You can configure Ansible Automation Platform from the **Settings** menu using the following selections:
+You can configure Ansible Automation Platform from the **Settings** menu by using the following selections:
 
 -  **Subscriptions**
 -  **Platform gateway**

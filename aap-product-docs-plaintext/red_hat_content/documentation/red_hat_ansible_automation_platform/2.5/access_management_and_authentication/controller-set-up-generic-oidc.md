@@ -13,6 +13,8 @@ OpenID Connect (OIDC) uses the OAuth 2.0 framework. It enables third-party appli
 1. ClickCreate authentication.
 1. Enter a **Name** for this authentication configuration.
 1. Select **Generic OIDC** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+
+
 1. Select a legacy authenticator method from the **Auto migrate users from** list. After upgrading from 2.4 to 2.5, this is the legacy authenticator from which to automatically migrate users to this new authentication configuration. Refer to [Ansible Automation Platform post-upgrade steps](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_upgrade_and_migration/aap-post-upgrade) in the RPM upgrade and migration guide for important information about migrating users.
 1. Enter the following information:
 

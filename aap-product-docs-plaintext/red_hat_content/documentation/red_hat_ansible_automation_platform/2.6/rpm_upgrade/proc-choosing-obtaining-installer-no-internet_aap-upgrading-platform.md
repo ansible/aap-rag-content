@@ -5,7 +5,7 @@
 
 
 
-Use the Red Hat Ansible Automation Platform **Bundle** installer if you are unable to access the internet, or would prefer not to install separate components and dependencies from online repositories. Access to Red Hat Enterprise Linux repositories is still needed. All other dependencies are included in the tar archive.
+Use the Red Hat Ansible Automation Platform **Bundle** installation program if you are unable to access the internet, or would prefer not to install separate components and dependencies from online repositories. Access to Red Hat Enterprise Linux repositories is still needed. The `tar` archive includes all other dependencies.
 
 **Procedure**
 

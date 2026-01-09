@@ -1,6 +1,6 @@
-# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 4.3. Configuring automation hub on Red Hat OpenShift Container Platform web console
-### 4.3.4. Finding and deleting PVCs
+# 5. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 5.3. Configuring automation hub on Red Hat OpenShift Container Platform web console
+### 5.3.4. Finding and deleting PVCs
 
 
 

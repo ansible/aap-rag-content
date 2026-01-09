@@ -9,10 +9,6 @@ The Ansible extension adds language support for Ansible to VS Code. It incorpora
 
 For a full description of the Ansible extension, see the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=redhat.ansible) .
 
-See [Learning path - Getting Started with the Ansible VS Code Extension](https://red.ht/aap-lp-vscode-essentials) for tutorials on working with the extension.
-
-Use the following procedure to install the Ansible VS Code extension:
-
 **Procedure**
 
 1. Open VS Code.

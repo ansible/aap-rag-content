@@ -1,6 +1,6 @@
-# 11. Ansible Automation Platform Resource Operator
-## 11.5. Creating custom resources for Resource Operator
-### 11.5.8. Creating an automation controller credential custom resource
+# 12. Ansible Automation Platform Resource Operator
+## 12.5. Create custom resources for Resource Operator
+### 12.5.8. Creating an automation controller credential custom resource
 
 
 

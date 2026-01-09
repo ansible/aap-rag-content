@@ -33,8 +33,6 @@ Jobs download the most recent roles before every job run. Roles and collections 
 
 The update happens much earlier in the process than the sync, so this identifies errors and details faster and in a more logical location.
 
-For more information and examples on the syntax of the `requirements.yml` file, see the [role requirements section](https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#installing-multiple-roles-from-a-file) in the Ansible documentation.
-
 If there are any directories that must be specifically exposed, you can specify those in the **Job Settings** screen from the navigation panelSettings→Automation Execution→Job, in **Paths to expose to isolated Jobs** . You can also update the following entry in the settings file:
 
 ```

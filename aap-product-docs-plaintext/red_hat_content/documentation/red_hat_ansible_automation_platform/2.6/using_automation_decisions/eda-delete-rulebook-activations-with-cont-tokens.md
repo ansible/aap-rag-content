@@ -5,7 +5,7 @@
 
 
 
-To replace the controller tokens, you must delete the rulebook activations that were associated with them.
+Delete rulebook activations that rely on deprecated controller tokens. This mandatory step prevents conflicts before migrating to the new, required Red Hat Ansible Automation Platform credentials.
 
 **Procedure**
 

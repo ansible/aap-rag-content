@@ -29,7 +29,7 @@ However, when the mapping order is changed to B, A; the first map allows `john` 
 1. In the list view, select the authenticator name displayed in the **Name** column.
 1. Select the **Mapping** tab from the **Details** page of your authenticator.
 1. ClickManage mappings.
-1. Adjust the mapping order by dragging and dropping the mappings up or down in the list using the draggable icon.
+1. Adjust the mapping order by dragging and dropping the mappings up or down in the list using the icon.
 
 Note
 The mapping precedence is determined by the order in which the mappings are listed.

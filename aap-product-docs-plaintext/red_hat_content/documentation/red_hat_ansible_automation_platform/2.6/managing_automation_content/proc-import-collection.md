@@ -30,6 +30,6 @@ If the collection is not approved, it is not displayed in the published reposito
 
 **Additional resources**
 
-- See [Approval pipeline](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/managing_automation_content/index#con-approval-pipeline) for more information about collection and repository approvals.
+-  [Approval pipeline for custom repositories in automation hub](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/managing_automation_content/managing-collections-hub#con-approval-pipeline)
 
 

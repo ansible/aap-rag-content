@@ -3,17 +3,19 @@
 
 
 
-You can create both Job templates and Workflow job templates fromAutomation Execution→Templates.
+A workflow job template links together a sequence of disparate resources that tracks the full set of jobs that were part of the release process as a single unit.
 
-For Job templates, see [Job templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-job-templates) .
-
-A workflow job template links together a sequence of disparate resources that tracks the full set of jobs that were part of the release process as a single unit. These resources include the following:
+These resources include the following:
 
 - Job templates
 - Workflow job templates
 - Project syncs
 - Inventory source syncs
 
+
+You can create both Job templates and Workflow job templates fromAutomation Execution→Templates.
+
+For Job templates, see [Job templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-job-templates) .
 
 The **Automation Templates** page shows the workflow and job templates that are currently available.
 

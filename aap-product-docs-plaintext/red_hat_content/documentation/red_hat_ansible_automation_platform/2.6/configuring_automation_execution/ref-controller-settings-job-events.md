@@ -5,6 +5,8 @@
 
 
 
+automation controller uses a callback receiver service to process job events sent from managed nodes during job execution.
+
 The callback receiver processes all the output of jobs and writes this output as job events to the automation controller database. The callback receiver has a pool of workers that processes events in batches. The number of workers automatically increases with the number of CPU available on an instance.
 
 Administrators can override the number of callback receiver workers with the setting `JOB_EVENT_WORKERS` . Do not set more than 1 worker per CPU, and there must be at least 1 worker. Greater values have more workers available to clear the Redis queue as events stream to the automation controller, but can compete with other processes such as the web server for CPU seconds, uses more database connections (1 per worker), and can reduce the batch size of events each worker commits.

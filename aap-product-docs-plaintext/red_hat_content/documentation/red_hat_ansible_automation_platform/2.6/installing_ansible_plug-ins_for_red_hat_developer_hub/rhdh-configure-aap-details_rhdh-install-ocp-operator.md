@@ -29,12 +29,12 @@ If `        checkSSL` is set to `        true` , the Ansible plug-ins verify whe
 data:          app-config-rhdh.yaml: |            ...            ansible:            ...              rhaap:                baseUrl: '&lt;https://MyControllerUrl&gt;'                token: '&lt;AAP Personal Access Token&gt;'                checkSSL: true
 ```
 
-
-
-
-
 Note
 You are responsible for protecting your Red Hat Developer Hub installation from external and unauthorized access. Manage the backend authentication key like any other secret. Meet strong password requirements, do not expose it in any configuration files, and only inject it into configuration files as an environment variable.
+
+
+
+
 
 
 

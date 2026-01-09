@@ -1,6 +1,6 @@
-# 5. Administering the Ansible Lightspeed Service
-## 5.2. Viewing and managing the Admin dashboard telemetry
-### 5.2.2. What telemetry data is collected?
+# 6. Administering the Ansible Lightspeed Service
+## 6.2. Viewing and managing the Admin dashboard telemetry
+### 6.2.2. What telemetry data is collected?
 
 
 

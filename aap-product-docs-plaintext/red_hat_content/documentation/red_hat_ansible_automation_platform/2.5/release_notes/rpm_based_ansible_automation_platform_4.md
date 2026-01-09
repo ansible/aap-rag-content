@@ -1,22 +1,25 @@
 # 10. Patch releases
-## 10.4. Ansible Automation Platform patch release July 2, 2025
-### 10.4.11. RPM-based Ansible Automation Platform
+## 10.4. Ansible Automation Platform patch release August 27, 2025
+### 10.4.9. RPM-based Ansible Automation Platform
 
 
 
 
-#### 10.4.11.1. Bug Fixes
+#### 10.4.9.1. Enhancements
 
 
 
 
-- Fixed an issue where redis-platform would not restart on restore.(AAP-47689)
-- Fixed an issue where old service nodes were not removed from platform gateway when the installer ran with a new host or new host names.(AAP-47651)
-- Fixed an issue where restore was failing when a non-default port was used for Ansible Automation Platform managed database.(AAP-47639)
-- Fixed an issue where some pages didn’t render properly when non-default `    umask` was being used.(AAP-47377)
-- Fixed an issue where the Event-Driven Ansible script was not starting `    nginx` on restart.(AAP-46511)
-- Fixed an issue where the credentials associated to decision environments would not be updated with the site information defined in the source inventory during restore.(AAP-46271)
-- Fixed an issue where the receptor certificate tasks would require switching to a receptor user.(AAP-46189)
-- Fixed an issue where the firewall was not opening event stream ports.(AAP-45684)
+- Added `    postgres_extra_settings` for `    postgresql.conf` customization for managed database installations.(AAP-51462)
+
+
+#### 10.4.9.2. Bug Fixes
+
+
+
+
+- Fixed an issue where automation controller nodes set to a deprovision state were not removed from the platform gateway registry.(AAP-51461)
+- Fixed an issue where the missing RPM dependency for **PostgreSQL** client which resulted in container images missing `    psql` binary.(AAP-50941)
+- Fixed an issue where disabling `    https` for platform gateway and/or platform gateway proxy ( **envoy** ) caused installation failures.(AAP-48606)
 
 

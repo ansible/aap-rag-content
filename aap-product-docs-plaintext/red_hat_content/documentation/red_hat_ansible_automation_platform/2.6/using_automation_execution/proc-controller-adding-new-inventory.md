@@ -69,7 +69,7 @@ icon for information on **How to use the constructed inventory plugin** .
 
 
 - Only applicable to constructed inventories: **Limit** : Restricts the number of returned hosts for the inventory source associated with the constructed inventory. You can paste a group name into the limit field to only include hosts in that group. For more information, see the **Source vars** setting.
-- Only applicable to standard inventories: **Options** : Check the **Prevent Instance Group Fallback** option to enable only the instance groups listed in the **Instance Groups** field to execute the job. If unchecked, all available instances in the execution pool are used based on the hierarchy described in [Control where a job runs](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-control-job-run) .
+- Only applicable to standard inventories: **Options** : Check the **Prevent Instance Group Fallback** option to enable only the instance groups listed in the **Instance Groups** field to run the job. If unchecked, all available instances in the execution pool are used based on the hierarchy described in [Control where a job runs](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-control-job-run) .
 -  **Variables** ( **Source vars** for constructed inventories):
 
 

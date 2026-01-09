@@ -3,3 +3,5 @@
 
 
 
+The service definition details the shared responsibilities between Red Hat, which manages the control plane, and the customer, who manages the execution plane.
+

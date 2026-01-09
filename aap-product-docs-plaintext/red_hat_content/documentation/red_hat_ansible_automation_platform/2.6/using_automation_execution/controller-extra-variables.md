@@ -1,12 +1,14 @@
 # 6. Job templates
-## 6.21. Extra variables
+## 6.18. Extra variables
 
 
 
+
+You can pass extra variables to a automation controller job template in several ways, including through surveys and the API.
 
 When you pass survey variables, they are passed as extra variables ( `extra_vars` ) within automation controller. However, passing extra variables to a job template (as you would do with a survey) can override other variables being passed from the inventory and project.
 
-By default, `extra_vars` are marked as `!unsafe` unless you specify them on the Job Template’s Extra Variables section. These are trusted, because they can only be added by users with enough privileges to add or edit a Job Template. For example, nested variables do not expand when entered as a prompt, as the Jinja brackets are treated as a string. For more information about unsafe variables, see [Unsafe or raw strings](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_advanced_syntax.html#unsafe-or-raw-strings) .
+By default, `extra_vars` are marked as `!unsafe` unless you specify them on the Job Template’s Extra Variables section. These are trusted, because they can only be added by users with enough privileges to add or edit a Job Template. For example, nested variables do not expand when entered as a prompt, as the Jinja brackets are treated as a string.
 
 Note
 `extra_vars` passed to the job launch API are only honored if one of the following is true:
@@ -17,10 +19,7 @@ Note
 
 
 
-**Example**
-
-You have a defined variable for an inventory for `debug = true` . It is possible that this variable, `debug = true` , can be overridden in a job template survey.
-
+**Example** You have a defined variable for an inventory for `debug = true` . It is possible that this variable, `debug = true` , can be overridden in a job template survey.
 
 To ensure the variables that you pass are not overridden, ensure they are included by redefining them in the survey. You can define extra variables at the inventory, group, and host levels.
 
@@ -53,9 +52,7 @@ satellites:
 
 The following table notes the behavior (hierarchy) of variable precedence in automation controller as it compares to variable precedence in Ansible.
 
-
-<span id="idm140044882546544"></span>
-**Table 6.1. Automation controller Variable Precedence Hierarchy (last listed wins)**
+**Automation controller Variable Precedence Hierarchy (last listed wins)**
 
 | Ansible | automation controller |
 | --- | --- |
@@ -78,7 +75,5 @@ The following table notes the behavior (hierarchy) of variable precedence in aut
 | extra variables | Job Template extra variables |
 |  | Job Template Survey (defaults) |
 |  | Job Launch extra variables |
-
-
 
 

@@ -7,19 +7,25 @@
 
 You can use the OpenShift Container Platform web console to create a project in your cluster.
 
-1. In a browser, log in to the OpenShift Container Platform web console.
-1. Choose the **Developer** perspective.
-1. Click the **Project** menu and select **Create project** .
+**Procedure**
 
+1. In a browser, log in to the OpenShift Container Platform web console.
+1. Creating a project varies slightly depending on which perspective you have on:
+
+
+1. From the **Developer** perspective: select **Project** then **Create Project** .
+1. From the **Administrator** perspective: select **Home** then **Project** then **Create Project** .
 
 1. In the **Create Project** dialog box, enter a unique name **Name** field.
 
 
-- Lowercase alphanumeric characters ( `            a-z` , `            0-9` ) and the hyphen character ( `            -` ) are permitted for project names.
-- The underscore ( `            _` ) character is not permitted.
+- Lowercase alphanumeric characters ( `        a-z` , `        0-9` ) and the hyphen character ( `        -` ) are permitted for project names.
+- The underscore ( `        _` ) character is not permitted.
 - The maximum length for project names is 63 characters.
 
+
 1. Optional: display name and description for your project.
+
 
 1. ClickClickto create the project.
 
@@ -34,7 +40,7 @@ You can run commands from your terminal to add a project to your cluster.
 **Prerequisites**
 
 - You have the login details for your Openshift cluster.
-- You have installed the `    oc` CLI tool. This is a command-line tool for interacting with and managing an OpenShift cluster from a terminal.
+- You have installed the `    oc` CLI tool.
 
 
 **Procedure**
@@ -97,13 +103,15 @@ You must create a registry in OpenShift Container Platform for the `.tar` files 
 
 
 
-The `.tar.gz` files for self-service automation portal are available from the Red Hat Customer Portal.
+Download the latest `.tar.gz` plug-in files for self-service automation portal from the Red Hat Customer Portal.
+
+**Procedure**
 
 1. Create a directory on your local machine to store the files.
 
 
 ```
-$ mkdir /path/to/&lt;automation-portal-plugins-local-dir-changeme&gt;
+$ mkdir /path/to/&lt;automation-portal-plugins&gt;
 ```
 
 
@@ -111,11 +119,11 @@ $ mkdir /path/to/&lt;automation-portal-plugins-local-dir-changeme&gt;
 
 
 ```
-$ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/&lt;automation-portal-plugins-local-dir-changeme&gt;
+$ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/&lt;automation-portal-plugins&gt;
 ```
 
 
-1. In a browser, navigate to the [Red Hat Ansible Automation Platform Product Software downloads page](https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software) . and select the **Product Software** tab.
+1. Download the setup bundle. In a browser, navigate to the [Red Hat Ansible Automation Platform Product Software downloads page](https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software) . and select the **Product Software** tab.
 1. Click **Download now** next to **Ansible self-service automation portal Setup Bundle** to download the latest version of the plug-ins.
 
 The format of the filename is `    self-service-automation-portal-plugins-x.y.z.tar.gz` .
@@ -288,17 +296,23 @@ Value needed: Ansible Automation Platform OAuth client secret value
 
 - Key: `        aap-token`
 
-Value needed: Token for Ansible Automation Platform user authentication (must have `        write` access).
+Value needed: Token for Ansible Automation Platform user authentication (must have `        read` access).
 
 
 
 1. ClickCreateto create the secret.
 
 
-### 3.8.2. Creating Creating GitHub and Gitlab secrets
+### 3.8.2. Creating GitHub and Gitlab secrets
 
 
 
+
+Create an OpenShift secret to hold Personal Access Tokens for your external Source Control Management systems, such as GitHub or GitLab. This helps securely manage access credentials.
+
+This procedure establishes the required `secrets-scm` Key/Value secret within your OpenShift Container Platform project to securely store the GitHub and/or GitLab Personal Access Tokens (PATs).
+
+**Procedure**
 
 1. Log in to your OpenShift Container Platform instance.
 1. Open your OpenShift project for self-service automation portal.
@@ -340,16 +354,20 @@ Value needed: Gitlab Personal Access Token (PAT)
 
 
 
+You can use the configured secrets and plugin registry to install the self-service automation portal. Deploy the application onto your OpenShift cluster using the provided Helm chart.
+
 ## 4.1. Configuring the self-service automation portal Helm chart from the OpenShift catalog
 
 
 
 
+Deploy the Helm chart from the OpenShift catalog by configuring the base URL and organization name in the YAML view. This launches the self-service automation portal installation.
+
 **Prerequisites**
 
-1. You have created a project for self-service automation portal in OpenShift Container Platform.
-1. You have created a plugin registry in your project.
-1. You have set up secrets for Ansible Automation Platform authentication and SCM authentication.
+- You have created a project for self-service automation portal in OpenShift Container Platform.
+- You have created a plugin registry in your project.
+- You have set up secrets for Ansible Automation Platform authentication and SCM authentication.
 
 
 **Procedure**
@@ -391,6 +409,8 @@ catalog:        providers:          rhaap:            production:            # R
 
 Verify the Helm chart installation from the OpenShift Container Platform web console.
 
+**Procedure**
+
 1. In a browser, log in to your OpenShift instance.
 1. In the **Developer** view, navigate to the **Topology** view for the namespace where you deployed the Helm chart.
 
@@ -398,10 +418,10 @@ The deployment appears: the label on the icon is `    D` . The name of the deplo
 
 While it is deploying, the icon is light blue. The color changes to dark blue when deployment is complete.
 
-
-
-
 ![Deployment on OpenShift console](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Installing_self-service_automation_portal-en-US/images/06c45647f2a2be815da7e2006fd83257/self-service-verify-helm-install.png)
+
+
+
 
 
 # Chapter 5. Installing self-service automation portal in air-gapped OpenShift Container Platform environments
@@ -415,6 +435,8 @@ You can install self-service automation portal in a disconnected OpenShift Conta
 
 
 
+
+Gather the required tools and access credentials necessary for air-gapped installation. This includes the OpenShift CLI, Helm, Podman, and required registry secrets.
 
 - You have installed the OpenShift CLI ( `    oc` ). See the [Getting started with the OpenShift CLI](https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/cli_tools/openshift-cli-oc#cli-getting-started) chapter of the _Understanding OpenShift Container Platform_ guide.
 - You have installed Helm 3.10 or newer. See the [Installing Helm](https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/building_applications/working-with-helm-charts#installing-helm) chapter of the _OpenShift Container Platform Building applications_ guide.
@@ -436,6 +458,10 @@ Before you can install self-service automation portal in a disconnected OpenShif
 
 
 
+
+Mirror the required container images from the Red Hat registry to your local disconnected registry. This action prepares the images needed to install the self-service automation portal in an isolated environment.
+
+**Procedure**
 
 1. Log in to `    registry.redhat.io` :
 
@@ -500,6 +526,10 @@ $ podman push &lt;disconnected_registry_url&gt;/&lt;your_namespace&gt;/rhdh-hub-
 
 
 
+Download the Helm chart package and modify the internal image references to point to your disconnected registry. This prepares the installation package for the air-gapped environment.
+
+**Procedure**
+
 1. Add the OpenShift Helm charts repository:
 
 
@@ -559,6 +589,10 @@ This creates a new `    .tgz` file with your changes (for example, `    redhat-r
 
 
 
+Transfer the modified Helm chart package from the connected bastion host to a machine inside your disconnected network. This action stages the installation assets for deployment within the isolated OpenShift environment.
+
+**Procedure**
+
 - Copy the modified Helm chart `    .tgz` file or files (for example, `    redhat-rhaap-portal-1.0.1.tgz` ) from your connected bastion host to a machine or jump box within your disconnected OpenShift network.
 
 
@@ -567,14 +601,20 @@ This creates a new `    .tgz` file with your changes (for example, `    redhat-r
 
 
 
+You can install the modified Helm chart using the `helm install` command in your disconnected OpenShift environment. This deploys the self-service automation portal using the locally available assets.
+
+Continued steps for installing the Helm chart in a disconnected OpenShift environment are detailed in this section.
+
 ### 5.3.1. Accessing the disconnected OpenShift environment
 
 
 
 
+Ensure your disconnected OpenShift cluster is configured to trust the private registry containing the mirrored container images. This step is crucial for successful image pulling during installation.
+
 **Prerequisites**
 
-Ensure you have the necessary kubeconfig and permissions, for example `cluster-admin` , for setting up image pull secrets or insecure registries.
+- You have the necessary kubeconfig and permissions. For example `    cluster-admin` , for setting up image pull secrets or insecure registries.
 
 
 **Procedure**
@@ -607,6 +647,10 @@ export KUBECONFIG=/path/to/your/kubeconfig    oc login
 
 
 
+
+Navigate to the transferred Helm chart directory on your jump box. Define environment variables for the installation namespace and cluster router base URL before beginning the installation.
+
+**Procedure**
 
 1. On the machine within your disconnected environment, navigate to the directory where you placed the transferred Helm chart `    .tgz` file.
 
@@ -653,6 +697,10 @@ export MY_NAMESPACE="rhdh-dev"    export MY_CLUSTER_ROUTER_BASE="apps.yourcluste
 
 
 
+Install the self-service automation portal by using the `helm install` command. You must reference the local Helm chart file and include the required cluster overrides using the `--set` flags.
+
+**Procedure**
+
 - Install the chart using the `    helm install` command, referencing the local `    .tgz` file by its name and using `    --set` flags to provide necessary overrides.
 
 Add more `    --set` flags for any other values that were in your original `    values.yaml` file.
@@ -674,6 +722,10 @@ $ helm install redhat-rhaap-portal \      redhat-rhaap-portal-x.y.z.tgz \      -
 
 
 
+
+Verify the successful installation of the Helm chart in the disconnected environment. Check the Helm release status, monitor the pods, and verify that the application routes are accessible.
+
+**Procedure**
 
 1. Check the Helm release status:
 
@@ -720,6 +772,10 @@ You can inspect the deployment logs and ConfigMap on the OpenShift console to ve
 
 
 
+
+You can view the deployment logs in the OpenShift console. Pay close attention to the install-dynamic-plugins container logs. This helps confirm that the required plug-ins installed successfully.
+
+**Procedure**
 
 1. In a browser, log in to your OpenShift instance.
 1. In the **Developer** view, navigate to the **Topology** view for the namespace where you deployed the Helm chart.
@@ -768,6 +824,8 @@ The log stream for successful installation of the plug-ins resembles the followi
 
 
 
+Complete the necessary post-installation configuration, including updating the OAuth application and setting up initial Role-Based Access Control (RBAC). You can then access and sign in to the portal.
+
 ## 7.1. Adding the deployment URL to the OAuth Application
 
 
@@ -776,6 +834,8 @@ The log stream for successful installation of the plug-ins resembles the followi
 When you set up your OAuth application in Ansible Automation Platform before deploying self-service automation portal, you added placeholder text for the `Redirect URIs` value.
 
 You must update this value using the URL from the deployed application so that you can run automation on self-service automation portal from self-service automation portal.
+
+**Procedure**
 
 1. Determine the `    Redirect URI` from your OpenShift deployment:
 
@@ -809,10 +869,12 @@ For example, if the URL for the deployment is `        https://my-automation-por
 
 
 
+Log in to the deployed self-service automation portal using your existing Ansible Automation Platform credentials. The portal uses these credentials for authentication.
+
 **Prerequisites**
 
-1. You have configured an OAuth application in Ansible Automation Platform for self-service automation portal.
-1. You have configured a user account in Ansible Automation Platform.
+- You have configured an OAuth application in Ansible Automation Platform for self-service automation portal.
+- You have configured a user account in Ansible Automation Platform.
 
 
 **Procedure**
@@ -834,28 +896,88 @@ For example, if the URL for the deployment is `        https://my-automation-por
 1. The self-service automation portal web console opens.
 
 
+**Troubleshooting**
+
+If your are using custom SSL certificates and when attempting to log in to self-service automation portal, it displays the error:
+
+
+`Login failed; caused by Error: Failed to send POST request: fetch failed`
+
+You must disable SSL validation in the Helm chart configuration.
+
+1. In the self-service automation portal Helm chart, locate the `    checkSSL` parameter and set its value to `    false` :
+
+
+```
+upstream:        backstage:          appConfig:            ansible:              creatorService:                baseUrl: 127.0.0.1                port: '8000'              rhaap:                baseUrl: '${AAP_HOST_URL}'                checkSSL: false &lt;-- Update this to false                token: '${AAP_TOKEN}'
+```
+
+
+1. Apply the updated configuration by upgrading the self-service automation portal Helm chart to allow users to log in.
+
+
 ## 7.3. Setting up initial RBAC rules in self-service automation portal
 
 
 
 
-After you install self-service automation portal and synchronize it with Ansible Automation Platform, only users with admin privileges can view the auto-generated templates.
+After you install self-service automation portal and synchronize it with Ansible Automation Platform, only users with Ansible Automation Platform administrator privileges can view the auto-generated templates.
 
-You must configure initial Role-Based Access Control (RBAC) in self-service automation portal to enable users who do not have admin privileges to view and execute auto-generated templates.
+You must configure initial Role-Based Access Control (RBAC) permissions to allow non-admin users to view and execute synchronized Ansible Automation Platform job templates.
+
+### 7.3.1. Understanding the permission model
+
+
+
+
+Self-service automation portal and Ansible Automation Platform use separate but related permission systems. Ansible Automation Platform RBAC is the source of truth for synchronization scope and execution permissions.
+
+**Self-service automation portal RBAC:**
+
+- Controls which users can view templates in the self-service automation portal catalog.
+- Controls which users can access portal templates and submit jobs.
+
+
+**Ansible Automation Platform RBAC:**
+
+-  **Controls synchronization scope:** Only Ansible Automation Platform job templates accessible by the configured Ansible Automation Platform token (ansible.rhaap.token) are synchronized to self-service automation portal.
+-  **Controls Ansible Automation Platform job template visibility and execution:** Ansible Automation Platform permissions determine whether authenticated users can view and execute Ansible Automation Platform job templates in self-service automation portal.
+-  **Validates execution permissions:** When a self-service automation portal user executes a template, Ansible Automation Platform checks that user’s execute permissions before launching the job.
+
+
+Note
+If a user can see a self-service automation portal template in the catalog but lacks Ansible Automation Platform execution permissions for the associated Ansible Automation Platform job template in Ansible Automation Platform, the user cannot run the Ansible Automation Platform Job.
+
+
+
+### 7.3.2. Configuring RBAC for synchronization
+
+
+
+
+Synchronization uses an Ansible Automation Platform token configured in the self-service automation portal to determine which data to synchronize from Ansible Automation Platform.
+
+By default, self-service automation portal synchronizes Ansible Automation Platform Organization, Team, and User identity information. Self-service automation portal also synchronizes Ansible Automation Platform job template information accessible by the configured Ansible Automation Platform token.
+
+Note
+For more information on Ansible Automation Platform token best practices, see the [Ansible Automation Platform documentation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-token-based-authentication#gw-oauth2-security-controls) .
+
+
 
 **Prerequisites**
 
-- You have credentials for an Ansible Automation Platform account that has admin privileges.
-- Synchronization of users, groups, and teams from Ansible Automation Platform is complete.
+- You have credentials for an Ansible Automation Platform administrator.
+- Synchronization of Ansible Automation Platform Organization information from Ansible Automation Platform is complete.
+- Users who execute Ansible Automation Platform job templates through self-service automation portal must have job template **Execute** permissions assigned in Ansible Automation Platform for the respective Ansible Automation Platform job templates.
 - The **Allow external users to create OAuth2 tokens** setting is enabled in theSettings→Platform gatewaysettings in Ansible Automation Platform.
 
 
 **Procedure**
 
-1. Log in to self-service automation portal with an account that has admin privileges.
-1. In the navigation pane of self-service automation portal, select Administration > RBAC.
-1. ClickCreateto create a new role.
-1. In the **Create Role** section, enter a name for the new role, for example `    auto-generated-templates-role` , then clickNext.
+1. Log in to self-service automation portal with an account that has Ansible Automation Platform administrator privileges.
+1. In the navigation pane of self-service automation portal, selectAdministration→RBAC.
+1. ClickCreateto create a new role and enter a name, for example `    portal-users` .
+1. ClickNext.
 
 ![Create new role](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Installing_self-service_automation_portal-en-US/images/8e8d2b1e5b8d880bb39cb45ab87a43b6/self-service-create-new-rbac-role.png)
 
@@ -863,37 +985,32 @@ You must configure initial Role-Based Access Control (RBAC) in self-service auto
 
 1. In the **Users and Groups** section, select the Ansible Automation Platform teams and users to assign to this role, then clickNext.
 
-You can only select teams and users from the Organization that you are using in self-service automation portal.
+**Note:** You can only select Ansible Automation Platform teams and users from the Ansible Automation Platform Organization that you have configured for synchronization with self-service automation portal.
 
 
-1. In the **Add permission policies** section, select the **Catalog** and **Scaffolder** plugins from the **Select plugins** dropdown menu. The selected plug-ins are added to a list.
+1. ClickNextto configure permissions in the **Add permission policies** section:
+
+
+1. Select the **Catalog** plugin from the **Select plugins** dropdown menu.
+1. Select the checkbox for `        catalog.entity.read` .
 
 ![Add permission policies](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Installing_self-service_automation_portal-en-US/images/7002db599883040e018acfd6d7f1e55c/self-service-add-permission-policies.png)
 
 
 
-1. Click **Select** to expand **Catalog** and **Scaffolder** in the list of plug-ins.
-1. To allow users to view templates and execute jobs in Ansible Automation Platform, grant the following minimum permissions for the selected plug-ins by selecting the check box to the left of the permission names.
+
+1. Select the **Scaffolder** plugin and enable all scaffolder permissions:
 
 
-- Catalog permissions:
-
-
--  `            catalog.entity.read`
-
-- Scaffolder permissions:
-
-
--  `            scaffolder.template.parameter.read`
--  `            scaffolder.template.step.read`
--  `            scaffolder.action.execute`
--  `            scaffolder.task.cancel`
--  `            scaffolder.task.create`
--  `            scaffolder.task.read`
+-  `        scaffolder.template.parameter.read`
+-  `        scaffolder.template.step.read`
+-  `        scaffolder.action.execute`
+-  `        scaffolder.task.cancel`
+-  `        scaffolder.task.create`
+-  `        scaffolder.task.read`
 
 Note
-The `            scaffolder.task.read` permission must be enabled so that users can view previous task runs in the **History** page in the self-service automation portal console.
-
+The `        scaffolder.task.read` permission must be enabled so that users can view previous task runs in the **History** page in the self-service automation portal console.
 
 
 
@@ -908,12 +1025,104 @@ On successful completion, your new role is included in the **All roles** list wh
 
 **Verification**
 
-- Log in to self-service automation portal as a non-admin user who is a member of a team you granted permissions to. Confirm that the user can see auto-generated templates in self-service automation portal. These correspond to the Ansible Automation Platform job templates that the user has **Execute** permissions for.
+On successful completion, your new role is included in the **All roles** list when you selectAdministration→RBACin the navigation pane in self-service automation portal.
 
 
-**Additional resources**
+### 7.3.3. Configuring conditional access
 
-To learn more about configuring RBAC in Ansible Automation Platform, see the [self-service automation portal interactive demo](https://interact.redhat.com/share/RZM69zpDpc5ymd63pMQv) .
+
+
+
+Optionally, you can configure conditional self-service automation portal RBAC policies to filter role access to specific Ansible Automation Platform job templates by tag for specific Ansible Automation Platform teams or users.
+
+Ansible Automation Platform labels applied to Ansible Automation Platform job templates are synchronized to self-service automation portal as tags and can be used for conditional access control.
+
+Note
+Ansible Automation Platform labels are converted to lowercase tags with special characters replaced by hyphens (for example, the Ansible Automation Platform label `Network-Automation` becomes the tag `network-automation` ).
+
+
+
+**Prerequisites**
+
+- Ansible Automation Platform job templates must have Ansible Automation Platform labels applied and synchronized with self-service automation portal.
+- Users who execute Ansible Automation Platform job templates through self-service automation portal must have Ansible Automation Platform job template **Execute** permissions assigned in Ansible Automation Platform for the respective Ansible Automation Platform job templates.
+
+
+**Procedure**
+
+1. Log in to self-service automation portal with an account that has Ansible Automation Platform administrator privileges.
+1. In the navigation pane of self-service automation portal, selectAdministration→RBAC.
+1. ClickCreateto create a new role and enter a name, for example `    network-templates` .
+1. ClickNext.
+1. In the **Users and Groups** section, select the Ansible Automation Platform teams and users to assign to this role (for example, the Ansible Automation Platform network-team), then clickNext.
+
+Note
+You can only select Ansible Automation Platform teams and users from the Ansible Automation Platform Organization that you are using in self-service automation portal.
+
+
+
+
+1. ClickNextto configure permissions in the **Add permission policies** section:
+
+
+- Select the **Catalog** plugin from the **Select plugins** dropdown menu.
+- Select the checkbox for `        catalog.entity.read` .
+- ClickConditionalto configure a condition-based policy.
+
+1. In the condition builder, configure a rule to filter by tag:
+
+
+-  **Rule:** Select `        HAS_METADATA` from the dropdown menu
+-  **Key:** Enter `        tags`
+-  **Value:** Enter the tag value to filter by (for example, `        network-automation` )
+
+1. Select the **Scaffolder** plugin and enable all scaffolder permissions:
+
+
+-  `        scaffolder.template.parameter.read`
+-  `        scaffolder.template.step.read`
+-  `        scaffolder.action.execute`
+-  `        scaffolder.task.cancel`
+-  `        scaffolder.task.create`
+-  `        scaffolder.task.read`
+
+1. ClickNextto review your settings, then clickCreateto create the new role.
+
+
+**Verification**
+
+On successful completion, your new role is included in the **All roles** list when you selectAdministration→RBACin the navigation pane in self-service automation portal.
+
+
+1. Log in to self-service automation portal as a non-Ansible Automation Platform administrator user who is a member of a team you granted permissions to.
+1. Verify that the user can see auto-generated templates in self-service automation portal.
+
+
+- If you configured conditional access by tag, the user should see only templates with the specified tags.
+- If you did not configure conditional access, the user should see all Ansible Automation Platform job templates for which they have job template **Execute** permissions in Ansible Automation Platform.
+
+1. To verify execution permissions work correctly, attempt to execute a template:
+
+
+1. If the user has job template **Execute** permissions in Ansible Automation Platform for the template, the user can view the template, and the job launches successfully.
+
+
+
+### 7.3.4. Permissions reference for Ansible Automation Platform job template access
+
+
+
+
+Permissions for Ansible Automation Platform job templates
+
+| Permission | Resource type | Policy | Description |
+| --- | --- | --- | --- |
+|  `catalog.entity.read` | catalog-entity | read | Users can view synchronized Ansible Automation Platform job templates in the self-service automation portal. |
+|  `scaffolder.template.parameter.read` | scaffolder-template | read | Users can read template parameters. |
+|  `scaffolder.action.execute` | scaffolder-action | use | Users can execute actions through templates. |
+|  `scaffolder.task.create` |  | create | Users can trigger the execution of Ansible Automation Platform job templates. |
+|  `scaffolder.task.read` |  | read | Users can view task execution history and logs on the **History** page. |
+|  `scaffolder.task.cancel` |  | use | Users can cancel currently running templates. |
 
 
 ## 7.4. Adjusting synchronization frequency between Ansible Automation Platform and self-service automation portal
@@ -925,15 +1134,14 @@ The Helm chart defines how frequently users, teams and organization configuratio
 
 The frequency is set by the `catalog.providers.rhaap.schedule.frequency` key. By default, the synchronization occurs hourly.
 
+**Procedure**
+
 - To adjust the synchronization frequency, edit the value for the `    catalog.providers.rhaap.schedule.frequency` key in the Helm chart.
 
 
 ```
 catalog:              ...              providers:                rhaap:                  '{{- include "catalog.providers.env" . }}':                    schedule:                      frequency: {minutes: 60}                      timeout: {seconds: 30}
 ```
-
-
-
 
 Note
 Increasing the synchronization frequency generates extra traffic.
@@ -942,23 +1150,30 @@ Bear this in mind when deciding the frequency, particularly if you have a large 
 
 
 
+
+
+
 # Chapter 8. Upgrading self-service automation portal
 
 
 
+
+To ensure that your self-service automation portal deployment has the latest features and fixes, you must upgrade the plug-in registry and Helm chart to the latest versions.
 
 ## 8.1. Downloading the plug-in TAR files
 
 
 
 
-The `.tar.gz` files for self-service automation portal are available from the Red Hat Customer Portal.
+Download the latest `.tar.gz` plug-in files for self-service automation portal from the Red Hat Customer Portal.
+
+**Procedure**
 
 1. Create a directory on your local machine to store the files.
 
 
 ```
-$ mkdir /path/to/&lt;automation-portal-plugins-local-dir-changeme&gt;
+$ mkdir /path/to/&lt;automation-portal-plugins&gt;
 ```
 
 
@@ -966,11 +1181,11 @@ $ mkdir /path/to/&lt;automation-portal-plugins-local-dir-changeme&gt;
 
 
 ```
-$ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/&lt;automation-portal-plugins-local-dir-changeme&gt;
+$ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/&lt;automation-portal-plugins&gt;
 ```
 
 
-1. In a browser, navigate to the [Red Hat Ansible Automation Platform Product Software downloads page](https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software) . and select the **Product Software** tab.
+1. Download the setup bundle. In a browser, navigate to the [Red Hat Ansible Automation Platform Product Software downloads page](https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software) . and select the **Product Software** tab.
 1. Click **Download now** next to **Ansible self-service automation portal Setup Bundle** to download the latest version of the plug-ins.
 
 The format of the filename is `    self-service-automation-portal-plugins-x.y.z.tar.gz` .
@@ -1010,6 +1225,8 @@ The files with the `.integrity` file type contain the plugin SHA value.
 
 
 
+To update the plug-in registry, you must upload your plug-in files to OpenShift, and start a new build of the registry.
+
 **Prerequisites**
 
 - You have downloaded the plug-in TAR files for self-service automation portal.
@@ -1027,14 +1244,25 @@ $ oc project &lt;YOUR_SELF_SERVICE_AUTOMATION_PORTAL_PROJECT&gt;
 ```
 
 
-1. Run the following commands to update your plug-in registry build in in your OpenShift project.
-
-The command assumes that `    $DYNAMIC_PLUGIN_ROOT_DIR` represents the directory for your TAR files. Replace this in the command if you have chosen a different environment variable name.
+1. Find the name of your current plug-in registry build configuration:
 
 
 ```
-$ oc start-build plugin-registry --from-dir=$DYNAMIC_PLUGIN_ROOT_DIR --wait
+$ oc get buildconfig
 ```
+
+
+1. From the output, identify the correct build configuration name, for example `    aap-self-service-plugins` .
+1. Run the following command to start a new build in in your OpenShift project.
+
+
+```
+$ oc start-build &lt;build_config_name&gt; --from-dir=$DYNAMIC_PLUGIN_ROOT_DIR --wait
+```
+
+
+- The command assumes that `        $DYNAMIC_PLUGIN_ROOT_DIR` represents the directory for your TAR files. Replace this in the command if you have chosen a different environment variable name.
+- Replace `        &lt;build_config_name&gt;` with the build configuration name you identified.
 
 When the build starts, the following message is displayed:
 
@@ -1050,14 +1278,7 @@ Uploading directory "/path/to/dynamic_plugin_root" as binary input for the build
 
 1. Open the **Topology** view in the **Developer** perspective for your project in the OpenShift web console.
 1. Select the plugin registry icon to open the **plugin-registry** details pane.
-1. In the **Pods** section of the **plugin-registry** details pane, select **View logs** for the `    plugin-registry-#########-####` pod.
-
-![Developer perspective](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Installing_self-service_automation_portal-en-US/images/b1594982a3b39036d9063bb57acc195e/self-service-plugin-registry.png)
-
-
-(1) Plug-in registry
-
-
+1. In the **Pods** section of the **plugin-registry** details pane, select **View logs** for the new build pod. The format for the pod name is `    &lt;build_config_name&gt;-&lt;build_number&gt;-build` .
 1. Click the **terminal** tab and log in to the container.
 1. In the terminal, run `    ls` to view the TAR files in the plugin registry.
 1. Verify that the new TAR files have been uploaded.
@@ -1070,28 +1291,67 @@ Uploading directory "/path/to/dynamic_plugin_root" as binary input for the build
 
 After you have updated your plug-in registry for your self-service automation portal project on your OpenShift Container Platform instance, you must update the Helm chart with the new versions of your plug-ins files.
 
+You can update the Helm chart from the command line using `helm` commands, or from the OpenShift web console.
+
+Note
+For upgrades in air-gapped or disconnected environments, the standard procedure cannot be used directly. You must first mirror the necessary container images to your local registry and prepare the Helm chart for offline use.
+
+For detailed instructions on this process, see the [Installing the self-service automation portal in an air-gapped environment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/installing_self-service_automation_portal/self-service-disconnected-install_aap-self-service-install) section of _ [Installing self-service automation portal](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/installing_self-service_automation_portal) _ .
+
+
+
 **Procedure**
 
-1. In a browser, log in to your OpenShift Container Platform console.
-1. Select your OpenShift project for self-service automation portal.
-1. Select **Helm** and select your Helm chart for self-service automation portal from the list.
+-  **Update the Helm chart from the command line:**
+
+
+1. In a terminal, log in to your OpenShift instance.
+1. Open your OpenShift Project that has your self-service automation portal installation.
+1. Run the following command to ensure your Helm repository is up to date:
+
+
+```
+$ helm repo update
+```
+
+
+1. Find the latest version of the Helm chart:
+
+
+```
+$ helm search repo openshift-helm-charts/redhat-rhaap-portal
+```
+
+
+1. Upgrade the Helm release:
+
+
+```
+$ helm upgrade &lt;release_name&gt; openshift-helm-charts/redhat-rhaap-portal --version &lt;chart_version&gt;
+```
+
+Replace `        &lt;release_name&gt;` with the name of your Helm release and `        &lt;chart_version&gt;` with the new Helm chart version number you identified in the previous step.
+
+
+
+-  **Update the Helm chart using the OpenShift web console:**
+
+
+1. In a browser, log in to your OpenShift Container Platform web console.
+1. Switch to the **Developer** perspective.
+1. Ensure you are in the OpenShift Project that has your self-service automation portal Helm deployment.
+1. From the navigation menu, Select **Helm** .
+1. Find your existing self-service automation portal deployment in the list of **Helm releases** and click its name.
 1. SelectActions→Upgrade.
-1. In the **Upgrade Helm Release** pane, select **YAML view** .
-1. Modify the YAML code to update the versions of the `    .tgz` and `    .integrity` files to match the versions in the plug-in registry:
+1. In the **Upgrade** pane, select the version that you want to upgrade to from the **Chart Version** dropdown list.
+1. Review the YAML configuration to ensure your custom values are preserved.
+1. ClickUpgradeto begin the upgrade.
 
-
-```
-...    global:    ...        plugins:          - disabled: false            integrity: &lt;SHA512 value&gt;            package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz'            pluginConfig:              dynamicPlugins:                frontend:                  ansible.plugin-backstage-rhaap:                    appIcons:                      - importName: AnsibleLogo                        name: AnsibleLogo                    dynamicRoutes:                      - importName: AnsiblePage                        menuItem:                          icon: AnsibleLogo                          text: Ansible                        path: /ansible          - disabled: false            integrity: &lt;SHA512 value&gt;            package: &gt;-              http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz            pluginConfig:              dynamicPlugins:                backend:                  ansible.plugin-scaffolder-backend-module-backstage-rhaap: null          - disabled: false            integrity: &lt;SHA512 value&gt;            package: &gt;-              http://plugin-registry:8080/ansible-plugin-backstage-rhaap-backend-dynamic-x.y.z.tgz            pluginConfig:              dynamicPlugins:                backend:                  ansible.plugin-backstage-rhaap-backend: null
-```
-
-
-1. ClickUpgradeto restart the pods.
 
 
 **Verification**
 
-1. In the OpenShift Container Platform web console, select **Topology** .
-1. Check that the self-service automation portal instance is available.
+After the upgrade completes, verify that the updated self-service automation portal instance is running: . In the OpenShift Container Platform web console, navigate to the **Topology** view for your project. . Check that the self-service automation portal instance is available and that all associated pods are in a **Running** state.
 
 
 # Chapter 9. Telemetry capturing
@@ -1122,6 +1382,8 @@ Red Hat collects and analyses the following data:
 
 You can disable and enable the telemetry data collection feature for self-service automation portal by updating the Helm chart for your OpenShift Container Platform project.
 
+**Procedure**
+
 1. Log in to the OpenShift Container Platform console and open the project for self-service automation portal in the **Developer** perspective.
 1. Navigate to **Helm** .
 1. Click the **More actions ⋮** icon for your self-service automation portal Helm chart and select **Upgrade** .
@@ -1141,18 +1403,18 @@ To re-enable telemetry data collection, delete these lines.
 
 
 
-<span id="idm140182961641984"></span>
+<span id="idm140108972376256"></span>
 # Legal Notice
 
-Copyright© 2025 Red Hat, Inc.
+Copyright© Red Hat.
 The text of and illustrations in this document are licensed by Red Hat under a Creative Commons Attribution–Share Alike 3.0 Unported license ("CC-BY-SA"). An explanation of CC-BY-SA is available at [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/) . In accordance with CC-BY-SA, if you distribute this document or an adaptation of it, you must provide the URL for the original version.
 Red Hat, as the licensor of this document, waives the right to enforce, and agrees not to assert, Section 4d of CC-BY-SA to the fullest extent permitted by applicable law.
-Red Hat, Red Hat Enterprise Linux, the Shadowman logo, the Red Hat logo, JBoss, OpenShift, Fedora, the Infinity logo, and RHCE are trademarks of Red Hat, Inc., registered in the United States and other countries.
+Red Hat, Red Hat Enterprise Linux, the Shadowman logo, JBoss, OpenShift, Fedora, the Infinity logo, and RHCE are trademarks of Red Hat, Inc., registered in the United States and other countries.
 Linux® is the registered trademark of Linus Torvalds in the United States and other countries.
 Java® is a registered trademark of Oracle and/or its affiliates.
 XFS® is a trademark of Silicon Graphics International Corp. or its subsidiaries in the United States and/or other countries.
 MySQL® is a registered trademark of MySQL AB in the United States, the European Union and other countries.
-Node.js® is an official trademark of Joyent. Red Hat is not formally related to or endorsed by the official Joyent Node.js open source or commercial project.
+Node.js® is an official trademark of Joyent. Red Hat Software Collections is not formally related to or endorsed by the official Joyent Node.js open source or commercial project.
 TheOpenStack® Word Mark and OpenStack logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
 All other trademarks are the property of their respective owners.
 

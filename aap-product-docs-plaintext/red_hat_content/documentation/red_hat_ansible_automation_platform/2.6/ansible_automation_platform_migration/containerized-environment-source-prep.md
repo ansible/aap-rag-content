@@ -5,7 +5,7 @@
 
 
 
-Before beginning your migration, document your current containerized deployment. This documentation serves as a reference throughout the migration process and is critical for properly configuring your target environment.
+Document your current containerized deployment configuration, topology, and components to create a comprehensive reference for migration.
 
 **Procedure**
 

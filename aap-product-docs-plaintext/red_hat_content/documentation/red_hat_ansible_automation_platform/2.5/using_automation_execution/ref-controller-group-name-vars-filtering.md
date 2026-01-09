@@ -14,7 +14,7 @@ There are two approaches to executing this filter:
 
 
 
-<span id="idm139889423393760"></span>
+<span id="idm140379294055760"></span>
 **Example 14.1. Example**
 
 The following inventory file defines four hosts and sets group and host variables. It defines a product group, a sustaining group, and it sets two hosts to a shutdown state.

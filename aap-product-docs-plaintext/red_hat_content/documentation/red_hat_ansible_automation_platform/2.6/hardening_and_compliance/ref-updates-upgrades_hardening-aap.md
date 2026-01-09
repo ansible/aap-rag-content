@@ -5,14 +5,14 @@
 
 
 
-All upgrades should be no more than two major versions behind what you are currently upgrading to. For example, to upgrade to automation controller 4.3, you must first be on version 4.1.x because there is no direct upgrade path from version 3.8.x or earlier. Refer to [Upgrading to Ansible Automation Platform](https://docs.ansible.com/automation-controller/latest/html/upgrade-migration-guide/upgrade_considerations.html) for additional information. To run automation controller 4.3, you must also have Ansible 2.12 or later.
+All upgrades should be no more than two major versions behind what you are currently upgrading to. For example, to upgrade to automation controller 4.3, you must first be on version 4.1.x because there is no direct upgrade path from version 3.8.x or earlier. Refer to [Planning your upgrade](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_upgrade) for additional information. To run automation controller 4.3, you must also have Ansible 2.12 or later.
 
 #### 2.4.2.1. Disaster recovery and continuity of operations
 
 
 
 
-Taking regular backups of Ansible Automation Platform is a critical part of disaster recovery planning. Both backups and restores are performed using the installation program, so these actions should be performed from the dedicated installation host described earlier in this document. Refer to the [Backing Up and Restoring](https://docs.ansible.com/automation-controller/latest/html/administration/backup_restore.html) section of the automation controller documentation for further details on how to perform these operations.
+Taking regular backups of Ansible Automation Platform is a critical part of disaster recovery planning. Both backups and restores are performed using the installation program, so these actions should be performed from the dedicated installation host described earlier in this document. Refer to the [Back up and restore](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/controller-backup-and-restore) section of the Configuring automation execution documentation for further details on how to perform these operations.
 
 An important aspect of backups is that they contain a copy of the database as well as the secret key used to decrypt credentials stored in the database, so the backup files should be stored in a secure encrypted location. This means that access to endpoint credentials are protected properly. Access to backups should be limited only to Ansible Automation Platform administrators who have root shell access to automation controller and the dedicated installation host.
 
@@ -28,7 +28,7 @@ Using some redundancy on the system is highly recommended. If the secrets system
 
 To generate a new secret key, perform the following steps:
 
-1. Backup your Ansible Automation Platform database before you do anything else! Follow the procedure described in the [Backing Up and Restoring Controller](https://docs.ansible.com/automation-controller/latest/html/administration/backup_restore.html) section.
+1. Backup your Ansible Automation Platform database before you do anything else! See the [Back up and restore](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/controller-backup-and-restore) section of the Configuring automation execution guide,
 1. Using the inventory from your install (same inventory with which you run backups/restores), run `    setup.sh -k` .
 
 

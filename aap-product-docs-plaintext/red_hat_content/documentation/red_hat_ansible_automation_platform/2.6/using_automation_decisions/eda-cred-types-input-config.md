@@ -1,9 +1,11 @@
 # 3. Credential types
 ## 3.2. Custom credential types
-### 3.2.1. Input Configuration
+### 3.2.1. Input configuration
 
 
 
+
+You can configure the input fields and define which parameters are required when a user creates a credential of this custom type.
 
 The Input configuration has two attributes:
 
@@ -14,7 +16,7 @@ The Input configuration has two attributes:
 Fields can have multiple properties, depending on the credential type you select.
 
 
-<span id="idm139756688267008"></span>
+<span id="idm140618142209792"></span>
 **Table 3.1. Input Configuration Field Properties**
 
 | Fields | Description | Mandatory (Y/N) |

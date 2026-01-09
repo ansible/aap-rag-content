@@ -7,10 +7,12 @@
 
 You can view detailed information for each template in **Top templates** to learn more about the template’s context in the calculation of automation savings.
 
-- Click the **Info** icon for a job template to view template details.
+**Procedure**
 
+1. Click the **Info** icon for a job template to view template details.
 
-**Top template information is provided for the following:**
+Top template information includes the following:
+
 
 -  **Total elapsed sum** - Total run time of the template.
 -  **Success elapsed sum** - Total run time for successful template runs.
@@ -18,5 +20,6 @@ You can view detailed information for each template in **Top templates** to lear
 -  **Automation percentage** - The template accounts for this percentage of automation in your organization.
 -  **Associated organizations** - The template runs against these organizations.
 -  **Associated clusters** - Automation controller clusters the template runs on.
+
 
 

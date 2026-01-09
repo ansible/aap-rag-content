@@ -1,11 +1,11 @@
 # 3. Getting started as an automation developer
-## 3.13. Create and run a rulebook activation
-### 3.13.5. Activating webhook rulebooks
+## 3.14. Create and run a rulebook activation
+### 3.14.5. Activating webhook rulebooks
 
 
 
 
-In Openshift environments, you can allow webhooks to reach an activation-job-pod over a given port by creating a route that exposes that rulebook activation’s Kubernetes service.
+In Openshift environments, you can activate webhooks by creating a route to expose the activation’s service, enabling external systems to send events and trigger automation.
 
 **Prerequisites**
 

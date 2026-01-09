@@ -35,6 +35,6 @@ $ podman images
 ```
 
 
-1. Verify that the execution environment you recently tagged with your automation hub information is contained in the list.
+1. Verify that the execution environment you tagged with your automation hub information is contained in the list.
 
 

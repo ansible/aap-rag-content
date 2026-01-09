@@ -1,11 +1,11 @@
 # 6. Configuring Ansible Automation Platform
 ## 6.2. Platform gateway
-### 6.2.6. = Configuring miscellaneous options
+### 6.2.7. Configuring miscellaneous options
 
 
 
 
-From the platform gateway settings page, you can configure options for Insights, subscriptions and notifications.
+From the platform gateway settings page, you can configure options for Insights, subscriptions, and notifications.
 
 **Procedure**
 
@@ -16,7 +16,7 @@ From the platform gateway settings page, you can configure options for Insights,
 
 
 -  **Insights tracking state** : Enables the service to gather data on automation and send it to Automation Analytics.
--  **Red Hat console URL** : This setting is used to to configure the upload URL for data collection for Automation Analytics.
+-  **Red Hat console URL** : This setting is used to configure the upload URL for data collection for Automation Analytics.
 -  **Red Hat password** : This password is used to send data to Automation Analytics.
 -  **Subscriptions password** : This password is used to retrieve subscription and content information.
 -  **Automation analytics gather interval** : The maximum number of items allowed on a list page.

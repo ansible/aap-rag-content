@@ -5,7 +5,9 @@
 
 
 
-For HTTP and HTTPS proxies you can use a squid server. Squid is a forward proxy for the Web supporting HTTP, HTTPS, and FTP, reducing bandwidth and improving response times by caching and reusing frequently-requested web pages. It is licensed under the GNU GPL. Forward proxies are systems that intercept network traffic going to another network (typically the internet) and send it on the behalf of the internal systems. The squid proxy enables all required communication to pass through it.
+For HTTP and HTTPS proxies you can use a squid server. Squid is a forward proxy for the Web supporting HTTP, HTTPS, and FTP, reducing bandwidth and improving response times by caching and reusing frequently-requested web pages. It is licensed under the GNU GPL.
+
+Forward proxies are systems that intercept network traffic going to another network (typically the internet) and send it on the behalf of the internal systems. The squid proxy enables all required communication to pass through it.
 
 Make sure all the required Ansible Automation Platform control plane ports are opened on the squid proxy backend. Ansible Automation Platform-specific ports:
 

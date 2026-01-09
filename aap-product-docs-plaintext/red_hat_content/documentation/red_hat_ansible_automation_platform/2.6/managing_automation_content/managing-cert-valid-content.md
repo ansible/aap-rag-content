@@ -11,7 +11,7 @@ Red Hat Ansible content contains two types of content:
 - Ansible validated content collections
 
 
-You can use both Ansible Certified Content Collections or Ansible validated content collections to build your automation library. For more information on the differences between Ansible Certified Content Collections and Ansible validated content collections, see the Knowledgebase article [Ansible Certified Content Collections and Ansible validated content](https://access.redhat.com/support/articles/ansible-automation-platform-certified-content) , or [Ansible validated content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/managing_automation_content/managing-cert-valid-content#assembly-validated-content) in this guide.
+With Ansible Certified Content Collections and Ansible validated content collections, you can build your automation library. For more information on the differences between Ansible Certified Content Collections and Ansible validated content collections, see the Knowledgebase article [Ansible Certified Content Collections and Ansible validated content](https://access.redhat.com/support/articles/ansible-automation-platform-certified-content) , or [Ansible validated content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/managing_automation_content/managing-cert-valid-content#assembly-validated-content) in this guide.
 
 You can update these collections manually by downloading their packages.
 

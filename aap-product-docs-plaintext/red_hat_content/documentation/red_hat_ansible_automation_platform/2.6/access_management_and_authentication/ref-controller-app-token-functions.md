@@ -90,7 +90,7 @@ Note
 
 
 
-Alternatively, to revoke OAuth2 tokens, you can use the `manage` utility, see [Revoke oauth2 tokens](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#ref-controller-revoke-oauth2-token) .
+You can also revoke OAuth2 tokens by using the `manage` utility, see [Revoke oauth2 tokens](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#ref-controller-revoke-oauth2-token) .
 
 On success, a response of `200 OK` is displayed. Verify the deletion by checking whether the token is present in the `api/gateway/v1/tokens/` endpoint.
 

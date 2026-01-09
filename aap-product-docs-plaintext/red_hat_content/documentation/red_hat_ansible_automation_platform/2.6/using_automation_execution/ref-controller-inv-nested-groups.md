@@ -5,6 +5,8 @@
 
 
 
+You can create nested groups in your inventory to organize hosts and apply variables at different levels.
+
 A nested group consists of two groups where one is a child of the other. In the following example, the child group has another host inside of it, and the parent group has a variable defined.
 
 Because of the way Ansible core operates, the variable of the parent group is available in the namespace as a playbook is running, and can be used for filtering.

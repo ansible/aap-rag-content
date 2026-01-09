@@ -1,5 +1,5 @@
 # 3. Installing Red Hat Ansible Automation Platform
-## 3.5. Backing up your Ansible Automation Platform instance
+## 3.6. Backing up your Ansible Automation Platform instance
 
 
 

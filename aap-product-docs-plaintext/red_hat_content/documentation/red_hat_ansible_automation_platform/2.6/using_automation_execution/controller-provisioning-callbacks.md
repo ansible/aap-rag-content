@@ -1,5 +1,5 @@
 # 6. Job templates
-## 6.20. Provisioning Callbacks
+## 6.17. Provisioning callbacks
 
 
 
@@ -12,8 +12,7 @@ Provisioning Callbacks are only used to run playbooks on the calling host and ar
 
 New instances with a need for client to server communication for configuration, such as transmitting an authorization key, not to run a job against another host. This provides for automatically configuring the following:
 
-
-- A system after it has been provisioned by another system (such as AWS auto-scaling, or an OS provisioning system like kickstart or preseed).
+- A system after it has been provisioned by another system (such as AWS auto-scaling, or an operating system provisioning system such as Kickstart or preseed).
 - Launching a job programmatically without invoking the automation controller API directly.
 
 

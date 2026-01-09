@@ -47,9 +47,16 @@ append_final:
 - RUN ls -la /etc
 ```
 
+1. Lists default values for build arguments.
+1. Specifies the location of various requirements files.
+1. Specifies the base image to be used. Red Hat support is only provided for the redhat.registry.io base image.
+1. Specifies options that can affect builder runtime functionality.
+1. Commands for additional custom build steps.
+
+
 **Additional resources**
 
-- For more information about the definition file content, see [Breakdown of definition file content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/creating_and_using_execution_environments/index#con-definition-file-breakdown) .
-- To read more about the differences between Ansible Builder versions 2 and 3, see the [Ansible Builder Porting Guide](https://ansible.readthedocs.io/projects/builder/en/latest/porting_guides/porting_guide/) .
+-  [Breakdown of definition file content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/creating_and_using_execution_environments/index#con-definition-file-breakdown)
+-  [Ansible Builder Porting Guide](https://ansible.readthedocs.io/projects/builder/en/latest/porting_guides/porting_guide/)
 
 

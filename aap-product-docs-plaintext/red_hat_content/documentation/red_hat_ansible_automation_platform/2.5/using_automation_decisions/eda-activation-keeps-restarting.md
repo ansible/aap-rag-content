@@ -1,5 +1,5 @@
 # 8. Rulebook activations troubleshooting
-## 8.2. Activation keeps restarting
+## 8.3. Activation keeps restarting
 
 
 

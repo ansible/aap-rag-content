@@ -5,7 +5,7 @@
 
 
 
-Before beginning your migration, document your current RPM deployment. This documentation serves as a reference throughout the migration process and is critical for properly configuring your target environment.
+Before beginning your migration, document your current RPM deployment to use as a reference throughout the migration process and when configuring your target environment.
 
 **Procedure**
 

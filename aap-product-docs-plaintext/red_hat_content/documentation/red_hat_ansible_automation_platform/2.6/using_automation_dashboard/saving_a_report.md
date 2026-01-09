@@ -1,5 +1,6 @@
-# 2. Filter and save automation data for reporting
-## 2.3. Saving a report
+# 1. View key usage metrics with Automation Dashboard
+## 1.5. Filter and save automation data for reporting
+### 1.5.3. Saving a report
 
 
 

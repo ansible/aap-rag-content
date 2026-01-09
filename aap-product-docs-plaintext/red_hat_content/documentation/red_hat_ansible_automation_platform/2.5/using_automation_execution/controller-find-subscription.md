@@ -6,7 +6,7 @@
 
 When you log in to Ansible Automation Platform for the first time, you must add your subscription information.
 
-If you have already added your subscription, you can update your subscription details in the platform by going toSettings→Subscription→Edit subscription.
+If you have already added your subscription, you can update your subscription details in the subscription wizard by going toSettings→Subscription→Edit subscription.
 
 **Prerequisites**
 
@@ -15,7 +15,7 @@ If you have already added your subscription, you can update your subscription de
 
 
 Note
-If you do not have administrative access, you can enter your Red Hat username and password in the Client ID and Client secret fields, respectively, to locate and add your subscription to your Ansible Automation Platform instance.
+If you do not have administrative access, you can enter your Red Hat username and password in the **Username and password** tab to locate and add your subscription to your Ansible Automation Platform instance.
 
 
 
@@ -24,9 +24,9 @@ If you do not have administrative access, you can enter your Red Hat username an
 1. Enter your service account credentials to find the subscription associated with your profile:
 
 
-1. To find your subscription, click the tab labeled **Service Account / Red Hat Satellite** .
-1. In the **Client ID / Satellite username** field enter the client ID you received when you created your service account.
-1. In the **Client secret / Satellite password** field enter the client secret you received when you created your service account. Your subscription appears in the list menu labeled **Subscription** . Select your subscription.
+1. To find your subscription, click the tab labeled **Service Account** .
+1. In the **Client ID** field, enter the client ID you received when you created your service account.
+1. In the **Client secret** field, enter the client secret you received when you created your service account. Your subscription appears in the list menu labeled **Subscription** . Select your subscription.
 
 1. After you have added your subscription, clickNext.
 1. Check the box indicating that you agree to the **End User License Agreement** .

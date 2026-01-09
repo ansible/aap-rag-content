@@ -1,12 +1,23 @@
-# 2. Ansible Automation Platform containerized installation
-## 2.6. Configuring the inventory file
+# 4. Preparing the containerized Ansible Automation Platform installation
+## 4.6. Configuring the inventory file
 
 
 
 
-You can control the installation of Ansible Automation Platform with inventory files. Inventory files define the information needed to customize the installation. For example, host details, certificate details, and various component-specific settings.
+You can control the installation of Ansible Automation Platform with inventory files. Inventory files define the host details, certificate details, and component-specific settings needed to customize the installation.
 
-Example inventory files are available in this document that you can copy and change to quickly get started.
+Example inventory files are available in this document that you can copy and change to get started.
+
+Important
+The inventory file requirements differ based on your installation type:
+
+-  **Online installation** : Requires the `    registry_username` and `    registry_password` variables to authenticate and pull container images from Red Hat registries during installation.
+-  **Disconnected (bundled) installation** : Does not require `    registry_username` or `    registry_password` because all container images are pre-packaged in the bundle. Instead, requires the `    bundle_install=true` and `    bundle_dir` variables.
+
+
+The following inventory file examples are for online installations. For disconnected installation inventory requirements, see [Performing a disconnected installation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-disconnected-installation#perform-disconnected-installation) .
+
+
 
 Additionally, growth topology and enterprise topology inventory files are available in the following locations:
 

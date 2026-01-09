@@ -5,7 +5,7 @@
 
 
 
-Remove specific permissions from a user associated with a resource. Disassociating a role restricts a user’s access to functionalities or data they no longer need.
+Learn how to remove specific permissions from a user associated with a resource. Disassociating a role restricts a user’s access to functionalities or data they no longer need.
 
 **Procedure**
 

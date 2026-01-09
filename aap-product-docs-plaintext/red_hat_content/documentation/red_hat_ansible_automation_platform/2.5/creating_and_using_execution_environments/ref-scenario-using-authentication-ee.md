@@ -29,6 +29,6 @@ prepend_galaxy:
 
 **Additional resources**
 
-- For information regarding the different parts of an automation execution environment definition file, see [Breakdown of definition file content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/creating_and_using_execution_environments/index#con-definition-file-breakdown) .
+-  [Breakdown of definition file content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/creating_and_using_execution_environments/index#con-definition-file-breakdown)
 
 

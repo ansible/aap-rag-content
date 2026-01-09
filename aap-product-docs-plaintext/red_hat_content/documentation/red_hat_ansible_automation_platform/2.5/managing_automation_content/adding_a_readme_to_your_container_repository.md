@@ -1,6 +1,6 @@
 # 3. Manage containers in private automation hub
 ## 3.4. Setting up your container repository
-### 3.4.2. Adding a README to your container repository
+### 3.4.1. Adding a README to your container repository
 
 
 
@@ -22,5 +22,8 @@ Add a README to your container repository to provide instructions to your users 
 1. ClickSavewhen you are finished.
 
 
+**Next steps**
+
 After you add a README, you can edit it at any time by clickingEditand repeating steps 4 and 5.
+
 

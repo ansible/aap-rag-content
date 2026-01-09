@@ -4,7 +4,7 @@
 
 
 
-You must create an event stream credential first before you can use an event stream.
+Create a credential to establish the authentication mechanism (like basic auth or HMAC) required for external systems to securely send events to an event stream.
 
 **Prerequisites**
 

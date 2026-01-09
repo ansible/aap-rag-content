@@ -1,6 +1,6 @@
 # 3. Getting started as an automation developer
-## 3.7. Build and use an execution environment
-### 3.7.3. About container registries
+## 3.8. Build and use an execution environment
+### 3.8.3. About container registries
 
 
 

@@ -1,6 +1,5 @@
-# 2. Ansible Automation Platform containerized installation
-## 2.7. Advanced configuration options
-### 2.7.4. Configuring a HAProxy load balancer
+# 5. Advanced containerized deployment
+## 5.4. Configuring a HAProxy load balancer
 
 
 

@@ -1,9 +1,9 @@
-# Chapter 2. Ansible Automation Platform containerized installation
+# Chapter 1. Containerized Ansible Automation Platform installation
 
 
 
 
-Ansible Automation Platform is a commercial offering that helps teams manage complex multi-tier deployments by adding control, knowledge, and delegation to Ansible-powered environments.
+Containerized Ansible Automation Platform uses Podman to run the platform in containers on Red Hat Enterprise Linux host machines. With this installation method, you manage both the product and infrastructure lifecycle while taking advantage of containerized architecture.
 
-This guide helps you to understand the installation requirements and processes behind the containerized version of Ansible Automation Platform.
+Containerized Ansible Automation Platform runs as rootless containers for enhanced security by default. You can install and operate Ansible Automation Platform with a non-root user account.
 

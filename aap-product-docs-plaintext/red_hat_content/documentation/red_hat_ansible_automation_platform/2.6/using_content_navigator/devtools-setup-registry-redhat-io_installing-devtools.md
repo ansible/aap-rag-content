@@ -45,5 +45,8 @@ $ podman login registry.redhat.io    Username: my_redhat_username    Password: *
 
 
 
-For more information about Red Hat container registry authentication, see [Red Hat Container Registry Authentication](https://access.redhat.com/RegistryAuthentication) on the Red Hat customer portal.
+**Additional resources**
+
+-  [Red Hat Container Registry Authentication](https://access.redhat.com/RegistryAuthentication)
+
 

@@ -7,7 +7,7 @@ The API paginates responses for collections. This means that while a collection 
 
 
 <span id="controller-api-using-pagination"></span>
-When you receive the result for a collection, something similar to the following appears:
+When you receive the result for a collection, something similar to the following is displayed:
 
 
 ```

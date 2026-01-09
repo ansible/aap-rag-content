@@ -1,4 +1,4 @@
-# Chapter 1. Managing Ansible Automation Platform licensing, updates and support
+# Chapter 3. Managing Ansible Automation Platform subscriptions, updates, and support
 
 
 

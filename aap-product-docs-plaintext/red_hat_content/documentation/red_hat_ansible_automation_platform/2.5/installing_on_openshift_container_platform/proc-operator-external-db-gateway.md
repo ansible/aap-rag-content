@@ -1,6 +1,6 @@
-# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 4.1. Configuring platform gateway on Red Hat OpenShift Container Platform web console
-### 4.1.1. Configuring an external database for platform gateway on Red Hat Ansible Automation Platform Operator
+# 5. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 5.1. Configuring platform gateway on Red Hat OpenShift Container Platform web console
+### 5.1.1. Configuring an external database for platform gateway on Red Hat Ansible Automation Platform Operator
 
 
 
@@ -56,6 +56,11 @@ Ansible Automation Platform 2.5 supports PostgreSQL 15.
 apiVersion: v1    kind: Secret    metadata:      name: external-postgres-configuration      namespace: &lt;target_namespace&gt;<span id="CO1-1"><!--Empty--></span><span class="callout">1</span>stringData:      host: "&lt;external_ip_or_url_resolvable_by_the_cluster&gt;"<span id="CO1-2"><!--Empty--></span><span class="callout">2</span>port: "&lt;external_port&gt;"<span id="CO1-3"><!--Empty--></span><span class="callout">3</span>database: "&lt;desired_database_name&gt;"      username: "&lt;username_to_connect_as&gt;"      password: "&lt;password_to_connect_with&gt;"<span id="CO1-4"><!--Empty--></span><span class="callout">4</span>type: "unmanaged"    type: Opaque
 ```
 
+
+1. Namespace to create the secret in. This should be the same namespace you want to deploy to.
+1. The resolvable hostname for your database node.
+1. External port defaults to `        5432` .
+1. Value for variable `        password` should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
 
 1. Apply `    external-postgres-configuration-secret.yml` to your cluster using the `    oc create` command.
 

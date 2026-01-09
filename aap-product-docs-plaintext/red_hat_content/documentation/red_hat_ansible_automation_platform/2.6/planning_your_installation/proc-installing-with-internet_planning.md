@@ -6,7 +6,9 @@
 
 Choose the Red Hat Ansible Automation Platform installer if your Red Hat Enterprise Linux environment is connected to the internet. Installing with internet access retrieves the latest required repositories, packages, and dependencies. Choose one of the following ways to set up your Ansible Automation Platform installer.
 
-**Tarball install**
+**Tarball installation**
+
+**Procedure**
 
 1. Navigate to the [Red Hat Ansible Automation Platform download](https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software) page.
 1. ClickDownload Nowfor the **Ansible Automation Platform <latest-version> Setup** .
@@ -45,29 +47,29 @@ $ tar xvzf aap-bundled-installer.tar.gz
 
 
 
-**RPM install**
+**RPM installation**
 
-1. Install Ansible Automation Platform Installer Package
+Note
+The Ansible Automation Platform RPM installer was deprecated in 2.5 and will be removed in Ansible Automation Platform 2.7. The RPM installer will be supported for RHEL 9 during the lifecycle of Ansible Automation Platform 2.6 to support migrations to existing supported topologies. For more information on upgrade and migration paths, see the [Support matrix for upgrade scenarios](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/planning_your_upgrade/index#upgrade-support-matrix) .
 
-v.2.6 for RHEL 8 for x86_64
 
 
-```
-$ sudo dnf install --enablerepo=ansible-automation-platform-2.5-for-rhel-8-x86_64-rpms ansible-automation-platform-installer
-```
+**Procedure**
+
+1. Install Ansible Automation Platform Installer Package:
 
 v.2.6 for RHEL 9 for x86_64
 
 
 ```
-$ sudo dnf install --enablerepo=ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms ansible-automation-platform-installer
+$ sudo dnf install --enablerepo=ansible-automation-platform-2.6-for-rhel-9-x86_64-rpms ansible-automation-platform-installer
 ```
 
 
 
 
 Note
-`dnf install` enables the repo as the repo is disabled by default.
+`dnf install` enables the repository as the repository is disabled by default.
 
 
 

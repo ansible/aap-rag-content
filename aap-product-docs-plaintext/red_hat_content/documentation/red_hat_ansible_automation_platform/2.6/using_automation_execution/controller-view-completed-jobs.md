@@ -4,6 +4,8 @@
 
 
 
+You can view completed jobs in automation controller to see the status and details of job templates that have run.
+
 The **Jobs** tab provides the list of job templates that have run. Click the expand icon next to each job to view the following details:
 
 - ID and name

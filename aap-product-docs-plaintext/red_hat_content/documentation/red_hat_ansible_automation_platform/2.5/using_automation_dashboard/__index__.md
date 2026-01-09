@@ -3,7 +3,7 @@
 
 Red Hat Customer Content Services
 
-[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_dashboard/index#idm139841256041808)
+[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_dashboard/index#idm140304309825184)
 **Abstract**
 
 This guide describes how to install and configure Automation Dashboard to evaluate automation usage across your environments and the savings associated with it.

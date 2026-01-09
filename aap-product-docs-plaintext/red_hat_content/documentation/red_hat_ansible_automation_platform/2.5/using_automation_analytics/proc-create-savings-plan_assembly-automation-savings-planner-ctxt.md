@@ -4,7 +4,7 @@
 
 
 
-Create an automation savings plan by defining the tasks needed to complete an automation job using the automation savings planner.
+Create an automation savings plan by defining the tasks needed to complete an automation job by using the automation savings planner.
 
 - The details you provide when creating a savings plan, namely the number of hosts and the manual duration, will be used to calculate your savings from automating this plan. See [this section](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_analytics/index#con-review-savings-calculations_assembly-automation-savings-planner-ctxt) for more information.
 
@@ -27,15 +27,15 @@ Create an automation savings plan by defining the tasks needed to complete an au
 1. Rearrange tasks by dragging the item up/down the tasks list.
 1. ClickNext.
 
-
+1. Select a template to link to this plan, then clickSave.
 
 Note
 The task list is for your planning purposes only, and does not currently factor into your automation savings calculation.
 
 
 
-1. Select a template to link to this plan, then clickSave.
-
-
 Your new savings plan is now created and displayed on the automation savings planner list view.
+
+
+
 

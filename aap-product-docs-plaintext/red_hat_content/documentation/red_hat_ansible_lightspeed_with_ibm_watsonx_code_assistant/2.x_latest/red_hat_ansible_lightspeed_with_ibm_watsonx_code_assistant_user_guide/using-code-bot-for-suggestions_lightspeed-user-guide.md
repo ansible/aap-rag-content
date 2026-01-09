@@ -1,4 +1,4 @@
-# Chapter 6. Installing and configuring the Ansible code bot
+# Chapter 7. Installing and configuring the Ansible code bot
 
 
 

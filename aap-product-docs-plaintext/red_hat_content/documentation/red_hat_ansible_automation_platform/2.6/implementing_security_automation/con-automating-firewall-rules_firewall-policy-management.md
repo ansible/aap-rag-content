@@ -13,8 +13,3 @@ Your entire team can use Ansible security automation to address investigations, 
 ![Simplified security lab environment](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Implementing_security_automation-en-US/images/a72895b73b84aa49356c8aae2334eacb/security-lab-environment.png)
 
 
-**Additional resources**
-
-[roles](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#roles)
-
-

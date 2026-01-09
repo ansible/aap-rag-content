@@ -57,4 +57,4 @@ When someone attempts to delete a KMS key intentionally or accidentally, a `Sche
 Ansible validated content for cloud.aws_ops and Event-Driven Ansible create many opportunities for automated issue resolution and observation of cloud computing environments, helping you to easily automate, mitigate security issues, and maximize your mastery of cloud environments. For more information on using rulebooks, see [Validated content for Event-Driven ansible for AWS](https://www.redhat.com/en/blog/ansible-validated-content-with-event-driven-ansible#:~:text=Event%2DDriven%20Ansible%20refers%20to,application%20failures%2C%20or%20security%20breaches) .
 
 
-<span id="idm140080971263536"></span>
+<span id="idm140485706812016"></span>

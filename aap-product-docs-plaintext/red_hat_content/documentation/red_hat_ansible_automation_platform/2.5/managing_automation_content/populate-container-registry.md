@@ -4,17 +4,15 @@
 
 
 
-By default, private automation hub does not include automation execution environments. To populate your container registry, you must push an execution environment to it.
-
 You must follow a specific workflow to populate your private automation hub remote registry:
 
-- Pull automation execution environments from the Red Hat Ecosystem Catalog (registry.redhat.io)
+- Pull automation execution environments from the Red Hat Ecosystem Catalog ( `    registry.redhat.io` )
 - Tag them
 - Push them to your private automation hub remote registry
 
 
 Important
-As of **April 1st, 2025** , `quay.io` is adding three additional endpoints. As a result, customers must adjust the allow/block lists within their firewall systems lists to include the following endpoints:
+As of **April 1st, 2025** , `quay.io` is adding three additional endpoints. As a result, you must adjust the allow/block lists within your firewall systems lists to include the following endpoints:
 
 -  `    cdn04.quay.io`
 -  `    cdn05.quay.io`

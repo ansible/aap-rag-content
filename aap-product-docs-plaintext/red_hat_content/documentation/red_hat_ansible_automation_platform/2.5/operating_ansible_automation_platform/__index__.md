@@ -3,7 +3,7 @@
 
 Red Hat Customer Content Services
 
-[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/operating_ansible_automation_platform/index#idm139942719981840)
+[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/operating_ansible_automation_platform/index#idm139835655152192)
 **Abstract**
 
 This guide provides instructions and guidance on post installation activities for Red Hat Ansible Automation Platform.

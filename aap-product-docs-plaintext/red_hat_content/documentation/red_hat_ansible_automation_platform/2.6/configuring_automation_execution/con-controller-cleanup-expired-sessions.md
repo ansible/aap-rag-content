@@ -5,6 +5,8 @@
 
 
 
+You can remove expired user sessions from automation controller to help maintain system performance.
+
 To remove expired sessions, click the launch![Launch](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/15376a8ac10d1efa9ec8cb3d4c707dfd/rightrocket.png)
 icon beside **Cleanup Expired Sessions** .
 

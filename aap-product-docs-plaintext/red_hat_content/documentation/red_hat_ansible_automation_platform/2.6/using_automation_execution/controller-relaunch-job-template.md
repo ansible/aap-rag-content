@@ -1,9 +1,11 @@
 # 6. Job templates
-## 6.21. Extra variables
-### 6.21.1. Relaunch a job template
+## 6.18. Extra variables
+### 6.18.1. Relaunch a job template
 
 
 
+
+Relaunching a job template creates a new job based on a previous job.
 
 Instead of manually relaunching a job, a relaunch is denoted by setting `launch_type` to `relaunch` . The relaunch behavior deviates from the launch behavior in that it does not inherit `extra_vars` .
 
@@ -12,7 +14,6 @@ Job relaunching does not go through the inherit logic. It uses the same `extra_v
 **Example**
 
 You launch a job template with no `extra_vars` which results in the creation of a job called **j1** . Then you edit the job template and add `extra_vars` (such as adding `"{ "hello": "world" }"` ).
-
 
 Relaunching **j1** results in the creation of **j2** , but because there is no inherit logic and **j1** has no extra_vars, **j2** does not have any `extra_vars` .
 

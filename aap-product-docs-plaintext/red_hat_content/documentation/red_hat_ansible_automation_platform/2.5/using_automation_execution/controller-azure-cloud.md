@@ -1,6 +1,6 @@
 # 6. Job templates
-## 6.19. OpenStack
-### 6.19.3. Azure
+## 6.15. OpenStack
+### 6.15.3. Azure
 
 
 

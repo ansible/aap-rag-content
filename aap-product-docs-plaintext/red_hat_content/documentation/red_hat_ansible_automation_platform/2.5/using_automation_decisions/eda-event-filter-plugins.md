@@ -34,4 +34,3 @@ In this example the data is first passed through the `json_filter` and then thro
 
 Since every event should record the origin of the event the filter `eda.builtin.insert_meta_info` is added automatically by ansible-rulebook to add the `source name` , `type` , and `received_at` . The `received_at` stores a date time in UTC ISO8601 format and includes the microseconds. The `uuid` stores the unique id for the event. The `meta key` is used to store metadata about the event and its needed to correctly report about the events in the aap-server.
 
-

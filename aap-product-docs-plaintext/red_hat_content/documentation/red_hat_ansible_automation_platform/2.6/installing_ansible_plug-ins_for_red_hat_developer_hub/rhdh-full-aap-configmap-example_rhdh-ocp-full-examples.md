@@ -5,6 +5,8 @@
 
 
 
+This example details necessary settings like the creatorService URL, optional integrations for Ansible Automation Platform and OpenShift Dev Spaces, and the addition of Ansible software templates to the catalog.
+
 ```
 kind: ConfigMap
 ...

@@ -1,9 +1,11 @@
 # 2. System requirements
-## 2.6. PostgreSQL requirements
-### 2.6.2. Setting up an external (customer supported) database
+## 2.7. PostgreSQL requirements
+### 2.7.2. Setting up an external database
 
 
 
+
+Red Hat Ansible Automation Platform 2.6 requires the external (customer supported) databases to have ICU support. Use the following procedure to configure an external PostgreSQL compliant database for use with an Ansible Automation Platform component, for example automation controller, Event-Driven Ansible, automation hub, and platform gateway.
 
 Important
 - When using an external database with Ansible Automation Platform, you must create and maintain that database. Ensure that you clear your external database when uninstalling Ansible Automation Platform.
@@ -12,8 +14,6 @@ Important
 
 
 
-
-Red Hat Ansible Automation Platform 2.6 requires the external (customer supported) databases to have ICU support. Use the following procedure to configure an external PostgreSQL compliant database for use with an Ansible Automation Platform component, for example automation controller, Event-Driven Ansible, automation hub, and platform gateway.
 
 **Procedure**
 

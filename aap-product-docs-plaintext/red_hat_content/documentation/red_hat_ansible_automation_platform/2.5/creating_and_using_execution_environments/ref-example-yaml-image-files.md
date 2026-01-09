@@ -4,7 +4,9 @@
 
 
 
-The 'ansible-builder' build command takes an execution environment definition as an input. It outputs the build context necessary for building an execution environment image, and then builds that image. The image can be re-built with the build context elsewhere, and produces the same result. By default, the builder searches for a file named `execution-environment.yml` in the current directory.
+The 'ansible-builder' build command takes an execution environment definition as an input. It outputs the build context necessary for building an execution environment image, and then builds that image.
+
+The image can be re-built with the build context elsewhere, and produces the same result. By default, the builder searches for a file named `execution-environment.yml` in the current directory.
 
 The following example `execution-environment.yml` file can be used as a starting point:
 

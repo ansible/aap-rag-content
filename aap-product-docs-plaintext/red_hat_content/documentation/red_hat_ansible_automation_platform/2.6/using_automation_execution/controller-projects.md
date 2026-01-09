@@ -6,10 +6,10 @@
 A project is a logical collection of Ansible playbooks, represented in automation controller. You can manage playbooks and playbook directories different ways:
 
 - By placing them manually under the Project Base Path on your automation controller server.
-- By placing your playbooks into a source code management (SCM) system supported by the automation controller. These include Git, Subversion, Mercurial and Red Hat Insights.
+- By placing your playbooks into a source code management (SCM) system supported by the automation controller. These include Git, Subversion, Mercurial and Red Hat Lightspeed.
 
 
-For more information on creating a Red Hat Insights project, see [Setting up Red Hat Insights for Red Hat Ansible Automation Platform Remediations](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-setting-up-insights) .
+For more information on creating a Red Hat Lightspeed project, see [Setting up Red Hat Lightspeed Remediations](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-setting-up-insights) .
 
 Note
 The Project Base Path is `/var/lib/awx/projects` . However, this can be modified by the system administrator. It is configured in `/etc/tower/conf.d/custom.py` .

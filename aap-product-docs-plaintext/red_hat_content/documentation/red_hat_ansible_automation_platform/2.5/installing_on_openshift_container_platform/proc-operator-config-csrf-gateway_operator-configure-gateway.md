@@ -1,6 +1,6 @@
-# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 4.1. Configuring platform gateway on Red Hat OpenShift Container Platform web console
-### 4.1.4. Configuring your CSRF settings for your platform gateway Operator ingress
+# 5. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 5.1. Configuring platform gateway on Red Hat OpenShift Container Platform web console
+### 5.1.4. Configuring your CSRF settings for your platform gateway Operator ingress
 
 
 

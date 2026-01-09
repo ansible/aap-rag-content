@@ -8,14 +8,12 @@ You must create a token in Ansible Automation Platform. The token is used in an 
 
 **Procedure**
 
-1. Log in to your instance of Ansible Automation Platform as the `    admin` user.
-1. Navigate toAccess Management→Users.
-1. Select the `    admin` user.
-1. Select the **Tokens** tab
-1. ClickCreate Token.
-1. Select your OAuth application. In the **Scope** menu, select `    Read` .
+1. Log in to your instance of Ansible Automation Platform as a user with Ansible Automation Platform administrator privileges.
+1. Navigate toAccess Management→API Tokensto display the **API Tokens** page.
+1. ClickCreate API Token.
+1. Add a description and select your OAuth application. In the **Scope** menu, select `    Read` .
 
-![Create OAuth token](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Installing_self-service_automation_portal-en-US/images/c8c80a59e8a0c3ea8c7184c7a7eb243f/self-service-generate-oauth-token.png)
+![Create OAuth token](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Installing_self-service_automation_portal-en-US/images/c2f34701c30af9851b4787207f96e175/self-service-generate-oauth-token.png)
 
 
 

@@ -58,7 +58,9 @@ ovirt-engine-sdk-python&gt;=4.4.10
 
 
 
-The `system` entry in the definition points to a [bindep](https://docs.opendev.org/opendev/bindep/latest/readme.html) requirements file or to an inline list of bindep entries, which install system-level dependencies that are outside of what the collections already include as their dependencies. The `system` entry can be listed as a relative path from the directory of the automation execution environment definition’s folder, or as an absolute path. At a minimum, the the collections must specify necessary requirements for `[platform:rpm]` .
+The `system` entry in the definition points to a [bindep](https://docs.opendev.org/opendev/bindep/latest/readme.html) requirements file or to an inline list of bindep entries, which install system-level dependencies that are outside of what the collections already include as their dependencies.
+
+The `system` entry can be listed as a relative path from the directory of the automation execution environment definition’s folder, or as an absolute path. At a minimum, the the collections must specify necessary requirements for `[platform:rpm]` .
 
 To demonstrate this, the following is an example `bindep.txt` file that adds the `libxml2` and `subversion` packages to a container.
 

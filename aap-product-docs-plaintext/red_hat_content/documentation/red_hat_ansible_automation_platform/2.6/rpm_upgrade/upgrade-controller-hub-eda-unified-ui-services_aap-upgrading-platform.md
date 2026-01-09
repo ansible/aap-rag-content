@@ -5,7 +5,7 @@
 
 
 
-If you installed Ansible Automation Platform 2.6 to use Event-Driven Ansible in a supported scenario, you can upgrade your Ansible Automation Platform 2.4 automation controller and automation hub to Ansible Automation Platform 2.6 by following the procedure in this section.
+If you installed Ansible Automation Platform 2.6 to use Event-Driven Ansible in a supported scenario, you can upgrade your Ansible Automation Platform 2.4 automation controller and automation hub to Ansible Automation Platform 2.6 by following this procedure.
 
 **Prerequisites**
 
@@ -66,4 +66,4 @@ The installer upgrades automation controller and automation hub from 2.4 to Ansi
 
 
 
-<span id="idm140548203611184"></span>
+<span id="idm140107837020224"></span>

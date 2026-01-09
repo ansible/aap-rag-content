@@ -1,6 +1,6 @@
-# 5. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
-## 5.1. Overview
-### 5.1.3. Large Language Model (LLM) provider requirements
+# 6. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
+## 6.1. Overview
+### 6.1.3. Large Language Model (LLM) provider requirements
 
 
 
@@ -9,7 +9,10 @@ You must have configured an LLM provider that you will use before deploying the 
 
 An LLM is a type of machine learning model that can interpret and generate human-like language. When an LLM is used with the Ansible Lightspeed intelligent assistant, the LLM can interpret questions accurately and provide helpful answers in a conversational manner.
 
-Ansible Lightspeed intelligent assistant can rely on the following Red Hat LLM providers:
+Ansible Lightspeed intelligent assistant can rely on the following LLM providers:
+
+-  **Red Hat LLM providers:**
+
 
 -  **Red Hat Enterprise Linux AI**
 
@@ -37,6 +40,21 @@ You can deploy an LLM using Red Hat AI Inference Server as your inference runtim
 If the Red Hat AI Inference Server deployment is in a different environment than the Ansible Lightspeed deployment, ensure the model deployment allows access using a secure connection and configure appropriate network routing.
 
 Ansible Lightspeed intelligent assistant supports vLLM Server when self-hosting an LLM with Red Hat AI Inference Server as the inference engine.
+
+
+
+-  **Third-party LLM providers:**
+
+
+-  **OpenAI**
+
+To use OpenAI with the Ansible Lightspeed intelligent assistant, you need access to the [OpenAI API platform](https://openai.com/api/) .
+
+
+-  **Microsoft Azure OpenAI**
+
+To use Microsoft Azure with the Ansible Lightspeed intelligent assistant, you need access to [Microsoft Azure OpenAI](https://azure.microsoft.com/en-us/products/ai-foundry/models/openai/) product page.
+
 
 
 

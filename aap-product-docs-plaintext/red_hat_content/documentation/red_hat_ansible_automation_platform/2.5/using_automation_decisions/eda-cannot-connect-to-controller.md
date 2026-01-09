@@ -1,5 +1,5 @@
 # 8. Rulebook activations troubleshooting
-## 8.4. Cannot connect to the 2.5 automation controller when running activations
+## 8.7. Cannot connect to the 2.5 automation controller when running activations
 
 
 

@@ -1,52 +1,49 @@
 # 10. Patch releases
-## 10.19. Ansible Automation Platform patch release December 3, 2024
-### 10.19.1. Enhancements
+## 10.20. Ansible Automation Platform patch release December 18, 2024
+### 10.20.1. Enhancements
 
 
 
 
-#### 10.19.1.1. Ansible Automation Platform
+#### 10.20.1.1. Ansible Automation Platform
 
 
 
 
-- Red Hat Ansible Lightspeed has been updated to 2.5.241127.(AAP-35307)
--  `    redhat.insights` Ansible collection has been updated to 1.3.0.(AAP-35161)
--  `    ansible.eda` collection has been updated to 2.2.0 in execution environment and decision environment images.(AAP-3398)
+- Added help text to all missing fields in Ansible Automation Platform gateway and `    django-ansible-base` . (AAP-37068)
+- Consistently formatted sentence structure for `    help_text` , and provided more context in the help text where it was vague.(AAP-37016)
+- Added dynamic preferences for usage by Automation Analytics.(AAP-36710)
 
 
-#### 10.19.1.2. Ansible Automation Platform Operator
+-  `        INSIGHTS_TRACKING_STATE` : Enables the service to gather data on automation and send it to Automation Analytics.
+-  `        RED_HAT_CONSOLE_URL` : This setting is used to to configure the upload URL for data collection for Automation Analytics.
+-  `        REDHAT_USERNAME` : Username used to send data to Automation Analytics.
+-  `        REDHAT_PASSWORD` : Password for the account used to send data to Automation Analytics.
+-  `        SUBSCRIPTIONS_USERNAME` : Username is used to retrieve subscription and content information.
+-  `        SUBSCRIPTIONS_PASSWORD` : Password is used to retrieve subscription and content information.
+-  `        AUTOMATION_ANALYTICS_GATHER_INTERVAL` : interval in seconds at which Automation Analytics gathers data.
+
+- Added an enabled flag for turning authenticator maps on or off. (AAP-36709)
+-  `    aap-metrics-utility` has been updated to 0.4.1. (AAP-36393)
+- Added the setting `    trusted_header_timeout_in_ns` to timegate `    X_TRUSTED_PROXY_HEADER` validation in the `    django-ansible-base` libraries used by Ansible Automation Platform components. (AAP-36712)
 
 
-
-
-- With this update, you can set PostgreSQL SSL/TLS mode to `    verify-full` or `    verify-ca` with the proper `    sslrootcert` configuration in the automation hub Operator.(AAP-35368)
-
-
-#### 10.19.1.3. Container-based Ansible Automation Platform
-
-
-
-
-- With this update, `    ID` and `    Image` fields from a container image are used instead of `    Digest` and `    ImageDigest` to trigger a container update.(AAP-36575)
-- With this update, you can now update the registry URL value in Event-Driven Ansible credentials.(AAP-35085)
-- With this update, the `    kernel.keys.maxkeys` and `    kernel.keys.maxbytes` settings are increased on systems with large memory configuration.(AAP-34019)
-- Added `    ansible_connection=local` to the `    inventory-growth file` and clarified its usage.(AAP-34016)
-
-
-#### 10.19.1.4. Documentation updates
+#### 10.20.1.2. Documentation updates
 
 
 
 
-- With this update, the Container growth topology and Container enterprise topology have been updated to include s390x (IBM Z) architecture test support.(AAP-35969)
+- With this update, the Ansible Automation Platform Operator growth topology and Ansible Automation Platform Operator enterprise topology have been updated to include s390x (IBM Z) architecture test support.
 
 
-#### 10.19.1.5. RPM-based Ansible Automation Platform
+#### 10.20.1.3. Event-Driven Ansible
 
 
 
 
-- With this update, you can now update the registry URL value in Event-Driven Ansible credentials.(AAP-35162)
+- Extended the scope of the `    log_level` and debug settings. (AAP-33669)
+- A project can now be synced with the Event-Driven Ansible collection modules. (AAP-32264)
+- In the Rulebook activation create form, selecting a project is now required before selecting a rulebook.(AAP-28082)
+- TheCreate credentialsbutton is now visible irrespective of whether there are any existing credentials or not.(AAP-23707)
 
 

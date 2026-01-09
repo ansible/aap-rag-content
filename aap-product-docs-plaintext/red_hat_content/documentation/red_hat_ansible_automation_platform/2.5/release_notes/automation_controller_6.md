@@ -1,25 +1,25 @@
 # 10. Patch releases
-## 10.6. Ansible Automation Platform patch release June 9, 2025
-### 10.6.3. Automation controller
+## 10.5. Ansible Automation Platform patch release July 30, 2025
+### 10.5.4. Automation controller
 
 
 
 
-#### 10.6.3.1. Enhancements
+#### 10.5.4.1. Enhancements
 
 
 
 
-- Updated license mechanism to allow users to provide username and password when fetching subscriptions via the API and Ansible Automation Platform user interface.(AAP-46797)
+- Update the injectors for the Ansible Automation Platform credential type to work across collection.(AAP-47877)
 
 
-#### 10.6.3.2. Bug Fixes
+#### 10.5.4.2. Bug Fixes
 
 
 
 
-- Fixed an issue where the idle dispatch workers were not recycled based upon age, or after completing the last task. Default maximum age is 4 hours, controlled by `    WORKER_MAX_LIFETIME_SECONDS` setting. Set to None to disable worker recycling.(AAP-45947)
-- Fixed an analytics collector failure to clean up temporary files after failed upload to Hybrid Cloud console.(AAP-45574)
-- Fixed an issue where inventory variables pulled in by update from a source with the option **Overwrite Variables** checked, were not deleted on subsequent updates from the same source when the source no longer contained the variable.(AAP-45571)
+- Removed API version from hard-coded URL in inventory plugin.(AAP-48443)
+- Fixed a **404** error for workflow nodes.(AAP-47362)
+- Fixed an issue where the automation controller pod was not working after an upgrade to `    aap-operator.v2.5.0-0.1750901870` .(AAP-48771)
 
 

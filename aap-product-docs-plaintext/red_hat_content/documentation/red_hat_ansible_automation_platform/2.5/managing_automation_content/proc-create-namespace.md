@@ -1,11 +1,16 @@
 # 2. Managing collections in automation hub
-## 2.1. Using namespaces to manage collections in automation hub
+## 2.1. Managing namespaces
 ### 2.1.2. Creating a namespace
 
 
 
 
 You can create a namespace to organize collections that your content developers upload to automation hub. When creating a namespace, you can assign a team in automation hub as owners of that namespace.
+
+Tip
+By default, namespaces used on Ansible Galaxy are also used on automation hub by the Ansible partner team. For questions, contact [ansiblepartners@redhat.com](mailto:ansiblepartners@redhat.com) .
+
+
 
 **Prerequisites**
 
@@ -14,7 +19,7 @@ You can create a namespace to organize collections that your content developers 
 
 **Procedure**
 
-1. Log in to your Ansible Automation Platform.
+1. Log in to Ansible Automation Platform.
 1. From the navigation panel, selectAutomation Content→Namespaces.
 1. ClickCreate namespaceand enter a **Name** for your namespace.
 1. Optional: enter a description, company, logo URL, resources, or useful links in the appropriate fields.
@@ -28,6 +33,6 @@ You can create a namespace to organize collections that your content developers 
 
 **Next steps**
 
-Your content developers can now upload collections to your new namespace and allow users in teams assigned as owners to upload collections.
+Your content developers can now upload collections to your new namespace. In addition, teams with permissions to upload to the namespace can start adding their collections for approval. Collections in the namespace appear in the **Published** repository after approval.
 
 

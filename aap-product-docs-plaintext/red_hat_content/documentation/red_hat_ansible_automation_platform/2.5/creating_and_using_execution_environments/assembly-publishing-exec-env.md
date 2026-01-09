@@ -3,3 +3,5 @@
 
 
 
+Publish and customize your execution environment images. This procedure guides users in adding custom content, such as a collection, to an existing execution environment image like `ee-minimal` .
+

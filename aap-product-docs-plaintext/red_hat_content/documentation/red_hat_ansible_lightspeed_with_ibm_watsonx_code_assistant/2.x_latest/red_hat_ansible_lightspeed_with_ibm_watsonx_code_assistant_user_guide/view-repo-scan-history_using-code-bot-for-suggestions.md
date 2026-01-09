@@ -1,6 +1,6 @@
-# 6. Installing and configuring the Ansible code bot
-## 6.3. Managing repository scans
-### 6.3.3. Viewing your repository’s scan history
+# 7. Installing and configuring the Ansible code bot
+## 7.3. Managing repository scans
+### 7.3.3. Viewing your repository’s scan history
 
 
 

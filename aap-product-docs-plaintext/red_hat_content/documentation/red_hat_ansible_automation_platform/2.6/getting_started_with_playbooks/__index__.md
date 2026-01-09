@@ -3,7 +3,7 @@
 
 Red Hat Customer Content Services
 
-[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/getting_started_with_playbooks/index#idm140632696142960)
+[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/getting_started_with_playbooks/index#idm140488242090816)
 **Abstract**
 
 This guide shows how to create and use playbooks to address your automation requirements.

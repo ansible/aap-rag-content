@@ -1,10 +1,12 @@
-# 2. Use a Playbook to establish a connection to a managed node
+# 2. Use a playbook to establish a connection to a managed node
 ## 2.3. Gather facts from network devices
 
 
 
 
-The `gather_facts` keyword supports gathering network device facts in standardized key/value pairs. You can feed these network facts into further tasks to manage the network device. You can also use the `gather_network_resources` parameter with the network `*_facts` modules (such as `arista.eos.eos_facts` ) to return a subset of the device configuration, as shown below.
+The `gather_facts` keyword supports gathering network device facts in standardized key/value pairs. You can feed these network facts into further tasks to manage the network device.
+
+You can also use the `gather_network_resources` parameter with the network `*_facts` modules (such as `arista.eos.eos_facts` ) to return a subset of the device configuration, as the following example shows:
 
 ```
 - hosts: arista
@@ -55,6 +57,4 @@ Note
 `gather_network_resources` renders configuration data as facts for all supported resources ( `interfaces/bgp/ospf/etc`` ), whereas `gather_subset` is primarily used to fetch operational data.
 
 
-
-You can store these facts and use them directly in another task, such as with the [eos_interfaces](https://docs.ansible.com/ansible/latest/collections/arista/eos/eos_interfaces_module.html#ansible-collections-arista-eos-eos-interfaces-module) resource module.
 

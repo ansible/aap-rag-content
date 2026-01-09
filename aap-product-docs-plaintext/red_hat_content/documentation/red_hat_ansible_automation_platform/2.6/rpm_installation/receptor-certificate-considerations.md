@@ -1,6 +1,6 @@
 # 2. System requirements
-## 2.6. PostgreSQL requirements
-### 2.6.5. Receptor certificate considerations
+## 2.7. PostgreSQL requirements
+### 2.7.5. Receptor certificate considerations
 
 
 

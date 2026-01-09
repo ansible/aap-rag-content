@@ -16,7 +16,7 @@ You can deregister custom self-service templates. Deregistering templates delete
 1. Click a custom self-service template to open the **Template detail** view. The navigation bar contains the **Unregister Template** option.
 1. Click **Unregister Template** .
 
-![Unregister template option](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_self-service_automation_portal-en-US/images/6f501bebe735057b78a3640bbac2fe66/self-service-unregister-template.png)
+![Unregister template option](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_self-service_automation_portal-en-US/images/724985d8896124ec67c93bad5907798d/self-service-unregister-template.png)
 
 
 

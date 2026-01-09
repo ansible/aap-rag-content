@@ -117,7 +117,7 @@ HostPath volumes present many security risks, and it is best practice to avoid t
 
 **Ignore Ansible Galaxy SSL Certificate Verification** : If set to `        true` , certificate validation is not done when installing content from any Galaxy server.
 
-Click the tooltip![Tool tip](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/0c17081b1d1293156a760e9a6e06634a/question_circle.png)
+Click the tooltip![tooltip](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/0c17081b1d1293156a760e9a6e06634a/question_circle.png)
 icon next to the field that you need additional information about.
 
 For more information about configuring Galaxy settings, see the [Ansible Galaxy Support](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-projects#ref-projects-galaxy-support) section of _Using automation execution_ .

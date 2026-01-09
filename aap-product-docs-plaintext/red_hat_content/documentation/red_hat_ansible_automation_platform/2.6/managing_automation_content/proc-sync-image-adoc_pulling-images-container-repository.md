@@ -5,7 +5,7 @@
 
 
 
-You can pull automation execution environments from the automation hub remote registry to sync an image to your local machine. To sync an automation execution environment from a remote registry, you must first configure a remote registry.
+You can pull automation execution environments from the private automation hub remote registry to sync an image to your local machine. To sync an execution environment from a remote registry, you must first configure a remote registry.
 
 **Prerequisites**
 
@@ -15,7 +15,7 @@ You must have permission to view and pull from a private container repository.
 **Procedure**
 
 1. From the navigation panel, selectAutomation Content→Execution Environments.
-1. Add [https://registry.redhat.io](https://registry.redhat.io) to the registry.
+1. Add `    <a class="link" href="https://registry.redhat.io">https://registry.redhat.io</a>` to the registry.
 1. Add any required credentials to authenticate.
 
 Note
@@ -34,12 +34,12 @@ The **Upstream name** field is the name of the image on the remote server. For e
 
 
 
-1. Set a list of tags to include or exclude. Syncing automation execution environments with a large number of tags is time consuming and uses a lot of disk space.
+1. Set a list of tags to include or exclude. Note that syncing automation execution environments with a large number of tags is time consuming and uses a lot of disk space.
 
 
 **Additional resources**
 
-- See [Red Hat Container Registry Authentication](https://access.redhat.com/RegistryAuthentication) for a list of registries.
-- See the [What is Podman?](http://docs.podman.io/en/latest/index.html) documentation for options to use when pulling images.
+-  [Red Hat Container Registry Authentication](https://access.redhat.com/RegistryAuthentication)
+-  [What is Podman?](http://docs.podman.io/en/latest/index.html)
 
 

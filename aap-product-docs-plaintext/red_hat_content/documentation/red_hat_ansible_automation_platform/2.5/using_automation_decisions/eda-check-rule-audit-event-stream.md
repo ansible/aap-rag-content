@@ -1,5 +1,5 @@
 # 10. Simplified event routing
-## 10.8. Check the Rule Audit for events on your new event stream
+## 10.9. Check the Rule Audit for events on your new event stream
 
 
 

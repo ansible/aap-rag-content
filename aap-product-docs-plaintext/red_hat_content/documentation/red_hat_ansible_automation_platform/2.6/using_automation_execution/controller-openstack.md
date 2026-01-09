@@ -4,6 +4,8 @@
 
 
 
+The OpenStack inventory plugin integrates with OpenStack clouds to dynamically generate Ansible inventories based on the current state of the cloud resources.
+
 ```
 expand_hostvars: true
 fail_on_errors: true

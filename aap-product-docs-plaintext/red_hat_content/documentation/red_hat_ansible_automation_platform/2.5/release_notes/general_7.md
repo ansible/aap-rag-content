@@ -1,13 +1,11 @@
 # 10. Patch releases
-## 10.8. Ansible Automation Platform patch release May 7, 2025
+## 10.8. Ansible Automation Platform patch release June 9, 2025
 ### 10.8.1. General
 
 
 
 
-- Implemented GitHub application credential type.(AAP-38589)
-- The `    ansible.platform` collection has been updated to 2.5.20250507.(AAP-44992)
-- The `    ansible.controller` collection has been updated to 4.6.12.
-- The `    ansible.eda` collection has been updated to 2.7.0.
+- The `    ansible.controller` collection has been updated to 4.6.14 (AAP-46562)
+- The `    ansible.platform` collection has been updated to 2.5.20250604 (AAP-46552)
 
 

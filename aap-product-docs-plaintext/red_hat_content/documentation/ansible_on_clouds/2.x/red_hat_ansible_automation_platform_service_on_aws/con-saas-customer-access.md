@@ -1,6 +1,6 @@
 # 5. Red Hat Ansible Automation Platform Service on AWS Service Definition
 ## 5.2. Control plane
-### 5.2.1. Customer access
+### 5.2.2. Customer access
 
 
 

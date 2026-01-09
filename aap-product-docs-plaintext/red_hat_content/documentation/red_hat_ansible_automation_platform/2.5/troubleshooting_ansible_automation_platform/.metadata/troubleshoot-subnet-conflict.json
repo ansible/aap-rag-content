@@ -1,5 +1,5 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/troubleshooting_ansible_automation_platform/index#troubleshoot-subnet-conflict",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.5/html-single/troubleshooting_ansible_automation_platform/index",
-  "title": "Issue - The default subnet used in Ansible Automation Platform containers conflicts with the internal network"
+  "title": "Issue - Container subnet conflicts with internal network"
 }

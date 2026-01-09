@@ -44,7 +44,7 @@ You can define custom groups in the inventory file by naming groups with `instan
 The current behavior expects a member of an `instance_group_*` to be part of `automationcontroller` or `execution_nodes` group.
 
 
-<span id="idm139889427950304"></span>
+<span id="idm140379249566336"></span>
 **Example 18.1. Define instance groups**
 
 ```
@@ -697,6 +697,11 @@ The control nodes run in the cluster connect and submit work to the execution no
 
 These execution nodes are registered in automation controller as type `execution` instances, meaning they are only used to run jobs, not dispatch work or handle web requests as control nodes do.
 
+Important
+When creating an execution node, make sure the system timezone on the execution node matches `settings.TIME_ZONE` (default is 'UTC') on automation controller. Fact caching relies on comparing modified times of artifact files, and these modified times are not timezone-aware. Therefore, it is critical that the timezones of the execution nodes match automation controller’s timezone setting.
+
+
+
 **Hop nodes** can be added to sit between the control plane of automation controller and standalone execution nodes. These hop nodes are not part of the Kubernetes cluster and are registered in automation controller as an instance of type `hop` , meaning they only handle inbound and outbound traffic for otherwise unreachable nodes in different or more strict networks.
 
 The following procedure demonstrates how to set the node type for the hosts.
@@ -995,7 +1000,7 @@ The content of `requirements.yml` :
 ```
 ---
 collections:
-- name: awx.awx
+- name: kubernetes.core
 ```
 
 To build an execution environment using the preceding files and run the following command:
@@ -1003,7 +1008,7 @@ To build an execution environment using the preceding files and run the followin
 ```
 ansible-builder build
 ...
-STEP 7: COMMIT my-awx-ee
+STEP 7: COMMIT my-custom-ee
 --&gt; 09c930f5f6a
 09c930f5f6ac329b7ddb321b144a029dbbfcc83bdfc77103968b7f6cdfc7bea2
 Complete! The build context can be found at: context
@@ -1297,7 +1302,7 @@ Note
 When using an `ansible.cfg` file to pass a token and other settings for a private account to an automation hub server, listing the configuration file path here as a string enables it to be included as a build argument in the initial phase of the build. |
 
 
-### 21.2.2. additional_build_steps
+## 21.3. additional_build_steps
 
 
 
@@ -1319,7 +1324,7 @@ The following are the valid keys. Each supports either a multi-line string, or a
 |  **prepend_galaxy** | Commands to insert before building of the galaxy image. |
 
 
-### 21.2.3. build_arg_defaults
+### 21.3.1. build_arg_defaults
 
 
 
@@ -1342,7 +1347,7 @@ Ansible Builder hard-codes values given inside of `build_arg_defaults` into the 
 
 If you specify the same variable in the definition and at the command line with the CLI `build-arg` flag, the CLI value overrides the value in the definition.
 
-### 21.2.4. Dependencies
+### 21.3.2. Dependencies
 
 
 
@@ -1453,7 +1458,7 @@ The `--sanitize` option reviews all of the collection requirements and removes d
 
 Use the `-v3` option to `introspect` to see logging messages about requirements that are being excluded.
 
-### 21.2.5. images
+### 21.3.3. images
 
 
 
@@ -1468,7 +1473,7 @@ A `name` key must be supplied with the container image to use. Use the `signatur
 | --- | --- |
 
 
-### 21.2.6. Image verification
+### 21.3.4. Image verification
 
 
 
@@ -1482,7 +1487,7 @@ Set the `container-policy` CLI option to control how this data is used in relati
 -  ** `    signature_required` ** policy: `    ansible-builder` uses the container image definitions to generate a `    policy.json` file in the build `    context directory &lt;context&gt;` that is used during the build to validate the images.
 
 
-### 21.2.7. options
+### 21.3.5. options
 
 
 
@@ -1498,17 +1503,9 @@ Valid keys are:
 
 -  **cmd** : Literal value for the `        CMD` Containerfile directive. The default value is `        ["bash"]` .
 -  **entrypoint** : Literal value for the `        ENTRYPOINT` Containerfile directive. The default entrypoint behavior handles signal propagation to subprocesses, as well as attempting to ensure at runtime that the container user has a proper environment with a valid writeable home directory, represented in `        /etc/passwd` , with the `        HOME` environment variable set to match. The default entrypoint script can emit warnings to `        stderr` in cases where it is unable to suitably adjust the user runtime environment. This behavior can be ignored or elevated to a fatal error; consult the source for the `        entrypoint` target script for more details.
-
-The default value is `        ["/opt/builder/bin/entrypoint", "dumb-init"]` .
-
-
 -  **package_pip** : Package to install with pip for entrypoint support. This package is installed in the final build image.
 
-The default value is `        dumb-init==1.2.5` .
-
-
-
--  **package_manager_path** : string with the path to the package manager (dnf or microdnf) to use. The default is `    /usr/bin/dnf` . This value is used to install a Python interpreter, if specified in `    dependencies` , and during the build phase by the `    assemble` script.
+-  **package_manager_path** : string with the path to the package manager (dnf or microdnf) to use. This value is used to install packages.
 -  **skip_ansible_check** : This boolean value controls whether or not the check for an installation of Ansible and Ansible Runner is performed on the final image.
 
 Set this value to `    True` to not perform this check.
@@ -1549,7 +1546,7 @@ user: bob
 ```
 
 
-### 21.2.8. version
+### 21.3.6. version
 
 
 
@@ -1560,7 +1557,7 @@ Defaults to `1` .
 
 The value must be `3` if you are using Ansible Builder 3.x.
 
-## 21.3. Default execution environment for AWX
+## 21.4. Default execution environment for AWX
 
 
 
@@ -1894,7 +1891,7 @@ GCE credentials require the following information:
 
 -  **Service Account Email Address** : The email address assigned to the Google Compute Engine **service account** .
 - Optional: **Project** : Provide the GCE assigned identification or the unique project ID that you provided at project creation time.
-- Optional: **Service Account JSON File** : Upload a GCE service account file. ClickBrowseto browse for the file that has the special account information that can be used by services and applications running on your GCE instance to interact with other Google Cloud Platform APIs. This grants permissions to the service account and virtual machine instances.
+- Optional: **Service Account JSON File** : Upload a GCE service account file. ClickBrowseto browse for the file that has the special account information that can be used by services and applications running on your GCE instance to interact with other Google Cloud APIs. This grants permissions to the service account and virtual machine instances.
 -  **RSA Private Key** : The PEM file associated with the service account email.
 
 
@@ -4022,7 +4019,7 @@ For a Continuous Integration system, such as Jenkins, to spawn a job, it must ma
 See also, **Node** .
 
 
-<span id="idm139889444421904"></span>
+<span id="idm140379247425040"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

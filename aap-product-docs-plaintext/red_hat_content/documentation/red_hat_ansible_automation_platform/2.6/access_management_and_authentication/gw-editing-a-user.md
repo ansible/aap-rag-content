@@ -5,7 +5,7 @@
 
 
 
-You can modify the properties of a user account after it is created.
+You can change the properties of a user account after it is created.
 
 To see whether a user had service level auditor privileges, you must refer to the API.
 
@@ -19,7 +19,7 @@ After upgrading to 2.6, users previously designated as automation controller adm
 1. From the navigation panel, selectAccess Management→Users.
 1. Click the **Pencil** ![Edit page](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Access_management_and_authentication-en-US/images/e5cb7f9b0cfe60ab5ba421bd17ecbb6a/leftpencil.png)
 icon next to the user you want to edit and select **Edit user** .
-1. The **Edit** user page is displayed where you can modify user details such as **Password** , **Email** , **User type** , and **Organization** .
+1. The **Edit** user page is displayed where you can change user details such as **Password** , **Email** , **User type** , and **Organization** .
 1. After your changes are complete, click **Save user** .
 
 

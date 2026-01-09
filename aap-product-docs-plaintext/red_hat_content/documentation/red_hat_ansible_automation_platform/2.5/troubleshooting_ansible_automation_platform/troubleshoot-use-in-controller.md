@@ -1,5 +1,5 @@
 # 4. Execution environments
-## 4.1. Issue - Cannot select the "Use in Controller" option for execution environment image on private automation hub
+## 4.1. Issue - Cannot select "Use in Controller" for execution environment on private automation hub
 
 
 

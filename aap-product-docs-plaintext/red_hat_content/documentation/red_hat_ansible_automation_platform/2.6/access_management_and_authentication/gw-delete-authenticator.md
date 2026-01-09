@@ -5,7 +5,7 @@
 
 
 
-You can modify the settings of previously configured authenticators from the **Authentication** list view.
+You can change the settings of previously configured authenticators from the **Authentication** list view.
 
 **Procedure**
 
@@ -14,7 +14,7 @@ You can modify the settings of previously configured authenticators from the **A
 1. Select **Delete authentication** from the **⋮** list.
 
 Note
-You can delete multiple authenticators by selecting the checkbox next to each authenticator you want to remove, and clicking **Delete selected authentication** from the **⋮** list on the menu bar.
+You can delete many authenticators by selecting the checkbox next to each authenticator you want to remove, and clicking **Delete selected authentication** from the **⋮** list on the menu bar.
 
 
 

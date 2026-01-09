@@ -1,6 +1,6 @@
 # 3. Installing Red Hat Ansible Automation Platform
-## 3.2. Inventory file examples based on installation scenarios
-### 3.2.1. Inventory file recommendations based on installation scenarios
+## 3.3. Inventory file examples based on installation scenarios
+### 3.3.1. Inventory file recommendations based on installation scenarios
 
 
 
@@ -14,13 +14,14 @@ The FQDN must not contain either the `    -` or the `    _` symbols, as it will 
 Do not use `    localhost` .
 
 
+- The `    [database]` group in the inventory file defines an Ansible Automation Platform managed database. When using an externally managed database, do not include the `    [database]` group in your inventory file. For more information, see [Setting up an external database](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/platform-system-requirements#proc-setup-postgresql-ext-database_licensing-gw) .
 -  `    admin` is the default user ID for the initial log in to Ansible Automation Platform and cannot be changed in the inventory file.
 - Use of special characters for `    pg_password` is limited. The `    !` , `    #` , `    0` and `    @` characters are supported. Use of other special characters can cause the setup to fail.
 - Enter your Red Hat Registry Service Account credentials in `    registry_username` and `    registry_password` to link to the Red Hat container registry.
 - The inventory file variables `    registry_username` and `    registry_password` are only required if a non-bundle installer is used.
 
 
-#### 3.2.1.1. Single platform gateway and automation controller with an external (installer managed) database
+#### 3.3.1.1. Single platform gateway and automation controller with an external (installer managed) database
 
 
 
@@ -82,7 +83,7 @@ automationgateway_pg_sslmode='prefer'
 # postgres_ssl_key=/path/to/pgsql.key
 ```
 
-#### 3.2.1.2. Single platform gateway, automation controller, and automation hub with an external (installer managed) database
+#### 3.3.1.2. Single platform gateway, automation controller, and automation hub with an external (installer managed) database
 
 
 
@@ -171,7 +172,7 @@ automationgateway_pg_sslmode='prefer'
 # postgres_ssl_key=/path/to/pgsql.key
 ```
 
-#### 3.2.1.3. Single platform gateway, automation controller, automation hub, and Event-Driven Ansible controller with an external (installer managed) database
+#### 3.3.1.3. Single platform gateway, automation controller, automation hub, and Event-Driven Ansible controller with an external (installer managed) database
 
 
 
@@ -304,7 +305,7 @@ automationgateway_pg_sslmode='prefer'
 For more information about these inventory variables, see [Ansible automation hub variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#hub-variables) in the _Red Hat Ansible Automation Platform Installation Guide_ .
 
 
-#### 3.2.1.4. High availability automation hub
+#### 3.3.1.4. High availability automation hub
 
 
 
@@ -354,11 +355,11 @@ USE_X_FORWARDED_HOST = True
 ```
 
 Note
-If `automationhub_main_url` is not specified, the first node in the [automationhub] group will be used as default.
+If you are using a load balancer, configure `automationgateway_main_url` to point to your load balancer. If `automationgateway_main_url` is not specified, the first node in the [automationgateway] group will be used as default.
 
 
 
-#### 3.2.1.5. Enabling a high availability (HA) deployment of automation hub on SELinux
+#### 3.3.1.5. Enabling a high availability (HA) deployment of automation hub on SELinux
 
 
 
@@ -455,7 +456,7 @@ $ setup.sh -- -b --become-user root
 - See the [Filesystem Layout](https://docs.pulpproject.org/pulpcore/installation/hardware-requirements.html#filesystem-layout) for a full description of Pulp folders.
 
 
-##### 3.2.1.5.1. Configuring pulpcore.service
+##### 3.3.1.5.1. Configuring pulpcore.service
 
 
 
@@ -517,7 +518,7 @@ $ chcon system_u:object_r:pulpcore_etc_t:s0 /etc/pulp/certs/token_{private,publi
 
 Repeat this command to reattach the proper SELinux labels whenever you relabel your system.
 
-##### 3.2.1.5.2. Applying the SELinux context
+##### 3.3.1.5.2. Applying the SELinux context
 
 
 
@@ -568,7 +569,7 @@ $ mount -a
 
 
 
-#### 3.2.1.6. Configuring content signing on private automation hub
+#### 3.3.1.6. Configuring content signing on private automation hub
 
 
 
@@ -599,10 +600,7 @@ The script prints out a JSON structure with the following format.
 
 All the file names are relative paths inside the current working directory. The file name must remain the same for the detached signature.
 
-**Example:**
-
-The following script produces signatures for content:
-
+**Example:** The following script produces signatures for content:
 
 
 ```
@@ -624,7 +622,7 @@ The two new keys ( **automationhub_auto_sign_collections** and **automationhub_r
 
 
 
-#### 3.2.1.7. Adding a safe plugin variable to Event-Driven Ansible controller
+#### 3.3.1.7. Adding a safe plugin variable to Event-Driven Ansible controller
 
 
 

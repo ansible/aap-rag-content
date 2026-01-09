@@ -1,5 +1,5 @@
 # 10. Simplified event routing
-## 10.7. Resending webhook data from your event stream type
+## 10.8. Resending webhook data from your event stream type
 
 
 

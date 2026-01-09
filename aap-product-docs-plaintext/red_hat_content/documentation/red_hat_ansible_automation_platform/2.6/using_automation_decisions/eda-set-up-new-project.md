@@ -4,12 +4,12 @@
 
 
 
-You can set up projects to manage and store your rulebooks in Event-Driven Ansible controller.
+Set up a project to connect Event-Driven Ansible controller to a Git repository, enabling it to pull, sync, and manage the rulebooks used by your automation.
 
 **Prerequisites**
 
 - You are logged in to the Ansible Automation Platform Dashboard as a Content Consumer.
-- You have set up a credential, if necessary. For more information, see the [Setting up credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_decisions/eda-credentials#eda-set-up-credential) [Setting up credentials] section.
+- You have set up a credential, if necessary. For more information, see the [Setting up credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_decisions/eda-credentials#eda-set-up-credential) section.
 - You have an existing repository containing rulebooks.
 
 

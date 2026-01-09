@@ -1,5 +1,5 @@
 # 10. Simplified event routing
-## 10.5. Verifying your event streams work
+## 10.6. Verifying your event streams work
 
 
 

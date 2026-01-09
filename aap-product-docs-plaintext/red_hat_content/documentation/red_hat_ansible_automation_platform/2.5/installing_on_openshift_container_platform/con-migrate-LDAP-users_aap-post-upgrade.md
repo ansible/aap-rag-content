@@ -1,6 +1,6 @@
-# 8. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 8.7. Ansible Automation Platform post-upgrade steps
-### 8.7.6. Migrating LDAP users
+# 9. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 9.7. Ansible Automation Platform post-upgrade steps
+### 9.7.6. Migrating LDAP users
 
 
 
@@ -13,7 +13,7 @@ There are two primary scenarios for migrating users from legacy authentication s
 1. Migration to LDAP without account linking
 
 
-#### 8.7.6.1. Key considerations
+#### 9.7.6.1. Key considerations
 
 
 
@@ -24,7 +24,7 @@ There are two primary scenarios for migrating users from legacy authentication s
 
 **Do not log in using legacy LDAP authentication if you do not have a user account in the platform prior to the upgrade:** Instead, you must [auto migrate directly to LDAP without linking accounts](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#proc-migrate-LDAP-users) .
 
-#### 8.7.6.2. Legacy user login and account linking
+#### 9.7.6.2. Legacy user login and account linking
 
 
 
@@ -35,7 +35,7 @@ After successful account linking, user accounts from both components are merged 
 
 For more information about account linking, see [Linking your accounts](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_upgrade_and_migration/aap-post-upgrade#account-linking_aap-post-upgrade) .
 
-#### 8.7.6.3. Migrating LDAP users without account linking
+#### 9.7.6.3. Migrating LDAP users without account linking
 
 
 

@@ -1,11 +1,11 @@
 # 6. Job templates
-## 6.20. Provisioning Callbacks
-### 6.20.2. Using REST manually to callback
+## 6.17. Provisioning callbacks
+### 6.17.2. Using REST manually to callback
 
 
 
 
-To callback manually using REST:
+You can use REST to callback manually.
 
 **Procedure**
 
@@ -56,7 +56,7 @@ OPTIONS:
 This script can retry commands and is therefore a more robust way to use callbacks than a simple `curl` request. The script retries once per minute for up to ten minutes.
 
 Note
-This is an example script. Edit this script if you need more dynamic behavior when detecting failure scenarios, as any non-200 error code may not be a transient error requiring retry.
+This is an example script. Edit this script if you need more dynamic behavior when detecting failure scenarios, as any non-200 error code might not be a transient error requiring retry.
 
 
 

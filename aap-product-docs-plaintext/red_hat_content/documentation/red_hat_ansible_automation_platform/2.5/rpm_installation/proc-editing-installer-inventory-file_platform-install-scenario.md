@@ -1,5 +1,5 @@
 # 3. Installing Red Hat Ansible Automation Platform
-## 3.1. Editing the Red Hat Ansible Automation Platform installer inventory file
+## 3.2. Editing the Red Hat Ansible Automation Platform installer inventory file
 
 
 

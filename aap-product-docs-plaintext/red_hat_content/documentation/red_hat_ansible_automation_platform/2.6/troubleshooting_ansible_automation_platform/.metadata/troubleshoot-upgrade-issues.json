@@ -1,5 +1,5 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/troubleshooting_ansible_automation_platform/index#troubleshoot-upgrade-issues",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.6/html-single/troubleshooting_ansible_automation_platform/index",
-  "title": "Issue - When upgrading from Ansible Automation Platform 2.4 to 2.6, connections to the automation controller API fail if the automation controller is behind a load balancer"
+  "title": "Issue - automation controller API connection fails after upgrade with load balancer"
 }

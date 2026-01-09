@@ -1,6 +1,6 @@
-# 2. Ansible Automation Platform containerized installation
-## 2.6. Configuring the inventory file
-### 2.6.2. Inventory file for online installation for containerized enterprise topology
+# 4. Preparing the containerized Ansible Automation Platform installation
+## 4.6. Configuring the inventory file
+### 4.6.2. Inventory file for online installation for containerized enterprise topology
 
 
 

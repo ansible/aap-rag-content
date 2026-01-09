@@ -5,6 +5,8 @@
 
 
 
+You can create an inventory that uses Ansible facts to populate host variables.
+
 To create an inventory with Ansible facts, you must run a playbook against the inventory that has the setting `gather_facts: true` . The facts differ system-to-system. The following examples are not intended to address all known scenarios.
 
 #### 14.2.4.1. Filter on environment variables
@@ -12,7 +14,7 @@ To create an inventory with Ansible facts, you must run a playbook against the i
 
 
 
-The following example involves filtering on environmental variables using the YAML format:
+You can filter hosts in an inventory by using the `ansible_env` variable in a constructed inventory plugin.
 
 ```
 source_vars:
@@ -29,6 +31,8 @@ limit: hosts_using_xterm
 
 
 
+
+You can create a constructed inventory that filters hosts by CPU type by using the `ansible_processor` fact.
 
 The following example involves filtering hosts by processor type (Intel) using the YAML format:
 

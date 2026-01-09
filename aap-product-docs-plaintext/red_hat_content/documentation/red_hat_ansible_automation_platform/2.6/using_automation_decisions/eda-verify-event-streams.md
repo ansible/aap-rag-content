@@ -1,18 +1,15 @@
 # 10. Simplified event routing
-## 10.5. Verifying your event streams work
+## 10.7. Verifying your event streams work
 
 
 
 
-Verify that you can use your event stream to connect to a remote system and receive data.
+Confirm end-to-end event flow by verifying the event stream receives data from the remote system, validating the webhook URL and authentication setup.
 
 1. Log in to Ansible Automation Platform.
 1. From the navigation panel, selectAutomation Decisions→Event Streams.
 1. Select the event stream that you created to validate connectivity and ensure that the event stream sends data to the rulebook activation.
 1. Verify that the events were received. The number of **Events received** is displayed along with a header that contains details about the event.
-
-![Verify event streams work](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_decisions-en-US/images/81d7279d43ce002cec83527582737ca3/eda-verify-event-streams.png)
-
 
 If you scroll down in the UI, you can also see the body of the payload with more information about the webhook.
 

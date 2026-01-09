@@ -1,4 +1,4 @@
-# Chapter 7. Migrating Red Hat Ansible Automation Platform to Red Hat Ansible Automation Platform Operator
+# Chapter 8. Migrating Red Hat Ansible Automation Platform to Red Hat Ansible Automation Platform Operator
 
 
 

@@ -5,7 +5,9 @@
 
 
 
-To remove job history older than a specified number of days, click the launch![Launch](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/15376a8ac10d1efa9ec8cb3d4c707dfd/rightrocket.png)
+Over time, job history can accumulate and consume significant disk space on the automation controller server. To manage disk space effectively, you can configure the automation controller to automatically remove job history that is older than a specified number of days.
+
+To do this, click the launch![Launch](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/15376a8ac10d1efa9ec8cb3d4c707dfd/rightrocket.png)
 icon beside **Cleanup Job Details** .
 
 ![management jobs - cleanup job launch](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/230d4569158709df3f1afd0706549ee9/management-jobs-cleanup-job-launch.png)

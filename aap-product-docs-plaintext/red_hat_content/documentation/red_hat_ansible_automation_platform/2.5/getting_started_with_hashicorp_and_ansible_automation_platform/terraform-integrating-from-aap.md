@@ -4,5 +4,5 @@
 
 
 
-Use the procedures in this section to set up the integration from Ansible Automation Platform. You need to create a credential, build an execution environment, and launch a job template in Ansible Automation Platform.
+As an administrator, you configure the integration from Ansible Automation Platform user interface. Use the procedures related to the collection you have installed.
 

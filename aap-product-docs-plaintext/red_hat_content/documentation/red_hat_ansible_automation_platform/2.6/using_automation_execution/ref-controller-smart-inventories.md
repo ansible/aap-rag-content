@@ -4,9 +4,9 @@
 
 
 
-Smart Inventories are collections of hosts defined by a stored search that can be viewed like a standard inventory and can be easily used with job runs. Organization administrators have admin permission for inventories in their organization and can create Smart Inventories.
+Smart Inventories are collections of hosts defined by a stored search that can be viewed such as a standard inventory and can be easily used with job runs. Organization administrators have admin permission for inventories in their organization and can create Smart Inventories.
 
-A Smart Inventory is identified by `KIND=smart` .
+You can identify a Smart Inventory by the `KIND=smart` variable.
 
 You can define a Smart Inventory by using the same method being used with Search. `InventorySource` is directly associated with an Inventory.
 
@@ -17,14 +17,14 @@ Smart inventories are deprecated and will be removed in a future release. Consid
 
 The `Inventory` model has the following new fields that are blank by default but are set accordingly for Smart Inventories:
 
--  `    kind` is set to `    smart` for Smart Inventories.
--  `    host_filter` is set AND `    kind` is set to `    smart` for Smart Inventories.
+- Set `    kind` to `    smart` for Smart Inventories.
+- Set `    host_filter` AND `    kind` to `    smart` for Smart Inventories.
 
 
-The `host` model has a related endpoint, `smart_inventories` that identifies a set of all the Smart Inventories a host is associated with. The membership table is updated every time a job runs against a smart inventory.
+The `host` model has a related endpoint, `smart_inventories` that identifies a set of all the Smart Inventories a host is associated with. The membership table updates every time a job runs against a smart inventory.
 
 Note
-To update the memberships more frequently, you can change the `AWX_REBUILD_SMART_MEMBERSHIP` file-based setting to `True` . (The default is False). This updates memberships if the following events occur:
+To update the memberships more often, you can change the `AWX_REBUILD_SMART_MEMBERSHIP` file-based setting to `True` . (The default is False). This updates memberships if the following events occur:
 
 - A new host is added
 - An existing host is modified (updated or deleted)
@@ -37,10 +37,10 @@ To update the memberships more frequently, you can change the `AWX_REBUILD_SMART
 You can view inventories without being editable:
 
 - Names of Host and Group created as a result of an inventory source synchronization.
-- Group records cannot be edited or moved.
+- You cannot move or edit Group records.
 
 
-You cannot create hosts from a Smart Inventory host endpoint ( `/inventories/N/hosts/` ) as with a normal inventory. The administrator of a Smart Inventory has permission to edit fields such as the name, description, variables, and the ability to delete, but does not have the permission to modify the `host_filter` , because that affects which hosts (that have a primary membership inside another inventory) are included in the smart inventory.
+You cannot create hosts from a Smart Inventory host endpoint ( `/inventories/N/hosts/` ) as with a normal inventory. The administrator of a Smart Inventory has permission to edit fields such as the name, description, variables, and the ability to delete. The administrator does not have the permission to change the `host_filter` , because that affects which hosts (that have a primary membership inside another inventory) are included in the smart inventory.
 
 `host_filter` only applies to hosts inside of inventories inside the Smart Inventory’s organization.
 
@@ -48,10 +48,10 @@ To modify `host_filter` , you must be the organization administrator of the inve
 
 Administrators of the Smart Inventory can grant other users (who are not also admins of your organization) permissions such as "use" and "adhoc" to the smart inventory. These permit the actions indicated by the role, as with other standard inventories. However, this does not grant any special permissions to hosts (which live in a different inventory). It does not permit direct read permission to hosts, or permit them to see additional hosts under `/#/hosts/` , although they can still view the hosts under the smart inventory host list.
 
-In some situations, you can modify the following:
+In some situations, you can change the following:
 
 - A new Host created manually on Inventory with Inventory sources.
-- Groups that were created as a result of inventory source synchronizations.
+- Groups created as a result of inventory source synchronizations.
 - Variables on Host and Group are not changeable, even as the local System Administrator.
 
 

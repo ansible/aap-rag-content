@@ -1,5 +1,6 @@
 # 3. Automation mesh design patterns
-## 3.5. Multi-hopped execution node
+## 3.3. Segregated local and remote execution configuration
+### 3.3.1. Multi-hopped execution node
 
 
 

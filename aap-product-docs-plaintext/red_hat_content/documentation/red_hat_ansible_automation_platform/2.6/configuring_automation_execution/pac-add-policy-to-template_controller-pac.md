@@ -5,7 +5,7 @@
 
 
 
-To associate a policy with a job template, take the following steps:
+Learn how to associate a policy with a job template.
 
 **Procedure**
 

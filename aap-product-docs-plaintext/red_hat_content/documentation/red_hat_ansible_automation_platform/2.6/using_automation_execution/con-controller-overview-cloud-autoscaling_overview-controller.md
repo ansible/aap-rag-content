@@ -4,7 +4,9 @@
 
 
 
-Automation controller includes a powerful optional provisioning callback feature that enables nodes to request configuration on-demand. This is an ideal solution for a cloud auto-scaling scenario and includes the following features:
+Automation controller includes a powerful optional provisioning callback feature that enables nodes to request configuration on-demand.
+
+This is an ideal solution for a cloud auto-scaling scenario and includes the following features:
 
 - It integrates with provisioning servers such as Cobbler and deals with managed systems with unpredictable uptimes.
 - It requires no management software to be installed on remote nodes.

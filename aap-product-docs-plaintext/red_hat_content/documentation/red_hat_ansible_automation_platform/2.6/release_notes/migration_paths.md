@@ -15,5 +15,8 @@ The following table outlines the supported migration paths for Ansible Automatio
 | Container-based Ansible Automation Platform | Managed Ansible Automation Platform |
 
 
-**Additional resources** * [Ansible Automation Platform migration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/ansible_automation_platform_migration/index)
+**Additional resources**
+
+-  [Ansible Automation Platform migration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/ansible_automation_platform_migration/index)
+
 

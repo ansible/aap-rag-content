@@ -3,12 +3,7 @@
 
 
 
-Automation controller uses a standard REST API, rooted at `/api/` on the server.
-
-
-<span id="controller-api-conventions-in-API"></span>
 The API is versioned for compatibility reasons. You can see what API versions are available by querying `/api/` .
-
 
 You might have to specify the content or type on `POST` or `PUT` requests:
 

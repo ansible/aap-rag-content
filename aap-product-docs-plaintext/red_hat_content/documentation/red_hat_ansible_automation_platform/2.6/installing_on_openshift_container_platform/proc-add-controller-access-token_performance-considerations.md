@@ -1,5 +1,5 @@
-# 11. Ansible Automation Platform Resource Operator
-## 11.3. Connecting Resource Operator to platform gateway
+# 13. Ansible Automation Platform Resource Operator
+## 13.3. Connecting Resource Operator to platform gateway
 
 
 

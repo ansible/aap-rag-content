@@ -4,6 +4,8 @@
 
 
 
+To remove Ansible Automation Platform and Dev Spaces configuration from an Operator installation, you must edit the custom Red Hat Developer Hub ConfigMap.
+
 **Procedure**
 
 1. Open the custom Red Hat Developer Hub ConfigMap where you added configuration for the templates and for connecting to Ansible Automation Platform and Dev Spaces. In this example, the Red Hat Developer Hub ConfigMap name is `    app-config-rhdh` .

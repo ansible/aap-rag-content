@@ -7,6 +7,8 @@
 
 For details on creating a personal access token in Gitlab, see [Create a personal access token](https://docs.gitlab.com/user/profile/personal_access_tokens/#create-a-personal-access-token) in the Gitlab documentation.
 
+**Procedure**
+
 1. In a browser, log in to Gitlab and click your avatar.
 1. Select **Edit profile** .
 1. Select **Access tokens** .

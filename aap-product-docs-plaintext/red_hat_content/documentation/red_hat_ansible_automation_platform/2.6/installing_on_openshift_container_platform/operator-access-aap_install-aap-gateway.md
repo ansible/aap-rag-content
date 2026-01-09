@@ -1,10 +1,10 @@
 # 2. Installing Red Hat Ansible Automation Platform gateway on Red Hat OpenShift Container Platform
-## 2.3. Accessing the platform gateway
+## 2.3. Accessing platform gateway through the OpenShift Container Platform UI
 
 
 
 
-You should use the **Ansible Automation Platform** instance as your default. This instance links the automation controller, automation hub, and Event-Driven Ansible deployments to a single interface.
+Use the **Ansible Automation Platform** instance as your default. This instance links the automation controller, automation hub, and Event-Driven Ansible deployments to a single interface.
 
 **Procedure**
 
@@ -12,7 +12,7 @@ You should use the **Ansible Automation Platform** instance as your default. Thi
 1. Navigate toNetworking→Routes
 1. Click the link under **Location** for **Ansible Automation Platform** .
 1. This redirects you to the Ansible Automation Platform login page. Enter "admin" as your username in the **Username** field.
-1. For the password you need to:
+1. For the password you must:
 
 
 1. Go to toWorkloads→Secrets.

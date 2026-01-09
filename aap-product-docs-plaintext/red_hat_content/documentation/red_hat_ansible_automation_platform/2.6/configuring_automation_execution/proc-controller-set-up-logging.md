@@ -46,13 +46,11 @@ icon next to the field for additional information on each data type. Delete the 
 -  **File system location for rsyslogd disk persistence** : Location to persist logs that should be retried after an outage of the external log aggregator (defaults to `        /var/lib/awx` ). Equivalent to the `        rsyslogd queue.spoolDirectory` setting.
 -  **Log Format For API 4XX Errors** : Configure a specific error message. For more information, see [API 4XX Error Configuration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-logging-aggregation#proc-controller-api-4xx-error-config) .
 
+1. You can set the following options:
 
-
-Set the following options:
 
 -  **Log System Tracking Facts Individually** : Click the tooltip![Help](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/0c17081b1d1293156a760e9a6e06634a/question_circle.png)
 icon for additional information, such as whether or not you want to turn it on, or leave it off by default.
-
 
 1. Review your entries for your chosen logging aggregation. The following example is set up for Splunk:
 
@@ -60,13 +58,10 @@ icon for additional information, such as whether or not you want to turn it on, 
 
 
 
-
 -  **Enable External Logging** : Select this checkbox if you want to send logs to an external log aggregator.
 -  **Enable/disable HTTPS certificate verification** : Certificate verification is enabled by default for the HTTPS log protocol. Select this checkbox if you want the log handler to verify the HTTPS certificate sent by the external log aggregator before establishing a connection.
--  **Enable rsyslogd debugging** : Select this checkbox to enable high verbosity debugging for `    rsyslogd` . Useful for debugging connection issues for external log aggregation.
-
+-  **Enable rsyslogd debugging** : Select this checkbox to enable high verbosity debugging for `        rsyslogd` . Useful for debugging connection issues for external log aggregation.
 
 1. ClickSaveorCancelto abandon the changes.
-
 
 

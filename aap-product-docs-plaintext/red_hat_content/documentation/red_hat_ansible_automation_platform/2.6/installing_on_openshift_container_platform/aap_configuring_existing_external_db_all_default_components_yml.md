@@ -1,6 +1,6 @@
-# 13. Appendix: Red Hat Ansible Automation Platform custom resources
-## 13.1. Custom resources
-### 13.1.10. aap-configuring-existing-external-db-all-default-components.yml
+# 15. Appendix: Red Hat Ansible Automation Platform custom resources
+## 15.1. Custom resources
+### 15.1.10. aap-configuring-existing-external-db-all-default-components.yml
 
 
 

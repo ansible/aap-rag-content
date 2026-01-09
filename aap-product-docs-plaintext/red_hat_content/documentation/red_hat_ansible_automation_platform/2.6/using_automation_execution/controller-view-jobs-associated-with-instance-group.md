@@ -5,6 +5,8 @@
 
 
 
+You can view jobs associated with an instance group to monitor their status and details.
+
 **Procedure**
 
 1. Select the **Jobs** tab of the **Instance Group** window.
@@ -24,6 +26,6 @@ Each job displays the following details:
 
 **Additional resources**
 
--  [Instance group policies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-instance-group-policies) .
+-  [Instance group policies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-instance-group-policies)
 
 

@@ -3,7 +3,7 @@
 
 
 
-As a platform administrator, Ansible Automation Platform can help you enable your users and teams to develop and run automation.
+As a platform administrator, Ansible Automation Platform helps you enable your users and teams to develop and run automation.
 
 This guide walks you through the basic steps to get set up as an administrator for Ansible Automation Platform, including configuring and maintaining the platform for users.
 

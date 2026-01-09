@@ -21,7 +21,7 @@ The following example inventory file deprovisions two nodes from an automation m
 
 
 
-<span id="idm140468920797184"></span>
+<span id="idm140138486741104"></span>
 **Example 4.1. Deprovision nodes**
 
 ```

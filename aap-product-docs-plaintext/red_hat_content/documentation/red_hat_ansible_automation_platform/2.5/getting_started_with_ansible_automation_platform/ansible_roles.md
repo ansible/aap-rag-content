@@ -11,8 +11,3 @@ You can also make roles configurable by exposing variables that users can set wh
 
 Roles are generally included in Ansible content collections.
 
-**Additional resources**
-
-For more information, see [Bundle content with Ansible roles](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/index#con-gs-ansible-roles_assembly-gs-auto-dev) .
-
-

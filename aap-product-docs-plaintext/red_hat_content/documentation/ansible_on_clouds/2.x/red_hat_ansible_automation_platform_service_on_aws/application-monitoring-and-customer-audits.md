@@ -1,6 +1,6 @@
 # 5. Red Hat Ansible Automation Platform Service on AWS Service Definition
 ## 5.2. Control plane
-### 5.2.6. Application monitoring and customer audits
+### 5.2.7. Application monitoring and customer audits
 
 
 

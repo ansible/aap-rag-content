@@ -4,7 +4,12 @@
 
 
 
-You can delete credentials if they are no longer needed for your organization.
+You can permanently delete unused credentials. You must first ensure they are detached from any event stream before the deletion process can be completed.
+
+**Prerequisites**
+
+1. Ensure that your credential is not currently linked to any rulebook activations.
+
 
 **Procedure**
 

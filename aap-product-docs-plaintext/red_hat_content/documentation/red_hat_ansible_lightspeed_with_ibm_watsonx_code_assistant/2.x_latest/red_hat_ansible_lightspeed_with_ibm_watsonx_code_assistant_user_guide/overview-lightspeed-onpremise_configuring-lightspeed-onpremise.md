@@ -1,13 +1,13 @@
-# 3. Setting up Red Hat Ansible Lightspeed for your organization
-## 3.3. Setting up Red Hat Ansible Lightspeed on-premise deployment
-### 3.3.1. Overview
+# 4. Setting up Red Hat Ansible Lightspeed for your organization
+## 4.3. Setting up Red Hat Ansible Lightspeed on-premise deployment
+### 4.3.1. Overview
 
 
 
 
 This section provides information about the system requirements, prerequisites, and the process for setting up a Red Hat Ansible Lightspeed on-premise deployment.
 
-#### 3.3.1.1. Deployment models
+#### 4.3.1.1. Deployment models
 
 
 
@@ -33,7 +33,7 @@ A hybrid deployment model provides the following benefits:
 
 
 
-#### 3.3.1.2. System requirements
+#### 4.3.1.2. System requirements
 
 
 
@@ -54,7 +54,7 @@ You must also have installed IBM watsonx Code Assistant for Red Hat Ansible Ligh
 
 
 
-#### 3.3.1.3. Prerequisites
+#### 4.3.1.3. Prerequisites
 
 
 

@@ -6,8 +6,8 @@
 
 Red Hat recommends performing the following initial configuration tasks in RHDH. However, you can install the Ansible plug-ins for Red Hat Developer Hub before completing these tasks.
 
--  [Setting up authentication in RHDH](https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/authentication/index)
--  [Installing and configuring RBAC in RHDH](https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/authorization/index)
+-  [Authentication in Red Hat Developer Hub](https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/authentication_in_red_hat_developer_hub/index)
+-  [Authorization in Red Hat Developer Hub](https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/authorization_in_red_hat_developer_hub/index)
 
 
 Note

@@ -1,5 +1,5 @@
 # 4. Migration prerequisites
-## 4.5. Prerequisites for migrating from a container-based deployment to a Managed Ansible Automation Platform deployment
+## 4.5. Containerized to Managed Ansible Automation Platform migration prerequisites
 
 
 
@@ -19,6 +19,6 @@ Before migrating from a container-based deployment to a Managed Ansible Automati
 - Network changes occur when moving the control plane to the managed service.
 - Automation mesh requires reconfiguration.
 
-- You must reconfigure or re-create SSO identity providers post-migration to account for URL changes.
+- You must reconfigure or re-create Single Sign-On (SSO) identity providers post-migration to account for URL changes.
 
 

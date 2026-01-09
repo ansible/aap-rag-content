@@ -1,5 +1,5 @@
-# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 4.4. Deploying Redis on Red Hat Ansible Automation Platform Operator
+# 5. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 5.4. Deploying Redis on Red Hat Ansible Automation Platform Operator
 
 
 

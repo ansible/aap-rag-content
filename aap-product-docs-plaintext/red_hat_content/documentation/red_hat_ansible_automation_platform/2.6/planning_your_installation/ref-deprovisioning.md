@@ -1,10 +1,10 @@
-# 8. About the installer inventory file
+# 8. About the installation program inventory file
 ## 8.2. Deprovisioning nodes or groups
 
 
 
 
-You can deprovision nodes and instance groups using the Ansible Automation Platform installer. Running the installer will remove all configuration files and logs attached to the nodes in the group.
+You can deprovision nodes and instance groups by using the Ansible Automation Platform installation program. Running the installation program removes all configuration files and logs attached to the nodes in the group.
 
 Note
 You can deprovision any hosts in your inventory except for the first host specified in the `[automationcontroller]` group.

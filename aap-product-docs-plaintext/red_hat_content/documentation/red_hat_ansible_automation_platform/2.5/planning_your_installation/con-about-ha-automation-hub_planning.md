@@ -6,5 +6,5 @@
 
 A high availability (HA) configuration increases reliability and scalablility for automation hub deployments.
 
-HA deployments of automation hub have multiple nodes that concurrently run the same service with a load balancer distributing workload (an "active-active" configuration). This configuration eliminates single points of failure to minimize service downtime and allows you to easily add or remove nodes to meet workload demands.
+HA deployments of automation hub have multiple nodes that concurrently run the same service with a load balancer distributing workload (an "active-active" configuration). This configuration eliminates single points of failure to minimize service downtime and enable you to easily add or remove nodes to meet workload demands.
 

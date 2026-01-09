@@ -1,6 +1,6 @@
 # 5. Red Hat Ansible Automation Platform Service on AWS Service Definition
 ## 5.2. Control plane
-### 5.2.4. Backup and disaster recovery
+### 5.2.5. Backup and disaster recovery
 
 
 
@@ -19,16 +19,23 @@ Customer data is replicated to a predefined secondary region based on the deploy
 
 | Primary Region | Business Continuity Region |
 | --- | --- |
-| af-south-1 | ap-southeast-2 |
-| ap-east-1 | ap-south-1 |
-| ap-southeast-2 | ap-south-1 |
-| ca-central-1 | us-east-2 |
-| eu-central-1 | eu-central-2 |
-| eu-west-1 | eu-north-1 |
-| eu-west-2 | eu-west-1 |
-| us-east-1 | us-west-2 |
-| us-east-2 | us-west-2 |
-| us-west-2 | us-east-1 |
+| af-south-1 (Cape Town) | ap-southeast-2 (Sydney) |
+| ap-east-1 (Hong Kong) | ap-south-1 (Mumbai) |
+| ap-northeast-1 (Tokyo) | ap-northeast-3 (Osaka) |
+| ap-northeast-3 (Osaka) | ap-northeast-1 (Tokyo) |
+| ap-southeast-2 (Sydney) | ap-south-1 (Mumbai) |
+| ca-central-1 (Central Canada) | us-east-2 (Ohio) |
+| ca-west-1 (Canada) | ca-central-1 (Central Canada) |
+| eu-central-1 (Frankfurt) | eu-central-2 (Zurich) |
+| eu-central-2 (Zurich) | eu-central-1 (Frankfurt) |
+| eu-south-2 (Spain) | eu-west-3 (Paris) |
+| eu-west-1 (Ireland) | eu-north-1 (Stockholm) |
+| eu-west-2 (London) | eu-west-1 (Ireland) |
+| eu-west-3 (Paris) | eu-south-2 (Spain) |
+| sa-east-1 (São Paulo) | us-east-1 (N. Virginia) |
+| us-east-1 (N. Virginia) | us-west-2 (Oregon) |
+| us-east-2 (Ohio) | us-west-2 (Oregon) |
+| us-west-2 (Oregon) | us-east-1 (N. Virginia) |
 
 
 To recover an Ansible Automation Platform deployment in a different AWS region, a customer must submit a request specifying their preferred deployment region from the available options. Red Hat evaluates the request and begins building an instance in that region. Data from the previous instance is recovered from the customer’s business continuity region. The customer is responsible for any necessary post-deployment network configuration to integrate the new instance into their environment.

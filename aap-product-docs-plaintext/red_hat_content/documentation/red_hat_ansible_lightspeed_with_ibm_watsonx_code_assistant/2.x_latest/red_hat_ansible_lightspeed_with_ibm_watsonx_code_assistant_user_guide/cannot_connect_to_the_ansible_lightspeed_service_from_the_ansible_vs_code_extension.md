@@ -1,6 +1,6 @@
-# 7. Troubleshooting
-## 7.2. Troubleshooting Red Hat Ansible Lightspeed on-premise deployment errors
-### 7.2.3. Cannot connect to the Ansible Lightspeed service from the Ansible VS Code extension
+# 8. Troubleshooting
+## 8.2. Troubleshooting Red Hat Ansible Lightspeed on-premise deployment errors
+### 8.2.2. Cannot connect to the Ansible Lightspeed service from the Ansible VS Code extension
 
 
 

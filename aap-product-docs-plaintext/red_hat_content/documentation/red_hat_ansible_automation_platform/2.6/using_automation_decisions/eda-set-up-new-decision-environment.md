@@ -4,12 +4,12 @@
 
 
 
-You can import a decision environment into your Event-Driven Ansible controller using a default or custom decision environment.
+Set up a new decision environment to define the dedicated, containerized runtime (including collections and dependencies) necessary to execute your rulebook activations.
 
 **Prerequisites**
 
-- You have set up a credential, if necessary. For more information, see the [Setting up credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_decisions/eda-credentials#eda-set-up-credential) section.
-- You have pushed a decision environment image to an image repository or you chose to use the `    de-minimal` image located in [registry.redhat.io](http://registry.redhat.io/) .
+- You have set up a credential, if necessary. For more information, see the [Setting up credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_decisions/eda-credentials#eda-set-up-credential) section.
+- You have pushed a decision environment image to an image repository or you chose to use the `    de-minimal`  [image](https://catalog.redhat.com/en/software/containers/ansible-automation-platform-26/de-minimal-rhel9/66fed7ad6ae4c44aa5de8c72) located in [registry.redhat.io](http://registry.redhat.io/) .
 
 
 **Procedure**

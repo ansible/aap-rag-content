@@ -1,5 +1,5 @@
-# 4. Common automation execution environment scenarios
-## 4.1. Updating the automation hub CA certificate
+# 3. Common automation execution environment scenarios
+## 3.1. Updating the automation hub CA certificate
 
 
 
@@ -9,7 +9,7 @@ Use this example to customize the default definition file to include a CA certif
 **Prerequisites** * A custom CA certificate, for example `rootCA.crt` .
 
 Note
-Customizing the CA certificate using `prepend_base` means that the resulting CA configuration appears in all other build stages and the final image, because all other build stages inherit from the base image.
+Customizing the CA certificate using `prepend_base` means that the resulting CA configuration is displayed in all other build stages and the final image, because all other build stages inherit from the base image.
 
 
 

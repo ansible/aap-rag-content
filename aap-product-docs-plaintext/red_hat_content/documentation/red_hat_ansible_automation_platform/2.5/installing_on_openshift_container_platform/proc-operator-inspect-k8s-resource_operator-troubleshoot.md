@@ -1,5 +1,5 @@
-# 12. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
-## 12.5. Inspecting a OpenShift Container Platform resource
+# 13. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+## 13.5. Inspecting a OpenShift Container Platform resource
 
 
 

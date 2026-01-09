@@ -1,6 +1,6 @@
-# 4. Developing Ansible content
-## 4.2. Installing and configuring the Ansible VS Code extension
-### 4.2.4. Logging in to Ansible Lightspeed through the Ansible VS Code extension
+# 5. Developing Ansible content
+## 5.2. Installing and configuring the Ansible VS Code extension
+### 5.2.4. Logging in to Ansible Lightspeed through the Ansible VS Code extension
 
 
 

@@ -28,7 +28,7 @@ $ aap-gateway-manage create_oauth2_token --user example_user
 New OAuth2 token for example_user: j89ia8OO79te6IAZ97L7E8bMgXCON2
 ```
 
-Ensure that you provide a valid user when creating tokens. Otherwise, an error message that you attempted to issue the command without specifying a user, or supplied a username that does not exist, is displayed.
+Ensure that you give a valid user when creating tokens. Otherwise, an error message that you attempted to issue the command without specifying a user, or supplied a username that does not exist, is displayed.
 
 #### 3.2.2.2. `revoke_oauth2_tokens`
 
@@ -79,5 +79,5 @@ Use this command to delete all sessions that have expired.
 
 For more information, see [Clearing the session store](https://docs.djangoproject.com/en/4.2/topics/http/sessions/#clearing-the-session-store) in Django’s Oauth Toolkit documentation.
 
-For more information on OAuth2 token management in the UI, see the [Applications](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#assembly-controller-applications) .
+For more information about OAuth2 token management in the UI, see the [Applications](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#assembly-controller-applications) .
 

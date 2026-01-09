@@ -4,6 +4,8 @@
 
 
 
+A proxy server acts as an intermediary for requests from clients seeking resources from other servers. There are two types of proxy servers: forward proxies and reverse proxies.
+
 A forward proxy deals with client traffic, regulating and securing it. To provide proxy server support, automation controller handles proxied requests (such as ALB, NLB , HAProxy, Squid, Nginx and tinyproxy in front of automation controller) using the **REMOTE_HOST_HEADERS** list variable in the automation controller settings. By default, **REMOTE_HOST_HEADERS** is set to `["REMOTE_ADDR", "REMOTE_HOST"]` .
 
 To enable proxy server support, edit the **REMOTE_HOST_HEADERS** field in the settings page for your automation controller:
@@ -22,6 +24,8 @@ To enable proxy server support, edit the **REMOTE_HOST_HEADERS** field in the se
 
 1. ClickSaveto save your settings.
 
-
 Automation controller determines the remote host’s IP address by searching through the list of headers in **Remote Host Headers** until the first IP address is located.
+
+
+
 

@@ -4,8 +4,14 @@
 
 
 
-To remove older activity stream data, click the launch![Launch](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/15376a8ac10d1efa9ec8cb3d4c707dfd/rightrocket.png)
+Learn how to remove old activity stream data from the automation controller database to help manage database
+
+**Procedure**
+
+1. To remove older activity stream data, click the launch![Launch](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/15376a8ac10d1efa9ec8cb3d4c707dfd/rightrocket.png)
 icon beside **Cleanup Activity Stream** .
 
-Enter the number of days of data you want to save and clickLaunch.
+
+1. Enter the number of days of data you want to save and clickLaunch.
+
 

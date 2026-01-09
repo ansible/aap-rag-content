@@ -3,7 +3,7 @@
 
 
 
-With Ansible Automation Platform, you can create, manage, and scale automation for your organization across users, teams, and regions. See the following functionality and concepts of Ansible Automation Platform for more details.
+With Ansible Automation Platform, you can create, manage, and scale automation for your organization across users, teams, and regions.
 
 The release of Ansible Automation Platform 2.6 introduces an updated, unified user interface (UI) that allows you to interact with and manage each part of the platform.
 

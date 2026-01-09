@@ -5,6 +5,8 @@
 
 
 
+After you create a schedule, you can define rules for when the schedule runs.
+
 **Procedure**
 
 1. Enter the following information:

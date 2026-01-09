@@ -5,7 +5,9 @@
 
 
 
-Use the following procedure to review or set a schedule for purging data marked for deletion:
+automation controller includes a management job that periodically purges data that has been marked for deletion from the system database.
+
+Learn how to review or set a schedule for purging data marked for deletion:
 
 **Procedure**
 
@@ -31,12 +33,13 @@ Use the following procedure to review or set a schedule for purging data marked 
 -  **Repeat frequency** the appropriate options display as the update frequency is modified including data you do not want to include by specifying exceptions.
 -  **Days of data to keep** required - specify how much data you want to retain.
 
-
-
-The **Details** tab displays a description of the schedule and a list of the scheduled occurrences in the selected Local Time Zone.
+1. The **Details** tab displays a description of the schedule and a list of the scheduled occurrences in the selected Local Time Zone.
 
 Note
 Jobs are scheduled in UTC. Repeating jobs that run at a specific time of day can move relative to a local time zone when Daylight Saving Time shifts occur.
+
+
+
 
 
 

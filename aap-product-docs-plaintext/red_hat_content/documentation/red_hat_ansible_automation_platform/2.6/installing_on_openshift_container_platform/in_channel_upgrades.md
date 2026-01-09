@@ -1,6 +1,6 @@
-# 8. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 8.4. Channel upgrades
-### 8.4.1. In-channel upgrades
+# 10. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 10.4. Channel upgrades
+### 10.4.1. In-channel upgrades
 
 
 

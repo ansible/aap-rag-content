@@ -4,7 +4,7 @@
 
 
 
-RBAC is set up in the Helm chart with the `admin` user set as the RBAC administrator ( `rbac_admin` ).
+By default, Ansible Automation Platform administrators can define self-service automation portal RBAC roles.
 
 This procedure describes how to create a role in self-service automation portal that allows only a selected team to view and execute particular custom self-service templates.
 
@@ -28,7 +28,7 @@ See [Adding users to a team](https://docs.redhat.com/en/documentation/red_hat_an
 
 **Procedure**
 
-1. In a browser, log in to your self-service automation portal instance as an Ansible Automation Platform user with `    admin` privileges.
+1. In a browser, log in to your self-service automation portal instance as an Ansible Automation Platform user with Ansible Automation Platform administrator privileges.
 1. In the navigation panel, selectAdministration→RBAC.
 1. In the **RBAC** view, click **Create** .
 

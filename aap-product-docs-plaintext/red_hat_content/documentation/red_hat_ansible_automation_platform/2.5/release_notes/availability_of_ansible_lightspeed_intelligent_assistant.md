@@ -1,6 +1,6 @@
 # 3. Technology preview
 ## 3.1. Technology Preview
-### 3.1.2. Availability of Ansible Lightspeed intelligent assistant
+### 3.1.3. Availability of Ansible Lightspeed intelligent assistant
 
 
 
@@ -16,4 +16,10 @@ To access and use the Ansible Lightspeed intelligent assistant, you need:
 
 
 For more information, see [Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#deploying-chatbot-operator) in _Installing on OpenShift Container Platform_ guide.
+
+**Additional resources**
+
+- For the most recent list of Technology Preview features, see [Ansible Automation Platform - Preview Features](https://access.redhat.com/articles/ansible-automation-platform-preview-features) .
+- For information about execution node enhancements on OpenShift deployments, see [Managing Capacity With Instances](https://docs.ansible.com/automation-controller/latest/html/administration/instances.html) .
+
 

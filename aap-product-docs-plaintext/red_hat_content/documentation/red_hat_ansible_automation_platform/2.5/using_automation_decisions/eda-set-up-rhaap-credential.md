@@ -4,7 +4,7 @@
 
 
 
-You can create a Red Hat Ansible Automation Platform credential type to run your rulebook activations.
+Create a Red Hat Ansible Automation Platform credential to connect to automation controller through the use of an automation controller URL and a username and password.
 
 **Prerequisites**
 

@@ -1,5 +1,5 @@
 # 7. Networking
-## 7.1. Issue - The default subnet used in Ansible Automation Platform containers conflicts with the internal network
+## 7.1. Issue - Container subnet conflicts with internal network
 
 
 

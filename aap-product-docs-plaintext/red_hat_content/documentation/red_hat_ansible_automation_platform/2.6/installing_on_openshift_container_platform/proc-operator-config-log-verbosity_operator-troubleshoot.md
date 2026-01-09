@@ -1,5 +1,5 @@
-# 12. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
-## 12.4. Configuring log verbosity
+# 14. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+## 14.4. Configuring log verbosity
 
 
 

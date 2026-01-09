@@ -1,6 +1,6 @@
-# 5. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
-## 5.5. Deploying the Ansible Lightspeed intelligent assistant
-### 5.5.1. Creating a chatbot configuration secret
+# 6. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
+## 6.4. Deploying the Ansible Lightspeed intelligent assistant
+### 6.4.1. Creating a chatbot configuration secret
 
 
 

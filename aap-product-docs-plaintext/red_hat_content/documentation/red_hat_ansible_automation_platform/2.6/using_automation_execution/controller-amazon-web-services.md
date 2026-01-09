@@ -4,6 +4,8 @@
 
 
 
+Use the following reference to configure an AWS EC2-sourced inventory.
+
 ```
 compose:
 ansible_host: public_ip_address

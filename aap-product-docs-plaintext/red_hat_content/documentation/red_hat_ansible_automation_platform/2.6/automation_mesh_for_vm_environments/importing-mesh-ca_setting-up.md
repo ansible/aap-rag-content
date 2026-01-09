@@ -4,7 +4,10 @@
 
 
 
+**Additional resources**
+
 A Certificate Authority (CA) verifies and signs individual node certificates in an automation mesh environment. You can provide your own CA by specifying the path to the certificate and the private RSA key file in the `inventory` file of your Red Hat Ansible Automation Platform installer.
+
 
 Note
 The Ansible Automation Platform installation program generates a CA if you do not provide one.
@@ -27,11 +30,5 @@ mesh_ca_keyfile=/tmp/<span class="emphasis"><em><span class="Role ARG Spec Role 
 mesh_ca_certfile=/tmp/<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">&lt;mesh_CA&gt;</span></em></span>.crt
 ```
 
-
-With the CA files added to the inventory file, run the installation program to apply the CA. This process copies the CA to the to `/etc/receptor/tls/ca/` directory on each control and execution node on your mesh network.
-
-**Additional resources**
-
--  [System Requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/platform-system-requirements)
-
++ With the CA files added to the inventory file, run the installation program to apply the CA. This process copies the CA to the to `/etc/receptor/tls/ca/` directory on each control and execution node on your mesh network.
 

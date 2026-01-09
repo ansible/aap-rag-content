@@ -1,6 +1,6 @@
-# 3. Setting up Red Hat Ansible Lightspeed for your organization
-## 3.3. Setting up Red Hat Ansible Lightspeed on-premise deployment
-### 3.3.7. Monitoring your Red Hat Ansible Lightspeed on-premise deployment
+# 4. Setting up Red Hat Ansible Lightspeed for your organization
+## 4.3. Setting up Red Hat Ansible Lightspeed on-premise deployment
+### 4.3.7. Monitoring your Red Hat Ansible Lightspeed on-premise deployment
 
 
 

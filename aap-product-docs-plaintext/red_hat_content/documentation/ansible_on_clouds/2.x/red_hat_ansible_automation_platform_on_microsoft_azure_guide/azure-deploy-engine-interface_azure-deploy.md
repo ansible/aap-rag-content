@@ -5,7 +5,9 @@
 
 
 
-The Ansible Automation Platform Deployment Engine displays a list of the steps in the deployment process. A progress bar shows how far along the deployment is. Icons indicate the steps that have been completed, the steps that are in progress, and steps that have failed.
+The Ansible Automation Platform Deployment Engine displays a list of the steps in the deployment process. A progress bar shows how far along the deployment is.
+
+Icons indicate the steps that have been completed, the steps that are in progress, and steps that have failed.
 
 To view extended information about a step that failed, click on the **failed** icon for that step.
 

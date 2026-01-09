@@ -4,6 +4,8 @@
 
 
 
+Learn how to run ad hoc commands against hosts in an inventory.
+
 _Ad hoc_ refers to using Ansible to perform a quick command, using /usr/bin/ansible, rather than the orchestration language, which is /usr/bin/ansible-playbook. An example of an ad hoc command might be rebooting 50 machines in your infrastructure. Anything you can do ad hoc can be accomplished by writing a playbook. Playbooks can also glue many other operations together.
 
 **Procedure**

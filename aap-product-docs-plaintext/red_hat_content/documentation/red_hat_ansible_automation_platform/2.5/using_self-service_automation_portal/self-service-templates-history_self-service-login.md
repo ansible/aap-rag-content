@@ -13,7 +13,7 @@ You can view a list of all the tasks that have been run from self-service automa
 
 The **Task list** page displays the tasks that have been run.
 
-![Templates view](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_self-service_automation_portal-en-US/images/1777c0c7aa9f9c10948093c1d9591876/self-service-task-history.png)
+![Templates view](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Using_self-service_automation_portal-en-US/images/09a26af799c6af5f674fb97978255457/self-service-task-history.png)
 
 
 

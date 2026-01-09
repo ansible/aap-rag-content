@@ -5,7 +5,7 @@
 
 
 
-While integrating with Source Code Management (SCM) systems is generally recommended for version control and collaborative development, there may be instances where direct management of playbook files is necessary. This approach involves creating and organizing playbook directories and files on the local filesystem, ensuring proper ownership and permissions for execution.
+Manage Ansible playbooks and directories directly on the automation controller filesystem. This approach helps ensure proper file ownership and permissions when you cannot use source control.
 
 **Procedure**
 

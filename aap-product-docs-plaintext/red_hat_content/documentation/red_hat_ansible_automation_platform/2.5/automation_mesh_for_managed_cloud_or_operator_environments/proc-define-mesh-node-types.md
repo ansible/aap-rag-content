@@ -10,6 +10,11 @@ The control nodes run in the cluster connect and submit work to the execution no
 
 These execution nodes are registered in automation controller as type `execution` instances, meaning they are only used to run jobs, not dispatch work or handle web requests as control nodes do.
 
+Important
+When creating an execution node, make sure the system time zone on the execution node matches `settings.TIME_ZONE` (default is 'UTC') on automation controller. Fact caching relies on comparing modified times of artifact files, and these modified times are not time zone-aware. Therefore, it is critical that the timezones of the execution nodes match automation controller’s time zone setting.
+
+
+
 **Hop nodes** can be added to sit between the control plane of automation controller and standalone execution nodes. These hop nodes are not part of the Kubernetes cluster and are registered in automation controller as an instance of type `hop` , meaning they only handle inbound and outbound traffic for otherwise unreachable nodes in different or more strict networks.
 
 The following procedure demonstrates how to set the node type for the hosts.
@@ -98,7 +103,7 @@ all:      hosts:        remote-execution:          ansible_host: localhost # cha
 - Ensure `        ansible_host` is set to the IP address or DNS of the node.
 - Set `        ansible_user` to the username running the installation.
 - Set `        ansible_ssh_private_key_file` to contain the filename of the private key used to connect to the instance.
-- The content of the `        inventory.yml` file serves as a template and contains variables for roles that are applied during the installation and configuration of a receptor node in a mesh topology. You can modify some of the other fields, or replace the file in its entirety for advanced scenarios. For more information, see [Role Variables](https://github.com/ansible/receptor-collection/blob/main/README.md) .
+- The content of the `        inventory.yml` file serves as a template and has variables for roles that are applied during the installation and configuration of a receptor node in a mesh topology. You can change some of the other fields, or replace the file in its entirety for advanced scenarios. For more information, see [Role Variables](https://github.com/ansible/receptor-collection/blob/main/README.md) .
 
 1. For a node that uses a private DNS, add the following line to `    inventory.yml` :
 
@@ -174,27 +179,27 @@ Suppose you have a Control plane with nodes A, B, and C
 
 The following is a peering set up for three controller nodes:
 
-Controller node A -→ Controller node B
+Controller node A → Controller node B
 
-Controller node A -→ Controller node C
+Controller node A → Controller node C
 
-Controller node B -→ Controller node C
+Controller node B → Controller node C
 
 You can force the listener by setting
 
 `receptor_listener=True`
 
-However, a connection Controller B -→ A is likely to be rejected as that connection already exists.
+However, a connection Controller B → A is likely to be rejected as that connection already exists.
 
 This means that nothing connects to Controller A as Controller A is creating the connections to the other nodes, and the following command does not return anything on Controller A:
 
 `[root@controller1 ~]# ss -ntlp | grep 27199 [root@controller1 ~]#`
 
-The RPM installer creates a strongly connected peering between the control plane nodes with a least privileged approach and opens the tcp listener only on those nodes where it is required. All the receptor connections are bidirectional, so once the connection is created, the receptor can communicate in both directions.
+The RPM installer creates a strongly connected peering between the control plane nodes with a least privileged approach and opens the TCP listener only on those nodes where it is required. All the receptor connections are bidirectional, so when the connection is created, the receptor can communicate in both directions.
 
 
 
-To remove an instance from the mesh, see [Removing instances](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/automation_mesh_for_managed_cloud_or_operator_environments/assembly-automation-mesh-operator-aap#ref-removing-instances) .
++ To remove an instance from the mesh, see [Removing instances](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/automation_mesh_for_managed_cloud_or_operator_environments/assembly-automation-mesh-operator-aap#ref-removing-instances) .
 
-r
++
 

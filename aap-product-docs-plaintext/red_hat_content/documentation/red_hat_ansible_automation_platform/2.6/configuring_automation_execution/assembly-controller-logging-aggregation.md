@@ -5,7 +5,7 @@
 
 Logging provides the capability to send detailed logs to third-party external log aggregation services. Services connected to this data feed serve as a means of gaining insight into automation controller use or technical trends. The data can be used to analyze events in the infrastructure, monitor for anomalies, and correlate events in one service with events in another.
 
-The types of data that are most useful to automation controller are job fact data, job events or job runs, activity stream data, and log messages. The data is sent in JSON format over a HTTP connection using minimal service-specific adjustments engineered in a custom handler or through an imported library.
+The types of data that are most useful to automation controller are job fact data, job events or job runs, activity stream data, and log messages. The data is sent in JSON format over a HTTP connection by using minimal service-specific adjustments engineered in a custom handler or through an imported library.
 
 The version of `rsyslog` that is installed by automation controller does not include the following `rsyslog` modules:
 
@@ -17,7 +17,7 @@ After installing automation controller, you must only use the automation control
 
 If you already use `rsyslog` for logging system logs on the automation controller instances, you can continue to use `rsyslog` to handle logs from outside of automation controller by running a separate `rsyslog` process (using the same version of rsyslog that automation controller uses), and pointing it to a separate `/etc/rsyslog.conf` file.
 
-Use the `/api/v2/settings/logging/` endpoint to configure how the automation controller `rsyslog` process handles messages that have not yet been sent in the event that your external logger goes offline:
+Use the `/api/v2/settings/logging/` endpoint to configure how the automation controller `rsyslog` process handles messages that have not yet been sent if your external logger goes offline:
 
 -  `    LOG_AGGREGATOR_ACTION_MAX_DISK_USAGE_GB` : Maximum disk persistence for rsyslogd action queuing in GB.
 

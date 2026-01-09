@@ -69,7 +69,7 @@ In an enterprise deployment, the components run on different nodes. Run the comm
 1. Import database dumps to the containerized environment.
 
 
-1. If you are using an Ansible Automation Platform managed database, you must create a temporary container to run the `        psql` and `        pg_restore` commands. Run this command from the database node.
+1. If you are using an Ansible Automation Platform managed database, you must create a temporary container to run the `        psql` and `        pg_restore` commands. Run this command from the database node:
 
 
 ```
@@ -86,12 +86,12 @@ It also assumes that the artifact is located in the current user’s home folder
 
 
 
-1. If you are using a customer-provided (external) database, you can run the `        psql` and `        pg_restore` commands from any node that has these commands installed and that has to access the database. Reach out to your database administrator if you are unsure.
+1. If you are using a customer-provided (external) database, you can run the `        psql` and `        pg_restore` commands from any node that has these commands installed and that has access to the database. Reach out to your database administrator if you are unsure.
 1. From inside the container, access the database and ensure the users have the `        CREATEDB` role.
 
 
 ```
-bash-4.4$ psql -h &lt;pg_hostname&gt; -U postgres        postgres=# \l        List of databases        Name         |      Owner       | Encoding | Collate   |   Ctype    | Access privileges        --------------------+------------------+----------+-----------+------------+-------------------        automationedacontroller | eda              | UTF8     | en_US.UTF-8 | en_US.UTF-8 |        automationhub      | automationhub    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |        awx                | awx              | UTF8     | en_US.UTF-8 | en_US.UTF-8 |        gateway            | gateway          | UTF8     | en_US.UTF-8 | en_US.UTF-8 |        (4 rows)
+bash-4.4$ psql -h &lt;pg_hostname&gt; -U postgres        postgres=# \l                  Name           |     Owner     | Encoding |   Collate   |    Ctype    | ICU Locale | Locale Provider |   Access privileg        es        -------------------------+---------------+----------+-------------+-------------+------------+-----------------+------------------        -----         automationedacontroller | eda           | UTF8     | en_US.UTF-8 | en_US.UTF-8 |            | libc            |         automationhub           | automationhub | UTF8     | en_US.UTF-8 | en_US.UTF-8 |            | libc            |         awx                     | awx           | UTF8     | en_US.UTF-8 | en_US.UTF-8 |            | libc            |         gateway                 | gateway       | UTF8     | en_US.UTF-8 | en_US.UTF-8 |            | libc            |        ...
 ```
 
 
@@ -126,6 +126,11 @@ Replace `        awx` with each user containing the role.
 
 1. Start the containerized services, except the database.
 
+Note
+In an enterprise deployment, the components run on different nodes. Run the commands on each component node.
+
+
+
 
 1. In all nodes, if Performance Co-Pilot is configured, run the following command:
 
@@ -155,7 +160,7 @@ $ systemctl --user start automation-hub-api automation-hub-content automation-hu
 
 
 ```
-$ systemctl --user start automation-eda-scheduler automation-eda-daphne automation-eda-web automation-eda-api automation-eda-worker-1 automation-eda-worker-2 automation-eda-activation-worker-1 automation-eda-activation-worker-2
+$ systemctl --user start automation-eda-scheduler automation-eda-daphne automation-eda-web automation-eda-api automation-eda-worker-1 automation-eda-worker-2  automation-eda-activation-worker-1 automation-eda-activation-worker-2
 ```
 
 
@@ -173,11 +178,6 @@ $ systemctl --user start automation-gateway automation-gateway-proxy
 ```
 $ systemctl --user start redis-unix redis-tcp
 ```
-
-Note
-In an enterprise deployment, the components run on different nodes. Run the commands on each component node.
-
-
 
 
 

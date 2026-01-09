@@ -4,7 +4,7 @@
 
 
 
-Default roles cannot be deleted; however, you can delete custom roles from the **Roles** list view.
+You cannot delete default roles; however, you can delete custom roles from the **Roles** list view.
 
 **Procedure**
 

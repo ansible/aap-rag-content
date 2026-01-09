@@ -7,7 +7,7 @@ The automation calculator provides graphs, metrics and calculations that help yo
 
 **Automation savings**
 
-Automation savings is produced by an analysis of the time and cost of performing a task manually, such as deploying a server, versus the time and cost associated with automating the same task. Automation savings calculations extend across all organizations, clusters, hosts and templates in an environment. Include your own estimated costs to produce a more accurate calculation.
+Automation savings is produced by an analysis of the time and cost of performing a task manually, such as deploying a server, compared to the time and cost associated with automating the same task. Automation savings calculations extend across all organizations, clusters, hosts and templates in an environment. Include your own estimated costs to produce a more accurate calculation.
 
 Note
 The initial total savings is based on default values for each variable.

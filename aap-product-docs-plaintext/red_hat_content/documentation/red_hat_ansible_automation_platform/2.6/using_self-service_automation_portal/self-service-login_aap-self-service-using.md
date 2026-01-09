@@ -3,3 +3,5 @@
 
 
 
+Learn how to access and authenticate to the self-service automation portal using your Ansible Automation Platform credentials.
+

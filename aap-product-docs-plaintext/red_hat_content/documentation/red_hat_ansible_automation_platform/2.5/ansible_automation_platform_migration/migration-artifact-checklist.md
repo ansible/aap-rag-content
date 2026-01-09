@@ -38,7 +38,7 @@ Use this checklist to verify the migration artifact.
 - Verify that checksums exist for all included database files.
 - Test the artifact’s structure and accessibility.
 - Consider encrypting the artifact for secure transfer to the target environment.
-
 - Document any known limitations or special considerations.
+
 
 

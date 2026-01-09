@@ -1,6 +1,6 @@
-# 7. Troubleshooting
-## 7.1. Troubleshooting Red Hat Ansible Lightspeed configuration errors
-### 7.1.1. Cannot access the Ansible Lightspeed administrator portal
+# 8. Troubleshooting
+## 8.1. Troubleshooting Red Hat Ansible Lightspeed configuration errors
+### 8.1.1. Cannot access the Ansible Lightspeed administrator portal
 
 
 

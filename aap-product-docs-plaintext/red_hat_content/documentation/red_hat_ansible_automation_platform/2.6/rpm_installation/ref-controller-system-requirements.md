@@ -1,42 +1,28 @@
 # 2. System requirements
-## 2.3. Automation controller system requirements
+## 2.4. Automation controller system requirements
 
 
 
 
-Automation controller is a distributed system, where different software components can be co-located or deployed across multiple compute nodes. In the installer, four node types are provided as abstractions to help you design the topology appropriate for your use case: control, hybrid, execution, and hop nodes.
+Automation controller is a distributed system, where different software components can be co-located or deployed across many compute nodes. The installation program provides four node types as abstractions to help you design the topology appropriate for your use case: control, hybrid, execution, and hop nodes.
 
 Use the following recommendations for node sizing:
 
-**Execution nodes**
 
-Execution nodes run automation. Increase memory and CPU to increase capacity for running more forks.
+<span id="idm139865340624976"></span>
+**Table 2.3. Recommended Resource Sizing for Automation controller Node Types**
 
-Note
-- The RAM and CPU resources stated are minimum recommendations to handle the job load for a node to run an average number of jobs simultaneously.
-- Recommended RAM and CPU node sizes are not supplied. The required RAM or CPU depends directly on the number of jobs you are running in that environment.
-- For capacity based on forks in your configuration, see [Automation controller capacity determination and job impact](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-jobs#controller-capacity-determination) .
-
-
-For further information about required RAM and CPU levels, see [Performance tuning for automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-improving-performance) .
-
+| Node Type | RAM (Minimum) | vCPU (Minimum) | Disk IOPS (Minimum) | Storage and Notes |
+| --- | --- | --- | --- | --- |
+|  **Execution Node** | 16 GB | 4 vCPU | 3000 | Runs automation. Increase RAM/CPU to increase capacity for concurrent job **forks** . Performance depends heavily on the number of jobs run simultaneously. |
+|  **Control Node** | 16 GB | 4 vCPU | 3000 | Processes events and runs cluster jobs (e.g., project updates). * **Storage:** 80GB minimum, with at least 20GB available under `/var/lib/awx` . * **Storage Requirement:** Volume must be rated for a minimum baseline of 3000 IOPS. |
+|  **Hybrid Node** | 16 GB | 4 vCPU | 3000 | A combination of Control and Execution node functions. Storage requirements generally match the Control Node. |
+|  **Hop Node** | 16 GB | 4 vCPU | 3000 | Routes traffic within the automation mesh (e.g., bastion host). RAM can affect throughput, but CPU activity is typically low. Network latency is a more important factor than RAM or CPU. |
 
 
-**Control nodes**
 
-Control nodes process events and run cluster jobs including project updates and cleanup jobs. Increasing CPU and memory can help with job event processing.
-
-- 40GB minimum with at least 20GB available under /var/lib/awx
-- Storage volume must be rated for a minimum baseline of 3000 IOPS
-- Projects are stored on control and hybrid nodes, and for the duration of jobs, are also stored on execution nodes. If the cluster has many large projects, consider doubling the GB in /var/lib/awx/projects, to avoid disk space errors.
-
-
-**Hop nodes**
-
-Hop nodes serve to route traffic from one part of the automation mesh to another (for example, a hop node could be a bastion host into another network). RAM can affect throughput, CPU activity is low. Network bandwidth and latency are generally a more important factor than either RAM or CPU.
 
 - Actual RAM requirements vary based on how many hosts automation controller manages simultaneously (which is controlled by the `    forks` parameter in the job template or the system `    ansible.cfg` file). To avoid possible resource conflicts, Ansible recommends 1 GB of memory per 10 forks and 2 GB reservation for automation controller. See [Automation controller capacity determination and job impact](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-jobs#controller-capacity-determination) . If `    forks` is set to 400, 42 GB of memory is recommended.
-- Automation controller hosts check if `    umask` is set to 0022. If not, the setup fails. Set `    umask=0022` to avoid this error.
 - A larger number of hosts can be addressed, but if the fork number is less than the total host count, more passes across the hosts are required. You can avoid these RAM limitations by using any of the following approaches:
 
 
@@ -48,7 +34,7 @@ Hop nodes serve to route traffic from one part of the automation mesh to another
 
 **Additional resources**
 
-- For more information about obtaining an automation controller subscription, see [Attaching your Red Hat Ansible Automation Platform subscription](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/assembly-gateway-licensing#proc-attaching-subscriptions) .
-- For questions, contact Ansible support through the [Red Hat Customer Portal](https://access.redhat.com/) .
+-  [Attaching your Red Hat Ansible Automation Platform subscription](https://access.redhat.com/articles/5807761)
+-  [Red Hat Customer Portal](https://access.redhat.com/)
 
 

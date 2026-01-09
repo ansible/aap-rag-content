@@ -1,11 +1,11 @@
 # 6. Configuring Ansible Automation Platform
 ## 6.2. Platform gateway
-### 6.2.4. Configuring additional platform options
+### 6.2.5. Configuring additional platform options
 
 
 
 
-From the **Platform gateway settings** page, you can configure additional platform options.
+Configure extra settings in platform gateway, such as the JWT expiration buffer. Adjusting these options helps ensure continuous token validity and smooth communication between platform services.
 
 **Procedure**
 
@@ -21,7 +21,7 @@ When authentication happens a JWT token is created for the user and that token i
 
 
 -  **Status endpoint backend timeout seconds** : Timeout (in seconds) for the status endpoint to wait when trying to connect to a backend.
--  **Status endpoint backend verify** : Specifies whether SSL certificates of the services are verified when calling individual nodes for statuses.
+-  **Status endpoint backend verify** : Specifies whether SSL/TLS certificates of the services are verified when calling individual nodes for statuses.
 -  **Resource client request timeout** : The timeout (in seconds) before the resource client will drop requests after forming connections.
 -  **Request timeout** : Specifies, in seconds, the length of time before the proxy will report a timeout and generate a 504.
 -  **Manage organization auth** : Controls whether any organization administrator has the privileges to create and manage users and teams. You might want to disable this ability if you are using an LDAP or SAML integration.
@@ -32,9 +32,9 @@ The `        MANAGE_ORGANIZATION_AUTH` setting is moved to platform gateway duri
 
 
 
--  **Stream idle timeout** : Timeout in seconds for idle streaming connections, for example, for the Ansible Automation Platform Lightspeed chatbot. Stream is closed if no data is transmitted within this period.
--  **Max stream duration** : Maximum total duration in seconds for streaming connections, for example, for the Ansible Automation Platform Lightspeed chatbot. Stream is closed after this time regardless of activity.
--  **Aap deployment type** : The deployment type for this AAP instance.
+-  **Stream idle timeout** : Timeout in seconds for idle streaming connections, for example, for the Red Hat Ansible Lightspeed chatbot. Stream is closed if no data is transmitted within this period.
+-  **Max stream duration** : Maximum total duration in seconds for streaming connections, for example, for the Red Hat Ansible Lightspeed chatbot. Stream is closed after this time regardless of activity.
+-  **Aap deployment type** : The deployment type for this Ansible Automation Platform instance.
 
 1. ClickSave platform gateway settingsto save the changes or proceed to configure the other platform options available.
 

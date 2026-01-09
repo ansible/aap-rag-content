@@ -36,13 +36,15 @@ Migration of LDAP authentication settings are not supported for 2.4 to 2.5 in th
 1. ClickCreate authentication.
 1. Enter a **Name** for this authentication configuration.
 1. Select **LDAP** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+
+
 1. Select a legacy authenticator method from the **Auto migrate users from** list. After upgrading from 2.4 to 2.5, this is the legacy authenticator from which to automatically migrate users to this new authentication configuration. Refer to [Ansible Automation Platform post-upgrade steps](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_upgrade_and_migration/aap-post-upgrade) in the RPM upgrade and migration guide for important information about migrating users.
 1. In the **LDAP Server URI** field, enter or modify the list of LDAP servers to which you want to connect. This field supports multiple addresses.
 1. In the **LDAP Bind DN text** field, enter the Distinguished Name (DN) to specify the user that the Ansible Automation Platform uses to connect to the LDAP server as shown in the following example:
 
 
 ```
-CN=josie,CN=users,DC=website,DC=com
+cn=josie,cn=users,dc=website,dc=com
 ```
 
 
@@ -52,7 +54,7 @@ CN=josie,CN=users,DC=website,DC=com
 The group type defines the class name of the group, which manages the groups associated with users in your LDAP directory and is returned by the search specified in Step 14 of this procedure. The group type, along with group parameters and the group search, is used to find and assign groups to users during log in, and can also be evaluated during the mapping process. The following table lists the available group types, along with their descriptions and the necessary parameters for each. By default, LDAP groups will be mapped to Django groups by taking the first value of the cn attribute. You can specify a different attribute with `    name_attr` . For example, `    name_attr='cn'` .
 
 
-<span id="idm140397708148192"></span>
+<span id="idm139715908194512"></span>
 **Table 2.1. Available LDAP group types**
 
 |  **LDAP Group Type** |  **Description** |  **Initializer method ( _init_ )** |
@@ -101,7 +103,7 @@ Values defined in this field override the dedicated fields provided in the UI. A
 
 
 
-1. Enter any **LDAP Connection Options** to set for the LDAP connection. LDAP referrals are not disabled by default. Disable this setting to prevent login flow timeouts and ensure successful user logins. Option names should be strings as shown in the following example:
+1. Enter any **LDAP Connection Options** to set for the LDAP connection. By default, LDAP referrals are disabled to prevent certain LDAP queries from hanging with Active Directory. Option names should be strings as shown in the following example:
 
 
 ```
@@ -133,7 +135,7 @@ To determine the parameters that a specific **LDAP Group Type** requires, refer 
 
 
 ```
-{    "first_name": "givenName",    "last_name": "sn",    "email": "mail"    }
+{    "first_name": "givenname",    "last_name": "sn",    "email": "mail"    }
 ```
 
 
@@ -141,7 +143,7 @@ To determine the parameters that a specific **LDAP Group Type** requires, refer 
 
 
 ```
-[    "OU=Users,DC=website,DC=com",    "SCOPE_SUBTREE",    "(cn=%(user)s)"    ]
+[    "ou=users,dc=website,dc=com",    "SCOPE_SUBTREE",    "(cn=%(user)s)"    ]
 ```
 
 If the **LDAP User DN Template** is not set, the Ansible Automation Platform authenticates to LDAP using the **Bind DN Template** and **LDAP Bind Password** . After authentication, an LDAP search is performed to locate the user specified by this field. If the user is found, Ansible Automation Platform validates the provided password against the user found by the LDAP search. Multiple search queries are supported for users with `    LDAPUnion` by entering multiple search terms as shown in the following example:

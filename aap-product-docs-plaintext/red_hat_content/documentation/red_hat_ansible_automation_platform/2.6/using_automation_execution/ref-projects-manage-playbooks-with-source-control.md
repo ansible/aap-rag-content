@@ -5,10 +5,10 @@
 
 
 
-Choose one of the following options when managing playbooks using source control:
+Choose one of the following options when managing playbooks by using source control:
 
 -  [SCM Types - Configuring playbooks to use Git and Subversion](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-scm-git-subversion)
--  [SCM Type - Configuring playbooks to use Red Hat Insights](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-scm-insights)
+-  [SCM Type - Configuring playbooks to use Red Hat Lightspeed](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-scm-insights)
 -  [SCM Type - Configuring playbooks to use a remote archive](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-scm-remote-archive)
 
 
@@ -17,7 +17,9 @@ Choose one of the following options when managing playbooks using source control
 
 
 
-Configure your projects to synchronize Ansible playbooks from Source Code Management (SCM) systems such as Git and Subversion. Integrating with SCM is a best practice for managing playbooks, as it provides version control, collaboration features, and a centralized repository for your automation code. By following these steps, you can ensure your environment always uses the latest version of your playbooks directly from your chosen SCM.
+Configure automation controller projects to synchronize Ansible playbooks directly from Git and Subversion. Integrating with Source Control Management supports collaboration and helps ensure you always deploy the latest automation code.
+
+By following these steps, you can ensure your environment always uses the latest version of your playbooks directly from your chosen SCM.
 
 **Procedure**
 
@@ -38,7 +40,7 @@ Configure your projects to synchronize Ansible playbooks from Source Code Manage
 
 -  **Clean** - Removes any local modifications before performing an update.
 -  **Delete** - Deletes the local repository in its entirety before performing an update. Depending on the size of the repository this can significantly increase the amount of time required to complete an update.
--  **Track submodules** - Tracks the latest commit. There is more information in the tooltip![Tooltip](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/0c17081b1d1293156a760e9a6e06634a/question_circle.png)
+-  **Track submodules** - Tracks the latest commit. There is more information in the tooltip![tooltip](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/0c17081b1d1293156a760e9a6e06634a/question_circle.png)
 .
 -  **Update revision on launch** - Updates the revision of the project to the current revision in the remote source control, and caching the roles directory from [Ansible Galaxy support](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#ref-projects-galaxy-support) or [Collections support](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#ref-projects-collections-support) . Automation controller ensures that the local revision matches and that the roles and collections are up-to-date with the last update. In addition, to avoid job overflows if jobs are spawned faster than the project can synchronize, selecting this enables you to configure a Cache Timeout to cache previous project synchronizations for a given number of seconds.
 -  **Allow branch override** - Enables a job template or an inventory source that uses this project to start with a specified SCM branch or revision other than that of the project. For more information, see [Job branch overriding](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-job-branch-overriding) .
@@ -46,20 +48,22 @@ Configure your projects to synchronize Ansible playbooks from Source Code Manage
 1. ClickSave project.
 
 
-#### 11.1.2.2. SCM Type - Configuring playbooks to use Red Hat Insights
+#### 11.1.2.2. SCM Type - Configuring playbooks to use Red Hat Lightspeed
 
 
 
 
-Configure your projects to retrieve Ansible playbooks directly from Red Hat Insights. By integrating with Red Hat Insights, you can use it to manage and deploy remediation playbooks identified through its analysis of your Red Hat Enterprise Linux environment. This integration streamlines the process of addressing identified vulnerabilities and optimizing system configurations, ensuring your automation aligns with best practices and security recommendations.
+Configure your projects to retrieve Ansible playbooks directly from Red Hat Lightspeed. Integrate with Red Hat Lightspeed to manage and deploy remediation playbooks identified through its analysis of your Red Hat Enterprise Linux environment.
+
+This integration streamlines the process of addressing identified vulnerabilities and optimizing system configurations, ensuring your automation aligns with best practices and security recommendations.
 
 **Procedure**
 
 1. From the navigation panel, selectAutomation Execution→Projects.
 1. Click the project name you want to use.
 1. In the project **Details** tab, clickEdit project.
-1. Select **Red Hat Insights** from the **Source Control Type** menu.
-1. In the **Insights credential** field, select the appropriate credential for use with Insights, as Red Hat Insights requires a credential for authentication.
+1. Select **Red Hat Lightspeed** from the **Source Control Type** menu.
+1. In the **Red Hat Lightspeed credential** field, select the appropriate credential for use with Red Hat Lightspeed, as Red Hat Lightspeed requires a credential for authentication.
 1. Optional: In the **Options** field, select the launch behavior, if applicable:
 
 

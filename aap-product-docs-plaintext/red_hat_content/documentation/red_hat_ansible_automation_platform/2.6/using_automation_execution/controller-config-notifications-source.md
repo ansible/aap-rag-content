@@ -5,7 +5,7 @@
 
 
 
-Use the following procedure to configure notifications for the source:
+After you create a source for an inventory in automation controller, you can configure notifications for that source.
 
 **Procedure**
 

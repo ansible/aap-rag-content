@@ -3,5 +3,5 @@
 
 
 
-The containerized installer deploys Ansible Automation Platform on Red Hat Enterprise Linux by using Podman which runs the platform in containers on host machines. Customers manage the product and infrastructure lifecycle.
+Ansible Automation Platform provides tested topologies for containerized Ansible Automation Platform. Select the topology that best fits your container-based deployment requirements.
 

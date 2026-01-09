@@ -4,5 +4,5 @@
 
 
 
-Red Hat Developer Hub (RHDH) serves as an open developer platform designed for building developer portals.
+Red Hat Developer Hub (RHDH) is an open developer platform you can use to build custom developer portals for your organization.
 

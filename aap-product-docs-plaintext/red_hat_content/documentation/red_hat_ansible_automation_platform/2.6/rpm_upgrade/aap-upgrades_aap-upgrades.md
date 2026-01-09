@@ -4,7 +4,7 @@
 
 
 
-Currently, it is possible to perform Ansible Automation Platform upgrades using one of the following supported upgrade paths.
+You can upgrade your Ansible Automation Platform installation from version 2.4 or 2.5 to 2.6 using the supported upgrade paths. Review the available upgrade paths and required steps to ensure a successful upgrade of your Ansible Automation Platform environment.
 
 Important
 Upgrade from Event-Driven Ansible 2.5 to 2.6 is supported; however, upgrade from Event-Driven Ansible 2.4 to 2.6 is not supported. If you are upgrading from Ansible Automation Platform 2.4 to 2.6 and you have deployed Event-Driven Ansible, you must first remove the Event-Driven Ansible 2.4 database and then upgrade your platform to 2.6. For information about the procedure, see [Removing Event-Driven Ansible 2.4 database](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/rpm_upgrade/index#proc-removing-eda-db_aap-upgrading-platform) .

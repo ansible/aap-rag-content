@@ -41,8 +41,3 @@ Use the acl_manager role to create a new firewall rule for blocking a source IP 
 You have created a new firewall rule that blocks a source IP address from accessing a destination IP address. Access the MGMT server and verify that the new security policy has been created.
 
 
-**Additional resources**
-
-[Installing roles from Galaxy](https://docs.ansible.com/ansible/latest/galaxy/user_guide.html#installing-roles-from-galaxy) .
-
-

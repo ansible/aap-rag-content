@@ -3,15 +3,9 @@
 
 
 
-Occasionally, rulebook activations might fail due to a variety of reasons that can be resolved. In many cases, log filtering provides information that could be helpful in determining the cause of activation failure.
+Rulebook activations might occasionally fail due to various reasons. While many issues can be resolved through basic checks, diagnosing failures across a distributed system requires robust logging.
 
-For improved log filtering, there are two different tracking IDs available for troubleshooting after an action is performed (for example, when you initiate a rulebook activation). Both tracking IDs are universally unique identifiers (UUIDs):
+Event-Driven Ansible’s enhanced logging strategy includes the addition of unique tracking identifiers to all output to significantly improve troubleshooting.
 
--  **Log tracking ID**  `    [tid]` - Created for each activation and persists across all activation instances. It allows users to track the complete history of an activation and its lifecycle. The Log tracking ID can be retrieved from the activation instance logs under the History tab.
--  **X-request-ID**  `    [rid]` - A standard HTTP header that is returned to the user as part of the HTTP response. If you want to fetch this ID, you must inspect the HTTP response headers. This ID results from actions such as triggering a restart of an activation. It allows tracking of a specific API request from platform gateway to Event-Driven Ansible controller.
-
-
-You can use both tracking IDs to locate specific log entries in your backend logs (for example, API or worker logs).
-
-Review the list of possible issues that can cause activation failures and suggestions on how you can resolve them.
+Review the list of possible issues contained in this chapter that can cause activation failures and suggestions on how you can resolve them. For detailed log filtering using the new identifiers, see [Event-Driven Ansible log filtering](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_decisions/eda-rulebook-troubleshooting#eda-log-filtering) .
 

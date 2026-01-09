@@ -3,7 +3,11 @@
 
 
 
-This document outlines the necessary steps and considerations for migrating between different Ansible Automation Platform deployment types for Ansible Automation Platform 2.5. Specifically, it focuses on these migration paths:
+Learn about supported migration paths between RPM-based, container-based, OpenShift Container Platform, and Managed Ansible Automation Platform deployments, including step-by-step workflows and migration requirements.
+
+Migration between different Ansible Automation Platform deployment types for Ansible Automation Platform 2.5 requires specific steps and considerations.
+
+The supported migration paths include:
 
 | Source environment | Target environment |
 | --- | --- |
@@ -16,10 +20,10 @@ This document outlines the necessary steps and considerations for migrating betw
 
 Migrations outside of those listed are not supported at this time.
 
-The primary goals of this document are to:
+The Ansible Automation Platform migration guide aims to:
 
-- Document all components and configurations that must be migrated between Ansible Automation Platform platforms
-- Give step-by-step migration workflows for different deployment scenarios
+- Document all components and configurations that require migration between Ansible Automation Platform platforms
+- Provide step-by-step migration workflows for different deployment scenarios
 - Identify potential challenges and unknowns that require further investigation
 
 

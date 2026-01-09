@@ -7,8 +7,7 @@ The automation calculator provides graphs, metrics and calculations that help yo
 
 **Automation savings**
 
-Automation savings is produced by an analysis of the time and cost of performing a task manually, such as deploying a server, versus the time and cost associated with automating the same task. Automation savings calculations extend across all organizations, clusters, hosts and templates in an environment. Include your own estimated costs to produce a more accurate calculation.
-
+Automation savings is produced by an analysis of the time and cost of performing a task manually, such as deploying a server, compared to the time and cost associated with automating the same task. Automation savings calculations extend across all organizations, clusters, hosts and templates in an environment. Include your own estimated costs to produce a more accurate calculation.
 
 Note
 The initial total savings is based on default values for each variable.
@@ -19,7 +18,6 @@ The initial total savings is based on default values for each variable.
 
 Several variables are used in evaluating costs:
 
-
 -  **Manual cost of automation** - the approximate cost for a mid-level resource to perform a task or series of tasks.
 -  **Cost of automation** - costs associated with automating tasks as job templates.
 -  **Automation time** - the time required to run a job template.
@@ -29,7 +27,6 @@ Several variables are used in evaluating costs:
 **Automation formula**
 
 Automation savings is based on the following formulas:
-
 
 -  **Manual cost per template** = (time for a manual run on one host * (sum of all hosts across job runs)) * cost per hour.
 -  **Automation cost per template** = cost of automation per hour * sum of total elapsed hours for a template.

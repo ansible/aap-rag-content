@@ -3,5 +3,5 @@
 
 
 
-The RPM installer deploys Ansible Automation Platform on Red Hat Enterprise Linux by using RPMs to install the platform on host machines. Customers manage the product and infrastructure lifecycle.
+Ansible Automation Platform provides tested topologies for RPM-based Ansible Automation Platform. Select the topology that best fits your RPM-based deployment requirements.
 

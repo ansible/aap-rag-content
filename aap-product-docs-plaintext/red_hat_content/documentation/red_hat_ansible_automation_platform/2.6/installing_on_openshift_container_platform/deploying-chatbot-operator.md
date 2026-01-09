@@ -1,4 +1,4 @@
-# Chapter 5. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
+# Chapter 6. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
 
 
 

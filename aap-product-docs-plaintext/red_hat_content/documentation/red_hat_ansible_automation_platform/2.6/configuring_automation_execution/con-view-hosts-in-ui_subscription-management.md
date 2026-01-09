@@ -5,11 +5,14 @@
 
 
 
+Learn how to view and manage the hosts that have been automated in automation controller.
+
 **Procedure**
 
 1. In the navigation panel, selectAutomation Analytics→Host Metricsto view the activity associated with hosts, such as those that have been automated and deleted.
 
-Each unique hostname is listed and sorted by the user’s preference. image::ug-host-metrics.png[Host metrics]
+Each unique hostname is listed and sorted by the user’s preference.![Host metrics](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/530c55b865c4d190d2a44c4087954223/ug-host-metrics.png)
+
 
 Note
 A scheduled task automatically updates these values on a weekly basis and deletes jobs with hosts that were last automated more than a year ago.
@@ -26,6 +29,6 @@ These are soft-deleted, meaning their records are not removed, but are not being
 
 **Additional resources**
 
--  [Configuring automation execution](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution) /index#controller-keep-subscription-in-compliance[Keeping your subscription in compliance]
+-  [Keeping your subscription in compliance](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-subscription-management#controller-keep-subscription-in-compliance_subscription-management)
 
 

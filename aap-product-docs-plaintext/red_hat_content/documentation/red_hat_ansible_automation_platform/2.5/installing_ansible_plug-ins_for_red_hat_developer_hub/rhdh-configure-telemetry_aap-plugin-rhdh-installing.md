@@ -18,4 +18,4 @@ Red Hat collects and analyzes the following data to improve your experience with
 With Red Hat Developer Hub, you can disable or customize the telemetry data collection feature. For more information, refer to the [Telemetry data collection and analysis](https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html/telemetry_data_collection_and_analysis/index) guide in the Red Hat Developer Hub documentation.
 
 
-<span id="idm140313496801264"></span>
+<span id="idm140013535460864"></span>

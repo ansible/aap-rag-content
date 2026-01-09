@@ -1,10 +1,12 @@
 # 6. Job templates
-## 6.11. Duplicating a job template
+## 6.12. Duplicating a job template
 
 
 
 
-If you duplicate a job template, it does not duplicate any associated schedule, notifications, or permissions. Schedules and notifications must be recreated by the user or administrator creating the duplicate of the job template. The user duplicating the Job Template is granted administrator permission, but no permissions are assigned (duplicated) to the job template.
+If you duplicate a job template, it does not duplicate any associated schedule, notifications, or permissions. Schedules and notifications must be recreated by the user or administrator creating the duplicate of the job template.
+
+The user duplicating the job template is granted administrator permission, but no permissions are assigned (duplicated) to the job template.
 
 **Procedure**
 

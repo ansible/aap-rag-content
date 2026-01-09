@@ -10,7 +10,7 @@ This error can happen when the collection associated with the module is missing 
 
 The recommended resolution is to create a custom execution environment and add the required collections inside of that execution environment. For more information about creating an execution environment, see [Using Ansible Builder](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/creating_and_using_execution_environments/assembly-using-builder) in _Creating and using execution environments_ .
 
-Alternatively, you can complete the following steps:
+Alternatively, you can complete these steps:
 
 **Procedure**
 
@@ -19,7 +19,7 @@ Alternatively, you can complete the following steps:
 
 
 ```
-collections:    -<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">&lt;collection_name&gt;</span></em></span>
+collections:    - &lt;collection_name&gt;
 ```
 
 

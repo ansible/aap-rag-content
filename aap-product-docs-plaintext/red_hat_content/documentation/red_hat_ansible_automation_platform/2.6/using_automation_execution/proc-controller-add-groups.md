@@ -5,6 +5,8 @@
 
 
 
+You can add groups to standard inventories in automation controller to organize hosts.
+
 Inventories are divided into groups, which can contain hosts and other groups. Groups are only applicable to standard inventories and are not a configurable directly through a Smart Inventory. You can associate an existing group through hosts that are used with standard inventories.
 
 The following actions are available for standard inventories:
@@ -47,6 +49,8 @@ When you have added a group to a template, the Group **Details** page is display
 
 
 
+
+You can create a hierarchy of groups by adding groups within groups. This allows you to create nested groupings of hosts for easier management and organization.
 
 When you have added a group to a template, the Group **Details** page is displayed.
 

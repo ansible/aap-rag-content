@@ -1,5 +1,5 @@
 # 2. Getting started as a platform administrator
-## 2.2. Adding your subscription
+## 2.2. Adding a subscription
 
 
 
@@ -11,7 +11,7 @@ To add your subscription information, you can either upload your subscription ma
 To add your subscription by uploading a subscription manifest, you must first:
 
 
-- Obtain your manifest file. See [Obtaining a manifest file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/assembly-gateway-licensing#assembly-aap-obtain-manifest-files) in the Access management and authentication guide for steps on how to do this.
+- Obtain your manifest file. See [Obtaining a manifest file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/assembly-gateway-licensing#assembly-aap-obtain-manifest-files) for more information.
 
 
 To add your subscription using your service account credentials, you must first:
@@ -22,29 +22,37 @@ To add your subscription using your service account credentials, you must first:
 
 **Procedure**
 
-To add your subscription by uploading a subscription manifest:
+1. To add your subscription by uploading a subscription manifest:
 
 
-- Drag the file to the field beneath **Red Hat subscription manifest** or browse for the file on your local machine.
+1. Drag the file to the field beneath **Red Hat subscription manifest** or browse for the file on your local machine.
+
+1. To add your subscription with your service account credentials:
 
 
-To add your subscription with your service account credentials:
+1. Click the **Service Account** tab.
+1. Enter the **client ID** you received when you created your service account in the field labeled Client ID.
+1. Enter the **client secret** you received when you created your service account in the field labeled Client secret.
 
-1. Click the **Service Account / Red Hat Satellite** tab.
-1. Enter the **client ID** you received when you created your service account in the field labeled Client ID / Satellite username.
-1. Enter the **client secret** you received when you created your service account in the field labeled Client secret / Satellite password. Your subscription appears in the **Subscription** list. Select your subscription.
-1. After you have added your subscription, clickNext.
+Your subscription appears in the **Subscription** list.
+
+
+
+1. Select your subscription and clickNext.
+
+
 1. Check the box indicating that you agree to the **End User License Agreement** .
 1. Review your information and clickFinish.
 
 
-Note
+
+**Troubleshooting**
+
 If you enter your client ID and client secret but cannot locate your subscription, you might not have the correct permissions set on your service account. For more information and troubleshooting guidance for service accounts, see [Configure Ansible Automation Platform to authenticate through service account credentials](https://access.redhat.com/articles/7112649) .
 
 
+**Additional resources**
 
-Tip
-After logging in, review the quick starts section in the navigation panel for useful guidance.
-
+-  [Attaching your Ansible Automation Platform subscription to your instance](https://access.redhat.com/articles/5807761)
 
 

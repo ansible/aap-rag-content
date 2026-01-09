@@ -1,6 +1,6 @@
-# 3. Disconnected installation
-## 3.1. Obtaining and configuring RPM source dependencies
-### 3.1.2. Configuring a local repository from a mounted ISO
+# 8. Disconnected installation
+## 8.1. Obtaining and configuring RPM source dependencies
+### 8.1.2. Configuring a local repository from a mounted ISO
 
 
 

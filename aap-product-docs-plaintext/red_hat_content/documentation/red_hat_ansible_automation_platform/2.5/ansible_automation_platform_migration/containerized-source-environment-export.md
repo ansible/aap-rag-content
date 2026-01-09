@@ -5,7 +5,7 @@
 
 
 
-From your source environment, export the data and configurations needed for migration.
+Export databases, secrets, and custom configurations from your source containerized Ansible Automation Platform deployment to create the migration artifact.
 
 **Procedure**
 
@@ -15,7 +15,7 @@ You can verify your current PostgreSQL version by connecting to your database se
 
 
 ```
-$ psql -c 'SELECT version();'
+$ podman exec -it postgresql bash -c 'psql -c "SELECT version();"'
 ```
 
 Important
@@ -41,7 +41,7 @@ $ ansible-playbook -i &lt;path_to_inventory&gt; ansible.containerized_installer.
 
 
 ```
-$ podman exec -it automation-controller-task bash -c 'awx-manage print_settings | grep DATABASES'
+$ podman exec -it automation-controller-task bash -c 'awx-manage print_settings | grep '^DATABASES'
 ```
 
 
@@ -74,7 +74,7 @@ $ podman exec -it postgresql bash -c 'psql -c "\l+"'
 Adjust the filesystem size or mount an external filesystem as needed before performing the next step.
 
 Note
-This procedure assumes that all target files will be sent to the `    /tmp` filesystem. You might want to adjust the commands to match your environment’s needs.
+These commands send all target files to the `    /tmp` filesystem. Adjust the commands to match your environment’s needs.
 
 
 
@@ -173,14 +173,14 @@ If any `    extra_settings` exist in your containerized installation inventory, 
 
 
 ```
-# cd /tmp/backups/artifact/    # [ -f sha256sum.txt ] &amp;&amp; rm -f sha256sum.txt; find . -type f -name "*.pgc" -exec sha256sum {} \; &gt;&gt; sha256sum.txt    # cat sha256sum.txt    # cd /tmp/backups/    # tar cf artifact.tar artifact    # sha256sum artifact.tar &gt; artifact.tar.sha256    # sha256sum --check artifact.tar.sha256    # tar tvf artifact.tar
+# cd /tmp/backups/artifact/    # [ -f sha256sum.txt ] &amp;&amp; rm -f sha256sum.txt; find . -type f -name "*.pgc" -exec sha256sum {} \; &gt;&gt; sha256sum.txt    # cat sha256sum.txt    # cd ..    # tar cf artifact.tar artifact    # sha256sum artifact.tar &gt; artifact.tar.sha256    # sha256sum --check artifact.tar.sha256    # tar tvf artifact.tar
 ```
 
 Example output of `    tar tvf artifact.tar` :
 
 
 ```
-drwxr-xr-x ansible/ansible        0 2025-05-08 16:48 artifact/    drwxr-xr-x ansible/ansible        0 2025-05-08 16:33 artifact/controller/    -rw-r--r-- ansible/ansible   732615 2025-05-08 16:26 artifact/controller/controller.pgc    drwxr-xr-x ansible/ansible        0 2025-05-08 16:33 artifact/controller/custom_configs/    drwxr-xr-x ansible/ansible        0 2025-05-08 16:11 artifact/gateway/    -rw-r--r-- ansible/ansible   231155 2025-05-08 16:28 artifact/gateway/gateway.pgc    drwxr-xr-x ansible/ansible        0 2025-05-08 16:26 artifact/hub/    -rw-r--r-- ansible/ansible 29252002 2025-05-08 16:26 artifact/hub/hub.pgc    -rw-r--r-- ansible/ansible      614 2025-05-08 16:24 artifact/secrets.yml    -rw-r--r-- ansible/ansible      338 2025-05-08 16:48 artifact/sha256sum.txt
+drwxr-xr-x ansible/ansible     0 2025-05-08 16:48 artifact/    drwxr-xr-x ansible/ansible     0 2025-05-08 16:33 artifact/controller/    -rw-r--r-- ansible/ansible 732615 2025-05-08 16:26 artifact/controller/controller.pgc    drwxr-xr-x ansible/ansible      0 2025-05-08 16:33 artifact/controller/custom_configs/    drwxr-xr-x ansible/ansible      0 2025-05-08 16:11 artifact/gateway/    -rw-r--r-- ansible/ansible 231155 2025-05-08 16:28 artifact/gateway/gateway.pgc    drwxr-xr-x ansible/ansible      0 2025-05-08 16:26 artifact/hub/    -rw-r--r-- ansible/ansible 29252002 2025-05-08 16:26 artifact/hub/hub.pgc    -rw-r--r-- ansible/ansible      614 2025-05-08 16:24 artifact/secrets.yml    -rw-r--r-- ansible/ansible      338 2025-05-08 16:48 artifact/sha256sum.txt
 ```
 
 
@@ -189,6 +189,6 @@ drwxr-xr-x ansible/ansible        0 2025-05-08 16:48 artifact/    drwxr-xr-x ans
 
 **Additional resources**
 
--  [Backing up containerized Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#backing-up-containerized-ansible-automation-platform)
+-  [Backing up containerized Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/maintaining-containerized-aap#backing-up-containerized-ansible-automation-platform)
 
 

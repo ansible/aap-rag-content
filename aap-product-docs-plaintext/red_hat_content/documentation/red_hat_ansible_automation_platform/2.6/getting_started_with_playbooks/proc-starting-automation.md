@@ -9,6 +9,7 @@ Get started with Ansible by creating an automation project, building an inventor
 **Prerequisites**
 
 - The Ansible package must be installed.
+- A text editor must be available to create and edit files.
 
 
 **Procedure**
@@ -17,9 +18,11 @@ Get started with Ansible by creating an automation project, building an inventor
 
 
 ```
-mkdir ansible_quickstart
-cd ansible_quickstart
+mkdir ansible_quickstart    cd ansible_quickstart
 ```
 
 Using a single directory structure makes it easier to add to source control, and reuse and share automation content.
+
+
+
 

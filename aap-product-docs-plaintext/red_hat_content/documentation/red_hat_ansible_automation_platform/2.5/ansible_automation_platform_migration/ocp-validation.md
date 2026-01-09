@@ -5,7 +5,7 @@
 
 
 
-To validate your migrated environment, perform the following steps.
+Verify that all Ansible Automation Platform services are running, credentials work correctly, and migrated content like projects, inventories, and job templates are accessible on OpenShift Container Platform.
 
 **Procedure**
 

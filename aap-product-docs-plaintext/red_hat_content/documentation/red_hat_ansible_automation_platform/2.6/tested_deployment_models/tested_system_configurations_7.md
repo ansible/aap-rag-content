@@ -4,5 +4,5 @@
 
 
 
-Each automation mesh VM has been tested with the following component requirements: 16 GB RAM, 4 CPUs, 60 GB local disk, and 3000 IOPS.
+Each automation mesh VM has been tested with these requirements: 16 GB RAM, 4 CPUs, 60 GB local disk, and 3000 IOPS.
 

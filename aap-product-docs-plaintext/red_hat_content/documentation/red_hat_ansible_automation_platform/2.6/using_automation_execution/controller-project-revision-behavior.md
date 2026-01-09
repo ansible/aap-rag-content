@@ -5,6 +5,8 @@
 
 
 
+Automation controller interacts with source control management (SCM) systems to manage project revisions effectively. When a project is configured to use an SCM system, such as Git, automation controller tracks the revisions of the project files. This tracking allows automation controller to ensure that the correct version of the project files is used during job execution.
+
 During a project update, the revision of the default branch (specified in the **Source control branch** field of the project) is stored when updated. If providing a non-default **Source control branch** (not a commit hash or tag) in a job, the newest revision is pulled from the source control remote immediately before the job starts. This revision is shown in the **Source control revision** field of the job and its project update.
 
 As a result, offline job runs are impossible for non-default branches. To ensure that a job is running a static version from source control, use tags or commit hashes. Project updates do not save all branches, only the project default branch.

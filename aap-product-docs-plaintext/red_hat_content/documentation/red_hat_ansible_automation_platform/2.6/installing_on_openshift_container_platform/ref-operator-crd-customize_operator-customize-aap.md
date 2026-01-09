@@ -1,5 +1,5 @@
-# 3. Customizing your Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
-## 3.4. Customizing your resource requirements
+# 4. Customizing your Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+## 4.4. Customizing your resource requirements
 
 
 

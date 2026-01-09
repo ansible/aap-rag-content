@@ -4,7 +4,7 @@
 
 
 
-A user is an individual or entity that can log into the platform and perform tasks. Users are fundamental units to which roles can be assigned, either directly by an administrator or indirectly through a team.
+A user is an individual or entity that can log in to the platform and perform tasks. Users are fundamental units to which roles can be assigned, either directly by an administrator or indirectly through a team.
 
 Note
 Ansible Automation Platform automatically creates a default system admin user so they can log in and set up Ansible Automation Platform for their organization. This user cannot be deleted or modified.

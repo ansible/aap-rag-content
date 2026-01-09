@@ -4,7 +4,9 @@
 
 
 
-After you update the inventory file with required parameters, run the installer setup script.
+After you update the inventory file with required parameters, run the installation program setup script.
+
+**RPM installer**
 
 **Procedure**
 
@@ -15,25 +17,24 @@ After you update the inventory file with required parameters, run the installer 
 $ sudo ./setup.sh
 ```
 
-
-
-
 Note
-If you are running the setup as a non-root user with `sudo` privileges, you can use the following command:
+If you are running the setup as a non-root user with `    sudo` privileges, you can use the following command:
+
 
 ```
-$ ANSIBLE_BECOME_METHOD='sudo'
-ANSIBLE_BECOME=True ./setup.sh
+$ ANSIBLE_BECOME_METHOD='sudo'    ANSIBLE_BECOME=True ./setup.sh
 ```
 
 
 
 Installation of Red Hat Ansible Automation Platform will begin.
 
-**Additional resources**
+If you want to add additional nodes to your automation mesh after the initial setup, edit the inventory file to add the new node, then rerun the `    setup.sh` script.
 
-See [Understanding privilege escalation](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_privilege_escalation.html) for additional `setup.sh` script examples.
+**Containerized installer**
+
+For information on installing containerized Ansible Automation Platform, see [Installing containerized Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/installing-containerized-aap)
 
 
-If you want to add additional nodes to your automation mesh after the initial setup, edit the inventory file to add the new node, then rerun the `setup.sh` script.
+
 

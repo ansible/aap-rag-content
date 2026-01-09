@@ -4,7 +4,9 @@
 
 
 
-To set up and use Prometheus, you must install Prometheus on a virtual machine or container.
+Learn how to use Prometheus to collect and visualize metrics from automation controller.
+
+You must install Prometheus on a virtual machine or container.
 
 For more information, see the [First steps with Prometheus](https://prometheus.io/docs/introduction/first_steps/) documentation.
 

@@ -1,6 +1,6 @@
 # 2. System requirements
-## 2.1. Red Hat Ansible Automation Platform system requirements
-### 2.1.1. Repository requirements
+## 2.2. Red Hat Ansible Automation Platform system requirements
+### 2.2.1. Repository requirements
 
 
 

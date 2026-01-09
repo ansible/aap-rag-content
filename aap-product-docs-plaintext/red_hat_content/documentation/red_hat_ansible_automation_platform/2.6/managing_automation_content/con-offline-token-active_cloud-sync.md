@@ -1,13 +1,13 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
-## 1.1. Configuring Ansible automation hub remote repositories to synchronize content
-### 1.1.4. Keeping your offline token active
+## 1.1. Configuring remote repositories for content syncing
+### 1.1.4. Refreshing the offline token
 
 
 
 
-Offline tokens expire after 30 days of inactivity. You can keep your offline token from expiring by keeping it active.
+Offline tokens expire after 30 days of inactivity. You can keep your offline token from expiring by refreshing it periodically.
 
-Keeping an offline token active is useful when an application performs an action on behalf of the user; for example, this allows the application to perform a routine data backup when the user is offline.
+Refreshing the offline token to keep it active is useful when an application performs an action on behalf of the user. For example, this allows the application to perform a routine data backup when the user is offline.
 
 Note
 If your offline token expires, you must [obtain a new one](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/managing_automation_content/index#proc-create-api-token_cloud-sync) .
@@ -16,7 +16,7 @@ If your offline token expires, you must [obtain a new one](https://docs.redhat.c
 
 **Procedure**
 
-- Run the following command to prevent your token from expiring:
+- Run the following command to refresh the offline token:
 
 
 ```

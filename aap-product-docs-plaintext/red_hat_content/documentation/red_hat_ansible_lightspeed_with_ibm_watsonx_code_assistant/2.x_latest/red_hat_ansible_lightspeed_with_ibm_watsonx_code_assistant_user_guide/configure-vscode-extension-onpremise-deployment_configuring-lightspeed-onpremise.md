@@ -1,6 +1,6 @@
-# 3. Setting up Red Hat Ansible Lightspeed for your organization
-## 3.3. Setting up Red Hat Ansible Lightspeed on-premise deployment
-### 3.3.5. Configuring Ansible VS Code extension for Red Hat Ansible Lightspeed on-premise deployment
+# 4. Setting up Red Hat Ansible Lightspeed for your organization
+## 4.3. Setting up Red Hat Ansible Lightspeed on-premise deployment
+### 4.3.5. Configuring Ansible VS Code extension for Red Hat Ansible Lightspeed on-premise deployment
 
 
 
@@ -33,7 +33,6 @@ The URL will be in the following format: `        https://&lt;lightspeed_route&g
 
 
 - In the **URL for Ansible Lightspeed** field, enter the **Route URL** of the Red Hat Ansible Lightspeed on-premise deployment. Ansible users must have Ansible Automation Platform controller credentials.
-- Optional: If you want to use a custom model instead of the default model, in the **Model ID Override** field, enter the custom model ID. Your settings are automatically saved in VS Code.
 
 After configuring Ansible VS Code extension to connect to Red Hat Ansible Lightspeed on-premise deployment, you must [log in to Ansible Lightspeed through the Ansible VS Code extension](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index#login-vscode-extension_developing-ansible-content) .
 

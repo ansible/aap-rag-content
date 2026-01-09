@@ -4,3 +4,5 @@
 
 
 
+The workflow for developing automation content involves three key stages: Create, Test, and Deploy.
+

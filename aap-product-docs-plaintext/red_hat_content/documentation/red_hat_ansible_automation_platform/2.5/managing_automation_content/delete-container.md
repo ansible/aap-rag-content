@@ -1,5 +1,6 @@
 # 3. Manage containers in private automation hub
-## 3.7. Deleting a container repository
+## 3.6. Working with signed containers
+### 3.6.7. Deleting a container repository
 
 
 
@@ -21,8 +22,8 @@ Delete a remote repository from your Ansible Automation Platform to manage your 
 
 **Verification**
 
-- Return to the **automation execution environments** list view. If the automation execution environments has been successfully deleted, it will no longer be in the list.
+- Return to the **execution environment** list view. If the execution environment has been successfully deleted, it will no longer be in the list.
 
 
 
-<span id="idm140615732439728"></span>
+<span id="idm140051692127552"></span>

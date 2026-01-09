@@ -1,5 +1,5 @@
 # 4. Getting started as an automation operator
-## 4.8. Work with job templates
+## 4.2. Work with job templates
 
 
 

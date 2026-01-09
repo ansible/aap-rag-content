@@ -5,6 +5,10 @@
 
 
 
+Modify the Red Hat Developer Hub Helm chart by adding the local path of the extracted dynamic plug-in files to the `appConfig.dynamicPlugins.rootDirectory` parameter.
+
+**Procedure**
+
 1. In the OpenShift Developer UI, navigate toHelm→developer-hub→Actions→Upgrade→Yaml view.
 1. Update the Helm chart configuration to add the dynamic plug-ins in the Red Hat Developer Hub instance. Under the `    plugins` section in the YAML file, add the dynamic plug-ins that you want to enable.
 

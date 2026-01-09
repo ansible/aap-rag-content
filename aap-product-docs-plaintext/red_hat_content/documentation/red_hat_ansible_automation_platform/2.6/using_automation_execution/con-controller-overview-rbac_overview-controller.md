@@ -19,6 +19,6 @@ Automation controller includes an _auditor_ type. A system-level auditor can see
 
 **Additional resources**
 
-- For more information about user roles, see [Managing access with role based access control](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access) .
+-  [Managing access with role based access control](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access)
 
 

@@ -24,7 +24,7 @@ If not, use the credentials Google supplied during the web application setup pro
 
 1. Copy and paste Google’s Client ID into the **Google OAuth2 Key** field.
 1. Copy and paste Google’s Client secret into the **Google OAuth2 Secret** field.
-1. Optional: Enter information for the following fields using the tooltips provided for instructions and required format:
+1. Optional: Enter information for the following fields using the tooltip provided for instructions and required format:
 
 
 -  **Access Token URL**
@@ -56,6 +56,6 @@ To verify that the authentication is configured correctly, log out of Ansible Au
 
 **Next steps**
 
-To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
 
 

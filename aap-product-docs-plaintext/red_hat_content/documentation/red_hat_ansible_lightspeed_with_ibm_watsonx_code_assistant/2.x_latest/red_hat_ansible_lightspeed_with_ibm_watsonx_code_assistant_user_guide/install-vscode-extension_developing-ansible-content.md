@@ -1,9 +1,11 @@
-# 4. Developing Ansible content
-## 4.2. Installing and configuring the Ansible VS Code extension
-### 4.2.2. Installing the Ansible VS Code extension
+# 5. Developing Ansible content
+## 5.2. Installing and configuring the Ansible VS Code extension
+### 5.2.2. Installing the Ansible VS Code extension
 
 
 
+
+Use the following procedure to install the Ansible Lightspeed extension in VS Code.
 
 **Prerequisites**
 

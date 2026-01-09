@@ -4,7 +4,7 @@
 
 
 
-When you log in to the Ansible Automation Platform and selectAutomation Decisions→Infrastructure→Credentials, the Credentials page has a pre-loaded **Decision Environment Container Registry** credential. When you create your own credentials, they will be added to this list view. .
+The Credentials list view provides a single pane to monitor all authentication assets, including their type, organization, and usage status across the platform.
 
 From the menu bar, you can search for credentials in the **Name** search field.
 

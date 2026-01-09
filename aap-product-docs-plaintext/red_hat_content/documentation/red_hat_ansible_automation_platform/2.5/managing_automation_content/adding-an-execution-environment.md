@@ -5,7 +5,7 @@
 
 
 
-Automation execution environments are container images that make it possible to incorporate system-level dependencies and collection-based content. Each execution environment allows you to have a customized image to run jobs, and each of them contain only what you need when running the job.
+Push a signed execution environment to your private automation hub for added security.
 
 **Procedure**
 

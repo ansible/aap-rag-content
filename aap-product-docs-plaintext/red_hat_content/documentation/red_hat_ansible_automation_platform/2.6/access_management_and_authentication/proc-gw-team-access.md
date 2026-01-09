@@ -14,7 +14,7 @@ Direct team access cannot be granted toAutomation Content→Remote Registriesres
 
 **Procedure**
 
-1. From the navigation panel, click the name of the resource that you want to provide a team access to. For example,Automation Execution→Templates.
+1. From the navigation panel, click the name of the resource that you want to give a team access to. For example,Automation Execution→Templates.
 1. On the details page, select the **Team Access** tab.
 1. ClickAssign Teams.
 1. Click the checkbox beside the team to assign that team access to your chosen resource and clickNext.

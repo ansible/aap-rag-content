@@ -44,7 +44,6 @@ For UI specific instructions, see [Red Hat Certified, validated, and Ansible Gal
 You have two repositories:
 
 
-
 -  _Prod_ : `        Namespace 1` and `        Namespace 2` , each with collection `        A` and `        B` so: `        namespace1.collectionA:v2.0.0` and `        namespace2.collectionB:v2.0.0`
 -  _Stage_ : `        Namespace 1` with only collection `        A` so: `        namespace1.collectionA:v1.5.0` on , you have a repository URL for _Prod_ and _Stage_ .
 
@@ -57,20 +56,15 @@ For UI specific instructions, see [Configuring user access for container reposit
 
 
 1. If automation hub has self-signed certificates, use the toggle to enable the setting **Ignore Ansible Galaxy SSL Certificate Verification** in **Job Settings** . For automation hub, which uses a signed certificate, use the toggle to disable it instead. This is a global setting:
-1. Create a project, where the source repository specifies the necessary collections in a requirements file located in the `    collections/requirements.yml` file. For information about the syntax to use, see [Using Ansible collections](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html#install-multiple-collections-with-a-requirements-file) in the Ansible documentation.
+1. Create a project, where the source repository specifies the necessary collections in a requirements file located in the `    collections/requirements.yml` file.
 1. In the **Projects** list view, click the sync![Update](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/8ca24410ba90c880998d13dfe67a52b0/sync.png)
 icon to update this project. Automation controller fetches the Galaxy collections from the `    collections/requirements.yml` file and reports it as changed. The collections are installed for any job template using this project.
 
-
 Note
-If updates are required from Galaxy or Collections, a sync is performed that downloads the required roles, consuming that much more space in your /tmp file. In cases where you have a large project (around 10 GB), disk space on `/tmp` may be an issue.
+If updates are required from Galaxy or Collections, a sync is performed that downloads the required roles, consuming that much more space in your /tmp file. In cases where you have a large project (around 10 GB), disk space on `    /tmp` may be an issue.
 
 
 
-**Additional resources**
-
-For more information about collections, see [Using Ansible Collections](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html) .
 
 
-For more information about how Red Hat publishes one of these official collections, which can be used to automate your install directly, see the [AWX Ansible Collection](https://github.com/ansible/awx/blob/devel/awx_collection/README.md) documentation.
 

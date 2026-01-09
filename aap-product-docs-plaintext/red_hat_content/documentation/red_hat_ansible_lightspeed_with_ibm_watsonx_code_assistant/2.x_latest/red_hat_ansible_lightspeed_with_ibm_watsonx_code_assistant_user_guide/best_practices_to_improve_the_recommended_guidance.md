@@ -1,6 +1,6 @@
-# 4. Developing Ansible content
-## 4.3. Creating task recommendations
-### 4.3.1. Best practices to improve the recommended guidance
+# 5. Developing Ansible content
+## 5.3. Creating task recommendations
+### 5.3.1. Best practices to improve the recommended guidance
 
 
 

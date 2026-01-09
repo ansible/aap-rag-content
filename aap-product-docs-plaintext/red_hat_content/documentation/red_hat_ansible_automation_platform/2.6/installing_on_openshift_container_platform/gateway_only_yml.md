@@ -1,6 +1,6 @@
-# 13. Appendix: Red Hat Ansible Automation Platform custom resources
-## 13.1. Custom resources
-### 13.1.17. gateway-only.yml
+# 15. Appendix: Red Hat Ansible Automation Platform custom resources
+## 15.1. Custom resources
+### 15.1.17. gateway-only.yml
 
 
 
@@ -37,4 +37,4 @@ disabled: true
 ```
 
 
-<span id="idm139729052287280"></span>
+<span id="idm140320328163280"></span>

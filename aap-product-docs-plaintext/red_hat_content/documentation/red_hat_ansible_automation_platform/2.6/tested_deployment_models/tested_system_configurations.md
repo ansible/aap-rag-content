@@ -5,10 +5,10 @@
 
 
 
-Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+Red Hat has tested these configurations to install and run Red Hat Ansible Automation Platform:
 
 
-<span id="idm140627609390976"></span>
+<span id="idm140186619060800"></span>
 **Table 2.3. System configuration**
 
 | Type | Description | Notes |
@@ -23,7 +23,7 @@ Red Hat has tested the following configurations to install and run Red Hat Ansi
 - Ansible Automation Platform bundles `    ansible-core` 2.16 for operation, so you do not need to install it manually. |
 | Browser | A currently supported version of Mozilla Firefox or Google Chrome. |  |
 | Database | - For Ansible Automation Platform managed databases: PostgreSQL 15.
-- For customer provided (external) databases: PostgreSQL 15, 16, or 17. | - External (customer supported) databases require ICU support.
+- For customer provided (external) databases: PostgreSQL 15, 16, or 17. | - External (customer supported) databases require International Components for Unicode (ICU) support.
 - External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality is dependent on utilities provided with PostgreSQL 15. |
 
 

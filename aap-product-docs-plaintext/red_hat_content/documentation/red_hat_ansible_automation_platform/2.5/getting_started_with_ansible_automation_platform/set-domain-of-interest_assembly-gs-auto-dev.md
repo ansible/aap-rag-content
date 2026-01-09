@@ -1,6 +1,6 @@
 # 3. Getting started as an automation developer
-## 3.12. Work with job templates
-### 3.12.2. Setting your domains of interest
+## 3.13. Work with job templates
+### 3.13.2. Setting your domains of interest
 
 
 
@@ -16,8 +16,8 @@ With domain filtering, you can customize the content displayed in the **Jobs** a
 icon. In the modal that appears, select **Add Domain** to add new domains to filter with.
 
 
-Note
-You can add labels to your individual job templates to make the templates appear as resources when you filter with the related domain label. Go toAutomation Execution→Templates, select your job template, and clickEdit template. On the editing screen, enter the label you want to use in the **Labels** field and clickSave job template.
+**Next steps**
 
+You can add labels to your individual job templates to make the templates appear as resources when you filter with the related domain label. Go toAutomation Execution→Templates, select your job template, and clickEdit template. On the editing screen, enter the label you want to use in the **Labels** field and clickSave job template.
 
 

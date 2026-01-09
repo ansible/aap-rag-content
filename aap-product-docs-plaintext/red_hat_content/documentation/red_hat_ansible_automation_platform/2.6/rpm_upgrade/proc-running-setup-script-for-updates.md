@@ -4,7 +4,7 @@
 
 
 
-You can run the setup script once you have finished updating the `inventory` file.
+Execute the Red Hat Ansible Automation Platform installer setup script after configuring your `inventory` file. This action initiates the installation or update process, applying all your custom settings to deploy the platform successfully.
 
 **Procedure**
 

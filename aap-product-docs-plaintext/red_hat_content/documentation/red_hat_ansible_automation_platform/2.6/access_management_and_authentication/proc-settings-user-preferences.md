@@ -1,5 +1,5 @@
 # 6. Configuring Ansible Automation Platform
-## 6.3. User preferences
+## 6.4. User preferences
 
 
 
@@ -57,4 +57,4 @@ The refresh happens in the background and does not reload the page.
 
 
 
-<span id="idm140205112768096"></span>
+<span id="idm140177592477744"></span>

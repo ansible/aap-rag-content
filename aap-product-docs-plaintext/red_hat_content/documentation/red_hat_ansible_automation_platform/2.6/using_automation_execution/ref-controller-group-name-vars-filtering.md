@@ -14,7 +14,7 @@ There are two approaches to executing this filter:
 
 
 
-<span id="idm140044870868064"></span>
+<span id="idm139777932833584"></span>
 **Example 14.1. Example**
 
 The following inventory file defines four hosts and sets group and host variables. It defines a product group, a sustaining group, and it sets two hosts to a shutdown state.
@@ -50,7 +50,7 @@ plugin: constructed    strict: true    groups:      is_shutdown: state | default
 
 `    limit` : `    is_shutdown:&amp;product_dev`
 
-This constructed inventory input creates a group for both categories and uses the `    limit` (host pattern) to only return hosts that are in the intersection of those two groups, which is documented in [Patterns: targeting hosts and groups](https://docs.ansible.com/ansible/latest/inventory_guide/intro_patterns.html) .
+This constructed inventory input creates a group for both categories and uses the `    limit` (host pattern) to only return hosts that are in the intersection of those two groups.
 
 When a variable is or is not defined (depending on the host), you can give a default. For example, use `    | default("running")` if you know what value it should have when it is not defined. This helps with debugging, as described in [Debugging tips](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-inventories#ref-controller-inv-debugging-tips) .
 

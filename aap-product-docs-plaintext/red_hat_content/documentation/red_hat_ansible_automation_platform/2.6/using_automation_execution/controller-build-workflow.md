@@ -5,6 +5,8 @@
 
 
 
+You can build a workflow by adding nodes and defining their relationships in the workflow visualizer.
+
 You can set up any combination of two or more of the following node types to build a workflow:
 
 - Template (Job Template or Workflow Job Template)
@@ -45,9 +47,9 @@ If you select a job template that does not have a default inventory when populat
 1. If the node is a root node, the edge type defaults to **Always** and is non-editable. For subsequent nodes, you can select one of the following scenarios (edge type) to apply to each:
 
 
--  **Always run** : Continue to execute regardless of success or failure.
--  **Run on success** : After successful completion, execute the next template.
--  **Run on fail** : After failure, execute a different template.
+-  **Always run** : Continue to run regardless of success or failure.
+-  **Run on success** : After successful completion, run the next template.
+-  **Run on fail** : After failure, run a different template.
 
 1. Select the behavior of the node if it is a convergent node from the **Convergence** field:
 
@@ -67,7 +69,7 @@ If a node is a root node, or a node that does not have any nodes converging into
 
 
 
-1. If a job template used in the workflow has **Prompt on launch** selected for any of its parameters, aPROMPToption appears, enabling you to change those values at the node level. Use the wizard to change the values in each of the tabs and clickConfirmin the **Preview** tab.
+1. If a job template used in the workflow has **Prompt on launch** selected for any of its parameters, aPROMPToption is displayed, enabling you to change those values at the node level. Use the wizard to change the values in each of the tabs and clickConfirmin the **Preview** tab.
 
 If a workflow template used in the workflow has **Prompt on launch** selected for the inventory option, use the wizard to supply the inventory at the prompt. If the parent workflow has its own inventory, it overrides any inventory that is supplied here.
 
@@ -94,7 +96,7 @@ When the node is created, it is labeled with its job type. A template that is as
 1. Hover over a node to edit the node, add step and link, or delete the selected node:
 
 Note
-If you hover over a step when adding a link and a red border appears, this means that you cannot connect those two steps together. This is a preventive measure to avoid users creating "circular dependencies", which can result in a workflow that ends up in an infinite loop and never finishes.
+If you hover over a step when adding a link and a red border is displayed, this means that you cannot connect those two steps together. This is a preventive measure to avoid users creating "circular dependencies", which can result in a workflow that ends up in an infinite loop and never finishes.
 
 
 
@@ -105,9 +107,11 @@ If you hover over a step when adding a link and a red border appears, this means
 1. When you have added or edited a node, clickFinishto save any modifications and render it on the graphical view. For possible ways to build your workflow, see [Building nodes scenarios](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-building-nodes-scenarios) .
 1. When you have built your workflow job template, clickSaveto save your entire workflow template and return to the new workflow job template details page.
 
-
 Important
 ClickingClosedoes not save your work, but instead, it closes the entire Workflow Visualizer so that you have to start again.
+
+
+
 
 
 

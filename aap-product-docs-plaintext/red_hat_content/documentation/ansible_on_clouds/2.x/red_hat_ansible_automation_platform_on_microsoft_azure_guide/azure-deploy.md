@@ -3,3 +3,5 @@
 
 
 
+Learn how to deploy and configure the Red Hat Ansible Automation Platform on Microsoft Azure.
+

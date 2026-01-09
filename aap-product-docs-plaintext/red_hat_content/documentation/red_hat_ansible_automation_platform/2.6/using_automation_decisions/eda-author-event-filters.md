@@ -4,7 +4,7 @@
 
 
 
-Event filters are functions in a python module that perform transformations on the event data. They can remove, add, change, or move any data in the event data structure. Event filters take the event as the first argument and additional keyword arguments are provided by the configuration in the rulebook.
+You can create custom Python event filters to clean, normalize, or enrich incoming event data, ensuring it meets the format and quality required for rulebook condition evaluation.
 
 The basic structure follows:
 
@@ -31,6 +31,6 @@ arg2: world
 
 **Additional resources**
 
-See the event filter plugins in [ansible.eda collection](https://github.com/ansible/event-driven-ansible/tree/main/extensions/eda/plugins/event_filter) for more examples of how to author them.
+-  [ansible.eda collection](https://github.com/ansible/event-driven-ansible/tree/main/extensions/eda/plugins/event_filter)
 
 

@@ -1,6 +1,6 @@
 # 4. Getting started as an automation operator
-## 4.10. Automation execution jobs
-### 4.10.1. Reviewing a job status
+## 4.4. Automation execution jobs
+### 4.4.1. Reviewing a job status
 
 
 
@@ -21,7 +21,9 @@ The default view is collapsed (Compact) with the job name, status, job type, sta
 - Relaunch jobs.
 - Remove selected jobs.
 
-
-
 The relaunch operation only applies to relaunches of playbook runs and does not apply to project or inventory updates, system jobs, or workflow jobs.
+
+
+
+
 

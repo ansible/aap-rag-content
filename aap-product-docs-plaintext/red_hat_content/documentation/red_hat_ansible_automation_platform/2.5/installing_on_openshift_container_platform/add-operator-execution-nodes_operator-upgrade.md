@@ -1,5 +1,5 @@
-# 10. Enabling execution nodes on Red Hat Ansible Automation Platform Operator
-## 10.1. Adding execution nodes to Red Hat Ansible Automation Platform Operator
+# 11. Enabling execution nodes on Red Hat Ansible Automation Platform Operator
+## 11.1. Adding execution nodes to Red Hat Ansible Automation Platform Operator
 
 
 

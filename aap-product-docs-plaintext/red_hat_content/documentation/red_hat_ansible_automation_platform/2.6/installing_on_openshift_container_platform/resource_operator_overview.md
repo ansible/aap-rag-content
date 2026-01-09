@@ -1,5 +1,5 @@
-# 11. Ansible Automation Platform Resource Operator
-## 11.1. Resource Operator overview
+# 13. Ansible Automation Platform Resource Operator
+## 13.1. Resource Operator overview
 
 
 

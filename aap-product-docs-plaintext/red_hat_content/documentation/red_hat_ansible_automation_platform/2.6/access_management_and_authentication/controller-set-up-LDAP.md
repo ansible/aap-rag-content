@@ -34,7 +34,7 @@ Your LDAP certificate is not automatically migrated if you use the default Red H
 
 
 ```
-CN=josie,CN=users,DC=website,DC=com
+cn=josie,cn=users,dc=website,dc=com
 ```
 
 
@@ -44,7 +44,7 @@ CN=josie,CN=users,DC=website,DC=com
 The group type defines the class name of the group, which manages the groups associated with users in your LDAP directory and is returned by the search specified in Step 14 of this procedure. The group type, along with group parameters and the group search, is used to find and assign groups to users during log in, and can also be evaluated during the mapping process. The following table lists the available group types, along with their descriptions and the necessary parameters for each. By default, LDAP groups will be mapped to Django groups by taking the first value of the cn attribute. You can specify a different attribute with `    name_attr` . For example, `    name_attr='cn'` .
 
 
-<span id="idm140205112267568"></span>
+<span id="idm140177591730960"></span>
 **Table 2.1. Available LDAP group types**
 
 |  **LDAP Group Type** |  **Description** |  **Initializer method ( _init_ )** |
@@ -93,7 +93,7 @@ Values defined in this field override the dedicated fields provided in the UI. A
 
 
 
-1. Enter any **LDAP Connection Options** to set for the LDAP connection. LDAP referrals are disabled by default (to prevent certain LDAP queries from hanging with Active Directory). Option names should be strings as shown in the following example:
+1. Enter any **LDAP Connection Options** to set for the LDAP connection. By default, LDAP referrals are disabled to prevent certain LDAP queries from hanging with Active Directory. Option names should be strings as shown in the following example:
 
 
 ```
@@ -125,7 +125,7 @@ To determine the parameters that a specific **LDAP Group Type** requires, refer 
 
 
 ```
-{    "first_name": "givenName",    "last_name": "sn",    "email": "mail"    }
+{    "first_name": "givenname",    "last_name": "sn",    "email": "mail"    }
 ```
 
 
@@ -133,7 +133,7 @@ To determine the parameters that a specific **LDAP Group Type** requires, refer 
 
 
 ```
-[    "OU=Users,DC=website,DC=com",    "SCOPE_SUBTREE",    "(cn=%(user)s)"    ]
+[    "ou=users,dc=website,dc=com",    "SCOPE_SUBTREE",    "(cn=%(user)s)"    ]
 ```
 
 If the **LDAP User DN Template** is not set, the Ansible Automation Platform authenticates to LDAP using the **Bind DN Template** and **LDAP Bind Password** . After authentication, an LDAP search is performed to locate the user specified by this field. If the user is found, Ansible Automation Platform validates the provided password against the user found by the LDAP search. Multiple search queries are supported for users with `    LDAPUnion` by entering multiple search terms as shown in the following example:
@@ -159,7 +159,7 @@ If the field **LDAP User DN Template** is populated, it takes precedence over th
 
 **Next steps**
 
-To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
 
 
 #### 2.5.4.1. Importing a certificate authority in automation controller for LDAPS integration

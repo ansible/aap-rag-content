@@ -1,11 +1,13 @@
 # 3. Getting started as an automation developer
-## 3.4. Bundle content with Ansible roles
-### 3.4.1. Creating a role
+## 3.5. Bundle automation content with roles
+### 3.5.1. Creating a role
 
 
 
 
-You can create roles using the Ansible Galaxy CLI tool, which is included with your Ansible Automation Platform bundle. Access role-specific commands from the `role` subcommand:
+Create an Ansible role by using the `ansible-galaxy` CLI tool to build reusable automation components.
+
+The Ansible Automation Platform bundle includes the Ansible Galaxy CLI tool. Access role-specific commands from the `role` subcommand:
 
 ```
 ansible-galaxy role init &lt;role_name&gt;

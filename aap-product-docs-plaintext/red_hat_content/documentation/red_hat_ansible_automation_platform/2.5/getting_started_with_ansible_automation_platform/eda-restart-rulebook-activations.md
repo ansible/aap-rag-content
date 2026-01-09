@@ -1,9 +1,11 @@
 # 3. Getting started as an automation developer
-## 3.13. Create and run a rulebook activation
-### 3.13.3. Restarting rulebook activations
+## 3.14. Create and run a rulebook activation
+### 3.14.3. Restarting rulebook activations
 
 
 
+
+You can restart a rulebook activation to quickly re-engage its automation, which is useful after making updates or to recover from an error.
 
 Note
 You can only restart a rulebook activation if it is currently enabled and the restart policy was set to **Always** when it was created.

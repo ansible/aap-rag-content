@@ -4,6 +4,8 @@
 
 
 
+Prepare your Red Hat Enterprise Linux systems by enabling the correct repositories and subscriptions needed to install components for project signing. This step helps ensure that your environment is properly configured for content verification.
+
 - RHEL nodes must properly be subscribed to:
 
 
@@ -28,7 +30,7 @@ Verify that you have a valid GPG keypair in your default GnuPG keyring, with the
 gpg --list-secret-keys
 ```
 
-If this command produces no output, or one line of output that states, `    trustdb was created` , then you do not have a secret key in your default keyring. In this case, refer to [How to create GPG keypairs](https://www.redhat.com/sysadmin/creating-gpg-keypairs) to learn how to create a new keypair before proceeding. If it produces any other output, you have a valid secret key and are ready to use `    ansible-sign` .
+If this command produces no output, or one line of output that states, `    trustdb was created` , then you do not have a secret key in your default keyring. In this case, see [How to create GPG keypairs](https://www.redhat.com/sysadmin/creating-gpg-keypairs) to learn how to create a new keypair before proceeding. If it produces any other output, you have a valid secret key and are ready to use `    ansible-sign` .
 
 
 

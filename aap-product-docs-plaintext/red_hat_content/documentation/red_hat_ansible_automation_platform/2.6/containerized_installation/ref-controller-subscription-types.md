@@ -1,5 +1,5 @@
-# 1. Managing Ansible Automation Platform licensing, updates, and support
-## 1.4. Subscription Types
+# 3. Managing Ansible Automation Platform subscriptions, updates, and support
+## 3.3. Subscription Types
 
 
 

@@ -4,5 +4,5 @@
 
 
 
-PostgreSQL (Postgres) is an open-source relational database management system. For Ansible Automation Platform, Postgres serves as the backend database to store automation data such as job templates, inventory, credentials, and execution history.
+PostgreSQL is the required database for Ansible Automation Platform, storing all automation data including job templates, inventory, credentials, and execution history. Understanding PostgreSQL configuration and management helps ensure optimal performance and data integrity for your automation environment.
 

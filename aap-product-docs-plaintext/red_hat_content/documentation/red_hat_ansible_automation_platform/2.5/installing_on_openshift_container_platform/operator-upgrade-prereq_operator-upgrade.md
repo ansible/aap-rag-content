@@ -1,5 +1,5 @@
-# 8. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 8.3. Prerequisites
+# 9. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 9.3. Prerequisites
 
 
 
@@ -10,5 +10,12 @@ To upgrade to a newer version of Ansible Automation Platform Operator, you must:
 - Create AutomationControllerBackup and AutomationHubBackup objects. For help with this see [Backup and recovery for operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/backup_and_recovery_for_operator_environments)
 - Review the [Release notes](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/release_notes) for the new Ansible Automation Platform version to which you are upgrading and any intermediate versions.
 - Determine the type of upgrade you want to perform. See the [Channel Upgrades](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/installing_on_openshift_container_platform/index#operator-channel-upgrade_operator-upgrade) section for more information.
+
+Note
+If you are upgrading from AAP 2.4, you are recommended to take a backup of the API call output and save it to a file. For example: curl -k [https://<CONTROLLER_FQDN>/api/v2/settings/all/](https://<CONTROLLER_FQDN>/api/v2/settings/all/) -u admin:password >> aap24_old_settings_all
+
+
+
+
 
 

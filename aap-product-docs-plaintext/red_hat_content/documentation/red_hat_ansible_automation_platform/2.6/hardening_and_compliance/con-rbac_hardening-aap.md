@@ -20,7 +20,7 @@ For further detail on Role Hierarchy, access inheritance, Built in Roles, permis
 The following is an example of an organization with roles and resource permissions:
 
 
-<span id="idm140608425349296"></span>
+<span id="idm139994922215680"></span>
 **Figure 2.2. RBAC role scopes within automation controller**
 
 ![Reference architecture for an example of an organization with roles and resource permissions.](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Hardening_and_compliance-en-US/images/7243b4cac93a882c6112555ade6a3891/aap_ref_arch_2.4.1.png)

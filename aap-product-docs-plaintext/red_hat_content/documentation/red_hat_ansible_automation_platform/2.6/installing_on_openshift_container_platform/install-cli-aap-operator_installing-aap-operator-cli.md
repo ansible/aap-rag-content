@@ -1,6 +1,6 @@
 # 1. Installing Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 1.4. Installing Red Hat Ansible Automation Platform Operator from the Red Hat OpenShift Container Platform CLI
-### 1.4.1. Installing the Ansible Automation Platform Operator in a namespace
+## 1.3. Installing Red Hat Ansible Automation Platform Operator from the Red Hat OpenShift Container Platform CLI
+### 1.3.1. Installing the Ansible Automation Platform Operator in a namespace
 
 
 
@@ -8,7 +8,7 @@
 Use this procedure to subscribe a namespace to an operator.
 
 Important
-You cannot deploy Ansible Automation Platform in the default namespace on your OpenShift Cluster. The `aap` namespace is recommended. You can use a custom namespace, but it should run only Ansible Automation Platform.
+You cannot deploy Ansible Automation Platform in the default namespace on your OpenShift Cluster. The 'ansible-automation-platform' namespace is recommended. You can use a custom namespace, but it should run only Ansible Automation Platform.
 
 
 
@@ -33,7 +33,7 @@ oc new-project ansible-automation-platform
 
 
 ```
----    apiVersion: v1    kind: Namespace    metadata:      labels:        openshift.io/cluster-monitoring: "true"      name: ansible-automation-platform    ---    apiVersion: operators.coreos.com/v1    kind: OperatorGroup    metadata:      name: ansible-automation-platform-operator      namespace: ansible-automation-platform    spec:      targetNamespaces:        - ansible-automation-platform    ---    apiVersion: operators.coreos.com/v1alpha1    kind: Subscription    metadata:      name: ansible-automation-platform      namespace: ansible-automation-platform    spec:      channel: 'stable-2.6'      installPlanApproval: Automatic      name: ansible-automation-platform-operator      source: redhat-operators      sourceNamespace: openshift-marketplace    ---
+---    apiVersion: operators.coreos.com/v1    kind: OperatorGroup    metadata:      name: ansible-automation-platform-operator      namespace: ansible-automation-platform    spec:      targetNamespaces:        - ansible-automation-platform    ---    apiVersion: operators.coreos.com/v1alpha1    kind: Subscription    metadata:      name: ansible-automation-platform      namespace: ansible-automation-platform    spec:      channel: 'stable-2.6'      installPlanApproval: Automatic      name: ansible-automation-platform-operator      source: redhat-operators      sourceNamespace: openshift-marketplace    ---
 ```
 
 This file creates a `    Subscription` object called `    <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">ansible-automation-platform</span></em></span>` that subscribes the `    ansible-automation-platform` namespace to the `    ansible-automation-platform-operator` operator.

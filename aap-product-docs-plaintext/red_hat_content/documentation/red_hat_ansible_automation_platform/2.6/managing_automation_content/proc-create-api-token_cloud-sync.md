@@ -1,11 +1,16 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
-## 1.1. Configuring Ansible automation hub remote repositories to synchronize content
+## 1.1. Configuring remote repositories for content syncing
 ### 1.1.2. Creating the offline token in automation hub
 
 
 
 
 In automation hub, you can create an offline token using **Token management** . The offline token is a secret token used to protect your content, so be sure to store it in a secure location.
+
+Note
+Your offline token expires after 30 days of inactivity.
+
+
 
 **Procedure**
 
@@ -16,13 +21,13 @@ In automation hub, you can create an offline token using **Token management** . 
 1. Paste the token into a file and store in a secure location.
 
 
-**Additional resources**
-
-Your offline token expires after 30 days of inactivity. For more on obtaining a new offline token, see [Keeping your offline token active](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/managing_automation_content/managing-cert-valid-content#con-offline-token-active_cloud-sync) .
-
-
-**Next step**
+**Next steps**
 
 The offline token is now available for configuring automation hub as your default collections server or for uploading collections by using the `ansible-galaxy` command line tool.
+
+
+**Additional resources**
+
+-  [Keeping your offline token active](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/managing_automation_content/index#con-offline-token-active_cloud-sync)
 
 

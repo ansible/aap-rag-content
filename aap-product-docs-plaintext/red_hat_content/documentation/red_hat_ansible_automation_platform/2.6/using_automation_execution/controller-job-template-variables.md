@@ -1,6 +1,6 @@
 # 6. Job templates
-## 6.10. Launching a job template
-### 6.10.1. Variables in job templates
+## 6.11. Additional information requested when launching a job template
+### 6.11.1. Variables in job templates
 
 
 

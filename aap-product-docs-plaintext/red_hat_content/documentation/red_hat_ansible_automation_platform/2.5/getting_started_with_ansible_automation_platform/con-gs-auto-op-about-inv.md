@@ -1,5 +1,5 @@
 # 4. Getting started as an automation operator
-## 4.9. About inventories
+## 4.3. About inventories
 
 
 

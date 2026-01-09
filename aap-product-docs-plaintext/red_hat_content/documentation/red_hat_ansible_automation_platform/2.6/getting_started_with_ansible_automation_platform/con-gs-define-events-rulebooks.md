@@ -1,5 +1,5 @@
 # 3. Getting started as an automation developer
-## 3.3. Define events with rulebooks
+## 3.4. Define events with rulebooks
 
 
 

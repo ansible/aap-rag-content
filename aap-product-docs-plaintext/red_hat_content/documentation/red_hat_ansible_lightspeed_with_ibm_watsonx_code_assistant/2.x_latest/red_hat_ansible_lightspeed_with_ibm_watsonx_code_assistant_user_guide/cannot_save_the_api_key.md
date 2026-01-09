@@ -1,6 +1,6 @@
-# 7. Troubleshooting
-## 7.1. Troubleshooting Red Hat Ansible Lightspeed configuration errors
-### 7.1.2. Cannot save the API key
+# 8. Troubleshooting
+## 8.1. Troubleshooting Red Hat Ansible Lightspeed configuration errors
+### 8.1.2. Cannot save the API key
 
 
 

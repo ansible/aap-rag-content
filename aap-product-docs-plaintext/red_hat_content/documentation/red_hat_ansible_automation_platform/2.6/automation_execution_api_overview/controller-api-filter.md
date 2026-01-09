@@ -7,13 +7,16 @@ The system recognizes a collection as a "queryset". You can filter this by using
 
 
 <span id="controller-api-filtering-in-api"></span>
+Learn how to use query parameters within the REST API URL to filter resources based on criteria such as exact matches, partial string containment ( `__contains` ), integer casting ( `__int` ), and many fields simultaneously.
+
+
 **Procedure**
 
-- To find groups that contain the name "foo", use the following:
+- To find groups that contain the name "car", use the following:
 
 
 ```
-http://&lt;gateway server name&gt;/api/controller/v2/groups/?name__contains=foo
+http://&lt;gateway server name&gt;/api/controller/v2/groups/?name__contains=car
 ```
 
 
@@ -21,7 +24,7 @@ http://&lt;gateway server name&gt;/api/controller/v2/groups/?name__contains=foo
 
 
 ```
-http://&lt;gateway server name&gt;/api/controller/v2/groups/?name=foo
+http://&lt;gateway server name&gt;/api/controller/v2/groups/?name=car
 ```
 
 
@@ -40,7 +43,7 @@ http://&lt;gateway server name&gt;/api/controller/v2/arbitrary_resource/?x__int=
 http://&lt;gateway server name&gt;/api/gateway/v1/users/?first_name__icontains=kim
 ```
 
-This returns all users with names that include the string "Kim" in them.
+This returns all users with names that include the string "kim" in them.
 
 
 - You can also filter against many fields at once:
@@ -52,11 +55,7 @@ http://&lt;gateway server name&gt;/api/controller/v2/groups/?name__icontains=tes
 
 This finds all groups containing the name "test" that have no active failures.
 
-Note
 You can also watch the API as the UI is being used to see how it is filtering on various criteria.
-
-
-
 
 
 

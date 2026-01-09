@@ -3,7 +3,9 @@
 
 
 
-A sliced job refers to the concept of a distributed job. Use distributed jobs for running a job across a large number of hosts. You can then run many ansible-playbooks, each on a subset of an inventory that you can be schedule in parallel across a cluster.
+A sliced job refers to the concept of a distributed job. Use distributed jobs for running a job across a large number of hosts.
+
+You can then run many ansible-playbooks, each on a subset of an inventory that you can be schedule in parallel across a cluster.
 
 By default, Ansible runs jobs from a single control instance. For jobs that do not require cross-host orchestration, job slicing takes advantage of automation controller’s ability to distribute work to many nodes in a cluster.
 

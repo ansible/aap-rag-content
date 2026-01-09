@@ -5,7 +5,7 @@
 
 
 
-Before you can set up Red Hat Ansible Automation Platform credentials, you must delete any existing controller tokens.
+Before configuring the new Red Hat Ansible Automation Platform credentials, delete all existing controller tokens, which are now deprecated and will conflict with the new Red Hat Ansible Automation Platform credentials.
 
 **Prerequisites**
 
@@ -23,6 +23,6 @@ Before you can set up Red Hat Ansible Automation Platform credentials, you must 
 
 **Next steps**
 
-After deleting the controller tokens and rulebook activations, proceed with [Setting up a Red Hat Ansible Automation Platform credential](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_decisions/eda-set-up-rhaap-credential-type#eda-set-up-rhaap-credential) .
+After deleting the controller tokens and rulebook activations, proceed with [Setting up a Red Hat Ansible Automation Platform credential](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_decisions/eda-set-up-rhaap-credential-type#eda-set-up-rhaap-credential) .
 
 

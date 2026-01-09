@@ -4,6 +4,8 @@
 
 
 
+Surveys provide a way to prompt users for input when launching a job from a job template. This input can then be used as variables in the playbook run.
+
 Job types of **Run** or **Check** provide a way to set up surveys in the **Job Template** creation or editing screens. Surveys set extra variables for the playbook similar to **Prompt for Extra Variables** does, but in a user-friendly question and answer way. Surveys also permit for validation of user input. Select the **Survey** tab to create a survey.
 
 **Example**

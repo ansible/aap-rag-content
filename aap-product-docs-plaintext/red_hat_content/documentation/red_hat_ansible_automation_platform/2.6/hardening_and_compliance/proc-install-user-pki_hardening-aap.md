@@ -10,7 +10,7 @@ By default, Ansible Automation Platform creates self-signed _Public Key Infrastr
 Use the following inventory variables to configure the infrastructure components with the new certificates.
 
 
-<span id="idm140608423054832"></span>
+<span id="idm139994922234928"></span>
 **Table 2.4. PKI certificate inventory variables**
 
 |  **RPM Variable** |  **Containerized Variable** |  **Details** |
@@ -18,12 +18,12 @@ Use the following inventory variables to configure the infrastructure components
 |  `custom_ca_cert` |  `custom_ca_cert` | The path to the custom CA certificate file.
 
 If set, this will install a custom CA certificate to the system truststore. |
-|  `web_server_ssl_cert` |  `controller_tls_cert` | The file name of the automation controller PKI certificate located in the installer directory. |
+|  `web_server_ssl_cert` |  `controller_tls_cert` | The file name of the automation controller PKI certificate located in the installation program directory. |
 |  `web_server_ssl_key` |  `controller_tls_key` | The file name of the automation controller PKI key located in the installation program directory. |
 |  `automationhub_ssl_cert` |  `hub_tls_cert` | The file name of the private automation hub PKI certificate located in the installation program directory. |
 |  `automationhub_ssl_key` |  `hub_tls_key` | The file name of the private automation hub PKI key located in the installation program directory. |
-|  `postgres_ssl_cert` |  `postgresql_tls_cert` | The file name of the database server PKI certificate located in the installation program directory. This variable is only needed for the installer-managed database server, not if a third-party database is used. |
-|  `postgres_ssl_key` |  `postgresql_tls_key` | The file name of the database server PKI key located in the installation program directory. This variable is only needed for the installer-managed database server, not if a third-party database is used. |
+|  `postgres_ssl_cert` |  `postgresql_tls_cert` | The file name of the database server PKI certificate located in the installation program directory. This variable is only needed for the installation program managed database server, not if a third-party database is used. |
+|  `postgres_ssl_key` |  `postgresql_tls_key` | The file name of the database server PKI key located in the installation program directory. This variable is only needed for the installation program-managed database server, not if a third-party database is used. |
 |  `automationedacontroller_ssl_cert` |  `eda_tls_cert` | The file name of the Event-Driven Ansible controller PKI certificate located in the installation program directory. |
 |  `automationedacontroller_ssl_key` |  `eda_tls_key` | The file name of the Event-Driven Ansible controller PKI key located in the installation program directory. |
 | - |  `gateway_tls_cert` | The filename of the platform gateway PKI certificate located in the installation program directory. |
@@ -32,7 +32,7 @@ If set, this will install a custom CA certificate to the system truststore. |
 
 
 
-When multiple platform gateways are deployed with a load balancer, `gateway_tls_cert` and `gateway_tls_key` are shared by each platform gateway. To prevent hostname mismatches, the certificate’s _Common Name_ (CN) must match the DNS FQDN used by the load balancer. If your organizational policies require unique certificates for each service, each certificate requires a _Subject Alt Name_ (SAN) that matches the DNS FQDN used for the load-balanced service. To install unique certificates and keys on each platform gateway, the certificate and key variables in the installation inventory file must be defined as per-host variables instead of in the `[all:vars]` section. For example:
+When multiple platform gateways are deployed with a load balancer, `gateway_tls_cert` and `gateway_tls_key` are shared by each platform gateway. To prevent hostname mismatches, the certificate’s _Common Name_ (CN) must match the DNS FQDN used by the load balancer. If your organizational policies require unique certificates for each service, each certificate requires a _Subject Alt Name_ (SAN) that matches the DNS FQDN used for the load-balanced service. To install unique certificates and keys on each platform gateway, the certificate and key variables in the installation inventory file must be defined as host variables instead of in the `[all:vars]` section. For example:
 
 ```
 [automationgateway]

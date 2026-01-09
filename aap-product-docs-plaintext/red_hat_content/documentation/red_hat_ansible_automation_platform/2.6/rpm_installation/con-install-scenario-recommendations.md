@@ -1,11 +1,11 @@
 # 3. Installing Red Hat Ansible Automation Platform
-## 3.2. Inventory file examples based on installation scenarios
-### 3.2.1. Inventory file recommendations based on installation scenarios
+## 3.3. Inventory file examples based on installation scenarios
+### 3.3.1. Inventory file recommendations based on installation scenarios
 
 
 
 
-Before selecting your installation method for Ansible Automation Platform, review the following recommendations. Familiarity with these recommendations will streamline the installation process.
+Inventory file recommendations define critical variables and configuration rules for installing Ansible Automation Platform in various scenarios. Reviewing these guidelines ensures that hosts are properly identified (using a reachable IP address or FQDN) and that credential variables meet required standards, thereby streamlining the installation process and preventing setup failures.
 
 - Provide a reachable IP address or fully qualified domain name (FQDN) for hosts to ensure users can sync and install content from automation hub from a different node.
 
@@ -14,13 +14,14 @@ The FQDN must not contain either the `    -` or the `    _` symbols, as it will 
 Do not use `    localhost` .
 
 
+- The `    [database]` group in the inventory file defines an Ansible Automation Platform managed database. When using an externally managed database, do not include the `    [database]` group in your inventory file. For more information, see [Setting up an external database](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/platform-system-requirements#proc-setup-postgresql-ext-database_licensing-gw) .
 -  `    admin` is the default user ID for the initial log in to Ansible Automation Platform and cannot be changed in the inventory file.
 - Use of special characters for `    pg_password` is limited. The `    !` , `    #` , `    0` and `    @` characters are supported. Use of other special characters can cause the setup to fail.
 - Enter your Red Hat Registry Service Account credentials in `    registry_username` and `    registry_password` to link to the Red Hat container registry.
 - The inventory file variables `    registry_username` and `    registry_password` are only required if a non-bundle installer is used.
 
 
-#### 3.2.1.1. Single platform gateway and automation controller with an external (installer managed) database
+#### 3.3.1.1. Single platform gateway and automation controller with an external (installer managed) database
 
 
 
@@ -82,7 +83,7 @@ automationgateway_pg_sslmode='prefer'
 # postgres_ssl_key=/path/to/pgsql.key
 ```
 
-#### 3.2.1.2. Single platform gateway, automation controller, and automation hub with an external (installer managed) database
+#### 3.3.1.2. Single platform gateway, automation controller, and automation hub with an external (installer managed) database
 
 
 
@@ -171,7 +172,7 @@ automationgateway_pg_sslmode='prefer'
 # postgres_ssl_key=/path/to/pgsql.key
 ```
 
-#### 3.2.1.3. Single platform gateway, automation controller, automation hub, and Event-Driven Ansible controller with an external (installer managed) database
+#### 3.3.1.3. Single platform gateway, automation controller, automation hub, and Event-Driven Ansible controller with an external (installer managed) database
 
 
 
@@ -301,47 +302,45 @@ automationgateway_pg_sslmode='prefer'
 
 **Additional resources**
 
-For more information about these inventory variables, see [Ansible automation hub variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/appendix-inventory-files-vars#hub-variables) in the _Red Hat Ansible Automation Platform Installation Guide_ .
+-  [Ansible automation hub variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/appendix-inventory-files-vars#hub-variables) .
 
 
-#### 3.2.1.4. High availability automation hub
+#### 3.3.1.4. Installing high availability automation hub
 
 
 
 
-Use the following examples to populate the inventory file to install a highly available automation hub. This inventory file includes a highly available automation hub with a clustered setup.
+Configure inventory files to install a highly available automation hub with clustered nodes and dedicated database hosts. This clustered setup uses load balancing to support enterprise-scale automation and ensures consistent system uptime.
 
 You can configure your HA deployment further to enable a [high availability deployment of automation hub on SELinux](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/rpm_installation/index#proc-install-ha-hub-selinux) .
 
-**Specify database host IP**
+**Procedure**
 
 - Specify the IP address for your database host, using the `    automation_pg_host` and `    automation_pg_port` inventory variables. For example:
 
 
 ```
-automationhub_pg_host='192.0.2.10'
-automationhub_pg_port=5432
+automationhub_pg_host='192.0.2.10'    automationhub_pg_port=5432
 ```
+
 
 - Also specify the IP address for your database host in the [database] section, using the value in the `    automationhub_pg_host` inventory variable:
 
 
 ```
-[database]
-192.0.2.10
+[database]    192.0.2.10
 ```
 
-**List all instances in a clustered setup**
 
-- If installing a clustered setup, replace `    localhost ansible_connection=local` in the [automationhub] section with the hostname or IP of all instances. For example:
+- If installing a clustered setup, replace `    localhost ansible_connection=local` in the `    [automationhub]` section with the hostname or IP of all instances. For example:
 
 
 ```
-[automationhub]
-automationhub1.testing.ansible.com ansible_user=cloud-user
-automationhub2.testing.ansible.com ansible_user=cloud-user
-automationhub3.testing.ansible.com ansible_user=cloud-user
+[automationhub]    automationhub1.testing.ansible.com ansible_user=cloud-user    automationhub2.testing.ansible.com ansible_user=cloud-user    automationhub3.testing.ansible.com ansible_user=cloud-user
 ```
+
+
+
 
 **Next steps**
 
@@ -354,16 +353,16 @@ USE_X_FORWARDED_HOST = True
 ```
 
 Note
-If `automationhub_main_url` is not specified, the first node in the [automationhub] group will be used as default.
+If you are using a load balancer, configure `automationgateway_main_url` to point to your load balancer. If `automationgateway_main_url` is not specified, the first node in the [automationgateway] group will be used as default.
 
 
 
-#### 3.2.1.5. Enabling a high availability (HA) deployment of automation hub on SELinux
+#### 3.3.1.5. Enabling a high availability (HA) deployment of automation hub on SELinux
 
 
 
 
-You can configure the inventory file to enable high availability deployment of automation hub on SELinux. You must create two mount points for `/var/lib/pulp` and `/var/lib/pulp/pulpcore_static` , and then assign the appropriate SELinux contexts to each.
+Enable a high availability (HA) deployment of automation hub on SELinux by creating and mounting the required `/var/lib/pulp` directories on an external NFS export. This process ensures that the appropriate SELinux security contexts are correctly applied to the mount points, fulfilling the prerequisites for a successful Ansible Automation Platform installation in this specialized environment.
 
 Note
 You must add the context for `/var/lib/pulp` pulpcore_static and run the Ansible Automation Platform installer before adding the context for `/var/lib/pulp` .
@@ -449,18 +448,18 @@ $ setup.sh -- -b --become-user root
 1.  [Configure the pulpcore.serivce](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/rpm_installation/index#proc-configure-pulpcore-service) .
 
 
-**Additional Resources**
+**Additional resources**
 
-- See the [SELinux Requirements on the Pulp Project documentation](https://docs.pulpproject.org/en/2.16/user-guide/scaling.html#selinux-requirements) for a list of SELinux contexts.
-- See the [Filesystem Layout](https://docs.pulpproject.org/pulpcore/installation/hardware-requirements.html#filesystem-layout) for a full description of Pulp folders.
-
-
-##### 3.2.1.5.1. Configuring pulpcore.service
+-  [SELinux Requirements on the Pulp Project documentation](https://docs.pulpproject.org/en/2.16/user-guide/scaling.html#selinux-requirements)
+-  [Filesystem Layout](https://docs.pulpproject.org/pulpcore/installation/hardware-requirements.html#filesystem-layout)
 
 
+##### 3.3.1.5.1. Configuring pulpcore.service
 
 
-After you have configured the inventory file, and applied the SELinux context, you now need to configure the pulp service.
+
+
+You can configure the `pulp` service to ensure that automation hub services start only after the network and the mounting of the remote mount points.
 
 **Procedure**
 
@@ -517,12 +516,12 @@ $ chcon system_u:object_r:pulpcore_etc_t:s0 /etc/pulp/certs/token_{private,publi
 
 Repeat this command to reattach the proper SELinux labels whenever you relabel your system.
 
-##### 3.2.1.5.2. Applying the SELinux context
+##### 3.3.1.5.2. Applying the SELinux context
 
 
 
 
-After you have configured the inventory file, you must now apply the context to enable the high availability (HA) deployment of automation hub on SELinux.
+By applying the necessary SELinux context to the Pulp directories you ensure proper file access permissions and security policy compliance. They are essential for enabling the high availability (HA) deployment of automation hub on SELinux.
 
 **Procedure**
 
@@ -550,7 +549,7 @@ $ umount /var/lib/pulp/
 ```
 
 
-1. Open `    /etc/fstab` using a text editor, then replace the existing value for `    /var/lib/pulp` with the following:
+1. Modify the `    /etc/fstab` file as follows:
 
 
 ```
@@ -568,7 +567,7 @@ $ mount -a
 
 
 
-#### 3.2.1.6. Configuring content signing on private automation hub
+#### 3.3.1.6. Configuring content signing on private automation hub
 
 
 
@@ -599,10 +598,7 @@ The script prints out a JSON structure with the following format.
 
 All the file names are relative paths inside the current working directory. The file name must remain the same for the detached signature.
 
-**Example:**
-
-The following script produces signatures for content:
-
+**Example:** The following script produces signatures for content:
 
 
 ```
@@ -624,7 +620,7 @@ The two new keys ( **automationhub_auto_sign_collections** and **automationhub_r
 
 
 
-#### 3.2.1.7. Adding a safe plugin variable to Event-Driven Ansible controller
+#### 3.3.1.7. Adding a safe plugin variable to Event-Driven Ansible controller
 
 
 

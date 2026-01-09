@@ -5,6 +5,8 @@
 
 
 
+You can add hosts to an inventory either by creating new hosts or by associating existing hosts with the inventory.
+
 You can configure hosts for the inventory and for groups and groups within groups.
 
 **Procedure**

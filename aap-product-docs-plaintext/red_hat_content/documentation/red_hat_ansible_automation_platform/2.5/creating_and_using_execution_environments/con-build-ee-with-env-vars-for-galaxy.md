@@ -5,7 +5,9 @@
 
 
 
-Ansible Builder schema 3 enables you to perform complex scenarios such as specifying custom Galaxy configurations. You can use this approach to pass sensitive information, such as authentication tokens, into the execution environment build without leaking them into the final execution environment image.
+Ansible Builder schema 3 enables you to perform complex scenarios such as specifying custom Galaxy configurations.
+
+You can use this approach to pass sensitive information, such as authentication tokens, into the execution environment build without leaking them into the final execution environment image.
 
 The following example uses Ansible Galaxy Server environment variables.
 

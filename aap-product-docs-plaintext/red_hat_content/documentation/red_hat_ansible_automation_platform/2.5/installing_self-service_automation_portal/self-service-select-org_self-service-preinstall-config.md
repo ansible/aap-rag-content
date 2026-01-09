@@ -6,6 +6,8 @@
 
 You must choose an organization in Ansible Automation Platform to use with self-service automation portal. If you have not set up an organization, use the following procedure to create one.
 
+**Procedure**
+
 1. Open your Ansible Automation Platform instance in a browser and log in as an administrator.
 1. Navigate toAccess Management→Organizations.
 1. Click **Create organization** .

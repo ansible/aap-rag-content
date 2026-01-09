@@ -1,5 +1,6 @@
 # 3. Automation mesh design patterns
-## 3.2. Single node control plane with single execution node
+## 3.1. Multiple hybrid nodes inventory file example
+### 3.1.1. Single node control plane with single execution node
 
 
 

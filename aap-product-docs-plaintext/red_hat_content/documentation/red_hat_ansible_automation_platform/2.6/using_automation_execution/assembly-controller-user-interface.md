@@ -5,7 +5,7 @@
 
 The Automation Execution _User Interface_ (UI) provides a graphical framework for your IT orchestration requirements.
 
-Access your user profile, the **About** page, view related documentation, or log out using the icons in the page header.
+Use it to access your user profile, the **About** page, view related documentation, or log out using the icons in the page header.
 
 The navigation panel provides quick access to automation controller resources, such as **Jobs** , **Templates** , **Schedules** , **Projects** , **Infrastructure** , and **Administration** .
 

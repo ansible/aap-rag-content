@@ -1,8 +1,0 @@
-# 4. Getting started as an automation operator
-## 4.4. About automation content
-
-
-
-
-Use the following Ansible concepts to create successful Ansible Playbooks and automation execution environments before beginning your Ansible development project.
-

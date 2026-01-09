@@ -1,4 +1,4 @@
-# Chapter 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+# Chapter 5. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
 
 
 

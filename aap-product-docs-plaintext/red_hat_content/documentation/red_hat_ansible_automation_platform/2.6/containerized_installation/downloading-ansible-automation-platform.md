@@ -1,5 +1,5 @@
-# 2. Ansible Automation Platform containerized installation
-## 2.5. Downloading Ansible Automation Platform
+# 4. Preparing the containerized Ansible Automation Platform installation
+## 4.5. Downloading Ansible Automation Platform
 
 
 
@@ -21,15 +21,14 @@ Choose the installation program you need based on your Red Hat Enterprise Linux 
 
 1. Copy the installation program `    .tar.gz` file and the optional manifest `    .zip` file onto your Red Hat Enterprise Linux host.
 
-
-1. You can use the `        scp` command to securely copy the files. The basic syntax for `        scp` is:
+Use the `    scp` command to securely copy the files. The basic syntax for `    scp` is:
 
 
 ```
 scp [options] &lt;path_to_source_file&gt; &lt;path_to_destination&gt;
 ```
 
-Use the following `        scp` command to copy the installation program `        .tar.gz` file to an AWS EC2 instance with a private key (replace the placeholder `        &lt;&gt;` values with your actual information):
+For example, use the following `    scp` command to copy the installation program `    .tar.gz` file to an AWS EC2 instance with a private key (replace the placeholder `    &lt;&gt;` values with your actual information):
 
 
 ```
@@ -37,11 +36,10 @@ scp -i &lt;path_to_private_key&gt; ansible-automation-platform-containerized-set
 ```
 
 
+1. Decide where you want the installation program to reside on the file system. This is your installation directory.
 
-1. Decide where you want the installation program to reside on the file system. This is referred to as your installation directory.
 
-
-1. Installation related files are created under this location and require at least 15 GB for the initial installation.
+1. The installation creates installation-related files under this location and requires at least 15 GB for the initial installation.
 
 1. Unpack the installation program `    .tar.gz` file into your installation directory, and go to the unpacked directory.
 

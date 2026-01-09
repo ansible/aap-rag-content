@@ -16,7 +16,7 @@ Filter options include:
 - Template
 
 
-You can sort results by any of the parameters from each column using the directional arrows.
+You can sort results by any of the parameters from each column by using the directional arrows.
 
 **Procedure**
 
@@ -25,6 +25,8 @@ You can sort results by any of the parameters from each column using the directi
 1. In that same toolbar, select a time range. Job Explorer will now display jobs within that time range.
 1. To further refine results, return to the filter toolbar and select a different attribute to filter results by, including job status, cluster, or organization.
 
-
 The **Job Explorer** view updates and presents a list of jobs based on the attributes you selected.
+
+
+
 

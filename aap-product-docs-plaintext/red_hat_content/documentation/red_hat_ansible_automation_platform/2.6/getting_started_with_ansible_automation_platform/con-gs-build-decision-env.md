@@ -1,5 +1,5 @@
 # 3. Getting started as an automation developer
-## 3.8. Build and use a decision environment
+## 3.9. Build and use a decision environment
 
 
 

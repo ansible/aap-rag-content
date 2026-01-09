@@ -1,6 +1,6 @@
 # 10. Patch releases
-## 10.10. Ansible Automation Platform patch release March 26, 2025
-### 10.10.3. Known Issues
+## 10.12. Ansible Automation Platform patch release March 26, 2025
+### 10.12.3. Known Issues
 
 
 

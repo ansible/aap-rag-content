@@ -1,23 +1,27 @@
 # 5. Red Hat Ansible Automation Platform Service on AWS Service Definition
 ## 5.2. Control plane
-### 5.2.8. Security
+### 5.2.9. Security
 
 
 
 
-#### 5.2.8.1. Identity and access management
+The platform is a managed service with robust built-in security, including RBAC and data encryption at rest and in transit (AES-256).
+
+#### 5.2.9.1. Identity and access management
 
 
 
 
-Ansible Automation Platform includes a built-in user model for configuring users and RBAC permissions that define access. Red Hat recommends using an enterprise identity provider with Ansible Automation Platform to implement multi-factor authentication for users. See the [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication) guide for more information.
+Ansible Automation Platform includes a built-in user model for configuring users and RBAC permissions that define access.
+
+Red Hat recommends using an enterprise identity provider with Ansible Automation Platform to implement multi-factor authentication for users. See the [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication) guide for more information.
 
 Note
 Red Hat advises keeping at least one local administrator account with a long, complex password for emergency access.
 
 
 
-#### 5.2.8.2. Encryption
+#### 5.2.9.2. Encryption
 
 
 

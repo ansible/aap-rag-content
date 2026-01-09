@@ -1,8 +1,10 @@
 # 15. Supported Inventory plugin templates
-## 15.9. Red Hat Ansible Automation Platform
+## 15.8. Red Hat Ansible Automation Platform
 
 
 
+
+Learn about the configuration options available in a automation controller Red Hat Ansible Automation Platform inventory
 
 ```
 include_metadata: true

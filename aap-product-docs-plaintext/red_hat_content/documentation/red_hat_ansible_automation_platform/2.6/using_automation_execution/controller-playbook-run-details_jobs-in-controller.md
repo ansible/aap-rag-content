@@ -5,6 +5,8 @@
 
 
 
+Learn how to view the details of a playbook run in Automation controller.
+
 Access the **Details** tab to view details about the job execution:
 
 ![Job details for example run](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/f44b9cf63023a4c7167813bde069f93e/ug-job-details-for-example-job.png)
@@ -15,7 +17,7 @@ You can view the following details for an executed job:
 -  **Status** : It can be any of the following:
 
 
--  **Pending** : The playbook run has been created, but not queued or started yet. Any job, not just playbook runs, stay in pending until it is ready to be run by the system. Reasons for playbook runs not being ready include dependencies that are currently running (all dependencies must be completed before the next step can execute), or there is not enough capacity to run in the locations it is configured to.
+-  **Pending** : The playbook run has been created, but not queued or started yet. Any job, not just playbook runs, stay in pending until it is ready to be run by the system. Reasons for playbook runs not being ready include dependencies that are currently running (all dependencies must be completed before the next step can run), or there is not enough capacity to run in the locations it is configured to.
 -  **Waiting** : The playbook run is in the queue waiting to be executed.
 -  **Running** : The playbook run is currently in progress.
 -  **Successful** : The last playbook run succeeded.

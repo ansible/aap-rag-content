@@ -1,6 +1,6 @@
 # 4. Getting started as an automation operator
-## 4.8. Work with job templates
-### 4.8.1. Launching a job template
+## 4.2. Work with job templates
+### 4.2.1. Launching a job template
 
 
 
@@ -14,9 +14,16 @@ Ansible Automation Platform offers push-button deployment of Ansible playbooks. 
 1. From the **Templates** page, click the launch icon to run your job template.
 
 
+**Verification**
+
 The **Templates** list view shows job templates that are currently available. The default view is collapsed (Compact), showing the template name, template type, and the timestamp of the last job that ran using that template. You can click the arrow icon next to each entry to expand and view more information. This list is sorted alphabetically by name, but you can sort by other criteria, or search by various template fields and attributes.
+
 
 From this screen you can launch, edit, and copy a job template.
 
-For more information about templates see the [Job Templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-job-templates) and [Workflow job templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-workflow-job-templates) sections of the Using automation execution guide.
+**Additional resources**
+
+-  [Job Templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-job-templates)
+-  [Workflow job templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-workflow-job-templates)
+
 

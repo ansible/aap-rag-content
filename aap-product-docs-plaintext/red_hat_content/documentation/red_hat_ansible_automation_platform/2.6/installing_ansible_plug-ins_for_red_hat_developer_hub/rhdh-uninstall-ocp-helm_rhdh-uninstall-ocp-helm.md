@@ -4,6 +4,8 @@
 
 
 
+To uninstall the Ansible plug-ins from a Helm chart installation, you remove templates using the ansible:content:create action first. Then, you delete the plug-in configuration from the Helm chart YAML, remove the extraContainers section, delete the Ansible block from the custom ConfigMap, restart the deployment, and remove the plug-in registry application.
+
 **Procedure**
 
 1. In Red Hat Developer Hub, remove any software templates that use the `    ansible:content:create` action.

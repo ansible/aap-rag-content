@@ -1,6 +1,6 @@
-# 11. Ansible Automation Platform Resource Operator
-## 11.5. Creating custom resources for Resource Operator
-### 11.5.7. Creating an automation controller inventory custom resource
+# 13. Ansible Automation Platform Resource Operator
+## 13.5. Create custom resources for Resource Operator
+### 13.5.7. Creating an automation controller inventory custom resource
 
 
 

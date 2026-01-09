@@ -4,6 +4,8 @@
 
 
 
+Learn how to create a new host by providing a name, selecting an inventory, and optionally defining a description and associated variables.
+
 To create a new host.
 
 **Procedure**

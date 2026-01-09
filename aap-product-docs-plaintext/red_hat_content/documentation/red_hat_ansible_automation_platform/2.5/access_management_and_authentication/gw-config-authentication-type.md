@@ -23,3 +23,8 @@ Ansible Automation Platform provides multiple authenticator plugins that you can
 -  [GitHub enterprise team](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/access_management_and_authentication/index#proc-controller-github-enterprise-team-settings)
 
 
+Note
+The **Controller admin** authentication method is for a specific installation and deployment scenario and should only be used if explicitly instructed to do so. This method provides no beneficial functionality for the normal operation of Ansible Automation Platform.
+
+
+

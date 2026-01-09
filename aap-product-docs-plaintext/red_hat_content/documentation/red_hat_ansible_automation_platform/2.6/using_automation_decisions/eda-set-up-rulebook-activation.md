@@ -4,7 +4,7 @@
 
 
 
-You can create and configure a rulebook activation within the Ansible Automation Platform Dashboard. This process ensures effective management and deployment of your event-driven automation.
+Create a rulebook activation to link a rulebook to a decision environment and event sources, initiating the event-driven automation process.
 
 **Prerequisites**
 

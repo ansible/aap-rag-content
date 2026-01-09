@@ -4,11 +4,7 @@
 
 
 
-Decision Environments are execution environments tailored towards running Ansible Rulebooks.
-
-Similar to execution environments that run Ansible playbooks for automation controller, decision environments are designed to run rulebooks for Event-Driven Ansible controller.
-
-You can create a custom decision environment for Event-Driven Ansible that provides a custom maintained or third-party event source plugin that is not available in the default decision environment.
+Customize a decision environment container image to ensure your rulebook activations run with the precise, custom-maintained collections and dependencies they require.
 
 **Prerequisites**
 
@@ -30,54 +26,23 @@ Important
 
 **Procedure**
 
-- Use `    de-minimal` as the base image with Ansible Builder to build your custom decision environments. This image is built from a base image provided by Red Hat at [Ansible Automation Platform minimal decision environment](https://catalog.redhat.com/software/containers/ansible-automation-platform-25/de-minimal-rhel9/650a5672a370728c710acaab) .
+1. Use `    de-minimal` as the base image with Ansible Builder to build your custom decision environments. This image is built from a base image provided by Red Hat at [Ansible Automation Platform minimal decision environment](https://catalog.redhat.com/software/containers/ansible-automation-platform-25/de-minimal-rhel9/650a5672a370728c710acaab) .
 
-
-**Example**
-
-The following is an example of the Ansible Builder definition file that uses `de-minimal` as a base image to build a custom decision environment with the ansible.eda collection:
+The following is an example of the Ansible Builder definition file that uses `    de-minimal` as a base image to build a custom decision environment with the ansible.eda collection:
 
 
 ```
-version: 3
-
-images:
-base_image:
-name: 'registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel9:latest'
-
-dependencies:
-galaxy:
-collections:
-- ansible.eda
-python_interpreter:
-package_system: "python39"
-
-options:
-package_manager_path: /usr/bin/microdnf
+version: 3        images:      base_image:        name: 'registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel9:latest'        dependencies:      galaxy:        collections:          - ansible.eda      python_interpreter:        package_system: "python39"        options:      package_manager_path: /usr/bin/microdnf
 ```
 
-Additionally, if you need other Python packages or RPMs, you can add the following to a single definition file:
+
+1. Optional: If you need other Python packages or RPMs, add the following to a single definition file:
+
 
 ```
-version: 3
-
-images:
-base_image:
-name: 'registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel9:latest'
-
-dependencies:
-galaxy:
-collections:
-- ansible.eda
-python:
-- six
-- psutil
-system:
-- iputils [platform:rpm]
-python_interpreter:
-package_system: "python39"
-
-options:
-package_manager_path: /usr/bin/microdnf
+version: 3        images:      base_image:        name: 'registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel9:latest'        dependencies:      galaxy:        collections:          - ansible.eda      python:        - six        - psutil      system:        - iputils [platform:rpm]      python_interpreter:        package_system: "python39"        options:      package_manager_path: /usr/bin/microdnf
 ```
+
+
+
 

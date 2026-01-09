@@ -1,10 +1,10 @@
 # 2. Managing collections in automation hub
-## 2.1. Using namespaces to manage collections in automation hub
+## 2.1. Managing namespaces
 
 
 
 
-Namespaces are unique locations in automation hub to which you can upload and publish content collections. Access to namespaces in automation hub is governed by teams with permission to manage the content and related information that appears there.
+Namespaces are unique locations in automation hub to which you can upload and publish content collections. Namespace access is governed by teams with permission to manage the content and related information that appears there.
 
 You can use namespaces in automation hub to organize collections developed within your organization for internal distribution and use.
 

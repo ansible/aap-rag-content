@@ -1,10 +1,10 @@
 # 8. Rulebook activations troubleshooting
-## 8.2. Activation keeps restarting
+## 8.3. Activation keeps restarting
 
 
 
 
-Perform the following steps if your rulebook activation keeps restarting.
+Troubleshoot rulebook activations that restart repeatedly (indicating persistent errors) to diagnose and fix core issues preventing stable, continuous automation execution.
 
 **Procedure**
 
@@ -24,7 +24,7 @@ There are three selections available: **On failure** (restarts a rulebook activa
 1. Check your log level for your activation.
 
 
-1. If your default log level is **Error** , go back to the **Rulebook Activation** page and recreate your activation following procedures in [Setting up rulebook a activation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_decisions/eda-rulebook-activations#eda-set-up-rulebook-activation) .
+1. If your default log level is **Error** , go back to the **Rulebook Activation** page and recreate your activation following procedures in [Setting up rulebook a activation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_decisions/eda-rulebook-activations#eda-set-up-rulebook-activation) .
 1. Change the **Log level** to **Debug** .
 1. Run the activation again and navigate to the **History** tab from the activation details page.
 1. On the **History** page, click one of your recent activations and view the **Output** .

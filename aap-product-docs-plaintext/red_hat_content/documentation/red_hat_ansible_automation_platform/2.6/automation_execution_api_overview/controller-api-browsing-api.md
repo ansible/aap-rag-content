@@ -7,6 +7,9 @@ REST APIs give access to resources (data entities) through URI paths.
 
 
 <span id="controller-api-browsing"></span>
+Learn how to access and use the automation controller REST API by using a web browser. Learn how to find the recommended current version (v2), view documentation for endpoints, and use GET, PUT, and POST methods with JSON formatting.
+
+
 **Procedure**
 
 1. Go to the automation controller REST API in a web browser at:
@@ -22,7 +25,6 @@ icon on the navigation menu, for documentation on the access methods for that pa
 
 Note
 You can also view changed settings from factory defaults at `    /api/gateway/v1/settings/` endpoint. It reflects changes you made in the API browser, not changed settings that come from static settings files.
-
 
 
 

@@ -7,6 +7,8 @@
 
 For more information about Personal access tokens in GitHub, see [Creating a personal access token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) in the GitHub _Authentication_ guide.
 
+**Procedure**
+
 1. In a browser, log in to GitHub.
 1. Click your profile picture and select **Settings** .
 1. Select **Developer settings** .

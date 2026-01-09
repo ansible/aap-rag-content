@@ -1,26 +1,17 @@
 # 10. Patch releases
-## 10.4. Ansible Automation Platform patch release July 2, 2025
-### 10.4.8. Container-based Ansible Automation Platform
+## 10.3. Ansible Automation Platform patch release September 23, 2025
+### 10.3.8. Container-based Ansible Automation Platform
 
 
 
 
-#### 10.4.8.1. Enhancements
+#### 10.3.8.1. Bug Fixes
 
 
 
 
-- Validate that nodes are configured with at least 16G of RAM.(AAP-47542)
-- Containerized Ansible Automation Platform now supports RHEL 10.(AAP-47083)
-
-
-#### 10.4.8.2. Bug Fixes
-
-
-
-
-- Fixed an issue where the TLS Certificate Authority (CA) certificate for Receptor mesh configuration when providing TLS certificates were not signed by the internal CA.(AAP-48065)
-- Fixed a missing user parameter for the sos report command on the `    log_gathering` playbook.(AAP-47718)
-- Fixed an issue where the `    jquery` version included in the redirect page did not match the version from the rest framework directory.(AAP-47074)
+- Fixed an issue where the `    create_initial_data` command did not work during backup and restore onto different clusters for Event-Driven Ansible. (AAP-53382)
+- Fixed an issue where scheduled tasks failed in private automation hub when using quotes in the task name. (AAP-53307)
+- Uploading Ansible collections to private automation hub is no longer limited by the API pagination. (AAP-53526)
 
 

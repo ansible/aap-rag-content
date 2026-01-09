@@ -1,11 +1,11 @@
 # 2. System requirements
-## 2.6. PostgreSQL requirements
-### 2.6.4. Using custom TLS certificates
+## 2.7. PostgreSQL requirements
+### 2.7.4. Using custom TLS certificates
 
 
 
 
-By default, the installation program generates self-signed TLS certificates and keys for all Ansible Automation Platform services. However, you can optionally use custom TLS certificates.
+Configure the installer to use your custom TLS certificates and keys for all Ansible Automation Platform services instead of the default self-signed certificates. This is achieved by setting inventory variables ( `aap_ca_cert_file` and `aap_ca_key_file` ), and optionally specifying a custom Certificate Authority (CA) certificate using `custom_ca_cert` to ensure trust and security across the platform.
 
 **Procedure**
 

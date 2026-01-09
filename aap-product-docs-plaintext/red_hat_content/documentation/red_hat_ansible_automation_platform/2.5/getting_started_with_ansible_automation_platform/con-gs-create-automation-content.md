@@ -4,5 +4,5 @@
 
 
 
-Ansible playbooks are blueprints that tell Ansible Automation Platform what tasks to perform with which devices. You can use a playbook to define the automation tasks that you want the platform to run.
+Ansible playbooks are blueprints that tell Ansible Automation Platform what tasks to perform with which devices. Use a playbook to define automation tasks for the platform to run.
 

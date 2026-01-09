@@ -4,6 +4,8 @@
 
 
 
+You can add permissions to a template to allow specific users or teams to have access to it.
+
 Use the following steps to add permissions for the team.
 
 **Procedure**
@@ -18,11 +20,16 @@ Use the following steps to add permissions for the team.
 1. Choose the roles that you want users or teams to have. Ensure that you scroll down for a complete list of roles. Each resource has different options available.
 1. ClickFinishto apply the roles to the selected users or teams and to add them as members.
 
-
 The window to add users and teams closes to display the updated roles assigned for each user and team
 
-To remove roles for a particular user, click the![Disassociate](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/48c2fa70cf2a09ae0fafa81899b143fc/disassociate.png)
+
+
+
+1. To remove roles for a particular user, click the![Disassociate](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/48c2fa70cf2a09ae0fafa81899b143fc/disassociate.png)
 icon next to its resource.
 
 This launches a confirmation dialog, asking you to confirm the disassociation.
+
+
+
 

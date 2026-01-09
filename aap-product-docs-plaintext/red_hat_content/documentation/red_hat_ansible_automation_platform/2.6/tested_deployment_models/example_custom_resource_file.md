@@ -5,7 +5,7 @@
 
 
 
-Use the following example custom resource (CR) to add your Ansible Automation Platform instance to your project:
+Use this example custom resource (CR) to add your Ansible Automation Platform instance to your project:
 
 ```
 apiVersion: aap.ansible.com/v1alpha1

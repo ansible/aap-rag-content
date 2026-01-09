@@ -19,7 +19,7 @@ Ensure that you are selecting the desired role within the correct component cont
 
 
 
-1. To remove a single role, click the **-** icon next to the role and confirm removal on the dialog that appears.
-1. To remove multiple roles, select the checkbox next to each role you want to remove and click **Remove selected roles** from the **More actions ⋮** list on the menu bar. On the dialog that appears, confirm removal of the selected roles and clickRemove role.
+1. To remove a single role, click the **-** icon next to the role and confirm removal on the dialog that is displayed.
+1. To remove multiple roles, select the checkbox next to each role you want to remove and click **Remove selected roles** from the **More actions ⋮** list on the menu bar. On the dialog that is displayed, confirm removal of the selected roles and clickRemove role.
 
 

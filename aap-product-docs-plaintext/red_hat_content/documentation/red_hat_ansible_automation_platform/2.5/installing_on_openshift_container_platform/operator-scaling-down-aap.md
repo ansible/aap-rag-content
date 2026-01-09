@@ -1,4 +1,4 @@
-# Chapter 6. Scaling down Red Hat Ansible Automation Platform Operator deployments
+# Chapter 7. Scaling down Red Hat Ansible Automation Platform Operator deployments
 
 
 

@@ -1,10 +1,10 @@
 # 3. Installing Red Hat Ansible Automation Platform
-## 3.5. Backing up your Ansible Automation Platform instance
+## 3.6. Backing up your Ansible Automation Platform instance
 
 
 
 
-Back up an existing Ansible Automation Platform instance by running the `.setup.sh` script with the `backup_dest` flag, which saves the content and configuration of your current environment. Use the compression flags `use_archive_compression` and `use_db_compression` to compress the backup artifacts before they are sent to the host running the backup operation.
+Back up an existing Ansible Automation Platform instance by running the `.setup.sh` script with the `backup_dest` flag. This saves the content and configuration of your current environment. Use the compression flags `use_archive_compression` and `use_db_compression` to compress the backup artifacts before they are sent to the host running the backup operation.
 
 **Procedure**
 

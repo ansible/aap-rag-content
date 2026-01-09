@@ -1,11 +1,11 @@
 # 10. Patch releases
-## 10.4. Ansible Automation Platform patch release July 2, 2025
-### 10.4.4. Red Hat Ansible Lightspeed
+## 10.6. Ansible Automation Platform patch release July 2, 2025
+### 10.6.4. Red Hat Ansible Lightspeed
 
 
 
 
-#### 10.4.4.1. Enhancements
+#### 10.6.4.1. Enhancements
 
 
 

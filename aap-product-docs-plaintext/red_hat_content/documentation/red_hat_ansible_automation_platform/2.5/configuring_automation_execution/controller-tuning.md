@@ -4,13 +4,12 @@
 
 
 
-You can configure many automation controller settings by using the automation controller UI, API, and file based settings including:
+You can configure many automation controller settings by using the UI, API, and file settings including:
 
 - Live events in the automation controller UI
-- Job event processing
+- Job event processing and scheduling
 - Control and execution node capacity
-- Instance group and container group capacity
-- Task management (job scheduling)
+- Instance and container groups capacity
 - Internal cluster routing
 - Web server tuning
 

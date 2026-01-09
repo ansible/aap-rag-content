@@ -1,5 +1,5 @@
-# 12. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
-## 12.9. Collecting Diagnostic Data
+# 14. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+## 14.9. Collecting Diagnostic Data
 
 
 

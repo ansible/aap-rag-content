@@ -14,7 +14,7 @@ System level monitoring includes the following information:
 - Network traffic
 
 
-Application level metrics provide data that the application knows about the system. This data includes the following information:
+Application level metrics supply data that the application knows about the system. This data includes the following information:
 
 - How many jobs are running in a given instance
 - Capacity information about instances in the cluster

@@ -1,6 +1,6 @@
-# 5. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
-## 5.1. Overview
-### 5.1.2. Ansible Automation Platform 2.6 requirements
+# 6. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
+## 6.1. Overview
+### 6.1.2. Ansible Automation Platform 2.6 requirements
 
 
 

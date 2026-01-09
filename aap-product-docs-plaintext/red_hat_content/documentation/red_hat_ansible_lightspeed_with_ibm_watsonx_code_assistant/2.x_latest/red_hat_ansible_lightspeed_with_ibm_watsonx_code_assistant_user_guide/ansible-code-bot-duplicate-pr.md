@@ -1,5 +1,5 @@
-# 6. Installing and configuring the Ansible code bot
-## 6.4. How Ansible code bot handles duplicate pull requests
+# 7. Installing and configuring the Ansible code bot
+## 7.4. How Ansible code bot handles duplicate pull requests
 
 
 

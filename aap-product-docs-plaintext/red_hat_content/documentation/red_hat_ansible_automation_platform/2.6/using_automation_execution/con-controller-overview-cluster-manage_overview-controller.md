@@ -1,5 +1,5 @@
 # 1. Automation controller overview
-## 1.15. Cluster management
+## 1.14. Cluster management
 
 
 

@@ -9,9 +9,9 @@ Team mapping is the mapping of team members (users) from authenticators.
 
 You can define the options for each team’s membership. For each team, you can specify which users are automatically added as members of the team and also which users can administer the team.
 
-Team mappings can be specified separately for each account authentication.
+You can specify Team mappings separately for each account authentication.
 
-When Team mapping is positively evaluated, a specified team and its organization are created, if they don’t exist if the related authenticator is allowed to create objects.
+When Team mapping is positively evaluated, a specified team and its organization are created, if they do not exist if the related authenticator is allowed to create objects.
 
 Important
 When configuring team mappings with an Attribute trigger, use the `or` operation. The `and` operation requires every single value in a list to match the comparison criteria for the trigger to be successful. This is rarely the intended behavior, as you typically want a match on at least one value in the list.

@@ -1,11 +1,11 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
-## 1.1. Configuring Ansible automation hub remote repositories to synchronize content
+## 1.1. Configuring remote repositories for content syncing
 ### 1.1.1. Token management in automation hub
 
 
 
 
-Before you can interact with automation hub by uploading or downloading collections, you must create an API token. The automation hub API token authenticates your `ansible-galaxy` client to the Red Hat automation hub server.
+You must create an API token before you can upload or download collections. The automation hub API token authenticates your `ansible-galaxy` client to the Red Hat automation hub server.
 
 Note
 Automation hub does not support basic authentication or authenticating through service accounts. You must authenticate using token management.

@@ -1,10 +1,10 @@
 # 3. Getting started as an automation developer
-## 3.4. Bundle content with Ansible roles
+## 3.5. Bundle automation content with roles
 
 
 
 
-A role is like a customized piece of automation content that bundles together relevant bits from playbooks to fit your system’s specific needs. Roles are self-contained and portable, and can include groupings of tasks, variables, configuration templates, handlers, and other supporting files to orchestrate complicated automation flows.
+A role is a customized piece of automation content that bundles together relevant bits from playbooks to fit your system’s specific needs. Roles are self-contained and portable, and can include groupings of tasks, variables, configuration templates, handlers, and other supporting files to orchestrate complicated automation flows.
 
 Instead of creating huge playbooks with hundreds of tasks, you can use roles to break the tasks apart into smaller, more discrete units of work.
 

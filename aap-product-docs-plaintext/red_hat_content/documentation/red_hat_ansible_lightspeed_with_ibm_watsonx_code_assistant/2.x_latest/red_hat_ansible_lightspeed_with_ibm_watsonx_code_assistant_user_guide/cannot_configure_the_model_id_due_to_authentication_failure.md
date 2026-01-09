@@ -1,6 +1,6 @@
-# 7. Troubleshooting
-## 7.1. Troubleshooting Red Hat Ansible Lightspeed configuration errors
-### 7.1.3. Cannot configure the model ID due to authentication failure
+# 8. Troubleshooting
+## 8.1. Troubleshooting Red Hat Ansible Lightspeed configuration errors
+### 8.1.3. Cannot configure the model ID due to authentication failure
 
 
 

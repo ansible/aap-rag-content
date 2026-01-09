@@ -1,10 +1,10 @@
 # 5. Disconnected installation
-## 5.3. Synchronizing RPM repositories using reposync
+## 5.2. Synchronizing RPM repositories using reposync
 
 
 
 
-To perform a reposync you need a RHEL host that has access to the internet. After the repositories are synced, you can move the repositories to the disconnected network hosted from a web server.
+To perform a reposync you need a Red Hat Enterprise Linux host that has access to the internet. After the repositories are synced, you can move the repositories to the disconnected network hosted from a web server.
 
 When downloading RPM, ensure you use the applicable distro.
 

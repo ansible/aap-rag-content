@@ -1,11 +1,11 @@
 # 2. Installing the Ansible plug-ins with a Helm chart on OpenShift Container Platform
 ## 2.5. Required configuration
-### 2.5.6. Adding Ansible plug-ins software templates
+### 2.5.8. Adding Ansible plug-ins software templates
 
 
 
 
-Red Hat Ansible provides software templates for Red Hat Developer Hub to provision new playbooks and collection projects based on Ansible best practices.
+Ansible Automation Platform provides software templates for Red Hat Developer Hub to provision new playbooks and collection projects based on Ansible best practices.
 
 **Procedure**
 

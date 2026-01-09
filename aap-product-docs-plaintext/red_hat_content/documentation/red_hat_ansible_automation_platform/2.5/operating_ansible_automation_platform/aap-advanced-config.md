@@ -168,7 +168,7 @@ The following procedure describes how to update the TLS certificates and keys by
 - To generate new certificates - If you want the installation program to generate a new certificate for a service, delete or move the existing certificates and keys.
 
 
-<span id="idm139942724533968"></span>
+<span id="idm139835654309744"></span>
 **Table 6.1. Certificate and key file paths per service**
 
 | Service | Certificate file path | Key file path |
@@ -322,18 +322,18 @@ true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
 
 
 
-To renew or change the SSL certificate for RPM-based installations, you can edit the inventory file and run the installation program. The installation program verifies that all Ansible Automation Platform components are working. The installation program can take a long time to run.
+To renew or change SSL certificates for RPM-based installations, you can edit the inventory file and run the installation program. The installation program verifies that all Ansible Automation Platform components are working.
 
 Alternatively, you can change the SSL certificates manually. This is quicker, but there is no automatic verification.
 
-Red Hat recommends that you use the installation program to make changes to your Ansible Automation Platform instance.
+Red Hat recommends that you use the installation program to make changes to your Ansible Automation Platform deployment.
 
-### 6.3.1. Renewing the self-signed SSL certificate
-
-
+### 6.3.1. Renewing the self-signed SSL/TLS certificates
 
 
-The following steps regenerate a new SSL certificate for both automation controller and automation hub.
+
+
+The following steps regenerate new SSL/TLS certificates for all Ansible Automation Platform components.
 
 **Procedure**
 
@@ -350,35 +350,51 @@ The following steps regenerate a new SSL certificate for both automation control
 
 **Verification**
 
-- Validate the CA file and `    server.crt` file on automation controller:
+- Validate the CA file and certificate file on Event-Driven Ansible controller:
 
 
 ```
-openssl verify -CAfile ansible-automation-platform-managed-ca-cert.crt /etc/tower/tower.cert    openssl s_client -connect &lt;AUTOMATION_HUB_URL&gt;:443
+openssl verify -CAfile ansible-automation-platform-managed-ca-cert.crt /etc/ansible-automation-platform/eda/server.cert    openssl s_client -connect &lt;EDA_FQDN&gt;:443
 ```
 
 
-- Validate the CA file and `    server.crt` file on automation hub:
+- Validate the CA file and certificate file on platform gateway:
 
 
 ```
-openssl verify -CAfile ansible-automation-platform-managed-ca-cert.crt /etc/pulp/certs/pulp_webserver.crt    openssl s_client -connect &lt;AUTOMATION_CONTROLLER_URL&gt;:443
+openssl verify -CAfile ansible-automation-platform-managed-ca-cert.crt /etc/ansible-automation-platform/gateway/gateway.cert    openssl s_client -connect &lt;GATEWAY_FQDN&gt;:443
+```
+
+
+- Validate the CA file and certificate file on automation hub:
+
+
+```
+openssl verify -CAfile ansible-automation-platform-managed-ca-cert.crt /etc/pulp/certs/pulp_webserver.crt    openssl s_client -connect &lt;HUB_FQDN&gt;:443
+```
+
+
+- Validate the CA file and certificate file on automation controller:
+
+
+```
+openssl verify -CAfile ansible-automation-platform-managed-ca-cert.crt /etc/tower/tower.cert    openssl s_client -connect &lt;CONTROLLER_FQDN&gt;:443
 ```
 
 
 
 
-### 6.3.2. Changing the SSL certificate and key using the installer
+### 6.3.2. Changing SSL/TLS certificates and keys using the installation program
 
 
 
 
-The following procedure describes how to change the SSL certificate and key in the inventory file.
+The following procedure describes how to change the SSL/TLS certificate and key in the inventory file.
 
 **Prerequisites**
 
+- The certificates must be in PEM format.
 - If there is an intermediate certificate authority, you must append it to the server certificate.
-- Both automation controller and automation hub use NGINX so the server certificate must be in PEM format.
 - Use the correct order for the certificates: The server certificate comes first, followed by the intermediate certificate authority.
 
 
@@ -386,16 +402,18 @@ For further information, see the [ssl certificate section of the NGINX documenta
 
 **Procedure**
 
-1. Copy the new SSL certificates and keys to a path relative to the Ansible Automation Platform installer.
-1. Add the absolute paths of the SSL certificates and keys to the inventory file. Refer to the [Automation controller variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#controller-variables) , [Automation hub variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#hub-variables) , and [Event-Driven Ansible controller variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-variables) sections of [RPM installation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation) for guidance on setting these variables.
+1. Copy the new SSL/TLS certificates and keys to a path relative to the Ansible Automation Platform installer.
+1. Add the absolute paths of the SSL/TLS certificates and keys to the inventory file. Refer to [Inventory file variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars) for guidance on setting these variables.
 
 
-- Automation controller: `        web_server_ssl_cert` , `        web_server_ssl_key` , `        custom_ca_cert`
-- Automation hub: `        automationhub_ssl_cert` , `        automationhub_ssl_key` , `        custom_ca_cert`
 - Event-Driven Ansible controller: `        automationedacontroller_ssl_cert` , `        automationedacontroller_ssl_key` , `        custom_ca_cert`
+- Platform gateway: `        automationgateway_ssl_cert` , `        automationgateway_ssl_key` , `        custom_ca_cert`
+- Automation hub: `        automationhub_ssl_cert` , `        automationhub_ssl_key` , `        custom_ca_cert`
+- Automation controller: `        web_server_ssl_cert` , `        web_server_ssl_key` , `        custom_ca_cert`
 
 Note
-The `    custom_ca_cert` must be the root certificate authority that signed the intermediate certificate authority. This file is installed in `    /etc/pki/ca-trust/source/anchors` .
+The `        custom_ca_cert` must be the root certificate authority that signed the intermediate certificate authority. This file is installed in `        /etc/pki/ca-trust/source/anchors` .
+
 
 
 
@@ -403,20 +421,20 @@ The `    custom_ca_cert` must be the root certificate authority that signed the 
 1. Run the installation program.
 
 
-### 6.3.3. Changing the SSL certificate and key manually on automation controller
+### 6.3.3. Changing SSL/TLS certificates and keys manually
 
 
 
 
-The following procedure describes how to change the SSL certificate and key manually on automation controller.
+The following procedure describes how to change SSL/TLS certificates and keys manually for all Ansible Automation Platform components.
 
 **Procedure**
 
-1. Backup the current SSL certificate:
+1. Backup the current SSL/TLS certificate:
 
 
 ```
-cp /etc/tower/tower.cert /etc/tower/tower.cert-$(date +%F)
+cp &lt;CERT_PATH&gt; &lt;CERT_PATH&gt;-$(date +%F)
 ```
 
 
@@ -424,17 +442,17 @@ cp /etc/tower/tower.cert /etc/tower/tower.cert-$(date +%F)
 
 
 ```
-cp /etc/tower/tower.key /etc/tower/tower.key-$(date +%F)+
+cp &lt;KEY_PATH&gt; &lt;KEY_PATH&gt;-$(date +%F)
 ```
 
 
-1. Copy the new SSL certificate to `    /etc/tower/tower.cert` .
-1. Copy the new key to `    /etc/tower/tower.key` .
+1. Copy the new SSL/TLS certificate to the certificate path.
+1. Copy the new key to the key path.
 1. Restore the SELinux context:
 
 
 ```
-restorecon -v /etc/tower/tower.cert /etc/tower/tower.key
+restorecon -v &lt;CERT_PATH&gt; &lt;KEY_PATH&gt;
 ```
 
 
@@ -442,7 +460,7 @@ restorecon -v /etc/tower/tower.cert /etc/tower/tower.key
 
 
 ```
-chown root:awx /etc/tower/tower.cert /etc/tower/tower.key    chmod 0600 /etc/tower/tower.cert /etc/tower/tower.key
+chown &lt;OWNER&gt;:&lt;GROUP&gt; &lt;CERT_PATH&gt; &lt;KEY_PATH&gt;    chmod 0600 &lt;CERT_PATH&gt; &lt;KEY_PATH&gt;
 ```
 
 
@@ -462,166 +480,32 @@ systemctl reload nginx.service
 ```
 
 
-1. Verify that new SSL certificate and key have been installed:
+1. Verify that new SSL/TLS certificate and key have been installed:
 
 
 ```
-true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
+true | openssl s_client -showcerts -connect &lt;COMPONENT_FQDN&gt;:443
 ```
 
 
+<span id="idm139835655310160"></span>
+**Table 6.2. SSL/TLS certificate and key file paths per service**
 
+| Service | Certificate file path | Key file path | Owner:Group |
+| --- | --- | --- | --- |
+| Automation controller |  `/etc/tower/tower.cert` |  `/etc/tower/tower.key` |  `root:awx` |
+| Automation hub |  `/etc/pulp/certs/pulp_webserver.crt` |  `/etc/pulp/certs/pulp_webserver.key` |  `root:pulp` |
+| Event-Driven Ansible controller |  `/etc/ansible-automation-platform/eda/server.cert` |  `/etc/ansible-automation-platform/eda/server.key` |  `root:eda` |
+| Platform gateway |  `/etc/ansible-automation-platform/gateway/gateway.cert` |  `/etc/ansible-automation-platform/gateway/gateway.key` |  `root:gateway` |
 
-### 6.3.4. Changing the SSL certificate and key on Event-Driven Ansible controller
 
 
 
 
-The following procedure describes how to change the SSL certificate and key manually on Event-Driven Ansible controller.
 
-**Procedure**
 
-1. Backup the current SSL certificate:
 
-
-```
-cp /etc/ansible-automation-platform/eda/server.cert /etc/ansible-automation-platform/eda/server.cert-$(date +%F)
-```
-
-
-1. Backup the current key files:
-
-
-```
-cp /etc/ansible-automation-platform/eda/server.key /etc/ansible-automation-platform/eda/server.key-$(date +%F)
-```
-
-
-1. Copy the new SSL certificate to `    /etc/ansible-automation-platform/eda/server.cert` .
-1. Copy the new key to `    /etc/ansible-automation-platform/eda/server.key` .
-1. Restore the SELinux context:
-
-
-```
-restorecon -v /etc/ansible-automation-platform/eda/server.cert /etc/ansible-automation-platform/eda/server.key
-```
-
-
-1. Set appropriate permissions for the certificate and key files:
-
-
-```
-chown root:eda /etc/ansible-automation-platform/eda/server.cert /etc/ansible-automation-platform/eda/server.key
-```
-
-
-```
-chmod 0600 /etc/ansible-automation-platform/eda/server.cert /etc/ansible-automation-platform/eda/server.key
-```
-
-
-1. Test the NGINX configuration:
-
-
-```
-nginx -t
-```
-
-
-1. Reload NGINX:
-
-
-```
-systemctl reload nginx.service
-```
-
-
-1. Verify that new SSL certificate and key have been installed:
-
-
-```
-true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
-```
-
-
-
-
-### 6.3.5. Changing the SSL certificate and key manually on automation hub
-
-
-
-
-The following procedure describes how to change the SSL certificate and key manually on automation hub.
-
-**Procedure**
-
-1. Backup the current SSL certificate:
-
-
-```
-cp /etc/pulp/certs/pulp_webserver.crt /etc/pulp/certs/pulp_webserver.crt-$(date +%F)
-```
-
-
-1. Backup the current key files:
-
-
-```
-cp /etc/pulp/certs/pulp_webserver.key /etc/pulp/certs/pulp_webserver.key-$(date +%F)
-```
-
-
-1. Copy the new SSL certificate to `    /etc/pulp/certs/pulp_webserver.crt` .
-1. Copy the new key to `    /etc/pulp/certs/pulp_webserver.key` .
-1. Restore the SELinux context:
-
-
-```
-restorecon -v /etc/pulp/certs/pulp_webserver.crt /etc/pulp/certs/pulp_webserver.key
-```
-
-
-1. Set appropriate permissions for the certificate and key files:
-
-
-```
-chown root:pulp /etc/pulp/certs/pulp_webserver.crt /etc/pulp/certs/pulp_webserver.key
-```
-
-
-```
-chmod 0600 /etc/pulp/certs/pulp_webserver.crt /etc/pulp/certs/pulp_webserver.key
-```
-
-
-1. Test the NGINX configuration:
-
-
-```
-nginx -t
-```
-
-
-1. Reload NGINX:
-
-
-```
-systemctl reload nginx.service
-```
-
-
-1. Verify that new SSL certificate and key have been installed:
-
-
-```
-true | openssl s_client -showcerts -connect ${CONTROLLER_FQDN}:443
-```
-
-
-
-
-
-<span id="idm139942719981840"></span>
+<span id="idm139835655152192"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

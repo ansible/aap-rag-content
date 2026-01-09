@@ -4,7 +4,7 @@
 
 
 
-You can create a credential type to use with a source plugin that you select based on the supported, default credential types. You can make your credential type available to a team or individuals.
+Build a reusable credential type template to enforce consistent input fields and authentication mechanisms for custom integrations across your organization.
 
 **Procedure**
 
@@ -67,6 +67,6 @@ icon to modify the credential type options.
 
 **Additional resources**
 
-[Setting up credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_decisions/eda-credentials#eda-set-up-credential) .
+-  [Setting up credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_decisions/eda-credentials#eda-set-up-credential)
 
 

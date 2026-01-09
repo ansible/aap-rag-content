@@ -7,7 +7,7 @@
 After using the RPM installation program, you must configure automation controller to use egress proxy.
 
 Note
-This is not required for containerized installers because podman uses system configured proxy and redirects all the container traffic to the proxy.
+This is not required for containerized installers because Podman uses system configured proxy and redirects all the container traffic to the proxy.
 
 
 

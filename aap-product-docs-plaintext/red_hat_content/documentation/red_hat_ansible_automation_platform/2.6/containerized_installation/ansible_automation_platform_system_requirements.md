@@ -1,6 +1,6 @@
-# 2. Ansible Automation Platform containerized installation
-## 2.2. System requirements
-### 2.2.2. Ansible Automation Platform system requirements
+# 4. Preparing the containerized Ansible Automation Platform installation
+## 4.2. System requirements
+### 4.2.2. Ansible Automation Platform system requirements
 
 
 
@@ -8,8 +8,8 @@
 Your system must meet the following minimum system requirements to install and run Red Hat Ansible Automation Platform.
 
 
-<span id="idm139878645268368"></span>
-**Table 2.1. System configuration**
+<span id="idm140209863528512"></span>
+**Table 4.1. System configuration**
 
 | Type | Description | Notes |
 | --- | --- | --- |
@@ -23,7 +23,7 @@ Your system must meet the following minimum system requirements to install and r
 - Ansible Automation Platform bundles `    ansible-core` 2.16 for operation, so you do not need to install it manually. |
 | Browser | A currently supported version of Mozilla Firefox or Google Chrome. |  |
 | Database | - For Ansible Automation Platform managed databases: PostgreSQL 15.
-- For customer provided (external) databases: PostgreSQL 15, 16, or 17. | - External (customer supported) databases require ICU support.
+- For customer provided (external) databases: PostgreSQL 15, 16, or 17. | - External (customer supported) databases require International Components for Unicode (ICU) support.
 - External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality is dependent on utilities provided with PostgreSQL 15. |
 
 
@@ -32,8 +32,8 @@ Your system must meet the following minimum system requirements to install and r
 Each virtual machine (VM) has the following system requirements:
 
 
-<span id="idm139878647283456"></span>
-**Table 2.2. Virtual machine requirements**
+<span id="idm140209857845536"></span>
+**Table 4.2. Virtual machine requirements**
 
 | Requirement | Minimum requirement |
 | --- | --- |
@@ -50,7 +50,7 @@ Each virtual machine (VM) has the following system requirements:
 
 
 Note
-If performing a bundled installation of the growth topology with `hub_seed_collections=true` , then 32 GB RAM is recommended. Note that with this configuration the install time is going to increase and can take 45 or more minutes alone to complete seeding the collections.
+If you perform a bundled installation of the growth topology with `hub_seed_collections=true` , then use 32 GB RAM. With this configuration, the install time will increase and can take 45 or more minutes to complete seeding the collections.
 
 
 

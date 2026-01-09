@@ -5,7 +5,7 @@
 
 
 
-You can view the output of the activations in the **History** tab.
+View the activation output in the History tab to inspect the execution results, confirm successful automation runs, and diagnose runtime errors or task failures.
 
 **Procedure**
 

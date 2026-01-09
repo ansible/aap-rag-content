@@ -5,10 +5,10 @@
 
 
 
-The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
+The Red Hat tested infrastructure topology for this deployment model:
 
 
-<span id="idm140627605266688"></span>
+<span id="idm140186612367136"></span>
 **Figure 4.2. Infrastructure topology diagram**
 
 ![RPM enterprise topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Tested_deployment_models-en-US/images/f2f3c928085ce3b7b53a92d554fbc14d/rpm-b-env-a.png)
@@ -16,10 +16,10 @@ The following diagram outlines the infrastructure topology that Red Hat has tes
 
 
 
-Each VM has been tested with the following component requirements:
+Red Hat tests each VM with these requirements:
 
 
-<span id="idm140627605261840"></span>
+<span id="idm140186612362288"></span>
 **Table 4.5. Virtual machine requirements**
 
 | Requirement | Minimum requirement |
@@ -33,8 +33,8 @@ Each VM has been tested with the following component requirements:
 
 
 
-<span id="idm140627606091664"></span>
-**Table 4.6. Infrastructure topology**
+<span id="idm140186612061504"></span>
+**Table 4.6. Infrastructure topology components**
 
 | VM count | Purpose | Example VM group names |
 | --- | --- | --- |
@@ -51,8 +51,8 @@ Each VM has been tested with the following component requirements:
 
 
 Note
-- 6 VMs are required for a Redis high availability (HA) compatible deployment. Redis can be colocated on each Ansible Automation Platform component VM except for automation controller, execution nodes, or the PostgreSQL database.
-- External Redis is not supported for RPM-based deployments of Ansible Automation Platform.
+- Redis high availability (HA) deployment requires 6 VMs. You can colocate Redis on each Ansible Automation Platform component VM except for automation controller, execution nodes, or the PostgreSQL database.
+- RPM-based deployments of Ansible Automation Platform do not support external Redis.
 
 
 

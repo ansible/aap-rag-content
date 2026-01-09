@@ -10,7 +10,7 @@ By default, Ansible Automation Platform creates self-signed _Public Key Infrastr
 Use the following inventory variables to configure the infrastructure components with the new certificates.
 
 
-<span id="idm140606648426608"></span>
+<span id="idm139835593127168"></span>
 **Table 2.4. PKI certificate inventory variables**
 
 |  **RPM Variable** |  **Containerized Variable** |  **Details** |

@@ -4,5 +4,5 @@
 
 
 
-The growth topology is intended for organizations that are getting started with Ansible Automation Platform and do not require redundancy or higher compute for large volumes of automation. This topology allows for smaller footprint deployments.
+The container-based growth topology provides a smaller footprint deployment without redundancy for organizations getting started with Ansible Automation Platform. Included are the tested infrastructure topology, system requirements, network port configurations, and an example inventory file for installation.
 

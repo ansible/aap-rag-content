@@ -5,6 +5,8 @@
 
 
 
+Set up your Microsoft Entra ID SSO configuration.
+
 **Procedure**
 
 - For help with setting up and configuring your enterprise authentication, see the _Chapter 3. Configuring Microsoft Entra ID authentication_ section of the [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication) guide.
@@ -115,7 +117,9 @@ The output displays the _appID_ and _tenant_ keys for the service principal:
 
 
 
-Service principal credentials have a limited lifetime that is set in your Microsoft Entra ID configuration. Track the lifespan of the service principal if you intend to automate against Azure for an extended period of time. You can create a new one when needed.
+Service principal credentials have a limited lifetime that is set in your Microsoft Entra ID configuration.
+
+Track the lifespan of the service principal if you intend to automate against Azure for an extended period of time. You can create a new one when needed.
 
 To view records of updated or deleted service principles, run the following Azure CLI command:
 

@@ -4,6 +4,8 @@
 
 
 
+Automation controller supports content signing for projects to ensure the integrity and authenticity of project files. This feature helps to prevent tampering with project content by ensuring that any changes to files are detected during project synchronization.
+
 For project maintainers, the supported way to sign content is to use the `ansible-sign` utility, using the _command-line interface_ (CLI) supplied with it.
 
 The CLI aims to make it easy to use cryptographic technology such as _GNU Privacy Guard_ (GPG) to validate that files within a project have not been tampered with in any way. Currently, GPG is the only supported means of signing and validation.
@@ -30,6 +32,6 @@ When you synchronize the project, automation controller pulls in the new changes
 
 Files must be included in, or excluded from, the `MANIFEST.in` file. For more information on this file, see [Sign a project](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/assembly-controller-project-signing#con-controller-signing-your-project) . If files have been added or removed unexpectedly, verification fails
 
-![Content signing proedure](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/9c1e44ccc1bfd7e750a47025ad99c0d0/content-sign-diagram.png)
+![Content signing procedure](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/9c1e44ccc1bfd7e750a47025ad99c0d0/content-sign-diagram.png)
 
 

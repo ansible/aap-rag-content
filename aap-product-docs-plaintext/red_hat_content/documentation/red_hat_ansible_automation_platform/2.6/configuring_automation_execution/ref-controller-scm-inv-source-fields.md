@@ -1,8 +1,10 @@
 # 5. Inventory File Importing
-## 5.1. Source control management Inventory Source Fields
+## 5.1. Source control management inventory source fields
 
 
 
+
+You can use a source control management (SCM) system, such as Git, to manage your inventory files in automation controller. You can use an SCM system to version control your inventory files and manage them in a collaborative manner.
 
 The source fields used are:
 

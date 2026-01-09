@@ -1,5 +1,5 @@
 # 2. System requirements
-## 2.6. PostgreSQL requirements
+## 2.7. PostgreSQL requirements
 
 
 

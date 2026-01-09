@@ -1,9 +1,11 @@
 # 6. Job templates
-## 6.19. OpenStack
-### 6.19.4. VMware
+## 6.16. OpenStack
+### 6.16.4. VMware
 
 
 
+
+Automation controller integrates with VMware vSphere to manage virtual machines (VMs) as part of its infrastructure. This integration allows users to automate the provisioning, management, and decommissioning of VMs within a VMware environment.
 
 VMware cloud credentials are exposed as the following environment variables during playbook execution (in the job template, choose the cloud credential needed for your setup):
 

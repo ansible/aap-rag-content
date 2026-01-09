@@ -5,14 +5,18 @@
 
 
 
-Passwords stored in automation controller configuration files are stored in plain text. A user with access to the `/etc/tower/conf.d/` directory can view the passwords used to access the database. Access to the directories is controlled with permissions, so they are protected, but some security findings deem this protection to be inadequate. The solution is to encrypt the passwords individually.
+Plain text passwords in automation controller configuration files pose a potential security risk.
+
+Configuration files are kept in the /etc/tower/conf.d/ folder. Files used to reach the database, for example, save passwords without encryption. This means that anyone who can read this folder can see the passwords clearly.
+
+While permissions protect these folders, some security reports say this protection is good inadequate. The fix is to encrypt each of these passwords separately.
 
 #### 3.6.1.1. Creating PostgreSQL password hashes
 
 
 
 
-Supply the hash values that replace the plain text passwords within the automation controller configuration files.
+Learn how to supply the hash values that replace the plain text passwords within the automation controller configuration files.
 
 **Procedure**
 
@@ -65,7 +69,9 @@ Note that the `        $*_PASS` values are already in plain text in your invento
 
 
 
-The following procedure replaces the plain text passwords with encrypted values. Perform the following steps on each node in the cluster:
+Learn how to encrypt the PostgreSQL password used by automation controller for database connections.
+
+Perform the following steps on each node in the cluster:
 
 **Procedure**
 
@@ -102,7 +108,7 @@ The hash value in this step is the output value of `    postgres_secret` .
 
 
 ```
-# Ansible Automation platform controller database settings. from awx.main.utils import decrypt_value, get_encryption_key DATABASES = { 'default': { 'ATOMIC_REQUESTS': True, 'ENGINE': 'django.db.backends.postgresql', 'NAME': 'awx', 'USER': 'awx', 'PASSWORD': decrypt_value(get_encryption_key('value'),'$encrypted$AESCBC$Z0FBQUFBQmNONU9BbGQ1VjJyNDJRVTRKaFRIR09Ib2U5TGdaYVRfcXFXRjlmdmpZNjdoZVpEZ21QRWViMmNDOGJaM0dPeHN2b194NUxvQ1M5X3dSc1gxQ29TdDBKRkljWHc9PQ=='), 'HOST': '127.0.0.1', 'PORT': 5432, } }
+# Ansible Automation platform controller database settings. from awx.main.utils import decrypt_value, get_encryption_key DATABASES = { 'default': { 'ATOMIC_REQUESTS': True, 'ENGINE': 'django.db.backends.postgresql', 'NAME': 'awx', 'USER': 'awx', 'PASSWORD': decrypt_value(get_encryption_key('value'),'$encrypted$AESCBC$Z0FBQUFBQmNONU9BbGQ1VjJyNDJRVTRKaFRIR09Ib2U5TGdaYVRfcXFXRjlmdmpZNjdoZVpEZ21QRWViMmNDOGJaM0dPeHN2b194NUxvQ1M5X3dSc1gxQ29TdDBKRkljWHc9PQ=='), 'HOST': '127.0.0.1', 'PORT': 5432, } }+
 ```
 
 

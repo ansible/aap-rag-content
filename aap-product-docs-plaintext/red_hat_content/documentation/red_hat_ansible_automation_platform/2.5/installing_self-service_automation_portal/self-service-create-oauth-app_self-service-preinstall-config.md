@@ -8,7 +8,7 @@ To use the Helm chart to deploy self-service automation portal, you must have se
 
 Create the OAuth Application on your Ansible Automation Platform instance, using a placeholder name for the deployment URL.
 
-After deploying self-service automation portal, you must [replace the placeholder value with a URL derived from your deployment URL](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/installing_ansible_automation_platform_self-service_technology_preview/self-service-accessing-deployment_aap-self-service-install#self-service-add-deployment-url-oauth-app_self-service-accessing-deployment) in your OAuth application.
+After deploying self-service automation portal, you must [replace the placeholder value with a URL derived from your deployment URL](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/installing_self-service_automation_portal/self-service-accessing-deployment_aap-self-service-install#self-service-add-deployment-url-oauth-app_self-service-accessing-deployment) in your OAuth application.
 
 The steps below describe how to create an OAuth Application in the Ansible Automation Platform Platform console.
 
@@ -24,7 +24,7 @@ The steps below describe how to create an OAuth Application in the Ansible Autom
 -  **Organization** : Choose the organization.
 -  **Authorization grant type** : Choose `        Authorization code` .
 -  **Client type** : choose `        Confidential` .
--  **Redirect URIs** : Add placeholder text for the deployment URL (for example `        https//:example.com` ).
+-  **Redirect URIs** : Add placeholder text for the deployment URL (for example `        <a class="link" href="https://example.com">https://example.com</a>` ).
 
 ![Create OAuth application](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Installing_self-service_automation_portal-en-US/images/828fab2808e2881822da27c48fcaf96e/self-service-create-oauth-app.png)
 

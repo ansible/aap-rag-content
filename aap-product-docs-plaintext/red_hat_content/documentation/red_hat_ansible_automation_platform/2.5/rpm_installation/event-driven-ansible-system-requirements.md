@@ -1,5 +1,5 @@
 # 2. System requirements
-## 2.5. Event-Driven Ansible controller system requirements
+## 2.6. Event-Driven Ansible controller system requirements
 
 
 

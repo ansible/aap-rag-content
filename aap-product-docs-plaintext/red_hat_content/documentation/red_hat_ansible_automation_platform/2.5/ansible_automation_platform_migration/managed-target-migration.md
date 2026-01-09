@@ -5,7 +5,7 @@
 
 
 
-Follow this procedure to migrate to Managed Ansible Automation Platform.
+Submit a support ticket on the Red Hat Customer Portal to request a migration to Managed Ansible Automation Platform.
 
 **Prerequisites**
 

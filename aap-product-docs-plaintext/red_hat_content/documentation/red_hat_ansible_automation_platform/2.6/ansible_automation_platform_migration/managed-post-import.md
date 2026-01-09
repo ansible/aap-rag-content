@@ -5,15 +5,15 @@
 
 
 
-After a successful migration, perform the following tasks:
+Update necessary configurations after migrating to Managed Ansible Automation Platform.
 
 **Procedure**
 
-1. Log in to the Managed Ansible Automation Platform instance by using the local administrator account to confirm that data was properly imported.
-1. You might need to perform the following actions based on the configuration of the source deployment:
+1. Log in to the Managed Ansible Automation Platform instance by using the local administrator account to confirm that data was imported.
+1. Perform the following actions based on the configuration of the source deployment:
 
 
-1. Reconfigure SSO authenticators and mappings to reflect the new URLs.
+1. Reconfigure Single Sign-On (SSO) authenticators and mappings to reflect the new URLs.
 1. Update private automation hub content to reflect the new URLs.
 
 
@@ -21,7 +21,7 @@ After a successful migration, perform the following tasks:
 
 
 ```
-`curl -d '{"verify_checksums": true }' -X POST -k https://&lt;platform_url&gt;/api/galaxy/pulp/api/v3/repair/ -u &lt;admin_user&gt;:&lt;admin_password&gt;`
+curl -d '{\"verify_checksums\": true }' -X POST -k https://&lt;platform url&gt;/api/galaxy/pulp/api/v3/repair/ -u &lt;admin_user&gt;:&lt;admin_password&gt;
 ```
 
 
@@ -30,8 +30,8 @@ After a successful migration, perform the following tasks:
 
 1. Reconfigure automation mesh.
 
-1. Following migration, you can request standard SRE tasks through support tickets for the SRE team to perform such as configuration of custom certificates, a custom domain, or connectivity through private endpoints.
+1. After migration, you can request standard Site Reliability Engineering (SRE) tasks through support tickets, such as configuration of custom certificates, a custom domain, or connectivity through private endpoints.
 
 
 
-<span id="idm140505541739984"></span>
+<span id="idm139684323502304"></span>

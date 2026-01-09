@@ -4,3 +4,5 @@
 
 
 
+The following examples demonstrate how the required and optional settings for the Ansible Dev Tools Server, Ansible Automation Platform, software templates, and other integrations are correctly formatted within their respective YAML files.
+

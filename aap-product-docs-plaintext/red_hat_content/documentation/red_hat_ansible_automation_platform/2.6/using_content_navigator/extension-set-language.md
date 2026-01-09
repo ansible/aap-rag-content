@@ -59,14 +59,16 @@ instread of manually associating the Ansible language to YAML files, you can add
 
 If you are installing the containerized version of Ansible development tools, you must install the [Microsoft Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension in VS Code.
 
+**Procedure**
+
 1. Open VS Code.
 1. Click the **Extensions** (![Extensions](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_content_navigator-en-US/images/417ed5315a44493c6a44ae5c12dc6fab/vscode-extensions-icon.png)
 ) icon in the Activity Bar, or clickView→Extensions, to display the **Extensions** view.
 1. In the search field in the **Extensions** view, type `    Dev Containers` .
 1. Select the Dev Containers extension from Microsoft and clickInstall.
 
+If you are using Podman or Podman Desktop as your containerization platform, you must modify the default settings in the `    Dev Containers` extension.
 
-If you are using Podman or Podman Desktop as your containerization platform, you must modify the default settings in the `Dev Containers` extension.
 
 1. Replace docker with podman in the `    Dev Containers` extension settings:
 
@@ -199,62 +201,36 @@ $ sudo subscription-manager attach --pool=&lt;sku-pool-id&gt;
 
 
 ```
-$ sudo dnf install --enablerepo=ansible-automation-platform-2.5-for-rhel-8-x86_64-rpms ansible-dev-tools
+$ sudo dnf install --enablerepo=ansible-automation-platform-2.6-for-rhel-8-x86_64-rpms ansible-dev-tools
 ```
 
 
 ```
-$ sudo dnf install --enablerepo=ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms ansible-dev-tools
+$ sudo dnf install --enablerepo=ansible-automation-platform-2.6-for-rhel-9-x86_64-rpms ansible-dev-tools
 ```
 
 
 
 
-**Verification:**
+**Verification**
 
-Verify that the Ansible development tools components have been installed:
+1. Verify that the Ansible development tools components have been installed:
+
+
+```
+$ rpm -aq | grep ansible    ansible-collection-redhat-rhel_mgmt-1.1.0-2.el9.noarch    ansible-collection-microsoft-sql-2.5.2-1.el9.noarch    ansible-core-2.16.14-2.el9ap.noarch    python3.11-ansible-compat-25.8.1-1.el9ap.noarch    python3.11-ansible-runner-2.4.1-1.el9ap.noarch    ansible-runner-2.4.1-1.el9ap.noarch    ansible-builder-3.1.0-1.el9ap.noarch    ansible-lint-25.8.2-1.el9ap.noarch    ansible-navigator-25.8.0-1.el9ap.noarch    ansible-sign-0.1.2-1.el9ap.noarch    python3.11-pytest-ansible-25.8.0-1.el9ap.noarch    ansible-dev-environment-25.8.0-1.el9ap.noarch    ansible-creator-25.8.0-1.el9ap.noarch    python3.11-tox-ansible-25.8.0-1.el9ap.noarch<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">ansible-dev-tools-25.8.3-1.el9ap.noarch</span></strong></span>
+```
+
+
+1. On successful installation, you can view the help documentation for the `    ansible-creator` utility:
 
 
 ```
-$ rpm -aq | grep ansible
+$ ansible-creator --help        usage: ansible-creator [-h] [--version] command ...        The fastest way to generate all your ansible content.        Positional arguments:     command      add           Add resources to an existing Ansible project.      init          Initialize a new Ansible project.        Options:     --version      Print ansible-creator version and exit.     -h     --help  Show this help message and exit
 ```
 
-The output displays the Ansible packages that are installed:
 
-```
-ansible-sign-0.1.1-2.el9ap.noarch
-ansible-creator-24.4.1-1.el9ap.noarch
-python3.11-ansible-runner-2.4.0-0.1.20240412.git764790f.el9ap.noarch
-ansible-runner-2.4.0-0.1.20240412.git764790f.el9ap.noarch
-ansible-builder-3.1.0-0.2.20240413.git167ed5c.el9ap.noarch
-ansible-dev-environment-24.1.0-2.el9ap.noarch
-ansible-core-2.16.6-0.1.20240413.gite636132.el9ap.noarch
-python3.11-ansible-compat-4.1.11-2.el9ap.noarch
-python3.11-pytest-ansible-24.1.2-1.el9ap.noarch
-ansible-lint-6.14.3-4.el9ap.noarch
-ansible-navigator-3.4.1-2.el9ap.noarch
-python3.11-tox-ansible-24.2.0-1.el9ap.noarch
-ansible-dev-tools-2.5-2.el9ap.noarch
-```
 
-On successful installation, you can view the help documentation for ansible-creator:
-
-```
-$ ansible-creator --help
-
-usage: ansible-creator [-h] [--version] command ...
-
-The fastest way to generate all your ansible content.
-
-Positional arguments:
-command
-add           Add resources to an existing Ansible project.
-init          Initialize a new Ansible project.
-
-Options:
---version      Print ansible-creator version and exit.
--h     --help  Show this help message and exit
-```
 
 # Chapter 3. Reviewing automation execution environments with automation content navigator
 
@@ -870,7 +846,7 @@ level: critical
 The following table describes each general parameter and setting options for automation content navigator.
 
 
-<span id="idm139927739797296"></span>
+<span id="idm139769238080384"></span>
 **Table 8.1. Automation content navigator general parameters settings**
 
 | Parameter | Description | Setting options |
@@ -1187,7 +1163,7 @@ set:
 The following table describes each parameter and setting options for the automation content navigator `config` subcommand.
 
 
-<span id="idm139927738775216"></span>
+<span id="idm139769239449584"></span>
 **Table 8.2. Automation content navigator `config` subcommand parameters settings**
 
 | Parameter | Description | Setting options |
@@ -1232,7 +1208,7 @@ help-config:
 The following table describes each parameter and setting options for the automation content navigator `doc` subcommand.
 
 
-<span id="idm139927738041584"></span>
+<span id="idm139769240475216"></span>
 **Table 8.3. automation content navigator `doc` subcommand parameters settings**
 
 | Parameter | Description | Setting options |
@@ -1293,7 +1269,7 @@ type:
 The following table describes each parameter and setting options for the automation content navigator `inventory` subcommand.
 
 
-<span id="idm139927740774752"></span>
+<span id="idm139769238428096"></span>
 **Table 8.4. Automation content navigator `inventory` subcommand parameters settings**
 
 | Parameter | Description | Setting options |
@@ -1346,7 +1322,7 @@ inventory-columns:
 The following table describes each parameter and setting options for the automation content navigator `replay` subcommand.
 
 
-<span id="idm139927736097616"></span>
+<span id="idm139769238595952"></span>
 **Table 8.5. Automation content navigator `replay` subcommand parameters settings**
 
 | Parameter | Description | Setting options |
@@ -1376,7 +1352,7 @@ replay:
 The following table describes each parameter and setting options for the automation content navigator `run` subcommand.
 
 
-<span id="idm139927736332928"></span>
+<span id="idm139769240529216"></span>
 **Table 8.6. Automation content navigator `run` subcommand parameters settings**
 
 | Parameter | Description | Setting options |
@@ -1528,7 +1504,7 @@ You can now type the number next to the plays and tasks to step into each to rev
 Use the following automation content navigator FAQ to help you troubleshoot problems in your environment.
 
 
-<span id="idm139927735777344"></span>
+<span id="idm139769237787088"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

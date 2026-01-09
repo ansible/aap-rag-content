@@ -21,7 +21,7 @@ OpenID Connect (OIDC) uses the OAuth 2.0 framework. It enables third-party appli
 -  **OIDC Secret** : The client secret from your IdP.
 
 1. Optional: Select the HTTP method to be used when requesting an access token from the **Access Token Method** list. The default method is **POST** .
-1. Optionally enter information for the following fields using the tooltips provided for instructions and required format:
+1. Optionally enter information for the following fields using the tooltip provided for instructions and required format:
 
 
 -  **Access Token Method** - The default method is **POST** .
@@ -40,8 +40,8 @@ OpenID Connect (OIDC) uses the OAuth 2.0 framework. It enables third-party appli
 -  **Userinfo URL**
 -  **Username Key**
 
-1. Use the **Verify OIDC Provider Certificate** to enable or disable the OIDC provider SSL certificate verification.
-1. Use the **Redirect** State to enable or disable the state parameter in the redirect URI. It is recommended that this is enabled to prevent Cross Site Request Forgery (CSRF) attacks.
+1. Use the **Verify OIDC Provider Certificate** to enable or disable the OIDC provider SSL/TLS certificate verification.
+1. Use the **Redirect** State to enable or disable the state parameter in the redirect URI. Enable this to prevent Cross Site Request Forgery (CSRF) attacks.
 1. Optional: Enter any **Additional Authenticator Fields** that this authenticator can take. These fields are not validated and are passed directly back to the authenticator.
 
 Note
@@ -58,7 +58,7 @@ Values defined in this field override the dedicated fields provided in the UI. A
 
 **Next steps**
 
-To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
 
 
 #### 2.5.9.1. Troubleshoot Generic OIDC Single Sign-On authentication failures

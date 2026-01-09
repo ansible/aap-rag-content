@@ -1,5 +1,5 @@
 # 2. Managing collections in automation hub
-## 2.1. Using namespaces to manage collections in automation hub
+## 2.1. Managing namespaces
 ### 2.1.7. Deleting a namespace
 
 

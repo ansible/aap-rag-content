@@ -1,5 +1,5 @@
 # 2. System requirements
-## 2.4. Automation hub system requirements
+## 2.5. Automation hub system requirements
 
 
 
@@ -9,7 +9,7 @@ Automation hub allows you to discover and use new certified automation content f
 Note
 Private automation hub
 
-If you install private automation hub from an internal address, and have a certificate which only encompasses the external address, this can result in an installation which cannot be used as container registry without certificate issues.
+If you install private automation hub from an internal address with a certificate that only encompasses the external address, this can result in an installation that cannot be used as container registry without certificate issues.
 
 To avoid this, use the `automationhub_main_url` inventory variable with a value such as https://pah.example.com linking to the private automation hub node in the installation inventory file.
 

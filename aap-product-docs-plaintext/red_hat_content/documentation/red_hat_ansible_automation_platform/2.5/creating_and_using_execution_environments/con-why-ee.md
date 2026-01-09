@@ -5,7 +5,9 @@
 
 
 
-With automation execution environments, Red Hat Ansible Automation Platform has transitioned to a distributed architecture by separating the control plane from the execution plane. Keeping automation execution independent of the control plane results in faster development cycles and improves scalability, reliability, and portability across environments. Red Hat Ansible Automation Platform also includes access to Ansible content tools, making it easy to build and manage automation execution environments.
+With automation execution environments, Red Hat Ansible Automation Platform has transitioned to a distributed architecture by separating the control plane from the execution plane.
+
+Keeping automation execution independent of the control plane results in faster development cycles and improves scalability, reliability, and portability across environments. Red Hat Ansible Automation Platform also includes access to Ansible content tools, making it easy to build and manage automation execution environments.
 
 In addition to speed, portability, and flexibility, automation execution environments provide the following benefits:
 

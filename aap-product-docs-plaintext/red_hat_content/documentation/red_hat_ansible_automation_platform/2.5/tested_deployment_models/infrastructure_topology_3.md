@@ -5,10 +5,10 @@
 
 
 
-The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
+The Red Hat tested infrastructure topology for this deployment model:
 
 
-<span id="idm139984996926000"></span>
+<span id="idm139972758768896"></span>
 **Figure 3.1. Infrastructure topology diagram**
 
 ![Container growth topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Tested_deployment_models-en-US/images/02b948e9d139f9a478e80ba4164dceae/cont-a-env-a.png)
@@ -16,10 +16,10 @@ The following diagram outlines the infrastructure topology that Red Hat has tes
 
 
 
-A single VM has been tested with the following component requirements:
+Red Hat tests a single VM with these requirements:
 
 
-<span id="idm139984996921104"></span>
+<span id="idm139972758764096"></span>
 **Table 3.1. Virtual machine requirements**
 
 | Requirement | Minimum requirement |
@@ -37,13 +37,13 @@ A single VM has been tested with the following component requirements:
 
 
 Note
-If performing a bundled installation of the growth topology with `hub_seed_collections=true` , then 32 GB RAM is recommended. Note that with this configuration the install time is going to increase and can take 45 or more minutes alone to complete seeding the collections.
+If performing a bundled installation of the growth topology with `hub_seed_collections=true` , then 32 GB RAM is recommended. With this configuration, the install time will increase. Seeding the collections can take 45 or more minutes.
 
 
 
 
-<span id="idm139984994713504"></span>
-**Table 3.2. Infrastructure topology**
+<span id="idm139972756045408"></span>
+**Table 3.2. Infrastructure topology components**
 
 | Purpose | Example group names |
 | --- | --- |

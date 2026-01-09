@@ -4,5 +4,7 @@
 
 
 
-Private automation hub allows you to attempt to sync all content between automation hub or Ansible Galaxy. However, this synchronization fails due to the storage and resource demands of such a large task. When syncing content from external sources, limit the synchronization to the collections your organization plans to use, focusing on recent or known used versions to reduce the synchronization scope.
+Private automation hub allows you to attempt to sync all content between automation hub or Ansible Galaxy. However, this synchronization fails due to the storage and resource demands of such a large task.
+
+When syncing content from external sources, limit the synchronization to the collections your organization plans to use, focusing on recent or known used versions to reduce the synchronization scope.
 

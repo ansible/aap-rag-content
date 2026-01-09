@@ -1,62 +1,71 @@
 # 10. Patch releases
-## 10.15. Ansible Automation Platform patch release January 29, 2025
-### 10.15.2. Bug fixes
-
-
-
-
-#### 10.15.2.1. CVE
+## 10.9. Ansible Automation Platform patch release May 28, 2025
+### 10.9.4. Bug fixes
 
 
 
 
 With this update, the following CVEs have been addressed:
 
--  [CVE-2024-56326](https://access.redhat.com/security/cve/cve-2024-56326)  `    python3.11-jinja2` : Jinja has a sandbox breakout through indirect reference to format method.(AAP-38852)
--  [CVE-2024-56374](https://access.redhat.com/security/cve/CVE-2024-56374)  `    ansible-lightspeed-container` : Potential denial-of-service vulnerability in IPv6 validation.(AAP-38647)
--  [CVE-2024-56374](https://access.redhat.com/security/cve/CVE-2024-56374)  `    python3.11-django` : potential denial-of-service vulnerability in IPv6 validation.(AAP-38630)
--  [CVE-2024-53907](https://access.redhat.com/security/cve/cve-2024-53907)  `    python3.11-django` : Potential denial-of-service in django.utils.html.strip_tags().(AAP-38486)
--  [CVE-2024-56201](https://access.redhat.com/security/cve/cve-2024-56201)  `    python3.11-jinja2` : Jinja has a sandbox breakout through malicious filenames.(AAP-38331)
--  [CVE-2024-56374](https://access.redhat.com/security/cve/CVE-2024-56374)  `    automation-controller` : Potential denial-of-service vulnerability in IPv6 validation.(AAP-38648)
--  [CVE-2024-56201](https://access.redhat.com/security/cve/cve-2024-56201)  `    automation-controller` : Jinja has a sandbox breakout through malicious filenames.(AAP-38081)
--  [CVE-2024-56326](https://access.redhat.com/security/cve/cve-2024-56326)  `    automation-controller` : Jinja has a sandbox breakout through indirect reference to format method.(AAP-38058)
+-  [CVE-2025-43859](https://access.redhat.com/security/cve/CVE-2025-43859)  `    ee-supported-container` : h11 accepts some malformed Chunked-Encoding bodies.(AAP-44783)
+-  [CVE-2025-43859](https://access.redhat.com/security/cve/CVE-2025-43859)  `    ee-cloud-services-container` : h11 accepts some malformed Chunked-Encoding bodies.(AAP-44781)
+-  [CVE-2025-43859](https://access.redhat.com/security/cve/CVE-2025-43859)  `    ansible-lightspeed-container` : h11 accepts some malformed Chunked-Encoding bodies.(AAP-44779)
 
 
-#### 10.15.2.2. Automation controller
+#### 10.9.4.1. Ansible Automation Platform
 
 
 
 
-- Fixed an issue where the order of source inventories was not respected by the collection `    ansible.controller` .(AAP-38524)
-- Fixed an issue where an actively running job on an execution node may have had its folder deleted by a system task. This fix addresses some **Failed to JSON parse a line from worker stream** type errors.(AAP-38137)
+- Fixed an issue found in SaaS deployments where the authentication proxy would use old, invalid database connections after an RDS database reboot.(AAP-44178)
+- Fixed an issue where administrators were not allowed to configure auto migration of legacy authenticators.(AAP-36841)
+- Fixed an issue where the usernames from LDAP were not case-insensitive. LDAP is case-insensitive so logging in as <Bob> and <bob> would result in two different users in platform gateway even though they are the same user in LDAP. With this change, both users will be authenticated as the lowercase username.(AAP-44177)
 
 
-#### 10.15.2.3. Container-based Ansible Automation Platform
-
-
-
-
-- The inventory file variable **postgresql_admin_username** is no longer required when using an external database. If you do not have database administrator credentials, you can supply the database credentials for each component in the inventory file instead.(AAP-39077)
-
-
-#### 10.15.2.4. Event-Driven Ansible
+#### 10.9.4.2. Ansible Automation Platform Operator
 
 
 
 
-- Fixed an issue where the application version in the **openapi** spec was incorrectly set.(AAP-38392)
-- Fixed an issue where activations were not properly updated in some scenarios with a high load of the system. (AAP-38374)
-- Fixed an issue where users were unable to filter **Rule Audits** by rulebook activation name.(AAP-39253)
-- Fixed an issue where the input field of the injector configuration could not be empty.(AAP-39086)
+- Fixed a broken document link to Ansible Automation Platform Operator installation documents in the OpenShift Container Platform UI.(AAP-45199)
+- Fixed an issue where the user was unable configure `    kind: AnsibleInstanceGroup` , and it failed with an error **policy_spec_override is undefined** .(AAP-45351)
 
 
-#### 10.15.2.5. RPM-based Ansible Automation Platform
+#### 10.9.4.3. Red Hat Ansible Lightspeed
 
 
 
 
-- Fixed an issue where setting `    automationedacontroller_max_running_activations` could cause the installer to fail. (AAP-38708)
-- Fixed an issue where the platform gateway services are not restarted when a dependency changes.(AAP-38918)
-- Fixed an issue where the platform gateway could not be setup with custom SSL certificates.(AAP-38985)
+- Fixed an issue where it was not possible to disable SSL verification between Model Server and Red Hat Ansible Lightspeed.(AAP-45269)
+- Fixed an issue where the provider type and context window size were not configurable in Red Hat Ansible Lightspeed Operator.(AAP-45166)
+
+
+#### 10.9.4.4. Automation controller
+
+
+
+
+- Fixed an issue where the VMware credential was not applying to the source correctly.(AAP-45169)
+- Fixed an issue where the workflow job template did not have job access parity with `    UnifiedJobAccess` .(AAP-45057)
+- Fixed an issue where error handling did not allow event processing to continue even if one event contained invalid data that cannot be parsed by `    jq` .(AAP-44876)
+
+
+#### 10.9.4.5. Platform gateway
+
+
+
+
+- Fixed `    AttributeError` errors around the `    legacy_base` authenticator which were harmless, but were showing in logs leading to customer and engineer confusion.(AAP-40159)
+- Fixed an issue where customized proxy authentication on a per service cluster basis was not allowed.(AAP-35601)
+- Fixed and issue where there was a server error on migrating an LDAP user in a freshly upgraded 2.4 → 2.5 instance. The fix prevents the 500 error during LDAP user legacy authentication and migration following an upgrade.(AAP-44958)
+
+
+#### 10.9.4.6. RPM-based Ansible Automation Platform
+
+
+
+
+- Fixed an issue the `    max keyrings sysctl` would produce common failures when running more than 200 containers on a node.(AAP-45260)
+- Fixed an issue where automation platform gateway proxy (envoy) ports were not included in the firewall.(AAP-45489)
 
 

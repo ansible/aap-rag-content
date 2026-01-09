@@ -5,7 +5,9 @@
 
 
 
-Choose the Red Hat Ansible Automation Platform installer if your Red Hat Enterprise Linux environment is connected to the internet. Installing with internet access retrieves the latest required repositories, packages, and dependencies. Choose one of the following ways to set up your Ansible Automation Platform installer.
+Choose the Red Hat Ansible Automation Platform installation program if your Red Hat Enterprise Linux environment is connected to the internet. Installing with internet access retrieves the latest required repositories, packages, and dependencies.
+
+Choose one of the following ways to set up your Ansible Automation Platform installation program.
 
 **Procedure**
 

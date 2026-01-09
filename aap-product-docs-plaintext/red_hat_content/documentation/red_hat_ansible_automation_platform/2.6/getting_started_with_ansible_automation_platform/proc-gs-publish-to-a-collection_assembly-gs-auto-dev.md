@@ -1,5 +1,5 @@
 # 3. Getting started as an automation developer
-## 3.6. Publishing to a collection
+## 3.7. Publishing to a collection
 
 
 
@@ -26,7 +26,7 @@ You can configure your projects to be uploaded to Git, or to the source control 
 1.  **Clean** - Removes any local modifications before performing an update.
 1.  **Delete** - Deletes the local repository in its entirety before performing an update. Depending on the size of the repository this can significantly increase the amount of time required to complete an update.
 1.  **Track submodules** - Tracks the latest commit. See the tooltip for more information.
-1.  **Update Revision on Launch** - Updates the revision of the project to the current revision in the remote source control, and caches the roles directory from [Ansible Galaxy](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html) or [Collections support](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-projects#ref-projects-collections-support) . Automation controller ensures that the local revision matches and that the roles and collections are up-to-date with the last update. In addition, to avoid job overflows if jobs are spawned faster than the project can synchronize, selecting this enables you to configure a cache timeout to cache previous project synchronizations for a given number of seconds.
+1.  **Update Revision on Launch** - Updates the revision of the project to the current revision in the remote source control, and caches the roles directory from [Collections support](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-projects#ref-projects-collections-support) . Automation controller ensures that the local revision matches and that the roles and collections are up-to-date with the last update. In addition, to avoid job overflows if jobs are spawned faster than the project can synchronize, selecting this enables you to configure a cache timeout to cache previous project synchronizations for a given number of seconds.
 1.  **Allow Branch Override** - Enables a job template or an inventory source that uses this project to start with a specified SCM branch or revision other than that of the project. For more information, see [Job branch overriding](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-jobs#controller-job-branch-overriding) .
 
 1. ClickSaveto save your project.

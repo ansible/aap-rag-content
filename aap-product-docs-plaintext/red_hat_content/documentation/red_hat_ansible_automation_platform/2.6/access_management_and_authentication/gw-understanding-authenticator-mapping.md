@@ -5,7 +5,7 @@
 
 
 
-In Ansible Automation Platform, authenticators manage authentication, validating users and returning details such as their username, first name, email, and group memberships (for example, LDAP groups). Authorization comes from the authenticator’s associated maps.
+In Ansible Automation Platform, authenticators manage authentication, validating users and returning details such as their username, given name, email, and group memberships (for example, LDAP groups). Authorization comes from the authenticator’s associated maps.
 
 During the authentication process, after a user has authenticated, the authorization system starts with a default set of permissions in memory. Then sequentially, the authenticator maps are processed and adjust permissions based on their trigger conditions. When all the authenticator’s maps are processed, the in-memory representation of the user’s permissions are reconciled with their existing permissions.
 
@@ -48,7 +48,7 @@ Access allowed = True
 Superuser permission =<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Skipped</span></strong></span>Admin of teams = None
 ```
 
-To revoke superuser access, you can select the **Revoke** option on the **Superuser** map. That way, when the user does not meet the attribute criteria, the permissions update to False like in the following:
+To revoke superuser access, you can select the **Revoke** option on the **Superuser** map. That way, when the user does not meet the attribute criteria, the permissions update to False such as the following:
 
 ```
 Access allowed = True

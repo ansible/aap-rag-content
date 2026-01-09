@@ -4,6 +4,8 @@
 
 
 
+This section describes how to configure and use VMware vCenter as a platform for hosting automation controller virtual machines (VMs).
+
 ```
 compose:
 ansible_host: guest.ipAddress

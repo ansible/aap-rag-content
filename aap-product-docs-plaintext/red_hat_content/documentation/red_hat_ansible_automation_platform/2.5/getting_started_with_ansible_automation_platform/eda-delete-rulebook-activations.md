@@ -1,9 +1,11 @@
 # 3. Getting started as an automation developer
-## 3.13. Create and run a rulebook activation
-### 3.13.4. Deleting rulebook activations
+## 3.14. Create and run a rulebook activation
+### 3.14.4. Deleting rulebook activations
 
 
 
+
+You can delete rulebook activations to permanently remove them when they are no longer needed.
 
 **Procedure**
 
