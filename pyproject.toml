@@ -33,7 +33,7 @@ version = "0.1.0"
 description = "RAG content for AAP chatbot"
 authors = []
 dependencies = [
-    "PyYAML==6.0.2",
+    "PyYAML==6.0.3",
     "huggingface-hub>=0.33.1",
     "requests>=2.32.3",
     "llama-stack==0.2.22",
