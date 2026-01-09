@@ -5,6 +5,8 @@
 
 
 
+Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.
+
 Inventory sources are not associated with groups. Spawned groups are top-level and can still have child groups. All of these spawned groups can have hosts. Adding a source to an inventory only applies to standard inventories.
 
 **Procedure**
@@ -25,7 +27,7 @@ icon or enter the name of the execution environment with which you want to run y
 1. When the information for your chosen [Inventory sources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#ref-controller-inventory-sources) is complete, you can optionally specify other common parameters, such as verbosity, host filters, and variables.
 1. Use the **Verbosity** menu to select the level of output on any inventory source’s update jobs.
 1. Use the **Host filter** field to specify only matching host names to be imported into automation controller.
-1. In the **Enabled variable** field, specify that automation controller retrieves the enabled state from the dictionary of host variables. You can specify the enabled variable by using dot notation as 'foo.bar', in which case the lookup searches nested dictionaries, equivalent to: `    from_dict.get('foo', {}).get('bar', default)` .
+1. In the **Enabled variable** field, specify that automation controller retrieves the enabled state from the dictionary of host variables. You can specify the enabled variable by using dot notation as 'car.key', in which case the lookup searches nested dictionaries, equal to: `    from_dict.get('car', {}).get('key', default)` .
 
 The **Enabled value** field is ignored unless you set the **Enabled variable** field. If the enabled variable matches this value, the host is enabled on import.
 

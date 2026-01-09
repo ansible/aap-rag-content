@@ -5,6 +5,8 @@
 
 
 
+When using constructed inventory scripts, you might need to debug your Jinja2 templates.
+
 It is important to set the `strict` parameter to `true` so that you can debug problems with your templates. If the template fails to render, an error occurs in the associated inventory update for that constructed inventory.
 
 When encountering errors, increase verbosity to get more details.
@@ -13,11 +15,9 @@ Giving a default, such as `| default("running")` is a generic use of Jinja2 temp
 
 You can also set `strict: false` , and so enable the template to produce an error, which results in the host not getting included in that group. However, doing this makes it difficult to debug issues in the future if your templates continue to grow in complexity.
 
-You might still have to debug the intended function of the templates if they are not producing the expected inventory content. For example, if a `groups` group has a complex filter (like `shutdown_in_product_dev` ) but does not contain any hosts in the resultant constructed inventory, then use the `compose` parameter to help debug.
+You might still have to debug the intended function of the templates if they are not producing the expected inventory content. For example, if a `groups` group has a complex filter (such as `shutdown_in_product_dev` ) but does not contain any hosts in the resultant constructed inventory, then use the `compose` parameter to help debug.
 
-
-<span id="idm140044872394016"></span>
-**Example 14.2. Example**
+**Example**
 
 ```
 source_vars:
@@ -34,7 +34,4 @@ limit: ``
 ```
 
 Running with a blank `limit` returns all hosts. You can use this to inspect specific variables on specific hosts, giving insight into where problems in the `groups` lie.
-
-
-
 

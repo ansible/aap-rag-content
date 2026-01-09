@@ -1,6 +1,6 @@
 # 9. Logging and Aggregation
 ## 9.1. Loggers
-### 9.1.6. Logging Aggregator Services
+### 9.1.6. Logging aggregator services
 
 
 
@@ -18,7 +18,9 @@ The logging aggregator service works with the following monitoring and data anal
 
 
 
-Automation controller’s Splunk logging integration uses the Splunk HTTP Collector. When configuring a SPLUNK logging aggregator, add the full URL to the HTTP Event Collector host, as in the following example:
+Automation controller’s Splunk logging integration uses the Splunk HTTP Collector.
+
+When configuring a SPLUNK logging aggregator, add the full URL to the HTTP Event Collector host, as in the following example:
 
 ```
 https://&lt;yourcontrollerfqdn&gt;/api/v2/settings/logging
@@ -58,6 +60,8 @@ For more information on configuring the HTTP Event Collector, see the [Splunk do
 
 
 
+The Loggly logging aggregator integration allows you to send logs from the controller to your Loggly account using Loggly’s HTTP endpoint.
+
 For more information on sending logs through Loggly’s HTTP endpoint, see the [Loggly documentation](https://documentation.solarwinds.com/en/success_center/loggly/content/admin/http-endpoint.htm?cshid=loggly_http-endpoint) .
 
 Loggly uses the URL convention shown in the **Logging Aggregator** field in the following example:
@@ -79,6 +83,8 @@ In Sumologic, create a search criteria containing the JSON files that provide th
 
 
 
+
+The elastic stack is a collection of open source products for searching, analyzing, and visualizing log data in real time.
 
 If you are setting up your own version of the elastic stack, the only change you require is to add the following lines to the logstash `logstash.conf` file:
 

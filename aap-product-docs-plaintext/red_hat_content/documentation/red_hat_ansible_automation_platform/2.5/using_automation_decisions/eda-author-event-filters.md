@@ -31,6 +31,6 @@ arg2: world
 
 **Additional resources**
 
-See the event filter plugins in [ansible.eda collection](https://github.com/ansible/event-driven-ansible/tree/main/extensions/eda/plugins/event_filter) for more examples of how to author them.
+-  [ansible.eda collection](https://github.com/ansible/event-driven-ansible/tree/main/extensions/eda/plugins/event_filter)
 
 

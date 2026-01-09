@@ -5,12 +5,9 @@
 
 
 
-To deploy your system so that it is ready for container signing, first ensure that you have [enabled automation content collection and container signing](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#enabling-automation-hub-collection-and-container-signing_aap-containerized-installation) . Then you can create a signing script, or [add and sign an execution environment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-containers-hub#adding-an-execution-environment) manually.
+To deploy your system so that it is ready for container signing, first ensure that you have [enabled automation content collection and container signing](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/advanced-configuration-containerized#enabling-automation-hub-collection-and-container-signing) . Then you can create a signing script, or [add and sign an execution environment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-containers-hub#adding-an-execution-environment) manually.
 
-Note
-Installer looks for the script and key on the same server where installer is located.
-
-
+Note that installer looks for the script and key on the same server where installer is located.
 
 **Procedure**
 
@@ -33,11 +30,17 @@ Installer looks for the script and key on the same server where installer is loc
 
 
 1. Once installation is complete, log in to Ansible Automation Platform and navigate toAutomation Content→Signature Keys.
-1. Ensure that you have a key titled **container-default** , or **container** - _anyname_ .
-
 
 Note
-The `container-default` service is created by the Ansible Automation Platform installer.
+The `    container-default` service is created by the Ansible Automation Platform installer.
 
+
+
+
+
+
+**Verification**
+
+Ensure that you have a key titled **container-default** , or **container** - _anyname_ .
 
 

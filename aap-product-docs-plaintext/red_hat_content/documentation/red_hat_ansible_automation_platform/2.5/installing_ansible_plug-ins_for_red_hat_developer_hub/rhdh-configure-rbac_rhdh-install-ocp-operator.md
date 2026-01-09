@@ -29,5 +29,5 @@ superUsers:
 - name: user:default/&lt;user-admin-idb&gt;
 ```
 
-For more information about permission policies and managing RBAC, refer to the [Authorization](https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/authorization/index) guide for Red Hat Developer Hub.
+For more information about permission policies and managing RBAC, refer to the [Authorization in Red Hat Developer Hub](https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.6/html-single/authorization_in_red_hat_developer_hub/index) guide for Red Hat Developer Hub.
 

@@ -1,5 +1,5 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/troubleshooting_ansible_automation_platform/index#troubleshoot-use-in-controller",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.6/html-single/troubleshooting_ansible_automation_platform/index",
-  "title": "Issue - Cannot select the \"Use in Controller\" option for execution environment image on private automation hub"
+  "title": "Issue - Cannot select \"Use in Controller\" for execution environment on private automation hub"
 }

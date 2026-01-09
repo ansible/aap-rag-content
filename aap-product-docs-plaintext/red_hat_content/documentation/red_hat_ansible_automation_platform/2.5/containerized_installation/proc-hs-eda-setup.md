@@ -1,6 +1,6 @@
-# 4. Horizontal Scaling in Red Hat Ansible Automation Platform
-## 4.1. Horizontal scaling in Event-Driven Ansible controller
-### 4.1.2. Setting up horizontal scaling for Event-Driven Ansible controller
+# 9. Horizontal scaling in Red Hat Ansible Automation Platform
+## 9.1. Horizontal scaling in Event-Driven Ansible controller
+### 9.1.2. Setting up horizontal scaling for Event-Driven Ansible controller
 
 
 
@@ -59,7 +59,7 @@ $ ansible-playbook -i &lt;path_to_inventory_file&gt; ansible.containerized_insta
 1. The following is a list of the parameters you can use with the `        log_gathering` playbook:
 
 
-<span id="idm140416032459392"></span>
+<span id="idm140658257523072"></span>
 **Table A.1. Parameter reference**
 
 | Parameter name | Description | Default |
@@ -98,7 +98,7 @@ $ podman ps --all --format "{{.Names}}"
 ```
 
 
-<span id="idm140416029049648"></span>
+<span id="idm140658249162928"></span>
 **Table A.2. Container details**
 
 | Component group | Container name | Purpose |
@@ -218,7 +218,7 @@ Use this information to troubleshoot your containerized installation of Ansible 
 
 **The installation takes a long time, or has errors, what should I check?**
 
-1. Ensure your system meets the minimum requirements as outlined in [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#system-requirements) . Factors such as improper storage choices and high latency when distributing across many hosts will all have an impact on installation time.
+1. Ensure your system meets the minimum requirements as outlined in [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/preparing-containerized-installation#system-requirements) . Factors such as improper storage choices and high latency when distributing across many hosts will all have an impact on installation time.
 1. Review the installation log file which is located by default at `    ./aap_install.log` . You can change the log file location within the `    ansible.cfg` file in the installation directory.
 1. Enable task profiling callbacks on an ad hoc basis to give an overview of where the installation program spends the most time. To do this, use the local `    ansible.cfg` file. Add a callback line under the `    [defaults]` section, for example:
 
@@ -246,7 +246,7 @@ TASK [ansible.containerized_installer.automationcontroller : Create the receptor
 fatal: [ec2-13-48-25-168.eu-north-1.compute.amazonaws.com]: FAILED! =&gt; {"changed": false, "msg": "Can't create container receptor", "stderr": "Error: creating container storage: creating an ID-mapped copy of layer \"98955f43cc908bd50ff43585fec2c7dd9445eaf05eecd1e3144f93ffc00ed4ba\": error during chown: storage-chown-by-maps: lchown usr/local/lib/python3.9/site-packages/azure/mgmt/network/v2019_11_01/operations/__pycache__/_available_service_aliases_operations.cpython-39.pyc: no space left on device: exit status 1\n", "stderr_lines": ["Error: creating container storage: creating an ID-mapped copy of layer \"98955f43cc908bd50ff43585fec2c7dd9445eaf05eecd1e3144f93ffc00ed4ba\": error during chown: storage-chown-by-maps: lchown usr/local/lib/python3.9/site-packages/azure/mgmt/network/v2019_11_01/operations/__pycache__/_available_service_aliases_operations.cpython-39.pyc: no space left on device: exit status 1"], "stdout": "", "stdout_lines": []}
 ```
 
-If you are installing a `/home` filesystem into a default Amazon Web Services marketplace RHEL instance, it might be too small since `/home` is part of the root `/` filesystem. To resolve this issue you must make more space available. For more information about the system requirements, see [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#system-requirements) .
+If you are installing a `/home` filesystem into a default Amazon Web Services marketplace RHEL instance, it might be too small since `/home` is part of the root `/` filesystem. To resolve this issue you must make more space available. For more information about the system requirements, see [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/preparing-containerized-installation#system-requirements) .
 
 **"Install container tools" task fails due to unavailable packages**
 
@@ -300,7 +300,7 @@ Use this information to understand the architecture for your containerized Ansib
 
 **Can you give details of the architecture for the Ansible Automation Platform containerized design?**
 
-We use as much of the underlying native Red Hat Enterprise Linux technology as possible. Podman is used for the container runtime and management of services.
+We use as much of the underlying Red Hat Enterprise Linux technology as possible. Podman is used for the container runtime and management of services.
 
 Use `podman ps` to list the running containers on the system:
 
@@ -604,7 +604,7 @@ The following tables contain information about the variables used in Ansible Aut
 The following variables control how Ansible Automation Platform interacts with remote hosts.
 
 
-<span id="idm140416030874016"></span>
+<span id="idm140658249777920"></span>
 **Table B.1. Ansible variables**
 
 | Variable | Description |
@@ -667,8 +667,7 @@ Inventory file variables for automation hub.
 |  `automationhub_collection_download_count` |  | Denote whether or not the collection download count should be displayed in the UI. | Optional |  `false` |
 |  `automationhub_collection_seed_repository` |  | Controls the type of content to upload when `hub_seed_collections` is set to `true` . Valid options include: `certified` , `validated` | Optional | Both certified and validated are enabled by default. |
 |  `automationhub_collection_signing_service_key` |  `hub_collection_signing_key` | Path to the collection signing key file. | Required if a collection signing service is enabled. |  |
-|  `automationhub_container_repair_media_type` |  | Denote whether or not to run the command `pulpcore-manager container-repair-media-type` .
-Valid options include: `true` , `false` , `auto` | Optional |  `auto` |
+|  `automationhub_container_repair_media_type` |  | Denote whether or not to run the command `pulpcore-manager container-repair-media-type` . Valid options include: `true` , `false` , `auto` | Optional |  `auto` |
 |  `automationhub_container_signing_service_key` |  `hub_container_signing_key` | Path to the container signing key file. | Required if a container signing service is enabled. |  |
 |  `automationhub_create_default_collection_signing_service` |  `hub_collection_signing` | Set this variable to `true` to enable a collection signing service. | Optional |  `false` |
 |  `automationhub_create_default_container_signing_service` |  `hub_container_signing` | Set this variable to `true` to enable a container signing service. | Optional |  `false` |
@@ -679,8 +678,7 @@ Valid options include: `true` , `false` , `auto` | Optional |  `auto` |
 |  `automationhub_enable_unauthenticated_collection_access` |  | Controls whether read-only access is enabled or disabled for unauthorized users viewing collections or namespaces for automation hub. Set this variable to `true` to enable read-only access. | Optional |  `false` |
 |  `automationhub_enable_unauthenticated_collection_download` |  | Controls whether or not unauthorized users can download read-only collections from automation hub. Set this variable to `true` to enable download of read-only collections. | Optional |  `false` |
 |  `automationhub_firewalld_zone` |  `hub_firewall_zone` | The firewall zone where automation hub related firewall rules are applied. This controls which networks can access automation hub based on the zone’s trust level. | Optional | RPM = no default set. Container = `public` . |
-|  `automationhub_force_change_admin_password` |  | Denote whether or not to require the change of the default administrator password for automation hub during installation.
-Set to `true` to require the user to change the default administrator password during installation. | Optional |  `false` |
+|  `automationhub_force_change_admin_password` |  | Denote whether or not to require the change of the default administrator password for automation hub during installation. Set to `true` to require the user to change the default administrator password during installation. | Optional |  `false` |
 |  `automationhub_importer_settings` |  `hub_galaxy_importer` | Dictionary of settings to pass to the `galaxy-importer.cfg` configuration file. These settings control how the `galaxy-importer` service processes and validates Ansible content. Example values include: `ansible-doc` , `ansible-lint` , and `flake8` . | Optional |  |
 |  `automationhub_nginx_tls_files_remote` |  | Denote whether the web certificate sources are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional | The value defined in `automationhub_tls_files_remote` . |
 |  `automationhub_pg_cert_auth` |  `hub_pg_cert_auth` | Controls whether client certificate authentication is enabled or disabled on the automation hub PostgreSQL database. Set this variable to `true` to enable client certificate authentication. | Optional |  `false` |
@@ -709,9 +707,7 @@ Set to `true` to require the user to change the default administrator password d
 For example:
 
 ```
-hub_extra_settings:
-- setting: REDIRECT_IS_HTTPS
-value: True
+hub_extra_settings=[{"setting": "REDIRECT_IS_HTTPS", "value": True}]
 ``` | Optional |  `[]` |
 |  `nginx_hsts_max_age` |  `hub_nginx_hsts_max_age` | Maximum duration (in seconds) that HTTP Strict Transport Security (HSTS) is enforced for automation hub. | Optional |  `63072000` |
 |  `pulp_secret` |  `hub_secret_key` | Secret key value used by automation hub to sign and encrypt data. | Optional |  |
@@ -725,7 +721,7 @@ value: True
 |  |  `hub_container_signing_service` | Service for signing containers. | Optional |  `container-default` |
 |  |  `hub_nginx_http_port` | Port number that automation hub listens on for HTTP requests. | Optional |  `8081` |
 |  |  `hub_nginx_https_port` | Port number that automation hub listens on for HTTPS requests. | Optional |  `8444` |
-|  `nginx_tls_protocols` |  `hub_nginx_https_protocols` | Protocols that automation hub will support when handling HTTPS traffic. | Optional | RPM = `[TLSv1.2]` . Container = `[TLSv1.2, TLSv1.3]` . |
+|  `nginx_tls_protocols` |  `hub_nginx_https_protocols` | Protocols that automation hub will support when handling HTTPS traffic. | Optional |  `[TLSv1.2, TLSv1.3]` |
 |  |  `hub_pg_socket` | UNIX socket used by automation hub to connect to the PostgreSQL database. | Optional |  |
 |  |  `hub_s3_access_key` | AWS S3 access key. | Required if using an AWS S3 storage backend. |  |
 |  |  `hub_s3_bucket_name` | Name of the AWS S3 storage bucket. | Optional |  `pulp` |
@@ -762,7 +758,7 @@ Inventory file variables for automation controller.
 |  `nginx_hsts_max_age` |  `controller_nginx_hsts_max_age` | Maximum duration (in seconds) that HTTP Strict Transport Security (HSTS) is enforced for automation controller. | Optional |  `63072000` |
 |  `nginx_http_port` |  `controller_nginx_http_port` | Port number that automation controller listens on for HTTP requests. | Optional | RPM = `80` . Container = `8080` |
 |  `nginx_https_port` |  `controller_nginx_https_port` | Port number that automation controller listens on for HTTPS requests. | Optional | RPM = `443` . Container = `8443` |
-|  `nginx_tls_protocols` |  `controller_nginx_https_protocols` | Protocols that automation controller supports when handling HTTPS traffic. | Optional | RPM = `[TLSv1.2]` . Container = `[TLSv1.2, TLSv1.3]` |
+|  `nginx_tls_protocols` |  `controller_nginx_https_protocols` | Protocols that automation controller supports when handling HTTPS traffic. | Optional |  `[TLSv1.2, TLSv1.3]` |
 |  `nginx_user_headers` |  `controller_nginx_user_headers` | List of additional NGINX headers to add to automation controller’s NGINX configuration. | Optional |  `[]` |
 |  |  `controller_create_preload_data` | Controls whether or not to create preloaded content during installation. | Optional |  `true` |
 |  `node_state` |  | The status of a node or group of nodes. Valid options include `active` , `deprovision` to remove a node from a cluster, or `iso_migrate` to migrate a legacy isolated node to an execution node. | Optional |  `active` |
@@ -795,9 +791,7 @@ For the `[execution_nodes]` group the two options are:
 For example:
 
 ```
-controller_extra_settings:
-- setting: USE_X_FORWARDED_HOST
-value: true
+controller_extra_settings=[{"setting": "USE_X_FORWARDED_HOST", "value": True}]
 ``` | Optional |  `[]` |
 |  |  `controller_license_file` | Path to the automation controller license file. |  |  |
 |  |  `controller_percent_memory_capacity` | Memory allocation for automation controller. | Optional |  `1.0` (allocates 100% of the total system memory to automation controller) |
@@ -820,16 +814,13 @@ Inventory file variables for the database used with Ansible Automation Platform.
 Example usage for RPM:
 
 ```
-postgresql_extra_settings:
-ssl_ciphers: 'HIGH:!aNULL:!MD5'
+postgresql_extra_settings={'ssl_ciphers': 'HIGH:!aNULL:!MD5'}
 ```
 
 Example usage for containerized:
 
 ```
-postgresql_extra_settings:
-- setting: ssl_ciphers
-value: 'HIGH:!aNULL:!MD5'
+postgresql_extra_settings=[{"setting": "ssl_ciphers", "value": "HIGH:!aNULL:!MD5"}]
 ``` | Optional |  |
 |  `postgres_firewalld_zone` |  `postgresql_firewall_zone` | The firewall zone where PostgreSQL related firewall rules are applied. This controls which networks can access PostgreSQL based on the zone’s trust level. | Optional | RPM = no default set. Container = `public` . |
 |  `postgres_max_connections` |  `postgresql_max_connections` | Maximum number of concurrent connections to the database if you are using an installer-managed database. For more information see [PostgreSQL database configuration and maintenance for automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-improving-performance#ref-controller-database-settings) . | Optional |  `1024` |
@@ -906,20 +897,18 @@ Inventory file variables for Event-Driven Ansible controller.
 For example:
 
 ```
-eda_extra_settings:
-- setting: RULEBOOK_READINESS_TIMEOUT_SECONDS
-value: 120
+eda_extra_settings=[{"setting": "RULEBOOK_READINESS_TIMEOUT_SECONDS", "value": 120}]
 ``` | Optional |  `[]` |
 |  |  `eda_nginx_client_max_body_size` | Maximum allowed size for data sent to Event-Driven Ansible through NGINX. | Optional |  `1m` |
 |  |  `eda_nginx_hsts_max_age` | Maximum duration (in seconds) that HTTP Strict Transport Security (HSTS) is enforced for Event-Driven Ansible. | Optional |  `63072000` |
-|  `nginx_tls_protocols` |  `eda_nginx_https_protocols` | Protocols that Event-Driven Ansible supports when handling HTTPS traffic. | Optional | RPM = `[TLSv1.2]` . Container = `[TLSv1.2, TLSv1.3]` . |
+|  `nginx_tls_protocols` |  `eda_nginx_https_protocols` | Protocols that Event-Driven Ansible supports when handling HTTPS traffic. | Optional |  `[TLSv1.2, TLSv1.3]` |
 |  |  `eda_pg_socket` | UNIX socket used by Event-Driven Ansible to connect to the PostgreSQL database. | Optional |  |
 |  `redis_disable_tls` |  `eda_redis_disable_tls` | Controls whether TLS is enabled or disabled for Event-Driven Ansible Redis. Set this variable to true to disable TLS. | Optional |  `false` |
 |  |  `eda_redis_tls_cert` | Path to the Event-Driven Ansible Redis certificate file. | Optional |  |
 |  |  `eda_redis_tls_key` | Path to the Event-Driven Ansible Redis key file. | Optional |  |
 |  |  `eda_safe_plugins` | List of plugins that are allowed to run within Event-Driven Ansible.
 
-For more information, see [Adding a safe plugin variable to Event-Driven Ansible controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#proc-add-eda-safe-plugin-var) . | Optional |  `[]` |
+For more information, see [Adding a safe plugin variable to Event-Driven Ansible controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/advanced-configuration-containerized#proc-add-eda-safe-plugin-var) . | Optional |  `[]` |
 
 
 ## B.6. General variables
@@ -931,10 +920,10 @@ General inventory file variables for Ansible Automation Platform.
 
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
-|  `aap_ca_cert_file` |  `ca_tls_cert` | Path to the user provided CA certificate file used to generate SSL/TLS certificates for all Ansible Automation Platform services. For more information, see [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#using-custom-tls-certificates_aap-containerized-installation) . | Optional |  |
+|  `aap_ca_cert_file` |  `ca_tls_cert` | Path to the user provided CA certificate file used to generate SSL/TLS certificates for all Ansible Automation Platform services. For more information, see [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/advanced-configuration-containerized#using-custom-tls-certificates) . | Optional |  |
 |  `aap_ca_cert_files_remote` |  `ca_tls_remote` | Denote whether the CA certificate files are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional |  `false` |
 |  `aap_ca_cert_size` |  | Bit size of the internally managed CA certificate private key. | Optional |  `4096` |
-|  `aap_ca_key_file` |  `ca_tls_key` | Path to the key file for the CA certificate provided in `aap_ca_cert_file` (RPM) and `ca_tls_cert` (Container). For more information, see [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#using-custom-tls-certificates_aap-containerized-installation) . | Optional |  |
+|  `aap_ca_key_file` |  `ca_tls_key` | Path to the key file for the CA certificate provided in `aap_ca_cert_file` (RPM) and `ca_tls_cert` (Container). For more information, see [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/advanced-configuration-containerized#using-custom-tls-certificates) . | Optional |  |
 |  `aap_ca_passphrase_cipher` |  | Cipher used for signing the internally managed CA certificate private key. | Optional |  `aes256` |
 |  `aap_ca_regenerate` |  | Denotes whether or not to regenerate the internally managed CA certificate key pair. | Optional |  `false` |
 |  `aap_service_cert_size` |  | Bit size of the component key pair managed by the internal CA. | Optional |  `4096` |
@@ -945,11 +934,15 @@ General inventory file variables for Ansible Automation Platform.
 |  `backup_file_prefix` |  | Prefix used for the file backup name for the final backup file. | Optional |  `automation-platform-backup` |
 |  `bundle_install` |  `bundle_install` | Controls whether or not to perform an offline or bundled installation. Set this variable to `true` to enable an offline or bundled installation. | Optional |  `false` if using the setup installation program. `true` if using the setup bundle installation program. |
 |  `bundle_install_folder` |  `bundle_dir` | Path to the bundle directory used when performing a bundle install. | Required if `bundle_install=true` | RPM = `/var/lib/ansible-automation-platform-bundle` . Container = `&lt;current_dir&gt;/bundle` . |
-|  `custom_ca_cert` |  `custom_ca_cert` | Path to the custom CA certificate file. This is required if any of the TLS certificates you manually provided are signed by a custom CA. For more information, see [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#using-custom-tls-certificates_aap-containerized-installation) . | Optional |  |
+|  `custom_ca_cert` |  `custom_ca_cert` | Path to the custom CA certificate file. This is required if any of the TLS certificates you manually provided are signed by a custom CA. For more information, see [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/advanced-configuration-containerized#using-custom-tls-certificates) . | Optional |  |
 |  `enable_insights_collection` |  | The default install registers the node to the Red Hat Insights for Red Hat Ansible Automation Platform for the Red Hat Ansible Automation Platform Service if the node is registered with Subscription Manager. Set to `false` to disable this functionality. | Optional |  `true` |
-|  `registry_password` |  `registry_password` | Password credential for access to the registry source defined in `registry_url` . For more information, see [Setting registry_username and registry_password](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#proc-set-registry-username-password) . | RPM = Required if you need a password to access `registry_url` . Container = Required if `registry_auth=true` . |  |
+|  `registry_password` |  `registry_password` | Password credential for access to the registry source defined in `registry_url` . For more information, see [Setting registry_username and registry_password](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/preparing-containerized-installation#proc-set-registry-username-password) .
+
+Not required for disconnected (bundled) installations where `bundle_install=true` . | RPM = Required if you need a password to access `registry_url` . Container = Required for online installations if `registry_auth=true` . Not required for disconnected installations. |  |
 |  `registry_url` |  `registry_url` | URL of the registry source from which to pull execution environment images. | Optional |  `registry.redhat.io` |
-|  `registry_username` |  `registry_username` | Username credential for access to the registry source defined in `registry_url` . For more information, see [Setting registry_username and registry_password](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#proc-set-registry-username-password) . | RPM = Required if you need a password to access `registry_url` . Container = Required if `registry_auth=true` . |  |
+|  `registry_username` |  `registry_username` | Username credential for access to the registry source defined in `registry_url` . For more information, see [Setting registry_username and registry_password](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/preparing-containerized-installation#proc-set-registry-username-password) .
+
+Not required for disconnected (bundled) installations where `bundle_install=true` . | RPM = Required if you need a password to access `registry_url` . Container = Required for online installations if `registry_auth=true` . Not required for disconnected installations. |  |
 |  `registry_verify_ssl` |  `registry_tls_verify` | Controls whether SSL/TLS certificate verification is enabled or disabled when making HTTPS requests. | Optional |  `true` |
 |  `restore_backup_file` |  | Path to the tar file used for the platform restore. | Optional |  `{{ setup_dir }}/automation-platform-backup-latest.tar.gz` |
 |  `restore_file_prefix` |  | Path prefix for the staged restore components. | Optional |  `automation-platform-restore` |
@@ -968,9 +961,10 @@ You can control this functionality at a component level by using the `&lt;compon
 |  |  `images_tmp_dir` | The directory where the installation program temporarily stores container images during installation. | Optional | The system’s temporary directory. |
 |  |  `pcp_firewall_zone` | The firewall zone where Performance Co-Pilot related firewall rules are applied. This controls which networks can access Performance Co-Pilot based on the zone’s trust level. | Optional | public |
 |  |  `pcp_use_archive_compression` | Controls whether archive compression is enabled or disabled for Performance Co-Pilot. You can control this functionality globally by using `use_archive_compression` . | Optional |  `true` |
-|  |  `registry_auth` | Set whether or not to use registry authentication. When this variable is set to true, `registry_username` and `registry_password` are required. | Optional |  `true` |
+|  |  `registry_auth` | Controls whether to use registry authentication. When set to `true` , `registry_username` and `registry_password` are required. Not applicable for disconnected (bundled) installations. | Optional |  `true` |
 |  |  `registry_ns_aap` | Ansible Automation Platform registry namespace. | Optional |  `ansible-automation-platform-26` |
 |  |  `registry_ns_rhel` | RHEL registry namespace. | Optional |  `rhel8` |
+|  |  `setup_monitoring` | Set to `true` to enable Performance Co-Pilot for system performance monitoring and data collection on Ansible Automation Platform control plane nodes. | Optional |  `false` |
 
 
 ## B.7. Image variables
@@ -1053,7 +1047,7 @@ Inventory file variables for platform gateway.
 |  `automationgatewayproxy_disable_https` |  `envoy_disable_https` | Controls whether or not HTTPS is disabled when accessing the platform UI. Set to `true` to disable HTTPS (HTTP is used instead). | Optional | RPM = The value defined in `disable_https` which defaults to `false` . Container = `false` . |
 |  `automationgatewayproxy_http_port` |  `envoy_http_port` | Port number on which the Envoy proxy listens for incoming HTTP connections. | Optional |  `80` |
 |  `automationgatewayproxy_https_port` |  `envoy_https_port` | Port number on which the Envoy proxy listens for incoming HTTPS connections. | Optional |  `443` |
-|  `nginx_tls_protocols` |  `gateway_nginx_https_protocols` | Protocols that platform gateway will support when handling HTTPS traffic. | Optional | RPM = `[TLSv1.2]` . Container = `[TLSv1.2, TLSv1.3]` . |
+|  `nginx_tls_protocols` |  `gateway_nginx_https_protocols` | Protocols that platform gateway will support when handling HTTPS traffic. | Optional |  `[TLSv1.2, TLSv1.3]` |
 |  `redis_disable_tls` |  `gateway_redis_disable_tls` | Controls whether TLS is enabled or disabled for platform gateway Redis. Set this variable to `true` to disable TLS. | Optional |  `false` |
 |  `redis_port` |  `gateway_redis_port` | Port number for the Redis host for platform gateway. | Optional |  `6379` |
 |  |  `gateway_extra_settings` | Defines additional settings for use by platform gateway during installation.
@@ -1061,9 +1055,7 @@ Inventory file variables for platform gateway.
 For example:
 
 ```
-gateway_extra_settings:
-- setting: OAUTH2_PROVIDER['ACCESS_TOKEN_EXPIRE_SECONDS']
-value: 600
+gateway_extra_settings=[{"setting": "OAUTH2_PROVIDER['ACCESS_TOKEN_EXPIRE_SECONDS']", "value": 600}]
 ``` | Optional |  `[]` |
 |  |  `gateway_nginx_client_max_body_size` | Maximum allowed size for data sent to platform gateway through NGINX. | Optional |  `5m` |
 |  |  `gateway_nginx_hsts_max_age` | Maximum duration (in seconds) that HTTP Strict Transport Security (HSTS) is enforced for platform gateway. | Optional |  `63072000` |
@@ -1098,7 +1090,7 @@ For the `[execution_nodes]` group the two options are:
 
 This is resolved into a set of hosts that is used to construct the `receptor.conf` file.
 
-For more information, see [Adding execution nodes](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#adding-execution-nodes_aap-containerized-installation) . | Optional |  `[]` |
+For more information, see [Adding execution nodes](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/advanced-configuration-containerized#adding-execution-nodes) . | Optional |  `[]` |
 |  |  `receptor_disable_signing` | Controls whether signing of communications between receptor nodes is enabled or disabled. Set this variable to `true` to disable communication signing. | Optional |  `false` |
 |  |  `receptor_disable_tls` | Controls whether TLS is enabled or disabled for receptor. Set this variable to `true` to disable TLS. | Optional |  `false` |
 |  |  `receptor_firewall_zone` | The firewall zone where receptor related firewall rules are applied. This controls which networks can access receptor based on the zone’s trust level. | Optional |  `public` |
@@ -1134,18 +1126,18 @@ Inventory file variables for Redis.
 
 
 
-<span id="idm140416028696608"></span>
+<span id="idm140658248319520"></span>
 # Legal Notice
 
-Copyright© 2025 Red Hat, Inc.
+Copyright© Red Hat.
 The text of and illustrations in this document are licensed by Red Hat under a Creative Commons Attribution–Share Alike 3.0 Unported license ("CC-BY-SA"). An explanation of CC-BY-SA is available at [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/) . In accordance with CC-BY-SA, if you distribute this document or an adaptation of it, you must provide the URL for the original version.
 Red Hat, as the licensor of this document, waives the right to enforce, and agrees not to assert, Section 4d of CC-BY-SA to the fullest extent permitted by applicable law.
-Red Hat, Red Hat Enterprise Linux, the Shadowman logo, the Red Hat logo, JBoss, OpenShift, Fedora, the Infinity logo, and RHCE are trademarks of Red Hat, Inc., registered in the United States and other countries.
+Red Hat, Red Hat Enterprise Linux, the Shadowman logo, JBoss, OpenShift, Fedora, the Infinity logo, and RHCE are trademarks of Red Hat, Inc., registered in the United States and other countries.
 Linux® is the registered trademark of Linus Torvalds in the United States and other countries.
 Java® is a registered trademark of Oracle and/or its affiliates.
 XFS® is a trademark of Silicon Graphics International Corp. or its subsidiaries in the United States and/or other countries.
 MySQL® is a registered trademark of MySQL AB in the United States, the European Union and other countries.
-Node.js® is an official trademark of Joyent. Red Hat is not formally related to or endorsed by the official Joyent Node.js open source or commercial project.
+Node.js® is an official trademark of Joyent. Red Hat Software Collections is not formally related to or endorsed by the official Joyent Node.js open source or commercial project.
 TheOpenStack® Word Mark and OpenStack logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
 All other trademarks are the property of their respective owners.
 

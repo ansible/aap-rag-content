@@ -1,5 +1,5 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/troubleshooting_ansible_automation_platform/index#troubleshoot-job-permissions",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.6/html-single/troubleshooting_ansible_automation_platform/index",
-  "title": "Issue - Jobs in private automation hub are failing with \"denied: requested access to the resource is denied, unauthorized: Insufficient permissions\" error message"
+  "title": "Issue - Jobs failing with insufficient permissions error in private automation hub"
 }

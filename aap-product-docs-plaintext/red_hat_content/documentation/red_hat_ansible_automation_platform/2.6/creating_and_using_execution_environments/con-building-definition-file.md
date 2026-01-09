@@ -1,5 +1,5 @@
-# 3. Using Ansible Builder
-## 3.4. Building a definition file
+# 2. Using Ansible Builder
+## 2.4. Building a definition file
 
 
 
@@ -13,21 +13,26 @@ The following is an example of a version 3 definition file. Each definition file
 ```
 version: 3
 
-build_arg_defaults:<span id="CO1-1"><!--Empty--></span><span class="callout">1</span>ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: '--pre'
+build_arg_defaults:
+ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: '--pre'
 
-dependencies:<span id="CO1-2"><!--Empty--></span><span class="callout">2</span>galaxy: requirements.yml
+dependencies:
+galaxy: requirements.yml
 python:
 - six
 - psutil
 system: bindep.txt
 
-images:<span id="CO1-3"><!--Empty--></span><span class="callout">3</span>base_image:
+images:
+base_image:
 name: registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel9:latest
 
 # Custom package manager path for the RHEL based images
-options:<span id="CO1-4"><!--Empty--></span><span class="callout">4</span>package_manager_path: /usr/bin/microdnf
+options:
+package_manager_path: /usr/bin/microdnf
 
-additional_build_steps:<span id="CO1-5"><!--Empty--></span><span class="callout">5</span>prepend_base:
+additional_build_steps:
+prepend_base:
 - RUN echo This is a prepend base command!
 
 prepend_galaxy:
@@ -47,9 +52,16 @@ append_final:
 - RUN ls -la /etc
 ```
 
+-  `    build_arg_defaults` : Lists default values for build arguments.
+-  `    dependencies` : Specifies the location of various requirements files.
+-  `    images` : Specifies the base image to be used. Red Hat support is only provided for the redhat.registry.io base image.
+-  `    options` : Specifies options that can affect builder runtime functionality.
+-  `    additional_build_steps` : Commands for additional custom build steps.
+
+
 **Additional resources**
 
-- For more information about the definition file content, see [Breakdown of definition file content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/creating_and_using_execution_environments/index#con-definition-file-breakdown) .
-- To read more about the differences between Ansible Builder versions 2 and 3, see the [Ansible Builder Porting Guide](https://ansible.readthedocs.io/projects/builder/en/latest/porting_guides/porting_guide/) .
+-  [Breakdown of definition file content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/creating_and_using_execution_environments/index#con-definition-file-breakdown)
+-  [Ansible Builder Porting Guide](https://ansible.readthedocs.io/projects/builder/en/latest/porting_guides/porting_guide/)
 
 

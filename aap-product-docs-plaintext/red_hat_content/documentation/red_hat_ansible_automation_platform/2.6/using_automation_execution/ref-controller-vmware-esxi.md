@@ -4,6 +4,8 @@
 
 
 
+This example inventory configuration file demonstrates how to use the `vmware.vmware.vms` inventory plugin to gather virtual machine information from a VMWare ESXI host.
+
 ```
 compose:
 ansible_host: guest.ipAddress

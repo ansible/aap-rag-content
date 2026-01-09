@@ -1,13 +1,13 @@
-# 6. Installing and configuring the Ansible code bot
-## 6.3. Managing repository scans
-### 6.3.1. Manually scanning your Git repositories
+# 7. Installing and configuring the Ansible code bot
+## 7.3. Managing repository scans
+### 7.3.1. Manually scanning your Git repositories
 
 
 
 
 You can manually scan your Git repositories if you did not set up a scanning schedule for your Ansible code bot or if you do not want to wait for the next scheduled scan. If you manually scan your repository, and no pull request was created, it is likely so because a duplicate pull request already exists. You can scan your repository from both the Ansible code bot dashboard and GitHub.
 
-#### 6.3.1.1. Manually scanning the repository from the Ansible code bot dashboard
+#### 7.3.1.1. Manually scanning the repository from the Ansible code bot dashboard
 
 
 
@@ -39,7 +39,7 @@ The repository’s scan history is displayed along with the scan start time, sca
 ) beside the repository and select **View repository** .
 
 
-#### 6.3.1.2. Manually scanning the repository from GitHub
+#### 7.3.1.2. Manually scanning the repository from GitHub
 
 
 

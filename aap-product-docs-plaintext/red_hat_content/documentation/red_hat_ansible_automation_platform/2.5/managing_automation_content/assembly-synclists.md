@@ -4,5 +4,5 @@
 
 
 
-To synchronize content, create and upload a requirements file to the appropriate remote. Remotes are configurations that enable you to synchronize content to your custom repositories from an external collection source.
+To synchronize content, create and upload a requirements file to the appropriate remote.
 

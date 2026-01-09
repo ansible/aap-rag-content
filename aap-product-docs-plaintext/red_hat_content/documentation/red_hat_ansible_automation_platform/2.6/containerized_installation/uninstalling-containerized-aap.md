@@ -1,5 +1,5 @@
-# 2. Ansible Automation Platform containerized installation
-## 2.12. Uninstalling containerized Ansible Automation Platform
+# 9. Maintaining containerized Ansible Automation Platform
+## 9.4. Uninstalling containerized Ansible Automation Platform
 
 
 

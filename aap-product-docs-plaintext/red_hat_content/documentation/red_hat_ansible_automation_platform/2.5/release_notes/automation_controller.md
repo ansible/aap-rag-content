@@ -1,21 +1,33 @@
 # 10. Patch releases
-## 10.1. Ansible Automation Platform patch release September 23, 2025
-### 10.1.6. Automation controller
+## 10.1. Ansible Automation Platform patch release December 10, 2025
+### 10.1.5. Automation controller
 
 
 
 
-#### 10.1.6.1. Bug Fixes
+#### 10.1.5.1. Features
 
 
 
 
-- Fixed an issue where the galaxy credentials could not be created and edited without the need to specify an organization. (AAP-52197)
-- Fixed an issue where the job template creation failed using `    ansible.controller.job_template` when multiple inventories shared the same name across different organizations. (AAP-51311)
-- Fixed an issue that did not allow a user to save **Schedule for Workflow** job template when **Limit has Prompt on Launch** was enabled. (AAP-49794)
-- The export command now works through the automation controller collection or with `    awxkit` when the correct environment variable is provided. (AAP-49452)
-- Fixed an issue where there were double escaped quotes in `    api/v2/jobs/{id}/stdout/?format=txt` . (AAP-49077)
-- Fixed an issue where the fact storage was not working when automation controller’s time zone was not UTC. (AAP-45933)
-- Fixed a bug where exports did not work on deployments using the platform gateway. The export module in the collection now honors the `    CONTROLLER_OPTIONAL_API_URLPATTERN_PREFIX` environment variable. (AAP-39265)
+- Updated the pinned version for receptorctl in controller. This addresses edge cases that could cause JSON to fail to parse a line from the worker stream.(AAP-58415)
+
+
+Error message
+
+```
+Error: Expecting value: line 1 column 1 (char 0) Line with invalid JSON data: b
+```
+
+#### 10.1.5.2. Bug Fixes
+
+
+
+
+- Fixed an issue where the system would display reminders on unsupported architectures, causing confusion.(AAP-56221)
+- Fixed an issue where jobs failed on `    fapolicyd` enabled systems where Python 3.9 was not installed by default. Updates `    automation-controller-fapolicyd` from Python 3.9 to Python 3.11 to address this issue.(AAP-58479)
+- Fixed an issue where there was a Redis broken pipe error in the long-running jobs component: API.(AAP-59727)
+- Fixed a GitHub application installation access token lookup where it would not accept Iv2 Client IDs.(AAP-58882)
+- Fixed an issue where the project update and project deletions failed with no output.(AAP-58532)
 
 

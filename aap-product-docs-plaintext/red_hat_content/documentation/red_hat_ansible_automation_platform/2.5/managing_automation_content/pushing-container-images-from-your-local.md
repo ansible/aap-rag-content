@@ -1,27 +1,27 @@
 # 3. Manage containers in private automation hub
 ## 3.6. Working with signed containers
-### 3.6.4. Pushing container images from your local environment
+### 3.6.4. Pushing signed execution environments from your local environment
 
 
 
 
-Use the following procedure to sign an automation execution environment on a local system and push the signed execution environment to the automation hub registry.
+Sign an automation execution environment on a local system and push the signed execution environment to the automation hub registry.
 
 **Procedure**
 
-1. From a terminal, log in to Podman, or any container client currently in use:
+1. From a terminal, log in to Podman, or any container client currently in use, and pull the execution environment you want to sign.
 
 
 ```
-&gt; podman pull &lt;container-name&gt;
+podman pull &lt;container-name&gt;
 ```
 
 
-1. After the execution environment is pulled, add tags (for example: latest, rc, beta, or version numbers, such as 1.0; 2.3, and so on):
+1. After the execution environment is pulled, add tags (for example: `    latest` , `    rc` , `    beta` , or version numbers, such as `    1.0` , `    2.3` , and so on):
 
 
 ```
-&gt; podman tag &lt;container-name&gt; &lt;server-address&gt;/&lt;container-name&gt;:&lt;tag name&gt;
+podman tag &lt;container-name&gt; &lt;server-address&gt;/&lt;container-name&gt;:&lt;tag name&gt;
 ```
 
 
@@ -29,18 +29,18 @@ Use the following procedure to sign an automation execution environment on a loc
 
 
 ```
-&gt; podman push &lt;server-address&gt;/&lt;container-name&gt;:&lt;tag name&gt; --tls-verify=false --sign-by &lt;reference to the gpg key on your local&gt;
+podman push &lt;server-address&gt;/&lt;container-name&gt;:&lt;tag name&gt; --tls-verify=false --sign-by &lt;reference to the gpg key on your local&gt;
 ```
 
 If the execution environment is not signed, it can only be pushed with any current signature embedded. Alternatively, you can use the following script to push the execution environment without signing it:
 
 
 ```
-&gt; podman push &lt;server-address&gt;/&lt;container-name&gt;:&lt;tag name&gt; --tls-verify=false
+podman push &lt;server-address&gt;/&lt;container-name&gt;:&lt;tag name&gt; --tls-verify=false
 ```
 
 
-1. Once the execution environment has been pushed, navigate toAutomation Content→Execution Environments.
+1. After the execution environment has been pushed, navigate toAutomation Content→Execution Environments.
 1. To display the new execution environment, click the **Refresh** icon.
 1. Click the name of the image to view your pushed image.
 
@@ -63,6 +63,6 @@ The details page for each execution environment indicates whether it has been si
 
 **Verification**
 
-The signing service signs the execution environment. After the execution environment is signed, the status changes to "signed".
+After the execution environment is signed, the status changes to "signed".
 
 

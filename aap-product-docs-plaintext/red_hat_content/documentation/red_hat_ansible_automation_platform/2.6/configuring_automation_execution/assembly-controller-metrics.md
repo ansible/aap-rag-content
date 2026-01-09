@@ -3,6 +3,8 @@
 
 
 
+Automation controller provides metrics that can be used to monitor the health and performance of the system.
+
 A metrics endpoint, `/api/controller/v2/metrics/` is available in the API that produces instantaneous metrics about automation controller, which can be consumed by system monitoring software such as the open source project Prometheus.
 
 The types of data shown at the `metrics/` endpoint are `Content-type: text/plain` and `application/json` .

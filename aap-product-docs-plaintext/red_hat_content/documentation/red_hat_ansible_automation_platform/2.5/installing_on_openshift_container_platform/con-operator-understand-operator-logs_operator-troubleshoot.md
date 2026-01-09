@@ -1,5 +1,5 @@
-# 12. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
-## 12.1. Understanding automation controller operator logs
+# 13. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+## 13.1. Understanding automation controller operator logs
 
 
 

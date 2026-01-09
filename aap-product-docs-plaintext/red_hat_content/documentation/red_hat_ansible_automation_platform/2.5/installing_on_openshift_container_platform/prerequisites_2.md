@@ -1,6 +1,6 @@
-# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 4.3. Configuring automation hub on Red Hat OpenShift Container Platform web console
-### 4.3.1. Prerequisites
+# 5. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 5.3. Configuring automation hub on Red Hat OpenShift Container Platform web console
+### 5.3.1. Prerequisites
 
 
 
@@ -8,7 +8,7 @@
 - You have installed the Ansible Automation Platform Operator in Operator Hub.
 
 
-#### 4.3.1.1. Storage options for Ansible Automation Platform Operator installation on Red Hat OpenShift Container Platform
+#### 5.3.1.1. Storage options for Ansible Automation Platform Operator installation on Red Hat OpenShift Container Platform
 
 
 
@@ -27,7 +27,7 @@ In addition, OpenShift Data Foundation provides a `ReadWriteMany` or S3 implemen
 -  [How do I create a storage class for NFS dynamic storage provisioning in an OpenShift environment?](https://www.ibm.com/support/pages/how-do-i-create-storage-class-nfs-dynamic-storage-provisioning-openshift-environment)
 
 
-##### 4.3.1.1.1. Provisioning OCP storage with `ReadWriteMany` access mode
+##### 5.3.1.1.1. Provisioning OCP storage with `ReadWriteMany` access mode
 
 
 
@@ -46,7 +46,7 @@ To ensure successful installation of Ansible Automation Platform Operator, you m
 1. Complete the additional steps in this section to create the persistent volume claim (PVC).
 
 
-##### 4.3.1.1.2. Configuring object storage on Amazon S3
+##### 5.3.1.1.2. Configuring object storage on Amazon S3
 
 
 
@@ -87,7 +87,7 @@ $ oc -n $HUB_NAMESPACE delete pod -l app.kubernetes.io/name=&lt;hub-name&gt;-api
 
 
 
-##### 4.3.1.1.3. Configuring object storage on Azure Blob
+##### 5.3.1.1.3. Configuring object storage on Azure Blob
 
 
 
@@ -128,7 +128,7 @@ $ oc -n $HUB_NAMESPACE delete pod -l app.kubernetes.io/name=&lt;hub-name&gt;-api
 
 
 
-#### 4.3.1.2. Configure your automation hub operator route options
+#### 5.3.1.2. Configure your automation hub operator route options
 
 
 
@@ -160,7 +160,7 @@ After you have configured your route you can customize your hostname by adding `
 
 
 
-#### 4.3.1.3. Configuring the ingress type for your automation hub operator
+#### 5.3.1.3. Configuring the ingress type for your automation hub operator
 
 
 

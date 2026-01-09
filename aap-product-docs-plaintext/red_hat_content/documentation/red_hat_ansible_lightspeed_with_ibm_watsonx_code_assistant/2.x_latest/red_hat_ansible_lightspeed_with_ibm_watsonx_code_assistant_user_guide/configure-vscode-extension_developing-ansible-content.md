@@ -1,15 +1,16 @@
-# 4. Developing Ansible content
-## 4.2. Installing and configuring the Ansible VS Code extension
-### 4.2.3. Configuring the Ansible VS Code extension
+# 5. Developing Ansible content
+## 5.2. Installing and configuring the Ansible VS Code extension
+### 5.2.3. Configuring the Ansible VS Code extension
 
 
 
 
-You can configure the Ansible VS Code extension to enable Red Hat Ansible Lightspeed and specify it’s portal URL and IBM watsonx Code Assistant model ID.
+Configure third-party LLM providers, such as IBM watsonx Code Assistant or Google Gemini, within the Ansible VS Code extension.
 
 **Prerequisites**
 
-- Your organization administrator has configured an IBM watsonx Code Assistant model for your organization.
+- You have installed the Ansible VS Code extension v25.12.3.
+- You have obtained a valid API key for your chosen third-party LLM provider.
 
 
 **Procedure**
@@ -22,30 +23,35 @@ You can configure the Ansible VS Code extension to enable Red Hat Ansible Lights
 1. Select **Ansible Lightspeed** settings, and specify the following information:
 
 
-1. Ensure that the **Enable Ansible Lightspeed with watsonx Code Assistant inline suggestions** checkbox is selected.
-1. In the **URL for Ansible Lightspeed** field, verify that you have the following URL: `        https://c.ai.ansible.redhat.com/` .
-1. Select the **Enable Ansible Lightspeed with watsonx Code Assistant inline suggestions** checkbox.
+| UI field | Description |
+| --- | --- |
+| Ansible Lightspeed: Enabled | Select this checkbox to enable the Red Hat Ansible Lightspeed service. |
+| Ansible Lightspeed: Provider | Select the active AI service for code generation.
 
-1. Optional: If you want to use the custom model instead of the default model, in the **Model ID Override** field, enter the custom model ID. The **model-override** setting enables you to override the default model and use the custom model, after your organization administrator has created a custom model and has shared the model ID with you separately.
+Choose the AI provider from the following options:
+
+-  `    wca` : (Default setting) Uses IBM watsonx Code Assistant as the AI provider.
+-  `    google` : Uses Google Gemini as the AI provider. |
+| Ansible Lightspeed: Model Name | Specify the specific AI model version to use for code generation:
+
+- For IBM watsonx Code Assistant: (Required) The IBM watsonx Code Assistant model name or ID that you want to use for code generation.
+- For Google Gemini: (Optional) The system applies a recommended default model if left blank. |
+| Ansible Lightspeed: Api Key | Specify the secret credential required to authenticate requests with third-party model providers.
+
+- For IBM watsonx Code Assistant: (Optional) This field is not used for the IBM WCA provider. IBM watsonx Code Assistant relies on a separate OAuth2 login flow via the Red Hat portal.
+- For Google Gemini: (Required) Paste your active Google Gemini API key into this field. This token authorizes the extension to send prompts to Google’s servers. |
+| Ansible Lightspeed: Api Endpoint | Specify the destination URL for network requests sent by the Ansible VS Code extension.
+
+- For IBM watsonx Code Assistant: (Required) This field allows modification of the service URL for IBM watsonx Code Assistant connections. The default URL is `    https://c.ai.ansible.redhat.com` .
+- For Google Gemini: (Not configurable) This setting is not configurable when using the Google provider. The extension automatically manages the correct endpoint URL for Google services internally. |
+| Ansible Lightspeed Suggestions: Enabled | Toggle the automatic display of inline code completions within the Ansible VS Code editor. Inline suggestions are currently available for the IBM watsonx Code Assistant provider only. |
+| Ansible Lightspeed: Timeout | Define the maximum duration the Ansible VS Code extension waits for a server response. The default timeout for API calls is 3000 milliseconds. |
+
 
 Your settings are automatically saved in VS Code.
 
-The following illustration displays the configured settings for the Ansible VS Code extension:
-
-
-<span id="idm139816010321424"></span>
-**Figure 4.1. Configured settings for the Ansible VS Code extension**
-
-![Configured settings for the Ansible VS Code extension](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/f0217e74e4b417bd4f6ae02ad6acb8c8/lightspeed-vs-code-settings.png)
-
-
-
-
 Note
 If your organization recently subscribed to the Red Hat Ansible Automation Platform, it might take a few hours for Red Hat Ansible Lightspeed to detect the new subscription. In VS Code, use the **Refresh** button in the Ansible extension from the Activity bar to check again.
-
-
-
 
 
 

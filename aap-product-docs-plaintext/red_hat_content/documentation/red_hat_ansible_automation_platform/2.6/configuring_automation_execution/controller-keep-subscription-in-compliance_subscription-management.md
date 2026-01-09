@@ -4,6 +4,8 @@
 
 
 
+To ensure that your automation controller installation remains compliant with your Red Hat subscription, automation controller provides a way to monitor your subscription status and usage.
+
 Your subscription has two possible statuses:
 
 -  **Compliant** : Indicates that your subscription is appropriate for the number of hosts that you have automated within your subscription count.
@@ -31,7 +33,7 @@ Other important information displayed are:
 For example, if you have a subscription capacity of 10 hosts:
 
 - Starting with 9 hosts, 2 hosts were added and 3 hosts were deleted, you now have 8 hosts (compliant).
-- 3 hosts were automated again, now you have 11 hosts, which puts you over the subscription limit of 10 (non-compliant).
+- 3 hosts were automated again, now you have 11 hosts, which puts you over the subscription limit of 10 (noncompliant).
 - If you delete hosts, refresh the subscription details to see the change in count and status.
 
 

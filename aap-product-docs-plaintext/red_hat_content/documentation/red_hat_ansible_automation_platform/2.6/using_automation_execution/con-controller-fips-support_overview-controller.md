@@ -1,5 +1,5 @@
 # 1. Automation controller overview
-## 1.18. Support for deployment in a FIPS-enabled environment
+## 1.17. Support for deployment in a FIPS-enabled environment
 
 
 

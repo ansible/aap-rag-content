@@ -1,43 +1,38 @@
 # 10. Patch releases
-## 10.14. Ansible Automation Platform patch release February 13, 2025
-### 10.14.2. Enhancements
+## 10.15. Ansible Automation Platform patch release February 25, 2025
+### 10.15.1. Enhancements
 
 
 
 
-#### 10.14.2.1. General
+#### 10.15.1.1. Platform gateway
 
 
 
 
-- The `    ansible.controller` collection has been updated to 4.6.8.(AAP-39848)
--  `    ansible.platform` collection has been updated to 2.5.20250213.(AAP-39740)
--  `    ansible.eda` collection has been updated to 2.4.0.(AAP-39577)
+- Previously `    gateway_proxy_url` was used for the proxy health check, but is no longer used in favor of the `    ENVOY_HOSTNAME` setting.(AAP-39907)
 
 
-#### 10.14.2.2. Ansible Automation Platform
-
-
-
-
-- It is now possible to configure automation hub without Redis PVC.(AAP-39600)
-
-
-#### 10.14.2.3. Automation controller
+#### 10.15.1.2. Event-Driven Ansible
 
 
 
 
-- This release sees the addition of `    client_id` and `    client_secret` fields to the Insights credential to support service accounts via console.redhat.com.(AAP-36565)
-- You are now able to specify the input for the `    client_id` and `    client_secret` for the insights credential via the `    awx.awx.credential_type` module.(AAP-37441)
-- Updated `    awxkit` by adding service account support for Insights credential type, specifically adding the fields `    client_id` and `    client_secret` to `    credential_input_fields` .(AAP-39352)
+- In the credential type schema the format field can be set to binary_base64 to specify a file should be loaded as a binary file.(AAP-36581)
 
 
-#### 10.14.2.4. Automation execution environments
+- Sample Credential Type Schema
+- Inputs Configuration
+- fields:
 
 
+- id: keytab
+- type: string
+- label: Kerberos Keytab file
+- format: binary_base64 secret: true
+- help_text: Please select a Kerberos Keytab file
+- multiline: true
 
 
-- The **file** command has been added to **ee-minimal** and **ee-supported** container images.(AAP-40009)
 
 

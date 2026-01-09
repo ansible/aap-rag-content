@@ -99,7 +99,7 @@ $ psql -c '\l+'
 Adjust the filesystem size or mount an external filesystem as needed before performing the next step.
 
 Note
-This procedure assumes that all target files will be sent to the `    /tmp` filesystem. You must adjust the commands to match your environment’s needs.
+These commands send all target files to the `    /tmp` filesystem. Adjust the commands to match your environment’s needs.
 
 
 
@@ -144,7 +144,7 @@ For each of the following steps, use the `    root` user to run the commands.
 
 
 ```
-# grep 'SECRET_KEY' /etc/pulp/settings.py | awk -F'=' '{ print $2}'
+# grep '^SECRET_KEY' /etc/pulp/settings.py | awk -F'=' '{ print $2 }'
 ```
 
 
@@ -196,7 +196,7 @@ Configuration files on automation controller that are managed by the installatio
 
 
 ```
-# cd
+# cd ..
 ```
 
 
@@ -223,7 +223,7 @@ Example output of `    tar tvf artifact.tar` :
 
 
 ```
-drwxr-xr-x ansible/ansible        0 2025-05-08 16:48 artifact/    drwxr-xr-x ansible/ansible        0 2025-05-08 16:33 artifact/controller/    -rw-r--r-- ansible/ansible   732615 2025-05-08 16:26 artifact/controller/controller.pgc    drwxr-xr-x ansible/ansible        0 2025-05-08 16:33 artifact/controller/custom_configs/    drwxr-xr-x ansible/ansible        0 2025-05-08 16:11 artifact/gateway/    -rw-r--r-- ansible/ansible   231155 2025-05-08 16:28 artifact/gateway/gateway.pgc    drwxr-xr-x ansible/ansible        0 2025-05-08 16:26 artifact/hub/    -rw-r--r-- ansible/ansible 29252002 2025-05-08 16:26 artifact/hub/hub.pgc    -rw-r--r-- ansible/ansible      614 2025-05-08 16:24 artifact/secrets.yml    -rw-r--r-- ansible/ansible      338 2025-05-08 16:48 artifact/sha256sum.txt
+drwxr-xr-x ansible/ansible     0 2025-05-08 16:48 artifact/    drwxr-xr-x ansible/ansible     0 2025-05-08 16:33 artifact/controller/    -rw-r--r-- ansible/ansible 732615 2025-05-08 16:26 artifact/controller/controller.pgc    drwxr-xr-x ansible/ansible      0 2025-05-08 16:33 artifact/controller/custom_configs/    drwxr-xr-x ansible/ansible      0 2025-05-08 16:11 artifact/gateway/    -rw-r--r-- ansible/ansible 231155 2025-05-08 16:28 artifact/gateway/gateway.pgc    drwxr-xr-x ansible/ansible      0 2025-05-08 16:26 artifact/hub/    -rw-r--r-- ansible/ansible 29252002 2025-05-08 16:26 artifact/hub/hub.pgc    -rw-r--r-- ansible/ansible      614 2025-05-08 16:24 artifact/secrets.yml    -rw-r--r-- ansible/ansible      338 2025-05-08 16:48 artifact/sha256sum.txt
 ```
 
 
@@ -232,6 +232,6 @@ drwxr-xr-x ansible/ansible        0 2025-05-08 16:48 artifact/    drwxr-xr-x ans
 
 **Additional resources**
 
--  [Backing up your Ansible Automation Platform instance](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/assembly-platform-install-scenario#con-backup-aap_platform-install-scenario)
+-  [Backing up your Ansible Automation Platform instance](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/assembly-platform-install-scenario#proc-backup-aap_platform-install-scenario)
 
 

@@ -1,6 +1,6 @@
 # 5. Red Hat Ansible Automation Platform Service on AWS Service Definition
 ## 5.2. Control plane
-### 5.2.3. SRE access and management
+### 5.2.4. SRE access and management
 
 
 

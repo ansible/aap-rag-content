@@ -1,5 +1,5 @@
-# 4. Horizontal Scaling in Red Hat Ansible Automation Platform
-## 4.1. Horizontal scaling in Event-Driven Ansible controller
+# 9. Horizontal scaling in Red Hat Ansible Automation Platform
+## 9.1. Horizontal scaling in Event-Driven Ansible controller
 
 
 

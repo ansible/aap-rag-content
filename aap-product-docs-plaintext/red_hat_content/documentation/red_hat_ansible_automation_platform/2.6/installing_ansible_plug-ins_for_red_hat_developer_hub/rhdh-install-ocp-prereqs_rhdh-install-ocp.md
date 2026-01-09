@@ -4,6 +4,8 @@
 
 
 
+To proceed, you must have Red Hat Developer Hub installed on Red Hat OpenShift Container Platform (OCP) and a valid subscription to Red Hat Ansible Automation Platform.
+
 - Red Hat Developer Hub installed on Red Hat OpenShift Container Platform.
 
 

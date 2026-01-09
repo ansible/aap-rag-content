@@ -1,5 +1,5 @@
-# 12. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
-## 12.3. Viewing operator logs
+# 14. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+## 14.3. Viewing operator logs
 
 
 

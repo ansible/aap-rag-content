@@ -7,6 +7,9 @@ The search query string parameter provides a simple yet powerful way to filter a
 
 
 <span id="proc-controller-api-search"></span>
+Learn how to use the search query parameter to perform a general, non-case-sensitive search across all text fields of an API model and how to use the `related__search` parameter to search across related fields.
+
+
 **Procedure**
 
 - Use the search query string parameter to perform a non-case-sensitive search within all designated text fields of a model:
@@ -21,9 +24,8 @@ https://&lt;gateway server name&gt;/api/controller/v2/model_verbose_name?search=
 
 
 ```
-https://&lt;gateway server name&gt;/api/controller/v2/model_verbose_name?related__search=findme
+https://&lt;gateway_server_name&gt;/api/controller/v2/model_verbose_name?related__search=findme
 ```
-
 
 
 

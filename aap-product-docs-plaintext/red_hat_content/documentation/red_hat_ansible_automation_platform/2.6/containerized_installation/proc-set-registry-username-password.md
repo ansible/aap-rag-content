@@ -1,13 +1,10 @@
-# 2. Ansible Automation Platform containerized installation
-## 2.6. Configuring the inventory file
-### 2.6.3. Setting registry_username and registry_password
+# 4. Preparing the containerized Ansible Automation Platform installation
+## 4.7. Setting registry_username and registry_password
 
 
 
 
-When using the `registry_username` and `registry_password` variables for an online non-bundled installation, you need to create a new registry service account.
-
-Registry service accounts are named tokens that can be used in environments where credentials will be shared, such as deployment systems.
+Create a new registry service account on the Red Hat Customer Portal to generate a named token and username. Use these credentials to set the `registry_username` and `registry_password` variables, which are essential for supporting online non-bundled installations in environments where credentials must be shared, such as deployment systems.
 
 **Procedure**
 

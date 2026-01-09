@@ -4,7 +4,7 @@
 
 
 
-When the following APIs are called for each operation, you see the following audit logs:
+Review logging samples for various API operations (CRUD, sync, and the like) to understand the expected audit format and efficiently monitor resource changes.
 
 ```
 1. Create
@@ -71,4 +71,4 @@ eda-activation-worker-1  | 2024-08-15 14:40:52,562 rq.worker INFO     activation
 ```
 
 
-<span id="idm139756691430576"></span>
+<span id="idm140618147678256"></span>

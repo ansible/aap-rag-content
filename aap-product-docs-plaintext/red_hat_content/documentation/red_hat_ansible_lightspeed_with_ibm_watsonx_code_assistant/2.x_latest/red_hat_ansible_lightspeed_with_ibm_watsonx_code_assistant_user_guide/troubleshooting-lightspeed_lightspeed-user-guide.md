@@ -1,4 +1,4 @@
-# Chapter 7. Troubleshooting
+# Chapter 8. Troubleshooting
 
 
 

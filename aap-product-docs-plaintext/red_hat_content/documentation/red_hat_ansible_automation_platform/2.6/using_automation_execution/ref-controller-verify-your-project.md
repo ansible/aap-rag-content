@@ -4,7 +4,9 @@
 
 
 
-To verify that a signed Ansible project has not been altered, you can use `ansible-sign` to check whether the signature is valid and that the checksums of the files match what the checksum manifest says they should be. The `ansible-sign project gpg-verify` command can be used to automatically verify both of these conditions.
+To verify that a signed Ansible project has not been altered, you can use `ansible-sign` to check whether the signature is valid and that the checksums of the files match what the checksum manifest says they should be.
+
+The `ansible-sign project gpg-verify` command can be used to automatically verify both of these conditions.
 
 ```
 $ ansible-sign project gpg-verify .

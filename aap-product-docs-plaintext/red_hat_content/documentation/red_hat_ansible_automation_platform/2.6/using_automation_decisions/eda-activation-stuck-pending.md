@@ -1,10 +1,10 @@
 # 8. Rulebook activations troubleshooting
-## 8.1. Activation stuck in Pending state
+## 8.2. Activation stuck in Pending state
 
 
 
 
-Perform the following steps if your rulebook activation is stuck in **Pending** state.
+Diagnose and resolve issues preventing a rulebook activation from transitioning from Pending to a running, operational state.
 
 **Procedure**
 

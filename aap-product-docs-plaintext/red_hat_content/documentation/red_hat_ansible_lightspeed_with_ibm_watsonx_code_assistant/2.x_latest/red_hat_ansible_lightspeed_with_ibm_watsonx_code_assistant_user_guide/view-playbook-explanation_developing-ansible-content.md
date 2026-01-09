@@ -1,6 +1,6 @@
-# 4. Developing Ansible content
-## 4.4. Creating playbooks and viewing playbook explanations
-### 4.4.3. Viewing the playbook explanations
+# 5. Developing Ansible content
+## 5.4. Creating playbooks and viewing playbook explanations
+### 5.4.3. Viewing the playbook explanations
 
 
 
@@ -43,8 +43,8 @@ The playbook explanation is displayed on the right panel of the VS Code screen.
 The following illustration shows an example of a playbook explanation:
 
 
-<span id="idm139816011361696"></span>
-**Figure 4.6. Example of a playbook explanation**
+<span id="idm139735360963632"></span>
+**Figure 5.5. Example of a playbook explanation**
 
 ![Example of a playbook explanation](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/98612898618da5b54f0c355a4303d127/lightspeed-playbook-explanation.png)
 

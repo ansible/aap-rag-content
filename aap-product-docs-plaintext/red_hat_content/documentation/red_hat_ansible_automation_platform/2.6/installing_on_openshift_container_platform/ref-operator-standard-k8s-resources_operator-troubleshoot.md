@@ -1,5 +1,5 @@
-# 12. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
-## 12.7. Standard Kubernetes resources
+# 14. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+## 14.7. Standard Kubernetes resources
 
 
 

@@ -3,7 +3,7 @@
 
 Red Hat Customer Content Services
 
-[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_analytics/index#idm140285099425840)
+[Legal Notice](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/using_automation_analytics/index#idm140504700689296)
 **Abstract**
 
 This guide shows how to use the features of automation analytics to evaluate how automation is deployed across your environments and the savings associated with it.

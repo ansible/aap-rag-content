@@ -1,10 +1,10 @@
 # 10. Simplified event routing
-## 10.8. Check the Rule Audit for events on your new event stream
+## 10.10. Check the Rule Audit for events on your new event stream
 
 
 
 
-When events have been sent and received by Event-Driven Ansible controller, you can confirm that actions have been triggered by going to the Rule Audit page and viewing the event stream results.
+Check the **Rule Audit** to confirm that events received via the newly configured event stream are correctly triggering rules and initiating the intended automation actions.
 
 **Procedure**
 

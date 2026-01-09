@@ -5,6 +5,8 @@
 
 
 
+Learn how to edit a node’s details or link edge type (Run on success/fail/always) and remove links within a workflow, and how to adjust the workflow diagram’s view.
+
 **Procedure**
 
 - Edit a node by using one of these methods:

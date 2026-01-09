@@ -1,5 +1,5 @@
-# 12. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
-## 12.8. Discovering custom resource definition configuration parameters
+# 13. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+## 13.8. Discovering custom resource definition configuration parameters
 
 
 

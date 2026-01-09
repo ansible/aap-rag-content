@@ -4,6 +4,8 @@
 
 
 
+automation controller uses a consistent protocol to generate human-readable unique identifiers for resources that can be addressed by name in the API and the web interface.
+
 Resources are identifiable by their unique keys, which are tuples of resource fields. Every resource is guaranteed to have its primary key number alone as a unique key, but there might be many other unique keys. A resource can generate an identifier format and, therefore, have a named URL if it has at least one unique key that satisfies the following rules:
 
 1. The key must contain only fields that are either the `    name` field, or text fields with a finite number of possible choices (such as credential type resource’s `    kind` field).
@@ -12,7 +14,9 @@ Resources are identifiable by their unique keys, which are tuples of resource fi
 
 If there are resources `Foo` and `Bar` , both `Foo` and `Bar` contain a name field and a choice field that can only have values "yes" or "no". Additionally, resource `Foo` has a many-to-one field (a foreign key) relating to `Bar` , for example `fk` . `Foo` has a unique key tuple ( `name` , `choice` , `fk` ) and `Bar` has a unique key tuple ( `name` , `choice` ). `Bar` can have named URL because it satisfies the preceding first rule. `Foo` can also have named URL, even though it breaks the first rule, the extra field breaking rule number one is the `fk` field, which is many-to-one-related to `Bar` and `Bar` can have named URL.
 
-For resources satisfying the rule number one, their human-readable unique identifiers are combinations of foreign key fields, delimited by `+` . In specific, resource `Bar` in the preceding example has slug format `&lt;name&gt;+&lt;choice&gt;` . Note that the field order matters in slug format and the `name` field always comes first if present, followed by the remaining fields arranged in lexicographic order of field name. For example, if `Bar` also has an `a_choice` field satisfying rule one and the unique key becomes ( `name` , `choice` , `a_choice` ), its slug format becomes `&lt;name&gt;+&lt;a_choice&gt;+&lt;choice&gt;` .
+For resources satisfying rule number one, their human-readable unique identifiers are combinations of foreign key fields, delimited by `+` . In specific, resource `Bar` in the preceding example has slug format `&lt;name&gt;+&lt;choice&gt;` .
+
+Note that the field order matters in slug format and the `name` field always comes first if present, followed by the remaining fields arranged in lexicographic order of field name. For example, if `Bar` also has an `a_choice` field satisfying rule one and the unique key becomes ( `name` , `choice` , `a_choice` ), its slug format becomes `&lt;name&gt;+&lt;a_choice&gt;+&lt;choice&gt;` .
 
 For resources satisfying rule number two, if traced back through the extra foreign key fields, the result is a tree of resources that identify objects of that resource. To generate the identifier format, each resource in the traceback tree generates its own part of the standalone format, using all fields but the foreign keys. Finally, all parts are combined by `++` in the following order:
 

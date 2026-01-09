@@ -1,6 +1,5 @@
-# 2. Ansible Automation Platform containerized installation
-## 2.7. Advanced configuration options
-### 2.7.1. Adding a safe plugin variable to Event-Driven Ansible controller
+# 5. Advanced containerized deployment
+## 5.1. Adding a safe plugin variable to Event-Driven Ansible controller
 
 
 

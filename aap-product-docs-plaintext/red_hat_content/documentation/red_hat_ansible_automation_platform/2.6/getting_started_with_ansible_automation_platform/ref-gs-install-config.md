@@ -4,7 +4,9 @@
 
 
 
-Red Hat Ansible Automation Platform offers flexible installation and configuration options. Depending on your organization’s needs, you can install Red Hat Ansible Automation Platform using one of the following methods, based on your environment:
+Choose the appropriate installation methods to match your infrastructure and organizational requirements.
+
+Depending on your organization’s needs, you can install Red Hat Ansible Automation Platform using one of the following methods, based on your environment:
 
 -  [RPM installation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation)
 -  [Installing on OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/installing_on_openshift_container_platform)

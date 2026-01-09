@@ -7,7 +7,7 @@
 
 To set up social authentication for a GitHub enterprise team, you must obtain a GitHub Enterprise Organization URL, an Organization API URL, an Organization OAuth2 key and secret for a web application.
 
-To obtain the URLs, refer to the [GitHub Enterprise administration documentation](https://docs.github.com/en/enterprise-server@3.1/rest/reference/enterprise-admin) .
+To obtain the URLs, see the [GitHub Enterprise administration documentation](https://docs.github.com/en/enterprise-server@3.1/rest/reference/enterprise-admin) .
 
 To obtain the key and secret, you must first register your enterprise organization-owned application at `<a class="link" href="https://github.com/organizations/<yourorg>/settings/applications">https://github.com/organizations/&lt;yourorg&gt;/settings/applications</a>` .
 
@@ -51,6 +51,6 @@ To verify that the authentication is configured correctly, log out of Ansible Au
 
 **Next steps**
 
-To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
 
 

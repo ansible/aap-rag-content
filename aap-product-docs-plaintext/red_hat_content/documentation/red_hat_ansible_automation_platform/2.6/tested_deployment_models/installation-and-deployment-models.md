@@ -1,13 +1,18 @@
-# 1. Overview of tested deployment models
+# 1. Tested deployment model types
 ## 1.1. Installation and deployment models
 
 
 
 
-The following table outlines the different ways to install or deploy Ansible Automation Platform:
+Ansible Automation Platform offers many installation and deployment options based on your infrastructure and organizational needs. Each installation type reference includes supported infrastructure types and links to tested topologies.
+
+Note
+The Ansible Automation Platform RPM installer was deprecated in 2.5 and will be removed in Ansible Automation Platform 2.7. The RPM installer will be supported for RHEL 9 during the lifecycle of Ansible Automation Platform 2.6 to support migrations to existing supported topologies. For more information on upgrade and migration paths, see the [Support matrix for upgrade scenarios](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/planning_your_upgrade/index#upgrade-support-matrix) .
 
 
-<span id="idm140627613967408"></span>
+
+
+<span id="idm140186618502656"></span>
 **Table 1.1. Ansible Automation Platform installation and deployment models**
 
 | Mode | Infrastructure | Description | Tested topologies |

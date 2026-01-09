@@ -5,10 +5,12 @@
 
 The automation mesh topologies in this section provide examples you can use to design a mesh deployment in your environment. Examples range from a simple, hydrid node deployment to a complex pattern that deploys numerous automation controller instances, employing several execution and hop nodes.
 
-**Prerequisites**
+Important
+If you are creating a mesh similar to the following in a containerized environment, replace the `node_type` variable with `receptor_type` , and the `peers` variable with `receptor_peers` in your inventory files.
 
-- You reviewed conceptual information on node types and relationsips
 
+
+**Prerequisites** * You reviewed conceptual information on node types and relationsips
 
 Note
 The following examples include images that illustrate the mesh topology. The arrows in the images indicate the direction of peering. After peering is established, the connection between the nodes allows bidirectional communication.

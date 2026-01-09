@@ -4,7 +4,7 @@
 
 
 
-You can restart a rulebook activation to quickly re-engage its automation, which is useful after making updates or to recover from an error.
+Restart an activation to immediately apply configuration changes, update rulebook content, or quickly recover from unexpected failures.
 
 Note
 You can only restart a rulebook activation if it is currently enabled and the restart policy was set to **Always** when it was created.

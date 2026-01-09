@@ -4,5 +4,5 @@
 
 
 
-Pull automation execution environments from the automation hub remote registry to make a copy to your local machine. Automation hub provides the `podman pull` command for each `latest` automation execution environments in the container repository. You can copy and paste this command into your terminal, or use `podman pull` to copy an automation execution environments based on an automation execution environments tag.
+Pull automation execution environments from the automation hub remote registry to make a copy to your local machine. Automation hub provides the `podman pull` command for each `latest` execution environment in the container repository. You can copy and paste this command into your terminal, or use `podman pull` to copy an execution environment based on an execution environment tag.
 

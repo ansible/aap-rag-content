@@ -1,4 +1,4 @@
-# Chapter 10. Enabling execution nodes on Red Hat Ansible Automation Platform Operator
+# Chapter 11. Enabling execution nodes on Red Hat Ansible Automation Platform Operator
 
 
 

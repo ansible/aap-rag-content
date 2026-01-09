@@ -11,7 +11,7 @@ Ansible Automation Platform automatically creates a default organization. If you
 
 1. From the navigation panel, selectAccess Management→Organizations.
 1. ClickCreate organization.
-1. Enter the **Name** and provide a **Description** for your organization.
+1. Enter the **Name** and give a **Description** for your organization.
 
 Note
 If automation controller is enabled on the platform, continue with Step 4. Otherwise, proceed to Step 6.

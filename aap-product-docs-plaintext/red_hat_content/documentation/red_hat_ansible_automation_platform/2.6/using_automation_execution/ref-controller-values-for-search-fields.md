@@ -5,6 +5,8 @@
 
 
 
+When performing searches in the automation controller UI, you can specify fields to search against. For example, to search for jobs of type `run` , you can enter `type:run` in the search bar on the Jobs page.
+
 To find values for certain fields, refer to the API endpoint for extensive options and their valid values. For example, if you want to search against `/api/v2/jobs`  **>**  `type` field, you can find the values by performing an **OPTIONS** request to `/api/v2/jobs` and look for entries in the API for `"type"` . Additionally, you can view the related searches by scrolling to the bottom of each screen. In the example for `/api/v2/jobs` , the related search shows:
 
 ```

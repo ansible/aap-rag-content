@@ -6,6 +6,8 @@
 
 This procedure describes how to verify that the role you set up is working correctly.
 
+**Procedure**
+
 1. Verify that users with permissions can use a template:
 
 

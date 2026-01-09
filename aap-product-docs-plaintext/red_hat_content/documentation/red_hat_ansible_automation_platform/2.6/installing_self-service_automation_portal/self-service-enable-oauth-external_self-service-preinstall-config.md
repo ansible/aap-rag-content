@@ -8,7 +8,10 @@ Self-service automation portal uses Ansible Automation Platform or authenticatio
 
 You must enable OAuth token creation in Ansible Automation Platform so that users can authenticate with the platform from self-service automation portal.
 
-Note: Users who do not have permission to log in to Ansible Automation Platform cannot log in to Self-service portal, because Ansible Automation Platform provides the OAuth tokens. Therefore, a user who is removed from an external IdP (for example LDAP, SAML, Azure) can no longer log into Ansible Automation Platform or self-service automation portal. This prevents potential external token issues. For more information, refer to the [Manage OAuth2 token creation for external users](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/gw-token-based-authentication#gw-manage-oauth2-external-users) section of [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication) .
+Note
+Users who do not have permission to log in to Ansible Automation Platform cannot log in to Self-service portal, because Ansible Automation Platform provides the OAuth tokens. Therefore, a user who is removed from an external IdP (for example LDAP, SAML, Azure) can no longer log into Ansible Automation Platform or self-service automation portal. This prevents potential external token issues. For more information, refer to the [Manage OAuth2 token creation for external users](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/gw-token-based-authentication#gw-manage-oauth2-external-users) section of [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication) .
+
+
 
 **Procedure**
 

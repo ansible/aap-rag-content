@@ -1,6 +1,6 @@
 # 3. Getting started as an automation developer
-## 3.8. Build and use a decision environment
-### 3.8.1. Setting up a new decision environment
+## 3.9. Build and use a decision environment
+### 3.9.1. Setting up a new decision environment
 
 
 
@@ -22,8 +22,13 @@ The following steps describe how to import a decision environment into the platf
 
 1. SelectCreate decision environment.
 
-
 Your decision environment is now created and can be managed on the **Decision Environments** page.
 
+
+
+
+**Verification**
+
 After saving the new decision environment, the decision environment’s details page is displayed. From there or the **Decision Environments** list view, you can edit or delete it.
+
 

@@ -1,13 +1,12 @@
 # 6. Jobs
-## 6.2. Issue - Jobs are failing with “Timeout (12s) waiting for privilege escalation prompt” error message
-### 6.2.2. Issue - Jobs in private automation hub are failing with "denied: requested access to the resource is denied, unauthorized: Insufficient permissions" error message
+## 6.4. Issue - Jobs failing with insufficient permissions error in private automation hub
 
 
 
 
-Jobs are failing with the error message "denied: requested access to the resource is denied, unauthorized: Insufficient permissions" when using an execution environment in private automation hub.
+Jobs are failing with the error message "denied: requested access to the resource is denied, unauthorized: Insufficient permissions". This happens when using an execution environment in private automation hub.
 
-This issue happens when your private automation hub is protected with a password or token and the registry credential is not assigned to the execution environment.
+This issue occurs when you protect private automation hub with a password or token but do not assign the registry credential to the execution environment.
 
 **Procedure**
 

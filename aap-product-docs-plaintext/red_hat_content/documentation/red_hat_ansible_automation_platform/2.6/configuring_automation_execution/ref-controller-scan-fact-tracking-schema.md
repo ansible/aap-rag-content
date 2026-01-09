@@ -5,6 +5,8 @@
 
 
 
+This section describes the schema for log messages produced by the scan/fact/system tracking logger in automation controller.
+
 These contain detailed dictionary-type fields that are either services, packages, or files.
 
 -  `    services` : For services scans, this field is included and has keys based on the name of the service.

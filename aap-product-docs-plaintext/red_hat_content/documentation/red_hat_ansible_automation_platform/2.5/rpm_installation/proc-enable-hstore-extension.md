@@ -1,6 +1,6 @@
 # 2. System requirements
-## 2.6. PostgreSQL requirements
-### 2.6.6. Enabling the hstore extension for the automation hub PostgreSQL database
+## 2.7. PostgreSQL requirements
+### 2.7.6. Enabling the hstore extension for the automation hub PostgreSQL database
 
 
 

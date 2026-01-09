@@ -4,7 +4,7 @@
 
 
 
-You can add a tile for a custom self-service template to the **Templates** view of your self-service automation portal instance. The custom self-service template is defined in a git repository.
+You can add a custom self-service template to the **Templates** view of your self-service automation portal instance. Custom self-service templates are stored in git repositories. self-service automation portal supports GitLab and GitHub Source Control Management (SCM).
 
 Note
 Names for custom self-service templates must be unique. Custom self-service templates must have a different name to auto-generated job templates and also to other custom self-service templates.
@@ -43,6 +43,10 @@ After the import is complete, return to the **Templates** page to view the newly
 
 **Next steps**
 
-- You must configure RBAC for your imported custom templates, bearing in mind that a user who wants to launch a template that is associated with a job template in Ansible Automation Platform must have access to that job template.
+- You must configure RBAC for your imported custom templates to allow users to view and run them. To do this, you must be logged into self-service automation portal as a platform administrator.
+
+For more information, see [Setting up RBAC for custom self-service templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_self-service_automation_portal/index#self-service-set-up-rbac_self-service-rbac) .
+
+
 
 

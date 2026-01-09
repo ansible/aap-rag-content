@@ -1,6 +1,6 @@
-# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 4.2. Configuring automation controller on Red Hat OpenShift Container Platform web console
-### 4.2.2. Configuring an external database for automation controller on Red Hat Ansible Automation Platform Operator
+# 5. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 5.2. Configuring automation controller on Red Hat OpenShift Container Platform web console
+### 5.2.2. Configuring an external database for automation controller on Red Hat Ansible Automation Platform Operator
 
 
 
@@ -36,9 +36,17 @@ If you choose to use an externally managed database with version 16 or 17 you mu
 
 
 ```
-apiVersion: v1    kind: Secret    metadata:      name: external-postgres-configuration      namespace: &lt;target_namespace&gt;<span id="CO2-1"><!--Empty--></span><span class="callout">1</span>stringData:      host: "&lt;external_ip_or_url_resolvable_by_the_cluster&gt;"<span id="CO2-2"><!--Empty--></span><span class="callout">2</span>port: "&lt;external_port&gt;"<span id="CO2-3"><!--Empty--></span><span class="callout">3</span>database: "&lt;desired_database_name&gt;"      username: "&lt;username_to_connect_as&gt;"      password: "&lt;password_to_connect_with&gt;"<span id="CO2-4"><!--Empty--></span><span class="callout">4</span>sslmode: "prefer"<span id="CO2-5"><!--Empty--></span><span class="callout">5</span>type: "unmanaged"    type: Opaque
+apiVersion: v1    kind: Secret    metadata:      name: external-postgres-configuration      namespace: &lt;target_namespace&gt;    stringData:      host: "&lt;external_ip_or_url_resolvable_by_the_cluster&gt;"      port: "&lt;external_port&gt;"      database: "&lt;desired_database_name&gt;"      username: "&lt;username_to_connect_as&gt;"      password: "&lt;password_to_connect_with&gt;"      sslmode: "prefer"      type: "unmanaged"    type: Opaque
 ```
 
+When configuring the secret:
+
+
+-  `        namespace` : Specify the namespace to create the secret in. This should be the same namespace you want to deploy to.
+-  `        host` : Specify the resolvable hostname for your database node.
+-  `        port` : Specify the external port. The default is `        5432` .
+-  `        password` : Ensure the password does not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
+-  `        sslmode` : This variable is valid for external databases only. The allowed values are: `        prefer` , `        disable` , `        allow` , `        require` , `        verify-ca` , and `        verify-full` .
 
 1. Apply `    external-postgres-configuration-secret.yml` to your cluster using the `    oc create` command.
 

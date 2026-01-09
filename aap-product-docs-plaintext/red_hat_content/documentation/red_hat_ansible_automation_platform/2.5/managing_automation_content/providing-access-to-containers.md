@@ -1,11 +1,11 @@
 # 3. Manage containers in private automation hub
 ## 3.4. Setting up your container repository
-### 3.4.3. Providing access to your automation execution environments
+### 3.4.2. Providing access to your automation execution environments
 
 
 
 
-Provide access to your automation execution environments for users who need to work with the images. Adding a team allows you to modify the permissions the team can have to the container repository. You can use this option to extend or restrict permissions based on what the team is assigned.
+Provide users with access to your automation execution environments by adding them to a team. Then, modify the permissions the team can have to a particular execution environment.
 
 **Prerequisites**
 

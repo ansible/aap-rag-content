@@ -3,15 +3,17 @@
 
 
 
-This guide is focused on the core components of Ansible Automation Platform. The following items are currently out of scope for the migration processes described in this document:
+Understand which Ansible Automation Platform components and configurations require manual recreation in the target environment and are not covered by the migration process.
 
-- Event-Driven Ansible: Configuration and content for Event-Driven Ansible must be manually recreated in the target environment.
-- Instance groups: Instance group configurations must be manually recreated after migration.
-- Hub content: Content hosted in automation hub must be manually reimported or reconfigured.
-- Custom Certificate Authority (CA) for receptor mesh: Custom CA configurations for receptor mesh must be manually reconfigured.
-- Disconnected environments: The migration processes for disconnected environments is not covered in this guide.
-- Execution environments (other than the default one): Custom execution environments must be rebuilt or reimported manually.
+The Ansible Automation Platform migration guide focuses on the core components of Ansible Automation Platform. The following items are currently out of scope for this migration process:
+
+- Event-Driven Ansible: Manually recreate configuration and content for Event-Driven Ansible in the target environment.
+- Instance groups: Manually recreate instance group configurations after migration.
+- Hub content: Manually re-import or reconfigure content hosted in automation hub.
+- Custom Certificate Authority (CA) for receptor mesh: Manually reconfigure custom CA configurations for receptor mesh.
+- Disconnected environments: The migration process does not cover disconnected environments.
+- Execution environments (other than the default one): Manually rebuild or re-import custom execution environments.
 
 
-As of the date of writing this guide, the content and configuration for these items are expected to be re-created, imported, or configured manually in the target environment. These out-of-scope items might be added as supported components in future updates to this migration guide.
+Manually re-create, import, or configure these items in the target environment.
 

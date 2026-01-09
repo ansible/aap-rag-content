@@ -3,5 +3,5 @@
 
 
 
-Troubleshoot issues with jobs.
+Resolve common job issues including module resolution errors, timeout errors, pending jobs, and permission errors.
 

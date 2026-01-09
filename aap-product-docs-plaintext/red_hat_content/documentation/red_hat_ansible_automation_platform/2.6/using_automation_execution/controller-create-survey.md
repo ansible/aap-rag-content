@@ -5,6 +5,10 @@
 
 
 
+You can create a survey for a job template to prompt users for input when they launch a job based on that template. Surveys can include many questions of various types, such as text input, multiple choice, and passwords.
+
+The responses provided by users are stored in Ansible variables that can be used within the playbook associated with the job template.
+
 **Procedure**
 
 1. From the navigation panel, selectAutomation Execution→Templates.
@@ -21,7 +25,7 @@
 
 -  **Text** : A single line of text. You can set the minimum and maximum length (in characters) for this answer.
 -  **Textarea** : A multi-line text field. You can set the minimum and maximum length (in characters) for this answer.
--  **Password** : Responses are treated as sensitive information, much like an actual password is treated. You can set the minimum and maximum length (in characters) for this answer.
+-  **Password** : Responses are treated as sensitive information, similar to the way an actual password is treated. You can set the minimum and maximum length (in characters) for this answer.
 -  **Multiple Choice (single select)** : A list of options, of which only one can be selected at a time. Enter the options, one per line, in the **Multiple Choice Options** field.
 -  **Multiple Choice (multiple select)** : A list of options, any number of which can be selected at a time. Enter the options, one per line, in the **Multiple Choice Options** field.
 -  **Integer** : An integer number. You can set the minimum and maximum length (in characters) for this answer.

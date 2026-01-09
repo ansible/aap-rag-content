@@ -1,10 +1,10 @@
-# 5. Publishing an automation execution environment
-## 5.1. Customizing an existing automation execution environments image
+# 4. Publishing an automation execution environment
+## 4.1. Customizing an existing automation execution environments image
 
 
 
 
-Ansible Controller includes the following default execution environments:
+You can customize existing Automation controller provided default automation execution environments by adding content specific to your needs. Automation controller includes the following default automation execution environments.
 
 -  `    Minimal` - `    ansible-automation-platform-25` Includes the latest Ansible-core 2.16 release along with Ansible Runner, but does not include collections or other content. Ansible-automation-platform-24 Includes the Ansible-core 2.15 release along with Ansible Runner, but does not include collections or other content.
 
@@ -47,19 +47,12 @@ collections:          - kubernetes.core
 
 1. For more information about definition files and their content, see the [Breakdown of definition file content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/creating_and_using_execution_environments/index#con-definition-file-breakdown) section.
 
-1. In the execution environment definition file, specify the original `    ee-minimal` container’s URL and tag in the `    EE_BASE_IMAGE` field. In doing so, your final `    execution-environment.yml` file appears similar to the following:
-
-
-<span id="idm140514303162864"></span>
-**Example 5.1. A customized `    execution-environment.yml` file**
+1. In the execution environment definition file, specify the original `    ee-minimal` container’s URL and tag in the `    EE_BASE_IMAGE` field. In doing so, your final `    execution-environment.yml` file looks similar to the following:
 
 
 ```
 version: 3        images:      base_image:        name: 'registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel9:latest'        dependencies:      galaxy:        collections:          - kubernetes.core
 ```
-
-
-
 
 Note
 Since this example uses the community version of `    kubernetes.core` and not a certified collection from automation hub, we do not need to create an `    ansible.cfg` file or reference that in our definition file.
@@ -84,7 +77,7 @@ If you do not use `    -t` with `    build` , an image called `    ansible-execu
 
 - Use the `        podman images` command to confirm that your new container image is in that list:
 
-The following shows the output of a 'podman images' command with the image `        new-ee` .
+The following shows the output of a `        podman images` command with the image `        new-ee` .
 
 
 ```
@@ -148,9 +141,6 @@ If your instance of automation hub is password or token protected, ensure that y
 
 
 **Additional resources**
-
-For more details on customizing execution environments based on common scenarios, see the following topics in the _Ansible Builder Documentation_ :
-
 
 -  [Copying arbitratory files to an execution environment](https://ansible.readthedocs.io/projects/builder/en/latest/scenario_guides/scenario_copy/)
 -  [Building execution environments with environment variables](https://ansible.readthedocs.io/projects/builder/en/latest/scenario_guides/scenario_using_env/)

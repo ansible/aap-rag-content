@@ -1,5 +1,5 @@
 {
   "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/containerized_installation/index#setting-up-a-customer-provided-external-database",
   "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.6/html-single/containerized_installation/index",
-  "title": "Setting up a customer provided (external) database"
+  "title": "Configuring an external (customer provided) PostgreSQL database"
 }

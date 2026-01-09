@@ -3,7 +3,7 @@
 
 
 
-Using the authentication settings in Ansible Automation Platform, you can set up a simplified login through several authentication methods, such as LDAP and SAML. Depending on the authentication method you select, you will be required to enter different information to complete the configuration. Be sure to include all the information required for your configuration needs.
+Using the authentication settings in Ansible Automation Platform, you can set up a simplified login through several authentication methods, such as LDAP and SAML. Depending on the authentication method you select, you must enter different information to complete the configuration. Be sure to include all the information required for your configuration needs.
 
 Important
 - During an upgrade to Ansible Automation Platform 2.6, platform gateway uses a new central authentication service.

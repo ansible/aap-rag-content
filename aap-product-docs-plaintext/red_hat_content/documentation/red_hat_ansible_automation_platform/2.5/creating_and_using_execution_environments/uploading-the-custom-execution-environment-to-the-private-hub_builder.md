@@ -6,23 +6,24 @@
 
 Before the new execution environment image can be used for automation jobs, it must be uploaded to the private automation hub.
 
-First, verify that the execution environment image can be seen in the local podman cache:
+**Procedure**
+
+1. First, verify that the execution environment image can be seen in the local podman cache:
+
 
 ```
-$ podman images --format "table {{.ID}} {{.Repository}} {{.Tag}}"
-IMAGE ID	    REPOSITORY					              TAG
-b38e3299a65e	private-hub.example.com/custom-ee     	  latest
-8e38be53b486	private-hub.example.com/ee-minimal-rhel8  latest
+$ podman images --format "table {{.ID}} {{.Repository}} {{.Tag}}"    IMAGE ID	    REPOSITORY					              TAG    b38e3299a65e	private-hub.example.com/custom-ee     	  latest    8e38be53b486	private-hub.example.com/ee-minimal-rhel8  latest
 ```
 
-**Log in to the private automation hub's container registry and push the image to make it available for use with job templates and workflows:**
+
+1. Then log in to the private automation hub’s container registry and push the image to make it available for use with job templates and workflows:
+
 
 ```
-$ podman login private-hub.example.com -u admin
-Password:
-Login Succeeded!
-$ podman push private-hub.example.com/custom-ee:latest
+$ podman login private-hub.example.com -u admin    Password:    Login Succeeded!    $ podman push private-hub.example.com/custom-ee:latest
 ```
+
+
 
 
 Use the following workflow to populate your private automation hub remote registry:
@@ -40,9 +41,9 @@ Use the following workflow to populate your private automation hub remote regist
 1.  [Sync images from a container repository](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-containers-hub#proc-sync-image-adoc_pulling-images-container-repository)
 
 
-**Additional information**
+**Additional resources**
 
-For more information on registries, see [Red Hat Container Registry Authentication](https://access.redhat.com/articles/RegistryAuthentication)
+-  [Red Hat Container Registry Authentication](https://access.redhat.com/articles/RegistryAuthentication)
 
 
 # Appendix A. Automation execution environments precedence
@@ -128,7 +129,7 @@ You may add Your own copyright statement to Your modifications and may provide a
 END OF TERMS AND CONDITIONS
 
 
-<span id="idm140538093999952"></span>
+<span id="idm140447362682976"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

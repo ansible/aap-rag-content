@@ -4,7 +4,7 @@
 
 
 
-Signing a project involves an Ansible project directory. For more information on project directory structures, see [Sample Ansible setup](https://docs.ansible.com/ansible/latest/tips_tricks/sample_setup.html) in the Ansible documentation.
+Signing a project involves an Ansible project directory.
 
 The following sample project has a very simple structure: an inventory file, and two small playbooks under a playbooks directory:
 
@@ -56,7 +56,7 @@ Successful execution displays output similar to the following:
 
 The project has now been signed.
 
-Note that the `gpg-sign` subcommand resides under the `project` subcommand.
+Note that the `gpg-sign` subcommand is under the `project` subcommand.
 
 For signing project content, every command starts with `ansible-sign project` .
 

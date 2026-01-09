@@ -4,10 +4,10 @@
 
 
 
-Automation mesh uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server for it to work. Ensure that these ports are available and are not blocked by the server firewall.
+Automation mesh uses several ports to communicate with its services. These ports must be open and available for Red Hat Ansible Automation Platform to work. Ensure that these ports are available and are not blocked by a firewall.
 
 
-<span id="idm139984993101136"></span>
+<span id="idm139972757794800"></span>
 **Table 5.1. Network ports and protocols**
 
 | Port number | Protocol | Service | Source | Destination |
@@ -25,14 +25,14 @@ Automation mesh uses several ports to communicate with its services. These ports
 
 
 
-This appendix provides a reference for the additional resources relevant to the tested deployment models outlined in Tested deployment models.
+Additional resources provide information and support for the tested deployment models outlined in Tested deployment models.
 
-- For additional information about each of the tested topologies described in this document, see the [test-topologies GitHub repo](https://github.com/ansible/test-topologies/) .
+- For additional information about each of the tested topologies, see the [test-topologies GitHub repo](https://github.com/ansible/test-topologies/) .
 - For questions around IBM cloud specific configurations or issues, see [IBM support](https://www.ibm.com/mysupport) .
 
 
 
-<span id="idm139984992578928"></span>
+<span id="idm139972764607328"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

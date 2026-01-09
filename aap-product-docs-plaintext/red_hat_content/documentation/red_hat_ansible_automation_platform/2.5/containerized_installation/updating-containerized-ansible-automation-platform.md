@@ -1,5 +1,5 @@
-# 2. Ansible Automation Platform containerized installation
-## 2.9. Updating containerized Ansible Automation Platform
+# 7. Maintaining containerized Ansible Automation Platform
+## 7.1. Updating containerized Ansible Automation Platform
 
 
 
@@ -10,14 +10,14 @@ Upgrades from 2.4 Containerized Ansible Automation Platform Tech Preview to 2.5 
 
 **Prerequisites**
 
-- You have reviewed the release notes for the associated patch release.
-- You have created a backup of your Ansible Automation Platform deployment.
+- You have reviewed the release notes for the associated patch release. For more information, see [Ansible Automation Platform Release notes](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/release_notes) .
+- You have a backup of your Ansible Automation Platform deployment. For more information, see [Backing up container-based Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/maintaining-containerized-aap#backing-up-containerized-ansible-automation-platform) .
 
 
 **Procedure**
 
 1. Log in to the Red Hat Enterprise Linux host as your dedicated non-root user.
-1. Follow the steps in [Downloading Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/aap-containerized-installation#downloading-ansible-automation-platform) to download the latest version of containerized Ansible Automation Platform.
+1. Follow the steps in [Downloading Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/containerized_installation/preparing-containerized-installation#downloading-ansible-automation-platform) to download the latest version of containerized Ansible Automation Platform.
 1. Copy the downloaded installation program to your Red Hat Enterprise Linux Host.
 1. Edit the `    inventory` file to match your required configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can change the parameters to match any modifications to your environment.
 1. Run the `    install` playbook:

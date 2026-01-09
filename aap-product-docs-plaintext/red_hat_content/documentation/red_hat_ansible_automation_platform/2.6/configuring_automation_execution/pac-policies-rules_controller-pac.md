@@ -20,5 +20,5 @@ allowed := {
 
 The key components of the rule’s structure are:
 
-These components together comprise the OPA policy name, which is formatted as `[package]/[rule]` . You will enter the OPA policy name when you configure enforcement points.
+These components together form the OPA policy name, with the format `[package]/[rule]` . Enter the OPA policy name when you configure enforcement points.
 

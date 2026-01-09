@@ -1,5 +1,5 @@
 # 1. Introduction
-## 1.2. How do I use Ansible Playbooks?
+## 1.2. How do I use Ansible Playbooks
 ### 1.2.2. From within the platform
 
 

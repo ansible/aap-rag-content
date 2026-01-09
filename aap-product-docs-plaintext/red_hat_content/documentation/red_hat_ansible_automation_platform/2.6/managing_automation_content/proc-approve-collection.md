@@ -1,6 +1,6 @@
 # 2. Managing collections in automation hub
-## 2.2. Managing the publication process of internal collections in Automation Hub
-### 2.2.2. Approving collections for internal publication
+## 2.2. Managing internal collection publication
+### 2.2.2. Approving collections
 
 
 
@@ -23,5 +23,8 @@ Collections requiring approval have the status **Needs review** .
 1. Click the thumbs up icon to approve and sign the collection. Confirm your choice in the modal that appears.
 
 
+**Verification**
+
 Approved collections are moved to the **Published** repository where users can view and download them for use.
+
 

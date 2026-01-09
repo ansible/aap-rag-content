@@ -31,6 +31,8 @@ Each key and secret must belong to a unique application and cannot be shared or 
 1. ClickCreate authentication.
 1. Enter a **Name** for this authentication configuration.
 1. Select **Azuread** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+
+
 1. Select a legacy authenticator method from the **Auto migrate users from** list. After upgrading from 2.4 to 2.5, this is the legacy authenticator from which to automatically migrate users to this new authentication configuration. Refer to [Ansible Automation Platform post-upgrade steps](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_upgrade_and_migration/aap-post-upgrade) in the RPM upgrade and migration guide for important information about migrating users.
 1. ClickEdit, copy and paste Microsoft’s **Application (Client) ID** to the **OIDC Key** field.
 1. If your Microsoft Entra ID is configured to provide user group information within a groups claim, ensure that the platform is configured with a **Groups Claim** name that matches your Microsoft Entra ID configuration. This allows the platform to correctly identify and associate groups for users logging in through Microsoft Entra ID.

@@ -7,6 +7,10 @@
 
 - Verify that you have a valid subscription before upgrading from a previous version of Ansible Automation Platform. Existing subscriptions are carried over during the upgrade process.
 - Review [Planning your upgrade](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_upgrade) to understand the upgrade requirements and scenarios, and [Tested deployment models](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/tested_deployment_models) for the RPM topologies and infrastructure.
+
+
+- Inspect all existing SAML authenticators in your automation controller environment before upgrading from Ansible Automation Platform 2.4 to 2.6. Encrypted private keys for SAML configurations are not supported in Ansible Automation Platform 2.6. For more information, see the [Authentication type: SAML](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_upgrade/upgrade-authentication-movement-2.4-to-2.6#upgrade-saml-auth) section in the _Planning your upgrade_ guide.
+
 - Ensure that you are on Ansible Automation Platform 2.4 or 2.5 before upgrading to 2.6. You can only upgrade from Ansible Automation Platform 2.4 or 2.5 to 2.6.
 - Upgrade to the latest version of Ansible Automation Platform 2.4 or 2.5 before upgrading to Red Hat Ansible Automation Platform 2.6.
 

@@ -5,7 +5,9 @@
 
 
 
-You can configure the networking address range (CIDR block) for the VNet that your Ansible Automation Platform on Microsoft Azure application uses. You set the CIDR block for the application in the `Configure virtual networks` section of the form when you deploy Ansible Automation Platform on Microsoft Azure.
+You can configure the networking address range (CIDR block) for the VNet that your Ansible Automation Platform on Microsoft Azure application uses.
+
+You set the CIDR block for the application in the `Configure virtual networks` section of the form when you deploy Ansible Automation Platform on Microsoft Azure.
 
 When you are planning your network configuration, bear the following in mind:
 

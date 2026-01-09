@@ -11,6 +11,8 @@ For Event-Driven Ansible, there are no global settings to set a proxy. You must 
 1. From the navigation panel, selectAutomation Decisions→Projects.
 1. ClickCreate Project
 
-
 Use the **Proxy** field.
+
+
+
 

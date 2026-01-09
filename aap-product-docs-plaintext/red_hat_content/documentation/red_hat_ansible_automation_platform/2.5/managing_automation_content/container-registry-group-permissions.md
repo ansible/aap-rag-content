@@ -5,11 +5,15 @@
 
 
 
-You can control how users can interact with execution environments managed in private automation hub. Use the following list of permissions to create teams with the right privileges for your remote registries.
+Create and assign permissions to a team in private automation hub to allow users to access specific features in the system. New teams do not have any assigned permissions by default. You must add permissions when first creating a team or edit an existing team to add or remove permissions.
+
+For more on managing access through teams, see [Teams](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication/gw-managing-access#assembly-controller-teams_gw-manage-rbac) in the Access management and authentication guide.
+
+The following table lists permissions you can grant to teams to ensure they have the correct level of access and privileges to your remote registries.
 
 
-<span id="idm140615733205936"></span>
-**Table 3.1. List of team permissions used to manage containers in private automation hub**
+<span id="idm140051695131856"></span>
+**Table 3.1. Team permissions for managing containers in private automation hub**
 
 | Permission name | Description |
 | --- | --- |

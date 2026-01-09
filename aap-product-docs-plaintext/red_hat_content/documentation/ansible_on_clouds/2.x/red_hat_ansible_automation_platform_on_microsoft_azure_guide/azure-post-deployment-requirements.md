@@ -3,3 +3,5 @@
 
 
 
+Understand the post-deployment requirements for private deployments of Red Hat Ansible Automation Platform on Microsoft Azure, focusing primarily on establishing private network peering.
+

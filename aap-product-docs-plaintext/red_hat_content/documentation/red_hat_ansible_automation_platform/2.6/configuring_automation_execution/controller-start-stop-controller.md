@@ -7,7 +7,7 @@ Automation controller includes an administrator utility script, `automation-cont
 
 
 <span id="controller-start-stop"></span>
-External databases must be explicitly managed by the administrator. You can find the services script in `/usr/bin/automation-controller-service` , which can be invoked with the following command:
+External databases must be explicitly managed by the administrator. You can find the services script in `/usr/bin/automation-controller-service` , which can be started with the following command:
 
 
 ```
@@ -23,7 +23,7 @@ For more information on clustered environments, see the [Clustering](https://doc
 
 
 
-You can also invoke the services script using distribution-specific service management commands. Distribution packages often provide a similar script, sometimes as an init script, to manage services. For more information, see your distribution-specific service management system.
+You can also start the services script by using distribution-specific service management commands. Distribution packages often provide a similar script, sometimes as an init script, to manage services. For more information, see your distribution-specific service management system.
 
 Important
 When running automation controller in a container, do not use the `automation-controller-service` script. Restart the pod using the container environment instead.

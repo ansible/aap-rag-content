@@ -4,6 +4,8 @@
 
 
 
+This inventory plugin dynamically generates inventory from Google Compute Engine (GCE) instances.
+
 ```
 auth_kind: serviceaccount
 compose:

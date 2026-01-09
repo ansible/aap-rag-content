@@ -1,5 +1,5 @@
 # 2. New features and enhancements
-## 2.9. Red Hat Ansible Automation Platform Service on AWS
+## 2.10. Red Hat Ansible Automation Platform Service on AWS
 
 
 

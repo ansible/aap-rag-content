@@ -19,7 +19,7 @@ For Red Hat Satellite, input your Satellite username and Satellite password in t
 
 1. From the navigation panel, selectSettings→Subscription. The **Subscription** page is displayed.
 1. ClickEdit subscription.
-1. You can either enter your service account or Satellite credentials, or attach a current Subscription Manifest in the **Welcome** page.
+1. You can either enter your service account or Satellite credentials, or attach a current subscription manifest in the **Welcome** page.
 1. ClickNextand agree to the terms of the license agreement.
 1. ClickNextto review the subscription settings.
 1. ClickFinishto complete the configuration.

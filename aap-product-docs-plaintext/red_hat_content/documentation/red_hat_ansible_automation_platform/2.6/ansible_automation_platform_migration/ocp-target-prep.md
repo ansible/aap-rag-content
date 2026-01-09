@@ -5,7 +5,7 @@
 
 
 
-To prepare and assess your target environment, perform the following steps.
+Transfer the migration artifact, create an OpenShift Container Platform project, and deploy Ansible Automation Platform using the Operator with configurations matching your source environment.
 
 **Procedure**
 
@@ -14,6 +14,6 @@ To prepare and assess your target environment, perform the following steps.
 1. Set up the Redis configuration (internal or external).
 1. Install Ansible Automation Platform using Ansible Automation Platform Operator.
 1. Create a backup of the initial OpenShift Container Platform deployment.
-1. Verify the fresh installation is functional.
+1. Verify the fresh installation functions correctly.
 
 

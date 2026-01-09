@@ -10,6 +10,6 @@ Managed through Event-Driven Ansible controller, Ansible rulebooks are the frame
 
 **Additional resources**
 
-For more information about rulebook, events, and sources, see [Rulebook actions](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/index#con-gs-define-events-rulebooks) .
+-  [Rulebook actions](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/getting_started_with_ansible_automation_platform/index#con-gs-define-events-rulebooks)
 
 

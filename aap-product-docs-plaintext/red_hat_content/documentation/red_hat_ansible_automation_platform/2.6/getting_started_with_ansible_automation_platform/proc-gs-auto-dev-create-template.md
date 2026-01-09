@@ -1,9 +1,11 @@
 # 3. Getting started as an automation developer
-## 3.12. Work with job templates
-### 3.12.3. Creating a job template
+## 3.13. Work with job templates
+### 3.13.3. Creating a job template
 
 
 
+
+Use the following procedure to create a job template.
 
 **Procedure**
 
@@ -27,10 +29,7 @@ Exceptions are noted in the following table.
 | Job Type | Choose a job type:
 
 - Run: Start the playbook when launched, running Ansible tasks on the selected hosts.
-- Check: Perform a "dry run" of the playbook and report changes that would be made without actually making them. Tasks that do not support check mode are missed and do not report potential changes.
-
-
-For more information about job types see the [Playbooks](https://docs.ansible.com/ansible/latest/playbook_guide/index.html) section of the Ansible documentation. | Yes |
+- Check: Perform a "dry run" of the playbook and report changes that would be made without actually making them. Tasks that do not support check mode are missed and do not report potential changes. | Yes |
 | Inventory | Choose the inventory to use with this job template from the inventories available to the logged in user.
 
 A System Administrator must grant you or your team permissions to be able to use certain inventories in a job template. | Yes.
@@ -70,10 +69,7 @@ only removes the newly added labels, not existing default labels. |
 
 - a:b means "in group a or b"
 - a:b:&c means "in a or b but must be in c"
-- a:!b means "in a, and definitely not in b"
-
-
-For more information, see [Patterns: targeting hosts and groups](https://docs.ansible.com/ansible/latest/inventory_guide/intro_patterns.html) in the Ansible documentation. | Yes
+- a:!b means "in a, and definitely not in b" | Yes
 
 If not selected, the job template executes against all nodes in the inventory or only the nodes predefined on the **Limit** field. When running as part of a workflow, the workflow job template limit is used instead. |
 | Verbosity | Control the level of output Ansible produces as the playbook executes. Choose the verbosity from Normal to various Verbose or Debug settings. This only appears in the **details** report view. Verbose logging includes the output of all commands. Debug logging is exceedingly verbose and includes information about SSH operations that can be useful in certain support instances.
@@ -95,8 +91,8 @@ If selected, you are providing the jobs preferred instance groups in order of pr
 
 - If you prompt for an instance group, what you enter replaces the normal instance group hierarchy and overrides all of the organizations' and inventories' instance groups.
 - The Instance Groups prompt shows up as its own step in a later prompt window. |
-| Job Tags | Type and select the **Create** menu to specify which parts of the playbook should be executed. For more information and examples see [Tags](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_tags.html) in the Ansible documentation. | Yes |
-| Skip Tags | Type and select the **Create** menu to specify certain tasks or parts of the playbook to skip. For more information and examples see [Tags](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_tags.html) in the Ansible documentation. | Yes |
+| Job Tags | Type and select the **Create** menu to specify which parts of the playbook should be executed. | Yes |
+| Skip Tags | Type and select the **Create** menu to specify certain tasks or parts of the playbook to skip. | Yes |
 | Extra Variables | - Pass extra command line variables to the playbook. This is the "-e" or "-extra-vars" command line parameter for ansible-playbook that is documented in the Ansible documentation at [Defining variables at runtime](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#defining-variables-at-runtime) .
 - Provide key or value pairs by using either YAML or JSON. These variables have a maximum value of precedence and overrides other variables specified elsewhere. The following is an example value: `    git_branch: production release_version: 1.5` | Yes.
 
@@ -130,8 +126,10 @@ See [Credential Types](https://docs.redhat.com/en/documentation/red_hat_ansible_
 
 1. ClickCreate job template, when you have completed configuring the details of the job template.
 
-
 Creating the template does not exit the job template page but advances to the Job Template **Details** tab. After saving the template, you can clickLaunch templateto start the job. You can also clickEditto add or change the attributes of the template, such as permissions, notifications, view completed jobs, and add a survey (if the job type is not a scan). You must first save the template before launching, otherwise,Launch templateremains disabled.
+
+
+
 
 **Verification**
 

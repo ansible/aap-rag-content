@@ -1,6 +1,6 @@
-# 4. Developing Ansible content
-## 4.1. Accessing the Ansible Lightspeed portal as an automation developer
-### 4.1.2. Logging out of the Ansible Lightspeed Service
+# 5. Developing Ansible content
+## 5.1. Accessing the Ansible Lightspeed portal as an automation developer
+### 5.1.2. Logging out of the Ansible Lightspeed Service
 
 
 

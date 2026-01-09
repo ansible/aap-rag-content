@@ -3,7 +3,9 @@
 
 
 
-The reports feature on the Red Hat Ansible Automation Platform provides users with a visual overview of their automation efforts across different teams using Ansible. Each report is designed to help users monitor the status of their automation environment, be it the frequency of playbook runs or the status of hosts affected by various job templates.
+The reports feature on the Red Hat Ansible Automation Platform provides users with a visual overview of their automation efforts across different teams by using Ansible.
+
+Each report helps users to monitor the status of their automation environment, be it the frequency of playbook runs or the status of hosts affected by various job templates.
 
 For example, you can use your reports to:
 

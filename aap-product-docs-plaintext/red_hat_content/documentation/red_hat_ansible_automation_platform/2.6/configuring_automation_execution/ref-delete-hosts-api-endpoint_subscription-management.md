@@ -5,9 +5,11 @@
 
 
 
+You can soft delete hosts that have been automated in automation controller using the host metric API endpoint.
+
 The API lists only non-deleted records and are sortable by last_automation and used_in_inventories columns.
 
-You can use the host metric API endpoint, `api/v2/host_metric` to soft delete hosts, using:
+To soft delete hosts, use:
 
 `api/v2/host_metric &lt;n&gt; DELETE`
 
@@ -34,7 +36,7 @@ The configuration data includes the following information:
 The reporting data includes the following information:
 
 - Job name and ID
-- Host name
+- Hostname
 - Inventory name
 - Organization name
 - Project name
@@ -56,12 +58,21 @@ Configure the `metrics-utility` to gather and report usage data for your Ansible
 
 
 
-**Prerequisites:**
+You can configure the `metrics-utility` on a Red Hat Enterprise Linux system to gather and report usage metrics for automation controller.
 
-- An active Ansible Automation Platform subscription
+**Prerequisites**
+
+-  **Subscription:** An active Ansible Automation Platform subscription.
+-  **Installation:** The `    metrics-utility` tool is included by default with the Ansible Automation Platform installation on the automation controller node. No separate installation is required.
+-  **User privileges:** You must be logged in as the `    root` user or the `    awx` user to run the `    metrics-utility` tool.
 
 
-`metrics-utility` is included with Ansible Automation Platform, so you do not need a separate installation. The following procedure gathers the relevant data and generate a [CCSP](https://connect.redhat.com/en/programs/certified-cloud-service-provider) report containing your usage metrics. You can configure these commands as cronjobs to ensure they run at the beginning of every month. See [How to schedule jobs using the Linux 'cron' utility](https://www.redhat.com/sysadmin/linux-cron-command) for more on configuring using the cron syntax.
+Important
+The `metrics-utility` requires read access to `/etc/tower/SECRET_KEY` to function correctly. Attempting to run this utility as a standard user (non-root or non-awx) results in a `PermissionError` and execution failure.
+
+
+
+The following procedure gathers the relevant data and generate a [CCSP](https://connect.redhat.com/en/programs/certified-cloud-service-provider) report containing your usage metrics. You can configure these commands as `cron` jobs to ensure they run at the beginning of every month. See [How to schedule jobs using the Linux cron utility](https://www.redhat.com/sysadmin/linux-cron-command) for more on configuring using the cron syntax.
 
 **Procedure**
 
@@ -90,7 +101,7 @@ Configure the `metrics-utility` to gather and report usage data for your Ansible
 `    chmod a+x /home/my-user/cron-gather /home/my-user/cron-report`
 
 
-1. To open the cron file for editing, run:
+1. To open the `    cron` file for editing, run:
 
 `    crontab -e`
 
@@ -147,6 +158,8 @@ Time and date might vary depending on how your configure the run schedule.
 
 
 
+The `metrics-utility` is a command-line tool that collects and reports metrics from your OpenShift Container Platform cluster to your automation controller instance.
+
 `metrics-utility` is included in the OpenShift Container Platform image beginning with version 4.12, 4.512, and 4.6. If your system does not have `metrics-utility` installed, update your OpenShift image to the latest version.
 
 Complete the following steps to configure the run schedule for `metrics-utility` on OpenShift Container Platform using the Ansible Automation Platform operator:
@@ -156,9 +169,11 @@ Complete the following steps to configure the run schedule for `metrics-utility`
 
 
 
-To inject the `metrics-utility` cronjobs with configuration data, use the following procedure to create a ConfigMap in the OpenShift UI YAML view:
+Learn how to create a ConfigMap in the OpenShift UI YAML view to inject configuration data for the `metrics-utility` cronjobs.
 
-**Prerequisites:**
+To inject the `metrics-utility` cronjobs with configuration data, and create a ConfigMap in the OpenShift UI YAML view:
+
+**Prerequisites**
 
 - A running OpenShift cluster
 - An operator-based installation of Ansible Automation Platform on OpenShift Container Platform.
@@ -195,6 +210,8 @@ apiVersion: v1    kind: ConfigMap    metadata:      name: automationcontroller-m
 
 
 
+automation controller includes a `metrics-utility` cronjob that gathers usage information and generates a report at specified intervals.
+
 To deploy automation controller and specify variables for how often `metrics-utility` gathers usage information and generates a report, use the following procedure:
 
 **Procedure**
@@ -224,31 +241,32 @@ To deploy automation controller and specify variables for how often `metrics-uti
 
 
 
+The `metrics-utility` tool generates performance metrics and reports for Ansible Automation Platform installations.
+
 `metrics-utility` is included in the OpenShift Container Platform image beginning with version 4.12, 4.512, and 4.6. If your system does not have `metrics-utility` installed, update your OpenShift image to the latest version.
 
-Complete the following steps to configure the run schedule for `metrics-utility` on OpenShift Container Platform using the Ansible Automation Platform operator:
+Use the following steps to configure `metrics-utility` on a manual containerized installation Ansible Automation Platform:
 
-Use the following steps to configure `metrics-utility` on a manual containerized installation of Ansible Automation Platform:
+1. Enable and configure `    metrics-utility` in the inventory file.
+1. Apply your `    metrics-utility` configuration.
+1. Verify the `    systemctl` timer.
+1. Verify the data collection.
+1. Locate the generated reports.
 
-1. Prepare host directories and scripts.
-1. Make scripts executable.
-1. Configure cron jobs.
 
+Note
+You must have an active Ansible Automation Platform subscription
 
-**Prerequisites**
-
-- An active Ansible Automation Platform subscription
 
 
 **Minimum resource requirements**
 
-Using the metrics-utility tool on a containerized installation of Ansible Automation Platform requires the following resources:
-
+Using the `metrics-utility` tool on a containerized installation of Ansible Automation Platform requires the following resources:
 
 - CPU: 1 dedicated CPU core
 
 
-- 100% of 1 core is used during execution
+- 100% of 1 core used during execution
 
 - Memory:
 
@@ -258,7 +276,7 @@ Using the metrics-utility tool on a containerized installation of Ansible Automa
 - Large-scale: 1 GB RAM (supports up to ~100,000 job host summaries)
 
 Note
-Memory requirements scale with the number of hosts and jobs being processed.
+Memory requirements scale with the number of hosts and jobs processed.
 
 
 
@@ -267,151 +285,99 @@ Memory requirements scale with the number of hosts and jobs being processed.
 - Execution time: Report generation typically completes within 10-30 seconds, depending on data volume
 
 
-#### 12.1.3.1. Preparing host directories and scripts
+#### 12.1.3.1. Enabling and configuring `metrics-utility` in the inventory file
 
 
 
 
-To prepare host directories and scripts, create two shell scripts on your host machine to execute `metrics-utility` commands inside your running container.
+Modify your Ansible Automation Platform inventory file to enable and configure `metrics-utility` .
 
 **Procedure**
 
-1. Modify your inventory file to enable metrics-utility container deployment by adding the following line under the [all:vars] section:
+1. Modify your inventory file to enable `    metrics-utility` container deployment by adding the following line under the `    [automationcontroller]` section:
 
 
 ```
 metrics_utility_enabled=true
 ```
 
-This setting instructs the installer to create and configure a dedicated `    automation-controller-metrics-utility` container as part of your Ansible Automation Platform deployment. Be sure to place this line under the `    [all:vars]` header in your inventory file, alongside your other global variables. Re-run the installer script to activate the container if your Ansible Automation Platform deployment has already been configured.
+This setting instructs the installation program to create and configure a dedicated `    automation-controller-metrics-utility` container as part of your Ansible Automation Platform deployment. Place this line under the `    [automationcontroller]` header in your inventory file, alongside your other global variables. If your Ansible Automation Platform deployment has already been configured, re-run the installation script to activate the container.
 
 
-1. Run the following command to create the host report destination directory:
-
-
-```
-mkdir -p /home/my-user/aap/controller/data/
-```
-
-This directory on your host machine stores the final generated reports.
-
-
-1. Create a file named `    /home/my-user/cron-gather` (replace `    /home/my-user/` with your desired path) and add the following content to create the `    cron-gather` script:
+1. Configure the reporting parameters by adding the `    metrics_utility_extra_settings` variable. This variable controls where reports are saved, what they contain, and other metadata.
 
 
 ```
-#!/bin/sh        # Specify the following variables to indicate where the report is deposited in your file system    export METRICS_UTILITY_SHIP_TARGET=directory    export METRICS_UTILITY_SHIP_PATH=/metrics_utility/data        # Run metrics-utility inside the running container    podman exec \      -e METRICS_UTILITY_SHIP_TARGET="$METRICS_UTILITY_SHIP_TARGET" \      -e METRICS_UTILITY_SHIP_PATH="$METRICS_UTILITY_SHIP_PATH" \      automation-controller-task \      metrics-utility gather_automation_controller_billing_data --ship --until=10m
+metrics_utility_extra_settings=[    {"setting": "METRICS_UTILITY_SHIP_TARGET", "value": "directory"},    {"setting": "METRICS_UTILITY_SHIP_PATH", "value": "~/aap/controller/data/metrics/"},    {"setting": "METRICS_UTILITY_REPORT_TYPE", "value": "CCSPv2"},    {"setting": "METRICS_UTILITY_PRICE_PER_NODE", "value": "100"},    {"setting": "METRICS_UTILITY_REPORT_COMPANY_NAME", "value": "My Company Inc"},    {"setting": "METRICS_UTILITY_REPORT_EMAIL", "value": "admin@mycompany.com"},    {"setting": "METRICS_UTILITY_REPORT_SKU", "value": "MCT3752MO"}]
 ```
 
-This script runs `    metrics-utility` to gather billing data from your Ansible Automation Platform instance and store it temporarily inside the container.
 
-
-1. Create a file named `    /home/my-user/cron-report` (replace `    /home/my-user/` with your desired path) and add the following content to create the `    cron-report` script:
-
-
-```
-#!/bin/sh        # --- Configuration Variables ---    # Define variables for the metrics utility parameters    export METRICS_UTILITY_SHIP_TARGET="directory"    export METRICS_UTILITY_SHIP_PATH="/metrics_utility/data" # This is the *internal* path in the container    export METRICS_UTILITY_REPORT_TYPE="CCSPv2"    export METRICS_UTILITY_PRICE_PER_NODE="11.55"    export METRICS_UTILITY_REPORT_SKU="MCT3752MO"    export METRICS_UTILITY_REPORT_SKU_DESCRIPTION="EX: Red Hat {PlatformNameShort}, Full Support (1 Managed Node, Dedicated, Monthly)"    export METRICS_UTILITY_REPORT_H1_HEADING="CCSP Reporting &lt;Company&gt;: ANSIBLE Consumption"    export METRICS_UTILITY_REPORT_COMPANY_NAME="Company Name"    export METRICS_UTILITY_REPORT_EMAIL="email@email.com"    export METRICS_UTILITY_REPORT_RHN_LOGIN="test_login"    export METRICS_UTILITY_REPORT_COMPANY_BUSINESS_LEADER="BUSINESS LEADER"    export METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER="PROCUREMENT LEADER"        podman exec \      -e METRICS_UTILITY_SHIP_TARGET="$METRICS_UTILITY_SHIP_TARGET" \      -e METRICS_UTILITY_SHIP_PATH="$METRICS_UTILITY_SHIP_PATH" \      -e METRICS_UTILITY_REPORT_TYPE="$METRICS_UTILITY_REPORT_TYPE" \      -e METRICS_UTILITY_PRICE_PER_NODE="$METRICS_UTILITY_PRICE_PER_NODE" \      -e METRICS_UTILITY_REPORT_SKU="$METRICS_UTILITY_REPORT_SKU" \      -e METRICS_UTILITY_REPORT_SKU_DESCRIPTION="$METRICS_UTILITY_REPORT_SKU_DESCRIPTION" \      -e METRICS_UTILITY_REPORT_H1_HEADING="$METRICS_UTILITY_REPORT_H1_HEADING" \      -e METRICS_UTILITY_REPORT_COMPANY_NAME="$METRICS_UTILITY_REPORT_COMPANY_NAME" \      -e METRICS_UTILITY_REPORT_EMAIL="$METRICS_UTILITY_REPORT_EMAIL" \      -e METRICS_UTILITY_REPORT_RHN_LOGIN="$METRICS_UTILITY_REPORT_RHN_LOGIN" \      -e METRICS_UTILITY_REPORT_COMPANY_BUSINESS_LEADER="$METRICS_UTILITY_REPORT_COMPANY_BUSINESS_LEADER" \      -e METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER="$METRICS_UTILITY_REPORT_COMPANY_PROCUREMENT_LEADER" \      "automation-controller-metrics-utility" \      metrics-utility build_report
-```
-
-This script METRICS_UTILITY_REPORT_SKU_DESCRIPTION `    metrics-utility` to build a report from the gathered data and then copy the final report from the container to your specified host directory.
-
-
-
-
-#### 12.1.3.2. Making the scripts executable
-
-
-
-
-Ensure that both scripts you created are executable by using the following procedure:
-
-**Procedure**
-
-1. Run the following command:
-
-
-```
-chmod a+x /home/my-user/cron-gather /home/my-user/cron-report
-```
+1. Optional: Override the default data gathering schedule by adding the following variables with your `    systemd timer` expressions:
 
 Note
-Ensure that you have replaced `    /home/my-user/` with your actual path.
+`    systemd timer` expressions differ from `    cron` expressions.
 
 
-
-
-
-
-#### 12.1.3.3. Configuring `cron` jobs
-
-
-
-
-Configure `cron` to schedule the `metrics-utility` commands to run automatically by using the following procedure:
-
-**Procedure**
-
-1. Open the `    cron` file for editing:
 
 
 ```
-crontab -e
+# Gathers data every 30 minutes    metrics_utility_cronjob_gather_schedule=*:0/30    # Generates the report at midnight on the 2nd of the month    metrics_utility_cronjob_report_schedule=*-*-02 00:00:00
 ```
 
 
-1. Add the following lines to the end of the `    crontab` file to add `    cron` schedule entries:
 
 
-```
-0 */1 * * * /home/my-user/cron-gather    0 4 2 * * /home/my-user/cron-report
-```
-
-These examples configure the `    gather` command to run every hour at 00 minutes and the `    build_report` command to run on the second day of each month at 4:00 AM.
+#### 12.1.3.2. Applying your `metrics-utility` configuration
 
 
-1. Adjust the cron syntax as needed to fit your desired schedule. For example:
 
 
-1.  `        0 */1 * * *` : Runs at minute 0 of every hour.
-1.  `        0 4 2 * *` : Runs at 04:00 on day-of-month 2.
+If you are running `metrics-utility` on a new installation, you do not need to take any additional actions to apply your configuration.
 
-1. Save and close the file.
+If you are applying your `metrics-utility` configuration to an existing deployment, you must re-run the Ansible Automation Platform installer script. Re-running the script reads the updated inventory file, deploys the `automation-controller-metrics-utility` container, and creates the `systemd` user services and timers necessary to automate data collection and reporting. Use the following verification steps to ensure your `metrics-utility` configuration has been applied and is running correctly:
+
+- Verify your `    systemctl` timer.
+- Verify data collection.
+- Locate generated reports.
 
 
 **Verification**
 
-Use the following verification steps to ensure correct configuration:
-
-
-1. To confirm that your `    cron` job entries have been saved correctly, run:
+1. Run the following command to verify that your `    systemctl timer` job entries were saved correctly:
 
 
 ```
-crontab -l
+systemctl --user list-timers --no-pager | grep metrics-utility
 ```
 
-If your `    cron` job entries have been saved correctly, you will see the two lines you added for `    cron-gather` and `    cron-report` .
-
-
-1. Inspect the `    cron` log to check if the `    cron` daemon is executing the commands and if `    metrics-utility` is producing output:
+**Example output:**
 
 
 ```
-cat /var/log/cron
-```
-
-For reference, see the following example output:
-
-
-```
-# Example Output:        Aug 20 09:55:01 aap CROND[72746]: (aap) CMD (/home/aap/Documents/scripts/cron-gather)    Aug 20 09:55:03 aap CROND[72744]: (aap) CMDOUT (2025-08-20 08:55:03,581 INFO     [-] awx.main.analytics /tmp/3292ca44-3314-4f0b-b3f6-ba4a1e47a2b1-2025-08-20-083506+0000-2025-08-20-084503+0000-0.tar.gz)    Aug 20 09:55:03 aap CROND[72744]: (aap) CMDOUT (/tmp/3292ca44-3314-4f0b-b3f6-ba4a1e47a2b1-2025-08-20-083506+0000-2025-08-20-084503+0000-0.tar.gz)    Aug 20 09:55:03 aap CROND[72744]: (aap) CMDOUT (2025-08-20 08:55:03,581 INFO     [-] awx.main.analytics /tmp/3292ca44-3314-4f0b-b3f6-ba4a1e47a2b1-2025-08-20-083506+0000-2025-08-20-084503+0000-1.tar.gz)    Aug 20 09:55:03 aap CROND[72744]: (aap) CMDOUT (/tmp/3292ca44-3314-4f0b-b3f6-ba4a1e47a2b1-2025-08-20-083506+0000-2025-08-20-084503+0000-1.tar.gz)    Aug 20 09:55:03 aap CROND[72744]: (aap) CMDEND (/home/aap/Documents/scripts/cron-gather)    Aug 20 10:00:02 aap CROND[77629]: (aap) CMD (/home/aap/Documents/scripts/cron-report)    Aug 20 10:00:02 aap CROND[77623]: (aap) CMDOUT (Generating metrics report inside the container...)    Aug 20 10:00:04 aap CROND[77623]: (aap) CMDOUT (2025-08-20 09:00:04,639 INFO     [-] awx.main.analytics No billing data for month 2025-07)    Aug 20 10:00:04 aap CROND[77623]: (aap) CMDOUT (No billing data for month 2025-07)    Aug 20 10:00:05 aap CROND[77623]: (aap) CMDOUT (Copying generated reports from container to host: /tmp/ansible_metrics_reports)    Aug 20 10:00:05 aap CROND[77623]: (aap) CMDOUT (Reports successfully moved to: /tmp/ansible_metrics_reports)    Aug 20 10:00:05 aap CROND[77623]: (aap) CMDOUT (Files in destination:)    Aug 20 10:00:05 aap CROND[77623]: (aap) CMDOUT (total 0)    Aug 20 10:00:05 aap CROND[77623]: (aap) CMDOUT (drwxr-xr-x. 3 aap aap 18 Aug 20 09:43 data)    Aug 20 10:00:05 aap CROND[77623]: (aap) CMDEND (/home/aap/Documents/scripts/cron-report)
+Wed 2025-08-13 10:45:00 IST 8min left Wed 2025-08-13 10:30:04 IST 6min ago   metrics-utility-build-report.timer metrics-utility-build-report.service    Wed 2025-08-13 10:45:00 IST 8min left Wed 2025-08-13 10:30:04 IST 6min ago   metrics-utility-gather.timer   	metrics-utility-gather.service
 ```
 
 
-1. Locate generated reports:
+1. Use the following command to verify data collection by inspecting the output logs of the services you are running:
 
 
-- The generated report has a default name format of `        CCSP-&lt;YEAR&gt;-&lt;MONTH&gt;.xlsx` (for example, `        CCSP-2024-07.xlsx` ). The report is deposited in the `        METRICS_UTILITY_SHIP_PATH` with the prefixed path you specified in Step 2 (for example, `        /home/my-user/aap/controller/data/metrics_utility/data` ).
+```
+systemctl --user status metrics-utility-gather.service
+```
+
+**Example output:**
+
+
+```
+metrics-utility-gather.service - Podman metrics-utility-gather.service     	Loaded: loaded (/home/aap/.config/systemd/user/metrics-utility-gather.service; disabled; preset: disabled)     	Active: inactive (dead) since Wed 2025-08-13 10:00:06 IST; 5min ago       Duration: 2.008s    TriggeredBy: ● metrics-utility-gather.timer       	Docs: man:podman-generate-systemd(1)    	Process: 1472847 ExecStart=/usr/bin/podman start metrics-utility-gather (code=exited, status=0/SUCCESS)    	Process: 1472927 ExecStop=/usr/bin/podman stop -t 10 metrics-utility-gather (code=exited, status=0/SUCCESS)    	Process: 1472937 ExecStopPost=/usr/bin/podman stop -t 10 metrics-utility-gather (code=exited, status=0/SUCCESS)       Main PID: 1472874 (code=exited, status=0/SUCCESS)        	CPU: 197ms        Aug 13 10:00:04 aap.example.org podman[1472847]: metrics-utility-gather    Aug 13 10:00:04 aap.example.org systemd[993]: Started Podman metrics-utility-gather.service.    Aug 13 10:00:05 aap.example.org metrics-utility-gather[1472874]: 2025-08-13 09:00:05,806 INFO 	[-] awx.main.analytics /tmp/3292ca44-3314-4f&gt;    Aug 13 10:00:05 aap.example.org metrics-utility-gather[1472874]: /tmp/3292ca44-3314-4f0b-b3f6-ba4a1e47a2b1-2025-08-13-083505+0000-2025-08-13-0&gt;    Aug 13 10:00:05 aap.example.org metrics-utility-gather[1472874]: 2025-08-13 09:00:05,808 INFO 	[-] awx.main.analytics /tmp/3292ca44-3314-4f&gt;    Aug 13 10:00:05 aap.example.org metrics-utility-gather[1472874]: /tmp/3292ca44-3314-4f0b-b3f6-ba4a1e47a2b1-2025-08-13-083505+0000-2025-08-13-0&gt;    Aug 13 10:00:06 aap.example.org podman[1472912]: 2025-08-13 10:00:06.169271763 +0100 IST m=+0.019922418 container died 5dc8d5674f1d1745258530f&gt;    Aug 13 10:00:06 aap.example.org podman[1472912]: 2025-08-13 10:00:06.187584135 +0100 IST m=+0.038234790 container cleanup 5dc8d5674f1d17452585&gt;    Aug 13 10:00:06 aap.example.org podman[1472927]: metrics-utility-gather    Aug 13 10:00:06 aap.example.org podman[1472937]: metrics-utility-gather
+```
+
+
+1. Locate the generated reports. Reports are saved in the directory you specified in the `    METRICS_UTILITY_SHIP_PATH` setting.
+
+
+- Path: Using the example provided in this document, the report path would be `        /aap/controller/data/metrics/` .
+- Filename: The report name follows the format `        CCSP-&lt;YEAR&gt;-&lt;MONTH&gt;.xlsx` . For example, a report generated for August, 2025 would be named `        CCSP-2025-08.xlsx` .
 
 
 
@@ -420,7 +386,7 @@ For reference, see the following example output:
 
 
 
-Fetch a monthly report from Ansible Automation Platform to gather usage metrics and create a consumption-based billing report. To fetch a monthly report on Red Hat Enterprise Linux or on OpenShift Container Platform, use the following procedures:
+You can fetch a monthly report from Ansible Automation Platform to gather usage metrics and create a consumption-based billing report. To fetch a monthly report on Red Hat Enterprise Linux or on OpenShift Container Platform, use the following procedures:
 
 ### 12.2.1. Fetching a monthly report on Red Hat Enterprise Linux
 
@@ -433,20 +399,24 @@ Use the following procedure to fetch a monthly report on Red Hat Enterprise Linu
 
 - Run: `    scp -r username@controller_host:$METRICS_UTILITY_SHIP_PATH/data/&lt;YYYY&gt;/&lt;MM&gt;/ /local/directory/`
 
+The system saves the generated report as `    CCSP-&lt;YEAR&gt;-&lt;MONTH&gt;.xlsx` in the ship path that you specified.
 
-The system saves the generated report as `CCSP-&lt;YEAR&gt;-&lt;MONTH&gt;.xlsx` in the ship path that you specified.
+
+
 
 ### 12.2.2. Fetching a monthly report on OpenShift Container Platform from the Ansible Automation Platform Operator
 
 
 
 
+Run a dedicated Ansible Playbook to fetch monthly usage reports directly from the OpenShift Container Platform persistent volume claim. This helps ensure accurate consumption-based billing and compliance.
+
 **Procedure**
 
 1. Use the following playbook to fetch a monthly consumption report for Ansible Automation Platform on OpenShift Container Platform:
 
 Note
-To use this playbook, you must have the `    kubernetes.core.k8s` collection to be installed on your machine.
+To use this playbook, you must have the `    kubernetes.core.k8s` collection installed on your machine.
 
 
 
@@ -463,7 +433,7 @@ To use this playbook, you must have the `    kubernetes.core.k8s` collection to 
 
 
 
-You can configure `metrics-utility` to run at specified times and intervals. Run frequency is expressed in cronjobs. For more information on the cron utility, see [How to schedule jobs using the Linux ‘Cron’ utility](https://www.redhat.com/sysadmin/linux-cron-command) .
+You can configure `metrics-utility` to run at specified times and intervals. Run frequency is expressed in cronjobs. For more information on the cron utility, see [How to schedule jobs using the Linux Cron utility](https://www.redhat.com/sysadmin/linux-cron-command) .
 
 To modify the run schedule on Red Hat Enterprise Linux and on OpenShift Container Platform, use one of the following procedures:
 
@@ -489,7 +459,7 @@ To modify the run schedule on Red Hat Enterprise Linux and on OpenShift Containe
 
 
 
-To adjust the execution schedule of the `metrics-utility` within your Ansible Automation Platform deployment running on OpenShift Container Platform, use the following procedure:
+To adjust the execution schedule of the `metrics-utility` within your Ansible Automation Platform deployment running on OpenShift Container Platform, use the following procedure.
 
 **Procedure**
 
@@ -499,7 +469,7 @@ To adjust the execution schedule of the `metrics-utility` within your Ansible Au
 1. From the navigation panel, select **Installed Operators** .
 1. From the list of installed operators, select Ansible Automation Platform.
 1. On the next screen, select the automation controller tab.
-1. From the list that appears, select your automation controller instance.
+1. From the list displayed, select your automation controller instance.
 1. On the next screen, select the `    YAML` tab.
 1. In the `    YAML` file, find the following parameters and enter a variable representing how often `    metrics-utility` should gather data and how often it should produce a report:
 
@@ -524,7 +494,9 @@ To adjust the execution schedule of the `metrics-utility` within your Ansible Au
 
 
 
-Supported storage is available for storing the raw data obtained by using the `metrics-utility gather_automation_controller_billing_data` command and storing the generated reports obtained by using the `metrics-utility build_report` command. Apply the environment variables to this storage based on your Ansible Automation Platform installation.
+Supported storage is available for storing the raw data obtained by using the `metrics-utility gather_automation_controller_billing_data` command and storing the generated reports obtained by using the `metrics-utility build_report` command.
+
+Apply the environment variables to this storage based on your Ansible Automation Platform installation.
 
 ### 12.4.1. Local disk
 
@@ -571,7 +543,7 @@ export METRICS_UTILITY_BUCKET_SECRET_KEY=&lt;secret_key&gt;
 
 
 
-This section provides additional configurations for data gathering and report building based on a report type. Apply the environment variables to each report type based on your Ansible Automation Platform installation.
+Additional configurations for data gathering and report building based on a report type. Apply the environment variables to each report type based on your Ansible Automation Platform installation.
 
 ### 12.5.1. CCSPv2
 
@@ -587,7 +559,7 @@ CCSPv2 is a report which shows the following:
 
 The primary use of this report is for partners under the [CCSP](https://connect.redhat.com/en/programs/certified-cloud-service-provider) program, but all customers can use it to obtain on-premise reporting showing managed nodes, jobs and content usage across their automation controller organizations.
 
-Set the report type using `METRICS_UTILITY_REPORT_TYPE=CCSPv2` .
+Set the report type by using `METRICS_UTILITY_REPORT_TYPE=CCSPv2` .
 
 ### 12.5.2. Optional collectors for `gather` command
 
@@ -713,7 +685,7 @@ Taxonomy mapping is dependent on the facts column in the raw data.
 
 
 - Unusual gaps between collections (based on collection_start_timestamp)
-- Gaps in collected intervals (based on since vs until)
+- Gaps in collected intervals (based on `            since` compared to `            until` )
 
 
 ```
@@ -730,9 +702,11 @@ Taxonomy mapping is dependent on the facts column in the raw data.
 
 
 
+When generating reports by using the metrics utility, you can filter the data by organization.
+
 To filter your report so that only certain organizations are present, use this environment variable with a semicolon separated list of organization names.
 
-`export METRICS_UTILITY_ORGANIZATION_FILTER="ACME;Organization 1"`
+`export METRICS_UTILITY_ORGANIZATION_FILTER="Organization 1;Organization 2"`
 
 This renders only the data from these organizations in the built report. This filter currently does not have any effect on the following optional sheets:
 
@@ -799,7 +773,9 @@ metrics-utility build_report --since=12months --ephemeral=1month
 
 
 
-The `RENEWAL_GUIDANCE` report has the capability to list additional sheets with ephemeral usage if the `–ephemeral` parameter is provided. Using the parameter `--ephemeral=1month` , you can define ephemeral nodes as any managed node that has been automated for a maximum of one month, then never automated again. Using this parameter, the total ephemeral usage of the 12-month period is computed as maximum ephemeral nodes used over all 1-month rolling date windows. This sheet is also added into the report.
+The `metrics-utility` command-line tool can generate reports showing ephemeral usage of managed nodes.
+
+The `RENEWAL_GUIDANCE` report has the capability to list additional sheets with ephemeral usage if the `-ephemeral` parameter is provided. Using the parameter `--ephemeral=1month` , you can define ephemeral nodes as any managed node that has been automated for a maximum of one month, then never automated again. Using this parameter, the total ephemeral usage of the 12-month period is computed as maximum ephemeral nodes used over all 1-month rolling date windows. This sheet is also added into the report.
 
 ```
 # Will generate report for 12 months back with ephemeral nodes being nodes
@@ -812,7 +788,9 @@ metrics-utility build_report --since=12months --ephemeral=1month
 
 
 
-The `RENEWAL_GUIDANCE` report requires a `since` parameter as the parameter is not supported due to the nature of the HostMetric data and is always set to `now` . To override a report date range that has already been built, use parameter `–force` with the command. For more information, see the following examples:
+The default behavior of the `RENEWAL_GUIDANCE` report is to build a report for the current date. The following examples describe how to override this default behavior to select a specific date range for your report:
+
+The `RENEWAL_GUIDANCE` report requires a `since` parameter as the parameter is not supported due to the nature of the `HostMetric` data and is always set to `now` . To override a report date range that is already built, use parameter `-force` with the command. For more information, see the following examples:
 
 ```
 # Build report for a specific date range, including the provided days
@@ -830,7 +808,7 @@ metrics-utility build_report --since=12months --force
 
 
 
-`CCSP` is the original report format. It does not include many of the customization of CCSPv2, and it is intended to be used only for the CCSP partner program.
+`CCSP` is the original report format. It does not include many of the customization of CCSPv2, and the intention is only to use it for the CCSP partner program.
 
 ### 12.5.8. Optional collectors for `gather` command
 
@@ -842,7 +820,7 @@ You can use the following optional collectors for the `gather` command:
 -  `    main_jobhostsummary`
 
 
-- If present by default, this incrementally collects the `        main_jobhostsummary` table from the automation controller database, containing information about jobs runs and managed nodes automated.
+- If present by default, this collects the `        main_jobhostsummary` table from the automation controller database, and has information about jobs runs and managed nodes automated.
 
 -  `    main_host`
 
@@ -852,12 +830,12 @@ You can use the following optional collectors for the `gather` command:
 -  `    main_jobevent`
 
 
-- This incrementally collects the `        main_jobevent` table from the automation controller database and contains information about which modules, roles, and ansible collections are being used.
+- This collects the `        main_jobevent` table from the automation controller database and has information about which modules, roles, and ansible collections are being used.
 
 -  `    main_indirectmanagednodeaudit`
 
 
-- This incrementally collects the `        main_indirectmanagednodeaudit` table from the automation controller database and contains information about indirectly managed nodes,
+- This collects the `        main_indirectmanagednodeaudit` table from the automation controller database and has information about indirectly managed nodes,
 
 
 
@@ -871,7 +849,7 @@ export METRICS_UTILITY_OPTIONAL_COLLECTORS="main_host,main_jobevent,main_indirec
 
 
 
-You may use the following optional sheets for the `build_report` command:
+You can use the following optional sheets for the `build_report` command:
 
 -  `    ccsp_summary`
 
@@ -928,6 +906,8 @@ export METRICS_UTILITY_OPTIONAL_CCSP_REPORT_SHEETS='ccsp_summary,managed_nodes,i
 
 
 
+By default, the CCSPv2 report generates data for the previous calendar month. You can override this behavior by specifying a different month when you run the `metrics-utility build_report` command.
+
 The default behavior of this report is to build a report for the previous month. The following examples describe how to override this default behavior to select a specific date range for your report:
 
 ```
@@ -948,14 +928,16 @@ metrics-utility build_report --month=2025-03 --force
 
 Deduplication changes how `metrics-utility` merges individual host records into countable managed nodes when building reports. Deduplication identifies identical hosts to ensure an accurate count of unique hosts.
 
-`metrics-utility` tracks individual hosts based on their hostnames. Any entries that use the same hostname are tracked as the same host. Additional deduplication strategies are also available using the following environment variable: `METRICS_UTILITY_DEDUPLICATOR=` .
+`metrics-utility` tracks individual hosts based on their hostnames. It tracks any entries that use the same hostname as the host. Additional deduplication strategies are also available using the following environment variable: `METRICS_UTILITY_DEDUPLICATOR=` .
 
 ### 12.6.1. Deduplication in the `RENEWAL_GUIDANCE` report
 
 
 
 
-The default value for `METRICS_UTILITY_DEDUPLICATOR=renewal` . This is the original method, which analyzes `host_name` , `ansible_host` , `ansible_product_serial` , and `ansible_machine_id` separately, and merges entries when any of these items are duplicated.
+The `RENEWAL_GUIDANCE` report uses deduplication to merge several entries for the same managed node into a single entry. This is important to provide accurate counts of managed nodes for subscription renewal.
+
+The default value for `METRICS_UTILITY_DEDUPLICATOR=renewal` . This is the original method, which analyzes `host_name` , `ansible_host` , `ansible_product_serial` , and `ansible_machine_id` separately, and merges entries any duplicated items.
 
 `METRICS_UTILITY_DEDUPLICATOR=renewal` applies deduplication in multiple iterations. It is limited by the `REPORT_RENEWAL_GUIDANCE_DEDUP_ITERATIONS` environment variable, which defaults to `3` .
 
@@ -969,6 +951,8 @@ You can also run `METRICS_UTILITY_DEDUPLICATOR` with the following environment v
 
 
 
+
+When generating the CCSP or CCSPv2 reports, you can set deduplication options to avoid counting the same managed node multiple times.
 
 The default value for `METRICS_UTILITY_DEDUPLICATOR=ccsp` . This limits deduplication to hostnames only.
 
@@ -1006,13 +990,17 @@ These external secret values are fetched before running a playbook that needs th
 
 
 
--  [Managing user credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/index#controller-credentials) .
+-  [Managing user credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/index#controller-credentials)
 
 
 ## 13.2. Configuring and linking secret lookups
 
 
 
+
+automation controller can be configured to retrieve secrets from third-party secret management systems, such as HashiCorp Vault, AWS Secrets Manager, CyberArk Conjur, and others.
+
+Learn how to configure automation controller to retrieve secrets from third-party systems by linking credential fields to external credentials that contain the necessary information to authenticate and retrieve secrets from these systems.
 
 When pulling a secret from a third-party system, you are linking credential fields to external systems. To link a credential field to a value stored in an external system, select the external credential corresponding to that system and provide `metadata` to look up the required value. The metadata input fields are part of the external credential type definition of the source credential.
 
@@ -1048,7 +1036,7 @@ icon in the input field to link one or more input fields to the external credent
 For more information, see the [Metadata for credential input sources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#ref-controller-metadata-credential-input) table.
 
 
-1. ClickTestto verify connection to the secret management system. If the lookup is unsuccessful, an error message displays:
+1. ClickTestto verify connection to the secret management system. If the lookup is unsuccessful, an error message displays.
 1. ClickOK. You return to the **Details** screen of your target credential.
 1. Repeat these steps, starting with Step 3 to complete the remaining input fields for the target credential. By linking the information in this manner, automation controller retrieves sensitive information, such as username, password, keys, certificates, and tokens from the third-party management systems and populates the remaining fields of the target credential form with that data.
 1. If necessary, supply any information manually for those fields that do not use linking as a way of retrieving sensitive information. For more information about each of the fields, see the appropriate [Credential types](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-credentials#ref-controller-credential-types) .
@@ -1057,7 +1045,7 @@ For more information, see the [Metadata for credential input sources](https://do
 
 **Additional resources**
 
-For more information, see the development documents for [Credential plugins](https://github.com/ansible/awx/blob/devel/docs/credentials/credential_plugins.md) .
+-  [Credential plugins](https://github.com/ansible/awx/blob/devel/docs/credentials/credential_plugins.md)
 
 
 ### 13.2.1. Metadata for credential input sources
@@ -1065,14 +1053,14 @@ For more information, see the development documents for [Credential plugins](htt
 
 
 
-The information required for the **Metadata** tab of the input source.
+Learn how to apply the information required for the **Metadata** tab of the input source.
 
 **AWS Secrets Manager Lookup**
 
 | Metadata | Description |
 | --- | --- |
-| AWS Secrets Manager Region (required) | The region where the secrets manager is located. |
-| AWS Secret Name (required) | Specify the AWS secret name that was generated by the AWS access key. |
+| AWS Secrets Manager Region (required) | Location of the region where the secrets manager is. |
+| AWS Secret Name (required) | Give the AWS secret name that generated by the AWS access key. |
 
 
 **Centrify Vault Credential Provider Lookup**
@@ -1162,6 +1150,8 @@ When AWS Secrets Manager lookup is selected for **Credential type** , give the f
 
 
 
+Centrify Vault Credential Provider Lookup enables automation controller to retrieve secrets from Centrify Vault when executing jobs. This integration uses the Centrify Vault API to look up secrets at job runtime.
+
 You need the Centrify Vault web service running to store secrets for this integration to work. When you select **Centrify Vault Credential Provider Lookup** for **Credential Type** , give the following metadata to configure your lookup:
 
 -  **Centrify Tenant URL** (required): give the URL used for communicating with Centrify’s secret management system
@@ -1175,6 +1165,8 @@ You need the Centrify Vault web service running to store secrets for this integr
 
 
 
+
+You can use automation controller to look up credentials stored in CyberArk Central Credential Provider (CCP) and use them in your automation tasks. This integration allows you to securely retrieve secrets from CyberArk CCP during job execution.
 
 The CyberArk Central Credential Provider web service must be running to store secrets for this integration to work. When you select **CyberArk Central Credential Provider Lookup** for **Credential Type** , give the following metadata to configure your lookup:
 
@@ -1191,14 +1183,14 @@ The CyberArk Central Credential Provider web service must be running to store se
 
 
 
-With a Conjur Cloud tenant available to target, configure the CyberArk Conjur Secrets Lookup external management system credential plugin.
+Learn how to configure a CyberArk Conjur Secrets Manager Lookup credential in automation controller.
 
 When you select **CyberArk Conjur Secrets Manager Lookup** for **Credential Type** , give the following metadata to configure your lookup:
 
--  **Conjur URL** (required): provide the URL used for communicating with CyberArk Conjur’s secret management system. This must include the URL scheme, such as http or https.
--  **API Key** (required): provide the key given by your Conjur admin
+-  **Conjur URL** (required): give the URL used for communicating with CyberArk Conjur’s secret management system. This must include the URL scheme, such as http or https.
+-  **API Key** (required): give the key given by your Conjur admin
 -  **Account** (required): the organization’s account name
--  **Username** (required): the specific authenticated user for this service
+-  **Username** (required): the authenticated user for this service
 -  **Public Key Certificate** : include the `    BEGIN CERTIFICATE` and `    END CERTIFICATE` lines when pasting the public key, if provided by CyberArk
 
 
@@ -1206,6 +1198,8 @@ When you select **CyberArk Conjur Secrets Manager Lookup** for **Credential Type
 
 
 
+
+The HashiCorp Vault secret lookup credential type allows you to retrieve secrets from a HashiCorp Vault server during playbook execution. This integration supports various authentication methods, including Token, AppRole, LDAP, Userpass, Kubernetes, and TLS Certificates.
 
 When you select **HashiCorp Vault Secret Lookup** for **Credential Type** , give the following metadata to configure your lookup:
 
@@ -1231,21 +1225,19 @@ To test the lookup, create another credential that uses Hashicorp Vault lookup.
 
 **Additional resources**
 
-For more detail about the LDAP authentication method and its fields, see the [Vault documentation for LDAP auth method](https://developer.hashicorp.com/vault/docs/auth/ldap) .
+-  [Vault documentation for LDAP auth method](https://developer.hashicorp.com/vault/docs/auth/ldap)
+-  [Vault documentation for AppRole auth method](https://developer.hashicorp.com/vault/docs/auth/approle)
+-  [Vault documentation for userpass auth method](https://developer.hashicorp.com/vault/docs/auth/userpass)
+-  [Vault documentation for Kubernetes auth method](https://developer.hashicorp.com/vault/docs/auth/kubernetes)
+-  [Vault documentation for TLS certificates auth method](https://developer.hashicorp.com/vault/docs/auth/cert)
 
-
-For more information about AppRole authentication method and its fields, see the [Vault documentation for AppRole auth method](https://developer.hashicorp.com/vault/docs/auth/approle) .
-
-For more information about the userpass authentication method and its fields, see the [Vault documentation for userpass auth method](https://developer.hashicorp.com/vault/docs/auth/userpass) .
-
-For more information about the Kubernetes auth method and its fields, see the [Vault documentation for Kubernetes auth method](https://developer.hashicorp.com/vault/docs/auth/kubernetes) .
-
-For more information about the TLS certificate auth method and its fields, see the [Vault documentation for TLS certificates auth method](https://developer.hashicorp.com/vault/docs/auth/cert) .
 
 ### 13.2.7. HashiCorp Vault Signed SSH
 
 
 
+
+You can use HashiCorp Vault Signed SSH to securely manage SSH credentials for accessing managed nodes in automation controller.
 
 When you select **HashiCorp Vault Signed SSH** for **Credential Type** , give the following metadata to configure your lookup:
 
@@ -1266,24 +1258,24 @@ When you select **HashiCorp Vault Signed SSH** for **Credential Type** , give th
 
 **Additional resources**
 
-For more information about AppRole authentication method and its fields, see the [Vault documentation for AppRole Auth Method](https://developer.hashicorp.com/vault/docs/auth/approle) .
+-  [Vault documentation for AppRole Auth Method](https://developer.hashicorp.com/vault/docs/auth/approle)
+-  [Vault documentation for Kubernetes auth method](https://developer.hashicorp.com/vault/docs/auth/kubernetes)
+-  [Vault documentation for TLS certificates auth method](https://developer.hashicorp.com/vault/docs/auth/cert)
 
-
-For more information about the Kubernetes authentication method and its fields, see the [Vault documentation for Kubernetes auth method](https://developer.hashicorp.com/vault/docs/auth/kubernetes) .
-
-For more information about the TLS certificate auth method and its fields, see the [Vault documentation for TLS certificates auth method](https://developer.hashicorp.com/vault/docs/auth/cert) .
 
 ### 13.2.8. Microsoft Azure Key Vault
 
 
 
 
+Use the Microsoft Azure Key Vault lookup to retrieve secrets from Microsoft Azure’s Key Management System (KMS) within your automation controller environment.
+
 When you select **Microsoft Azure Key Vault** for **Credential Type** , give the following metadata to configure your lookup:
 
 -  **Vault URL (DNS Name)** (required): give the URL used for communicating with Microsoft Azure’s key management system
 -  **Client ID** (required): give the identifier as obtained by Microsoft Entra ID
 -  **Client Secret** (required): give the secret as obtained by Microsoft Entra ID
--  **Tenant ID** (required): give the unique identifier that is associated with an Microsoft Entra ID instance within an Azure subscription
+-  **Tenant ID** (required): give the unique identifier associated with an Microsoft Entra ID instance within an Azure subscription
 -  **Cloud Environment** : select the applicable cloud environment to apply
 
 
@@ -1291,6 +1283,8 @@ When you select **Microsoft Azure Key Vault** for **Credential Type** , give the
 
 
 
+
+Thycotic DevOps Secrets Vault is a secrets management system that enables secure storage and retrieval of sensitive information such as passwords, API keys, and certificates.
 
 When you select **Thycotic DevOps Secrets Vault** for **Credential Type** , give the following metadata to configure your lookup:
 
@@ -1305,7 +1299,9 @@ When you select **Thycotic DevOps Secrets Vault** for **Credential Type** , give
 
 
 
-When you select **Thycotic Secrets Server** for **Credential Type** , give the following metadata to configure your lookup:
+Thycotic Secret Server is a secrets management system that enables secure storage and retrieval of sensitive information such as passwords, API keys, and certificates.
+
+Give the following metadata to configure your lookup When you select **Thycotic Secrets Server** as **Credential Type** :
 
 -  **Secret Server URL** (required): give the URL used for communicating with the Thycotic Secrets Server management system
 -  **Username** (required): specify the authenticated user for this service
@@ -1317,6 +1313,8 @@ When you select **Thycotic Secrets Server** for **Credential Type** , give the f
 
 
 
+
+Learn how to configure a `GitHub App Installation Access Token Lookup` credential in automation controller.
 
 With this plugin you can use a private GitHub App RSA key as a credential input source to pull access tokens from GitHub App installations. Platform gateway uses existing GitHub authorization from organizations' GitHub repositories.
 
@@ -1424,21 +1422,23 @@ You must have 'local' user access for the following users:
 
 
 
-Automation controller hashes local automation controller user passwords with the PBKDF2 algorithm using a SHA256 hash. Users who authenticate by external account mechanisms, such as LDAP, SAML, and OAuth, do not have any password or secret stored.
+Automation controller hashes local automation controller user passwords with the PBKDF2 algorithm by using a SHA256 hash. Users who authenticate by external account mechanisms, such as LDAP, SAML, and OAuth, do not have any password or secret stored.
 
 ### 14.1.2. Secret handling for operational use
 
 
 
 
+Learn how automation controller handles operational secrets that are required for the service to run properly.
+
 The operational secrets found in automation controller are as follows:
 
 -  `    /etc/tower/SECRET_KEY` : A secret key used for encrypting automation secrets in the database. If the `    SECRET_KEY` changes or is unknown, you cannot access encrypted fields in the database.
--  `    /etc/tower/tower.{cert,key}` : An SSL certificate and key for the automation controller web service. A self-signed certificate or key is installed by default; you can provide a locally appropriate certificate and key.
+-  `    /etc/tower/tower.{cert,key}` : An SSL/TLS certificate and key for the automation controller web service. The system installs self-signed certificate or key by default; you can give a locally appropriate certificate and key.
 - A database password in `    /etc/tower/conf.d/postgres.py` and a message bus password in `    /etc/tower/conf.d/channels.py` .
 
 
-These secrets are stored unencrypted on the automation controller server, because they are all needed to be read by the automation controller service at startup in an automated fashion. All secrets are protected by UNIX permissions, and restricted to root and the automation controller awx service user.
+The system stores these secrets unencrypted on the automation controller server, because they must be read by the automation controller service at startup in an automated fashion. UNIX permissions protect all secrets, restricting them to root and the automation controller awx service user.
 
 If you need to hide these secrets, the files that these secrets are read from are interpreted by Python. You can adjust these files to retrieve these secrets by some other mechanism anytime a service restarts. This is a customer provided modification that might need to be reapplied after every upgrade. Red Hat Support and Red Hat Consulting have examples of such modifications.
 
@@ -1447,7 +1447,7 @@ If the secrets system is down, automation controller cannot get the information 
 
 
 
-If you believe the `SECRET_KEY` that automation controller generated for you has been compromised and needs to be regenerated, you can run a tool from the installer that behaves much like the automation controller backup and restore tool.
+If you believe the `SECRET_KEY` that automation controller generated for you has been compromised and needs to be regenerated, you can run a tool from the installation program that behaves much as the automation controller backup and restore tool.
 
 Important
 Ensure that you backup your automation controller database before you generate a new secret key.
@@ -1467,7 +1467,7 @@ setup.sh -k.
 
 
 
-A backup copy of the previous key is saved in `/etc/tower/` .
+A backup copy of the earlier key is saved in `/etc/tower/` .
 
 ### 14.1.3. Secret handling for automation use
 
@@ -1483,7 +1483,7 @@ These secrets include the following:
 - "password" type survey field entries.
 
 
-To encrypt secret fields, automation controller uses AES in CBC mode with a 256-bit key for encryption, PKCS7 padding, and HMAC using SHA256 for authentication.
+To encrypt secret fields, automation controller uses AES in CBC mode with a 256-bit key for encryption, PKCS7 padding, and HMAC by using SHA256 for authentication.
 
 The encryption or decryption process derives the AES-256 bit encryption key from the `SECRET_KEY` , the field name of the model field and the database assigned auto-incremented record ID. Therefore, if any attribute used in the key generation process changes, the automation controller fails to correctly decrypt the secret.
 
@@ -1527,7 +1527,9 @@ Automation controller connects to the following services as part of internal ope
 
 
 
-Automation controller is accessed using standard HTTP/HTTPS on standard ports, provided by Nginx. A self-signed certificate or key is installed by default; you can provide a locally appropriate certificate and key. SSL/TLS algorithm support is configured in the `/etc/nginx/nginx.conf` configuration file. An "intermediate" profile is used by default, that you can configure. You must reapply changes after each update.
+Automation controller is accessed using standard HTTP/HTTPS on standard ports, provided by Nginx. A self-signed certificate or key is installed by default; you can provide a locally appropriate certificate and key.
+
+SSL/TLS algorithm support is configured in the `/etc/nginx/nginx.conf` configuration file. An "intermediate" profile is used by default, that you can configure. You must reapply changes after each update.
 
 ### 14.1.7. Managed nodes
 
@@ -1556,7 +1558,9 @@ To secure Red Hat Enterprise Linux start with the following release-appropriate 
 
 
 
-Ansible Automation Platform and automation controller comprise a general-purpose, declarative automation platform. That means that when an Ansible Playbook is launched (by automation controller, or directly on the command line), the playbook, inventory, and credentials provided to Ansible are considered to be the source of truth. If you want policies around external verification of specific playbook content, job definition, or inventory contents, you must complete these processes before the automation is launched, either by the automation controller web UI, or the automation controller API.
+Ansible Automation Platform and automation controller comprise a general-purpose, declarative automation platform. When an Ansible Playbook is launched (by automation controller, the playbook, inventory, and credentials provided to Ansible are considered to be the source of truth.
+
+If you want policies around external verification of specific playbook content, job definition, or inventory contents, you must complete these processes before the automation is launched, either by the automation controller web UI, or the automation controller API.
 
 The use of source control, branching, and mandatory code review is best practice for Ansible automation. There are tools that can help create process flow around using source control in this manner.
 
@@ -1586,7 +1590,9 @@ Granting access to certain parts of the system exposes security risks. Apply the
 
 
 
-Minimizing the access to system administrative accounts is crucial for maintaining a secure system. A system administrator or root user can access, edit, and disrupt any system application. Limit the number of people or accounts with root access, where possible. Do not give out _sudo_ to _root_ or _awx_ (the automation controller user) to untrusted users. Note that when restricting administrative access through mechanisms like _sudo_ , restricting to a certain set of commands can still give a wide range of access. Any command that enables execution of a shell or arbitrary shell commands, or any command that can change files on the system, is equal to full root access.
+Minimizing the access to system administrative accounts is crucial for maintaining a secure system. A system administrator or root user can access, edit, and disrupt any system application.
+
+Limit the number of people or accounts with root access, where possible. Do not give out _sudo_ to _root_ or _awx_ (the automation controller user) to untrusted users. Note that when restricting administrative access through mechanisms such as _sudo_ , restricting to a certain set of commands can still give a wide range of access. Any command that enables execution of a shell or arbitrary shell prompt commands, or any command that can change files on the system, is equal to full root access.
 
 With automation controller, any automation controller "system administrator" or "superuser" account can edit, change, and update an inventory or automation definition in automation controller. Restrict this to the minimum set of users possible for low-level automation controller configuration and disaster recovery only.
 
@@ -1602,12 +1608,16 @@ When you use automation controller with best practices, it does not require loca
 
 
 
-If an automation controller credential is only stored in the controller, you can further secure it. You can configure services such as OpenSSH to only permit credentials on connections from specific addresses. Credentials used by automation can be different from credentials used by system administrators for disaster-recovery or other ad hoc management, allowing for easier auditing.
+You can remove user access to credentials stored in an automation controller controller to enhance security.
+
+If an automation controller credential is only stored in the controller, you can further secure it. You can configure services such as OpenSSH to only allow credentials on connections from specific addresses. Credentials used by automation can be different from credentials used by system administrators for disaster-recovery or other ad hoc management, allowing for easier auditing.
 
 ### 15.1.5. Enforce separation of duties
 
 
 
+
+Separation of duties is a security principle that prevents fraud and errors by dividing responsibilities among multiple individuals or systems. You can enforce separation of duties by using different credentials for different levels of access or different types of automation tasks.
 
 Different pieces of automation might require access to a system at different levels. For example, you can have low-level system automation that applies patches and performs security baseline checking, while a higher-level piece of automation deploys applications. By using different keys or credentials for each piece of automation, the effect of any one key vulnerability is minimized, while also enabling baseline auditing.
 
@@ -1616,7 +1626,9 @@ Different pieces of automation might require access to a system at different lev
 
 
 
-Several resources exist in automation controller and elsewhere to ensure a secure platform. Consider using the following functionalities:
+Several resources exist in automation controller and elsewhere to ensure a secure platform.
+
+Consider using the following functionalities:
 
 -  [Existing security functionality](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-security-best-practices#controller-existing-security)
 -  [External account stores](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-security-best-practices#controller-external-account-stores)
@@ -1628,7 +1640,7 @@ Several resources exist in automation controller and elsewhere to ensure a secur
 
 
 
-Note the following:
+Consider the following security best practices when implementing or deploying any new system to protect your organization’s assets:
 
 - Do not disable SELinux or automation controller’s existing multi-tenant containment.
 - Use automation controller’s role-based access control (RBAC) to delegate the minimum level of privileges required to run automation. For more information, see [Managing access with role based access control](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access)
@@ -1647,7 +1659,9 @@ Maintaining a full set of users in automation controller can be a time-consuming
 
 
 
-Automation controller administrators can use Django to set password policies at creation time through `AUTH_PASSWORD_VALIDATORS` to validate automation controller user passwords. In the `custom.py` file located at `/etc/tower/conf.d` of your automation controller instance, add the following code block example:
+Learn how to set password policies to validate user passwords upon creation, ensuring compliance with organizational security standards.
+
+Add the following code block example in the `custom.py` file located at `/etc/tower/conf.d` of your automation controller instance:
 
 ```
 AUTH_PASSWORD_VALIDATORS = [
@@ -1673,10 +1687,10 @@ Ensure that you restart your automation controller instance for the change to ta
 
 **Additional resources**
 
-[Password validation](https://docs.djangoproject.com/en/3.2/topics/auth/passwords/#module-django.contrib.auth.password_validation)
+-  [Password validation](https://docs.djangoproject.com/en/3.2/topics/auth/passwords/#module-django.contrib.auth.password_validation)
 
 
-# Chapter 16. The _awx-manage_ Utility
+# Chapter 16. The _awx-manage_ utility
 
 
 
@@ -1722,7 +1736,9 @@ Edits and additions to Inventory host variables persist beyond an inventory sync
 
 
 
-`awx-manage` has a variety of commands used to clean old data from automation controller. Automation controller administrators can use the automation controller **Management Jobs** interface for access or use the command line.
+`awx-manage` has a variety of commands used to clean old data from automation controller.
+
+Automation controller administrators can use the automation controller **Management Jobs** interface for access or use the command line.
 
 -  `    awx-manage cleanup_jobs [--help]`
 
@@ -1739,9 +1755,11 @@ This permanently deletes any [Activity stream] data older than a specific number
 
 
 
-For more information about the `awx-manage provision_instance` and `awx-manage deprovision_instance` commands, see [Clustering](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/controller-clustering) .
+This section describes how to manage a automation controller cluster by provisioning and deprovisioning cluster instances. Automation controller uses the `awx-manage` command-line tool to manage cluster instances.
 
-Note
+For more information about the `awx-manage provision_instance` and `awx-manage deprovision_instance` commands, see [Clustering](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-clustering) .
+
+Important
 Do not run other `awx-manage` commands unless instructed by Ansible Support.
 
 
@@ -1817,6 +1835,8 @@ setup.sh -i &lt;inventory file&gt;
 
 
 
+automation controller includes playbooks to backup and restore your installation.
+
 In addition to the `install.yml` file included with your `setup.sh` setup playbook, there are also `backup.yml` and `restore.yml` files.
 
 These playbooks serve to backup and restore.
@@ -1855,6 +1875,8 @@ Consider the following points when you backup and restore your system:
 
 
 
+Learn how to back up and restore automation controller in a clustered environment.
+
 The procedure for backup and restore for a clustered environment is similar to a single install, except for some of the following considerations:
 
 Note
@@ -1884,6 +1906,11 @@ When restoring a backup to a separate instance or cluster, manual projects and c
 
 The restore process does not alter instance groups present before the restore. It does not introduce any new instance groups either. Restored automation controller resources that were associated to instance groups likely need to be reassigned to instance groups present on the new automation controller cluster.
 
+Warning
+If you plan to use a backup and restore operation to migrate your Ansible Automation Platform instance to a different cluster or new set of hostnames, any Red Hat Ansible Automation Platform credentials you set up for Event-Driven Ansible controller will break, causing your rulebook activations to fail. You must manually edit and update the automation controller URL and associated credentials after the restore operation is complete to restore connectivity.
+
+
+
 # Chapter 18. Usability Analytics and Data Collection
 
 
@@ -1909,7 +1936,7 @@ For opt-in of Automation Analytics to have any effect, your instance of automati
 
 
 
-As with Red Hat Insights, Automation Analytics is built to collect the minimum amount of data needed. No credential secrets, personal data, automation variables, or task output is gathered.
+As with Red Hat Lightspeed, Automation Analytics is built to collect the minimum amount of data needed. No credential secrets, personal data, automation variables, or task output is gathered.
 
 When you imported your license for the first time, you were automatically opted in to Automation Analytics. To configure or disable this feature, see [Configuring Automation Analytics](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#proc-controller-configure-analytics) .
 
@@ -1923,14 +1950,14 @@ This setting can also be enabled through the API by specifying `INSIGHTS_TRACKIN
 
 The Automation Analytics generated from this data collection can be found on the [Red Hat Cloud Services](https://cloud.redhat.com) portal.
 
-**Clusters** data is the default view. This graph represents the number of job runs across all automation controller clusters over a period of time. The previous example shows a span of a week in a stacked bar-style chart that is organized by the number of jobs that ran successfully (in green) and jobs that failed (in red).
+**Clusters** data is the default view. This graph represents the number of job runs across all automation controller clusters over a period of time. The previous example shows a span of a week in a stacked bar-style chart that is organized by the number of jobs that ran successfully and jobs that failed.
 
 Alternatively, you can select a single cluster to view its job status information.
 
 ![Job run status](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/8367194553220359712bc53b67ce39c1/aa-job-run-status-over-time-period.png)
 
 
-This multi-line chart represents the number of job runs for a single automation controller cluster for a specified period of time. The preceding example shows a span of a week, organized by the number of successfully running jobs (in green) and jobs that failed (in red). You can specify the number of successful and failed job runs for a selected cluster over a span of one week, two weeks, and monthly increments.
+This multi-line chart represents the number of job runs for a single automation controller cluster for a specified period of time. The preceding example shows a span of a week, organized by the number of successfully running jobs and jobs that failed. You can specify the number of successful and failed job runs for a selected cluster over a span of one week, two weeks, and monthly increments.
 
 On the clouds navigation panel, selectOrganization Statisticsto view information for the following:
 
@@ -1971,7 +1998,7 @@ This chart represents automation controller use across all automation controller
 
 This bar chart represents automation controller use by organization and date, which is calculated by the number of jobs run by that organization on a particular date.
 
-Alternatively, you can specify to show the number of job runs per organization in one week, two weeks, and monthly increments.
+You can also specify to show the number of job runs per organization in one week, two weeks, and monthly increments.
 
 ![Organization status](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/0f8ed00783958a1c019d012596cdfd01/aa-usage-by-org-by-date.png)
 
@@ -1980,6 +2007,8 @@ Alternatively, you can specify to show the number of job runs per organization i
 
 
 
+
+Learn about the specific data that automation controller collects and sends to Red Hat when you enable Automation Analytics.
 
 Automation Analytics collects the following classes of data from automation controller:
 
@@ -2119,6 +2148,8 @@ Which includes the following fields:
 
 
 
+Automation controller generates an `instance_info.json` file that provides detailed information about each instance in the cluster. This file is typically located in the `/var/lib/&lt;controller_service_name&gt;/instance_info.json` path on the controller node.
+
 The `instance_info.json` file contains detailed information on the instances that make up the cluster, organized by instance UUID.
 
 The following is an example `instance_info.json` file:
@@ -2231,6 +2262,8 @@ The following is an example `org_counts.json` file:
 
 
 
+
+Automation controller generates a `cred_type_counts.json` file that provides a summary of credential types and their counts in the cluster. This file is typically located in the `/var/lib/&lt;controller_service_name&gt;/cred_type_counts.json` path on the controller node.
 
 The `cred_type_counts.json` file has information about different credential types in the cluster, and how many credentials exist for each type.
 
@@ -2425,7 +2458,7 @@ Note that instances in this file are by hostname, not by UUID as they are in `in
 
 
 
-The `unified_job_template_table.csv` file provides information on job templates in the system. Each line contains the following fields for the job template:
+The `unified_job_template_table.csv` file provides information about job templates in the system. Each line has the following fields for the job template:
 
 -  **id** : Job template id.
 -  **name** : Job template name.
@@ -2449,9 +2482,9 @@ The `unified_job_template_table.csv` file provides information on job templates 
 
 
 
-The `unified_jobs_table.csv` file provides information on jobs run by the system.
+The `unified_jobs_table.csv` file provides information about jobs run by the system.
 
-Each line contains the following fields for a job:
+Each line has the following fields for a job:
 
 -  **id** : Job id.
 -  **name** : Job name (from the template).
@@ -2472,7 +2505,7 @@ Each line contains the following fields for a job:
 -  **cancel_flag** : Whether the job was canceled.
 -  **status** : Status of the job.
 -  **failed** : Whether the job failed.
--  **job_explanation** : Any additional detail for jobs that failed to execute properly.
+-  **job_explanation** : Any additional detail for jobs that failed to run properly.
 -  **forks** : Number of forks executed for this job.
 
 
@@ -2502,7 +2535,7 @@ Each line contains the following fields for a worfklow job template node:
 
 
 
-The `workflow_job_node_table.csv` provides information on the jobs that have been executed as part of a workflow on the system.
+The `workflow_job_node_table.csv` provides information about the jobs that have been executed as part of a workflow on the system.
 
 Each line contains the following fields for a job run as part of a workflow:
 
@@ -2525,9 +2558,9 @@ Each line contains the following fields for a job run as part of a workflow:
 
 
 
-The `events_table.csv` file provides information on all job events from all job runs in the system.
+This provides information about all job events from all job runs in the system.
 
-Each line contains the following fields for a job event:
+Each line has the following fields for a job event:
 
 -  **id** : Event id.
 -  **uuid** : Event UUID.
@@ -2537,7 +2570,7 @@ Each line contains the following fields for a job event:
 -  **task_action** : The module associated with this event, if any (such as `    command` or `    yum` ).
 -  **failed** : Whether the event returned `    failed` .
 -  **changed** : Whether the event returned `    changed` .
--  **playbook** : Playbook associated with the event.
+-  **playbook** : The playbook associated with the event.
 -  **play** : Play name from playbook.
 -  **task** : Task name from playbook.
 -  **role** : Role name from playbook.
@@ -2551,10 +2584,12 @@ Each line contains the following fields for a job event:
 -  **deprecations** : Any deprecation warnings from the task or module.
 
 
-## 18.3. Analytics Reports
+## 18.3. Analytics reports
 
 
 
+
+The Automation Analytics feature collects and aggregates data from your automation environment to provide insights into usage patterns and performance. This data helps you optimize your automation strategies and improve efficiency.
 
 Reports for data collected are available through [console.redhat.com](https://console.redhat.com) .
 
@@ -2581,7 +2616,9 @@ Useful troubleshooting information for automation controller.
 
 
 
-Access to automation controller is intentionally restricted through a secure protocol (HTTPS). In cases where your configuration is set up to run an automation controller node behind a load balancer or proxy as "HTTP only", and you only want to access it without SSL (for troubleshooting, for example), you must add the following settings in the `custom.py` file located at `/etc/tower/conf.d` of your automation controller instance:
+Access to automation controller is intentionally restricted through a secure protocol (HTTPS).
+
+In cases where your configuration is set up to run an automation controller node behind a load balancer or proxy as "HTTP only", and you only want to access it without SSL/TLS (for troubleshooting, for example), you must add the following settings in the `custom.py` file located at `/etc/tower/conf.d` of your automation controller instance:
 
 ```
 SESSION_COOKIE_SECURE = False
@@ -2601,7 +2638,7 @@ automation-controller-service restart
 
 
 
-If you are unable to run a job from a playbook, review the playbook YAML file. When importing a playbook, either manually or by a source control mechanism, keep in mind that the host definition is controlled by automation controller and should be set to `hosts:all` .
+If you are unable to run a job from a playbook, review the playbook YAML file. When importing a playbook, either manually or by a source control mechanism, remember that the host definition is controlled by automation controller and should be set to `hosts:all` .
 
 ## 19.3. Playbooks do not show up in the Job Template list
 
@@ -2637,6 +2674,8 @@ If you continue to have issues, run `sosreport` as root on the automation contro
 
 
 
+When reusing an external database for clustered installations, you must manually clear the database before performing subsequent installations.
+
 Instances have been reported where reusing the external database during subsequent installation of nodes causes installation failures.
 
 **Example**
@@ -2655,7 +2694,9 @@ By default, automation controller only shows instances in a VPC that have an Ela
 **Procedure**
 
 1. From the navigation panel, selectAutomation Execution→Infrastructure→Inventories.
-1. Select the inventory that has the **Source** set to **Amazon EC2** , and click the **Source** tab. In the **Source Variables** field, enter:
+1. Select the inventory that has the **Source** set to **Amazon EC2** , and click the **Source** tab.
+
+In the **Source Variables** field, enter:
 
 
 ```
@@ -2671,6 +2712,8 @@ vpc_destination_variable: private_ip_address
 Once you complete these steps, you can see your VPC instances.
 
 
++
+
 Note
 Automation controller must be running inside the VPC with access to those instances if you want to configure them.
 
@@ -2680,6 +2723,8 @@ Automation controller must be running inside the VPC with access to those instan
 
 
 
+
+Use administrative tools and advanced techniques to manage complex configuration settings, optimize automation controller performance, and extend core functionality.
 
 -  [Use the automation controller CLI Tool](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#ref-controller-use-CLI-tool)
 -  [Change the automation controller Admin Password](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#ref-controller-change-admin-password)
@@ -2704,9 +2749,7 @@ Automation controller must be running inside the VPC with access to those instan
 
 Automation controller has a full-featured command line interface.
 
-For more information on configuration and use, see the [AWX Command Line Interface](https://docs.ansible.com/automation-controller/latest/html/controllercli/usage.html) and the [AWX manage utility](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#assembly-controller-awx-manage-utility) section.
-
-## 20.2. Change the automation controller Administrator Password
+## 20.2. Change the automation controller administrator password
 
 
 
@@ -2721,7 +2764,7 @@ awx-manage changepassword admin
 
 Next, enter a new password. After that, the password you have entered works as the administrator password in the web UI.
 
-To set policies at creation time for password validation using Django, see [Django password policies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#controller-django-password-policies) .
+To set policies at creation time for password validation by using Django, see [Django password policies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#controller-django-password-policies) .
 
 ## 20.3. Create an automation controller Administrator from the command line
 
@@ -2741,14 +2784,18 @@ awx-manage createsuperuser
 
 
 
+A jump host (also known as a bastion host) is an intermediary server through which connections to managed nodes are routed.
+
+This setup enhances security by isolating the managed nodes from direct access from the automation controller server. To configure automation controller to use a jump host when connecting to managed nodes, you need to modify the SSH configuration used by Ansible. This involves editing the SSH configuration file to specify the jump host details.
+
 Credentials supplied by automation controller do not flow to the jump host through ProxyCommand. They are only used for the end-node when the tunneled connection is set up.
 
-### 20.4.1. Configure a fixed user/keyfile in your SSH configuration file
+### 20.4.1. Configure a fixed user or keyfile in your SSH configuration file
 
 
 
 
-You can configure a fixed user/keyfile in your SSH configuration file in the ProxyCommand definition that sets up the connection through the jump host.
+You can configure a fixed user or keyfile in your SSH configuration file in the ProxyCommand definition that sets up the connection through the jump host.
 
 **Prerequisites**
 
@@ -2829,7 +2876,9 @@ To view the Ansible outputs, browse to https://<controller server name>/api/v2/j
 
 
 
-While Ansible does not require a configuration file, OS packages often include a default one in `/etc/ansible/ansible.cfg` for possible customization.
+Configure a custom Ansible configuration file (ansible.cfg) by placing it at the project root. This allows automation controller to customize settings for job execution.
+
+While Ansible does not require a configuration file, operating system packages often include a default one in `/etc/ansible/ansible.cfg` for possible customization.
 
 To use a custom `ansible.cfg` file, place it at the root of your project. Automation controller runs `ansible-playbook` from the root of the project directory, where it finds the custom `ansible.cfg` file.
 
@@ -2838,9 +2887,7 @@ An `ansible.cfg` file anywhere else in the project is ignored.
 
 
 
-To learn which values you can use in this file, see [Generating a sample ansible.cfg file](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#generating-a-sample-ansible-cfg-file) in the Ansible documentation.
-
-Using the defaults are acceptable for starting out, but you can configure the default module path or connection type here, as well as other things.
+Using the defaults are acceptable for starting out, but you can configure the default module path or connection type here, and other things.
 
 Automation controller overrides some `ansible.cfg` options. For example, automation controller stores the SSH ControlMaster sockets, the SSH agent socket, and any other per-job run items in a per-job temporary directory that is passed to the container used for job execution.
 
@@ -2848,6 +2895,8 @@ Automation controller overrides some `ansible.cfg` options. For example, automat
 
 
 
+
+You can view a listing of all `ansible_` variables that automation controller gathers about managed hosts.
 
 By default, Ansible gathers "facts" about the machines under its management, accessible in Playbooks and in templates.
 
@@ -2857,12 +2906,14 @@ To view all facts available about a machine, run the `setup` module as an _ad ho
 ansible -m setup hostname
 ```
 
-This prints out a dictionary of all facts available for that particular host. For more information, see [information-discovered-from-systems-facts](https://docs.ansible.com/ansible/latest/reference_appendices/special_variables.html#facts) in the Ansible documentation.
+This prints out a dictionary of all facts available for that particular host.
 
 ## 20.8. The ALLOW_JINJA_IN_EXTRA_VARS variable
 
 
 
+
+The `ALLOW_JINJA_IN_EXTRA_VARS` setting controls whether Jinja templating is allowed in extra variables for job templates in automation controller.
 
 Setting `ALLOW_JINJA_IN_EXTRA_VARS = template` only works for saved job template extra variables.
 
@@ -2882,18 +2933,18 @@ This parameter is configurable in the **Jobs Settings** page of the automation c
 
 
 
+You can configure the hostname used in notification emails sent by automation controller.
+
 From the **System settings** page, you can replace `https://controller.example.com` in the **Base URL of the Service** field with your preferred hostname to change the notification hostname.
 
 Refreshing your automation controller license also changes the notification hostname. New installations of automation controller need not set the hostname for notifications.
 
-## 20.10. Launching Jobs with curl
+## 20.10. Launching jobs with curl
 
 
 
 
-Launching jobs with the automation controller API is simple.
-
-The following are some easy to follow examples using the `curl` tool.
+Use the `curl` command line tool to launch automation controller jobs programmatically through the REST API. This method provides a direct way to integrate job execution into external scripts, ensuring immediate control.
 
 Assuming that your Job Template ID is '1', your controller IP is 192.168.42.100, and that `admin` and `awxsecret` are valid login credentials, you can create a new job this way:
 
@@ -2912,16 +2963,18 @@ curl -f -k -H 'Content-Type: application/json' -XPOST \
 ```
 
 Note
-The `extra_vars` parameter must be a string which contains JSON, not just a JSON dictionary. Use caution when escaping the quotes, etc.
+The `extra_vars` parameter must be a string which contains JSON, not just a JSON dictionary. Use caution when escaping the quotes.
 
 
 
-## 20.11. Filtering instances returned by the dynamic inventory sources in the controller
+## 20.11. Filtering instances returned by the dynamic inventory sources in automation controller
 
 
 
 
-By default, the dynamic inventory sources in automation controller (such as AWS and Google) return all instances available to the cloud credentials being used. They are automatically joined into groups based on various attributes. For example, AWS instances are grouped by region, by tag name, value, and security groups. To target specific instances in your environment, write your playbooks so that they target the generated group names.
+By default, the dynamic inventory sources in automation controller (such as AWS and Google) return all instances available to the cloud credentials being used. They are automatically joined into groups based on various attributes.
+
+For example, AWS instances are grouped by region, by tag name, value, and security groups. To target specific instances in your environment, write your playbooks so that they target the generated group names.
 
 For example:
 
@@ -2934,7 +2987,7 @@ tasks:
 
 You can also use the `Limit` field in the Job Template settings to limit a playbook run to a certain group, groups, hosts, or a combination of them. The syntax is the same as the `--limit parameter` on the ansible-playbook command line.
 
-You can also create your own groups by copying the auto-generated groups into your custom groups. Make sure that the `Overwrite` option is disabled on your dynamic inventory source, otherwise subsequent synchronization operations delete and replace your custom groups.
+You can also create your own groups by copying the autogenerated groups into your custom groups. Make sure that the `Overwrite` option is disabled on your dynamic inventory source, otherwise subsequent synchronization operations delete and replace your custom groups.
 
 ## 20.12. Use an unreleased module from Ansible source with automation controller
 
@@ -2956,8 +3009,6 @@ When this is created, copy the module you want to use and drop it into the `/lib
 
 Ansible has a flexible method of handling actions during playbook runs, called callback plugins. You can use these plugins with automation controller to do things such as notify services upon playbook runs or failures, or send emails after every playbook run.
 
-For official documentation on the callback plugin architecture, see [Developing plugins](http://docs.ansible.com/developing_plugins.html#callbacks) .
-
 Note
 Automation controller does not support the `stdout` callback plugin because Ansible only permits one, and it is already being used for streaming event data.
 
@@ -2973,14 +3024,14 @@ To use these plugins, put the callback plugin `.py` file into a directory called
 Note
 To have most callbacks shipped with Ansible applied globally, you must add them to the `callback_whitelist` section of your `ansible.cfg` .
 
-If you have custom callbacks, see [Enabling callback plugins](https://docs.ansible.com/ansible/latest/plugins/callback.html#enabling-callback-plugins) .
-
 
 
 ## 20.14. Connect to Windows with winrm
 
 
 
+
+To connect to Windows hosts by using `winrm` , you must specify the connection type in the group variables.
 
 By default, automation controller attempts to `ssh` to hosts.
 
@@ -2996,10 +3047,12 @@ icon of the group name that contains the Windows servers. In the "variables" sec
 
 When complete, save your edits. If Ansible was previously attempting an SSH connection and failed, you should re-run the job template.
 
-## 20.15. Import existing inventory files and host/group vars into automation controller
+## 20.15. Import existing inventory files and host or group vars into automation controller
 
 
 
+
+You can import existing static inventory files and host or group variable files into automation controller using the `awx-manage inventory_import` command.
 
 To import an existing static inventory and the accompanying host and group variables into automation controller, your inventory must be in a structure similar to the following:
 
@@ -3040,7 +3093,7 @@ If you receive an error, such as:
 ValueError: need more than 1 value to unpack
 ```
 
-Create a directory to hold the hosts file, as well as the group_vars:
+Create a directory to hold the hosts file and the group_vars:
 
 ```
 mkdir -p inventory-directory/group_vars
@@ -3051,7 +3104,7 @@ Then, for each of the groups that have :vars listed, create a file called `inven
 The importer then handles the conversion correctly.
 
 
-<span id="idm139673923123312"></span>
+<span id="idm140225414213264"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

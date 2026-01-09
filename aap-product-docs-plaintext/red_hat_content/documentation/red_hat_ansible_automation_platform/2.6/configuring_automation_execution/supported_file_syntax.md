@@ -1,6 +1,6 @@
 # 5. Inventory File Importing
-## 5.1. Source control management Inventory Source Fields
-### 5.1.1. Supported File Syntax
+## 5.1. Source control management inventory source fields
+### 5.1.1. Supported file syntax
 
 
 

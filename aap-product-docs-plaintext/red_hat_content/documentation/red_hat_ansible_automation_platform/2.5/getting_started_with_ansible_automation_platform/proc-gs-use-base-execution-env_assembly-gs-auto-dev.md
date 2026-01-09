@@ -1,19 +1,19 @@
 # 3. Getting started as an automation developer
-## 3.7. Build and use an execution environment
-### 3.7.1. Using the base automation execution environment
+## 3.8. Build and use an execution environment
+### 3.8.1. Using the base automation execution environment
 
 
 
 
-Your subscription with Ansible Automation Platform gives you access to some base automation execution environments. You can use a base execution environment as a starting point for creating a customized execution environment.
+Ansible Automation Platform provides access to some base automation execution environments. You can use a base execution environment as a starting point for creating a customized execution environment.
 
-Ansible Automation Platform includes the following default execution environments:
+Ansible Automation Platform includes the following execution environments:
 
 -  `    Minimal` - Includes the latest Ansible-core 2.15 release along with Ansible Runner, but does not include collections or other content
 -  `    EE Supported` - Minimal, plus all Red Hat-supported collections and dependencies
 
 
-Base images included with Ansible Automation Platform are hosted on the Red Hat Ecosystem Catalog (registry.redhat.io).
+Base images included with Ansible Automation Platform are hosted on the Red Hat Ecosystem Catalog ( `registry.redhat.io` ).
 
 **Prerequisites**
 
@@ -22,7 +22,7 @@ Base images included with Ansible Automation Platform are hosted on the Red Hat 
 
 **Procedure**
 
-1. Log in to registry.redhat.io.
+1. Log in to `    registry.redhat.io` .
 
 
 ```
@@ -34,20 +34,20 @@ $ podman login registry.redhat.io
 
 
 ```
-$podman pull registry.redhat.io/aap/&lt;image name&gt;
+$ podman pull registry.redhat.io/aap/&lt;image name&gt;
 ```
 
 **Additional resources**
 
-While these environments cover many automation use cases, you can also customize these containers for your specific needs. For more information about customizing your execution environment, see [Customizing an existing automation execution environment image](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/creating_and_using_execution_environments/assembly-publishing-exec-env#proc-customize-ee-image) in the Creating and using execution environments guide.
+-  [Customizing an existing automation execution environment image](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/creating_and_using_execution_environments/assembly-publishing-exec-env#proc-customize-ee-image)
 
 
-#### 3.7.1.1. About Ansible Builder
+#### 3.8.1.1. About Ansible Builder
 
 
 
 
-You also have the option of creating an entirely new execution environment with Ansible Builder, also referred to as execution environment builder. Ansible Builder is a command line tool you can use to create an execution environment for Ansible. You can only create execution environments with Ansible Builder.
+You also have the option of creating an entirely new execution environment with Ansible Builder, also referred to as execution environment builder. Ansible Builder is a command line tool you can use to create an execution environment for Ansible.
 
 To build your own execution environment, you must:
 

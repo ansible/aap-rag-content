@@ -4,6 +4,8 @@
 
 
 
+When automation controller is configured in a clustered environment, jobs can be executed on any instance within the cluster.
+
 The way jobs are run and reported to a _normal_ user of automation controller does not change. On the system side, note the following differences:
 
 - When a job is submitted from the API interface it is pushed into the dispatcher queue. Each automation controller instance connects to and receives jobs from that queue using a scheduling algorithm. Any instance in the cluster is just as likely to receive the work and run the task. If an instance fails while executing jobs, then the work is marked as permanently failed.

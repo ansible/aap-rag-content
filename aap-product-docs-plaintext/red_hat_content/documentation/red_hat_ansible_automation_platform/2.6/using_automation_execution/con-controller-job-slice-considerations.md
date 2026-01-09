@@ -19,7 +19,7 @@ When setting up job slices, consider the following:
 Note
 Job slicing is intended to scale job executions horizontally. Enabling job slicing on a job template divides an inventory to be acted upon in the number of slices configured at launch time and then starts a job for each slice.
 
-Normally, the number of slices is equal to or less than the number of automation controller nodes. You can set an extremely high number of job slices but it can cause performance degradation. The job scheduler is not designed to simultaneously schedule thousands of workflow nodes, which are what the sliced jobs become.
+Normally, the number of slices is equal to or less than the number of hybrid or execution nodes. A job template can also be limited to certain instances through its instance groups. You can set an extremely high number of job slices but it can cause performance degradation. The job scheduler is not designed to simultaneously schedule thousands of workflow nodes, which are what the sliced jobs become.
 
 
 - Sliced job templates with prompts or extra variables behave the same as standard job templates, applying all variables and limits to the entire set of slice jobs in the resulting workflow job. However, when passing a limit to a sliced job, if the limit causes slices to have no hosts assigned, those slices will fail, causing the overall job to fail.
@@ -28,6 +28,6 @@ Normally, the number of slices is equal to or less than the number of automation
 
 
 - Any job that intends to orchestrate across hosts (rather than just applying changes to individual hosts) must not be configured as a slice job.
-- Any job that does, can fail, and automation controller does not try to discover or account for playbooks that fail when run as slice jobs.
+- If a sliced job fails, automation controller does not attempt to discover or account for the specific failed playbooks.
 
 

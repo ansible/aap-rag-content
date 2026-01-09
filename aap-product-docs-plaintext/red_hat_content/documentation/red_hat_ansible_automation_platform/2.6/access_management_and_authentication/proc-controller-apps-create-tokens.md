@@ -36,7 +36,7 @@ The Token information is displayed with **Token** and **Refresh Token** informat
 
 **Verification**
 
-You can verify that the application now shows the user with the appropriate token using the Tokens tab on the Applications details page.
+You can verify that the application now shows the user with the appropriate token by using the **Tokens** tab on the Applications details page.
 
 
 1. From the navigation panel, selectAccess Management→OAuth Applications.

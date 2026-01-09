@@ -4,10 +4,12 @@
 
 
 
+Log in to the deployed self-service automation portal using your existing Ansible Automation Platform credentials. The portal uses these credentials for authentication.
+
 **Prerequisites**
 
-1. You have configured an OAuth application in Ansible Automation Platform for self-service automation portal.
-1. You have configured a user account in Ansible Automation Platform.
+- You have configured an OAuth application in Ansible Automation Platform for self-service automation portal.
+- You have configured a user account in Ansible Automation Platform.
 
 
 **Procedure**
@@ -27,5 +29,25 @@
 
 1. Enter your Ansible Automation Platform credentials and click **Log in** .
 1. The self-service automation portal web console opens.
+
+
+**Troubleshooting**
+
+If your are using custom SSL certificates and when attempting to log in to self-service automation portal, it displays the error:
+
+
+`Login failed; caused by Error: Failed to send POST request: fetch failed`
+
+You must disable SSL validation in the Helm chart configuration.
+
+1. In the self-service automation portal Helm chart, locate the `    checkSSL` parameter and set its value to `    false` :
+
+
+```
+upstream:        backstage:          appConfig:            ansible:              creatorService:                baseUrl: 127.0.0.1                port: '8000'              rhaap:                baseUrl: '${AAP_HOST_URL}'                checkSSL: false &lt;-- Update this to false                token: '${AAP_TOKEN}'
+```
+
+
+1. Apply the updated configuration by upgrading the self-service automation portal Helm chart to allow users to log in.
 
 

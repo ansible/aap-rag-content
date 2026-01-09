@@ -1,5 +1,5 @@
 # 6. Job templates
-## 6.18. Use Cloud Credentials with a cloud inventory
+## 6.14. Use Cloud Credentials with a cloud inventory
 
 
 

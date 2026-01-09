@@ -32,10 +32,7 @@ If a field has the **Prompt on launch** checkbox selected, either launching the 
 
 - a:b means "in group a or b"
 - a:b:&c means "in a or b but must be in c"
-- a:!b means "in a, and definitely not in b"
-
-
-For more information see, [Patterns: targeting hosts and groups](https://docs.ansible.com/ansible/latest/inventory_guide/intro_patterns.html) in the Ansible documentation. | Yes
+- a:!b means "in a, and definitely not in b" | Yes
 
 If selected, even if a default value is supplied, you are prompted upon launch to select a limit. |
 | Source control branch | Select a branch for the workflow. This branch is applied to all workflow job template nodes that prompt for a branch. | Yes |
@@ -48,8 +45,8 @@ beside a label to remove it. When a label is removed, it is no longer associated
 
 If selected, even if a default value is supplied, you are prompted when launching to supply additional labels, if needed. - You cannot delete existing labels, selecting![Disassociate](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/48c2fa70cf2a09ae0fafa81899b143fc/disassociate.png)
 only removes the newly added labels, not existing default labels. |
-| Job tags | Type and select the **Create** drop-down to specify which parts of the playbook should run. For more information and examples see [Tags](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_tags.html) in the Ansible documentation. | Yes |
-| Skip tags | Type and select the **Create** drop-down to specify certain tasks or parts of the playbook to skip. For more information and examples see [Tags](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_tags.html) in the Ansible documentation. | Yes |
+| Job tags | Type and select the **Create** drop-down to specify which parts of the playbook should run. | Yes |
+| Skip tags | Type and select the **Create** drop-down to specify certain tasks or parts of the playbook to skip. | Yes |
 | Extra variables | - Pass extra command line variables to the playbook.
 
 
@@ -77,8 +74,8 @@ If you want to be able to specify `extra_vars` on a schedule, you must select **
 
 1. When you have completed configuring the workflow template, clickCreate workflow job template.
 
-
 Saving the template exits the workflow template page and the workflow visualizer opens where you can build a workflow. For more information, see the [Workflow visualizer](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-workflow-visualizer) section. Otherwise, select one of these methods:
+
 
 - Close the workflow visualizer to return to the **Details** tab of the newly saved template. There you can complete the following tasks:
 
@@ -91,6 +88,7 @@ Saving the template exits the workflow template page and the workflow visualizer
 
 Note
 Save the template before launching, orLaunch templateremains disabled. The **Notifications** tab is only present after you save the template.
+
 
 
 

@@ -4,6 +4,8 @@
 
 
 
+You can create instance groups with Automation controller to organize and manage your instances.
+
 Use the following procedure to create a new instance group.
 
 **Procedure**

@@ -1,6 +1,6 @@
 # 2. Managing collections in automation hub
-## 2.2. Managing the publication process of internal collections in Automation Hub
-### 2.2.1. About Approval
+## 2.2. Managing internal collection publication
+### 2.2.1. Approval workflow
 
 
 

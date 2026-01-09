@@ -5,7 +5,7 @@
 
 
 
-The Teams page displays the existing teams for your installation. From here, you can search for a specific team, filter the list of teams by team name or organization, or change the sort order for the list.
+The **Teams** page displays the existing teams for your installation. From here, you can search for a specific team, filter the list of teams by team name or organization, or change the sort order for the list.
 
 **Procedure**
 

@@ -28,6 +28,6 @@ Normally, the number of slices is equal to or less than the number of automation
 
 
 - Any job that intends to orchestrate across hosts (rather than just applying changes to individual hosts) must not be configured as a slice job.
-- Any job that does, can fail, and automation controller does not try to discover or account for playbooks that fail when run as slice jobs.
+- If a sliced job fails, automation controller does not attempt to discover or account for the specific failed playbooks.
 
 

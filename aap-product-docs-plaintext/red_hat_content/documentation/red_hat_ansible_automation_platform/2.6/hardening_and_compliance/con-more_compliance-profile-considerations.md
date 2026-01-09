@@ -42,9 +42,9 @@ In environments where this configuration might not meet a required compliance pr
 
 
 
-Where the `fapolicyd` service must enforce its rules, consider crafting a custom set of rules to permit Ansible Automation Platform to execute its Python code.
+Where the `fapolicyd` service must enforce its rules, consider crafting a custom set of rules to permit Ansible Automation Platform to run its Python code.
 
-The following example procedure treats the "ansible" service account as a trusted entity and enables it to execute content in the local Ansible temporary directory (by default, `$HOME/.ansible/tmp` ).
+The following example procedure treats the "ansible" service account as a trusted entity and enables it to run content in the local Ansible temporary directory (by default, `$HOME/.ansible/tmp` ).
 
 **Procedure**
 
@@ -57,10 +57,10 @@ The following example procedure treats the "ansible" service account as a truste
 
 `    sudo systemctl restart fapolicyd.service`
 
+This example rule might require modification to work with any other `    fapolicyd` rules that exist on the managed RHEL nodes, and must be thoroughly tested and approved by your security auditor before being put into production.
 
 
 
-This example rule might require modification to work with any other `fapolicyd` rules that exist on the managed RHEL nodes, and must be thoroughly tested and approved by your security auditor before being put into production.
 
 
-<span id="idm140608432442048"></span>
+<span id="idm139994926549664"></span>

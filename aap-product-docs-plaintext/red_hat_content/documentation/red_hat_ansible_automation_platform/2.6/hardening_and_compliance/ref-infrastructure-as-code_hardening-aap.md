@@ -10,7 +10,7 @@ The Red Hat Community of Practice has created a set of automation content availa
 The following Ansible content collections are available for managing Ansible Automation Platform components using an infrastructure as code methodology, all of which are found on the [Ansible Automation Hub](https://console.redhat.com/ansible/automation-hub) :
 
 
-<span id="idm140608422672144"></span>
+<span id="idm139994918970720"></span>
 **Table 2.5. Ansible content collections**
 
 |  **Validated Collection** |  **Collection Purpose** |

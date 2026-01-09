@@ -1,4 +1,4 @@
-# Chapter 13. Appendix: Red Hat Ansible Automation Platform custom resources
+# Chapter 14. Appendix: Red Hat Ansible Automation Platform custom resources
 
 
 

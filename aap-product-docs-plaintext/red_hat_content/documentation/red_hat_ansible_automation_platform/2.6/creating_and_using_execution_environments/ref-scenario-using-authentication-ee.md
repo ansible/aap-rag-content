@@ -1,5 +1,5 @@
-# 4. Common automation execution environment scenarios
-## 4.2. Using automation hub authentication details when building automation execution environments
+# 3. Common automation execution environment scenarios
+## 3.2. Using automation hub authentication details when building automation execution environments
 
 
 
@@ -29,6 +29,6 @@ prepend_galaxy:
 
 **Additional resources**
 
-- For information regarding the different parts of an automation execution environment definition file, see [Breakdown of definition file content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/creating_and_using_execution_environments/index#con-definition-file-breakdown) .
+-  [Breakdown of definition file content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/creating_and_using_execution_environments/index#con-definition-file-breakdown)
 
 

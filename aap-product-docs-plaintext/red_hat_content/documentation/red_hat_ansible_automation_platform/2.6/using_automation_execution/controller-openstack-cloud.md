@@ -1,7 +1,20 @@
 # 6. Job templates
-## 6.19. OpenStack
+## 6.16. OpenStack
 
 
+
+
+Use this credential type to connect to OpenStack clouds. Automation controller uses the OpenStack SDK to interact with OpenStack clouds. When you create an OpenStack cloud credential, the controller prompts you for the following information:
+
+-  **Username** : The username to authenticate to the OpenStack cloud.
+-  **Password** : The password to authenticate to the OpenStack cloud.
+-  **Project name** : The project name (also called tenant name) to use when connecting to the OpenStack cloud.
+-  **Auth URL** : The authentication URL for the OpenStack cloud.
+-  **Cloud name** : The name of the cloud as defined in your OpenStack clouds.yaml file.
+-  **Region name** (optional): The region name to use when connecting to the OpenStack cloud.
+-  **Domain name** (optional): The domain name to use when connecting to the OpenStack cloud.
+-  **Project domain name** (optional): The project domain name to use when connecting to the OpenStack cloud.
+-  **Validate SSL certificate** : Select this option to validate the SSL/TLS certificate presented by the OpenStack cloud. Clear this option to disable SSL/TLS certificate validation.
 
 
 The following sample playbook invokes the `nova_compute` Ansible OpenStack cloud module and requires credentials:

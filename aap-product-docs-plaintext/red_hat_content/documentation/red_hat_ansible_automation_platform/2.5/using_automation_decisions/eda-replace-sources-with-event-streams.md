@@ -1,5 +1,5 @@
 # 10. Simplified event routing
-## 10.6. Replacing sources and attaching event streams to activations
+## 10.7. Replacing sources and attaching event streams to activations
 
 
 

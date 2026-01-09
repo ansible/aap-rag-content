@@ -1,5 +1,5 @@
 # 2. New features and enhancements
-## 2.2. 30 July 2025
+## 2.3. 30 July 2025
 
 
 

@@ -4,6 +4,8 @@
 
 
 
+The Microsoft Azure inventory plugin integrates with Microsoft Azure to pull information about virtual machines and other resources for use in automation tasks.
+
 ```
 conditional_groups:
 azure: true

@@ -3,7 +3,9 @@
 
 
 
-Ansible Automation Platform is composed of services that are connected together to meet your automation needs. These services provide the ability to store, make decisions for, and execute automation. All of these functions are available through a user interface (UI) and RESTful application programming interface (API). Deploy each of the following components so that all features and capabilities are available for use without the need to take further action:
+Ansible Automation Platform is composed of services that connect together to meet your automation needs. These services enable you to store, make decisions for, and run automation. Each of these functions are available through a user interface (UI) and RESTful application programming interface (API).
+
+Each of the following components must be deployed so that all features and capabilities of Ansible Automation Platform are available for use:
 
 - Platform gateway
 - Automation controller

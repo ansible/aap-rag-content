@@ -1,6 +1,6 @@
 # 5. Red Hat Ansible Automation Platform Service on AWS Service Definition
 ## 5.2. Control plane
-### 5.2.10. Custom domain
+### 5.2.11. Custom domain
 
 
 
@@ -16,7 +16,7 @@ To use custom domains, you must configure three DNS records according to your se
 
 You can create custom subdomains under the domain you own.
 
-#### 5.2.10.1. Planning for your custom domain
+#### 5.2.11.1. Planning for your custom domain
 
 
 
@@ -37,13 +37,20 @@ To set up a custom domain for your deployment, you must complete several prepara
 
 
 1. To ensure the validity of a TLS certificate for a custom domain, you must confirm that the certificate is generated for the platform record and all mesh-ingress records are included in the Subject Alternative Name (SAN) parameter. Alternatively, you can opt to generate a wildcard certificate to cover the subdomains of your primary custom domain.
+1. Bundle the certificate, private key, and any optional intermediary certificates into a zip.
 
 Important
 TLS Certificate requirements for custom domains:
 
 
-- Initial setup: When providing a new certificate, it must have an expiration date of at least one year or longer. This is a requirement for our certificate management process.
-- Renewal: You are responsible for monitoring your certificate’s expiration. To ensure uninterrupted service, you must begin the support process to renew it at least 14 days before it expires.
+-  **Private Key:** The private key must be unencrypted and cannot have a passphrase or be password protected.
+-  **Expiration:** Initial certificates must be valid for at least one year.
+-  **Renewal:** You must initiate a support ticket to renew the certificate at least 14 days before the expiration date. When renewing you must use one of the following formats for the certificate’s Subject Alternative Names (SANs):
+
+
+-  **Explicit SANs:** List the required subdomains: `                platform` , `                mesh-ingress-0` , and `                mesh-ingress-1` .
+-  **Wildcard certificate:** Use a wildcard to cover all subdomains (for example, `                *.exampledomain.com` ).
+
 
 
 
@@ -53,13 +60,14 @@ TLS Certificate requirements for custom domains:
 
 - Company Name
 - Deployment information (for example, `        cus-xxxx` )
-- Custom domain (for example, `        <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">exampledomain</span></em></span>.com` )
+- Custom domain (for example, `        exampledomain.com` )
+- Provide the zip file containing the certificates, or request a presigned URL for secure upload.
 
 1. Allow the SRE team to apply the configuration to your deployment, verify the functionality, and collaborate with you on follow-up steps via the support ticket.
 1. After your configuration is complete, apply the custom domain to your deployment.
 
 Note
-Your original mesh-ingresses will not be available; new ones using the custom domain are created instead.
+New mesh-ingresses using the custom domain replace the original ones.
 
 
 
@@ -67,7 +75,7 @@ Your original mesh-ingresses will not be available; new ones using the custom do
 1. Reconfigure your execution nodes if you configured them previously with the old domain.
 
 
-#### 5.2.10.2. Setting up a custom domain without AWS PrivateLink
+#### 5.2.11.2. Setting up a custom domain without AWS PrivateLink
 
 
 
@@ -100,7 +108,7 @@ Shell        # Replace the URL with the "mesh-ingress" URL of your deployment   
 
 
 
-#### 5.2.10.3. Setting up a custom domain with AWS PrivateLink
+#### 5.2.11.3. Setting up a custom domain with AWS PrivateLink
 
 
 

@@ -11,13 +11,6 @@ Red Hat Ansible Lightspeed offers the following key features:
 Red Hat Ansible Lightspeed with IBM watsonx Code Assistant uses Ansible-specific IBM watsonx Granite models unique to your organization, which are provided, managed, and maintained by IBM.
 
 
--  **Model customization**
-
-Organization administrators can now create and use fine-tuned, custom models that are trained on your organization’s existing Ansible content. With this capability, you can tune the models to your organization’s automation patterns and improve the code recommendation experience.
-
-You can configure multiple custom models for your organization. For example, you can create a custom model for your corporate IT automation team and a different one for your engineering team’s infrastructure. You can also configure a custom model to make it available for all Ansible users or select Ansible users in your organization.
-
-
 -  **Red Hat Ansible Lightspeed cloud service and on-premise deployments**
 
 Red Hat Ansible Lightspeed is available both as a cloud service and as an on-premise deployment. Red Hat Ansible Lightspeed on-premise deployments provide the Red Hat Ansible Automation Platform customers more control over their data and supports compliance with enterprise security policies. For example, organizations in sensitive industries with data privacy or air-gapped requirements can use on-premise deployments of both Red Hat Ansible Lightspeed and IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data. Red Hat Ansible Lightspeed on-premise deployments are supported on Red Hat Ansible Automation Platform version 2.4 and later.

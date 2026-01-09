@@ -4,7 +4,7 @@
 
 
 
-Regularly updating your projects ensures that your environment has access to the latest versions of your playbooks, roles, and collections, reflecting any changes made in your Git, Subversion, or other integrated SCM repositories. This process is important for maintaining synchronization between your SCM and Ansible Automation Platform.
+Regularly updating your projects ensures your Ansible Automation Platform environment is synchronized with the latest versions of playbooks, roles, and collections from your integrated SCM repositories.
 
 **Procedure**
 
@@ -18,7 +18,12 @@ Immediately after adding a project setup to use source control, a sync starts th
 
 
 
-- Click the project’s status under the **Status** column for further information about the update process. This brings you to the **Output** tab of the **Jobs** section.
+- Click the project’s status under the **Status** column for further information about the update process.
 
+
+
+**Results**
+
+This brings you to the **Output** tab of the **Jobs** section.
 
 

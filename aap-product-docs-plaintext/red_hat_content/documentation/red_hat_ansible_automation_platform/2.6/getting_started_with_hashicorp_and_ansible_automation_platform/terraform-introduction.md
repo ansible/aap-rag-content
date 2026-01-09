@@ -4,5 +4,5 @@
 
 
 
-The integration of Red Hat Ansible Automation Platform and IBM HashiCorp Terraform offers a powerful solution for streamlining IT operations. This collaboration combines the strengths of both tools to save time and effort while reducing risks in complex IT environments.
+Learn about the supported integrations between IBM HashiCorp products and Red Hat Ansible Automation Platform, the integration workflows, and migration paths to help determine the best options for your environment.
 

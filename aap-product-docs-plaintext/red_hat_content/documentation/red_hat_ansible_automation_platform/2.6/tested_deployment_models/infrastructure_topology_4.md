@@ -5,10 +5,10 @@
 
 
 
-The following diagram outlines the infrastructure topology that Red Hat has tested with this deployment model that customers can use when self-managing Ansible Automation Platform:
+The Red Hat tested infrastructure topology for this deployment model:
 
 
-<span id="idm140627609278320"></span>
+<span id="idm140186609979952"></span>
 **Figure 3.2. Infrastructure topology diagram**
 
 ![Operator enterprise topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Tested_deployment_models-en-US/images/404830abca879783bdfe6a23434fd33a/ocp-b-env-a.png)
@@ -17,17 +17,17 @@ The following diagram outlines the infrastructure topology that Red Hat has tes
 
 
 Important
-While Redis and PostgreSQL can be installed as part of the operator-based installation process, this diagram represents a Red Hat supported topology where both Redis and PostgreSQL are external to Ansible Automation Platform.
+While Redis and PostgreSQL can be installed as part of the operator-based installation process, the topology diagram represents a Red Hat supported topology where both Redis and PostgreSQL are external to Ansible Automation Platform.
 
 
 
-The following infrastructure topology describes an OpenShift Cluster with 3 primary nodes and 2 worker nodes.
+This infrastructure topology describes an OpenShift Cluster with 3 primary nodes and 2 worker nodes.
 
-Each OpenShift Worker node has been tested with the following component requirements: 16 GB RAM, 4 CPUs, 128 GB local disk, and 3000 IOPS.
+Red Hat tests each OpenShift Worker node with these requirements: 16 GB RAM, 4 CPUs, 128 GB local disk, and 3000 IOPS.
 
 
-<span id="idm140627609008720"></span>
-**Table 3.4. Infrastructure topology**
+<span id="idm140186609972288"></span>
+**Table 3.4. Infrastructure topology components**
 
 | Count | Component |
 | --- | --- |

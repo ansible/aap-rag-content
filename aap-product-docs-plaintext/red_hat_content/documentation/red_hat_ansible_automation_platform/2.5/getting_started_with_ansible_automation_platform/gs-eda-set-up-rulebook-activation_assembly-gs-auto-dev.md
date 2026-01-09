@@ -1,9 +1,11 @@
 # 3. Getting started as an automation developer
-## 3.13. Create and run a rulebook activation
-### 3.13.1. Setting up a rulebook activation
+## 3.14. Create and run a rulebook activation
+### 3.14.1. Setting up a rulebook activation
 
 
 
+
+Follow the steps in this procedure to set up a rulebook activation.
 
 **Prerequisites**
 
@@ -60,17 +62,22 @@ In Event-Driven Ansible controller, you cannot customize the pull policy of the 
 
 1. ClickCreate rulebook activation.
 
-
 Your rulebook activation is now created and can be managed on the **Rulebook Activations** page.
-
-After saving the new rulebook activation, the rulebook activation’s details page is displayed, with either a **Pending** , **Running** , or **Failed** status. From there or the **Rulebook Activations** list view, you can restart or delete it.
 
 Note
 Occasionally, when a source plugin shuts down, it causes a rulebook to exit gracefully after a certain amount of time. When a rulebook activation shuts down, any tasks that are waiting to be performed will be canceled, and an info level message is sent to the activation log. For more information, see [Rulebooks](https://ansible.readthedocs.io/projects/rulebook/en/stable/rulebooks.html#) .
 
 
 
-#### 3.13.1.1. Rulebook activation list view
+
+
+
+**Verification**
+
+After saving the new rulebook activation, the rulebook activation’s details page is displayed, with either a **Pending** , **Running** , or **Failed** status. From there or the **Rulebook Activations** list view, you can restart or delete it.
+
+
+#### 3.14.1.1. Rulebook activation list view
 
 
 

@@ -1,5 +1,5 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
-## 1.1. Configuring Ansible automation hub remote repositories to synchronize content
+## 1.1. Configuring remote repositories for content syncing
 ### 1.1.7. Configuring proxy settings
 
 

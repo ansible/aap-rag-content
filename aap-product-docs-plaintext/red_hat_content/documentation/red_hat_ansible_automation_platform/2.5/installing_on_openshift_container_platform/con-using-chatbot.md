@@ -1,12 +1,16 @@
-# 5. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
-## 5.6. Using the Ansible Lightspeed intelligent assistant
+# 6. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
+## 6.4. Deploying the Ansible Lightspeed intelligent assistant
+### 6.4.4. Using the Ansible Lightspeed intelligent assistant
 
 
 
 
 After you deploy the Ansible Lightspeed intelligent assistant, all Ansible users within the organization can access and use the chat interface to ask questions and receive information about the Ansible Automation Platform.
 
-**Accessing the Ansible Lightspeed intelligent assistant**
+#### 6.4.4.1. Accessing the Ansible Lightspeed intelligent assistant
+
+
+
 
 1. Log in to the Ansible Automation Platform.
 1. Click the Ansible Lightspeed intelligent assistant icon![Ansible Lightspeed intelligent assistant icon](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Installing_on_OpenShift_Container_Platform-en-US/images/441ac50ea9d519ddce4a68cfee7a6f54/chatbot-icon.png)
@@ -20,10 +24,12 @@ The Ansible Lightspeed intelligent assistant window opens with a welcome message
 
 
 
-**Using the Ansible Lightspeed intelligent assistant**
+#### 6.4.4.2. Using the Ansible Lightspeed intelligent assistant
+
+
+
 
 You can perform the following tasks:
-
 
 - Ask questions in the prompt field and get answers about the Ansible Automation Platform
 - View the chat history of all conversations in a chat session

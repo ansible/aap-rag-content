@@ -5,6 +5,8 @@
 
 
 
+This example provides a full YAML configuration for the Helm chart, illustrating the precise structure needed to integrate the Ansible plug-ins into the Red Hat Developer Hub installation.
+
 ```
 global:
 ...

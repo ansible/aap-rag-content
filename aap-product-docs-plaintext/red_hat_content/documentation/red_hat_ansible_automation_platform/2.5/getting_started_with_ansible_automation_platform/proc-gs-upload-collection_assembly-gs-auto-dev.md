@@ -1,6 +1,6 @@
 # 3. Getting started as an automation developer
-## 3.6. Publishing to a collection
-### 3.6.1. Uploading a collection to automation hub
+## 3.7. Publishing to a collection
+### 3.7.1. Uploading a collection to automation hub
 
 
 
@@ -28,11 +28,13 @@ You can upload your collection by using either the automation hub user interface
 1. Select the **Collections** tab, and then clickUpload collection.
 1. In the New collection modal, click **Select file** . Locate the file on your system.
 1. ClickUpload.
+1. Optional: you can also upload from the command line. Using the `    ansible-galaxy` client, enter the following command:
 
-
-Using the `ansible-galaxy` client, enter the following command:
 
 ```
 $ ansible-galaxy collection publish path/to/my_namespace-my_collection-1.0.0.tar.gz --api-key=SECRET
 ```
+
+
+
 

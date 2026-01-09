@@ -4,7 +4,11 @@
 
 
 
-You can use session authentication when logging in directly to the automation controller’s API or UI to manually create resources, such as inventories, projects, and job templates and start jobs in the browser. With this method, you can remain logged in for a prolonged period of time, not just for that HTTP request. For example, when browsing the API or UI in a browser such as Chrome or Mozilla Firefox. When a user logs in, a session cookie is created, this means that they can remain logged in when navigating to different pages within automation controller. The following image represents the communication that occurs between the client and server in a session:
+You can use session authentication when logging in directly to the automation controller’s API or UI to manually create resources, such as inventories, projects, and job templates and start jobs in the browser.
+
+With this method, you can remain logged in for a prolonged period of time, not just for that HTTP request. For example, when browsing the API or UI in a browser such as Chrome or Mozilla Firefox. When you log in, a session cookie is created, this means that you can remain logged in when navigating to different pages within automation controller.
+
+The following image represents the communication that occurs between the client and server in a session:
 
 ![Session authentication architecture](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Automation_execution_API_overview-en-US/images/acd897bb1e8827242df14583c242d699/session-auth-architecture.png)
 
@@ -21,6 +25,7 @@ $ curl -k -c - https://&lt;gateway server name&gt;/api/gateway/v1/login/        
 ```
 
 
+1. Extract the `    csrftoken` value from the cookie returned in the first step.
 1.  `    POST` to the `    /api/login/` endpoint with username, password, and `    X-CSRFToken=&lt;token-value&gt;` :
 
 
@@ -31,12 +36,18 @@ curl -X POST -H 'Content-Type: application/x-www-form-urlencoded' \        --ref
 
 1. Access and test the APIs that need authentication, for example `    /api/controller/v2/settings/all/` :
 
+Note
+All of this is done by automation controller when you log in to the UI or API in the browser, and you must only use it when authenticating in the browser. For programmatic integration with automation controller, see [OAuth2 token authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/automation_execution_api_overview/index#controller-api-oauth2-token) .
+
+
+
 
 ```
 $ curl -X GET -H 'Cookie: &lt;cookieID&gt;;' https://&lt;gateway server name&gt;/api/controller/v2/settings/all/ -k
 ```
 
-All of this is done by automation controller when you log in to the UI or API in the browser, and you must only use it when authenticating in the browser. For programmatic integration with automation controller, see [OAuth2 token authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/automation_execution_api_overview/index#controller-api-oauth2-token) .
+
+
 
 **Verification**
 

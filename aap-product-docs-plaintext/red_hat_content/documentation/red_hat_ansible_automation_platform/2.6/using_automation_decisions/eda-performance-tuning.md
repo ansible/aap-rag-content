@@ -3,10 +3,10 @@
 
 
 
-Event-Driven Ansible is a highly scalable, flexible automation capability. Event-Driven Ansible controller provides the interface in which Event-Driven Ansible automation performs. Tune your Event-Driven Ansible controller to optimize performance and scalability through:
+Event-Driven Ansible controller provides the interface in which Event-Driven Ansible automation performs. Tune your Event-Driven Ansible controller to optimize performance and scalability through:
 
 - Characterizing your workload
-- System level monitoring
 - Performance troubleshooting
+- System level monitoring
 
 

@@ -1,6 +1,6 @@
 # 2. Installing the Ansible plug-ins with a Helm chart on OpenShift Container Platform
 ## 2.5. Required configuration
-### 2.5.5. Configuring Ansible Automation Platform details
+### 2.5.7. Configuring Ansible Automation Platform details
 
 
 
@@ -30,12 +30,12 @@ If `        checkSSL` is set to `        true` , the Ansible plug-ins verify whe
 data:          app-config-rhdh.yaml: |            ...            ansible:            ...              rhaap:                baseUrl: '&lt;https://MyControllerUrl&gt;'                token: '&lt;AAP Personal Access Token&gt;'                checkSSL: true
 ```
 
-
-
-
-
 Note
 You are responsible for protecting your Red Hat Developer Hub installation from external and unauthorized access. Manage the backend authentication key like any other secret. Meet strong password requirements, do not expose it in any configuration files, and only inject it into configuration files as an environment variable.
+
+
+
+
 
 
 

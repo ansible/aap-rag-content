@@ -42,6 +42,10 @@ The following link statuses are also shown in the Legend:
 You can use the **Details** page to remove the instance, run a health check on the instance on an as-needed basis, or unassign jobs from the instance. By default, jobs can be assigned to each node. However, you can disable it to exclude the node from having any jobs running on it.
 
 
-1. Additional resources For more information about creating new nodes and scaling the mesh, see [Managing capacity with Instances](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/assembly-controller-instances) .
+
+
+**Additional resources**
+
+-  [Managing capacity with Instances](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/assembly-controller-instances)
 
 

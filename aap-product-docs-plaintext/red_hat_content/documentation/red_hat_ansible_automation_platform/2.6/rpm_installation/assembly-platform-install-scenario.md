@@ -9,8 +9,3 @@ For more information about the components provided with Ansible Automation Platf
 
 There are several supported installation scenarios for Red Hat Ansible Automation Platform. To install Red Hat Ansible Automation Platform, you must edit the inventory file parameters to specify your installation scenario. You can use the [enterprise installer](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/tested_deployment_models/rpm-topologies#example_enterprise_inventory_file) as a basis for your own inventory file.
 
-**Additional resources**
-
-For a comprehensive list of predefined variables used in installation inventory files, see [Inventory file variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/appendix-inventory-files-vars) .
-
-

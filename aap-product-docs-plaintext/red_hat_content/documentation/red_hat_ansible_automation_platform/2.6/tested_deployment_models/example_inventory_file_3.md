@@ -5,7 +5,7 @@
 
 
 
-Use the example inventory file to perform an installation for this topology:
+Use the example inventory file to perform an installation:
 
 ```
 # This is the Ansible Automation Platform installer inventory file intended for the RPM growth deployment topology.

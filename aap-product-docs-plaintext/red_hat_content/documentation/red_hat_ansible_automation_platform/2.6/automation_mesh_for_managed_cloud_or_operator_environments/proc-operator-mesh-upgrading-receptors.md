@@ -1,5 +1,5 @@
 # 2. Automation mesh for operator-based Red Hat Ansible Automation Platform
-## 2.10. Upgrading receptors
+## 2.11. Upgrading receptors
 
 
 
@@ -51,4 +51,4 @@ sudo systemctl restart receptor
 
 
 
-<span id="idm140404608830192"></span>
+<span id="idm140603267344096"></span>

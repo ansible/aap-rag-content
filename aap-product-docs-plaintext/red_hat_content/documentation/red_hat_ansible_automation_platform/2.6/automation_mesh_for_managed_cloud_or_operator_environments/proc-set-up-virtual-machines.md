@@ -4,6 +4,8 @@
 
 
 
+Prepare Red Hat Enterprise Linux virtual machines by setting up SSH access and enabling repositories. Deploying these VMs as nodes helps expand the execution capacity of your automation mesh.
+
 **Procedure**
 
 1. SSH into each of the RHEL instances and perform the following steps. Depending on your network access and controls, SSH proxies or other access models might be required.

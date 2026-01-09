@@ -1,5 +1,5 @@
 # 3. Getting started as an automation developer
-## 3.6. Publishing to a collection
+## 3.7. Publishing to a collection
 
 
 

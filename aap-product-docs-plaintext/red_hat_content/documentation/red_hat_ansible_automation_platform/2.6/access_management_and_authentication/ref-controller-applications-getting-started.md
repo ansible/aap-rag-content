@@ -16,7 +16,7 @@ Access rules for applications are as follows:
 
 - Platform administrators can view and manipulate all applications in the system.
 - Platform auditors can only view applications in the system.
-- Tokens, on the other hand, are resources used to authenticate incoming requests and mask the permissions of the underlying user.
+- Tokens are resources used to authenticate incoming requests and mask the permissions of the underlying user.
 
 
 Access rules for tokens are as follows:
@@ -55,7 +55,7 @@ You can only use the authorization code type to acquire an access token when usi
 
 The default expiration for access tokens is 1 year.
 
-The best way to set up application integrations using the **Authorization code** grant type is to allowlist the origins for those cross-site requests. More generally, you must allowlist the service or application you are integrating with the platform, for which you want to provide access tokens.
+The best way to set up application integrations by using the **Authorization code** grant type is to allowlist the origins for those cross-site requests. More generally, you must allowlist the service or application you are integrating with the platform, for which you want to provide access tokens.
 
 To do this, have your administrator add this allowlist to their local Ansible Automation Platform settings file:
 

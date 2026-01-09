@@ -1,10 +1,12 @@
 # 1. Automation controller overview
-## 1.20. Inventory plugins
+## 1.19. Inventory plugins
 
 
 
 
-The following inventory plugins are used from upstream collections:
+Automation controller uses inventory plugins to gather information about the hosts in your infrastructure.
+
+Use the following inventory plugins from upstream collections:
 
 -  `    amazon.aws.aws_ec2`
 -  `    community.vmware.vmware_vm_inventory`

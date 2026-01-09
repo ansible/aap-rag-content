@@ -4,7 +4,9 @@
 
 
 
-Automation controller supports project-specific [Ansible collections](https://docs.ansible.com/ansible/latest/user_guide/collections_using.html) in job runs. If you specify a collections requirements file in the SCM at `collections/requirements.yml` , automation controller installs collections in that file in the implicit project synchronization before a job run.
+Automation controller supports project-specific Ansible collections in job runs.
+
+If you specify a collections requirements file in the SCM at `collections/requirements.yml` , automation controller installs collections in that file in the implicit project synchronization before a job run.
 
 Automation controller has a system-wide setting that enables collections to be dynamically downloaded from the `collections/requirements.yml` file for SCM projects. You can turn off this setting in the **Job Settings** screen from the navigation panelSettings→Automation Execution→Job, by unchecking the **Enable Collection(s) Download** box.
 

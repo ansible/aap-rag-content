@@ -12,11 +12,13 @@ To view reports about your Ansible automation environment, proceed with the foll
 1. ClickReportson the side navigation panel.
 1. Select a report from the results to view it.
 
-
-Each report presents data to monitor your Ansible automation environment. Use the filter toolbar on each report to adjust your graph view.
+Each report presents data to monitor your automation environment. Use the filter toolbar on each report to adjust your graph view.
 
 Note
-We are constantly adding new reports to the system. If you have ideas for new reports that would be helpful for your team, please contact your account representative or log a feature enhancement for automation analytics.
+New reports are regularly added to the system. If you have ideas for new reports that would be helpful for your team, contact your account representative or log a feature enhancement for automation analytics.
+
+
+
 
 
 

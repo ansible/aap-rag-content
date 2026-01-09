@@ -1,11 +1,11 @@
 # 2. System requirements
-## 2.6. PostgreSQL requirements
-### 2.6.3. Enabling mutual TLS (mTLS) authentication
+## 2.7. PostgreSQL requirements
+### 2.7.3. Enabling mutual TLS (mTLS) authentication
 
 
 
 
-mTLS authentication is disabled by default; however, you can optionally enable the authentication.
+Enable mutual TLS authentication to secure PostgreSQL database connections with certificate-based verification. This protects against unauthorized access and man-in-the-middle attacks while meeting enterprise security and compliance requirements.
 
 **Procedure**
 

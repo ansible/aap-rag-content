@@ -1,6 +1,6 @@
-# 5. Administering the Ansible Lightspeed Service
-## 5.1. Logging in to the Ansible Lightspeed administrator portal
-### 5.1.1. Logging out of the Ansible Lightspeed Service
+# 6. Administering the Ansible Lightspeed Service
+## 6.1. Logging in to the Ansible Lightspeed administrator portal
+### 6.1.1. Logging out of the Ansible Lightspeed Service
 
 
 

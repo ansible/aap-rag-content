@@ -5,7 +5,7 @@
 
 
 
-Use the following examples to explore the different conditions, like groups and attribute values you can implement to control user access to the platform.
+Use the following examples to explore the different conditions, such as groups and attribute values you can implement to control user access to the platform.
 
 **Add users to an organization based on an attribute**
 
@@ -30,13 +30,13 @@ In this example, you will add a user to the **Networking** organization if they 
 In this example, you will add user to the `Apple` team if they have either of the following groups:
 
 ```
-cn=Administrators,ou=AAP,ou=example,o=com
+cn=administrators,ou=aap,ou=example,o=com
 ```
 
 or
 
 ```
-cn=Operators,ou=AAP,ou=example,co=com
+cn=operators,ou=aap,ou=example,co=com
 ```
 
 ![Add user to a team mapping example](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Access_management_and_authentication-en-US/images/c042e34a642a888c9802793b67bf468d/am-apple-team-map-example.png)
@@ -54,7 +54,7 @@ In this example, you never escalate users to a superuser. But note, this rule do
 In this example, you escalate user privileges to superuser if they belong to the following group:
 
 ```
-cn=Administrators,ou=AAP
+cn=administrators,ou=aap
 ```
 
 ![Escalate privileges mapping example](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Access_management_and_authentication-en-US/images/018d28310df7776dd32ec6bd14c8de02/am-escalate-privileges.png)

@@ -1,10 +1,11 @@
-# 2. Filter and save automation data for reporting
-## 2.2. Time period and currency
+# 1. View key usage metrics with Automation Dashboard
+## 1.5. Filter and save automation data for reporting
+### 1.5.2. Time period and currency
 
 
 
 
-After selecting your filters, select a time period for analysis, and select a currency to demonstrate automation savings.
+After selecting your filters, select a time period for analysis, and select a currency to show automation savings.
 
 - A shorter time period is useful when considering specific automation use cases.
 - A longer time period is useful when considering overall platform usage and automation growth.

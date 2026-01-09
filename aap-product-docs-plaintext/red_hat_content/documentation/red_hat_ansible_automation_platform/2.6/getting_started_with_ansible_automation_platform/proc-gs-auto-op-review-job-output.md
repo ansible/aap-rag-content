@@ -1,6 +1,6 @@
 # 4. Getting started as an automation operator
-## 4.10. Automation execution jobs
-### 4.10.2. Reviewing job output
+## 4.4. Automation execution jobs
+### 4.4.2. Reviewing job output
 
 
 
@@ -19,4 +19,4 @@ When you relaunch a job, the jobs **Output** view is displayed.
 
 
 
-<span id="idm139891440724176"></span>
+<span id="idm139844190626144"></span>

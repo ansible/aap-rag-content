@@ -1,28 +1,29 @@
-# 6. Populating your private automation hub container registry
-## 6.1. Uploading the custom execution environment to the private hub
+# 5. Populating your private automation hub container registry
+## 5.1. Uploading the custom execution environment to the private hub
 
 
 
 
 Before the new execution environment image can be used for automation jobs, it must be uploaded to the private automation hub.
 
-First, verify that the execution environment image can be seen in the local podman cache:
+**Procedure**
+
+1. First, verify that the execution environment image can be seen in the local Podman cache:
+
 
 ```
-$ podman images --format "table {{.ID}} {{.Repository}} {{.Tag}}"
-IMAGE ID	    REPOSITORY					              TAG
-b38e3299a65e	private-hub.example.com/custom-ee     	  latest
-8e38be53b486	private-hub.example.com/ee-minimal-rhel8  latest
+$ podman images --format "table {{.ID}} {{.Repository}} {{.Tag}}"    IMAGE ID	    REPOSITORY					              TAG    b38e3299a65e	private-hub.example.com/custom-ee     	  latest    8e38be53b486	private-hub.example.com/ee-minimal-rhel8  latest
 ```
 
-**Log in to the private automation hub's container registry and push the image to make it available for use with job templates and workflows:**
+
+1. Then log in to the private automation hub’s container registry and push the image to make it available for use with job templates and workflows:
+
 
 ```
-$ podman login private-hub.example.com -u admin
-Password:
-Login Succeeded!
-$ podman push private-hub.example.com/custom-ee:latest
+$ podman login private-hub.example.com -u admin    Password:    Login Succeeded!    $ podman push private-hub.example.com/custom-ee:latest
 ```
+
+
 
 
 Use the following workflow to populate your private automation hub remote registry:
@@ -40,9 +41,9 @@ Use the following workflow to populate your private automation hub remote regist
 1.  [Sync images from a container repository](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/managing_automation_content/managing-containers-hub#proc-sync-image-adoc_pulling-images-container-repository)
 
 
-**Additional information**
+**Additional resources**
 
-For more information on registries, see [Red Hat Container Registry Authentication](https://access.redhat.com/articles/RegistryAuthentication)
+-  [Red Hat Container Registry Authentication](https://access.redhat.com/articles/RegistryAuthentication)
 
 
 # Appendix A. Automation execution environments precedence
@@ -50,7 +51,9 @@ For more information on registries, see [Red Hat Container Registry Authenticati
 
 
 
-Project updates always use the control plane automation execution environments by default, however, jobs use the first available automation execution environments as follows:
+Project updates always use the control plane automation execution environments by default.
+
+However, jobs use the first available automation execution environments as follows:
 
 1. The `    execution_environment` defined on the template (job template or inventory source) that created the job.
 1. The `    default_environment` defined on the project that the job uses.
@@ -66,7 +69,7 @@ If more than one execution environment fits a criteria (applies for 6 and 7), th
 
 
 
-# Chapter 7. Open Source license
+# Chapter 6. Open Source license
 
 
 
@@ -128,7 +131,7 @@ You may add Your own copyright statement to Your modifications and may provide a
 END OF TERMS AND CONDITIONS
 
 
-<span id="idm140514309589040"></span>
+<span id="idm140195790208720"></span>
 # Legal Notice
 
 Copyright© 2025 Red Hat, Inc.

@@ -12,7 +12,7 @@ To set up enterprise authentication for Microsoft Entra ID, formerly known as Mi
 1.  **Add the redirect URL in Microsoft Entra ID** . After completing the configuration wizard for Microsoft Entra ID authentication in your platform, copy the URL displayed in the **Azure AD OAuth2 Callback URL** field. Then, go to your registered enterprise application in Azure and add this URL as a **Redirect URL** (also referred to as a **Callback URL** in Ansible Automation Platform) as described in [How to add a redirect URI to your application](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-redirect-uri) . This step is required for the login flow to work correctly.
 
 
-The attributes provided by Microsoft Entra ID are not set in the Ansible Automation Platform configuration for this authentication type. Instead, the [social_core azuread backend](https://github.com/python-social-auth/social-core/blob/master/social_core/backends/azuread.py#L85-L98) provides the translation of claims provided by Microsoft Entra ID. The user attributes that allow Ansible Automation Platform to correctly identify the user and assign the proper attributes like first name, last name, email, and username include the following:
+The attributes provided by Microsoft Entra ID are not set in the Ansible Automation Platform configuration for this authentication type. Instead, the [social_core azuread backend](https://github.com/python-social-auth/social-core/blob/master/social_core/backends/azuread.py#L85-L98) provides the translation of claims provided by Microsoft Entra ID. The user attributes that allow Ansible Automation Platform to correctly identify the user and assign the proper attributes such as given name, surname, email, and username include the following:
 
 | Ansible Automation Platform attribute | Microsoft Entra ID parameter |
 | --- | --- |
@@ -66,7 +66,7 @@ To verify that the authentication is configured correctly, log out of Ansible Au
 
 **Next steps**
 
-To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
 
 
 **Additional resources**

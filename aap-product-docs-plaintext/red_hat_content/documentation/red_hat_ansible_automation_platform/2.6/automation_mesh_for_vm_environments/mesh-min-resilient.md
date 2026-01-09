@@ -1,5 +1,5 @@
 # 3. Automation mesh design patterns
-## 3.3. Minimum resilient configuration
+## 3.2. Minimum resilient configuration
 
 
 

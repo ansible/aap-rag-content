@@ -1,5 +1,5 @@
 # 2. Automation mesh for operator-based Red Hat Ansible Automation Platform
-## 2.9. Removing Instances
+## 2.10. Removing Instances
 
 
 

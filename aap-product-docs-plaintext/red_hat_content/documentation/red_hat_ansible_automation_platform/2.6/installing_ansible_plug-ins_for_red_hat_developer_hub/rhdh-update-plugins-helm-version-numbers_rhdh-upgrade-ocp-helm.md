@@ -4,6 +4,8 @@
 
 
 
+You must navigate to the Helm chart’s YAML view in the OpenShift Developer UI and replace the old version numbers and integrity hash values for both Ansible plug-ins, which triggers a restart of the Developer Hub pods to finalize the upgrade.
+
 **Procedure**
 
 1. Log in to your OpenShift Container Platform instance.

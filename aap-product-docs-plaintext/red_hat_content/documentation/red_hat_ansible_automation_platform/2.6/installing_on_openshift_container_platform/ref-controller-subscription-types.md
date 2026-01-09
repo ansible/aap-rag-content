@@ -1,6 +1,5 @@
-# 1. Installing Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 1.2. Managing Ansible Automation Platform licensing, updates, and support
-### 1.2.4. Subscription Types
+# 3. Managing Ansible Automation Platform subscriptions, updates, and support
+## 3.3. Subscription Types
 
 
 

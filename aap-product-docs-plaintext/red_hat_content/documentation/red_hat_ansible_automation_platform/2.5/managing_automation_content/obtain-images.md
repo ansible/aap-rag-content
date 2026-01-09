@@ -5,16 +5,16 @@
 
 
 
-Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use. The following example details how to pull an execution environment from the Red Hat Ecosystem Catalog (registry.redhat.io).
+Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use. The following example details how to pull an execution environment from the Red Hat Ecosystem Catalog ( `registry.redhat.io` ).
 
 **Prerequisites**
 
-- You have permissions to pull automation execution environments from registry.redhat.io.
+- You have permissions to pull automation execution environments from `    registry.redhat.io` .
 
 
 **Procedure**
 
-1. Log in to Podman by using your registry.redhat.io credentials:
+1. Log in to Podman with your `    registry.redhat.io` credentials:
 
 
 ```
@@ -22,7 +22,6 @@ $ podman login registry.redhat.io
 ```
 
 
-1. Enter your username and password.
 1. Pull an execution environment:
 
 
@@ -35,7 +34,7 @@ $ podman pull registry.redhat.io/<span class="emphasis"><em><span class="Role AR
 
 **Verification**
 
-To verify that the execution environment you recently pulled is contained in the list, take these steps:
+To verify that the execution environment you pulled is contained in the list, take these steps:
 
 
 1. List the images in local storage:
@@ -51,6 +50,6 @@ $ podman images
 
 **Additional resources**
 
-- See [Red Hat Ecosystem Catalog Help](https://redhat-connect.gitbook.io/catalog-help/) for information on registering and getting execution environments.
+-  [Red Hat Ecosystem Catalog Help](https://redhat-connect.gitbook.io/catalog-help/)
 
 

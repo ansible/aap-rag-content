@@ -4,7 +4,7 @@
 
 
 
-Red Hat Ansible Automation Platform is designed with a default security posture that prevents users authenticated through external providers, such as LDAP, SAML, or SSO, from creating OAuth2 tokens for programmatic API access. When an external user tries to generate such a token, the following message appears: `403: Forbidden' error with the message: '(access_denied) OAuth2 Tokens cannot be created by users associated with an external authentication provider` .
+Red Hat Ansible Automation Platform is designed with a default security posture that prevents users authenticated through external providers, such as LDAP, SAML, or SSO, from creating OAuth2 tokens for programmatic API access. When an external user tries to generate such a token, the following message is displayed: `403: Forbidden' error with the message: '(access_denied) OAuth2 Tokens cannot be created by users associated with an external authentication provider` .
 
 This default behavior is a deliberate security measure. Ansible Automation Platform prioritizes centralized control over token generation, which encourages administrators to select the appropriate method for enabling OAuth 2.0 user token generation for external authentication providers.
 

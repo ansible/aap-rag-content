@@ -1,6 +1,6 @@
-# 7. Troubleshooting
-## 7.3. Troubleshooting Ansible Visual Studio Code extension errors
-### 7.3.1. Cannot view the generated code recommendations using the Ansible VS Code extension
+# 8. Troubleshooting
+## 8.3. Troubleshooting Ansible Visual Studio Code extension errors
+### 8.3.1. Cannot view the generated code recommendations using the Ansible VS Code extension
 
 
 

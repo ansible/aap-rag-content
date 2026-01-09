@@ -1,11 +1,13 @@
 # 3. Credential types
 ## 3.2. Custom credential types
-### 3.2.2. Injector Configuration
+### 3.2.2. Injector configuration
 
 
 
 
-You can use Injector configuration to extract information from Input configuration fields and map them into injector types that can be sent to ansible-rulebook when running a rulebook activation. Event-Driven Ansible supports the following types of injectors:
+You can use Injector configuration to safely transform and map credential data from input fields so that it can be correctly exposed and consumed by `ansible-rulebook` at runtime.
+
+Event-Driven Ansible supports the following types of injectors:
 
 - Environment variables ( `    env` ) - Used in source plugins for the underlying package or shared library.
 - Ansible extra variables ( `    extra_vars` ) - Used for substitution in the rulebook conditions, actions or source plugin parameters.

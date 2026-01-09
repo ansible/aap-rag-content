@@ -1,4 +1,4 @@
-# Chapter 11. Ansible Automation Platform Resource Operator
+# Chapter 12. Ansible Automation Platform Resource Operator
 
 
 

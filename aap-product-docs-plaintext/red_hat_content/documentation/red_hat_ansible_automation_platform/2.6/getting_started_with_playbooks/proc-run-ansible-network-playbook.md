@@ -1,10 +1,12 @@
-# 2. Use a Playbook to establish a connection to a managed node
+# 2. Use a playbook to establish a connection to a managed node
 ## 2.2. Running a network Ansible Playbook
 
 
 
 
-If you want to run a particular command every day, you can save it in a playbook and run it with `ansible-playbook` instead of ansible. The playbook can store a lot of the parameters you provided with flags at the command line, leaving less to type at the command line. You need two files for this, a playbook and an inventory file.
+If you want to run a particular command every day, you can save it in a playbook and run it with `ansible-playbook` instead of ansible.
+
+The playbook can store many of the parameters you provided with flags at the command line, leaving less to type at the command line. You need two files for this, a playbook and an inventory file.
 
 **Prerequisites**
 
@@ -48,8 +50,6 @@ When facts are gathered from a system, either through a collection-specific fact
 
 When a module runs in a playbook, the output is held in memory for use by future tasks instead of written to the console. With most other modules you must explicitly register a variable to store and reuse the output of a module or task.
 
-For more information about facts, see [Ansible facts] in the _Ansiible Playbook Reference Guide_ .
-
 The following debug task lets you see the results in your shell.
 
 **Procedure**
@@ -58,7 +58,7 @@ The following debug task lets you see the results in your shell.
 
 `    ansible-playbook -i vyos.example.net, -u ansible -k -e ansible_network_os=vyos.vyos.vyos first_playbook.yml`
 
-The playbook contains one play with two tasks, and generates output like this.
+The playbook contains one play with two tasks, and generates output similar to the following:
 
 
 ```

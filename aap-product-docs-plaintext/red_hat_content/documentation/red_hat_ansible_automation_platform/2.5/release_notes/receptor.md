@@ -1,15 +1,15 @@
 # 10. Patch releases
-## 10.4. Ansible Automation Platform patch release July 2, 2025
-### 10.4.10. Receptor
+## 10.1. Ansible Automation Platform patch release December 10, 2025
+### 10.1.10. Receptor
 
 
 
 
-#### 10.4.10.1. Bug Fixes
+#### 10.1.10.1. Features
 
 
 
 
-- Fixed an issue where jobs were in a failed status with message **Receptor detail: Finished** . EOF is now handled correctly when the pod is ready.(AAP-46484)
+- Addresses edge cases that could cause JSON to fail to parse a line from the worker stream. Also raises the versions of go dependencies and other minor functionality changes.(AAP-57253)
 
 

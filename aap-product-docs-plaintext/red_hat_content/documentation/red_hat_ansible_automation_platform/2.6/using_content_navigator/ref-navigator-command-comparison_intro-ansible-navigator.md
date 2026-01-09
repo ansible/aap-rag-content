@@ -7,7 +7,7 @@
 The automation content navigator commands run familiar Ansible CLI commands in `-m stdout` mode. You can use all the subcommands and options available in the related Ansible CLI command. Use `ansible-navigator --help` for details.
 
 
-<span id="idm139927742011904"></span>
+<span id="idm139769239092864"></span>
 **Table 1.2. Comparison of automation content navigator and Ansible CLI commands**
 
 | automation content navigator command | Ansible CLI command |

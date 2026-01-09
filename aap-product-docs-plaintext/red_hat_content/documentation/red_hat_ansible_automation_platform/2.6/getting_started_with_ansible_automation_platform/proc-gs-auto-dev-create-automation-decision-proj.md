@@ -1,5 +1,5 @@
 # 3. Getting started as an automation developer
-## 3.10. Creating an automation decision project
+## 3.11. Creating an automation decision project
 
 
 
@@ -33,7 +33,10 @@ Like automation execution projects, automation decision projects are logical col
 1. ClickCreate project.
 
 
+**Next steps**
+
 Your project is now created and can be managed in the **Projects** screen.
+
 
 After saving the new project, the project’s details page is displayed. From there or the **Projects** list view, you can edit or delete it.
 

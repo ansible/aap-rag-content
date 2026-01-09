@@ -1,4 +1,4 @@
-# 8. About the installer inventory file
+# 8. About the installation program inventory file
 ## 8.2. Deprovisioning nodes or groups
 
 

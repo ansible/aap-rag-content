@@ -5,24 +5,24 @@
 
 
 
-Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+Red Hat has tested these configurations to install and run Red Hat Ansible Automation Platform:
 
 
-<span id="idm139984995217792"></span>
+<span id="idm139972756147488"></span>
 **Table 3.7. System configuration**
 
 | Type | Description | Notes |
 | --- | --- | --- |
 | Subscription | - Valid Red Hat Ansible Automation Platform subscription
 - Valid Red Hat Enterprise Linux subscription (to consume the BaseOS and AppStream repositories) |  |
-| Operating system | - Red Hat Enterprise Linux 9.2 or later minor versions of Red Hat Enterprise Linux 9.
+| Operating system | - Red Hat Enterprise Linux 9.4 or later minor versions of Red Hat Enterprise Linux 9.
 - Red Hat Enterprise Linux 10 or later minor versions of Red Hat Enterprise Linux 10. |  |
 | CPU architecture | x86_64, AArch64, s390x (IBM Z), ppc64le (IBM Power) |  |
 |  `ansible-core` | - RHEL 9: installation program uses `    ansible-core` 2.14, Ansible Automation Platform operation uses `    ansible-core` 2.16.
 - RHEL 10: installation program uses `    ansible-core` 2.16, Ansible Automation Platform operation uses `    ansible-core` 2.16. | - The installation program uses the `    ansible-core` package from the RHEL AppStream repository.
 - Ansible Automation Platform bundles `    ansible-core` 2.16 for operation, so you do not need to install it manually. |
 | Browser | A currently supported version of Mozilla Firefox or Google Chrome. |  |
-| Database | PostgreSQL 15 | External (customer supported) databases require ICU support. |
+| Database | PostgreSQL 15 | External (customer supported) databases require International Components for Unicode (ICU) support. |
 
 
 

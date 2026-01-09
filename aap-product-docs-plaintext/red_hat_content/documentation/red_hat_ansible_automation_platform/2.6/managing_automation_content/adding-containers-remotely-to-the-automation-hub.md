@@ -1,15 +1,11 @@
 # 3. Manage containers in private automation hub
 ## 3.6. Working with signed containers
-### 3.6.2. Adding containers remotely to automation hub
+### 3.6.2. Defining an image source for the signing pipeline
 
 
 
 
-You can add containers remotely to automation hub in one of the following two ways:
-
-- By creating remotes
-- By using an automation execution environment
-
+After configuring a container signing service, define the source of the images you want to sign. Configure a remote registry to tell private automation hub where to find upstream images so that it can retrieve them, add your signature, and then store them locally.
 
 **Procedure**
 

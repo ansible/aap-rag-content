@@ -8,7 +8,7 @@ This procedure describes how to launch a template from a tile in the **Templates
 
 **Prerequisites**
 
-You have configured RBAC in Ansible Automation Platform for templates that are associated with Ansible Automation Platform job templates.
+- You have configured RBAC in Ansible Automation Platform for templates that are associated with Ansible Automation Platform job templates.
 
 
 **Procedure**

@@ -40,12 +40,11 @@ awx-manage host_metric --tarball --rows_per_file &lt;n&gt;
 ```
 
 
+1. Automation Analytics then receives and uses the JSON file.
 
-
-Automation Analytics receives and uses the JSON file.
 
 **Additional resources**
 
--  [Configuring automation execution](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution) /assembly-controller-metrics[Usage reporting with metrics-utility]
+-  [Usage reporting with metrics-utility](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/metrics-utility)
 
 

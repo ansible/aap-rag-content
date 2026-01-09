@@ -4,11 +4,7 @@
 
 
 
-You must specify where jobs are run, or they default to running in the control cluster.
-
-To do this, set up a Job Template.
-
-For more information on Job Templates, see [Job templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-job-templates) in _Using automation execution_ .
+You must specify where jobs run from, or they default to running in the control cluster. To do this, set up a Job Template. For more information about Job Templates, see [Job templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-job-templates) in _Using automation execution_ .
 
 **Procedure**
 

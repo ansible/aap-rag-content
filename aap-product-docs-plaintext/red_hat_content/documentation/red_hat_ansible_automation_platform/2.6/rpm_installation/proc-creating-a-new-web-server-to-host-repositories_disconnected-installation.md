@@ -1,10 +1,10 @@
 # 5. Disconnected installation
-## 5.4. Creating a new web server to host repositories
+## 5.3. Creating a new web server to host repositories
 
 
 
 
-If you do not have an existing web server to host your repositories, you can create one with your synced repositories.
+Create and configure a dedicated web server to host repositories for a disconnected environment. This procedure ensures local access to synchronized RPM packages and enables you to streamline content installation and updates on isolated systems.
 
 **Procedure**
 

@@ -4,6 +4,8 @@
 
 
 
+Install Ansible Builder to create custom execution environments that contain the dependencies and collections required for your automation content. You need a valid Red Hat subscription and Podman installed on your RHEL system
+
 **Prerequisites**
 
 - You have valid subscriptions attached on the host. Doing so enables you to access the subscription-only resources needed to install ansible-builder, and ensures that the necessary repository for ansible-builder is automatically enabled. See Attaching your Red Hat Ansible Automation Platform subscription for more information.

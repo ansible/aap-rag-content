@@ -1,5 +1,5 @@
-# 3. Disconnected installation
-## 3.1. Obtaining and configuring RPM source dependencies
+# 10. Disconnected installation
+## 10.1. Obtaining and configuring RPM source dependencies
 
 
 

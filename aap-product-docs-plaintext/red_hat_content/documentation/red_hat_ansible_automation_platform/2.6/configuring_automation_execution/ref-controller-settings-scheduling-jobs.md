@@ -5,6 +5,8 @@
 
 
 
+The controller uses a task manager to schedule jobs onto instances.
+
 The task manager periodically collects tasks that need to be scheduled and determines what instances have capacity and are eligible for running them. The task manager has the following workflow:
 
 1. Find and assign the control and execution instances.

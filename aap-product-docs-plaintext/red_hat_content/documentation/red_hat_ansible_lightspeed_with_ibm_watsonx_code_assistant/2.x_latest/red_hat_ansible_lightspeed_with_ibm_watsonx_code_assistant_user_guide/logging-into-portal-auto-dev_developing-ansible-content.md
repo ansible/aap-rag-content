@@ -1,9 +1,11 @@
-# 4. Developing Ansible content
-## 4.1. Accessing the Ansible Lightspeed portal as an automation developer
-### 4.1.1. Logging in to the Ansible Lightspeed portal as an automation developer
+# 5. Developing Ansible content
+## 5.1. Accessing the Ansible Lightspeed portal as an automation developer
+### 5.1.1. Logging in to the Ansible Lightspeed portal as an automation developer
 
 
 
+
+Use the following procedure to log into the Ansible Lightspeed portal with your Red Hat account.
 
 **Procedure**
 

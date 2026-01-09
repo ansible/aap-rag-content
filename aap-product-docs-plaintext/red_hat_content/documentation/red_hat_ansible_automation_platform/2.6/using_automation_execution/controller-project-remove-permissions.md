@@ -5,7 +5,7 @@
 
 
 
-Remove roles for a particular user.
+Remove existing roles assigned to users and teams within an automation controller project. This action helps ensure that access is restricted only to the necessary functions and data.
 
 **Procedure**
 

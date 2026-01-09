@@ -5,7 +5,7 @@
 
 
 
-To set up social authentication for a GitHub team, you must obtain an OAuth2 key and secret for a web application using the instructions provided in [registering the new application with GitHub](https://docs.github.com/en/apps/using-github-apps/installing-your-own-github-app) .
+To set up social authentication for a GitHub team, you must obtain an OAuth2 key and secret for a web application by using the instructions provided in [registering the new application with GitHub](https://docs.github.com/en/apps/using-github-apps/installing-your-own-github-app) .
 
 The OAuth2 key (Client ID) and secret (Client Secret) are used to supply the required fields in the UI. To register the application, you must supply it with your webpage URL, which is the **Callback URL** shown in the Authenticator details for your authenticator configuration. See [Displaying authenticator details](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-display-auth-details) for instructions on accessing this information.
 
@@ -38,14 +38,13 @@ Values defined in this field override the dedicated fields provided in the UI. A
 1. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users** .
 1. ClickCreate Authentication Method.
 
-
-**Verification**
-
 To verify that the authentication is configured correctly, log out of Ansible Automation Platform and check that the login screen displays the logo of your authentication chosen method to enable logging in with those credentials.
+
+
 
 
 **Next steps**
 
-To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
 
 

@@ -1,6 +1,6 @@
 # 6. Job templates
-## 6.21. Extra variables
-### 6.21.1. Relaunch a job template
+## 6.17. Extra variables
+### 6.17.1. Relaunch a job template
 
 
 

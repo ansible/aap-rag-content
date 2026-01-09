@@ -4,7 +4,7 @@
 
 
 
-RBAC is set up in the Helm chart with the `admin` user set as the RBAC administrator ( `rbac_admin` ).
+By default, Ansible Automation Platform administrators can define self-service automation portal RBAC roles.
 
 This procedure describes how to create a role in self-service automation portal that allows only a selected team to view and execute particular custom self-service templates.
 
@@ -14,21 +14,13 @@ If you assign permissions to a particular team to launch a custom self-service t
 
 **Prerequisites**
 
-- As the admin user in your Ansible Automation Platform instance, you have created a user, for example `    example-user` .
-
-See [Creating a user](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access#proc-controller-creating-a-user) in the _Access management and authentication_ guide.
-
-
-- You have added this user as a member of a team, for example `    example-team` .
-
-See [Adding users to a team](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access#proc-gw-team-add-user) in the _Access management and authentication_ guide.
-
-
+- You have created a user, for example `    example-user` . For more details, see [Creating a user](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access#proc-controller-creating-a-user) .
+- You have added this user as a member of a team, for example `    example-team` . Fore more details, see [Adding users to a team](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access#proc-gw-team-add-user) .
 
 
 **Procedure**
 
-1. In a browser, log in to your self-service automation portal instance as an Ansible Automation Platform user with `    admin` privileges.
+1. In a browser, log in to your self-service automation portal instance as an Ansible Automation Platform user with Ansible Automation Platform administrator privileges.
 1. In the navigation panel, selectAdministration→RBAC.
 1. In the **RBAC** view, click **Create** .
 

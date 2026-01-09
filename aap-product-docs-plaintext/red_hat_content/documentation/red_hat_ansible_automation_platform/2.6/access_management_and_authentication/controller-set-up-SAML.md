@@ -7,7 +7,7 @@
 
 SAML allows the exchange of authentication and authorization data between an Identity Provider (IdP) and a Service Provider (SP). Ansible Automation Platform is a SAML SP that you can configure to talk with one or more SAML IdPs to authenticate users.
 
-Based on groups and attributes optionally provided by the SAML IdP, users can be placed into teams and organizations in Ansible Automation Platform based on the authenticator maps tied to this authenticator. This mapping ensures that when a user logs in through SAML, Ansible Automation Platform can correctly identify the user and assign the proper attributes like first name, last name, email, and group membership.
+Based on groups and attributes optionally provided by the SAML IdP, users can be placed into teams and organizations in Ansible Automation Platform based on the authenticator maps tied to this authenticator. This mapping ensures that when a user logs in through SAML, Ansible Automation Platform can correctly identify the user and assign the proper attributes such as given name, surname, email, and group membership.
 
 **Prerequisites**
 
@@ -19,7 +19,7 @@ Before you configure SAML authentication in Ansible Automation Platform, be sure
 
 
 -  **Identifier (Entity ID):** This can be any value that you want, but it needs to match the one configured in your Ansible Automation Platform.
--  **Reply URL (Assertion Consumer Service (ACS) URL):** This URL is auto generated when the SAML method is configured in Ansible Automation Platform. That value must be copied from Ansible Automation Platform and pasted in your IdP settings.
+-  **Reply URL (Assertion Consumer Service (ACS) URL):** This URL is auto generated when the SAML method is configured in Ansible Automation Platform. Copy that value from Ansible Automation Platform and paste in your IdP settings.
 
 - Gather the user attributes for your SAML IdP application. Different IdPs might use different attribute names and formats. Refer to documentation for your specific IdP for the exact attribute names and the expected values.
 - Generate a private key and public certificate using the following command:
@@ -39,13 +39,13 @@ $ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days
 1. Enter a **Name** for this SAML configuration.
 1. Select **SAML** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
 1. Enter the application-defined unique identifier used as the audience of the SAML service provider configuration in the **SAML Service Provider Entity ID** field. This is usually the base URL of your service provider, but the actual value depends on the Entity ID expected by your IdP.
-1. Include the certificate content in the **SAML Service Provider Public Certificate** field. This information is contained in the cert.pem you created as a prerequisite and must include the `    —–BEGIN CERTIFICATE—–` and `    —–END CERTIFICATE—–` .
-1. Include the private key content in the **SAML Service Provider Private Key** field. This information is contained in the key.pem you created as a prerequisite and must include the `    —–BEGIN PRIVATE KEY—–` and `    —–END PRIVATE KEY—–` .
+1. Include the certificate content in the **SAML Service Provider Public Certificate** field. This information is contained in the cert.pem you created as a prerequisite and must include the `    --BEGIN CERTIFICATE--` and `    --END CERTIFICATE--` .
+1. Include the private key content in the **SAML Service Provider Private Key** field. This information is contained in the key.pem you created as a prerequisite and must include the `    --BEGIN PRIVATE KEY--` and `    --END PRIVATE KEY--` .
 1. Enter the URL to redirect the user to for login initiation in the **IdP Login URL** field. This is the login URL from your SAML IdP application.
 1. Enter the public cert used for secrets coming from the **IdP in the IdP Public Cert** field. This is the SAML certificate available for download from IdP.
 
 Note
-The IdP in the IdP Public Cert field should contain the entire certificate, including the `    —–BEGIN CERTIFICATE—–` and `    —–END CERTIFICATE—–` . You must manually enter the prefix and suffix if the IdP does not include it.
+The IdP in the IdP Public Cert field should contain the entire certificate, including the `    --BEGIN--` and `    --END CERTIFICATE--` . You must manually enter the prefix and suffix if the IdP does not include it.
 
 
 
@@ -120,7 +120,7 @@ This field is the equivalent to the `    SOCIAL_AUTH_SAML_SP_EXTRA` in the API. 
 For more information and additional options, see [OneLogin’s SAML Python Toolkit](https://github.com/SAML-Toolkits/python-saml#settings) .
 
 
-1. Optional: In the **SAML IDP to extra_data attribute mapping** field, enter values to map IDP attributes to extra_data attributes. These values will include additional user information beyond standard attributes like Email or Username to be mapped. For example:
+1. Optional: In the **SAML IDP to extra_data attribute mapping** field, enter values to map IDP attributes to extra_data attributes. These values will include additional user information beyond standard attributes such as Email or Username to be mapped. For example:
 
 
 ```
@@ -130,7 +130,7 @@ For more information and additional options, see [OneLogin’s SAML Python Toolk
 For more information on the values you can include, see [advanced SAML settings](https://python-social-auth.readthedocs.io/en/latest/backends/saml.html#advanced-settings) .
 
 Important
-Make sure you include all relevant values so that everything gets mapped correctly for your configuration. Alternatively, you can include the `    GET_ALL_EXTRA_DATA: true` in the **Additional Authenticator Fields** to allow mapping of all available SAML IdP attributes.
+Ensure to include all relevant values so that everything gets mapped correctly for your configuration. Alternatively, you can include the `    GET_ALL_EXTRA_DATA: true` in the **Additional Authenticator Fields** to allow mapping of all available SAML IdP attributes.
 
 
 
@@ -150,7 +150,7 @@ You can configure an HTTPS redirect for SAML in operator-based deployments to si
 
 **Next steps**
 
-To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
 
 
 #### 2.5.5.1. Configuring transparent SAML logins

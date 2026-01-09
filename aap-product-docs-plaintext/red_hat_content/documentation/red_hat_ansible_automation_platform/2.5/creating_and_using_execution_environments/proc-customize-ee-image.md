@@ -50,7 +50,7 @@ collections:          - kubernetes.core
 1. In the execution environment definition file, specify the original `    ee-minimal` container’s URL and tag in the `    EE_BASE_IMAGE` field. In doing so, your final `    execution-environment.yml` file appears similar to the following:
 
 
-<span id="idm140538095462400"></span>
+<span id="idm140447358306400"></span>
 **Example 5.1. A customized `    execution-environment.yml` file**
 
 
@@ -148,9 +148,6 @@ If your instance of automation hub is password or token protected, ensure that y
 
 
 **Additional resources**
-
-For more details on customizing execution environments based on common scenarios, see the following topics in the _Ansible Builder Documentation_ :
-
 
 -  [Copying arbitratory files to an execution environment](https://ansible.readthedocs.io/projects/builder/en/latest/scenario_guides/scenario_copy/)
 -  [Building execution environments with environment variables](https://ansible.readthedocs.io/projects/builder/en/latest/scenario_guides/scenario_using_env/)

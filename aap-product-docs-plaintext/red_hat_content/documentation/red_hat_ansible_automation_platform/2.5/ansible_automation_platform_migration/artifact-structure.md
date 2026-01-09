@@ -4,7 +4,7 @@
 
 
 
-The migration artifact serves as a comprehensive package containing all necessary components to successfully transfer your Ansible Automation Platform deployment.
+The migration artifact is a comprehensive package containing all necessary components to transfer your Ansible Automation Platform deployment.
 
 Structure the artifact as follows:
 
@@ -13,6 +13,7 @@ Structure the artifact as follows:
 manifest.yml
 secrets.yml
 sha256sum.txt
+
 -&gt; controller:
 controller.pgc
 -&gt; custom_configs:

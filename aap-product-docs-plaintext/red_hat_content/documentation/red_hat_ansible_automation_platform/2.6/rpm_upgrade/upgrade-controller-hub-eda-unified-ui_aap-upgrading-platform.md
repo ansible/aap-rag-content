@@ -5,7 +5,7 @@
 
 
 
-Use this procedure if you have migration path for 2.4 instances with managed databases.
+Migrate Ansible Automation Platform 2.4 instances with managed databases to 2.6 by upgrading automation controller and automation hub before enabling unified UI and Event-Driven Ansible.
 
 **Prerequisites**
 

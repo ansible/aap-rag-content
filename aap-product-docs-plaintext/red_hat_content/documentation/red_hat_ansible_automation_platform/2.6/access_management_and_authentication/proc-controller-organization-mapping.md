@@ -5,7 +5,7 @@
 
 
 
-You can control which users are placed into which Ansible Automation Platform organizations based on attributes like their username and email address or based on groups provided from an authenticator.
+You can control which users are placed into which Ansible Automation Platform organizations based on attributes such as their username and email address or based on groups provided from an authenticator.
 
 When organization mapping is positively evaluated, a specified organization is created, if it does not exist if the authenticator tied to the map is allowed to create objects.
 

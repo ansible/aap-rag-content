@@ -1,5 +1,5 @@
-# 8. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 8.6. Creating Ansible Automation Platform custom resources
+# 10. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 10.6. Creating Ansible Automation Platform custom resources
 
 
 

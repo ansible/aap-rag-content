@@ -4,7 +4,9 @@
 
 
 
-After you have created your definition file, Ansible Builder reads and validates it, creates a `Containerfile` and container build context, and optionally passes these to Podman to build your automation execution environment image. The container build occurs in several distinct stages: `base` , `galaxy` , `builder` , and `final` . The image build steps (along with any corresponding custom `prepend_` and `append_` steps defined in `additional_build_steps` ) are:
+After you have created your definition file, Ansible Builder reads and validates it, creates a `Containerfile` and container build context, and optionally passes these to Podman to build your automation execution environment image.
+
+The container build occurs in several distinct stages: `base` , `galaxy` , `builder` , and `final` . The image build steps (along with any corresponding custom `prepend_` and `append_` steps defined in `additional_build_steps` ) are:
 
 1. During the `    base` build stage, the specified base image is (optionally) customized with components required by other build stages, including Python, `    pip` , `    ansible-core` , and `    ansible-runner` . The resulting image is then validated to ensure that the required components are available (as they may have already been present in the base image). Ephemeral copies of the resulting customized `    base` image are used as the base for all other build stages.
 1. During the `    galaxy` build stage, collections specified by the definition file are downloaded and stored for later installation during the `    final` build stage. Python and system dependencies declared by the collections, if any, are also collected for later analysis.

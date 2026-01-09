@@ -1,6 +1,6 @@
-# 13. Appendix: Red Hat Ansible Automation Platform custom resources
-## 13.1. Custom resources
-### 13.1.16. aap-lightspeed-enabled.yml
+# 15. Appendix: Red Hat Ansible Automation Platform custom resources
+## 15.1. Custom resources
+### 15.1.16. aap-lightspeed-enabled.yml
 
 
 

@@ -7,26 +7,29 @@
 
 The examples in this section demonstrate how to set the node type for the hosts in your inventory file.
 
+Important
+For a container-based installation of Ansible Automation Platform, replace `node_type` with `receptor_type` .
+
+
+
 You can set the `node_type` for single nodes in the control plane or execution plane inventory groups. To define the node type for an entire group of nodes, set the `node_type` in the `vars` stanza for the group.
 
 - The permitted values for `    node_type` in the control plane `    [automationcontroller]` group are `    hybrid` (default) and `    control` .
 - The permitted values for `    node_type` in the `    [execution_nodes]` group are `    execution` (default) and `    hop` .
 
 
-**Hybrid node**
+**Hybrid nodes**
 
 The following inventory consists of a single hybrid node in the control plane:
-
 
 ```
 [automationcontroller]
 control-plane-1.example.com
 ```
 
-**Control node**
+**Control nodes**
 
 The following inventory consists of a single control node in the control plane:
-
 
 ```
 [automationcontroller]
@@ -43,20 +46,18 @@ control-plane-1.example.com
 node_type=control
 ```
 
-**Execution node**
+**Execution nodes**
 
 The following stanza defines a single execution node in the execution plane:
-
 
 ```
 [execution_nodes]
 execution-plane-1.example.com
 ```
 
-**Hop node**
+**Hop nodes**
 
 The following stanza defines a single hop node and an execution node in the execution plane. The `node_type` variable is set for every individual node.
-
 
 ```
 [execution_nodes]
@@ -83,26 +84,4 @@ execution-plane-1.example.com
 [hop_group:vars]
 node_type=hop
 ```
-
-**Peer connections**
-
-Create node-to-node connections using the `peers=` host variable. The following example connects `control-plane-1.example.com` to `execution-node-1.example.com` and `execution-node-1.example.com` to `execution-node-2.example.com` :
-
-
-```
-[automationcontroller]
-control-plane-1.example.com peers=execution-node-1.example.com
-
-[automationcontroller:vars]
-node_type=control
-
-[execution_nodes]
-execution-node-1.example.com peers=execution-node-2.example.com
-execution-node-2.example.com
-```
-
-**Additional resources**
-
-- See the example automation mesh topologies in this guide for more examples of how to implement mesh nodes.
-
 

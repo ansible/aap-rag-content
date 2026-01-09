@@ -4,7 +4,7 @@
 
 
 
-Learn about the initial setup of clusters. To upgrade an existing cluster, see [Upgrade Planning](https://docs.ansible.com/automation-controller/4.4/html/upgrade-migration-guide/upgrade_considerations.html#upgrade-planning) in the _Ansible Automation Platform Upgrade and Migration Guide_ .
+Learn about the initial setup of clusters.
 
 Note the following important considerations in the new clustering environment:
 

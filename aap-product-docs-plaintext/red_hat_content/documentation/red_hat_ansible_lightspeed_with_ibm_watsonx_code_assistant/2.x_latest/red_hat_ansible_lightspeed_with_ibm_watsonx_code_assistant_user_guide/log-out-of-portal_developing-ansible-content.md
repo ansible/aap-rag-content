@@ -1,6 +1,6 @@
-# 4. Developing Ansible content
-## 4.2. Installing and configuring the Ansible VS Code extension
-### 4.2.5. Logging out of the Ansible Lightspeed Service
+# 5. Developing Ansible content
+## 5.2. Installing and configuring the Ansible VS Code extension
+### 5.2.5. Logging out of the Ansible Lightspeed Service
 
 
 

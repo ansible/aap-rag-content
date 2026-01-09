@@ -5,6 +5,8 @@
 
 
 
+By default, automation controller streams live events to the user interface (UI) for jobs that are running.
+
 Events are sent to any node where there is a UI client subscribed to a job. This task is expensive, and becomes more expensive as the number of events that the cluster is producing increases and the number of control nodes increases, because all events are broadcast to all nodes regardless of how many clients are subscribed to particular jobs.
 
 To reduce the overhead of displaying live events in the UI, administrators can choose to either:
@@ -20,20 +22,28 @@ When you disable live streaming of events, they are only loaded on hard refresh 
 
 
 
+You can disable live streaming events in automation controller to reduce system load or for troubleshooting purposes.
+
+Disable live streaming events by using one of the following methods:
+
 **Procedure**
 
-1. Disable live streaming events by using one of the following methods:
+1. In the API, set `    UI_LIVE_UPDATES_ENABLED` to **False** .
+
+Or
 
 
-1. In the API, set `        UI_LIVE_UPDATES_ENABLED` to **False** .
-1. Go to your automation controller. Open the **Miscellaneous System Settings** window. Set the **Enable Activity Stream** toggle to **Off** .
-
+1. In the navigation panel, selectSettings→Automation Execution→System.
+1. ClickEdit.
+1. Set the **Enable Activity Stream** option to **Off** .
 
 
 #### 3.7.1.2. Settings to modify rate and size of events
 
 
 
+
+If your system generates a large number of events, the live streaming of events to the user interface (UI) can cause performance issues. You can disable live streaming of events or reduce the number of events that are displayed in the UI by modifying the following settings.
 
 If you cannot disable live streaming of events because of their size, reduce the number of events that are displayed in the UI. You can use the following settings to manage how many events are displayed:
 

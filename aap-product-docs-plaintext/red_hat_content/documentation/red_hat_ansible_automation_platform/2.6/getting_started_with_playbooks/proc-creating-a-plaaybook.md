@@ -4,7 +4,7 @@
 
 
 
-Use the following procedure to create a playbook that pings your hosts and prints a “Hello world” message.
+Learn how to create a playbook that pings your hosts and prints a “Hello world” message.
 
 **Procedure**
 
@@ -25,40 +25,16 @@ Use the following procedure to create a playbook that pings your hosts and print
 
 
 ```
-PLAY [My first play] ****************************************************************************
-
-TASK [Gathering Facts] **************************************************************************
-ok: [192.0.2.50]
-ok: [192.0.2.51]
-ok: [192.0.2.52]
-
-TASK [Ping my hosts] ****************************************************************************
-ok: [192.0.2.50]
-ok: [192.0.2.51]
-ok: [192.0.2.52]
-
-TASK [Print message] ****************************************************************************
-ok: [192.0.2.50] =&gt; {
-"msg": "Hello world"
-}
-ok: [192.0.2.51] =&gt; {
-"msg": "Hello world"
-}
-ok: [192.0.2.52] =&gt; {
-"msg": "Hello world"
-}
-
-PLAY RECAP **************************************************************************************
-192.0.2.50: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-192.0.2.51: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-192.0.2.52: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+PLAY [My first play] ****************************************************************************        TASK [Gathering Facts] **************************************************************************    ok: [192.0.2.50]    ok: [192.0.2.51]    ok: [192.0.2.52]        TASK [Ping my hosts] ****************************************************************************    ok: [192.0.2.50]    ok: [192.0.2.51]    ok: [192.0.2.52]        TASK [Print message] ****************************************************************************    ok: [192.0.2.50] =&gt; {        "msg": "Hello world"    }    ok: [192.0.2.51] =&gt; {        "msg": "Hello world"    }    ok: [192.0.2.52] =&gt; {        "msg": "Hello world"    }        PLAY RECAP **************************************************************************************    192.0.2.50: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0    192.0.2.51: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0    192.0.2.52: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 In this output you can see:
 
+
 - The names that you give the play and each task. Always use descriptive names that make it easy to verify and troubleshoot playbooks.
 - The Gather Facts task runs implicitly. By default Ansible gathers information about your inventory that it can use in the playbook.
-- The status of each task. Each task has a status of `    ok` which means it ran successfully.
-- The play recap that summarizes results of all tasks in the playbook per host. In this example, there are three tasks so `    ok=3` indicates that each task ran successfully.
+- The status of each task. Each task has a status of `        ok` which means it ran successfully.
+- The play recap that summarizes results of all tasks in the playbook per host. In this example, there are three tasks so `        ok=3` indicates that each task ran successfully.
+
 
 

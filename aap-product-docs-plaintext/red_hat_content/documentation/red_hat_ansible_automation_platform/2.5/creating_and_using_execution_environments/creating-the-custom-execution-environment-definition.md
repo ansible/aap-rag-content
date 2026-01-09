@@ -27,9 +27,11 @@ Version 3 of the execution environment definition format is required, so ensure 
 1. Override the base image to point to the minimal execution environment available in your private automation hub.
 1. Define the additional build files needed to point to any disconnected content sources that will be used in the build process. Your custom `        execution-environment.yml` file should look similar to the following example:
 
+
 ```
-version: 3        images:      base_image:        name: private-hub.example.com/ee-minimal-rhel8:latest        dependencies:      python: requirements.txt      galaxy: requirements.yml        additional_build_files:      - src: files/ansible.cfg        dest: configs      - src: files/pip.conf        dest: configs      - src: files/hub-ca.crt        dest: configs      # uncomment if custom RPM repositories are required      #- src: files/custom.repo      #  dest: configs        additional_build_steps:      prepend_base:        # copy a custom pip.conf to override the location of the PyPI content        - ADD _build/configs/pip.conf /etc/pip.conf        # remove the default UBI repository definition        - RUN rm -f /etc/yum.repos.d/ubi.repo        # copy the hub CA certificate and update the trust store        - ADD _build/configs/hub-ca.crt /etc/pki/ca-trust/source/anchors        - RUN update-ca-trust        # if needed, uncomment to add a custom RPM repository configuration        #- ADD _build/configs/custom.repo /etc/yum.repos.d/custom.repo          prepend_galaxy:        - ADD _build/configs/ansible.cfg ~/.ansible.cfg        ...
+version: 3                images:          base_image:            name: private-hub.example.com/ee-minimal-rhel8:latest                dependencies:          python: requirements.txt          galaxy: requirements.yml                additional_build_files:          - src: files/ansible.cfg            dest: configs          - src: files/pip.conf            dest: configs          - src: files/hub-ca.crt            dest: configs          # uncomment if custom RPM repositories are required          #- src: files/custom.repo          #  dest: configs                additional_build_steps:          prepend_base:            # copy a custom pip.conf to override the location of the PyPI content            - ADD _build/configs/pip.conf /etc/pip.conf            # remove the default UBI repository definition            - RUN rm -f /etc/yum.repos.d/ubi.repo            # copy the hub CA certificate and update the trust store            - ADD _build/configs/hub-ca.crt /etc/pki/ca-trust/source/anchors            - RUN update-ca-trust            # if needed, uncomment to add a custom RPM repository configuration            #- ADD _build/configs/custom.repo /etc/yum.repos.d/custom.repo                  prepend_galaxy:            - ADD _build/configs/ansible.cfg ~/.ansible.cfg                ...
 ```
+
 
 
 1. Create an `    ansible.cfg` file under the `    files/` subdirectory that points to your private automation hub.
@@ -80,27 +82,15 @@ Any required collections must already be uploaded into your private automation h
 The following files should exist under the `    custom-ee/` directory, with `    bindep.txt` and `    files/custom.repo` being optional:
 
 
-
-
 ```
-$ cd $HOME/custom-ee
-$ tree .
-.
-├── bindep.txt
-├── execution-environment.yml
-├── files
-│   ├── ansible.cfg
-│   ├── custom.repo
-│   ├── hub-ca.crt
-│   └── pip.conf
-├── requirements.txt
-└── requirements.yml
-
-1 directory, 8 files
+$ cd $HOME/custom-ee    $ tree .    .    ├── bindep.txt    ├── execution-environment.yml    ├── files    │   ├── ansible.cfg    │   ├── custom.repo    │   ├── hub-ca.crt    │   └── pip.conf    ├── requirements.txt    └── requirements.yml        1 directory, 8 files
 ```
+
+
+
 
 **Additional resources**
 
-For more information on the Version 3 format and requirements, see [Execution Environment Definition: Version 3 Format](https://ansible-builder.readthedocs.io/en/stable/definition/) .
+-  [Execution Environment Definition: Version 3 Format](https://ansible-builder.readthedocs.io/en/stable/definition/)
 
 

@@ -14,13 +14,15 @@ If your private automation hub is behind a network proxy, you can configure prox
 **Requirements.yml example**
 
 
+
+
 ```
-collections:      # Install a collection from Ansible Galaxy.      - name: community.aws        version: 5.2.0        source: https://galaxy.ansible.com
+collections:
+# Install a collection from Ansible Galaxy.
+- name: community.aws
+version: 5.2.0
+source: https://galaxy.ansible.com
 ```
-
-
-
-
 
 **Procedure**
 

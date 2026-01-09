@@ -1,14 +1,22 @@
-# 2. Filter and save automation data for reporting
-## 2.1. Filters
+# 1. View key usage metrics with Automation Dashboard
+## 1.5. Filter and save automation data for reporting
+### 1.5.1. Filters
 
 
 
 
-Select one or more of the following filtering options to customize your report:
+Use the following filtering options to customize your report:
 
--  **Template:** allows you to select one or more Job Templates
--  **Organization:** allows you to select one or more Organizations
--  **Project:** allows you to select one or more Projects
--  **Label:** allows you to select one or more automations by label. Labels must be preconfigured and assigned to Ansible Automation Platform in order to be displayed in Automation Dashboard. For more information on configuring labels, see [Creating a job template](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-job-templates#controller-create-job-template) .
+-  **Template:** select one or more Job Templates
+-  **Organization:** select one or more Organizations
+-  **Project:** select one or more Projects
+-  **Label:** select one or more automation projects by label.
+
+Note
+You must preconfigure and assign labels to Ansible Automation Platform for display in Automation Dashboard. For more information on configuring labels, see [Creating a job template](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-job-templates#controller-create-job-template) .
+
+
+
+
 
 

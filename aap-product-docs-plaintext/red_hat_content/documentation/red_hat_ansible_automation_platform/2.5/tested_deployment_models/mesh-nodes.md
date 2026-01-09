@@ -3,5 +3,5 @@
 
 
 
-Automation mesh is an overlay network intended to ease the distribution of work across a large and dispersed collection of workers. This is done through nodes that establish peer-to-peer connections with each other by using existing networks.
+Automation mesh is an overlay network that distributes automation work across large and distributed collections of workers through peer-to-peer node connections. Included are the tested system configurations and network port requirements for mesh nodes.
 

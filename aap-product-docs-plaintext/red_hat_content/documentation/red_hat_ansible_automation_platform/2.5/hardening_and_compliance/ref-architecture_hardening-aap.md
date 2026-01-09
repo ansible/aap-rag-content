@@ -12,7 +12,7 @@ It is possible to install Ansible Automation Platform on different infrastructur
 The following diagram is a tested container enterprise architecture:
 
 
-<span id="idm140606650918736"></span>
+<span id="idm139835593999264"></span>
 **Figure 2.1. Reference architecture overview**
 
 ![Infrastructure reference architecture that Red Hat has tested that customers can use when self-managing Ansible Automation Platform](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.5-Hardening_and_compliance-en-US/images/704824d330eb8422156d4d7cf034ee52/cont-b-env-a.png)

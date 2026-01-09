@@ -5,10 +5,10 @@
 
 
 
-Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+Red Hat has tested these configurations to install and run Red Hat Ansible Automation Platform:
 
 
-<span id="idm140627608525568"></span>
+<span id="idm140186621343360"></span>
 **Table 3.5. Tested system configurations**
 
 | Type | Description |
@@ -41,6 +41,7 @@ Red Hat has tested the following configurations to install and run Red Hat Ansi
 - replicas_per_node_group: 1
 - automatic_failover_enabled: true |
 | s3 storage | HTTPS only accessible through AWS Role assigned to automation hub SA at runtime by using AWS Pod Identity |
+| IP version | IPv4, IPv6 (single-stack and dual-stack) |
 
 
 

@@ -1,6 +1,6 @@
-# 3. Setting up Red Hat Ansible Lightspeed for your organization
-## 3.2. Setting up Red Hat Ansible Lightspeed cloud service
-### 3.2.1. Logging in to the Ansible Lightspeed administrator portal
+# 4. Setting up Red Hat Ansible Lightspeed for your organization
+## 4.2. Setting up Red Hat Ansible Lightspeed cloud service
+### 4.2.1. Logging in to the Ansible Lightspeed administrator portal
 
 
 

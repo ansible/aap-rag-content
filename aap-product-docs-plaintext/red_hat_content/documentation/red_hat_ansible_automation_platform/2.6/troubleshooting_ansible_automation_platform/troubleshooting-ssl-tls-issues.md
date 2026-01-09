@@ -4,7 +4,7 @@
 
 
 
-To troubleshoot issues with SSL/TLS, verify the certificate chain, use the correct certificates, and confirm that a trusted Certificate Authority (CA) signed the certificate.
+To troubleshoot SSL/TLS issues, verify the certificate chain, use the correct certificates, and confirm that a trusted Certificate Authority (CA) signed the certificate.
 
 **Procedure**
 

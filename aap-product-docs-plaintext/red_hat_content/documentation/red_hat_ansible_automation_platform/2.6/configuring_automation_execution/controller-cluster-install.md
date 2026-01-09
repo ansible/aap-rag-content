@@ -4,6 +4,8 @@
 
 
 
+Learn how to install and configure a automation controller cluster installation.
+
 Provisioning new instances for a VM-based install involves updating the `inventory` file and re-running the setup playbook. It is important that the inventory file has all passwords and information used when installing the cluster or other instances might be reconfigured. The inventory file has a single inventory group, `automationcontroller` .
 
 Note
@@ -53,7 +55,7 @@ routable_hostname
 For more information about `routable_hostname` , see [General variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/appendix-inventory-files-vars#ref-genera-inventory-variables) in the _RPM installation_ .
 
 Important
-Earlier versions of automation controller used the variable name `rabbitmq_host` . If you are upgrading from an earlier version of the platform, and you previously specified `rabbitmq_host` in your inventory, rename `rabbitmq_host` to `routable_hostname` before upgrading.
+Earlier versions of automation controller used the variable name `rabbitmq_host` . If you are upgrading from an earlier version of the platform, and you specified `rabbitmq_host` in your inventory, rename `rabbitmq_host` to `routable_hostname` before upgrading.
 
 
 

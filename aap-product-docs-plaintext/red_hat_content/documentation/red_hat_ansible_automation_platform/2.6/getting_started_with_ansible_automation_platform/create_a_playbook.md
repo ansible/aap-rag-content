@@ -38,5 +38,10 @@ job_type: run
 state: present
 ```
 
-For more detailed instructions on authoring playbooks, see [Developing automation content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/developing_automation_content) , or consult our documentation on [Red Hat Ansible Lightspeed with IBM watsonx Code Assistant User Guide](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide) to learn how to generate a playbook with AI assistance.
+For more detailed guidance on authoring playbooks, consult the following documentation:
+
+-  [Developing automation content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/developing_automation_content)
+-  [Creating playbooks and viewing playbook explanations](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/developing-ansible-content_lightspeed-user-guide#playbook-generation_developing-ansible-content) in the Red Hat Ansible Lightspeed with IBM watsonx Code Assistant User Guide to learn how to generate a playbook with AI.
+-  [Getting started with playbooks](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/getting_started_with_playbooks)
+
 

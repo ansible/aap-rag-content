@@ -1,6 +1,6 @@
-# 3. Disconnected installation
-## 3.1. Obtaining and configuring RPM source dependencies
-### 3.1.1. Configuring a local repository using reposync
+# 8. Disconnected installation
+## 8.1. Obtaining and configuring RPM source dependencies
+### 8.1.1. Configuring a local repository using reposync
 
 
 
@@ -14,11 +14,11 @@ With the `reposync` command you can to synchronize the BaseOS and AppStream repo
 
 **Procedure**
 
-1. Attach the BaseOS and AppStream repositories using `    subscription-manager` :
+1. Attach the BaseOS and AppStream repositories using `    subscription-manager` , replacing `    &lt;RHEL_VERSION&gt;` with your RHEL version number:
 
 
 ```
-$ sudo subscription-manager repos \        --enable rhel-9-baseos-rhui-rpms \        --enable rhel-9-appstream-rhui-rpms
+$ sudo subscription-manager repos \        --enable rhel-&lt;RHEL_VERSION&gt;-baseos-rhui-rpms \        --enable rhel-&lt;RHEL_VERSION&gt;-appstream-rhui-rpms
 ```
 
 
@@ -72,19 +72,19 @@ $ sudo tar xzvf ~/rhel-repos.tar.gz -C /opt
 ```
 
 
-1. Create a Yum repository file at `    /etc/yum.repos.d/rhel.repo` with the following content:
+1. Create a Yum repository file at `    /etc/yum.repos.d/rhel.repo` with the following content, replacing `    &lt;RHEL_VERSION&gt;` with your RHEL version number:
 
 
 ```
-[RHEL-BaseOS]    name=Red Hat Enterprise Linux BaseOS    baseurl=file:///opt/rhel-repos/rhel-9-baseos-rhui-rpms    enabled=1    gpgcheck=1    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release        [RHEL-AppStream]    name=Red Hat Enterprise Linux AppStream    baseurl=file:///opt/rhel-repos/rhel-9-appstream-rhui-rpms    enabled=1    gpgcheck=1    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+[RHEL-BaseOS]    name=Red Hat Enterprise Linux BaseOS    baseurl=file:///opt/rhel-repos/rhel-&lt;RHEL_VERSION&gt;-baseos-rhui-rpms    enabled=1    gpgcheck=1    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release        [RHEL-AppStream]    name=Red Hat Enterprise Linux AppStream    baseurl=file:///opt/rhel-repos/rhel-&lt;RHEL_VERSION&gt;-appstream-rhui-rpms    enabled=1    gpgcheck=1    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 ```
 
 
-1. Import the gpg key to allow the system to verify the packages:
+1. Import the gpg key to allow the system to verify the packages, replacing `    &lt;RHEL_VERSION&gt;` with your RHEL version number:
 
 
 ```
-$ sudo rpm --import /opt/rhel-repos/rhel-9-baseos-rhui-rpms/RPM-GPG-KEY-redhat-release
+$ sudo rpm --import /opt/rhel-repos/rhel-&lt;RHEL_VERSION&gt;-baseos-rhui-rpms/RPM-GPG-KEY-redhat-release
 ```
 
 

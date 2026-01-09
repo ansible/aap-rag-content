@@ -1,5 +1,5 @@
-# 4. Getting started as an automation operator
-## 4.2. Writing a playbook
+# 3. Getting started as an automation developer
+## 3.3. Writing a playbook
 
 
 
@@ -25,10 +25,10 @@ Ansible uses the YAML syntax. YAML is a human-readable language that enables you
 $ ansible-playbook -i inventory.ini playbook.yaml
 ```
 
-
-
-
 Ansible returns the following output:
+
+
+
 
 ```
 PLAY [My first play] ********************************************************
@@ -63,7 +63,7 @@ PLAY RECAP ******************************************************************
 
 **Additional resources**
 
-- For more information on playbooks, see [Getting started with playbooks](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/getting_started_with_playbooks) .
-- If you need help writing a playbook, see [Red Hat Ansible Lightspeed with IBM watsonx Code Assistant](https://developers.redhat.com/products/ansible/lightspeed?source=sso) .
+-  [Getting started with playbooks](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/getting_started_with_playbooks)
+-  [Red Hat Ansible Lightspeed with IBM watsonx Code Assistant](https://developers.redhat.com/products/ansible/lightspeed?source=sso)
 
 

@@ -1,17 +1,21 @@
-# 8. About the installer inventory file
+# 8. About the installation program inventory file
 ## 8.1. Guidelines for hosts and groups
 
 
 
 
+Follow these configuration guidelines to properly set up databases, automation hub, automation controller, Event-Driven Ansible controller, and platform gateway hosts for reliable Ansible Automation Platform installations.
+
 **Databases**
 
-- When using an external database, ensure the `    [database]` sections of your inventory file are properly set up.
+- The `    [database]` group in your inventory file defines the Ansible Automation Platform managed database. When using an externally managed database, do not include the `    [database]` group in your inventory file.
 - To improve performance, do not colocate the database and the automation controller on the same server.
-
 
 Important
 When using an external database with Ansible Automation Platform, you must create and maintain that database. Ensure that you clear your external database when uninstalling the Ansible Automation Platform.
+
+
+
 
 
 
@@ -22,7 +26,7 @@ When using an external database with Ansible Automation Platform, you must creat
 - Do not install Ansible automation hub and automation controller on the same node.
 - Provide a reachable IP address or fully qualified domain name (FQDN) for the `    [automationhub]` and `    [automationcontroller]` hosts to ensure that users can synchronize and install content from Ansible automation hub and automation controller from a different node.
 
-The FQDN must not contain the `    _` symbol, as it will not be processed correctly in Skopeo. You may use the `    -` symbol, as long as it is not at the start or the end of the host name.
+The FQDN must not contain the `    _` symbol, as it will not be processed correctly in Skopeo. You can use the `    -` symbol provided that it is not at the start or the end of the hostname.
 
 Do not use `    localhost` .
 
@@ -33,13 +37,13 @@ Do not use `    localhost` .
 
 - Do not install private automation hub and automation controller on the same node.
 - You can use the same PostgreSQL (database) instance, but they must use a different (database) name.
-- If you install private automation hub from an internal address, and have a certificate which only encompasses the external address, it can result in an installation you cannot use as a container registry without certificate issues.
-
+- If you install private automation hub from an internal address, and have a certificate that only encompasses the external address, it can result in an installation you cannot use as a container registry without certificate issues.
 
 Important
-You must separate the installation of automation controller and Ansible automation hub because the `[database]` group does not distinguish between the two if both are installed at the same time.
+You must separate the installation of automation controller and Ansible automation hub because the `    [database]` group does not distinguish between the two if both are installed at the same time. If you use one value in `    [database]` and both automation controller and Ansible automation hub define it, they would use the same database.
 
-If you use one value in `[database]` and both automation controller and Ansible automation hub define it, they would use the same database.
+
+
 
 
 

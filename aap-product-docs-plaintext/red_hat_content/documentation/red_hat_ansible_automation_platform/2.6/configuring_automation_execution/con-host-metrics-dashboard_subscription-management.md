@@ -5,8 +5,6 @@
 
 
 
-To view your host metrics, in the navigation pane, selectAutomation Analytics→Host Metrics.
-
 The Host Metrics dashboard provides high level automation run details per managed host, including:
 
 - The first and last time a host was automated.
@@ -14,18 +12,24 @@ The Host Metrics dashboard provides high level automation run details per manage
 - The number of times a managed host has been deleted.
 
 
-The ability to view the number of times automation has been run on hosts enables you to:
+Use the ability to view the number of times automation has been run on hosts to:
 
 - View your most commonly automated hosts.
 - More accurately reflect the scope of your automation landscape.
 
+
+To view your host metrics, in the navigation pane, selectAutomation Analytics→Host Metrics.
 
 #### 11.1.1.1. Soft deletion
 
 
 
 
-Soft deletion enables the removal of decommissioned hosts from the Host Metrics view and excludes them from any potential managed node counting. Additionally, the following host types can also be deleted:
+Automation controller provides a soft deletion feature that allows you to mark hosts as deleted without permanently removing them from the database. This feature is useful for managing hosts that are no longer in use but need to be retained for historical or auditing purposes.
+
+When a host is soft deleted, it is marked as deleted in the database but remains accessible for reporting and auditing.
+
+Additionally, the following host types can also be deleted:
 
 - Ephemeral, uniquely provisioned hosts, such as those used for CI-CD, or testing only.
 - Bench provisioning or temporary hosts.

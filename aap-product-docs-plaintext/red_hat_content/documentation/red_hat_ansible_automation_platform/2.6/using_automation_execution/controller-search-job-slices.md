@@ -4,6 +4,8 @@
 
 
 
+You can search for job slices and their parent workflow jobs by using the search functionality in Automation controller.
+
 To make it easier to find slice jobs, use the search functionality to apply a search filter to:
 
 - Job lists to show only slice jobs

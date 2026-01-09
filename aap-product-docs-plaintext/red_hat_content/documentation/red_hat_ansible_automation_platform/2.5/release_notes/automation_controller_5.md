@@ -1,15 +1,23 @@
 # 10. Patch releases
-## 10.5. Ansible Automation Platform patch release June 11, 2025
-### 10.5.1. Automation controller
+## 10.4. Ansible Automation Platform patch release August 27, 2025
+### 10.4.6. Automation controller
 
 
 
 
-#### 10.5.1.1. Bug Fixes
+#### 10.4.6.1. Bug Fixes
 
 
 
 
-- Fixed an issue where using or creating Azure keyvault credentials was failing with **TypeError** .(AAP-47413)
+- Fixed regression in `    ansible.controller` collection where the argument `    controller_oauthtoken` was wrongfully removed.
+
+
+- Fixed newly added `        aap_token` to function the same as `        controller_oauthtoken` .
+- Fixed the `        ansible.controller.controller_api` lookup plugin.
+(AAP-51289)
+
+- Fixed an issue where the Ansible Galaxy credentials could not be created and edited without specifying an organization.(AAP-51614)
+- Fixed an issue where the subscription is attached before subscription credentials have been set, returned a **400 Bad Request** .(AAP-50322)
 
 

@@ -1,11 +1,11 @@
 # 2. System requirements
-## 2.6. PostgreSQL requirements
-### 2.6.7. Benchmarking storage performance for the Ansible Automation Platform PostgreSQL database
+## 2.7. PostgreSQL requirements
+### 2.7.7. Benchmarking storage performance for the Ansible Automation Platform PostgreSQL database
 
 
 
 
-Check whether the minimum Ansible Automation Platform PostgreSQL database requirements are met by using the Flexible I/O Tester (FIO) tool. FIO is a tool used to benchmark read and write IOPS performance of the storage system.
+Use the Flexible I/O Tester (FIO) tool to verify that your storage system meets minimum Ansible Automation Platform PostgreSQL database requirements. FIO benchmarks read and write IOPS performance to help you evaluate storage capabilities.
 
 **Prerequisites**
 

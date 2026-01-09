@@ -1,10 +1,12 @@
 # 10. Simplified event routing
-## 10.4. Configuring your remote system to send events
+## 10.6. Configuring your remote system to send events
 
 
 
 
 After you have created your event stream, you must configure your remote system to send events to Event-Driven Ansible controller. The method used for this configuration varies, depending on the vendor for the event stream credential type you select.
+
+The following example demonstrates how to configure webhooks in a remote system like GitHub to send events to Event-Driven Ansible controller. Each vendor will have unique methods for configuring your remote system to send events to Event-Driven Ansible controller.
 
 **Prerequisites**
 
@@ -13,9 +15,6 @@ After you have created your event stream, you must configure your remote system 
 
 
 **Procedure**
-
-The following example demonstrates how to configure webhooks in a remote system like GitHub to send events to Event-Driven Ansible controller. Each vendor will have unique methods for configuring your remote system to send events to Event-Driven Ansible controller.
-
 
 1. Log in to your GitHub repository.
 1. Click **Your profile name → Your repositories** .

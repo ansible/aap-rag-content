@@ -1,6 +1,6 @@
 # 2. System requirements
-## 2.1. Red Hat Ansible Automation Platform system requirements
-### 2.1.2. Additional notes for Red Hat Ansible Automation Platform requirements
+## 2.2. Red Hat Ansible Automation Platform system requirements
+### 2.2.2. Additional notes for Red Hat Ansible Automation Platform requirements
 
 
 
@@ -11,7 +11,7 @@
 
 
 Note
-You must use Ansible-core, which is installed via dnf. Ansible-core version 2.16 is required for versions 2.5 and later.
+You must use Ansible-core, which is installed by using DNF. Ansible-core version 2.16 is required for versions 2.5 and later.
 
 
 

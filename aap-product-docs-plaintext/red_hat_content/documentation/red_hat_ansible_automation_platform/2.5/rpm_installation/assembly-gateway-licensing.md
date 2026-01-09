@@ -1,5 +1,5 @@
 # 1. Red Hat Ansible Automation Platform installation overview
-## 1.4. Managing Ansible Automation Platform licensing, updates and support
+## 1.4. Managing Ansible Automation Platform subscriptions, updates, and support
 
 
 

@@ -1,6 +1,6 @@
-# 3. Setting up Red Hat Ansible Lightspeed for your organization
-## 3.1. Configuration requirements
-### 3.1.1. Licensing requirements
+# 4. Setting up Red Hat Ansible Lightspeed for your organization
+## 4.1. Configuration requirements
+### 4.1.1. Licensing requirements
 
 
 

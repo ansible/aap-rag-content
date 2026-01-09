@@ -4,7 +4,7 @@
 
 
 
-Red Hat Ansible provides software templates for Red Hat Developer Hub to provision new playbooks and collection projects based on Ansible best practices.
+Ansible Automation Platform provides software templates for Red Hat Developer Hub to provision new playbooks and collection projects based on Ansible best practices.
 
 **Procedure**
 

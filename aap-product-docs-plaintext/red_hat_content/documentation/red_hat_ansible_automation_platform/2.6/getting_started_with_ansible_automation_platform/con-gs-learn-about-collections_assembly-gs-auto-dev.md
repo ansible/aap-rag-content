@@ -1,5 +1,5 @@
 # 3. Getting started as an automation developer
-## 3.5. About content collections
+## 3.6. About content collections
 
 
 

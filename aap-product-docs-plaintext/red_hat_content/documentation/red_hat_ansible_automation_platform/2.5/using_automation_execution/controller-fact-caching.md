@@ -1,5 +1,5 @@
 # 6. Job templates
-## 6.16. Fact caching
+## 6.12. Fact caching
 
 
 

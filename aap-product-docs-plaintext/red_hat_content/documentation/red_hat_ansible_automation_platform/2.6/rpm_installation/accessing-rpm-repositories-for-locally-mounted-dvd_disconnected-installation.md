@@ -1,8 +1,10 @@
 # 5. Disconnected installation
-## 5.5. Accessing RPM repositories from a locally mounted DVD
+## 5.4. Accessing RPM repositories from a locally mounted DVD
 
 
 
+
+In disconnected or air-gapped environments, you can install Ansible Automation Platform by using packages from a locally mounted RHEL DVD or ISO image. Learn how to mount the media and configure yum repositories to access BaseOS and AppStream packages for offline installation.
 
 If you plan to access the repositories from the RHEL binary DVD, you must first set up a local repository.
 
@@ -43,17 +45,16 @@ If you plan to access the repositories from the RHEL binary DVD, you must first 
 # rpm --import /media/rheldvd/RPM-GPG-KEY-redhat-release
 ```
 
-
-
-
 Note
 If the key is not imported you will see an error similar to
 
+
 ```
-# Curl error (6): Couldn't resolve host name for
-https://www.redhat.com/security/data/fd431d51.txt [Could not resolve host:
-www.redhat.com]
+# Curl error (6): Couldn't resolve host name for    https://www.redhat.com/security/data/fd431d51.txt [Could not resolve host:    www.redhat.com]
 ```
+
+
+
 
 
 

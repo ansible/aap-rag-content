@@ -1,5 +1,5 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
-## 1.3. Collections and content signing in private automation hub
+## 1.3. Content signing in private automation hub
 ### 1.3.4. Configuring Ansible-Galaxy CLI to verify collections
 
 
@@ -53,18 +53,4 @@ When you install a collection from automation hub, the signatures provided by th
 
 1. (Optional) If you need to verify the internal consistency of your collection again without querying the Ansible Galaxy server, run the same command you used previously using the `    --offline` option.
 
-
-
-<span id="are_there_any_recommendations_for_collection_naming"></span>
-#### Are there any recommendations for collection naming?
-
-
-Create a collection with `company_name.product` format. This format means that multiple products can have different collections under the company namespace.
-
-
-<span id="how_do_i_get_a_namespace_on_automation_hub"></span>
-#### How do I get a namespace on automation hub?
-
-
-By default namespaces used on Ansible Galaxy are also used on automation hub by the Ansible partner team. For any queries and clarifications contact [ansiblepartners@redhat.com](mailto:ansiblepartners@redhat.com) .
 

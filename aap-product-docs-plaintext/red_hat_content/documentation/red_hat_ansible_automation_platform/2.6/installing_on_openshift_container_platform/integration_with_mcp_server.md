@@ -1,6 +1,6 @@
-# 5. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
-## 5.1. Overview
-### 5.1.1. Integration with MCP server
+# 6. Deploying the Ansible Lightspeed intelligent assistant on OpenShift Container Platform
+## 6.1. Overview
+### 6.1.1. Integration with MCP server
 
 
 

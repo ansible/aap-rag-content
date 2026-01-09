@@ -1,24 +1,19 @@
 # 10. Patch releases
-## 10.6. Ansible Automation Platform patch release June 9, 2025
-### 10.6.6. RPM-based Ansible Automation Platform
+## 10.5. Ansible Automation Platform patch release July 30, 2025
+### 10.5.6. RPM-based Ansible Automation Platform
 
 
 
 
-#### 10.6.6.1. Enhancements
+#### 10.5.6.1. Bug Fixes
 
 
 
 
-- Setup will now retry automation gateway data migration attempts in case services take longer than expected to start.(AAP-46208)
-
-
-#### 10.6.6.2. Bug Fixes
-
-
-
-
-- Fixed an issue Event stream worker would not restart like other workers when running setup.sh.(AAP-46205)
-- Fixed an issue where setup would not restart the podman socket whenever podman was reset.(AAP-46191)
+- Event-Driven Ansible node type is now properly checked during restore.(AAP-49004)
+- Fixed an issue where **gRPC** server port was not configured properly when non-default value was used.(AAP-48543)
+- Fixed an issue where the firewall role logic improperly restricted Event-Driven Ansible event stream ports. Firewall ports are now restricted to event hosts, enhancing network security for Event-Driven Ansible users.(AAP-49792)
+- Fixed an issue where the gunicorn timeout to Event-Driven Ansible API service unit was not passed.(AAP-49858)
+- Fixed an issue where envoy, nginx, web server, and jwt token timeouts were not aligned, and caused issues where requests time out but work continues, or tokens expire before they are used.(AAP-49153)
 
 

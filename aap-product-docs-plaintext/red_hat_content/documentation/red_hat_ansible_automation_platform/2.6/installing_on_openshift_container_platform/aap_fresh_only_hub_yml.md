@@ -1,6 +1,6 @@
-# 13. Appendix: Red Hat Ansible Automation Platform custom resources
-## 13.1. Custom resources
-### 13.1.15. aap-fresh-only-hub.yml
+# 15. Appendix: Red Hat Ansible Automation Platform custom resources
+## 15.1. Custom resources
+### 15.1.15. aap-fresh-only-hub.yml
 
 
 

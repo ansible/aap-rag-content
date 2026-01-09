@@ -1,6 +1,6 @@
-# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 4.2. Configuring automation controller on Red Hat OpenShift Container Platform web console
-### 4.2.1. Prerequisites
+# 5. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 5.2. Configuring automation controller on Red Hat OpenShift Container Platform web console
+### 5.2.1. Prerequisites
 
 
 
@@ -10,7 +10,7 @@
 - For Hub a StorageClass that supports ReadWriteMany must be available on the cluster to dynamically created the PVC needed for the content, redis and api pods. If it is not the default StorageClass on the cluster, you can specify it when creating your AutomationHub object.
 
 
-#### 4.2.1.1. Configuring your controller image pull policy
+#### 5.2.1.1. Configuring your controller image pull policy
 
 
 
@@ -80,7 +80,7 @@ Use this procedure to configure the image pull policy on your automation control
 1. Under **Preload instance with data upon creation** , select **true** or **false** . The default is true.
 
 
-#### 4.2.1.2. Configuring your controller LDAP security
+#### 5.2.1.2. Configuring your controller LDAP security
 
 
 
@@ -98,8 +98,13 @@ You can configure your LDAP SSL configuration for automation controller through 
 
 
 ```
-$ oc create secret -n aap-namespace generic bundle-ca-secret --from-file=bundle-ca.crt
+$ oc create secret -n aap generic bundle-ca-secret --from-file=bundle-ca.crt
 ```
+
+Note
+The target filename for this operation must be `    bundle-ca.crt` and the secret name should be `    bundle-ca-secret` .
+
+
 
 
 1. Add the `    bundle_cacert_secret` to the Ansible Automation Platform customer resource:
@@ -116,13 +121,20 @@ You can verify the expected certificate by running:
 
 
 ```
-oc exec -it deployment.apps/aap-gateway - openssl x509 -in /etc/pki/tls/certs/bundle-ca.crt -noout -text
+oc get deployments -l 'app.kubernetes.io/component=aap-gateway'
+```
+
+Followed by:
+
+
+```
+oc exec -it deployment.apps/&lt;gateway-deployment-name-from-above&gt; -- openssl x509 -in /etc/pki/tls/certs/ca-bundle.crt -noout -text
 ```
 
 
 
 
-#### 4.2.1.3. Configuring your automation controller operator route options
+#### 5.2.1.3. Configuring your automation controller operator route options
 
 
 
@@ -155,7 +167,7 @@ After you have configured your route you can customize your hostname by adding `
 
 
 
-#### 4.2.1.4. Configuring the ingress type for your automation controller operator
+#### 5.2.1.4. Configuring the ingress type for your automation controller operator
 
 
 

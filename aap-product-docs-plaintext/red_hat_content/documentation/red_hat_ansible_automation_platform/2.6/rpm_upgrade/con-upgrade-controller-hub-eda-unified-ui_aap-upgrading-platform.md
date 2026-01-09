@@ -4,7 +4,9 @@
 
 
 
-Ansible Automation Platform 2.6 supports upgrades from Ansible Automation Platform 2.4 environments for all components, with the exception of Event-Driven Ansible. You can also configure a mixed environment with Event-Driven Ansible from 2.6 connected to a legacy 2.4 cluster. Combining install methods (OCP, RPM, Containerized) within such a topology is not supported by Ansible Automation Platform.
+Ansible Automation Platform 2.6 supports upgrades from Ansible Automation Platform 2.4 environments for all components, with the exception of Event-Driven Ansible. You can also configure a mixed environment with Event-Driven Ansible from 2.6 connected to an existing 2.4 cluster.
+
+Combining install methods (OpenShift Container Platform, RPM, Containerized) within such a topology is not supported by Ansible Automation Platform.
 
 Note
 If you are running the 2.4 version of Event-Driven Ansible in production, before you upgrade, contact Red Hat support or your account representative for more information on how to move to Ansible Automation Platform 2.6.

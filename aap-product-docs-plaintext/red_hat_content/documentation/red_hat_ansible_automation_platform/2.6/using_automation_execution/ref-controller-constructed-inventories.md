@@ -8,8 +8,6 @@ You can create a new inventory (called a constructed inventory) from a list of i
 
 A constructed inventory has copies of hosts and groups in its input inventories, permitting jobs to target groups of servers across many inventories. Groups and hostvars can be added to the inventory content, and hosts can be filtered to limit the size of the constructed inventory.
 
-Constructed inventories use the [ansible.builtin.constructed inventory](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/constructed_inventory.html#ansible-builtin-constructed-inventory-uses-jinja2-to-construct-vars-and-groups-based-on-existing-inventory) model.
-
 The key factors of a constructed inventory are:
 
 - The normal Ansible hostvars namespace is available

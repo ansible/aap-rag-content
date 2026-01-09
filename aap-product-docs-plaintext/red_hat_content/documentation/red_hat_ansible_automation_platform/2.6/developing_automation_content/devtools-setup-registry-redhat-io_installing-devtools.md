@@ -16,11 +16,7 @@ If you are running Ansible development tools on a container inside VS Code and y
 
 **Prerequisites**
 
-- To use the `    registry.redhat.io` registry, you must have a Red Hat login.
-
-This is the same account that you use to log in to the Red Hat Customer Portal (access.redhat.com) and manage your Red Hat subscriptions.
-
-
+- You have a Red Hat login. It is the same account that you use to log in to the Red Hat Customer Portal (access.redhat.com) and manage your Red Hat subscriptions.
 
 
 **Procedure**
@@ -45,5 +41,8 @@ $ podman login registry.redhat.io    Username: my_redhat_username    Password: *
 
 
 
-For more information about Red Hat container registry authentication, see [Red Hat Container Registry Authentication](https://access.redhat.com/RegistryAuthentication) on the Red Hat customer portal.
+**Additional resources**
+
+-  [Red Hat Container Registry Authentication](https://access.redhat.com/RegistryAuthentication)
+
 

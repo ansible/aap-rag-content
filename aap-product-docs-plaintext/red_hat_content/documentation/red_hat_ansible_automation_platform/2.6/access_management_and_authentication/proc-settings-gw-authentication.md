@@ -1,6 +1,6 @@
 # 6. Configuring Ansible Automation Platform
 ## 6.2. Platform gateway
-### 6.2.5. Enabling OAuth2 token creation for external users
+### 6.2.6. Enabling OAuth2 token creation for external users
 
 
 

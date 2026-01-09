@@ -1,5 +1,5 @@
-# 3. Using Ansible Builder
-## 3.3. Build an execution environment in a disconnected environment
+# 2. Using Ansible Builder
+## 2.3. Build an execution environment in a disconnected environment
 
 
 

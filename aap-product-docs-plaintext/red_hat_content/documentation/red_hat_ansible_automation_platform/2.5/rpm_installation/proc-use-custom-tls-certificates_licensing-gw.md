@@ -1,6 +1,6 @@
 # 2. System requirements
-## 2.6. PostgreSQL requirements
-### 2.6.4. Using custom TLS certificates
+## 2.7. PostgreSQL requirements
+### 2.7.4. Using custom TLS certificates
 
 
 

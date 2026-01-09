@@ -1,10 +1,10 @@
 # 8. Rulebook activations troubleshooting
-## 8.3. Event streams not sending events to activation
+## 8.6. Event streams not sending events to activation
 
 
 
 
-If you are using event streams to send events to your rulebook activations, occasionally those events might not be successfully routed to your rulebook activation.
+Diagnose issues where an event stream is receiving data but failing to forward it, ensuring proper connectivity and correct credential setup.
 
 **Procedure**
 

@@ -1,5 +1,5 @@
-# 11. Ansible Automation Platform Resource Operator
-## 11.4. Creating a automation controller connection secret for Resource Operator
+# 13. Ansible Automation Platform Resource Operator
+## 13.4. Creating a automation controller connection secret for Resource Operator
 
 
 

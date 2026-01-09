@@ -4,6 +4,8 @@
 
 
 
+Workflows in automation controller allow you to string together multiple job templates and other workflows into a single job run. This section describes several workflow scenarios and considerations to remember when building workflows.
+
 When building workflows, consider the following:
 
 - A root node is set to **ALWAYS** by default and cannot be edited.

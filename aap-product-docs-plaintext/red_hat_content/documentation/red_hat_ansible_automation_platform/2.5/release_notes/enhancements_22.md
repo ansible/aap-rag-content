@@ -1,68 +1,36 @@
 # 10. Patch releases
-## 10.8. Ansible Automation Platform patch release May 7, 2025
-### 10.8.4. Enhancements
+## 10.9. Ansible Automation Platform patch release May 28, 2025
+### 10.9.3. Enhancements
 
 
 
 
-#### 10.8.4.1. Ansible Automation Platform
+#### 10.9.3.1. Ansible Automation Platform
 
 
 
 
-- Updated platform gateway to adopt selected standard component for settings mechanism.(AAP-34939)
-- Refactored the `    authenticate()` method inside the `    AuthenticatorPlugin` class in `    legacy_password.py` and `    legacy_sso.py` to their common parent `    LegacyMixin` . Added comments to classes and their methods for code clarity.(AAP-44460)
+- Reduced the cognitive complexity level of `    validate_password()` method and reorganized the `    validate_authenticate_uid()` method to increase code readability.(AAP-45346)
+- For clarity and to prevent misconfiguration, the SAML authenticator now requires both a permanent user ID and a username.(AAP-45333)
+- Updated field names and help text in the System Settings UI to indicate client ID and client secret for service accounts, as well as client ID and client secret for analytics.(AAP-43119)
+- Validation/enforcement of expected service types removed because service types are now dynamic.(AAP-40130)
+- Enables configuration of control plane authentication for custom services. You should not modify it for pre-defined services.(AAP-40131)
+- Custom service type support added. Arbitrary service types and services can be created rather than a fixed list.(AAP-39812)
 
 
-#### 10.8.4.2. Ansible Automation Platform Operator
-
-
-
-
-- Fixed an issue where the Lightspeed Operator would not use the `    ANSIBLE_AI_MODEL_MESH_CONFIG` .(AAP-41335)
-- Extended CCSP and renewal guidance reports to include inventory scope and node/host details.(AAP-38802)
-
-
-#### 10.8.4.3. Automation controller
+#### 10.9.3.2. Red Hat Ansible Lightspeed
 
 
 
 
-- Updated the pinned version of `    receptorctl` in automation controller to 1.5.5.(AAP-44823)
-- Updated the pinned version for `    ansible-runner` in automation controller.(AAP-43357)
+- It is now possible to disable SSL verification for Red Hat Ansible Lightspeed <→ Model Server communication.(AAP-45337)
 
 
-#### 10.8.4.4. Container-based Ansible Automation Platform
-
-
-
-
-- Added new variable `    use_archive_compression` with default `    value: true` . Added new variable component `    Name_use_archive_compression` for each component with the default `    value: true` .(AAP-41242)
-
-
-#### 10.8.4.5. Event-Driven Ansible
+#### 10.9.3.3. Automation controller
 
 
 
 
-- Event-Driven Ansible collection standardization enhancements.(AAP-41402)
-- Relevant settings and versions are emitted in logs when the ansible-rulebook starts in worker mode.(AAP-40781)
-- Added log entries with settings and version at startup.(AAP-40781)
-- Enhanced the Ansible Automation Platform injectors for `    eda-server` to include common platform variables as `    extra_vars` or environment variables if they are specified.(AAP-43029)
-- Event-Driven Ansible decision environment validation errors now display under the decision environment text box in the decision environment UI page.(AAP-42147)
-- Added a automation controller URL check for the CLI.(AAP-41575)
-- If a source plugin terminates you are now able to see the stack trace with the source file name, the function name, and line number.(AAP-41774)
-
-
-#### 10.8.4.6. RPM-based Ansible Automation Platform
-
-
-
-
-- Added compression for archive and database artifacts used in backup/restore
-
-
-- Updated database filename used for automation controller `        pg_dump` from tower to automation controller while maintaining backward compatibility for backups using `        tower.db` filename.(AAP-42055)
-
+- Updated Azure Key Vault plugin to use managed identity when creating credentials.(AAP-43461)
 
 

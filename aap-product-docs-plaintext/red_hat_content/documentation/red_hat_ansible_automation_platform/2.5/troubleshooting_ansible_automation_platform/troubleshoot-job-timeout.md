@@ -1,5 +1,5 @@
 # 6. Jobs
-## 6.2. Issue - Jobs are failing with “Timeout (12s) waiting for privilege escalation prompt” error message
+## 6.2. Issue - Jobs failing with timeout waiting for privilege escalation prompt
 
 
 
@@ -13,7 +13,13 @@ The following changes will affect all of the jobs in automation controller. To u
 
 
 
-**Add ANSIBLE_TIMEOUT as an environment variable in the automation controller UI**
+**Procedure**
+
+- Increase the timeout value by using one of the following methods:
+
+
+-  **Add ANSIBLE_TIMEOUT as an environment variable in the automation controller UI:**
+
 
 1. Go to automation controller.
 1. From the navigation panel, selectSettings→Jobs settings.
@@ -21,32 +27,34 @@ The following changes will affect all of the jobs in automation controller. To u
 
 
 ```
-{    "ANSIBLE_TIMEOUT": 60    }
+{            "ANSIBLE_TIMEOUT": 60            }
 ```
 
 
 
-
-**Add a timeout value in the [defaults] section of the ansible.cfg file by using the CLI**
-
-- Edit the `    /etc/ansible/ansible.cfg` file and add the following:
+-  **Add a timeout value in the [defaults] section of the ansible.cfg file:**
 
 
-```
-[defaults]    timeout = 60
-```
-
-
-
-
-**Running ad hoc commands with a timeout**
-
-- To run an ad hoc playbook in the command line, add the `    --timeout` flag to the `    ansible-playbook` command, for example:
+1. Edit the `            /etc/ansible/ansible.cfg` file and add the following:
 
 
 ```
-# ansible-playbook --timeout=60<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">&lt;your_playbook.yml&gt;</span></em></span>
+[defaults]            timeout = 60
 ```
+
+
+
+-  **Run ad hoc commands with a timeout:**
+
+
+1. To run an ad hoc playbook in the command line, add the `            --timeout` flag to the `            ansible-playbook` command, for example:
+
+
+```
+# ansible-playbook --timeout=60 &lt;your_playbook.yml&gt;
+```
+
+
 
 
 

@@ -1,10 +1,17 @@
-# 3. Customizing your Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
-## 3.3. Defining a parameter on a nested component
+# 4. Customizing your Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+## 4.3. Defining a parameter on a nested component
 
 
 
 
-To define a parameter, such as the `resource_requirements` for Automation Controller, you add the configuration to the parent Ansible Automation Platform CR YAML. This ensures that the Ansible Automation Platform CR is the single source of truth for your deployment.
+To define a parameter, such as the `resource_requirements` for automation controller, you add the configuration to the parent Ansible Automation Platform CR YAML. This ensures that the Ansible Automation Platform CR is the single source of truth for your deployment.
+
+Note
+The `image` and `image_version` , as well as the `{component}_image` and `{component}_image_version` parameters are intended for development or hotfix purposes only.
+
+**Do not use these in production environments.** These settings bypass standard version management and can lead to configuration drift, inconsistent deployments, and difficulty troubleshooting issues.
+
+
 
 **Procedure**
 

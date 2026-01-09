@@ -1,5 +1,5 @@
 # 8. Rulebook activations troubleshooting
-## 8.1. Activation stuck in Pending state
+## 8.2. Activation stuck in Pending state
 
 
 

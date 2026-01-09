@@ -1,6 +1,6 @@
 # 3. Manage containers in private automation hub
 ## 3.4. Setting up your container repository
-### 3.4.5. Creating a credential
+### 3.4.4. Creating a credential
 
 
 
@@ -21,6 +21,4 @@ In earlier versions of Ansible Automation Platform, you were required to deploy 
 1. Optional: To enable SSL verification, select **Verify SSL** .
 1. ClickCreate credential.
 
-
-Filling in at least one of the fields organization, user, or team is mandatory, and can be done through the user interface.
 

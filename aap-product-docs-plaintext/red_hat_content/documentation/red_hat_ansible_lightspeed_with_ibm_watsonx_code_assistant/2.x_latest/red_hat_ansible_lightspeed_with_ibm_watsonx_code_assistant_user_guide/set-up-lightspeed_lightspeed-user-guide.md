@@ -1,4 +1,4 @@
-# Chapter 3. Setting up Red Hat Ansible Lightspeed for your organization
+# Chapter 4. Setting up Red Hat Ansible Lightspeed for your organization
 
 
 

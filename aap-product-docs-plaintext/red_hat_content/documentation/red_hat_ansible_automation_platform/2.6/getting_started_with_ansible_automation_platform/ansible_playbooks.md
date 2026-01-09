@@ -17,6 +17,7 @@ You can also use Red Hat Ansible Lightspeed, Ansible’s generative AI service, 
 
 **Additional resources**
 
+-  [Bundle content with Ansible roles](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/getting_started_with_ansible_automation_platform/index#con-gs-ansible-roles_assembly-gs-auto-dev)
 -  [Getting started with playbooks](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/getting_started_with_playbooks)
 -  [Red Hat Ansible Lightspeed with IBM watsonx Code Assistant user guide](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index)
 

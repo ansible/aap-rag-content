@@ -1,5 +1,5 @@
 # 3. Installing Red Hat Ansible Automation Platform
-## 3.6. Adding a subscription manifest to Ansible Automation Platform
+## 3.7. Adding a subscription manifest to Ansible Automation Platform
 
 
 

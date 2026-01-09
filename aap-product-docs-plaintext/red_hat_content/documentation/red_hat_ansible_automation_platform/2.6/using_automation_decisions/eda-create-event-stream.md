@@ -4,12 +4,12 @@
 
 
 
-You can create event streams that will be attached to a rulebook activation.
+Create a dedicated stream endpoint to simplify how external systems send events, making it easier to route data to multiple rulebook activations.
 
 **Prerequisites**
 
 - If you will be attaching your event stream to a rulebook activation, ensure that your activation has a decision environment and project already set up.
-- If you plan to connect to automation controller to run your rulebook activation, ensure that you have created a Red Hat Ansible Automation Platform credential type in addition to the decision environment and project. For more information, see [Setting up a Red Hat Ansible Automation Platform credential](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_decisions/eda-set-up-rhaap-credential-type#eda-set-up-rhaap-credential) .
+- If you plan to connect to automation controller to run your rulebook activation, ensure that you have created a Red Hat Ansible Automation Platform credential type in addition to the decision environment and project. For more information, see [Setting up a Red Hat Ansible Automation Platform credential](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_decisions/eda-set-up-rhaap-credential-type#eda-set-up-rhaap-credential) .
 
 
 **Procedure**

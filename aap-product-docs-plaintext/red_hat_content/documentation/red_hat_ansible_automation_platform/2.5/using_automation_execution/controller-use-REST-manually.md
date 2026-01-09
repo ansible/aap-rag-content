@@ -1,6 +1,6 @@
 # 6. Job templates
-## 6.20. Provisioning Callbacks
-### 6.20.2. Using REST manually to callback
+## 6.16. Provisioning Callbacks
+### 6.16.2. Using REST manually to callback
 
 
 

@@ -1,6 +1,6 @@
 # 2. System requirements
-## 2.6. PostgreSQL requirements
-### 2.6.7. Benchmarking storage performance for the Ansible Automation Platform PostgreSQL database
+## 2.7. PostgreSQL requirements
+### 2.7.7. Benchmarking storage performance for the Ansible Automation Platform PostgreSQL database
 
 
 

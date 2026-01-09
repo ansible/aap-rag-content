@@ -4,7 +4,7 @@
 
 
 
-Before upgrading your Red Hat Ansible Automation Platform installation, edit the `inventory` file so that it matches your desired configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can modify the parameters to match any changes to your environment.
+Before upgrading your Red Hat Ansible Automation Platform installation, edit the `inventory` file so that it matches your required configuration. You can keep the same parameters from your existing Ansible Automation Platform deployment or you can update the parameters to match any changes to your environment.
 
 You can find sample inventory files in the [Test topologies](https://github.com/ansible/test-topologies/) GitHub repository, or in our [Tested deployment models](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/tested_deployment_models) guide.
 

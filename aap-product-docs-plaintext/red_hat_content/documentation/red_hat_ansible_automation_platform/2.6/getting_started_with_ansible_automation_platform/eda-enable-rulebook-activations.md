@@ -1,11 +1,11 @@
 # 3. Getting started as an automation developer
-## 3.13. Create and run a rulebook activation
-### 3.13.2. Enabling and disabling rulebook activations
+## 3.14. Create and run a rulebook activation
+### 3.14.2. Enabling and disabling rulebook activations
 
 
 
 
-You can enable or disable rulebook activations to control when they run. Disabling an activation is useful for troubleshooting or to temporarily halt automation without deleting the configuration.
+Toggle the state of an activation to start or stop event processing instantly, allowing for temporary pauses, maintenance, or troubleshooting without deletion.
 
 **Procedure**
 

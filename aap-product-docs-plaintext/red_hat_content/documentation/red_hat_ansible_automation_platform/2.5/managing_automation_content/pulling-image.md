@@ -5,16 +5,16 @@
 
 
 
-You can pull automation execution environments from the automation hub remote registry to make a copy to your local machine.
+You can pull an execution environment from your private automation hub remote registry to make a copy to your local machine.
 
 **Prerequisites**
 
 - You must have permission to view and pull from a private container repository.
+- If you are pulling automation execution environments from a password or token-protected registry, [create a credential](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/index#proc-create-credential) first.
 
 
 **Procedure**
 
-1. If you are pulling automation execution environments from a password or token-protected registry, [create a credential](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html-single/managing_automation_content/index#proc-create-credential) before pulling the automation execution environments.
 1. From the navigation panel, selectAutomation Content→Execution Environments.
 1. Select your automation execution environments.
 1. In the **Pull this image** entry, clickCopy to clipboard.

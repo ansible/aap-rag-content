@@ -5,6 +5,8 @@
 
 
 
+Understand the automation mesh architecture and the connectivity requirements for the execution plane
+
 #### 5.3.2.1. Automation mesh
 
 
@@ -21,7 +23,18 @@ You can also configure the automation mesh with outbound connectivity from the c
 
 You can use the [Automation mesh for managed cloud or operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/automation_mesh_for_managed_cloud_or_operator_environments/index) documentation for instructions.
 
-#### 5.3.2.2. Connectivity
+#### 5.3.2.2. PrivateLink configuration types
+
+
+
+
+The PrivateLink configuration offers both ingress, for UI/API access to the Ansible Automation Platform control plane, and egress, for the control plane to connect to your private resources. For more information, see section [AWS PrivateLink connectivity into the Ansible Automation Platform control plane](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html/red_hat_ansible_automation_platform_service_on_aws/saas-private-link#aws_privatelink_connectivity_into_the_ansible_automation_platform_control_plane) .
+
+-  **Ingress PrivateLink:** Connects your VPC to the Ansible Automation Platform control plane (for UI/API access). Requires a support ticket providing your AWS Account ID and Region.
+-  **Egress PrivateLink:** Connects the Ansible Automation Platform control plane to your private resources (for example, private automation hub). This requires a separate support ticket to authorize the connection to your Endpoint Service.
+
+
+#### 5.3.2.3. Connectivity
 
 
 
@@ -35,4 +48,12 @@ The execution plane can communicate with the control plane under the following c
 You can configure automation mesh nodes behind firewalls, proxy servers, and similar services. These services route or proxy traffic originating from Ansible Automation Platform without altering headers, payload, or other information that would affect functionality of the automation mesh.
 
 You can restrict access to the control plane by providing CIDR blocks to the Red Hat support team through a [Customer support request](https://access.redhat.com/support/cases/#/case/new/get-support?caseCreate=true) . This controls the inbound access to the control plane limiting it to the IP ranges you provide for traffic over the public internet. The application of these rules do not apply to traffic over PrivateLink. These restrictions do not affect outbound traffic that originates from the control plane.
+
+Important
+Customers **must** allowlist the following wildcard domain in their local firewalls to permit the SRE team’s maintenance and monitoring:
+
+-  `    *.redhat.com`
+
+
+
 

@@ -5,7 +5,9 @@
 
 
 
-Capacity algorithms determine how many forks a system is capable of running simultaneously. These algorithms control how many systems Ansible can communicate with simultaneously. Increasing the number of forks an automation controller system is running enables jobs to run faster by performing more work in parallel. However, this increases the load on the system, which can cause work to slow down.
+Capacity algorithms determine how many forks a system is capable of running simultaneously. These algorithms control how many systems Ansible can communicate with simultaneously.
+
+Increasing the number of forks an automation controller system is running enables jobs to run faster by performing more work in parallel. However, this increases the load on the system, which can cause work to slow down.
 
 The default, `mem_capacity` , enables you to over-commit processing resources while protecting the system from running out of memory. If most of your work is not processor-bound, then selecting this mode maximizes the number of forks.
 
@@ -13,6 +15,8 @@ The default, `mem_capacity` , enables you to over-commit processing resources wh
 
 
 
+
+The memory relative capacity option allows you to set the maximum number of concurrent tasks (forks) that can run on a controller based on the amount of memory available on the system. This setting is useful for systems where memory is a limiting factor for running Ansible jobs.
 
 `mem_capacity` is calculated relative to the amount of memory needed per fork. Taking into account the overhead for internal components, this is about 100MB per fork. When considering the amount of memory available to Ansible jobs, the capacity algorithm reserves 2GB of memory to account for the presence of other services. The algorithm formula for this is:
 
@@ -32,6 +36,8 @@ A system with 4GB of memory is capable of running 20 forks. The value `mem_per_f
 
 
 
+
+automation controller uses the `cpu_capacity` algorithm to determine the relative CPU capacity of managed nodes. This information is used to optimize the distribution of tasks across the available nodes.
 
 Ansible workloads are often processor-bound. In such cases, you can reduce the simultaneous workload to enable more tasks to run faster and reduce the average time-to-completion of those jobs.
 

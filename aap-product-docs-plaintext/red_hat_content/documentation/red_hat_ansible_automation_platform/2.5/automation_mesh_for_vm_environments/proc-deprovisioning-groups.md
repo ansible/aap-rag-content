@@ -17,7 +17,7 @@ You can deprovision any hosts in your inventory except for the first host specif
 
 
 
-<span id="idm140468917947088"></span>
+<span id="idm140138490675120"></span>
 **Example 4.2. Group deprovision**
 
 ```

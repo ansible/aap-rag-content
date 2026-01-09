@@ -1,10 +1,10 @@
 # 6. Job templates
-## 6.17. Benefits of fact caching
+## 6.13. Benefits of fact caching
 
 
 
 
-Fact caching saves you time over running fact gathering. If you have a playbook in a job that runs against a thousand hosts and forks, you can spend 10 minutes gathering facts across all of those hosts. However, if you run a job on a regular basis, the first run of it caches these facts and the next run pulls them from the database. This reduces the runtime of jobs against large inventories, including Smart Inventories.
+Fact caching saves you time over running fact gathering. If you have a playbook in a job that runs against a thousand hosts and forks, you can spend 10 minutes gathering facts across all of those hosts. However, if you run a job on a regular basis, the first run of it caches these facts and the next run pulls them from the database. This reduces the runtime of jobs against large inventories.
 
 Note
 Do not change the ansible.cfg file to apply fact caching. Custom fact caching could conflict with the controller’s fact caching feature. You must use the fact caching module that includes automation controller.

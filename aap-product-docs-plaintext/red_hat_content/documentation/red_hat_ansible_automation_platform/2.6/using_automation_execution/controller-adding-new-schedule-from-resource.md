@@ -4,6 +4,8 @@
 
 
 
+You can create a new schedule from the **Schedules** tab of a resource page, such as a template, project, or inventory source.
+
 To create a new schedule from a resource page:
 
 **Procedure**

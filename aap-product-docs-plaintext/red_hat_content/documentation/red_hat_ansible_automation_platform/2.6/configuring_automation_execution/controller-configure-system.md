@@ -42,7 +42,7 @@ You can select the following options:
 
 
 - No subscription: Deletion of host_metrics will not be considered for purposes of managed host counting.
-- Usage based on unique managed nodes ina large hostorical time frame and delete functionality for no longer used managed nodes.
+- Usage based on unique managed nodes in a large historical time frame and delete functionality for no longer used managed nodes.
 
 
 1. You can set the following options:

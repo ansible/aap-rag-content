@@ -38,6 +38,8 @@ $ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days
 1. ClickCreate authentication.
 1. Enter a **Name** for this SAML configuration.
 1. Select **SAML** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
+
+
 1. Select a legacy authenticator method from the **Auto migrate users from** list. After upgrading from 2.4 to 2.5, this is the legacy authenticator from which to automatically migrate users to this new authentication configuration. Refer to [Ansible Automation Platform post-upgrade steps](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_upgrade_and_migration/aap-post-upgrade) in the RPM upgrade and migration guide for important information about migrating users.
 1. Enter the application-defined unique identifier used as the audience of the SAML service provider configuration in the **SAML Service Provider Entity ID** field. This is usually the base URL of your service provider, but the actual value depends on the Entity ID expected by your IdP.
 1. Include the certificate content in the **SAML Service Provider Public Certificate** field. This information is contained in the cert.pem you created as a prerequisite and must include the `    —–BEGIN CERTIFICATE—–` and `    —–END CERTIFICATE—–` .

@@ -1,5 +1,5 @@
-# 3. Customizing your Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
-## 3.1. Discovering custom resource configuration parameters through the OpenShift Container Platform UI
+# 4. Customizing your Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+## 4.1. Discovering custom resource configuration parameters through the OpenShift Container Platform UI
 
 
 

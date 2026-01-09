@@ -1,5 +1,5 @@
-# 11. Ansible Automation Platform Resource Operator
-## 11.2. Using Resource Operator
+# 12. Ansible Automation Platform Resource Operator
+## 12.2. Using Resource Operator
 
 
 
@@ -12,8 +12,9 @@ The Resource Operator itself does not do anything until the user creates an obje
 - Deploy automation controller using the `    automation-controller-operator` .
 
 
-**Next steps**
+**Procedure**
 
-After installing the `automation-controller-resource-operator` in your cluster, you must create a Kubernetes (k8s) secret with the connection information for your automation controller instance. Then you can use Resource Operator to create a k8s resource to manage your automation controller instance.
+1. After installing the `    automation-controller-resource-operator` in your cluster, you must create a Kubernetes (k8s) secret with the connection information for your automation controller instance.
+1. Then you can use Resource Operator to create a k8s resource to manage your automation controller instance.
 
 

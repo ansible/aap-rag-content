@@ -5,16 +5,17 @@
 
 
 
-When selecting the capacity, it is important to understand how each job type affects capacity.
+When configuring automation controller capacity, it is important to understand how different job types impact the system capacity.
 
-The default forks value for Ansible is five. However, if you set up automation controller to run against fewer systems than that, then the actual concurrency value is lower.
+automation controller uses Ansible to run jobs. Each job can have a different impact on system resources depending on the number of forks used for the job.
+
+The default forks value for Ansible is five. This means that, by default, each job can run tasks on up to five systems concurrently.
+
+However, if you set up automation controller to run against fewer systems than that, then the actual concurrency value is lower.
 
 When a job is run in automation controller, the number of forks selected is incremented by 1, to compensate for the Ansible parent process.
 
-**Example**
-
-If you run a playbook against five systems with forks value of 5, then the actual forks value from the Job Impact perspective is 6.
-
+For example, if you run a playbook against five systems with forks value of 5, then the actual forks value from the Job Impact perspective is 6.
 
 #### 5.4.2.1. Impact of job types in automation controller
 
@@ -42,6 +43,10 @@ If you do not set a forks value on your job template, your job uses Ansible’s 
 
 
 
+When an instance is created, automation controller calculates the capacity of the instance based on two algorithms: CPU-bound and memory-bound. The CPU-bound algorithm calculates the number of forks based on the number of CPU cores available to the instance.
+
+The memory-bound algorithm calculates the number of forks based on the amount of memory available to the instance. By default, automation controller selects the minimum number of forks calculated by these two algorithms. This is to ensure that the instance does not overcommit resources. However, in some cases, you might want to adjust this behavior.
+
 Selecting a capacity out of the CPU-bound or the memory-bound capacity limits is selecting between the minimum or maximum number of forks. In the [previous examples](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-memory-relative-capacity) , the CPU capacity permits a maximum of 16 forks while the memory capacity permits 20. For some systems, the disparity between these can be large and you might want to have a balance between these two.
 
 The instance field `capacity_adjustment` enables you to select how much you want to consider. It is represented as a value between 0.0 and 1.0. If set to a value of 1.0, then the largest value is used. The previous example involves memory capacity, so a value of 20 forks can be selected. If set to a value of 0.0 then the smallest value is used. A value of 0.5 is a 50/50 balance between the two algorithms, which is 18:
@@ -51,9 +56,6 @@ The instance field `capacity_adjustment` enables you to select how much you want
 ```
 
 **Procedure**
-
-View or edit the capacity:
-
 
 1. From the navigation panel, selectAutomation Execution→Infrastructure→Instance Groups.
 1. On the **Instance Groups** list view, select the required instance.

@@ -1,6 +1,6 @@
 # 3. Getting started as an automation developer
-## 3.3. Define events with rulebooks
-### 3.3.1. Rulebook actions
+## 3.4. Define events with rulebooks
+### 3.4.1. Rulebook actions
 
 
 
@@ -19,5 +19,5 @@ Rulebooks can trigger the following activations:
 -  `    shutdown`
 
 
-To read more about rulebook activations, see [Actions](https://ansible.readthedocs.io/projects/rulebook/en/latest/actions.html) in the Ansible Rulebook documentation.
+To read more about rulebook activations, see [Actions](https://ansible.readthedocs.io/projects/rulebook/en/latest/actions.html) in the Ansible Rulebook documentation. For a complete guide to using Event-Driven Ansible, see [Using automation decisions](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_decisions) .
 

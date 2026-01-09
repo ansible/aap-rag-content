@@ -4,7 +4,9 @@
 
 
 
-If you choose private access during the deployment of Ansible Automation Platform on Microsoft Azure, the DNS record for the application points to a private address within the selected CIDR block. To access this private address, you must configure network peering and establish connectivity. The method for connecting to the Ansible Automation Platform depends on your organization’s Azure infrastructure management practices. Azure administrators must determine the most suitable model and configure the setup accordingly.
+If you choose private access during the deployment of Ansible Automation Platform on Microsoft Azure, the DNS record for the application points to a private address within the selected CIDR block.
+
+To access this private address, you must configure network peering and establish connectivity. The method for connecting to the Ansible Automation Platform depends on your organization’s Azure infrastructure management practices. Azure administrators must determine the most suitable model and configure the setup accordingly.
 
 Common access options include:
 

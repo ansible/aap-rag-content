@@ -5,7 +5,7 @@
 
 
 
-For application level monitoring, automation controller provides Prometheus-style metrics on an API endpoint `/api/v2/metrics` . Use these metrics to monitor aggregate data about job status and subsystem performance, such as for job output processing or job scheduling.
+For application level monitoring, automation controller provides Prometheus-style metrics on an API endpoint `/api/v2/metrics` . Use these metrics to check data about job status and subsystem performance, such as for job output processing or job scheduling.
 
 The metrics endpoint includes descriptions of each metric. Metrics of particular interest for performance include:
 
@@ -13,7 +13,7 @@ The metrics endpoint includes descriptions of each metric. Metrics of particular
 
 
 - Current total of jobs in each status. Helps correlate other events to activity in system.
-- Can monitor upticks in errored or failed jobs.
+- Can check upticks in errored or failed jobs.
 
 - awx_instance_remaining_capacity
 

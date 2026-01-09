@@ -4,7 +4,7 @@
 
 
 
-To improve the performance of automation controller, you can configure the following configuration parameters in the database:
+Improve the performance of automation controller, by configuring the following configuration parameters in the database:
 
 **Maintenance**
 

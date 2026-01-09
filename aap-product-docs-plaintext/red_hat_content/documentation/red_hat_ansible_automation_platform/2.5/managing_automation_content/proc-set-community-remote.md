@@ -1,6 +1,6 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
-## 1.1. Configuring Ansible automation hub remote repositories to synchronize content
-### 1.1.6. Configuring the community remote repository to sync Ansible Galaxy collections
+## 1.1. Configuring remote repositories for content syncing
+### 1.1.6. Configuring the community remote repository
 
 
 
@@ -15,13 +15,15 @@ You can edit the **community** remote repository to synchronize chosen collectio
 **Requirements.yml example**
 
 
+
+
 ```
-collections:      # Install a collection from Ansible Galaxy.      - name: community.aws        version: 5.2.0        source: https://galaxy.ansible.com
+collections:
+# Install a collection from Ansible Galaxy.
+- name: community.aws
+version: 5.2.0
+source: https://galaxy.ansible.com
 ```
-
-
-
-
 
 **Procedure**
 

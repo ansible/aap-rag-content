@@ -4,5 +4,5 @@
 
 
 
-To determine who can access and manage execution environments in your Ansible Automation Platform, you must configure user access for container repositories in your private automation hub.
+Configure team access to container repositories in private automation hub to control who can access and manage automation execution environments.
 

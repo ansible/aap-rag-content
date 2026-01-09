@@ -10,4 +10,11 @@
 - Before upgrading your Red Hat Ansible Automation Platform, ensure you have upgraded to automation controller 4.5 or later.
 - When upgrading to Ansible Automation Platform 2.5, you must use RPM installer version 2.5-11 or later. If you use an older installer, the installation might fail. If you encounter a failed installation using an older version of the installer, rerun the installation with RPM installer version 2.5-11 or later.
 
+Note
+If you are upgrading from AAP 2.4, you are recommended to take a backup of the API call output and save it to a file. For example: curl -k [https://<CONTROLLER_FQDN>/api/v2/settings/all/](https://<CONTROLLER_FQDN>/api/v2/settings/all/) -u admin:password >> aap24_old_settings_all
+
+
+
+
+
 

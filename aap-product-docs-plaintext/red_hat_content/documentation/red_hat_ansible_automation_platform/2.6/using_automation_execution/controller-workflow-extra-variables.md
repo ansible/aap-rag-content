@@ -15,14 +15,11 @@ Workflows use the same behavior (hierarchy) of variable precedence as job templa
 
 Workflows included in a workflow follow the same variable precedence, they only inherit variables if they are specifically prompted for, or defined as part of a survey.
 
-In addition to the workflow `extra_vars` , jobs and workflows run as part of a workflow can inherit variables in the artifacts dictionary of a parent job in the workflow (also combining with ancestors further upstream in its branch). These can be defined by the `set_stats`  [Ansible module](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/set_stats_module.html) .
+In addition to the workflow `extra_vars` , jobs and workflows run as part of a workflow can inherit variables in the artifacts dictionary of a parent job in the workflow (also combining with ancestors further upstream in its branch).
 
 If you use the `set_stats` module in your playbook, you can produce results that can be consumed downstream by another job.
 
-**Example**
-
-Notifying users as to the success or failure of an integration run. In this example, there are two playbooks that can be combined in a workflow to exercise artifact passing:
-
+**Example** Notifying users as to the success or failure of an integration run. In this example, there are two playbooks that can be combined in a workflow to exercise artifact passing:
 
 - invoke_set_stats.yml: first playbook in the workflow:
 

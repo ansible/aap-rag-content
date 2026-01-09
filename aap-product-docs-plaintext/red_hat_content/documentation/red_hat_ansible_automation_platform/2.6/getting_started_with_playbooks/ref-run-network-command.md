@@ -1,4 +1,4 @@
-# 2. Use a Playbook to establish a connection to a managed node
+# 2. Use a playbook to establish a connection to a managed node
 ## 2.1. Run a network Ansible command
 
 
@@ -20,11 +20,11 @@ The flags in this command set seven values:
 - the user ( `    -u` , the username for the SSH connection)
 - the SSH connection method (- `    k` , prompt for the password)
 - the module ( `    -m` , the Ansible module to run, using the fully qualified collection name (FQCN))
-- an extra variable ( `    -e` , in this case, setting the network OS value)
+- an extra variable ( `    -e` , in this case, setting the network operating system value)
 
 
 Note
-If you use `ssh-agent` with ssh keys, Ansible loads them automatically. You can omit the `-k` flag.
+If you use `ssh-agent` with SSH keys, Ansible loads them automatically. You can omit the `-k` flag.
 
 If you are running Ansible in a virtual environment, you must also add the variable `ansible_python_interpreter=/path/to/venv/bin/python` .
 

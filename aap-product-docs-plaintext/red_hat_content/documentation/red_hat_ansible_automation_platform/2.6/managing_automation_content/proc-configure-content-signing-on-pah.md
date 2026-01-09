@@ -1,5 +1,5 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
-## 1.3. Collections and content signing in private automation hub
+## 1.3. Content signing in private automation hub
 ### 1.3.1. Configuring content signing on private automation hub
 
 
@@ -31,10 +31,7 @@ The script prints out a JSON structure with the following format.
 
 All the file names are relative paths inside the current working directory. The file name must remain the same for the detached signature.
 
-**Example:**
-
-The following script produces signatures for content:
-
+**Example:** The following script produces signatures for content:
 
 
 ```

@@ -1,11 +1,13 @@
 # 5. Jobs in automation controller
 ## 5.5. Job branch overriding
-### 5.5.3. Git Refspec
+### 5.5.3. Git refspec
 
 
 
 
-The **Source control refspec** field specifies which extra references the update should download from the remote. Examples include the following:
+The **Source control refspec** field specifies the extra references the update should download from the remote. A refspec maps references from the remote repository to references in the local repository. If you leave this field blank, only the default references are fetched (for example, branches under `refs/heads/` ).
+
+Examples include the following:
 
 -  `    refs/<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">:refs/remotes/origin/</span></strong></span>` : This fetches all references, including remotes of the remote
 -  `    refs/pull/<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">:refs/remotes/origin/pull/</span></strong></span>` (GitHub-specific): This fetches all refs for all pull requests
@@ -18,13 +20,5 @@ The **Source control refspec** parameter affects the availability of the project
 
 The Ansible git module fetches `refs/heads/` by default. This means that you can use a project’s branches, tags and commit hashes, as the **Source control branch** if **Source control refspec** is blank. The value specified in the **Source control refspec** field affects which **Source control branch** fields can be used as overrides. Project updates (of any type) perform an extra `git fetch` command to pull that refspec from the remote.
 
-**Example**
-
-You can set up a project that enables branch override with the first or second refspec example. Use this in a job template that prompts for the **Source control branch** . A client can then launch the job template when a new pull request is created, providing the branch `pull/N/head` and the job template can run against the provided GitHub pull request reference.
-
-
-**Additional resources**
-
-For more information, see the [Ansible git module](https://docs.ansible.com/ansible/latest/modules/git_module.html) .
-
+**Example** You can set up a project that enables branch override with the first or second refspec example. Use this in a job template that prompts for the **Source control branch** . A client can then start the job template when a new pull request is created, providing the branch `pull/N/head` and the job template can run against the provided GitHub pull request reference.
 

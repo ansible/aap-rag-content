@@ -1,5 +1,5 @@
 # 2. New features and enhancements
-## 2.8. Ansible development tools
+## 2.9. Ansible development tools
 
 
 

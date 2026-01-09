@@ -1,5 +1,5 @@
-# 3. Using Ansible Builder
-## 3.8. Additional build files
+# 2. Using Ansible Builder
+## 2.8. Additional build files
 
 
 
@@ -9,7 +9,7 @@ You can add any external file to the build context directory by referring or cop
 Each list item must be a dictionary containing the following required keys:
 
 Note
-Absolute paths can not include a regular expression. If `src` is a directory, the entire contents of that directory are copied to `dest` .
+Absolute paths cannot include a regular expression. If `src` is a directory, the entire contents of that directory are copied to `dest` .
 
 
 

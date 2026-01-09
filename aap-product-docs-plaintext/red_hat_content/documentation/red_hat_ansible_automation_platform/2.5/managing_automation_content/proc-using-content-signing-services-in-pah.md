@@ -1,6 +1,6 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
-## 1.3. Collections and content signing in private automation hub
-### 1.3.2. Using content signing services in private automation hub
+## 1.3. Content signing in private automation hub
+### 1.3.2. Signing content in private automation hub
 
 
 

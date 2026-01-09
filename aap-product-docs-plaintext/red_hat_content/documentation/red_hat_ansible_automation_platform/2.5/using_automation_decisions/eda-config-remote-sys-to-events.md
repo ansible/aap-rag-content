@@ -1,5 +1,5 @@
 # 10. Simplified event routing
-## 10.4. Configuring your remote system to send events
+## 10.5. Configuring your remote system to send events
 
 
 

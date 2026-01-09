@@ -12,7 +12,7 @@ You can manage access to an organization by selecting an organization from the *
 
 
 
-You can provide a user with access to an organization, and therefore the resources within the organization, by assigning them to the organization and managing the organization roles associated with the user.
+You can give a user with access to an organization, and therefore the resources within the organization, by assigning them to the organization and managing the organization roles associated with the user.
 
 You can view a list of users associated with an organization, along with the roles each user is directly assigned, in the organization’s **Users** tab. When you manage a user’s organization roles in the **Users** tab, you can also see how the user was assigned their roles, whether indirectly, through association with a team, or through direct user assignment by an administrator.
 
@@ -51,9 +51,11 @@ A user with roles associated with an organization loses those roles if they are 
 1. To remove a particular user from the organization, select **Remove user** from theMore Actions **⋮** list next to the user. This launches a confirmation dialog, asking you to confirm the removal. Note that removing a user from an organization will also remove all organization roles that the user is indirectly assigned from that specific organization.
 1. To manage roles for users in an organization, click the **⚙** icon next to the user and select **Manage roles** . You can manage organization roles that are directly assigned to a user by selecting or clearing the checkboxes. Double-check the component column to ensure you are selecting the desired role in the correct component context.
 
-
 Tip
 From this screen, you can view, but not manage, indirectly-assigned roles that a user has inherited from a team assignment. To view indirectly-assigned roles, along with the team assignment they originated from, click **View indirectly-assigned organization roles** link in the banner beneath the page heading. To manage roles indirectly assigned to a user through a team assignment, [manage that team’s role assignments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access#proc-controller-user-permissions) or [remove the user from that team](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access#proc-gw-team-remove-user) .
+
+
+
 
 
 
@@ -75,7 +77,7 @@ You can add administrators to an organization, which allows them to manage the m
 1. To remove a particular administrator from the organization, select **Remove administrator** from the **More actions ⋮** list next to the administrator name. This launches a confirmation dialog asking you to confirm the removal.
 
 Note
-If the user had previously been added as a member to this organization, they will continue to be a member of this organization. However, if they were added to the organization when the administrator assignment was made, they will be removed from the organization.
+If the user has been added as a member to this organization, they will continue to be a member of this organization. However, if they were added to the organization when the administrator assignment was made, they are removed from the organization.
 
 
 
@@ -87,7 +89,9 @@ If the user had previously been added as a member to this organization, they wil
 
 
 
-You can provide a team access to an organization, and to the resources within that organization, by assigning roles to the team in the organization’s **Teams** tab. All users who are part of a team assigned to the organization will inherit the team’s organization role assignments. To assign roles to a team, the team must already exist in the organization. For more information, see [Creating a team](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access#proc-controller-creating-a-team) . To assign roles for a team, the role must already exist. See [Creating a role](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/assembly-gw-roles#proc-gw-create-roles) for more information.
+You can give a team access to an organization, and to the resources within that organization, by assigning roles to the team in the organization’s **Teams** tab. All users who are part of a team assigned to the organization will inherit the team’s organization role assignments.
+
+To assign roles to a team, the team must already exist in the organization. For more information, see [Creating a team](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access#proc-controller-creating-a-team) . To assign roles for a team, the role must already exist. See [Creating a role](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/assembly-gw-roles#proc-gw-create-roles) for more information.
 
 **Procedure**
 
@@ -124,7 +128,7 @@ A team with associated roles retains them if they are reassigned to another orga
 Before you can delete an organization, you must be an Organization administrator or System administrator. When you delete an organization, the organization, team, users and resources are permanently removed from Ansible Automation Platform.
 
 Note
-When you attempt to delete items that are used by other resources, a message is displayed warning you that the deletion might impact other resources and prompts you to confirm the deletion. Some screens contain items that are invalid or have been deleted previously, and will fail to run.
+When you try to delete items that are used by other resources, a message is displayed warning you that the deletion might impact other resources and prompts you to confirm the deletion. Some screens contain items that are invalid or have been deleted previously, and will fail to run.
 
 
 

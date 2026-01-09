@@ -4,7 +4,7 @@
 
 
 
-Use the `ansible-sign` utility to provide options for the user to sign and verify whether the project is signed.
+Use the `ansible-sign` utility to offer options for you to sign and verify whether the project is signed.
 
 **Procedure**
 

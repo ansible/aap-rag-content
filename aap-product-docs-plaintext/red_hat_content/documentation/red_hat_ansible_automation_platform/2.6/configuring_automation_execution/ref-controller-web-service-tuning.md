@@ -5,7 +5,7 @@
 
 
 
-Control and Hybrid nodes each serve the UI and API of automation controller. WSGI traffic is served by the uwsgi web server on a local socket. ASGI traffic is served by Daphne. NGINX listens on port 443 and proxies traffic as needed.
+The Control and Hybrid nodes each serve the UI and API of automation controller. WSGI traffic is served by the uwsgi web server on a local socket. ASGI traffic is served by Daphne. NGINX listens on port 443 and proxies traffic as needed.
 
 To scale automation controller’s web service, follow these best practices:
 
@@ -25,6 +25,6 @@ To optimize automation controller’s web service on the client side, follow the
 
 -  [Scaling Automation Controller for API Driven Workloads](https://www.ansible.com/blog/scaling-automation-controller-for-api-driven-workloads)
 -  [Bulk API in Automation Controller](https://www.ansible.com/blog/bulk-api-in-automation-controller)
--  [Token-Based Authentication](https://docs.ansible.com/automation-controller/latest/html/administration/oauth2_token_auth.html#ag-oauth2-token-auth)
+-  [Configuring access to external applications with token-based authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-token-based-authentication)
 
 

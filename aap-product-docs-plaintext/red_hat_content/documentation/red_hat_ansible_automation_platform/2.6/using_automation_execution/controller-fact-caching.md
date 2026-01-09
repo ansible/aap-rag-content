@@ -1,10 +1,12 @@
 # 6. Job templates
-## 6.16. Fact caching
+## 6.13. Fact caching
 
 
 
 
-Automation controller can store and retrieve facts on a per-host basis through an Ansible Fact Cache plugin. This behavior is configurable on a per-job template basis. Fact caching is turned off by default but can be enabled to serve fact requests for all hosts in an inventory related to the job running. This enables you to use job templates with `--limit` while still having access to the entire inventory of host facts. You can specify a global timeout setting that the plugin enforces per-host, (in seconds) from the navigation panel, selectSettings→Automation Execution→Joband edit the **Per-Host Ansible Fact Cache Timeout** field.
+Automation controller can store and retrieve facts on a per-host basis through an Ansible Fact Cache plugin. This behavior is configurable on a per-job template basis.
+
+Fact caching is turned off by default but can be enabled to serve fact requests for all hosts in an inventory related to the job running. This enables you to use job templates with `--limit` while still having access to the entire inventory of host facts. You can specify a global timeout setting that the plugin enforces per-host, (in seconds) from the navigation panel, selectSettings→Automation Execution→Joband edit the **Per-Host Ansible Fact Cache Timeout** field.
 
 After launching a job that uses fact cache ( `use_fact_cache=True` ), each host’s `ansible_facts` are all stored by the controller in the job’s inventory.
 

@@ -1,6 +1,6 @@
 # 1. Red Hat Ansible Automation Platform installation overview
-## 1.2. Managing Ansible Automation Platform licensing, updates, and support
-### 1.2.5. Attaching your Red Hat Ansible Automation Platform subscription
+## 1.2. Managing Ansible Automation Platform subscriptions, updates, and support
+### 1.2.4. Attaching your Red Hat Ansible Automation Platform subscription
 
 
 
@@ -8,7 +8,7 @@
 You **must** have valid subscriptions on all nodes before installing Red Hat Ansible Automation Platform.
 
 Note
-Simple Content Access (SCA) is now the default subscription method for all Red Hat accounts. With SCA, you only need to register your systems to Red Hat Subscription Management (RHSM) or Satellite to access content. Traditional pool-based subscription attachment commands (such as `subscription-manager attach --pool` or `subscription-manager attach --auto` ) are no longer required. For more information, see [Simple Content Access](https://access.redhat.com/articles/simple-content-access) .
+Simple Content Access (SCA) is now the default subscription method for all Red Hat accounts. With SCA, you must register your systems to Red Hat Subscription Management (RHSM) or Satellite to access content. Traditional pool-based subscription attachment commands (such as `subscription-manager attach --pool` or `subscription-manager attach --auto` ) are no longer required. For more information, see [Simple Content Access](https://access.redhat.com/articles/simple-content-access) .
 
 
 
@@ -23,11 +23,11 @@ $ sudo subscription-manager register --username &lt;$INSERT_USERNAME_HERE&gt; --
 
 With Simple Content Access (SCA), registration is the only step required to access Ansible Automation Platform content.
 
-
-
-
 Note
-For accounts still using legacy subscription pools, you might need to manually attach subscriptions using the commands shown in the troubleshooting section.
+For accounts still using legacy subscription pools, you might have to manually attach subscriptions using the commands shown in the troubleshooting section.
+
+
+
 
 
 
@@ -55,7 +55,7 @@ This command displays your system identity, name, organization name, and organiz
 
 **Troubleshooting**
 
-- For legacy accounts not using SCA, you might need to manually attach subscriptions:
+- For legacy accounts not using SCA, you might have to manually attach subscriptions:
 
 
 ```

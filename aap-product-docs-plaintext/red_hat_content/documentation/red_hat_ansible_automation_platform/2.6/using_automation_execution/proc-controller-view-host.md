@@ -4,7 +4,7 @@
 
 
 
-To view the Host details for a job run.
+View the Host details for a job run.
 
 **Procedure**
 

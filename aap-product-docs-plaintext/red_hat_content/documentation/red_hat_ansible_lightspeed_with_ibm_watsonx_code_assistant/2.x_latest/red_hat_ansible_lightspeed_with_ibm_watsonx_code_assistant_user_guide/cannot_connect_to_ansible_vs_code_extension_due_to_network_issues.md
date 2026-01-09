@@ -1,6 +1,6 @@
-# 7. Troubleshooting
-## 7.3. Troubleshooting Ansible Visual Studio Code extension errors
-### 7.3.4. Cannot connect to Ansible VS code extension due to network issues
+# 8. Troubleshooting
+## 8.3. Troubleshooting Ansible Visual Studio Code extension errors
+### 8.3.4. Cannot connect to Ansible VS code extension due to network issues
 
 
 

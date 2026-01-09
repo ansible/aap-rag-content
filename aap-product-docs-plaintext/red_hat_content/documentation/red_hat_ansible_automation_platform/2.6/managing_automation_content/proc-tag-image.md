@@ -1,6 +1,6 @@
 # 3. Manage containers in private automation hub
 ## 3.4. Setting up your container repository
-### 3.4.4. Tagging container images
+### 3.4.3. Tagging container images
 
 
 

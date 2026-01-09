@@ -20,7 +20,7 @@ Changing the name does not update the unique identifier of the authenticator. Fo
 
 
 1. Select the authenticator type from the **Authentication type** list. See [Configuring an authentication type](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-config-authentication-type) for the complete list of authentication plugins available.
-1. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type. See the respective sections in Configuring an authentication type for the required details.
+1. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type. See the relevant sections in Configuring an authentication type for the required details.
 
 For all authentication types you can enter a **Name** , **Additional Authenticator Fields** and **Create Objects** .
 

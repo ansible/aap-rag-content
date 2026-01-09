@@ -4,7 +4,17 @@
 
 
 
-If you need to delete a project, the Event-Driven Ansible controller interface provides multiple options.
+Use the platform gateway interface to delete a project that is no longer required from Event-Driven Ansible controller.
+
+Note
+You cannot delete a project if it is still being used by a rulebook activation.
+
+
+
+**Prerequisites**
+
+1. A project is not currently linked to any rulebook activation.
+
 
 **Procedure**
 

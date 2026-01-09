@@ -1,4 +1,4 @@
-# Chapter 6. Populating your private automation hub container registry
+# Chapter 5. Populating your private automation hub container registry
 
 
 

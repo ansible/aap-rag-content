@@ -1,4 +1,4 @@
-# Chapter 12. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
+# Chapter 14. Troubleshooting the Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
 
 
 

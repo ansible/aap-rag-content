@@ -5,8 +5,5 @@
 
 Certain fields in the REST API are marked read-only.
 
-
-<span id="controller-api-readonly"></span>
 These usually include the URL of a resource, the ID, and occasionally some internal fields. For example, the `'created\_by'` attribute of each object indicates which user created the resource, and you cannot edit this. If you post some values and notice that they are not changing, these fields might be read-only.
-
 

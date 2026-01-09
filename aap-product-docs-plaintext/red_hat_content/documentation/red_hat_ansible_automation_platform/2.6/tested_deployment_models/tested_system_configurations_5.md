@@ -5,10 +5,10 @@
 
 
 
-Red Hat has tested the following configurations to install and run Red Hat Ansible Automation Platform:
+Red Hat has tested these configurations to install and run Red Hat Ansible Automation Platform:
 
 
-<span id="idm140627605006512"></span>
+<span id="idm140186614534944"></span>
 **Table 4.3. Tested system configurations**
 
 | Type | Description |  |
@@ -21,6 +21,7 @@ Red Hat has tested the following configurations to install and run Red Hat Ansi
 | Database | - For Ansible Automation Platform managed databases: PostgreSQL 15
 - For customer provided (external) databases: PostgreSQL 15, 16, or 17. | - External (customer supported) databases require ICU support.
 - External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality is dependent on utilities provided with PostgreSQL 15. |
+| IP version | IPv4, IPv6 (single-stack and dual-stack) |  |
 
 
 

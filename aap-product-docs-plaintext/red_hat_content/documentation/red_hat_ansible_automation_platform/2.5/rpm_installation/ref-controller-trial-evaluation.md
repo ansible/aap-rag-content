@@ -1,13 +1,13 @@
 # 1. Red Hat Ansible Automation Platform installation overview
-## 1.4. Managing Ansible Automation Platform licensing, updates and support
+## 1.4. Managing Ansible Automation Platform subscriptions, updates, and support
 ### 1.4.1. Trial and evaluation
 
 
 
 
-A license is required to run Ansible Automation Platform. You can start by using a free trial license.
+You need a subscription to run Ansible Automation Platform. You can start by signing up for a free trial subscription.
 
-- Trial licenses for Ansible Automation Platform are available at the [Red Hat product trial center](https://www.redhat.com/en/products/trials?products=ansible) .
-- Support is not included in a trial license or during an evaluation of the Ansible Automation Platform.
+- Trial subscriptions for Ansible Automation Platform are available at the [Red Hat product trial center](https://www.redhat.com/en/products/trials?products=ansible) .
+- Support is not included in a trial subscription or during an evaluation of the Ansible Automation Platform.
 
 

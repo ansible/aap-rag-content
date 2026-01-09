@@ -13,25 +13,13 @@ You can deprovision any hosts in your inventory except for the first host specif
 
 **Procedure**
 
-- Add `    <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">node_state=deprovision</span></strong></span>` to the [group:vars] associated with the group you want to deprovision.
+- Add `    <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">node_state=deprovision</span></strong></span>` to the [group:vars] associated with the group you want to deprovision, as in the following example:
 
+**Group deprovision**
 
-
-<span id="idm139910866026784"></span>
-**Example 4.2. Group deprovision**
 
 ```
-[execution_nodes]
-execution-node-1.example.com peers=execution-node-2.example.com
-execution-node-2.example.com peers=execution-node-3.example.com
-execution-node-3.example.com peers=execution-node-4.example.com
-execution-node-4.example.com peers=execution-node-5.example.com
-execution-node-5.example.com peers=execution-node-6.example.com
-execution-node-6.example.com peers=execution-node-7.example.com
-execution-node-7.example.com
-
-[execution_nodes:vars]
-node_state=deprovision
+[execution_nodes]    execution-node-1.example.com peers=execution-node-2.example.com    execution-node-2.example.com peers=execution-node-3.example.com    execution-node-3.example.com peers=execution-node-4.example.com    execution-node-4.example.com peers=execution-node-5.example.com    execution-node-5.example.com peers=execution-node-6.example.com    execution-node-6.example.com peers=execution-node-7.example.com    execution-node-7.example.com        [execution_nodes:vars]    node_state=deprovision
 ```
 
 

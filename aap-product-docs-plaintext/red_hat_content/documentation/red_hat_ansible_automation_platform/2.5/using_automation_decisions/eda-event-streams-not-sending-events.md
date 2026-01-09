@@ -1,5 +1,5 @@
 # 8. Rulebook activations troubleshooting
-## 8.3. Event streams not sending events to activation
+## 8.6. Event streams not sending events to activation
 
 
 

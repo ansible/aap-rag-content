@@ -5,7 +5,7 @@
 
 
 
-There are three types of users in Ansible Automation Platform:
+You can create three types of users in Ansible Automation Platform:
 
 **Procedure**
 
@@ -25,11 +25,11 @@ If you are modifying your own password, log out and log back in for the change t
 
 When the user is successfully created, the **User** details screen opens. From here, you can review and change the user’s teams, roles, tokens and other membership details.
 
-
-
-
 Note
 If the user is not newly-created, the details screen displays the user’s last login activity.
+
+
+
 
 
 

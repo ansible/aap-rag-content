@@ -5,5 +5,5 @@
 
 
 
-You can click on the arrow icon next to the job **Id/Name** column to view more details related to that job.
+You can click the arrow icon next to the job **Id/Name** column to view more details related to that job.
 

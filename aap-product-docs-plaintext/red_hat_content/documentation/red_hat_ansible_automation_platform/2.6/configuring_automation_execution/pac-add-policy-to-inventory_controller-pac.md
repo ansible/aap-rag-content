@@ -5,7 +5,7 @@
 
 
 
-To associate a policy with an inventory, take the following steps:
+Learn how to associate a policy with an inventory
 
 **Procedure**
 
@@ -17,7 +17,7 @@ To associate a policy with an inventory, take the following steps:
 to go to the editing screen.
 1. To create a new inventory, clickCreate inventory.
 
-1. In the field titled **Policy enforcement** , enter the query path associated with the policy you want to implement. You must format the query path as `    package/rule` .
+1. In the field titled **Policy enforcement.** , enter the query path associated with the policy you want to implement. You must format the query path as `    package/rule` .
 1. ClickSave inventoryif you are editing an existing inventory, or clickCreate inventoryif you are creating a new inventory.
 
 

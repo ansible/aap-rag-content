@@ -24,7 +24,8 @@ awx-manage host_metric --csv
 ```
 
 
-1. This command produces host metric data, a host metrics summary file, and a cluster info file. To package all the files into a single tar file for distribution and sharing, use:
+1. This command produces host metric data in CSV format, a host metrics summary file, and a cluster info file.
+1. To package all the files into a single tar file for distribution and sharing, use:
 
 
 ```
@@ -40,12 +41,11 @@ awx-manage host_metric --tarball --rows_per_file &lt;n&gt;
 ```
 
 
+1. Automation Analytics then receives and uses the JSON file.
 
-
-Automation Analytics receives and uses the JSON file.
 
 **Additional resources**
 
--  [Configuring automation execution](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution) /assembly-controller-metrics[Usage reporting with metrics-utility]
+-  [Usage reporting with metrics-utility](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/metrics-utility)
 
 

@@ -1,6 +1,6 @@
 # 1. Installing Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 1.4. Installing Red Hat Ansible Automation Platform Operator from the Red Hat OpenShift Container Platform CLI
-### 1.4.1. Installing the Ansible Automation Platform Operator in a namespace
+## 1.3. Installing Red Hat Ansible Automation Platform Operator from the Red Hat OpenShift Container Platform CLI
+### 1.3.1. Installing the Ansible Automation Platform Operator in a namespace
 
 
 

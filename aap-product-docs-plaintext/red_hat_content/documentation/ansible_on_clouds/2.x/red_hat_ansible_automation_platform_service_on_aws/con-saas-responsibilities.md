@@ -5,6 +5,8 @@
 
 
 
+Learn about your responsibilities and Red Hat’s responsibilities. Understanding these roles helps you manage your product effectively.
+
 | Feature | Red Hat | Customer |
 | --- | --- | --- |
 | Control plane infrastructure | ✓ | ┄ |

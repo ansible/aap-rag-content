@@ -1,5 +1,5 @@
-# 2. Ansible Automation Platform containerized installation
-## 2.11. Restoring containerized Ansible Automation Platform
+# 9. Maintaining containerized Ansible Automation Platform
+## 9.3. Restoring containerized Ansible Automation Platform
 
 
 
@@ -9,14 +9,14 @@ Restore your container-based installation of Ansible Automation Platform from a 
 Note
 When restoring Ansible Automation Platform, use the latest installation program available at the time of the restore. For example, if you are restoring a backup taken from version `2.6-1` , use the latest `2.6-x` installation program available at the time of the restore.
 
-Restore functionality only works with the PostgreSQL versions supported by your current Ansible Automation Platform version. For more information, see [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/aap-containerized-installation#system-requirements) .
+Restore functionality only works with the PostgreSQL versions supported by your current Ansible Automation Platform version. For more information, see [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/preparing-containerized-installation#system-requirements) .
 
 
 
 **Prerequisites**
 
 - You have logged in to the Red Hat Enterprise Linux host as your dedicated non-root user.
-- You have a backup of your Ansible Automation Platform deployment. For more information, see [Backing up containerized Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/aap-containerized-installation#backing-up-containerized-ansible-automation-platform) .
+- You have a backup of your Ansible Automation Platform deployment. For more information, see [Backing up container-based Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/maintaining-containerized-aap#backing-up-containerized-ansible-automation-platform) .
 - If restoring to a different environment with the same hostnames, you have performed a fresh installation on the target environment with the same topology as the original (source) environment.
 - You have ensured that the administrator credentials on the target environment match the administrator credentials from the source environment.
 

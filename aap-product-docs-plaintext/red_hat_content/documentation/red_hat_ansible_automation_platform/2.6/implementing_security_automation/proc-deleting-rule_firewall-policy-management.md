@@ -34,11 +34,7 @@ Use the acl_manager role to delete a security rule.
 
 
 
-
-
-**Verification**
-
-You have deleted the firewall rule. Access the MGMT server and verify that the new security policy has been removed.
+1. You have deleted the firewall rule. Access the MGMT server and verify that the new security policy has been removed.
 
 
 **Additional resources**

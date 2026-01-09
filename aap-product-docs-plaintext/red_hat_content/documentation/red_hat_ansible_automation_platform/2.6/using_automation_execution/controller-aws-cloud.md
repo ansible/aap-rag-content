@@ -1,6 +1,6 @@
 # 6. Job templates
-## 6.19. OpenStack
-### 6.19.1. Amazon Web Services
+## 6.16. OpenStack
+### 6.16.1. Amazon Web Services
 
 
 

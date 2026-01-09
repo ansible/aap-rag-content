@@ -8,7 +8,7 @@ Token-based authentication permits authentication of third-party tools and servi
 The default expiration for access tokens has been updated from 1000 years to 1 year. This change ensures frequent token rotation for increased credential security.
 
 Note
-Access tokens in controller 2.4 and previous versions of the platform gateway were valid for 1000 years. Any existing tokens created prior to the 2.5.20250604 patch release will retain a 1000 year expiration.
+Access tokens in controller 2.4 and previous versions of the platform gateway were valid for 1000 years. Any existing tokens created before the 2.5.20250604 patch release will retain a 1000 year expiration.
 
 
 

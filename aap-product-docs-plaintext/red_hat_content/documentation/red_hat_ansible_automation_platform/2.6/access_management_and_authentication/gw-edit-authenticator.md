@@ -5,7 +5,7 @@
 
 
 
-You can modify the settings of previously configured authenticators from the **Authentication** list view.
+You can change the settings of previously configured authenticators from the **Authentication** list view.
 
 **Procedure**
 
@@ -17,7 +17,7 @@ You can modify the settings of previously configured authenticators from the **A
 icon next to authenticator you want to modify, or
 1. Select the authenticator name displayed in the **Name** column and clickEdit authenticatorfrom the **Details** page.
 
-1. Modify the authentication details or mapping configurations as required.
+1. Change the authentication details or mapping configurations as required.
 1. ClickSave.
 
 

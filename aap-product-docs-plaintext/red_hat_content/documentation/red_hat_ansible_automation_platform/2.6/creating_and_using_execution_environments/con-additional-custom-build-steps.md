@@ -1,5 +1,5 @@
-# 3. Using Ansible Builder
-## 3.9. Additional custom build steps
+# 2. Using Ansible Builder
+## 2.9. Additional custom build steps
 
 
 
@@ -12,21 +12,21 @@ See the following table for a list of values that can be used in `additional_bui
 
 | Value | Description |
 | --- | --- |
-|  `prepend_base` | Allows you to insert commands before building the base image. |
-|  `append_base` | Allows you to insert commands after building the base image. |
-|  `prepend_galaxy` | Allows you to insert before building the galaxy image. |
-|  `append_galaxy` | Allows you to insert after building the galaxy image. |
-|  `prepend_builder` | Allows you to insert commands before building the Python builder image. |
-|  `append_builder` | Allows you to insert commands after building the Python builder image. |
-|  `prepend_final` | Allows you to insert before building the final image. |
-|  `append_final` | Allows you to insert after building the final image. |
+|  `prepend_base` | You can insert commands before building the base image. |
+|  `append_base` | You can insert commands after building the base image. |
+|  `prepend_galaxy` | You can insert commands before building the galaxy image. |
+|  `append_galaxy` | You can insert commands after building the galaxy image. |
+|  `prepend_builder` | You can insert commands before building the Python builder image. |
+|  `append_builder` | You can insert commands after building the Python builder image. |
+|  `prepend_final` | You can insert commands before building the final image. |
+|  `append_final` | You can insert commands after building the final image. |
 
 
 The syntax for `additional_build_steps` supports both multi-line strings and lists. See the following examples:
 
 
-<span id="idm140514302454944"></span>
-**Example 3.1. A multi-line string entry**
+<span id="idm140195786894464"></span>
+**Example 2.1. A multi-line string entry**
 
 ```
 prepend_final: |
@@ -38,8 +38,8 @@ RUN cat /etc/os-release
 
 
 
-<span id="idm140514302452912"></span>
-**Example 3.2. A list entry**
+<span id="idm140195786892480"></span>
+**Example 2.2. A list entry**
 
 ```
 append_final:
@@ -51,8 +51,8 @@ append_final:
 
 
 
-<span id="idm140514302450800"></span>
-**Example 3.3. Copying arbitrary files to execution environments**
+<span id="idm140195786890368"></span>
+**Example 2.3. Copying arbitrary files to execution environments**
 
 ```
 additional_build_files:
@@ -71,5 +71,5 @@ prepend_base:
 
 
 
-The `additional_build_files` section enable you to add `rootCA.crt` to the build context directory. When this file is copied to the build context directory, it can be used in the build process. To use the file, copy it from the build context directory using the COPY directive specified in the prepend_base step of the additional_build_steps section. You can perform any action based upon the copied file, such as in this example updating dynamic configuration of CA certificates by running RUN update-ca-trust.
+The `additional_build_files` section enable you to add `rootCA.crt` to the build context directory. When this file is copied to the build context directory, it can be used in the build process. To use the file, copy it from the build context directory by using the COPY directive specified in the prepend_base step of the additional_build_steps section. You can perform any action based upon the copied file, such as in this example updating dynamic configuration of CA certificates by running RUN update-ca-trust.
 

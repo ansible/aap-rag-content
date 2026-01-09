@@ -1,4 +1,4 @@
-# Chapter 5. Administering the Ansible Lightspeed Service
+# Chapter 6. Administering the Ansible Lightspeed Service
 
 
 
@@ -7,7 +7,6 @@ As an organization administrator, you can use Red Hat Ansible Lightspeed to mana
 
 - Access the Ansible Lightspeed portal as an organization administrator
 - View and manage the Admin dashboard telemetry data
-- Configure custom models
 
 
 Note

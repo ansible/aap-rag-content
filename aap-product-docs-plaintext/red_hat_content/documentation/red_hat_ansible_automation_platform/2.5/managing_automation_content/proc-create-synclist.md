@@ -1,6 +1,6 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
 ## 1.2. Synchronizing Ansible Content Collections in automation hub
-### 1.2.1. Syncing Ansible content collections
+### 1.2.1. Synchronizing content collections
 
 
 
@@ -24,6 +24,7 @@ When syncing content, keep in mind that automation hub does not check other repo
 -  `        cloud.redhat.com`
 -  `        console.redhat.com`
 -  `        sso.redhat.com`
+-  `        ansible-galaxy-ng.s3.dualstack.us-east-1.amazonaws.com`
 
 - Ansible automation hub resources are stored in Amazon Simple Storage. The following domain names must be in the allow list:
 

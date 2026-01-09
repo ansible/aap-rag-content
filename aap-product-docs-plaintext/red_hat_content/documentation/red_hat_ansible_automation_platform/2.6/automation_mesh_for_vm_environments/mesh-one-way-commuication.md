@@ -1,5 +1,6 @@
 # 3. Automation mesh design patterns
-## 3.6. Outbound only connections to controller nodes
+## 3.3. Segregated local and remote execution configuration
+### 3.3.2. Outbound only connections to controller nodes
 
 
 

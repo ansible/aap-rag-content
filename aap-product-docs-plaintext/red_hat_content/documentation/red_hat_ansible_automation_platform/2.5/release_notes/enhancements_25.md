@@ -1,38 +1,25 @@
 # 10. Patch releases
-## 10.13. Ansible Automation Platform patch release February 25, 2025
-### 10.13.1. Enhancements
+## 10.13. Ansible Automation Platform patch release March 12, 2025
+### 10.13.3. Enhancements
 
 
 
 
-#### 10.13.1.1. Platform gateway
+#### 10.13.3.1. Event-Driven Ansible
 
 
 
 
-- Previously `    gateway_proxy_url` was used for the proxy health check, but is no longer used in favor of the `    ENVOY_HOSTNAME` setting.(AAP-39907)
+- Event-Driven Ansible activation logging is now provided via the `    journald` driver.(AAP-39745)
+- Rulebook activations' log message field is now separated into timestamps and message fields.(AAP-39743)
+- Moved `    ansible.eda` collection from de-supported to de-minimal as elements of the collection are required for all Event-Driven Ansible images.(AAP-39749)
 
 
-#### 10.13.1.2. Event-Driven Ansible
+#### 10.13.3.2. RPM-based Ansible Automation Platform
 
 
 
 
-- In the credential type schema the format field can be set to binary_base64 to specify a file should be loaded as a binary file.(AAP-36581)
-
-
-- Sample Credential Type Schema
-- Inputs Configuration
-- fields:
-
-
-- id: keytab
-- type: string
-- label: Kerberos Keytab file
-- format: binary_base64 secret: true
-- help_text: Please select a Kerberos Keytab file
-- multiline: true
-
-
+- The `    setup.sh` script now has an option to collect `    sosreport` .(AAP-40085)
 
 

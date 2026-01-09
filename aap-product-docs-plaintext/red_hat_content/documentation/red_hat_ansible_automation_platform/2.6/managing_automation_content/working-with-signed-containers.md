@@ -4,5 +4,5 @@
 
 
 
-Automation execution environments are container images used by Ansible Automation Platform to run jobs. You can download this content to private automation hub, and publish it within your organization.
+Add an extra layer of security to your content by enabling container signing in private automation hub.
 

@@ -4,20 +4,18 @@
 
 
 
-A playbook runs in order from top to bottom. Within each play, tasks also run in order from top to bottom. Playbooks with multiple 'plays' can orchestrate multi-machine deployments, running one play on your webservers, then another play on your database servers, then a third play on your network infrastructure, and so on.
+A playbook runs in order from top to bottom. Within each play, tasks also run in order from top to bottom. Playbooks with multiple 'plays' can orchestrate multi-machine deployments, running one play on your webservers, then another play on your database servers, and so on.
 
 At a minimum, each play defines two things:
 
 - the managed nodes to target, using a pattern
-- at least one task to execute
+- at least one task to run
 
 
 Note
 Use the fully-qualified collection name in your playbooks to ensure the correct module is selected, because multiple collections can contain modules with the same name (for example, `user` ).
 
 
-
-For further information, see [Using collections in a playbook](https://docs.ansible.com/ansible/latest/collections_guide/collections_using_playbooks.html#collections-using-playbook) .
 
 In this example, the first play targets the web servers; the second play targets the database servers.
 
@@ -61,7 +59,7 @@ The playbook contains two plays:
 
 Your playbook can include more than just a hosts line and tasks.
 
-For example, this example playbook sets a remote_user for each play. This is the user account for the SSH connection. You can add other Playbook Keywords at the playbook, play, or task level to influence how Ansible behaves. Playbook keywords can control the connection plugin, whether to use privilege escalation, how to handle errors, and more.
+For example, this example playbook sets a remote_user for each play. This is the user account for the SSH connection. You can add other playbook keywords at the playbook, play, or task level to influence how Ansible behaves. Playbook keywords can control the connection plugin, whether to use privilege escalation, how to handle errors, and more.
 
 To support a variety of environments, Ansible enables you to set many of these parameters as command-line flags, in your Ansible configuration, or in your inventory. Learning the precedence rules for these sources of data can help you as you expand your Ansible ecosystem
 

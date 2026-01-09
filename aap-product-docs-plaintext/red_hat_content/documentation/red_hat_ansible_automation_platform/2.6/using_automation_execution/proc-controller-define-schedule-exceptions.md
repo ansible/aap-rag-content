@@ -5,6 +5,8 @@
 
 
 
+Define specific dates or times when automated jobs should skip execution by using schedule exceptions.
+
 **Procedure**
 
 1. On the **Schedule Exceptions** page, clickCreate exception.

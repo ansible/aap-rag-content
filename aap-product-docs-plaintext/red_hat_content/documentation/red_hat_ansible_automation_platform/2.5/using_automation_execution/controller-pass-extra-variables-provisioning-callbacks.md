@@ -1,6 +1,6 @@
 # 6. Job templates
-## 6.20. Provisioning Callbacks
-### 6.20.3. Passing extra variables to Provisioning Callbacks
+## 6.16. Provisioning Callbacks
+### 6.16.3. Passing extra variables to Provisioning Callbacks
 
 
 

@@ -5,6 +5,8 @@
 
 
 
+The Hub-and-spoke peering model establishes a centralized hub VNet for managing private network communication and transit routing between your existing spoke networks and the dedicated Ansible Automation Platform VNet.
+
 Note
 Updating route tables incorrectly can break your network. Only execute the steps in these procedures if you are confident that you can reverse any unexpected network behavior.
 
@@ -14,6 +16,8 @@ Updating route tables incorrectly can break your network. Only execute the steps
 
 
 
+
+Understand the necessary preparation and three core steps for enabling private network communication after deploying the managed application.
 
 **Prerequisites**
 
@@ -126,7 +130,7 @@ Before you update the route tables, confirm that you satisfy the [Prerequisites]
 
 
 
-use the **Route Tables** page in the Azure portal to route traffic to Ansible Automation Platform.
+Use the **Route Tables** page in the Azure portal to route traffic to Ansible Automation Platform.
 
 **Procedure**
 
@@ -203,6 +207,6 @@ If you choose not to allow all outbound traffic from port 443, you must configur
 
 **Additional resources**
 
-- * [Create a route](https://docs.microsoft.com/en-us/azure/virtual-network/manage-route-table#create-a-route)
+-  [Create a route](https://docs.microsoft.com/en-us/azure/virtual-network/manage-route-table#create-a-route)
 
 

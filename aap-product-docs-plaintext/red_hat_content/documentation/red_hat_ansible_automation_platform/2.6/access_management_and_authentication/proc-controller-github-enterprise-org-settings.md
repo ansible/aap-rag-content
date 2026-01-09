@@ -7,7 +7,7 @@
 
 To set up social authentication for a GitHub enterprise organization, you must obtain a GitHub enterprise organization URL, an Organization API URL, an Organization OAuth2 key and secret for a web application.
 
-To obtain the URLs, refer to the [GitHub Enterprise administration documentation](https://docs.github.com/en/enterprise-server@3.1/rest/reference/enterprise-admin) .
+To obtain the URLs, see the [GitHub Enterprise administration documentation](https://docs.github.com/en/enterprise-server@3.1/rest/reference/enterprise-admin) .
 
 The OAuth2 key (Client ID) and secret (Client Secret) are used to supply the required fields in the UI. To register the application, you must supply it with your webpage URL, which is the **Callback URL** shown in the Authenticator details for your authenticator configuration. See [Displaying authenticator details](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-display-auth-details) for instructions on accessing this information.
 
@@ -19,7 +19,7 @@ Each key and secret must belong to a unique application and cannot be shared or 
 1. ClickCreate authentication.
 1. Enter a **Name** for this authentication configuration.
 1. Select **GitHub enterprise organization** from the **Authentication type** list. The **Authentication details** section automatically updates to show the fields relevant to the selected authentication type.
-1. When the application is registered, GitHub displays the **Client ID** and **Client Secret** :
+1. When you register the application, GitHub displays the **Client ID** and **Client Secret** :
 
 
 1. Copy and paste the GitHub Client ID into the GitHub OAuth2 Key field.
@@ -41,14 +41,13 @@ Values defined in this field override the dedicated fields provided in the UI. A
 1. To remove a user for any groups they were previously added to when they authenticate from this source, select **Remove users** .
 1. ClickCreate Authentication Method.
 
-
-**Verification**
-
 To verify that the authentication is configured correctly, log out of Ansible Automation Platform and check that the login screen displays the logo of your authentication chosen method to enable logging in with those credentials.
+
+
 
 
 **Next steps**
 
-To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
+To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong, continue to [Mapping](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-mapping) .
 
 

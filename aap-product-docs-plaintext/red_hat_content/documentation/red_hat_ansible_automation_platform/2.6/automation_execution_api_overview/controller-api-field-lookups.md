@@ -4,7 +4,7 @@
 
 
 
-You can use field lookups for more advanced queries, by appending the lookup to the field name:
+Field lookups allow you to filter API results based on specific criteria. You can use field lookups for more advanced queries, by appending the lookup to the field name:
 
 ```
 ?field__lookup=value

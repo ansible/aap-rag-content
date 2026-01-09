@@ -1,10 +1,10 @@
 # 10. Simplified event routing
-## 10.6. Replacing sources and attaching event streams to activations
+## 10.8. Replacing sources and attaching event streams to activations
 
 
 
 
-When you create rulebook activations, you can use event streams to swap out source mappings in rulebook activations and simplify routing from external sources to Event-Driven Ansible controller.
+Replace complex source mappings with pre-configured event streams to simplify rulebook activation design and centralize incoming event routing.
 
 There are several key points to keep in mind regarding source mapping:
 

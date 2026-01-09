@@ -1,5 +1,5 @@
-# 8. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 8.5. Upgrading the Ansible Automation Platform Operator
+# 10. Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 10.5. Upgrading the Ansible Automation Platform Operator
 
 
 
@@ -16,7 +16,7 @@ If you upgraded from 2.4 to 2.5, you must migrate your authentication methods an
 **Prerequisites**
 
 - Read the [Release notes](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/release_notes) for 2.6
-- [Optional] You must deploy all of your Red Hat Ansible Automation Platform services (automation controller, automation hub, Event-Driven Ansible) to the same, single namespace before upgrading to 2.6 (only for existing deployments). For more information see, [Migrating from one namespace to another](https://access.redhat.com/solutions/7092056) .
+- For existing deployments only: You must deploy your automation controller and automation hub instances to the same, single namespace before upgrading to 2.6. For more information see, [Migrating from one namespace to another](https://access.redhat.com/solutions/7092056) .
 - Review the [Backup and recovery for operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/backup_and_recovery_for_operator_environments) guide and backup your services:
 
 

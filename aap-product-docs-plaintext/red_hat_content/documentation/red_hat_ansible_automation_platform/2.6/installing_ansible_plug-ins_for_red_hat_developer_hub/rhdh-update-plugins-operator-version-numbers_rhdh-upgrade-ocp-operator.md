@@ -4,6 +4,8 @@
 
 
 
+You must edit the dedicated plug-ins ConfigMap, such as `rhaap-dynamic-plugins-config` , replacing the old version numbers and SHA values in the configuration to trigger a restart and update of the plug-ins.
+
 **Procedure**
 
 1. Log in to your OpenShift Container Platform instance.

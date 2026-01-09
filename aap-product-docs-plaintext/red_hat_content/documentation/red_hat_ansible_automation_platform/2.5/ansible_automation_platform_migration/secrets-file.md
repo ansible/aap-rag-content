@@ -4,7 +4,7 @@
 
 
 
-The `secrets.yml` file in the migration artifact includes essential Django `SECRET_KEY` values and other sensitive data required for authentication between services.
+The `secrets.yml` file in the migration artifact includes essential Django `SECRET_KEY` values required for authentication between services.
 
 Structure the secrets file as follows:
 
@@ -19,7 +19,7 @@ hub_db_fields_encryption_key: &lt;redacted&gt;
 ```
 
 Note
-Ensure the `secrets.yml` file is encrypted kept in a secure location.
+Ensure the `secrets.yml` file is encrypted and kept in a secure location.
 
 
 

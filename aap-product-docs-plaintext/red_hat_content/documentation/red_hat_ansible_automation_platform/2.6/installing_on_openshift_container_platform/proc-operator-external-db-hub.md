@@ -1,6 +1,6 @@
-# 4. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
-## 4.3. Configuring automation hub on Red Hat OpenShift Container Platform web console
-### 4.3.3. Configuring an external database for automation hub on Red Hat Ansible Automation Platform Operator
+# 5. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
+## 5.3. Configuring automation hub on Red Hat OpenShift Container Platform web console
+### 5.3.3. Configuring an external database for automation hub on Red Hat Ansible Automation Platform Operator
 
 
 
@@ -36,9 +36,15 @@ If you choose to use an externally managed database with version 16 or 17 you mu
 
 
 ```
-apiVersion: v1    kind: Secret    metadata:      name: external-postgres-configuration      namespace: &lt;target_namespace&gt;<span id="CO3-1"><!--Empty--></span><span class="callout">1</span>stringData:      host: "&lt;external_ip_or_url_resolvable_by_the_cluster&gt;"<span id="CO3-2"><!--Empty--></span><span class="callout">2</span>port: "&lt;external_port&gt;"<span id="CO3-3"><!--Empty--></span><span class="callout">3</span>database: "&lt;desired_database_name&gt;"      username: "&lt;username_to_connect_as&gt;"      password: "&lt;password_to_connect_with&gt;"<span id="CO3-4"><!--Empty--></span><span class="callout">4</span>sslmode: "prefer"<span id="CO3-5"><!--Empty--></span><span class="callout">5</span>type: "unmanaged"    type: Opaque
+apiVersion: v1    kind: Secret    metadata:      name: external-postgres-configuration      namespace: &lt;target_namespace&gt;<span id="CO1-5"><!--Empty--></span><span class="callout">1</span>stringData:      host: "&lt;external_ip_or_url_resolvable_by_the_cluster&gt;"<span id="CO1-6"><!--Empty--></span><span class="callout">2</span>port: "&lt;external_port&gt;"<span id="CO1-7"><!--Empty--></span><span class="callout">3</span>database: "&lt;desired_database_name&gt;"      username: "&lt;username_to_connect_as&gt;"      password: "&lt;password_to_connect_with&gt;"<span id="CO1-8"><!--Empty--></span><span class="callout">4</span>sslmode: "prefer"<span id="CO1-9"><!--Empty--></span><span class="callout">5</span>type: "unmanaged"    type: Opaque
 ```
 
+
+1. Namespace to create the secret in. This should be the same namespace you want to deploy to.
+1. The resolvable hostname for your database node.
+1. External port defaults to `        5432` .
+1. Value for variable `        password` should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
+1. The variable `        sslmode` is valid for `        external` databases only. The allowed values are: `        <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">prefer</span></strong></span>` , `        <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">disable</span></strong></span>` , `        <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">allow</span></strong></span>` , `        <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">require</span></strong></span>` , `        <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">verify-ca</span></strong></span>` , and `        <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">verify-full</span></strong></span>` .
 
 1. Apply `    external-postgres-configuration-secret.yml` to your cluster using the `    oc create` command.
 
@@ -58,7 +64,7 @@ apiVersion: automationhub.ansible.com/v1beta1    kind: AutomationHub    metadata
 
 
 
-#### 4.3.3.1. Enabling the hstore extension for the automation hub PostgreSQL database
+#### 5.3.3.1. Enabling the hstore extension for the automation hub PostgreSQL database
 
 
 

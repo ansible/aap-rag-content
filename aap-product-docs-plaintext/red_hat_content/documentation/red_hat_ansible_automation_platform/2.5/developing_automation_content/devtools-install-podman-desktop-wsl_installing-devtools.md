@@ -17,7 +17,7 @@ If you are installing Ansible development tools on a container in VS Code on Win
 
 
 ```
-$ `wsl --install --no-distribution`
+$ wsl --install --no-distribution
 ```
 
 

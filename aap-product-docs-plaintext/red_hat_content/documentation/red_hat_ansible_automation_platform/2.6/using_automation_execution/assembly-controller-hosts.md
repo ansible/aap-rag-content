@@ -3,7 +3,7 @@
 
 
 
-A host is a system managed by Ansible Automation Platform, which may include a physical, virtual, cloud-based server, or other device.
+A host is a system managed by Ansible Automation Platform, which might include a physical, virtual, cloud-based server, or other device.
 
 Typically a host is an operating system instance.
 

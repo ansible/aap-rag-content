@@ -1,6 +1,6 @@
-# 1. Installing Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-## 1.5. Fetching platform gateway login details from the OpenShift Container Platform CLI
-### 1.5.3. Decoding the platform gateway password
+# 2. Configuring the Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
+## 2.4. Accessing platform gateway through the OpenShift Container Platform CLI
+### 2.4.3. Decoding the platform gateway password
 
 
 

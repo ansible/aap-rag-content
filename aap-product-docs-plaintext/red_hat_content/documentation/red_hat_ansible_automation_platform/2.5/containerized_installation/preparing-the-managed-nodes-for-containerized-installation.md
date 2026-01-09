@@ -1,16 +1,10 @@
-# 2. Ansible Automation Platform containerized installation
-## 2.4. Preparing the managed nodes for containerized installation
+# 4. Preparing the containerized Ansible Automation Platform installation
+## 4.4. Preparing the managed nodes for containerized installation
 
 
 
 
-Managed nodes, also referred to as hosts, are the devices that Ansible Automation Platform is configured to manage.
-
-To ensure a consistent and secure setup of containerized Ansible Automation Platform, create a dedicated user on each host. Ansible Automation Platform connects as this user to run tasks on the host.
-
-Once configured, you can define the dedicated user for each host by adding `ansible_user=&lt;username&gt;` in your inventory file, for example: `aap.example.org ansible_user=aap` .
-
-Complete the following steps for each host:
+Managed nodes, also referred to as hosts, are the devices that Ansible Automation Platform manages. To ensure a consistent and secure setup of containerized Ansible Automation Platform, create a dedicated user on each managed node. Ansible Automation Platform connects as this user to run tasks on the node.
 
 **Procedure**
 
@@ -33,7 +27,7 @@ $ sudo passwd &lt;username&gt;
 
 1. Configure the user to run `    sudo` commands.
 
-For a secure and maintainable installation, it is a best practice to configure `    sudo` privileges for the installation user in a dedicated file within the `    /etc/sudoers.d/` directory.
+For a secure and maintainable installation, configure `    sudo` privileges for the installation user in a dedicated file within the `    /etc/sudoers.d/` directory.
 
 
 1. Create a dedicated `        sudoers` file for the user:

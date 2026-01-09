@@ -1,6 +1,6 @@
-# 2. Ansible Automation Platform containerized installation
-## 2.6. Configuring the inventory file
-### 2.6.1. Inventory file for online installation for containerized growth topology (all-in-one)
+# 4. Preparing the containerized Ansible Automation Platform installation
+## 4.6. Configuring the inventory file
+### 4.6.1. Inventory file for online installation for containerized growth topology (all-in-one)
 
 
 
@@ -94,6 +94,7 @@ eda_pg_password=&lt;set your own&gt;
 
 - If the installation program is run from a separate node, do not include `        ansible_connection=local` . In this case, use an SSH connection instead.
 
+-  `    [database]` - This group in the inventory file defines the Ansible Automation Platform managed database.
 
 
 **Additional resources**

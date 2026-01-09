@@ -23,6 +23,6 @@ To limit repository synchronization to specific collections within a remote, you
 
 **Additional resources**
 
-For more information about using requirements files, see [Creating a requirements file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-cert-valid-content#create-requirements-file_managing-cert-validated-content) .
+-  [Creating a requirements file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content/managing-cert-valid-content#create-requirements-file_managing-cert-validated-content)
 
 

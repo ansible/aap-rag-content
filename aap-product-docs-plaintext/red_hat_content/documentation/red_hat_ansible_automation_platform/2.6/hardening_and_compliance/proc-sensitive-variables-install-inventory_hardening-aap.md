@@ -5,9 +5,7 @@
 
 
 
-The installation inventory file for Ansible Automation Platform contains a number of sensitive variables, such as default administrative and database passwords. By default, these are stored in plain text. By securing sensitive values with Ansible Vault, both RPM-based and containerized Ansible Automation Platform installations benefit from improved security, password hygiene, and maintainability.
-
-To create an Ansible vault file, use the following procedure:
+By securing sensitive values in the installation inventory file with Ansible Vault, both RPM-based and containerized Ansible Automation Platform installations benefit from improved security, password hygiene, and maintainability.
 
 **Procedure**
 
@@ -32,15 +30,19 @@ Passwords with special characters must be in double quotes.
 1. Store the vault password securely, in accordance with your organizations security policy, for example, using a password manager or vault service.
 1. Add your sensitive variables to the vault and ensure they are not also defined in the inventory file.
 
-
 To edit your vault file use:
 
-`ansible-vault edit &lt;file&gt;`
+`    ansible-vault edit &lt;file&gt;`
+
+
+
 
 #### 2.2.4.1. Using an external vault file with an RPM-based Ansible Automation Platform deployment
 
 
 
+
+When installing Ansible Automation Platform using RPM packages, you can use an external Ansible vault file to securely provide sensitive variables, such as passwords, during the installation process.
 
 For RPM-based installations, you can provide the Ansible vault at runtime when executing the setup script.
 
@@ -68,12 +70,12 @@ To use the vault during installation, use the following procedure:
 1. Ensure the vault file, for example, `    vault.yml` , contains all required sensitive variables.
 1. Run the installation using the following command:
 
-`    ./setup.sh -e @vault.yml –ask-vault-pass`
+`    ./setup.sh -e @vault.yml -ask-vault-pass`
+
+Using this procedure ensures that the installation program reads encrypted variables from the vault and prompts for the vault password.
 
 
 
-
-Using this procedure ensures that the installer reads encrypted variables from the vault and prompts for the vault password.
 
 #### 2.2.4.2. Using an external vault file with a containerized installation
 
@@ -107,10 +109,10 @@ To use the new Ansible vault with the installation program, use the following pr
 1. Ensure your vault file, for example, `    vault.yml` , contains all required sensitive variables.
 1. Run the container installer using the following command:
 
-`    ansible-playbook ansible.containerized_installer.install -e @vault.yml –ask-become-pass` .
+`    ansible-playbook ansible.containerized_installer.install -e @vault.yml -ask-become-pass` .
+
+Ensure that the vault file is located in the working directory, or provide the full path. Do not duplicate the encrypted variables in the `    plaintext` inventory file.
 
 
 
-
-Ensure that the vault file is located in the working directory, or provide the full path. Do not duplicate the encrypted variables in the `plaintext` inventory file.
 

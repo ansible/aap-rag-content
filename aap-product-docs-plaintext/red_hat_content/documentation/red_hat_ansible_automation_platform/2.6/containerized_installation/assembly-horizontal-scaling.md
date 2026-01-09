@@ -1,4 +1,4 @@
-# Chapter 4. Horizontal Scaling in Red Hat Ansible Automation Platform
+# Chapter 11. Horizontal scaling in Red Hat Ansible Automation Platform
 
 
 

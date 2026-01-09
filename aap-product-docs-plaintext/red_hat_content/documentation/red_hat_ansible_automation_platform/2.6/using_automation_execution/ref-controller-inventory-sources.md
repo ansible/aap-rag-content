@@ -5,7 +5,7 @@
 
 
 
-Choose a source which matches the inventory type against which a host can be entered:
+Choose a source which matches the inventory type against which a host can be entered.
 
 -  [Sourcing from a Project](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-sourced-from-project)
 -  [Amazon Web Services EC2](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-amazon-ec2)
@@ -14,7 +14,7 @@ Choose a source which matches the inventory type against which a host can be ent
 -  [VMware vCenter](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-inv-source-vm-vcenter)
 -  [VMware ESXi](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-inv-source-vm-esxi)
 -  [Red Hat Satellite 6](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-inv-source-satellite)
--  [Red Hat Insights](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-inv-source-insights)
+-  [Red Hat Lightspeed](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-inv-source-insights)
 -  [OpenStack](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-inv-source-openstack)
 -  [Red Hat Virtualization](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-inv-source-rh-virt)
 -  [Red Hat Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-inv-source-aap)
@@ -106,7 +106,7 @@ If you only use `include_filters` , the AWS plugin always returns all the hosts.
 
 
 
-Use the following procedure to configure a Google-sourced inventory:
+Learn how to configure a Google-sourced inventory:
 
 **Procedure**
 
@@ -143,7 +143,7 @@ Use the following procedure to configure an Microsoft Azure Resource Manager-sou
 
 
 
-Use the following procedure to configure a VMWare-sourced inventory.
+You can configure automation controller to synchronize inventory from a VMware vCenter server. You can manage virtual machines as part of your automation workflows.
 
 **Procedure**
 
@@ -162,7 +162,7 @@ Use the following procedure to configure a VMWare-sourced inventory.
 
 **Troubleshooting**
 
-VMWare properties have changed from lower case to camel case. Automation controller provides aliases for the top-level keys, but lower case keys in nested properties have been discontinued. For a list of valid and supported properties, see [Using Virtual machine attributes in VMware dynamic inventory plugin](https://docs.ansible.com/ansible/4/scenario_guides/vmware_scenarios/vmware_inventory_vm_attributes.html) .
+VMWare properties have changed from lower case to camel case. Automation controller provides aliases for the top-level keys, but lower case keys in nested properties have been discontinued.
 
 
 #### 14.4.7.6. VMware ESXi
@@ -170,7 +170,7 @@ VMWare properties have changed from lower case to camel case. Automation control
 
 
 
-Use the following procedure to configure a VMWare-ESXI sourced inventory.
+Learn how to configure a VMWare-ESXI sourced inventory.
 
 **Procedure**
 
@@ -191,7 +191,7 @@ Use the following procedure to configure a VMWare-ESXI sourced inventory.
 
 **Troubleshooting**
 
-VMWare properties have changed from lower case to camel case. Automation controller provides aliases for the top-level keys, but lower case keys in nested properties have been discontinued. For a list of valid and supported properties, see [Using Virtual machine attributes in VMware dynamic inventory plugin](https://docs.ansible.com/ansible/4/scenario_guides/vmware_scenarios/vmware_inventory_vm_attributes.html) .
+VMWare properties have changed from lower case to camel case. Automation controller provides aliases for the top-level keys, but lower case keys in nested properties have been discontinued.
 
 
 **Additional resources**
@@ -203,6 +203,8 @@ VMWare properties have changed from lower case to camel case. Automation control
 
 
 
+
+automation controller can integrate with Red Hat Satellite 6 as a dynamic inventory source.
 
 Use the following procedure to configure a Red Hat Satellite-sourced inventory.
 
@@ -218,7 +220,7 @@ Use the following procedure to configure a Red Hat Satellite-sourced inventory.
 - Optional: **Credential** : Choose from an existing Satellite Credential. For more information, see [Managing user credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-credentials) .
 
 1. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in [Adding a source](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-add-source) .
-1. Use the **Source Variables** field to specify parameters used by the `    foreman` inventory source. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the [Foreman inventory source](https://docs.ansible.com/ansible/latest/collections/theforeman/foreman/foreman_inventory.html) in the Ansible documentation.
+1. Use the **Source Variables** field to specify parameters used by the `    foreman` inventory source. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two.
 
 
 **Troubleshooting**
@@ -228,26 +230,28 @@ If you meet an issue with the automation controller inventory not having the "re
 
 If you see the message, `"no foreman.id" variable(s) when syncing the inventory` , see the solution on the Red Hat Customer Portal at: [https://access.redhat.com/solutions/5826451](https://access.redhat.com/solutions/5826451) . Be sure to login with your customer credentials to access the full article.
 
-#### 14.4.7.8. Red Hat Insights
+#### 14.4.7.8. Red Hat Lightspeed
 
 
 
 
-Use the following procedure to configure a Red Hat Insights-sourced inventory.
+You can create an inventory source that uses Red Hat Lightspeed as the source of hosts.
+
+Use the following procedure to configure a Red Hat Lightspeed-sourced inventory.
 
 **Procedure**
 
 1. From the navigation panel, selectAutomation Execution→Infrastructure→Inventories.
 1. Select the inventory name you want a source to and click the **Sources** tab.
 1. ClickCreate source.
-1. In the **Create source** page, select **Red Hat Insights** from the **Source** list.
+1. In the **Create source** page, select **Red Hat Lightspeed** from the **Source** list.
 1. The **Create source** window expands with additional fields. Enter the following details:
 
 
-- Optional: **Credential** : Choose from an existing Red Hat Insights Credential. For more information, see [Managing user credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-credentials) .
+- Optional: **Credential** : Choose from an existing Red Hat Lightspeed Credential. For more information, see [Managing user credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-credentials) .
 
 1. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in [Adding a source](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-add-source) .
-1. Use the **Source Variables** field to override variables used by the `    insights` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see [insights inventory plugin](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/insights/content/inventory/insights) .
+1. Use the **Source Variables** field to override variables used by the `    Red Hat Lightspeed` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see [Red Hat Lightspeed inventory plugin](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/insights/content/inventory/insights) .
 
 
 #### 14.4.7.9. OpenStack
@@ -255,7 +259,7 @@ Use the following procedure to configure a Red Hat Insights-sourced inventory.
 
 
 
-Use the following procedure to configure an OpenStack-sourced inventory.
+You can create an inventory source that uses the OpenStack inventory plugin to dynamically generate inventory from your OpenStack cloud.
 
 **Procedure**
 
@@ -269,7 +273,7 @@ Use the following procedure to configure an OpenStack-sourced inventory.
 - Optional: **Credential** : Choose from an existing OpenStack Credential. For more information, see [Managing user credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-credentials) .
 
 1. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in [Adding a source](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-add-source) .
-1. Use the **Source Variables** field to override variables used by the `    openstack` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see [openstack inventory plugin](https://docs.ansible.com/ansible/latest/collections/openstack/cloud/openstack_inventory.html) .
+1. Use the **Source Variables** field to override variables used by the `    openstack` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two.
 
 
 #### 14.4.7.10. Red Hat Virtualization
@@ -277,7 +281,7 @@ Use the following procedure to configure an OpenStack-sourced inventory.
 
 
 
-Use the following procedure to configure a Red Hat virtualization-sourced inventory.
+Learn how to configure a Red Hat virtualization-sourced inventory.
 
 **Procedure**
 
@@ -293,9 +297,11 @@ Use the following procedure to configure a Red Hat virtualization-sourced invent
 1. Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in [Adding a source](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#proc-controller-add-source) .
 1. Use the **Source Variables** field to override variables used by the `    ovirt` inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see [ovirt inventory plugin](https://console.redhat.com/ansible/automation-hub/repo/published/redhat/rhv/content/inventory/ovirt)
 
-
 Note
-Red Hat Virtualization (ovirt) inventory source requests are secure by default. To change this default setting, set the key `ovirt_insecure` to **true** in `source_variables` , which is only available from the API details of the inventory source at the `/api/v2/inventory_sources/N/` endpoint.
+Red Hat Virtualization (ovirt) inventory source requests are secure by default. To change this default setting, set the key `    ovirt_insecure` to **true** in `    source_variables` , which is only available from the API details of the inventory source at the `    /api/v2/inventory_sources/N/` endpoint.
+
+
+
 
 
 
@@ -303,6 +309,8 @@ Red Hat Virtualization (ovirt) inventory source requests are secure by default. 
 
 
 
+
+An inventory that is sourced from Red Hat Ansible Automation Platform uses the Red Hat Ansible Automation Platform inventory plugin to gather inventory data from the Red Hat Ansible Automation Platform platform.
 
 Use the following procedure to configure an automation controller-sourced inventory.
 
@@ -325,6 +333,8 @@ Use the following procedure to configure an automation controller-sourced invent
 
 
 
+
+Use the following procedure to create a Terraform State inventory source.
 
 This inventory source uses the terraform_state inventory plugin from the [cloud.terraform](https://console.redhat.com/ansible/automation-hub/repo/published/cloud/terraform/content/inventory/terraform_state/) collection. The plugin parses a terraform state file and add hosts for AWS EC2, GCE, and Microsoft Azure instances.
 
@@ -361,9 +371,11 @@ backend_type: s3
 
 1. Select an **Execution environment** that has a Terraform binary. This is required for the inventory plugin to run the Terraform commands that read inventory data from the Terraform state file.
 
-
 Important
 Terraform provider for Ansible Automation Platform inventories are managed by Terraform and you must not edit them in Ansible Automation Platform as it can introduce drift to the Terraform deployment.
+
+
+
 
 
 
@@ -378,7 +390,14 @@ Terraform provider for Ansible Automation Platform inventories are managed by Te
 
 
 
-This inventory source uses a cluster that is able to deploy Red Hat OpenShift Container Platform Virtualization. To configure a Red Hat OpenShift Container Platform Virtualization, you need a virtual machine deployed in a specific namespace and an OpenShift or Kubernetes API Bearer Token credential.
+Learn how to add an OpenShift Virtualization inventory source to an existing inventory.
+
+This inventory source uses a cluster that is able to deploy Red Hat OpenShift Container Platform Virtualization.
+
+**Prerequisite**
+
+- You need a virtual machine deployed in a specific namespace and an OpenShift or Kubernetes API Bearer Token credential.
+
 
 **Procedure**
 
@@ -439,9 +458,9 @@ Refer to the official [Ansible documentation](https://console.redhat.com/ansible
 
 
 
-Despite the removal of the custom inventory scripts API, the scripts are still saved in the database. Use the following commands to recover the scripts from the database in a format that is suitable for you to subsequently check into source control.
+Despite the removal of the custom inventory scripts API, the scripts are still saved in the database.
 
-Use the following commands:
+To recover the scripts from the database in a format that is suitable for you to check into source control, use the following command:
 
 ```
 $ awx-manage export_custom_scripts --filename=my_scripts.tar
