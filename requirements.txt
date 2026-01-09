@@ -584,9 +584,9 @@ joblib==1.5.3 \
     --hash=sha256:5fc3c5039fc5ca8c0276333a188bbd59d6b7ab37fe6632daa76bc7f9ec18e713 \
     --hash=sha256:8561a3269e6801106863fd0d6d84bb737be9e7631e33aaed3fb9ce5953688da3
     # via scikit-learn
-jsonschema==4.25.0 \
-    --hash=sha256:24c2e8da302de79c8b9382fee3e76b355e44d2a4364bb207159ce10b517bd716 \
-    --hash=sha256:e63acf5c11762c0e6672ffb61482bdf57f0876684d8d249c0fe2d730d48bc55f
+jsonschema==4.26.0 \
+    --hash=sha256:0c26707e2efad8aa1bfc5b7ce170f3fccc2e4918ff85989ba9ffa9facb2be326 \
+    --hash=sha256:d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce
     # via llama-stack
 jsonschema-specifications==2025.4.1 \
     --hash=sha256:4653bffbd6584f7de83a67e0d620ef16900b390ddc7939d56684d6c81e33f1af \
