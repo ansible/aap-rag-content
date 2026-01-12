@@ -34,8 +34,8 @@ description = "RAG content for AAP chatbot"
 authors = []
 dependencies = [
     "requests",
-    "llama-stack",
-    "llama-stack-client",
+    "llama-stack==0.2.22",
+    "llama-stack-client==0.2.22",
     "torch",
     "sqlalchemy",
     "faiss-cpu",
