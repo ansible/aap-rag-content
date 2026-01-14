@@ -220,9 +220,9 @@ frozenlist==1.7.0 \
     # via
     #   aiohttp
     #   aiosignal
-fsspec==2025.7.0 \
-    --hash=sha256:786120687ffa54b8283d942929540d8bc5ccfa820deb555a2b5d0ed2b737bf58 \
-    --hash=sha256:8b012e39f63c7d5f10474de957f3ab793b47b45ae7d39f2fb735f8bbe25c0e21
+fsspec==2025.12.0 \
+    --hash=sha256:8bf1fe301b7d8acfa6e8571e3b1c3d158f909666642431cc78a1b7b4dbc5ec5b \
+    --hash=sha256:c505de011584597b1060ff778bb664c1bc022e87921b0e4f10cc9c44f9635973
     # via
     #   huggingface-hub
     #   torch
