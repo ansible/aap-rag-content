@@ -37,7 +37,7 @@ dependencies = [
     "llama-stack==0.2.22",
     "llama-stack-client==0.2.22",
     "torch",
-    "sqlalchemy",
+    "sqlalchemy[asyncio]",
     "faiss-cpu",
     "chardet",
     "sentence-transformers",
