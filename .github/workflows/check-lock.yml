@@ -1,0 +1,27 @@
+name: Check uv.lock
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Update lock file
+        run: uv lock
+
+      - name: Check for changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::uv.lock is out of date. Run 'uv lock' and commit the changes."
+            git diff
+            exit 1
+          fi
