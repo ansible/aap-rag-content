@@ -19,7 +19,7 @@ ignore_missing_imports = true
 # https://docs.astral.sh/uv/guides/integration/pytorch/
 [tool.uv.sources]
 torch = [
-  { index = "pytorch-cpu" },
+  { index = "pytorch-cpu", marker = "sys_platform != 'darwin'" },
 ]
 
 [[tool.uv.index]]
@@ -46,9 +46,10 @@ dependencies = [
     "aiosqlite==0.21.0",
     # CVE fixes
     "aiohttp>=3.13.3",  # CVE-2025-69223, CVE-2025-69224, CVE-2025-69225, CVE-2025-69226, CVE-2025-69227, CVE-2025-69228, CVE-2025-69229, CVE-2025-69230
-    "filelock>=3.20.1",  # CVE-2025-68146
+    "filelock>=3.20.3",
     "urllib3>=2.6.3",  # CVE-2025-66418, CVE-2025-66471, CVE-2026-21441
     "starlette>=0.49.1",  # CVE-2025-62727
+    "pyasn1==0.6.2",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"
