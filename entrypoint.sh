@@ -35,12 +35,13 @@ cd /rag/llama_stack_vector_db
 diff provider_vector_db_id.ind ${DESTDIR}/provider_vector_db_id.ind
 if [[ $? != 0 ]]; then
   cp provider_vector_db_id.ind ${DESTDIR}
-  echo -e "PROVIDER_VECTOR_DB_ID=$(cat provider_vector_db_id.ind)" > ${DESTDIR}/provider_rag.env
   echo "RAG environment variables updated."
 else
   echo "RAG environment variables already up-to-date."
 fi
 
+echo "Generating the provider_rag.env"
+echo -e "PROVIDER_VECTOR_DB_ID=$(cat provider_vector_db_id.ind)" > ${DESTDIR}/provider_rag.env
 cat ${DESTDIR}/provider_rag.env
 echo ""
 
