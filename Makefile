@@ -76,8 +76,11 @@ build-llama-stack-db:
 	mkdir -p ./llama_stack_vector_db
 	uv run python3 scripts/generate_embeddings-llama-stack.py \
   -f aap-product-docs-plaintext \
+  --aap-doc-version $(AAP_VERSION) \
   -i aap-product-docs-$(AAP_VERSION_STR) \
-  -c 200
+  -c 200 \
+  -v ./llama_stack_vector_db/provider_vector_db_id.ind
+
 
 build-llama-stack-db-extra-docs:
 	rm -rf ./llama_stack_vector_db
@@ -86,8 +89,10 @@ build-llama-stack-db-extra-docs:
 	gzip -d ./llama_stack_vector_db/faiss_store.db.gz
 	uv run python3 scripts/generate_embeddings-llama-stack.py \
   -f aap-product-docs-plaintext \
+  --aap-doc-version $(AAP_VERSION) \
   -i aap-product-docs-$(AAP_VERSION_STR) \
   -c 200 \
+  -v ./llama_stack_vector_db/provider_vector_db_id.ind \
   --skip-ping \
   --extra-docs-folder extra_docs
 
