@@ -2,22 +2,23 @@
 
 import argparse
 import json
-import os
 import time
-from typing import Callable, Dict
 from pathlib import Path
+from typing import Callable
+from typing import Dict
+
 import requests
-
-from llama_stack_client.types.shared_params.document import Document as RAGDocument
 from llama_stack.core.library_client import LlamaStackAsLibraryClient
+from llama_stack_client.types.shared_params.document import Document as RAGDocument
 
+AAP_PLATFORM_DOC_DIR = "red_hat_ansible_automation_platform"
 
 PROVIDER_NAME = "vector_io"
 UNREACHABLE_DOCS: int = 0
 
 
 class SourceDocument:
-    path: str
+    path: Path
     metadata: Dict
 
     def __init__(self, path: Path, metadata: Dict):
@@ -36,6 +37,7 @@ class DocumentIngestionTool:
         skip_ping=False,
         additional_docs_folder: Path | None = None,
         extra_docs_folder: Path | None = None,
+        aap_doc_version: str = "2.6",
     ):
         self.folder = folder
         self.additional_docs_folder = additional_docs_folder
@@ -43,6 +45,7 @@ class DocumentIngestionTool:
         self.index = index
         self.skip_ping = skip_ping
         self.extra_docs_folder = extra_docs_folder
+        self.aap_doc_version = aap_doc_version
 
         self.client, self.vector_dbs_identifier = self.setup_llama_stack()
         with open(vector_db_id_file_name, "w") as fp:
@@ -57,13 +60,9 @@ class DocumentIngestionTool:
         client.initialize()
 
         vector_providers = [
-            provider
-            for provider in client.providers.list()
-            if provider.api == PROVIDER_NAME
+            provider for provider in client.providers.list() if provider.api == PROVIDER_NAME
         ]
-        provider_id = vector_providers[
-            0
-        ].provider_id  # Use the first available vector provider
+        provider_id = vector_providers[0].provider_id  # Use the first available vector provider
 
         # Register a vector database
         result = client.vector_dbs.register(
@@ -136,9 +135,7 @@ class DocumentIngestionTool:
             docs_url = lambda x: metadata["url"]
             return self.file_metadata_func(file_path, docs_url, self.get_file_title)
 
-        AAP_RAG_CONTENT_BASE_URL = (
-            "https://github.com/ansible/aap-rag-content/blob/main/"
-        )
+        AAP_RAG_CONTENT_BASE_URL = "https://github.com/ansible/aap-rag-content/blob/main/"
         docs_url = AAP_RAG_CONTENT_BASE_URL + str(file_path)
 
         title = self.get_file_title(file_path)
@@ -165,9 +162,7 @@ class DocumentIngestionTool:
                     metadata=doc.metadata,
                 )
             )
-            if len(rag_documents) >= batch_size or len(rag_documents) + count == len(
-                documents
-            ):
+            if len(rag_documents) >= batch_size or len(rag_documents) + count == len(documents):
                 count += len(rag_documents)
                 print(f"{count=}")
                 self.client.tool_runtime.rag_tool.insert(
@@ -185,6 +180,8 @@ class DocumentIngestionTool:
         documents = [
             SourceDocument(f, self.aap_file_metadata_func(f))
             for f in self.folder.rglob("*.md")
+            if f"/{AAP_PLATFORM_DOC_DIR}/" not in str(f)
+            or f"/{AAP_PLATFORM_DOC_DIR}/{self.aap_doc_version}/" in str(f)
         ]
         self.insert_documents(documents, "doc")
 
@@ -220,20 +217,19 @@ def main():
     parser.add_argument(
         "--additional-docs-folder", type=Path, help="Addional_doc path", default=None
     )
-    parser.add_argument(
-        "-c", "--chunk", type=int, default=380, help="Chunk size for embedding"
-    )
+    parser.add_argument("-c", "--chunk", type=int, default=380, help="Chunk size for embedding")
     parser.add_argument("-i", "--index", help="Product index")
-    parser.add_argument(
-        "--skip-ping", action="store_true", help="Skip URL existence check"
-    )
+    parser.add_argument("--skip-ping", action="store_true", help="Skip URL existence check")
     parser.add_argument(
         "--extra-docs-folder",
         type=Path,
         help="Folder that stores extra docs to be added to the existing DB",
         default=None,
     )
-    parser.add_argument("-v", "--vector-db-id-file-path", type=Path, help="Plain provider_vector_db_id file name")
+    parser.add_argument(
+        "-v", "--vector-db-id-file-path", type=Path, help="Plain provider_vector_db_id file name"
+    )
+    parser.add_argument("--aap-doc-version", type=str, default="2.6", help="AAP Document version")
 
     args = parser.parse_args()
     print(f"Arguments used: {args}")
@@ -250,7 +246,14 @@ def main():
         exit(1)
 
     DocumentIngestionTool(
-        args.folder, args.chunk, args.index, args.vector_db_id_file_path, args.skip_ping, args.additional_docs_folder, args.extra_docs_folder
+        args.folder,
+        args.chunk,
+        args.index,
+        args.vector_db_id_file_path,
+        args.skip_ping,
+        args.additional_docs_folder,
+        args.extra_docs_folder,
+        args.aap_doc_version,
     ).run()
 
 
