@@ -1,78 +1,34 @@
-FROM registry.access.redhat.com/ubi9/python-312 as aap-rag-builder
+FROM quay.io/lightspeed-core/rag-content-cpu as builder
 ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
-ARG FLAVOR=cpu
-ARG HERMETIC=false
 ARG AAP_VERSION=2.6
-ARG AAP_VERSION_2_5=2.5
-ARG BUILD_ROAD_CORE_DB=false
 
-USER 0
-WORKDIR /workdir
-
-COPY requirements.txt ./requirements.txt
+WORKDIR /rag-content
 
 COPY aap-product-docs-plaintext ./aap-product-docs-plaintext
 COPY additional_docs ./additional_docs
 
-COPY embeddings_model ./embeddings_model
+COPY scripts/custom_processor-aap.py .
+RUN uv run python custom_processor-aap.py  \
+  -o ./llama_stack_vector_db \
+  -f /rag-content \
+  -md embeddings_model/ \
+  -mn ${EMBEDDING_MODEL} \
+  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
+  --vector-store-type=llamastack-faiss \
+  -c 200 \
+  -l 10
 
-COPY scripts/generate_embeddings-aap.py .
-COPY scripts/generate_embeddings-llama-stack.py .
-COPY run.yaml .
-
-RUN python3.12 -m venv .venv
-RUN pip3.12 install --upgrade pip
-RUN source .venv/bin/activate
-RUN pip3.12 install --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
-
-RUN cd embeddings_model; if [ "$HERMETIC" == "true" ]; then \
-        cp /cachi2/output/deps/generic/model.safetensors model.safetensors; \
-    elif [ ! -f model.safetensors ]; then  \
-        curl -L -O https://huggingface.co/sentence-transformers/all-mpnet-base-v2/resolve/9a3225965996d404b775526de6dbfe85d3368642/model.safetensors; \
-    fi
-
-RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
-		set -e && python3.12 generate_embeddings-aap.py \
-		  -f aap-product-docs-plaintext \
-		  -mn ${EMBEDDING_MODEL} \
-		  -o vector_db/aap_product_docs/${AAP_VERSION_2_5} \
-		  -i aap-product-docs-$(echo $AAP_VERSION_2_5 | sed 's/\./_/g') \
-		  -v ${AAP_VERSION_2_5} \
-		  -c 200 \
-		  -l 10; \
-	else \
-		mkdir -p /workdir/vector_db/aap_product_docs; \
-        mkdir -p /opt/app-root/src/.llama/providers.d; \
-	fi
-
-RUN if [ "$BUILD_ROAD_CORE_DB" == "true" ]; then \
-		set -e && python3.12 generate_embeddings-llama-stack.py \
-		  -f aap-product-docs-plaintext \
-		  --aap-doc-version $AAP_VERSION \
-		  --additional-docs-folder additional_docs \
-		  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
-		  -c 200; \
-	else \
-		set -e && python3.12 generate_embeddings-llama-stack.py \
-		  -f aap-product-docs-plaintext \
-		  --aap-doc-version $AAP_VERSION \
-		  --additional-docs-folder additional_docs \
-		  -i aap-product-docs-$(echo $AAP_VERSION | sed 's/\./_/g') \
-		  -c 200 \
-		  -v /workdir/llama_stack_vector_db/provider_vector_db_id.ind \
-		  --skip-ping; \
-	fi
-
-RUN cd llama_stack_vector_db; gzip faiss_store.db; sha256sum faiss_store.db.gz > faiss_store.db.gz.sha256
+WORKDIR /rag-content/llama_stack_vector_db
+RUN gzip faiss_store.db; sha256sum faiss_store.db.gz > faiss_store.db.gz.sha256
+RUN sed -n 's/.*vector_store_id: //p' llama-stack.yaml | tr -d '\n' > provider_vector_db_id.ind
 
 FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:6fc28bcb6776e387d7a35a2056d9d2b985dc4e26031e98a2bd35a7137cd6fd71
 
 # install diff and gzip
 RUN microdnf install -y diffutils gzip
 
-COPY --from=aap-rag-builder /workdir/vector_db/aap_product_docs /rag/vector_db/aap_product_docs
-COPY --from=aap-rag-builder /workdir/embeddings_model /rag/embeddings_model
-COPY --from=aap-rag-builder /workdir/llama_stack_vector_db /rag/llama_stack_vector_db
+COPY --from=builder /rag-content/embeddings_model /rag/embeddings_model
+COPY --from=builder /rag-content/llama_stack_vector_db /rag/llama_stack_vector_db
 
 # this directory is checked by ecosystem-cert-preflight-checks task in Konflux
 RUN mkdir /licenses
