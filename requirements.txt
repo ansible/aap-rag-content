@@ -625,10 +625,12 @@ python-jose==3.5.0 \
     --hash=sha256:abd1202f23d34dfad2c3d28cb8617b90acf34132c7afd60abd0b0b7d3cb55771 \
     --hash=sha256:fb4eaa44dbeb1c26dcc69e4bd7ec54a1cb8dd64d3b4d81ef08d90ff453f2b01b
     # via llama-stack
-python-multipart==0.0.21 \
-    --hash=sha256:7137ebd4d3bbf70ea1622998f902b97a29434a9e8dc40eb203bbcf7c2a2cba92 \
-    --hash=sha256:cf7a6713e01c87aa35387f4774e812c4361150938d20d232800f75ffcf266090
-    # via llama-stack
+python-multipart==0.0.22 \
+    --hash=sha256:2b2cd894c83d21bf49d702499531c7bafd057d730c201782048f7945d82de155 \
+    --hash=sha256:7340bef99a7e0032613f56dc36027b959fd3b30a787ed62d310e951f7c3a3a58
+    # via
+    #   aap-rag-content
+    #   llama-stack
 pytokens==0.3.0 \
     --hash=sha256:2f932b14ed08de5fcf0b391ace2642f858f1394c0857202959000b68ed7a458a \
     --hash=sha256:95b2b5eaf832e469d141a378872480ede3f251a5a5041b8ec6e581d3ac71bbf3
@@ -867,7 +869,10 @@ torch==2.9.1 ; sys_platform == 'darwin' \
     #   aap-rag-content
     #   sentence-transformers
 torch==2.9.1+cpu ; sys_platform != 'darwin' \
-    --hash=sha256:7417d8c565f219d3455654cb431c6d892a3eb40246055e14d645422de13b9ea1
+    --hash=sha256:1abe31f14b560c1f062699e966cb08ef5b67518a1cfac2d8547a3dbcd8387b06 \
+    --hash=sha256:3bf9b442a51a2948e41216a76d7ab00f0694cfcaaa51b6f9bcab57b7f89843e6 \
+    --hash=sha256:7417d8c565f219d3455654cb431c6d892a3eb40246055e14d645422de13b9ea1 \
+    --hash=sha256:a4e06b4f441675d26b462123c8a83e77c55f1ec8ebc081203be2db1ea8054add
     # via
     #   aap-rag-content
     #   sentence-transformers
