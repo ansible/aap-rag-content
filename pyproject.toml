@@ -43,7 +43,7 @@ dependencies = [
     "sentence-transformers",
     # aiosqlite 0.22+ hangs on exit due to llama-stack not closing connections properly
     # https://github.com/llamastack/llama-stack/issues/4587
-    "aiosqlite==0.21.0",
+    "aiosqlite==0.22.1",
     # CVE fixes
     "aiohttp>=3.13.3",  # CVE-2025-69223, CVE-2025-69224, CVE-2025-69225, CVE-2025-69226, CVE-2025-69227, CVE-2025-69228, CVE-2025-69229, CVE-2025-69230
     "cryptography==46.0.5", # CVE-2026-26007
