@@ -52,7 +52,7 @@ class AAPMetadataProcessor(MetadataProcessor):
         if title:
             return title
         if not file_path.endswith(".txt"):
-            raise RuntimeError(f"Title is not found for {file_path}")
+            raise RuntimeError(f"Title metadata is not found for the markdown file {file_path}")
         file_content = Path(file_path).read_text(encoding="utf8")
         return file_content.split("\n")[0].lstrip("# ")
 
