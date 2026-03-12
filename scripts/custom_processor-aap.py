@@ -1,3 +1,4 @@
+import functools
 import json
 from pathlib import Path
 
@@ -23,6 +24,7 @@ class AAPMetadataProcessor(MetadataProcessor):
     def __init__(self):
         pass
 
+    @functools.lru_cache(maxsize=None)
     def _load_metadata(self, file_path_str: str) -> dict:
         # Return a dict that contains metadata for the specified source
         # document
