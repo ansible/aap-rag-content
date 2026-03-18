@@ -1,0 +1,52 @@
+FROM quay.io/lightspeed-core/rag-content-cpu as builder
+ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
+
+WORKDIR /rag-content
+
+COPY byok_docs ./byok_docs
+
+COPY scripts/custom_processor-byok.py .
+RUN python custom_processor-byok.py  \
+  -o ./byok_vector_db \
+  -f /rag-content \
+  -md embeddings_model/ \
+  -mn ${EMBEDDING_MODEL} \
+  -i byok-docs \
+  --vector-store-type=llamastack-faiss \
+  -c 200 \
+  -l 10
+
+WORKDIR /rag-content/byok_vector_db
+RUN gzip faiss_store.db; sha256sum faiss_store.db.gz > faiss_store.db.gz.sha256
+RUN sed -n 's/.*vector_store_id: //p' llama-stack.yaml | tr -d '\n' > provider_vector_db_id.ind
+
+FROM registry.access.redhat.com/ubi9/ubi-minimal@sha256:6fc28bcb6776e387d7a35a2056d9d2b985dc4e26031e98a2bd35a7137cd6fd71
+
+# install diff and gzip
+RUN microdnf install -y diffutils gzip
+
+COPY --from=builder /rag-content/embeddings_model /rag/embeddings_model
+COPY --from=builder /rag-content/byok_vector_db /rag/byok_vector_db
+
+# this directory is checked by ecosystem-cert-preflight-checks task in Konflux
+RUN mkdir /licenses
+COPY LICENSE /licenses/
+
+# Labels for enterprise contract
+LABEL com.redhat.component=byok-rag-content
+LABEL description="BYOK RAG content"
+LABEL distribution-scope=private
+LABEL io.k8s.description="BYOK RAG content"
+LABEL io.k8s.display-name="BYOK RAG content"
+LABEL io.ansible.tags="ansible,aap,ai,assistant,rag,byok"
+LABEL name=byok-rag-content
+LABEL release=0.0.1
+LABEL url="https://github.com/ansible/aap-rag-content"
+LABEL vendor="Red Hat"
+LABEL version=0.0.1
+LABEL summary="BYOK RAG content"
+
+COPY entrypoint.sh /rag
+RUN chmod +x /rag/entrypoint.sh
+
+USER 65532:65532
