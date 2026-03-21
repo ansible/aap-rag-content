@@ -33,26 +33,25 @@ version = "0.1.0"
 description = "RAG content for AAP chatbot"
 authors = []
 dependencies = [
-    "requests",
-    "llama-stack==0.2.22",
-    "llama-stack-client==0.2.22",
-    "torch",
-    "sqlalchemy[asyncio]",
-    "faiss-cpu",
-    "chardet",
-    "sentence-transformers",
+    "aiohttp==3.13.3",  # Transient dep pinned to handle CVE
     # aiosqlite 0.22+ hangs on exit due to llama-stack not closing connections properly
     # https://github.com/llamastack/llama-stack/issues/4587
-    "aiosqlite==0.21.0",
-    # CVE fixes
-    "aiohttp>=3.13.3",  # CVE-2025-69223, CVE-2025-69224, CVE-2025-69225, CVE-2025-69226, CVE-2025-69227, CVE-2025-69228, CVE-2025-69229, CVE-2025-69230
-    "cryptography==46.0.5", # CVE-2026-26007
-    "filelock>=3.20.3",
-    "urllib3>=2.6.3",  # CVE-2025-66418, CVE-2025-66471, CVE-2026-21441
-    "starlette>=0.49.1",  # CVE-2025-62727
-    "pillow==12.1.1", # CVE-2026-25990
-    "pyasn1==0.6.2",
-    "python-multipart==0.0.22", # CVE-2026-24486
+    "aiosqlite==0.22.1",
+    "chardet==5.2.0",
+    "cryptography==46.0.5", # Transient dep pinned to handle CVE
+    "faiss-cpu==1.12",
+    "filelock==3.20.3",
+    "llama-stack-client==0.2.22",
+    "llama-stack==0.2.22",
+    "pillow==12.1.1", # Transient dep pinned to handle CVE
+    "pyasn1==0.6.3",
+    "python-multipart==0.0.22", # Transient dep pinned to handle CVE
+    "requests==2.32.5",
+    "sentence-transformers==5.2.2",
+    "sqlalchemy[asyncio]==2.0.46",
+    "starlette==0.50.0",  # Transient dep pinned to handle CVE
+    "torch",
+    "urllib3==2.6.3",  # Transient dep pinned to handle CVE
 ]
 requires-python = "==3.12.*"
 readme = "README.md"
