@@ -1,14 +1,28 @@
-FROM quay.io/lightspeed-core/rag-content-cpu as builder
+FROM registry.access.redhat.com/ubi9/python-312 as builder
 ARG EMBEDDING_MODEL=sentence-transformers/all-mpnet-base-v2
 ARG AAP_VERSION=2.6
 
 WORKDIR /rag-content
+USER 0
 
 COPY aap-product-docs-plaintext ./aap-product-docs-plaintext
 COPY additional_docs ./additional_docs
 
 COPY scripts/custom_processor-aap.py .
-RUN uv run python custom_processor-aap.py  \
+COPY requirements.txt ./requirements.txt
+COPY embeddings_model ./embeddings_model
+COPY src/aap_rag_content ./aap_rag_content
+
+RUN python3.12 -m venv .venv
+RUN pip3.12 install --upgrade pip
+RUN pip3.12 install --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cpu -r requirements.txt
+
+RUN cd embeddings_model; if [ ! -f model.safetensors ]; then  \
+        curl -L -O https://huggingface.co/sentence-transformers/all-mpnet-base-v2/resolve/9a3225965996d404b775526de6dbfe85d3368642/model.safetensors; \
+    fi
+
+ENV PYTHONPATH=/rag-content
+RUN python custom_processor-aap.py  \
   -o ./llama_stack_vector_db \
   -f /rag-content \
   -md embeddings_model/ \

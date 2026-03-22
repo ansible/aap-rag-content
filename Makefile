@@ -53,6 +53,9 @@ verify: ## Verify the code using various linters
 	black --check scripts
 	ruff check scripts --per-file-ignores=scripts/*:S101
 
+unit-test: ## Run unit tests
+	PYTHONPATH=src:$$PYTHONPATH .venv/bin/pytest tests/ -v -c pyproject.toml
+
 update-docs: ## Update the plaintext OCP docs in ocp-product-docs-plaintext/
 	@set -e && for OCP_VERSION in $$(ls -1 ocp-product-docs-plaintext); do \
 		scripts/get_ocp_plaintext_docs.sh $$OCP_VERSION; \

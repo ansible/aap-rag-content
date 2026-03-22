@@ -15,6 +15,7 @@ line-length = 100
 [tool.mypy]
 disable_error_code = ["union-attr", "return-value", "arg-type", "import-untyped"]
 ignore_missing_imports = true
+mypy_path = ["src"]
 
 # https://docs.astral.sh/uv/guides/integration/pytorch/
 [tool.uv.sources]
@@ -41,8 +42,8 @@ dependencies = [
     "cryptography==46.0.5", # Transient dep pinned to handle CVE
     "faiss-cpu==1.12",
     "filelock==3.20.3",
-    "llama-stack-client==0.2.22",
-    "llama-stack==0.2.22",
+    "llama-stack-client==0.4.3",
+    "llama-stack==0.4.3",
     "pillow==12.1.1", # Transient dep pinned to handle CVE
     "pyasn1==0.6.3",
     "python-multipart==0.0.22", # Transient dep pinned to handle CVE
