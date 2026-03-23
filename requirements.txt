@@ -30,9 +30,9 @@ aiosignal==1.4.0 \
     --hash=sha256:053243f8b92b990551949e63930a839ff0cf0b0ebbe0597b0f3fb19e1a0fe82e \
     --hash=sha256:f47eecd9468083c2029cc99945502cb7708b082c232f9aca65da147157b251c7
     # via aiohttp
-aiosqlite==0.21.0 \
-    --hash=sha256:131bb8056daa3bc875608c631c678cda73922a2d4ba8aec373b19f18c17e7aa3 \
-    --hash=sha256:2549cf4057f95f53dcba16f2b64e8e2791d7e1adedb13197dd8ed77bb226d7d0
+aiosqlite==0.22.1 \
+    --hash=sha256:043e0bd78d32888c0a9ca90fc788b38796843360c855a7262a532813133a0650 \
+    --hash=sha256:21c002eb13823fad740196c5a2e9d8e62f6243bd9e7e4a1f87fb5e44ecb4fceb
     # via
     #   aap-rag-content
     #   llama-stack
@@ -180,15 +180,16 @@ ecdsa==0.19.1 \
     --hash=sha256:30638e27cf77b7e15c4c4cc1973720149e1033827cfd00661ca5c8cc0cdb24c3 \
     --hash=sha256:478cba7b62555866fcb3bb3fe985e06decbdb68ef55713c4e5ab98c57d508e61
     # via python-jose
-faiss-cpu==1.13.2 \
-    --hash=sha256:0ee330a284042c2480f2e90450a10378fd95655d62220159b1408f59ee83ebf1 \
-    --hash=sha256:2c4f696ae76e7c97cbc12311db83aaf1e7f4f7be06a3ffea7e5b0e8ec1fd805b \
-    --hash=sha256:85511129b34f890d19c98b82a0cd5ffb27d89d1cec2ee41d2621ee9f9ef8cf3f \
-    --hash=sha256:8b32eb4065bac352b52a9f5ae07223567fab0a976c7d05017c01c45a1c24264f \
-    --hash=sha256:a9064eb34f8f64438dd5b95c8f03a780b1a3f0b99c46eeacb1f0b5d15fc02dc1 \
-    --hash=sha256:ab88ee287c25a119213153d033f7dd64c3ccec466ace267395872f554b648cd7 \
-    --hash=sha256:b82c01d30430dd7b1fa442001b9099735d1a82f6bb72033acdc9206d5ac66a64 \
-    --hash=sha256:c8d097884521e1ecaea6467aeebbf1aa56ee4a36350b48b2ca6b39366565c317
+faiss-cpu==1.12.0 \
+    --hash=sha256:016e391f49933875b8d60d47f282f2e93d8ea9f9ffbda82467aa771b11a237db \
+    --hash=sha256:2f87cbcd603f3ed464ebceb857971fdebc318de938566c9ae2b82beda8e953c0 \
+    --hash=sha256:6b8012353d50d9bc81bcfe35b226d0e5bfad345fdebe0da31848395ebc83816d \
+    --hash=sha256:88bfe134f8c7cd2dda7df34f2619448906624962c8207efdd6eb1647e2f5338b \
+    --hash=sha256:8b4f5b18cbe335322a51d2785bb044036609c35bfac5915bff95eadc10e89ef1 \
+    --hash=sha256:9243ee4c224a0d74419040503f22bf067462a040281bf6f3f107ab205c97d438 \
+    --hash=sha256:9b54990fcbcf90e37393909d4033520237194263c93ab6dbfae0616ef9af242b \
+    --hash=sha256:a5f5bca7e1a3e0a98480d1e2748fc86d12c28d506173e460e6746886ff0e08de \
+    --hash=sha256:c2e4963c7188f57cfba248f09ebd8a14c76b5ffb87382603ccd4576f2da39d74
     # via aap-rag-content
 fastapi==0.128.0 \
     --hash=sha256:1cc179e1cef10a6be60ffe429f79b829dce99d8de32d7acb7e6c8dfdf7f2645a \
@@ -448,6 +449,7 @@ numpy==2.4.1 \
     #   pandas
     #   scikit-learn
     #   scipy
+    #   sentence-transformers
     #   transformers
 openai==2.15.0 \
     --hash=sha256:42eb8cbb407d84770633f31bf727d4ffb4138711c670565a41663d9439174fba \
@@ -571,9 +573,9 @@ pyaml==25.7.0 \
     --hash=sha256:ce5d7867cc2b455efdb9b0448324ff7b9f74d99f64650f12ca570102db6b985f \
     --hash=sha256:e113a64ec16881bf2b092e2beb84b7dcf1bd98096ad17f5f14e8fb782a75d99b
     # via llama-stack-client
-pyasn1==0.6.2 \
-    --hash=sha256:1eb26d860996a18e9b6ed05e7aae0e9fc21619fcee6af91cca9bad4fbea224bf \
-    --hash=sha256:9b59a2b25ba7e4f8197db7686c09fb33e658b98339fadb826e9512629017833b
+pyasn1==0.6.3 \
+    --hash=sha256:697a8ecd6d98891189184ca1fa05d1bb00e2f84b5977c481452050549c8a72cf \
+    --hash=sha256:a80184d120f0864a52a073acc6fc642847d0be408e7c7252f31390c0f4eadcde
     # via
     #   aap-rag-content
     #   python-jose
@@ -785,9 +787,9 @@ scipy==1.17.0 \
     # via
     #   scikit-learn
     #   sentence-transformers
-sentence-transformers==5.2.0 \
-    --hash=sha256:aa57180f053687d29b08206766ae7db549be5074f61849def7b17bf0b8025ca2 \
-    --hash=sha256:acaeb38717de689f3dab45d5e5a02ebe2f75960a4764ea35fea65f58a4d3019f
+sentence-transformers==5.2.2 \
+    --hash=sha256:280ac54bffb84c110726b4d8848ba7b7c60813b9034547f8aea6e9a345cd1c23 \
+    --hash=sha256:7033ee0a24bc04c664fd490abf2ef194d387b3a58a97adcc528783ff505159fa
     # via aap-rag-content
 setuptools==80.9.0 \
     --hash=sha256:062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922 \
@@ -805,15 +807,16 @@ sniffio==1.3.1 \
     # via
     #   llama-stack-client
     #   openai
-sqlalchemy==2.0.45 \
-    --hash=sha256:0c9f6ada57b58420a2c0277ff853abe40b9e9449f8d7d231763c6bc30f5c4953 \
-    --hash=sha256:107029bf4f43d076d4011f1afb74f7c3e2ea029ec82eb23d8527d5e909e97aa6 \
-    --hash=sha256:1632a4bda8d2d25703fdad6363058d882541bdaaee0e5e3ddfa0cd3229efce88 \
-    --hash=sha256:215f0528b914e5c75ef2559f69dca86878a3beeb0c1be7279d77f18e8d180ed4 \
-    --hash=sha256:5225a288e4c8cc2308dbdd874edad6e7d0fd38eac1e9e5f23503425c8eee20d0 \
-    --hash=sha256:8defe5737c6d2179c7997242d6473587c3beb52e557f5ef0187277009f73e5e1 \
-    --hash=sha256:b3ee2aac15169fb0d45822983631466d60b762085bc4535cd39e66bea362df5f \
-    --hash=sha256:ba547ac0b361ab4f1608afbc8432db669bd0819b3e12e29fb5fa9529a8bba81d
+sqlalchemy==2.0.46 \
+    --hash=sha256:2347c3f0efc4de367ba00218e0ae5c4ba2306e47216ef80d6e31761ac97cb0b9 \
+    --hash=sha256:37fee2164cf21417478b6a906adc1a91d69ae9aba8f9533e67ce882f4bb1de53 \
+    --hash=sha256:3a9a72b0da8387f15d5810f1facca8f879de9b85af8c645138cba61ea147968c \
+    --hash=sha256:412f26bb4ba942d52016edc8d12fb15d91d3cd46b0047ba46e424213ad407bcb \
+    --hash=sha256:9094c8b3197db12aa6f05c51c05daaad0a92b8c9af5388569847b03b1007fb1b \
+    --hash=sha256:b1e14b2f6965a685c7128bd315e27387205429c2e339eeec55cb75ca4ab0ea2e \
+    --hash=sha256:cf36851ee7219c170bb0793dbc3da3e80c582e04a5437bc601bfe8c85c9216d7 \
+    --hash=sha256:ea3cd46b6713a10216323cda3333514944e510aa691c945334713fca6b5279ff \
+    --hash=sha256:f9c11766e7e7c0a2767dda5acb006a118640c9fc0a4104214b96269bfb78399e
     # via aap-rag-content
 starlette==0.50.0 \
     --hash=sha256:9e5391843ec9b6e472eed1365a78c8098cfceb7a74bfd4d6b1c0c0095efb3bca \
@@ -899,7 +902,6 @@ typing-extensions==4.15.0 \
     --hash=sha256:f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548
     # via
     #   aiosignal
-    #   aiosqlite
     #   anyio
     #   fastapi
     #   huggingface-hub
