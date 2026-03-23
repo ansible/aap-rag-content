@@ -50,7 +50,7 @@ dependencies = [
     "requests==2.32.5",
     "sentence-transformers==5.2.2",
     "sqlalchemy[asyncio]==2.0.46",
-    "starlette==0.50.0",  # Transient dep pinned to handle CVE
+    "starlette==0.52.1",  # Transient dep pinned to handle CVE
     "torch",
     "urllib3==2.6.3",  # Transient dep pinned to handle CVE
 ]
