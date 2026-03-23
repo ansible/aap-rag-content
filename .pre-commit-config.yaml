@@ -38,10 +38,10 @@ repos:
 - repo: local
   hooks:
     - id: check-uv-lock
-      name: check uv.lock is updated when pyproject.toml changes
-      entry: bash -c 'if git diff --cached --name-only | grep -q "^pyproject.toml$"; then if git diff --cached -- pyproject.toml | grep -qE "^[+-]\s+\"[a-zA-Z]"; then if ! git diff --cached --name-only | grep -q "^uv.lock$"; then echo "Dependencies in pyproject.toml were modified but uv.lock was not. Run \"uv lock\" and stage the changes."; exit 1; fi; fi; fi'
+      name: check uv.lock is up to date
+      entry: uv lock --check
       language: system
-      always_run: true
+      files: pyproject.toml
       pass_filenames: false
 - repo: local
   hooks:
