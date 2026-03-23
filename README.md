@@ -13,11 +13,10 @@ Knowledge Portal (OKP), which provides off-line access to
 Red Hat product documentation.
 Copies of markdown files are stored in this repository.
 
-For generating vector DB, we are using scripts provided by
-the [lightspeed-core/rag-content](https://github.com/lightspeed-core/rag-content/)
-repository with our own [custom_processor-aap.py script](./scripts/custom_processor-aap.py).
-See [the README.md file of lightspeed-core/rag-content](https://github.com/lightspeed-core/rag-content/blob/main/README.md)
-for technical details.
+For generating vector DB, we use the `aap_rag_content` Python package
+located in the `src/` directory, which provides document processing and
+vector database generation capabilities. The [custom_processor-aap.py script](./scripts/custom_processor-aap.py)
+uses this package to process AAP documentation and build the vector database.
 
 
 ## Input files for Vector DBs
@@ -35,6 +34,21 @@ extension.
 - `/additional_docs` This directory contains additional Markdown files that are
 used as the input for vector DB.  Its `.metadata` subdirectory contains
 metadata JSON files.
+
+## Running Unit Tests
+
+To run the unit tests for the `aap_rag_content` package:
+
+```commandline
+make unit-test
+```
+
+This will execute all tests in the `tests/` directory using pytest with verbose output.
+The test suite includes tests for:
+- Metadata processing
+- Document processing
+- Vector database generation
+- Utility functions
 
 ## Build a container image
 

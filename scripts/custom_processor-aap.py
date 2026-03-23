@@ -2,9 +2,9 @@ import functools
 import json
 from pathlib import Path
 
-from lightspeed_rag_content.metadata_processor import MetadataProcessor
-from lightspeed_rag_content.document_processor import DocumentProcessor
-from lightspeed_rag_content import utils
+from aap_rag_content.metadata_processor import MetadataProcessor
+from aap_rag_content.document_processor import DocumentProcessor
+from aap_rag_content import utils
 
 # Folders where AAP product documentation markdown (.md) files are stored.
 AAP_PRODUCT_DOCS = [
