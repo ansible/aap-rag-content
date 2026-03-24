@@ -40,7 +40,7 @@ dependencies = [
     "aiosqlite==0.22.1",
     "chardet==5.2.0",
     "cryptography==46.0.5", # Transient dep pinned to handle CVE
-    "faiss-cpu==1.12",
+    "faiss-cpu==1.13.2",
     "filelock==3.20.3",
     "llama-stack-client==0.4.3",
     "llama-stack==0.4.3",
@@ -48,9 +48,9 @@ dependencies = [
     "pyasn1==0.6.3",
     "python-multipart==0.0.22", # Transient dep pinned to handle CVE
     "requests==2.32.5",
-    "sentence-transformers==5.2.2",
+    "sentence-transformers==5.3.0",
     "sqlalchemy[asyncio]==2.0.46",
-    "starlette==0.50.0",  # Transient dep pinned to handle CVE
+    "starlette==0.52.1",  # Transient dep pinned to handle CVE
     "torch",
     "urllib3==2.6.3",  # Transient dep pinned to handle CVE
 ]
