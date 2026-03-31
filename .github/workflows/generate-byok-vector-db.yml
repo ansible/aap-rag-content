@@ -1,0 +1,99 @@
+name: Generate BYOK Vector Database Image
+
+on:
+  workflow_dispatch:
+    inputs:
+      rag_tool_image:
+        description: 'RAG tool container image reference'
+        required: true
+        default: 'quay.io/romartin/rag-content:latest'
+      docs_dir:
+        description: 'Repo-relative path to the directory containing input Markdown files'
+        required: true
+        default: 'byok/ansible-collection-docs'
+      index_name:
+        description: 'Vector store index name'
+        required: true
+        default: 'alia-byok-index'
+      output_image_name:
+        description: 'Repository name embedded in the output image archive'
+        required: true
+        default: 'alia-byok-example'
+      output_image_tag:
+        description: 'Tag embedded in the output image archive'
+        required: true
+        default: 'latest'
+      include_model:
+        description: 'Include the embedding model in the output image (true/false)'
+        required: true
+        default: 'true'
+      quay_repository:
+        description: 'Quay.io repository to push the output image to'
+        required: true
+        default: 'quay.io/ansible/aap-byok-example'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create output directory
+        run: mkdir -p output/vector_db && chmod -R 777 output
+
+      - name: Pull RAG tool image
+        run: docker pull "${{ inputs.rag_tool_image }}"
+
+      - name: Generate vector database and image archive
+        run: |
+          NO_MODEL_FLAG=""
+          if [ "${{ inputs.include_model }}" = "false" ]; then
+            NO_MODEL_FLAG="--no-include-model"
+          fi
+
+          docker run --rm \
+            -v "${{ github.workspace }}/${{ inputs.docs_dir }}:/input" \
+            -v "${{ github.workspace }}/output:/output" \
+            "${{ inputs.rag_tool_image }}" \
+            python /rag-content/scripts/generate_embeddings.py \
+              -f /input \
+              -o /output/vector_db \
+              -i "${{ inputs.index_name }}" \
+              --output-image "/output/${{ inputs.output_image_name }}-${{ inputs.output_image_tag }}.tar" \
+              --image-name "${{ inputs.output_image_name }}" \
+              --image-tag "${{ inputs.output_image_tag }}" \
+              $NO_MODEL_FLAG
+
+      - name: List output files
+        run: find output/ -type f | sort
+
+      - name: Upload vector database files
+        uses: actions/upload-artifact@v4
+        with:
+          name: vector-db
+          path: output/vector_db/
+          retention-days: 7
+
+      - name: Upload image archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.output_image_name }}-${{ inputs.output_image_tag }}.tar
+          path: output/${{ inputs.output_image_name }}-${{ inputs.output_image_tag }}.tar
+          retention-days: 7
+
+      - name: Log in to quay.io
+        run: |
+          echo "${{ secrets.QUAY_PASSWORD }}" | docker login quay.io \
+            -u "${{ secrets.QUAY_USERNAME }}" --password-stdin
+
+      - name: Load and push image to quay.io
+        run: |
+          docker load < "output/${{ inputs.output_image_name }}-${{ inputs.output_image_tag }}.tar"
+          docker tag \
+            "${{ inputs.output_image_name }}:${{ inputs.output_image_tag }}" \
+            "${{ inputs.quay_repository }}:${{ inputs.output_image_tag }}"
+          docker push "${{ inputs.quay_repository }}:${{ inputs.output_image_tag }}"
