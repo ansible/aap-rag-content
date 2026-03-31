@@ -87,8 +87,8 @@ jobs:
 
       - name: Log in to quay.io
         run: |
-          echo "${{ secrets.QUAY_PASSWORD }}" | docker login quay.io \
-            -u "${{ secrets.QUAY_USERNAME }}" --password-stdin
+          echo "${{ secrets.QUAY_TOKEN }}" | docker login quay.io \
+            -u "${{ secrets.QUAY_USER }}" --password-stdin
 
       - name: Load and push image to quay.io
         run: |
