@@ -31,6 +31,14 @@ class MetadataProcessor:
     from the name of a document, is not implemented.
     """
 
+    def __init__(self, suppress_ping_url: bool = False):
+        """Initialize MetadataProcessor.
+
+        Args:
+            suppress_ping_url: If True, skip URL reachability check and assume all URLs are reachable.
+        """
+        self.suppress_ping_url = suppress_ping_url
+
     def get_file_title(self, file_path: str) -> str:
         """Extract title from the plaintext doc file."""
         title = ""
@@ -74,7 +82,7 @@ class MetadataProcessor:
         }
 
         url_reachable = True
-        if not self.ping_url(doc_url):
+        if not self.suppress_ping_url and not self.ping_url(doc_url):
             LOG.warning(
                 'URL not reachable: %(url)s (Title: "%(title)s", '
                 "File path: %(file_path)s)",
