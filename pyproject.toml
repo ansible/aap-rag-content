@@ -54,7 +54,7 @@ dependencies = [
     "torch",
     "urllib3==2.6.3",  # Transient dep pinned to handle CVE
 ]
-requires-python = "==3.12.*"
+requires-python = "==3.14.*"
 readme = "README.md"
 license = {file = "LICENSE"}
 
