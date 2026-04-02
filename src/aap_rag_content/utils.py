@@ -146,4 +146,10 @@ def get_common_arg_parser() -> argparse.ArgumentParser:
         choices=["text", "markdown", "html"],
         help="The type of the document which is to be added to the RAG.",
     )
+    parser.add_argument(
+        "--suppress-ping-url",
+        action="store_true",
+        default=False,
+        help="Skip URL reachability check and assume all URLs are reachable.",
+    )
     return parser

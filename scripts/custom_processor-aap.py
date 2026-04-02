@@ -21,8 +21,8 @@ ADDITIONAL_DOCS = [
 
 class AAPMetadataProcessor(MetadataProcessor):
 
-    def __init__(self):
-        pass
+    def __init__(self, suppress_ping_url: bool = False):
+        super().__init__(suppress_ping_url=suppress_ping_url)
 
     @functools.lru_cache(maxsize=None)
     def _load_metadata(self, file_path_str: str) -> dict:
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Instantiate custom Metadata Processor
-    metadata_processor = AAPMetadataProcessor()
+    metadata_processor = AAPMetadataProcessor(suppress_ping_url=args.suppress_ping_url)
 
     # Instantiate Document Processor
     document_processor = DocumentProcessor(

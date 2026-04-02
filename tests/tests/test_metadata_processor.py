@@ -28,6 +28,12 @@ def md_processor():
 
 
 @pytest.fixture
+def md_processor_skip_ping():
+    """Fixture for MetadataProcessor with suppress_ping_url enabled."""
+    return metadata_processor.MetadataProcessor(suppress_ping_url=True)
+
+
+@pytest.fixture
 def processor_data():
     """Fixture for MetadataProcessor test data."""
     return {
@@ -159,3 +165,59 @@ class TestMetadataProcessor:
         mock_url_func.assert_called_once_with(processor_data["file_path"])
         mock_get_title.assert_called_once_with(processor_data["file_path"])
         mock_ping_url.assert_called_once_with(processor_data["url"])
+
+    def test_init_default_suppress_ping_url(self):
+        """Test MetadataProcessor initializes with suppress_ping_url=False by default."""
+        processor = metadata_processor.MetadataProcessor()
+        assert processor.suppress_ping_url is False
+
+    def test_init_with_suppress_ping_url(self):
+        """Test MetadataProcessor initializes with suppress_ping_url=True when specified."""
+        processor = metadata_processor.MetadataProcessor(suppress_ping_url=True)
+        assert processor.suppress_ping_url is True
+
+    def test_populate_suppress_ping_url(
+        self, md_processor_skip_ping, mocker, processor_data
+    ):
+        """Test populate method skips ping_url when suppress_ping_url=True."""
+        mock_url_func = mocker.patch.object(md_processor_skip_ping, "url_function")
+        mock_get_title = mocker.patch.object(md_processor_skip_ping, "get_file_title")
+        mock_ping_url = mocker.patch.object(md_processor_skip_ping, "ping_url")
+
+        mock_url_func.return_value = processor_data["url"]
+        mock_get_title.return_value = processor_data["title"]
+
+        result = md_processor_skip_ping.populate(processor_data["file_path"])
+
+        expected_result = {
+            "docs_url": processor_data["url"],
+            "title": processor_data["title"],
+            "url_reachable": True,
+        }
+        assert expected_result == result
+        mock_url_func.assert_called_once_with(processor_data["file_path"])
+        mock_get_title.assert_called_once_with(processor_data["file_path"])
+        # Verify ping_url was NOT called
+        mock_ping_url.assert_not_called()
+
+    def test_populate_suppress_ping_url_no_warning(
+        self, md_processor_skip_ping, mocker, caplog, processor_data
+    ):
+        """Test populate method does not log warning when suppress_ping_url=True."""
+        mock_url_func = mocker.patch.object(md_processor_skip_ping, "url_function")
+        mock_get_title = mocker.patch.object(md_processor_skip_ping, "get_file_title")
+
+        mock_url_func.return_value = processor_data["url"]
+        mock_get_title.return_value = processor_data["title"]
+
+        with caplog.at_level(logging.WARNING, logger=metadata_processor.__name__):
+            result = md_processor_skip_ping.populate(processor_data["file_path"])
+
+        expected_result = {
+            "docs_url": processor_data["url"],
+            "title": processor_data["title"],
+            "url_reachable": True,
+        }
+        assert expected_result == result
+        # Verify no warning was logged
+        assert "URL not reachable" not in caplog.text

@@ -109,3 +109,17 @@ class TestUtils:
 
         args = parser.parse_args(["-i", "/tmp/test.txt"])
         assert args.input_file == Path("/tmp/test.txt")
+
+    def test_arg_parser_suppress_ping_url_default(self):
+        """Test that suppress_ping_url defaults to False in the arg parser."""
+        parser = utils.get_common_arg_parser()
+
+        args = parser.parse_args([])
+        assert args.suppress_ping_url is False
+
+    def test_arg_parser_suppress_ping_url_enabled(self):
+        """Test that suppress_ping_url can be enabled via --suppress-ping-url flag."""
+        parser = utils.get_common_arg_parser()
+
+        args = parser.parse_args(["--suppress-ping-url"])
+        assert args.suppress_ping_url is True
