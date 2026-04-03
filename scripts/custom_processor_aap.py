@@ -1,16 +1,29 @@
+"""Custom metadata processor for AAP documentation.
+
+This module provides AAPMetadataProcessor class for processing AAP product
+documentation metadata and generating vector databases.
+"""
+
+# pylint: disable=import-error
 import functools
 import json
 from pathlib import Path
 
-from aap_rag_content.metadata_processor import MetadataProcessor
-from aap_rag_content.document_processor import DocumentProcessor
 from aap_rag_content import utils
+from aap_rag_content.document_processor import DocumentProcessor
+from aap_rag_content.metadata_processor import MetadataProcessor
 
 # Folders where AAP product documentation markdown (.md) files are stored.
 AAP_PRODUCT_DOCS = [
     "aap-product-docs-plaintext/red_hat_content/documentation/ansible_on_clouds",
-    "aap-product-docs-plaintext/red_hat_content/documentation/red_hat_ansible_automation_platform/2.6",
-    "aap-product-docs-plaintext/red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant",
+    (
+        "aap-product-docs-plaintext/red_hat_content/documentation/"
+        "red_hat_ansible_automation_platform/2.6"
+    ),
+    (
+        "aap-product-docs-plaintext/red_hat_content/documentation/"
+        "red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant"
+    ),
 ]
 
 # Folders where additional documents are stored as plain text (.txt) files.
@@ -20,6 +33,10 @@ ADDITIONAL_DOCS = [
 
 
 class AAPMetadataProcessor(MetadataProcessor):
+    """Metadata processor for AAP documentation.
+
+    Extends MetadataProcessor to handle AAP-specific metadata stored in JSON files.
+    """
 
     def __init__(self, suppress_ping_url: bool = False):
         super().__init__(suppress_ping_url=suppress_ping_url)
@@ -36,8 +53,7 @@ class AAPMetadataProcessor(MetadataProcessor):
         return metadata
 
     def url_function(self, file_path: str) -> str:
-        """
-        Return a URL for the file, so it can be referenced when used
+        """Return a URL for the file, so it can be referenced when used
         in an answer
         """
         url = self._load_metadata(file_path).get("url")
@@ -46,8 +62,7 @@ class AAPMetadataProcessor(MetadataProcessor):
         return url
 
     def get_file_title(self, file_path: str) -> str:
-        """
-        If a title is find in the metadata JSON file, return it.
+        """If a title is find in the metadata JSON file, return it.
         Otherwise, extract title from the plaintext doc file.
         """
         title = self._load_metadata(file_path).get("title")
@@ -59,7 +74,8 @@ class AAPMetadataProcessor(MetadataProcessor):
         return file_content.split("\n")[0].lstrip("# ")
 
 
-if __name__ == "__main__":
+def main():
+    """Main function to process AAP documentation and generate vector database."""
     parser = utils.get_common_arg_parser()
     args = parser.parse_args()
 
@@ -96,3 +112,7 @@ if __name__ == "__main__":
 
     # Save the new vector database to the output directory
     document_processor.save(args.index, args.output)
+
+
+if __name__ == "__main__":
+    main()

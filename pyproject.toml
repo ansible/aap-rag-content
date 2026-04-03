@@ -62,6 +62,8 @@ license = {file = "LICENSE"}
 dev = [
     "black",
     "mypy",
+    "pytest",
+    "pytest-mock",
     "ruff",
     "types-requests",
 ]

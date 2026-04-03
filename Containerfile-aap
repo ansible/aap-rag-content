@@ -8,7 +8,7 @@ USER 0
 COPY aap-product-docs-plaintext ./aap-product-docs-plaintext
 COPY additional_docs ./additional_docs
 
-COPY scripts/custom_processor-aap.py .
+COPY scripts/custom_processor_aap.py .
 COPY requirements.txt ./requirements.txt
 COPY embeddings_model ./embeddings_model
 COPY src/aap_rag_content ./aap_rag_content
@@ -22,7 +22,7 @@ RUN cd embeddings_model; if [ ! -f model.safetensors ]; then  \
     fi
 
 ENV PYTHONPATH=/rag-content
-RUN python custom_processor-aap.py  \
+RUN python custom_processor_aap.py  \
   -o ./llama_stack_vector_db \
   -f /rag-content \
   -md embeddings_model/ \
