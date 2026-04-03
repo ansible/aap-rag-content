@@ -108,7 +108,7 @@ build-image: ## Build a rag-content container image.
 build-image-aap: ## Build a rag-content container image.
 	podman build -t aap-rag-content -f Containerfile-aap .
 
-build-image-aap-1llama-stack: ## Build a rag-content container image.
+build-image-aap-llama-stack: ## Build a rag-content container image.
 	podman build -t aap-rag-content -f Containerfile-aap --build-arg BUILD_ROAD_CORE_DB=false .
 
 build-image-embeddings: ## Build an embeddings container image.
