@@ -19,6 +19,9 @@ AAP_VERSION_2_5_STR := $(shell echo $(AAP_VERSION_2_5) | sed 's/\./_/g')
 uv-lock-check: ## Check that the uv.lock file is in a good shape
 	uv lock --check
 
+setup: ## Set up development environment with all dependencies including dev tools
+	uv sync --all-groups
+
 install-deps: uv-lock-check download-embeddings-model ## Install all required dependencies, according to uv.lock
 	uv sync --frozen
 
@@ -54,7 +57,7 @@ verify: ## Verify the code using various linters
 	ruff check scripts --per-file-ignores=scripts/*:S101
 
 unit-test: ## Run unit tests
-	PYTHONPATH=src:$$PYTHONPATH .venv/bin/pytest tests/ -v -c pyproject.toml
+	PYTHONPATH=src:$$PYTHONPATH uv run pytest tests/ -v -c pyproject.toml
 
 update-docs: ## Update the plaintext OCP docs in ocp-product-docs-plaintext/
 	@set -e && for OCP_VERSION in $$(ls -1 ocp-product-docs-plaintext); do \
@@ -105,7 +108,7 @@ build-image: ## Build a rag-content container image.
 build-image-aap: ## Build a rag-content container image.
 	podman build -t aap-rag-content -f Containerfile-aap .
 
-build-image-aap-llama-stack: ## Build a rag-content container image.
+build-image-aap-1llama-stack: ## Build a rag-content container image.
 	podman build -t aap-rag-content -f Containerfile-aap --build-arg BUILD_ROAD_CORE_DB=false .
 
 build-image-embeddings: ## Build an embeddings container image.

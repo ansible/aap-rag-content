@@ -9,13 +9,13 @@ Intelligent Assistant (ALIA).
 
 The source documents saved here were
 extracted from the document archive built for Red Hat Offline
-Knowledge Portal (OKP), which provides off-line access to 
+Knowledge Portal (OKP), which provides off-line access to
 Red Hat product documentation.
 Copies of markdown files are stored in this repository.
 
 For generating vector DB, we use the `aap_rag_content` Python package
 located in the `src/` directory, which provides document processing and
-vector database generation capabilities. The [custom_processor-aap.py script](./scripts/custom_processor-aap.py)
+vector database generation capabilities. The [custom_processor_aap.py script](./scripts/custom_processor_aap.py)
 uses this package to process AAP documentation and build the vector database.
 
 
@@ -34,6 +34,21 @@ extension.
 - `/additional_docs` This directory contains additional Markdown files that are
 used as the input for vector DB.  Its `.metadata` subdirectory contains
 metadata JSON files.
+
+## Development Setup
+
+Before running tests or working with the codebase, set up your development environment:
+
+```commandline
+make setup
+```
+
+This command will:
+- Create a virtual environment (`.venv/`)
+- Install all project dependencies
+- Install development tools (pytest, black, mypy, ruff, etc.)
+
+The project uses [uv](https://github.com/astral-sh/uv) for dependency management, which provides fast and reliable package installation.
 
 ## Running Unit Tests
 
@@ -62,4 +77,3 @@ make build-image-aap
 podman login quay.io
 podman push aap-rag-content quay.io/ansible/aap-rag-content
 ```
-
