@@ -13,35 +13,15 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 """Tests for custom_processor_aap module."""
-# pylint: disable=C0415
+# pylint: disable=C0415, disable=import-error
 import sys
 from pathlib import Path
 from unittest.mock import MagicMock
 from unittest.mock import patch
 
-import pytest
-
 # Add scripts directory to path
 scripts_dir = Path(__file__).parent.parent.parent / "scripts"
 sys.path.insert(0, str(scripts_dir))
-
-
-@pytest.fixture
-def mock_args():
-    """Mock command line arguments."""
-    args = MagicMock()
-    args.folder = "/fake/folder"
-    args.model_dir = "embeddings_model"
-    args.model_name = "test-model"
-    args.chunk = 380
-    args.overlap = 0
-    args.workers = None
-    args.vector_store_type = "faiss"
-    args.manual_chunking = True
-    args.index = "test-index"
-    args.output = "/fake/output"
-    args.suppress_ping_url = False
-    return args
 
 
 class TestAAPMetadataProcessor:
