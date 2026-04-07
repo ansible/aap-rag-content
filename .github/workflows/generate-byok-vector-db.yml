@@ -6,7 +6,7 @@ on:
       rag_tool_image:
         description: 'RAG tool container image reference'
         required: true
-        default: 'quay.io/romartin/rag-content:latest'
+        default: 'quay.io/lightspeed-core/rag-content-cpu@sha256:8816c11286ce4a260e5b7fbf9ee8b305459aab4458cef0ff7983dd6cb4502de7'
       docs_dir:
         description: 'Repo-relative path to the directory containing input Markdown files'
         required: true
