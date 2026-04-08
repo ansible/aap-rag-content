@@ -8,7 +8,7 @@
 Red Hat has tested these configurations to install and run Red Hat Ansible Automation Platform:
 
 
-<span id="idm140186621343360"></span>
+<span id="idm140264420180592"></span>
 **Table 3.5. Tested system configurations**
 
 | Type | Description |
@@ -30,7 +30,7 @@ Red Hat has tested these configurations to install and run Red Hat Ansible Auto
 - instance_class: "db.t4g.small"
 - multi_az: true
 - backup_retention_period: 5
-- database: must have ICU support |
+- database: must have International Components for Unicode (ICU) support |
 | AWS Memcached Service | - engine: "redis"
 - engine_version: "6.2"
 - auto_minor_version_upgrade: "false"

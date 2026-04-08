@@ -421,6 +421,14 @@ awx-manage deprovision_instance --host=node1.example.org        awx-manage depro
 
 
 
+1. Remove the `    aap-resource-server` secret and allow the deployments to reconcile. This will recreate the resource service keys and secret for the components:
+
+
+```
+$ oc delete secret/aap-resource-server
+```
+
+
 1. Run the `    curl` command to repair automation hub filesystem data.
 
 

@@ -1,15 +1,19 @@
 # 2. Hardening Ansible Automation Platform
 ## 2.1. Planning considerations
-### 2.1.7. Red Hat Enterprise Linux host planning
+### 2.1.6. Red Hat Enterprise Linux host planning
 
 
 
 
 The security of Ansible Automation Platform relies in part on the configuration of the underlying Red Hat Enterprise Linux servers.
 
-For this reason, the underlying Red Hat Enterprise Linux hosts for each Ansible Automation Platform component must be installed and configured in accordance with the [Security hardening for Red Hat Enterprise Linux 8](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html-single/security_hardening/index) or [Security hardening for Red Hat Enterprise Linux 9](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/index) (depending on which operating system is used). In addition, install and configure any security profile requirements ( _Center for Internet Security_ (CIS), STIG, _Health Insurance Portability and Accountability Act_ (HIPAA), and so on) used by your organization. This document recommends Red Hat Enterprise Linux 9 for all new deployments. When using the container-based installation method, Red Hat Enterprise Linux 9 is required.
+For this reason, the underlying Red Hat Enterprise Linux hosts for each Ansible Automation Platform component must be installed and configured in accordance with [Security hardening for Red Hat Enterprise Linux 8](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html-single/security_hardening/index) , [Security hardening for Red Hat Enterprise Linux 9](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/index) , or [Security hardening for Red Hat Enterprise Linux 10](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html-single/security_hardening/index) depending on which operating system is used. Also apply any security profiles ( _Center for Internet Security_ (CIS), DISA STIG for RHEL, _Health Insurance Portability and Accountability Act_ (HIPAA), and so on) required by your organization. Red Hat Enterprise Linux hardening and compliance requirements must be applied for all new before Ansible Automation Platform is installed.
 
-#### 2.1.7.1. Ansible Automation Platform and additional software
+Red Hat Enterprise Linux 9 or higher is recommended for all new deployments. When using the container-based installation method, Red Hat Enterprise Linux 9 or higher is required.
+
+The RPM installation method is no longer available for Red Hat Enterprise Linux 10.
+
+#### 2.1.6.1. Ansible Automation Platform and additional software
 
 
 

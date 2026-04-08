@@ -9,7 +9,7 @@ Set up your Microsoft Entra ID SSO configuration.
 
 **Procedure**
 
-- For help with setting up and configuring your enterprise authentication, see the _Chapter 3. Configuring Microsoft Entra ID authentication_ section of the [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication) guide.
+- For help with setting up and configuring your enterprise authentication, see the _Chapter 3. Configuring Microsoft Entra ID authentication_ section of the [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/index) guide.
 
 
 #### 5.4.2.1. Creating a registered application in Microsoft Entra ID
@@ -85,7 +85,7 @@ To create a service principal, you must have administrator privileges with tenan
 **Procedure**
 
 1. Navigate to the Azure portal
-1. Click the [Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/overview) icon to open a bash Cloud Shell in your browser.
+1. Click the [Cloud Shell](https://learn.microsoft.com/en-us/azure/cloud-shell/overview) icon to open a bash Cloud Shell in your browser.
 1. Set the Azure CLI to use the subscription that you intend to use for automating Azure services. Run the following command from the shell:
 
 

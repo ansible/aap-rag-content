@@ -17,6 +17,6 @@ When you initiate the deployment of the Red Hat Ansible Automation Platform mana
 - If you have already set up your Ansible Automation Platform deployment, you can go directly to it by copying the platformUrl output.
 
 1. Paste the selected URL into your browser search bar and hit enter. This brings you to your Ansible Automation Platform deployment.
-1. The first time you log in to Ansible Automation Platform with the URL, you must configure the subscription. For help see the _Logging in for the first time_ section of the [Getting started with Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/getting_started_with_ansible_automation_platform) guide.
+1. The first time you log in to Ansible Automation Platform with the URL, you must configure the subscription. For help see the _Logging in for the first time_ section of the [Getting started with Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/getting_started_with_ansible_automation_platform/index) guide.
 
 

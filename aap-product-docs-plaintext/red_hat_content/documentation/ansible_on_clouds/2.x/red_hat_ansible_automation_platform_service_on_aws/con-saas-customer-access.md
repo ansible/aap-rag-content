@@ -12,11 +12,11 @@ During the initial configuration of an Ansible Automation Platform Service on AW
 The administrator account’s initial password is provided to the HCC user who performed the initial deployment.
 
 Important
-You must change this initial password immediately after your first login to Ansible Automation Platform.
+You must change this initial password immediately after your first log in to Ansible Automation Platform.
 
 
 
-If you need help accessing your deployment, submit a support request through [Red Hat Customer Portal](https://access.redhat.com/support/cases/#/case/new/get-support?caseCreate=true) .
+If you need help accessing your deployment, submit a support request through [Customer support](https://access.redhat.com/support/cases/?extIdCarryOver=true&sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true) .
 
 Note
 You can provide a custom URL for your Ansible Automation Platform Service on AWS by using a domain name that you own. To request a custom domain name for your deployment, you can submit a customer support request to initiate the configuration process. The Red Hat SRE team will engage the support ticket for collaboration on next steps. Refer to the [Custom Domain](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html/red_hat_ansible_automation_platform_service_on_aws/saas-service-definition#con-saas-custom-domain) section for configuration information.

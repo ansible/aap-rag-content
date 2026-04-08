@@ -49,7 +49,7 @@ If you do not see the language mode section in your VS Code editor, from the Com
 If **Ansible** is already selected as the desired language but the **Lightspeed** entry is not displayed, re-select **Ansible** as the language mode. The following illustration shows **Lightspeed** and **Ansible** entries on the VS Code status bar.
 
 
-<span id="idm139735361025328"></span>
+<span id="idm140399987922112"></span>
 **Figure 5.1. Ansible and Lightspeed set as selected language mode**
 
 ![Settings show Ansible and Lightspeed as selected language mode](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/55224b688645d492bd45f4f89832daa9/lightspeed-vs-code.png)
@@ -119,12 +119,9 @@ If you reject a recommendation, you can modify the prompt and review the generat
 
 
 
-1. On the **ANSIBLE: LIGHTSPEED TRAINING MATCHES** tab, view the content source matching results.
+1. After you accept the code recommendation, click the **ANSIBLE** tab to see the content source matching results.
 
-The following illustration shows the training matches found in existing Ansible Galaxy content for the task prompt **Install postgresql-server** :
-
-![training matches in existing content](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/fee8b5fa13220187d8b70ff7f4013e0f/single-task-training-content-match.png)
-
+For each generated code recommendation, Red Hat Ansible Lightspeed lists content source matches, including details such as potential source, content author, and relevant licenses. You can use this data to gain insight into potential training data sources used to generate the code recommendations.
 
 
 1. Click **Save** to save the code recommendation changes in your Ansible YAML file.

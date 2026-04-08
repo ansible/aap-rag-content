@@ -1,5 +1,5 @@
 # 2. Upgrading to Red Hat Ansible Automation Platform 2.6
-## 2.6. Running the Red Hat Ansible Automation Platform installer setup script
+## 2.5. Running the Red Hat Ansible Automation Platform installer setup script
 
 
 

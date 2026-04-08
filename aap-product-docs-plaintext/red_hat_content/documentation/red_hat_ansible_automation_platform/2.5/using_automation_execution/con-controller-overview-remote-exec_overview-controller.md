@@ -1,8 +1,0 @@
-# 1. Automation controller overview
-## 1.9. Remote command execution
-
-
-
-
-Use remote command execution to perform a simple task, such as adding a single user, updating a single security vulnerability, or restarting a failing service. Any task that you can describe as a single Ansible play can be run on a host or group of hosts in your inventory. You can manage your systems quickly and easily. Because of an RBAC engine and detailed audit logging, you know which user has completed a specific task.
-

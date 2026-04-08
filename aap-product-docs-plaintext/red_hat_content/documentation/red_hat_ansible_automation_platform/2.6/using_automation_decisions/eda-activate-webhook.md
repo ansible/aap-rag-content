@@ -1,5 +1,5 @@
 # 7. Rulebook activations
-## 7.9. Activating webhook rulebooks
+## 7.8. Activating webhook rulebooks
 
 
 

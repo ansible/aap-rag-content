@@ -17,10 +17,10 @@ You can add execution nodes from the Ansible Automation Platform user interface.
 
 1. Log in to Red Hat Ansible Automation Platform.
 1. In the navigation panel, selectAutomation Execution→Infrastructure→Instances.
-1. ClickAdd.
+1. ClickCreate Instance.
 1. Input the Execution Node domain name or IP in the **Host Name** field.
 1. Optional: Input the port number in the **Listener Port** field.
-1. ClickSave.
+1. ClickCreate Instance.
 1. Click the download icon![download](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Installing_on_OpenShift_Container_Platform-en-US/images/8a61e20c21c53f44e207c84d454159ec/download.png)
 next to **Install Bundle** . This starts a download, take note of where you save the file
 1. Untar the gz file.
@@ -35,7 +35,7 @@ To run the `    install_receptor.yml` playbook you must install the receptor col
 
 
 ```
-all:       hosts:          remote-execution:    	        ansible_host: example_host_name # Same with configured in AAP WebUI    	        ansible_user: &lt;username&gt; #user provided    	        Ansible_ssh_private_key_file: ~/.ssh/id_example
+all:       hosts:          remote-execution:    	        ansible_host: example_host_name # Must match what is configured in AAP WebUI    	        ansible_user: &lt;username&gt; #user provided    	        Ansible_ssh_private_key_file: ~/.ssh/id_example
 ```
 
 

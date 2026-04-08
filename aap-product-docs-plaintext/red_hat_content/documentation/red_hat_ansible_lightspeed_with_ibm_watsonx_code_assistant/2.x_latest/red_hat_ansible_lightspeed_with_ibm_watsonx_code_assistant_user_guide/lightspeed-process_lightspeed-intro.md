@@ -4,5 +4,5 @@
 
 
 
-Ensure that you have reviewed the licensing and connectivity requirements for setting up Red Hat Ansible Lightspeed.
+Review the following licensing and connectivity requirements for setting up Red Hat Ansible Lightspeed.
 

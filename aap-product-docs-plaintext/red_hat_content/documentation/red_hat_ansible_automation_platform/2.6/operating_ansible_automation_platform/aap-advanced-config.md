@@ -170,7 +170,7 @@ The following procedure describes how to update the TLS certificates and keys by
 - To generate new certificates - If you want the installation program to generate a new certificate for a service, delete or move the existing certificates and keys.
 
 
-<span id="idm139766773535456"></span>
+<span id="idm140162030352448"></span>
 **Table 6.1. Certificate and key file paths per service**
 
 | Service | Certificate file path | Key file path |
@@ -490,7 +490,7 @@ true | openssl s_client -showcerts -connect &lt;COMPONENT_FQDN&gt;:443
 ```
 
 
-<span id="idm139766774627344"></span>
+<span id="idm140162029626896"></span>
 **Table 6.2. SSL/TLS certificate and key file paths per service**
 
 | Service | Certificate file path | Key file path | Owner:Group |
@@ -507,19 +507,16 @@ true | openssl s_client -showcerts -connect &lt;COMPONENT_FQDN&gt;:443
 
 
 
-<span id="idm139766773554032"></span>
+<span id="idm140162035190288"></span>
 # Legal Notice
 
-Copyright© 2025 Red Hat, Inc.
-The text of and illustrations in this document are licensed by Red Hat under a Creative Commons Attribution–Share Alike 3.0 Unported license ("CC-BY-SA"). An explanation of CC-BY-SA is available at [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/) . In accordance with CC-BY-SA, if you distribute this document or an adaptation of it, you must provide the URL for the original version.
+Copyright© Red Hat.
+Except as otherwise noted below, the text of and illustrations in this documentation are licensed by Red Hat under the Creative Commons Attribution–Share Alike 3.0 Unported license . If you distribute this document or an adaptation of it, you must provide the URL for the original version.
 Red Hat, as the licensor of this document, waives the right to enforce, and agrees not to assert, Section 4d of CC-BY-SA to the fullest extent permitted by applicable law.
-Red Hat, Red Hat Enterprise Linux, the Shadowman logo, the Red Hat logo, JBoss, OpenShift, Fedora, the Infinity logo, and RHCE are trademarks of Red Hat, Inc., registered in the United States and other countries.
+Red Hat, the Red Hat logo, JBoss, Hibernate, and RHCE are trademarks or registered trademarks of Red Hat, LLC. or its subsidiaries in the United States and other countries.
 Linux® is the registered trademark of Linus Torvalds in the United States and other countries.
-Java® is a registered trademark of Oracle and/or its affiliates.
-XFS® is a trademark of Silicon Graphics International Corp. or its subsidiaries in the United States and/or other countries.
-MySQL® is a registered trademark of MySQL AB in the United States, the European Union and other countries.
-Node.js® is an official trademark of Joyent. Red Hat is not formally related to or endorsed by the official Joyent Node.js open source or commercial project.
-TheOpenStack® Word Mark and OpenStack logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+XFS is a trademark or registered trademark of Hewlett Packard Enterprise Development LP or its subsidiaries in the United States and other countries.
+TheOpenStack® Word Mark and OpenStack logo are trademarks or registered trademarks of the Linux Foundation, used under license.
 All other trademarks are the property of their respective owners.
 
 

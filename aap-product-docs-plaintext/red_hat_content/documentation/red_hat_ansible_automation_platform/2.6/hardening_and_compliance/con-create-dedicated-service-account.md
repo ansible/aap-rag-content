@@ -7,11 +7,11 @@
 
 Ansible Automation Platform can be configured to use various users or accounts for connecting to managed nodes.
 
-This guide recommends creating a single, dedicated service account for this purpose. This service account must be a local account on each managed node to ensure automation jobs continue to run, even if an external authentication mechanism experiences an outage. This recommendation applies unless organizational policy mandates centrally managed service accounts. The service account must be clearly named to indicate its purpose, for instance, `ansible` or `aapsvc` .
+Create a single, dedicated service account for this purpose. This service account must be a local account on each managed node to ensure automation jobs continue to run, even if an external authentication mechanism experiences an outage. This recommendation applies unless organizational policy mandates centrally managed service accounts. The service account must be clearly named to indicate its purpose, for instance, `ansible` or `aapsvc` .
 
-The remainder of this section uses "ansible" as the assumed name for a local service account in its examples.
+"Ansible" is used here as the assumed name for a local service account in the examples.
 
-The local service account is configured in the following manner:
+The local service account is configured as follows:
 
 - It is granted sufficient privileges to run any automation job required.
 - It is limited to SSH key authentication only. No password authentication is allowed.
@@ -40,8 +40,6 @@ sudo useradd ansible \
 The service account requires sufficient privileges to run any current or future automation job on the managed node. This section describes the use of `sudo` , though other privilege escalation methods are available.
 
 Since Ansible Automation Platform defaults to using the `ansible.builtin.sudo`  [become plugin](https://docs.ansible.com/ansible/latest/plugins/become.html) on Linux-based managed nodes, the service account must be permitted to run any command on the RHEL managed node using the sudo command.
-
-To configure this, use the following procedure:
 
 **Procedure**
 
@@ -72,7 +70,18 @@ To configure this, use the following procedure:
 
 The service account must not be permitted to use password authentication with SSH connections to the managed node.
 
-Use the following procedure to configure the SSH daemon:
+Given that password authentication is prohibited, at least one SSH public key must be appended to the service account’s authorized_keys file (typically located at `/home/ansible/.ssh/authorized_keys` ).
+
+These public keys must correspond with the private keys used to establish Machine credentials in Ansible Automation Platform, as these credentials facilitate connections to the RHEL managed nodes.
+
+Use a single service account for connections to managed RHEL nodes.
+
+Note
+You do not need to use a single SSH key across all nodes.
+
+
+
+In larger organizations, individual teams managing RHEL servers can generate their own machine credentials within Ansible Automation Platform. Teams can then add the corresponding keys to the authorized keys file on their specific RHEL servers. This approach ensures consistent access to managed nodes organization-wide by using a common service account, while enabling each team to independently manage the credentials for their assigned nodes.
 
 **Procedure**
 
@@ -80,7 +89,7 @@ Use the following procedure to configure the SSH daemon:
 
 
 ```
-# sshd config applied to the ansible service account    Match User ansible    	PasswordAuthentication no    Match all
+# sshd config applied to the ansible service account    Match User ansible    	PasswordAuthentication no
 ```
 
 
@@ -107,7 +116,7 @@ This guide advocates for a single service account for connections to managed RHE
 
 
 
-To restrict remote login access to connections originating from the Ansible Automation Platform automation controller and execution nodes and ensure the service account is exclusively used by Ansible Automation Platform, use the following procedure:
+Restrict remote login access to connections originating from the Ansible Automation Platform automation controller and execution nodes to ensure the service account is exclusively used by Ansible Automation Platform.
 
 **Procedure**
 

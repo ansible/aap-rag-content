@@ -1,8 +1,0 @@
-# 3. Installing Red Hat Ansible Automation Platform
-## 3.3. Inventory file examples based on installation scenarios
-
-
-
-
-Red Hat supports several installation scenarios for Ansible Automation Platform. You can develop your own inventory files using the example files as a basis, or you can use the example closest to your preferred installation scenario.
-

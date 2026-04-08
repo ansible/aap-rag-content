@@ -1,6 +1,6 @@
 # 6. Configuring Ansible Automation Platform
 ## 6.2. Platform gateway
-### 6.2.7. Configuring miscellaneous options
+### 6.2.8. Configuring miscellaneous options
 
 
 

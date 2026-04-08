@@ -1,4 +1,4 @@
-# Chapter 6. Troubleshooting RPM installation of Ansible Automation Platform
+# Chapter 7. Troubleshooting RPM installation of Ansible Automation Platform
 
 
 

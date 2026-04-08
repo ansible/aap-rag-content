@@ -26,49 +26,23 @@ $ podman exec -it automation-gateway bash        $ aap-gateway-manage migrate   
 
 - Edit the inventory file and apply any relevant `        extra_settings` to each component by using the `        component_extra_settings` .
 
-1. Update the Resource Server Secret Key for each component.
-
-
-1. Gather the current Resource Secret values for each component:
+1. Remove all resource server key secrets to be repopulated by the installation program:
 
 
 ```
-$ podman exec -it automation-gateway bash -c 'aap-gateway-manage shell_plus --quiet -c "[print(cl.name, key.secret) for cl in ServiceCluster.objects.all() for key in cl.service_keys.all()]"'
+$ for i in `podman secret ls | egrep 'resource_server' | awk '{print $2}'`; do podman secret rm $i; done
 ```
-
-
-1. Validate the current secret values:
-
-
-```
-$ for secret_name in eda_resource_server hub_resource_server controller_resource_server        do        echo $secret_name        podman secret inspect $secret_name --showsecret | grep SecretData        done
-```
-
-
-1. If the secret value does not match the current values, delete the existing secret and re-create it, updating it with the new value:
-
-
-1. Delete the secret:
-
-
-```
-$ podman secret rm &lt;SECRET_NAME&gt;
-```
-
-
-1. Re-create the secret:
-
-
-```
-$ echo "secret_value" | podman secret create &lt;SECRET_NAME&gt; -
-```
-
-Replace the `            &lt;SECRET_NAME&gt;` placeholder in the commands above with the appropriate secret name for each component: `            eda_resource_server` (Event-Driven Ansible), `            hub_resource_server` (automation hub), and `            controller_resource_server` (automation controller).
-
-
 
 
 1. Re-run the installation program on the target environment by using the same inventory from the installation.
+1. Sync platform gateway resources if Event-Driven Ansible is present:
+
+
+```
+$ podman exec -it automation-eda-api bash    $ aap-eda-manage resource_sync
+```
+
+
 1. Validate instances for automation execution.
 
 

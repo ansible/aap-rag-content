@@ -12,7 +12,10 @@ Red Hat Ansible Automation Platform is composed of the following primary compone
 - Event-Driven Ansible controller
 
 
-A PostgreSQL database is also provided, although a user-provided PostgreSQL database can be used as well. Red Hat recommends that customers always deploy all components of Ansible Automation Platform so that all features and capabilities are available for use without the need to take further action.
+Although a PostgreSQL database can be installed as part of the Ansible Automation Platform deployment, use a user-provided PostgreSQL database. Red Hat recommends that customers always deploy all components of Ansible Automation Platform so that all features and capabilities are available for use without the need to take further action.
 
-For further information, see [Red Hat Ansible Automation Platform Architecture](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/ref-aap-components#ref-aap-components)
+**Additional information**
+
+[Red Hat Ansible Automation Platform Architecture](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/ref-aap-components#ref-aap-components)
+
 

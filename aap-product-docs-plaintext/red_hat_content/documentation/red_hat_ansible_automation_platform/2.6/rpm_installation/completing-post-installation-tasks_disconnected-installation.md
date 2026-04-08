@@ -1,5 +1,5 @@
-# 5. Disconnected installation
-## 5.6. Completing post installation tasks
+# 6. Disconnected installation
+## 6.6. Completing post installation tasks
 
 
 

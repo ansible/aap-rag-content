@@ -17,8 +17,8 @@
 
 **Additional resources**
 
--  [Attaching a subscription](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/assembly-gateway-licensing#proc-attaching-subscriptions)
--  [Backup and restore](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/controller-backup-and-restore)
+-  [Attaching your Red Hat Ansible Automation Platform subscription](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/assembly-platform-install-overview#proc-attaching-subscriptions)
+-  [Backup and restore Red Hat Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_upgrade/controller-backup-and-restore)
 -  [Clustering](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/controller-clustering)
 -  [Planning your upgrade](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_upgrade/index)
 -  [Planning your installation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/index)

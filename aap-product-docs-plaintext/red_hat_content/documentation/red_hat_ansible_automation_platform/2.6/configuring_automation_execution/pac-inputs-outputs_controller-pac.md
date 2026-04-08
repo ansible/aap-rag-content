@@ -7,7 +7,7 @@
 Use the following inputs and outputs to craft policies for use in policy enforcement.
 
 
-<span id="idm140225427339280"></span>
+<span id="idm139876822108000"></span>
 **Table 7.1. Input data**
 
 |  **Input** |  **Type** |  **Description** |
@@ -245,7 +245,7 @@ The following code block shows example input data from a demo job template launc
 ```
 
 
-<span id="idm140225414404880"></span>
+<span id="idm139876815417552"></span>
 **Table 7.2. Output data**
 
 |  **Input** |  **Type** |  **Description** |

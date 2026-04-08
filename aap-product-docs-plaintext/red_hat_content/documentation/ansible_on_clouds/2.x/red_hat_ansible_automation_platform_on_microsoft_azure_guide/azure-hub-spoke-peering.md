@@ -23,7 +23,7 @@ Understand the necessary preparation and three core steps for enabling private n
 
 - You have deployed Ansible Automation Platform on Microsoft Azure.
 - You have configured and tested an Azure VNet hub-and-spoke implementation in your Azure tenant. This prerequisite requires many Azure resources to be configured, including a Virtual Network Gateway.
-- You have configured transit routing between your spoke networks, including your VPNs. Refer to [Configure VPN gateway transit for virtual network peering](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-peering-gateway-transit) in the Microsoft Azure documentation for instructions.
+- You have configured transit routing between your spoke networks, including your VPNs. Refer to [Configure VPN gateway transit for virtual network peering](https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-peering-gateway-transit) in the Microsoft Azure documentation for instructions.
 - You have identified the following:
 
 
@@ -68,7 +68,7 @@ The CIDR block of the cluster is displayed in the **Address Space** .
 
 **Additional resources**
 
--  [View virtual networks and settings](https://docs.microsoft.com/en-us/azure/virtual-network/manage-virtual-network#view-virtual-networks-and-settings)
+-  [View virtual networks and settings](https://learn.microsoft.com/en-us/azure/virtual-network/manage-virtual-network#view-virtual-networks-and-settings)
 
 
 #### 4.1.1.3. Configuring network peering with the Ansible Automation Platform subnet
@@ -80,14 +80,15 @@ Within the Azure console, the Azure virtual network (VNet) is known as _this vir
 
 In the **Virtual Networks** page in the Azure portal, use the following settings to configure peering between the Azure VNet and the VNet that you want to peer with the Ansible Automation Platform on Microsoft Azure app:
 
-- Under **Remote virtual network** , select the settings for the virtual network that you want to peer with Azure:
+**Procedure**
+
+1. Under **Remote virtual network** , select the settings for the virtual network that you want to peer with Azure:
 
 
 -  **Summary** :
 
 
 -  **Peering link name** : _<aap_to_hub_peering_link_name>_
-
 -  **Peering settings** :
 
 
@@ -95,14 +96,14 @@ In the **Virtual Networks** page in the Azure portal, use the following settings
 -  **Traffic forwarded from remote virtual network** : _Allow_
 
 
-- Under **Local virtual network** , select **Settings** the Ansible Automation Platform on Microsoft Azure virtual network:
+
+1. Under **Local virtual network** , select **Settings** the Ansible Automation Platform on Microsoft Azure virtual network:
 
 
 -  **Summary** :
 
 
 -  **Peering link name** : _<hub_to_aap_peering_link_name>_
-
 -  **Peering settings** :
 
 
@@ -113,9 +114,10 @@ In the **Virtual Networks** page in the Azure portal, use the following settings
 
 
 
+
 **Additional resources**
 
--  [Create a peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering#create-a-peering)
+-  [Create a peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering#create-a-peering)
 
 
 #### 4.1.1.4. Updating the route tables
@@ -123,7 +125,12 @@ In the **Virtual Networks** page in the Azure portal, use the following settings
 
 
 
-Before you update the route tables, confirm that you satisfy the [Prerequisites](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-hub-spoke-peering_azure-hub-spoke-peering) for the hub-and-spoke peering process.
+Route tables in the Azure portal are sets of rules, known as routes, that determine how network traffic is directed between subnets, virtual networks (VNets), on-premises networks, and the internet.
+
+**Procedure**
+
+1. Before you update the route tables, confirm that you satisfy the [Prerequisites](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-hub-spoke-peering_azure-hub-spoke-peering) for the hub-and-spoke peering process.
+
 
 ##### 4.1.1.4.1. Routing to Ansible Automation Platform on Microsoft Azure
 
@@ -196,17 +203,19 @@ The easiest way to implement this is to create a firewall rule that allows all o
 
 If you choose not to allow all outbound traffic from port 443, you must configure routes.
 
-- For Red Hat to manage and upgrade Ansible Automation Platform on Microsoft Azure and execute security patching, any machine in the Azure Kubernetes service (AKS) cluster must be allowed to submit a request to pull updates for containers used by Ansible Automation Platform.
+**Procedure**
+
+1. For Red Hat to manage and upgrade Ansible Automation Platform on Microsoft Azure and execute security patching, any machine in the Azure Kubernetes service (AKS) cluster must be allowed to submit a request to pull updates for containers used by Ansible Automation Platform.
 
 
-- Add routes in the Ansible Automation Platform route table for outbound traffic from the full CIDR range of the Ansible Automation Platform on Microsoft Azure managed application to the domains listed in the [Azure Virtual Appliance Routing with Ansible Automation Platform on Azure](https://access.redhat.com/articles/6972355) article on the Red Hat Customer Portal.
+1. Add routes in the Ansible Automation Platform route table for outbound traffic from the full CIDR range of the Ansible Automation Platform on Microsoft Azure managed application to the domains listed in the [Azure Virtual Appliance Routing with Ansible Automation Platform on Azure](https://access.redhat.com/articles/6972355) article on the Red Hat Customer Portal.
 
-- You must also allow traffic from your firewall to any other external domain or IP address that you want Ansible Automation Platform to run automation jobs against. Otherwise, your firewall blocks connectivity between Ansible Automation Platform and destinations for automation.
-- Ansible Automation Platform requires a public DNS zone to provide SSL certificates. This public DNS zone is in the managed resource group of the deployment. The platform must be able to communicate via DNS queries with the servers listed in the DNS zone to complete certificate challenges with our upstream provider. Blocking this communication prevents successful certificate renewal.
+1. You must also allow traffic from your firewall to any other external domain or IP address that you want Ansible Automation Platform to run automation jobs against. Otherwise, your firewall blocks connectivity between Ansible Automation Platform and destinations for automation.
+1. Ansible Automation Platform requires a public DNS zone to provide SSL certificates. This public DNS zone is in the managed resource group of the deployment. The platform must be able to communicate via DNS queries with the servers listed in the DNS zone to complete certificate challenges with our upstream provider. Blocking this communication prevents successful certificate renewal.
 
 
 **Additional resources**
 
--  [Create a route](https://docs.microsoft.com/en-us/azure/virtual-network/manage-route-table#create-a-route)
+-  [Create a route](https://learn.microsoft.com/en-us/azure/virtual-network/manage-route-table#create-a-route)
 
 

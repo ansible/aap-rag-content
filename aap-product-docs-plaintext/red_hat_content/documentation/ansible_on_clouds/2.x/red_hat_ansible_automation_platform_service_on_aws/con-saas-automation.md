@@ -4,7 +4,7 @@
 
 
 
-The Red Hat Ansible Automation Platform Service on AWS offers a deployment of Ansible Automation Platform deployment purchased through AWS Marketplace. Red Hat configures and provisions an Ansible Automation Platform. The Red Hat team handles the setup and maintenance of the Ansible Automation Platform, ensuring reliability and security.
+The Red Hat Ansible Automation Platform Service on AWS offers a deployment of Ansible Automation Platform purchased through AWS Marketplace. Red Hat configures and provisions an Ansible Automation Platform. The Red Hat team handles the setup and maintenance of the Ansible Automation Platform, ensuring reliability and security.
 
 While Red Hat manages the control plane, the execution plane is implemented in your network using automation mesh hop nodes and execution nodes. For help with configuring execution nodes see _ [Automation mesh for managed cloud or operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/automation_mesh_for_managed_cloud_or_operator_environments) _ .
 

@@ -11,7 +11,7 @@ Red Hat recommends performing the following initial configuration tasks in RHDH.
 
 
 Note
-Red Hat provides a [repository of software templates for RHDH](https://github.com/ansible/ansible-rhdh-templates/blob/main/all.yaml) that uses the `publish:github` action. To use these software templates, you must install the required GitHub dynamic plugins.
+Red Hat provides a [repository of software templates for RHDH](https://github.com/ansible/ansible-rhdh-templates/) that uses the `publish:github` action. To use these software templates, you must install the required GitHub dynamic plugins.
 
 
 

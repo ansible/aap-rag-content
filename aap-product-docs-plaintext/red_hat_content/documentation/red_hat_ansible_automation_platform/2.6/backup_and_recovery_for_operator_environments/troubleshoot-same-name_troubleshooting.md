@@ -4,13 +4,13 @@
 
 
 
-The name specified for the new AutomationController custom resource must not match an existing deployment or the recovery process will fail.
+If your `AutomationController` customer resource matches an existing deployment, perform the following steps to resolve the issue.
 
-If your AutomationController customer resource matches an existing deployment, perform the following steps to resolve the issue.
+The name specified for the new `AutomationController` custom resource must not match an existing deployment or the recovery process will fail. Persistent volume claims (PVCs) and Secrets remain after a deployment is deleted. If you want to reuse the same name you must delete previous PVCs and Secrets before creating a new custom resource.
 
 **Procedure**
 
-1. Delete the existing AutomationController and the associated postgres PVC:
+1. Delete the existing `    AutomationController` and the associated postgres PVC:
 
 
 ```
@@ -18,7 +18,7 @@ oc delete automationcontroller &lt;YOUR_DEPLOYMENT_NAME&gt; -n &lt;YOUR_NAMESPAC
 ```
 
 
-1. Use AutomationControllerRestore with the same deployment_name in it:
+1. Use `    AutomationControllerRestore` with the same deployment_name in it:
 
 
 ```
@@ -29,4 +29,4 @@ oc apply -f restore.yaml
 
 
 
-<span id="idm139811120822080"></span>
+<span id="idm140364267908672"></span>

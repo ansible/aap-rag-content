@@ -1,5 +1,5 @@
 # 5. Upgrading the Ansible plug-ins on an Operator installation on OpenShift Container Platform
-## 5.2. Updating the plug-in registry
+## 5.3. Update the plug-in registry
 
 
 

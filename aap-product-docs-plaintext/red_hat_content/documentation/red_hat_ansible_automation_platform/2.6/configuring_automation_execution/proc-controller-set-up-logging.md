@@ -27,24 +27,28 @@ When the connection type is HTTPS, you can enter the hostname as a URL with a po
 
 
 
--  **Logging Aggregator Type** : Click to select the aggregator service from the list:
+-  **Logging Aggregator Type** : Click to select the aggregator service from the list
 
 ![Logging types](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/6413f8fbf68267cd5e93c29799e3b094/configure-controller-system-logging-types.png)
 
 
 
 -  **Logging Aggregator Username** : Enter the username of the logging aggregator if required.
+
 -  **Logging Aggregator Password/Token** : Enter the password of the logging aggregator if required.
+
+
 -  **Loggers to Send Data to the Log Aggregator Form** : All four types of data are pre-populated by default. Click the tooltip![Help](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/0c17081b1d1293156a760e9a6e06634a/question_circle.png)
 icon next to the field for additional information on each data type. Delete the data types you do not want.
 -  **Cluster wide unique identifier** : Use this to uniquely identify instances.
 -  **Logging Aggregator Protocol** : Click to select a connection type (protocol) to communicate with the log aggregator. Subsequent options vary depending on the selected protocol.
 -  **TCP Connection Timeout** : Specify the connection timeout in seconds. This option is only applicable to HTTPS and TCP log aggregator protocols.
 -  **Logging Aggregator Level Threshold** : Select the level of severity you want the log handler to report.
--  **Maximum number of messages that can be stored in the log action queue** :Defines how large the `        rsyslog` action queue can grow in number of messages stored. This can have an impact on memory use. When the queue reaches 75% of this number, the queue starts writing to disk ( `        queue.highWatermark` in `        rsyslog` ). When it reaches 90%, `        NOTICE` , `        INFO` , and `        DEBUG` messages start to be discarded ( `        queue.discardMark` with `        queue.discardSeverity=5` ).
--  **Maximum disk persistence for rsyslogd action queuing (in GB)** : The amount of data to store (in gigabytes) if an `        rsyslog` action takes time to process an incoming message (defaults to 1). Equivalent to the `        rsyslogd queue.maxdiskspace` setting on the action (e.g. `        omhttp` ). It stores files in the directory specified by `        LOG_AGGREGATOR_MAX_DISK_USAGE_PATH` .
--  **File system location for rsyslogd disk persistence** : Location to persist logs that should be retried after an outage of the external log aggregator (defaults to `        /var/lib/awx` ). Equivalent to the `        rsyslogd queue.spoolDirectory` setting.
--  **Log Format For API 4XX Errors** : Configure a specific error message. For more information, see [API 4XX Error Configuration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-logging-aggregation#proc-controller-api-4xx-error-config) .
+-  **Maximum number of messages that can be stored in the log action queue** : Defines how large the `            rsyslog` action queue can grow in number of messages stored. This can have an impact on memory use. When the queue reaches 75% of this number, the queue starts writing to disk ( `            queue.highWatermark` in `            rsyslog` ). When it reaches 90%, `            NOTICE` , `            INFO` , and `            DEBUG` messages start to be discarded ( `            queue.discardMark` with `            queue.discardSeverity=5` ).
+-  **Maximum disk persistence for rsyslogd action queuing (in GB)** : The amount of data to store (in gigabytes) if an `            rsyslog` action takes time to process an incoming message (defaults to 1). Equivalent to the `            rsyslogd queue.maxdiskspace` setting on the action (e.g. `            omhttp` ). It stores files in the directory specified by `            LOG_AGGREGATOR_MAX_DISK_USAGE_PATH` .
+-  **File system location for rsyslogd disk persistence** : Location to persist logs to retry after an outage of the external log aggregator (defaults to `            /var/lib/awx` ). Equivalent to the `            rsyslogd queue.spoolDirectory` setting.
+-  **Log Format For API 4XX Errors** : Configure a specific error message format. For more information, see [API 4XX Error Configuration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-logging-aggregation#proc-controller-api-4xx-error-config) .
+
 
 1. You can set the following options:
 

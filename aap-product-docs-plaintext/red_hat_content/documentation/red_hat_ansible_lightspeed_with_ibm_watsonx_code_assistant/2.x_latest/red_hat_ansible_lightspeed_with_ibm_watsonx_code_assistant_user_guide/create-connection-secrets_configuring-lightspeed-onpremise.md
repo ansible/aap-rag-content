@@ -47,9 +47,9 @@ This key controls whether the SSL certificate of the IBM watsonx Code Assistant 
 Default = `true` |
 |  `model_enable_anonymization` |  _Optional and supported on Ansible Automation Platform 2.5.250730 and later_
 
-This key controls whether the anonymization of Personally Identifiable Information (PII) is enabled. PII information includes passwords, IP addresses, email addresses, and other sensitive data. When PII anonymization is enabled, users' personal information is modified to some generic values to protect their data and reduce the risk of data leaks.
+This key controls whether the anonymization of Personally Identifiable Information (PII) is enabled. PII information includes passwords, IP addresses, email addresses, and other sensitive data. When is enabled, users' personal information is modified to some generic values to protect their data and reduce the risk of data leaks.
 
-You can turn off the anonymization by specifying the value as false if you want to retain all original information as entered by users and improve the quality of the answers. If you set the value to `false` and the Ansible administrator is using Ansible Lightspeed in hybrid mode (where the model is in IBM watsonx Code Assistant in IBM Cloud) then their users' PII is sent to IBM Cloud.
+You can turn off anonymization by setting the value to `false` to retain all original information entered by users and improve the quality of the answers. Disabling anonymization for Ansible Lightspeed hybrid deployments (the model is in IBM watsonx Code Assistant on IBM Cloud) results in users' PII being sent to IBM Cloud.
 
 Default = `true` |
 

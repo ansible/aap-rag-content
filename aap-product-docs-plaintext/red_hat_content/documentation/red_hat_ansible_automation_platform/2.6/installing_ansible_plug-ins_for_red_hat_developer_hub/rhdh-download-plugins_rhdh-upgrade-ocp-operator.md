@@ -1,5 +1,5 @@
 # 5. Upgrading the Ansible plug-ins on an Operator installation on OpenShift Container Platform
-## 5.1. Downloading the Ansible plug-ins files
+## 5.2. Downloading the Ansible plug-ins files
 
 
 
@@ -55,5 +55,5 @@ ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz
 ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz.integrity
 ```
 
-The files with the `.integrity` file type contain the plugin SHA value. The SHA value is used during the plug-in configuration.
+The files with the `.integrity` file type contain the plugin SHA value. You use the SHA value during the plug-in configuration.
 

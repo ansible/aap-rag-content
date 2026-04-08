@@ -54,7 +54,7 @@ to edit.
 
 
 -  **Mirror** : Select if you want your repository content to mirror the remote repository’s content.
--  **Optimize** : Select if you want to sync only when no changes are reported by the remote server.
+-  **Optimize** : Select if you want to sync only when changes are reported by the remote server.
 
 1. ClickSyncto complete the sync.
 

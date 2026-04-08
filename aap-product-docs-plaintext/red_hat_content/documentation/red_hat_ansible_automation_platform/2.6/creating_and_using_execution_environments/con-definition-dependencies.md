@@ -88,6 +88,6 @@ The following table shows a list of values that you can use in `images` :
 
 A `name` key is required for the container image to use. Specify the `signature _original_name` key if the image is mirrored within your repository, but is signed with the image’s original signature key. Image names must contain a tag, such as `:latest` .
 
-The default image is `registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel8:latest` . |
+The default image is `registry.redhat.io/ansible-automation-platform-26/ee-minimal-rhel8:latest` . |
 
 

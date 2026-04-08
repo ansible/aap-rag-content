@@ -12,7 +12,7 @@ It is possible to install Ansible Automation Platform on different infrastructur
 The following diagram is a tested container enterprise architecture:
 
 
-<span id="idm139994923214880"></span>
+<span id="idm140601133411744"></span>
 **Figure 2.1. Reference architecture overview**
 
 ![Infrastructure reference architecture that Red Hat has tested that customers can use when self-managing Ansible Automation Platform](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Hardening_and_compliance-en-US/images/704824d330eb8422156d4d7cf034ee52/cont-b-env-a.png)
@@ -25,7 +25,7 @@ The following diagram is a tested container enterprise architecture:
 When planning firewall or cloud network security group configurations related to Ansible Automation Platform, see the "Network Ports" section of your chosen topology in [Tested deployment models](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/tested_deployment_models) to understand what network ports need to be opened on a firewall or security group.
 
 
-For internet-connected systems, the [Networks and Protocols](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/ref-network-ports-protocols_planning) section of Planning your installation defines the outgoing traffic requirements for services that Ansible Automation Platform can be configured to use, such as Red Hat automation hub, Insights for Ansible Automation Platform, Ansible Galaxy, the registry.redhat.io container image registry, and so on.
+For internet-connected systems, the [Networks and Protocols](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/ref-network-ports-protocols_planning) section of Planning your installation defines the outgoing traffic requirements for services that Ansible Automation Platform can be configured to use, such as Red Hat automation hub, Red Hat Lightspeed for Ansible Automation Platform, Ansible Galaxy, the registry.redhat.io container image registry, and so on.
 
 Restrict access to the ports used by the Ansible Automation Platform components to protected networks and clients. The following restrictions are highly recommended:
 

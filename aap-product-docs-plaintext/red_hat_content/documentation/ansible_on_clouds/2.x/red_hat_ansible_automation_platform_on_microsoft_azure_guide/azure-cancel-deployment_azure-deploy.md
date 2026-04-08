@@ -4,11 +4,11 @@
 
 
 
-You can gracefully cancel a Ansible Automation Platform on Microsoft Azure deployment.
+You can gracefully cancel an Ansible Automation Platform on Microsoft Azure deployment.
 
 **Procedure**
 
-1. Login to the deployment engine to display the progress of the deployment steps in the **Ansible Automation Platform Deployment Engine** page. Refer to [Monitoring deployments on the Ansible Automation Platform Deployment Engine](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#azure-monitor-deployment-engine_azure-deploy) for information on accessing and logging into the **Ansible Automation Platform Deployment Engine** page.
+1. Log in to the deployment engine to display the progress of the deployment steps in the **Ansible Automation Platform Deployment Engine** page. Refer to [Monitoring deployments on the Ansible Automation Platform Deployment Engine](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#azure-monitor-deployment-engine_azure-deploy) for information on accessing and logging into the **Ansible Automation Platform Deployment Engine** page.
 1. To cancel the deployment, clickCancel Deploymentand confirm.
 
 

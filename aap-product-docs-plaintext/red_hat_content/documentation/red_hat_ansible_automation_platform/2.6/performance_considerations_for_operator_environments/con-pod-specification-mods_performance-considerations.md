@@ -12,7 +12,7 @@ Pods have a life cycle. They are defined, then they are assigned to run on a nod
 
 Red Hat Ansible Automation Platform provides a simple default pod specification, however, you can provide a custom YAML, or JSON document that overrides the default pod specification. This custom document uses custom fields, such as `ImagePullSecrets` , that can be serialized as valid Pod JSON or YAML.
 
-A full list of options can be found in the [Openshift Online](https://docs.openshift.com/online/pro/architecture/core_concepts/pods_and_services.html) documentation.
+A full list of options can be found in the [OpenShift Online](https://docs.openshift.com/online/pro/architecture/core_concepts/pods_and_services.html) documentation.
 
 **Example of a pod that provides a long-running service**
 

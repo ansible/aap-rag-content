@@ -1,0 +1,5 @@
+{
+  "url": "https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#proc-saas-config-ingress-privatelink",
+  "path": "/documentation/en-us/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index",
+  "title": "Configuring AWS PrivateLink connectivity from customer VPC to Red Hat managed control plane"
+}

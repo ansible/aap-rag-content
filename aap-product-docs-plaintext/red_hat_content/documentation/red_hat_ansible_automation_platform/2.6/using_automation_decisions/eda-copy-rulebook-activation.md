@@ -1,5 +1,5 @@
 # 7. Rulebook activations
-## 7.7. Duplicating a rulebook activation
+## 7.6. Duplicating a rulebook activation
 
 
 

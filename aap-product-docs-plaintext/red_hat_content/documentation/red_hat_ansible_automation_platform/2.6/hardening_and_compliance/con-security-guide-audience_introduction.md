@@ -4,5 +4,5 @@
 
 
 
-This guide is written for personnel responsible for installing, configuring, and maintaining Ansible Automation Platform 2.6 when deployed on Red Hat Enterprise Linux. Additional information is provided for security operations, compliance assessment, and other functions associated with related security processes.
+Use the following guidance to install, configure, and maintain Ansible Automation Platform 2.6 on Red Hat Enterprise Linux, and to perform related security operations and compliance assessments.
 

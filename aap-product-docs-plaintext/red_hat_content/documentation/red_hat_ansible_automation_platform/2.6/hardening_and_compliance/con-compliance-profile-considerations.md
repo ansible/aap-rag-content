@@ -5,7 +5,9 @@
 
 
 
-In many environments, Ansible Automation Platform might need to be installed on Red Hat Enterprise Linux systems where security controls have been applied to meet the requirements of a compliance profile such as CIS Critical Security Controls, _Payment Card Industry/Data Security Standard_ (PCI/DSS), the DISA STIG, or a similar profile. In these environments, there are a specific set of security controls that might need to be modified for Ansible Automation Platform to run properly. Apply any compliance profile controls to the Red Hat Enterprise Linux servers being used for Ansible Automation Platform before installation, and then modify the following security controls as required.
+You can use Ansible Automation Platform to manage systems where security controls have been applied to managed RHEL nodes to meet the requirements of a compliance profile such as CIS, PCI/DSS, the DISA STIG, or similar.
+
+In these environments, there are a specific set of security controls that might need to be modified for Ansible Automation Platform to run properly. Apply any compliance profile controls to the Red Hat Enterprise Linux servers being used for Ansible Automation Platform before installation, and then modify the following security controls as required.
 
 In environments where these controls are required, discuss waiving the controls with your security auditor.
 
@@ -14,7 +16,7 @@ In environments where these controls are required, discuss waiving the controls 
 
 
 
-A compliance policy might require the `fapolicyd` daemon to be running. However, Ansible Automation Platform is not currently supported when `fapolicyd` is enforcing policy, as this causes failures during both installation and operation of Ansible Automation Platform. Because of this, the installation program runs a pre-flight check that halts installation if it discovers that `fapolicyd` is enforcing policy. This guide recommends setting `fapolicyd` to permissive mode on Ansible Automation Platform using the following steps:
+A compliance policy might require the `fapolicyd` daemon to be running. However, Ansible Automation Platform is not currently supported when `fapolicyd` is enforcing policy, as this causes failures during both installation and operation of Ansible Automation Platform. Because of this, the installation program runs a pre-flight check that halts installation if it discovers that `fapolicyd` is enforcing policy. Set `fapolicyd` to permissive mode on Ansible Automation Platform using the following steps:
 
 1. Edit the file `    /etc/fapolicyd/fapolicyd.conf` and set "permissive = 1".
 1. Restart the service with the command
@@ -39,9 +41,10 @@ A compliance profile might require that certain file systems are mounted with th
 -  `    /tmp`
 -  `    /var`
 -  `    /var/tmp`
+-  `    /home # for the containerized installation method only`
 
 
-To install Ansible Automation Platform, you must re-mount these file systems with the `noexec` option removed. When installation is complete, proceed with the following steps:
+To install Ansible Automation Platform, you must re-mount these file systems with the `noexec` option removed. When installation is complete, use the following optional steps to re-enable `noexec` :
 
 1. Reapply the `    noexec` option to the `    /tmp` and `    /var/tmp` file systems.
 1. Change the automation controller job execution path from `    /tmp` to an alternate directory that does not have the `    noexec` option enabled.
@@ -62,8 +65,12 @@ A compliance profile might require that the kernel setting `user.max_user_namesp
 
 To check the `user.max_user_namespaces` kernel setting, complete the following steps on each Ansible Automation Platform component in the installation inventory:
 
-1. Log in to your automation controller at the command line.
-1. Run the command `    sudo sysctl user.max_user_namespaces` .
+1. Log in to each Ansible Automation Platform infrastructure node at the command line.
+1. Run the command:
+
+`    sudo sysctl user.max_user_namespaces` .
+
+
 1. If the output indicates that the value is zero, look at the contents of the file `    /etc/sysctl.conf` and all files under `    /etc/sysctl.d/` , edit the file containing the `    user.max_user_namespaces` setting, and set the value to "65535".
 1. To apply this new value, run the command `    sudo sysctl -p &lt;file&gt;` , where `    &lt;file&gt;` is the file just modified.
 1. Re-run the command `    sudo sysctl user.max_user_namespaces` and verify that the value is now set to "65535".
@@ -98,7 +105,9 @@ This change only needs to be made on the installation host, or if an installatio
 
 
 
-A compliance profile might require that all users with sudo privileges must provide a password (that is, the `NOPASSWD` directive must not be used in a sudoers file). The Ansible Automation Platform installation program runs many tasks as a privileged user, and by default expects to be able to elevate privileges without a password.
+A compliance profile might require that all users with sudo privileges must provide a password (that is, the `NOPASSWD` directive must not be used in a sudoers file).
+
+The Ansible Automation Platform installation program runs many tasks as a privileged user, and by default expects to be able to elevate privileges without a password.
 
 To provide a password to the installation program for elevating privileges, append the following options when launching the RPM installer script:
 

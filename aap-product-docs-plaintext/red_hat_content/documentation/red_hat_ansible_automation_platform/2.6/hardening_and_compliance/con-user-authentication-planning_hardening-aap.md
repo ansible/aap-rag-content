@@ -34,7 +34,9 @@ Some local service accounts are created and managed by the RPM-based installatio
 
 Ansible Automation Platform user accounts for accessing the user interface or API can either be local (stored in the Ansible Automation Platform database) or mapped to an external authentication source, such as a _Lightweight Directory Access Protocol_ (LDAP) server.
 
-This guide recommends that where possible, all primary user accounts should be mapped to an external authentication source. Using external account sources eliminates a source of error when working with permissions in this context and minimizes the amount of time devoted to maintaining a full set of users exclusively within Ansible Automation Platform. This includes accounts assigned to individual persons and for non-person entities, such as service accounts used for external application integration. Reserve any local accounts, such as the default “admin” account, for emergency access or “break glass” scenarios where the external authentication mechanism isn’t available.
+Where possible, map all primary user accounts to an external authentication source. Using external account sources eliminates a source of error when working with permissions in this context and minimizes the amount of time devoted to maintaining a full set of users exclusively within Ansible Automation Platform. This includes accounts assigned to individual persons and for non-person entities, such as service accounts used for external application integration. Reserve any local accounts, such as the default “admin” account, for emergency access or “break glass” scenarios where the external authentication mechanism isn’t available.
+
+The following external authentication mechanisms are supported in Ansible Automation Platform 2.5:
 
 - LDAP
 - SAML
@@ -52,19 +54,7 @@ This guide recommends that where possible, all primary user accounts should be m
 - GitHub enterprise team
 
 
-Select an authentication mechanism compliant with your organization’s policies, and review [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication) for prerequisite details. The authentication mechanism used must ensure that the authentication-related traffic between Ansible Automation Platform and the authentication back-end is encrypted when the traffic occurs on a public or insecure network (for example, LDAPS or LDAP over TLS, HTTPS for OAuth2 and SAML providers, and so on.).
+Choose an authentication mechanism that adheres to your organization’s policies, and refer to [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication) to understand the prerequisites for the relevant authentication mechanism. The authentication mechanism used must ensure that the authentication-related traffic between Ansible Automation Platform and the authentication back-end is encrypted when the traffic occurs on a public or insecure network (for example, LDAPS or LDAP over TLS, HTTPS for OAuth2 and SAML providers, and so on.).
 
-In the Ansible Automation Platform UI, any “system administrator” account can edit, change, and update any inventory or automation definition. Restrict these account privileges to the minimum set of users possible for low-level automation controller configuration and disaster recovery.
-
-Note
-Ansible Automation Platform 2.6 introduces a new central authentication mechanism used by all of the platform components:
-
-- Automation controller
-- Private automation hub
-- Event-Driven Ansible controller
-
-
-Before 2.6, each of these components had their own authentication configuration.
-
-
+In the Ansible Automation Platform UI, any account with “system administrator” privileges can edit, change, and update any inventory or automation resource. Restrict these account privileges to the minimum set of users necessary for Ansible Automation Platform administration and maintenance.
 

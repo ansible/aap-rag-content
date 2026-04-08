@@ -1,14 +1,14 @@
-# 1. View key usage metrics with Automation Dashboard
-## 1.4. Uninstalling Automation Dashboard
+# 1. View key usage metrics with automation dashboard
+## 1.5. Uninstalling automation dashboard
 
 
 
 
-Uninstall Automation Dashboard and its dependencies by using a single command, ensuring a clean removal from your host.
+Uninstall automation dashboard and its dependencies by using a single command, ensuring a clean removal from your host.
 
 **Procedure**
 
-- Run the following command to uninstall Automation Dashboard and its dependencies, including the PostgreSQL database container:
+- Run the following command to uninstall automation dashboard and its dependencies, including the PostgreSQL database container:
 
 
 ```

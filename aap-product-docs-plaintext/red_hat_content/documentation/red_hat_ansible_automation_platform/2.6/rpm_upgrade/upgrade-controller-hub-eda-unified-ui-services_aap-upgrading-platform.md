@@ -1,6 +1,6 @@
 # 2. Upgrading to Red Hat Ansible Automation Platform 2.6
-## 2.8. Automation controller and automation hub 2.4 and Event-Driven Ansible 2.6 with unified UI upgrades
-### 2.8.3. Using Migration path for 2.4 services with 2.6 services
+## 2.7. Automation controller and automation hub 2.4 and Event-Driven Ansible 2.6 with unified UI upgrades
+### 2.7.3. Using Migration path for 2.4 services with 2.6 services
 
 
 
@@ -9,15 +9,12 @@ If you installed Ansible Automation Platform 2.6 to use Event-Driven Ansible in 
 
 **Prerequisites**
 
-- An inventory from 2.4 for automation controller and automation hub and a 2.6 inventory for unified UI (platform gateway) and Event-Driven Ansible. You must run upgrades on 2.4 services (using the inventory file to specify only automation controller and automation hub VMs) to get them to the initial version of Ansible Automation Platform 2.6 first. When all the services are at the same version, run an upgrade (using a complete inventory file) on all the services to go to the latest version of Ansible Automation Platform 2.6.
+- An inventory from 2.4 for automation controller and automation hub and a 2.6 inventory for the unified UI (platform gateway) and Event-Driven Ansible. You must merge both inventories into a single 2.6 inventory file before running the upgrade. The platform gateway host must be included in the inventory for the installation program to run successfully.
 
 
 Important
-DO NOT upgrade Event-Driven Ansible and the unified UI (platform gateway) to the latest version of Ansible Automation Platform 2.6 without first upgrading the individual services (automation controller and automation hub) to the initial version of Ansible Automation Platform 2.6.
+Ensure you have upgraded to the latest version of Ansible Automation Platform 2.4 before merging inventories and running the 2.6 upgrade.
 
-
-
-- Ensure you have upgraded to the latest version of Ansible Automation Platform 2.4 before upgrading your Red Hat Ansible Automation Platform.
 
 
 **Procedure**
@@ -37,20 +34,20 @@ The example below shows the inventory file for automation controller and automat
 
 
 ```
-[edacontroller]    eda-1    eda-2        [gateway]    gw-1    gw-2        [all:vars]    # Here we have admin passwd, db credentials etc.
+[automationedacontroller]    eda-1    eda-2        [automationgateway]    gw-1    gw-2        [all:vars]    # Here we have admin passwd, db credentials etc.
 ```
 
 **Merged Inventory**
 
 
 ```
-[automationcontroller]    controller-1    controller-2        [automationhub]    hub-1    hub-2        [edacontroller]    eda-1    eda-2        [gateway]    gw-1    gw-2        [all:vars]    # Here we have admin passwd, db credentials etc from both inventories above
+[automationcontroller]    controller-1    controller-2        [automationhub]    hub-1    hub-2        [automationedacontroller]    eda-1    eda-2        [automationgateway]    gw-1    gw-2        [all:vars]    # Here we have admin passwd, db credentials etc from both inventories above
 ```
 
 
 1. Run `    setup.sh`
 
-The installer upgrades automation controller and automation hub from 2.4 to Ansible Automation Platform 2.6, latest Event-Driven Ansible, and the unified UI (platform gateway) from the fresh install of 2.6 to the latest version of 2.6, and connects automation controller and automation hub properly with the unified UI (platform gateway) node to initialize the unified experience.
+The installation program upgrades all services to the latest version of Ansible Automation Platform 2.6 and connects them to the unified UI (platform gateway).
 
 
 
@@ -61,9 +58,7 @@ The installer upgrades automation controller and automation hub from 2.4 to Ansi
 
 
 - Perform an SSH to automation controller and Event-Driven Ansible.
-- In the unified UI, navigate toHelp→Aboutto verify the RPM versions are at 2.6.
+- In the unified UI, go toHelp→Aboutto verify the RPM versions are at 2.6.
 
 
 
-
-<span id="idm140107837020224"></span>

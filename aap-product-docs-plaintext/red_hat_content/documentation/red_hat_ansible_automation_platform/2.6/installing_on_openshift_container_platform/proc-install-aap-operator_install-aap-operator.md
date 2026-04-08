@@ -28,7 +28,7 @@ You cannot deploy Ansible Automation Platform in the default namespace on your O
 **Prerequisites**
 
 - You have installed the Red Hat Ansible Automation Platform catalog in OperatorHub.
-- You have created a `    StorageClass` object for your platform and a persistent volume claim (PVC) with `    ReadWriteMany` access mode. See [Dynamic provisioning](https://docs.openshift.com/container-platform/4.15/storage/dynamic-provisioning.html) for details.
+- You have created a `    StorageClass` for [Dynamic provisioning](https://docs.openshift.com/container-platform/4.15/storage/dynamic-provisioning.html) OR you have pre-created PVCs for static provisioning. See [Configure static storage for Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#operator-static-storage_operator-platform-doc) for manual setup.
 - To run Red Hat OpenShift Container Platform clusters on Amazon Web Services (AWS) with `    ReadWriteMany` access mode, you must add NFS or other storage.
 
 

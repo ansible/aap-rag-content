@@ -1,5 +1,5 @@
 # 7. Rulebook activations
-## 7.4. Enabling and disabling rulebook activations
+## 7.3. Enabling and disabling rulebook activations
 
 
 

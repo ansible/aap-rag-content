@@ -301,7 +301,7 @@ Modify your Ansible Automation Platform inventory file to enable and configure `
 metrics_utility_enabled=true
 ```
 
-This setting instructs the installation program to create and configure a dedicated `    automation-controller-metrics-utility` container as part of your Ansible Automation Platform deployment. Place this line under the `    [automationcontroller]` header in your inventory file, alongside your other global variables. If your Ansible Automation Platform deployment has already been configured, re-run the installation script to activate the container.
+This setting instructs the installation program to create and configure two dedicated `    automation-controller-metrics-utility` containers as part of your Ansible Automation Platform deployment. One of these containers is used to collect the data and the other is used to build the report. If your Ansible Automation Platform deployment has already been configured, re-run the installation script to activate the container.
 
 
 1. Configure the reporting parameters by adding the `    metrics_utility_extra_settings` variable. This variable controls where reports are saved, what they contain, and other metadata.
@@ -1456,7 +1456,7 @@ Ensure that you backup your automation controller database before you generate a
 
 To generate a new secret key:
 
-1. Follow the procedure described in the [Backing up and Restoring](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#controller-backup-and-restore) section.
+1. Follow the procedure described in the [Back up and Restore](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_upgrade/controller-backup-and-restore) section.
 1. Use the inventory from your install (the same inventory with which you run backups and restores), and run the following command:
 
 
@@ -1781,137 +1781,7 @@ The `--since` parameter is optional.
 
 The `--json` flag specifies the output format and is optional.
 
-# Chapter 17. Backup and restore
-
-
-
-
-You can backup and restore your system by using the Ansible Automation Platform setup playbook.
-
-For more information, see the [Backup and restore clustered environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/index#controller-backup-restore-clustered-environments) section.
-
-Note
-When backing up Ansible Automation Platform, use the installation program that matches your currently installed version of Ansible Automation Platform.
-
-When restoring Ansible Automation Platform, use the latest installation program available at the time of the restore. For example, if you are restoring a backup taken from version `2.6-1` , use the latest `2.6-x` installation program available at the time of the restore.
-
-Backup and restore functionality only works with the PostgreSQL versions supported by your current Ansible Automation Platform version. For more information, see [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/platform-system-requirements) in _Planning your installation_ .
-
-
-
-The Ansible Automation Platform setup playbook is invoked as `setup.sh` from the path where you unpacked the platform installer tar file. It uses the same inventory file used by the install playbook. The setup script takes the following arguments for backing up and restoring:
-
--  `    -b` : Perform a database backup rather than an installation.
--  `    -r` : Perform a database restore rather than an installation.
-
-
-As the root user, call `setup.sh` with the appropriate parameters and the Ansible Automation Platform backup or restored as configured:
-
-```
-root@localhost:~# ./setup.sh -b
-root@localhost:~# ./setup.sh -r
-```
-
-Backup files are created on the same path that `setup.sh` script exists. You can change it by specifying the following `EXTRA_VARS` :
-
-```
-root@localhost:~# ./setup.sh -e 'backup_dest=/path/to/backup_dir/' -b
-```
-
-A default restore path is used unless you provide `EXTRA_VARS` with a non-default path, as shown in the following example:
-
-```
-root@localhost:~# ./setup.sh -e 'restore_backup_file=/path/to/nondefault/backup.tar.gz' -r
-```
-
-Optionally, you can override the inventory file used by passing it as an argument to the setup script:
-
-```
-setup.sh -i &lt;inventory file&gt;
-```
-
-## 17.1. Backup and restore playbooks
-
-
-
-
-automation controller includes playbooks to backup and restore your installation.
-
-In addition to the `install.yml` file included with your `setup.sh` setup playbook, there are also `backup.yml` and `restore.yml` files.
-
-These playbooks serve to backup and restore.
-
-- The overall backup, backs up:
-
-
-- The database
-- The `        SECRET_KEY` file
-
-- The per-system backups include:
-
-
-- Custom configuration files
-- Manual projects
-
-- The restore backup restores the backed up files and data to a freshly installed and working second instance of automation controller.
-
-
-When restoring your system, installation program checks to see that the backup file exists before beginning the restoration. If the backup file is not available, your restoration fails.
-
-Note
-Make sure that your automation controller hosts are properly set up with SSH keys, user or pass variables in the hosts file, and that the user has `sudo` access.
-
-
-
-## 17.2. Backup and restoration considerations
-
-
-
-
-Consider the following points when you backup and restore your system:
-
-## 17.3. Backup and restore clustered environments
-
-
-
-
-Learn how to back up and restore automation controller in a clustered environment.
-
-The procedure for backup and restore for a clustered environment is similar to a single install, except for some of the following considerations:
-
-Note
-For more information about installing clustered environments, see the [Install and configure](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#controller-cluster-install) section.
-
-
-
-- If restoring to a new cluster, ensure that the old cluster is shut down before proceeding because they can conflict with each other when accessing the database.
-- Per-node backups are only restored to nodes bearing the same hostname as the backup.
-- When restoring to an existing cluster, the restore has the following:
-
-
-- A dump of the PostgreSQL database
-- UI artifacts, included in the database dump
-- An automation controller configuration (retrieved from `        /etc/tower` )
-- An automation controller secret key
-- Manual projects
-
-
-
-### 17.3.1. Restore to a different cluster
-
-
-
-
-When restoring a backup to a separate instance or cluster, manual projects and custom settings under `/etc/tower` are retained. Job output and job events are stored in the database, and therefore, not affected.
-
-The restore process does not alter instance groups present before the restore. It does not introduce any new instance groups either. Restored automation controller resources that were associated to instance groups likely need to be reassigned to instance groups present on the new automation controller cluster.
-
-Warning
-If you plan to use a backup and restore operation to migrate your Ansible Automation Platform instance to a different cluster or new set of hostnames, any Red Hat Ansible Automation Platform credentials you set up for Event-Driven Ansible controller will break, causing your rulebook activations to fail. You must manually edit and update the automation controller URL and associated credentials after the restore operation is complete to restore connectivity.
-
-
-
-# Chapter 18. Usability Analytics and Data Collection
+# Chapter 17. Usability Analytics and Data Collection
 
 
 
@@ -1924,7 +1794,7 @@ Automation controller collects user data automatically to help improve the produ
 
 For information about setting up Automation Analytics, see [Configuring Automation Analytics](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#proc-controller-configure-analytics) .
 
-## 18.1. Automation Analytics
+## 17.1. Automation Analytics
 
 
 
@@ -1971,7 +1841,7 @@ The organization statistics page will be deprecated in a future release.
 
 
 
-### 18.1.1. Use by organization
+### 17.1.1. Use by organization
 
 
 
@@ -1981,7 +1851,7 @@ The following chart represents the number of tasks run inside all jobs by a part
 ![Tasks by organization](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/4902044c1f01b3ba37373b2aa9c73ad2/aa-usage-by-org-tasks.png)
 
 
-### 18.1.2. Job runs by organization
+### 17.1.2. Job runs by organization
 
 
 
@@ -1991,7 +1861,7 @@ This chart represents automation controller use across all automation controller
 ![Jobs by organization](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/68892f94eecc849a4a290d596046d0ce/aa-usage-by-org.png)
 
 
-### 18.1.3. Organization status
+### 17.1.3. Organization status
 
 
 
@@ -2003,7 +1873,7 @@ You can also specify to show the number of job runs per organization in one week
 ![Organization status](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Configuring_automation_execution-en-US/images/0f8ed00783958a1c019d012596cdfd01/aa-usage-by-org-by-date.png)
 
 
-## 18.2. Details of data collection
+## 17.2. Details of data collection
 
 
 
@@ -2052,7 +1922,7 @@ This file contains several JSON and CSV files. Each file contains a different se
 -  [events_table.csv](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#ref-controller-events-table-csv)
 
 
-### 18.2.1. manifest.json
+### 17.2.1. manifest.json
 
 
 
@@ -2080,7 +1950,7 @@ The following is an example `manifest.json` file:
 }
 ```
 
-### 18.2.2. config.json
+### 17.2.2. config.json
 
 
 
@@ -2143,7 +2013,7 @@ Which includes the following fields:
 -  **controller_version** : Version of the software on the cluster
 
 
-### 18.2.3. instance_info.json
+### 17.2.3. instance_info.json
 
 
 
@@ -2189,7 +2059,7 @@ Which includes the following fields:
 -  **version** : Version of the software on the instance
 
 
-### 18.2.4. counts.json
+### 17.2.4. counts.json
 
 
 
@@ -2229,7 +2099,7 @@ The following is an example `counts.json` file:
 
 Each entry in this file is for the corresponding API objects in `/api/v2` , with the exception of the active session counts.
 
-### 18.2.5. org_counts.json
+### 17.2.5. org_counts.json
 
 
 
@@ -2258,7 +2128,7 @@ The following is an example `org_counts.json` file:
 }
 ```
 
-### 18.2.6. cred_type_counts.json
+### 17.2.6. cred_type_counts.json
 
 
 
@@ -2303,7 +2173,7 @@ The following is an example `cred_type_counts.json` file:
 },
 ```
 
-### 18.2.7. inventory_counts.json
+### 17.2.7. inventory_counts.json
 
 
 
@@ -2357,7 +2227,7 @@ The following is an example `inventory_counts.json` file:
 }
 ```
 
-### 18.2.8. projects_by_scm_type.json
+### 17.2.8. projects_by_scm_type.json
 
 
 
@@ -2376,7 +2246,7 @@ The following is an example `projects_by_scm_type.json` file:
 }
 ```
 
-### 18.2.9. query_info.json
+### 17.2.9. query_info.json
 
 
 
@@ -2395,7 +2265,7 @@ The following is an example `query_info.json` file:
 
 `collection_type` is one of `manual` or `automatic` .
 
-### 18.2.10. job_counts.json
+### 17.2.10. job_counts.json
 
 
 
@@ -2422,7 +2292,7 @@ The following is an example `job_counts.json` file:
 }
 ```
 
-### 18.2.11. job_instance_counts.json
+### 17.2.11. job_instance_counts.json
 
 
 
@@ -2453,7 +2323,7 @@ The following is an example `job_instance_counts.json` file:
 
 Note that instances in this file are by hostname, not by UUID as they are in `instance_info` .
 
-### 18.2.12. unified_job_template_table.csv
+### 17.2.12. unified_job_template_table.csv
 
 
 
@@ -2477,7 +2347,7 @@ The `unified_job_template_table.csv` file provides information about job templat
 -  **next_schedule_id** : Schedule id for `    next_job_run` , if any.
 
 
-### 18.2.13. unified_jobs_table.csv
+### 17.2.13. unified_jobs_table.csv
 
 
 
@@ -2509,7 +2379,7 @@ Each line has the following fields for a job:
 -  **forks** : Number of forks executed for this job.
 
 
-### 18.2.14. workflow_job_template_node_table.csv
+### 17.2.14. workflow_job_template_node_table.csv
 
 
 
@@ -2530,7 +2400,7 @@ Each line contains the following fields for a worfklow job template node:
 -  **all_parents_must_converge** : Whether this node requires all its parent conditions satisfied to start.
 
 
-### 18.2.15. workflow_job_node_table.csv
+### 17.2.15. workflow_job_node_table.csv
 
 
 
@@ -2553,7 +2423,7 @@ Each line contains the following fields for a job run as part of a workflow:
 -  **all_parents_must_converge** : Whether this node requires all its parent conditions satisfied to start.
 
 
-### 18.2.16. events_table.csv
+### 17.2.16. events_table.csv
 
 
 
@@ -2584,7 +2454,7 @@ Each line has the following fields for a job event:
 -  **deprecations** : Any deprecation warnings from the task or module.
 
 
-## 18.3. Analytics reports
+## 17.3. Analytics reports
 
 
 
@@ -2604,14 +2474,14 @@ Other Automation Analytics data currently available and accessible through the p
 
 **Subscription Usage** reports the historical usage of your subscription. Subscription capacity and licenses consumed per month are displayed, with the ability to filter by the last year, two years, or three years.
 
-# Chapter 19. Troubleshooting automation controller
+# Chapter 18. Troubleshooting automation controller
 
 
 
 
 Useful troubleshooting information for automation controller.
 
-## 19.1. Unable to login to automation controller through HTTP
+## 18.1. Unable to login to automation controller through HTTP
 
 
 
@@ -2633,14 +2503,14 @@ To apply the changes, run:
 automation-controller-service restart
 ```
 
-## 19.2. Unable to run a job
+## 18.2. Unable to run a job
 
 
 
 
 If you are unable to run a job from a playbook, review the playbook YAML file. When importing a playbook, either manually or by a source control mechanism, remember that the host definition is controlled by automation controller and should be set to `hosts:all` .
 
-## 19.3. Playbooks do not show up in the Job Template list
+## 18.3. Playbooks do not show up in the Job Template list
 
 
 
@@ -2655,7 +2525,7 @@ If your playbooks are not showing up in the **Job Template** list, check the fol
 chown awx -R /var/lib/awx/projects/
 ```
 
-## 19.4. Playbook stays in pending
+## 18.4. Playbook stays in pending
 
 
 
@@ -2669,7 +2539,7 @@ If you are attempting to run a playbook job and it stays in the `Pending` state 
 
 If you continue to have issues, run `sosreport` as root on the automation controller server, then file a [support request](http://support.ansible.com/) with the result.
 
-## 19.5. Reusing an external database causes installations to fail
+## 18.5. Reusing an external database causes installations to fail
 
 
 
@@ -2684,7 +2554,7 @@ You perform a clustered installation. Then, you need to do this again and perfor
 
 When setting up an external database that has been used in a prior installation, you must manually clear the database used for the clustered node before any additional installations can succeed.
 
-## 19.6. Viewing private EC2 VPC instances in the automation controller inventory
+## 18.6. Viewing private EC2 VPC instances in the automation controller inventory
 
 
 
@@ -2719,7 +2589,7 @@ Automation controller must be running inside the VPC with access to those instan
 
 
 
-# Chapter 20. Automation controller tips and tricks
+# Chapter 19. Automation controller tips and tricks
 
 
 
@@ -2742,14 +2612,14 @@ Use administrative tools and advanced techniques to manage complex configuration
 -  [Import existing inventory files and host/group vars into automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#ref-controller-import-inventory-files)
 
 
-## 20.1. The automation controller CLI Tool
+## 19.1. The automation controller CLI Tool
 
 
 
 
 Automation controller has a full-featured command line interface.
 
-## 20.2. Change the automation controller administrator password
+## 19.2. Change the automation controller administrator password
 
 
 
@@ -2766,7 +2636,7 @@ Next, enter a new password. After that, the password you have entered works as t
 
 To set policies at creation time for password validation by using Django, see [Django password policies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#controller-django-password-policies) .
 
-## 20.3. Create an automation controller Administrator from the command line
+## 19.3. Create an automation controller Administrator from the command line
 
 
 
@@ -2779,7 +2649,7 @@ To create a superuser, run the following command as root on the automation contr
 awx-manage createsuperuser
 ```
 
-## 20.4. Configuring automation controller to use jump hosts connecting to managed nodes
+## 19.4. Configuring automation controller to use jump hosts connecting to managed nodes
 
 
 
@@ -2790,7 +2660,7 @@ This setup enhances security by isolating the managed nodes from direct access f
 
 Credentials supplied by automation controller do not flow to the jump host through ProxyCommand. They are only used for the end-node when the tunneled connection is set up.
 
-### 20.4.1. Configure a fixed user or keyfile in your SSH configuration file
+### 19.4.1. Configure a fixed user or keyfile in your SSH configuration file
 
 
 
@@ -2841,7 +2711,7 @@ Using the Red Hat Ansible Automation Platform UI
 1. ClickSaveto save your changes.
 
 
-### 20.4.2. Configuring jump hosts using Ansible Inventory variables
+### 19.4.2. Configuring jump hosts using Ansible Inventory variables
 
 
 
@@ -2862,7 +2732,7 @@ ansible_user: &lt;user_name&gt;    ansible_connection: ssh    ansible_ssh_common
 
 
 
-## 20.5. View Ansible outputs for JSON commands when using automation controller
+## 19.5. View Ansible outputs for JSON commands when using automation controller
 
 
 
@@ -2871,7 +2741,7 @@ When working with automation controller, you can use the API to obtain the Ansib
 
 To view the Ansible outputs, browse to https://<controller server name>/api/v2/jobs/<job_id>/job_events/
 
-## 20.6. Locate and configure the Ansible configuration file
+## 19.6. Locate and configure the Ansible configuration file
 
 
 
@@ -2891,7 +2761,7 @@ Using the defaults are acceptable for starting out, but you can configure the de
 
 Automation controller overrides some `ansible.cfg` options. For example, automation controller stores the SSH ControlMaster sockets, the SSH agent socket, and any other per-job run items in a per-job temporary directory that is passed to the container used for job execution.
 
-## 20.7. View a listing of all ansible_ variables
+## 19.7. View a listing of all ansible_ variables
 
 
 
@@ -2908,7 +2778,7 @@ ansible -m setup hostname
 
 This prints out a dictionary of all facts available for that particular host.
 
-## 20.8. The ALLOW_JINJA_IN_EXTRA_VARS variable
+## 19.8. The ALLOW_JINJA_IN_EXTRA_VARS variable
 
 
 
@@ -2928,7 +2798,7 @@ This parameter has three values:
 
 This parameter is configurable in the **Jobs Settings** page of the automation controller UI.
 
-## 20.9. Configuring the `controllerhost` hostname for notifications
+## 19.9. Configuring the `controllerhost` hostname for notifications
 
 
 
@@ -2939,7 +2809,7 @@ From the **System settings** page, you can replace `https://controller.example.c
 
 Refreshing your automation controller license also changes the notification hostname. New installations of automation controller need not set the hostname for notifications.
 
-## 20.10. Launching jobs with curl
+## 19.10. Launching jobs with curl
 
 
 
@@ -2967,7 +2837,7 @@ The `extra_vars` parameter must be a string which contains JSON, not just a JSON
 
 
 
-## 20.11. Filtering instances returned by the dynamic inventory sources in automation controller
+## 19.11. Filtering instances returned by the dynamic inventory sources in automation controller
 
 
 
@@ -2989,7 +2859,7 @@ You can also use the `Limit` field in the Job Template settings to limit a playb
 
 You can also create your own groups by copying the autogenerated groups into your custom groups. Make sure that the `Overwrite` option is disabled on your dynamic inventory source, otherwise subsequent synchronization operations delete and replace your custom groups.
 
-## 20.12. Use an unreleased module from Ansible source with automation controller
+## 19.12. Use an unreleased module from Ansible source with automation controller
 
 
 
@@ -3002,7 +2872,7 @@ Next, create a new directory, at the same directory level of your Ansible source
 
 When this is created, copy the module you want to use and drop it into the `/library` directory. It is consumed first by your system modules and can be removed once you have updated the stable version with your normal package manager.
 
-## 20.13. Use callback plugins with automation controller
+## 19.13. Use callback plugins with automation controller
 
 
 
@@ -3026,7 +2896,7 @@ To have most callbacks shipped with Ansible applied globally, you must add them 
 
 
 
-## 20.14. Connect to Windows with winrm
+## 19.14. Connect to Windows with winrm
 
 
 
@@ -3047,7 +2917,7 @@ icon of the group name that contains the Windows servers. In the "variables" sec
 
 When complete, save your edits. If Ansible was previously attempting an SSH connection and failed, you should re-run the job template.
 
-## 20.15. Import existing inventory files and host or group vars into automation controller
+## 19.15. Import existing inventory files and host or group vars into automation controller
 
 
 
@@ -3104,19 +2974,16 @@ Then, for each of the groups that have :vars listed, create a file called `inven
 The importer then handles the conversion correctly.
 
 
-<span id="idm140225414213264"></span>
+<span id="idm139876824711136"></span>
 # Legal Notice
 
-Copyright© 2025 Red Hat, Inc.
-The text of and illustrations in this document are licensed by Red Hat under a Creative Commons Attribution–Share Alike 3.0 Unported license ("CC-BY-SA"). An explanation of CC-BY-SA is available at [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/) . In accordance with CC-BY-SA, if you distribute this document or an adaptation of it, you must provide the URL for the original version.
+Copyright© Red Hat.
+Except as otherwise noted below, the text of and illustrations in this documentation are licensed by Red Hat under the Creative Commons Attribution–Share Alike 3.0 Unported license . If you distribute this document or an adaptation of it, you must provide the URL for the original version.
 Red Hat, as the licensor of this document, waives the right to enforce, and agrees not to assert, Section 4d of CC-BY-SA to the fullest extent permitted by applicable law.
-Red Hat, Red Hat Enterprise Linux, the Shadowman logo, the Red Hat logo, JBoss, OpenShift, Fedora, the Infinity logo, and RHCE are trademarks of Red Hat, Inc., registered in the United States and other countries.
+Red Hat, the Red Hat logo, JBoss, Hibernate, and RHCE are trademarks or registered trademarks of Red Hat, LLC. or its subsidiaries in the United States and other countries.
 Linux® is the registered trademark of Linus Torvalds in the United States and other countries.
-Java® is a registered trademark of Oracle and/or its affiliates.
-XFS® is a trademark of Silicon Graphics International Corp. or its subsidiaries in the United States and/or other countries.
-MySQL® is a registered trademark of MySQL AB in the United States, the European Union and other countries.
-Node.js® is an official trademark of Joyent. Red Hat is not formally related to or endorsed by the official Joyent Node.js open source or commercial project.
-TheOpenStack® Word Mark and OpenStack logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+XFS is a trademark or registered trademark of Hewlett Packard Enterprise Development LP or its subsidiaries in the United States and other countries.
+TheOpenStack® Word Mark and OpenStack logo are trademarks or registered trademarks of the Linux Foundation, used under license.
 All other trademarks are the property of their respective owners.
 
 

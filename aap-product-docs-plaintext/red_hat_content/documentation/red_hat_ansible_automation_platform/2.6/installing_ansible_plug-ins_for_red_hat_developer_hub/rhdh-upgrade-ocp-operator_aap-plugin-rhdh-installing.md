@@ -3,5 +3,5 @@
 
 
 
-To upgrade the Ansible plug-ins, you must update the `plugin-registry` application with the latest Ansible plug-ins files.
+Upgrade the Ansible plug-ins to work with the latest version in your automation environment.
 

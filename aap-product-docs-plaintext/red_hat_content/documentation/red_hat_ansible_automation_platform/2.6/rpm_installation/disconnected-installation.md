@@ -1,4 +1,4 @@
-# Chapter 5. Disconnected installation
+# Chapter 6. Disconnected installation
 
 
 

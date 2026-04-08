@@ -1,0 +1,17 @@
+# 4. Getting started as an automation operator
+## 4.2. Work with job templates
+### 4.2.2. Surveys in job templates
+
+
+
+
+Surveys provide a way to prompt users for input when launching a job from a job template. This input can then be used as variables in the playbook run.
+
+Job types of **Run** or **Check** provide a way to set up surveys in the **Job Template** creation or editing screens. Surveys set extra variables for the playbook similar to **Prompt for Extra Variables** does, but in a user-friendly question and answer way. Surveys also permit for validation of user input. Select the **Survey** tab to create a survey.
+
+**Example**
+
+You can use surveys for several situations. For example, operations want to give developers a "push to stage" button that they can run without advance knowledge of Ansible. When launched, this task could prompt for answers to questions such as "What tag should we release?".
+
+You can ask many types of questions, including multiple-choice questions.
+

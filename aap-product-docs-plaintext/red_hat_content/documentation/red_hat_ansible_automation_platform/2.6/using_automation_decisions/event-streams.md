@@ -4,22 +4,22 @@
 
 
 
-Event streams provide the secure, authenticated entry point for external systems to send events over the internet directly to {DAcontroller},simplifying remote data ingestion.
+Event streams provide the secure, authenticated entry point for external systems to send events over the internet directly to Event-Driven Ansible controller,simplifying remote data ingestion.
 
 Event-Driven Ansible controller supports six different event stream types.
 
 
-<span id="idm140618138417392"></span>
+<span id="idm139919143708208"></span>
 **Table 10.1. Event Stream Types**
 
 | Type | Description | Vendor examples |
 | --- | --- | --- |
 |  **Hashed Message Authentication Code (HMAC)** | Uses a shared secret between Event-Driven Ansible controller and the vendors webhook server. This guarantees message integrity. | Github |
 |  **Basic Authentication** | Uses HTTP basic authentication. | Datadog, Dynatrace |
-|  **Token Authentication** | Uses Token Authentication. Usually the HTTP Header is **Authorization** but some vendors like Gitlab use **X-Gitlab-Token** . | Gitlab, ServiceNow |
+|  **Token Authentication** | Validates incoming event data using a security token passed in the request header. While the standard HTTP header used is **Authorization** , it can be customized for specific platforms, such as using **X-Gitlab-Token** for GitLab integrations. | Gitlab, ServiceNow |
 |  **OAuth2** | Uses Machine-to-Machine (M2M) mode with a grant type called **client credentials** . The token is opaque. | Dynatrace |
 |  **OAuth2 with JWT** | Uses M2M mode with a grant type called **client credentials** . The token is JSON Web Token (JWT). | Datadog |
-|  **Elliptic Curve Digital Signature Algorithm (ECDSA)** | Verifies message authenticity using a public/private key pair. The sender signs the message with a private key, and the receiver (EDA Controller) validates it with a public key. | SendGrid, Twilio |
+|  **Elliptic Curve Digital Signature Algorithm (ECDSA)** | Verifies message authenticity using a public/private key pair. The sender signs the message with a private key, and the receiver (Event-Driven Ansible controller) validates it with a public key. | SendGrid, Twilio |
 |  **Mutual Transport Layer Security (mTLS)** | Ensures two-way authentication between Event-Driven Ansible controller and the client sending events through an event stream. It has two sub-types:
 
 - Certificate

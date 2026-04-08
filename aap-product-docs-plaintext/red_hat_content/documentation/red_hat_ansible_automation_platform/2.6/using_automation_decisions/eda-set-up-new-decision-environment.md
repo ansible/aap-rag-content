@@ -1,5 +1,5 @@
 # 5. Decision environments
-## 5.3. Setting up a new decision environment
+## 5.4. Setting up a new decision environment
 
 
 

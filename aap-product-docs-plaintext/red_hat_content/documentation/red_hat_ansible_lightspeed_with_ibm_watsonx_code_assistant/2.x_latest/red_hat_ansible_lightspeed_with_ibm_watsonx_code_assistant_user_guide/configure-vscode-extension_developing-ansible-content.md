@@ -22,7 +22,6 @@ Configure third-party LLM providers, such as IBM watsonx Code Assistant or Googl
 1. From the **Ansible** extension page, click the **Settings** icon and select **Extension Settings** .
 1. Select **Ansible Lightspeed** settings, and specify the following information:
 
-
 | UI field | Description |
 | --- | --- |
 | Ansible Lightspeed: Enabled | Select this checkbox to enable the Red Hat Ansible Lightspeed service. |
@@ -48,7 +47,13 @@ Choose the AI provider from the following options:
 | Ansible Lightspeed: Timeout | Define the maximum duration the Ansible VS Code extension waits for a server response. The default timeout for API calls is 3000 milliseconds. |
 
 
+
+
+
+**Result**
+
 Your settings are automatically saved in VS Code.
+
 
 Note
 If your organization recently subscribed to the Red Hat Ansible Automation Platform, it might take a few hours for Red Hat Ansible Lightspeed to detect the new subscription. In VS Code, use the **Refresh** button in the Ansible extension from the Activity bar to check again.

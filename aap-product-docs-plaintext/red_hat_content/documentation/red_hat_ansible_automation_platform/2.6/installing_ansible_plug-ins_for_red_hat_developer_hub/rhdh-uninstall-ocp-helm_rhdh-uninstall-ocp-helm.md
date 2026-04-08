@@ -4,7 +4,7 @@
 
 
 
-To uninstall the Ansible plug-ins from a Helm chart installation, you remove templates using the ansible:content:create action first. Then, you delete the plug-in configuration from the Helm chart YAML, remove the extraContainers section, delete the Ansible block from the custom ConfigMap, restart the deployment, and remove the plug-in registry application.
+To uninstall the Ansible plug-ins from a Helm chart installation, you remove templates using the ansible:content:create action first. Then, you delete the plug-in configuration from the Helm chart YAML, remove the extraContainers section, and delete the Ansible block from the custom ConfigMap. Finally, you restart the deployment.
 
 **Procedure**
 
@@ -14,30 +14,33 @@ To uninstall the Ansible plug-ins from a Helm chart installation, you remove tem
 
 
 ```
-...    global:    ...        plugins:          - disabled: false            integrity: &lt;SHA512 value&gt;            package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz'            pluginConfig:              dynamicPlugins:                frontend:                  ansible.plugin-backstage-rhaap:                    appIcons:                      - importName: AnsibleLogo                        name: AnsibleLogo                    dynamicRoutes:                      - importName: AnsiblePage                        menuItem:                          icon: AnsibleLogo                          text: Ansible                        path: /ansible          - disabled: false            integrity: &lt;SHA512 value&gt;            package: &gt;-              http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz            pluginConfig:              dynamicPlugins:                backend:                  ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
+global:      dynamic:        plugins:          - disabled: false            package: 'oci://registry.redhat.io/ansible-automation-platform/automation-portal:2.1!ansible-plugin-backstage-rhaap'            pluginConfig:              ...          - disabled: false            package: 'oci://registry.redhat.io/ansible-automation-platform/automation-portal:2.1!ansible-plugin-scaffolder-backend-module-backstage-rhaap'            pluginConfig:              ...
 ```
+
+For HTTP plug-in registry, remove the `    <a class="link" href="http://plugin-registry:8080/">http://plugin-registry:8080/</a>...` entries instead.
 
 
 1. Remove the `    extraContainers` section.
 
 
 ```
-upstream:      backstage: |        ...        extraContainers:          - command:              - adt              - server            image: &gt;-              registry.redhat.io/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest            imagePullPolicy: IfNotPresent            name: ansible-devtools-server            ports:              - containerPort: 8000        image:          pullPolicy: Always          pullSecrets:            - ...            - rhdh-secret-registry        ...
+upstream:      backstage:        ...        extraContainers:          - command:              - adt              - server            image: &gt;-              registry.redhat.io/ansible-automation-platform-26/ansible-dev-tools-rhel9:latest            imagePullPolicy: IfNotPresent            name: ansible-devtools-server            ports:              - containerPort: 8000
 ```
 
 
 1. ClickUpgrade.
 1. Edit your custom Red Hat Developer Hub config map, for example `    app-config-rhdh` .
 1. Remove the `    ansible` section.
-
-
-```
-data:      app-config-rhdh.yaml: |        ...        ansible:          analytics:            enabled: true          devSpaces:            baseUrl: '&lt;https://MyOwnDevSpacesUrl/&gt;'          creatorService:            baseUrl: '127.0.0.1'            port: '8000'          rhaap:            baseUrl: '&lt;https://MyAapSubcriptionUrl&gt;'            token: '&lt;TopSecretAAPToken&gt;'            checkSSL: true          automationHub:            baseUrl: '&lt;https://MyOwnPAHUrl/&gt;'
-```
-
-
 1. Restart the Red Hat Developer Hub deployment.
-1. Remove the `    plugin-registry` OpenShift application.
+1. If you used OCI delivery, delete the registry auth secret:
+
+
+```
+oc delete secret &lt;deployment-name&gt;-dynamic-plugins-registry-auth
+```
+
+
+1. If you used the HTTP plug-in registry method, remove the plug-in registry application:
 
 
 ```

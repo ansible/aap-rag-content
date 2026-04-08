@@ -8,7 +8,7 @@
 The Red Hat tested infrastructure topology for this deployment model:
 
 
-<span id="idm140186611089568"></span>
+<span id="idm140264421768688"></span>
 **Figure 3.1. Infrastructure topology diagram**
 
 ![Operator growth topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Tested_deployment_models-en-US/images/5d4c3ae79cc44b3dde002a9fe383192e/ocp-a-env-a.png)
@@ -24,7 +24,7 @@ While Redis and PostgreSQL can be installed as part of the operator-based instal
 Red Hat tests a Single Node OpenShift (SNO) cluster with these requirements: 32 GB RAM, 16 CPUs, 128 GB local disk, and 3000 IOPS.
 
 
-<span id="idm140186611082768"></span>
+<span id="idm140264421761936"></span>
 **Table 3.1. Infrastructure topology components**
 
 | Count | Component |

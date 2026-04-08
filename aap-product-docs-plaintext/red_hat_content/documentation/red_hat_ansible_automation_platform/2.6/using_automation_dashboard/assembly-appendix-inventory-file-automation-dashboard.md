@@ -3,5 +3,5 @@
 
 
 
-The inventory variables required by the Automation Dashboard installer are described in the following table:
+The inventory variables required by the automation dashboard installer are described in the following table:
 

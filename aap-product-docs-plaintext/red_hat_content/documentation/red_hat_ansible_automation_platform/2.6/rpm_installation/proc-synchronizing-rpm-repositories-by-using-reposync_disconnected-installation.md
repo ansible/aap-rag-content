@@ -1,5 +1,5 @@
-# 5. Disconnected installation
-## 5.2. Synchronizing RPM repositories using reposync
+# 6. Disconnected installation
+## 6.2. Synchronizing RPM repositories using reposync
 
 
 

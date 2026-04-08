@@ -1,6 +1,6 @@
 # 2. Hardening Ansible Automation Platform
 ## 2.2. Installation
-### 2.2.4. Securing sensitive variables with ansible vault
+### 2.2.4. Secure sensitive variables with ansible vault
 
 
 
@@ -11,15 +11,15 @@ By securing sensitive values in the installation inventory file with Ansible Vau
 
 1. Navigate to the install directory by using the following command:
 
-`    cd /path/to/ansible-automation-platform-setup-bundle-2.5-&lt;version&gt;`
+`    cd /path/to/ansible-automation-platform-setup-bundle-2.6-&lt;version&gt;`
 
 
-1. Create a vault file by using the following command:
+1. Create an Ansible vault file by using the following command:
 
 `    ansible-vault create vault.yml`
 
 
-1. When prompted, enter a vault password This password is required to access or modify the vault and is required for day-two operations such as backups and reconfigurations.
+1. When prompted, enter a password. This password is required to access or modify the Ansible vault file and is required for day-two operations such as backups and reconfigurations.
 
 Important
 Passwords with special characters must be in double quotes.
@@ -27,17 +27,17 @@ Passwords with special characters must be in double quotes.
 
 
 
-1. Store the vault password securely, in accordance with your organizations security policy, for example, using a password manager or vault service.
-1. Add your sensitive variables to the vault and ensure they are not also defined in the inventory file.
+1. Add your sensitive variables to the Ansible vault file and ensure they are not also defined in the installation program inventory file.
+1. Store the vault password securely in accordance with your organization’s security policy, for example, using a password manager or a service like Hashicorp Vault.
 
 To edit your vault file use:
 
-`    ansible-vault edit &lt;file&gt;`
+`    ansible-vault edit vault.yml`
 
 
 
 
-#### 2.2.4.1. Using an external vault file with an RPM-based Ansible Automation Platform deployment
+#### 2.2.4.1. Use an external Ansiblevault file with an RPM-based Ansible Automation Platform deployment
 
 
 
@@ -46,7 +46,7 @@ When installing Ansible Automation Platform using RPM packages, you can use an e
 
 For RPM-based installations, you can provide the Ansible vault at runtime when executing the setup script.
 
-Add the following sensitive variables to the vault file:
+Add the following sensitive variables to the Ansible vault file:
 
 ```
 admin_password: &lt;secure_password&gt;
@@ -63,11 +63,11 @@ automationedacontroller_pg_password: &lt;secure_password&gt;
 registry_password: &lt;secure_cdn_password&gt;
 ```
 
-To use the vault during installation, use the following procedure:
+To use the Ansible vault file during installation, use the following procedure:
 
 **Procedure**
 
-1. Ensure the vault file, for example, `    vault.yml` , contains all required sensitive variables.
+1. Ensure the Ansible vault file, for example, `    vault.yml` , contains all required sensitive variables.
 1. Run the installation using the following command:
 
 `    ./setup.sh -e @vault.yml -ask-vault-pass`
@@ -77,12 +77,12 @@ Using this procedure ensures that the installation program reads encrypted varia
 
 
 
-#### 2.2.4.2. Using an external vault file with a containerized installation
+#### 2.2.4.2. Use an external vault file with a containerized installation
 
 
 
 
-For containerized installations of Ansible Automation Platform, use the provided automation execution playbook with the external vault file.
+For containerized installations of Ansible Automation Platform, use the provided automation execution playbook with the external Ansible vault file.
 
 Add the following sensitive variables to the vault file:
 
@@ -106,12 +106,12 @@ To use the new Ansible vault with the installation program, use the following pr
 
 **Procedure**
 
-1. Ensure your vault file, for example, `    vault.yml` , contains all required sensitive variables.
+1. Ensure your Ansible vault file (for example, `    vault.yml` ) contains all required sensitive variables.
 1. Run the container installer using the following command:
 
 `    ansible-playbook ansible.containerized_installer.install -e @vault.yml -ask-become-pass` .
 
-Ensure that the vault file is located in the working directory, or provide the full path. Do not duplicate the encrypted variables in the `    plaintext` inventory file.
+Ensure that the Ansible vault file is located in the working directory, or provide the full path. Do not duplicate the encrypted variables in the plaintext installation inventory file.
 
 
 

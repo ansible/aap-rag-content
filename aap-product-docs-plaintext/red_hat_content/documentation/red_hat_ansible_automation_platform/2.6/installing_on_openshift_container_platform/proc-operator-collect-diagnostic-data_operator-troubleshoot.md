@@ -12,7 +12,7 @@ Use the `oc adm must-gather` command to collect comprehensive diagnostic data ab
 
 
 ```
-oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-25/aap-must-gather-rhel8
+oc adm must-gather --image=registry.redhat.io/ansible-automation-platform-26/aap-must-gather-rhel9
 ```
 
 Note

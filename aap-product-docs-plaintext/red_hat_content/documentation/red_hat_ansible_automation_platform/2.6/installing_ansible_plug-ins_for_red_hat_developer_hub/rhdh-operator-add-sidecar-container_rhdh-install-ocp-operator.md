@@ -15,7 +15,7 @@ Add a sidecar container for Ansible development tools in the Developer Hub pod. 
 
 
 ```
-apiVersion: rhdh.redhat.com/v1alpha4    kind: Backstage    metadata:      name: developer-hub    spec:      deployment:        patch:          spec:            template:              spec:                containers:                  - command:                      - adt                      - server                    image: registry.redhat.io/ansible-automation-platform-26/ansible-dev-tools-rhel8:latest                    imagePullPolicy: always                    ports:                      - containerPort: 8000                        protocol: TCP                    terminationMessagePolicy: file
+apiVersion: rhdh.redhat.com/v1alpha4    kind: Backstage    metadata:      name: developer-hub    spec:      deployment:        patch:          spec:            template:              spec:                containers:                  - command:                      - adt                      - server                    image: registry.redhat.io/ansible-automation-platform-26/ansible-dev-tools-rhel9:latest                    imagePullPolicy: always                    ports:                      - containerPort: 8000                        protocol: TCP                    terminationMessagePolicy: file
 ```
 
 

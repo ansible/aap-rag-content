@@ -5,7 +5,7 @@
 
 
 
-You can configure the AKS network CIDR blocks. Traffic that originates from the AKS cluster appears to come from the range configured in AKS, not from the VNET.
+You can configure the AKS network CIDR blocks. Traffic that originates from the AKS cluster appears to come from the range configured in AKS, not from the VNet.
 
 When you are planning your AKS CIDR block configuration, bear the following in mind:
 
@@ -34,7 +34,7 @@ It must not overlap with any Subnet IP ranges. | Requires a /24 block at minimum
 
 This CIDR block must not intersect with the CIDR of the Pod CIDR block.
 
-This CIDR block also must not intersect with the CIDR of the VNET CIDR block. |
+This CIDR block also must not intersect with the CIDR of the VNet CIDR block. |
 | DNS Service IP | An IP address assigned to the Kubernetes DNS service.
 
 It must be within the Kubernetes service address range specified in `serviceCidr` . | Must be an IP address in the Service CIDR other than the first IP in that range.

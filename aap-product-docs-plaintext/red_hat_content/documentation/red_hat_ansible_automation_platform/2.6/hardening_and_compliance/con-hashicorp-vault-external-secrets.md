@@ -1,20 +1,22 @@
 # 2. Hardening Ansible Automation Platform
 ## 2.4. Day two operations
-### 2.4.3. Using HashiCorp vault for external secrets management
+### 2.4.2. Use HashiCorp Vault for external secrets management
 
 
 
 
 You can integrate HashiCorp Vault with Ansible Automation Platform to manage and retrieve sensitive data.
 
-#### 2.4.3.1. Configuring Ansible Automation Platform to communicate with HashiCorp vault
+#### 2.4.2.1. Configure Ansible Automation Platform to communicate with HashiCorp Vault
 
 
 
 
-In an enterprise environment, having externally managed secrets is a convenient way to manage sensitive data across multiple services. One of the most common and recommended authentication methods for the HashiCorp vault is to use AppRoles with policies and login requirements that must be satisfied before a token is issued. To configure Ansible Automation Platform to use secrets stored in HashiCorp vault, set up a new credential with the type of HashiCorp Vault Secret Lookup. For information on how to do this, see [Hashicorp vault secret lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-secret-management#ref-hashicorp-vault-lookup) .
+In an enterprise environment, externally managed secrets are a way to manage sensitive data across multiple services. One of the most common authentication methods for the HashiCorp vault is to use AppRoles with policies and login requirements that must be satisfied before a token is issued.
 
-Enter relevant information such as an identifiable credential name, organization, and the URL of the vault server, for example, [https://vault.domain.com:8200](https://vault.domain.com:8200) .
+To configure Ansible Automation Platform to use secrets stored in HashiCorp vault, set up a new credential with the type of HashiCorp Vault Secret Lookup. For information on how to do this, see [Hashicorp vault secret lookup](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-secret-management#ref-hashicorp-vault-lookup) .
+
+Enter relevant information such as an identifiable credential name, organization, and the URL of the Hashicorp Vault server, for example, [https://vault.domain.com:8200](https://vault.domain.com:8200) .
 
 Populate the necessary fields with your information such as Token, AppRole role_id, and AppRole secret_id, then select v2 for the API version.
 
@@ -36,7 +38,7 @@ The **Path to Secret** will be prefixed by `    kv` if storing a key-value pair,
 1. When complete, Ansible Automation Platform is properly configured to use HashiCorp Vault as an external secret source.
 
 
-#### 2.4.3.2. Using HashiCorp Vault credentials within Ansible Automation Platform
+#### 2.4.2.2. Use HashiCorp Vault credentials within Ansible Automation Platform
 
 
 
@@ -54,12 +56,17 @@ icon.
 1. Optionally, clickTest. Otherwise, clickFinish.
 
 
-#### 2.4.3.3. Configuring the machine credential’s SSH private key
+#### 2.4.2.3. Configure the machine credential’s SSH private key
 
 
 
 
-Use the following procedure:
+Learn how to configure the machine credential’s SSH private key to use a HashiCorp Vault credential.
+
+**Prerequisite**
+
+This procedure assumes you have already configured the HashiCorp Vault credential and have the necessary information to complete the configuration.
+
 
 **Procedure**
 

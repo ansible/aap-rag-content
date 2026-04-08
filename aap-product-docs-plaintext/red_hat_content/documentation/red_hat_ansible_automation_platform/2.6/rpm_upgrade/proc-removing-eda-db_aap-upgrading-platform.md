@@ -1,5 +1,5 @@
 # 2. Upgrading to Red Hat Ansible Automation Platform 2.6
-## 2.5. Removing Event-Driven Ansible 2.4 database
+## 2.4. Removing Event-Driven Ansible 2.4 database
 
 
 

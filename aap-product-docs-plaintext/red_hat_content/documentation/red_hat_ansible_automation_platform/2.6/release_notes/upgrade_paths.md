@@ -35,6 +35,6 @@ The RPM-based upgrade paths are deprecated and will be removed in Ansible Automa
 -  [Infrastructure changes by deployment type](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_upgrade/upgrade-infrastructure-changes)
 -  [RPM upgrade](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_upgrade/index)
 -  [Updating containerized Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/maintaining-containerized-aap#updating-containerized-ansible-automation-platform)
--  [Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#operator-upgrade_licensing-gw)
+-  [Upgrading Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#operator-upgrade_deploying-chatbot-operator)
 
 

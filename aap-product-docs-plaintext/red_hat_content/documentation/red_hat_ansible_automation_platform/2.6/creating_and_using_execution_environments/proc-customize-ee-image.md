@@ -6,7 +6,7 @@
 
 You can customize existing Automation controller provided default automation execution environments by adding content specific to your needs. Automation controller includes the following default automation execution environments.
 
--  `    Minimal` - `    ansible-automation-platform-25` Includes the latest Ansible-core 2.16 release along with Ansible Runner, but does not include collections or other content. Ansible-automation-platform-24 Includes the Ansible-core 2.15 release along with Ansible Runner, but does not include collections or other content.
+-  `    Minimal` - `    ansible-automation-platform-26` Includes the latest Ansible-core 2.19 release along with Ansible Runner, but does not include collections or other content.
 
 While supported execution environments cover many automation prerequisites, minimal execution-environments are the recommended basis for your own custom images, to keep full control over dependencies and their versions.
 
@@ -30,7 +30,7 @@ $ podman login -u="[username]" -p="[token/hash]" registry.redhat.io
 
 
 ```
-podman pull registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel8:latest
+podman pull registry.redhat.io/ansible-automation-platform-26/ee-minimal-rhel8:latest
 ```
 
 

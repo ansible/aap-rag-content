@@ -1,5 +1,5 @@
 # 7. Rulebook activations
-## 7.6. Editing a rulebook activation
+## 7.5. Editing a rulebook activation
 
 
 

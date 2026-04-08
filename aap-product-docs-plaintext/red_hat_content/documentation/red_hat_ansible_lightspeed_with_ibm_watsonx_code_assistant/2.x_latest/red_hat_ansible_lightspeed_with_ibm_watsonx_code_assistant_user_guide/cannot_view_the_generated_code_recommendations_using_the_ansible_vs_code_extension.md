@@ -27,7 +27,7 @@ To resolve this error, ensure that:
 
 - You receive a `    Failure on completion requests` error when you make inference requests in VS Code.
 
-If you are part of an organization that has a trial or paid subscription to both Ansible Automation Platform and IBM watsonx Code Assistant, but your organization administrator has not configured an IBM watsonx Code Assistant model for your organization, you will encounter a `    Failure on completion requests` error when you make inference requests in VS Code.
+This error occurs because your organization has a trial or paid subscription to both Ansible Automation Platform and IBM watsonx Code Assistant. However, your organization administrator has not configured an IBM watsonx Code Assistant model for your organization.
 
 
 - You receive an `    Ansible Lightspeed encountered an error. Try again after some time.` error message when you make single-task or multitask requests.

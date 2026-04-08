@@ -34,5 +34,5 @@ vars:
 ansible_user: my_server_user
 ```
 
-For more information about inventories and Ansible inventory variables, see [About the Installer Inventory file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/planning_your_installation/about_the_installer_inventory_file) and [Inventory file variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/rpm_installation/appendix-inventory-files-vars) .
+For more information about inventories and Ansible inventory variables, see [About the installation program inventory file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/con-inventory-introduction_planning) and [Inventory file variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/appendix-inventory-files-vars) .
 

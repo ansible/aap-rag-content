@@ -11,7 +11,7 @@ The Red Hat Ansible Lightspeed with IBM watsonx Code Assistant machine learning 
 - Content from Ansible Galaxy
 
 
-Owing to IBM watsonx Code Assistant’s generative AI technology, as well as the types of Ansible content that were used to train the model, it is not possible to identify the specific set of training data that contributed to the generated code recommendations. However, Red Hat Ansible Lightspeed provides a capability that helps you to understand the possible origins of generated code recommendations.
+IBM watsonx Code Assistant uses generative AI technology and various types of Ansible content to train the model. Therefore, it is not possible to trace the specific training data that produced a given code recommendation.
 
 For each generated code recommendation, Red Hat Ansible Lightspeed lists the content source matches, including details such as potential source, content author, and relevant licenses. You can use this data to gain insight into potential training data sources used to generate the code recommendations.
 
@@ -20,7 +20,7 @@ After you enter a natural language prompt in VS Code and see the generated code 
 For example, the following illustration shows the training matches for the multitask recommendation **Install postgresql-server & run postgresql-setup command** :
 
 
-<span id="idm139735358926816"></span>
+<span id="idm140399989646400"></span>
 **Figure 5.3. Training matches for a multitask recommendation**
 
 ![Training matches for multitask recommendation](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/1f0180015e378772f9d8876be53e9a9c/lightspeed-multitask-content-matches.png)

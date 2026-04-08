@@ -1,5 +1,5 @@
-# 3. Installing Red Hat Ansible Automation Platform
-## 3.3. Inventory file examples based on installation scenarios
+# 4. Installing Red Hat Ansible Automation Platform
+## 4.3. Inventory file examples based on installation scenarios
 
 
 

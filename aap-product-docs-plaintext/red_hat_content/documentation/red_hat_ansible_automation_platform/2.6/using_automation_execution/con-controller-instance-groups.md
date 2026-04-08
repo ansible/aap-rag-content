@@ -44,7 +44,7 @@ You can define custom groups in the inventory file by naming groups with `instan
 The current behavior expects a member of an `instance_group_*` to be part of `automationcontroller` or `execution_nodes` group.
 
 
-<span id="idm139777937328384"></span>
+<span id="idm140078308330432"></span>
 **Example 18.1. Define instance groups**
 
 ```
@@ -1226,7 +1226,7 @@ Your newly added execution environment is ready to be used in a job template.
 
 **Verification**
 
-When you have added an execution environment to a job template, those templates are listed in the **Templates** tab of the execution environment:
+When you have added an execution environment to a job template, those templates are listed in the **Templates** tab of the execution environment.
 
 
 
@@ -1744,7 +1744,8 @@ Automation controller supports the following credential types:
 -  [Red Hat Satellite 6](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-credentials#ref-controller-credential-satellite)
 -  [Red Hat Virtualization](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-credentials#ref-controller-credential-virtualization)
 -  [Source Control](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-credentials#ref-controller-credential-source-control)
--  [Terraform Backend Configuration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-credentials#ref-controller-credential-terraform)
+-  [Terraform: Backend Configuration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-credentials#ref-controller-credential-terraform)
+-  [Terraform: HCP Terraform credential type](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-credentials/#ref-controller-credential-terraform-hcp)
 -  [Thycotic DevOps Secrets Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-credentials#ref-controller-credential-thycotic-vault)
 -  [Thycotic Secret Server](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-credentials#ref-controller-credential-thycotic-server)
 -  [Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-credentials#ref-controller-credential-vault)
@@ -2477,7 +2478,7 @@ If you are using a GitHub account for a Source Control credential and you have _
 
 
 
-### 22.4.26. Terraform backend configuration
+### 22.4.26. Terraform: Backend configuration
 
 
 
@@ -2508,7 +2509,21 @@ bucket = "my-terraform-state-bucket"    key = "path/to/terraform-state-file"    
 - Optional: **Google Cloud Platform account credentials**
 
 
-### 22.4.27. Thycotic DevOps Secrets Vault credential type
+### 22.4.27. Terraform: HCP Terraform credential type
+
+
+
+
+When using the `hashicorp.terraform` collection, you can use the **HCP Terraform** credential type for HCP Terraform or Terraform Enterprise (TFE/C).
+
+Using this credential type enables users to store TFE/C tokens and host names, and associate them with job or workflow templates. It eliminates the need to set tokens in playbooks or tasks.
+
+**Additional resources**
+
+-  [Creating a credential](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/getting_started_with_hashicorp_and_ansible_automation_platform/terraform-product#terraform-creating-credential)
+
+
+### 22.4.28. Thycotic DevOps Secrets Vault credential type
 
 
 
@@ -2519,7 +2534,7 @@ This is part of the secret management capability.
 
 For more information, see [Thycotic DevOps Secrets Vault](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-secret-management#ref-thycotic-devops-vault) .
 
-### 22.4.28. Thycotic secret server credential type
+### 22.4.29. Thycotic secret server credential type
 
 
 
@@ -2528,7 +2543,7 @@ This is considered part of the secret management capability.
 
 For more information, see [Thycotic Secret Server](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-secret-management#ref-thycotic-secret-server) .
 
-### 22.4.29. Ansible Vault credential type
+### 22.4.30. Ansible Vault credential type
 
 
 
@@ -2548,7 +2563,7 @@ Credentials that are used in scheduled jobs must not be configured as **Prompt o
 
 
 
-### 22.4.30. VMware vCenter credential type
+### 22.4.31. VMware vCenter credential type
 
 
 
@@ -2578,7 +2593,7 @@ If the VMware guest tools are not running on the instance, VMware inventory sync
 
 
 
-#### 22.4.30.1. Access VMware vCenter credentials in an Ansible Playbook
+#### 22.4.31.1. Access VMware vCenter credentials in an Ansible Playbook
 
 
 
@@ -4137,19 +4152,16 @@ A collection of terms and definitions covering the core concepts, components, an
 See also, **Node** .
 
 
-<span id="idm139777949616176"></span>
+<span id="idm140078325239392"></span>
 # Legal Notice
 
 Copyright© Red Hat.
-The text of and illustrations in this document are licensed by Red Hat under a Creative Commons Attribution–Share Alike 3.0 Unported license ("CC-BY-SA"). An explanation of CC-BY-SA is available at [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/) . In accordance with CC-BY-SA, if you distribute this document or an adaptation of it, you must provide the URL for the original version.
+Except as otherwise noted below, the text of and illustrations in this documentation are licensed by Red Hat under the Creative Commons Attribution–Share Alike 3.0 Unported license . If you distribute this document or an adaptation of it, you must provide the URL for the original version.
 Red Hat, as the licensor of this document, waives the right to enforce, and agrees not to assert, Section 4d of CC-BY-SA to the fullest extent permitted by applicable law.
-Red Hat, Red Hat Enterprise Linux, the Shadowman logo, JBoss, OpenShift, Fedora, the Infinity logo, and RHCE are trademarks of Red Hat, Inc., registered in the United States and other countries.
+Red Hat, the Red Hat logo, JBoss, Hibernate, and RHCE are trademarks or registered trademarks of Red Hat, LLC. or its subsidiaries in the United States and other countries.
 Linux® is the registered trademark of Linus Torvalds in the United States and other countries.
-Java® is a registered trademark of Oracle and/or its affiliates.
-XFS® is a trademark of Silicon Graphics International Corp. or its subsidiaries in the United States and/or other countries.
-MySQL® is a registered trademark of MySQL AB in the United States, the European Union and other countries.
-Node.js® is an official trademark of Joyent. Red Hat Software Collections is not formally related to or endorsed by the official Joyent Node.js open source or commercial project.
-TheOpenStack® Word Mark and OpenStack logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+XFS is a trademark or registered trademark of Hewlett Packard Enterprise Development LP or its subsidiaries in the United States and other countries.
+TheOpenStack® Word Mark and OpenStack logo are trademarks or registered trademarks of the Linux Foundation, used under license.
 All other trademarks are the property of their respective owners.
 
 

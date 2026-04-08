@@ -1,0 +1,25 @@
+# 3. Manage your Ansible development tools environment with the AI assistant
+## 3.3. Understand your existing automation with the AI assistant
+
+
+
+
+If you are working with an existing playbook and need to understand its components, you can ask the assistant to analyze the file.
+
+**Procedure**
+
+1. Open the playbook you want to investigate in the VS Code editor.
+1. In the Copilot chat window, enter a prompt instructing the AI assistant to analyze dependencies. For example:
+
+
+-  _Analyze my web server playbook and tell me which Ansible collections are being used_ .
+
+The assistant then analyzes the playbook content and identifies:
+
+
+- Which collections are required.
+- Which modules are used within the tasks.
+- Whether automations are referenced with Fully Qualified Collection Names (FQCN).
+
+
+
