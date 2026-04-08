@@ -1,8 +1,0 @@
-# 1. Introduction to hardening Ansible Automation Platform
-## 1.1. Audience
-
-
-
-
-This guide is written for personnel responsible for installing, configuring, and maintaining Ansible Automation Platform 2.5 when deployed on Red Hat Enterprise Linux. Additional information is provided for security operations, compliance assessment, and other functions associated with related security processes.
-

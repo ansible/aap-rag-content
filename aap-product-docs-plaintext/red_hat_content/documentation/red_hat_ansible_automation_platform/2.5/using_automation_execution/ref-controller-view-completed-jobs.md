@@ -1,8 +1,0 @@
-# 14. Inventories
-## 14.5. View completed jobs
-
-
-
-
-If you use an inventory to run a job, you can view details about those jobs in the **Jobs** tab of the inventory and click **Expanded** to view details about each job.
-

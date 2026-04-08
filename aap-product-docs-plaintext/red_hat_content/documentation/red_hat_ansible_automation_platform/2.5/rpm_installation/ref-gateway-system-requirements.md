@@ -1,8 +1,0 @@
-# 2. System requirements
-## 2.3. Platform gateway system requirements
-
-
-
-
-The platform gateway is the service that handles authentication and authorization for Ansible Automation Platform. It provides a single entry into the platform and serves the platform’s user interface.
-

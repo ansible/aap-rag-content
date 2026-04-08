@@ -1,7 +1,0 @@
-# Chapter 4. Upgrading the Ansible plug-ins on a Helm installation on OpenShift Container Platform
-
-
-
-
-To upgrade the Ansible plug-ins, you must update the `plugin-registry` application with the latest Ansible plug-ins files.
-
