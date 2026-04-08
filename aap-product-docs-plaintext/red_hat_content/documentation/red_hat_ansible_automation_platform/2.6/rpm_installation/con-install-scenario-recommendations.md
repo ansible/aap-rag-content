@@ -1,6 +1,6 @@
-# 3. Installing Red Hat Ansible Automation Platform
-## 3.3. Inventory file examples based on installation scenarios
-### 3.3.1. Inventory file recommendations based on installation scenarios
+# 4. Installing Red Hat Ansible Automation Platform
+## 4.3. Inventory file examples based on installation scenarios
+### 4.3.1. Inventory file recommendations based on installation scenarios
 
 
 
@@ -21,7 +21,7 @@ Do not use `    localhost` .
 - The inventory file variables `    registry_username` and `    registry_password` are only required if a non-bundle installer is used.
 
 
-#### 3.3.1.1. Single platform gateway and automation controller with an external (installer managed) database
+#### 4.3.1.1. Single platform gateway and automation controller with an external (installer managed) database
 
 
 
@@ -83,7 +83,7 @@ automationgateway_pg_sslmode='prefer'
 # postgres_ssl_key=/path/to/pgsql.key
 ```
 
-#### 3.3.1.2. Single platform gateway, automation controller, and automation hub with an external (installer managed) database
+#### 4.3.1.2. Single platform gateway, automation controller, and automation hub with an external (installer managed) database
 
 
 
@@ -172,7 +172,7 @@ automationgateway_pg_sslmode='prefer'
 # postgres_ssl_key=/path/to/pgsql.key
 ```
 
-#### 3.3.1.3. Single platform gateway, automation controller, automation hub, and Event-Driven Ansible controller with an external (installer managed) database
+#### 4.3.1.3. Single platform gateway, automation controller, automation hub, and Event-Driven Ansible controller with an external (installer managed) database
 
 
 
@@ -305,7 +305,7 @@ automationgateway_pg_sslmode='prefer'
 -  [Ansible automation hub variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/appendix-inventory-files-vars#hub-variables) .
 
 
-#### 3.3.1.4. Installing high availability automation hub
+#### 4.3.1.4. Installing high availability automation hub
 
 
 
@@ -357,7 +357,7 @@ If you are using a load balancer, configure `automationgateway_main_url` to poin
 
 
 
-#### 3.3.1.5. Enabling a high availability (HA) deployment of automation hub on SELinux
+#### 4.3.1.5. Enabling a high availability (HA) deployment of automation hub on SELinux
 
 
 
@@ -454,7 +454,7 @@ $ setup.sh -- -b --become-user root
 -  [Filesystem Layout](https://docs.pulpproject.org/pulpcore/installation/hardware-requirements.html#filesystem-layout)
 
 
-##### 3.3.1.5.1. Configuring pulpcore.service
+##### 4.3.1.5.1. Configuring pulpcore.service
 
 
 
@@ -516,7 +516,7 @@ $ chcon system_u:object_r:pulpcore_etc_t:s0 /etc/pulp/certs/token_{private,publi
 
 Repeat this command to reattach the proper SELinux labels whenever you relabel your system.
 
-##### 3.3.1.5.2. Applying the SELinux context
+##### 4.3.1.5.2. Applying the SELinux context
 
 
 
@@ -567,7 +567,7 @@ $ mount -a
 
 
 
-#### 3.3.1.6. Configuring content signing on private automation hub
+#### 4.3.1.6. Configuring content signing on private automation hub
 
 
 
@@ -620,7 +620,7 @@ The two new keys ( **automationhub_auto_sign_collections** and **automationhub_r
 
 
 
-#### 3.3.1.7. Adding a safe plugin variable to Event-Driven Ansible controller
+#### 4.3.1.7. Adding a safe plugin variable to Event-Driven Ansible controller
 
 
 

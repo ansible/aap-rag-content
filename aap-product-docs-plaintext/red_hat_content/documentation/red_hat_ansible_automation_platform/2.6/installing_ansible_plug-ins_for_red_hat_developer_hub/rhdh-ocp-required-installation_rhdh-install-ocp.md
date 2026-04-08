@@ -1,5 +1,5 @@
 # 2. Installing the Ansible plug-ins with a Helm chart on OpenShift Container Platform
-## 2.5. Required configuration
+## 2.4. Required configuration
 
 
 

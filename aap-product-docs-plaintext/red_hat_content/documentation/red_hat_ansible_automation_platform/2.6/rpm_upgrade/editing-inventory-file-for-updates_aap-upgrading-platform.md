@@ -1,5 +1,5 @@
 # 2. Upgrading to Red Hat Ansible Automation Platform 2.6
-## 2.4. Setting up the inventory file
+## 2.3. Setting up the inventory file
 
 
 

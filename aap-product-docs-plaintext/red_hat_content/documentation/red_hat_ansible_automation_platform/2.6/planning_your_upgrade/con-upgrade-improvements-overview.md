@@ -1,10 +1,10 @@
 # 1. Overview of upgrade improvements
-## 1.1. Overview of upgrade improvements
+## 1.1. Upgrade path details
 
 
 
 
-Changes in 2.6 improve the overall upgrade experience, as detailed in the following sections:
+Ansible Automation Platform 2.6 includes changes that improve the overall platform upgrade experience.
 
 -  [Upgrading from 2.5 to 2.6](#from-2.5)
 -  [Upgrading from 2.4 to 2.6](#from-2.4)
@@ -49,18 +49,18 @@ To prevent migration failure and service disruption for SSO users, you must:
 
 
 - Automation controller: You can view and edit existing automation controller applications, but you cannot create new ones. They still function, but they might be removed in a future release. You should plan to migrate to platform OAuth applications.
-- Ansible Automation Platform: Platform OAuth applications provide an updated interface and are the standard for future use. You will transition to these applications.
+- Ansible Automation Platform: Platform OAuth applications provide an updated interface and are the standard for future use. You will move to these applications.
 
 - Tokens:
 
 
 - Automation controller: Automation controller personal access tokens (PATs) are deprecated. You will move to platform gateway PATs.
-- Ansible Automation Platform: Platform tokens provide an updated interface and are the standard for future use. You will transition to these tokens.
+- Ansible Automation Platform: Platform tokens provide an updated interface and are the standard for future use. You will move to these tokens.
 
 - Authenticator configurations:
 
 
-- Ansible Automation Platform 2.4 to Ansible Automation Platform 2.6: The migration of all authenticator configurations from the automation controller to the platform gateway is automated. This includes third-party authentication configurations and sensitive data like SAML private keys or OAuth secret keys. If you use custom LDAP certificates, you must manually migrate them.
+- Ansible Automation Platform 2.4 to Ansible Automation Platform 2.6: The migration of all authenticator configurations from the automation controller to the platform gateway is automated. This includes third-party authentication configurations and sensitive data such as SAML private keys or OAuth secret keys. If you use custom LDAP certificates, you must manually migrate them.
 - Ansible Automation Platform 2.5 to Ansible Automation Platform 2.6: Authenticator configurations are not automatically migrated. LDAP settings configured in Ansible Automation Platform 2.5 remain as they were after upgrading to 2.6.
 
 
@@ -76,10 +76,10 @@ To prevent migration failure and service disruption for SSO users, you must:
 
 
 
-Determine which upgrade paths are supported for your current Ansible Automation Platform deployment. The following reference tables show RHEL version compatibility and give step-by-step upgrade processes organized by deployment type: RPM-based, container-based, and OpenShift Container Platform deployments.
+Use these reference tables to find the supported upgrade paths for your Ansible Automation Platform deployment. Review Red Hat Enterprise Linux version compatibility and step-by-step processes for RPM, container, and OpenShift Container Platform deployment types.
 
 Note
-In-place upgrades of major RHEL versions are not supported. You must migrate your existing deployment of Ansible Automation Platform to a new RHEL environment.
+In-place upgrades of major Red Hat Enterprise Linux versions are not supported. You must migrate your existing deployment of Ansible Automation Platform to a new Red Hat Enterprise Linux environment.
 
 
 
@@ -102,7 +102,7 @@ Supported RHEL versions differ among deployment types, as shown in the following
 
 
 
-Use the following reference tables to find the supported upgrade paths for RPM-based deployments of Ansible Automation Platform.
+Find the supported upgrade paths for your RPM-based Ansible Automation Platform deployment. This helps you plan the necessary steps for a smooth upgrade.
 
 ### 3.2.1. RPM-based Ansible Automation Platform 2.4 on RHEL 8
 
@@ -197,7 +197,7 @@ Use the following reference tables to find the supported upgrade paths for RPM-b
 
 
 
-Use the following reference tables to find the supported upgrade paths for container-based deployments of Ansible Automation Platform.
+Find the supported upgrade paths for your container-based Ansible Automation Platform deployment. This helps you plan the necessary steps for a smooth upgrade.
 
 ### 3.3.1. Container-based Ansible Automation Platform 2.5 on RHEL 9
 
@@ -220,8 +220,8 @@ Use the following reference tables to find the supported upgrade paths for conta
 
 | Source | Target | Process |
 | --- | --- | --- |
-| Container-based Ansible Automation Platform 2.5 on RHEL 10 | Container-based Ansible Automation Platform 2.6 on RHEL 10 | -  [Upgrade your container deployment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installationmaintaining-containerized-aap#updating-containerized-ansible-automation-platform) from 2.5 to 2.6. |
-| Container-based Ansible Automation Platform 2.5 on RHEL 10 | Ansible Automation Platform on OpenShift Container Platform 2.6 | 1.  [Upgrade your container deployment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installationmaintaining-containerized-aap#updating-containerized-ansible-automation-platform) from 2.5 to 2.6.
+| Container-based Ansible Automation Platform 2.5 on RHEL 10 | Container-based Ansible Automation Platform 2.6 on RHEL 10 | -  [Upgrade your container deployment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/maintaining-containerized-aap#updating-containerized-ansible-automation-platform) from 2.5 to 2.6. |
+| Container-based Ansible Automation Platform 2.5 on RHEL 10 | Ansible Automation Platform on OpenShift Container Platform 2.6 | 1.  [Upgrade your container deployment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/maintaining-containerized-aap#updating-containerized-ansible-automation-platform) from 2.5 to 2.6.
 1.  [Migrate your container deployment](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/ansible_automation_platform_migration) 2.6 to Ansible Automation Platform on OpenShift Container Platform 2.6. |
 
 
@@ -251,7 +251,7 @@ Use the following reference tables to find the supported upgrade paths for conta
 
 
 
-Use the following reference tables to find the supported upgrade paths for Ansible Automation Platform deployments on OpenShift Container Platform.
+Find the supported upgrade paths for Ansible Automation Platform deployments that use OpenShift Container Platform. This helps you plan the necessary steps for a smooth upgrade.
 
 ### 3.4.1. Ansible Automation Platform on OpenShift Container Platform 2.4
 
@@ -260,7 +260,7 @@ Use the following reference tables to find the supported upgrade paths for Ansib
 
 | Source | Target | Process |
 | --- | --- | --- |
-| Ansible Automation Platform on OpenShift Container Platform 2.4 | Ansible Automation Platform on OpenShift Container Platform 2.6 | -  [Upgrade from Ansible Automation Platform on OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/installing_on_openshift_container_platform/operator-upgrade_licensing-gw) 2.4 to 2.6. |
+| Ansible Automation Platform on OpenShift Container Platform 2.4 | Ansible Automation Platform on OpenShift Container Platform 2.6 | -  [Upgrading the Ansible Automation Platform on OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/installing_on_openshift_container_platform/operator-upgrade_deploying-chatbot-operator#upgrading-operator_operator-upgrade) 2.4 to 2.6. |
 
 
 ### 3.4.2. Ansible Automation Platform on OpenShift Container Platform 2.5
@@ -270,7 +270,7 @@ Use the following reference tables to find the supported upgrade paths for Ansib
 
 | Source | Target | Process |
 | --- | --- | --- |
-| Ansible Automation Platform on OpenShift Container Platform 2.5 | Ansible Automation Platform on OpenShift Container Platform 2.6 | -  [Upgrade from Ansible Automation Platform on OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/installing_on_openshift_container_platform/operator-upgrade_licensing-gw) 2.5 to 2.6. |
+| Ansible Automation Platform on OpenShift Container Platform 2.5 | Ansible Automation Platform on OpenShift Container Platform 2.6 | -  [Upgrading the Ansible Automation Platform on OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/installing_on_openshift_container_platform/operator-upgrade_deploying-chatbot-operator#upgrading-operator_operator-upgrade) 2.5 to 2.6. |
 
 
 ### 3.4.3. Ansible Automation Platform on OpenShift Container Platform 2.6
@@ -308,7 +308,7 @@ The following sections describe the tested infrastructure changes for RPM-based 
 
 
 
-You can upgrade your 2.4 single automation controller node deployment to a 2.6 growth topology. This section outlines the infrastructure changes, requirements, and an example inventory for upgrading.
+Successfully upgrade your single automation controller node deployment (version 2.4) to a 2.6 growth topology. Use the provided infrastructure changes, requirements, and example inventory file to plan your upgrade.
 
 #### 4.1.1.1. 2.4 infrastructure topology diagram
 
@@ -318,7 +318,7 @@ You can upgrade your 2.4 single automation controller node deployment to a 2.6 g
 This diagram outlines the 2.4 infrastructure topology for this deployment model.
 
 
-<span id="idm140469845861696"></span>
+<span id="idm140131019041328"></span>
 **Figure 4.1. 2.4 infrastructure topology diagram**
 
 ![2.4 single controller topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/ef36dec0d0d280120421bee65ee22274/rpm-a-controller-2-4.png)
@@ -334,7 +334,7 @@ This diagram outlines the 2.4 infrastructure topology for this deployment model.
 This diagram outlines the 2.6 infrastructure topology that Red Hat has tested with this deployment model.
 
 
-<span id="idm140469844712896"></span>
+<span id="idm140131019034112"></span>
 **Figure 4.2. 2.6 infrastructure topology diagram**
 
 ![2.6 single controller growth topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/2b14cc5fc01f4813cb34238bc17161c7/rpm-a-controller-2.6.png)
@@ -458,7 +458,7 @@ automationedacontroller_pg_password=&lt;set your own&gt;
 
 
 
-You can upgrade your 2.4 single node automation controller and automation hub deployment to a 2.6 growth topology. This section outlines the infrastructure changes, requirements, and an example inventory for upgrading.
+Upgrade your 2.4 single-node deployment (automation controller and automation hub) to a 2.6 growth topology. Review the infrastructure changes and requirements needed to successfully plan your upgrade.
 
 #### 4.1.2.1. 2.4 infrastructure topology diagram
 
@@ -468,7 +468,7 @@ You can upgrade your 2.4 single node automation controller and automation hub de
 This diagram outlines the 2.4 infrastructure topology for this deployment model.
 
 
-<span id="idm140469844323248"></span>
+<span id="idm140131017535152"></span>
 **Figure 4.3. 2.4 infrastructure topology diagram**
 
 ![2.4 single controller and hub topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/f6dd26e553109a3bae6119cd1a996f06/rpm-a-controller-hub-2-4.png)
@@ -484,7 +484,7 @@ This diagram outlines the 2.4 infrastructure topology for this deployment model.
 This diagram outlines the 2.6 infrastructure topology that Red Hat has tested with this deployment model.
 
 
-<span id="idm140469845033328"></span>
+<span id="idm140131020093952"></span>
 **Figure 4.4. 2.6 infrastructure topology diagram**
 
 ![2.6 single controller and hub growth topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/349e4be26d5082fc249d738fe99596bf/rpm-a-controller-hub-2.6.png)
@@ -610,7 +610,7 @@ automationedacontroller_pg_password=&lt;set your own&gt;
 
 
 
-You can upgrade your 2.4 multi node automation controller deployment to a 2.6 enterprise topology. This section outlines the infrastructure changes, requirements, and an example inventory for upgrading.
+Upgrade your 2.4 multi-node automation controller setup to a 2.6 enterprise topology. Review the required infrastructure changes and requirements needed to successfully plan the upgrade.
 
 #### 4.1.3.1. 2.4 infrastructure topology diagram
 
@@ -620,7 +620,7 @@ You can upgrade your 2.4 multi node automation controller deployment to a 2.6 en
 This diagram outlines the 2.4 infrastructure topology for this deployment model.
 
 
-<span id="idm140469848555280"></span>
+<span id="idm140131024577808"></span>
 **Figure 4.5. 2.4 infrastructure topology diagram**
 
 ![2.4 multi controller topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/dae45b79ec5c3b275a7884b5e80d6a14/rpm-b-controller-2-4.png)
@@ -636,7 +636,7 @@ This diagram outlines the 2.4 infrastructure topology for this deployment model.
 This diagram outlines the 2.6 infrastructure topology that Red Hat has tested with this deployment model.
 
 
-<span id="idm140469845213472"></span>
+<span id="idm140131016893040"></span>
 **Figure 4.6. 2.6 infrastructure topology diagram**
 
 ![2.6 multi controller enterprise topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/b3751f9a7f990673c57748eab57cc559/rpm-b-controller-2.6.png)
@@ -791,7 +791,7 @@ You can upgrade your 2.4 multi node automation controller and automation hub dep
 This diagram outlines the 2.4 infrastructure topology that Red Hat has tested with this deployment model.
 
 
-<span id="idm140469846827488"></span>
+<span id="idm140131017729248"></span>
 **Figure 4.7. 2.4 infrastructure topology diagram**
 
 ![2.4 multi controller and hub topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/b41838ce1c18cbce6495ce4eac2fcadd/rpm-b-controller-hub-2-4.png)
@@ -807,7 +807,7 @@ This diagram outlines the 2.4 infrastructure topology that Red Hat has tested wi
 This diagram outlines the 2.6 infrastructure topology that Red Hat has tested with this deployment model.
 
 
-<span id="idm140469846820368"></span>
+<span id="idm140131017299168"></span>
 **Figure 4.8. 2.6 infrastructure topology diagram**
 
 ![2.6 multi controller and hub enterprise topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/1a073d50d5f416340b05c3fe41863cfe/rpm-b-controller-hub-2.6.png)
@@ -1015,7 +1015,7 @@ The following sections describe the tested infrastructure changes for Operator-b
 
 
 
-You can upgrade your 2.4 single automation controller node deployment to a 2.6 growth topology. This section outlines the infrastructure changes and requirements for upgrading.
+Plan your upgrade from a 2.4 single automation controller node setup to a 2.6 growth topology. Review the required infrastructure changes and requirements for a successful upgrade.
 
 #### 4.3.1.1. 2.4 infrastructure topology diagram
 
@@ -1025,7 +1025,7 @@ You can upgrade your 2.4 single automation controller node deployment to a 2.6 g
 This diagram outlines the 2.4 infrastructure topology for this deployment model.
 
 
-<span id="idm140469844846960"></span>
+<span id="idm140131020022704"></span>
 **Figure 4.9. 2.4 infrastructure topology diagram**
 
 ![2.4 single controller topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/939a71fba6d3b55d4095383016298a8b/ocp-a-controller-2.4.png)
@@ -1041,7 +1041,7 @@ This diagram outlines the 2.4 infrastructure topology for this deployment model.
 This diagram outlines the 2.6 infrastructure topology that Red Hat has tested with this deployment model.
 
 
-<span id="idm140469844839776"></span>
+<span id="idm140131020876560"></span>
 **Figure 4.10. 2.6 infrastructure topology diagram**
 
 ![2.6 growth topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/c5591346c88cb1a587f46c8e97fee020/ocp-a-controller-2.6.png)
@@ -1086,7 +1086,7 @@ The following table highlights the requirements for upgrading from Ansible Autom
 
 
 
-You can upgrade your 2.4 single automation controller and automation hub deployment to a 2.6 growth topology. This section outlines the infrastructure changes and requirements for upgrading.
+Upgrade your 2.4 single-node deployment (automation controller and automation hub) to a 2.6 growth topology. Review the infrastructure changes and requirements needed to successfully plan your upgrade.
 
 #### 4.3.2.1. 2.4 infrastructure topology diagram
 
@@ -1096,7 +1096,7 @@ You can upgrade your 2.4 single automation controller and automation hub deploym
 This diagram outlines the 2.4 infrastructure topology for this deployment model.
 
 
-<span id="idm140469843393712"></span>
+<span id="idm140131020434672"></span>
 **Figure 4.11. 2.4 infrastructure topology diagram**
 
 ![2.4 single controller and hub topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/7c89a7bf265cf9281fe17b4245254573/ocp-a-controller-hub-2.4.png)
@@ -1112,7 +1112,7 @@ This diagram outlines the 2.4 infrastructure topology for this deployment model.
 This diagram outlines the 2.6 infrastructure topology that Red Hat has tested with this deployment model.
 
 
-<span id="idm140469843705120"></span>
+<span id="idm140131016978128"></span>
 **Figure 4.12. 2.6 infrastructure topology diagram**
 
 ![2.6 growth topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/21acc7a5d8cc4b5c8aa5937191468c3b/ocp-a-controller-hub-2.6.png)
@@ -1161,7 +1161,7 @@ The following table highlights the requirements for upgrading from Ansible Autom
 
 
 
-You can upgrade your 2.4 multi node automation controller deployment to a 2.6 enterprise topology. This section outlines the infrastructure changes and requirements for upgrading.
+Upgrade your 2.4 multi-node automation controller setup to a 2.6 enterprise topology. Review the required infrastructure changes and requirements needed to successfully plan the upgrade.
 
 #### 4.3.3.1. 2.4 infrastructure topology diagram
 
@@ -1171,7 +1171,7 @@ You can upgrade your 2.4 multi node automation controller deployment to a 2.6 en
 This diagram outlines the 2.4 infrastructure topology for this deployment model.
 
 
-<span id="idm140469847420224"></span>
+<span id="idm140131016551680"></span>
 **Figure 4.13. 2.4 infrastructure topology diagram**
 
 ![2.4 multi controller topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/d977a11bcd47bd7c415beb03a58f71c2/ocp-b-controller-2.4.png)
@@ -1187,7 +1187,7 @@ This diagram outlines the 2.4 infrastructure topology for this deployment model.
 This diagram outlines the 2.6 infrastructure topology that Red Hat has tested with this deployment model.
 
 
-<span id="idm140469847413104"></span>
+<span id="idm140131016544560"></span>
 **Figure 4.14. 2.6 infrastructure topology diagram**
 
 ![2.6 enterprise topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/daf6df62663bb2971afecec84977ef0c/ocp-b-controller-2.6.png)
@@ -1235,7 +1235,7 @@ The following table highlights the requirements for upgrading from Ansible Autom
 
 
 
-You can upgrade your 2.4 multi node automation controller and automation hub deployment to a 2.6 enterprise topology. This section outlines the infrastructure changes and requirements for upgrading.
+Upgrade your 2.4 multi-node deployment (automation controller and automation hub) to a 2.6 enterprise topology. Review the infrastructure changes and requirements needed to successfully plan your upgrade.
 
 #### 4.3.4.1. 2.4 infrastructure topology diagram
 
@@ -1245,7 +1245,7 @@ You can upgrade your 2.4 multi node automation controller and automation hub dep
 This diagram outlines the 2.4 infrastructure topology for this deployment model.
 
 
-<span id="idm140469844398384"></span>
+<span id="idm140131015349952"></span>
 **Figure 4.15. 2.4 infrastructure topology diagram**
 
 ![2.4 multi controller and hub topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/bac1cf6785af2b43d539d3d0db00af74/ocp-b-controller-hub-2.4.png)
@@ -1261,7 +1261,7 @@ This diagram outlines the 2.4 infrastructure topology for this deployment model.
 This diagram outlines the 2.6 infrastructure topology that Red Hat has tested with this deployment model.
 
 
-<span id="idm140469844391264"></span>
+<span id="idm140131015342768"></span>
 **Figure 4.16. 2.6 infrastructure topology diagram**
 
 ![2.6 enterprise topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Planning_your_upgrade-en-US/images/ef9d80ce5ca4d51d4ef247f2c27b6c8a/ocp-b-controller-hub-2.6.png)
@@ -1331,7 +1331,9 @@ For more information about the enterprise topology infrastructure requirements a
 
 
 
-During the upgrade process to Ansible Automation Platform 2.6, Identity Access Management (IAM) data, including users, teams, organizations, their memberships, and associated roles, is migrated from automation controller and automation hub to platform gateway. This migration establishes automation controller as the primary source of IAM data for platform gateway, ensuring continuity of user memberships and appropriate platform-level role assignments.
+During the upgrade process to Ansible Automation Platform 2.6, Identity Access Management (IAM) data, including users, teams, organizations, their memberships, and associated roles, is migrated from automation controller and automation hub to platform gateway.
+
+This migration establishes automation controller as the primary source of IAM data for platform gateway, ensuring continuity of user memberships and appropriate platform-level role assignments.
 
 Note
 We recommend upgrading directly from the latest version of 2.4 to Ansible Automation Platform 2.6, without using 2.5 as an intermediate step, as the upgrade process to 2.6 is less complex.
@@ -1349,7 +1351,7 @@ It is possible for customers to upgrade directly from the latest 2.4 version to 
 | --- | --- |
 | Automation controller auditor | Platform auditor |
 | Automation controller superuser/administrator (flag) | Platform superuser/administrator (flag) |
-| Automation controller organization admin | Organization administrator |
+| Automation controller organization admin | Organization Administrator |
 | Automation controller organization member | Organization member |
 | Automation controller team admin | Team administrator |
 | Automation hub administrator | Team member (user) |
@@ -1404,14 +1406,18 @@ Before upgrading from Ansible Automation Platform 2.4, change any integrations o
 
 
 
-When upgrading from Ansible Automation Platform 2.5 to 2.6, existing authenticators and their mappings in platform gateway continue to function as they are, with no changes being imported. This is because the core authentication service in 2.5 is already platform gateway, so a migration of this data is not needed.
+When upgrading from Ansible Automation Platform 2.5 to 2.6, existing authenticators and their mappings in platform gateway continue to function as they are, with no changes being imported.
+
+This is because the core authentication service in 2.5 is already platform gateway, so a migration of this data is not needed.
 
 ### 5.2.1. Automation controller
 
 
 
 
-Customers upgrading from 2.5 to 2.6 must also begin moving away from using nested teams in automation controller APIs, as future releases will disable direct access to service APIs. After the upgrade, user data is synchronized between automation controller and the platform-wide authentication gateway.
+Customers upgrading from 2.5 to 2.6 must also begin moving away from using nested teams in automation controller APIs, as future releases will disable direct access to service APIs.
+
+After the upgrade, user data is synchronized between automation controller and the platform-wide authentication gateway.
 
 Automation controller users, teams, roles, and organizations should become platform entities upon upgrade without the need to run additional "merge" processes. Customers that first upgraded from 2.4 to 2.5 will have teams that existed in 2.4 merged into platform gateway when they upgrade from 2.5 to 2.6.
 
@@ -1421,6 +1427,8 @@ Roles should apply the permission model for non-admin access to execution, conte
 
 
 
+
+Understand identity changes for automation hub users when upgrading from 2.5 to 2.6. Review automatically merged teams, manually reassign permissions for removed admins, and reconfigure SSO to restore user access.
 
 The following apply:
 
@@ -1435,7 +1443,7 @@ If teams with the same name exist in both automation hub and within the platform
 - If you rely on automation hub _Single Sign-On_ (SSO) to access the automation hub user interface (UI), automation hub SSO logins will no longer function after the upgrade. However, API tokens will remain active. Therefore, automated processes or systems that use API tokens for authentication will continue to operate without interruption. If your workflows predominantly rely on API access, the impact might be minimal. However, if users primarily access the UI through SSO, they will need to take action post-upgrade.
 - To restore UI access for users who previously relied on automation hub SSO, you need to reconfigure SSO within Ansible Automation Platform to be able to login. For further information, see [Configuring Ansible Automation Platform Central Authentication Generic OIDC Settings and Red Hat SSO/KEYCLOAK for Red Hat SSO and Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.4/html-single/installing_and_configuring_central_authentication_for_the_ansible_automation_platform/index#configuring-central-auth-generic-oidc-settings) .
 - Automation controller admins will become platform admins and can administer automation hub.
-- If you upgraded from 2.4 to 2.6 with both automation controller and private automation hub, then a dialog appears in the product post upgrade that informs you that there are steps to take in order to reconfigure private automation hub. This dialog can either display information in-product, or link to a product doc or Knowledge Base article. In either case, you will be guided to take action from within the product and not be expected to find that information unprompted.
+- If you upgraded from 2.4 to 2.6 with both automation controller and private automation hub, then a dialog is displayed in the product post upgrade that informs you that there are steps to take to reconfigure private automation hub. This dialog can either display information in-product, or link to a product doc or Knowledge Base article. In either case, you will be guided to take action from within the product and not be expected to find that information unprompted.
 - If you upgraded from 2.4 to 2.6 from an automation controller-only environment, then the addition of private automation hub and Event-Driven Ansible services involves adding the necessary roles to a normal user account to grant access to those services.
 
 
@@ -1443,6 +1451,8 @@ If teams with the same name exist in both automation hub and within the platform
 
 
 
+
+When upgrading Event-Driven Ansible from version 2.5 to 2.6, users must reset their password to log in unless they use SSO. Administrators must manually reassign permissions for the former Automation Decisions Administrator role
 
 The following apply:
 
@@ -1524,6 +1534,8 @@ The movement of existing authentication configurations from a Red Hat Ansible Au
 
 
 
+Review the general settings and mappings for OpenID Connect (OIDC) authentication. Compare how configurations transform from automation controller 2.4 to the platform gateway 2.6.
+
 **General settings**
 
 | Automation controller 2.4 | Platform gateway 2.6 |
@@ -1595,6 +1607,8 @@ is_superuser_value: "true"
 
 
 
+
+Review the general settings and mappings for LDAP authentication. Compare how configurations transform from automation controller 2.4 to the platform gateway 2.6.
 
 **General settings**
 
@@ -1782,6 +1796,8 @@ is_superuser_value: "true"
 
 
 
+Review the general settings and mappings for Github authentication. Compare how configurations transform from automation controller 2.4 to the platform gateway 2.6.
+
 **General settings**
 
 | Automation controller 2.4 | Platform gateway 2.6 |
@@ -1867,6 +1883,8 @@ users:
 
 
 
+Review the general settings and mappings for Azure AD authentication. Compare how configurations transform from automation controller 2.4 to the platform gateway 2.6.
+
 **General settings**
 
 | Automation controller 2.4 | Platform gateway 2.6 |
@@ -1938,6 +1956,8 @@ users:
 
 
 
+Review the general settings and mappings for RADIUS authentication. Compare how configurations transform from automation controller 2.4 to the platform gateway 2.6.
+
 **General settings**
 
 | Automation controller 2.4 | Platform gateway 2.6 |
@@ -1963,6 +1983,8 @@ RADIUS authentication does not support user mappings in either automation contro
 
 
 
+
+Review the general settings and mappings for TACACS+ authentication. Compare how configurations transform from automation controller 2.4 to the platform gateway 2.6.
 
 **General settings**
 
@@ -1995,6 +2017,8 @@ TACACS+ authentication does not support user mappings in either automation contr
 
 
 
+
+Review the general settings and mappings for Google OAuth2 authentication. Compare how configurations transform from automation controller 2.4 to the platform gateway 2.6.
 
 **General settings**
 
@@ -2069,7 +2093,9 @@ users: true
 
 
 
-The automation controller setting previously called **Organization Admins Can Manage Users and Teams** in the UI (or `MANAGE_ORGANIZATION_AUTH` in the API) controls whether an organization administrator can create users and teams. This setting now exists in both platform gateway and automation controller in Ansible Automation Platform 2.6. During an upgrade the value from automation controller is imported into the platform gateway server. If you decide to change the value of this setting ensure that you change it to the same values in both the platform gateway and automation controller.
+The automation controller setting previously called **Organization Admins Can Manage Users and Teams** in the UI (or `MANAGE_ORGANIZATION_AUTH` in the API) controls whether an organization administrator can create users and teams.
+
+This setting now exists in both platform gateway and automation controller in Ansible Automation Platform 2.6. During an upgrade the value from automation controller is imported into the platform gateway server. If you decide to change the value of this setting ensure that you change it to the same values in both the platform gateway and automation controller.
 
 Important
 For environments with automation running directly against automation controller, maintain a consistent value for `MANAGE_ORGANIZATION_AUTH` across both automation controller and platform gateway to avoid unexpected behavior.
@@ -2169,19 +2195,16 @@ Example: `/api/gateway/v1/role_user_access/awx.credential/42/` | List the users 
 
 
 
-<span id="idm140469844158864"></span>
+<span id="idm140131026487920"></span>
 # Legal Notice
 
-Copyright© 2025 Red Hat, Inc.
-The text of and illustrations in this document are licensed by Red Hat under a Creative Commons Attribution–Share Alike 3.0 Unported license ("CC-BY-SA"). An explanation of CC-BY-SA is available at [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/) . In accordance with CC-BY-SA, if you distribute this document or an adaptation of it, you must provide the URL for the original version.
+Copyright© Red Hat.
+Except as otherwise noted below, the text of and illustrations in this documentation are licensed by Red Hat under the Creative Commons Attribution–Share Alike 3.0 Unported license . If you distribute this document or an adaptation of it, you must provide the URL for the original version.
 Red Hat, as the licensor of this document, waives the right to enforce, and agrees not to assert, Section 4d of CC-BY-SA to the fullest extent permitted by applicable law.
-Red Hat, Red Hat Enterprise Linux, the Shadowman logo, the Red Hat logo, JBoss, OpenShift, Fedora, the Infinity logo, and RHCE are trademarks of Red Hat, Inc., registered in the United States and other countries.
+Red Hat, the Red Hat logo, JBoss, Hibernate, and RHCE are trademarks or registered trademarks of Red Hat, LLC. or its subsidiaries in the United States and other countries.
 Linux® is the registered trademark of Linus Torvalds in the United States and other countries.
-Java® is a registered trademark of Oracle and/or its affiliates.
-XFS® is a trademark of Silicon Graphics International Corp. or its subsidiaries in the United States and/or other countries.
-MySQL® is a registered trademark of MySQL AB in the United States, the European Union and other countries.
-Node.js® is an official trademark of Joyent. Red Hat is not formally related to or endorsed by the official Joyent Node.js open source or commercial project.
-TheOpenStack® Word Mark and OpenStack logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+XFS is a trademark or registered trademark of Hewlett Packard Enterprise Development LP or its subsidiaries in the United States and other countries.
+TheOpenStack® Word Mark and OpenStack logo are trademarks or registered trademarks of the Linux Foundation, used under license.
 All other trademarks are the property of their respective owners.
 
 

@@ -1,5 +1,5 @@
 # 2. Creating Red Hat Ansible Automation Platform backup resources
-## 2.1. Backing up your Ansible Automation Platform deployment
+## 2.1. Back up your Ansible Automation Platform deployment
 
 
 

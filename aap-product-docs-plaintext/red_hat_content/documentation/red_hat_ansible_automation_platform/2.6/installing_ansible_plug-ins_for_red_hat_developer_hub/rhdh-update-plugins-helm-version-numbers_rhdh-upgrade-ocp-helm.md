@@ -1,26 +1,26 @@
 # 4. Upgrading the Ansible plug-ins on a Helm installation on OpenShift Container Platform
-## 4.3. Updating the Ansible plug-ins version numbers for a Helm installation
+## 4.4. Updating the Ansible plug-ins version numbers for a Helm installation
 
 
 
 
-You must navigate to the Helm chart’s YAML view in the OpenShift Developer UI and replace the old version numbers and integrity hash values for both Ansible plug-ins, which triggers a restart of the Developer Hub pods to finalize the upgrade.
+To upgrade the Ansible plug-ins, you must update the `imageTagInfo` parameter in the Helm chart configuration to the desired version. This triggers the Red Hat Developer Hub to pull the new container images directly from the Red Hat registry.
 
 **Procedure**
 
 1. Log in to your OpenShift Container Platform instance.
 1. In the OpenShift Developer UI, navigate toHelm→developer-hub→Actions→Upgrade→Yaml view.
-1. Update the Ansible plug-ins version numbers and associated `    .integrity` file values.
+1. Locate the `    global` section.
 
 
 ```
-...    global:    ...        plugins:          - disabled: false            integrity: &lt;SHA512 value&gt;            package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz'            pluginConfig:              dynamicPlugins:                frontend:                  ansible.plugin-backstage-rhaap:                    appIcons:                      - importName: AnsibleLogo                        name: AnsibleLogo                    dynamicRoutes:                      - importName: AnsiblePage                        menuItem:                          icon: AnsibleLogo                          text: Ansible                        path: /ansible          - disabled: false            integrity: &lt;SHA512 value&gt;            package: &gt;-              http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz            pluginConfig:              dynamicPlugins:                backend:                  ansible.plugin-scaffolder-backend-module-backstage-rhaap: null
+...    global:      # Ensure OCI mode is enabled      pluginMode: oci          # UPDATE this value to the new desired version      imageTagInfo: "2.1"          # Note: Do not manually update 'plugins' packages;      # OCI mode handles the download automatically based on the tag above.      dynamic:        plugins: []
 ```
 
 
 1. ClickUpgrade.
 
-The developer hub pods restart and the plug-ins are installed.
+The Red Hat Developer Hub pods restart and pull the new plug-in versions.
 
 
 

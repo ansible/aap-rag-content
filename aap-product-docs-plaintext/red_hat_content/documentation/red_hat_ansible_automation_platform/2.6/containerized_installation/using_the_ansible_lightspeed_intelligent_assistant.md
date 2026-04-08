@@ -1,0 +1,28 @@
+# 6. Deploying Red Hat Ansible Lightspeed on containerized Ansible Automation Platform
+## 6.4. Using the Ansible Lightspeed intelligent assistant
+### 6.4.2. Using the Ansible Lightspeed intelligent assistant
+
+
+
+
+You can perform the following tasks:
+
+- Ask questions in the prompt field and get answers about the Ansible Automation Platform
+
+Note
+If you are using an IBM Granite 3.3 series AI model, you might experience a delay of about one minute when waiting for a chat response. To resolve this error, restart the chat session.
+
+
+
+
+- View the chat history of all conversations in a chat session.
+- Search the chat history using a user prompt or answer. The chat history is deleted when you close an existing chat session or log out from the Ansible Automation Platform.
+- Restore an earlier chat by clicking the relevant entry from the chat history.
+- Give feedback on the quality of the chat answers, by clicking the **Thumbs up** or **Thumbs down** icon.
+- Copy and record the answers by clicking the **Copy** icon.
+- Change the mode of the virtual assistant to dark or light mode, by clicking the **Sun** icon![Sun icon](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Containerized_installation-en-US/images/9196a3ed55b45a3aa6b8a218c865d350/sun-icon.png)
+from the top right corner of the toolbar.
+- Clear the context of an existing chat by using the **New chat** button in the chat history.
+- Close the chat interface while working on the Ansible Automation Platform.
+
+

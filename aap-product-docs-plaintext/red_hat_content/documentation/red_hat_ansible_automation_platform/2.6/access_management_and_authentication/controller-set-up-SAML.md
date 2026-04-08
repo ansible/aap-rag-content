@@ -109,6 +109,11 @@ Values defined in this field override the dedicated fields provided in the UI. A
 
 This field is the equivalent to the `    SOCIAL_AUTH_SAML_SP_EXTRA` in the API. For more information, see [OneLogin’s SAML Python Toolkit](https://github.com/SAML-Toolkits/python-saml#settings) to learn about the valid service provider extra (SP_EXTRA) parameters.
 
+Note
+References to the OneLogin SAML Python Toolkit are for formatting examples only. Some configuration entries in the OneLogin documentation might not apply to Ansible Automation Platform.
+
+
+
 
 1. Optional: Provide security settings in the **SAML Security Config** field. This field is the equivalent to the `    SOCIAL_AUTH_SAML_SECURITY_CONFIG` field in the API.
 
@@ -127,7 +132,7 @@ For more information and additional options, see [OneLogin’s SAML Python Toolk
 - Department    - UserType    - Organization
 ```
 
-For more information on the values you can include, see [advanced SAML settings](https://python-social-auth.readthedocs.io/en/latest/backends/saml.html#advanced-settings) .
+For more information about the values you can include, see [advanced SAML settings](https://python-social-auth.readthedocs.io/en/latest/backends/saml.html#advanced-settings) .
 
 Important
 Ensure to include all relevant values so that everything gets mapped correctly for your configuration. Alternatively, you can include the `    GET_ALL_EXTRA_DATA: true` in the **Additional Authenticator Fields** to allow mapping of all available SAML IdP attributes.

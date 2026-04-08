@@ -1,5 +1,5 @@
 # 7. Rulebook activations
-## 7.8. Deleting rulebook activations
+## 7.7. Deleting rulebook activations
 
 
 

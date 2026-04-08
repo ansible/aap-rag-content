@@ -1,6 +1,6 @@
 # 5. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
 ## 5.1. Configuring platform gateway on Red Hat OpenShift Container Platform web console
-### 5.1.7. Frequently asked questions on platform gateway
+### 5.1.9. Frequently asked questions on platform gateway
 
 
 

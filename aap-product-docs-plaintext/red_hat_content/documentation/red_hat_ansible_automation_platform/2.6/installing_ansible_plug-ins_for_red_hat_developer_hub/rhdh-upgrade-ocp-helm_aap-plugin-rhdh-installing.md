@@ -3,5 +3,5 @@
 
 
 
-To upgrade the Ansible plug-ins, you must update the `plugin-registry` application with the latest Ansible plug-ins files.
+Upgrade the Ansible plug-ins to the latest version. The upgrade procedure depends on the plug-in delivery method you used during installation.
 

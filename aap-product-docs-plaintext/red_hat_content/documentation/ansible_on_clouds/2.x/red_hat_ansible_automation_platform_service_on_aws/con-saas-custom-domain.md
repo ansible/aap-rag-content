@@ -21,7 +21,7 @@ You can create custom subdomains under the domain you own.
 
 
 
-To set up a custom domain for your deployment, you must complete several preparatory steps, including domain identification and TLS certificate creation. This procedure outlines the necessary planning activities to ensure a successful custom URL configuration with Red Hat SRE assistance.
+You can configure a custom URL through Red Hat SRE assistance for your deployment. First, however, you must complete the preparatory steps, for domain identification and TLS certificate creation.
 
 **Prerequisites**
 
@@ -32,11 +32,13 @@ To set up a custom domain for your deployment, you must complete several prepara
 
 **Procedure**
 
-1. Identify the domain or subdomain that you intend to use.
-1. Create the TLS certificate.
+1. Identify the domain or subdomain to use.
+1. Create the TLS certificate:
 
 
-1. To ensure the validity of a TLS certificate for a custom domain, you must confirm that the certificate is generated for the platform record and all mesh-ingress records are included in the Subject Alternative Name (SAN) parameter. Alternatively, you can opt to generate a wildcard certificate to cover the subdomains of your primary custom domain.
+- Include all mesh-ingress records in the Subject Alternative Name (SAN) parameter.
+- Alternatively, generate a wildcard certificate to cover subdomains (for example, `        *.exampledomain.com` ).
+
 1. Bundle the certificate, private key, and any optional intermediary certificates into a zip.
 
 Important
@@ -46,16 +48,18 @@ TLS Certificate requirements for custom domains:
 -  **Private Key:** The private key must be unencrypted and cannot have a passphrase or be password protected.
 -  **Expiration:** Initial certificates must be valid for at least one year.
 -  **Renewal:** You must initiate a support ticket to renew the certificate at least 14 days before the expiration date. When renewing you must use one of the following formats for the certificate’s Subject Alternative Names (SANs):
+-  **Explicit SANs:** List the required subdomains: `        platform` , `        mesh-ingress-0` , and `        mesh-ingress-1` . For example, if your domain is `        exampledomain.com` , include the following in the certificate’s SAN:
 
 
--  **Explicit SANs:** List the required subdomains: `                platform` , `                mesh-ingress-0` , and `                mesh-ingress-1` .
--  **Wildcard certificate:** Use a wildcard to cover all subdomains (for example, `                *.exampledomain.com` ).
+-  `            platform.exampledomain.com`
+-  `            mesh-ingress-0.exampledomain.com`
+-  `            mesh-ingress-1.exampledomain.com`
+-  **Wildcard certificate:** Use a wildcard to cover all subdomains (for example, `            *.exampledomain.com` ).
 
 
 
 
-
-1. Open a [support ticket](https://access.redhat.com/support/cases/#/case/new/get-support?caseCreate=true) with Red Hat requesting a custom URL configuration to your deployment and supply the following information:
+1. Open a [support ticket](https://access.redhat.com/support/cases/#/case/new/get-support?caseCreate=true) with Red Hat requesting a custom URL configuration to your deployment and include the following information:
 
 
 - Company Name
@@ -64,7 +68,13 @@ TLS Certificate requirements for custom domains:
 - Provide the zip file containing the certificates, or request a presigned URL for secure upload.
 
 1. Allow the SRE team to apply the configuration to your deployment, verify the functionality, and collaborate with you on follow-up steps via the support ticket.
-1. After your configuration is complete, apply the custom domain to your deployment.
+1. Update image URLs for **Execution Environments** and **Decision Environments** to point to the new platform domain address if images are sourced from the private automation hub on the same Ansible Automation Platform instance.
+1. Reconfigure pull mode execution nodes if they were previously configured with the old domain:
+
+
+1. Locate the `        group_vars/all.yml` file in the tar archive used to set up the execution node.
+1. Modify the `        receptor_peers` address variable to point to the new mesh ingress node.
+1. Rerun the `        install_receptor.yml` playbook.
 
 Note
 New mesh-ingresses using the custom domain replace the original ones.
@@ -72,7 +82,7 @@ New mesh-ingresses using the custom domain replace the original ones.
 
 
 
-1. Reconfigure your execution nodes if you configured them previously with the old domain.
+
 
 
 #### 5.2.11.2. Setting up a custom domain without AWS PrivateLink
@@ -117,7 +127,7 @@ If you are planning to connect to the Ansible Automation Platform UI or use auto
 
 **Procedure**
 
-1. Retrieve the main DNS name of the Amazon Virtual Private Cloud (VPC) endpoint you created to connect to AWS PrivateLink endpoint service by perfoming the following steps:
+1. Retrieve the main DNS name of the Amazon Virtual Private Cloud (VPC) endpoint you created to connect to AWS PrivateLink endpoint service by performing the following steps:
 
 
 1. Log in to the Amazon Web Services portal and selectVPC→Endpoints.

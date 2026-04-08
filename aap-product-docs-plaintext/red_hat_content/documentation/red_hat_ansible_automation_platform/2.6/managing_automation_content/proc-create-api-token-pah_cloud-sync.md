@@ -7,7 +7,9 @@
 
 In private automation hub, you can create an API token using API token management. The API token is a secret token used to protect your content, so be sure to store it in a secure location.
 
+Note
 The API token does not expire.
+
 
 
 **Prerequisites**

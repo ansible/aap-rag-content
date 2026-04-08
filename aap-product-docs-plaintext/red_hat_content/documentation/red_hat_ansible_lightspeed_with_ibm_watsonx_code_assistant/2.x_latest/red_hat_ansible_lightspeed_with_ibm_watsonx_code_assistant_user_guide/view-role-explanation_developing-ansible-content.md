@@ -48,7 +48,7 @@ The role explanation is displayed on the right panel of the VS Code screen.
 The following illustration shows an example of a role explanation:
 
 
-<span id="idm139735359490736"></span>
+<span id="idm140399989267776"></span>
 **Figure 5.6. Example of a role explanation**
 
 ![Example of a role explanation](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant-2.x_latest-Red_Hat_Ansible_Lightspeed_with_IBM_watsonx_Code_Assistant_User_Guide-en-US/images/98612898618da5b54f0c355a4303d127/lightspeed-playbook-explanation.png)

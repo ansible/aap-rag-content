@@ -1,5 +1,5 @@
 # 7. Rulebook activations
-## 7.10. Testing with Kubernetes
+## 7.9. Testing with Kubernetes
 
 
 

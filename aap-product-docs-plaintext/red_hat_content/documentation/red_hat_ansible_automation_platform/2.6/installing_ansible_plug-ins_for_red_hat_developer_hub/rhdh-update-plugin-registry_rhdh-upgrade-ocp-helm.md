@@ -1,5 +1,5 @@
 # 4. Upgrading the Ansible plug-ins on a Helm installation on OpenShift Container Platform
-## 4.2. Updating the plug-in registry
+## 4.3. Update the plug-in registry
 
 
 

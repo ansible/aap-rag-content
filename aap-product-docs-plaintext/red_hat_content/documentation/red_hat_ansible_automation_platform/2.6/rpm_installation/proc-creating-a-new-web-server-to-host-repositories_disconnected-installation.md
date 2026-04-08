@@ -1,5 +1,5 @@
-# 5. Disconnected installation
-## 5.3. Creating a new web server to host repositories
+# 6. Disconnected installation
+## 6.3. Creating a new web server to host repositories
 
 
 

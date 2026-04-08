@@ -16,12 +16,12 @@ The following table shows the settings and fields that can be set on the automat
 | --- | --- | --- |
 |  `postgres_image` | Path of the image to pull | postgres |
 |  `postgres_image_version` | Image version to pull | 13 |
-|  `node_selector` | AutomationController pods’ nodeSelector | “”’’ |
-|  `topology_spread_constraints` | AutomationController pods’ topologySpreadConstraints | “”’’ |
-|  `tolerations` | AutomationController pods’ tolerations | “”’’ |
-|  `annotations` | AutomationController pods’ annotations | “”’’ |
-|  `postgres_selector` | Postgres pods’ nodeSelector | “”’’ |
-|  `postgres_tolerations` | Postgres pods’ tolerations | “”’’ |
+|  `node_selector` | AutomationController pods’ nodeSelector | N/A’’ |
+|  `topology_spread_constraints` | AutomationController pods’ topologySpreadConstraints | N/A’’ |
+|  `tolerations` | AutomationController pods’ tolerations | N/A’’ |
+|  `annotations` | AutomationController pods’ annotations | N/A’’ |
+|  `postgres_selector` | Postgres pods’ nodeSelector | N/A’’ |
+|  `postgres_tolerations` | Postgres pods’ tolerations | N/A’’ |
 
 
 `topology_spread_constraints` can help optimize spreading your control plane pods across the compute nodes that match your node selector. For example, with the `maxSkew` parameter of this option set to `100` , this means maximally spread across available nodes. So if there are three matching compute nodes and three pods, one pod will be assigned to each compute node. This parameter helps prevent the control plane pods from competing for resources with each other.

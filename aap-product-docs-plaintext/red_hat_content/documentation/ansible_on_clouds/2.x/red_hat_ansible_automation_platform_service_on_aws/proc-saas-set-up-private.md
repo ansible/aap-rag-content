@@ -23,7 +23,7 @@ A private offer is sent to you directly from a Red Hat seller. A private offer 
 1. Navigate to the **Private Offers** page of the AWS Marketplace. If you have already accepted your offer you can find it in the **Manage subscriptions** page.
 1. Click the URL under the **Offer ID** column. This redirects you to the **Offer Selection** page.
 1. ClickCreate contract.
-1. ClickClick Set up your account. This redirects you to Red Hat Single Sign-On where you must:
+1. SelectClick Set up your account. This redirects you to Red Hat Single Sign-On where you must:
 
 
 1. Create or sign into your Red Hat account.
@@ -36,7 +36,7 @@ A private offer is sent to you directly from a Red Hat seller. A private offer 
 1. Enter your AWS account ID and clickVerify.
 
 
-- This account ID must be the account ID that purchased the offer from the AWS marketplace. The system does not recognize associated or nested accounts.
+- This account ID must be the account ID that purchased the offer from the AWS Marketplace. The system does not recognize associated or nested accounts.
 
 1. After your AWS ID is validated clickNext.
 1. Select your required region and clickNext.
@@ -55,5 +55,5 @@ Update your password as soon as possible. The confirmation email includes a link
 
 
 
-If you did not receive the email or the initial admin password has expired, you must to submit a [support ticket](https://access.redhat.com/support) and the Red Hat team will assist you with next steps.
+If you did not receive the email or the initial admin password has expired, you must submit a [support ticket](https://access.redhat.com/support) and the Red Hat team will assist you with next steps.
 

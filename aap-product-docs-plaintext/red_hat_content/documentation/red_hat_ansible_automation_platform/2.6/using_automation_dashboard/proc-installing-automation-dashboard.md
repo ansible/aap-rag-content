@@ -1,27 +1,27 @@
-# 1. View key usage metrics with Automation Dashboard
-## 1.2. Installing Automation Dashboard
+# 1. View key usage metrics with automation dashboard
+## 1.2. Installing automation dashboard
 
 
 
 
-Install Automation Dashboard to collect and analyze key metrics related to job execution, efficiency, and automation savings across your Ansible Automation Platform deployments.
+Install automation dashboard to collect and analyze key metrics related to job execution, efficiency, and automation savings across your Ansible Automation Platform deployments.
 
 **Prerequisites**
 
 - One of the following tested configurations:
 
 
-- RHEL 9 x86 or ARM based physical or virtual host.
+- RHEL 9 or RHEL 10 on x86 or ARM-based physical or virtual hosts.
 - With an external database: PostgreSQL v15 database.
 
 Important
-Do not attempt to install Automation Dashboard on the same host(s) as Ansible Automation Platform.
+Do not install automation dashboard on the same host(s) as Ansible Automation Platform.
 
 
 
 
 
-- Automation Dashboard installation has been tested with the following configuration:
+- Automation dashboard installation has been tested with the following configuration:
 
 
 - 80 GB hard drive (depending on data growth)
@@ -30,21 +30,21 @@ Do not attempt to install Automation Dashboard on the same host(s) as Ansible Au
 - Handle up to 10,000 jobs/month and 47M summaries/month
 - Connects to three Ansible Automation Platform deployments of the same version
 
-- Access to _baseos_ and _Ansible Automation Platformstream_ repository packages for the RHEL 9 host.
-- A non-root login account to the RHEL 9 host for installation.
+- Access to _baseos_ and _Ansible Automation Platformstream_ repository packages for the RHEL 9 or RHEL 10 host.
+- A non-root login account to the RHEL 9 or RHEL 10 host for installation.
 
 
-- This requires passwordless `        sudo` access to root.
+- The login account requires `        sudo` access to root.
 - By default, we use the `        $HOMEDIR` of the user account.
 
 - URL details for access to your Ansible Automation Platform instances.
-- An Ansible Automation Platform OAuth2 token, which is used for communication between the Ansible Automation Platform instances and Automation Dashboard.
-- Access to download the installation bundle providing installation components for the Automation Dashboard.
-- Open firewall access to allow for bidirectional communication between AAP instances and the Automation Dashboard.
+- An Ansible Automation Platform OAuth2 token, which is used for communication between the Ansible Automation Platform instances and automation dashboard.
+- Access to download the installation bundle providing installation components for the automation dashboard.
+- Open firewall access to allow for bidirectional communication between Ansible Automation Platform instances and the automation dashboard.
 
 
 - This includes HTTPS/443 (or your Ansible Automation Platform configured port) from the dashboard to the Ansible Automation Platform instance(s).
-- Port 8447 is the default ingress port for the Automation Dashboard. This port can be configured during installation.
+- Port 8447 is the default ingress port for the automation dashboard. This port can be configured during installation.
 - RHEL firewall ports that might block 5432 to PostgreSQL.
 
 - A supported version of `    ansible-core` installed on supported RHEL versions.
@@ -53,7 +53,7 @@ Do not attempt to install Automation Dashboard on the same host(s) as Ansible Au
 **Procedure**
 
 1. Download the latest installer tar file from access.redhat.com. Navigate to Downloads > Red Hat Ansible Automation Platform Product Software.
-1. Copy the installation source file to your RHEL 9 host.
+1. Copy the installation source file to your RHEL 9 or RHEL 10 host.
 1. Extract the installation source. This will require ~500Mb. of disk space. Throughout this example we will use the ec2-user home directory: `    /home/&lt;username&gt;` .
 
 
@@ -62,11 +62,11 @@ tar -xzvf ansible-automation-dashboard-containerized-setup-bundle-0.1-x86_64.tar
 ```
 
 
-1. Verify that the installation of necessary software by running the following commands:
+1. Install the required `    ansible-core` package.
 
 
 ```
-cd ansible-automation-dashboard-containerized-setup    sudo dnf install ansible-core    ansible-galaxy collection install -r requirements.yml
+cd ansible-automation-dashboard-containerized-setup    sudo dnf install ansible-core
 ```
 
 
@@ -113,7 +113,7 @@ The values for **Name** , **Organization** , and HTTPS port number for Ansible A
 - OAuth application: automation-dashboard-sso
 - Scope: read
 
-1. Store this access token value. `            clusters.yaml` uses this access token.
+1. Store the access token and refresh token values. `            clusters.yaml` uses these tokens.
 
 
 1. Copy the example inventory and change it before running the installation program.
@@ -129,15 +129,25 @@ Important
 - You must change the following values to use this inventory configuration in your environment:
 
 
-- Change the RHEL 9 host occurrences from `            host.example.com` to your FQDN host
+- Change the RHEL 9 or RHEL 10 host occurrences from `            host.example.com` to your FQDN host
 - Change the phrase `            TODO` to match your passwords within all `            _admin_password` or `            _pg_password` values.
+- Change the `            dashboard_pg_host` value to the IP address or DNS name of the database server.
+- If your automation dashboard images are hosted in a different registry than your core components, you must provide separate login credentials using the `            registry_&lt;VARIABLE_NAME&gt;_aap_automation_dashboard` variables.
 
 - For more information, see the [Inventory variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_dashboard/assembly-appendix-inventory-file-automation-dashboard#ref-automation-dashboard-inventory-variables) section of this document.
 
 
 
 ```
-# This is our Automation Dashboard front-end application    [automationdashboard]    host.example.com ansible_connection=local        # These are required vars for the installation and should not be removed    [automationdashboard:vars]    # Configure AAP OAuth2 authentication.    # aap_auth_provider_name - name as shown on login page.    aap_auth_provider_name=Ansible Automation Platform    # aap_auth_provider_protocol - http or https    aap_auth_provider_protocol=https    # AAP version - 2.4, 2.5 or 2.6    aap_auth_provider_aap_version=2.5    # aap_auth_provider_host - AAP IP or DNS name, with optional port    aap_auth_provider_host=my-aap.example.com    # aap_auth_provider_check_ssl - enforce TLS check or not.    aap_auth_provider_check_ssl=true    # aap_auth_provider_client_id and aap_auth_provider_client_secret -    # they are obtained from AAP when OAuth2 application is created in AAP.    aap_auth_provider_client_id=TODO    aap_auth_provider_client_secret=TODO            # Specify amount of old data to synchronoize after installation.    # The initial_sync_days=N requests N days of old data, counting from "today".    # The initial_sync_since requests data from the specified data until "today".    # If both are specified, the initial_sync_since will be used.    initial_sync_days=1    # initial_sync_since=2025-08-08        # Hide warnings when insecure https request are made.    # Use this if your AAP uses self-signed TLS certificate.    # show_urllib3_insecure_request_warning=False        # Force clean install-like    # dashboard_update_secret=true        # HTTP/HTTPS settings    # nginx_disable_https=true    # Change nginx_http_port or nginx_https_port if you want to access dashboard on a different TCP port.    # nginx_http_port=8083    # nginx_https_port=8447    # TLS certificate configuration    # The dashboard_tls_cert needs:    #   - contain server certificate, intermediate CA certificates and root CA certificate.    #   - the server certificate must be the first one in the file.    # dashboard_tls_cert=/path/to/tls/dashboard.crt    # dashboard_tls_key=/path/to/tls/dashboard.key        # Enable Django DEBUG.    # django_debug=True        [database]    host.example.com ansible_connection=local        [all:vars]    postgresql_admin_username=postgres    postgresql_admin_password=TODO        # AAP Dashboard - mandatory    # --------------------------    dashboard_pg_containerized=True    dashboard_admin_password=TODO    dashboard_pg_host=host.example.com    dashboard_pg_username=aapdashboard    dashboard_pg_password=TODO    dashboard_pg_database=aapdashboard    #    bundle_install=true    # &lt;full path to the bundle directory&gt;    bundle_dir='{{ lookup("ansible.builtin.env", "PWD") }}/bundle'
+# This is our automation dashboard front-end application    [automationdashboard]    host.example.com ansible_connection=local        # These are required vars for the installation and should not be removed    [automationdashboard:vars]    # Configure AAP OAuth2 authentication.    # aap_auth_provider_name - name as shown on login page.    aap_auth_provider_name=Ansible Automation Platform    # aap_auth_provider_protocol - http or https    aap_auth_provider_protocol=https    # AAP version - 2.4, 2.5 or 2.6    aap_auth_provider_aap_version=2.5    # aap_auth_provider_host - AAP IP or DNS name, with optional port    aap_auth_provider_host=my-aap.example.com    # aap_auth_provider_check_ssl - enforce TLS check or not.    aap_auth_provider_check_ssl=true    # aap_auth_provider_client_id and aap_auth_provider_client_secret -    # they are obtained from AAP when OAuth2 application is created in AAP.    aap_auth_provider_client_id=TODO    aap_auth_provider_client_secret=TODO            # Specify amount of old data to synchronoize after installation.    # The initial_sync_days=N requests N days of old data, counting from "today".    # The initial_sync_since requests data from the specified data until "today".    # If both are specified, the initial_sync_since will be used.    initial_sync_days=1    # initial_sync_since=2025-08-08        # Hide warnings when insecure https request are made.    # Use this if your AAP uses self-signed TLS certificate.    # show_urllib3_insecure_request_warning=False        # Force clean install-like    # dashboard_update_secret=true        # HTTP/HTTPS settings    # nginx_disable_https=true    # Change nginx_http_port or nginx_https_port if you want to access dashboard on a different TCP port.    # nginx_http_port=8083    # nginx_https_port=8447    # TLS certificate configuration    # The dashboard_tls_cert needs:    #   - contain server certificate, intermediate CA certificates and root CA certificate.    #   - the server certificate must be the first one in the file.    # dashboard_tls_cert=/path/to/tls/dashboard.crt    # dashboard_tls_key=/path/to/tls/dashboard.key        # Enable Django DEBUG.    # django_debug=True        [database]    host.example.com ansible_connection=local    [redis]    host.example.com ansible_connection=local        [all:vars]    redis_mode=standalone        [all:vars]    postgresql_admin_username=postgres    postgresql_admin_password=TODO        # Standard registry settings    # registry_username=    # registry_password=        # Dashboard Registry - optional (use if dashboard images are in a different registry)    # registry_url_aap_automation_dashboard=quay.io    # registry_ns_aap_automation_dashboard=aap    # registry_username_aap_automation_dashboard=TODO    # registry_password_aap_automation_dashboard=TODO    # registry_tls_verify_aap_automation_dashboard=True        # AAP Dashboard - mandatory    # --------------------------    dashboard_pg_containerized=True    dashboard_admin_password=TODO    # The value of dashboard_pg_host needs to resolve to an IP address of the database.    # It cannot be localhost or 127.0.0.1.    # It can be IP address of the server.        dashboard_pg_host=host.example.com    dashboard_pg_username=aapdashboard    dashboard_pg_password=TODO    dashboard_pg_database=aapdashboard        bundle_install=true    #    # Relevant if bundle_install=false    # Set container_image_update to True to fetch most recent container images from registry.    # container_image_update=True    #    # Relevant if bundle_install=true    # &lt;full path to the bundle directory&gt;    bundle_dir='{{ lookup("ansible.builtin.env", "PWD") }}/bundle'    # AAP Dashboard - optional    # --------------------------    # Set to True to expose Django admin page.    # nginx_dashboard_admin_exposed=False
+```
+
+
+1. Install the required Ansible collections. You must complete this step to prevent module resolution errors during the installation.
+
+
+```
+ansible-galaxy collection install -r requirements.yml
 ```
 
 
@@ -145,7 +155,7 @@ Important
 
 
 ```
-ansible-playbook -i inventory ansible.containerized_installer.dashboard_install
+ansible-playbook -i inventory ansible.containerized_installer.dashboard_install --ask-become-pass
 ```
 
 
@@ -162,5 +172,5 @@ ec2-54-147-26-173.compute-1.amazonaws.com : ok=126  changed=51   unreachable=0  
 localhost                  : ok=12   changed=0    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0
 ```
 
-Alternative configurations are possible (for example, the database for Automation Dashboard can be set on a different host). This requires additional changes to variables in the inventory file. Consult the [Inventory variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_dashboard/assembly-appendix-inventory-file-automation-dashboard#ref-automation-dashboard-inventory-variables) section of this document for available variables.
+Alternative configurations are possible (for example, the database for automation dashboard can be set on a different host). This requires additional changes to variables in the inventory file. Consult the [Inventory variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_dashboard/assembly-appendix-inventory-file-automation-dashboard#ref-automation-dashboard-inventory-variables) section of this document for available variables.
 

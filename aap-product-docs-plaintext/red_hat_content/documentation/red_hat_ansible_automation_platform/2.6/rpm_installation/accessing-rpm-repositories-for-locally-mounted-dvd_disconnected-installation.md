@@ -1,5 +1,5 @@
-# 5. Disconnected installation
-## 5.4. Accessing RPM repositories from a locally mounted DVD
+# 6. Disconnected installation
+## 6.4. Accessing RPM repositories from a locally mounted DVD
 
 
 

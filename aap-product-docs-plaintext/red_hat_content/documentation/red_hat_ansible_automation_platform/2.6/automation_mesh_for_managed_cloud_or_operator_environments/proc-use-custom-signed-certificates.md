@@ -1,0 +1,31 @@
+# 2. Automation mesh for operator-based Red Hat Ansible Automation Platform
+## 2.9. Using custom signed certificates in managed cloud and operator environments
+
+
+
+
+Execution nodes verify incoming connections by ensuring the x509 certificate was issued by a trusted Certificate Authority (CA). You might want to provide your own CA for this validation. If no CA is provided. Controller Operator generates a self-signed CA during installation.
+
+The control nodes on the Kubernetes cluster communicate with execution nodes through mutual TLS/TCP connections, running using receptor. Controller Operator generates a self-signed CA during installation by using OpenSSL.
+
+**Procedure**
+
+1. If custom `    ca.crt` and `    ca.key` are stored locally, run the following:
+
+`    kubectl create secret tls controller-demo-12345-receptor-ca \ --cert=/path/to/ca.crt --key=/path/to/ca.key`
+
+The secret should be named `    &lt;Controller Custom Resource name&gt;-receptor-ca` . In this example the Controller CR name is `    controller-demo-12345` .
+
+Replace `    controller-demo-12345` with your Controller Custom Resource name.
+
+
+1. If this secret is created after automation controller is deployed, run the following to restart the deployment:
+
+`    kubectl rollout restart deployment controller-demo-12345`
+
+
+
+
+Changing the receptor CA breaks connections to any existing execution nodes. These nodes enter an unavailable state, and jobs cannot run on them. You must download and re-run the install bundle for each execution node. This replaces the TLS certificate files with those signed by the new CA. The execution nodes then appear in a ready state after a few minutes.
+
+

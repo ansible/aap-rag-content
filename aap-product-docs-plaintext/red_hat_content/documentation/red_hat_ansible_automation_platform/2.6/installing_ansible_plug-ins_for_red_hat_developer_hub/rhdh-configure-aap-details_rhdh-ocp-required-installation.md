@@ -1,11 +1,11 @@
 # 2. Installing the Ansible plug-ins with a Helm chart on OpenShift Container Platform
-## 2.5. Required configuration
-### 2.5.7. Configuring Ansible Automation Platform details
+## 2.4. Required configuration
+### 2.4.6. Configuring Ansible Automation Platform details
 
 
 
 
-The Ansible plug-ins query your Ansible Automation Platform subscription status with the controller API using a token.
+Connect Red Hat Developer Hub to your automation controller by configuring the Ansible Automation Platform details. This configuration uses a Personal Access Token (PAT) to authenticate the plug-ins, which allows them to interact with your automation environment.
 
 Note
 The Ansible plug-ins continue to function regardless of the Ansible Automation Platform subscription status.
@@ -14,7 +14,7 @@ The Ansible plug-ins continue to function regardless of the Ansible Automation P
 
 **Procedure**
 
-1. Create a Personal Access Token (PAT) with “Read” scope in automation controller, following the [Applications](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-token-based-authentication#assembly-controller-applications) section of _Access management and authentication_ .
+1. Create a Personal Access Token (PAT) with “read and write” scope in automation controller, following the [Applications](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-token-based-authentication#assembly-controller-applications) section of _Access management and authentication_ .
 1. Edit your custom Red Hat Developer Hub config map, for example `    app-config-rhdh` .
 1. Add your Ansible Automation Platform details to `    app-config-rhdh.yaml` .
 

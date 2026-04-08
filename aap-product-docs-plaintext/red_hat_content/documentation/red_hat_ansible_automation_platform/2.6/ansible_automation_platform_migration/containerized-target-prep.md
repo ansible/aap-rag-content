@@ -22,7 +22,7 @@ $ cd ~
 
 
 ```
-$ sha256sum-check artifact.tar.sha256
+$ sha256sum --check artifact.tar.sha256
 ```
 
 
@@ -37,7 +37,7 @@ $ cd artifact
 
 
 ```
-$ sha256sum-check sha256sum.txt
+$ sha256sum --check sha256sum.txt
 ```
 
 

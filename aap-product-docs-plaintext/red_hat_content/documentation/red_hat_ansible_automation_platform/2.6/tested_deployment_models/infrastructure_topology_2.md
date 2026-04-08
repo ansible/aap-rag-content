@@ -8,7 +8,7 @@
 The Red Hat tested infrastructure topology for this deployment model:
 
 
-<span id="idm140186610237968"></span>
+<span id="idm140264428349200"></span>
 **Figure 2.2. Infrastructure topology diagram**
 
 ![Container enterprise topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Tested_deployment_models-en-US/images/704824d330eb8422156d4d7cf034ee52/cont-b-env-a.png)
@@ -19,7 +19,7 @@ The Red Hat tested infrastructure topology for this deployment model:
 Red Hat tests each VM with these requirements:
 
 
-<span id="idm140186618941984"></span>
+<span id="idm140264428344400"></span>
 **Table 2.5. Virtual machine requirements**
 
 | Requirement | Minimum requirement |
@@ -37,7 +37,7 @@ Red Hat tests each VM with these requirements:
 
 
 
-<span id="idm140186610133088"></span>
+<span id="idm140264419022128"></span>
 **Table 2.6. Infrastructure topology components**
 
 | VM count | Purpose | Example VM group names |

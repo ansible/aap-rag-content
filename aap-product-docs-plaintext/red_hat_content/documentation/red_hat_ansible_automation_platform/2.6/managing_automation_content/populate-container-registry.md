@@ -38,7 +38,7 @@ After making this change, you can continue to pull images from `registry.redhat.
 
 For more information, see [Firewall changes for container image pulls 2024/2025](https://access.redhat.com/articles/7084334) .
 
-Ensure that the [Network ports and protocols](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/ref-network-ports-protocols_planning) listed in _Table 6.4. Execution Environments (EE)_ are available to avoid problems pulling container images.
+Ensure that the network ports and protocols listed under [Network ports and protocols firewall](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/network-ports-protocols_planning#ref-network-ports-protocols-firewalls) , in the _Execution Environments (EE)_ section, are available to avoid problems pulling container images.
 
 
 

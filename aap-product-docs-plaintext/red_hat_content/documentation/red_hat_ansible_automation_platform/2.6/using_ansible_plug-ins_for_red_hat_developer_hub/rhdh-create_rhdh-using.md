@@ -4,9 +4,11 @@
 
 
 
+Create a new Ansible Playbook project in the Red Hat Developer Hub by logging in, navigating to the Ansible section, and selecting the project creation template. You must have the correct access (RBAC) assigned by your administrator to view the templates.
+
 **Prerequisite**
 
-- Ensure you have the correct access (RBAC) to view the templates in Red Hat Developer Hub. Ask your administrator to assign access to you if necessary.
+- You have the correct access (RBAC) to view the templates in Red Hat Developer Hub. Ask your administrator to assign access to you if necessary.
 
 
 **Procedure**
@@ -37,8 +39,6 @@ You can see sample values for this form in the Example project.
 
 Note
 Collection namespaces must follow Python module naming conventions. Collections must have short, all lowercase names. You can use underscores in the collection name if it improves readability.
-
-For more information, see the [Ansible Collection naming conventions documentation](https://docs.ansible.com/ansible/latest/dev_guide/developing_modules_in_groups.html#naming-conventions) .
 
 
 

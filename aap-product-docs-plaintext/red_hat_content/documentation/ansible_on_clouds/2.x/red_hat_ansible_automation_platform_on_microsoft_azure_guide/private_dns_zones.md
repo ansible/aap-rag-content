@@ -1,12 +1,12 @@
 # 6. Support for Red Hat Ansible Automation Platform on Microsoft Azure
-## 6.2. Private DNS Zones
+## 6.2. Private DNS zones
 
 
 
 
 Ansible Automation Platform on Microsoft Azure uses Azure’s managed DNS services when deployed.
 
-To use private DNS records that cannot be resolved publicly, you can either use Azure Private DNS zones that are peered to the managed application VNET, or you can make a submit request to Red Hat to submit DNS zones that must be forwarded to a customer-managed private DNS server.
+To use private DNS records that cannot be resolved publicly, you can either use Azure Private DNS zones that are peered to the managed application VNet, or you can make a submit request to Red Hat to submit DNS zones that must be forwarded to a customer-managed private DNS server.
 
 A limitation of Private DNS zones is that only one instance of a given zone may be linked to a Virtual Network. Attempting to link zones that match the names of Private DNS zones in the managed resource group causes conflicts. Microsoft recommends consolidating DNS records into a single zone to work around this limitation.
 

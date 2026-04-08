@@ -83,7 +83,17 @@ Backward compatibility has been preserved where practical, but some breaking cha
 
 We recommend you test your playbooks and roles in a staging environment with this release to determine where you may need to make changes.
 
-For further information see the [Ansible Porting Guide](https://ansible.readthedocs.io/projects/ansible-core/devel/porting_guides/porting_guide_core_2.19.html#id3) .
+For further information see the [Ansible Porting Guide](https://docs.ansible.com/projects/ansible-core/devel/porting_guides/porting_guide_core_2.19.html#id3) .
+
+## 3.2. Execution environment builder
+
+
+
+
+Technology Preview features are not supported with Red Hat production service level agreements (SLAs) and might not be functionally complete. Red Hat does not recommend using them in production.
+
+- Self-service automation portal includes a guided user experience for creating execution environment definition files. Users can start from scratch or begin with Red Hat opinionated templates, then download the generated definition file or push to a new or existing Git repository.
+
 
 # Chapter 4. Deprecated features
 
@@ -209,6 +219,11 @@ RPM-based Ansible Automation Platform
 - Fixed an issue where installer managed CA certificates were discovered but not used by the installer.(AAP-53335)
 
 
+Ansible self-service automation portal 2.1.1
+
+- Fixed an issue where credential selection dropdowns did not include the credential type, making it difficult to select the correct credential.
+
+
 # Chapter 9. Patch releases
 
 
@@ -231,7 +246,1012 @@ The patch releases section of the release notes will be updated over time to giv
 - For information about Common Vulnerabilities and Exposures (CVEs), see [What is a CVE?](https://www.redhat.com/en/topics/security/what-is-cve) and [Red Hat CVE Database](https://access.redhat.com/security/security-updates/cve) .
 
 
-## 9.1. Ansible Automation Platform patch release December 10, 2025
+## 9.1. Ansible Automation Platform patch release March 25, 2026
+
+
+
+
+This release includes the following components and versions:
+
+| Release Date | Component versions |
+| --- | --- |
+| March 25, 2026
+
+This release includes the following components and versions: | - Automation controller 4.7.10
+- Automation hub 4.11.7
+- Event-Driven Ansible 1.2.7
+- Container-based installer Ansible Automation Platform (bundle) 2.6-7
+- Container-based installer Ansible Automation Platform (online) 2.6-7
+- Receptor 1.6.4
+- RPM-based installer Ansible Automation Platform (bundle) 2.6-6
+- RPM-based installer Ansible Automation Platform (online) 2.6-6 |
+
+
+CSV Versions in this release:
+
+- Namespace-scoped bundle: aap-operator.v2.6.0-0.1774648945
+- Cluster-scoped bundle: aap-operator.v2.6.0-0.1774648973
+
+
+### 9.1.1. Overview
+
+
+
+
+This asynchronous update for Red Hat Ansible Automation Platform 2.6 (2.6.20260325) provides targeted enhancements, security updates, and bug fixes across automation controller, platform gateway, automation hub, Event-Driven Ansible, Red Hat Ansible Lightspeed, execution environment, Ansible Automation Platform Operator, and both platform and containerized installers.
+
+This release focuses on expanding audit coverage for administrative actions, upgrading core services to Django 5.2 LTS, addressing multiple CVEs across the stack, and improving reliability, performance, and observability. It also refines user experience in the web UI and gateway and improves diagnostics through clearer logging and traceability.
+
+### 9.1.2. Highlights
+
+
+
+
+**Expanded audit and access logging**
+
+Introduces and extends audit logging for users, teams, organizations, role assignments, dynamic preferences, and direct component access, improving traceability of administrative and configuration changes. AAP-67043, AAP-66919, AAP-66800, AAP-66668
+
+**Platform-wide move to Django 5.2 LTS**
+
+Upgrades Django for gateway, Automation hub, Automation controller, and Red Hat Ansible Lightspeed components to Django 5.2 LTS, aligning with a supported, more secure framework baseline.
+
+Note
+Due to this upgrade, all users must use a new installer for both containerized and RPM versions.
+
+
+
+AAP-68587, AAP-68135, AAP-60155, AAP-59873, AAP-60388, AAP-64430
+
+**Security hardening through CVE remediation**
+
+Resolves multiple vulnerabilities in UI, automation controller, gateway proxy, automation hub, Red Hat Ansible Lightspeed, and packaging, including issues in Axios, Authlib, Pillow, pyasn1, cryptography, jsonpath, AIOHTTP, express-rate-limit, and Go’s crypto/tls and net/url libraries. AAP-69040, AAP-68686, AAP-68683, AAP-68529, AAP-68526, AAP-67735, AAP-67503, AAP-66903, AAP-66695, AAP-66655, AAP-66636, AAP-65713, AAP-65711, AAP-65695, AAP-65507, AAP-65506, AAP-65505, AAP-65475, AAP-65474, AAP-65473, AAP-65472, AAP-65412, AAP-65411, AAP-65410, AAP-65409, AAP-65224, AAP-64902, AAP-61921
+
+**Improved stability and performance across services**
+
+Addresses issues impacting UI responsiveness, containerized installer behavior after Django upgrades, constructed inventory and facts handling, credential validation in Event-Driven Ansible, database restore flows in platform operators, and certificate handling in execution environments. AAP-69005, AAP-68843, AAP-68842, AAP-68841, AAP-68135, AAP-68079, AAP-67759, AAP-67749, AAP-67579, AAP-67552, AAP-67550, AAP-67549, AAP-67548, AAP-67498, AAP-67460, AAP-67371, AAP-67230, AAP-67081, AAP-67080, AAP-67079, AAP-67078, AAP-67038, AAP-66864, AAP-66845, AAP-66806, AAP-66706, AAP-66579, AAP-66400, AAP-66106, AAP-66105, AAP-66104, AAP-66102, AAP-65109, AAP-65081, AAP-64996, AAP-64630, AAP-64146, AAP-60313, AAP-60238, AAP-58769, AAP-58535, AAP-22149
+
+This update rebases the containerized installer to `ansible.platform` collection version 2.6.20260306, aligning the installer with the current Ansible Automation Platform 2.6 collection release. AAP-67548
+
+### 9.1.3. Features
+
+
+
+
+#### 9.1.3.1. Automation controller
+
+
+
+
+- This update improves compatibility with the receptor control tooling used by automation controller by updating the pinned receptorctl version for Tower 4.7 / Ansible Automation Platform 2.6. AAP-66806
+
+
+### 9.1.4. Enhancements
+
+
+
+
+#### 9.1.4.1. Ansible Automation Platform
+
+
+
+
+- This update extends audit logging for identity lifecycle operations in the gateway by recording creation, modification, and deletion of users, teams, and organizations. AAP-66919
+- This update adds audit logging for dynamic preference changes so that updates to registered preferences and settings are tracked over time. AAP-66800
+- This update refines the login experience by removing the “show password” eye icon so that the password field remains masked during entry. AAP-67230
+- This update improves diagnostics for connectivity issues with automation controller by enhancing logging behind the “Error connecting to Controller API” banner. AAP-64146
+
+
+#### 9.1.4.2. Container-based installer Ansible Automation Platform
+
+
+
+
+- This update improves compatibility of the containerized installer after the Django 5.2 upgrade, preventing controller install failures caused by changes in Django behavior and output. AAP-68587
+- This update keeps TLS configuration accurate by ensuring the gateway certificate is regenerated when certificate data changes so that gateway_main_url and related fields are updated. AAP-66579
+- This update improves observability for direct component access in containerized deployments by adding nginx log markers for controller, hub, and Event-Driven Ansible in the containerized installer. AAP-66106
+
+
+#### 9.1.4.3. Automation controller
+
+
+
+
+- This update increases observability for direct API access to automation controller by adding nginx log markers for requests containing X-Trusted-Proxy and X-DAB-JW-TOKEN headers. AAP-66102
+- This update aligns automation controller with the supported framework baseline by upgrading its Django dependency to version 5.2 LTS. AAP-59873
+
+
+#### 9.1.4.4. Django-ansible-base
+
+
+
+
+- This update extends audit logging coverage by adding audit entries for user and team role assignment changes, improving visibility into permission updates. AAP-67042
+
+
+#### 9.1.4.5. Event-Driven Ansible
+
+
+
+
+- This update improves observability for API traffic to Event-Driven Ansible by adding nginx log markers for direct API access. AAP-66105
+
+
+#### 9.1.4.6. Automation hub
+
+
+
+
+- This update improves the robustness of the automation hub container registry by setting gunicorn and proxy timeouts to better handle varied workloads and network conditions. AAP-67759
+- This update enhances logging parity across services by adding nginx log markers for direct API access to Automation hub so that traffic bypassing the gateway can be detected. AAP-66104
+- This update prepares for future token management changes by adding a deprecation warning for the `    ah_token` module in the ansible.hub collection on Ansible Automation Platform 2.6 (Hub 4.11) behind AAP gateway. AAP-65109
+- This update modernizes automation hub by upgrading its Django dependency to version 5.2 LTS. AAP-60388
+
+
+### 9.1.5. CVE
+
+
+
+
+#### 9.1.5.1. Ansible Automation Platform UI
+
+
+
+
+-  [CVE-2026-29074](https://access.redhat.com/security/cve/cve-2026-29074) - SVGO denial of service via XML entity expansion in:
+
+
+-  `        automation-platform-ui` . AAP-68529
+-  `        gateway-rhel9` image. AAP-68526
+
+-  [CVE-2026-27904](https://access.redhat.com/security/cve/cve-2026-27904) - Minimatch denial of service via catastrophic backtracking in glob expressions in:
+
+
+-  `        automation-platform-ui` . AAP-66695
+
+-  [CVE-2025-69873](https://access.redhat.com/security/cve/cve-2026-69873) - Regular expression denial of service (ReDoS) via `    $data` references in:
+
+
+-  `        automation-platform-ui` for Ansible Automation Platform 2.6. AAP-65713
+-  `        gateway-rhel9` image. AAP-65711
+-  `        lightspeed-rhel9` . AAP-66655
+
+-  [CVE-2026-25639](https://access.redhat.com/security/cve/cve-2026-25639) - Axios denial of service via `    <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">proto</span></em></span>` handling in mergeConfig in:
+
+
+-  `        automation-platform-ui` . AAP-65475
+-  `        gateway-rhel9` image. AAP-65472
+-  `        ansible-lightspeed-rhel9` . AAP-65473
+
+
+
+#### 9.1.5.2. Automation gateway
+
+
+
+
+-  [CVE-2025-68121](https://access.redhat.com/security/cve/cve-2026-68121) - Unexpected session resumption in Go `    crypto/tls` in:
+
+
+-  `        automation-gateway-proxy` for Ansible Automation Platform 2.6. AAP-65695
+
+-  [CVE-2025-61726](https://access.redhat.com/security/cve/cve-2026-61726) - Memory exhaustion via query parameter parsing in Go `    net/url` in:
+
+
+-  `        automation-gateway-proxy` for Ansible Automation Platform 2.6. AAP-64902
+
+
+
+#### 9.1.5.3. Red Hat Lightspeed / MCP / RAG
+
+
+
+
+-  [CVE-2026-30922](https://access.redhat.com/security/cve/cve-2026-30922) - pyasn1 denial of service via unbounded recursion in:
+
+
+-  `        lightspeed-chatbot-rhel9` image for Ansible Automation Platform 2.6. AAP-69040
+
+-  [CVE-2026-28498](https://access.redhat.com/security/cve/cve-2026-28498) - Authlib authentication bypass via forged OpenID Connect ID tokens in:
+
+
+-  `        lightspeed-chatbot-rhel9` image for Ansible Automation Platform 2.6. AAP-68686
+
+-  [CVE-2026-28802](https://access.redhat.com/security/cve/cve-2026-28802) - Authlib signature verification bypass allowing unauthorized access via malicious JWTs in:
+
+
+-  `        lightspeed-chatbot-rhel9` image. AAP-67503
+
+-  [CVE-2026-25990](https://access.redhat.com/security/cve/cve-2026-25990) - Pillow out-of-bounds write via specially crafted PSD images in:
+
+
+-  `        lightspeed-chatbot-rhel9` . AAP-65506
+-  `        hub-rhel9` . AAP-65505
+
+-  [CVE-2026-26007](https://access.redhat.com/security/cve/cve-2026-26007) - cryptography subgroup attack due to missing subgroup validation for SECT curves in:
+
+
+-  `        mcp-tools-rhel9` . AAP-65412
+-  `        lightspeed-rhel9` . AAP-65411
+-  `        lightspeed-chatbot-rhel9` . AAP-65410
+
+-  [CVE-2026-1615](https://access.redhat.com/security/cve/cve-2026-1615) - jsonpath arbitrary code execution via unsafe JSON Path evaluation in:
+
+
+-  `        lightspeed-service-container` . AAP-65224
+
+-  [CVE-2025-69223](https://access.redhat.com/security/cve/cve-2026-69223) - AIOHTTP HTTP parser auto_decompress vulnerability exploitable with zip bombs in:
+
+
+-  `        lightspeed-chatbot-rhel9` . AAP-61921
+
+-  [CVE-2026-30827](https://access.redhat.com/security/cve/cve-2026-30827) - express-rate-limit denial of service for IPv4 clients due to incorrect IPv6 subnet masking in:
+
+
+-  `        mcp-server-rhel9` . AAP-67735
+
+
+
+#### 9.1.5.4. Pillow / Image processing
+
+
+
+
+-  [CVE-2026-25990](https://access.redhat.com/security/cve/cve-2026-25990) - Out-of-bounds write via specially crafted PSD images in:
+
+
+-  `        hub-rhel9` . AAP-65505
+
+
+
+### 9.1.6. Bug fixes
+
+
+
+
+#### 9.1.6.1. Ansible Automation Platform
+
+
+
+
+- Fixed an issue where the “Organization Admins Can Manage Users and Teams” setting did not correctly disable the create-team button in the UI when turned off, so organization admins now see the correct state. AAP-68843
+- Fixed an issue where organization administrators were still able to delete or modify teams when “Organization Admins Can Manage Users and Teams” was disabled, so this setting now enforces the intended restrictions. AAP-68842
+- Fixed an issue where teams from other organizations were not visible to organization administrators as expected when organization-wide visibility was enabled. AAP-68841
+- Fixed an issue where an organization administrator could not assign team access to projects in Ansible Automation Platform 2.6, preventing proper delegation of permissions. AAP-65081
+- Fixed an issue where list views in the gateway UI loaded slowly because of excessive duplicate API requests and aggressive polling intervals, improving responsiveness. AAP-67460
+- Fixed an issue where redirects using the `    next` URL parameter failed when the value included a plus sign ( `    +` ), whether encoded or unencoded, so redirects now work correctly. AAP-64996
+- Fixed an issue where creating Event-Driven Ansible projects concurrently from multiple users could result in server errors when handling project creation. AAP-67749
+- Fixed an issue where general project creation flows in Django Ansible Base could lead to errors when invoked by multiple users, improving stability. AAP-60238
+
+
+#### 9.1.6.2. Container-based installer Ansible Automation Platform
+
+
+
+
+- Fixed an issue where containerized controller installs could fail after the Django 5.2 upgrade because Django output changed and broke parsing in the installer. AAP-68135
+- Fixed an issue where Podman’s `    pids_limit` could be set to an extremely large value on nodes with large memory, exceeding system-supported limits, by capping the value. AAP-67579
+
+
+#### 9.1.6.3. Automation controller
+
+
+
+
+- Fixed an issue where facts could become inconsistent when running job templates with fact storage enabled, particularly when multiple inventories had same-name hosts or concurrent jobs updated facts. AAP-67371
+- Fixed an issue where constructed inventories could not be saved when verbosity was greater than 2, so higher verbosity levels are now supported. AAP-66864
+- Fixed an issue where job events missing an event type caused uncaught exceptions in the job events children summary view, improving reliability. AAP-64630
+
+
+#### 9.1.6.4. Event-Driven Ansible
+
+
+
+
+- Fixed an issue where Decision Environment credential validation rejected container registry credentials when the password came from an external credential provider unless placeholder text was used, allowing those credentials to be attached without workarounds. AAP-69005
+- Fixed an issue where Jinja2 variable substitution in rule names failed in Event-Driven Ansible controller worker mode even though the same variables worked in action `    extra_vars` , aligning behavior with the CLI. AAP-67038
+- Fixed an issue where Event-Driven Ansible server could not sync git projects using `    ssh:// or git+ssh://` URL schemes, restoring project sync behavior. AAP-66353
+
+
+#### 9.1.6.5. Automation execution environment
+
+
+
+
+- Fixed an issue where a change in the `    certifi` package affected default trust store paths in Ansible Automation Platform 2.6 execution environments by switching to `    system-certifi` to restore expected behavior. AAP-58769
+
+
+#### 9.1.6.6. Automation hub
+
+
+
+
+- Fixed an issue where the X-Forwarded-Proto header could be incorrectly set in conjunction with the `    alter_hostname_settings` configuration on Azure when passing traffic from gateway to Automation hub. AAP-66706
+
+
+#### 9.1.6.7. Red Hat Ansible Lightspeed
+
+
+
+
+- Fixed an issue where OAuth2 authentication on containerized installer deployments could fail when the Red Hat Ansible Lightspeed port was set to 443 because of incorrect URL handling and default port logic. AAP-66845
+- Fixed an issue where the platform configuration MCP server exposed the `    settings_list` tool twice, causing API errors in clients, by renaming the tools to `    controller-settings_list` and `    gateway-settings_list` . AAP-66400
+- Fixed an issue where the /check endpoint of the Ansible Red Hat Ansible Lightspeed API container reported an incorrect commit version and SHA, improving diagnostics. AAP-60313
+
+
+#### 9.1.6.8. Ansible Automation Platform Operator
+
+
+
+
+- Fixed an issue where deleting a restored Ansible Automation Platform object did not delete the associated deployment or pods, leaving orphaned resources. AAP-68079
+- Fixed an issue where IRSA-based S3 authentication support from galaxy-operator was not available in Automation hub operator for stable-2.6, allowing S3 access-key fields to be optional. AAP-67498
+- Fixed an issue where Galaxy operator restores with `    force_drop_db` failed due to missing CREATEDB privileges and partitioned index handling, causing `    pg_restore` to fail during restores. AAP-67081
+- Fixed an issue where EDA operator restores with `    force_drop_db` failed because the managed PostgreSQL user lacked permissions to recreate databases, causing failures on restore. AAP-67080
+- Fixed an issue where gateway operator restores with `    force_drop_db` failed because required privileges were missing and partitioned indexes caused errors during `    pg_restore` . AAP-67079
+- Fixed an issue where AWX operator restores with `    force_drop_db` were ignored, preventing databases from being dropped and recreated as expected. AAP-67078
+
+
+#### 9.1.6.9. Receptor
+
+
+
+
+- Fixed an issue where receptor reported “Error locating unit” when running in controller because cancelled work units were deleted prematurely across restarts. AAP-22149
+
+
+### 9.1.7. Known issues
+
+
+
+
+#### 9.1.7.1. Red Hat Ansible Lightspeed
+
+
+
+
+- This update documents that validation of Red Hat Ansible Lightspeed enablement in related ATF pipelines is part of ongoing work, with pipelines verified for coverage. AAP-66885
+
+
+### 9.1.8. Developer preview
+
+
+
+
+#### 9.1.8.1. Automation controller
+
+
+
+
+This update introduces a developer preview of the `dispatcherd` feature flag for automation controller in AAP 2.6, allowing early evaluation of the new task system engine ahead of general availability. AAP-58535
+
+### 9.1.9. Rebase
+
+
+
+
+#### 9.1.9.1. RPM-based installer Ansible Automation Platform
+
+
+
+
+This update rebases the platform installer to `ansible.platform` collection version 2.6.20260306, aligning installer content with the current collection version. AAP-67549
+
+#### 9.1.9.2. Ansible Automation Platform Operator
+
+
+
+
+This update rebases the platform operator to `ansible.platform` collection version 2.6.20260306, ensuring operator-managed resources use the current collection baseline. AAP-67550
+
+## 9.2. Ansible Automation Platform patch release February 25, 2026
+
+
+
+
+This release includes the following components and versions:
+
+| Release Date | Component versions |
+| --- | --- |
+| February 25, 2026 | - automation controller 4.7.9
+- Automation hub 4.11.6
+- Event-Driven Ansible 1.2.6
+- Container-based installer Ansible Automation Platform (bundle) 2.6-6
+- Container-based installer Ansible Automation Platform (online) 2.6-6
+- Receptor 1.6.3
+- RPM-based installer Ansible Automation Platform (bundle) 2.6-5
+- RPM-based installer Ansible Automation Platform (online) 2.6-5 |
+
+
+CSV Versions in this release:
+
+- Namespace-scoped Bundle: aap-operator.v2.6.0-0.1772556740
+- Cluster-scoped Bundle: aap-operator.v2.6.0-0.1772583722
+
+
+### 9.2.1. General
+
+
+
+
+- Upgraded to Python 3.12.(AAP-56538)
+
+
+- Due to this upgrade, all users must use a new installer for both containerized and RPM versions.
+
+
+
+### 9.2.2. CVE
+
+
+
+
+With this update, the following CVEs have been addressed:
+
+-  [CVE-2026-24486](https://access.redhat.com/security/cve/cve-2026-24486)  `    ansible-automation-platform-26/lightspeed-chatbot-rhel9` : Python-Multipart has Arbitrary File Write via Non-Default Configuration.(AAP-64188)
+-  [CVE-2026-24486](https://access.redhat.com/security/cve/cve-2026-24486)  `    ansible-automation-platform-26/mcp-tools-rhel9` : Python-Multipart has Arbitrary File Write via Non-Default Configuration.(AAP-64186)
+-  [CVE-2025-13465](https://access.redhat.com/security/cve/cve-2025-13465)  `    automation-platform-ui` : prototype pollution in `    _.unset` and `    _.omit` functions.(AAP-64106)
+-  [CVE-2025-13465](https://access.redhat.com/security/cve/cve-2025-13465)  `    ansible-automation-platform-26/lightspeed-rhel9` : prototype pollution in `    _.unset` and `    _.omit` functions.(AAP-64104)
+-  [CVE-2025-13465](https://access.redhat.com/security/cve/cve-2025-13465)  `    ansible-automation-platform-26/gateway-rhel9` : prototype pollution in `    _.unset` and `    _.omit` functions.(AAP-64103)
+-  [CVE-2026-24049](https://access.redhat.com/security/cve/cve-2026-24049)  `    automation-controller: wheel` : Privilege Escalation or Arbitrary Code Execution via malicious wheel file unpacking.(AAP-63877)
+-  [CVE-2026-24049](https://access.redhat.com/security/cve/cve-2026-24049)  `    ansible-automation-platform-26/de-supported-rhel9: wheel` : Privilege Escalation or Arbitrary Code Execution via malicious wheel file unpacking.(AAP-63861)
+-  [CVE-2026-24049](https://access.redhat.com/security/cve/cve-2026-24049)  `    ansible-automation-platform-26/de-minimal-rhel9: wheel` : Privilege Escalation or Arbitrary Code Execution via malicious wheel file unpacking.(AAP-63860)
+-  [CVE-2025-59057](https://access.redhat.com/security/cve/cve-2025-59057)  `    automation-platform-ui` : React Router has XSS Vulnerability.(AAP-62544)
+-  [CVE-2025-59057](https://access.redhat.com/security/cve/cve-2025-59057)  `    ansible-automation-platform-26/gateway-rhel9` : React Router has XSS Vulnerability.(AAP-62543)
+-  [CVE-2026-21884](https://access.redhat.com/security/cve/cve-2026-21884)  `    automation-platform-ui` : React Router SSR XSS in ScrollRestoration.(AAP-62542)
+-  [CVE-2026-21884](https://access.redhat.com/security/cve/cve-2026-21884)  `    ansible-automation-platform-26/gateway-rhel9` : React Router SSR XSS in ScrollRestoration.(AAP-62541)
+-  [CVE-2026-22029](https://access.redhat.com/security/cve/cve-2026-22029)  `    automation-platform-ui` : React Router vulnerable to XSS via Open Redirects.(AAP-62524)
+-  [CVE-2026-22029](https://access.redhat.com/security/cve/cve-2026-22029)  `    ansible-automation-platform-26/gateway-rhel9` : React Router vulnerable to XSS via Open Redirects.(AAP-62523)
+-  [CVE-2026-21441](https://access.redhat.com/security/cve/cve-2026-21441)  `    ansible-automation-platform-26/hub-web-rhel9` : urllib3 vulnerable to decompression-bomb safeguard bypass when following HTTP redirects (streaming API).(AAP-62449)
+-  [CVE-2026-21441](https://access.redhat.com/security/cve/cve-2026-21441)  `    ansible-automation-platform-26/hub-rhel9` : urllib3 vulnerable to decompression-bomb safeguard bypass when following HTTP redirects (streaming API).(AAP-62448)
+-  [CVE-2025-69223](https://access.redhat.com/security/cve/cve-2025-69223)  `    python3.11-aiohttp` : AIOHTTP’s HTTP Parser `    auto_decompress` feature is vulnerable to zip bomb.(AAP-62286)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/hub-web-rhel9` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62081)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/hub-rhel9-operator` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62080)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/hub-rhel9` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62079)
+-  [CVE-2025-69223](https://access.redhat.com/security/cve/cve-2025-69223)  `    ansible-automation-platform-26/hub-rhel9` : AIOHTTP’s HTTP Parser `    auto_decompress` feature is vulnerable to zip bomb.(AAP-61920)
+-  [CVE-2025-69223](https://access.redhat.com/security/cve/cve-2025-69223)  `    ansible-automation-platform-26/ee-supported-rhel9` : AIOHTTP’s HTTP Parser `    auto_decompress` feature is vulnerable to zip bomb.(AAP-61919)
+-  [CVE-2025-69223](https://access.redhat.com/security/cve/cve-2025-69223)  `    ansible-automation-platform-26/ee-minimal-rhel9` : AIOHTTP’s HTTP Parser `    auto_decompress` feature is vulnerable to zip bomb.(AAP-61918)
+-  [CVE-2025-53643](https://access.redhat.com/security/cve/cve-2025-53643)  `    ansible-automation-platform-26/ee-supported-rhel9` : AIOHTTP HTTP Request/Response Smuggling.(AAP-54841)
+-  [CVE-2026-23490](https://access.redhat.com/security/cve/cve-2026-23490)  `    automation-controller` : pyasn1 has a DoS vulnerability in decoder.(AAP-63123)
+-  [CVE-2025-61140](https://access.redhat.com/security/cve/cve-2025-61140)  `    ansible-automation-platform-26/lightspeed-rhel9: jsonpath` : Prototype Pollution vulnerability in the value function.(AAP-64332)
+-  [CVE-2026-0994](https://access.redhat.com/security/cve/cve-2026-0994)  `    python3.11-protobuf` : Denial of Service in Python Protobuf.(AAP-64072)
+
+
+### 9.2.3. Ansible Automation Platform
+
+
+
+
+#### 9.2.3.1. Bug fixes
+
+
+
+
+- Fixed an issue where there was double logging in Gateway/DAB. Fixed unit tests.(AAP-65216)
+- If the Project’s source control branch is overridden by a Template or template Schedule, it is now displayed on the schedule detail and schedule edit form review step.(AAP-60920)
+- Fixed an issue preventing reordering more than 50 authentication mappings.(AAP-59119)
+- Restored a bug fix so that the feature flags table is created/updated as expected even on partial migrations.(AAP-65815)
+
+
+### 9.2.4. Ansible Automation Platform Operator
+
+
+
+
+#### 9.2.4.1. Enhancements
+
+
+
+
+- Increased envoy request timeout from 1 second to 5 seconds.(AAP-64420)
+
+
+#### 9.2.4.2. Bug Fixes
+
+
+
+
+- Fixed an issue with Automation hub file data not restored in the correct directory.(AAP-65961)
+- Fixed an issue where custom PostgreSQL settings could not be applied to the Ansible Automation Platform Operator. Added command configuration to PostgreSQL `    statefulset` configuration when `    postgres_extra_args` is defined.(AAP-65487)
+- Fixed an issue where there was a missing `    resource_requirement` in the **nginx** container configured in the EDA event stream deployment.(AAP-64007)
+- Fixed an issue where Kubernetes Secret values were being printed in operator logs.(AAP-62943)
+- Fixed an issue with an extra_settings to allow customizing the LOGGING level for the Gateway Operator.(AAP-62938)
+
+
+### 9.2.5. Red Hat Ansible Lightspeed
+
+
+
+
+#### 9.2.5.1. Bug Fixes
+
+
+
+
+- Fixed an issue where Lightspeed timed out connecting to chatbot in Testing CI containerized installer. Added chatbot and mcp tools ports to `    firewalld` .(AAP-65319)
+- Fixed an issue where ChatGPT 5.1 produced blank ALIA responses while using a supported model provider. Added custom config variable to be added to the llama-stack agent configuration.(AAP-63538)
+- Fixed an issue where navigating away from the chatbot while a request was in progress would interrupt the process, often resulting in errors like duplicated messages. This issue has been resolved this by ensuring that outstanding requests continue processing even when the browser focus changes.(AAP-62685)
+- ChatGPT 5.1 produces blank ALIA responses, while using a supported model provider.
+
+
+### 9.2.6. Automation controller
+
+
+
+
+#### 9.2.6.1. Enhancements
+
+
+
+
+- Fixed the job list endpoint to no longer load the job artifacts, resulting in better performance.(AAP-63489)
+
+
+#### 9.2.6.2. Bug Fixes
+
+
+
+
+- Fixed an issue where the AWX CLI `    modify` command did not display available field flags for users who have an admin role on a specific resource but do not have permission to create new resources of that type.(AAP-65813)
+- Fixed missing `    RoleUserAssignment` openapi schema component.(AAP-60826)
+
+
+### 9.2.7. Automation hub
+
+
+
+
+#### 9.2.7.1. Features
+
+
+
+
+- Added a static OpenAPI spec to galaxy that focuses the potential endpoints users can call.(AAP-66415)
+- Improved documentation for Automation hub OpenAPI specifications.(AAP-66410)
+
+
+#### 9.2.7.2. Enhancements
+
+
+
+
+- Added concise descriptions to API Endpoints for AAP MCP server.(AAP-66412)
+
+
+### 9.2.8. Container-based Ansible Automation Platform
+
+
+
+
+#### 9.2.8.1. Enhancements
+
+
+
+
+- Increased envoy request timeout from 1 second to 5 seconds.(AAP-64323)
+- Added a retry mechanism when trying to get the Automation controller status.(AAP-64291)
+- Fixed a compatibility issue when `    jinja2` native is enabled on ansible-core.(AAP-62878)
+- URL anchors in the inventory samples reflect official documentation.(AAP-55780)
+
+
+#### 9.2.8.2. Bug Fixes
+
+
+
+
+- Fixed automation gateway preflight check which doesn’t require `    ansible_host` to be defined anymore.(AAP-65370)
+- Fixed an issue where the installer did not make use of `    ansible_user_dir` for receptor.(AAP-64452)
+- Fixed an issue where disabling TLS on envoy no longer causes a controller connection error when running Merge organization task.(AAP-62904)
+- Fixed an issue where the TLS verification when pushing container images to the Automation Hub registry and TLS was enabled.(AAP-62864)
+
+
+### 9.2.9. RPM-based Ansible Automation Platform
+
+
+
+
+#### 9.2.9.1. Enhancements
+
+
+
+
+- Increased envoy request timeout from 1 second to 5 seconds.(AAP-64008)
+
+
+### 9.2.10. Event-Driven Ansible
+
+
+
+
+#### 9.2.10.1. Enhancements
+
+
+
+
+- The content of the `    de-minimal` and `    de-supported` images of the decision environment changes. There are new names for existing plugins, and the old names are still available albeit deprecated. In most of the cases only a change of the used event source or event filter is needed.(AAP-48005)
+
+
+- For example:
+
+
+
+```
+- name: Production ruleset
+sources:
+- ansible.eda.pg_listener:
+postgres_params:
+host: postgresql_hostname
+port: postgresql_port
+dbname: postgresql_database
+channels:
+- my_events
+- my_alerts
+[...]
+```
+
+- The event source name will need to be changed as follows:
+
+
+```
+- name: Production ruleset
+sources:
+- eda.builtin.pg_listener:
+postgres_params:
+host: postgresql_hostname
+port: postgresql_port
+dbname: postgresql_database
+channels:
+- my_events
+- my_alerts
+[...]
+```
+
+#### 9.2.10.2. Bug Fixes
+
+
+
+
+- Fixed an issue where the activation worker failed to reconnect to redis after disconnection.Override RQ’s default heartbeat to call `    register_birth` , allowing worker re-registration in case of worker disconnects from Redis, and also eliminating ghost workers. Upgraded rq version to 2.6.1.(AAP-56872)
+
+
+### 9.2.11. execution environment
+
+
+
+
+#### 9.2.11.1. Enchancements
+
+
+
+
+- ee-minimal and ee-supported have been updated to use Python 3.12. The version number has been updated to 2.0.0.(AAP-56549)
+
+
+## 9.3. Ansible Automation Platform patch release January 21, 2026
+
+
+
+
+This release includes the following components and versions:
+
+| Release Date | Component versions |
+| --- | --- |
+| January 21, 2026 | - automation controller 4.7.8
+- Automation hub 4.11.5
+- Event-Driven Ansible 1.2.4
+- Container-based installer Ansible Automation Platform (bundle) 2.6-5
+- Container-based installer Ansible Automation Platform (online) 2.6-5
+- Receptor 1.6.3
+- RPM-based installer Ansible Automation Platform (bundle) 2.6-4
+- RPM-based installer Ansible Automation Platform (online) 2.6-4 |
+
+
+CSV Versions in this release:
+
+- Namespace: aap-operator.v2.6.0-0.1768951397
+- Cluster: aap-operator.v2.6.0-0.1768951413
+
+
+### 9.3.1. CVE
+
+
+
+
+With this update, the following CVEs have been addressed:
+
+-  [CVE-2025-69223](https://access.redhat.com/security/cve/cve-2025-69223)  `    automation-controller` : AIOHTTP’s HTTP Parser auto_decompress feature is vulnerable to zip bomb.(AAP-61927)
+-  [CVE-2025-69223](https://access.redhat.com/security/cve/cve-2025-69223)  `    ansible-automation-platform-26/controller-rhel9` : AIOHTTP’s HTTP Parser auto_decompress feature is vulnerable to zip bomb.(AAP-61915)
+-  [CVE-2025-4565](https://access.redhat.com/security/cve/cve-2025-4565)  `    python3.11-protobuf` : Unbounded recursion in Python Protobuf.(AAP-60498)
+-  [CVE-2025-66031](https://access.redhat.com/security/cve/cve-2025-66031)  `    ansible-ai-connect-service` : `    node-forge` ASN.1 Unbounded Recursion.(AAP-59983)
+-  [CVE-2025-66416](https://access.redhat.com/security/cve/cve-2025-66416)  `    ansible-automation-platform-26/mcp-tools-rhel9` : DNS Rebinding Protection Disabled by Default in Model Context Protocol PythonSDK.(AAP-59952)
+-  [CVE-2025-64459](https://access.redhat.com/security/cve/cve-2025-64459)  `    ansible-automation-platform-26/hub-rhel9` : Django SQL injection.(AAP-58111)
+-  [CVE-2025-53643](https://access.redhat.com/security/cve/cve-2025-53643)  `    automation-controller` : AIOHTTP HTTP Request/Response Smuggling.(AAP-54877)
+-  [CVE-2025-61729](https://access.redhat.com/security/cve/cve-2025-61729)  `    ansible-automation-platform-26/receptor-rhel9` : Excessive resource consumption when printing error string for host certificate validation in `    crypto/x509` .(AAP-61230)
+-  [CVE-2025-64460](https://access.redhat.com/security/cve/cve-2025-64460)  `    python3.11-django` : `    Django` : Algorithmic complexity in XML deserializer leads to denial of service.(AAP-61780)
+-  [CVE-2025-64460](https://access.redhat.com/security/cve/cve-2025-64460)  `    automation-controller` : `    Django` : Algorithmic complexity in XML Deserializer leads to denial of service.(AAP-60961)
+-  [CVE-2026-21441](https://access.redhat.com/security/cve/cve-2026-21441)  `    ansible-automation-platform-26/lightspeed-rhel9` : `    urllib3` vulnerable to decompression-bomb safeguard bypass when following HTTP redirects (streaming API).(AAP-62341)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    python3.11-urllib3` : `    urllib3` streaming API improperly handles highly compressed data.(AAP-62290)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    python3.11-urllib3` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62290)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    automation-controller` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62090)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/controller-rhel9` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62068)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-25/lightspeed-rhel8` : `    urllib3` : Streaming API improperly handles highly compressed data.(AAP-62030)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/mcp-tools-rhel9` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62085)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/lightspeed-rhel9-operator` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62084)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/lightspeed-rhel9` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62083)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/lightspeed-chatbot-rhel9` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62082)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/controller-rhel9-operator` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62069)
+-  [CVE-2025-61729](https://access.redhat.com/security/cve/cve-2025-61729)  `    receptor` : Excessive resource consumption when printing error string for host certificate validation in `    crypto/x509` .(AAP-61235)
+-  [CVE-2025-62706](https://access.redhat.com/security/cve/cve-2025-62706)  `    ansible-automation-platform-26/lightspeed-chatbot-rhel9` : `    Authlib` : JWE `    zip=DEF` decompression bomb enables DoS.(AAP-60596)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/gateway-rhel9: `urllib3` Streaming API improperly handles highly compressed data.(AAP-62077)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/eda-controller-rhel9` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62072)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/de-supported-rhel9` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62071)
+-  [CVE-2025-66471](https://access.redhat.com/security/cve/cve-2025-66471)  `    ansible-automation-platform-26/de-minimal-rhel9` : `    urllib3` Streaming API improperly handles highly compressed data.(AAP-62070)
+-  [CVE-2026-21441](https://access.redhat.com/security/cve/cve-2026-21441)  `    ansible-automation-platform-26/gateway-rhel9` : `    urllib3` vulnerable to decompression-bomb safeguard bypass when following HTTP redirects (streaming API).(AAP-62446)
+-  [CVE-2026-21441](https://access.redhat.com/security/cve/cve-2026-21441)  `    ansible-automation-platform-26/eda-controller-rhel9` : `    urllib3` vulnerable to decompression-bomb safeguard bypass when following HTTP redirects (streaming API).(AAP-62443)
+-  [CVE-2026-21441](https://access.redhat.com/security/cve/cve-2026-21441)  `    ansible-automation-platform-26/de-minimal-rhel9` : `    urllib3` vulnerable to decompression-bomb safeguard bypass when following HTTP redirects (streaming API).(AAP-62383)
+-  [CVE-2025-69223](https://access.redhat.com/security/cve/cve-2025-69223)  `    ansible-automation-platform-26/de-supported-rhel9` : AIOHTTP’s HTTP Parser `    auto_decompress` feature is vulnerable to zip bomb.(AAP-61917)
+-  [CVE-2025-69223](https://access.redhat.com/security/cve/cve-2025-69223)  `    ansible-automation-platform-26/de-minimal-rhel9` : AIOHTTP’s HTTP Parser `    auto_decompress` feature is vulnerable to zip bomb.(AAP-61916)
+
+
+### 9.3.2. Ansible Automation Platform
+
+
+
+
+#### 9.3.2.1. Features
+
+
+
+
+- Page titles now reflect the current page content.(AAP-61754)
+- Ansible Automation Platform now provides support for IPv6 single-stack and dual-stack (IPv4 and IPv6) deployments in container-based environments. IPv6 is now supported across all Ansible Automation Platform deployment methods. The `    FEATURE_GATEWAY_IPV6_USAGE_ENABLED` feature flag has been removed and IPv6 support is enabled by default.(ANSTRAT-1575)
+- Red Hat now collects anonymized telemetry data from the Ansible MCP server. The telemetry data includes metrics related to MCP server performance, adoption trends, and usage patterns. For more information, see the [Telemetry data collection for the Ansible MCP server](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/deploying-ansible-mcp-server#telemetry_data_collection_for_ansible_mcp_server) .(ANSTRAT-1792)
+
+
+#### 9.3.2.2. Enhancements
+
+
+
+
+Improves labels and descriptions for Authenticator Mappings details.(AAP-51295)
+
+Updated modal warning message and layout when enabling a copied Rulebook Activation.(AAP-42574)
+
+- Added dedicated aap.auth_audit logger with specialized formatters and handlers.
+
+
+- Source IP address.
+- User agent from HTTP requests.
+
+
+- Introduced new logs for authentication events, all of which are both present in logs following their original patterns as well as logs under the `            aap.auth_audit` logger, including all of the original information.
+
+
+
+
+Important
+In a future release, all authentication logs introduced and moved from their existing logger to the aap.auth_audit logger will be removed from all but the `aap.auth_audit` logger.
+
+
+
+- Specific log changes:
+
+
+-  `        OAuth2` Token Lifecycle Tracking
+
+
+- Log token creation, modification, and usage with associated OAuth2 application.
+- Track authenticated API requests with user, method, path, and token details.
+- Improved activity stream with selective field diffing to reduce noise from trivial updates.
+
+
+- SSO Authentication Logging
+
+
+- Log SSO redirect initiation with authenticator identification and sanitized redirect URLs.
+- Track social auth failures and exceptions.
+- Enhanced SAML authenticator logging.
+
+- Authentication Event Logging
+
+
+- Log successful and failed authentication attempts.
+- Track cases where no authenticator can validate a user.
+- Include authenticator type in login success messages.
+- Log access denials from claims processing.
+
+- Improved Error Logging
+
+
+- Enhanced Redis connection error messages to include underlying exceptions.
+- Better diagnostic information for troubleshooting.
+
+(AAP-60364)
+
+
+- Reduce cognitive complexity `            in _sync_user_superuser_flag` .(AAP-62771)
+
+
+
+
+#### 9.3.2.3. Bug Fixes
+
+
+
+
+- Fixed an issue preventing gateway from working in a pure IPv4 single stack environment when IPv6 is enabled.(AAP-60478)
+- Fixed an issue where the UI did not allow for full search in resource dropdowns.(AAP-57712)
+- Fixed an issue that occasionally showed a bad request status when navigating between different pages in Ansible Automation Platform.(AAP-56701)
+- Fixed an issue where searching for a collection by name returned incorrect results. Fixed the filtering by name in the **Collections** page.(AAP-56529)
+- Fixed an issue where the user could not edit the **Client Certificate** and/or **Client Key** fields of a credential once set.(AAP-55296)
+- Fixed an issue where the workflow job templates node credentials were missing after save for job template nodes that have a default credential that is promptable.(AAP-52638)
+- Fixed an issue where the platform gateway UI reset the order of an authentication mapping when the entity was edited by the user.(AAP-52258)
+- Fixed an issue where automation controller unavailability rendered the entire Ansible Automation Platform UI inaccessible. The UI now remains functional during automation controller outages, displaying a notification banner to alert users.(AAP-50106)
+- Fixed an issue where the descriptions for the **Remotes** and **Remote Registries** were not accurate.(AAP-49838)
+- Fixed an issue where the survey text area **Default Answer** field did not properly accept newlines when pressing Enter.(AAP-49820)
+- Fixed an issue where the **Review** page of the add **Approval** node in workflow job template did not load.(AAP-49433)
+- Fixed an issue where **Days of Data to Keep** is missing from **Edit Cleanup Job** schedule page.(AAP-48972)
+- Fixed an issue where editing and saving credentials that use external credential lookup plugins (such as CyberArk) failed with an error message. Users can now successfully modify and save these credentials as expected.(AAP-44813)
+- Fixed an issue where the SAML Service Provider extra configuration data field could not be cleared in the UI, as it would automatically reset to the default value. Users can now set this field to null, which is required for compatibility with certain identity providers.(AAP-43661)
+- Fixed an issue where ad-hoc commands failed with a **Bad Request** error when using credentials configured with prompt on launch for password fields. The **Run Command** wizard now correctly displays a credential passwords step to collect required passwords before executing the command.(AAP-43603)
+
+
+#### 9.3.2.4. Deprecated
+
+
+
+
+- Feature flag `    FEATURE_GATEWAY_IPV6_USAGE_ENABLED` has been removed. IPv6 is now supported by default.(AAP-61805)
+
+
+### 9.3.3. Automation controller
+
+
+
+
+#### 9.3.3.1. Features
+
+
+
+
+- Added runtime feature flags.(AAP-62686)
+
+
+### 9.3.4. Automation hub
+
+
+
+
+#### 9.3.4.1. Bug Fixes
+
+
+
+
+- Fixed an issue where the password field on the automation hub Django REST framework authentication page was missing the autocomplete attribute. As a consequence, the field did not align with security best practices regarding browser autofill. With this update, the password field uses the autocomplete="new-password" attribute. As a result, the automation hub API authentication page now complies with recommended security settings.(AAP-59912)
+
+
+### 9.3.5. Container-based Ansible Automation Platform
+
+
+
+
+#### 9.3.5.1. Enhancements
+
+
+
+
+- Added lTLS support to lightspeed chatbot service.(AAP-60900)
+
+
+#### 9.3.5.2. Bug Fixes
+
+
+
+
+- Fixed an issue where the system-prompt optimized for granite and OpenAI models.(AAP-60898)
+- Fixed an issue where the containerized installer could not properly configure Redis in the IPv6 only environment. Added IPv6 support for different Ansible Automation Platform components within the containerized installer collection.(AAP-60532)
+- Fixed an issue where the ansiblemcp uninstall is failing to stop containers.
+
+
+### 9.3.6. Event-Driven Ansible
+
+
+
+
+#### 9.3.6.1. Features
+
+
+
+
+- Added x-ai-description field to the activation PATCH method.(AAP-61969)
+- With this update, activations in the "workers offline" status on the Event-Driven Ansible server are now protected from accidental deletion or disabling. This enhancement adds a warning banner to the User Interface (UI) for the "restart", "disable", and "delete" workflows, providing users with a clear warning before performing these actions. The feature also supports a force flag for the "disable" and "delete" operations, giving users the option to bypass the warning if necessary.(AAP-51378)
+
+
+#### 9.3.6.2. Bug Fixes
+
+
+
+
+- Fixed an issue where the IPv6 support in the Event-Driven Ansible operator configmaps was missing the extra listen **NGINX** directive. We added the required directive so the event streams pod now has **NGINX** bound to its IPv6 interface.(AAP-62001)
+
+
+### 9.3.7. Red Hat Ansible Lightspeed
+
+
+
+
+#### 9.3.7.1. Enhancements
+
+
+
+
+- Enabled chatbot authentication.(AAP-61015)
+- Supports Red Hat Ansible Lightspeed chatbot authentication.(AAP-59478)
+- Enabled chatbot authentication.(AAP-59476)
+- The MCP service / endpoint now displays a banner that explains how to connect to the service, this banner replaces an error message.(AAP-59334)
+- Implemented authentication between ansible-lightspeed and ansible-lightspeed-chatbot.(AAP-58796)
+- Added chatbot authentication capabilities.(AAP-58794)
+- Added Lightspeed chatbot TLS support.(AAP-54412)
+
+
+#### 9.3.7.2. Bug Fixes
+
+
+
+
+- Fixed an issue where there was an error on the cursor editor. When the error occurred, the MCP server configuration on the Cursor Settings panel and Output view displayed error messages.(AAP-62002)
+- Fixed an issue where the Lightspeed Chatbot `    PROVIDER_VECTOR_DB_ID` set to literal string caused degraded responses in production.(AAP-61118)
+- Fixed bug where VS Code would throw a warning when connecting to Ansible Automation Platform MCP servers due to a period character being in the tool name.(AAP-59293)
+- Fixed an issue where Ansible Lightspeed intelligent assistant showed raw tool_call output in answers.(AAP-57513)
+- Fixed an issue where long tool names in the Ansible Automation Platform MCP server exceeding the 60-character limit in Cursor’s MCP server resulted in the MCP server tools to being hidden in Cursor, impacting tool usage. With this release, the MCP server now supports tool names exceeding 60 characters, resolving the visibility and usability issues for all tools in the Ansible Automation Platform MCP server.(AAP-61149)
+- Fixed an issue where ALIA was experiencing Database or Disk is Full errors.(AAP-53081)
+- Fixed an issue where the `    CHATBOT_API_KEY` environment variable was not passed to the container when the provider was azure/openai.(AAP-63292)
+
+
+#### 9.3.7.3. Deprecated
+
+
+
+
+- Removed ansible-risk-insights dependency from ansible-ai-connect-service.(AAP-60336)
+
+
+## 9.4. Ansible Automation Platform patch release January 6, 2026
+
+
+
+
+This release includes the following components and versions:
+
+| Release Date | Component versions |
+| --- | --- |
+| January 6, 2026 | - Automation controller 4.7.6
+- Automation hub 4.11.4
+- Event-Driven Ansible 1.2.3
+- Container-based installer Ansible Automation Platform (bundle) 2.6-4.1
+- Container-based installer Ansible Automation Platform (online) 2.6-4
+- Receptor 1.6.2
+- RPM-based installer Ansible Automation Platform (bundle) 2.6-3.2
+- RPM-based installer Ansible Automation Platform (online) 2.6-3 |
+
+
+CSV Versions in this release:
+
+- Namespace: aap-operator.v2.6.0-0.1767630689
+- Cluster: aap-operator.v2.6.0-0.1767630627
+
+
+### 9.4.1. CVE
+
+
+
+
+With this update, the following CVEs have been addressed:
+
+-  [CVE-2025-14025](https://access.redhat.com/security/cve/cve-2025-14025)  `    automation-gateway` : Read-only Personal Access Token (PAT) bypasses write restrictions.(AAP-60068)
+-  [CVE-2025-68664](https://access.redhat.com/security/cve/cve-2025-68664)  `    ansible-automation-platform-26/lightspeed-rhel9: LangChain` : Arbitrary code execution via serialization injection.(AAP-61313)
+
+
+## 9.5. Ansible Automation Platform patch release December 10, 2025
 
 
 
@@ -256,19 +1276,19 @@ CSV Versions in this release:
 - cluster: aap-operator.v2.6.0-0.1764966767
 
 
-### 9.1.1. General
+### 9.5.1. General
 
 
 
 
-#### 9.1.1.1. **Stakeholder Notification: Ansible Lightspeed Release 2.6 Sign-Off Issue**
+#### 9.5.1.1. **Stakeholder Notification: Ansible Lightspeed Release 2.6 Sign-Off Issue**
 
 
 
 
 We are writing to inform you of an issue discovered during the final sign-off process for the Ansible Lightspeed 2.6 release that impacts a subset of customers.
 
-#### 9.1.1.2. Issue Description
+#### 9.5.1.2. Issue Description
 
 
 
@@ -277,14 +1297,14 @@ Ansible Lightspeed customers who deploy using the Red Hat OpenShift Container Pl
 
 A similar issue also affects customers who utilize the **containerized installer** with the **Enterprise topology** . Crucially, this issue **does not affect** customers using the containerized installer with the **Growth or All-in-One topology** .
 
-#### 9.1.1.3. Root Cause and Impact
+#### 9.5.1.3. Root Cause and Impact
 
 
 
 
 The 403 error is caused by a Cross-Site Request Forgery (CSRF) protection mechanism not correctly recognizing the origin of the Chatbot’s request in the affected deployment configurations. This prevents the Chatbot from functioning as intended for these specific customer segments.
 
-#### 9.1.1.4. Workaround
+#### 9.5.1.4. Workaround
 
 
 
@@ -314,7 +1334,7 @@ The `&lt;Ansible Automation Platform Gateway FQDN&gt;` should be replaced with t
 
 
 
-#### 9.1.1.5. Next Steps
+#### 9.5.1.5. Next Steps
 
 
 
@@ -325,7 +1345,7 @@ Please disseminate this information to your relevant customer-facing and support
 
 Thank you for your understanding and continued support.
 
-### 9.1.2. CVE
+### 9.5.2. CVE
 
 
 
@@ -341,12 +1361,12 @@ With this update, the following CVEs have been addressed:
 -  [CVE-2025-64459](https://access.redhat.com/security/cve/cve-2025-64459)  `    python3.11-django` : Django SQL injection.
 
 
-### 9.1.3. Ansible Automation Platform
+### 9.5.3. Ansible Automation Platform
 
 
 
 
-#### 9.1.3.1. Features
+#### 9.5.3.1. Features
 
 
 
@@ -373,7 +1393,7 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 
 
 
-#### 9.1.3.2. Enhancements
+#### 9.5.3.2. Enhancements
 
 
 
@@ -381,7 +1401,7 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 - Fixed an issue with missing Ansible Automation Platform 2.6 repositories for Red Hat Enterprise Linux 10, which previously prevented the successful build of devtools RPMs. This resulted in devtools failing to mirror Ansible Automation Platform 2.6 on Red Hat Enterprise Linux 10. With this release, we have built the devtools RPMs for Red Hat Enterprise Linux 10 on a dedicated channel which are now accessible to users.(AAP-53866)
 
 
-#### 9.1.3.3. Bug Fixes
+#### 9.5.3.3. Bug Fixes
 
 
 
@@ -425,7 +1445,7 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 - Fixed an issue where users were encountering an issue with `    extra-vars`  `    number_list` containing more than 21 digits in non-quoted integer format, experiencing a UI display problem. Previously, the user interface incorrectly converted long numbers to scientific notation, making input difficult.(AAP-31805)
 
 
-#### 9.1.3.4. Deprecated
+#### 9.5.3.4. Deprecated
 
 
 
@@ -439,12 +1459,12 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 
 
 
-### 9.1.4. Ansible Automation Platform Operator
+### 9.5.4. Ansible Automation Platform Operator
 
 
 
 
-#### 9.1.4.1. Enhancements
+#### 9.5.4.1. Enhancements
 
 
 
@@ -460,7 +1480,7 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 
 
 
-#### 9.1.4.2. Bug Fixes
+#### 9.5.4.2. Bug Fixes
 
 
 
@@ -471,12 +1491,12 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 - Fixed a server error that could happen when assigning permissions via the `    /api/eda/` or `    /api/controller/` endpoints.(AAP-58622)
 
 
-### 9.1.5. Automation controller
+### 9.5.5. Automation controller
 
 
 
 
-#### 9.1.5.1. Features
+#### 9.5.5.1. Features
 
 
 
@@ -485,7 +1505,7 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 - Added `    x-ai-description` to controller schema to provide AI friendly description of each endpoint.(AAP-59819)
 
 
-#### 9.1.5.2. Bug Fixes
+#### 9.5.5.2. Bug Fixes
 
 
 
@@ -496,12 +1516,12 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 - Fixed an issue where the OpenAPI specification for the Automation controller was incomplete, impeding MCP server integration development. This limited the seamless MCP server integration with the Ansible Automation Platform. The Automation controller’s REST API is now complete and accessible.(AAP-53640)
 
 
-### 9.1.6. Automation hub
+### 9.5.6. Automation hub
 
 
 
 
-#### 9.1.6.1. Bug Fixes
+#### 9.5.6.1. Bug Fixes
 
 
 
@@ -515,12 +1535,12 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 - Previously, upgrades from Ansible Automation Platform 2.5 to 2.6 failed when API access logging was enabled. This occurred due to an incorrect import path in the galaxy-ng package. This release corrects the import path.(AAP-59886)
 
 
-### 9.1.7. Container-based Ansible Automation Platform
+### 9.5.7. Container-based Ansible Automation Platform
 
 
 
 
-#### 9.1.7.1. Enhancements
+#### 9.5.7.1. Enhancements
 
 
 
@@ -528,7 +1548,7 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 - Configured podman PID limits, `    sysctls` for `    inotify` and kernel keys, and ulimit `    nofile` for user running Ansible Automation Platform service containers based on system resources.(AAP-59438)
 
 
-#### 9.1.7.2. Bug Fixes
+#### 9.5.7.2. Bug Fixes
 
 
 
@@ -536,12 +1556,12 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 - Fixed an issue where after uninstall/re-install of receptor jobs were unable to start due to stale exited containers with the same name were still present.(AAP-59609)
 
 
-### 9.1.8. Event-Driven Ansible
+### 9.5.8. Event-Driven Ansible
 
 
 
 
-#### 9.1.8.1. Enhancements
+#### 9.5.8.1. Enhancements
 
 
 
@@ -549,7 +1569,7 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 - Added concise descriptions to API endpoints for Ansible Automation Platform MCP MVP endpoints ( `    x-ai-description` ).(AAP-58431)
 
 
-#### 9.1.8.2. Bug Fixes
+#### 9.5.8.2. Bug Fixes
 
 
 
@@ -557,12 +1577,12 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 - Fixed an issue where the OpenAPI specification for Event-Driven Ansible was not offering comprehensive documentation and detailed request/response schemas. Previously, developers integrating with Event-Driven Ansible via the MCP server had to manually explore APIs and format API calls without proper guidance, which impeded seamless integration. With this release, the OpenAPI specification for the Event-Driven Ansible REST API is now complete and well-documented. This enhancement enables seamless integration with the MCP server using Event-Driven Ansible.(AAP-53642)
 
 
-### 9.1.9. Lightspeed
+### 9.5.9. Lightspeed
 
 
 
 
-#### 9.1.9.1. Technical Preview
+#### 9.5.9.1. Technical Preview
 
 
 
@@ -571,14 +1591,14 @@ For more information about deploying the Ansible MCP server, see [Deploying an A
 - This new feature enables users to access the Ansible Automation Platform 2.6 API directly from AI tools like Claude Code.(AAP-57217)
 
 
-#### 9.1.9.2. Features
+#### 9.5.9.2. Features
 
 
 
 
 Added the new Ansible Automation Platform MCP Server to the 2.6 stream.(AAP-58863)
 
-#### 9.1.9.3. Bug Fixes
+#### 9.5.9.3. Bug Fixes
 
 
 
@@ -586,12 +1606,12 @@ Added the new Ansible Automation Platform MCP Server to the 2.6 stream.(AAP-5886
 - Fixed an issue of Ansible Automation Platform Multi-Channel Platform (MCP) servers crashing due to incomplete Epic and System Design Plan (SDP) creation, leading to unclear work requirements. As a result, the Ansible Automation Platform MCP Servers have created the System Design Plan and related tasks, addressing ANSTRAT-1567. This enhancement improves the efficiency of feature development for end users by completing the Ansible Automation Platform MCP Servers system design plan in an active manner.(AAP-53087)
 
 
-### 9.1.10. Receptor
+### 9.5.10. Receptor
 
 
 
 
-#### 9.1.10.1. Features
+#### 9.5.10.1. Features
 
 
 
@@ -599,7 +1619,7 @@ Added the new Ansible Automation Platform MCP Server to the 2.6 stream.(AAP-5886
 - Receptor collection version bumped to 2.0.8, which supports Red Hat Enterprise Linux 10 mesh nodes.(AAP-57987)
 
 
-#### 9.1.10.2. Bug Fixes
+#### 9.5.10.2. Bug Fixes
 
 
 
@@ -607,7 +1627,7 @@ Added the new Ansible Automation Platform MCP Server to the 2.6 stream.(AAP-5886
 - Fixed an issue where the receptor-collection was not up to date with Automation hub standards. There is now an up to date Changelog included in receptor-collection.(AAP-58434)
 
 
-## 9.2. Ansible Automation Platform patch release November 19, 2025
+## 9.6. Ansible Automation Platform patch release November 19, 2025
 
 
 
@@ -632,7 +1652,7 @@ CSV Versions in this release:
 - Cluster: aap-operator.v2.6.0-0.1763137355
 
 
-### 9.2.1. CVE
+### 9.6.1. CVE
 
 
 
@@ -643,12 +1663,12 @@ With this update, the following CVEs have been addressed:
 -  [CVE-2025-59530](https://access.redhat.com/security/cve/cve-2025-59530)  `    receptor` : `    quic-go` crash due to premature `    HANDSHAKE_DONE` frame.(AAP-55973)
 
 
-### 9.2.2. Ansible Automation Platform
+### 9.6.2. Ansible Automation Platform
 
 
 
 
-#### 9.2.2.1. Features
+#### 9.6.2.1. Features
 
 
 
@@ -656,7 +1676,7 @@ With this update, the following CVEs have been addressed:
 - Allows for Event-Driven Ansible to add CA Certificates in gateway which can then be used by **Envoy** to do certificate based authorization for mTLS `    EventStreams` .(AAP-56770)
 
 
-#### 9.2.2.2. Enhancements
+#### 9.6.2.2. Enhancements
 
 
 
@@ -675,7 +1695,7 @@ With this update, the following CVEs have been addressed:
 
 
 
-#### 9.2.2.3. Bug Fixes
+#### 9.6.2.3. Bug Fixes
 
 
 
@@ -698,12 +1718,12 @@ With this update, the following CVEs have been addressed:
 - Fixed an execution environment deletion warning.(AAP-55135)
 
 
-### 9.2.3. Red Hat Ansible Lightspeed
+### 9.6.3. Red Hat Ansible Lightspeed
 
 
 
 
-#### 9.2.3.1. Features
+#### 9.6.3.1. Features
 
 
 
@@ -712,7 +1732,7 @@ With this update, the following CVEs have been addressed:
 - Added support for 3rd party model providers Azure.(AAP-58290)
 
 
-#### 9.2.3.2. Enhancements
+#### 9.6.3.2. Enhancements
 
 
 
@@ -725,7 +1745,7 @@ With this update, the following CVEs have been addressed:
 - Made changes required to support `    llama-stack` 0.2.22.(AAP-58361)
 
 
-#### 9.2.3.3. Bug Fixes
+#### 9.6.3.3. Bug Fixes
 
 
 
@@ -735,7 +1755,7 @@ With this update, the following CVEs have been addressed:
 - Fixed an issue where during the upgrade of `    chatbot-api` , the new one is stuck in pending state waiting until PVC is removed.(AAP-57376)
 
 
-#### 9.2.3.4. Known Issues
+#### 9.6.3.4. Known Issues
 
 
 
@@ -743,12 +1763,12 @@ With this update, the following CVEs have been addressed:
 - If you are using an IBM Granite 3.3 AI model series in your Ansible Lightspeed intelligent assistant deployment, there may be a delay of ~1 minute in receiving a chat response. As a workaround, restart the chat session.(AAP-58186)
 
 
-### 9.2.4. Automation controller
+### 9.6.4. Automation controller
 
 
 
 
-#### 9.2.4.1. Features
+#### 9.6.4.1. Features
 
 
 
@@ -756,7 +1776,7 @@ With this update, the following CVEs have been addressed:
 - Receptor collection version updated to 2.0.6, which is compatible with ansible-core 2.19.(AAP-42617)
 
 
-#### 9.2.4.2. Bug Fixes
+#### 9.6.4.2. Bug Fixes
 
 
 
@@ -778,12 +1798,12 @@ django.db.utils.ProgrammingError: column main_unifiedjobtemplate.org_unique does
 - Fixes an issue where jobs failed on `    fapolicyd` enabled systems where python3.9 was not installed by default. Updates `    automation-controller-fapolicyd` from python3.9 to python3.11 to address this issue.(AAP-55790)
 
 
-### 9.2.5. Automation hub
+### 9.6.5. Automation hub
 
 
 
 
-#### 9.2.5.1. Bug Fixes
+#### 9.6.5.1. Bug Fixes
 
 
 
@@ -791,12 +1811,12 @@ django.db.utils.ProgrammingError: column main_unifiedjobtemplate.org_unique does
 - Fixed an upgrade error, `    AttributeError` or `    ValueError` , **content type mismatch** in the migration that happens when upgrading if any role is assigned to a group globally before the migration.(AAP-58299)
 
 
-### 9.2.6. Container-based Ansible Automation Platform
+### 9.6.6. Container-based Ansible Automation Platform
 
 
 
 
-#### 9.2.6.1. Enhancements
+#### 9.6.6.1. Enhancements
 
 
 
@@ -806,7 +1826,7 @@ django.db.utils.ProgrammingError: column main_unifiedjobtemplate.org_unique does
 - Added ALIA support for OpenAI provider.(AAP-58197)
 
 
-#### 9.2.6.2. Bug Fixes
+#### 9.6.6.2. Bug Fixes
 
 
 
@@ -816,19 +1836,19 @@ django.db.utils.ProgrammingError: column main_unifiedjobtemplate.org_unique does
 - Fixed an issue with the monitoring image on Red Hat Ansible Lightspeed nodes when using the bundle deployment.(AAP-57167)
 
 
-### 9.2.7. RPM-based Ansible Automation Platform
+### 9.6.7. RPM-based Ansible Automation Platform
 
 
 
 
-#### 9.2.7.1. Enhancements
+#### 9.6.7.1. Enhancements
 
 
 
 
 Event-Driven Ansible event-stream mTLS configuration added to installer.(AAP-46070)
 
-#### 9.2.7.2. Bug Fixes
+#### 9.6.7.2. Bug Fixes
 
 
 
@@ -845,12 +1865,12 @@ Event-Driven Ansible event-stream mTLS configuration added to installer.(AAP-460
 
 
 
-### 9.2.8. Event-Driven Ansible
+### 9.6.8. Event-Driven Ansible
 
 
 
 
-#### 9.2.8.1. Features
+#### 9.6.8.1. Features
 
 
 
@@ -860,7 +1880,7 @@ Event-Driven Ansible event-stream mTLS configuration added to installer.(AAP-460
 - Added a credential type for mTLS event stream.(AAP-46054)
 
 
-#### 9.2.8.2. Enhancements
+#### 9.6.8.2. Enhancements
 
 
 
@@ -868,12 +1888,12 @@ Event-Driven Ansible event-stream mTLS configuration added to installer.(AAP-460
 - Event-Driven Ansible event-stream mTLS configuration added to the installer,(AAP-57434)
 
 
-### 9.2.9. Receptor
+### 9.6.9. Receptor
 
 
 
 
-#### 9.2.9.1. Features
+#### 9.6.9.1. Features
 
 
 
@@ -881,7 +1901,7 @@ Event-Driven Ansible event-stream mTLS configuration added to installer.(AAP-460
 - Addresses edge cases that could cause JSON failure to parse a line from the worker stream. It also raises the versions of go dependencies and other minor functionality changes.(AAP-57253)
 
 
-## 9.3. Ansible Automation Platform patch release November 5, 2025
+## 9.7. Ansible Automation Platform patch release November 5, 2025
 
 
 
@@ -906,12 +1926,12 @@ CSV Versions in this release:
 - Cluster-scoped Bundle: aap-operator.v2.6.0-0.1761384578
 
 
-### 9.3.1. Red Hat Ansible Lightspeed
+### 9.7.1. Red Hat Ansible Lightspeed
 
 
 
 
-#### 9.3.1.1. Bug Fixes
+#### 9.7.1.1. Bug Fixes
 
 
 
@@ -919,24 +1939,24 @@ CSV Versions in this release:
 - A typo in the `    containerfile` caused the **nginx** configuration file to be copied to a non-existent directory in operator-based installations, leading to the Lightspeed API service being unavailable due to incorrect port configuration. With this release, the typo has been fixed, ensuring the Lightspeed API service now listens on the correct port in operator-based installations, improving API endpoint accessibility.(AAP-56712)
 
 
-### 9.3.2. Technical note
+### 9.7.2. Technical note
 
 
 
 
-#### 9.3.2.1. Red Hat Ansible Lightspeed
+#### 9.7.2.1. Red Hat Ansible Lightspeed
 
 
 
 
 RFC 2818 is now enforced between the lightspeed service and the identity provider (gateway) during the OAuth2 authorisation.
 
-### 9.3.3. Container-based Ansible Automation Platform
+### 9.7.3. Container-based Ansible Automation Platform
 
 
 
 
-#### 9.3.3.1. Bug Fixes
+#### 9.7.3.1. Bug Fixes
 
 
 
@@ -944,7 +1964,7 @@ RFC 2818 is now enforced between the lightspeed service and the identity provide
 - Fixed an issue with the chatbot response about the latest Ansible Automation Platform version.(AAP-57385)
 
 
-## 9.4. Ansible Automation Platform patch release October 28, 2025
+## 9.8. Ansible Automation Platform patch release October 28, 2025
 
 
 
@@ -969,7 +1989,7 @@ CSV Versions in this release:
 - Cluster: aap-operator.v2.6.0-0.1762261209
 
 
-### 9.4.1. CVE
+### 9.8.1. CVE
 
 
 
@@ -986,12 +2006,12 @@ With this update, the following CVEs have been addressed:
 
 [CVE-2025-58754](https://access.redhat.com/security/cve/cve-2025-58754)  `automation-platform-ui` : Axios DoS via lack of data size check.(AAP-53718)
 
-### 9.4.2. Ansible Automation Platform
+### 9.8.2. Ansible Automation Platform
 
 
 
 
-#### 9.4.2.1. Features
+#### 9.8.2.1. Features
 
 
 
@@ -1000,7 +2020,7 @@ With this update, the following CVEs have been addressed:
 - Added two new toggle options on the subscription wizard to allow for fetching subscriptions using basic authentication.(AAP-47865)
 
 
-#### 9.4.2.2. Bug Fixes
+#### 9.8.2.2. Bug Fixes
 
 
 
@@ -1020,7 +2040,7 @@ With this update, the following CVEs have been addressed:
 - Fixed an issue that prevented SAML and AzureAD authentication when local user accounts share the same email address.(AAP-56518)
 
 
-#### 9.4.2.3. Deprecated
+#### 9.8.2.3. Deprecated
 
 
 
@@ -1028,12 +2048,12 @@ With this update, the following CVEs have been addressed:
 - Subscription credentials can no longer be viewed/edited from the system settings page.(AAP-55014)
 
 
-### 9.4.3. Ansible Automation Platform Operator
+### 9.8.3. Ansible Automation Platform Operator
 
 
 
 
-#### 9.4.3.1. Bug Fixes
+#### 9.8.3.1. Bug Fixes
 
 
 
@@ -1044,12 +2064,12 @@ With this update, the following CVEs have been addressed:
 - Fixed an issue where the backup and restore Ansible Automation Platform instance failed, from cluster A to cluster B, when restoring an upgraded AAP environment from 2.4.(AAP-55648)
 
 
-### 9.4.4. Red Hat Ansible Lightspeed
+### 9.8.4. Red Hat Ansible Lightspeed
 
 
 
 
-#### 9.4.4.1. Features
+#### 9.8.4.1. Features
 
 
 
@@ -1073,7 +2093,7 @@ Technology Preview features are not supported with Red Hat production service le
 
 For more information, see [Deploying Red Hat Ansible Lightspeed on containerized Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/deploying-lightspeed-containerized-install) in the containerized install user guide.
 
-#### 9.4.4.2. Enhancements
+#### 9.8.4.2. Enhancements
 
 
 
@@ -1081,12 +2101,12 @@ For more information, see [Deploying Red Hat Ansible Lightspeed on containerized
 - Added `    postgres_extra_settings` to Ansible Automation Platform operators to apply PostgreSQL configuration file level changes to managed postgres.(AAP-55053)
 
 
-### 9.4.5. Automation controller
+### 9.8.5. Automation controller
 
 
 
 
-#### 9.4.5.1. Enhancements
+#### 9.8.5.1. Enhancements
 
 
 
@@ -1094,7 +2114,7 @@ For more information, see [Deploying Red Hat Ansible Lightspeed on containerized
 - Added support for Red Hat username and password for the subscription management API.(AAP-54975)
 
 
-#### 9.4.5.2. Bug Fixes
+#### 9.8.5.2. Bug Fixes
 
 
 
@@ -1107,12 +2127,12 @@ For more information, see [Deploying Red Hat Ansible Lightspeed on containerized
 - Fixed an issue where the platform auditor did not have access to controller settings.(AAP-55607)
 
 
-### 9.4.6. Automation hub
+### 9.8.6. Automation hub
 
 
 
 
-#### 9.4.6.1. Enhancements
+#### 9.8.6.1. Enhancements
 
 
 
@@ -1120,7 +2140,7 @@ For more information, see [Deploying Red Hat Ansible Lightspeed on containerized
 - Fixed an **HTTP 500** error when getting _/api/galaxy/_ui/v2/users/3/_ .(AAP-54260)
 
 
-#### 9.4.6.2. Bug Fixes
+#### 9.8.6.2. Bug Fixes
 
 
 
@@ -1128,12 +2148,12 @@ For more information, see [Deploying Red Hat Ansible Lightspeed on containerized
 - Fixed an HTTP 500 error when getting /api/galaxy/_ui/v2/users/3/.(AAP-54260)
 
 
-### 9.4.7. Container-based Ansible Automation Platform
+### 9.8.7. Container-based Ansible Automation Platform
 
 
 
 
-#### 9.4.7.1. Enhancements
+#### 9.8.7.1. Enhancements
 
 
 
@@ -1141,7 +2161,7 @@ For more information, see [Deploying Red Hat Ansible Lightspeed on containerized
 - Implemented preflight ansible-core version validation.(AAP-54932)
 
 
-#### 9.4.7.2. Bug Fixes
+#### 9.8.7.2. Bug Fixes
 
 
 
@@ -1149,12 +2169,12 @@ For more information, see [Deploying Red Hat Ansible Lightspeed on containerized
 - Fixed an issue where `    REDHAT_CANDLEPIN_VERIFY` was not being used for the correct CA permissions so that the controller could not make requests to **subscription.rhsm.redhat.com** .(AAP-55180)
 
 
-### 9.4.8. RPM-based Ansible Automation Platform
+### 9.8.8. RPM-based Ansible Automation Platform
 
 
 
 
-#### 9.4.8.1. Bug Fixes
+#### 9.8.8.1. Bug Fixes
 
 
 
@@ -1168,12 +2188,12 @@ Fixed an issue where the `envoy.log` for automation gateway did not receive logs
 
 Fixed an issue where `REDHAT_CANDLEPIN_VERIFY` was not being used for the correct CA permissions so that the controller could not make requests to **subscription.rhsm.redhat.com** .(AAP-55183)
 
-### 9.4.9. Event-Driven Ansible
+### 9.8.9. Event-Driven Ansible
 
 
 
 
-#### 9.4.9.1. Features
+#### 9.8.9.1. Features
 
 
 
@@ -1181,19 +2201,19 @@ Fixed an issue where `REDHAT_CANDLEPIN_VERIFY` was not being used for the correc
 - Changes in the deployment and nginx configuration now allow for gunicorn and daphne to bind to :: as well, essentially allowing for seamlessly binding to IPv4 and IPv6 (dual-stack) addresses, while also enabling the operator to run in single-stack IPv6 or IPv4 scenarios.(AAP-56192)
 
 
-### 9.4.10. Receptor
+### 9.8.10. Receptor
 
 
 
 
-#### 9.4.10.1. Bug Fixes
+#### 9.8.10.1. Bug Fixes
 
 
 
 
 Fixed an issue where there was stability issue on long-running jobs, clusters under heavy load, and network flakiness.(AAP-53742)
 
-## 9.5. Ansible Automation Platform patch release October 16, 2025
+## 9.9. Ansible Automation Platform patch release October 16, 2025
 
 
 
@@ -1218,12 +2238,12 @@ CSV Versions in this release:
 - Cluster-scoped Bundle: aap-operator.v2.6.0-0.1760139657
 
 
-### 9.5.1. Ansible Automation Platform
+### 9.9.1. Ansible Automation Platform
 
 
 
 
-#### 9.5.1.1. Bug Fixes
+#### 9.9.1.1. Bug Fixes
 
 
 
@@ -1231,12 +2251,12 @@ CSV Versions in this release:
 - Fixed an issue where the claims processing failed to migrate services during the post-migrate upgrade process.(AAP-55631)
 
 
-### 9.5.2. Automation controller
+### 9.9.2. Automation controller
 
 
 
 
-#### 9.5.2.1. Bug Fixes
+#### 9.9.2.1. Bug Fixes
 
 
 
@@ -1244,12 +2264,12 @@ CSV Versions in this release:
 - Fixed an issue where the Ansible Automation Platform upgrade would be marked as failed if a single authenticator failed to migrate.(AAP-55629)
 
 
-### 9.5.3. Automation hub
+### 9.9.3. Automation hub
 
 
 
 
-#### 9.5.3.1. Bug Fixes
+#### 9.9.3.1. Bug Fixes
 
 
 
@@ -1259,7 +2279,7 @@ CSV Versions in this release:
 - Fixed an issue from `    aap-gateway-manage,`  `    migrate_service_data` , that states **Role definition content type must be null to assign globally** , which was due to permissions in hub that failed validation.(AAP-55639)
 
 
-## 9.6. Ansible Automation Platform patch release October 6, 2025
+## 9.10. Ansible Automation Platform patch release October 6, 2025
 
 
 
@@ -1284,7 +2304,7 @@ CSV Versions in this release:
 - Cluster-scoped Bundle: aap-operator.v2.6.0-0.1759764962
 
 
-### 9.6.1. Automation hub
+### 9.10.1. Automation hub
 
 
 
@@ -1293,19 +2313,16 @@ CSV Versions in this release:
 
 
 
-<span id="idm140711326443472"></span>
+<span id="idm139869456780608"></span>
 # Legal Notice
 
-Copyright© 2025 Red Hat, Inc.
-The text of and illustrations in this document are licensed by Red Hat under a Creative Commons Attribution–Share Alike 3.0 Unported license ("CC-BY-SA"). An explanation of CC-BY-SA is available at [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/) . In accordance with CC-BY-SA, if you distribute this document or an adaptation of it, you must provide the URL for the original version.
+Copyright© Red Hat.
+Except as otherwise noted below, the text of and illustrations in this documentation are licensed by Red Hat under the Creative Commons Attribution–Share Alike 3.0 Unported license . If you distribute this document or an adaptation of it, you must provide the URL for the original version.
 Red Hat, as the licensor of this document, waives the right to enforce, and agrees not to assert, Section 4d of CC-BY-SA to the fullest extent permitted by applicable law.
-Red Hat, Red Hat Enterprise Linux, the Shadowman logo, the Red Hat logo, JBoss, OpenShift, Fedora, the Infinity logo, and RHCE are trademarks of Red Hat, Inc., registered in the United States and other countries.
+Red Hat, the Red Hat logo, JBoss, Hibernate, and RHCE are trademarks or registered trademarks of Red Hat, LLC. or its subsidiaries in the United States and other countries.
 Linux® is the registered trademark of Linus Torvalds in the United States and other countries.
-Java® is a registered trademark of Oracle and/or its affiliates.
-XFS® is a trademark of Silicon Graphics International Corp. or its subsidiaries in the United States and/or other countries.
-MySQL® is a registered trademark of MySQL AB in the United States, the European Union and other countries.
-Node.js® is an official trademark of Joyent. Red Hat is not formally related to or endorsed by the official Joyent Node.js open source or commercial project.
-TheOpenStack® Word Mark and OpenStack logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+XFS is a trademark or registered trademark of Hewlett Packard Enterprise Development LP or its subsidiaries in the United States and other countries.
+TheOpenStack® Word Mark and OpenStack logo are trademarks or registered trademarks of the Linux Foundation, used under license.
 All other trademarks are the property of their respective owners.
 
 

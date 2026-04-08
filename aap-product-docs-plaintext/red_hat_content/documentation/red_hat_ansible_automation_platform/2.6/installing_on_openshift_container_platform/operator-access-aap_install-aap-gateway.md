@@ -15,7 +15,7 @@ Use the **Ansible Automation Platform** instance as your default. This instance 
 1. For the password you must:
 
 
-1. Go to toWorkloads→Secrets.
+1. Go toWorkloads→Secrets.
 1. Click<your instance name>-admin-passwordand copy the password.
 1. Paste the password into the **Password** field.
 

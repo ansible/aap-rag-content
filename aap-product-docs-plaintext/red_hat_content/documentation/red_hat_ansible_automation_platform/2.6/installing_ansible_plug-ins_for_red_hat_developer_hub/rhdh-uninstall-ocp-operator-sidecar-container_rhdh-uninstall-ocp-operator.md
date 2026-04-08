@@ -15,10 +15,26 @@ To remove the sidecar container for Ansible development tools from the developer
 
 
 ```
-...    spec:      deployment:        patch:          spec:            template:              spec:                containers:                  - command:                      - adt                      - server                    image: ghcr.io/ansible/community-ansible-dev-tools:latest                    imagePullPolicy: always                    ports:                      - containerPort: 8000                        protocol: TCP                    terminationMessagePolicy: file
+...    spec:      deployment:        patch:          spec:            template:              spec:                containers:                  - command:                      - adt                      - server                    image: registry.redhat.io/ansible-automation-platform-26/ansible-dev-tools-rhel9:latest                    imagePullPolicy: always                    ports:                      - containerPort: 8000                        protocol: TCP                    terminationMessagePolicy: file
 ```
 
 
 1. ClickSave.
+1. If you used OCI delivery, delete the registry auth secret:
+
+
+```
+oc delete secret &lt;deployment-name&gt;-dynamic-plugins-registry-auth
+```
+
+
+1. If you used the HTTP plug-in registry, remove the plug-in registry application:
+
+
+```
+oc delete all -l app=plugin-registry
+```
+
+
 
 

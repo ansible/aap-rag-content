@@ -25,7 +25,8 @@ When _removing_ parameters, you have to remove them both from the Ansible Automa
 
 ```
 # Example of defining custom resource requirements for all components
-# This can be useful for clusters with a ResourceQuote in the AAP namespaceapiVersion: aap.ansible.com/v1alpha1
+# This can be useful for clusters with a ResourceQuota in the AAP namespace
+apiVersion: aap.ansible.com/v1alpha1
 kind: AnsibleAutomationPlatform
 metadata:
 name: aap

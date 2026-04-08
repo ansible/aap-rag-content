@@ -85,3 +85,31 @@ execution-plane-1.example.com
 node_type=hop
 ```
 
+#### 1.2.4.1. Peer connections
+
+
+
+
+Important
+For a container-based installation of Ansible Automation Platform, use the `receptor_peers=` variable instead of `peers=` .
+
+The value of `receptor_peers` must be a comma-separated list of hostnames. Do not use inventory group names. For more information, see [Adding execution nodes](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/advanced-configuration-containerized#adding-execution-nodes) .
+
+
+
+Create node-to-node connections using the `peers=` host variable. The following example connects `control-plane-1.example.com` to `execution-node-1.example.com` and `execution-node-1.example.com` to `execution-node-2.example.com` :
+
+```
+[automationcontroller]
+control-plane-1.example.com peers=execution-node-1.example.com
+
+[automationcontroller:vars]
+node_type=control
+
+[execution_nodes]
+execution-node-1.example.com peers=execution-node-2.example.com
+execution-node-2.example.com
+```
+
+See the example automation mesh topologies in this guide for more examples of how to implement mesh nodes.
+

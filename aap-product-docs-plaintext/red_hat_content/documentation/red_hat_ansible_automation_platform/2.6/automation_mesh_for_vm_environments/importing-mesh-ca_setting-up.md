@@ -4,10 +4,7 @@
 
 
 
-**Additional resources**
-
 A Certificate Authority (CA) verifies and signs individual node certificates in an automation mesh environment. You can provide your own CA by specifying the path to the certificate and the private RSA key file in the `inventory` file of your Red Hat Ansible Automation Platform installer.
-
 
 Note
 The Ansible Automation Platform installation program generates a CA if you do not provide one.

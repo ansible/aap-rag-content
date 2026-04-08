@@ -51,7 +51,7 @@ To ensure successful installation of Ansible Automation Platform Operator, you m
 
 
 
-Red Hat supports Amazon Simple Storage Service (S3) for automation hub. You can configure it when deploying the `AutomationHub` custom resource (CR), or you can configure it for an existing instance.
+Red Hat supports Amazon Simple Storage Service (S3) for automation hub. You can configure it when deploying the `AnsibleAutomationPlatform` custom resource (CR), or you can configure it for an existing instance.
 
 **Prerequisites**
 
@@ -69,12 +69,19 @@ $ oc -n $HUB_NAMESPACE apply -f- &lt;&lt;EOF    apiVersion: v1    kind: Secret  
 ```
 
 
-1. Add the secret to the automation hub custom resource (CR) `    spec` :
+1. Add the secret to the Ansible Automation Platform custom resource (CR) under the `    hub` section in the `    spec` :
 
 
 ```
-spec:      object_storage_s3_secret: test-s3
+apiVersion: aap.ansible.com/v1alpha1    kind: AnsibleAutomationPlatform    metadata:      name: myaap    spec:      hub:        storage_type: S3        object_storage_s3_secret: test-s3
 ```
+
+Note
+If you have an existing automation hub instance, specify its name using `    hub.name: existing-hub-name` to apply these settings to the existing instance.
+
+For more examples of Ansible Automation Platform custom resources, see [Appendix: Red Hat Ansible Automation Platform custom resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#appendix-operator-crs_operator-platform-doc) .
+
+
 
 
 1. If you are applying this secret to an existing instance, restart the API pods for the change to take effect. `    &lt;hub-name&gt;` is the name of your hub instance.
@@ -92,7 +99,7 @@ $ oc -n $HUB_NAMESPACE delete pod -l app.kubernetes.io/name=&lt;hub-name&gt;-api
 
 
 
-Red Hat supports Azure Blob Storage for automation hub. You can configure it when deploying the `AutomationHub` custom resource (CR), or you can configure it for an existing instance.
+Red Hat supports Azure Blob Storage for automation hub. You can configure it when deploying the `AnsibleAutomationPlatform` custom resource (CR), or you can configure it for an existing instance.
 
 **Prerequisites**
 
@@ -110,12 +117,19 @@ $ oc -n $HUB_NAMESPACE apply -f- &lt;&lt;EOF    apiVersion: v1    kind: Secret  
 ```
 
 
-1. Add the secret to the automation hub custom resource (CR) `    spec` :
+1. Add the secret to the Ansible Automation Platform custom resource (CR) under the `    hub` section in the `    spec` :
 
 
 ```
-spec:      object_storage_azure_secret: test-azure
+apiVersion: aap.ansible.com/v1alpha1    kind: AnsibleAutomationPlatform    metadata:      name: myaap    spec:      hub:        storage_type: azure        object_storage_azure_secret: test-azure
 ```
+
+Note
+If you have an existing automation hub instance, specify its name using `    hub.name: existing-hub-name` to apply these settings to the existing instance.
+
+For more examples of Ansible Automation Platform custom resources, see [Appendix: Red Hat Ansible Automation Platform custom resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#appendix-operator-crs_operator-platform-doc) .
+
+
 
 
 1. If you are applying this secret to an existing instance, restart the API pods for the change to take effect. `    &lt;hub-name&gt;` is the name of your hub instance.
@@ -140,20 +154,23 @@ The Red Hat Ansible Automation Platform operator installation form allows you to
 1. Log in to Red Hat OpenShift Container Platform.
 1. Navigate toOperators→Installed Operators.
 1. Select your Ansible Automation Platform Operator deployment.
-1. Select the **Automation Hub** tab.
-1. For new instances, clickCreate AutomationHub.
+1. Select the **Ansible Automation Platform** tab.
+1. Click the ⋮ icon next to your Ansible Automation Platform instance and selectEdit AnsibleAutomationPlatform.
+1. ClickYAML viewand locate the `    spec.hub:` section.
+1. Configure the route options under the `    hub:` section:
 
 
-1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationHub.
+```
+spec:      hub:        ingress_type: Route        route_host: hub.example.com  # Custom hostname for the route        route_tls_termination_mechanism: Edge  # Options: Edge, Passthrough        route_tls_secret: hub-tls-secret  # Optional: TLS credential secret
+```
 
-1. ClickAdvanced configuration.
-1. Under **Ingress type** , click the drop-down menu and select **Route** .
-1. Under **Route DNS host** , enter a common host name that the route answers to.
-1. Under **Route TLS termination mechanism** , click the drop-down menu and select **Edge** or **Passthrough** .
-1. Under **Route TLS credential secret** , click the drop-down menu and select a secret from the list.
+
+1. ClickSave.
 
 Note
-After you have configured your route you can customize your hostname by adding `    route_host:` to the YAML for that automation hub instance.
+Edge termination is recommended for most instances. After configuring your route, you can customize additional route settings by adding them to the `    hub:` section in the Ansible Automation Platform custom resource.
+
+For more examples of Ansible Automation Platform custom resources, see [Appendix: Red Hat Ansible Automation Platform custom resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#appendix-operator-crs_operator-platform-doc) .
 
 
 
@@ -172,21 +189,32 @@ The Ansible Automation Platform Operator installation form allows you to further
 1. Log in to Red Hat OpenShift Container Platform.
 1. Navigate toOperators→Installed Operators.
 1. Select your Ansible Automation Platform Operator deployment.
-1. Select the **Automation Hub** tab.
-1. For new instances, clickCreate AutomationHub.
+1. Select the **Ansible Automation Platform** tab.
+1. Click the ⋮ icon next to your Ansible Automation Platform instance and selectEdit AnsibleAutomationPlatform.
+1. ClickYAML viewand locate the `    spec.hub:` section.
+1. Configure the ingress options under the `    hub:` section:
 
 
-1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationHub.
+```
+spec:      hub:        ingress_type: Ingress        ingress_annotations: |          nginx.ingress.kubernetes.io/proxy-body-size: "0"          nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"        ingress_tls_secret: hub-ingress-tls-secret
+```
 
-1. ClickAdvanced Configuration.
-1. Under **Ingress type** , click the drop-down menu and select **Ingress** .
-1. Under **Ingress annotations** , enter any annotations to add to the ingress.
-1. Under **Ingress TLS secret** , click the drop-down menu and select a secret from the list.
+
+1. ClickSave.
+
+Note
+These ingress settings apply to the automation hub component managed by this Ansible Automation Platform instance. The operator automatically updates the ingress configuration for the hub.
+
+For more examples of Ansible Automation Platform custom resources, see [Appendix: Red Hat Ansible Automation Platform custom resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#appendix-operator-crs_operator-platform-doc) .
+
+
+
+
 
 
 **Verification**
 
-After you have configured your automation hub operator, clickCreateat the bottom of the form view. Red Hat OpenShift Container Platform creates the pods. This may take a few minutes.
+After you have configured your automation hub ingress settings, Red Hat OpenShift Container Platform updates the pods. This may take a few minutes.
 
 
 You can view the progress by navigating toWorkloads→Podsand locating the newly created instance.

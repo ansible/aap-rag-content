@@ -5,7 +5,7 @@
 
 Ansible Automation Platform features a platform interface where you can set up centralized authentication, configure access management, and configure global and system level settings from a single location.
 
-The first time you log in to the Ansible Automation Platform, you must enter your subscription information to activate the platform. For more information about licensing and subscriptions, see [Managing Ansible Automation Platform licensing, updates and support](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/assembly-gateway-licensing) .
+The first time you log in to the Ansible Automation Platform, you must enter your subscription information to activate the platform. For more information about licensing and subscriptions, see _Managing Ansible Automation Platform licensing, updates and support_ in the [RPM installation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/assembly-platform-install-overview#assembly-gateway-licensing) , [Containerized installation](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/assembly-gateway-licensing) , or [Installing on OpenShift Container Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/installing_on_openshift_container_platform/assembly-gateway-licensing-operator-copy) guide.
 
 A system administrator can configure access, permissions and system settings through the following tasks:
 

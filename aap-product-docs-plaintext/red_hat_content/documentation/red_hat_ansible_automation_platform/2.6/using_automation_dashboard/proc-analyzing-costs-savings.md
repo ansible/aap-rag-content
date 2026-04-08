@@ -1,32 +1,36 @@
-# 1. View key usage metrics with Automation Dashboard
-## 1.7. Analyzing costs and savings
+# 1. View key usage metrics with automation dashboard
+## 1.8. Analyzing costs and savings
 
 
 
 
-The costs and savings analysis compares the cost of manual automation compared to the cost of automation execution by using Ansible Automation Platform to calculate the total savings derived from automation execution.
+To calculate total savings, the cost and savings analysis compares manual labor costs against Ansible Automation Platform execution costs. The dashboard prorates the monthly subscription cost into daily reporting values.
 
 **Procedure**
 
-1. Use the **Average cost per minute to manually run the job** field to enter the average cost per minute for an engineer to manually run jobs.
-1. Use the **Average cost per minute of running on Ansible Automation Platform** field to enter an average cost per minute of running a job using Ansible Automation Platform.
-1. Select **Time taken to create automation into calculation** to include the costs associated with creating the initial or ongoing automation execution.
+1. In the **Monthly AAP cost** field, enter the monthly cost of running the Ansible Automation Platform. This value includes license, labor, and infrastructure costs to run Ansible Automation Platform. It is used to calculate the automation savings.
+1. In the **Hourly rate for manually running the job ($)** field, enter the hourly labor cost used to estimate what it would cost to run these jobs manually. This is used to calculate manual cost and savings.
+1. Optional: Select **Time taken to create automation** to include the estimated time spent creating or authoring the automation (for example, writing playbooks, setting up jobs) before it could be run.
 
-Automation Dashboard supplies the following data:
+Automation dashboard calculates the following data points based on your inputs:
 
 
--  **Cost of manual automation** : This number represents the estimated cost of manually performing all of the automated tasks. This is an estimated value, not an actual expenditure. It represents the potential expenses that the organization would incur without automation. The calculation is based on the time taken to manually run each job, multiplied by a labor cost rate.
--  **Cost of automated execution** : This is the cost of automation execution using Ansible Automation Platform. This cost includes the resources consumed by Ansible Automation Platform, such as server time, processing power, and any other operational expenses associated with automation execution. It represents the actual cost incurred for automation execution.
--  **Total savings/cost avoided** : This is the difference between the **Cost of manual automation** and the **Cost of automated execution** . This is a key metric for demonstrating the return on investment attainable by using Ansible Automation Platform.
--  **Total hours saved/avoided** : This figure is calculated by adding host executions and automation creation time, then subtracting the running time in minutes.
--  **Time taken to manually execute (min)** : This metric represents the amount of time it would take for a user to perform the task manually on a host. It is an input provided to compare the value of manual execution and automated execution using the time taken by the organization to manually automate.
+-  **Cost of manual automation** : Total cost if all jobs were run manually.
+-  **Cost of automated execution** : Total cost of running jobs on Ansible Automation Platform.
+-  **Total savings/cost avoided** : Difference between manual and automated cost.
+-  **Total hours saved/avoided** : Time saved by automation vs manual execution.
+-  **Time taken to manually execute (min)** : Estimated manual execution time in minutes.
+-  **Time taken to create automation (min)** : Estimated time spent creating or authoring the automation (for example, writing playbooks, setting up jobs) before it could be run. Included in cost when the switch above is on.
+
+
+
+**Verification**
+
+- Navigate to the Reports page to view the Total savings based on your updated cost configurations.
+
 
 Note
-You can export the data from your cost and savings analysis as a CSV.
-
-
-
-
+You can export the cost and savings analysis as a CSV or PDF file. You must specify a date range to generate a PDF report. For more information, see link::https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_dashboard/proc-exporting-reports[Exporting automation reports].
 
 
 

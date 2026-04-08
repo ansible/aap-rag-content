@@ -8,7 +8,7 @@
 Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for Red Hat Ansible Automation Platform to work. Ensure that these ports are available and are not blocked by a firewall.
 
 
-<span id="idm140186614691440"></span>
+<span id="idm140264423243328"></span>
 **Table 3.3. Network ports and protocols**
 
 | Port number | Protocol | Service | Source | Destination |

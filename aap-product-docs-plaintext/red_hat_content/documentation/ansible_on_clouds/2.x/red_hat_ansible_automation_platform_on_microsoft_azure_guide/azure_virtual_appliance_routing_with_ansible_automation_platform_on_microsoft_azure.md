@@ -1,5 +1,5 @@
 # 6. Support for Red Hat Ansible Automation Platform on Microsoft Azure
-## 6.1. Azure Virtual Appliance Routing with Ansible Automation Platform on Microsoft Azure
+## 6.1. Azure Virtual Appliance routing with Ansible Automation Platform on Microsoft Azure
 
 
 

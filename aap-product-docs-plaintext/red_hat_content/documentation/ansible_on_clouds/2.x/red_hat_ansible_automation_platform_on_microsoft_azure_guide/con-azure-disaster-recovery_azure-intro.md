@@ -10,7 +10,7 @@ The disaster recovery feature incurs additional Microsoft Azure infrastructure c
 
 If you want to enable disaster recovery on an existing instance of Ansible Automation Platform on Microsoft Azure, contact Red Hat customer support.
 
-The disaster recovery feature creates a nightly backup of your managed application and stores it in a paired region that is geographically distant to your primary region. For information about regional pairings, refer to [Azure cross-region replication pairings for all geographies](https://learn.microsoft.com/en-us/azure/reliability/cross-region-replication-azure#azure-cross-region-replication-pairings-for-all-geographies) in the Microsoft Azure reliability documentation.
+The disaster recovery feature creates a nightly backup of your managed application and stores it in a business continuity region that is geographically distant to your primary region. For information about regional pairings, refer to [Azure cross-region replication pairings for all geographies](https://learn.microsoft.com/en-us/azure/reliability/cross-region-replication-azure#azure-cross-region-replication-pairings-for-all-geographies) in the Microsoft Azure reliability documentation.
 
 For information about recovering your application after a service-impacting event, see the [Disaster recovery for Ansible Automation Platform on Microsoft Azure](https://access.redhat.com/articles/7010302) article on the Red Hat customer portal.
 

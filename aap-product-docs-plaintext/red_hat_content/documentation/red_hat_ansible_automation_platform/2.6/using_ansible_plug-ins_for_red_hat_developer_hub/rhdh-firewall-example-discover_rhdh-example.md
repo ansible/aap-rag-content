@@ -8,6 +8,8 @@ Red Hat recommends that you use trusted automation content that has been tested 
 
 Automation hub is a central repository for discovering, downloading, and managing trusted content collections from Red Hat and its partners. Private automation hub provides an on-premise solution for managing content collections.
 
+**Procedure**
+
 1. Click on the Ansible `    A` icon in the Red Hat Developer Hub navigation panel.
 1. Click **Discover existing collections** .
 1. Click **Go to Automation Hub** .
@@ -24,8 +26,8 @@ In this example, you are redirected to the RHCC automation hub.
 
 The search returns the `    rhel_system_roles` collection.
 
-
-
-
 The RHEL System Roles collection contains certified Ansible content that you can reuse to configure your firewall.
+
+
+
 

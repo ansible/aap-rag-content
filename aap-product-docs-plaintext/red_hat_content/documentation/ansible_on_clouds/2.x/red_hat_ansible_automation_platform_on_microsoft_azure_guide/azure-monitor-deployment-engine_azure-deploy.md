@@ -17,7 +17,7 @@ When you begin deploying Ansible Automation Platform on Microsoft Azure, the Azu
 -  **Note:** Approximately 10 minutes into the deployment process, the **Outputs** section of the **Parameters and Outputs** page displays a link to the ** `        deploymentEngineUrl` ** .
 
 1. Copy the link and paste it in another browser tab to open the login page for the deployment engine.
-1. Login to the deployment using the following credentials:
+1. Log in to the deployment using the following credentials:
 
 
 -  **Username** : _admin_

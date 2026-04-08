@@ -12,7 +12,7 @@ The Ansible Automation Platform RPM installer was deprecated in 2.5 and will be 
 
 
 
-<span id="idm140186618502656"></span>
+<span id="idm140264427674736"></span>
 **Table 1.1. Ansible Automation Platform installation and deployment models**
 
 | Mode | Infrastructure | Description | Tested topologies |

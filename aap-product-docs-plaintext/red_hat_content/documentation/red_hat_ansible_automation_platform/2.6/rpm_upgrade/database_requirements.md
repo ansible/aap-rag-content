@@ -12,6 +12,6 @@
 - Customer provided or configured database - This is an external database that is provided by the customer, whether on bare metal, virtual machine, container, or cloud hosted service. Ansible Automation Platform requires customer provided (external) database to have ICU support.
 
 - PostgreSQL user passwords are hashed with SCRAM-SHA-256 secure hashing algorithm before storing in the database.
-- Ensure that you back up your Ansible Automation Platform environment before upgrading in case any issues occur. See [Backup and restore](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/controller-backup-and-restore) and [Backup and recovery for operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/backup_and_recovery_for_operator_environments) for the specific topology of the environment.
+- Ensure that you back up your Ansible Automation Platform environment before upgrading in case any issues occur. See [Backup and restore](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/controller-backup-and-restore) and [Backup and recovery for operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/backup_and_recovery_for_operator_environments) for the specific topology of the environment.
 
 

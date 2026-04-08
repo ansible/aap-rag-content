@@ -34,7 +34,7 @@ Note the exceptions in the following table.
 For more information about job types see the [Jobs in automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-jobs) . | Yes |
 |  **Inventory** | Choose the inventory to use with this job template from the inventories available to the logged in user.
 
-A System Administrator must grant you or your team permissions to be able to use certain inventories in a job template. | Yes.
+A System Administrator must grant you or your team permissions to be able to use certain inventories in a job template. | Yes
 
 Inventory prompts show up as its own step in a later prompt window. |
 |  **Project** | Select the project to use with this job template from the projects available to the user that is logged in. | N/A |
@@ -42,9 +42,9 @@ Inventory prompts show up as its own step in a later prompt window. |
 
 For more information, see [Job branch overriding](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-job-branch-overriding) . | Yes |
 |  **Playbook** | Choose the playbook to be launched with this job template from the available playbooks. This field automatically populates with the names of the playbooks found in the project base path for the selected project. Alternatively, you can enter the name of the playbook if it is not listed, such as the name of a file (such as `test.yml` ) you want to use to run with that playbook. If you enter a filename that is not valid, the template displays an error, or causes the job to fail. | N/A |
-|  **Execution Environment** | Select the container image to be used to run this job. You must select a project before you can select an execution environment. | Yes.
+|  **Execution Environment** | Select the container image to be used to run this job. You must select a project before you can select an execution environment. | Yes
 
-Execution environment prompts show up as its own step in a later prompt window. |
+Execution environment prompt show up as its own step in a later prompt window. |
 |  **Credentials** | Select the![examine](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/4e440067d24ca0b7a2a91901d3b3778f/examine.png)
 icon to open a separate window.
 
@@ -71,31 +71,34 @@ only removes the newly added labels, not existing default labels. |
 
 - a:b means "in group a or b"
 - a:b:&c means "in a or b but must be in c"
-- a:!b means "in a, and definitely not in b"
+- a:!b means "in a, and definitely not in b" | Yes
 
+If not selected, the job template executes against all nodes in the inventory or only the nodes predefined on the **Limit** field. When running as part of a workflow, the workflow job template limit is used instead. |
+|  **Verbosity** | Control the level of output Ansible produces as the playbook executes. Choose the verbosity from Normal to various Verbose or Debug settings. This is only displayed in the **details** report view. Verbose logging includes the output of all commands. Debug logging is exceedingly verbose and includes information about SSH operations that can be useful in certain support instances.
 
-If not selected, the job template executes against all nodes in the inventory or only the nodes predefined on the **Limit** field. When running as part of a workflow, the workflow job template limit is used instead. |  **Verbosity** |
-| Control the level of output Ansible produces as the playbook executes. Choose the verbosity from Normal to various Verbose or Debug settings. This is only displayed in the **details** report view. Verbose logging includes the output of all commands. Debug logging is exceedingly verbose and includes information about SSH operations that can be useful in certain support instances.
-
-Verbosity `5` causes automation controller to block heavily when jobs are running, which could delay reporting that the job has finished (even though it has) and can cause the browser tab to lock up. | Yes |  **Job slicing** |
-| Specify the number of slices you want this job template to run. Each slice runs the same tasks against a part of the inventory. For more information about job slices, see [Job Slicing](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-job-slicing) . | Yes |  **Timeout** |
-| This enables you to specify the length of time (in seconds) that the job can run before it is canceled. Consider the following for setting the timeout value:
+Verbosity `5` causes automation controller to block heavily when jobs are running, which could delay reporting that the job has finished (even though it has) and can cause the browser tab to lock up. | Yes |
+|  **Job slicing** | Specify the number of slices you want this job template to run. Each slice runs the same tasks against a part of the inventory. For more information about job slices, see [Job Slicing](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-job-slicing) . | Yes |
+|  **Timeout** | This enables you to specify the length of time (in seconds) that the job can run before it is canceled. Consider the following for setting the timeout value:
 
 - There is a global timeout defined in the settings which defaults to 0, indicating no timeout.
 - A negative timeout (<0) on a job template is a true "no timeout" on the job.
 - A timeout of 0 on a job template defaults the job to the global timeout (which is no timeout by default).
-- A positive timeout sets the timeout for that job template. | Yes |  **Show changes** |
-| Enables you to see the changes made by Ansible tasks. | Yes |  **Instance groups** |
-| Choose [Instance and Container Groups](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-instance-and-container-groups) to associate with this job template. If the list is extensive, use the![examine](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/4e440067d24ca0b7a2a91901d3b3778f/examine.png)
+- A positive timeout sets the timeout for that job template. | Yes |
+|  **Show changes** | Enables you to see the changes made by Ansible tasks. | Yes |
+|  **Instance groups** | Choose [Instance and Container Groups](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-instance-and-container-groups) to associate with this job template. If the list is extensive, use the![examine](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/4e440067d24ca0b7a2a91901d3b3778f/examine.png)
 icon to narrow the options. Job template instance groups contribute to the job scheduling criteria, see [Job Runtime Behavior](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/controller-clustering#controller-cluster-job-runtime) and [Control where a job runs](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-control-job-run) for rules. A System Administrator must grant you or your team permissions to be able to use an instance group in a job template. Use of a container group requires admin rights. | - Yes.
 
 
 If selected, you are providing the jobs preferred instance groups in order of preference. If the first group is out of capacity, later groups in the list are considered until one with capacity is available, at which point that is selected to run the job.
 
 - If you prompt for an instance group, what you enter replaces the normal instance group hierarchy and overrides all of the organizations' and inventories' instance groups.
-- The Instance Groups prompt shows up as its own step in a later prompt window. |  **Job tags** |
-| Type and select the **Create** menu to specify which parts of the playbook should be executed. | Yes |  **Skip tags** |
-| Type and select the **Create** menu to specify certain tasks or parts of the playbook to skip. | Yes |  **Extra variables** |
+- The Instance Groups prompt shows up as its own step in a later prompt window. |
+|  **Job tags** | Type and select the **Create** menu to specify which parts of the playbook should be executed. | Yes |
+|  **Skip tags** | Type and select the **Create** menu to specify certain tasks or parts of the playbook to skip. | Yes |
+|  **Extra variables** | - Pass extra command line variables to the playbook. This is the "-e" or "-extra-vars" command line parameter for ansible-playbook.
+- Give key or value pairs by using either YAML or JSON. These variables have a maximum value of precedence and overrides other variables specified elsewhere. The following is an example value: `    git_branch: production release_version: 1.5` | Yes
+
+If you want to be able to specify `extra_vars` on a schedule, you must select **Prompt on launch** for Variables on the job template, or enable a survey on the job template. Those answered survey questions become `extra_vars` . |
 
 
 

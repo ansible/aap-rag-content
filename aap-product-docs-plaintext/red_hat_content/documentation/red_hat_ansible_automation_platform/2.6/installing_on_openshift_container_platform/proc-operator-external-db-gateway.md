@@ -21,7 +21,7 @@ There are two scenarios for deploying Ansible Automation Platform with an extern
 See the _aap-configuring-external-db-all-default-components.yml_ example in the [14.1. Custom resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#operator-crs) section for help with this.
 
 If using Red Hat Ansible Lightspeed, use the _aap-configuring-external-db-with-lightspeed-enabled.yml_ example. |
-| Existing external database in 2.4 | Your existing external database remains the same after upgrading but you must specify the `external-postgres-configuration-gateway` (spec.database.database_secret) on the Ansible Automation Platform custom resource. |
+| Existing external database in 2.4 | Your existing external database remains the same after upgrading but you must specify the `external-postgres-configuration-gateway` (spec.database.database_secret) on the Ansible Automation Platform custom resource. For detailed steps, see [Upgrading an external database for platform gateway on Red Hat Ansible Automation Platform Operator](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#proc-operator-upgrade-external-db-gateway) . |
 
 
 To deploy Ansible Automation Platform with an external database, you must first create a Kubernetes secret with credentials for connecting to the database.

@@ -1,5 +1,5 @@
 # 7. Rulebook activations
-## 7.5. Restarting rulebook activations
+## 7.4. Restarting rulebook activations
 
 
 

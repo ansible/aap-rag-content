@@ -26,7 +26,7 @@ Red Hat advises keeping at least one local administrator account with a long, c
 
 
 
-Data is encrypted at rest in both the database and file system using AWS KMS Service, which uses AES-256 encryption. Data in transit is encrypted with TLS 1.2 or higher.
+Data is encrypted at rest in both the database and file system using AWS Key Management Service (KMS), which uses AES-256 encryption. Data in transit is encrypted with TLS 1.2 or higher.
 
 We use AWS Customer Managed Keys (CMKs) to enforce encryption across databases, Amazon S3 buckets, and AWS Secrets Manager secrets. These KMS keys are securely stored in AWS Key Management Service (KMS) under Customer Managed Keys. KMS keys are automatically rotated every 365 days to reduce the risk of key compromise. The Amazon S3 bucket is used for automation hub configuration and backups. AWS Secrets Manager secrets is leveraged to store sensitive information such as credentials and configuration details.
 

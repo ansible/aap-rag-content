@@ -14,7 +14,7 @@ For more on managing access through teams, see [Teams](https://docs.redhat.com/e
 The following table lists permissions you can grant to teams to ensure they have the correct level of access and privileges to your remote registries.
 
 
-<span id="idm140126403630704"></span>
+<span id="idm139806111202144"></span>
 **Table 3.1. Team permissions for managing containers in private automation hub**
 
 | Permission name | Description |

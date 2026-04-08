@@ -5,6 +5,8 @@
 
 
 
+This section contains information about accessing both Red Hat Ansible Lightspeed cloud service and on-premise deployment.
+
 -  **Red Hat Ansible Lightspeed cloud service**
 
 To use the Red Hat Ansible Lightspeed cloud service, you must meet **one** of the following requirements:

@@ -18,7 +18,7 @@ Make the following configuration changes in automation controller to minimize do
 - Later than 4.12.0
 
 - High availability (HA) deployment of Postgres
-- Multiple worker node that automation controller pods can be scheduled on
+- Multiple worker nodes that automation controller pods can be scheduled on
 
 
 **Procedure**
@@ -57,5 +57,3 @@ task_affinity:        podAntiAffinity:          preferredDuringSchedulingIgnored
 
 
 
-
-<span id="idm140083191688608"></span>

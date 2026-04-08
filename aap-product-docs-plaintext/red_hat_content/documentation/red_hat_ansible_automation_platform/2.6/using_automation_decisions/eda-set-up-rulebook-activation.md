@@ -1,5 +1,5 @@
 # 7. Rulebook activations
-## 7.2. Setting up a rulebook activation
+## 7.1. Setting up a rulebook activation
 
 
 

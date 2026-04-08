@@ -1,6 +1,6 @@
-# 3. Installing Red Hat Ansible Automation Platform
-## 3.3. Inventory file examples based on installation scenarios
-### 3.3.2. Setting registry_username and registry_password
+# 4. Installing Red Hat Ansible Automation Platform
+## 4.3. Inventory file examples based on installation scenarios
+### 4.3.2. Setting registry_username and registry_password
 
 
 
@@ -33,7 +33,7 @@ https://access.redhat.com/terms-based-registry/token/&lt;name-of-your-token&gt;
 1. Copy the token and use it to set the variable `    registry_password` .
 
 
-#### 3.3.2.1. Configuring Redis
+#### 4.3.2.1. Configuring Redis
 
 
 

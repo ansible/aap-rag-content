@@ -10,27 +10,27 @@ The Red Hat Community of Practice has created a set of automation content availa
 The following Ansible content collections are available for managing Ansible Automation Platform components using an infrastructure as code methodology, all of which are found on the [Ansible Automation Hub](https://console.redhat.com/ansible/automation-hub) :
 
 
-<span id="idm139994918970720"></span>
+<span id="idm140601135499968"></span>
 **Table 2.5. Ansible content collections**
 
 |  **Validated Collection** |  **Collection Purpose** |
 | --- | --- |
 |  `infra.aap_utilities` | Ansible content for automating day 1 and day 2 operations of Ansible Automation Platform, including installation, backup and restore, certificate management, and more. |
 |  `infra.aap_configuration` | A collection of roles to manage the creation of Ansible Automation Platform components, including users and groups (RBAC), projects, job templates and workflows, credentials, and more. This collection includes functionality from the older `infra.controller_configuration` , `infra.ah_configuration` and `infra.eda_configuration` and should be used in their place with Ansible Automation Platform 2.6. |
-|  `infra.ee_utilities` | A collection of roles for creating and managing execution environment images, or migrating from the older Tower virtualenvs to execution environments. |
+|  `infra.ee_utilities` | A collection of roles for creating and managing execution environment images, or migrating from the older Ansible Tower virtualenvs to execution environments. |
 
 
 
 
-Many organizations use CI/CD platforms to configure pipelines or other methods to manage this type of infrastructure. However, using Ansible Automation Platform natively, a webhook can be configured to link a Git-based repository natively. In this way, Ansible can respond to Git events to trigger Job Templates directly. This removes the need for external CI components from this overall process and thus reduces the attack surface.
+Many organizations use CI/CD platforms to configure pipelines or other methods to manage this type of infrastructure. However, using Ansible Automation Platform natively, a webhook can be configured to link a git-based repository natively. In this way, Ansible Automation Platform can respond to git events to trigger Job Templates directly. This removes the need for external CI components from this overall process and thus reduces the attack surface.
 
-These practices enable version control of all infrastructure and configuration. Apply Git best practices to ensure proper code quality inspection before being synchronized into Ansible Automation Platform. Relevant Git best practices include the following:
+These practices enable version control of all infrastructure and configuration. Apply git best practices to ensure proper code quality inspection before being synchronized into Ansible Automation Platform. Relevant git best practices include the following:
 
-- Creating pull requests.
+- Creating pull requests and reviewing new code before merging.
 - Ensuring that inspection tools are in place.
 - Ensuring that no plain text secrets are committed.
 - Ensuring that pre-commit hooks and any other policies are followed.
 
 
-CaC also encourages using external vault systems which removes the need to store any sensitive data in the repository, or deal with having to individually vault files as needed. This is particularly important when storing Ansible Automation Platform configuration in a source code repository, as automation controller credentials and Event-Driven Ansible credentials must be provided to the collection variables in plain text which should not be committed to a source repository. For more information on using external vault systems, see the [External credential vault considerations](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/hardening_and_compliance/hardening-aap#con-external-credential-vault_hardening-aap) section in this guide.
+CaC also encourages using external credential management systems which removes the need to store any sensitive data in the repository, or deal with having to individually vault files as needed. This is particularly important when storing Ansible Automation Platform configuration in a source code repository, as automation controller credentials and Event-Driven Ansible credentials must be provided to the collection variables in plain text which should not be committed to a source repository. For more information on using external vault systems, see [External credential vault considerations](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/hardening_and_compliance/hardening-aap#con-external-credential-vault_hardening-aap) .
 

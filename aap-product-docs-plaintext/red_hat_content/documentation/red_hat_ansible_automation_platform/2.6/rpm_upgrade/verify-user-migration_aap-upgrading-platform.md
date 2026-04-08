@@ -1,5 +1,5 @@
 # 2. Upgrading to Red Hat Ansible Automation Platform 2.6
-## 2.7. Verifying user migration
+## 2.6. Verifying user migration
 
 
 

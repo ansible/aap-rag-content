@@ -20,7 +20,9 @@ Within the Azure console, the Azure virtual network is known as _this virtual ne
 
 In the **Virtual Networks** page in the Azure portal, use the following settings to configure the Azure network and the VNet that you want to peer with the Ansible Automation Platform on Microsoft Azure app:
 
-- Under **Remote virtual network** , select the settings for the virtual network that you want to peer with Azure:
+**Procedure**
+
+1. Under **Remote virtual network** , select the settings for the virtual network that you want to peer with Azure:
 
 
 -  **Summary** :
@@ -38,7 +40,7 @@ In the **Virtual Networks** page in the Azure portal, use the following settings
 -  **Virtual network gateway or Route Server** : _Use the remote virtual network’s gateway or Route server_
 
 
-- Under **Local virtual network** , select the settings the Ansible Automation Platform on Microsoft Azure virtual network:
+1. Under **Local virtual network** , select the settings the Ansible Automation Platform on Microsoft Azure virtual network:
 
 
 -  **Summary** :
@@ -47,14 +49,15 @@ In the **Virtual Networks** page in the Azure portal, use the following settings
 -  **Peering link name** : _<hub_to_aap_peering_link_name>_
 -  **Traffic to remote virtual network** : _Allow_
 -  **Traffic forwarded from remote virtual network** : _Allow_
--  **Enable this virtual network to use peered vnet’s remote gateway or Route Sever** : _Enabled_
+-  **Enable this virtual network to use peered VNet’s remote gateway or Route Sever** : _Enabled_
 
 
+1. After you have configured direct network peering, traffic routes between Ansible Automation Platform on Microsoft Azure and private hosts and IPs on your VNet.
 
 
-After you have configured direct network peering, traffic routes between Ansible Automation Platform on Microsoft Azure and private hosts and IPs on your Vnet.
+**Additional resources**
 
-For more detailed instructions for configuring peering, refer to [Create a peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering#create-a-peering) in the Microsoft Azure _Virtual network_ guide.
+-  [Create a peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering#create-a-peering)
+-  [Virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
 
-For further information on direct peering, refer to [Virtual network peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview) in the Microsoft Azure _Virtual network_ guide.
 

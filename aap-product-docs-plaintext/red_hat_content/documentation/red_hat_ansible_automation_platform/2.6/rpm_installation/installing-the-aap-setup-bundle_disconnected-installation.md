@@ -1,5 +1,5 @@
-# 5. Disconnected installation
-## 5.5. Downloading and installing the Ansible Automation Platform setup bundle
+# 6. Disconnected installation
+## 6.5. Downloading and installing the Ansible Automation Platform setup bundle
 
 
 

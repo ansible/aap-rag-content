@@ -1,5 +1,5 @@
-# 3. Installing Red Hat Ansible Automation Platform
-## 3.5. Verifying installation of Ansible Automation Platform
+# 4. Installing Red Hat Ansible Automation Platform
+## 4.5. Verifying installation of Ansible Automation Platform
 
 
 

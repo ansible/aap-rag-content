@@ -1,0 +1,26 @@
+# 4. Configuring Ansible automation controller on OpenShift Container Platform
+## 4.2. Receptor Kubernetes retry count variable
+
+
+
+
+Configure the Receptor worker within the Ansible Automation Platform Operator through the `RECEPTOR_KUBE_RETRY_COUNT` environment variable. This variable controls how the worker handles Kubernetes API connection failures.
+
+Important
+The retry mechanism uses an exponential backoff strategy which is capped at 5 minutes to prevent excessive wait times during job execution errors.
+
+
+
+**RECEPTOR_KUBE_RETRY_COUNT details**
+
+| Variable | Description | Default Value | Valid Range |
+| --- | --- | --- | --- |
+|  `RECEPTOR_KUBE_RETRY_COUNT` | Sets the maximum number of retry attempts for Kubernetes API operations within the Receptor worker. Retry delays increase using exponential backoff with a Fibonacci-like sequence. |  `5` |  `1` - `100` |
+
+
+**Configuration recommendations**
+
+If a playbook is expected to run for more than 20 hours, or if it remains without output for more than 2 to 4 hours, increase `RECEPTOR_KUBE_RETRY_COUNT` from the default value. For a 20-hour job, a retry count of 10 is recommended. This setting allows approximately 2 hours for each retry attempt, ensuring the worker does not time out prematurely during long-running operations.
+
+
+<span id="idm140644212749264"></span>

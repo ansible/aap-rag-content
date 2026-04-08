@@ -22,62 +22,27 @@ Use this procedure to configure the image pull policy on your automation control
 1. Log in to Red Hat OpenShift Container Platform.
 1. Go toOperators→Installed Operators.
 1. Select your Ansible Automation Platform Operator deployment.
-1. Select the **Automation Controller** tab.
-1. For new instances, clickCreate AutomationController.
+1. Select the **Ansible Automation Platform** tab.
+1. Click the ⋮ icon next to your Ansible Automation Platform instance and selectEdit AnsibleAutomationPlatform.
+1. ClickYAML viewand locate the `    spec.controller:` section.
+1. Configure the image pull policy and resource requirements under the `    controller:` section:
 
 
-1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationController.
-
-1. Clickadvanced Configuration. Under **Image Pull Policy** , click on the radio button to select
-
-
--  **Always**
--  **Never**
--  **IfNotPresent**
-
-1. To display the option under **Image Pull Secrets** , click the arrow.
+```
+spec:      controller:        image_pull_policy: IfNotPresent  # Options: Always, Never, IfNotPresent        image_pull_secrets:          - pull-secret-name        web_resource_requirements:          limits:            cpu: 1000m            memory: 2Gi          requests:            cpu: 500m            memory: 1Gi        task_resource_requirements:          limits:            cpu: 2000m            memory: 4Gi          requests:            cpu: 1000m            memory: 2Gi        ee_resource_requirements:          limits:            cpu: 500m            memory: 1Gi          requests:            cpu: 250m            memory: 512Mi        redis_resource_requirements:          limits:            cpu: 500m            memory: 1Gi          requests:            cpu: 250m            memory: 512Mi        postgres_resource_requirements:          limits:            cpu: 1000m            memory: 2Gi          requests:            cpu: 500m            memory: 1Gi        postgres_storage_requirements:          limits:            storage: 10Gi          requests:            storage: 8Gi        replicas: 1        garbage_collect_secrets: false        create_preload_data: true
+```
 
 
-1. Click+beside **Add Image Pull Secret** and enter a value.
+1. ClickSave.
 
-1. To display fields under the **Web container resource requirements** drop-down list, click the arrow.
+Note
+These settings apply to the automation controller component managed by this Ansible Automation Platform instance. If you specified an existing controller under `    controller.name` , these settings will update that instance.
 
-
-1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
-
-1. To display fields under the **Task container resource requirements** drop-down list, click the arrow.
+For more examples of Ansible Automation Platform custom resources, see [Appendix: Red Hat Ansible Automation Platform custom resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#appendix-operator-crs_operator-platform-doc) .
 
 
-1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
-
-1. To display fields under the **EE Control Plane container resource requirements** drop-down list, click the arrow.
 
 
-1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
-
-1. To display fields under the **PostgreSQL init container resource requirements (when using a managed service)** drop-down list, click the arrow.
-
-
-1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
-
-1. To display fields under the **Redis container resource requirements** drop-down list, click the arrow.
-
-
-1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
-
-1. To display fields under the **PostgreSQL container resource requirements (when using a managed instance)** * drop-down list, click the arrow.
-
-
-1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
-
-1. To display the **PostgreSQL container storage requirements (when using a managed instance)** drop-down list, click the arrow.
-
-
-1. Under **Limits** , and **Requests** , enter values for **CPU cores** , **Memory** , and **Storage** .
-
-1. Under Replicas, enter the number of instance replicas.
-1. Under **Remove used secrets on instance removal** , select **true** or **false** . The default is false.
-1. Under **Preload instance with data upon creation** , select **true** or **false** . The default is true.
 
 
 #### 5.2.1.2. Configuring your controller LDAP security
@@ -134,33 +99,40 @@ oc exec -it deployment.apps/&lt;gateway-deployment-name-from-above&gt; -- openss
 
 
 
-#### 5.2.1.3. Configuring your automation controller operator route options
+#### 5.2.1.3. Configure automation controller operator route options
 
 
 
 
-The Red Hat Ansible Automation Platform operator installation form allows you to further configure your automation controller operator route options under **Advanced configuration** .
+The Red Hat Ansible Automation Platform Operator installation form provides advanced options to configure your automation controller operator route.
+
+Important
+You must assign a unique `metadata.name` to each custom resource (CR) in your namespace. If you assign an `AutomationControllerMeshIngress` the same name as your `Ansible Automation Platform` installation, the operator overrides default routes and services. This conflict causes the platform installation to fail.
+
+
 
 **Procedure**
 
 1. Log in to Red Hat OpenShift Container Platform.
 1. Navigate toOperators→Installed Operators.
 1. Select your Ansible Automation Platform Operator deployment.
-1. Select the **Automation Controller** tab.
-1. For new instances, clickCreate AutomationController.
+1. Select the **Ansible Automation Platform** tab.
+1. Click the ⋮ icon next to your Ansible Automation Platform instance and selectEdit AnsibleAutomationPlatform.
+1. ClickYAML viewand locate the `    spec.controller:` section.
+1. Configure the route options under the `    controller:` section:
 
 
-1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationController.
+```
+spec:      controller:        ingress_type: Route        route_host: controller.example.com  # Custom hostname for the route        route_tls_termination_mechanism: Edge  # Options: Edge, Passthrough        route_tls_secret: controller-tls-secret  # Optional: TLS credential secret        projects_persistence: false  # Enable/disable persistence for /var/lib/projects
+```
 
-1. ClickAdvanced configuration.
-1. Under **Ingress type** , click the drop-down menu and select **Route** .
-1. Under **Route DNS host** , enter a common host name that the route answers to.
-1. Under **Route TLS termination mechanism** , click the drop-down menu and select **Edge** or **Passthrough** . For most instances **Edge** should be selected.
-1. Under **Route TLS credential secret** , click the drop-down menu and select a secret from the list.
-1. Under **Enable persistence for _/var/lib/projects_ directory** select either true or false by moving the slider.
+
+1. ClickSave.
 
 Note
-After you have configured your route you can customize your hostname by adding `    route_host:` to the YAML for that automation controller instance.
+Edge termination is recommended for most instances. After configuring your route, you can customize additional route settings by adding them to the `    controller:` section in the Ansible Automation Platform custom resource.
+
+For more examples of Ansible Automation Platform custom resources, see [Appendix: Red Hat Ansible Automation Platform custom resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#appendix-operator-crs_operator-platform-doc) .
 
 
 
@@ -179,21 +151,32 @@ The Ansible Automation Platform Operator installation form allows you to further
 1. Log in to Red Hat OpenShift Container Platform.
 1. Navigate toOperators→Installed Operators.
 1. Select your Ansible Automation Platform Operator deployment.
-1. Select the **Automation Controller** tab.
-1. For new instances, clickCreate AutomationController.
+1. Select the **Ansible Automation Platform** tab.
+1. Click the ⋮ icon next to your Ansible Automation Platform instance and selectEdit AnsibleAutomationPlatform.
+1. ClickYAML viewand locate the `    spec.controller:` section.
+1. Configure the ingress options under the `    controller:` section:
 
 
-1. For existing instances, you can edit the YAML view by clicking the ⋮ icon and thenEdit AutomationController.
+```
+spec:      controller:        ingress_type: Ingress        ingress_annotations: |          nginx.ingress.kubernetes.io/proxy-body-size: "0"          nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"        ingress_tls_secret: controller-ingress-tls-secret
+```
 
-1. ClickAdvanced configuration.
-1. Under **Ingress type** , click the drop-down menu and select **Ingress** .
-1. Under **Ingress annotations** , enter any annotations to add to the ingress.
-1. Under **Ingress TLS secret** , click the drop-down menu and select a secret from the list.
+
+1. ClickSave.
+
+Note
+These ingress settings apply to the automation controller component managed by this Ansible Automation Platform instance. The operator automatically updates the ingress configuration for the controller.
+
+For more examples of Ansible Automation Platform custom resources, see [Appendix: Red Hat Ansible Automation Platform custom resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#appendix-operator-crs_operator-platform-doc) .
+
+
+
+
 
 
 **Verification**
 
-After you have configured your automation controller operator, clickCreateat the bottom of the form view. Red Hat OpenShift Container Platform creates the pods. This may take a few minutes.
+After you have configured your automation controller ingress settings, Red Hat OpenShift Container Platform updates the pods. This may take a few minutes.
 
 
 You can view the progress by navigating toWorkloads→Podsand locating the newly created instance.

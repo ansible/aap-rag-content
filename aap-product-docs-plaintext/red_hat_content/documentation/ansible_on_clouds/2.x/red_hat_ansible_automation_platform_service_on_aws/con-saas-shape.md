@@ -12,7 +12,7 @@ Ansible Automation Platform minimum requirements:
 - Hop Nodes: Red Hat Ansible Automation Platform Service on AWS includes two hop nodes that customers can use to peer with execution nodes. They typically require minimal resources. The shape of a hop node depends on the number of connected execution nodes. A virtual machine (VM) with 2 vCPUs and 2 GB RAM can route traffic for 2-4 execution nodes.
 
 
-- For help with configuring your automation mesh see [Automation mesh for managed cloud or operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/automation_mesh_for_managed_cloud_or_operator_environments/index) .
+- For help with configuring your automation mesh see [Automation mesh for managed cloud or operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/automation_mesh_for_managed_cloud_or_operator_environments/index) .
 
 - For automation in fewer locations (such as specific geographies or clouds), create a mesh with fewer VMs that can be scaled vertically. Most clouds and hypervisors allow shape changes with minimal downtime.
 - For CPU or RAM-intensive automation, use larger machine shapes.

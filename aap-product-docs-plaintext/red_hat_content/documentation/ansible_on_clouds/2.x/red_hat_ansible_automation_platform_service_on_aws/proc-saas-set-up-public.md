@@ -4,7 +4,7 @@
 
 
 
-To set up Red Hat Ansible Automation Platform Service on AWS you must link your Amazon Web Services (AWS) and Red Hat accounts through the AWS marketplace.
+To set up Red Hat Ansible Automation Platform Service on AWS you must link your Amazon Web Services (AWS) and Red Hat accounts through the AWS Marketplace.
 
 When you link your accounts you can provision and configure your cluster through the Red Hat Hybrid Cloud Console.
 
@@ -33,7 +33,7 @@ When you link your accounts you can provision and configure your cluster through
 1. Select the contract options.
 1. Optional: Add a purchase order number.
 1. ClickCreate contract.
-1. ClickClick here to set up your account. This redirects you to Red Hat Single Sign-On where you must:
+1. SelectClick here to set up your account. This redirects you to Red Hat Single Sign-On where you must:
 
 
 1. Create or sign into your Red Hat account.
@@ -61,5 +61,5 @@ Update your password as soon as possible. The confirmation email includes a link
 
 
 
-If you did not receive the email or the initial admin password has expired, you must to submit a [support ticket](https://access.redhat.com/support) and the Red Hat team will assist you with next steps.
+If you did not receive the email or the initial admin password has expired, you must submit a [support ticket](https://access.redhat.com/support) and the Red Hat team will assist you with next steps.
 

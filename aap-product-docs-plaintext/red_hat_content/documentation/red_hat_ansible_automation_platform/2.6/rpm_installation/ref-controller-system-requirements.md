@@ -9,7 +9,7 @@ Automation controller is a distributed system, where different software componen
 Use the following recommendations for node sizing:
 
 
-<span id="idm139865340624976"></span>
+<span id="idm140368655054288"></span>
 **Table 2.3. Recommended Resource Sizing for Automation controller Node Types**
 
 | Node Type | RAM (Minimum) | vCPU (Minimum) | Disk IOPS (Minimum) | Storage and Notes |

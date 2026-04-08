@@ -230,6 +230,111 @@ $ ansible-creator --help        usage: ansible-creator [-h] [--version] command 
 
 
 
+## 3.4. MCP server integration
+
+
+
+
+An MCP server implements Model Context Protocol (MCP) for a specific backend such as REST API, various services, databases, and other external systems. The MCP server then exposes its operations as discoverable tools that AI agents or large language models (LLMs) can call.
+
+MCP servers are integrated into Execution Environments (EEs) using a robust Ansible plugin framework. This setup allows Ansible playbooks to call MCP servers directly. A crucial design strategy is the ephemeral nature of these servers, meaning they exist only for the duration of the job execution.
+
+The core requirement for enabling MCP support involves securely installing the required MCP server software into the Execution Environment during the build process, typically using the `ansible-builder` command.
+
+You can configure MCP servers in two ways:
+
+-  **For embedded (local) MCP servers** : The EE image must explicitly include the MCP server binaries or libraries installed on the image path. This setup enables the Execution Environment to discover and start the specific embedded server required for the job.
+-  **For remote (external) MCP servers** : The EE build process facilitates defining remote connection details in a manifest file contained within the EE. This manifest informs the core MCP collection plugin on how to connect, typically pointing to a specific remote URL using an HTTP connection.
+
+
+
+
+## 3.5. Implementing automation content for ephemeral MCP agents
+
+
+
+
+You can create an Ansible playbook leveraging the Execution Environment (EE) setup so that ephemeral MCP servers are provisioned during Ansible Automation Platform (AAP) controller job creation. This way you can safely use AI as an operational assistant, which can take assigned actions in your enterprise platform.
+
+**Prerequisites**
+
+- You must securely store all access credentials necessary for MCP plugin use exclusively within AAP credential store.
+- The Execution Environment (EE) image must be configured to include the necessary MCP server component, which is typically accomplished by selecting a collection with specialized roles during the EE build process.
+
+
+**Procedure**
+
+1. Create the `    execution-environment.yml` definition file, which specifies a step to install the MCP server components:
+
+
+```
+---    version: 3        images:      base_image:        name: ansible-automation-platform-25/ee-minimal-rhel9:latest    dependencies:      galaxy: requirements.yml        options:      package_manager_path: /usr/bin/microdnf        additional_build_steps:      append_final: |        RUN ansible-playbook ansible.mcp_builder.install_mcp -e mcp_servers=github_mcp -e github_mcp_mode=remote
+```
+
+The example definition file above specifies the required MCP server, so that the necessary dependencies are pulled into the file.
+
+During the EE build process the MCP server software is installed into the EE.
+
+For embedded servers, include the MCP server binaries or libraries explicitly on the EE image path.
+
+For remote servers, define remote connection details in a manifest file within the EE.
+
+
+1. Write custom Ansible content:
+
+
+```
+---    - name: Example Github MCP server interaction      hosts: github_mcp      tasks:        - name: Create a Github repository          ansible.mcp.run_tool:            name: create_repository            args:              name: my-github-repository              autoInit: true
+```
+
+The playbook syntax for invoking MCP plugins is intuitive and aligns with existing Ansible module patterns.
+
+Important
+You must configure the `    ansible.mcp.mcp` connection plugin to use the `    ansible.mcp` collection. For example, you should set the `    ansible_mcp_server_name` custom-defined configuration variable to the name of a server in the `    mcpserver.json` manifest file. Your playbook might use inventory variables, such as setting the connection plugin to `    ansible_connection: ansible.mcp.mcp` , along with required timeout values like `    ansible_connect_timeout: 30` and `    ansible_command_timeout: 30` .
+
+
+
+
+1. Create and configure credentials in AAP:
+
+The required credentials vary based on which MCP server you are using. For example, the Github MCP server requires a Github Personal Access Token, which should be set in the `    MCP_BEARER_TOKEN` environment variable.
+
+
+1. To do this, first create a custom credential type in AAP:
+
+![Create credential type](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Developing_automation_content-en-US/images/56121a0cac2a21ec1bc61113775f19cb/mcp-agents-create-credential-type.png)
+
+
+
+1. Create a new credential and use the custom credential type you just created:
+
+![Create credential](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Developing_automation_content-en-US/images/7bf269720aee6a88522cc4b69b07ba9e/mcp-agents-create-credential.png)
+
+
+The examples above show how to set up the required credential structures in the AAP credential store. This includes defining the relevant fields and the injector configuration needed to pass the secret as an environment variable (for example, `        MCP_BEARER_TOKEN: “{{ token }}”` ).
+
+
+
+1. Create a new host and configure the connection variables:
+
+![Create a host](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Developing_automation_content-en-US/images/ab580a3f075ad17d8babe9850b3f7a43/mcp-agents-create-host.png)
+
+
+
+1. Launch the relevant job in the AAP controller GUI.
+
+
+**Troubleshooting**
+
+To manage the health of the MCP servers, the AAP environment emphasizes governance and auditability, allowing you to trace workflow success and failures.
+
+
+All MCP plugin invocations and credential usage events are logged and auditable through AAP audit trail systems, including the job ID, user, and timestamp, along with Ansible eventstream data. This tracking supports governance requirements for enterprise compliance.
+
+The system ensures that secrets are never hardcoded into playbooks or visible in execution logs; they are masked automatically. This robust auditing assists in identifying security issues or operational problems during task execution.
+
+A successful operation relies on the strict, controlled lifecycle of the MCP agents. This ensures that upon job failure or completion, there are no residual data, services, or security artifacts remaining.
+
 # Chapter 4. Manually adding the Ansible language to YAML files
 
 
@@ -653,7 +758,7 @@ The output is displayed in the terminal. You can inspect the results and step in
 
 **Additional resources**
 
--  [Running Ansible playbooks with automation content navigator](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_content_navigator/assembly-execute-playbooks-navigator_ansible-navigator)
+-  [Running Ansible playbooks with automation content navigator](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_content_navigator/assembly-execute-playbooks-navigator_installing-devtools)
 
 
 # Chapter 7. Publishing and running your playbooks in Ansible Automation Platform
@@ -686,7 +791,7 @@ To run your playbook in Ansible Automation Platform, you must create a project i
 **Procedure**
 
 1. In a browser, log in to automation controller.
-1. Configure a Source Control credential type for your source control system if necessary. See the [Creating new credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-credentials#controller-create-credential) section of _Using automation execution_ for more details. [https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#controller-create-credential](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_execution/controller-credentials#controller-create-credential)
+1. Configure a Source Control credential type for your source control system if necessary. See the [Creating new credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-credentials#controller-create-credential) section of _Using automation execution_ for more details.
 1. In automation controller, create a project for the GitHub repository where you stored your playbook project. Refer to the [Projects](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-projects) chapter of _Using automation execution_ .
 1. Create a job template that uses a playbook from the project that you created. Refer to the [Job Templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-job-templates) chapter of _Using automation execution_ .
 1. Run your playbook from automation controller by launching the job template. Refer to the [Launching a job template](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-job-templates#controller-launch-job-template) section of _Using automation execution_ .
@@ -983,19 +1088,16 @@ The following procedure describes the workflow to add a collection to an executi
 
 
 
-<span id="idm140090807737280"></span>
+<span id="idm139634524830640"></span>
 # Legal Notice
 
 Copyright© Red Hat.
-The text of and illustrations in this document are licensed by Red Hat under a Creative Commons Attribution–Share Alike 3.0 Unported license ("CC-BY-SA"). An explanation of CC-BY-SA is available at [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/) . In accordance with CC-BY-SA, if you distribute this document or an adaptation of it, you must provide the URL for the original version.
+Except as otherwise noted below, the text of and illustrations in this documentation are licensed by Red Hat under the Creative Commons Attribution–Share Alike 3.0 Unported license . If you distribute this document or an adaptation of it, you must provide the URL for the original version.
 Red Hat, as the licensor of this document, waives the right to enforce, and agrees not to assert, Section 4d of CC-BY-SA to the fullest extent permitted by applicable law.
-Red Hat, Red Hat Enterprise Linux, the Shadowman logo, JBoss, OpenShift, Fedora, the Infinity logo, and RHCE are trademarks of Red Hat, Inc., registered in the United States and other countries.
+Red Hat, the Red Hat logo, JBoss, Hibernate, and RHCE are trademarks or registered trademarks of Red Hat, LLC. or its subsidiaries in the United States and other countries.
 Linux® is the registered trademark of Linus Torvalds in the United States and other countries.
-Java® is a registered trademark of Oracle and/or its affiliates.
-XFS® is a trademark of Silicon Graphics International Corp. or its subsidiaries in the United States and/or other countries.
-MySQL® is a registered trademark of MySQL AB in the United States, the European Union and other countries.
-Node.js® is an official trademark of Joyent. Red Hat Software Collections is not formally related to or endorsed by the official Joyent Node.js open source or commercial project.
-TheOpenStack® Word Mark and OpenStack logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+XFS is a trademark or registered trademark of Hewlett Packard Enterprise Development LP or its subsidiaries in the United States and other countries.
+TheOpenStack® Word Mark and OpenStack logo are trademarks or registered trademarks of the Linux Foundation, used under license.
 All other trademarks are the property of their respective owners.
 
 

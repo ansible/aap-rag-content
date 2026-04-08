@@ -9,7 +9,7 @@ To set up Red Hat Ansible Lightspeed for your organization, you need the followi
 
 -  **API key**
 
-A unique API key authenticates all requests made from Red Hat Ansible Lightspeed to IBM watsonx Code Assistant. Each Red Hat organization with a valid Ansible Automation Platform subscription must have a configured API key. When an authenticated RH-SSO user creates a task request in Red Hat Ansible Lightspeed, the API key associated with the user’s Red Hat organization is used to authenticate the request to IBM watsonx Code Assistant.
+A unique API key authenticates all requests made from Red Hat Ansible Lightspeed to IBM watsonx Code Assistant. Each Red Hat organization with a valid Ansible Automation Platform subscription must have a configured API key. An authenticated RH-SSO user creating a task in Red Hat Ansible Lightspeed is authenticated to IBM watsonx Code Assistant through the user’s Red Hat organization API key.
 
 
 -  **Model ID**

@@ -10,4 +10,4 @@ Customers can subscribe to the notifications by visiting [https://announcements.
 All Ansible Automation Platform customers can subscribe to this content. Messages include categorization tags to specify deployment types: managed, self-managed (on-premise), or a combination. Red Hat is developing a future enhancement to integrate this feature directly into the UI.
 
 
-<span id="idm140676675174128"></span>
+<span id="idm139629093991904"></span>

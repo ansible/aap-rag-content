@@ -1,6 +1,6 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
 ## 1.1. Configuring remote repositories for content syncing
-### 1.1.8. Creating a requirements file
+### 1.1.9. Creating a requirements file
 
 
 
@@ -27,7 +27,9 @@ collections:      - name: namespace.collection_name        version: 1.0.0
 
 
 
+Important
 Be sure to specify the collection version number, otherwise you will sync all collection versions. Syncing all versions can require more space than expected.
+
 
 
 **Next step**

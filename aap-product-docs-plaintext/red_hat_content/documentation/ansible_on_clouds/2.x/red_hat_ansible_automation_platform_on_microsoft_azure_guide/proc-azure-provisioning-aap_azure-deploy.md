@@ -69,5 +69,5 @@ You can use the deployment engine to view the progress of your deployment a few 
 
 It may take 30 minutes or longer for the infrastructure and software to fully provision.
 
-After provisioning is complete, you can access and login to your new Ansible Automation Platform instance. For help with configuring your automation controller and automation hub instances see [Configuring automation execution](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution) and [Managing automation content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/managing_automation_content) respectively.
+After provisioning is complete, you can access and log in to your new Ansible Automation Platform instance. For help with configuring your automation controller and automation hub instances see [Configuring automation execution](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/index) and [Managing automation content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/managing_automation_content) respectively.
 

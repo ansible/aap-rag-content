@@ -4,17 +4,33 @@
 
 
 
-You can enable task output for debugging on any custom resources (CRs) by setting `no_log` to `false` in the `spec` section of the CR.
+You can enable task output for debugging on any custom resources (CRs) by setting `no_log` to `false` in the component section of the `AnsibleAutomationPlatform` CR.
 
-The logs then show output for any failed tasks that originally had `no_log` set to `true` . The following procedure uses automation controller as an example, but every CR listed in the [Core Ansible Automation Platform Resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#ref-operator-core-aap-resources_operator-troubleshoot) section supports `no_log` .
+The logs then show output for any failed tasks that originally had `no_log` set to `true` . All Ansible Automation Platform components (automation controller, automation hub, and Event-Driven Ansible) support the `no_log` setting.
 
 **Procedure**
 
-1. Edit the automation controller CR and set the `    no_log` field to `    false` in the spec.
+1. Edit the Ansible Automation Platform CR and set the `    no_log` field to `    false` for the component you want to debug.
+
+For automation controller:
 
 
 ```
-apiVersion: automationcontroller.ansible.com/v1beta1    kind: AutomationController    metadata:      name: controller-demo    spec:      no_log: false
+apiVersion: aap.ansible.com/v1alpha1    kind: AnsibleAutomationPlatform    metadata:      name: myaap    spec:      controller:        no_log: false
+```
+
+For automation hub:
+
+
+```
+apiVersion: aap.ansible.com/v1alpha1    kind: AnsibleAutomationPlatform    metadata:      name: myaap    spec:      hub:        no_log: false
+```
+
+For Event-Driven Ansible:
+
+
+```
+apiVersion: aap.ansible.com/v1alpha1    kind: AnsibleAutomationPlatform    metadata:      name: myaap    spec:      eda:        no_log: false
 ```
 
 Note
@@ -23,11 +39,11 @@ This might expose sensitive data in the logs. On production clusters, this value
 
 
 
-1. To increase the Ansible Playbook verbosity from the operator, set the verbosity level using an annotation:
+1. To increase the Ansible Playbook verbosity from the operator, set the verbosity level using an annotation on the Ansible Automation Platform CR:
 
 
 ```
-annotations:        ansible.sdk.operatorframework.io/verbosity: "4"
+apiVersion: aap.ansible.com/v1alpha1    kind: AnsibleAutomationPlatform    metadata:      name: myaap      annotations:        ansible.sdk.operatorframework.io/verbosity: "4"    spec:      # ... component configuration ...
 ```
 
 

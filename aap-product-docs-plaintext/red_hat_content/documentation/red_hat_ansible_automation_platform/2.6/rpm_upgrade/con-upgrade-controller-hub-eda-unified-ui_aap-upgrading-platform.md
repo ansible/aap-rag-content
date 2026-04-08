@@ -1,5 +1,5 @@
 # 2. Upgrading to Red Hat Ansible Automation Platform 2.6
-## 2.8. Automation controller and automation hub 2.4 and Event-Driven Ansible 2.6 with unified UI upgrades
+## 2.7. Automation controller and automation hub 2.4 and Event-Driven Ansible 2.6 with unified UI upgrades
 
 
 

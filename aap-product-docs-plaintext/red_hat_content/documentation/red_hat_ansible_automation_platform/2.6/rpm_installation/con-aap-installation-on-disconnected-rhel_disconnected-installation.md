@@ -1,5 +1,5 @@
-# 5. Disconnected installation
-## 5.1. Ansible Automation Platform installation on disconnected RHEL
+# 6. Disconnected installation
+## 6.1. Ansible Automation Platform installation on disconnected RHEL
 
 
 

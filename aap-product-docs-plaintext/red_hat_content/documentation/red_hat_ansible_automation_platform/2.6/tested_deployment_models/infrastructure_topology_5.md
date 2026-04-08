@@ -8,7 +8,7 @@
 The Red Hat tested infrastructure topology for this deployment model:
 
 
-<span id="idm140186614655264"></span>
+<span id="idm140264419108240"></span>
 **Figure 4.1. Infrastructure topology diagram**
 
 ![RPM growth topology diagram](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Tested_deployment_models-en-US/images/a6bab844df620cd5ae45fac1ec8f2b85/rpm-a-env-a.png)
@@ -19,7 +19,7 @@ The Red Hat tested infrastructure topology for this deployment model:
 Red Hat tests each VM with these requirements:
 
 
-<span id="idm140186614184672"></span>
+<span id="idm140264419103392"></span>
 **Table 4.1. Virtual machine requirements**
 
 | Requirement | Minimum requirement |
@@ -33,7 +33,7 @@ Red Hat tests each VM with these requirements:
 
 
 
-<span id="idm140186614161696"></span>
+<span id="idm140264423867520"></span>
 **Table 4.2. Infrastructure topology components**
 
 | VM count | Purpose | Example VM group names |

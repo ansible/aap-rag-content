@@ -8,13 +8,13 @@ Ansible Automation Platform on Microsoft Azure is installed as a managed applica
 
 The managed application resource group (RG) is completely separate from other RGs in your tenant. Red Hat only has access to the managed application RG, with no visibility into other tenant resources.
 
-For information about how this works and how resources and access are isolated from the rest of your Azure resources, refer to [Azure managed applications overview](https://docs.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/overview) in the Microsoft _Azure managed applications_ guide.
+For information about how this works and how resources and access are isolated from the rest of your Azure resources, refer to [Azure managed applications overview](https://learn.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/overview) in the Microsoft _Azure managed applications_ guide.
 
 Ansible Automation Platform on Microsoft Azure uses the following RGs:
 
 - A new or existing RG in your tenant. This RG includes a single resource referring to the Ansible Automation Platform on Microsoft Azure managed application deployment. Red Hat has access to the managed app to perform support, maintenance, and upgrades, but the RG is outside of Red Hat’s management.
 - A multi-tenant managed resource group (MRG) that contains most of the infrastructure needed to operate Ansible Automation Platform on Microsoft Azure. This multi-tenant MRG is shared between the Red Hat tenant and your tenant. Red Hat has full administrative control and you have read-only access to the RG.
-- An AKS node pool resource group (NPRG). Microsoft requires the NPRG for AKS deployments. It contains resources that AKS uses to function. It is created on deployment, and it is outside of Red Hat’s management. Refer to [Microsoft’s AKS documentation](https://docs.microsoft.com/en-us/azure/aks/faq#why-are-two-resource-groups-created-with-aks) for more information about NPRGs.
+- An AKS node pool resource group (NPRG). Microsoft requires the NPRG for AKS deployments. It contains resources that AKS uses to function. It is created on deployment, and it is outside of Red Hat’s management. Refer to [Microsoft’s AKS documentation](https://learn.microsoft.com/en-us/azure/aks/faq#why-are-two-resource-groups-created-with-aks) for more information about NPRGs.
 
 
 Note

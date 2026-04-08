@@ -52,6 +52,6 @@ When network peering completes, traffic routes to and from Ansible Automation Pl
 
 **Additional resources**
 
--  [Connect a virtual network to a Virtual WAN hub - portal](https://docs.microsoft.com/en-us/azure/virtual-wan/howto-connect-vnet-hub)
+-  [Connect a virtual network to a Virtual WAN hub - portal](https://learn.microsoft.com/en-us/azure/virtual-wan/howto-connect-vnet-hub)
 
 

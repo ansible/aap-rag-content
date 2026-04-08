@@ -4,6 +4,8 @@
 
 
 
+Access Ansible Automation Platformthrough the Red Hat Developer Hub to create a project in {ControllerNameShort} for your playbook repository and then set up a job template that uses the playbook. You can navigate directly to your {ControllerNameShort} instance if it was not configured during the plug-in installation.
+
 **Procedure**
 
 1. The Ansible plug-ins provide a link to Ansible Automation Platform.

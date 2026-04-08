@@ -1,5 +1,5 @@
 # 7. Rulebook activations
-## 7.3. Rulebook activation list view
+## 7.2. Rulebook activation list view
 
 
 

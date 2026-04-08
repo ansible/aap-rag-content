@@ -4,9 +4,7 @@
 
 
 
-When you log in to Red Hat Developer Hub (RHDH), the main RHDH menu and dashboard are displayed.
-
-To view the dashboard for Ansible plug-ins for Red Hat Developer Hub, click **Ansible** in the Red Hat Developer Hub navigation panel.
+After logging into Red Hat Developer Hub (RHDH), use the Ansible navigation panel item to view the plug-in dashboard. The dashboard shows the full automation workflow, from learning to deploying jobs on Ansible Automation Platform.
 
 ![Ansible plug-in dashboard](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_Ansible_plug-ins_for_Red_Hat_Developer_Hub-en-US/images/8b6becccba147f266a6ac21ee7afc621/rhdh-plugin-dashboard.png)
 

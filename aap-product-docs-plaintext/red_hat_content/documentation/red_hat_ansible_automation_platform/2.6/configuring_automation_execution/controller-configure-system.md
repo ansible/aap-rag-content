@@ -35,6 +35,13 @@ If **Gather data for Automation Analytics** is set to false, this value is ignor
 
 
 -  **Remote Host Headers** : HTTP headers and meta keys to search to decide remote hostname or IP. Add additional items to this list, such as `        HTTP_X_FORWARDED_FOR` , if behind a reverse proxy. For more information, see [Configuring proxy support for Red Hat Ansible Automation Platform](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/operating_ansible_automation_platform/assembly-configuring-proxy-support) .
+
+Important
+If a setting is defined in a file (such as a python file or a custom YAML file) or an environment variable, it is considered a hard directive from Ansible Automation Platform infrastructure. The platform regards files on the server to be the official source of truth. If that occurs, UI changes in the **Remote Host Headers** field cannot override the contents of the file. This makes **Remote Host Headers** read-only.
+
+
+
+
 -  **Automation Analytics upload URL** : This value has been set manually in a settings file. This setting is used to configure the upload URL for data collection for Automation Analytics.
 -  **Defines subscription usage model and shows Host Metrics** :
 

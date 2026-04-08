@@ -59,7 +59,7 @@ $ ansible-playbook -i &lt;path_to_inventory_file&gt; ansible.containerized_insta
 1. The following is a list of the parameters you can use with the `        log_gathering` playbook:
 
 
-<span id="idm140209858226608"></span>
+<span id="idm140279429129632"></span>
 **Table A.1. Parameter reference**
 
 | Parameter name | Description | Default |
@@ -98,7 +98,7 @@ $ podman ps --all --format "{{.Names}}"
 ```
 
 
-<span id="idm140209855966720"></span>
+<span id="idm140279428766544"></span>
 **Table A.2. Container details**
 
 | Component group | Container name | Purpose |
@@ -205,8 +205,8 @@ Example with output:
 $ CONTAINER_HOST=unix://run/user/1000/podman/podman.sock podman images
 
 REPOSITORY                                                            TAG         IMAGE ID      CREATED     SIZE
-registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8  latest      59d1bc680a7c  6 days ago  2.24 GB
-registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel8    latest      a64b9fc48094  6 days ago  338 MB
+registry.redhat.io/ansible-automation-platform-26/ee-supported-rhel9  latest      59d1bc680a7c  6 days ago  2.24 GB
+registry.redhat.io/ansible-automation-platform-26/ee-minimal-rhel9    latest      a64b9fc48094  6 days ago  338 MB
 ```
 
 ## A.3. Troubleshooting containerized Ansible Automation Platform installation
@@ -582,7 +582,7 @@ The following tables contain information about the variables used in Ansible Aut
 The following variables control how Ansible Automation Platform interacts with remote hosts.
 
 
-<span id="idm140209855535136"></span>
+<span id="idm140279432947840"></span>
 **Table B.1. Ansible variables**
 
 | Variable | Description |
@@ -898,10 +898,10 @@ General inventory file variables for Ansible Automation Platform.
 
 | RPM variable name | Container variable name | Description | Required or optional | Default |
 | --- | --- | --- | --- | --- |
-|  `aap_ca_cert_file` |  `ca_tls_cert` | Path to the user provided CA certificate file used to generate SSL/TLS certificates for all Ansible Automation Platform services. For more information, see [Configuring custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/advanced-configuration-containerized#using-custom-tls-certificates) . | Optional |  |
+|  `aap_ca_cert_file` |  `ca_tls_cert` | Path to the user-provided CA certificate file. When you specify this variable, the installation program automatically generates TLS certificates for each Ansible Automation Platform service signed by this CA. You do not need to define individual service certificate variables (such as `gateway_tls_cert` , `controller_tls_cert` , or `hub_tls_cert` ). For more information, see [Configuring custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/advanced-configuration-containerized#using-custom-tls-certificates) . | Optional |  |
 |  `aap_ca_cert_files_remote` |  `ca_tls_remote` | Denote whether the CA certificate files are local to the installation program ( `false` ) or on the remote component server ( `true` ). | Optional |  `false` |
 |  `aap_ca_cert_size` |  | Bit size of the internally managed CA certificate private key. | Optional |  `4096` |
-|  `aap_ca_key_file` |  `ca_tls_key` | Path to the key file for the CA certificate provided in `aap_ca_cert_file` (RPM) and `ca_tls_cert` (Container). For more information, see [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/advanced-configuration-containerized#using-custom-tls-certificates) . | Optional |  |
+|  `aap_ca_key_file` |  `ca_tls_key` | Path to the key file for the CA certificate provided in `aap_ca_cert_file` (RPM) and `ca_tls_cert` (Container). The installation program uses this key to sign the automatically generated TLS certificates for each Ansible Automation Platform service. For more information, see [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/advanced-configuration-containerized#using-custom-tls-certificates) . | Optional |  |
 |  `aap_ca_passphrase_cipher` |  | Cipher used for signing the internally managed CA certificate private key. | Optional |  `aes256` |
 |  `aap_ca_regenerate` |  | Denotes whether or not to regenerate the internally managed CA certificate key pair. | Optional |  `false` |
 |  `aap_service_cert_size` |  | Bit size of the component key pair managed by the internal CA. | Optional |  `4096` |
@@ -912,8 +912,10 @@ General inventory file variables for Ansible Automation Platform.
 |  `backup_file_prefix` |  | Prefix used for the file backup name for the final backup file. | Optional |  `automation-platform-backup` |
 |  `bundle_install` |  `bundle_install` | Controls whether or not to perform an offline or bundled installation. Set this variable to `true` to enable an offline or bundled installation. | Optional |  `false` if using the setup installation program. `true` if using the setup bundle installation program. |
 |  `bundle_install_folder` |  `bundle_dir` | Path to the bundle directory used when performing a bundle install. | Required if `bundle_install=true` | RPM = `/var/lib/ansible-automation-platform-bundle` . Container = `&lt;current_dir&gt;/bundle` . |
-|  `custom_ca_cert` |  `custom_ca_cert` | Path to the custom CA certificate file. This is required if any of the TLS certificates you manually provided are signed by a custom CA. For more information, see [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/advanced-configuration-containerized#using-custom-tls-certificates) . | Optional |  |
-|  `enable_insights_collection` |  | The default install registers the node to the Red Hat Insights for Red Hat Ansible Automation Platform for the Red Hat Ansible Automation Platform Service if the node is registered with Subscription Manager. Set to `false` to disable this functionality. | Optional |  `true` |
+|  `custom_ca_cert` |  `custom_ca_cert` | Path to the custom CA certificate file. Use this variable when you have manually provided TLS certificates for Ansible Automation Platform services (such as `gateway_tls_cert` , `controller_tls_cert` , or `hub_tls_cert` ) that are signed by a custom CA.
+
+This variable adds the CA certificate to the environment to ensure proper authentication and trust of the manually provided certificates. This variable is not needed when using `ca_tls_cert` and `ca_tls_key` , which automatically generate TLS certificates. For more information, see [Using custom TLS certificates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/advanced-configuration-containerized#using-custom-tls-certificates) . | Optional |  |
+|  `enable_insights_collection` |  | The default install registers the node to the Red Hat Lightspeed for Red Hat Ansible Automation Platform for the Red Hat Ansible Automation Platform Service if the node is registered with Subscription Manager. Set to `false` to disable this functionality. | Optional |  `true` |
 |  `registry_password` |  `registry_password` | Password credential for access to the registry source defined in `registry_url` . For more information, see [Setting registry_username and registry_password](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/preparing-containerized-installation#proc-set-registry-username-password) .
 
 Not required for disconnected (bundled) installations where `bundle_install=true` . | RPM = Required if you need a password to access `registry_url` . Container = Required for online installations if `registry_auth=true` . Not required for disconnected installations. |  |
@@ -1229,22 +1231,24 @@ The following variables govern the access granted to Ansible MCP server.
 | N/A |  `mcp_allow_write_operations` | Determines whether the Ansible MCP server allows actions that modify state, such as launching jobs or updating templates through the external AI tool.
 
 By default, the variable’s value is set to `false` , so that the Ansible MCP server enables read-only operations and blocks all write operations. To enable the Ansible MCP server to perform write operations, change the value of the variable to `true` . | Optional |  `false` |
+| N/A |  `mcp_ignore_certificate_errors` | Specifies whether to skip validation of SSL/TLS certificates when connecting to an MCP server over a secure transport (HTTPS/WSS).
+
+Set this parameter value to `true` to allow connections to servers with self-signed, expired, or otherwise untrusted certificates, primarily during local development or internal testing. | Optional |  `false` |
+| N/A |  `mcp_tls_cert` | Path to the SSL/TLS certificate file for the Ansible MCP server. | Required if using client certificate authentication. |  |
+| N/A |  `mcp_tls_key` | Path to the SSL/TLS key file for the Ansible MCP server. | Required if using client certificate authentication. |  |
 
 
 
-<span id="idm140209870410880"></span>
+<span id="idm140279425481152"></span>
 # Legal Notice
 
 Copyright© Red Hat.
-The text of and illustrations in this document are licensed by Red Hat under a Creative Commons Attribution–Share Alike 3.0 Unported license ("CC-BY-SA"). An explanation of CC-BY-SA is available at [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/) . In accordance with CC-BY-SA, if you distribute this document or an adaptation of it, you must provide the URL for the original version.
+Except as otherwise noted below, the text of and illustrations in this documentation are licensed by Red Hat under the Creative Commons Attribution–Share Alike 3.0 Unported license . If you distribute this document or an adaptation of it, you must provide the URL for the original version.
 Red Hat, as the licensor of this document, waives the right to enforce, and agrees not to assert, Section 4d of CC-BY-SA to the fullest extent permitted by applicable law.
-Red Hat, Red Hat Enterprise Linux, the Shadowman logo, JBoss, OpenShift, Fedora, the Infinity logo, and RHCE are trademarks of Red Hat, Inc., registered in the United States and other countries.
+Red Hat, the Red Hat logo, JBoss, Hibernate, and RHCE are trademarks or registered trademarks of Red Hat, LLC. or its subsidiaries in the United States and other countries.
 Linux® is the registered trademark of Linus Torvalds in the United States and other countries.
-Java® is a registered trademark of Oracle and/or its affiliates.
-XFS® is a trademark of Silicon Graphics International Corp. or its subsidiaries in the United States and/or other countries.
-MySQL® is a registered trademark of MySQL AB in the United States, the European Union and other countries.
-Node.js® is an official trademark of Joyent. Red Hat Software Collections is not formally related to or endorsed by the official Joyent Node.js open source or commercial project.
-TheOpenStack® Word Mark and OpenStack logo are either registered trademarks/service marks or trademarks/service marks of the OpenStack Foundation, in the United States and other countries and are used with the OpenStack Foundation's permission. We are not affiliated with, endorsed or sponsored by the OpenStack Foundation, or the OpenStack community.
+XFS is a trademark or registered trademark of Hewlett Packard Enterprise Development LP or its subsidiaries in the United States and other countries.
+TheOpenStack® Word Mark and OpenStack logo are trademarks or registered trademarks of the Linux Foundation, used under license.
 All other trademarks are the property of their respective owners.
 
 

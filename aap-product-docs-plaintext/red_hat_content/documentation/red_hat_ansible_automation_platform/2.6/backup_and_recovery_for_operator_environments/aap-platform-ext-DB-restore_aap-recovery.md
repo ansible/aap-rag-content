@@ -44,11 +44,11 @@ Restoring from an external database force drops the database, which overrides yo
 
 **Verification**
 
-Your backups starts restoring under the **AnsibleAutomationPlatformRestores** tab.
+Your backup restores under the **AnsibleAutomationPlatformRestores** tab.
 
 
 Note
-The recovery is not complete until all the resources are successfully restored. Depending on the size of your database this this can take some time.
+The recovery is not complete until all the resources are successfully restored. Depending on the size of your database this can take some time.
 
 
 

@@ -4,7 +4,7 @@
 
 
 
-Ansible Automation Platform on Microsoft Azure default configuration of [Microsoft Azure cluster autoscaler](https://docs.microsoft.com/en-us/azure/aks/cluster-autoscaler#about-the-cluster-autoscaler) for autoscaling, with the following settings to limit the number of nodes:
+Ansible Automation Platform on Microsoft Azure default configuration of [Microsoft Azure cluster autoscaler](https://learn.microsoft.com/en-us/azure/aks/cluster-autoscaler#about-the-cluster-autoscaler) for autoscaling, with the following settings to limit the number of nodes:
 
 - Minimum Nodes: 3
 - Maximum Nodes: 20

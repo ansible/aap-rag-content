@@ -1,6 +1,6 @@
 # 2. Installing the Ansible plug-ins with a Helm chart on OpenShift Container Platform
-## 2.7. Full examples
-### 2.7.1. Full app-config-rhdh ConfigMap example for Ansible plug-ins entries
+## 2.6. Full examples
+### 2.6.1. Full app-config-rhdh ConfigMap example for Ansible plug-ins entries
 
 
 
@@ -22,8 +22,6 @@ port: '8000'
 # Optional integrations
 rhaap:
 baseUrl: '&lt;https://MyControllerUrl&gt;'
-token: '&lt;AAP Personal Access Token&gt;'
-checkSSL: &lt;true or false&gt;
 devSpaces:
 baseUrl: '&lt;https://MyDevSpacesURL&gt;'
 automationHub:

@@ -1,6 +1,6 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
 ## 1.1. Configuring remote repositories for content syncing
-### 1.1.5. Configuring the rh-certified remote repository
+### 1.1.6. Configuring the rh-certified remote repository
 
 
 
@@ -15,7 +15,7 @@ If you have collections `A` , `B` , and `C` in your requirements file, and a new
 
 - You have valid **Modify Ansible repo content** permissions. For more information on permissions, see [Access management and authentication](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication) .
 - You have retrieved the Sync URL and API Token from the automation hub hosted service on console.redhat.com.
-- You have configured access to port 443. This is required for synchronizing certified collections. For more information, see the automation hub table in the [Network ports and protocols](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/ref-network-ports-protocols_planning) chapter of Planning your installation.
+- You have configured access to port 443. This is required for synchronizing certified collections. For more information, see [Network ports and protocols](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/network-ports-protocols_planning) .
 
 
 **Procedure**

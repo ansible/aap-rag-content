@@ -10,7 +10,7 @@ To access this private address, you must configure network peering and establish
 
 Common access options include:
 
--  [Azure hosted virtual machine](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-nw-private-deploy-az-hosted-vm_azure-connecting-to-aap)
--  [VPN](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-nw-private-deploy-vpn_azure-connecting-to-aap)
+-  [Azure hosted virtual machine](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#ref-azure-nw-private-deploy-az-hosted-vm_azure-connecting-to-aap)
+-  [VPN](https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#ref-azure-nw-private-deploy-vpn_azure-connecting-to-aap)
 
 

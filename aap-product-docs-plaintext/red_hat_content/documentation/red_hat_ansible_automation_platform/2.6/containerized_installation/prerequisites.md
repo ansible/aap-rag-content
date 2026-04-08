@@ -19,6 +19,11 @@
 
 
 Important
+Containerized Ansible Automation Platform stores all runtime data, configuration files, container images, and Podman volumes under the installing user’s home directory. This includes `$HOME/aap/` for component configuration and data, and `$HOME/.local/share/containers/` for container images and volumes.
+
+
+
+Important
 Podman does not support storing container images on an NFS share. To use an NFS share for the user home directory, set up the Podman storage backend path outside of the NFS share. For more information, see [Rootless Podman and NFS](https://www.redhat.com/en/blog/rootless-podman-nfs) .
 
 

@@ -1,5 +1,5 @@
-# 3. Installing Red Hat Ansible Automation Platform
-## 3.4. Running the Red Hat Ansible Automation Platform installer setup script
+# 4. Installing Red Hat Ansible Automation Platform
+## 4.4. Running the Red Hat Ansible Automation Platform installer setup script
 
 
 

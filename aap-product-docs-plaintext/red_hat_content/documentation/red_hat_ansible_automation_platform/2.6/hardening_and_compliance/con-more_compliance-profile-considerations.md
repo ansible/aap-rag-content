@@ -12,7 +12,7 @@ In many environments, you can use Ansible Automation Platform to manage systems 
 
 
 
-When an Ansible Automation Platform job runs against a RHEL managed node, most tasks are executed by copying Python code to the managed node and then executing it locally. The job will fail if the `fapolicyd` service is enabled on the managed node, because the default set of rules that come with RHEL prevents this Python code from running.
+When an Ansible Automation Platform job runs against a RHEL managed node, most tasks are executed by copying Python code to the managed node and then executing it locally. The job fails if the `fapolicyd` service is enabled on the managed node, because the default set of rules that come with RHEL prevents this Python code from running.
 
 To prevent this issue from occurring, use one of the following methods:
 
@@ -63,4 +63,4 @@ This example rule might require modification to work with any other `    fapolic
 
 
 
-<span id="idm139994926549664"></span>
+<span id="idm140601132926496"></span>

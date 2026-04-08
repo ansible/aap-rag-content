@@ -21,12 +21,12 @@ Important
 
 
 
-- Back up your Ansible Automation Platform environment before upgrading in case any issues occur. See [Backing up your Ansible Automation Platform instance](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/rpm_upgrade/index#proc-backup-aap_aap-upgrading-platform) and [Backup and recovery for operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/backup_and_recovery_for_operator_environments) for the specific topology of the environment.
+- Back up your Ansible Automation Platform environment before upgrading in case any issues occur. See [Back up the platform using automation installer](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/controller-backup-and-restore#backup-using-automation-installer) and [Backup and recovery for operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/backup_and_recovery_for_operator_environments) for the specific topology of the environment.
 - Capture your inventory or instance group details before upgrading.
 - Review the platform gateway requirements:
 
 
-- Ansible Automation Platform 2.4 to 2.6 upgrades include the [platform gateway](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/ref-aap-components#con-about-platform-gateway_planning) . Ensure you review the 2.6 [Network ports and protocols](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/ref-network-ports-protocols_planning) for architectural changes.
+- Ansible Automation Platform 2.4 to 2.6 upgrades include the [platform gateway](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/ref-aap-components#con-about-platform-gateway_planning) . Ensure you review the 2.6 [Network ports and protocols](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/planning_your_installation/network-ports-protocols_planning) for architectural changes.
 - Platform gateway has a number of associated inventory file variables, some of which are required. For details of the new and changed variables for 2.6, see [Appendix A. Inventory file variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/appendix-inventory-files-vars) .
 - When upgrading from Ansible Automation Platform 2.4 to 2.6, connections to the platform gateway URL might fail on the platform gateway UI if you are using the automation controller behind a load balancer. The following error message is displayed: `        Error connecting to Controller API`
 

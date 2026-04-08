@@ -1,6 +1,6 @@
 # 7. Rulebook activations
-## 7.3. Rulebook activation list view
-### 7.3.1. Viewing activation output
+## 7.2. Rulebook activation list view
+### 7.2.1. Viewing activation output
 
 
 
