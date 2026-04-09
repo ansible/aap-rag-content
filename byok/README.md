@@ -43,6 +43,36 @@ podman pull <rag-tool-image-gpu>:<tag>
 
 ---
 
+## Example Content Included in This Repository
+
+The `ansible-collection-docs/` directory in this repository contains a ready-to-use example
+that demonstrates two types of BYOK content working together:
+
+**1. Custom Ansible collection documentation** — `mycompany.infrastructure` (root level and subdirectories)
+
+A fictional enterprise collection with modules, lookup plugins, filter plugins, an inventory
+plugin, and user guides. Covers server provisioning, database management, network configuration,
+application deployment, and HashiCorp Vault integration.
+
+**2. Org-specific policy documentation** — `policies/` subdirectory
+
+MyCompany Corp internal governance documents that contain facts distinguishable from the default
+Ansible documentation. Used to validate that ALIA's responses change meaningfully when BYOK is
+active. Includes:
+
+| File | Content |
+|------|---------|
+| `mycompany-automation-standards.md` | Role naming (`mycompany_` prefix), Platform Team review workflow, CI requirements (`--mode stdout`), starter templates, secrets policy |
+| `mycompany-inventory-management-policy.md` | Group naming (`mycompany_<env>_<tier>`), required host variables, variable file structure, inventory source registration |
+| `mycompany-troubleshooting-guide.md` | Escalation paths (Team Lead → Platform Team → On-Call SRE), internal tools (`mycompany-job-tracer`, `mycompany-log-collector`), incident reporting |
+| `mycompany-playbook-patterns-and-role-conventions.md` | Role structure, required `meta/main.yml` fields, task tagging taxonomy, secrets lookup integration |
+
+These two content types complement each other: the collection docs provide plugin/module reference
+content, while the policy docs provide org-specific guidance — together they enable rich blended
+BYOK retrieval scenarios during testing.
+
+---
+
 ## Step 2 — Prepare Your Markdown Files
 
 Put your `.md` files in a local directory, e.g.:
@@ -50,7 +80,12 @@ Put your `.md` files in a local directory, e.g.:
 ```
 ./ansible-collection-docs/
   README.md
-  ...
+  modules/
+    create_server.md
+    ...
+  policies/
+    mycompany-automation-standards.md
+    ...
 ```
 
 ---
@@ -113,7 +148,7 @@ podman run --rm \
 | | `--output-image` | Path for the output `.tar` image archive (required) |
 | | `--image-name` | Repository name embedded in the image archive (default: `rag-content-output`) |
 | | `--image-tag` | Tag embedded in the image archive (default: `latest`) |
-| | `--no-include-model` | Exclude the embedding model from the output image (included by default) |
+| | `--exclude-model` | Exclude the embedding model from the output image (included by default) |
 
 > **Note:** `--userns=keep-id` is required so the container process runs as your host UID
 > and can write to the output directory.
