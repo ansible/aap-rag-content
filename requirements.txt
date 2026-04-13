@@ -734,9 +734,9 @@ requests==2.32.5 \
     #   opentelemetry-exporter-otlp-proto-http
     #   tiktoken
     #   transformers
-rich==14.2.0 \
-    --hash=sha256:73ff50c7c0c1c77c8243079283f4edb376f0f6442433aecb8ce7e6d0b92d1fe4 \
-    --hash=sha256:76bc51fe2e57d2b1be1f96c524b890b816e334ab4c1e45888799bfaab0021edd
+rich==15.0.0 \
+    --hash=sha256:33bd4ef74232fb73fe9279a257718407f169c09b78a87ad3d296f548e27de0bb \
+    --hash=sha256:edd07a4824c6b40189fb7ac9bc4c52536e9780fbbfbddf6f1e2502c31b068c36
     # via
     #   llama-stack
     #   llama-stack-client
