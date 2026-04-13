@@ -42,7 +42,7 @@ dependencies = [
     "cryptography==46.0.7", # Transient dep pinned to handle CVE
     "faiss-cpu==1.12",
     "filelock==3.20.3",
-    "llama-stack-client==0.4.3",
+    "llama-stack-client==0.7.2",
     "llama-stack==0.4.3",
     "pillow==12.1.1", # Transient dep pinned to handle CVE
     "pyasn1==0.6.3",

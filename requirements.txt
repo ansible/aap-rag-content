@@ -364,9 +364,9 @@ llama-stack-api==0.4.4 \
     --hash=sha256:3973ca3bacf86916e04e521f77e7909533eec7364d32c3eabc35dc2976dbfe7d \
     --hash=sha256:7bbc63330ed186502dcd48f65cae014dbeb788ba5690be738c98693cfcd2f599
     # via llama-stack
-llama-stack-client==0.4.3 \
-    --hash=sha256:97b8cc5032bad4f0cdd1b0ae992cf44f5554679d315b7c40f46deb358c041f50 \
-    --hash=sha256:cb807be258206e8fedeb5e5ceba7be7108d3badb31d74199406808c3d1679c35
+llama-stack-client==0.7.2 \
+    --hash=sha256:0e3458800af6a18fd8fc5e0760ed626931a416f6c1fdf24aeba4001e6fca9aec \
+    --hash=sha256:8b86156f2522c241ae46280e59287b7716c3cdaf016b6477630eb64bd8cbf150
     # via aap-rag-content
 markdown-it-py==4.0.0 \
     --hash=sha256:87327c59b172c5011896038353a81343b6754500a08cd7a4973bb48c6d578147 \
