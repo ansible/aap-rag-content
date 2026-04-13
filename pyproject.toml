@@ -34,7 +34,7 @@ version = "0.1.0"
 description = "RAG content for AAP chatbot"
 authors = []
 dependencies = [
-    "aiohttp==3.13.3",  # Transient dep pinned to handle CVE
+    "aiohttp==3.13.5",  # Transient dep pinned to handle CVE
     # aiosqlite 0.22+ hangs on exit due to llama-stack not closing connections properly
     # https://github.com/llamastack/llama-stack/issues/4587
     "aiosqlite==0.22.1",
