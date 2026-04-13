@@ -360,9 +360,9 @@ llama-stack==0.4.3 \
     --hash=sha256:423207eae2b640894992a9075ff9dd6300ff904ab06a49fe38cfe0bb809d4669 \
     --hash=sha256:70d379ae9dbb5b1d0693f14054d9817aba183ffcd805133f0a4442baee132c6d
     # via aap-rag-content
-llama-stack-api==0.4.4 \
-    --hash=sha256:3973ca3bacf86916e04e521f77e7909533eec7364d32c3eabc35dc2976dbfe7d \
-    --hash=sha256:7bbc63330ed186502dcd48f65cae014dbeb788ba5690be738c98693cfcd2f599
+llama-stack-api==0.7.1 \
+    --hash=sha256:13467639f83ffc87b950513afd2270e6ce0403852442d6214f3f08c087a2d5d5 \
+    --hash=sha256:441b0e1c29f7acc0a1d9b697d276f2c352387b719b67926af9983caec95f107e
     # via llama-stack
 llama-stack-client==0.4.3 \
     --hash=sha256:97b8cc5032bad4f0cdd1b0ae992cf44f5554679d315b7c40f46deb358c041f50 \
