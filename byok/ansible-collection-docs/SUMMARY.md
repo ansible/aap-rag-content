@@ -26,9 +26,14 @@ ansible-collection-docs-md/
 │   └── infrastructure_filters.md     ← all 3 filters in one file (to_cidr, parse_json_string, extract_tags)
 ├── inventory/
 │   └── dynamic_cloud.md
-└── guides/
-    ├── authentication.md
-    └── migration_1x_to_2x.md
+├── guides/
+│   ├── authentication.md
+│   └── migration_1x_to_2x.md
+└── policies/
+    ├── naming_conventions.md          ← mycompany_ role prefix, mycompany_<env>_<tier> inventory groups
+    ├── playbook_review.md             ← Platform Team approval, #platform-ops, 3-day SLA, emergency changes
+    ├── troubleshooting_escalation.md  ← mycompany-job-tracer, escalation path (Team Lead → Platform Team → On-Call SRE)
+    └── ci_automation_policy.md        ← ansible-navigator run --mode stdout mandate (interactive mode prohibited)
 ```
 
 ---
@@ -71,6 +76,15 @@ ansible-collection-docs-md/
 |---|---|
 | `authentication.md` | Gateway token, IAM, Vault integration, and ansible.cfg configuration |
 | `migration_1x_to_2x.md` | Breaking changes, removed parameters, and upgrade steps |
+
+### Organizational Policies
+
+| Policy | Description |
+|---|---|
+| `policies/naming_conventions.md` | Mandatory `mycompany_` role prefix and `mycompany_<env>_<tier>` inventory group pattern |
+| `policies/playbook_review.md` | Platform Team approval via `#platform-ops`, 3-day SLA, emergency change process |
+| `policies/troubleshooting_escalation.md` | `mycompany-job-tracer` usage and Team Lead → Platform Team → On-Call SRE escalation path |
+| `policies/ci_automation_policy.md` | `ansible-navigator run --mode stdout` mandate; `--mode interactive` and `--mode tui` prohibited in CI |
 
 ---
 
