@@ -113,7 +113,7 @@ podman run --rm \
 | | `--output-image` | Path for the output `.tar` image archive (required) |
 | | `--image-name` | Repository name embedded in the image archive (default: `rag-content-output`) |
 | | `--image-tag` | Tag embedded in the image archive (default: `latest`) |
-| | `--no-include-model` | Exclude the embedding model from the output image (included by default) |
+| | `--exclude-model` | Exclude the embedding model from the output image (included by default) |
 
 > **Note:** `--userns=keep-id` is required so the container process runs as your host UID
 > and can write to the output directory.
