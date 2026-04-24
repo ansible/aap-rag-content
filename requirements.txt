@@ -279,9 +279,9 @@ httpx==0.28.1 \
     #   llama-stack
     #   llama-stack-client
     #   openai
-huggingface-hub==0.36.0 \
-    --hash=sha256:47b3f0e2539c39bf5cde015d63b72ec49baff67b6931c3d97f3f84532e2b8d25 \
-    --hash=sha256:7bcc9ad17d5b3f07b57c78e79d527102d08313caa278a641993acddcb894548d
+huggingface-hub==1.12.0 \
+    --hash=sha256:7c3fe85e24b652334e5d456d7a812cd9a071e75630fac4365d9165ab5e4a34b6 \
+    --hash=sha256:d74939969585ee35748bd66de09baf84099d461bda7287cd9043bfb99b0e424d
     # via
     #   sentence-transformers
     #   tokenizers
