@@ -26,7 +26,7 @@ on:
       include_model:
         description: 'Include the embedding model in the output image (true/false)'
         required: true
-        default: 'true'
+        default: 'false'
       quay_repository:
         description: 'Quay.io repository to push the output image to'
         required: true
@@ -52,7 +52,7 @@ jobs:
         run: |
           NO_MODEL_FLAG=""
           if [ "${{ inputs.include_model }}" = "false" ]; then
-            NO_MODEL_FLAG="--no-include-model"
+            NO_MODEL_FLAG="--exclude-model"
           fi
 
           docker run --rm \
