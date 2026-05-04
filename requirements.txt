@@ -356,9 +356,9 @@ librt==0.7.8 ; platform_python_implementation != 'PyPy' \
     --hash=sha256:ad64a14b1e56e702e19b24aae108f18ad1bf7777f3af5fcd39f87d0c5a814449 \
     --hash=sha256:bb7a7807523a31f03061288cc4ffc065d684c39db7644c676b47d89553c0d714
     # via mypy
-llama-stack==0.4.3 \
-    --hash=sha256:423207eae2b640894992a9075ff9dd6300ff904ab06a49fe38cfe0bb809d4669 \
-    --hash=sha256:70d379ae9dbb5b1d0693f14054d9817aba183ffcd805133f0a4442baee132c6d
+llama-stack==0.7.1 \
+    --hash=sha256:65b9c827989011af3879ad051db9134163f8e6b3bc3685340328f21f5d07cf5f \
+    --hash=sha256:d88dc8430abe1d26f3908ab506f0f6ccd4f3c16ba06ee46ac662f4c896c52da8
     # via aap-rag-content
 llama-stack-api==0.4.4 \
     --hash=sha256:3973ca3bacf86916e04e521f77e7909533eec7364d32c3eabc35dc2976dbfe7d \
