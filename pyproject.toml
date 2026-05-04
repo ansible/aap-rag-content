@@ -47,7 +47,7 @@ dependencies = [
     "pillow==12.2.0", # Transient dep pinned to handle CVE-2026-40192
     "python-dotenv>=1.2.2", # CVE-2026-28684
     "pyasn1==0.6.3",
-    "python-multipart==0.0.22", # Transient dep pinned to handle CVE
+    "python-multipart==0.0.27", # Transient dep pinned to handle CVE
     "requests==2.32.5",
     "sentence-transformers==5.3.0",
     "sqlalchemy[asyncio]==2.0.46",
