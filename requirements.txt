@@ -984,9 +984,9 @@ urllib3==2.6.3 \
     #   llama-stack
     #   requests
     #   types-requests
-uvicorn==0.40.0 \
-    --hash=sha256:839676675e87e73694518b5574fd0f24c9d97b46bea16df7b8c05ea1a51071ea \
-    --hash=sha256:c6c8f55bc8bf13eb6fa9ff87ad62308bbbc33d0b67f84293151efe87e0d5f2ee
+uvicorn==0.47.0 \
+    --hash=sha256:2c5715bc12d1892d84752049f400cd1c3cb018514967fdfeb97640443a6a9432 \
+    --hash=sha256:7c9a0ea1a9414106bbab7324609c162d8fa0cdcdcb703060987269d77c7bb533
     # via llama-stack
 wcwidth==0.2.14 \
     --hash=sha256:4d478375d31bc5395a3c55c40ccdf3354688364cd61c4f6adacaa9215d0b3605 \
