@@ -457,9 +457,9 @@ numpy==2.4.1 \
     #   scipy
     #   sentence-transformers
     #   transformers
-openai==2.15.0 \
-    --hash=sha256:42eb8cbb407d84770633f31bf727d4ffb4138711c670565a41663d9439174fba \
-    --hash=sha256:6ae23b932cd7230f7244e52954daa6602716d6b9bf235401a107af731baea6c3
+openai==2.37.0 \
+    --hash=sha256:814633888b8f3b1ffd6615697c6e4ef93632d08b7c2e28c8c5ef3556e5a10107 \
+    --hash=sha256:f4bc562cc5f3a43d40d678105572d9d44765f6e0f50c125f63055419b72f4bd9
     # via
     #   llama-stack
     #   llama-stack-api
