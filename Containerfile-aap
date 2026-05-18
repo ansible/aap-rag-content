@@ -7,6 +7,7 @@ USER 0
 
 COPY aap-product-docs-plaintext ./aap-product-docs-plaintext
 COPY additional_docs ./additional_docs
+COPY solution-guides-plaintext ./solution-guides-plaintext
 
 COPY scripts/custom_processor_aap.py .
 COPY requirements.txt ./requirements.txt
