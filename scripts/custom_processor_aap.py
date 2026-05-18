@@ -33,7 +33,7 @@ ADDITIONAL_DOCS = [
 
 # Folder where Technical Marketing contents (e.g. Solution Guides) are stored.
 TECHNICAL_MARKETING_CONTENTS = [
-    "solution_guides",
+    "solution-guides-plaintext",
 ]
 
 
