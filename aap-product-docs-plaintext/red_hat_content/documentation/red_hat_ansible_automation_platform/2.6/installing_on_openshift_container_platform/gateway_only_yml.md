@@ -1,11 +1,7 @@
 # 15. Appendix: Red Hat Ansible Automation Platform custom resources
 ## 15.1. Custom resources
-### 15.1.17. gateway-only.yml
+### 15.1.17. gateway-only.yml
 
-
-
-
-```
 ---
 apiVersion: aap.ansible.com/v1alpha1
 kind: AnsibleAutomationPlatform
@@ -34,7 +30,4 @@ disabled: true
 # * * Event-Driven Ansible is not deployed
 # * * Automation hub is not deployed
 # * Red Hat Ansible Lightspeed is not deployed
-```
 
-
-<span id="idm140305224632864"></span>

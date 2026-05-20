@@ -1,7 +1,4 @@
-# Chapter 1. Introduction
-
-
-
+# Chapter 1. Introduction
 
 An Ansible Playbook is a blueprint for automation tasks, which are actions executed with limited manual effort across an inventory of solutions. Playbooks tell Ansible what to do on which devices.
 

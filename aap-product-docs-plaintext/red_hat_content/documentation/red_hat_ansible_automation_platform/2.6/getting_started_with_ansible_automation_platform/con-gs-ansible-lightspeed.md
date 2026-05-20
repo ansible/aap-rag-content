@@ -1,8 +1,5 @@
 # 1. Key functionality and concepts
-## 1.6. Red Hat Ansible Lightspeed
-
-
-
+## 1.6. Red Hat Ansible Lightspeed
 
 Red Hat Ansible Lightspeed with IBM watsonx Code Assistant is a generative AI service designed by and for Ansible platform engineers and developers. It accepts natural-language prompts entered by a user and then interacts with IBM watsonx foundation models to produce code recommendations built on Ansible best practices.
 

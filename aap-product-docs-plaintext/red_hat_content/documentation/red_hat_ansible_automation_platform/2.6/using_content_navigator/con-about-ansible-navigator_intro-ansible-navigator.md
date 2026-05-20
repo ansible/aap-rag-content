@@ -1,8 +1,5 @@
 # 1. Introduction to automation content navigator
-## 1.1. Uses for automation content navigator
-
-
-
+## 1.1. Uses for automation content navigator
 
 Automation content navigator is a command line, content-creator-focused tool with a text-based user interface. You can use automation content navigator to:
 
@@ -12,5 +9,4 @@ Automation content navigator is a command line, content-creator-focused tool wit
 - Browse your file-based inventory.
 - Render Ansible module documentation and extract examples you can use in your playbooks.
 - View a detailed command output on the user interface.
-
 

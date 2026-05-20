@@ -1,12 +1,8 @@
 # 3. Ansible Automation Platform synchronization configuration examples
-## 3.9. Production configuration example
-
-
-
+## 3.9. Production configuration example
 
 Complete production configuration with filters:
 
-```
 catalog:
 providers:
 rhaap:
@@ -26,5 +22,4 @@ labels:
 schedule:
 frequency: { hours: 1 }
 timeout: { minutes: 15 }
-```
 

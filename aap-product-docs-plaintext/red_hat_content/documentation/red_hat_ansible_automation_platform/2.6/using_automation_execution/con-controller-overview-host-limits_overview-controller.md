@@ -1,8 +1,5 @@
 # 1. Automation controller overview
-## 1.18. Limit the number of hosts per organization
-
-
-
+## 1.18. Limit the number of hosts per organization
 
 In automation controller, you can limit the number of hosts that each organization can manage.
 

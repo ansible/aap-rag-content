@@ -1,67 +1,38 @@
-# Chapter 6. Filtering in the API
-
-
-
+# Chapter 6. Filtering in the API
 
 The system recognizes a collection as a "queryset". You can filter this by using various operators.
 
-
-<span id="controller-api-filtering-in-api"></span>
-Learn how to use query parameters within the REST API URL to filter resources based on criteria such as exact matches, partial string containment ( `__contains` ), integer casting ( `__int` ), and many fields simultaneously.
-
+Learn how to use query parameters within the REST API URL to filter resources based on criteria such as exact matches, partial string containment (`__contains`), integer casting (`__int`), and many fields simultaneously.
 
 **Procedure**
 
 - To find groups that contain the name "car", use the following:
 
-
-```
-http://&lt;gateway server name&gt;/api/controller/v2/groups/?name__contains=car
-```
-
+http://<gateway server name>/api/controller/v2/groups/?name__contains=car
 
 - To find an exact match, use the following:
 
+http://<gateway server name>/api/controller/v2/groups/?name=car
 
-```
-http://&lt;gateway server name&gt;/api/controller/v2/groups/?name=car
-```
+- If a resource is of an integer type, you must add `\_\_int` to the end to cast your string input value to an integer, such as the following:
 
-
-- If a resource is of an integer type, you must add `    \_\_int` to the end to cast your string input value to an integer, such as the following:
-
-
-```
-http://&lt;gateway server name&gt;/api/controller/v2/arbitrary_resource/?x__int=5
-```
-
+http://<gateway server name>/api/controller/v2/arbitrary_resource/?x__int=5
 
 - You can query related resources with the following:
 
-
-```
-http://&lt;gateway server name&gt;/api/gateway/v1/users/?first_name__icontains=kim
-```
+http://<gateway server name>/api/gateway/v1/users/?first_name__icontains=kim
 
 This returns all users with names that include the string "kim" in them.
 
-
 - You can also filter against many fields at once:
 
-
-```
-http://&lt;gateway server name&gt;/api/controller/v2/groups/?name__icontains=test&amp;has_active_failures=false
-```
+http://<gateway server name>/api/controller/v2/groups/?name__icontains=test&has_active_failures=false
 
 This finds all groups containing the name "test" that have no active failures.
 
 You can also watch the API as the UI is being used to see how it is filtering on various criteria.
 
-
-
-
 **Additional resources**
 
--  [QuerySet API reference](https://docs.djangoproject.com/en/dev/ref/models/querysets/)
-
+- [QuerySet API reference](https://docs.djangoproject.com/en/dev/ref/models/querysets/)
 

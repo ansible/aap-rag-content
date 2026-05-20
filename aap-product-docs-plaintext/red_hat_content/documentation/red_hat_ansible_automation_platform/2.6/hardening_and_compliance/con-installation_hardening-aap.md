@@ -1,8 +1,5 @@
 # 2. Hardening Ansible Automation Platform
-## 2.2. Installation
-
-
-
+## 2.2. Installation
 
 There are installation-time decisions that affect the security posture of Ansible Automation Platform. The installation process includes setting several variables, some of which are relevant to the hardening of the Ansible Automation Platform infrastructure.
 

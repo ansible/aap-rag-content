@@ -1,7 +1,4 @@
-# Chapter 2. Installation overview
-
-
-
+# Chapter 2. Installation overview
 
 You can deploy self-service automation portal from a Helm chart on OpenShift Container Platform.
 

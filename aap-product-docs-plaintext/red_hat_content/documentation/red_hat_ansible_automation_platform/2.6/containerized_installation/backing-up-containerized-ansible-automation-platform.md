@@ -1,53 +1,54 @@
 # 9. Maintaining containerized Ansible Automation Platform
-## 9.2. Backing up containerized Ansible Automation Platform
-
-
-
+## 9.2. Backing up containerized Ansible Automation Platform
 
 Perform a backup of your container-based installation of Ansible Automation Platform.
 
 Note
+
 - When backing up Ansible Automation Platform, use the installation program that matches your currently installed version of Ansible Automation Platform.
-- Backup functionality only works with the PostgreSQL versions supported by your current Ansible Automation Platform version. For more information, see [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/preparing-containerized-installation#system-requirements) .
+- Backup functionality only works with the PostgreSQL versions supported by your current Ansible Automation Platform version. For more information, see [System requirements](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/preparing-containerized-installation#system-requirements).
 - Backup and restore for content stored in Azure Blob Storage or Amazon S3 must be handled through the vendor portals, as each vendor provides their own backup solutions.
-
-
-
 
 **Prerequisites**
 
 - You have logged in to the Red Hat Enterprise Linux host as your dedicated non-root user.
 
-
 **Procedure**
 
 1. Go to the Red Hat Ansible Automation Platform installation directory on your Red Hat Enterprise Linux host.
-1. To control compression of the backup artifacts before they are sent to the host running the backup operation, you can use the following variables in your inventory file:
+
+2. To control compression of the backup artifacts before they are sent to the host running the backup operation, you can use the following variables in your inventory file:
 
 
 1. For control of compression for filesystem related backup files:
 
+# Global control of compression for filesystem backup files
+use_archive_compression=true
 
-```
-# Global control of compression for filesystem backup files        use_archive_compression=true                # Component-level control of compression for filesystem backup files        #controller_use_archive_compression=true        #eda_use_archive_compression=true        #gateway_use_archive_compression=true        #hub_use_archive_compression=true        #pcp_use_archive_compression=true        #postgresql_use_archive_compression=true        #receptor_use_archive_compression=true        #redis_use_archive_compression=true
-```
+# Component-level control of compression for filesystem backup files
+#controller_use_archive_compression=true
+#eda_use_archive_compression=true
+#gateway_use_archive_compression=true
+#hub_use_archive_compression=true
+#pcp_use_archive_compression=true
+#postgresql_use_archive_compression=true
+#receptor_use_archive_compression=true
+#redis_use_archive_compression=true
 
+2. For control of compression for database related backup files:
 
-1. For control of compression for database related backup files:
+# Global control of compression for database backup files
+use_db_compression=true
 
+# Component-level control of compression for database backup files
+#controller_use_db_compression=true
+#eda_use_db_compression=true
+#hub_use_db_compression=true
+#gateway_use_db_compression=true
 
-```
-# Global control of compression for database backup files        use_db_compression=true                # Component-level control of compression for database backup files        #controller_use_db_compression=true        #eda_use_db_compression=true        #hub_use_db_compression=true        #gateway_use_db_compression=true
-```
+3. Run the `backup` playbook:
 
-
-
-1. Run the `    backup` playbook:
-
-
-```
-$ ansible-playbook -i &lt;path_to_inventory&gt; ansible.containerized_installer.backup
-```
+$ ansible-playbook -i <path_to_inventory> ansible.containerized_installer.backup
 
 The backup process creates archives of the following data:
 
@@ -56,25 +57,33 @@ The backup process creates archives of the following data:
 - Configuration files
 - Data files
 
-
-
 **Next steps**
 
 To customize the backup process, you can use the following variables in your inventory file:
 
+- Change the backup destination directory from the default `./backups` by using the `backup_dir` variable.
 
-- Change the backup destination directory from the default `    ./backups` by using the `    backup_dir` variable.
-- Exclude paths that contain duplicated data, such as snapshot subdirectories, by using the `    hub_data_path_exclude` variable. For example, to exclude a `    .snapshots` subdirectory, specify `    hub_data_path_exclude=['<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">/.snapshots/</span></strong></span>']` in your inventory file.
+- Exclude paths that contain duplicated data, such as snapshot subdirectories, by using the `hub_data_path_exclude` variable.
+
+For example, to exclude a `.snapshots` subdirectory from the backup, add the following to your inventory file:
+
+hub_data_path_exclude=["*/.snapshots", "*/.snapshots/*"]
+
+Alternatively, you can pass this variable at runtime by using the `-e` flag:
+
+$ ansible-playbook -i inventory ansible.containerized_installer.backup -e hub_data_path_exclude="['*/.snapshots', '*/.snapshots/*']"
+
+You can also define the exclusion patterns in a YAML extra variables file and pass it at runtime:
+
+**exclude_vars.yml**
 
 
-- Alternatively, you can use the command-line interface with the `        -e` flag to pass this variable at runtime:
 
-
-```
-$ ansible-playbook -i inventory ansible.containerized_installer.backup -e hub_data_path_exclude="['*/.snapshots/*']"
-```
-
+hub_data_path_exclude:
+- "*/.snapshots/*"
+- "*/.snapshots"
 
 
 
+$ ansible-playbook -i inventory ansible.containerized_installer.backup -e @exclude_vars.yml
 

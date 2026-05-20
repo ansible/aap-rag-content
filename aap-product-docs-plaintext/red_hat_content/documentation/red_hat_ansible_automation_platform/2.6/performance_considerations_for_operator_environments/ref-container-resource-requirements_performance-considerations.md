@@ -1,28 +1,23 @@
 # 2. Control plane adjustments
-## 2.2. Containers resource requirements
-
-
-
+## 2.2. Containers resource requirements
 
 You can configure the resource requirements of tasks and the web containers, at both the lower end (requests) and the upper end (limits). The execution environment control plane is used for project updates, but is normally the same as the default execution environment for jobs.
 
-Setting resource requests and limits is a best practice because a container that has both defined is given a higher _Quality of Service_ class. This means that if the underlying node is resource constrained and the cluster has to reap a pod to prevent running memory or other failure, the control plane pod is less likely to be reaped.
+Setting resource requests and limits is a best practice because a container that has both defined is given a higher *Quality of Service* class. This means that if the underlying node is resource constrained and the cluster has to reap a pod to prevent running memory or other failure, the control plane pod is less likely to be reaped.
 
-These requests and limits apply to the control pods for automation controller and if limits are set, determine the _capacity_ of the instance. By default, controlling a job takes one unit of capacity. The memory and CPU limits of the task container are used to determine the capacity of control nodes. For more information about how this is calculated, see [Automation controller capacity determination and job impact](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-capacity-determination) .
+These requests and limits apply to the control pods for automation controller and if limits are set, determine the *capacity* of the instance. By default, controlling a job takes one unit of capacity. The memory and CPU limits of the task container are used to determine the capacity of control nodes. For more information about how this is calculated, see [Automation controller capacity determination and job impact](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-capacity-determination).
 
 See also [Jobs scheduled on the worker nodes](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/performance_considerations_for_operator_environments/index#ref-schedule-jobs-worker-nodes)
 
 | Name | Description | Default |
 | --- | --- | --- |
-|  `web_resource_requirements` | Web container resource requirements | requests: {CPU: 100m, memory: 128Mi} |
-|  `task_resource_requirements` | Task container resource requirements | requests: {CPU: 100m, memory: 128Mi} |
-|  `ee_resource_requirements` | EE control plane container resource requirements | requests: {CPU: 100m, memory: 128Mi} |
-|  `redis_resource_requirements` | Redis control plane container resource requirements | requests: {CPU:100m, memory: 128Mi} |
-
+| <br> `web_resource_requirements` | <br>  Web container resource requirements | <br>  requests: {CPU: 100m, memory: 128Mi} |
+| <br> `task_resource_requirements` | <br>  Task container resource requirements | <br>  requests: {CPU: 100m, memory: 128Mi} |
+| <br> `ee_resource_requirements` | <br>  EE control plane container resource requirements | <br>  requests: {CPU: 100m, memory: 128Mi} |
+| <br> `redis_resource_requirements` | <br>  Redis control plane container resource requirements | <br>  requests: {CPU:100m, memory: 128Mi} |
 
 The use of `topology_spread_constraints` to maximally spread control nodes onto separate underlying Kubernetes worker nodes is recommended. A reasonable set of requests and limits would be limits whose sum is equal to the actual resources on the node. If only `limits` are set, then the request is automatically set to be equal to the limit. But because some variability of resource usage between the containers in the control pod is permitted, you can set `requests` to a lower amount, for example to 25% of the resources available on the node. An example of container customization for a cluster where the worker nodes have 4 CPUs and 16 GB of RAM could be:
 
-```
 spec:
 ...
 web_resource_requirements:
@@ -53,5 +48,4 @@ memory: 1Gi
 limits:
 cpu: 1000m
 memory: 4Gi
-```
 

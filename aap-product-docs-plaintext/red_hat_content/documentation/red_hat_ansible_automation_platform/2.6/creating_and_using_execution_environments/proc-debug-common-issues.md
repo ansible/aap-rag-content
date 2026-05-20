@@ -1,0 +1,19 @@
+# 6. Create and integrate custom MCP Servers in execution environments
+## 6.9. Debug common issues
+
+Diagnose and resolve initialization failures when your MCP server is unlisted or fails to execute. By systematically verifying build logs, installed files, and manifests, you can identify the root cause of deployment errors and successfully run your server.
+
+**Procedure**
+
+1. Check the build log. Look for errors during the `ansible-playbook` step of the build output. Common issues include missing dependencies or network access failures during package download.
+
+2. Inspect the installed files and verify the binary or script is present:
+
+`podman run --rm my-cfn-mcp-ee:latest ls -la /opt/mcp/bin/`
+
+3. Check the manifest separately from the binary. If the `mcp_manage` list shows the server but `mcp_manage` run fails, the manifest was generated but the package installation might have failed silently.
+
+4. Run the server directly. Bypass `mcp_manage` and call the server binary directly to see raw error output:
+
+`podman run --rm my-cfn-mcp-ee:latest /opt/mcp/bin/awslabs.cfn-mcp-server --help`
+

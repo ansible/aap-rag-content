@@ -1,12 +1,8 @@
 # 7. Implementing policy enforcement
-## 7.2. Understanding OPA packages and rules
-
-
-
+## 7.2. Understanding OPA packages and rules
 
 An OPA policy is organized in packages, which are namespaced collections of rules. The basic structure of an OPA policy looks like this:
 
-```
 package aap_policy_examples  # Package name
 
 import rego.v1  # Import required for Rego v1 syntax
@@ -16,9 +12,14 @@ allowed := {
 "allowed": true,
 "violations": []
 }
-```
 
 The key components of the rule’s structure are:
 
-These components together form the OPA policy name, with the format `[package]/[rule]` . Enter the OPA policy name when you configure enforcement points.
+Package declaration
+This defines the namespace for your policy.
+
+Rules
+This defines the policy’s logic and the decision that it returns.
+
+These components together form the OPA policy name, with the format `[package]/[rule]`. Enter the OPA policy name when you configure enforcement points.
 

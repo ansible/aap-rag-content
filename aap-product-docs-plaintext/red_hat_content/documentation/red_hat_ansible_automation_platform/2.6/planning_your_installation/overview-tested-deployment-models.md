@@ -1,7 +1,4 @@
-# Chapter 4. Tested deployment model types
-
-
-
+# Chapter 4. Tested deployment model types
 
 Red Hat tests Ansible Automation Platform 2.6 with a defined set of topologies to give you opinionated deployment options. Deploy all components of Ansible Automation Platform so that all features and capabilities are available for use without the need to take further action.
 

@@ -1,12 +1,8 @@
 # 3. Ansible Automation Platform synchronization configuration examples
-## 3.5. Combine filters for production
-
-
-
+## 3.5. Combine filters for production
 
 Combine survey status and label filters:
 
-```
 catalog:
 providers:
 rhaap:
@@ -26,11 +22,9 @@ labels:
 schedule:
 frequency: { hours: 1 }
 timeout: { minutes: 15 }
-```
 
 This configuration syncs:
 
-- All Users, Teams, and Organizations from the "Default" organization
+- All Users and Teams from the "Default" organization
 - Job Templates that belong to "Default" organization AND have Ansible Automation Platform Surveys enabled **AND** have Ansible Automation Platform Labels "portal" **OR** "self-service"
-
 

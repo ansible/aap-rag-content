@@ -1,30 +1,37 @@
-# 6. Using automation execution environments with Red Hat Model Context Protocol (MCP) servers
-## 6.1. MCP Builder Collection
+# 6. Create and integrate custom MCP Servers in execution environments
+## 6.2. Understand the MCP builder framework
+
+The `ansible.mcp_builder` collection provides a reusable framework for installing MCP servers inside execution environments. Rather than manually scripting installation steps in your container build, you define a role with metadata about your MCP server, and the framework handles the rest.
+
+To automate the installation and lifecycle management of your servers, you must understand how the `ansible.mcp_builder` framework operates.
+
+**How the framework works**
+
+The framework consists of three main components:
+
+- The common role ( `ansible.mcp_builder.common` ) provides shared installation logic for MCP servers. Based on the language specified in your role’s registry metadata, the common role automatically:
 
 
+- Installs the appropriate language runtime (Go, Node.js, or Python/uv) if not already present.
+- Downloads and installs the MCP server package from the correct source (PyPI, npm, or Git).
+- Generates a unified manifest file (`/opt/mcp/mcpservers.json/opt/mcp/ mcpservers.json`) listing all available MCP servers.
+- Creates the `mcp_manage` utility for listing, querying, and running installed MCP servers
+
+- Your custom role defines metadata about the MCP server you want to install. At minimum, it includes:
 
 
-The `mcp_builder_collection` is a collection of Ansible roles and playbooks designed to facilitate the integration and management of Model Context Protocol (MCP) servers within Ansible execution environments built using Ansible Builder.
+- A registry variable that specifies the server name, transport type, language, and description.
+- A tasks file that invokes the common role’s `install_manager` and `generate_manifest` tasks.
 
-This collection provides tools to streamline the process of configuring MCP servers, ensuring that they are properly set up to interact with Large Language Models (LLMs) and other AI systems.
+- A playbook ties your custom role into the build process. This playbook is called by ansible-builder during the execution environment container build.
 
-Roles
+**Selecting an installation method**
 
-| Name | Description |
-| --- | --- |
-|  `ansible.mcp_builder.common` | Sets up a generic MCP build environment with automatic dependency detection and installs MCP servers from multiple sources (Go, npm, PyPI) |
-|  `ansible.mcp_builder.aws_ccapi_mcp` | Installs the [AWS Cloud Control MCP server](https://awslabs.github.io/mcp/servers/ccapi-mcp-server) from PyPI |
-|  `ansible.mcp_builder.aws_cdk_mcp` | Installs the [AWS CDK MCP server](https://awslabs.github.io/mcp/servers/cdk-mcp-server) from PyPI |
-|  `ansible.mcp_builder.aws_core_mcp` | Installs the AWS [Core MCP server](https://awslabs.github.io/mcp/servers/core-mcp-server) from PyPI with dynamic proxy server strategy |
-|  `ansible.mcp_builder.aws_iam_mcp` | Installs the AWS [IAM MCP server](https://awslabs.github.io/mcp/servers/core-mcp-server) from PyPI |
-|  `ansible.mcp_builder.azure_mcp` | Installs the [Azure MCP server](https://awslabs.github.io/mcp/servers/azure-mcp-server) from npm to interact with Azure resources |
-|  `ansible.mcp_builder.github_mcp` | Installs the [GitHub MCP server](https://github.com/github/github-mcp-server) with support for local (build from source) and remote modes |
+The framework supports three installation methods, selected by the `lang` field in your registry metadata:
 
-
-**Playbooks**
-
-| Name | Description |
-| --- | --- |
-|  `ansible.mcp_builder.install_mcp` | Installs selected MCP servers |
-
+| <br>  Language | <br>  Install method | <br>  Example servers |
+| --- | --- | --- |
+| <br>  pyoi | <br>  Installed with uv tool install from PyPI | <br>  AWS CloudFormation MCP, AWS Core MCP, AWS IAM MCP |
+| <br>  npm | <br>  Installed with npm from the npm registry | <br>  Azure MCP |
+| <br>  go | <br>  Built from source with go build from a Git repository | <br>  GitHub MCP |
 

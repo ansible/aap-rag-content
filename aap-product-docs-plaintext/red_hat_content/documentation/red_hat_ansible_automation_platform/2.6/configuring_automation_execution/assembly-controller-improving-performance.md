@@ -1,7 +1,4 @@
-# Chapter 3. Performance tuning for automation controller
-
-
-
+# Chapter 3. Performance tuning for automation controller
 
 Tune your automation controller to optimize performance and scalability. When planning your workload, ensure that you identify your performance and scaling needs, adjust for any limitations, and monitor your deployment.
 
@@ -13,5 +10,4 @@ Automation controller is a distributed system with many components that you can 
 - Web server in charge of serving the API
 - WebSocket system that serve and broadcast WebSocket connections and data
 - Database used by many components
-
 

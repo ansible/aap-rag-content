@@ -1,8 +1,5 @@
 # 2. Red Hat Ansible Automation Platform components
-## 2.5. High availability automation hub
-
-
-
+## 2.5. High availability automation hub
 
 High availability increases reliability and scalability for automation hub by distributing workload across many nodes and eliminating single points of failure.
 

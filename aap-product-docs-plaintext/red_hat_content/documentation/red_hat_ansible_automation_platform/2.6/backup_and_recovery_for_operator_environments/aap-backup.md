@@ -1,7 +1,4 @@
-# Chapter 2. Creating Red Hat Ansible Automation Platform backup resources
-
-
-
+# Chapter 2. Creating Red Hat Ansible Automation Platform backup resources
 
 Backing up your Red Hat Ansible Automation Platform deployment involves creating backup resources for your deployed instances.
 

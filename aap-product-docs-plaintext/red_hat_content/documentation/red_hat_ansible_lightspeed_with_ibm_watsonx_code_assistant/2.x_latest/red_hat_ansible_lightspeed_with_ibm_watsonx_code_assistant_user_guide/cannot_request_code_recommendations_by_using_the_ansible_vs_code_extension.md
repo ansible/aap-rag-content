@@ -1,9 +1,6 @@
 # 8. Troubleshooting
 ## 8.3. Troubleshooting Ansible Visual Studio Code extension errors
-### 8.3.2. Cannot request code recommendations by using the Ansible VS Code extension
-
-
-
+### 8.3.2. Cannot request code recommendations by using the Ansible VS Code extension
 
 The following error message is displayed: `Your trial to the generative AI model has expired. Refer to your IBM Cloud Account to re-enable access to the IBM watsonx Code Assistant.`
 

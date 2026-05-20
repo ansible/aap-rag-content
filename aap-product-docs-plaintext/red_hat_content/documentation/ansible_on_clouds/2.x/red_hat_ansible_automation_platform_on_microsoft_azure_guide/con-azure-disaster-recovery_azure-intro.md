@@ -1,8 +1,5 @@
 # 1. Introduction to Red Hat Ansible Automation Platform on Microsoft Azure
-## 1.4. Disaster recovery
-
-
-
+## 1.4. Disaster recovery
 
 When you deploy Ansible Automation Platform on Microsoft Azure, you must enable or disable disaster recovery in the `Business Continuity` tab of the form. There is no default setting for disaster recovery.
 

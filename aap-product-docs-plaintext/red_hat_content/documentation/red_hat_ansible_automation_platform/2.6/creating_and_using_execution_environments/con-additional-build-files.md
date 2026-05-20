@@ -1,15 +1,17 @@
 # 2. Using Ansible Builder
-## 2.8. Additional build files
-
-
-
+## 2.8. Additional build files
 
 You can add any external file to the build context directory by referring or copying them to the `additional_build_files` section of the definition file. The format is a list of dictionary values, each with a `src` and `dest` key and value.
 
 Each list item must be a dictionary containing the following required keys:
 
+`src`
+Specifies the source files to copy into the build context directory. This can be an absolute path (for example, `/home/user/.ansible.cfg`), or a path that is relative to the execution environment file. Relative paths can be glob expressions matching one or more files (for example, `files/*.cfg`).
+
 Note
-Absolute paths cannot include a regular expression. If `src` is a directory, the entire contents of that directory are copied to `dest` .
 
+Absolute paths cannot include a regular expression. If `src` is a directory, the entire contents of that directory are copied to `dest`.
 
+`dest`
+Specifies a subdirectory path underneath the `_build` subdirectory of the build context directory that contains the source files (for example, `files/configs`). This cannot be an absolute path or contain `..` within the path. Ansible Builder creates this directory for you if it does not already exist.
 

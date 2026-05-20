@@ -1,8 +1,5 @@
 # 2. Control plane adjustments
-## 2.1. Requests and limits for task containers
-
-
-
+## 2.1. Requests and limits for task containers
 
 You must set a value for the task container’s CPU and memory resource limits. For each job that is run in an execution node, processing must occur on the control plane to schedule, open, and receive callback events for that job.
 

@@ -1,8 +1,5 @@
 # 4. Managing access with role-based access control
-## 4.1. Organizations
-
-
-
+## 4.1. Organizations
 
 As an administrator, you can use organizations to organize groups of resources. Assigning a team or user to the organization gives the team or user access to the resources within the organization. This way, administrators no longer have to grant individual teams and users access to new resources as they become available; teams and users gain access to new resources when they are added to the organization.
 

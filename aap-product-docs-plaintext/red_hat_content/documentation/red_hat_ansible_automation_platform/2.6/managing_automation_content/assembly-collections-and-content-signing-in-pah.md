@@ -1,8 +1,5 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
-## 1.3. Content signing in private automation hub
-
-
-
+## 1.3. Content signing in private automation hub
 
 As an automation administrator for your organization, you can configure private automation hub to sign and publish Ansible content collections from different groups within your organization.
 

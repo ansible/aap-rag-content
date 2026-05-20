@@ -1,8 +1,5 @@
 # 12. Project Signing and Verification
-## 12.2. Prerequisites
-
-
-
+## 12.2. Prerequisites
 
 Prepare your Red Hat Enterprise Linux systems by enabling the correct repositories and subscriptions needed to install components for project signing. This step helps ensure that your environment is properly configured for content verification.
 
@@ -10,28 +7,19 @@ Prepare your Red Hat Enterprise Linux systems by enabling the correct repositori
 
 
 - RHEL subscription with **baseos** and **appstream** repositories must be enabled.
+
 - Your Red Hat Ansible Automation Platform subscription and the proper channel must be enabled:
 
+ansible-automation-platform-2.5-for-rhel-8-x86_64-rpms for RHEL 8
+ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms for RHEL 9
 
-```
-ansible-automation-platform-2.5-for-rhel-8-x86_64-rpms for RHEL 8        ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms for RHEL 9
-```
+- You require a valid GPG public or private keypair for signing content. For more information, see [How to create GPG keypairs](https://www.redhat.com/sysadmin/creating-gpg-keypairs).
 
-
-
-- You require a valid GPG public or private keypair for signing content. For more information, see [How to create GPG keypairs](https://www.redhat.com/sysadmin/creating-gpg-keypairs) .
-
-For more information about GPG keys, see the [GnuPG documentation](https://www.gnupg.org/documentation/index.html) .
+For more information about GPG keys, see the [GnuPG documentation](https://www.gnupg.org/documentation/index.html).
 
 Verify that you have a valid GPG keypair in your default GnuPG keyring, with the following command:
 
-
-```
 gpg --list-secret-keys
-```
 
-If this command produces no output, or one line of output that states, `    trustdb was created` , then you do not have a secret key in your default keyring. In this case, see [How to create GPG keypairs](https://www.redhat.com/sysadmin/creating-gpg-keypairs) to learn how to create a new keypair before proceeding. If it produces any other output, you have a valid secret key and are ready to use `    ansible-sign` .
-
-
-
+If this command produces no output, or one line of output that states, `trustdb was created`, then you do not have a secret key in your default keyring. In this case, see [How to create GPG keypairs](https://www.redhat.com/sysadmin/creating-gpg-keypairs) to learn how to create a new keypair before proceeding. If it produces any other output, you have a valid secret key and are ready to use `ansible-sign`.
 

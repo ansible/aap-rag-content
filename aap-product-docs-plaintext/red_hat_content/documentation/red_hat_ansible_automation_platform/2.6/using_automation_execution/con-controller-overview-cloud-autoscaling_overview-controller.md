@@ -1,8 +1,5 @@
 # 1. Automation controller overview
-## 1.4. Cloud and autoscaling flexibility
-
-
-
+## 1.4. Cloud and autoscaling flexibility
 
 Automation controller includes a powerful optional provisioning callback feature that enables nodes to request configuration on-demand.
 
@@ -10,7 +7,6 @@ This is an ideal solution for a cloud auto-scaling scenario and includes the fol
 
 - It integrates with provisioning servers such as Cobbler and deals with managed systems with unpredictable uptimes.
 - It requires no management software to be installed on remote nodes.
-- The callback solution can be triggered by a call to `    curl` or `    wget` , and can be embedded in `    init` scripts, kickstarts, or preseeds.
+- The callback solution can be triggered by a call to `curl` or `wget`, and can be embedded in `init` scripts, kickstarts, or preseeds.
 - You can control access so that only machines listed in the inventory can request configuration.
-
 

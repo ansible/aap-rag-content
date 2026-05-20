@@ -1,27 +1,24 @@
 # 5. Migration artifact structure and verification
-## 5.4. Migration artifact creation checklist
-
-
-
+## 5.4. Migration artifact creation checklist
 
 Use this checklist to verify the migration artifact.
 
 - Database dumps: Include complete database dumps for each component.
 
 
-- Ensure the automation controller database ( `        controller.pgc` ) is present in the artifact.
-- Ensure the automation hub database ( `        hub.pgc` ) is present in the artifact.
-- Ensure the platform gateway database ( `        gateway.pgc` ) is present in the artifact.
+- Ensure the automation controller database (`controller.pgc`) is present in the artifact.
+- Ensure the automation hub database (`hub.pgc`) is present in the artifact.
+- Ensure the platform gateway database (`gateway.pgc`) is present in the artifact.
 
 - Secret dumps: Export and include all security-related information.
 
 
-- Validate that all secret values are present in the `        secrets.yml` file.
+- Validate that all secret values are present in the `secrets.yml` file.
 
 - Custom configurations: Package all customizations from the source environment.
 
 
-- Validate that any custom Python scripts or modules (for example `        foo.py` , `        bar.py` ) are present on the artifact.
+- Validate that any custom Python scripts or modules (for example `foo.py`, `bar.py`) are present on the artifact.
 - Document any non-standard configurations or environment-specific settings.
 
 - Database information: Document database details.
@@ -39,6 +36,4 @@ Use this checklist to verify the migration artifact.
 - Test the artifact’s structure and accessibility.
 - Consider encrypting the artifact for secure transfer to the target environment.
 - Document any known limitations or special considerations.
-
-
 

@@ -1,9 +1,6 @@
 # 3. Performance tuning for automation controller
 ## 3.2. Capacity planning for deploying automation controller
-### 3.2.2. Types of nodes in automation controller
-
-
-
+### 3.2.2. Types of nodes in automation controller
 
 You can configure four types of nodes in an automation controller deployment:
 
@@ -12,13 +9,9 @@ You can configure four types of nodes in an automation controller deployment:
 - Execution nodes
 - Hop nodes
 
-
 However, for an operator-based environment, there are no hybrid or control nodes. There are container groups, which make up containers running on the Kubernetes cluster. That comprises the control plane. That control plane is local to the Kubernetes cluster in which Red Hat Ansible Automation Platform is deployed.
 
-#### 3.2.2.1. Benefits of scaling control nodes
-
-
-
+#### 3.2.2.1. Benefits of scaling control nodes
 
 Control and hybrid nodes provide control capacity. They provide the ability to start jobs and process their output into the database. Every job is assigned a control node.
 
@@ -29,20 +22,15 @@ Vertically scaling a control node by deploying a larger virtual machine with mor
 - The number of jobs that a control node can perform control tasks for, which requires both more CPU and memory.
 - The number of job events a control node can process concurrently.
 
-
 Scaling CPU and memory in the same proportion is recommended, for example, 1 CPU: 4 GB RAM. Even when memory consumption is high, increasing the CPU of an instance can often relieve pressure. The majority of the memory that control nodes consume is from unprocessed events that are stored in a memory-based queue.
 
 Note
+
 Vertically scaling a control node does not automatically increase the number of workers that handle web requests.
-
-
 
 An alternative to vertically scaling is horizontally scaling by deploying more control nodes. This allows spreading control tasks across more nodes and allowing web traffic to be spread over more nodes, given that you provision a load balancer to spread requests across nodes. Horizontally scaling by deploying more control nodes in many ways can be preferable as it additionally provides for more redundancy and workload isolation when a control node goes down or experiences higher than normal load.
 
-#### 3.2.2.2. Benefits of scaling execution nodes
-
-
-
+#### 3.2.2.2. Benefits of scaling execution nodes
 
 Execution and hybrid nodes provide execution capacity. The capacity consumed by a job is equal to the number of forks set on the job template or the number of hosts in the inventory, whichever is less, plus one additional capacity unit to account for the main ansible process.
 
@@ -54,10 +42,7 @@ In general, scaling CPU alongside memory in the same proportion is recommended. 
 
 An alternative to vertically scaling execution nodes is horizontally scaling the execution plane by deploying more virtual machines to be execution nodes. Because horizontally scaling can provide additional isolation of workloads, you can assign different instances to different instance groups. You can then assign these instance groups to organizations, inventories, or job templates. For example, you can configure an instance group that can only be used for running jobs against a certain Inventory. In this scenario, by horizontally scaling the execution plane, you can ensure that lower-priority jobs do not block higher-priority jobs
 
-#### 3.2.2.3. Benefits of scaling hop nodes
-
-
-
+#### 3.2.2.3. Benefits of scaling hop nodes
 
 Hop nodes offer a communication bridge between the control plane and execution nodes, especially where execution nodes are located in a different network segment or behind firewalls.
 
@@ -65,10 +50,7 @@ Because hop nodes use very low memory and CPU, vertically scaling these nodes do
 
 Horizontally scaling by adding more hop nodes could offer redundancy when one hop node goes down, which can allow traffic to continue to flow between the control plane and the execution nodes.
 
-#### 3.2.2.4. Ratio of control to execution capacity
-
-
-
+#### 3.2.2.4. Ratio of control to execution capacity
 
 When planning your deployment architecture, consider the ratio of control capacity to execution capacity. Control capacity refers to the resources allocated to the control plane, while execution capacity refers to the resources allocated to run jobs.
 

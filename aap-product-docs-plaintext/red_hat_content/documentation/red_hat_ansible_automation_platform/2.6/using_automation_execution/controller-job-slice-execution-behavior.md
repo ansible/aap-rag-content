@@ -1,8 +1,5 @@
 # 7. Job slicing
-## 7.2. Job slice execution behavior
-
-
-
+## 7.2. Job slice execution behavior
 
 When jobs are sliced, they can run on any node. Insufficient capacity in the system can cause some to run at a different time. When slice jobs are running, job details display the workflow and job slices currently running, and a link to view their details individually.
 
@@ -15,5 +12,4 @@ The [Job templates](https://docs.redhat.com/en/documentation/red_hat_ansible_aut
 - Relaunch the whole workflow or individual jobs after slice jobs finish running.
 - View the details about the workflow and slice jobs after launching a job template.
 - Search slice jobs specifically after you create them, according to the [Searching job slices](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-job-slicing#controller-search-job-slices) section.
-
 

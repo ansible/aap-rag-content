@@ -1,8 +1,5 @@
 # 4. Event-Driven Ansible for reacting to security-related events
-## 4.1. Use of Event-Driven Ansible for security
-
-
-
+## 4.1. Use of Event-Driven Ansible for security
 
 Event-Driven Ansible is a powerful automation framework that enables organizations to respond to real-time events dynamically. It listens for triggers from various sources, evaluates conditions, and executes automated responses using Ansible Playbooks.
 
@@ -11,28 +8,27 @@ In the context of security operations, Event-Driven Ansible enables rapid incide
 Event-Driven Ansible can automate the following common security use cases:
 
 - Enterprise firewalls
--  _Intrusion Detection and Prevention Systems_ (IDPS)
--  _Security Information and Event Management_ (SIEM) systems
--  _Privileged Access Management_ (PAM) tools
--  _Endpoint Protection Platform_ (EPP)
+- *Intrusion Detection and Prevention Systems* (IDPS)
+- *Security Information and Event Management* (SIEM) systems
+- *Privileged Access Management* (PAM) tools
+- *Endpoint Protection Platform* (EPP)
 - Threat detection and response
 - Automated incident response
--  _Zero Trust Network Access_ (ZTNA)
+- *Zero Trust Network Access* (ZTNA)
 - Compliance and hardening
 - Phishing mitigation
 
-
 The following is an example workflow scenario using Event-Driven Ansible for detection of and response to unauthorized SSH access:
 
-1.  **Event Source** : A security monitoring tool detects multiple failed SSH login attempts.
-1.  **Trigger** : The event is sent to Event-Driven Ansible.
-1.  **Event-Driven Ansible rulebook evaluation** : If the failed login count exceeds a threshold, execute an Ansible Playbook.
+1. **Event Source**: A security monitoring tool detects multiple failed SSH login attempts.
+
+2. **Trigger**: The event is sent to Event-Driven Ansible.
+
+3. **Event-Driven Ansible rulebook evaluation**: If the failed login count exceeds a threshold, execute an Ansible Playbook.
 
 
 - Automated response actions:
 - Block the source IP in the firewall.
 - Send a notification to security teams.
 - Collect logs for forensic analysis.
-
-
 

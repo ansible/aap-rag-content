@@ -1,18 +1,14 @@
 # 6. Job templates
 ## 6.16. OpenStack
-### 6.16.2. Google
-
-
-
+### 6.16.2. Google
 
 Use this credential type to authenticate to Google Cloud Platform services. Automation controller supports Google Cloud credentials for use with Ansible modules that manage Google Cloud resources.
 
 Google cloud credentials are exposed as the following environment variables during playbook execution (in the job template, choose the cloud credential needed for your setup):
 
--  `    GCE_EMAIL`
--  `    GCE_PROJECT`
--  `    GCE_CREDENTIALS_FILE_PATH`
+- `GCE_EMAIL`
+- `GCE_PROJECT`
+- `GCE_CREDENTIALS_FILE_PATH`
 
-
-Each Google module implicitly uses these credentials when run through the controller without having to set the `service_account_email` , `project_id` , or `pem_file` module options.
+Each Google module implicitly uses these credentials when run through the controller without having to set the `service_account_email`, `project_id`, or `pem_file` module options.
 

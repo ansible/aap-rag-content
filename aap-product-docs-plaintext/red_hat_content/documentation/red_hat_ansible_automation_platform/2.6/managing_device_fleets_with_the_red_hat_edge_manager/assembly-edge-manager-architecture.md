@@ -1,7 +1,4 @@
-# Chapter 2. Red Hat Edge Manager architecture
-
-
-
+# Chapter 2. Red Hat Edge Manager architecture
 
 You can manage individual devices or an entire fleet by using the Red Hat Edge Manager. The Red Hat Edge Manager uses an agent-based architecture that allows for a scalable and robust device management, even with limited network conditions.
 
@@ -21,10 +18,8 @@ The Red Hat Edge Manager architecture has the following main features:
 - Device
 - Device fleet
 
-
 Learn more from the following sections:
 
--  [Red Hat Edge Manager agent and service](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-agent-service)
--  [Red Hat Edge Manager API server](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/managing_device_fleets_with_the_red_hat_edge_manager/index#edge-manager-api-server)
-
+- [Red Hat Edge Manager agent and service](#edge-manager-agent-service "2.1.&nbsp;Red Hat Edge Manager agent and service")
+- [Red Hat Edge Manager API server](#edge-manager-api-server "2.2.&nbsp;Red Hat Edge Manager API server")
 

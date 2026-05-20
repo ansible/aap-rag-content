@@ -1,8 +1,5 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
-## 1.4. Configuring Ansible validated content with the installer
-
-
-
+## 1.4. Configuring Ansible validated content with the installer
 
 Red Hat Ansible Automation Platform includes Ansible validated content, which complements existing Red Hat Ansible Certified Content. Ansible validated content provides an expert-led path for performing operational tasks on a variety of platforms from both Red Hat and our trusted partners.
 
@@ -10,12 +7,10 @@ You can obtain Ansible validated content during the installation process. When y
 
 You can change the default configuration by using two variables:
 
--  `    automationhub_seed_collections` is a boolean that defines whether or not preloading is enabled.
--  `    automationhub_collection_seed_repository` is a variable that enables you to specify the type of content to upload when it is set to `    true` . Possible values are `    certified` or `    validated` . If this variable is missing, both content sets will be uploaded.
-
+- `automationhub_seed_collections` is a boolean that defines whether or not preloading is enabled.
+- `automationhub_collection_seed_repository` is a variable that enables you to specify the type of content to upload when it is set to `true`. Possible values are `certified` or `validated`. If this variable is missing, both content sets will be uploaded.
 
 Note
+
 Changing the default configuration might require further platform configuration changes for other content.
-
-
 

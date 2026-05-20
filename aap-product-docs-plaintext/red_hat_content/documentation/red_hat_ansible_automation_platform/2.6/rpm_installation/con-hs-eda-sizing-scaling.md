@@ -1,9 +1,6 @@
 # 5. Horizontal scaling in Red Hat Ansible Automation Platform
 ## 5.1. Horizontal scaling in Event-Driven Ansible controller
-### 5.1.1. Sizing and scaling guidelines
-
-
-
+### 5.1.1. Sizing and scaling guidelines
 
 Scaling guidelines for Event-Driven Ansible define how to properly size API nodes based on user requests and worker nodes based on automation activations. You can ensure independent scaling and optimized resource utilization for your environment by separating the node roles.
 

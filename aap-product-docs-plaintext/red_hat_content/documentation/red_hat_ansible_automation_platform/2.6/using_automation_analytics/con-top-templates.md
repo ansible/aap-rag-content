@@ -1,8 +1,5 @@
 # 1. About Automation Calculator
-## 1.2. Top templates
-
-
-
+## 1.2. Top templates
 
 **Top templates** lists the 25 most frequently run templates across all hosts in your environment.
 

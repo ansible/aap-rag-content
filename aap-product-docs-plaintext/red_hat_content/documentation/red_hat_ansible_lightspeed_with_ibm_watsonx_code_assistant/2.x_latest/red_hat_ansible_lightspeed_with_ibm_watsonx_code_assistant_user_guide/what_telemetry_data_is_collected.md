@@ -1,9 +1,6 @@
 # 6. Administering the Ansible Lightspeed Service
 ## 6.2. Viewing and managing the Admin dashboard telemetry
-### 6.2.2. What telemetry data is collected?
-
-
-
+### 6.2.2. What telemetry data is collected?
 
 Following is the list of telemetry data that Red Hat Ansible Lightspeed collects:
 
@@ -12,5 +9,4 @@ Following is the list of telemetry data that Red Hat Ansible Lightspeed collects
 - Inline suggestions that were accepted, rejected, or ignored by your organization users
 - User sentiment feedback
 - Top 10 modules returned in code recommendations
-
 

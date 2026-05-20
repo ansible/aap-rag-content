@@ -1,8 +1,5 @@
 # 3. Managing Ansible Automation Platform subscriptions, updates, and support
-## 3.4. Obtaining a manifest file
-
-
-
+## 3.4. Obtaining a manifest file
 
 You can obtain a subscription manifest in the [Subscription Allocations](https://access.redhat.com/management/subscription_allocations/) section of Red Hat Subscription Management.
 

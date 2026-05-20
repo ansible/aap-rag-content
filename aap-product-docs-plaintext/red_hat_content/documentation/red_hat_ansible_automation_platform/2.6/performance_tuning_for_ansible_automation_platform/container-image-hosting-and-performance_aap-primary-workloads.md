@@ -1,8 +1,5 @@
 # 1. Types of workloads
-## 1.6. Container image hosting and performance
-
-
-
+## 1.6. Container image hosting and performance
 
 Private automation hub has the capability to host container images for automation execution environments and decision environments. Event-Driven Ansible or automation controller can pull these container images when running activations or jobs. The frequency of job starts and the pull policy configured for the automation execution environments and decision environments in Event-Driven Ansible or automation controller determine how often they pull these containers.
 

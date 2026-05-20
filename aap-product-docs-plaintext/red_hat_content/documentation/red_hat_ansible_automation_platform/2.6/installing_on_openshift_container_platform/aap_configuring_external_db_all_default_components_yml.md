@@ -1,11 +1,7 @@
 # 15. Appendix: Red Hat Ansible Automation Platform custom resources
 ## 15.1. Custom resources
-### 15.1.9. aap-configuring-external-db-all-default-components.yml
+### 15.1.9. aap-configuring-external-db-all-default-components.yml
 
-
-
-
-```
 ---
 apiVersion: aap.ansible.com/v1alpha1
 kind: AnsibleAutomationPlatform
@@ -21,5 +17,4 @@ postgres_configuration_secret: external-postgres-configuration-hub
 eda:
 database:
 database_secret: external-postgres-configuration-eda
-```
 

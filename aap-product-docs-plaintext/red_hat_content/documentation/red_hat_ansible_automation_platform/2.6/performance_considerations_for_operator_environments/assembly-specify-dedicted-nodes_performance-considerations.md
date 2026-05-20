@@ -1,7 +1,4 @@
-# Chapter 3. Specifying dedicated nodes
-
-
-
+# Chapter 3. Specifying dedicated nodes
 
 A Kubernetes cluster runs on top of many Virtual Machines or nodes (generally anywhere between 2 and 20 nodes). Pods can be scheduled on any of these nodes. When you create or schedule a new pod, use the `topology_spread_constraints` setting to configure how new pods are distributed across the underlying nodes when scheduled or created.
 

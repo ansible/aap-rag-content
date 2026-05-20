@@ -1,45 +1,56 @@
 # 3. Installing the Red Hat Edge Manager on Ansible Automation Platform
 ## 3.2. Set up the OAuth application for Ansible Automation Platform
-### 3.2.3. Integrating with Ansible Automation Platform
-
-
-
+### 3.2.3. Integrating with Ansible Automation Platform
 
 Integrate the Red Hat Edge Manager with your Ansible Automation Platform instance by modifying the `service-config.yaml` file to include authentication type, API URLs, OAuth client ID, and an optional OAuth token, followed by restarting the services.
 
 **Procedure**
 
-1. Stop the flightctl services before editing your `    service-config.yaml` file:
+1. Stop the flightctl services before editing your `service-config.yaml` file:
 
-
-```
 sudo systemctl stop flightctl.target
-```
 
+2. Configure the integration settings by editing the configuration file:
 
-1. Configure the integration settings by editing the configuration file:
-
-
-```
 sudo vi /etc/flightctl/service-config.yaml
-```
+
+3. Update the configuration file to integrate with Ansible Automation Platform:
+
+global:
+baseDomain: <your-edge-manager-ip-or-domain>
+auth:
+type: aap
+insecureSkipTlsVerify: false
+aap:
+apiUrl: https://your-aap-instance.example.com
+externalApiUrl: https://your-aap-instance.example.com
+oAuthApplicationClientId: <client-id-from-oauth-app>
+oAuthToken: <your-oauth-token>
 
 
-1. Update the configuration file to integrate with Ansible Automation Platform:
 
+baseDomain
+The domain name or IP for the host. This is the only mandatory field.
 
-```
-global:      baseDomain: &lt;your-edge-manager-ip-or-domain&gt;<span id="CO1-1"><!--Empty--></span><span class="callout">1</span>auth:        type: aap<span id="CO1-2"><!--Empty--></span><span class="callout">2</span>insecureSkipTlsVerify: false<span id="CO1-3"><!--Empty--></span><span class="callout">3</span>aap:          apiUrl: https://your-aap-instance.example.com<span id="CO1-4"><!--Empty--></span><span class="callout">4</span>externalApiUrl: https://your-aap-instance.example.com<span id="CO1-5"><!--Empty--></span><span class="callout">5</span>oAuthApplicationClientId: &lt;client-id-from-oauth-app&gt;<span id="CO1-6"><!--Empty--></span><span class="callout">6</span>oAuthToken: &lt;your-oauth-token&gt;<span id="CO1-7"><!--Empty--></span><span class="callout">7</span>
-```
+type
+Set this to `aap` to enable Ansible Automation Platform authentication.
 
+insecureSkipTlsVerify
+Set to `false`. Only set this to `true` to skip TLS certificate verification for the Ansible Automation Platform URLs. For production environments, consider configuring a CA certificate (see the Self-signed certificates section).
 
-1. Start the services:
+apiUrl
+The internal facing API URL for the running Ansible Automation Platform instance that makes requests against.
 
+externalApiUrl
+The externally accessible URL of your running Ansible Automation Platform instance.
 
-```
+oAuthApplicationClientId
+This is the Client ID of the OAuth application configured in Ansible Automation Platform for the Red Hat Edge Manager. This is not necessary if you are using the automatic method.
+
+oAuthToken
+This is an OAuth token with write permissions for the "Default" organization. This is only needed if you want the setup process to automatically create the OAuth application. This is not necessary if you are using the manual method.
+
+4. Start the services:
+
 sudo systemctl start flightctl.target
-```
-
-
-
 

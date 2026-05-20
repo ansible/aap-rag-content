@@ -1,8 +1,5 @@
 # 6. Support for Red Hat Ansible Automation Platform on Microsoft Azure
-## 6.2. Private DNS zones
-
-
-
+## 6.2. Private DNS zones
 
 Ansible Automation Platform on Microsoft Azure uses Azure’s managed DNS services when deployed.
 
@@ -14,7 +11,7 @@ You can replicate the records from the zones in the managed resource group into 
 
 Failure to properly maintain the records in the Private DNS zone can prevent the managed application from operating.
 
-The Azure Kubernetes Service (AKS) Private DNS zone cannot be customer managed and still allow Red Hat to update or upgrade the managed AKS that is a part of this offering. To allow Red Hat to upgrade the customer AKS to the latest version during the maintenance windows, do not unlink the `&lt;GUID&gt;.privatelink.&lt;region&gt;.azmk8s.io` Private DNS zone. For more information on this limitation, see ["CreateOrUpdateVirtualNetworkLinkFailed" error when updating or upgrading an AKS cluster](https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/create-upgrade-delete/createorupdatevirtualnetworklinkfailed-error) in the Microsoft Azure documentation.
+The Azure Kubernetes Service (AKS) Private DNS zone cannot be customer managed and still allow Red Hat to update or upgrade the managed AKS that is a part of this offering. To allow Red Hat to upgrade the customer AKS to the latest version during the maintenance windows, do not unlink the `<GUID>.privatelink.<region>.azmk8s.io` Private DNS zone. For more information on this limitation, see ["CreateOrUpdateVirtualNetworkLinkFailed" error when updating or upgrading an AKS cluster](https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/create-upgrade-delete/createorupdatevirtualnetworklinkfailed-error) in the Microsoft Azure documentation.
 
 To work around this limitation, Red Hat allows you to manage A and CNAME records in the Private DNS zones in the managed resource group. Any records that you put in the Private DNS zones in the managed resource group are visible to the Red Hat SREs. If you decide to use the Private DNS zones in the managed resource group, you are responsible for updating them with the records you need. Customer supplied records are not backed up as a part of the disaster recovery process. Removing any Azure supplied records can cause network connectivity issues with Ansible Automation Platform on Microsoft Azure.
 

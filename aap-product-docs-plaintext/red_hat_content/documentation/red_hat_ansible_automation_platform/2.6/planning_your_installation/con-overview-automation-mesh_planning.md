@@ -1,8 +1,5 @@
 # 2. Red Hat Ansible Automation Platform components
-## 2.7. Automation mesh
-
-
-
+## 2.7. Automation mesh
 
 Automation mesh is an overlay network intended to ease the distribution of work across a large and dispersed collection of workers through nodes that establish peer-to-peer connections with each other using existing networks.
 
@@ -13,5 +10,4 @@ Automation mesh provides:
 - Deployment choices that are resilient to latency, reconfigurable without outage, and that dynamically re-reroute to choose a different path when outages exist.
 - Dynamic mesh routing changes for optimal network performance.
 - Connectivity that includes bidirectional, multi-hopped mesh communication possibilities which are Federal Information Processing Standards (FIPS) compliant.
-
 

@@ -1,12 +1,8 @@
 # 15. Supported Inventory plugin templates
-## 15.2. Google Compute Engine
-
-
-
+## 15.2. Google Compute Engine
 
 This inventory plugin dynamically generates inventory from Google Compute Engine (GCE) instances.
 
-```
 auth_kind: serviceaccount
 compose:
 ansible_ssh_host: networkInterfaces[0].accessConfigs[0].natIP | default(networkInterfaces[0].networkIP)
@@ -52,5 +48,4 @@ separator: ''
 plugin: google.cloud.gcp_compute
 retrieve_image_info: true
 use_contrib_script_compatible_sanitization: true
-```
 

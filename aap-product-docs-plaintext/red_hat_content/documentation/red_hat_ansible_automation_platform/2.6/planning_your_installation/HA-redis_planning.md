@@ -1,7 +1,4 @@
-# Chapter 3. Caching and queueing system
-
-
-
+# Chapter 3. Caching and queueing system
 
 [Redis](https://redis.io/) provides centralized caching and queueing for Ansible Automation Platform 2.6 components. This in-memory system stores event queues, session data, and tokens to deliver improved performance, reliability, and data security.
 

@@ -1,0 +1,22 @@
+# 6. Authentication movement
+## 6.3. Authentication type: SAML
+
+Understand how Security Assertion Markup Language (SAML) provides secure, token-based authentication for your upgraded system. Implement SAML to ensure seamless single sign-on (SSO) and centralized identity management.
+
+Important
+
+Automation controller in Ansible Automation Platform 2.4 allowed customers to enter an encrypted private key in SAML configuration without raising an error. If request signing was not enabled in the authenticator and the SAML IdP, then the Ansible Automation Platform administrator would not know that encrypted keys were not supported. Encrypted keys not supported in Ansible Automation Platform 2.6 authenticators. The platform alerts users that encrypted keys are not supported. However, when upgrading from Ansible Automation Platform 2.4 to 2.6, customers must replace encrypted private keys with unencrypted private keys in their SAML authenticators to prevent migration errors for the authenticator to platform gateway. If you skip this step, the authenticator is not migrated as part of the upgrade. The SAML authenticator must then be recreated manually by a local administrator to re-enable authentication. This might delay SSO users from logging back into the platform after the upgrade.
+
+**General settings**
+
+| Automation controller 2.4 | Platform gateway 2.6 |
+| --- | --- |
+| SOCIAL_AUTH_SAML_ENABLED_IDPS:       Keycloak: null       entity_id: 'https://idp.example.com/auth/realms/awx'       url: 'https://idp.example.com/auth/realms/awx/protocol/saml'       x509cert: MIICert...       attr_username: username       attr_email: email     SOCIAL_AUTH_SAML_SP_ENTITY_ID: 'https://controller.example.com:8043'     SOCIAL_AUTH_SAML_SP_PUBLIC_CERT: MIICertPublic...     SOCIAL_AUTH_SAML_SP_PRIVATE_KEY: MIIKeyPrivate... | "configuration": {       "IDP_URL": "https://idp.example.com/auth/realms/awx/protocol/saml",       "IDP_X509_CERT": "-----BEGIN CERTIFICATE-----\nMIICert...\n-----END CERTIFICATE-----",       "IDP_ENTITY_ID": "https://idp.example.com/auth/realms/awx",       "IDP_ATTR_EMAIL": "email",       "IDP_ATTR_USERNAME": "username",       "SP_ENTITY_ID": "https://controller.example.com:8043",       "SP_PUBLIC_CERT": "MIICertPublic...",       "SP_PRIVATE_KEY": "MIIKeyPrivate..."     } |
+
+**Mappings**
+
+| Automation controller 2.4 | Platform gateway 2.6 |
+| --- | --- |
+| SOCIAL_AUTH_SAML_ORGANIZATION_MAP:      "Default":         users: true | {       "name": "Default - Users (users)",       "map_type": "organization",       "order": 1,       "authenticator": -1,       "triggers": {         "users": true       },       "organization": "Default",       "team": null,       "role": "Organization Member",       "revoke": true     } |
+| SOCIAL_AUTH_SAML_USER_FLAGS_BY_ATTR:      is_superuser_attr: "is_superuser"      is_superuser_value: "true" | {       "name": "is_superuser - role",       "authenticator": -1,       "revoke": true,       "map_type": "is_superuser",       "team": null,       "organization": null,       "triggers": {         "attributes": {           "is_superuser": {             "has_or": [               "true"             ]           }         }       },       "order": 2     } |
+

@@ -1,8 +1,5 @@
 # 7. Red Hat Ansible Automation Platform Service on AWS Private Link Connectivity
-## 7.2. How AWS PrivateLink works
-
-
-
+## 7.2. How AWS PrivateLink works
 
 AWS PrivateLink connectivity is supported both into (ingress) and out of (egress) the Ansible Automation Platform control plane.
 

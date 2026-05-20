@@ -1,8 +1,5 @@
 # 6. Red Hat Ansible Automation Platform best practices
-## 6.2. Syncing content with private automation hub
-
-
-
+## 6.2. Syncing content with private automation hub
 
 Private automation hub allows you to attempt to sync all content between automation hub or Ansible Galaxy. However, this synchronization fails due to the storage and resource demands of such a large task.
 

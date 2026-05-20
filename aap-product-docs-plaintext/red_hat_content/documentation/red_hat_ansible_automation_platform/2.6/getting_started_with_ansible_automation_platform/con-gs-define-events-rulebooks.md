@@ -1,8 +1,5 @@
 # 3. Getting started as an automation developer
-## 3.4. Define events with rulebooks
-
-
-
+## 3.4. Define events with rulebooks
 
 An Ansible rulebook is a collection of rulesets that references one or more sources, rules, and conditions.
 

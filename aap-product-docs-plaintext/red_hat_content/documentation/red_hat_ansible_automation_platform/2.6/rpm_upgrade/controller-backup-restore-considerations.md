@@ -1,8 +1,22 @@
 # 3. Backup and restore Ansible Automation Platform
-## 3.1. Backup and restoration considerations
-
-
-
+## 3.1. Backup and restoration considerations
 
 Consider the following points when you backup and restore your system:
+
+Disk space
+Review your disk space requirements to ensure you have enough room to backup configuration files, keys, other relevant files, and the database of the Ansible Automation Platform installation.
+
+Note
+
+The Ansible Automation Platform database backups are staged on each node at `/var/backups/automation-platform` through the variable `backup_dir`. You might need to mount a new volume to `/var/backups` or change the staging location with the variable `backup_dir` to prevent issues with disk space before running the `./setup.sh -b` script.
+
+System credentials
+Confirm you have the required system credentials when working with a local database or a remote database. On local systems, you might need `root` or `sudo` access, depending on how credentials are set up. On remote systems, you might need different credentials to grant you access to the remote system you are trying to backup or restore.
+
+Version
+You must always use the most recent minor version of a release to backup or restore your Ansible Automation Platform installation version. For example, if the current platform version you are on is 2.6.x, only use the latest 2.6 installer.
+
+Backup file location
+- **Default location:** If the backup file is placed in the same directory as the `./setup.sh` installer, the restore playbook locates it automatically.
+- **Non-default location:** If your backup file is stored in a different directory, you must specify the path using the `restore_backup_file` extra variable when running the restore command.
 

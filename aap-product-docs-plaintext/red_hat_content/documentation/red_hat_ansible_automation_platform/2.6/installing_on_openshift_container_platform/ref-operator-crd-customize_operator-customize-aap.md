@@ -1,29 +1,23 @@
 # 4. Customizing your Red Hat Ansible Automation Platform Operator on OpenShift Container Platform
-## 4.4. Customizing your resource requirements
-
-
-
+## 4.4. Customizing your resource requirements
 
 Customize resource requirements for your Ansible Automation Platform components to optimize performance and resource allocation in your specific environment.
 
 The following section provides a complete code block with the default resource requirements for each component. The main reasons for customizing your resource requirements include:
 
 - Performance Tuning: Increase resource limits for components that perform heavy workloads.
-- To comply with a `    ResourceQuota` enforced by the cluster admin.
+- To comply with a `ResourceQuota` enforced by the cluster admin.
 - Resource Constrained Environments: Decrease resource requests to conserve cluster resources in development or test environments.
 - Environment Specifics: Align the resource allocation with the capacity of your OpenShift or Kubernetes cluster nodes.
-
 
 You can use this reference as a starting point. Copy the full code block for your Ansible Automation Platform instance and modify the values for the components you want to change. This method helps ensure all default settings are applied correctly, reducing the risk of deployment errors.
 
 Note
-When _adding_ parameters, you can add it to the Ansible Automation Platform custom resource (CR) only and those parameters will work their way down to the nested CRs.
 
-When _removing_ parameters, you have to remove them both from the Ansible Automation Platform CR _and_ the nested CR, for example, the **Automation Controller** CR.
+When *adding* parameters, you can add it to the Ansible Automation Platform custom resource (CR) only and those parameters will work their way down to the nested CRs.
 
+When *removing* parameters, you have to remove them both from the Ansible Automation Platform CR *and* the nested CR, for example, the **Automation Controller** CR.
 
-
-```
 # Example of defining custom resource requirements for all components
 # This can be useful for clusters with a ResourceQuota in the AAP namespace
 apiVersion: aap.ansible.com/v1alpha1
@@ -240,5 +234,4 @@ memory: 400Mi
 # * Controller deployed and named: myaap-controller
 # * EDA deployed and named: myaap-eda
 # * Hub deployed and named: myaap-hub
-```
 

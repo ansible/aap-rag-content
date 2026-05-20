@@ -1,7 +1,4 @@
-# Chapter 2. Automation controller configuration
-
-
-
+# Chapter 2. Automation controller configuration
 
 You can configure some automation controller options by using the **Settings** menu of the User Interface.
 

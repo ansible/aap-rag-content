@@ -1,12 +1,10 @@
 # 13. Event-Driven Ansible logging strategy
-## 13.1. Logging samples
-
-
-
+## 13.1. Logging samples
 
 Review logging samples for various API operations (CRUD, sync, and the like) to understand the expected audit format and efficiently monitor resource changes.
 
-```
+Rulebook activation
+
 1. Create
 1. 2024-08-15 14:13:20,384 aap_eda.api.views.activation INFO   Action: Create / ResourceType: RulebookActivation / ResourceName: quick_start_project / ResourceID: 53 / Organization: Default
 2. Read
@@ -19,9 +17,9 @@ Review logging samples for various API operations (CRUD, sync, and the like) to 
 1. 2024-08-15 14:24:53,847 aap_eda.api.views.activation INFO   Action: Delete / ResourceType: RulebookActivation / ResourceName: quick_start_activation / ResourceID: 1 / Organization: Default
 6. Restart
 2024-08-15 14:24:34,169 aap_eda.api.views.activation INFO      Action: Restart / ResourceType: RulebookActivation / ResourceName: quick_start_activation / ResourceID: 1 / Organization: Default
-```
 
-```
+EventStream Logs
+
 1. Create
 1. 2024-08-15 13:46:26,903 aap_eda.api.views.webhook INFO     Action: Create / ResourceType: EventStream / ResourceName: ZackTest / ResourceID: 1 / Organization: Default
 2. Update
@@ -32,9 +30,9 @@ Review logging samples for various API operations (CRUD, sync, and the like) to 
 1. 2024-08-15 13:56:17,492 aap_eda.api.views.webhook INFO     Action: List / ResourceType: EventStream / ResourceName: * / ResourceID: * / Organization: *
 5. Delete
 1. 2024-08-15 13:57:13,124 aap_eda.api.views.webhook INFO     Action: Delete / ResourceType: EventStream / ResourceName: ZackTest / ResourceID: None / Organization: Default
-```
 
-```
+Decision Environment
+
 1. Create
 1. 2024-08-15 14:10:53,311 aap_eda.api.views.decision_environment INFO     Action: Create / ResourceType: DecisionEnvironment / ResourceName: quick_start_de / ResourceID: 86 / Organization: Default
 2. Read
@@ -43,9 +41,9 @@ Review logging samples for various API operations (CRUD, sync, and the like) to 
 2024-08-15 14:11:20,970 aap_eda.api.views.decision_environment INFO     Action: Update / ResourceType: DecisionEnvironment / ResourceName: quick_start_de / ResourceID: 86 / Organization: Default
 4. Delete
 2024-08-15 14:11:42,369 aap_eda.api.views.decision_environment INFO     Action: Delete / ResourceType: DecisionEnvironment / ResourceName: quick_start_de / ResourceID: None / Organization: Default
-```
 
-```
+Project
+
 1. Create
 1. 2024-08-15 14:05:26,874 aap_eda.api.views.project INFO     Action: Create / ResourceType: Project / ResourceName: quick_start_project / ResourceID: 86 / Organization: Default
 2. Read
@@ -56,9 +54,9 @@ Review logging samples for various API operations (CRUD, sync, and the like) to 
 1. 2024-08-15 14:06:30,580 aap_eda.api.views.project INFO     Action: Sync / ResourceType: Project / ResourceName: quick_start_project / ResourceID: 86 / Organization: Default
 5. Delete
 1. 2024-08-15 14:06:49,481 aap_eda.api.views.project INFO     Action: Delete / ResourceType: Project / ResourceName: quick_start_project / ResourceID: 86 / Organization: Default
-```
 
-```
+Activation Start/Stop
+
 1. Start
 1. 2024-08-15 14:21:29,076 aap_eda.services.activation.activation_manager INFO     Requested to start activation 1, starting.
 2024-08-15 14:21:29,093 aap_eda.services.activation.activation_manager INFO     Creating a new activation instance for activation: 1
@@ -68,7 +66,4 @@ Review logging samples for various API operations (CRUD, sync, and the like) to 
 eda-activation-worker-1  | 2024-08-15 14:40:52,550 aap_eda.services.activation.activation_manager INFO     Activation 2 is already stopped.
 eda-activation-worker-1  | 2024-08-15 14:40:52,550 aap_eda.services.activation.activation_manager INFO     Activation manager activation id: 2 Activation restart scheduled for 1 second.
 eda-activation-worker-1  | 2024-08-15 14:40:52,562 rq.worker INFO     activation: Job OK (activation-2)
-```
 
-
-<span id="idm139919143935712"></span>

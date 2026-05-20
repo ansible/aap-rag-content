@@ -1,7 +1,4 @@
-# Chapter 5. Roles
-
-
-
+# Chapter 5. Roles
 
 A role is a group of permissions for specific Red Hat Ansible Automation Platform resources. These permissions govern actions such as viewing, changing, using, executing, or deleting resources such as projects, inventories, credentials, and job templates. When you assign a role to a team or user you are granting them access to manage defined resources within the platform.
 

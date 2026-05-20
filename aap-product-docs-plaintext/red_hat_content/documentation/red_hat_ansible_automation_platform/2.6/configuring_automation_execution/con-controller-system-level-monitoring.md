@@ -1,9 +1,6 @@
 # 3. Performance tuning for automation controller
 ## 3.5. Metrics to monitor automation controller
-### 3.5.2. System level monitoring
-
-
-
+### 3.5.2. System level monitoring
 
 Monitoring the CPU and memory use of your cluster hosts is important because capacity management for instances does not introspect into the actual resource usage of hosts. The resource impact of automation jobs depends on what the playbooks are doing. For example, many cloud or networking modules do most of the processing on the execution node, which runs the Ansible Playbook. The impact on the automation controller is very different from if you were running a native module such as “yum” where the work is performed on the target hosts where the execution node spends much of the time during this task waiting on results.
 
@@ -13,7 +10,6 @@ Monitor the disk I/O and use of your system. The manner in which an automation c
 
 **Additional resources**
 
--  [Metrics](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/configuring_automation_execution/index#assembly-controller-metrics)
--  [Automation analytics and Red Hat Lightspeed for Red Hat Ansible Automation Platform](https://www.ansible.com/products/insights-for-ansible)
-
+- [Metrics](#assembly-controller-metrics "Chapter&nbsp;10.&nbsp;Metrics")
+- [Automation analytics and Red Hat Lightspeed for Red Hat Ansible Automation Platform](https://www.ansible.com/products/insights-for-ansible)
 

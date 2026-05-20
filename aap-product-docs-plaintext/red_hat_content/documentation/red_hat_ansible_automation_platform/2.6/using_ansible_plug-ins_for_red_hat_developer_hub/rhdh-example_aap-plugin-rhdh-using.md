@@ -1,7 +1,4 @@
-# Chapter 3. Example: Automate Red Hat Enterprise Linux firewall configuration
-
-
-
+# Chapter 3. Example: Automate Red Hat Enterprise Linux firewall configuration
 
 This example demonstrates how the Ansible plug-ins can help Ansible users of all skill levels create quality Ansible content.
 

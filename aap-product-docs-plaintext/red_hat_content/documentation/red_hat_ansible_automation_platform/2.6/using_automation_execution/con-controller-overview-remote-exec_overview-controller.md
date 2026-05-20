@@ -1,8 +1,5 @@
 # 1. Automation controller overview
-## 1.9. Remote command execution
-
-
-
+## 1.9. Remote command execution
 
 Remote command execution allows you to run ad hoc tasks on one or more managed nodes directly from the automation controller interface without creating a job template.
 
