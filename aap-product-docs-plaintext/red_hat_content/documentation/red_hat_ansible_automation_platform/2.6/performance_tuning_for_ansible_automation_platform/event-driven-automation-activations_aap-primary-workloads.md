@@ -1,10 +1,7 @@
 # 1. Types of workloads
-## 1.4. Event-Driven Ansible activations
+## 1.4. Event-Driven Ansible activations
 
-
-
-
-Activations are used by Event-Driven Ansible to run instances of `ansible-rulebook` . These activations can either connect to external event sources or listen to an event stream for incoming payloads.
+Activations are used by Event-Driven Ansible to run instances of `ansible-rulebook`. These activations can either connect to external event sources or listen to an event stream for incoming payloads.
 
 Activation and output management uses Event-Driven Ansible hybrid nodes, the platform gateway for event stream handling, the WebSocket server in each API node or pod, and the database for audit event storage.
 

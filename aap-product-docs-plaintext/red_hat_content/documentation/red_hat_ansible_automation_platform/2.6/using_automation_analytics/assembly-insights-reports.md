@@ -1,7 +1,4 @@
-# Chapter 3. Viewing your reports on Red Hat Ansible Automation Platform
-
-
-
+# Chapter 3. Viewing your reports on Red Hat Ansible Automation Platform
 
 The reports feature on the Red Hat Ansible Automation Platform provides users with a visual overview of their automation efforts across different teams by using Ansible.
 
@@ -12,5 +9,4 @@ For example, you can use your reports to:
 - View the number of hosts affected by a job template
 - View the number changes made to hosts by a job template
 - View the frequency of a job template run, and the rate of job templates that succeed or fail to run
-
 

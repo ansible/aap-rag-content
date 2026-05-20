@@ -1,5 +1,2 @@
-# Chapter 2. New features and enhancements
-
-
-
+# Chapter 2. New features and enhancements
 

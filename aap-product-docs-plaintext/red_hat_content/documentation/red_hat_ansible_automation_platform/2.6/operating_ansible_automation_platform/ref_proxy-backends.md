@@ -1,9 +1,6 @@
 # 3. Configuring Ansible Automation Platform to use egress proxy
 ## 3.1. Overview
-### 3.1.1. Proxy backends
-
-
-
+### 3.1.1. Proxy backends
 
 For HTTP and HTTPS proxies you can use a squid server. Squid is a forward proxy for the Web supporting HTTP, HTTPS, and FTP, reducing bandwidth and improving response times by caching and reusing frequently-requested web pages. It is licensed under the GNU GPL.
 
@@ -11,18 +8,15 @@ Forward proxies are systems that intercept network traffic going to another netw
 
 Make sure all the required Ansible Automation Platform control plane ports are opened on the squid proxy backend. Ansible Automation Platform-specific ports:
 
-```
 acl Safe_ports port 81
 acl Safe_ports port 82
 acl Safe_ports port 389
 acl Safe_ports port 444
 acl Safe_ports port 445
 acl SSL_ports port 22
-```
 
 The following ports are for containerized installations:
 
-```
 acl SSL_ports port 444
 acl SSL_ports port 445
 acl SSL_ports port 8443
@@ -34,5 +28,4 @@ acl SSL_ports port 44322
 
 http_access deny !Safe_ports
 http_access deny CONNECT !SSL_ports
-```
 

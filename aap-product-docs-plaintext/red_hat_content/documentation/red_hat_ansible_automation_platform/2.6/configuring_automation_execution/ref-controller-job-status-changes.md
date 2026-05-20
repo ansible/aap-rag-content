@@ -1,9 +1,6 @@
 # 9. Logging and Aggregation
 ## 9.1. Loggers
-### 9.1.4. Job status changes
-
-
-
+### 9.1.4. Job status changes
 
 The job status changes logger captures changes in the status of jobs as they occur.
 

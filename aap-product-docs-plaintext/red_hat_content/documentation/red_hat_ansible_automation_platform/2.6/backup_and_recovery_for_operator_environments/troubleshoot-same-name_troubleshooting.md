@@ -1,8 +1,5 @@
 # 4. Troubleshooting
-## 4.1. Automation controller custom resource has the same name as an existing deployment
-
-
-
+## 4.1. Automation controller custom resource has the same name as an existing deployment
 
 If your `AutomationController` customer resource matches an existing deployment, perform the following steps to resolve the issue.
 
@@ -10,23 +7,13 @@ The name specified for the new `AutomationController` custom resource must not m
 
 **Procedure**
 
-1. Delete the existing `    AutomationController` and the associated postgres PVC:
+1. Delete the existing `AutomationController` and the associated postgres PVC:
 
+oc delete automationcontroller <YOUR_DEPLOYMENT_NAME> -n <YOUR_NAMESPACE>
 
-```
-oc delete automationcontroller &lt;YOUR_DEPLOYMENT_NAME&gt; -n &lt;YOUR_NAMESPACE&gt;        oc delete pvc postgres-13-&lt;YOUR_DEPLOYMENT_NAME&gt;-13-0 -n &lt;YOUR_NAMESPACE&gt;
-```
+oc delete pvc postgres-13-<YOUR_DEPLOYMENT_NAME>-13-0 -n <YOUR_NAMESPACE>
 
+2. Use `AutomationControllerRestore` with the same deployment_name in it:
 
-1. Use `    AutomationControllerRestore` with the same deployment_name in it:
-
-
-```
 oc apply -f restore.yaml
-```
 
-
-
-
-
-<span id="idm140364267908672"></span>

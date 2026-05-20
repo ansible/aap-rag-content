@@ -1,8 +1,5 @@
 # 1. Introduction
-## 1.1. How do Ansible Playbooks work
-
-
-
+## 1.1. How do Ansible Playbooks work
 
 Ansible Playbooks are lists of tasks that run automatically for your specified inventory or groups of hosts. One or more Ansible tasks can be combined to make a play, that is, an ordered grouping of tasks mapped to specific hosts.
 
@@ -18,7 +15,22 @@ Each play executes part of the overall goal of the playbook, running one or more
 
 Each task calls an Ansible module.
 
-Ansible modules are grouped in collections with a _Fully Qualified Collection Name_ (FQCN) for each module. Tasks are executed by modules, each of which performs a specific task in a playbook. A module contains metadata that determines when and where a task is executed, and which user executes it. There are thousands of Ansible modules that perform all kinds of IT tasks, such as:
+Playbook
+A list of plays that define the order in which Ansible performs operations, from top to bottom, to achieve an overall goal.
+
+Play
+An ordered list of tasks that maps to managed nodes in an inventory.
+
+Task
+A reference to a single module that defines the operations that Ansible performs.
+
+Roles
+Roles are a way to make code in playbooks reusable by putting the functionality into "libraries" that can then be used in any playbook as needed.
+
+Module
+A unit of code or binary that Ansible runs on managed nodes.
+
+Ansible modules are grouped in collections with a *Fully Qualified Collection Name* (FQCN) for each module. Tasks are executed by modules, each of which performs a specific task in a playbook. A module contains metadata that determines when and where a task is executed, and which user executes it. There are thousands of Ansible modules that perform all kinds of IT tasks, such as:
 
 - Cloud management
 - User management
@@ -27,7 +39,5 @@ Ansible modules are grouped in collections with a _Fully Qualified Collection Na
 - Configuration management
 - Communication
 
-
 ![Structure of a typical playbook](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Getting_started_with_playbooks-en-US/images/60e7743536356b211fbc1ce9602ba958/playbook.png)
-
 

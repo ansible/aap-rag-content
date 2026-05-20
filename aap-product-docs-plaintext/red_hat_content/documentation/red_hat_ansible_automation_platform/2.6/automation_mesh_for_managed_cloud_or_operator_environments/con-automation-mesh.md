@@ -1,8 +1,5 @@
 # 1. Planning for automation mesh in your operator-based Red Hat Ansible Automation Platform environment
-## 1.1. About automation mesh
-
-
-
+## 1.1. About automation mesh
 
 Automation mesh is an overlay network intended to ease the distribution of work across a large and dispersed collection of workers through nodes that establish peer-to-peer connections with each other using existing networks.
 
@@ -11,8 +8,7 @@ Red Hat Ansible Automation Platform 2 replaces Ansible Tower and isolated nodes 
 Automation mesh is useful for:
 
 - traversing difficult network topologies
-- bringing execution capabilities (the machine running `    ansible-playbook` ) closer to your target hosts
-
+- bringing execution capabilities (the machine running `ansible-playbook`) closer to your target hosts
 
 The nodes (control, hop, and execution instances) are interconnected through a receptor mesh, forming a virtual mesh.
 
@@ -23,6 +19,5 @@ Automation mesh introduces:
 - Dynamic cluster capacity that scales independently, enabling you to create, register, group, ungroup and deregister nodes with minimal downtime.
 - Control and execution plane separation that enables you to scale playbook execution capacity independently from control plane capacity.
 - Deployment choices that are resilient to latency, reconfigurable without outage, and that dynamically re-reroute to choose a different path when outages occur.
-- Connectivity that includes bi-directional, multi-hopped mesh communication possibilities which are _Federal Information Processing Standards_ (FIPS) compliant.
-
+- Connectivity that includes bi-directional, multi-hopped mesh communication possibilities which are *Federal Information Processing Standards* (FIPS) compliant.
 

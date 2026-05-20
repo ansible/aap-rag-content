@@ -1,8 +1,5 @@
 # 4. Migration prerequisites
-## 4.2. RPM to OpenShift Container Platform migration prerequisites
-
-
-
+## 4.2. RPM to OpenShift Container Platform migration prerequisites
 
 Before migrating from an RPM-based deployment to an OpenShift Container Platform deployment, ensure you meet the following prerequisites:
 
@@ -13,5 +10,4 @@ Before migrating from an RPM-based deployment to an OpenShift Container Platform
 - You have made a decision on internal or external database configuration.
 - You have made a decision on internal or external Redis configuration.
 - There is network connectivity between the source and target environments.
-
 

@@ -1,8 +1,5 @@
 # 4. Scaffolding an Ansible project with the AI assistant
-## 4.4. Scaffold content with the AI assistant
-
-
-
+## 4.4. Scaffold content with the AI assistant
 
 If you need to generate specific content within the project using specific templates (such as a playbook or execution environment), you can continue the conversation.
 
@@ -11,8 +8,6 @@ If you need to generate specific content within the project using specific templ
 - In the GitHub Copilot chat window, enter a natural language prompt requesting help with creating the type of content you need. For example:
 
 
-- For a playbook project, enter the prompt: _Following best practices, help me create a playbook called 'webserver'…​"_
-- For an execution environment, enter the prompt: _Create an execution environment definition file using Fedora minimal as the base"_
-
-
+- For a playbook project, enter the prompt: *Following best practices, help me create a playbook called 'webserver'…​"*
+- For an execution environment, enter the prompt: *Create an execution environment definition file using Fedora minimal as the base"*
 

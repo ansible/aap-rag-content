@@ -1,9 +1,6 @@
 # 2. Configuring authentication in the Ansible Automation Platform
 ## 2.7. Mapping
-### 2.7.8. Role mapping
-
-
-
+### 2.7.8. Role mapping
 
 Role mapping is the mapping of a user either to a global role, such as Platform Auditor, or team or organization role.
 
@@ -14,25 +11,22 @@ You can specify role mapping separately for each account authentication.
 **Procedure**
 
 1. After configuring the authentication details for your authentication method, select the **Mapping** tab.
-1. Select **Role** from the **Add authentication mapping** list.
-1. Enter a unique rule **Name** to identify the rule.
-1. Select a **Trigger** from the list. See [Authenticator map triggers](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/access_management_and_authentication/index#gw-authenticator-map-triggers) for more information about map triggers.
-1. Select **Revoke** to remove the role for the user when none of the trigger conditions are matched.
-1. Select a **Role** to be applied or removed for matching users.
-1. ClickNext.
-
+2. Select **Role** from the **Add authentication mapping** list.
+3. Enter a unique rule **Name** to identify the rule.
+4. Select a **Trigger** from the list. See [Authenticator map triggers](#gw-authenticator-map-triggers "2.7.3.&nbsp;Authenticator map triggers") for more information about map triggers.
+5. Select **Revoke** to remove the role for the user when none of the trigger conditions are matched.
+6. Select a **Role** to be applied or removed for matching users.
+7. Click Next.
 
 **Next steps**
 
-1. You can manage the authentication mappings order by clickingManage mappings.
-1. Drag and drop the mapping up or down in the list.
+1. You can manage the authentication mappings order by clicking Manage mappings.
+
+2. Drag and drop the mapping up or down in the list.
+
 
 Note
 The mapping precedence is determined by the order in which the mappings are listed.
 
-
-
-
-1. ClickApply.
-
+3. Click Apply.
 

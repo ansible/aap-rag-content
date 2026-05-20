@@ -1,9 +1,6 @@
-# Chapter 1. Ansible development tools
+# Chapter 1. Ansible development tools
 
-
-
-
-Ansible development tools ( `ansible-dev-tools` ) is a suite of tools provided with Ansible Automation Platform to help automation creators to create, test, and deploy playbook projects, execution environments, and collections.
+Ansible development tools (`ansible-dev-tools`) is a suite of tools provided with Ansible Automation Platform to help automation creators to create, test, and deploy playbook projects, execution environments, and collections.
 
 The Ansible VS Code extension by Red Hat integrates most of the Ansible development tools: you can use these tools from the VS Code user interface.
 

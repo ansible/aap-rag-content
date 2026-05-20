@@ -1,8 +1,5 @@
 # 2. New features and enhancements
-## 2.2. General availability of Ansible self-service automation portal 2.1.1
-
-
-
+## 2.2. General availability of Ansible self-service automation portal 2.1.1
 
 Ansible self-service automation portal is now generally available as part of the Ansible Automation Platform subscription. The new self-service automation portal empowers platform admins to provide a streamlined “point-and-click” Ansible automation experience to a broader set of users within the organization. Users who are not Ansible experts now have a dedicated self-service portal from which they can launch a range of automation jobs.
 
@@ -20,5 +17,4 @@ Notable changes include:
 - Simplified Interface: A distinct, user-friendly web interface designed for business users, not automation experts.
 - Guided Workflows: Step-by-step forms that walk users through automation requests without technical complexity - automatically generated from your existing job templates.
 - Smart Forms: Real-time field validation, conditional and dynamic forms, and dropdown fields for Ansible Automation Platform artifacts, such as Ansible Automation Platform inventories.
-
 

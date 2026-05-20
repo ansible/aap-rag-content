@@ -1,9 +1,6 @@
 # 5. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
 ## 5.3. Configuring automation hub on Red Hat OpenShift Container Platform web console
-### 5.3.3. Configuring an external database for automation hub on Red Hat Ansible Automation Platform Operator
-
-
-
+### 5.3.3. Configuring an external database for automation hub on Red Hat Ansible Automation Platform Operator
 
 For users who prefer to deploy Ansible Automation Platform with an external database, they can do so by configuring a secret with instance credentials and connection information, then applying it to their cluster using the `oc create` command.
 
@@ -12,9 +9,8 @@ By default, the Ansible Automation Platform Operator automatically creates and c
 You can choose to use an external database instead if you prefer to use a dedicated node to ensure dedicated resources or to manually manage backups, upgrades, or performance tweaks.
 
 Note
+
 The same external database (PostgreSQL instance) can be used for both automation hub, automation controller, and platform gateway as long as the database names are different. In other words, you can have multiple databases with different names inside a single PostgreSQL instance.
-
-
 
 The following section outlines the steps to configure an external database for your automation hub on a Ansible Automation Platform Operator.
 
@@ -22,59 +18,63 @@ The following section outlines the steps to configure an external database for y
 
 The external database must be a PostgreSQL database that is the version supported by the current release of Ansible Automation Platform. The external postgres instance credentials and connection information will need to be stored in a secret, which will then be set on the automation hub spec.
 
-
 Note
+
 Ansible Automation Platform 2.6 supports PostgreSQL 15 for its managed databases and additionally supports PostgreSQL 15, 16, and 17 for external databases.
 
 If you choose to use an externally managed database with version 16 or 17 you must also rely on external backup and restore processes.
 
-
-
 **Procedure**
 
-1. Create a `    postgres_configuration_secret` YAML file, following the template below:
+1. Create a `postgres_configuration_secret` YAML file, following the template below:
 
-
-```
-apiVersion: v1    kind: Secret    metadata:      name: external-postgres-configuration      namespace: &lt;target_namespace&gt;<span id="CO1-5"><!--Empty--></span><span class="callout">1</span>stringData:      host: "&lt;external_ip_or_url_resolvable_by_the_cluster&gt;"<span id="CO1-6"><!--Empty--></span><span class="callout">2</span>port: "&lt;external_port&gt;"<span id="CO1-7"><!--Empty--></span><span class="callout">3</span>database: "&lt;desired_database_name&gt;"      username: "&lt;username_to_connect_as&gt;"      password: "&lt;password_to_connect_with&gt;"<span id="CO1-8"><!--Empty--></span><span class="callout">4</span>sslmode: "prefer"<span id="CO1-9"><!--Empty--></span><span class="callout">5</span>type: "unmanaged"    type: Opaque
-```
+apiVersion: v1
+kind: Secret
+metadata:
+name: external-postgres-configuration
+namespace: <target_namespace> 1
+stringData:
+host: "<external_ip_or_url_resolvable_by_the_cluster>" 2
+port: "<external_port>" 3
+database: "<desired_database_name>"
+username: "<username_to_connect_as>"
+password: "<password_to_connect_with>" 4
+sslmode: "prefer" 5
+type: "unmanaged"
+type: Opaque
 
 
 1. Namespace to create the secret in. This should be the same namespace you want to deploy to.
-1. The resolvable hostname for your database node.
-1. External port defaults to `        5432` .
-1. Value for variable `        password` should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
-1. The variable `        sslmode` is valid for `        external` databases only. The allowed values are: `        <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">prefer</span></strong></span>` , `        <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">disable</span></strong></span>` , `        <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">allow</span></strong></span>` , `        <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">require</span></strong></span>` , `        <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">verify-ca</span></strong></span>` , and `        <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">verify-full</span></strong></span>` .
+2. The resolvable hostname for your database node.
+3. External port defaults to `5432`.
+4. Value for variable `password` should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
+5. The variable `sslmode` is valid for `external` databases only. The allowed values are: `prefer`, `disable`, `allow`, `require`, `verify-ca`, and `verify-full`.
 
-1. Apply `    external-postgres-configuration-secret.yml` to your cluster using the `    oc create` command.
+2. Apply `external-postgres-configuration-secret.yml` to your cluster using the `oc create` command.
 
-
-```
 $ oc create -f external-postgres-configuration-secret.yml
-```
 
+3. When creating your `AnsibleAutomationPlatform` custom resource object, specify the secret under the `hub` section in your spec, following the example below:
 
-1. When creating your `    AnsibleAutomationPlatform` custom resource object, specify the secret under the `    hub` section in your spec, following the example below:
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+name: myaap
+spec:
+hub:
+name: hub-dev  # Optional: specify existing instance or custom name
+postgres_configuration_secret: external-postgres-configuration
+storage_type: file
+file_storage_storage_class: <your-read-write-many-storage-class>
+file_storage_size: 10Gi
 
-
-```
-apiVersion: aap.ansible.com/v1alpha1    kind: AnsibleAutomationPlatform    metadata:      name: myaap    spec:      hub:        name: hub-dev  # Optional: specify existing instance or custom name        postgres_configuration_secret: external-postgres-configuration        storage_type: file        file_storage_storage_class: &lt;your-read-write-many-storage-class&gt;        file_storage_size: 10Gi
-```
 
 Note
-If you have an existing automation hub instance, specify its name under `    hub.name` to apply these settings to the existing instance. If you omit the `    name` field, the operator will create a new instance with the default name pattern `    &lt;aap-instance-name&gt;-hub` .
+If you have an existing automation hub instance, specify its name under `hub.name` to apply these settings to the existing instance. If you omit the `name` field, the operator will create a new instance with the default name pattern `<aap-instance-name>-hub`.
 
-For more examples of Ansible Automation Platform custom resources, see [Appendix: Red Hat Ansible Automation Platform custom resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#appendix-operator-crs_operator-platform-doc) .
+For more examples of Ansible Automation Platform custom resources, see [Appendix: Red Hat Ansible Automation Platform custom resources](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/installing_on_openshift_container_platform/index#appendix-operator-crs_operator-platform-doc).
 
-
-
-
-
-
-#### 5.3.3.1. Enabling the hstore extension for the automation hub PostgreSQL database
-
-
-
+#### 5.3.3.1. Enabling the hstore extension for the automation hub PostgreSQL database
 
 The database migration script uses `hstore` fields to store information, therefore the `hstore` extension must be enabled in the automation hub PostgreSQL database.
 
@@ -88,53 +88,37 @@ If the `hstore` extension is not enabled before installation, a failure raises d
 
 1. Check if the extension is available on the PostgreSQL server (automation hub database).
 
+$ psql -d <automation hub database> -c "SELECT * FROM pg_available_extensions WHERE name='hstore'"
 
-```
-$ psql -d &lt;automation hub database&gt; -c "SELECT * FROM pg_available_extensions WHERE name='hstore'"
-```
+2. Where the default value for `<automation hub database>` is `automationhub`.
 
+**Example output with `hstore` available**:
 
-1. Where the default value for `    &lt;automation hub database&gt;` is `    automationhub` .
+name  | default_version | installed_version |comment
+------+-----------------+-------------------+---------------------------------------------------
+hstore | 1.7           |                   | data type for storing sets of (key, value) pairs
+(1 row)
 
-**Example output with `    hstore` available** :
+**Example output with `hstore` not available**:
 
+name | default_version | installed_version | comment
+------+-----------------+-------------------+---------
+(0 rows)
 
-```
-name  | default_version | installed_version |comment    ------+-----------------+-------------------+---------------------------------------------------     hstore | 1.7           |                   | data type for storing sets of (key, value) pairs    (1 row)
-```
-
-**Example output with `    hstore` not available** :
-
-
-```
-name | default_version | installed_version | comment    ------+-----------------+-------------------+---------    (0 rows)
-```
-
-
-1. On a RHEL based server, the `    hstore` extension is included in the `    postgresql-contrib` RPM package, which is not installed automatically when installing the PostgreSQL server RPM package.
+3. On a RHEL based server, the `hstore` extension is included in the `postgresql-contrib` RPM package, which is not installed automatically when installing the PostgreSQL server RPM package.
 
 To install the RPM package, use the following command:
 
-
-```
 dnf install postgresql-contrib
-```
 
+4. Load the `hstore` PostgreSQL extension into the automation hub database with the following command:
 
-1. Load the `    hstore` PostgreSQL extension into the automation hub database with the following command:
+$ psql -d <automation hub database> -c "CREATE EXTENSION hstore;"
 
+In the following output, the `installed_version` field lists the `hstore` extension used, indicating that `hstore` is enabled.
 
-```
-$ psql -d &lt;automation hub database&gt; -c "CREATE EXTENSION hstore;"
-```
-
-In the following output, the `    installed_version` field lists the `    hstore` extension used, indicating that `    hstore` is enabled.
-
-
-```
-name | default_version | installed_version | comment    -----+-----------------+-------------------+------------------------------------------------------    hstore  |     1.7      |       1.7         | data type for storing sets of (key, value) pairs    (1 row)
-```
-
-
-
+name | default_version | installed_version | comment
+-----+-----------------+-------------------+------------------------------------------------------
+hstore  |     1.7      |       1.7         | data type for storing sets of (key, value) pairs
+(1 row)
 

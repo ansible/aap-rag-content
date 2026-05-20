@@ -1,12 +1,8 @@
 # 1. Installing Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
 ## 1.1. Planning your Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-### 1.1.6. Additional resources
-
-
-
+### 1.1.6. Additional resources
 
 To learn more about OpenShift Container Platform OperatorHub you can review OpenShift Container Platform documentation:
 
--  [Understanding OperatorHub](https://docs.redhat.com/en/documentation/openshift_container_platform/4.15/html/operators/understanding-operators#olm-understanding-operatorhub)
-
+- [Understanding OperatorHub](https://docs.redhat.com/en/documentation/openshift_container_platform/4.15/html/operators/understanding-operators#olm-understanding-operatorhub)
 

@@ -1,8 +1,5 @@
 # 4. Migration prerequisites
-## 4.1. RPM to containerized migration prerequisites
-
-
-
+## 4.1. RPM to containerized migration prerequisites
 
 Before migrating from an RPM-based deployment to a container-based deployment, ensure you meet the following prerequisites:
 
@@ -12,5 +9,4 @@ Before migrating from an RPM-based deployment to a container-based deployment, e
 - You have downloaded the containerized installation program for the latest release of the Ansible Automation Platform version you are on.
 - You have enough storage for database dumps and backups.
 - There is network connectivity between the source and target environments.
-
 

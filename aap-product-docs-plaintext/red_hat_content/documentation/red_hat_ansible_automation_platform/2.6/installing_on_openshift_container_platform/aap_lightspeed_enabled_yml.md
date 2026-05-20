@@ -1,11 +1,7 @@
 # 15. Appendix: Red Hat Ansible Automation Platform custom resources
 ## 15.1. Custom resources
-### 15.1.16. aap-lightspeed-enabled.yml
+### 15.1.16. aap-lightspeed-enabled.yml
 
-
-
-
-```
 ---
 apiVersion: aap.ansible.com/v1alpha1
 kind: AnsibleAutomationPlatform
@@ -44,5 +40,4 @@ disabled: false
 # * * Event-Driven Ansible deployed and named: myaap-eda
 # * * Automation hub deployed and named: myaap-hub
 # * Red Hat Ansible Lightspeed deployed and named: myaap-lightspeed
-```
 

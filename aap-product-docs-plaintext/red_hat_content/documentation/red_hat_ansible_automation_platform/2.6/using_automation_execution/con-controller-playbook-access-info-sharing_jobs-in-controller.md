@@ -1,9 +1,6 @@
 # 5. Jobs in automation controller
 ## 5.3. Playbook run jobs
-### 5.3.3. Playbook access and information sharing
-
-
-
+### 5.3.3. Playbook access and information sharing
 
 Automation controller’s use of automation execution environments and Linux containers prevents playbooks from reading files outside of their project directory.
 

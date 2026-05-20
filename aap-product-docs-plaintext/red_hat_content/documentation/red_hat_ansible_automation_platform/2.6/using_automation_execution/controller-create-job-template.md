@@ -1,16 +1,16 @@
 # 6. Job templates
-## 6.3. Creating a job template
-
-
-
+## 6.3. Creating a job template
 
 A job template is a definition and set of parameters for running an Ansible job. Use job templates to launch jobs.
 
 **Procedure**
 
-1. From the navigation panel, selectAutomation Execution→Templates.
-1. On the **Automation Templates** page, select **Create job template** from the **Create template** list.
-1. Enter the appropriate details in the following fields:
+1. From the navigation panel, select Automation Execution → Templates.
+
+2. On the **Automation Templates** page, select **Create job template** from the **Create template** list.
+
+3. Enter the appropriate details in the following fields:
+
 
 Note
 If a field has the **Prompt on launch** checkbox selected, launching the job prompts you for the value for that field when launching.
@@ -19,126 +19,69 @@ Most prompted values override any values set in the job template.
 
 Note the exceptions in the following table.
 
-
-
-|  **Field** |  **Options** |  **Prompt on Launch** |
+| **Field** | **Options** | **Prompt on Launch** |
 | --- | --- | --- |
-|  **Name** | Enter a name for the job. | N/A |
-|  **Description** | Enter an arbitrary description as appropriate (optional). | N/A |
-|  **Job type** | Choose a job type:
+| <br> **Name** | <br>  Enter a name for the job. | <br>  N/A |
+| <br> **Description** | <br>  Enter an arbitrary description as appropriate (optional). | <br>  N/A |
+| <br> **Job type** | <br>  Choose a job type:    <br>    Run: Start the playbook when launched, running Ansible tasks on the selected hosts.     Check: Perform a "dry run" of the playbook and report changes that would be made without actually making them. Tasks that do not support check mode are missed and do not report potential changes.  <br>  For more information about job types see the [Jobs in automation controller](#controller-jobs "Chapter&nbsp;5.&nbsp;Jobs in automation controller"). | <br>  Yes |
+| <br> **Inventory** | <br>  Choose the inventory to use with this job template from the inventories available to the logged in user. <br>  A System Administrator must grant you or your team permissions to be able to use certain inventories in a job template. | <br>  Yes <br>  Inventory prompts show up as its own step in a later prompt window. |
+| <br> **Project** | <br>  Select the project to use with this job template from the projects available to the user that is logged in. | <br>  N/A |
+| <br> **Source control branch** | <br>  This field is only present if you chose a project that allows branch override. Specify the overriding branch to use in your job run. If left blank, the specified SCM branch (or commit hash or tag) from the project is used. <br>  For more information, see [Job branch overriding](#controller-job-branch-overriding "5.5.&nbsp;Job branch overriding"). | <br>  Yes |
+| <br> **Playbook** | <br>  Choose the playbook to be launched with this job template from the available playbooks. This field automatically populates with the names of the playbooks found in the project base path for the selected project. Alternatively, you can enter the name of the playbook if it is not listed, such as the name of a file (such as `test.yml`) you want to use to run with that playbook. If you enter a filename that is not valid, the template displays an error, or causes the job to fail. | <br>  N/A |
+| <br> **Execution Environment** | <br>  Select the container image to be used to run this job. You must select a project before you can select an execution environment. | <br>  Yes <br>  Execution environment prompt show up as its own step in a later prompt window. |
+| <br> **Credentials** | <br>  Select the   ![examine](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/4e440067d24ca0b7a2a91901d3b3778f/examine.png)  icon to open a separate window. <br>  Choose the credential from the available options to use with this job template. <br>  Use the drop-down menu list to filter by credential type if the list is extensive. Some credential types are not listed because they do not apply to certain job templates. | <br>    If selected, when launching a job template that has a default credential and supplying another credential replaces the default credential if it is the same type. The following is an example this message:  <br> `Job Template default credentials must be replaced with one of the same type. Please select a credential for the following types in order to proceed: Machine.`   <br>    You can add more credentials as you see fit.  <br>  For guidance on using multiple credential types together, such as Machine and Network credentials, see [Using Machine and Network credentials together](#proc-controller-multi-cred-machine-network "22.4.19.&nbsp;Using Machine and Network credentials together").    <br>    Credential prompts show up as its own step in a later prompt window. |
+| <br> **Labels** | <br>    Optionally supply labels that describe this job template, such as `dev` or `test`.     Use labels to group and filter job templates and completed jobs in the display.     Labels are created when they are added to the job template. Labels are associated with a single Organization by using the Project that is provided in the job template. Members of the Organization can create labels on a job template if they have edit permissions (such as the admin role).     Once you save the job template, the labels appear in the **Job Templates** overview in the Expanded view.     Select   ![Disassociate](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/48c2fa70cf2a09ae0fafa81899b143fc/disassociate.png)  beside a label to remove it. When a label is removed, it is no longer associated with that particular Job or Job Template, but it remains associated with any other jobs that reference it.     Jobs inherit labels from the Job Template at the time of launch. If you delete a label from a Job Template, it is also deleted from the Job. | <br>    If selected, even if a default value is supplied, you are prompted when launching to supply additional labels, if needed.     You cannot delete existing labels, selecting   ![Disassociate](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/48c2fa70cf2a09ae0fafa81899b143fc/disassociate.png)  only removes the newly added labels, not existing default labels. |
+| <br> **Forks** | <br>  The number of parallel or simultaneous processes to use while executing the playbook. A value of zero uses the Ansible default setting, which is five parallel processes unless overridden in `/etc/ansible/ansible.cfg`. | <br>  Yes |
+| <br> **Limit** | <br>  A host pattern to further constrain the list of hosts managed or affected by the playbook. You can separate many patterns by colons (:). As with core Ansible:    <br>    a:b means "in group a or b"     a:b:&c means "in a or b but must be in c"     a:!b means "in a, and definitely not in b" | <br>  Yes <br>  If not selected, the job template executes against all nodes in the inventory or only the nodes predefined on the **Limit** field. When running as part of a workflow, the workflow job template limit is used instead. |
+| <br> **Verbosity** | <br>  Control the level of output Ansible produces as the playbook executes. Choose the verbosity from Normal to various Verbose or Debug settings. This is only displayed in the **details** report view. Verbose logging includes the output of all commands. Debug logging is exceedingly verbose and includes information about SSH operations that can be useful in certain support instances. <br>  Verbosity `5` causes automation controller to block heavily when jobs are running, which could delay reporting that the job has finished (even though it has) and can cause the browser tab to lock up. | <br>  Yes |
+| <br> **Job slicing** | <br>  Specify the number of slices you want this job template to run. Each slice runs the same tasks against a part of the inventory. For more information about job slices, see [Job Slicing](#controller-job-slicing "Chapter&nbsp;7.&nbsp;Job slicing"). | <br>  Yes |
+| <br> **Timeout** | <br>  This enables you to specify the length of time (in seconds) that the job can run before it is canceled. Consider the following for setting the timeout value:    <br>    There is a global timeout defined in the settings which defaults to 0, indicating no timeout.     A negative timeout (<0) on a job template is a true "no timeout" on the job.     A timeout of 0 on a job template defaults the job to the global timeout (which is no timeout by default).     A positive timeout sets the timeout for that job template. | <br>  Yes |
+| <br> **Show changes** | <br>  Enables you to see the changes made by Ansible tasks. | <br>  Yes |
+| <br> **Instance groups** | <br>  Choose [Instance and Container Groups](#controller-instance-and-container-groups "Chapter&nbsp;18.&nbsp;Instance and container groups") to associate with this job template. If the list is extensive, use the   ![examine](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/4e440067d24ca0b7a2a91901d3b3778f/examine.png)  icon to narrow the options. Job template instance groups contribute to the job scheduling criteria, see [Job Runtime Behavior](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/controller-clustering#controller-cluster-job-runtime) and [Control where a job runs](#controller-control-job-run "18.1.7.&nbsp;Control where a job runs") for rules. A System Administrator must grant you or your team permissions to be able to use an instance group in a job template. Use of a container group requires admin rights. | <br>    Yes.  <br>  If selected, you are providing the jobs preferred instance groups in order of preference. If the first group is out of capacity, later groups in the list are considered until one with capacity is available, at which point that is selected to run the job.    <br>    If you prompt for an instance group, what you enter replaces the normal instance group hierarchy and overrides all of the organizations' and inventories' instance groups.     The Instance Groups prompt shows up as its own step in a later prompt window. |
+| <br> **Job tags** | <br>  Type and select the **Create** menu to specify which parts of the playbook should be executed. | <br>  Yes |
+| <br> **Skip tags** | <br>  Type and select the **Create** menu to specify certain tasks or parts of the playbook to skip. | <br>  Yes |
+| <br> **Extra variables** | <br>    Pass extra command line variables to the playbook. This is the "-e" or "-extra-vars" command line parameter for ansible-playbook.     Give key or value pairs by using either YAML or JSON. These variables have a maximum value of precedence and overrides other variables specified elsewhere. The following is an example value: `git_branch: production release_version: 1.5` | <br>  Yes <br>  If you want to be able to specify `extra_vars` on a schedule, you must select **Prompt on launch** for Variables on the job template, or enable a survey on the job template. Those answered survey questions become `extra_vars`. |
 
-- Run: Start the playbook when launched, running Ansible tasks on the selected hosts.
-- Check: Perform a "dry run" of the playbook and report changes that would be made without actually making them. Tasks that do not support check mode are missed and do not report potential changes.
-
-
-For more information about job types see the [Jobs in automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-jobs) . | Yes |
-|  **Inventory** | Choose the inventory to use with this job template from the inventories available to the logged in user.
-
-A System Administrator must grant you or your team permissions to be able to use certain inventories in a job template. | Yes
-
-Inventory prompts show up as its own step in a later prompt window. |
-|  **Project** | Select the project to use with this job template from the projects available to the user that is logged in. | N/A |
-|  **Source control branch** | This field is only present if you chose a project that allows branch override. Specify the overriding branch to use in your job run. If left blank, the specified SCM branch (or commit hash or tag) from the project is used.
-
-For more information, see [Job branch overriding](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-job-branch-overriding) . | Yes |
-|  **Playbook** | Choose the playbook to be launched with this job template from the available playbooks. This field automatically populates with the names of the playbooks found in the project base path for the selected project. Alternatively, you can enter the name of the playbook if it is not listed, such as the name of a file (such as `test.yml` ) you want to use to run with that playbook. If you enter a filename that is not valid, the template displays an error, or causes the job to fail. | N/A |
-|  **Execution Environment** | Select the container image to be used to run this job. You must select a project before you can select an execution environment. | Yes
-
-Execution environment prompt show up as its own step in a later prompt window. |
-|  **Credentials** | Select the![examine](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/4e440067d24ca0b7a2a91901d3b3778f/examine.png)
-icon to open a separate window.
-
-Choose the credential from the available options to use with this job template.
-
-Use the drop-down menu list to filter by credential type if the list is extensive. Some credential types are not listed because they do not apply to certain job templates. | - If selected, when launching a job template that has a default credential and supplying another credential replaces the default credential if it is the same type. The following is an example this message:
+4. You can set the following options for launching this template, if necessary:
 
 
-`Job Template default credentials must be replaced with one of the same type. Please select a credential for the following types in order to proceed: Machine.`
+- **Privilege escalation**: If checked, you enable this playbook to run as an administrator. This is the equal of passing the `--become` option to the `ansible-playbook` command.
 
-- You can add more credentials as you see fit.
-- Credential prompts show up as its own step in a later prompt window. |
-|  **Labels** | - Optionally supply labels that describe this job template, such as `    dev` or `    test` .
-- Use labels to group and filter job templates and completed jobs in the display.
-- Labels are created when they are added to the job template. Labels are associated with a single Organization by using the Project that is provided in the job template. Members of the Organization can create labels on a job template if they have edit permissions (such as the admin role).
-- Once you save the job template, the labels appear in the **Job Templates** overview in the Expanded view.
-- Select![Disassociate](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/48c2fa70cf2a09ae0fafa81899b143fc/disassociate.png)
-beside a label to remove it. When a label is removed, it is no longer associated with that particular Job or Job Template, but it remains associated with any other jobs that reference it.
-- Jobs inherit labels from the Job Template at the time of launch. If you delete a label from a Job Template, it is also deleted from the Job. | - If selected, even if a default value is supplied, you are prompted when launching to supply additional labels, if needed.
-- You cannot delete existing labels, selecting![Disassociate](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/48c2fa70cf2a09ae0fafa81899b143fc/disassociate.png)
-only removes the newly added labels, not existing default labels. |
-|  **Forks** | The number of parallel or simultaneous processes to use while executing the playbook. A value of zero uses the Ansible default setting, which is five parallel processes unless overridden in `/etc/ansible/ansible.cfg` . | Yes |
-|  **Limit** | A host pattern to further constrain the list of hosts managed or affected by the playbook. You can separate many patterns by colons (:). As with core Ansible:
+- **Provisioning callback**: If checked, you enable a host to call back to automation controller through the REST API and start a job from this job template. For more information, see [Provisioning Callbacks](#controller-provisioning-callbacks "6.17.&nbsp;Provisioning callbacks").
 
-- a:b means "in group a or b"
-- a:b:&c means "in a or b but must be in c"
-- a:!b means "in a, and definitely not in b" | Yes
-
-If not selected, the job template executes against all nodes in the inventory or only the nodes predefined on the **Limit** field. When running as part of a workflow, the workflow job template limit is used instead. |
-|  **Verbosity** | Control the level of output Ansible produces as the playbook executes. Choose the verbosity from Normal to various Verbose or Debug settings. This is only displayed in the **details** report view. Verbose logging includes the output of all commands. Debug logging is exceedingly verbose and includes information about SSH operations that can be useful in certain support instances.
-
-Verbosity `5` causes automation controller to block heavily when jobs are running, which could delay reporting that the job has finished (even though it has) and can cause the browser tab to lock up. | Yes |
-|  **Job slicing** | Specify the number of slices you want this job template to run. Each slice runs the same tasks against a part of the inventory. For more information about job slices, see [Job Slicing](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-job-slicing) . | Yes |
-|  **Timeout** | This enables you to specify the length of time (in seconds) that the job can run before it is canceled. Consider the following for setting the timeout value:
-
-- There is a global timeout defined in the settings which defaults to 0, indicating no timeout.
-- A negative timeout (<0) on a job template is a true "no timeout" on the job.
-- A timeout of 0 on a job template defaults the job to the global timeout (which is no timeout by default).
-- A positive timeout sets the timeout for that job template. | Yes |
-|  **Show changes** | Enables you to see the changes made by Ansible tasks. | Yes |
-|  **Instance groups** | Choose [Instance and Container Groups](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-instance-and-container-groups) to associate with this job template. If the list is extensive, use the![examine](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/4e440067d24ca0b7a2a91901d3b3778f/examine.png)
-icon to narrow the options. Job template instance groups contribute to the job scheduling criteria, see [Job Runtime Behavior](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/controller-clustering#controller-cluster-job-runtime) and [Control where a job runs](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-control-job-run) for rules. A System Administrator must grant you or your team permissions to be able to use an instance group in a job template. Use of a container group requires admin rights. | - Yes.
-
-
-If selected, you are providing the jobs preferred instance groups in order of preference. If the first group is out of capacity, later groups in the list are considered until one with capacity is available, at which point that is selected to run the job.
-
-- If you prompt for an instance group, what you enter replaces the normal instance group hierarchy and overrides all of the organizations' and inventories' instance groups.
-- The Instance Groups prompt shows up as its own step in a later prompt window. |
-|  **Job tags** | Type and select the **Create** menu to specify which parts of the playbook should be executed. | Yes |
-|  **Skip tags** | Type and select the **Create** menu to specify certain tasks or parts of the playbook to skip. | Yes |
-|  **Extra variables** | - Pass extra command line variables to the playbook. This is the "-e" or "-extra-vars" command line parameter for ansible-playbook.
-- Give key or value pairs by using either YAML or JSON. These variables have a maximum value of precedence and overrides other variables specified elsewhere. The following is an example value: `    git_branch: production release_version: 1.5` | Yes
-
-If you want to be able to specify `extra_vars` on a schedule, you must select **Prompt on launch** for Variables on the job template, or enable a survey on the job template. Those answered survey questions become `extra_vars` . |
-
-
-
-1. You can set the following options for launching this template, if necessary:
-
-
--  **Privilege escalation** : If checked, you enable this playbook to run as an administrator. This is the equal of passing the `        --become` option to the `        ansible-playbook` command.
--  **Provisioning callback** : If checked, you enable a host to call back to automation controller through the REST API and start a job from this job template. For more information, see [Provisioning Callbacks](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-provisioning-callbacks) .
--  **Enable webhook** : If checked, you turn on the ability to interface with a predefined SCM system web service that is used to launch a job template. GitHub and GitLab are the supported SCM systems.
+- **Enable webhook**: If checked, you turn on the ability to interface with a predefined SCM system web service that is used to launch a job template. GitHub and GitLab are the supported SCM systems.
 
 
 - If you enable webhooks, other fields display, prompting for additional information:
--  **Webhook service** : Select which service to listen for webhooks from.
--  **Webhook URL** : Automatically populated with the URL for the webhook service to POST requests to.
--  **Webhook key** : Generated shared secret to be used by the webhook service to sign payloads sent to automation controller. You must configure this in the settings on the webhook service in order for automation controller to accept webhooks from this service.
--  **Webhook credential** : Optionally, give a GitHub or GitLab personal access token (PAT) as a credential to use to send status updates back to the webhook service.
+
+- **Webhook service**: Select which service to listen for webhooks from.
+
+- **Webhook URL**: Automatically populated with the URL for the webhook service to POST requests to.
+
+- **Webhook key**: Generated shared secret to be used by the webhook service to sign payloads sent to automation controller. You must configure this in the settings on the webhook service in order for automation controller to accept webhooks from this service.
+
+- **Webhook credential**: Optionally, give a GitHub or GitLab personal access token (PAT) as a credential to use to send status updates back to the webhook service.
 
 Before you can select it, the credential must exist.
 
-See [Credential types](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#ref-controller-credential-types) to create one.
+See [Credential types](#ref-controller-credential-types "22.4.&nbsp;Credential types") to create one.
 
+- For additional information about setting up webhooks, see [Working with Webhooks](#controller-work-with-webhooks "Chapter&nbsp;27.&nbsp;Working with Webhooks").
 
-- For additional information about setting up webhooks, see [Working with Webhooks](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-work-with-webhooks) .
+- **Concurrent jobs**: If checked, you are allowing jobs in the queue to run simultaneously if not dependent on one another. Check this box if you want to run job slices simultaneously. For more information, see [Automation controller capacity determination and job impact](#controller-capacity-determination "5.4.&nbsp;Automation controller capacity determination and job impact").
 
--  **Concurrent jobs** : If checked, you are allowing jobs in the queue to run simultaneously if not dependent on one another. Check this box if you want to run job slices simultaneously. For more information, see [Automation controller capacity determination and job impact](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-capacity-determination) .
--  **Enable fact storage** : If checked, automation controller stores gathered facts for all hosts in an inventory related to the job running.
--  **Prevent instance group fallback** : Check this option to allow only the instance groups listed in the **Instance Groups** field to run the job. If clear, all available instances in the execution pool are used based on the hierarchy described in [Control where a job runs](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-control-job-run) .
+- **Enable fact storage**: If checked, automation controller stores gathered facts for all hosts in an inventory related to the job running.
 
-1. ClickCreate job template, when you have completed configuring the details of the job template.
+- **Prevent instance group fallback**: Check this option to allow only the instance groups listed in the **Instance Groups** field to run the job. If clear, all available instances in the execution pool are used based on the hierarchy described in [Control where a job runs](#controller-control-job-run "18.1.7.&nbsp;Control where a job runs").
+
+5. Click Create job template, when you have completed configuring the details of the job template.
 
 Creating the template does not exit the job template page but advances to the Job Template **Details** tab.
 
-After saving the template, you can clickLaunch templateto start the job. You can also clickEditto add or change the attributes of the template, such as permissions, notifications, view completed jobs, and add a survey (if the job type is not a scan). You must first save the template before launching, otherwise,Launch templateremains disabled.
-
-
-
+After saving the template, you can click Launch template to start the job. You can also click Edit to add or change the attributes of the template, such as permissions, notifications, view completed jobs, and add a survey (if the job type is not a scan). You must first save the template before launching, otherwise, Launch template remains disabled.
 
 **Verification**
 
-1. From the navigation panel, selectAutomation Execution→Templates.
-1. Verify that the newly created template is displayed on the **Templates** page.
-
+1. From the navigation panel, select Automation Execution → Templates.
+2. Verify that the newly created template is displayed on the **Templates** page.
 

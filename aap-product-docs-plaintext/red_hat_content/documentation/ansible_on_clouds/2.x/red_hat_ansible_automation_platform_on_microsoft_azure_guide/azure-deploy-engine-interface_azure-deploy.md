@@ -1,9 +1,6 @@
 # 3. Deploying Red Hat Ansible Automation Platform on Microsoft Azure
 ## 3.4. Monitoring deployments on the Ansible Automation Platform Deployment Engine
-### 3.4.1. Ansible Automation Platform Deployment Engine interface
-
-
-
+### 3.4.1. Ansible Automation Platform Deployment Engine interface
 
 The Ansible Automation Platform Deployment Engine displays a list of the steps in the deployment process. A progress bar shows how far along the deployment is.
 
@@ -11,5 +8,5 @@ Icons indicate the steps that have been completed, the steps that are in progres
 
 To view extended information about a step that failed, click on the **failed** icon for that step.
 
-To restart a failed step, clickRestart Step.
+To restart a failed step, click Restart Step.
 

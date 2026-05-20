@@ -1,9 +1,6 @@
 # 3. Ansible Automation Platform security automation use cases
 ## 3.2. Patch automation with Ansible Automation Platform
-### 3.2.1. Benefits of patch automation
-
-
-
+### 3.2.1. Benefits of patch automation
 
 Automating the patching process provides a number of benefits:
 
@@ -11,5 +8,4 @@ Automating the patching process provides a number of benefits:
 - Decreases time to deploy patches at scale.
 - Ensures consistency of patches across similar systems. Manual patching of similar systems can result in human error (forgetting one or more, patching using different versions) that impacts consistency.
 - Enables orchestration of complex patching scenarios where an update might require taking a system snapshot before applying a patch, or might require additional configuration changes when the patch is applied.
-
 

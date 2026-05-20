@@ -1,8 +1,5 @@
 # 3. Performance tuning for automation controller
-## 3.5. Metrics to monitor automation controller
-
-
-
+## 3.5. Metrics to monitor automation controller
 
 Monitor your automation controller hosts at the system and application levels.
 
@@ -13,14 +10,12 @@ System level monitoring includes the following information:
 - CPU use
 - Network traffic
 
-
 Application level metrics supply data that the application knows about the system. This data includes the following information:
 
 - How many jobs are running in a given instance
 - Capacity information about instances in the cluster
 - How many inventories are present
 - How many hosts are in those inventories
-
 
 Using system and application metrics can help you identify what was happening in the application when a service degradation occurred. Information about automation controller’s performance over time helps when diagnosing problems or doing capacity planning for future growth.
 

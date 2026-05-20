@@ -1,8 +1,5 @@
 # 2. Scaling the tested deployment models
-## 2.5. Motivations for customizing enterprise topologies
-
-
-
+## 2.5. Motivations for customizing enterprise topologies
 
 Enterprise topologies provide a pattern for scalability and resilience. Organizations typically evolve the tested deployment models into custom deployments, tailoring service configurations and scaling to their specific workflows and performance needs within Red Hat Ansible Automation Platform.
 

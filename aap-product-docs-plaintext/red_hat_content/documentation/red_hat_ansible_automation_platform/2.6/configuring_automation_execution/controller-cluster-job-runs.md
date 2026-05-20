@@ -1,9 +1,6 @@
 # 6. Clustering
 ## 6.5. Job runtime behavior
-### 6.5.1. Job runs
-
-
-
+### 6.5.1. Job runs
 
 automation controller supports running jobs on a cluster of instances.
 

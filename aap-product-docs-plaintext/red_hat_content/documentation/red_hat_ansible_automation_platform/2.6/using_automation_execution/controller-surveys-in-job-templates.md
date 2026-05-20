@@ -1,8 +1,5 @@
 # 6. Job templates
-## 6.9. Surveys in job templates
-
-
-
+## 6.9. Surveys in job templates
 
 Surveys provide a way to prompt users for input when launching a job from a job template. This input can then be used as variables in the playbook run.
 

@@ -1,12 +1,8 @@
 # 15. Supported Inventory plugin templates
-## 15.3. Microsoft Azure Resource Manager
-
-
-
+## 15.3. Microsoft Azure Resource Manager
 
 The Microsoft Azure inventory plugin integrates with Microsoft Azure to pull information about virtual machines and other resources for use in automation tasks.
 
-```
 conditional_groups:
 azure: true
 default_host_filters: []
@@ -42,5 +38,4 @@ separator: ''
 plain_host_names: true
 plugin: azure.azcollection.azure_rm
 use_contrib_script_compatible_sanitization: true
-```
 

@@ -1,8 +1,5 @@
 # 3. Getting started as an automation developer
-## 3.8. Build and use an execution environment
-
-
-
+## 3.8. Build and use an execution environment
 
 All automation in Red Hat Ansible Automation Platform runs on container images called automation execution environments.
 
@@ -18,7 +15,6 @@ Automation execution environments contain:
 - Python libraries
 - System dependencies
 - Custom user needs
-
 
 You can either use the default base execution environment included in your Ansible Automation Platform subscription, or you can define and create an automation execution environment using Ansible Builder.
 

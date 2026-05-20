@@ -1,8 +1,5 @@
 # 4. Migration prerequisites
-## 4.4. Containerized to OpenShift Container Platform migration prerequisites
-
-
-
+## 4.4. Containerized to OpenShift Container Platform migration prerequisites
 
 Before migrating from a container-based deployment to an OpenShift Container Platform deployment, ensure that you meet the following prerequisites:
 
@@ -13,5 +10,4 @@ Before migrating from a container-based deployment to an OpenShift Container Pla
 - You have decided between internal or external database configuration.
 - You have decided between internal or external Redis configuration.
 - There is network connectivity between the source and target environments.
-
 

@@ -1,7 +1,4 @@
-# Chapter 2. Configuring proxy support for Red Hat Ansible Automation Platform
-
-
-
+# Chapter 2. Configuring proxy support for Red Hat Ansible Automation Platform
 
 You can configure Red Hat Ansible Automation Platform to communicate with traffic by using a proxy. Proxy servers act as an intermediary for requests from clients seeking resources from other servers.
 

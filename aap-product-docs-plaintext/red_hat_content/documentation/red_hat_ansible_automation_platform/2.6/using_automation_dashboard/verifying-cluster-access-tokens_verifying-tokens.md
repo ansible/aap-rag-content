@@ -1,29 +1,21 @@
 # 1. View key usage metrics with automation dashboard
 ## 1.3. Integrating automation dashboard with your Ansible Automation Platform
-### 1.3.2. Verifying cluster access tokens
-
-
-
+### 1.3.2. Verifying cluster access tokens
 
 After you configure and load your cluster data, verify the stored access tokens for debugging purposes.
 
 **Procedure**
 
-1. Use the `    getclusters` management command with the `    --decrypt` option to display the stored `    access_token` and `    refresh_token` in plain text.
-1. Run the following command inside the `    automation-dashboard-web` container:
+1. Use the `getclusters` management command with the `--decrypt` option to display the stored `access_token` and `refresh_token` in plain text.
 
+2. Run the following command inside the `automation-dashboard-web` container:
 
-```
 podman exec -it automation-dashboard-web /venv/bin/python ./manage.py getclusters --decrypt
-```
 
-
-1. Review the output to confirm that the stored tokens are correct and up-to-date.
-
+3. Review the output to confirm that the stored tokens are correct and up-to-date.
 
 **Example**
 
-```
 clusters:
 - protocol: https
 address: my-aap.example.com
@@ -37,41 +29,33 @@ sync_schedules:
 - name: Every 5 minutes sync
 rrule: DTSTART;TZID=Europe/Ljubljana:20250630T070000 FREQ=MINUTELY;INTERVAL=5
 enabled: true
-```
-
 
 Note
+
 Displaying the encrypted `access_token` and `refresh_token` in plain text for debugging requires the `--decrypt` flag. Do not use this command on unsecured systems.
 
-
-
-You can write output produced by `./manage.py getclusters --decrypt` to a file `clusters.yaml` and use it as input for `./manage.py setclusters clusters.yaml` .
+You can write output produced by `./manage.py getclusters --decrypt` to a file `clusters.yaml` and use it as input for `./manage.py setclusters clusters.yaml`.
 
 **Verification**
 
 If you come across error messages during installation, consult the following table:
 
-
-| Issue | Possible Cause | Solution |
+| <br>  Issue | <br>  Possible Cause | <br>  Solution |
 | --- | --- | --- |
-| 401 error | This is an unauthorized access message indicating authentication errors such as wrong credentials or tokens. | Verify that your access token is correct in `clusters.yaml` |
-| 401 error | A temporary 401 error is expected behavior when the token expires, followed immediately by trying to refresh. | If the automatic token refresh fails (for example, due to invalid `client_secret` or `refresh_token` ), use the `getclusters`  `--decrypt` command to manually verify that the credentials stored in the database match those in your source `clusters.yaml` file. If they do not match, re-run the `setclusters` command with the correct configuration. You can only use the refresh token once. If you need to execute `setclusters` because of invalid access token, create new access and refresh tokens, and use them in your source `clusters.yaml` . |
-| 404 error | This is a “not found” message indicating that something is not configured correctly or pointing to the correct endpoint. | Verify that your Ansible Automation Platform instance URLs used in `clusters.yaml` are correct. |
-
+| <br>  401 error | <br>  This is an unauthorized access message indicating authentication errors such as wrong credentials or tokens. | <br>  Verify that your access token is correct in `clusters.yaml` |
+| <br>  401 error | <br>  A temporary 401 error is expected behavior when the token expires, followed immediately by trying to refresh. | <br>  If the automatic token refresh fails (for example, due to invalid `client_secret` or `refresh_token`), use the `getclusters` `--decrypt` command to manually verify that the credentials stored in the database match those in your source `clusters.yaml` file. If they do not match, re-run the `setclusters` command with the correct configuration. You can only use the refresh token once. If you need to execute `setclusters` because of invalid access token, create new access and refresh tokens, and use them in your source `clusters.yaml`. |
+| <br>  404 error | <br>  This is a “not found” message indicating that something is not configured correctly or pointing to the correct endpoint. | <br>  Verify that your Ansible Automation Platform instance URLs used in `clusters.yaml` are correct. |
 
 A successful installation should be running the following three container services:
 
-```
 podman ps --all --format "{{.Names}}"
 
 postgresql
 automation-dashboard-task
 automation-dashboard-web
-```
 
 You can check your container logs by running the following:
 
-```
 journalctl CONTAINER_NAME=container (where container equals one of postgresql automation-dashboard-task or automation-dashboard-web)
 
 For example:
@@ -79,45 +63,40 @@ journalctl CONTAINER_NAME=automation-dashboard-task
 May 22 13:02:07 automation-dashboard automation-dashboard-task[1607]: [wait-for-migrations-dashboard.sh] Waiting for database migrations...
 May 22 13:02:07 automation-dashboard automation-dashboard-task[1607]: [wait-for-migrations-dashboard.sh] Attempt 1
 May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,636 periodic 2 140568371550016 Starting sync task.
-May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,636 periodic 2 140568371550016 Retrieving clusters inform&gt;
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,636 periodic 2 140568371550016 Retrieving clusters inform>
 May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,747 periodic 2 140568371550016 Retrieved 1 clusters.
-May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 periodic 2 140568371550016 Retrieving data from clust&gt;
-May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 connector 2 140568371550016 Checking Ansible Automation Platform version at h&gt;
-May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 connector 2 140568371550016 Checking if is Ansible Automation Platform 2.5 at&gt;
-May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 connector 2 140568371550016 Pinging api https://ec2-3&gt;
-May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 connector 2 140568371550016 Executing GET request to &gt;
-May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: ERROR 2025-05-22 13:02:13,820 connector 2 140568371550016 GET request failed with &gt;
-May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:13,821 connector 2 140568371550016 Checking if is Ansible Automation Platform 2.4 at&gt;
-May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:13,821 connector 2 140568371550016 Pinging api https://ec2-3&gt;
-May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:13,821 connector 2 140568371550016 Executing GET request to &gt;
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 periodic 2 140568371550016 Retrieving data from clust>
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 connector 2 140568371550016 Checking Ansible Automation Platform version at h>
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 connector 2 140568371550016 Checking if is Ansible Automation Platform 2.5 at>
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 connector 2 140568371550016 Pinging api https://ec2-3>
+May 22 13:02:10 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:10,761 connector 2 140568371550016 Executing GET request to >
+May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: ERROR 2025-05-22 13:02:13,820 connector 2 140568371550016 GET request failed with >
+May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:13,821 connector 2 140568371550016 Checking if is Ansible Automation Platform 2.4 at>
+May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:13,821 connector 2 140568371550016 Pinging api https://ec2-3>
+May 22 13:02:13 automation-dashboard automation-dashboard-task[1607]: INFO 2025-05-22 13:02:13,821 connector 2 140568371550016 Executing GET request to >
 May 22 13:02:16 automation-dashboard automation-dashboard-task[1607]: ERROR 2025-05-22 13:02:16,892 connector 2 140568371550016 GET request failed with ...
-```
 
 The following log snippet shows a successful token refresh:
 
 Note
+
 This log snippet omits timestamps and hostname for brevity.
-
-
 
 **Example**
 
-```
 journalctl CONTAINER_NAME=automation-dashboard-task
 INFO Checking if is AAP 2.5 ... 2.6 at https://app.example.com:443
 INFO Pinging api https://app.example.com:443/api/gateway/v1/ping/
 INFO Detected AAP version AAP 2.6 at https://app.example.com:443
-INFO Executing GET request to https://app.example.com:443/api/controller/v2/organizations/?page_size=100&amp;page=1
+INFO Executing GET request to https://app.example.com:443/api/controller/v2/organizations/?page_size=100&page=1
 ERROR GET request failed with status 401
-INFO Token refresh POST request succedded with status 201
+INFO Token refresh POST request succeeded with status 201
 ERROR GET after reauth response.status_code=200
-INFO Executing GET request to https://app.example.com:443/api/controller/v2/job_templates/?page_size=200&amp;page=1
-Executing GET request to https://app.example.com:443/api/controller/v2/jobs/?page_size=100&amp;page=1&amp;order_by=finished&amp;finished__gt=2025-10-23T13:01:09.768681Z
-```
+INFO Executing GET request to https://app.example.com:443/api/controller/v2/job_templates/?page_size=200&page=1
+Executing GET request to https://app.example.com:443/api/controller/v2/jobs/?page_size=100&page=1&order_by=finished&finished__gt=2025-10-23T13:01:09.768681Z
 
-Check how the services are running by using `systemd` :
+Check how the services are running by using `systemd`:
 
-```
 systemctl status --user
 
 ● automation-dashboard
@@ -130,14 +109,14 @@ systemd: 252-51.el9
 CGroup: /user.slice/user-1000.slice/user@1000.service
 ├─app.slice
 │ ├─automation-dashboard-task.service
-│ │ └─1607 /usr/bin/conmon --api-version 1 -c 84e46532e8ca31b0cadb037479289d030103aa01b7a1591e62b83b17f031e47d -u 84e46532e8ca31b0cadb037479&gt;
+│ │ └─1607 /usr/bin/conmon --api-version 1 -c 84e46532e8ca31b0cadb037479289d030103aa01b7a1591e62b83b17f031e47d -u 84e46532e8ca31b0cadb037479>
 │ ├─automation-dashboard-web.service
-│ │ └─1608 /usr/bin/conmon --api-version 1 -c d060f3e3fb2b4c4c5c588149253beed83c78ccc9c9a8c1bf4c96157142a210dc -u d060f3e3fb2b4c4c5c58814925&gt;
+│ │ └─1608 /usr/bin/conmon --api-version 1 -c d060f3e3fb2b4c4c5c588149253beed83c78ccc9c9a8c1bf4c96157142a210dc -u d060f3e3fb2b4c4c5c58814925>
 │ ├─dbus-broker.service
 │ │ ├─1621 /usr/bin/dbus-broker-launch --scope user
-│ │ └─1624 dbus-broker --log 4 --controller 9 --machine-id 612db98503014199bfd8c788c8d3da58 --max-bytes 100000000000000 --max-fds 2500000000&gt;
+│ │ └─1624 dbus-broker --log 4 --controller 9 --machine-id 612db98503014199bfd8c788c8d3da58 --max-bytes 100000000000000 --max-fds 2500000000>
 │ └─postgresql.service
-│   └─1614 /usr/bin/conmon --api-version 1 -c eec61745cb6fc3a89a4f7475d7ef63b5899699157d943c2f16a3243311927bef -u eec61745cb6fc3a89a4f7475d7&gt;
+│   └─1614 /usr/bin/conmon --api-version 1 -c eec61745cb6fc3a89a4f7475d7ef63b5899699157d943c2f16a3243311927bef -u eec61745cb6fc3a89a4f7475d7>
 ├─init.scope
 │ ├─1093 /usr/lib/systemd/systemd --user
 │ └─1128 "(sd-pam)"
@@ -175,5 +154,4 @@ CGroup: /user.slice/user-1000.slice/user@1000.service
 │   └─1889 "postgres: aapdashboard aapdashboard 172.31.28.99(39338) idle"
 └─podman-pause-b6c4e853.scope
 └─1359 catatonit -P
-```
 

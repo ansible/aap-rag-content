@@ -1,8 +1,5 @@
 # 13. Ansible Automation Platform Resource Operator
-## 13.5. Create custom resources for Resource Operator
+## 13.5. Create custom resources for Resource Operator
 
-
-
-
-Use the Resource Operator to manage automation controller resources directly from your Kubernetes cluster. This section provides the procedures for creating custom resources like **AnsibleJob** , **JobTemplate** , **AnsibleProject** , and more.
+Use the Resource Operator to manage Ansible Automation Platform resources directly from your Kubernetes cluster. This section provides the procedures for creating custom resources like **AnsibleJob**, **JobTemplate**, **AnsibleProject**, and more.
 

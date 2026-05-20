@@ -1,21 +1,17 @@
 # 9. Workflows in automation controller
-## 9.2. Workflow extra variables
+## 9.2. Workflow extra variables
 
+Workflows use surveys to specify variables to be used in the playbooks in the workflow, called `extra_vars`. Survey variables are combined with `extra_vars` defined on the workflow job template, and saved to the workflow job `extra_vars`. `extra_vars` in the workflow job are combined with job template variables when spawning jobs within the workflow.
 
-
-
-Workflows use surveys to specify variables to be used in the playbooks in the workflow, called `extra_vars` . Survey variables are combined with `extra_vars` defined on the workflow job template, and saved to the workflow job `extra_vars` . `extra_vars` in the workflow job are combined with job template variables when spawning jobs within the workflow.
-
-Workflows use the same behavior (hierarchy) of variable precedence as job templates with the exception of three additional variables. See the [Automation controller Variable Precedence Hierarchy](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-extra-variables) in the Extra variables section of Job templates. The three additional variables include:
+Workflows use the same behavior (hierarchy) of variable precedence as job templates with the exception of three additional variables. See the [Automation controller Variable Precedence Hierarchy](#controller-extra-variables "6.18.&nbsp;Extra variables") in the Extra variables section of Job templates. The three additional variables include:
 
 - Workflow job template extra variables
 - Workflow job template survey (defaults)
 - Workflow job launch extra variables
 
-
 Workflows included in a workflow follow the same variable precedence, they only inherit variables if they are specifically prompted for, or defined as part of a survey.
 
-In addition to the workflow `extra_vars` , jobs and workflows run as part of a workflow can inherit variables in the artifacts dictionary of a parent job in the workflow (also combining with ancestors further upstream in its branch).
+In addition to the workflow `extra_vars`, jobs and workflows run as part of a workflow can inherit variables in the artifacts dictionary of a parent job in the workflow (also combining with ancestors further upstream in its branch).
 
 If you use the `set_stats` module in your playbook, you can produce results that can be consumed downstream by another job.
 
@@ -23,8 +19,6 @@ If you use the `set_stats` module in your playbook, you can produce results that
 
 - invoke_set_stats.yml: first playbook in the workflow:
 
-
-```
 ---
 - hosts: localhost
 tasks:
@@ -37,12 +31,9 @@ register: result
 set_stats:
 data:
 integration_results_url:  "{{ (result.stdout|from_json).link }}"
-```
 
 - use_set_stats.yml: second playbook in the workflow:
 
-
-```
 ---
 - hosts: localhost
 tasks:
@@ -56,17 +47,14 @@ register: results
 - name: "Output test results"
 debug:
 msg: "{{ results.content }}"
-```
 
 The `set_stats` module processes this workflow as follows:
 
 1. The contents of an integration result is uploaded to the web.
-1. Through the `    invoke_set_stats` playbook, `    set_stats` is then invoked to artifact the URL of the uploaded `    integration_results.txt` into the Ansible variable `    integration_results_url` .
-1. The second playbook in the workflow consumes the Ansible extra variable `    integration_results_url` . It calls out to the web by using the URI module to get the contents of the file uploaded by the previous job template job. Then, it prints out the contents of the obtained file.
-
+2. Through the `invoke_set_stats` playbook, `set_stats` is then invoked to artifact the URL of the uploaded `integration_results.txt` into the Ansible variable `integration_results_url`.
+3. The second playbook in the workflow consumes the Ansible extra variable `integration_results_url`. It calls out to the web by using the URI module to get the contents of the file uploaded by the previous job template job. Then, it prints out the contents of the obtained file.
 
 Note
+
 For artifacts to work, keep the default setting, `per_host = False` in the `set_stats` module.
-
-
 

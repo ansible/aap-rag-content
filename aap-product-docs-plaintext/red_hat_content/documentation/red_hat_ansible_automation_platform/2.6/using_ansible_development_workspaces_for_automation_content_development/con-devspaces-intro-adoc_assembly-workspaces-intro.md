@@ -1,8 +1,5 @@
 # 1. Ansible development workspaces
-## 1.1. Introduction to Ansible development workspaces
-
-
-
+## 1.1. Introduction to Ansible development workspaces
 
 Ansible development workspaces offer centralized management and policy enforcement. Administrators gain improved control, trust, and governance over the consistent, secure environments used to develop automation. Developers do not need to install applications on their workstations, which is useful for locked down environments.
 

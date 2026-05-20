@@ -1,8 +1,5 @@
 # 2. Red Hat Ansible Automation Platform components
-## 2.1. Platform gateway
-
-
-
+## 2.1. Platform gateway
 
 Platform gateway is the service that handles authentication and authorization for the Ansible Automation Platform. It provides a single entry into the Ansible Automation Platform and serves the platform user interface so you can authenticate and access all of the Ansible Automation Platform services from a single location.
 
@@ -10,9 +7,7 @@ The platform gateway includes an activity stream that captures changes to gatewa
 
 You can access the details captured by the activity stream from the API:
 
-```
 /api/gateway/v1/activitystream/
-```
 
-For more information about the services available in the Ansible Automation Platform, refer to [Key functionality and concepts](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/getting_started_with_ansible_automation_platform/index#assembly-gs-key-functionality) in _Getting started with Ansible Automation Platform_ .
+For more information about the services available in the Ansible Automation Platform, refer to [Key functionality and concepts](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/getting_started_with_ansible_automation_platform/index#assembly-gs-key-functionality) in *Getting started with Ansible Automation Platform*.
 

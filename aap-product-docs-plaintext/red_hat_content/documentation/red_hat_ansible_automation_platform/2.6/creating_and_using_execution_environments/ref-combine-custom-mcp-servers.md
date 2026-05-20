@@ -1,0 +1,14 @@
+# 6. Create and integrate custom MCP Servers in execution environments
+## 6.6. Combine custom and dev preview MCP servers
+
+Integrate both custom-developed and dev preview Model Context Protocol (MCP) servers within a single execution environment to use comprehensive automation capabilities.
+
+To include both dev preview MCP servers from `ansible.mcp_builder` such as `aws_ccapi_mcp` and your custom role in the same execution environment, chain multiple playbook calls in `additional_build_steps`:
+
+additional_build_steps:
+append_final: |
+RUN ansible-playbook ansible.mcp_builder.install_mcp -e mcp_servers=aws_ccapi_mcp
+RUN ansible-playbook myorg.mcp_cfn.install_cfn_mcp
+
+The manifest file merges automatically. The second playbook appends its entries to the existing 'mcpservers.json' created by the first.
+

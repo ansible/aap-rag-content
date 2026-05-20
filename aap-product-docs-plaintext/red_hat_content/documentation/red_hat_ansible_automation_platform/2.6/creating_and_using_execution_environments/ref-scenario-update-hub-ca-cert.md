@@ -1,19 +1,14 @@
 # 3. Common automation execution environment scenarios
-## 3.1. Updating the automation hub CA certificate
-
-
-
+## 3.1. Updating the automation hub CA certificate
 
 Use this example to customize the default definition file to include a CA certificate to the `additional-build-files` section, move the file to the appropriate directory and, finally, run the command to update the dynamic configuration of CA certificates to allow the system to trust this CA certificate.
 
-**Prerequisites** * A custom CA certificate, for example `rootCA.crt` .
+**Prerequisites** * A custom CA certificate, for example `rootCA.crt`.
 
 Note
+
 Customizing the CA certificate using `prepend_base` means that the resulting CA configuration is displayed in all other build stages and the final image, because all other build stages inherit from the base image.
 
-
-
-```
 additional_build_files:
 # copy the CA public key into the build context, we will copy and use it in the base image later
 - src: files/rootCA.crt
@@ -31,5 +26,4 @@ package_manager_path: /usr/bin/microdnf  # downstream images use non-standard pa
 
 [galaxy]
 server_list = automation_hub
-```
 

@@ -1,8 +1,5 @@
 # 9. Logging and Aggregation
-## 9.4. Troubleshooting logging
-
-
-
+## 9.4. Troubleshooting logging
 
 This section provides information to help troubleshoot logging issues in automation controller.
 
@@ -12,11 +9,11 @@ If you have sent a message with the test button to your configured logging servi
 
 **API 4XX Errors**
 
-You can include the API error message for 4XX errors by modifying the log format for those messages. Refer to the [API 4XX Error Configuration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-logging-aggregation#proc-controller-api-4xx-error-config) .
+You can include the API error message for 4XX errors by modifying the log format for those messages. Refer to the [API 4XX Error Configuration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-logging-aggregation#proc-controller-api-4xx-error-config).
 
 **LDAP**
 
-You can enable logging messages for the LDAP adapter. For more information, see [API 4XX Error Configuration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-logging-aggregation#proc-controller-api-4xx-error-config) .
+You can enable logging messages for the LDAP adapter. For more information, see [API 4XX Error Configuration](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/assembly-controller-logging-aggregation#proc-controller-api-4xx-error-config).
 
 **SAML**
 

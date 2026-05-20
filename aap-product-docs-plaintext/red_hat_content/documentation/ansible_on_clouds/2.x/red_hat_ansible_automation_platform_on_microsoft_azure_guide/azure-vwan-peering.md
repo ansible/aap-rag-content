@@ -1,22 +1,17 @@
 # 4. Red Hat Ansible Automation Platform on Microsoft Azure post-deployment requirements
 ## 4.1. Private network peering for private deployments
-### 4.1.2. Azure Virtual WAN (VWAN)
-
-
-
+### 4.1.2. Azure Virtual WAN (VWAN)
 
 Create a connection within the VWAN portal that links your selected VWAN hub to the Ansible Automation Platform’s managed application VNet.
 
-#### 4.1.2.1. Peering a VWAN Hub to the Ansible Automation Platform on Microsoft Azure Network
-
-
-
+#### 4.1.2.1. Peering a VWAN Hub to the Ansible Automation Platform on Microsoft Azure Network
 
 Before peering, you must connect a hub network, and at least one spoke network, to the hub network of the Azure VWAN to which you intend to connect Ansible Automation Platform on Microsoft Azure.
 
 **Prerequisites**
 
 - A pre-configured Azure VWAN.
+
 - One or more of the following connections to the VWAN:
 
 
@@ -24,34 +19,29 @@ Before peering, you must connect a hub network, and at least one spoke network, 
 - A DMZ network that contains an Azure virtual machine that local machines can connect to with SSH tunneling to access Ansible Automation Platform on Microsoft Azure.
 - A VPN or Direct Connect service to your local network that routes traffic from local machines to Ansible Automation Platform on Microsoft Azure.
 
-
-
 **Procedure**
 
 1. Navigate to the **Virtual Network Connections** page for the VWAN that you want to peer with your Ansible Automation Platform instance.
-1. To create a connection between the VWAN hub and your Ansible Automation Platform instance, use the following settings:
+
+2. To create a connection between the VWAN hub and your Ansible Automation Platform instance, use the following settings:
 
 
--  **Connection Name** : _<Ansible_Automation_Platform_connection_name>_
--  **Hubs** : Select one or more VWAN hub networks that the managed application VNet peers with.
--  **Subscription** : Select the subscription where Ansible Automation Platform on Microsoft Azure has been deployed.
--  **Resource group** : The managed resource group of the managed application. It is typically prefixed with “mrg-”.
--  **Virtual network** : The VNet of the managed application. There is only one VNet in the managed resource group.
--  **Propagate to none** : _No_
--  **Associate Route Table** : Select the default route table or the appropriate route table that your organization has configured for VWAN.
--  **Propagate to Route Tables** : Select one or more default route tables or the appropriate route table that your organization has configured for VWAN.
--  **Propagate to labels** : Select labels if your organization uses them.
--  **Static routes** : Do not complete this field.
-
-
+- **Connection Name**: *<Ansible_Automation_Platform_connection_name>*
+- **Hubs**: Select one or more VWAN hub networks that the managed application VNet peers with.
+- **Subscription**: Select the subscription where Ansible Automation Platform on Microsoft Azure has been deployed.
+- **Resource group**: The managed resource group of the managed application. It is typically prefixed with “mrg-”.
+- **Virtual network**: The VNet of the managed application. There is only one VNet in the managed resource group.
+- **Propagate to none**: *No*
+- **Associate Route Table**: Select the default route table or the appropriate route table that your organization has configured for VWAN.
+- **Propagate to Route Tables**: Select one or more default route tables or the appropriate route table that your organization has configured for VWAN.
+- **Propagate to labels**: Select labels if your organization uses them.
+- **Static routes**: Do not complete this field.
 
 **Verification**
 
 When network peering completes, traffic routes to and from Ansible Automation Platform on Microsoft Azure though your VWAN hub network.
 
-
 **Additional resources**
 
--  [Connect a virtual network to a Virtual WAN hub - portal](https://learn.microsoft.com/en-us/azure/virtual-wan/howto-connect-vnet-hub)
-
+- [Connect a virtual network to a Virtual WAN hub - portal](https://learn.microsoft.com/en-us/azure/virtual-wan/howto-connect-vnet-hub)
 

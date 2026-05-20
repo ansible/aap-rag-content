@@ -1,8 +1,5 @@
 # 3. Credential types
-## 3.2. Custom credential types
-
-
-
+## 3.2. Custom credential types
 
 Create custom credential types (via JSON/YAML) to define unique security fields and logic, enabling support for proprietary event sources or specialized authentication.
 
@@ -13,12 +10,10 @@ Custom credentials support Ansible extra variables as a means of injecting their
 You can attach one or more cloud, vault, and Red Hat Ansible Automation Platform credential types to a rulebook activation.
 
 Note
-- When creating a new credential type, you must avoid collisions in the `    extra_vars` .
+
+- When creating a new credential type, you must avoid collisions in the `extra_vars`.
 - Extra variable names must not start with **EDA_** because they are reserved.
 - You must have System administrator (superuser) permissions to be able to create and edit a credential type and to be able to view the **Injector configuration** field.
-
-
-
 
 When you customize your own credential types, they display on the Credential Types page along with a list of built-in credential types.
 

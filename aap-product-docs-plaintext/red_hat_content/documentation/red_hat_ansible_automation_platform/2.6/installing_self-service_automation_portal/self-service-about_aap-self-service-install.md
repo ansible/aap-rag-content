@@ -1,7 +1,4 @@
-# Chapter 1. About self-service automation portal
-
-
-
+# Chapter 1. About self-service automation portal
 
 Self-service automation portal makes enterprise automation accessible to users of varying roles and skill levels through a simplified web interface designed for business users, not automation experts.
 
@@ -25,5 +22,4 @@ The following restrictions apply:
 
 - You can only use one Ansible Automation Platform instance.
 - You can only use one Ansible Automation Platform organization.
-
 

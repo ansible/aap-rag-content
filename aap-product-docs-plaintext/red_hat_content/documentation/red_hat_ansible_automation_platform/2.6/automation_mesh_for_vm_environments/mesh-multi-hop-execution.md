@@ -1,15 +1,11 @@
 # 3. Automation mesh design patterns
 ## 3.3. Segregated local and remote execution configuration
-### 3.3.1. Multi-hopped execution node
-
-
-
+### 3.3.1. Multi-hopped execution node
 
 In this configuration, resilient controller nodes are peered with resilient local execution nodes. Resilient local hop nodes are peered with the controller nodes. A remote execution node and a remote hop node are peered with the local hop nodes.
 
 You can use this setup if you need to run automation in a DMZ network from a remote network.
 
-```
 [automationcontroller]
 aap_c_1.example.com
 aap_c_2.example.com
@@ -53,20 +49,17 @@ peers=automationcontroller
 
 [remote_multi_hop]
 aap_h_3 peers=local_hop
-```
 
 The following image displays the topology of this mesh network.
 
 ![The topology map of the configuration consists of an automation controller group, a local execution group, a hop node group, and a remote execution node group. The automation controller group consists of three control nodes: aap_c_1, aap_c_2, and aap_c_3. The local execution nodes are aap_e_1 and aap_e_2. Every control node is peered to every local execution node. The hop node group contains two hop nodes, aap_h_1 and aap_h_2. It is peered to the controller group. The remote execution node group contains one execution node, aap_e_3. It is peered to the hop node group. A remote hop node group, consisting of node aap_h_3, is peered with the local hop node group. An execution node, aap_e_4, is peered with the remote hop group](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Automation_mesh_for_VM_environments-en-US/images/84aaca0c07e4eedb4eb779a0a918fb4d/mesh-multi-hop.png)
-
 
 The `[automationcontroller:vars]` stanza sets the node types for all nodes in the control plane and defines how the control nodes peer to the local execution nodes:
 
 - All nodes in the control plane are automatically peered to one another.
 - All nodes in the control plane are peered with all local execution nodes.
 
-
 The `[local_hop:vars]` stanza peers all nodes in the `[local_hop]` group with all the control nodes.
 
-If the name of a group of nodes begins with `instance_group_` , the installer recognises it as an instance group and adds it to the Ansible Automation Platform user interface.
+If the name of a group of nodes begins with `instance_group_`, the installer recognises it as an instance group and adds it to the Ansible Automation Platform user interface.
 

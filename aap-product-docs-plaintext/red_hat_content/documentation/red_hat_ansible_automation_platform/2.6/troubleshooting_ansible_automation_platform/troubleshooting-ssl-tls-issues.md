@@ -1,8 +1,5 @@
 # 7. Networking
-## 7.2. Troubleshooting SSL/TLS issues
-
-
-
+## 7.2. Troubleshooting SSL/TLS issues
 
 To troubleshoot SSL/TLS issues, verify the certificate chain, use the correct certificates, and confirm that a trusted Certificate Authority (CA) signed the certificate.
 
@@ -13,27 +10,18 @@ To troubleshoot SSL/TLS issues, verify the certificate chain, use the correct ce
 
 1. Run the following command to confirm whether the server is reachable over SSL/TLS and to see the full certificate chain:
 
+# true | openssl s_client -showcerts -connect <fqdn_or_ip>:<port>
 
-```
-# true | openssl s_client -showcerts -connect &lt;fqdn_or_ip&gt;:&lt;port&gt;
-```
+2. Replace `<fqdn_or_ip>` and `<port>` with suitable values.
 
-
-1. Replace `        &lt;fqdn_or_ip&gt;` and `        &lt;port&gt;` with suitable values.
-
-1. Verify the certificate details.
+2. Verify the certificate details.
 
 
 1. Run the following command to view the details of a certificate:
 
+# openssl x509 -in <path_to_certificate> -noout -text
 
-```
-# openssl x509 -in &lt;path_to_certificate&gt; -noout -text
-```
-
-
-
-1. Replace `    &lt;path_to_certificate&gt;` with the path to the certificate file you want to inspect.
+3. Replace `<path_to_certificate>` with the path to the certificate file you want to inspect.
 
 The result of the command shows information such as:
 
@@ -43,18 +31,12 @@ The result of the command shows information such as:
 - Validity "Not Before" - The date the certificate was issued.
 - Validity "Not After" - The date the certificate expires.
 
-1. Verify a trusted CA signed the certificate.
+4. Verify a trusted CA signed the certificate.
 
 
 1. Run the following command to verify that a specific certificate is valid and was signed by a trusted CA:
 
+openssl verify -CAfile <path_to_ca_public_certificate> <path_to_server_certificate_file_to_verify>
 
-```
-openssl verify -CAfile &lt;path_to_ca_public_certificate&gt; &lt;path_to_server_certificate_file_to_verify&gt;
-```
-
-
-1. If the command returns `        OK` , it means the certificate file is valid and signed by a trusted CA.
-
-
+2. If the command returns `OK`, it means the certificate file is valid and signed by a trusted CA.
 

@@ -1,8 +1,5 @@
 # 2. About the automation savings planner
-## 2.4. Review savings calculations for your automation plans
-
-
-
+## 2.4. Review savings calculations for your automation plans
 
 The automation savings planner offers a calculation of how much time and money you can save by automating a job. Automation analytics takes data from the plan details and the associated job template to provide you with an accurate projection of your cost savings when you complete this savings plan.
 

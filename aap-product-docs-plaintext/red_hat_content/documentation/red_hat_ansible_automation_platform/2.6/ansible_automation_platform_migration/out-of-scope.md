@@ -1,7 +1,4 @@
-# Chapter 2. Out of scope
-
-
-
+# Chapter 2. Out of scope
 
 Understand which Ansible Automation Platform components and configurations require manual recreation in the target environment and are not covered by the migration process.
 
@@ -13,7 +10,6 @@ The Ansible Automation Platform migration guide focuses on the core components o
 - Custom Certificate Authority (CA) for receptor mesh: Manually reconfigure custom CA configurations for receptor mesh.
 - Disconnected environments: The migration process does not cover disconnected environments.
 - Execution environments (other than the default one): Manually rebuild or re-import custom execution environments.
-
 
 Manually re-create, import, or configure these items in the target environment.
 

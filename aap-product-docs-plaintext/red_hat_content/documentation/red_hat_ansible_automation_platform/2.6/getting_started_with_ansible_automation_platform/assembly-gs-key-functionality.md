@@ -1,7 +1,4 @@
-# Chapter 1. Key functionality and concepts
-
-
-
+# Chapter 1. Key functionality and concepts
 
 With Ansible Automation Platform, you can create, manage, and scale automation for your organization across users, teams, and regions.
 

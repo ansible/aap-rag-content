@@ -1,17 +1,13 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
 ## 1.1. Configuring remote repositories for content syncing
-### 1.1.9. Creating a requirements file
-
-
-
+### 1.1.9. Creating a requirements file
 
 Use a requirements file to add collections to your automation hub. Requirements files are in YAML format and list the collections that you want to install in your automation hub.
 
 A standard `requirements.yml` file contains the following parameters:
 
--  `    name` : the name of the collection formatted as `    &lt;namespace&gt;.&lt;collection_name&gt;`
--  `    version` : the collection version number
-
+- `name`: the name of the collection formatted as `<namespace>.<collection_name>`
+- `version`: the collection version number
 
 **Procedure**
 
@@ -19,21 +15,15 @@ A standard `requirements.yml` file contains the following parameters:
 
 In YAML format, collection information in your requirements file should contain the following information:
 
-
-```
-collections:      - name: namespace.collection_name        version: 1.0.0
-```
-
-
-
+collections:
+- name: namespace.collection_name
+version: 1.0.0
 
 Important
+
 Be sure to specify the collection version number, otherwise you will sync all collection versions. Syncing all versions can require more space than expected.
-
-
 
 **Next step**
 
-To sync the collections in your requirements file, follow the steps in [Syncing Ansible content collections](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/managing_automation_content/managing-cert-valid-content#proc-create-synclist) .
-
+To sync the collections in your requirements file, follow the steps in [Syncing Ansible content collections](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/managing_automation_content/managing-cert-valid-content#proc-create-synclist).
 

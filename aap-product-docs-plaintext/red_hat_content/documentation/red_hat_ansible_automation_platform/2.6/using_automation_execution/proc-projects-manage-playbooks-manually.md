@@ -1,19 +1,15 @@
 # 11. Projects
 ## 11.1. Adding a new project
-### 11.1.1. Managing playbooks manually
-
-
-
+### 11.1.1. Managing playbooks manually
 
 Manage Ansible playbooks and directories directly on the automation controller filesystem. This approach helps ensure proper file ownership and permissions when you cannot use source control.
 
 **Procedure**
 
-- Create one or more directories to store playbooks under the Project Base Path, for example, `    /var/lib/awx/projects/` .
+- Create one or more directories to store playbooks under the Project Base Path, for example, `/var/lib/awx/projects/`.
 - Create or copy playbook files into the playbook directory.
 - Ensure that the playbook directory and files are owned by the same UNIX user and group that the service runs as.
 - Ensure that the permissions are appropriate for the playbook directories and files.
-
 
 **Troubleshooting**
 
@@ -22,6 +18,4 @@ Manage Ansible playbooks and directories directly on the automation controller f
 
 - Create the appropriate playbook directories and check out playbooks from your SCM.
 - Copy playbooks into the appropriate playbook directories.
-
-
 

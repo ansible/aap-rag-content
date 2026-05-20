@@ -1,7 +1,4 @@
-# Chapter 5. Advanced containerized deployment
-
-
-
+# Chapter 5. Advanced containerized deployment
 
 Configure external databases, custom TLS certificates, execution nodes, HAProxy load balancers, and hub storage for complex containerized Ansible Automation Platform deployments.
 

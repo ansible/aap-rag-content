@@ -1,8 +1,5 @@
 # 1. Firewall policy management with Ansible security automation
-## 1.1. About firewall policy management
-
-
-
+## 1.1. About firewall policy management
 
 An organization’s network firewall is the first line of defense against an attack and a vital component for maintaining a secure environment. As a security operator, you construct and manage secure networks to ensure that your firewall only allows inbound and outbound network traffic defined by your organization’s firewall policies. A firewall policy consists of security rules that protect the network against harmful incoming and outgoing traffic.
 

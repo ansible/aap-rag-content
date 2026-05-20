@@ -1,8 +1,5 @@
 # 1. Ansible development workspaces
-## 1.3. About the Ansible dev spaces image
-
-
-
+## 1.3. About the Ansible dev spaces image
 
 Red Hat OpenShift Dev Spaces is a containerized cloud development environment (CDE) that provides pre-configured, consistent workspaces running on OpenShift Container Platform. It provisions ready-to-code workspaces on demand.
 
@@ -13,5 +10,4 @@ For details for the Ansible devspaces image, see the [Ansible Automation Platfor
 The following diagram illustrates the relationship between OpenShift Container Platform, OpenShift Dev Spaces, and Ansible development workspaces.
 
 ![Ansible development workspaces topology](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_Ansible_development_workspaces_for_automation_content_development-en-US/images/f7b5fb5cc069f90b0a3393c9ebbcd3b0/devtools-workspaces-architecture.png)
-
 

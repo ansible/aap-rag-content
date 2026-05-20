@@ -1,5 +1,2 @@
-# Chapter 13. Ansible Automation Platform Resource Operator
-
-
-
+# Chapter 13. Ansible Automation Platform Resource Operator
 

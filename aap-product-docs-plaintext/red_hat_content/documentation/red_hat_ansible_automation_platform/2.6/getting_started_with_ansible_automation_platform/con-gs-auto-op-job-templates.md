@@ -1,8 +1,5 @@
 # 4. Getting started as an automation operator
-## 4.2. Work with job templates
-
-
-
+## 4.2. Work with job templates
 
 A job template is a definition and set of parameters for running an Ansible job.
 

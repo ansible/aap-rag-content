@@ -1,12 +1,8 @@
 # 15. Supported Inventory plugin templates
-## 15.6. Red Hat Satellite 6
-
-
-
+## 15.6. Red Hat Satellite 6
 
 You can use automation controller to manage hosts registered to Red Hat Satellite 6 by using the Foreman dynamic inventory plugin.
 
-```
 group_prefix: foreman_
 keyed_groups:
 - key: foreman['environment_name'] | lower | regex_replace(' ', '') | regex_replace('[^A-Za-z0-9_]', '_') | regex_replace('none', '')
@@ -30,5 +26,4 @@ validate_certs: false
 want_facts: true
 want_hostcollections: false
 want_params: true
-```
 

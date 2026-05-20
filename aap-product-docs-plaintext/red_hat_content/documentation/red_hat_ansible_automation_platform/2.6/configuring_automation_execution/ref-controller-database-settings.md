@@ -1,8 +1,5 @@
 # 3. Performance tuning for automation controller
-## 3.6. PostgreSQL database configuration and maintenance for automation controller
-
-
-
+## 3.6. PostgreSQL database configuration and maintenance for automation controller
 
 Improve the performance of automation controller, by configuring the following configuration parameters in the database:
 
@@ -12,59 +9,45 @@ The `VACUUM` and `ANALYZE` tasks are important maintenance activities that can i
 
 **Configuration parameters**
 
-To improve the performance of the PostgreSQL server, configure the following _Grand Unified Configuration_ (GUC) parameters that manage database memory. You can find these parameters inside the `$PDATA` directory in the `postgresql.conf` file, which manages the configurations of the database server.
+To improve the performance of the PostgreSQL server, configure the following *Grand Unified Configuration* (GUC) parameters that manage database memory. You can find these parameters inside the `$PDATA` directory in the `postgresql.conf` file, which manages the configurations of the database server.
 
--  `    shared_buffers` : determines how much memory is dedicated to the server for caching data. The default value for this parameter is 128 MB. When you modify this value, you must set it between 15% and 25% of the machine’s total RAM.
-
+- `shared_buffers`: determines how much memory is dedicated to the server for caching data. The default value for this parameter is 128 MB. When you modify this value, you must set it between 15% and 25% of the machine’s total RAM.
 
 Note
+
 If you are compiling Postgres against OpenSSL 3.2, your system regresses to remove the parameter for User during startup. You can rectify this by using the BIO_get_app_data call instead of open_get_data. Only an administrator can make these changes, but it impacts all users connected to the PostgreSQL database. f you update your systems without the OpenSSL patch, you are not impacted, and you do not need to take action.
 
-
-
 Note
-You must restart the database server after changing the value for `shared_buffers` .
 
-
+You must restart the database server after changing the value for `shared_buffers`.
 
 Warning
+
 If you are compiling Postgres against OpenSSL 3.2, your system regresses to remove the parameter for User during startup. You can rectify this by using the BIO_get_app_data call instead of open_get_data. Only an administrator can make these changes, but it impacts all users connected to the PostgreSQL database.
 
 If you update your systems without the OpenSSL patch, you are not impacted, and you do not need to take action.
 
+- `work_mem`: provides the amount of memory to be used by internal sort operations and hash tables before disk-swapping. Sort operations are used for order by, distinct, and merge join operations. Hash tables are used in hash joins and hash-based aggregation. The default value for this parameter is 4 MB. Setting the correct value of the `work_mem` parameter improves the speed of a search by reducing disk-swapping.
 
 
--  `    work_mem` : provides the amount of memory to be used by internal sort operations and hash tables before disk-swapping. Sort operations are used for order by, distinct, and merge join operations. Hash tables are used in hash joins and hash-based aggregation. The default value for this parameter is 4 MB. Setting the correct value of the `    work_mem` parameter improves the speed of a search by reducing disk-swapping.
+- Use the following formula to calculate the optimal value of the `work_mem` parameter for the database server:
 
-
-- Use the following formula to calculate the optimal value of the `        work_mem` parameter for the database server:
-
-
-
-```
 Total RAM * 0.25 / max_connections
-```
 
 Note
+
 Setting a large `work_mem` can cause the PostgreSQL server to go out of memory (OOM) if there are too many open connections to the database.
 
+- `max_connections`: specifies the maximum number of concurrent connections to the database server.
+- `maintenance_work_mem`: provides the maximum amount of memory to be used by maintenance operations, such as vacuum, create index, and alter table add foreign key operations. The default value for this parameter is 64 MB. Use the following equation to calculate a value for this parameter:
 
-
--  `    max_connections` : specifies the maximum number of concurrent connections to the database server.
--  `    maintenance_work_mem` : provides the maximum amount of memory to be used by maintenance operations, such as vacuum, create index, and alter table add foreign key operations. The default value for this parameter is 64 MB. Use the following equation to calculate a value for this parameter:
-
-
-```
 Total RAM * 0.05
-```
 
 Note
+
 Set `maintenance_work_mem` higher than `work_mem` to improve performance for vacuuming.
-
-
 
 **Additional resources**
 
--  [Automatic Vacuuming](https://www.postgresql.org/docs/13/runtime-config-autovacuum.html)
-
+- [Automatic Vacuuming](https://www.postgresql.org/docs/13/runtime-config-autovacuum.html)
 

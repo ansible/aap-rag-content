@@ -1,20 +1,17 @@
 # 1. Introduction to Red Hat Ansible Automation Platform on Microsoft Azure
 ## 1.3. Application Architecture
-### 1.3.3. Security
-
-
-
+### 1.3.3. Security
 
 Ansible Automation Platform on Microsoft Azure follows security best practices from both Red Hat and Microsoft. The following resources describe the security posture of the application and the infrastructure.
 
 - Data encryption in flight and at rest
 
 
--  [All Azure Storage Services enable server-side encryption by default using service-managed keys](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest#azure-storage)
--  [All Azure hosted services are committed to providing Encryption at Rest options](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest#conclusion)
--  [Azure encryption overview](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-overview)
+- [All Azure Storage Services enable server-side encryption by default using service-managed keys](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest#azure-storage)
+- [All Azure hosted services are committed to providing Encryption at Rest options](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest#conclusion)
+- [Azure encryption overview](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-overview)
 - All communications between services within Azure Kubernetes Service (AKS) (for example, Ansible Automation Platform, Postgres, storage accounts) use Transport Layer Security (TLS) v1.2 or higher.
--  [Azure security baseline for Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/azure-kubernetes-service-aks-security-baseline)
+- [Azure security baseline for Azure Kubernetes Service (AKS)](https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/azure-kubernetes-service-aks-security-baseline)
 
 - Password storage
 
@@ -24,12 +21,12 @@ Ansible Automation Platform on Microsoft Azure follows security best practices f
 - Keys generated with industry standards
 
 
--  [Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-overview#azure-storage-service-encryption)
+- [Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-overview#azure-storage-service-encryption)
 
 - Key installation, rotation
 
 
--  [Microsoft manages key rotation, backup, and redundancy](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-models#key-access)
+- [Microsoft manages key rotation, backup, and redundancy](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-models#key-access)
 
 - SSL/TLS traffic encryption
 
@@ -48,6 +45,4 @@ Ansible Automation Platform on Microsoft Azure follows security best practices f
 
 
 - The Red Hat SREs regularly update the Kubernetes version, underlying node OS, and Ansible Automation Platform version to the latest available stable versions to get the latest features, bug fixes, and security fixes.
-
-
 

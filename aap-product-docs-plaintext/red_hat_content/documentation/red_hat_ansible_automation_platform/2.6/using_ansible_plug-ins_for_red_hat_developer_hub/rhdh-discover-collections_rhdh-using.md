@@ -1,10 +1,7 @@
 # 1. Using the Ansible plug-ins
-## 1.4. Discovering existing collections
+## 1.4. Discovering existing collections
 
-
-
-
-From the **Overview** page in the Ansible plug-ins dashboard on Red Hat Developer Hub, click **Discover Existing Collections** .
+From the **Overview** page in the Ansible plug-ins dashboard on Red Hat Developer Hub, click **Discover Existing Collections**.
 
 The links in this pane provide access to the source of reusable automation content collections that you configured during plug-in installation.
 

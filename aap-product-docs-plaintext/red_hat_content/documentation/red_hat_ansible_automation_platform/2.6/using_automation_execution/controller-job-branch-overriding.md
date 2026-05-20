@@ -1,8 +1,5 @@
 # 5. Jobs in automation controller
-## 5.5. Job branch overriding
-
-
-
+## 5.5. Job branch overriding
 
 In automation controller, you can configure projects to allow job templates to override the branch, tag, or reference used for source control.
 
@@ -10,6 +7,5 @@ Projects specify the branch, tag, or reference to use from source control in the
 
 ![Project branching emphasized](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/0ba4c940a0b89d4fffe04a22f80d5094/ug-scm-project-branching-emphasized.png)
 
-
-When creating or editing a job you have the option to **Allow branch override** . When this option is checked, project administrators can delegate branch selection to the job templates that use that project, requiring only project `use_role` .
+When creating or editing a job you have the option to **Allow branch override**. When this option is checked, project administrators can delegate branch selection to the job templates that use that project, requiring only project `use_role`.
 

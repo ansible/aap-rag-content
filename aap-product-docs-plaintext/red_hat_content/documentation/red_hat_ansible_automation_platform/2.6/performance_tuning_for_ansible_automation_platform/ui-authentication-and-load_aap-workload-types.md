@@ -1,8 +1,5 @@
 # 1. Types of workloads
-## 1.1. UI authentication and platform load
-
-
-
+## 1.1. UI authentication and platform load
 
 Users can access the Ansible Automation Platform UI by using enterprise authentication methods. UI clients apply load to the platform gateway proxy and the gRPC authentication service, the web servers of all components, and the database, because most UI-driven API requests interact with the database.
 
@@ -13,7 +10,6 @@ The Ansible Automation Platform UI receives live updates through WebSockets and 
 Through WebSockets in the user interface, the browser receives real-time job updates. The browser can subscribe to any job running on any automation controller node, because events are accessible everywhere. However, live streaming updates to the job detail page might increase the load on the automation controller service. To disable these updates, set `UI_LIVE_UPDATES_ENABLED` to false in the automation controller configuration.
 
 Note
+
 Disabling updates prevents the job detail page from automatically updating when events are received. In this case, you must manually refresh the page to access the most recent details.
-
-
 

@@ -1,9 +1,6 @@
 # 5. Configuring Red Hat Ansible Automation Platform components on Red Hat Ansible Automation Platform Operator
 ## 5.4. Configure static storage for Ansible Automation Platform
-### 5.4.1. Understand static provisioning in the Ansible Automation Platform Operator
-
-
-
+### 5.4.1. Understand static provisioning in the Ansible Automation Platform Operator
 
 By default, the Ansible Automation Platform Operator uses dynamic provisioning to create the required storage for components such as the database and automation hub.
 

@@ -1,8 +1,5 @@
 # 4. About the Job Explorer
-## 4.2. Drilling down into cluster data
-
-
-
+## 4.2. Drilling down into cluster data
 
 You can drill down into cluster data to review more detailed information about successful or failed jobs.
 

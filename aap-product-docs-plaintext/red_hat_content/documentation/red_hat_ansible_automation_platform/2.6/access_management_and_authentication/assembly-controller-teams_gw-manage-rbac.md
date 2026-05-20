@@ -1,8 +1,5 @@
 # 4. Managing access with role-based access control
-## 4.2. Teams
-
-
-
+## 4.2. Teams
 
 As an administrator, you can use teams to bulk-assign roles to users that need to share the same access.
 

@@ -1,9 +1,6 @@
 # 3. Getting started as an automation developer
 ## 3.8. Build and use an execution environment
-### 3.8.3. About container registries
-
-
-
+### 3.8.3. About container registries
 
 If you have many automation execution environmentss that you want to support, you can store them in a container registry linked to your private automation hub.
 

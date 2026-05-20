@@ -1,39 +1,30 @@
 # 4. RPM topologies
 ## 4.1. RPM growth topology
-### 4.1.3. Network ports
-
-
-
+### 4.1.3. Network ports
 
 Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for Red Hat Ansible Automation Platform to work. Ensure that these ports are available and are not blocked by a firewall.
 
-
-<span id="idm140264423534912"></span>
-**Table 4.4. Network ports and protocols**
+**Table 4.4. Network ports and protocols**
 
 | Port number | Protocol | Service | Source | Destination |
 | --- | --- | --- | --- | --- |
-| 80/443 | TCP | HTTP/HTTPS | Event-Driven Ansible | Automation hub |
-| 80/443 | TCP | HTTP/HTTPS | Event-Driven Ansible | Automation controller |
-| 80/443 | TCP | HTTP/HTTPS | Automation controller | Automation hub |
-| 80/443 | TCP | HTTP/HTTPS | Platform gateway | Automation controller |
-| 80/443 | TCP | HTTP/HTTPS | Platform gateway | Automation hub |
-| 80/443 | TCP | HTTP/HTTPS | Platform gateway | Event-Driven Ansible |
-| 80/443 | TCP | HTTP/HTTPS | Execution node | Platform gateway |
-| 5432 | TCP | PostgreSQL | Event-Driven Ansible | Database |
-| 5432 | TCP | PostgreSQL | Platform gateway | Database |
-| 5432 | TCP | PostgreSQL | Automation hub | Database |
-| 5432 | TCP | PostgreSQL | Automation controller | Database |
-| 6379 | TCP | Redis | Event-Driven Ansible | Redis node |
-| 6379 | TCP | Redis | Platform gateway | Redis node |
-| 8443 | TCP | HTTPS | Platform gateway | Platform gateway |
-| 27199 | TCP | Receptor | Automation controller | Execution node |
-
-
-
+| <br>  80/443 | <br>  TCP | <br>  HTTP/HTTPS | <br>  Event-Driven Ansible | <br>  Automation hub |
+| <br>  80/443 | <br>  TCP | <br>  HTTP/HTTPS | <br>  Event-Driven Ansible | <br>  Automation controller |
+| <br>  80/443 | <br>  TCP | <br>  HTTP/HTTPS | <br>  Automation controller | <br>  Automation hub |
+| <br>  80/443 | <br>  TCP | <br>  HTTP/HTTPS | <br>  Platform gateway | <br>  Automation controller |
+| <br>  80/443 | <br>  TCP | <br>  HTTP/HTTPS | <br>  Platform gateway | <br>  Automation hub |
+| <br>  80/443 | <br>  TCP | <br>  HTTP/HTTPS | <br>  Platform gateway | <br>  Event-Driven Ansible |
+| <br>  80/443 | <br>  TCP | <br>  HTTP/HTTPS | <br>  Execution node | <br>  Platform gateway |
+| <br>  5432 | <br>  TCP | <br>  PostgreSQL | <br>  Event-Driven Ansible | <br>  Database |
+| <br>  5432 | <br>  TCP | <br>  PostgreSQL | <br>  Platform gateway | <br>  Database |
+| <br>  5432 | <br>  TCP | <br>  PostgreSQL | <br>  Automation hub | <br>  Database |
+| <br>  5432 | <br>  TCP | <br>  PostgreSQL | <br>  Automation controller | <br>  Database |
+| <br>  6379 | <br>  TCP | <br>  Redis | <br>  Event-Driven Ansible | <br>  Redis node |
+| <br>  6379 | <br>  TCP | <br>  Redis | <br>  Platform gateway | <br>  Redis node |
+| <br>  8443 | <br>  TCP | <br>  HTTPS | <br>  Platform gateway | <br>  Platform gateway |
+| <br>  27199 | <br>  TCP | <br>  Receptor | <br>  Automation controller | <br>  Execution node |
 
 Note
+
 If you change any port values by using inventory variables, refer to [Inventory file variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/appendix-inventory-files-vars) to review all default port values and ensure there are no port conflicts.
-
-
 

@@ -1,8 +1,5 @@
 # 3. Getting started as an automation developer
-## 3.9. Build and use a decision environment
-
-
-
+## 3.9. Build and use a decision environment
 
 Event-Driven Ansible includes an ansible.eda collection, which contains sample sources, event filters and rulebooks. All the collections, ansible rulebooks and their dependencies use a decision environment, which is an image that can be run on either Podman or Kubernetes.
 
@@ -12,7 +9,6 @@ In decision environments, sources, which are typically Python code, are distribu
 - Java Runtime Environment for Drools rule engine
 - ansible-rulebook python package
 - ansible.eda collection
-
 
 You can use the base decision environment and build your own customized Decision Environments with additional collections and collection dependencies. You can build a decision environment using a Dockerfile or optionally you can deploy your CA certificate into the image.
 

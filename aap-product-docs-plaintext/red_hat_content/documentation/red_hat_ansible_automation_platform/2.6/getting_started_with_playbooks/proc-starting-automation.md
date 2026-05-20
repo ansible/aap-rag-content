@@ -1,8 +1,5 @@
 # 1. Introduction
-## 1.3. Starting automation with Ansible
-
-
-
+## 1.3. Starting automation with Ansible
 
 Get started with Ansible by creating an automation project, building an inventory, and creating a `Hello World` playbook.
 
@@ -11,18 +8,12 @@ Get started with Ansible by creating an automation project, building an inventor
 - The Ansible package must be installed.
 - A text editor must be available to create and edit files.
 
-
 **Procedure**
 
 - Create a project folder on your filesystem.
 
-
-```
-mkdir ansible_quickstart    cd ansible_quickstart
-```
+mkdir ansible_quickstart
+cd ansible_quickstart
 
 Using a single directory structure makes it easier to add to source control, and reuse and share automation content.
-
-
-
 

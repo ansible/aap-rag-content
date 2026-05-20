@@ -1,9 +1,6 @@
 # 5. Jobs in automation controller
 ## 5.5. Job branch overriding
-### 5.5.1. Source tree copy behavior
-
-
-
+### 5.5.1. Source tree copy behavior
 
 When automation controller runs a job, it creates a private copy of the project’s source tree for that job run.
 

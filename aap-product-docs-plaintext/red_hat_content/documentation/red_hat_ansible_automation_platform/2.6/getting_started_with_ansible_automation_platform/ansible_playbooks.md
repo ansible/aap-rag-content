@@ -1,9 +1,6 @@
 # 1. Key functionality and concepts
 ## 1.3. Automation content
-### 1.3.2. Ansible playbooks
-
-
-
+### 1.3.2. Ansible playbooks
 
 Playbooks are YAML files that contain specific sets of human-readable instructions, or “plays,” that you send to run on a single target or groups of targets. Ansible playbooks are repeatable and reusable configuration management tools designed to deploy complex applications.
 
@@ -17,8 +14,7 @@ You can also use Red Hat Ansible Lightspeed, Ansible’s generative AI service, 
 
 **Additional resources**
 
--  [Bundle content with Ansible roles](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/getting_started_with_ansible_automation_platform/index#con-gs-ansible-roles_assembly-gs-auto-dev)
--  [Getting started with playbooks](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/getting_started_with_playbooks)
--  [Red Hat Ansible Lightspeed with IBM watsonx Code Assistant user guide](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index)
-
+- [Bundle content with Ansible roles](#con-gs-ansible-roles_assembly-gs-auto-dev "3.5.&nbsp;Bundle automation content with roles")
+- [Getting started with playbooks](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/getting_started_with_playbooks)
+- [Red Hat Ansible Lightspeed with IBM watsonx Code Assistant user guide](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index)
 

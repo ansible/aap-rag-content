@@ -1,9 +1,6 @@
 # 5. Red Hat Ansible Automation Platform Service on AWS Service Definition
 ## 5.2. Control plane
-### 5.2.4. SRE access and management
-
-
-
+### 5.2.4. SRE access and management
 
 Site Reliability Engineering (SRE) access is limited to the infrastructure and services running Ansible Automation Platform. Red Hat only accesses the Ansible Automation Platform interfaces or APIs in exceptional cases, such as during support engagements.
 
@@ -14,9 +11,7 @@ SREs access resources and audit data are collected when:
 - The SRE team requests access to cluster resources using a tool that allows temporary access. This tool generates a log entry detailing the time and the SRE team member who requested access.
 - Audit logs are created for any management operation performed on a customer instance and are sent to a centralized logging system.
 
-
 Important
-Red Hat erases job logs every 30 days.
 
-
+Red Hat erases job logs every 30 days.
 

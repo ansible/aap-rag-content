@@ -1,19 +1,14 @@
 # 10. Schedules
 ## 10.2. Adding a new schedule from a resource page
-### 10.2.2. Setting exceptions to the schedule
-
-
-
+### 10.2.2. Setting exceptions to the schedule
 
 Define specific dates or times when automated jobs should skip execution by using schedule exceptions.
 
 **Procedure**
 
-1. On the **Schedule Exceptions** page, clickCreate exception.
+1. On the **Schedule Exceptions** page, click Create exception.
 
 Use the same format as for the schedule rules to create a schedule exception.
 
-
-1. ClickNextto save and review both the schedule and the exception.
-
+2. Click Next to save and review both the schedule and the exception.
 

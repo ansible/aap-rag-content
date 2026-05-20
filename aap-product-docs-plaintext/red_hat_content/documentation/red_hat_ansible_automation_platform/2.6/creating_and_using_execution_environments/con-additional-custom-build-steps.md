@@ -1,60 +1,39 @@
 # 2. Using Ansible Builder
-## 2.9. Additional custom build steps
-
-
-
+## 2.9. Additional custom build steps
 
 You can specify custom build commands for any build phase in the `additional_build_steps` section of the definition file. This allows fine-grained control over the build phases.
 
 Use the `prepend_` and `append_` commands to add directives to the `Containerfile` that run either before or after the main build steps are executed. The commands must conform to any rules required for the runtime system.
 
-See the following table for a list of values that can be used in `additional_build_steps` :
+See the following table for a list of values that can be used in `additional_build_steps`:
 
 | Value | Description |
 | --- | --- |
-|  `prepend_base` | You can insert commands before building the base image. |
-|  `append_base` | You can insert commands after building the base image. |
-|  `prepend_galaxy` | You can insert commands before building the galaxy image. |
-|  `append_galaxy` | You can insert commands after building the galaxy image. |
-|  `prepend_builder` | You can insert commands before building the Python builder image. |
-|  `append_builder` | You can insert commands after building the Python builder image. |
-|  `prepend_final` | You can insert commands before building the final image. |
-|  `append_final` | You can insert commands after building the final image. |
-
+| <br> `prepend_base` | <br>  You can insert commands before building the base image. |
+| <br> `append_base` | <br>  You can insert commands after building the base image. |
+| <br> `prepend_galaxy` | <br>  You can insert commands before building the galaxy image. |
+| <br> `append_galaxy` | <br>  You can insert commands after building the galaxy image. |
+| <br> `prepend_builder` | <br>  You can insert commands before building the Python builder image. |
+| <br> `append_builder` | <br>  You can insert commands after building the Python builder image. |
+| <br> `prepend_final` | <br>  You can insert commands before building the final image. |
+| <br> `append_final` | <br>  You can insert commands after building the final image. |
 
 The syntax for `additional_build_steps` supports both multi-line strings and lists. See the following examples:
 
+**Example 2.1. A multi-line string entry**
 
-<span id="idm140288744802256"></span>
-**Example 2.1. A multi-line string entry**
-
-```
 prepend_final: |
 RUN whoami
 RUN cat /etc/os-release
-```
 
+**Example 2.2. A list entry**
 
-
-
-
-<span id="idm140288744800144"></span>
-**Example 2.2. A list entry**
-
-```
 append_final:
 - RUN echo This is a post-install command!
 - RUN ls -la /etc
-```
 
+**Example 2.3. Copying arbitrary files to execution environments**
 
-
-
-
-<span id="idm140288744798032"></span>
-**Example 2.3. Copying arbitrary files to execution environments**
-
-```
 additional_build_files:
 # copy arbitrary files next to this EE def into the build context - we can refer to them later...
 - src: files/rootCA.crt
@@ -66,10 +45,6 @@ prepend_base:
 # because this is in "base", all stages will inherit (including the final EE)
 - COPY _build/configs/rootCA.crt /usr/share/pki/ca-trust-source/anchors
 - RUN update-ca-trust
-```
-
-
-
 
 The `additional_build_files` section enable you to add `rootCA.crt` to the build context directory. When this file is copied to the build context directory, it can be used in the build process. To use the file, copy it from the build context directory by using the COPY directive specified in the prepend_base step of the additional_build_steps section. You can perform any action based upon the copied file, such as in this example updating dynamic configuration of CA certificates by running RUN update-ca-trust.
 

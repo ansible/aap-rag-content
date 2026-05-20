@@ -1,8 +1,5 @@
 # 10. Authenticating in the API
-## 10.4. Single sign-on authentication
-
-
-
+## 10.4. Single sign-on authentication
 
 Single sign-on (SSO) authentication methods are different from other methods because the authentication of the user happens external to automation controller, such as Google SSO, Microsoft Azure SSO, SAML, or GitHub.
 
@@ -10,8 +7,5 @@ You can configure SSO authentication by using automation controller inside a lar
 
 **Additional resources**
 
--  [Configuring an authentication type](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-configure-authentication#gw-config-authentication-type)
+- [Configuring an authentication type](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-configure-authentication#gw-config-authentication-type)
 
-
-
-<span id="idm139982681589184"></span>

@@ -1,20 +1,15 @@
 # 5. Inventory File Importing
 ## 5.1. Source control management inventory source fields
-### 5.1.1. Supported file syntax
-
-
-
+### 5.1.1. Supported file syntax
 
 Automation controller uses the `ansible-inventory` module from Ansible to process inventory files, and supports all valid inventory syntax that automation controller requires.
 
 Important
+
 You do not need to write inventory scripts in Python. You can enter any executable file in the source field and must run `chmod +x` for that file and check it into Git.
-
-
 
 The following is a working example of JSON output that automation controller can read for the import:
 
-```
 {
 "_meta": {
 "hostvars": {
@@ -59,12 +54,10 @@ The following is a working example of JSON output that automation controller can
 ]
 }
 }
-```
 
 **Additional resources**
 
--  [test-playbooks/inventories](https://github.com/ansible/test-playbooks/tree/main/inventories)
--  [inventories/changes.py](https://github.com/ansible/test-playbooks/blob/main/inventories/changes.py)
--  [How to migrate inventory scripts from Red Hat Ansible tower to Red Hat Ansible Automation Platform?](https://access.redhat.com/solutions/6997130)
-
+- [test-playbooks/inventories](https://github.com/ansible/test-playbooks/tree/main/inventories)
+- [inventories/changes.py](https://github.com/ansible/test-playbooks/blob/main/inventories/changes.py)
+- [How to migrate inventory scripts from Red Hat Ansible tower to Red Hat Ansible Automation Platform?](https://access.redhat.com/solutions/6997130)
 

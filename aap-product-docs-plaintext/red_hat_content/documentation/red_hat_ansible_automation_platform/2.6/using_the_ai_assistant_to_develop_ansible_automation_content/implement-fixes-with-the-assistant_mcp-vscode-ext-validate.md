@@ -1,8 +1,5 @@
 # 5. Validate and debug content with the AI assistant
-## 5.5. Implement fixes with the AI assistant
-
-
-
+## 5.5. Implement fixes with the AI assistant
 
 After the AI assistant has generated a list of fixes, you can ask the assistant to help you implement those fixes.
 
@@ -17,28 +14,22 @@ The analysis might include:
 - Failure Analysis: Explaining logical errors that could cause runtime failures.
 - Best Practice Gaps: Noting where the code deviates from the "prescriptive rule sets" derived from Ansible content best practices.
 
-1. Prompt the assistant to provide a solution. For example:
+2. Prompt the assistant to provide a solution. For example:
 
 
--  _How do I fix this error?_
--  _Refactor this task to follow best practices._
+- *How do I fix this error?*
+
+- *Refactor this task to follow best practices.*
 
 The assistant generates a corrected code block, ensuring that it adheres to best practice recommendations (such as correct indentation, valid parameters, and proper module usage).
-
-
-
-
 
 **Next steps**
 
 After applying the suggested changes, verify that there are no further issues.
 
-
 1. Apply the changes to your playbook.
-1. (Optional) Ask the assistant to confirm the new structure. For example, you can ask _Does this look correct now?_
 
-The assistant might trigger `    ansible_lint` again or perform a final static check to ensure the debugging session resolved the issues.
+2. (Optional) Ask the assistant to confirm the new structure. For example, you can ask *Does this look correct now?*
 
-
-
+The assistant might trigger `ansible_lint` again or perform a final static check to ensure the debugging session resolved the issues.
 

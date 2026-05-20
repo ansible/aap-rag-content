@@ -1,12 +1,8 @@
-# Chapter 11. Performance tuning for Event-Driven Ansible controller
-
-
-
+# Chapter 11. Performance tuning for Event-Driven Ansible controller
 
 Event-Driven Ansible controller provides the interface in which Event-Driven Ansible automation performs. Tune your Event-Driven Ansible controller to optimize performance and scalability through:
 
 - Characterizing your workload
 - Performance troubleshooting
 - System level monitoring
-
 

@@ -1,8 +1,5 @@
 # 6. Clustering
-## 6.6. Deprovisioning instances
-
-
-
+## 6.6. Deprovisioning instances
 
 Use the following procedure to deprovision an instance from a automation controller cluster.
 
@@ -10,22 +7,19 @@ Re-running the setup playbook does not automatically deprovision instances since
 
 **Procedure**
 
-1. Shut down the instance or stop the service with the command: `    automation-controller-service stop` .
-1. Run the following deprovision command from another instance to remove it from the automation controller cluster.
+1. Shut down the instance or stop the service with the command: `automation-controller-service stop`.
 
-`    $ awx-manage deprovision_instance --hostname=&lt;name used in inventory file&gt;`
+2. Run the following deprovision command from another instance to remove it from the automation controller cluster.
+
+`$ awx-manage deprovision_instance --hostname=<name used in inventory file>`
 
 The following is an example deprovision command:
 
-`    $ awx-manage deprovision_instance --hostname=hostB`
+`$ awx-manage deprovision_instance --hostname=hostB`
 
+3. Restart the services on the remaining instances with the command:
 
-1. Restart the services on the remaining instances with the command:
+`automation-controller-service start`.
 
-`    automation-controller-service start` .
-
-Deprovisioning instance groups in automation controller does not automatically deprovision or remove instance groups. For more information, see the [Deprovisioning instance groups](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-instance-and-container-groups#controller-deprovision-instance-group) section in _Using automation execution_ .
-
-
-
+Deprovisioning instance groups in automation controller does not automatically deprovision or remove instance groups. For more information, see the [Deprovisioning instance groups](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_execution/controller-instance-and-container-groups#controller-deprovision-instance-group) section in *Using automation execution*.
 

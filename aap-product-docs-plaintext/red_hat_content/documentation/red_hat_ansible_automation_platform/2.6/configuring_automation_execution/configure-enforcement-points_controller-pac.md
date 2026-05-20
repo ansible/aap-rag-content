@@ -1,15 +1,20 @@
 # 7. Implementing policy enforcement
-## 7.3. Configuring enforcement points
-
-
-
+## 7.3. Configuring enforcement points
 
 After you have set up your Ansible Automation Platform instance to communicate with the OPA server, you can set up enforcement points where you want the policy to be applied.
 
 You can associate a policy with a job template, an inventory, or an organization. Enforcement then occurs in the following ways:
 
+Organization
+Jobs launched from a template owned by an organization will fail if the policy is violated. This configuration provides broad control over automation within organizational boundaries.
+
+Inventory
+Jobs that use an inventory associated with a policy fail if the policy is violated. This configuration allows you to control access to specific infrastructure resources.
+
+Job template
+Jobs launched from a template associated with a policy fail if the job violates the associated policy. This configuration provides granular control over specific automation tasks.
+
 Note
+
 If you do not associate a policy with a resource, policy evaluation will not occur when you run the related job.
-
-
 

@@ -1,9 +1,6 @@
 # 1. Introduction to automation execution environments
 ## 1.1. About automation execution environments
-### 1.1.1. Why use automation execution environments
-
-
-
+### 1.1.1. Why use automation execution environments
 
 With automation execution environments, Red Hat Ansible Automation Platform has transitioned to a distributed architecture by separating the control plane from the execution plane.
 
@@ -15,5 +12,4 @@ In addition to speed, portability, and flexibility, automation execution environ
 - They give Red Hat Ansible Automation Platform administrators the ability to supply and manage automation environments to meet the needs of different teams.
 - Automation execution environmentss enable automation teams to define, build, and update their automation environments themselves. System administrators can supply execution environments, but each organization administrator can also supply their own.
 - They allow automation to be easily scaled and shared between teams by providing a standard way of building and distributing the automation environment.
-
 

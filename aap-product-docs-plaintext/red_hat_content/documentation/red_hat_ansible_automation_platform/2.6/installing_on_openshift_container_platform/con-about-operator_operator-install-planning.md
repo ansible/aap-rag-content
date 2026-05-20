@@ -1,9 +1,6 @@
 # 1. Installing Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
 ## 1.1. Planning your Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform
-### 1.1.1. About Ansible Automation Platform Operator
-
-
-
+### 1.1.1. About Ansible Automation Platform Operator
 
 The Ansible Automation Platform Operator provides cloud-native, push-button deployment of new Ansible Automation Platform instances in your OpenShift environment.
 
@@ -15,5 +12,5 @@ Deploying Ansible Automation Platform instances with a Kubernetes native operato
 
 You can install the Ansible Automation Platform Operator from the Red Hat Operators catalog in OperatorHub.
 
-For information about the Ansible Automation Platform Operator system requirements and infrastructure topology see [Operator topologies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/tested_deployment_models/ocp-topologies) in _Tested deployment models_
+For information about the Ansible Automation Platform Operator system requirements and infrastructure topology see [Operator topologies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/tested_deployment_models/ocp-topologies) in *Tested deployment models*
 
