@@ -821,9 +821,9 @@ scipy==1.17.0 \
     # via
     #   scikit-learn
     #   sentence-transformers
-sentence-transformers==5.3.0 \
-    --hash=sha256:414a0a881f53a4df0e6cbace75f823bfcb6b94d674c42a384b498959b7c065e2 \
-    --hash=sha256:dca6b98db790274a68185d27a65801b58b4caf653a4e556b5f62827509347c7d
+sentence-transformers==5.5.1 \
+    --hash=sha256:02b7740dfc60bdbbcb6061625f5d97a5c1a4e2d3baac5f9391b912bb5eae2290 \
+    --hash=sha256:4fe11d433badc5282d32f7fc08bc714216b7a5aca426f9df77a45a554756deb7
     # via aap-rag-content
 setuptools==80.9.0 \
     --hash=sha256:062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922 \
