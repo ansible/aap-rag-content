@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -57,8 +59,63 @@ jobs:
       # - name: Run type checker
       #   run: make check-types
 
-      - name: Run unit tests
-        run: make unit-test
+      - name: Run unit tests with coverage
+        run: PYTHONPATH=src:$$PYTHONPATH uv run pytest tests/ -v -c pyproject.toml --cov=src --cov=scripts --cov-report=xml --cov-report=term
+
+      # Fix paths in coverage file for SonarCloud
+      # See https://sonarsource.atlassian.net/browse/SONARPY-1203
+      - name: Fix paths in coverage file
+        if: always()
+        run: |
+          if [ -f coverage.xml ]; then
+            sed -i "s,/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/,/github/workspace/,g" coverage.xml
+          fi
+
+      # Embed PR number in coverage.xml for cross-workflow communication
+      - name: Embed PR number in coverage.xml
+        if: github.event_name == 'pull_request' && always()
+        run: |
+          if [ -f coverage.xml ]; then
+            sed -i '2i<!-- PR ${{ github.event.pull_request.number }} -->' coverage.xml
+          fi
+
+      - name: Upload coverage artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage.xml
+          retention-days: 1
+          if-no-files-found: warn
+
+      #####################
+      # SonarCloud analysis
+      #####################
+      - name: Extract repo owner and name
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ github.event.repository.fork }}" = "true" ]; then
+            PARENT_REPO_SLUG=$(gh api repos/${{ github.repository }} | jq -r '.parent.full_name')
+            IFS="/" read -r REPO_OWNER REPO_NAME <<< "$PARENT_REPO_SLUG"
+          else
+            IFS="/" read -r REPO_OWNER REPO_NAME <<< "${GITHUB_REPOSITORY}"
+          fi
+          echo "REPO_OWNER=$REPO_OWNER" >> $GITHUB_ENV
+          echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
+
+      - name: SonarCloud Scan
+        if: always()
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets[format('{0}', vars.SONAR_TOKEN_SECRET_NAME)] }}
+        with:
+          args: >
+            -Dsonar.projectKey=${{ env.REPO_OWNER }}_${{ env.REPO_NAME }}
+            -Dsonar.organization=${{ env.REPO_OWNER }}
 
       - name: Upload test artifacts (on failure)
         if: failure()
