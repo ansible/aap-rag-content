@@ -14,6 +14,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    # Only run for ansible organization
+    if: github.repository_owner == 'ansible'
+
     env:
       UV_CACHE_DIR: /tmp/.uv-cache
       HF_HOME: /tmp/.cache/huggingface
