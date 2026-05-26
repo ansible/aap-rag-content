@@ -2,6 +2,7 @@ name: Unit Tests
 
 permissions:
   contents: read
+  pull-requests: read
 
 on:
   push:
@@ -95,7 +96,7 @@ jobs:
       # SonarCloud analysis
       #####################
       - name: Extract repo owner and name
-        if: always()
+        if: always() && (github.event.pull_request.head.repo.full_name == github.repository || github.event_name != 'pull_request')
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -109,8 +110,15 @@ jobs:
           echo "REPO_OWNER=$REPO_OWNER" >> $GITHUB_ENV
           echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
 
+      - name: Verify SONAR_TOKEN is set
+        if: always() && (github.event.pull_request.head.repo.full_name == github.repository || github.event_name != 'pull_request')
+        run: test -n "$SONAR_TOKEN" || { echo "SONAR_TOKEN is empty — check vars.SONAR_TOKEN_SECRET_NAME"; exit 1; }
+        env:
+          SONAR_TOKEN: ${{ secrets[format('{0}', vars.SONAR_TOKEN_SECRET_NAME)] }}
+
       - name: SonarCloud Scan
-        if: always()
+        # Skip for fork PRs where secrets are not available
+        if: always() && (github.event.pull_request.head.repo.full_name == github.repository || github.event_name != 'pull_request')
         uses: SonarSource/sonarqube-scan-action@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
