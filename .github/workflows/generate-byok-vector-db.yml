@@ -35,6 +35,10 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
+
+    # Only run for ansible organization
+    if: github.repository_owner == 'ansible'
+
     permissions:
       contents: read
 

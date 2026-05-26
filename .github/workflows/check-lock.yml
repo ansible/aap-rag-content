@@ -9,6 +9,13 @@ on:
 jobs:
   check-lock:
     runs-on: ubuntu-latest
+
+    # Only run for ansible organization
+    if: github.repository_owner == 'ansible'
+
+    permissions:
+      contents: read
+
     steps:
       - uses: actions/checkout@v4
 

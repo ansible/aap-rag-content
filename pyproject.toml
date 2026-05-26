@@ -17,6 +17,27 @@ disable_error_code = ["union-attr", "return-value", "arg-type", "import-untyped"
 ignore_missing_imports = true
 mypy_path = ["src"]
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.coverage.run]
+source = ["src", "scripts"]
+omit = ["*/tests/*", "*/__pycache__/*", "*/migrations/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@abstractmethod",
+]
+
 # https://docs.astral.sh/uv/guides/integration/pytorch/
 [tool.uv.sources]
 torch = [
@@ -64,6 +85,7 @@ dev = [
     "black",
     "mypy",
     "pytest",
+    "pytest-cov",
     "pytest-mock",
     "ruff",
     "types-requests",
