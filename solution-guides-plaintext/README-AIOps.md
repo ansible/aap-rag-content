@@ -215,7 +215,7 @@ Stages 1-3 are safe to experiment with in any environment. Stage 4 is where prod
 
 This is a workflow **example** from our hands-on workshop **Introduction to AI-Driven Ansible Automation**
 
-[](https://github.com/rhpds/showroom-lb2961-ai-driven-ansible-automation/blob/main/solution_images/overview_diagram.png?raw=true)
+
 
 
 > **This is a high level diagram.**

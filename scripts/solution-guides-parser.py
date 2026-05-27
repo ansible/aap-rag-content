@@ -67,6 +67,8 @@ class SolutionGuidesParser:
         with open(out_file, "w", encoding="utf-8") as f:
             for line in lines:
                 line = re.sub(r"<img\s[^>]*>", "", line)
+                # Strip linked images ([![...](...)](#...)) before plain images
+                line = re.sub(r"\[!\[[^\]]*\]\([^)]*\)\]\([^)]*\)", "", line)
                 line = re.sub(r"!\[[^\]]*\]\([^)]*\)", "", line)
                 f.write(line)
 
