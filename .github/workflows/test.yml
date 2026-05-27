@@ -64,7 +64,7 @@ jobs:
       #   run: make check-types
 
       - name: Run unit tests with coverage
-        run: PYTHONPATH=src:$$PYTHONPATH uv run pytest tests/ -v -c pyproject.toml --cov=src --cov=scripts --cov-report=xml --cov-report=term
+        run: PYTHONPATH=src:$PYTHONPATH uv run pytest tests/ -v -c pyproject.toml --cov=src --cov=scripts --cov-report=xml --cov-report=term
 
       # Fix paths in coverage file for SonarCloud
       # See https://sonarsource.atlassian.net/browse/SONARPY-1203
