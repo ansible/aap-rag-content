@@ -45,7 +45,12 @@ class SolutionGuidesParser:
         for line in lines:
             if line.startswith("# "):
                 title = line.lstrip("# ").strip()
-                title = re.sub(r"\s*<!--[\s\S]*?--!?>", "", title)
+                while "<!--" in title:
+                    start = title.find("<!--")
+                    end = title.find("-->", start + 4)
+                    if end == -1:
+                        break
+                    title = (title[:start] + title[end + 3:]).strip()
                 return title
         return None
 
