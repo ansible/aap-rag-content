@@ -72,7 +72,7 @@ jobs:
         if: always()
         run: |
           if [ -f coverage.xml ]; then
-            sed -i "s,/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/,/github/workspace/,g" coverage.xml
+            sed -i "s,/home/runner/work/${{ github.event.repository.name }}/${{ github.event.repository.name }}/,,g" coverage.xml
           fi
 
       # Embed PR number in coverage.xml for cross-workflow communication
