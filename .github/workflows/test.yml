@@ -93,6 +93,21 @@ jobs:
           if-no-files-found: warn
 
       #####################
+      # Upload coverage to Codecov
+      #####################
+      - name: Upload Python coverage to Codecov
+        # Skip for fork PRs where secrets are not available
+        if: always() && (github.event.pull_request.head.repo.full_name == github.repository || github.event_name != 'pull_request')
+        uses: codecov/codecov-action@0f8570b1a125f4937846a11fcfa3bcd548bd8c97 # v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          url: ${{ vars.CODECOV_URL }}
+          files: ./coverage.xml
+          flags: python
+          disable_search: true
+          fail_ci_if_error: false
+
+      #####################
       # SonarCloud analysis
       #####################
       - name: Extract repo owner and name

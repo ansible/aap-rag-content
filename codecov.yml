@@ -1,0 +1,33 @@
+codecov:
+  require_ci_to_pass: yes
+
+coverage:
+  precision: 2
+  round: down
+  range: "50...100"
+
+  # Align with SonarCloud exclusions from sonar-project.properties
+  ignore:
+    # Python test files
+    - "tests/**/*"
+    # Python cache and artifacts
+    - "**/__pycache__/**"
+    - "**/*.pyc"
+    - "**/.pytest_cache/**"
+    # Python migrations
+    - "**/migrations/**"
+
+flags:
+  python:
+    carryforward: true
+    paths:
+      - src/
+      - scripts/
+      - embeddings_model/
+
+comment:
+  layout: "reach,diff,flags,files"
+  behavior: default
+  require_changes: false
+  require_base: true
+  require_head: true
