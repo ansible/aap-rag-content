@@ -40,7 +40,7 @@ download-embeddings-model:
 	podman kill rag-content
 
 export-deps: ## Check pyproject.toml for changes, update the lock file if needed, then sync.
-	uv export --format requirements.txt -o requirements.txt
+	uv pip compile pyproject.toml --generate-hashes --python-version 3.12 --python-platform linux --torch-backend cpu --output-file requirements.txt
 
 check-types: ## Checks type hints in sources
 	uv run mypy --explicit-package-bases --disallow-untyped-calls --disallow-untyped-defs --disallow-incomplete-defs scripts
