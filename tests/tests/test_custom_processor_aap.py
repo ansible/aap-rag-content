@@ -13,11 +13,14 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 """Tests for custom_processor_aap module."""
-# pylint: disable=C0415, disable=import-error
+# pylint: disable=C0415,import-error,protected-access
+import json
 import sys
 from pathlib import Path
 from unittest.mock import MagicMock
 from unittest.mock import patch
+
+import pytest
 
 # Add scripts directory to path
 scripts_dir = Path(__file__).parent.parent.parent / "scripts"
@@ -143,3 +146,116 @@ class TestAAPMetadataProcessor:
         assert result["url_reachable"] is True
         assert result["docs_url"] == "https://example.com"
         assert result["title"] == "Test Title"
+
+
+class TestTechnicalMarketingContents:
+    """Test cases for TECHNICAL_MARKETING_CONTENTS integration."""
+
+    def test_technical_marketing_contents_list(self):
+        """Test TECHNICAL_MARKETING_CONTENTS contains solution-guides-plaintext."""
+        from custom_processor_aap import TECHNICAL_MARKETING_CONTENTS
+
+        assert "solution-guides-plaintext" in TECHNICAL_MARKETING_CONTENTS
+
+    @patch("custom_processor_aap.DocumentProcessor")
+    @patch("custom_processor_aap.AAPMetadataProcessor")
+    @patch("custom_processor_aap.utils.get_common_arg_parser")
+    def test_main_processes_technical_marketing_contents(
+        self, mock_parser, _mock_processor_class, mock_doc_processor_class
+    ):
+        """Test main() calls document_processor.process() for solution-guides-plaintext."""
+        from custom_processor_aap import main
+
+        test_args = MagicMock()
+        test_args.suppress_ping_url = False
+        test_args.folder = "/test"
+        mock_parser_instance = MagicMock()
+        mock_parser.return_value = mock_parser_instance
+        mock_parser_instance.parse_args.return_value = test_args
+
+        mock_doc_processor = MagicMock()
+        mock_doc_processor_class.return_value = mock_doc_processor
+
+        main()
+
+        process_calls = mock_doc_processor.process.call_args_list
+        solution_guide_calls = [
+            c
+            for c in process_calls
+            if "solution-guides-plaintext" in str(c) and c.kwargs.get("required_exts") == [".md"]
+        ]
+        assert len(solution_guide_calls) == 1
+
+    def test_metadata_processor_loads_solution_guide_metadata(self, tmp_path):
+        """Test AAPMetadataProcessor loads metadata from solution guide JSON."""
+        from custom_processor_aap import AAPMetadataProcessor
+
+        doc_dir = tmp_path / "solution-guides-plaintext"
+        doc_dir.mkdir()
+        meta_dir = doc_dir / ".metadata"
+        meta_dir.mkdir()
+
+        metadata = {
+            "title": "AIOps Guide",
+            "url": "https://ansible-tmm.github.io/solution-guides/README-AIOps",
+            "path": "README-AIOps.md",
+        }
+        (meta_dir / "README-AIOps.json").write_text(json.dumps(metadata), encoding="utf-8")
+
+        processor = AAPMetadataProcessor(suppress_ping_url=True)
+        result = processor._load_metadata(str(doc_dir / "README-AIOps.md"))
+        assert result["title"] == "AIOps Guide"
+        assert result["url"] == "https://ansible-tmm.github.io/solution-guides/README-AIOps"
+
+    def test_metadata_processor_url_function_solution_guide(self, tmp_path):
+        """Test url_function returns URL from solution guide metadata."""
+        from custom_processor_aap import AAPMetadataProcessor
+
+        doc_dir = tmp_path / "guides"
+        doc_dir.mkdir()
+        meta_dir = doc_dir / ".metadata"
+        meta_dir.mkdir()
+
+        expected_url = "https://ansible-tmm.github.io/solution-guides/README-EDB"
+        metadata = {"title": "EDB Guide", "url": expected_url, "path": "README-EDB.md"}
+        (meta_dir / "README-EDB.json").write_text(json.dumps(metadata), encoding="utf-8")
+
+        processor = AAPMetadataProcessor(suppress_ping_url=True)
+        url = processor.url_function(str(doc_dir / "README-EDB.md"))
+        assert url == expected_url
+
+    def test_metadata_processor_get_file_title_solution_guide(self, tmp_path):
+        """Test get_file_title returns title from solution guide metadata."""
+        from custom_processor_aap import AAPMetadataProcessor
+
+        doc_dir = tmp_path / "guides"
+        doc_dir.mkdir()
+        meta_dir = doc_dir / ".metadata"
+        meta_dir.mkdir()
+
+        metadata = {
+            "title": "EDB PostgreSQL with AAP",
+            "url": "https://example.com",
+            "path": "README-EDB.md",
+        }
+        (meta_dir / "README-EDB.json").write_text(json.dumps(metadata), encoding="utf-8")
+
+        processor = AAPMetadataProcessor(suppress_ping_url=True)
+        title = processor.get_file_title(str(doc_dir / "README-EDB.md"))
+        assert title == "EDB PostgreSQL with AAP"
+
+    def test_metadata_processor_get_file_title_md_no_metadata_raises(self, tmp_path):
+        """Test get_file_title raises RuntimeError for .md file without title."""
+        from custom_processor_aap import AAPMetadataProcessor
+
+        doc_dir = tmp_path / "guides"
+        doc_dir.mkdir()
+        meta_dir = doc_dir / ".metadata"
+        meta_dir.mkdir()
+
+        metadata = {"title": None, "url": "https://example.com", "path": "test.md"}
+        (meta_dir / "test.json").write_text(json.dumps(metadata), encoding="utf-8")
+
+        processor = AAPMetadataProcessor(suppress_ping_url=True)
+        with pytest.raises(RuntimeError, match="Title metadata is not found"):
+            processor.get_file_title(str(doc_dir / "test.md"))

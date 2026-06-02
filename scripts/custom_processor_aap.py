@@ -31,6 +31,11 @@ ADDITIONAL_DOCS = [
     "additional_docs",
 ]
 
+# Folder where Technical Marketing contents (e.g. Solution Guides) are stored.
+TECHNICAL_MARKETING_CONTENTS = [
+    "solution-guides-plaintext",
+]
+
 
 class AAPMetadataProcessor(MetadataProcessor):
     """Metadata processor for AAP documentation.
@@ -108,6 +113,13 @@ def main():
             folder,
             metadata=metadata_processor,
             required_exts=[".txt"],
+        )
+    for document_folder in TECHNICAL_MARKETING_CONTENTS:
+        folder = Path(Path(args.folder) / document_folder)
+        document_processor.process(
+            folder,
+            metadata=metadata_processor,
+            required_exts=[".md"],
         )
 
     # Save the new vector database to the output directory
