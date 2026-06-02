@@ -15,9 +15,7 @@ COPY src/aap_rag_content ./aap_rag_content
 
 RUN python3.12 -m venv .venv
 RUN pip3.12 install --upgrade pip
-# Strip hashes from requirements.txt to allow PyTorch CPU index to provide torch
-RUN cut -f1 -d' ' requirements.txt > requirements-no-hash.txt
-RUN pip3.12 install --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cpu -r requirements-no-hash.txt
+RUN pip3.12 install --no-cache-dir -r requirements.txt
 
 RUN cd embeddings_model; if [ ! -f model.safetensors ]; then  \
         curl -L -O https://huggingface.co/sentence-transformers/all-mpnet-base-v2/resolve/9a3225965996d404b775526de6dbfe85d3368642/model.safetensors; \
