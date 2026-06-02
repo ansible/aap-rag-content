@@ -1,12 +1,14 @@
-"""Download and parse solution guides for RAG DB ingestion."""
+"""Download and parse solution guides for RAG DB ingestion."""  # pylint: disable=invalid-name
 
 import argparse
 import json
 import os
 import re
+import shutil
+import sys
 import time
-import urllib.request
 import urllib.error
+import urllib.request
 
 SOLUTION_GUIDES_REPO_URL = "https://github.com/ansible-tmm/solution-guides/"
 SOLUTION_GUIDES_WEB_PAGE = "https://ansible-tmm.github.io/solution-guides/"
@@ -50,7 +52,7 @@ class SolutionGuidesParser:
                     end = title.find("-->", start + 4)
                     if end == -1:
                         break
-                    title = (title[:start] + title[end + 3:]).strip()
+                    title = (title[:start] + title[end + 3 :]).strip()
                 return title
         return None
 
@@ -91,36 +93,56 @@ class SolutionGuidesParser:
         if not os.path.isdir(self.repo_dir):
             os.makedirs(self.repo_dir)
 
-        raw_base_url = SOLUTION_GUIDES_REPO_URL.replace(
-            "github.com", "raw.githubusercontent.com"
-        ).rstrip("/") + "/main/"
+        raw_base_url = (
+            SOLUTION_GUIDES_REPO_URL.replace("github.com", "raw.githubusercontent.com").rstrip("/")
+            + "/main/"
+        )
 
+        failures = []
         for source_file in SOURCE_FILES:
             url = raw_base_url + source_file
             dest = os.path.join(self.repo_dir, source_file)
             print(f"Downloading {source_file}...")
             try:
-                urllib.request.urlretrieve(url, dest)
-            except urllib.error.HTTPError as e:
-                print(f"Warning: failed to download {source_file}: {e}")
+                with (
+                    urllib.request.urlopen(url, timeout=30) as response,
+                    open(dest, "wb") as out,
+                ):
+                    shutil.copyfileobj(response, out)
+            except (urllib.error.URLError, TimeoutError, OSError) as e:
+                print(
+                    f"ERROR: failed to download {source_file}: {e}",
+                    file=sys.stderr,
+                )
+                failures.append(source_file)
+
+        if failures:
+            print(
+                f"\n{len(failures)} download(s) failed: {', '.join(failures)}",
+                file=sys.stderr,
+            )
+            print(
+                "Aborting to avoid producing an incomplete corpus.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
 
     def run(self):
+        """Parse all source files and write plaintext output with metadata."""
         for source_file in SOURCE_FILES:
             self._parse_file(source_file)
 
 
 def main():
+    """Entry point for the solution guides parser CLI."""
     start = time.time()
     try:
         arg_parser = argparse.ArgumentParser()
+        arg_parser.add_argument("-o", "--out-dir", default="solution-guides-plaintext")
+        arg_parser.add_argument("-r", "--repo-dir", default="solution-guides")
         arg_parser.add_argument(
-            "-o", "--out-dir", default="solution-guides-plaintext"
-        )
-        arg_parser.add_argument(
-            "-r", "--repo-dir", default="solution-guides"
-        )
-        arg_parser.add_argument(
-            "--skip-download", action="store_true",
+            "--skip-download",
+            action="store_true",
             help="Skip downloading source files from the repository",
         )
         args = arg_parser.parse_args()
@@ -135,4 +157,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

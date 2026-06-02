@@ -22,6 +22,8 @@ from pathlib import Path
 from unittest.mock import call
 from unittest.mock import patch
 
+import pytest
+
 scripts_dir = Path(__file__).parent.parent.parent / "scripts"
 sys.path.insert(0, str(scripts_dir))
 
@@ -230,42 +232,116 @@ class TestDownloadFiles:
     """Test cases for download_files."""
 
     def test_download_files_success(self, tmp_path):
-        """Test urlretrieve is called for each SOURCE_FILES entry."""
+        """Test urlopen is called for each SOURCE_FILES entry."""
         repo_dir = tmp_path / "repo"
         parser = SolutionGuidesParser(str(repo_dir), str(tmp_path / "out"))
 
-        with patch.object(_urllib_request, "urlretrieve") as mock_retrieve:
-            parser.download_files()
+        with patch.object(_urllib_request, "urlopen") as mock_urlopen:
+            mock_urlopen.return_value.__enter__ = lambda s: s
+            mock_urlopen.return_value.__exit__ = lambda s, *a: None
+            mock_urlopen.return_value.read = lambda size=-1: b""
+            with patch("builtins.open", create=True):
+                with patch.object(_mod.shutil, "copyfileobj"):
+                    parser.download_files()
 
-            assert mock_retrieve.call_count == len(SOURCE_FILES)
+            assert mock_urlopen.call_count == len(SOURCE_FILES)
             for source_file in SOURCE_FILES:
                 expected_url = (
                     "https://raw.githubusercontent.com/ansible-tmm/solution-guides/main/"
                     + source_file
                 )
-                expected_dest = str(repo_dir / source_file)
-                mock_retrieve.assert_any_call(expected_url, expected_dest)
+                mock_urlopen.assert_any_call(expected_url, timeout=30)
 
-    def test_download_files_http_error(self, tmp_path, capsys):
-        """Test that HTTP errors are printed as warnings without aborting."""
+    def test_download_files_http_error_aborts(self, tmp_path, capsys):
+        """Test that download failures cause sys.exit(1)."""
         repo_dir = tmp_path / "repo"
         parser = SolutionGuidesParser(str(repo_dir), str(tmp_path / "out"))
 
-        def side_effect(url, _dest):
+        def side_effect(url, timeout=None):  # pylint: disable=unused-argument
             if "README-AIOps.md" in url:
                 raise urllib.error.HTTPError(url, 404, "Not Found", {}, None)
+            mock_resp = type(
+                "Resp",
+                (),
+                {
+                    "__enter__": lambda s: s,
+                    "__exit__": lambda s, *a: None,
+                    "read": lambda s, size=-1: b"",
+                },
+            )()
+            return mock_resp
 
-        with patch.object(
-            _urllib_request,
-            "urlretrieve",
-            side_effect=side_effect,
-        ) as mock_retrieve:
+        with (
+            patch.object(
+                _urllib_request,
+                "urlopen",
+                side_effect=side_effect,
+            ),
+            patch.object(_mod.shutil, "copyfileobj"),
+            pytest.raises(SystemExit, match="1"),
+        ):
             parser.download_files()
 
-            assert mock_retrieve.call_count == len(SOURCE_FILES)
-            captured = capsys.readouterr()
-            assert "Warning" in captured.out
-            assert "README-AIOps.md" in captured.out
+        captured = capsys.readouterr()
+        assert "ERROR" in captured.err
+        assert "README-AIOps.md" in captured.err
+        assert "Aborting" in captured.err
+
+    def test_download_files_timeout_aborts(self, tmp_path, capsys):
+        """Test that a timeout causes sys.exit(1)."""
+        repo_dir = tmp_path / "repo"
+        parser = SolutionGuidesParser(str(repo_dir), str(tmp_path / "out"))
+
+        def side_effect(url, timeout=None):  # pylint: disable=unused-argument
+            if "README-EDB.md" in url:
+                raise TimeoutError("timed out")
+            mock_resp = type(
+                "Resp",
+                (),
+                {
+                    "__enter__": lambda s: s,
+                    "__exit__": lambda s, *a: None,
+                    "read": lambda s, size=-1: b"",
+                },
+            )()
+            return mock_resp
+
+        with (
+            patch.object(
+                _urllib_request,
+                "urlopen",
+                side_effect=side_effect,
+            ),
+            patch.object(_mod.shutil, "copyfileobj"),
+            pytest.raises(SystemExit, match="1"),
+        ):
+            parser.download_files()
+
+        captured = capsys.readouterr()
+        assert "ERROR" in captured.err
+        assert "README-EDB.md" in captured.err
+
+    def test_download_files_url_error_aborts(self, tmp_path, capsys):
+        """Test that URLError (DNS/connection) causes sys.exit(1)."""
+        repo_dir = tmp_path / "repo"
+        parser = SolutionGuidesParser(str(repo_dir), str(tmp_path / "out"))
+
+        def side_effect(url, timeout=None):
+            raise urllib.error.URLError("Name resolution failed")
+
+        with (
+            patch.object(
+                _urllib_request,
+                "urlopen",
+                side_effect=side_effect,
+            ),
+            pytest.raises(SystemExit, match="1"),
+        ):
+            parser.download_files()
+
+        captured = capsys.readouterr()
+        assert "ERROR" in captured.err
+        assert f"{len(SOURCE_FILES)} download(s) failed" in captured.err
 
     def test_download_files_creates_repo_dir(self, tmp_path):
         """Test that repo_dir is created if it doesn't exist."""
@@ -274,7 +350,10 @@ class TestDownloadFiles:
 
         parser = SolutionGuidesParser(str(repo_dir), str(tmp_path / "out"))
 
-        with patch.object(_urllib_request, "urlretrieve"):
-            parser.download_files()
+        with patch.object(_urllib_request, "urlopen") as mock_urlopen:
+            mock_urlopen.return_value.__enter__ = lambda s: s
+            mock_urlopen.return_value.__exit__ = lambda s, *a: None
+            with patch.object(_mod.shutil, "copyfileobj"):
+                parser.download_files()
 
         assert repo_dir.is_dir()
