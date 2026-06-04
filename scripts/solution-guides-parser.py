@@ -109,7 +109,7 @@ class SolutionGuidesParser:
                     open(dest, "wb") as out,
                 ):
                     shutil.copyfileobj(response, out)
-            except (urllib.error.URLError, TimeoutError, OSError) as e:
+            except OSError as e:
                 print(
                     f"ERROR: failed to download {source_file}: {e}",
                     file=sys.stderr,
