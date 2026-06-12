@@ -22,6 +22,9 @@ testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
+markers = [
+    "requires_model: tests that require the embeddings model files",
+]
 
 [tool.coverage.run]
 source = ["src", "scripts"]

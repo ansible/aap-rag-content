@@ -64,6 +64,43 @@ The test suite includes tests for:
 - Document processing
 - Vector database generation
 - Utility functions
+- Vector query round-trip validation
+- Solution guide query verification (requires a complete vector DB; see below)
+
+### Vector Query Tests
+
+The `test_vector_query.py` file contains two test classes:
+
+- **`TestVectorQueryRoundTrip`** verifies basic FAISS operations (index creation,
+  semantic relevance, result count, embedding dimensions) using the real
+  `sentence-transformers/all-mpnet-base-v2` model from the `embeddings_model/`
+  directory. These tests build a small in-memory index from sample documents and
+  run automatically whenever the embedding model files are present.
+
+- **`TestSolutionGuidesQuery`** validates that the vector DB built by
+  `custom_processor_aap.py` returns chunks from the correct solution guide
+  documents. It loads the FAISS index from the built `faiss_store.db` and
+  checks that:
+  - A query mentioning "IBM Instana" returns chunks from the Instana solution guide
+  - A query mentioning "AIOps with ServiceNow" returns chunks from the ServiceNow guide
+  - A query mentioning "Red Hat AI Inference Server" returns chunks from the RHAIIS guide
+
+  These tests require a vector DB that includes solution guide content. In the
+  Konflux build, this happens automatically (tests run after `custom_processor_aap.py`).
+  To run them locally, decompress the pre-built DB first:
+
+  ```commandline
+  gzip -dk rag/llama_stack_vector_db/faiss_store.db.gz
+  ```
+
+  Then run only the solution guide tests:
+
+  ```commandline
+  PYTHONPATH=src:$PYTHONPATH uv run pytest tests/tests/test_vector_query.py::TestSolutionGuidesQuery -v
+  ```
+
+  If the DB does not contain solution guide chunks, these tests skip
+  automatically with a descriptive message.
 
 ## Build a container image
 

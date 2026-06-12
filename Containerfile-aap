@@ -33,6 +33,11 @@ RUN python custom_processor_aap.py  \
   -c 200 \
   -l 10
 
+COPY tests ./tests
+COPY pyproject.toml ./pyproject.toml
+RUN pip3.12 install --no-cache-dir pytest
+RUN PYTHONPATH=/rag-content TRANSFORMERS_OFFLINE=1 HF_HOME=/rag-content/embeddings_model python3.12 -m pytest tests/ -v -m requires_model -c pyproject.toml
+
 WORKDIR /rag-content/llama_stack_vector_db
 RUN gzip faiss_store.db; sha256sum faiss_store.db.gz > faiss_store.db.gz.sha256
 RUN sed -n 's/.*vector_store_id: //p' llama-stack.yaml | tr -d '\n' > provider_vector_db_id.ind
