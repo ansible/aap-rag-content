@@ -104,8 +104,9 @@ def _load_built_vector_db(db_path):
 def embedding_model():
     """Load the SentenceTransformer model once per test module."""
     model_dir = os.path.realpath(MODEL_DIR)
-    if not os.path.isdir(model_dir):
-        pytest.skip(f"Embeddings model not found at {model_dir}")
+    model_weights = os.path.join(model_dir, "model.safetensors")
+    if not os.path.isfile(model_weights):
+        pytest.skip(f"Embeddings model weights not found at {model_weights}")
     old_hf_home = os.environ.get("HF_HOME")
     old_offline = os.environ.get("TRANSFORMERS_OFFLINE")
     os.environ["HF_HOME"] = model_dir
