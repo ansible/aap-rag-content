@@ -36,7 +36,7 @@ RUN python custom_processor_aap.py  \
 COPY tests ./tests
 COPY pyproject.toml ./pyproject.toml
 RUN pip3.12 install --no-cache-dir pytest
-RUN PYTHONPATH=/rag-content TRANSFORMERS_OFFLINE=1 HF_HOME=/rag-content/embeddings_model python3.12 -m pytest tests/tests/test_vector_query.py -v -c pyproject.toml
+RUN PYTHONPATH=/rag-content TRANSFORMERS_OFFLINE=1 HF_HOME=/rag-content/embeddings_model REQUIRE_VECTOR_DB=1 python3.12 -m pytest tests/tests/test_vector_query.py -v -c pyproject.toml
 
 WORKDIR /rag-content/llama_stack_vector_db
 RUN gzip faiss_store.db; sha256sum faiss_store.db.gz > faiss_store.db.gz.sha256

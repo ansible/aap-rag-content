@@ -31,6 +31,15 @@ pytestmark = pytest.mark.requires_model
 EMBEDDING_DIM = 768
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 MODEL_DIR = str(REPO_ROOT / "embeddings_model")
+REQUIRE_VECTOR_DB = os.environ.get("REQUIRE_VECTOR_DB") == "1"
+
+
+def _skip_or_fail(msg):
+    """Skip locally, fail in container builds where REQUIRE_VECTOR_DB=1."""
+    if REQUIRE_VECTOR_DB:
+        pytest.fail(msg)
+    else:
+        pytest.skip(msg)
 
 SAMPLE_DOCUMENTS = [
     "Ansible Automation Platform provides enterprise automation capabilities for IT teams",
@@ -75,6 +84,8 @@ def _load_built_vector_db(db_path):
 
     The LlamaStack FAISS provider stores the index as a numpy uint8 array
     and chunk metadata as JSON strings inside a SQLite KV store.
+    This reads the provider's internal serialization format directly;
+    a LlamaStack upgrade may change the schema and require updating this reader.
 
     Returns (faiss_index, chunks_dict) where chunks_dict maps
     string index to parsed chunk metadata dict.
@@ -106,7 +117,7 @@ def embedding_model():
     model_dir = os.path.realpath(MODEL_DIR)
     model_weights = os.path.join(model_dir, "model.safetensors")
     if not os.path.isfile(model_weights):
-        pytest.skip(f"Embeddings model weights not found at {model_weights}")
+        _skip_or_fail(f"Embeddings model weights not found at {model_weights}")
     old_hf_home = os.environ.get("HF_HOME")
     old_offline = os.environ.get("TRANSFORMERS_OFFLINE")
     os.environ["HF_HOME"] = model_dir
@@ -140,18 +151,18 @@ def built_vector_db():
     """Load the FAISS index built by custom_processor_aap.py."""
     db_path = _find_vector_db_path()
     if db_path is None:
-        pytest.skip("Built vector DB (faiss_store.db) not found")
+        _skip_or_fail("Built vector DB (faiss_store.db) not found")
 
     index, chunks = _load_built_vector_db(db_path)
     if index is None:
-        pytest.skip("No FAISS index found in the vector DB")
+        _skip_or_fail("No FAISS index found in the vector DB")
 
     has_solution_guides = any(
         SOLUTION_GUIDE_URL_PREFIX in c.get("metadata", {}).get("docs_url", "")
         for c in chunks.values()
     )
     if not has_solution_guides:
-        pytest.skip(
+        _skip_or_fail(
             "Vector DB does not contain solution guide chunks "
             "(run custom_processor_aap.py to build a complete DB)"
         )
@@ -179,6 +190,7 @@ class TestVectorQueryRoundTrip:
         _, indices = index.search(query_embedding, k=len(docs))
 
         top_idx = indices[0][0]
+        # Expected indices assume the pinned all-mpnet-base-v2 model
         assert top_idx in (0, 4), (
             f"Expected top result to be an Ansible doc (index 0 or 4), "
             f"got index {top_idx}: '{docs[top_idx]}'"
