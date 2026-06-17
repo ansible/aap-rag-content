@@ -1,12 +1,8 @@
 # 15. Supported Inventory plugin templates
-## 15.1. Amazon Web Services EC2
-
-
-
+## 15.1. Amazon Web Services EC2
 
 Use the following reference to configure an AWS EC2-sourced inventory.
 
-```
 compose:
 ansible_host: public_ip_address
 ec2_account_id: owner_id
@@ -26,7 +22,7 @@ ec2_instance_type: instance_type
 ec2_ip_address: public_ip_address
 ec2_kernel: kernel_id | default("")
 ec2_key_name: key_name
-ec2_launch_time: launch_time | regex_replace(" ", "T") | regex_replace("(\+)(\d\d):(\d)(\d)$", ".\g&lt;2&gt;\g&lt;3&gt;Z")
+ec2_launch_time: launch_time | regex_replace(" ", "T") | regex_replace("(\+)(\d\d):(\d)(\d)$", ".\g<2>\g<3>Z")
 ec2_monitored: monitoring.state in ['enabled', 'pending']
 ec2_monitoring_state: monitoring.state
 ec2_persistent: persistent | default(false)
@@ -109,5 +105,4 @@ prefix: ''
 separator: ''
 plugin: amazon.aws.aws_ec2
 use_contrib_script_compatible_sanitization: true
-```
 

@@ -1,8 +1,5 @@
 # 3. Configuring Ansible Automation Platform to use egress proxy
-## 3.2. System proxy configuration
-
-
-
+## 3.2. System proxy configuration
 
 An outbound proxy (egress proxy) is a server that acts as an intermediary for requests from clients seeking resources from other servers on the internet. It is used to regulate and secure client traffic, and to provide caching services to improve performance.
 
@@ -10,11 +7,9 @@ The outbound proxy is configured on the system level for all the nodes in the co
 
 You must set the following environment variables:
 
-```
 http_proxy=“http://external-proxy_0:3128”
 https_proxy=“http://external-proxy_0:3128”
 no_proxy=“localhost,127.0.0.0/8,10.0.0.0/8”
-```
 
 You can also add those variables to the '/etc/environment' file to make them permanent.
 

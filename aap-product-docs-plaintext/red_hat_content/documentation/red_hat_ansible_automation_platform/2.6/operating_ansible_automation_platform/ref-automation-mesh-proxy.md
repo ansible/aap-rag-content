@@ -1,8 +1,5 @@
 # 3. Configuring Ansible Automation Platform to use egress proxy
-## 3.7. Configuring proxy settings for automation mesh
-
-
-
+## 3.7. Configuring proxy settings for automation mesh
 
 You can route outbound communication from the receptor on an automation mesh node through a proxy server. If your proxy does not strip out TLS certificates then an installation of Ansible Automation Platform automatically supports the use of a proxy server.
 

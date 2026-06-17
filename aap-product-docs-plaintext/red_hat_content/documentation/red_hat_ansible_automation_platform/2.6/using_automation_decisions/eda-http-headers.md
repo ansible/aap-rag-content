@@ -1,19 +1,21 @@
 # 10. Simplified event routing
-## 10.4. HTTP headers
-
-
-
+## 10.4. HTTP headers
 
 In the context of Event-Driven Ansible and event streams, HTTP headers play a significant role because they carry the necessary context and security information about the incoming event from a third-party source (for example, GitHub, a monitoring tool, or a proprietary webhook).
 
 They include the following capabilities:
 
+Authentication and non-repudiation
+This is the most critical use. Headers often contain tokens, API keys, or security signatures (like an HMAC in an `X-Hub-Signature` header) that Event-Driven Ansible uses to *verify the sender’s identity* and ensure the event payload has not been tampered with. This supports non-repudiation—proof that the event came from a legitimate source.
+
+Debugging and Logging
+Headers provide crucial data points (`Date`, `User-Agent`, `X-Request-ID`) for tracing the event’s path, helping system administrators and SREs *debug* issues related to delayed or failed event processing.
+
 Headers are essential for all HTTP communication, serving several distinct purposes:
 
--  **Context and metadata:** Describe the data being sent (for example, `    Content-Type: application/json, Content-Length: 1024` ).
--  **Client/Server Capabilities:** Inform the receiving party of the sender’s capabilities or preferences (for example, `    Accept-Language: en-US` ).
--  **Authentication/Authorization:** Carry security credentials (for example, `    Authorization: Bearer &lt;token&gt;` ).
--  **Caching:** Controls how content should be cached by clients and proxies (for example, `    Cache-Control: max-age=3600` ).
--  **Routing and Tracking:** They facilitate network routing and transaction tracking, often via custom headers (for example, `    X-Request-ID` ).
-
+- **Context and metadata:** Describe the data being sent (for example, `Content-Type: application/json, Content-Length: 1024`).
+- **Client/Server Capabilities:** Inform the receiving party of the sender’s capabilities or preferences (for example, `Accept-Language: en-US`).
+- **Authentication/Authorization:** Carry security credentials (for example, `Authorization: Bearer <token>`).
+- **Caching:** Controls how content should be cached by clients and proxies (for example, `Cache-Control: max-age=3600`).
+- **Routing and Tracking:** They facilitate network routing and transaction tracking, often via custom headers (for example, `X-Request-ID`).
 

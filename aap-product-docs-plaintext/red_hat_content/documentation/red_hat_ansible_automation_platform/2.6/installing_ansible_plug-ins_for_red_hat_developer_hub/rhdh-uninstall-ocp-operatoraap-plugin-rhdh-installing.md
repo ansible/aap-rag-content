@@ -1,7 +1,4 @@
-# Chapter 7. Uninstalling an Operator installation on OpenShift Container Platform
-
-
-
+# Chapter 7. Uninstalling an Operator installation on OpenShift Container Platform
 
 To delete the dynamic plug-ins from your installation, you must edit the ConfigMaps that reference Ansible.
 

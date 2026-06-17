@@ -1,9 +1,6 @@
 # 3. Performance tuning for automation controller
 ## 3.2. Capacity planning for deploying automation controller
-### 3.2.1. Characteristics of your workload
-
-
-
+### 3.2.1. Characteristics of your workload
 
 Before planning your deployment, establish the workload that you want to support. Consider the following factors to characterize an automation controller workload:
 
@@ -13,5 +10,4 @@ Before planning your deployment, establish the workload that you want to support
 - Maximum number of forks set on jobs. Forks decide the number of hosts that a job acts on concurrently.
 - Maximum API requests per second
 - Node size that you prefer to deploy (CPU/Memory/Disk)
-
 

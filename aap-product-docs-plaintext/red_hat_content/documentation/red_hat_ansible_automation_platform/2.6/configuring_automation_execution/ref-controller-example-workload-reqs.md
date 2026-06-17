@@ -1,9 +1,6 @@
 # 3. Performance tuning for automation controller
 ## 3.3. Example capacity planning exercise
-### 3.3.1. Example workload requirements
-
-
-
+### 3.3.1. Example workload requirements
 
 Learn how to calculate workload requirements for automation controller based on a hypothetical workload.
 
@@ -20,13 +17,12 @@ Derive the total capacity by summing the resource consumed by parallel execution
 **Control capacity**
 
 - To control 10 concurrent jobs requires at least 10 units of control capacity.
+
 - To calculate the number of events per hour that you need to support 300 managed hosts and 1,000 tasks per hour per host, use the following equation:
 
 
 - 1000 tasks x 300 managed hosts per hour = 300,000 events per hour at minimum.
 - You must run the job to see exactly how many events it produces, because this is dependent on the specific task and verbosity. For example, a debug task printing “Hello World” produces 6 job events with the verbosity of 1 on one host. With a verbosity of 3, it produces 34 job events on one host. Therefore, you must estimate that the task produces at least 6 events. This would produce closer to 3,000,000 events per hour, or approximately 833 events per second.
-
-
 
 **Determining quantity of execution and control nodes needed**
 
@@ -36,10 +32,9 @@ Using this default, the maximum number of jobs a control node can dispatch to ex
 
 | Node | API capacity | Default execution capacity | Default control capacity | Mean event processing rate at 100% capacity usage | Mean events processing rate at 50% capacity usage | Mean event processing rate at 40% capacity usage |
 | --- | --- | --- | --- | --- | --- | --- |
-| 4 CPU at 2.5Ghz, 16 GB RAM control node, a maximum of 3000 IOPS disk | about 10 requests per second | n/a | 137 jobs | 1100 per second | 1400 per second | 1630 per second |
-| 4 CPU at 2.5Ghz, 16 GB RAM execution node, a maximum of 3000 IOPS disk | n/a | 137 | n/a | n/a | n/a | n/a |
-| 4 CPU at 2.5Ghz, 16 GB RAM database node, a maximum of 3000 IOPS disk | n/a | n/a | n/a | n/a | n/a | n/a |
-
+| <br>  4 CPU at 2.5Ghz, 16 GB RAM control node, a maximum of 3000 IOPS disk | <br>  about 10 requests per second | <br>  n/a | <br>  137 jobs | <br>  1100 per second | <br>  1400 per second | <br>  1630 per second |
+| <br>  4 CPU at 2.5Ghz, 16 GB RAM execution node, a maximum of 3000 IOPS disk | <br>  n/a | <br>  137 | <br>  n/a | <br>  n/a | <br>  n/a | <br>  n/a |
+| <br>  4 CPU at 2.5Ghz, 16 GB RAM database node, a maximum of 3000 IOPS disk | <br>  n/a | <br>  n/a | <br>  n/a | <br>  n/a | <br>  n/a | <br>  n/a |
 
 Because controlling jobs competes with job event processing on the control node, over-provisioning control capacity can reduce processing times. When processing times are high, you can experience a delay between when the job runs and when you can view the output in the API or UI.
 
@@ -49,6 +44,5 @@ For this example, for a workload on 300 managed hosts, executing 1000 tasks per 
 - Keep the default fork setting of 5 on job templates.
 - Use the capacity change feature in the instance view of the UI on the control node to reduce the capacity down to 16, the lowest value, to reserve more of the control node’s capacity for processing events.
 
-
-For more information about workloads with high levels of API interaction, see [Scaling Automation Controller for API Driven Workloads](https://www.ansible.com/blog/scaling-automation-controller-for-api-driven-workloads) . For more information about managing capacity with instances, see [Managing capacity with Instances](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#assembly-controller-instances) . For more information about operator-based deployments, see [Red Hat Ansible Automation Platform considerations for operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/performance_considerations_for_operator_environments/index) .
+For more information about workloads with high levels of API interaction, see [Scaling Automation Controller for API Driven Workloads](https://www.ansible.com/blog/scaling-automation-controller-for-api-driven-workloads). For more information about managing capacity with instances, see [Managing capacity with Instances](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#assembly-controller-instances). For more information about operator-based deployments, see [Red Hat Ansible Automation Platform considerations for operator environments](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/performance_considerations_for_operator_environments/index).
 

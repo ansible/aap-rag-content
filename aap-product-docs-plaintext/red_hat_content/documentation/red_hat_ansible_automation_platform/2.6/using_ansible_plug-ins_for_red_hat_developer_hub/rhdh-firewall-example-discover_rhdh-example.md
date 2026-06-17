@@ -1,8 +1,5 @@
 # 3. Example: Automate Red Hat Enterprise Linux firewall configuration
-## 3.2. Discovering existing Ansible content for RHEL system roles
-
-
-
+## 3.2. Discovering existing Ansible content for RHEL system roles
 
 Red Hat recommends that you use trusted automation content that has been tested and approved by Red Hat or your organization.
 
@@ -10,9 +7,12 @@ Automation hub is a central repository for discovering, downloading, and managin
 
 **Procedure**
 
-1. Click on the Ansible `    A` icon in the Red Hat Developer Hub navigation panel.
-1. Click **Discover existing collections** .
-1. Click **Go to Automation Hub** .
+1. Click on the Ansible `A` icon in the Red Hat Developer Hub navigation panel.
+
+2. Click **Discover existing collections**.
+
+3. Click **Go to Automation Hub**.
+
 
 
 - If private automation hub has been configured in the Ansible plug-ins, you are redirected to your **PrivateHubName** instance.
@@ -20,14 +20,11 @@ Automation hub is a central repository for discovering, downloading, and managin
 
 In this example, you are redirected to the RHCC automation hub.
 
+4. If you are prompted to log in, provide your Red Hat Customer Portal credentials.
 
-1. If you are prompted to log in, provide your Red Hat Customer Portal credentials.
-1. Filter the collections with the `    rhel firewall` keywords.
+5. Filter the collections with the `rhel firewall` keywords.
 
-The search returns the `    rhel_system_roles` collection.
+The search returns the `rhel_system_roles` collection.
 
 The RHEL System Roles collection contains certified Ansible content that you can reuse to configure your firewall.
-
-
-
 

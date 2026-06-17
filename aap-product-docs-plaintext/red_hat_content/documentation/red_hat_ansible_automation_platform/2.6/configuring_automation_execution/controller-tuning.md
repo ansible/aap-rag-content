@@ -1,8 +1,5 @@
 # 3. Performance tuning for automation controller
-## 3.7. Automation controller tuning
-
-
-
+## 3.7. Automation controller tuning
 
 You can configure many automation controller settings by using the UI, API, and file settings including:
 
@@ -12,5 +9,4 @@ You can configure many automation controller settings by using the UI, API, and 
 - Instance and container groups capacity
 - Internal cluster routing
 - Web server tuning
-
 

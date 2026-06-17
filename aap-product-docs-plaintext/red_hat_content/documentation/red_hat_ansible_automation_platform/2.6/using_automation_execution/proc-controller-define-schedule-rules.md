@@ -1,9 +1,6 @@
 # 10. Schedules
 ## 10.2. Adding a new schedule from a resource page
-### 10.2.1. Defining rules for the schedule
-
-
-
+### 10.2.1. Defining rules for the schedule
 
 After you create a schedule, you can define rules for when the schedule runs.
 
@@ -12,29 +9,37 @@ After you create a schedule, you can define rules for when the schedule runs.
 1. Enter the following information:
 
 
--  **Frequency** : Enter how often the schedule runs.
--  **Interval** : Select the interval at which the rule will repeat.
--  **Week start** : Select the day of the week that you want the week to begin.
--  **Minutes of the hour** : Use this field to declare minute(s) of the hour that the schedule should run.
--  **Hours of day** : Use this field to declare the hours of day that the schedule should run.
--  **Days of the week** : Select the days of the week on which to run the schedule.
--  **Days of the month** : Select the months of the year on which to run the schedule
--  **Weeks of the year** : Use this field to declare numbered weeks of the year that the schedule should run.
--  **Months of the year** : Use this field to declare ordinal days number of the month that the schedule should run.
--  **Days of the year** : Use this field to declare ordinal number days of the year that the schedule should run.
--  **Occurrences** : Use this field to filter down indexed rules based on those declared using the form fields in the Rule section.
--  **Schedule ending type** : Use this field to select when the schedule is set to end.
+- **Frequency**: Enter how often the schedule runs.
 
-For more information, see the [link](https://datatracker.ietf.org/doc/html/rfc5545) to the `        iCalendar RFC for bysetpos` field in the iCalendar documentation when you have set the rules for the schedule.
+- **Interval**: Select the interval at which the rule will repeat.
 
+- **Week start**: Select the day of the week that you want the week to begin.
 
+- **Minutes of the hour**: Use this field to declare minute(s) of the hour that the schedule should run.
 
-1. ClickSave rule. The **Schedule Rules** summary page is displayed.
-1. ClickAdd ruleto add additional rules.
-1. ClickNext.
+- **Hours of day**: Use this field to declare the hours of day that the schedule should run.
+
+- **Days of the week**: Select the days of the week on which to run the schedule.
+
+- **Days of the month**: Select the months of the year on which to run the schedule
+
+- **Weeks of the year**: Use this field to declare numbered weeks of the year that the schedule should run.
+
+- **Months of the year**: Use this field to declare ordinal days number of the month that the schedule should run.
+
+- **Days of the year**: Use this field to declare ordinal number days of the year that the schedule should run.
+
+- **Occurrences**: Use this field to filter down indexed rules based on those declared using the form fields in the Rule section.
+
+- **Schedule ending type**: Use this field to select when the schedule is set to end.
+
+For more information, see the [link](https://datatracker.ietf.org/doc/html/rfc5545) to the `iCalendar RFC for bysetpos` field in the iCalendar documentation when you have set the rules for the schedule.
+
+2. Click Save rule. The **Schedule Rules** summary page is displayed.
+
+3. Click Add rule to add additional rules.
+
+4. Click Next.
 
 The **Schedule Exceptions** page is displayed.
-
-
-
 

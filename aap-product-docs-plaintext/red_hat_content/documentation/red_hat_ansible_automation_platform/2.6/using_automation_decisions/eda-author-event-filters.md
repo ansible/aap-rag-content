@@ -1,23 +1,17 @@
 # 12. Event filter plugins
-## 12.1. Author event filters
-
-
-
+## 12.1. Author event filters
 
 You can create custom Python event filters to clean, normalize, or enrich incoming event data, ensuring it meets the format and quality required for rulebook condition evaluation.
 
 The basic structure follows:
 
-```
 # my_namespace.my_collection/extensions/eda/plugins/event_filter/my_filter.py
 def main(event: dict, arg1, arg2):
 # Process event data here
 return event
-```
 
 You can use this filter in a rulebook by adding it to the filters list in an event source:
 
-```
 sources:
 - name: azure_service_bus
 ansible.eda.azure_service_bus:
@@ -27,10 +21,8 @@ filters:
 - my_namespace.my_collection.my_filter:
 arg1: hello
 arg2: world
-```
 
 **Additional resources**
 
--  [ansible.eda collection](https://github.com/ansible/event-driven-ansible/tree/main/extensions/eda/plugins/event_filter)
-
+- [ansible.eda collection](https://github.com/ansible/event-driven-ansible/tree/main/extensions/eda/plugins/event_filter)
 

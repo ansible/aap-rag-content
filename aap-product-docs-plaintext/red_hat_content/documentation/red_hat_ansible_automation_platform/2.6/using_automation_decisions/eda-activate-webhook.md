@@ -1,8 +1,5 @@
 # 7. Rulebook activations
-## 7.8. Activating webhook rulebooks
-
-
-
+## 7.8. Activating webhook rulebooks
 
 In Openshift environments, you can activate webhooks by creating a route to expose the activation’s service, enabling external systems to send events and trigger automation.
 
@@ -10,11 +7,10 @@ In Openshift environments, you can activate webhooks by creating a route to expo
 
 - You have created a rulebook activation.
 
-
 Note
+
 The following is an example of rulebook with a given webhook:
 
-```
 - name: Listen for storage-monitor events
 hosts: all
 sources:
@@ -32,32 +28,39 @@ job_args:
 extra_vars:
 message: from eda
 sleep: 1
-```
-
-
 
 **Procedure**
 
 1. Create a Route (on OpenShift Container Platform) to expose the service. The following is an example Route for an ansible-rulebook source that expects POST’s on port 5000 on the decision environment pod:
 
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+name: test-sync-bug
+namespace: dynatrace
+labels:
+app: eda
+job-name: activation-job-1-5000
+spec:
+host: test-sync-bug-dynatrace.apps.aap-dt.ocp4.testing.ansible.com
+to:
+kind: Service
+name: activation-job-1-5000
+weight: 100
+port:
+targetPort: 5000
+tls:
+termination: edge
+insecureEdgeTerminationPolicy: Redirect
+wildcardPolicy: None
 
-```
-kind: Route    apiVersion: route.openshift.io/v1    metadata:      name: test-sync-bug      namespace: dynatrace      labels:        app: eda        job-name: activation-job-1-5000    spec:      host: test-sync-bug-dynatrace.apps.aap-dt.ocp4.testing.ansible.com      to:        kind: Service        name: activation-job-1-5000        weight: 100      port:        targetPort: 5000      tls:        termination: edge        insecureEdgeTerminationPolicy: Redirect      wildcardPolicy: None
-```
+2. When you create the Route, test it with a **Post to the Route URL**:
 
-
-1. When you create the Route, test it with a **Post to the Route URL** :
 
 Note
 You do not need the port as it is specified on the Route (targetPort).
 
-
-
-
-```
-curl -H "Content-Type: application/json" -X POST    test-sync-bug-dynatrace.apps.aap-dt.ocp4.testing.ansible.com -d    '{}'
-```
-
-
-
+curl -H "Content-Type: application/json" -X POST
+test-sync-bug-dynatrace.apps.aap-dt.ocp4.testing.ansible.com -d
+'{}'
 

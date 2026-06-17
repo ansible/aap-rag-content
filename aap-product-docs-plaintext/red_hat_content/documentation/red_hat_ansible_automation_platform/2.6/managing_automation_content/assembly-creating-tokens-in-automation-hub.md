@@ -1,12 +1,9 @@
 # 1. Red Hat Certified, validated, and Ansible Galaxy content in automation hub
-## 1.1. Configuring remote repositories for content syncing
-
-
-
+## 1.1. Configuring remote repositories for content syncing
 
 Use remote configurations to configure your private automation hub to synchronize with Ansible Certified Content Collections hosted on `console.redhat.com` or with your collections in Ansible Galaxy.
 
-Each remote configuration inAutomation Content→Remotesprovides information for both the **community** and **rh-certified** repository about when the repository was **last updated** . You can add new content to Ansible automation hub at any time by using the **Edit** and **Sync** features included on theAutomation Content→Repositoriespage.
+Each remote configuration in Automation Content → Remotes provides information for both the **community** and **rh-certified** repository about when the repository was **last updated**. You can add new content to Ansible automation hub at any time by using the **Edit** and **Sync** features included on the Automation Content → Repositories page.
 
 **Understanding the difference between Ansible Galaxy and Ansible automation hub collections**
 
@@ -16,7 +13,7 @@ Collections published to Ansible automation hub are targeted to joint customers 
 
 **Requesting a namespace on Ansible Galaxy**
 
-To request a namespace through an Ansible Galaxy GitHub issue, send an email request to [ansiblepartners@redhat.com](mailto:ansiblepartners@redhat.com) that includes the GitHub username used to sign up on Ansible Galaxy.
+To request a namespace through an Ansible Galaxy GitHub issue, send an email request to <ansiblepartners@redhat.com> that includes the GitHub username used to sign up on Ansible Galaxy.
 
 You must have logged in at least once for the system to validate.
 

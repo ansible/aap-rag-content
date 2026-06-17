@@ -1,8 +1,5 @@
 # 2. Using Ansible Builder
-## 2.14. Example YAML file to build an image
-
-
-
+## 2.14. Example YAML file to build an image
 
 The 'ansible-builder' build command takes an execution environment definition as an input. It outputs the build context necessary for building an execution environment image, and then builds that image.
 
@@ -10,7 +7,6 @@ The image can be re-built with the build context elsewhere, and produces the sam
 
 The following example `execution-environment.yml` file can be used as a starting point:
 
-```
 version: 3
 dependencies:
 galaxy: requirements.yml
@@ -22,10 +18,9 @@ To build an execution environment using the preceding files and run the followin
 ansible-builder build
 ...
 STEP 7: COMMIT my-awx-ee
---&gt; 09c930f5f6a
+--> 09c930f5f6a
 09c930f5f6ac329b7ddb321b144a029dbbfcc83bdfc77103968b7f6cdfc7bea2
 Complete! The build context can be found at: context
-```
 
 In addition to producing a ready-to-use container image, the build context is preserved. This can be rebuilt at a different time or location with the tools of your choice, such as docker build or Podman build.
 

@@ -1,7 +1,4 @@
-# Chapter 4. Installing Red Hat Ansible Automation Platform
-
-
-
+# Chapter 4. Installing Red Hat Ansible Automation Platform
 
 Ansible Automation Platform is a modular platform. The platform gateway deploys automation platform components, such as automation controller, automation hub, and Event-Driven Ansible controller.
 

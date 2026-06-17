@@ -1,8 +1,5 @@
 # 10. Schedules
-## 10.1. Adding a new schedule
-
-
-
+## 10.1. Adding a new schedule
 
 You can create a new schedule for a job template, workflow job template, inventory source, project sync, or management job template.
 
@@ -12,56 +9,56 @@ To create a new schedule on the **Schedules** page:
 
 **Procedure**
 
-1. From the navigation panel, selectAutomation Execution→Schedules.
-1. ClickCreate schedule. This opens the **Create schedule** window.
-1. Select a **Resource type** onto which this schedule is applied.
+1. From the navigation panel, select Automation Execution → Schedules.
+
+2. Click Create schedule. This opens the **Create schedule** window.
+
+3. Select a **Resource type** onto which this schedule is applied.
 
 Select from:
 
 
--  **Job template**
+- **Job template**
 
 
 - For **Job template** select a **Job template** from the menu.
 
--  **Workflow job template**
+- **Workflow job template**
 
 
 - For **Workflow job template** select a **Workflow job template** from the menu.
 
--  **Inventory source**
+- **Inventory source**
 
 
 - For **Inventory source** select an **Inventory** and an **Inventory source** from the appropriate menu.
 
--  **Project sync**
+- **Project sync**
 
 
 - For **Project sync** select a **Project** from the menu.
 
--  **Management job template**
+- **Management job template**
 
 
 - For **Management job template** select a **Workflow job template** from the menu.
 
+4. For **Job template** and **Project sync** enter the appropriate details into the following fields:
 
-1. For **Job template** and **Project sync** enter the appropriate details into the following fields:
 
+- **Schedule name**: Enter the name.
 
--  **Schedule name** : Enter the name.
-- Optional: **Description** : Enter a description.
--  **Start date/time** : Enter the date and time to start the schedule.
--  **Time zone** : Select the time zone. The **Start date/time** that you enter must be in this time zone.
+- Optional: **Description**: Enter a description.
 
-The **Schedule Details** display when you establish a schedule, enabling you to review the schedule settings and a list of the scheduled occurrences in the selected **Local Time Zone** .
+- **Start date/time**: Enter the date and time to start the schedule.
+
+- **Time zone**: Select the time zone. The **Start date/time** that you enter must be in this time zone.
+
+The **Schedule Details** display when you establish a schedule, enabling you to review the schedule settings and a list of the scheduled occurrences in the selected **Local Time Zone**.
+
 
 Important
 Jobs are scheduled in UTC. Repeating jobs that run at a specific time of day can move relative to a local time zone when Daylight Saving Time shifts occur. The system resolves the local time zone based time to UTC when the schedule is saved. To ensure your schedules are correctly created, set your schedules in UTC time.
 
-
-
-
-
-1. ClickNext. The **Define rules** page is displayed.
-
+5. Click Next. The **Define rules** page is displayed.
 

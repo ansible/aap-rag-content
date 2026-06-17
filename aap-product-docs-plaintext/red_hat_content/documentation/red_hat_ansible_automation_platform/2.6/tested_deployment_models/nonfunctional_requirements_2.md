@@ -1,9 +1,6 @@
 # 3. Operator topologies
 ## 3.2. Operator enterprise topology
-### 3.2.4. Nonfunctional requirements
-
-
-
+### 3.2.4. Nonfunctional requirements
 
 Ansible Automation Platform’s performance characteristics and capacity depend on its resource allocation and configuration. With OpenShift, each Ansible Automation Platform component deploys as a pod. You can specify resource requests and limits for each pod.
 

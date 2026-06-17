@@ -1,8 +1,5 @@
 # 6. Clustering
-## 6.3. Status and monitoring by browser API
-
-
-
+## 6.3. Status and monitoring by browser API
 
 Automation controller reports as much status as it can using the browser API at `/api/v2/ping` to validate the health of the cluster. This includes the following:
 
@@ -10,6 +7,5 @@ Automation controller reports as much status as it can using the browser API at 
 - The timestamps of the last heartbeat of all other instances in the cluster
 - Instance Groups and Instance membership in those groups
 
-
-View more details about Instances and Instance Groups, including running jobs and membership information at `/api/v2/instances/` and `/api/v2/instance_groups/` .
+View more details about Instances and Instance Groups, including running jobs and membership information at `/api/v2/instances/` and `/api/v2/instance_groups/`.
 

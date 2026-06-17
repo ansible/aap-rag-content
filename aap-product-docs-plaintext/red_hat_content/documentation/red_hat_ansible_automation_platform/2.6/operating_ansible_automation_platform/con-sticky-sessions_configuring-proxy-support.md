@@ -1,8 +1,5 @@
 # 2. Configuring proxy support for Red Hat Ansible Automation Platform
-## 2.4. Enable sticky sessions
-
-
-
+## 2.4. Enable sticky sessions
 
 By default, an application load balancer routes each request independently to a registered target based on the chosen load balancing algorithm.
 

@@ -1,8 +1,5 @@
 # 7. Job slicing
-## 7.3. Searching job slices
-
-
-
+## 7.3. Searching job slices
 
 You can search for job slices and their parent workflow jobs by using the search functionality in Automation controller.
 
@@ -12,36 +9,20 @@ To make it easier to find slice jobs, use the search functionality to apply a se
 - Job lists to show only parent workflow jobs of job slices
 - Job template lists to only show job templates that produce slice jobs
 
-
 **Procedure**
 
 - Search for slice jobs by using one of the following methods:
 
 
-- To show only slice jobs in job lists, as with most cases, you can filter either on the type (jobs here) or `        unified_jobs` :
+- To show only slice jobs in job lists, as with most cases, you can filter either on the type (jobs here) or `unified_jobs`:
 
-
-```
 /api/v2/jobs/?job_slice_count__gt=1
-```
-
 
 - To show only parent workflow jobs of job slices:
 
-
-```
 /api/v2/workflow_jobs/?job_template__isnull=false
-```
-
 
 - To show only job templates that produce slice jobs:
 
-
-```
 /api/v2/job_templates/?job_slice_count__gt=1
-```
-
-
-
-
 

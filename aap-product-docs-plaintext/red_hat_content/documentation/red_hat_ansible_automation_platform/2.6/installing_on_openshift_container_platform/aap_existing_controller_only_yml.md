@@ -1,11 +1,7 @@
 # 15. Appendix: Red Hat Ansible Automation Platform custom resources
 ## 15.1. Custom resources
-### 15.1.3. aap-existing-controller-only.yml
+### 15.1.3. aap-existing-controller-only.yml
 
-
-
-
-```
 ---
 apiVersion: aap.ansible.com/v1alpha1
 kind: AnsibleAutomationPlatform
@@ -41,5 +37,4 @@ disabled: true
 # * Automation controller: existing-controller registered with Ansible Automation Platform UI
 # * * Event-Driven Ansible deployed and named: myaap-eda
 # * * Automation hub deployed and named: myaap-hub
-```
 

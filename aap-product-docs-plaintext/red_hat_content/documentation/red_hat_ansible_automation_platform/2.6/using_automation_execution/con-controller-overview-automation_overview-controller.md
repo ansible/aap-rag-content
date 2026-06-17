@@ -1,8 +1,5 @@
 # 1. Automation controller overview
-## 1.2. "Push button" automation
-
-
-
+## 1.2. "Push button" automation
 
 Automation controller provides "push button" automation capabilities that allow users to run predefined jobs and workflows with minimal input.
 

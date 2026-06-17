@@ -1,8 +1,5 @@
 # 2. Managing collections in automation hub
-## 2.6. Exporting and importing collections in automation hub
-
-
-
+## 2.6. Exporting and importing collections in automation hub
 
 Ansible automation hub stores automation content collections within repositories. These collections are versioned by the automation content creator. Many versions of the same collection can exist in the same or different repositories at the same time.
 

@@ -1,11 +1,7 @@
 # 15. Appendix: Red Hat Ansible Automation Platform custom resources
 ## 15.1. Custom resources
-### 15.1.5. aap-existing-hub-controller-eda.yml
+### 15.1.5. aap-existing-hub-controller-eda.yml
 
-
-
-
-```
 ---
 apiVersion: aap.ansible.com/v1alpha1
 kind: AnsibleAutomationPlatform
@@ -16,7 +12,7 @@ spec:
 no_log: false
 
 controller:
-name: existing-controller # &lt;-- this is the name of the existing AutomationController CR
+name: existing-controller # <-- this is the name of the existing AutomationController CR
 disabled: false
 
 eda:
@@ -34,5 +30,4 @@ disabled: false
 #
 # Note: The automation controller, Event-Driven Ansible, and automation hub names must match the names of the existing.
 # Automation controller, Event-Driven Ansible, and automation hub CRs in the same namespace as the Ansible Automation Platform CR. If the names do not match, the Ansible Automation Platform CR will not be able to register the existing automation controller, Event-Driven Ansible, and automation hub with the Ansible Automation Platform UI,and will instead deploy new automation controller, Event-Driven Ansible, and automation hub instances.
-```
 

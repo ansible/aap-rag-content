@@ -1,7 +1,4 @@
-# Chapter 9. Read-only fields
-
-
-
+# Chapter 9. Read-only fields
 
 Certain fields in the REST API are marked read-only.
 

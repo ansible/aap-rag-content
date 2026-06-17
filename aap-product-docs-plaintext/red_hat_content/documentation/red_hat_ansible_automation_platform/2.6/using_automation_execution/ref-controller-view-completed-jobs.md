@@ -1,8 +1,5 @@
 # 14. Inventories
-## 14.5. View completed jobs
-
-
-
+## 14.5. View completed jobs
 
 You can view completed jobs in automation controller by navigating to the **Jobs** tab in the navigation panel.
 

@@ -1,7 +1,4 @@
-# Chapter 2. Managing collections in automation hub
-
-
-
+# Chapter 2. Managing collections in automation hub
 
 As a content creator, you can use namespaces in automation hub to curate and manage collections. For example, you can:
 
@@ -10,6 +7,5 @@ As a content creator, you can use namespaces in automation hub to curate and man
 - Upload collections to the namespace
 - Review the namespace import logs to determine the success or failure of uploading the collection and its current approval status
 
-
-For information on creating content, see [Developing automation content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/developing_automation_content) .
+For information on creating content, see [Developing automation content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/developing_automation_content).
 

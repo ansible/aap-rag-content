@@ -1,7 +1,4 @@
-# Chapter 3. Configuring Ansible Automation Platform to use egress proxy
-
-
-
+# Chapter 3. Configuring Ansible Automation Platform to use egress proxy
 
 You can deploy Ansible Automation Platform so that egress from the platform for various purposes functions properly through proxy servers.
 

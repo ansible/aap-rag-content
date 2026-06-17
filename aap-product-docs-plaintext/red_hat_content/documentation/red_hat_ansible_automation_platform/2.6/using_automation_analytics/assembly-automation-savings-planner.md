@@ -1,7 +1,4 @@
-# Chapter 2. About the automation savings planner
-
-
-
+# Chapter 2. About the automation savings planner
 
 An automation savings plan gives you the ability to plan, track, and analyze the potential efficiency and cost savings of your automation initiatives. Use automation analytics to create an automation savings plan by defining a list of tasks needed to complete an automation job.
 

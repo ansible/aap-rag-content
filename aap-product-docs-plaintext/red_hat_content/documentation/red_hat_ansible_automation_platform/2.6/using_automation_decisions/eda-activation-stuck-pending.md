@@ -1,8 +1,5 @@
 # 8. Rulebook activations troubleshooting
-## 8.2. Activation stuck in Pending state
-
-
-
+## 8.2. Activation stuck in Pending state
 
 Diagnose and resolve issues preventing a rulebook activation from transitioning from Pending to a running, operational state.
 
@@ -12,8 +9,6 @@ Diagnose and resolve issues preventing a rulebook activation from transitioning 
 
 
 1. If there are other activations running, terminate one or more of them, if possible.
-1. If not, check that the default worker, Redis, and activation worker are all running.
-1. If all systems are working as expected, check your eda-server internal logs in the worker, scheduler, API, and nginx containers and services to see if the problem can be determined. These logs reveal the source of the issue, such as an exception thrown by the code, a runtime error with network issues, or an error with the rulebook code. If your internal logs do not provide information that leads to resolution, report the issue to Red Hat support.
-
-
+2. If not, check that the default worker, Redis, and activation worker are all running.
+3. If all systems are working as expected, check your eda-server internal logs in the worker, scheduler, API, and nginx containers and services to see if the problem can be determined. These logs reveal the source of the issue, such as an exception thrown by the code, a runtime error with network issues, or an error with the rulebook code. If your internal logs do not provide information that leads to resolution, report the issue to Red Hat support.
 

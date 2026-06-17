@@ -1,8 +1,5 @@
 # 2. Configuring authentication in the Ansible Automation Platform
-## 2.7. Mapping
-
-
-
+## 2.7. Mapping
 
 To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or what groups they belong to, you can configure authenticator maps.
 

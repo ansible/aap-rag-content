@@ -1,8 +1,5 @@
 # 2. Upgrading to Red Hat Ansible Automation Platform 2.6
-## 2.6. Verifying user migration
-
-
-
+## 2.6. Verifying user migration
 
 During the upgrade to Ansible Automation Platform 2.6, controller user accounts are converted into platform user accounts. Controller administrators retain their administrative privileges, but they are converted into platform administrator privileges.
 
@@ -23,6 +20,4 @@ After your upgrade to Ansible Automation Platform 2.6 is complete, verify that y
 
 
 - Request a password reset from your administrator and log into the upgraded platform with your new password.
-
-
 

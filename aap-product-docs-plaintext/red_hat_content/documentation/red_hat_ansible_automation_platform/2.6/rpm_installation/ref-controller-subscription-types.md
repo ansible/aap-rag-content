@@ -1,13 +1,10 @@
 # 1. Red Hat Ansible Automation Platform installation overview
 ## 1.2. Managing Ansible Automation Platform subscriptions, updates, and support
-### 1.2.3. Subscription Types
-
-
-
+### 1.2.3. Subscription Types
 
 Red Hat Ansible Automation Platform is provided at various levels of support and number of machines as an annual subscription.
 
--  **Standard:**
+- **Standard:**
 
 
 - Manage any size environment
@@ -16,7 +13,7 @@ Red Hat Ansible Automation Platform is provided at various levels of support and
 - Review the SLA at [Product Support Terms of Service](https://access.redhat.com/support/offerings/production/sla)
 - Review the [Red Hat Support Severity Level Definitions](https://access.redhat.com/support/policy/severity)
 
--  **Premium:**
+- **Premium:**
 
 
 - Manage any size environment, including mission-critical environments
@@ -25,9 +22,7 @@ Red Hat Ansible Automation Platform is provided at various levels of support and
 - Review the SLA at [Product Support Terms of Service](https://access.redhat.com/support/offerings/production/sla)
 - Review the [Red Hat Support Severity Level Definitions](https://access.redhat.com/support/policy/severity)
 
-
-
 All subscription levels include regular updates and releases of automation controller, Ansible, and any other components of the Ansible Automation Platform.
 
-For more information, contact Ansible through the [Red Hat Customer Portal](https://access.redhat.com/) or at the [Ansible site](http://www.ansible.com/contact-us/) .
+For more information, contact Ansible through the [Red Hat Customer Portal](https://access.redhat.com/) or at the [Ansible site](http://www.ansible.com/contact-us/).
 

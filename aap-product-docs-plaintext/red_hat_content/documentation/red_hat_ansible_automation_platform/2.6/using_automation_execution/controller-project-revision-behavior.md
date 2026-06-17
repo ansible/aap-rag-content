@@ -1,9 +1,6 @@
 # 5. Jobs in automation controller
 ## 5.5. Job branch overriding
-### 5.5.2. Project revision behavior
-
-
-
+### 5.5.2. Project revision behavior
 
 Automation controller interacts with source control management (SCM) systems to manage project revisions effectively. When a project is configured to use an SCM system, such as Git, automation controller tracks the revisions of the project files. This tracking allows automation controller to ensure that the correct version of the project files is used during job execution.
 

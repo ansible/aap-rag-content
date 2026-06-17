@@ -1,7 +1,4 @@
-# Chapter 9. Rule Audit
-
-
-
+# Chapter 9. Rule Audit
 
 Rule audit allows the auditing of rules which have been triggered by all the rules that were activated at some point.
 

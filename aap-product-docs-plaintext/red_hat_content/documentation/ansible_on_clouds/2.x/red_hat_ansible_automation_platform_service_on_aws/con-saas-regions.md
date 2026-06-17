@@ -1,9 +1,6 @@
 # 5. Red Hat Ansible Automation Platform Service on AWS Service Definition
 ## 5.1. Account management
-### 5.1.3. Regions and availability zones
-
-
-
+### 5.1.3. Regions and availability zones
 
 Each supported region is paired with a companion AWS region where backup data is stored in the event of a primary region catastrophe that requires restoration in another AWS region.
 

@@ -1,8 +1,5 @@
 # 9. Workflows in automation controller
-## 9.4. Role-based access controls
-
-
-
+## 9.4. Role-based access controls
 
 Learn the specific roles required to create, edit, and run automation controller workflow job templates. Understanding these permissions help ensures that access is properly delegated among users and teams.
 
@@ -12,7 +9,7 @@ However, you can run a workflow job template that has job templates that you do 
 
 You can also perform other tasks, such as making a duplicate copy or re-launching a workflow, depending on which permissions are granted to a user. You must have permissions to all the resources used in a workflow, such as job templates, before relaunching or making a copy.
 
-For more information, see [Managing access with role based access control](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access) .
+For more information, see [Managing access with role based access control](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/gw-managing-access).
 
-For more information about performing the tasks described, see [Workflow job templates](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html-single/using_automation_execution/index#controller-workflow-job-templates) .
+For more information about performing the tasks described, see [Workflow job templates](#controller-workflow-job-templates "Chapter&nbsp;8.&nbsp;Workflow job templates").
 

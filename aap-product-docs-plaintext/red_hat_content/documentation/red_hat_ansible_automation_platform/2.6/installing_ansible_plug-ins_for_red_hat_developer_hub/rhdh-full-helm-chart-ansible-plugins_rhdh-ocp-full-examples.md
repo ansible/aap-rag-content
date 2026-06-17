@@ -1,13 +1,9 @@
 # 2. Installing the Ansible plug-ins with a Helm chart on OpenShift Container Platform
 ## 2.6. Full examples
-### 2.6.2. Full Helm chart config example for Ansible plug-ins
-
-
-
+### 2.6.2. Full Helm chart config example for Ansible plug-ins
 
 This example provides a full YAML configuration for the Helm chart using OCI container delivery.
 
-```
 global:
 dynamic:
 includes:
@@ -39,7 +35,7 @@ upstream:
 backstage:
 image:
 pullSecrets:
-- &lt;your-redhat-registry-pull-secret&gt;
+- <your-redhat-registry-pull-secret>
 extraAppConfig:
 - configMapRef: app-config-rhdh
 filename: app-config-rhdh.yaml
@@ -47,11 +43,10 @@ extraContainers:
 - command:
 - adt
 - server
-image: &gt;-
+image: >-
 registry.redhat.io/ansible-automation-platform-26/ansible-dev-tools-rhel9:latest
 imagePullPolicy: IfNotPresent
 name: ansible-devtools-server
 ports:
 - containerPort: 8000
-```
 

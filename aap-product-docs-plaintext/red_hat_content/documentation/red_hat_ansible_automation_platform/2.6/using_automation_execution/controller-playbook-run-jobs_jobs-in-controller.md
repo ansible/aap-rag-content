@@ -1,8 +1,5 @@
 # 5. Jobs in automation controller
-## 5.3. Playbook run jobs
-
-
-
+## 5.3. Playbook run jobs
 
 You can run playbook jobs to run Ansible playbooks on one or more managed nodes directly from the automation controller interface without creating a job template.
 
@@ -17,13 +14,9 @@ The events summary displays the following events that are run as part of this pl
 - The number of hosts associated with this playbook is shown in the **Hosts** field
 - The amount of time it took to complete the playbook run is shown in the **Elapsed** field
 
-
 ![Job events summary](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/e5f98a447f71e931f4c828442326587e/ug-jobs-events-summary.png)
 
-
-You canRelaunch job,Cancel job, download![Download](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/8a61e20c21c53f44e207c84d454159ec/download.png)
-the job output, or delete![Delete](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/6cfc80c0460fa4d4d18be2d2f5df16fa/delete-button.png)
-the job.
+You can Relaunch job, Cancel job, download ![Download](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/8a61e20c21c53f44e207c84d454159ec/download.png) the job output, or delete ![Delete](https://access.redhat.com/webassets/avalon/d/Red_Hat_Ansible_Automation_Platform-2.6-Using_automation_execution-en-US/images/6cfc80c0460fa4d4d18be2d2f5df16fa/delete-button.png) the job.
 
 Hover over a section of the host status bar in the **Output** view and the number of hosts associated with that status displays.
 

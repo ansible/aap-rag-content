@@ -1,11 +1,7 @@
 # 15. Appendix: Red Hat Ansible Automation Platform custom resources
 ## 15.1. Custom resources
-### 15.1.15. aap-fresh-only-hub.yml
+### 15.1.15. aap-fresh-only-hub.yml
 
-
-
-
-```
 ---
 apiVersion: aap.ansible.com/v1alpha1
 kind: AnsibleAutomationPlatform
@@ -48,5 +44,4 @@ disabled: false
 # * * Event-Driven Ansible disabled
 # * * Automation hub deployed and named: myaap-hub
 # * Red Hat Ansible Lightspeed disabled
-```
 

@@ -1,34 +1,28 @@
 # 3. Specifying dedicated nodes
-## 3.1. Assigning pods to specific nodes
-
-
-
+## 3.1. Assigning pods to specific nodes
 
 You can constrain the automation controller pods created by the operator to run on a certain subset of nodes.
 
--  `    node_selector` and `    postgres_selector` constrain the automation controller pods to run only on the nodes that match all the specified key, or value, pairs.
--  `    tolerations` and `    postgres_tolerations` enable the automation controller pods to be scheduled onto nodes with matching taints. See [Taints and Toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) in the Kubernetes documentation for further details.
-
+- `node_selector` and `postgres_selector` constrain the automation controller pods to run only on the nodes that match all the specified key, or value, pairs.
+- `tolerations` and `postgres_tolerations` enable the automation controller pods to be scheduled onto nodes with matching taints. See [Taints and Toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) in the Kubernetes documentation for further details.
 
 The following table shows the settings and fields that can be set on the automation controller’s specification section of the YAML (or using the OpenShift UI form).
 
 | Name | Description | Default |
 | --- | --- | --- |
-|  `postgres_image` | Path of the image to pull | postgres |
-|  `postgres_image_version` | Image version to pull | 13 |
-|  `node_selector` | AutomationController pods’ nodeSelector | N/A’’ |
-|  `topology_spread_constraints` | AutomationController pods’ topologySpreadConstraints | N/A’’ |
-|  `tolerations` | AutomationController pods’ tolerations | N/A’’ |
-|  `annotations` | AutomationController pods’ annotations | N/A’’ |
-|  `postgres_selector` | Postgres pods’ nodeSelector | N/A’’ |
-|  `postgres_tolerations` | Postgres pods’ tolerations | N/A’’ |
+| <br> `postgres_image` | <br>  Path of the image to pull | <br>  postgres |
+| <br> `postgres_image_version` | <br>  Image version to pull | <br>  13 |
+| <br> `node_selector` | <br>  AutomationController pods’ nodeSelector | <br>  N/A’’ |
+| <br> `topology_spread_constraints` | <br>  AutomationController pods’ topologySpreadConstraints | <br>  N/A’’ |
+| <br> `tolerations` | <br>  AutomationController pods’ tolerations | <br>  N/A’’ |
+| <br> `annotations` | <br>  AutomationController pods’ annotations | <br>  N/A’’ |
+| <br> `postgres_selector` | <br>  Postgres pods’ nodeSelector | <br>  N/A’’ |
+| <br> `postgres_tolerations` | <br>  Postgres pods’ tolerations | <br>  N/A’’ |
 
-
-`topology_spread_constraints` can help optimize spreading your control plane pods across the compute nodes that match your node selector. For example, with the `maxSkew` parameter of this option set to `100` , this means maximally spread across available nodes. So if there are three matching compute nodes and three pods, one pod will be assigned to each compute node. This parameter helps prevent the control plane pods from competing for resources with each other.
+`topology_spread_constraints` can help optimize spreading your control plane pods across the compute nodes that match your node selector. For example, with the `maxSkew` parameter of this option set to `100`, this means maximally spread across available nodes. So if there are three matching compute nodes and three pods, one pod will be assigned to each compute node. This parameter helps prevent the control plane pods from competing for resources with each other.
 
 **Example of a custom configuration for constraining controller pods to specific nodes**
 
-```
 spec:
 ...
 node_selector: |
@@ -41,7 +35,7 @@ topologyKey: "topology.kubernetes.io/zone"
 whenUnsatisfiable: "ScheduleAnyway"
 labelSelector:
 matchLabels:
-app.kubernetes.io/name: "&lt;resourcename&gt;"
+app.kubernetes.io/name: "<resourcename>"
 tolerations: |
 - key: "dedicated"
 operator: "Equal"
@@ -56,5 +50,4 @@ postgres_tolerations: |
 operator: "Equal"
 value: "AutomationController"
 effect: "NoSchedule"
-```
 

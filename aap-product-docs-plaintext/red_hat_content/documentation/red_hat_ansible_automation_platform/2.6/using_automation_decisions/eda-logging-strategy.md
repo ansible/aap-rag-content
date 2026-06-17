@@ -1,7 +1,4 @@
-# Chapter 13. Event-Driven Ansible logging strategy
-
-
-
+# Chapter 13. Event-Driven Ansible logging strategy
 
 Event-Driven Ansible offers an audit logging solution over its resources. Each supported create, read, update and delete (CRUD) operation is logged against rulebook activations, event streams, decision environments, projects, and activations.
 

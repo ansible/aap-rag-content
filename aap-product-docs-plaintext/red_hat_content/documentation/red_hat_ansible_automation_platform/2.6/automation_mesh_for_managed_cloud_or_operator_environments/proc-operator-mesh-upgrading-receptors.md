@@ -1,8 +1,5 @@
 # 2. Automation mesh for operator-based Red Hat Ansible Automation Platform
-## 2.11. Upgrading receptors
-
-
-
+## 2.11. Upgrading receptors
 
 A software update addresses any issues or bugs to provide a better experience of working with the technology. Anyone with administrative rights can update the receptor on an execution node.
 
@@ -12,43 +9,23 @@ Red Hat recommends performing updates to the receptor after any Ansible Automati
 
 1. Check the current receptor version:
 
-
-```
 receptor --version
-```
 
+2. Update the receptor:
 
-1. Update the receptor:
-
-
-```
 sudo dnf update ansible-runner receptor -y
-```
+
 
 Note
-To upgrade all packages (not just the receptor), use `    dnf update` , then reboot with `    reboot` .
+To upgrade all packages (not just the receptor), use `dnf update`, then reboot with `reboot`.
 
+3. Verify the installation. After the update is complete, check the receptor version again to verify the update:
 
-
-
-1. Verify the installation. After the update is complete, check the receptor version again to verify the update:
-
-
-```
 receptor --version
-```
 
+4. Restart the receptor service:
 
-1. Restart the receptor service:
-
-
-```
 sudo systemctl restart receptor
-```
 
+5. Ensure the receptor is working correctly and is properly connected to the controller or other nodes in the system.
 
-1. Ensure the receptor is working correctly and is properly connected to the controller or other nodes in the system.
-
-
-
-<span id="idm140603267344096"></span>

@@ -1,8 +1,5 @@
 # 1. Ansible plug-ins for Red Hat Developer Hub
-## 1.2. Ansible plug-ins for Red Hat Developer Hub
-
-
-
+## 1.2. Ansible plug-ins for Red Hat Developer Hub
 
 Ansible plug-ins for Red Hat Developer Hub deliver an Ansible-first Red Hat Developer Hub user experience that simplifies the automation experience for Ansible users of all skill levels.
 
@@ -14,5 +11,4 @@ The Ansible plug-ins provide:
 - Curated Ansible learning paths to help users new to Ansible.
 - Software templates for creating Ansible playbook and collection projects that follow best practices.
 - Optional links to supported development environments and tools with opinionated configurations.
-
 

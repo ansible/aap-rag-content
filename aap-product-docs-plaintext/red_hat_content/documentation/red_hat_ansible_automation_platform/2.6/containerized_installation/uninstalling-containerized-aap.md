@@ -1,15 +1,11 @@
 # 9. Maintaining containerized Ansible Automation Platform
-## 9.4. Uninstalling containerized Ansible Automation Platform
-
-
-
+## 9.4. Uninstalling containerized Ansible Automation Platform
 
 Uninstall your container-based installation of Ansible Automation Platform.
 
 **Prerequisites**
 
 - You have logged in to the Red Hat Enterprise Linux host as your dedicated non-root user.
-
 
 **Procedure**
 
@@ -18,34 +14,19 @@ Uninstall your container-based installation of Ansible Automation Platform.
 
 1. First, list the available secrets:
 
-
-```
 $ podman secret list
-```
 
+2. Next, collect the secret keys by running the following command:
 
-1. Next, collect the secret keys by running the following command:
-
-
-```
-$ podman secret inspect --showsecret &lt;secret_key_variable&gt; | jq -r .[].SecretData
-```
+$ podman secret inspect --showsecret <secret_key_variable> | jq -r .[].SecretData
 
 For example:
 
-
-```
 $ podman secret inspect --showsecret controller_secret_key | jq -r .[].SecretData
-```
 
+2. Run the `uninstall` playbook:
 
-
-1. Run the `    uninstall` playbook:
-
-
-```
 $ ansible-playbook -i inventory ansible.containerized_installer.uninstall
-```
 
 
 - This stops all systemd units and containers and then deletes all resources used by the containerized installer such as:
@@ -56,27 +37,15 @@ $ ansible-playbook -i inventory ansible.containerized_installer.uninstall
 - Podman containers and images
 - RPM packages
 
-- To keep container images, set the `        container_keep_images` parameter to `        true` .
+- To keep container images, set the `container_keep_images` parameter to `true`.
 
-
-```
 $ ansible-playbook -i inventory ansible.containerized_installer.uninstall -e container_keep_images=true
-```
 
+- To keep PostgreSQL databases, set the `postgresql_keep_databases` parameter to `true`.
 
-- To keep PostgreSQL databases, set the `        postgresql_keep_databases` parameter to `        true` .
-
-
-```
 $ ansible-playbook -i inventory ansible.containerized_installer.uninstall -e postgresql_keep_databases=true
-```
-
-
-
-
 
 **Additional resources**
 
--  [Inventory file variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/appendix-inventory-files-vars)
-
+- [Inventory file variables](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/containerized_installation/appendix-inventory-files-vars)
 

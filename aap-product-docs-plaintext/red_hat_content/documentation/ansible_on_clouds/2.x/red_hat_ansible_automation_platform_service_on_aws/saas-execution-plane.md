@@ -1,8 +1,5 @@
 # 5. Red Hat Ansible Automation Platform Service on AWS Service Definition
-## 5.3. Execution plane
-
-
-
+## 5.3. Execution plane
 
 You can only run test and cleanup jobs on the default or controller execution planes. All other automation must be configured to run on your execution plane.
 

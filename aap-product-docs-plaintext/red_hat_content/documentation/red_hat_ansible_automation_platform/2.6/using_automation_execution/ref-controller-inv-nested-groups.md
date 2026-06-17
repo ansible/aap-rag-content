@@ -1,9 +1,6 @@
 # 14. Inventories
 ## 14.2. Constructed Inventories
-### 14.2.3. Nested groups
-
-
-
+### 14.2.3. Nested groups
 
 You can create nested groups in your inventory to organize hosts and apply variables at different levels.
 
@@ -13,7 +10,6 @@ Because of the way Ansible core operates, the variable of the parent group is av
 
 The following example inventory file, `nested.yml` is in YAML format:
 
-```
 all:
 children:
 groupA:
@@ -26,29 +22,25 @@ host1: {}
 ungrouped:
 hosts:
 host2: {}
-```
 
-Because `host1` is in `groupB` , it is also in `groupA` .
+Because `host1` is in `groupB`, it is also in `groupA`.
 
 **Filter on nested group names**
 
 Use the following YAML format to filter on nested group names:
 
-```
 `source_vars`:
 
 plugin: constructed
 
 `limit`: `groupA`
-```
 
 **Filter on nested group property**
 
 Use the following YAML format to filter on a group variable, even if the host is indirectly a member of that group.
 
-In the inventory content, note that `host2` is not expected to have the variable `filter_var` defined, because it is not in any of the groups. Because `strict: true` is used, use a default value so that hosts without that variable are defined. Using this, `host2` , returns `false` from the expression, instead of producing an error. `host1` inherits the variable from its groups, and is returned.
+In the inventory content, note that `host2` is not expected to have the variable `filter_var` defined, because it is not in any of the groups. Because `strict: true` is used, use a default value so that hosts without that variable are defined. Using this, `host2`, returns `false` from the expression, instead of producing an error. `host1` inherits the variable from its groups, and is returned.
 
-```
 source_vars:
 
 plugin: constructed
@@ -57,5 +49,4 @@ groups:
 filter_var_is_filter_val: filter_var | default("") == "filter_val"
 
 limit: filter_var_is_filter_val
-```
 

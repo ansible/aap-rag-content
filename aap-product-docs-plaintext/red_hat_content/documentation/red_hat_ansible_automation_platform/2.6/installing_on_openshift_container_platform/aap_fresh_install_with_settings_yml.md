@@ -1,11 +1,7 @@
 # 15. Appendix: Red Hat Ansible Automation Platform custom resources
 ## 15.1. Custom resources
-### 15.1.12. aap-fresh-install-with-settings.yml
+### 15.1.12. aap-fresh-install-with-settings.yml
 
-
-
-
-```
 ---
 apiVersion: aap.ansible.com/v1alpha1
 kind: AnsibleAutomationPlatform
@@ -65,5 +61,4 @@ cache_enabled: false
 # * Automation controller deployed and named: myaap-controller
 # * * Event-Driven Ansible deployed and named: myaap-eda
 # * * Automation hub deployed and named: myaap-hub
-```
 

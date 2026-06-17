@@ -1,8 +1,5 @@
 # 4. Getting started as an automation operator
-## 4.3. About inventories
-
-
-
+## 4.3. About inventories
 
 An inventory is a file listing the collection of hosts managed by Ansible Automation Platform. Organizations are assigned to inventories, while permissions to launch playbooks against inventories are controlled at the user or team level.
 

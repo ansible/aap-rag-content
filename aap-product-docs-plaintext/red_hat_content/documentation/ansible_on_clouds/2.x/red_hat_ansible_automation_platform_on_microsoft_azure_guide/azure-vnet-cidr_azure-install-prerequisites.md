@@ -1,9 +1,6 @@
 # 2. Prerequisites for Installing Red Hat Ansible Automation Platform on Microsoft Azure
 ## 2.5. Network
-### 2.5.1. VNet CIDR blocks
-
-
-
+### 2.5.1. VNet CIDR blocks
 
 You can configure the networking address range (CIDR block) for the VNet that your Ansible Automation Platform on Microsoft Azure application uses.
 
@@ -15,18 +12,17 @@ When you are planning your network configuration, bear the following in mind:
 
 | Networking entity | Minimum CIDR Block |
 | --- | --- |
-| VNet | /24 |
-| Cluster subnet | /26 |
-| Gateway subnet | /28 |
-| Database subnet | /28 |
-| Private link subnet | /28 |
-
-
+| <br>  VNet | <br>  /24 |
+| <br>  Cluster subnet | <br>  /26 |
+| <br>  Gateway subnet | <br>  /28 |
+| <br>  Database subnet | <br>  /28 |
+| <br>  Private link subnet | <br>  /28 |
 
 - Ensure that the VNet range you configure does not intersect with the default CIDR block for AKS clusters (10.0.0.0/16). The Azure user interface does not prevent you entering this range, but using the default AKS CIDR block for your VNet causes networking issues.
+
 - To ensure successful network peering and communication between Ansible Automation Platform on Microsoft Azure and your existing networks, your enterprise network ranges must not overlap with the VNet network range.
+
 - If you do not have any existing Azure VNets, the Azure user interface suggests a default CIDR block and range for the VNet. Do not accept these defaults. Instead, use the network configuration that you have planned.
 
-
-For information about planning the network address range and completing the networking configuration form on deployment, refer to [Red Hat Ansible Automation Platform on Microsoft Azure VNet Preparation](https://access.redhat.com/articles/6973251) .
+For information about planning the network address range and completing the networking configuration form on deployment, refer to [Red Hat Ansible Automation Platform on Microsoft Azure VNet Preparation](https://access.redhat.com/articles/6973251).
 

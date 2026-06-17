@@ -1,8 +1,5 @@
 # 1. Key functionality and concepts
-## 1.2. Automation execution
-
-
-
+## 1.2. Automation execution
 
 The centerpiece of Ansible Automation Platform is its automation execution command and control center, where you can deploy, define, operate, scale and delegate automation across your enterprise. With this functionality, you can perform a variety of tasks from a single location, such as running playbooks from a simple, straightforward web UI, monitoring dashboard activity, and centralized logging to manage and track job execution.
 

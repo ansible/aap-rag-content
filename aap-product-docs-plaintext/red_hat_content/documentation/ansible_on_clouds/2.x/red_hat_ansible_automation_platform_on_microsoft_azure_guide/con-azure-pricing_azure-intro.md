@@ -1,8 +1,5 @@
 # 1. Introduction to Red Hat Ansible Automation Platform on Microsoft Azure
-## 1.2. Ansible Automation Platform on Microsoft Azure pricing tier
-
-
-
+## 1.2. Ansible Automation Platform on Microsoft Azure pricing tier
 
 As of December 16, 2024, Microsoft has adjusted the API, quotas, and limits of Azure Kubernetes Service (AKS) cluster tiers.
 

@@ -1,21 +1,16 @@
 # 3. Getting started as an automation developer
 ## 3.2. Create automation content with playbooks
-### 3.2.1. Create a playbook
-
-
-
+### 3.2.1. Create a playbook
 
 A playbook contains one or more plays. A basic play contains the following parameters:
 
--  **Name** : a brief description of the overall function of the playbook, which assists in keeping it readable and organized for all users.
--  **Hosts** : identifies the target or targets for Ansible to run against.
--  **Become statements** : this optional statement can be set to `    true` or `    yes` to enable privilege escalation using a become plugin (such as `    sudo` , `    su` , `    pfexec` , `    doas` , `    pbrun` , `    dzdo` , `    ksu` ).
--  **Tasks** : this is the list of actions that get executed against each host in the play.
-
+- **Name**: a brief description of the overall function of the playbook, which assists in keeping it readable and organized for all users.
+- **Hosts**: identifies the target or targets for Ansible to run against.
+- **Become statements**: this optional statement can be set to `true` or `yes` to enable privilege escalation using a become plugin (such as `sudo`, `su`, `pfexec`, `doas`, `pbrun`, `dzdo`, `ksu`).
+- **Tasks**: this is the list of actions that get executed against each host in the play.
 
 Here is an example of a play in a playbook. You can see the name of the play, the host, and the list of tasks included in the play.
 
-```
 - name: Set Up a Project and Job Template
 hosts: host.name.ip
 become: true
@@ -36,12 +31,10 @@ inventory: Demo Inventory
 playbook: hello_world.yml
 job_type: run
 state: present
-```
 
 For more detailed guidance on authoring playbooks, consult the following documentation:
 
--  [Developing automation content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/developing_automation_content)
--  [Creating playbooks and viewing playbook explanations](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/developing-ansible-content_lightspeed-user-guide#playbook-generation_developing-ansible-content) in the Red Hat Ansible Lightspeed with IBM watsonx Code Assistant User Guide to learn how to generate a playbook with AI.
--  [Getting started with playbooks](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/getting_started_with_playbooks)
-
+- [Developing automation content](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/developing_automation_content)
+- [Creating playbooks and viewing playbook explanations](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/developing-ansible-content_lightspeed-user-guide#playbook-generation_developing-ansible-content) in the Red Hat Ansible Lightspeed with IBM watsonx Code Assistant User Guide to learn how to generate a playbook with AI.
+- [Getting started with playbooks](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/getting_started_with_playbooks)
 

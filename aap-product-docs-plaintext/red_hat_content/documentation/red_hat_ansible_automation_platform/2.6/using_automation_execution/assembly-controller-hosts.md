@@ -1,7 +1,4 @@
-# Chapter 16. Hosts
-
-
-
+# Chapter 16. Hosts
 
 A host is a system managed by Ansible Automation Platform, which might include a physical, virtual, cloud-based server, or other device.
 

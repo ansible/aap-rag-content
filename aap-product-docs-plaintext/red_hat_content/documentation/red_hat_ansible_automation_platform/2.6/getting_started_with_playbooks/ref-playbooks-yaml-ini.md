@@ -1,15 +1,11 @@
 # 1. Introduction
 ## 1.4. Building an inventory
-### 1.4.1. Inventories in INI or YAML format
-
-
-
+### 1.4.1. Inventories in INI or YAML format
 
 You can create inventories by using either INI files or in YAML. In most cases, such as the preceding example, INI files are straightforward and easy to read for a small number of managed nodes. Creating an inventory in YAML format becomes a sensible option as the number of managed nodes increases.
 
 The following is the same as `inventory.ini` that declares unique names for managed nodes and uses the `ansible_host` field:
 
-```
 myhosts:
 hosts:
 my_host_01:
@@ -18,5 +14,4 @@ my_host_02:
 ansible_host: 192.0.2.51
 my_host_03:
 ansible_host: 192.0.2.52
-```
 

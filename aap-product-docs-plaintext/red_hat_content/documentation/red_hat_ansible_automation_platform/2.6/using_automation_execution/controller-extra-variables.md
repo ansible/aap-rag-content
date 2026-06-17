@@ -1,29 +1,24 @@
 # 6. Job templates
-## 6.18. Extra variables
-
-
-
+## 6.18. Extra variables
 
 You can pass extra variables to a automation controller job template in several ways, including through surveys and the API.
 
-When you pass survey variables, they are passed as extra variables ( `extra_vars` ) within automation controller. However, passing extra variables to a job template (as you would do with a survey) can override other variables being passed from the inventory and project.
+When you pass survey variables, they are passed as extra variables (`extra_vars`) within automation controller. However, passing extra variables to a job template (as you would do with a survey) can override other variables being passed from the inventory and project.
 
 By default, `extra_vars` are marked as `!unsafe` unless you specify them on the Job Template’s Extra Variables section. These are trusted, because they can only be added by users with enough privileges to add or edit a Job Template. For example, nested variables do not expand when entered as a prompt, as the Jinja brackets are treated as a string.
 
 Note
+
 `extra_vars` passed to the job launch API are only honored if one of the following is true:
 
 - They correspond to variables in an enabled survey.
--  `    ask_variables_on_launch` is set to **True** .
+- `ask_variables_on_launch` is set to **True**.
 
-
-
-
-**Example** You have a defined variable for an inventory for `debug = true` . It is possible that this variable, `debug = true` , can be overridden in a job template survey.
+**Example** You have a defined variable for an inventory for `debug = true`. It is possible that this variable, `debug = true`, can be overridden in a job template survey.
 
 To ensure the variables that you pass are not overridden, ensure they are included by redefining them in the survey. You can define extra variables at the inventory, group, and host levels.
 
-If you are specifying the `ALLOW_JINJA_IN_EXTRA_VARS` parameter, see the [The ALLOW_JINJA_IN_EXTRA_VARS variable](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/controller-tips-and-tricks#ref-controller-allow-jinja-in-extra-vars) section of _Configuring automation execution_ to configure it.
+If you are specifying the `ALLOW_JINJA_IN_EXTRA_VARS` parameter, see the [The ALLOW_JINJA_IN_EXTRA_VARS variable](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/controller-tips-and-tricks#ref-controller-allow-jinja-in-extra-vars) section of *Configuring automation execution* to configure it.
 
 The job template extra variables dictionary is merged with the survey variables.
 
@@ -31,24 +26,18 @@ The following are some simplified examples of `extra_vars` in YAML and JSON form
 
 - The configuration in YAML format:
 
-
-```
 launch_to_orbit: true
 satellites:
 - sputnik
 - explorer
 - satcom
-```
 
 - The configuration in JSON format:
 
-
-```
 {
 "launch_to_orbit": true,
 "satellites": ["sputnik", "explorer", "satcom"]
 }
-```
 
 The following table notes the behavior (hierarchy) of variable precedence in automation controller as it compares to variable precedence in Ansible.
 
@@ -56,24 +45,23 @@ The following table notes the behavior (hierarchy) of variable precedence in aut
 
 | Ansible | automation controller |
 | --- | --- |
-| role defaults | role defaults |
-| dynamic inventory variables | dynamic inventory variables |
-| inventory variables | automation controller inventory variables |
-| inventory `group_vars` | automation controller group variables |
-| inventory `host_vars` | automation controller host variables |
-| playbook `group_vars` | playbook `group_vars` |
-| playbook `host_vars` | playbook `host_vars` |
-| host facts | host facts |
-| registered variables | registered variables |
-| set facts | set facts |
-| play variables | play variables |
-| play `vars_prompt` | (not supported) |
-| play `vars_files` | play `vars_files` |
-| role and include variables | role and include variables |
-| block variables | block variables |
-| task variables | task variables |
-| extra variables | Job Template extra variables |
-|  | Job Template Survey (defaults) |
-|  | Job Launch extra variables |
-
+| <br>  role defaults | <br>  role defaults |
+| <br>  dynamic inventory variables | <br>  dynamic inventory variables |
+| <br>  inventory variables | <br>  automation controller inventory variables |
+| <br>  inventory `group_vars` | <br>  automation controller group variables |
+| <br>  inventory `host_vars` | <br>  automation controller host variables |
+| <br>  playbook `group_vars` | <br>  playbook `group_vars` |
+| <br>  playbook `host_vars` | <br>  playbook `host_vars` |
+| <br>  host facts | <br>  host facts |
+| <br>  registered variables | <br>  registered variables |
+| <br>  set facts | <br>  set facts |
+| <br>  play variables | <br>  play variables |
+| <br>  play `vars_prompt` | <br>  (not supported) |
+| <br>  play `vars_files` | <br>  play `vars_files` |
+| <br>  role and include variables | <br>  role and include variables |
+| <br>  block variables | <br>  block variables |
+| <br>  task variables | <br>  task variables |
+| <br>  extra variables | <br>  Job Template extra variables |
+|  | <br>  Job Template Survey (defaults) |
+|  | <br>  Job Launch extra variables |
 

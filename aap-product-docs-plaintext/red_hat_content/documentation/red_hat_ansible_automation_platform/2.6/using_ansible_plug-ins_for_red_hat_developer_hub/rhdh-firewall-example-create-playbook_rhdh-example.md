@@ -1,34 +1,29 @@
 # 3. Example: Automate Red Hat Enterprise Linux firewall configuration
-## 3.3. Create a new playbook project to configure a firewall
-
-
-
+## 3.3. Create a new playbook project to configure a firewall
 
 Create a new Ansible Playbook project quickly using the plug-in templates. This sets up the basic structure needed to configure your Red Hat Enterprise Linux firewall successfully.
 
 **Procedure**
 
-1. Click the Ansible `    A` icon in the Red Hat Developer Hub navigation panel.
-1. From the **Create** dropdown menu on the landing page, select **Create Ansible Git Project** .
-1. Click **Choose** in the **Create Ansible Playbook Project** software template.
-1. Fill in the following information in the **Create Ansible Playbook Project** page:
+1. Click the Ansible `A` icon in the Red Hat Developer Hub navigation panel.
+
+2. From the **Create** dropdown menu on the landing page, select **Create Ansible Git Project**.
+
+3. Click **Choose** in the **Create Ansible Playbook Project** software template.
+
+4. Fill in the following information in the **Create Ansible Playbook Project** page:
 
 | Field | Required | Description | Example value |
 | --- | --- | --- | --- |
-| Source code repository organization name or username | Yes | The name of your source code repository username or organization name. |  `my_github_username` |
-| Playbook repository name | Yes | The name of your new Git repository. |  `rhel_firewall_config` |
-| Playbook description | No | A description of the new playbook project. |  `This playbook configures firewalls on Red Hat Enterprise Linux systems` |
-| Playbook project’s collection namespace | Yes | The new playbook Git project creates an example collection folder for you. Enter a value for the collection namespace. |  `my_galaxy_username` |
-| Playbook project’s collection name | Yes | This is the name of the example collection. |  `rhel_firewall_config` |
-| Catalog Owner Name | Yes | The name of the Developer Hub catalog item owner. It is a Red Hat Developer Hub field. |  `my_rhdh_username` |
-| System | No | This is a Red Hat Developer Hub field. |  `my_rhdh_linux_system` |
+| <br>  Source code repository organization name or username | <br>  Yes | <br>  The name of your source code repository username or organization name. | <br> `my_github_username` |
+| <br>  Playbook repository name | <br>  Yes | <br>  The name of your new Git repository. | <br> `rhel_firewall_config` |
+| <br>  Playbook description | <br>  No | <br>  A description of the new playbook project. | <br> `This playbook configures firewalls on Red Hat Enterprise Linux systems` |
+| <br>  Playbook project’s collection namespace | <br>  Yes | <br>  The new playbook Git project creates an example collection folder for you. Enter a value for the collection namespace. | <br> `my_galaxy_username` |
+| <br>  Playbook project’s collection name | <br>  Yes | <br>  This is the name of the example collection. | <br> `rhel_firewall_config` |
+| <br>  Catalog Owner Name | <br>  Yes | <br>  The name of the Developer Hub catalog item owner. It is a Red Hat Developer Hub field. | <br> `my_rhdh_username` |
+| <br>  System | <br>  No | <br>  This is a Red Hat Developer Hub field. | <br> `my_rhdh_linux_system` |
 
-
-
-
-
-1. Click **Review** .
-1. Click **Create** to provision your new playbook project.
-1. Click **Open in catalog** to view your project.
-
+5. Click **Review**.
+6. Click **Create** to provision your new playbook project.
+7. Click **Open in catalog** to view your project.
 

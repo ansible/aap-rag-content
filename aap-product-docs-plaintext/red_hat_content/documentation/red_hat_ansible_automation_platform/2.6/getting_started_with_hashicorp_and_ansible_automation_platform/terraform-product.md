@@ -1,5 +1,2 @@
-# Chapter 1. Terraform integration
-
-
-
+# Chapter 1. Terraform integration
 

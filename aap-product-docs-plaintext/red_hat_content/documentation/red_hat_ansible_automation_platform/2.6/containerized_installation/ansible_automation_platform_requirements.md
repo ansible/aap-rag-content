@@ -1,9 +1,6 @@
 # 6. Deploying Red Hat Ansible Lightspeed on containerized Ansible Automation Platform
 ## 6.1. Overview
-### 6.1.5. Ansible Automation Platform requirements
-
-
-
+### 6.1.5. Ansible Automation Platform requirements
 
 - Licensing requirements:
 
@@ -22,6 +19,4 @@
 
 
 - Deployment of an LLM service that is hosted on one of these platforms: Red Hat Enterprise Linux AI, Red Hat OpenShift AI, or Red Hat AI Inference Server.
-
-
 

@@ -1,8 +1,5 @@
 # 8. Workflow job templates
-## 8.10. Workflow job template extra variables
-
-
-
+## 8.10. Workflow job template extra variables
 
 You can define extra variables for a workflow job template that are passed to all job templates within the workflow.
 

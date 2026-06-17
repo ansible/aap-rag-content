@@ -1,8 +1,5 @@
 # 6. Job templates
-## 6.17. Provisioning callbacks
-
-
-
+## 6.17. Provisioning callbacks
 
 Provisioning Callbacks are a feature of automation controller that enable a host to start a playbook run against itself, rather than waiting for a user to launch a job to manage the host from the automation controller console.
 
@@ -15,8 +12,7 @@ New instances with a need for client to server communication for configuration, 
 - A system after it has been provisioned by another system (such as AWS auto-scaling, or an operating system provisioning system such as Kickstart or preseed).
 - Launching a job programmatically without invoking the automation controller API directly.
 
-
 The job template launched only runs against the host requesting the provisioning.
 
-This is often accessed with a firstboot type script or from `cron` .
+This is often accessed with a firstboot type script or from `cron`.
 

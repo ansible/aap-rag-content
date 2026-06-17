@@ -1,14 +1,10 @@
 # 5. Migration artifact structure and verification
-## 5.2. Manifest file
-
-
-
+## 5.2. Manifest file
 
 The `manifest.yml` file serves as the primary metadata document for the migration artifact. It contains critical versioning and component information from your source environment.
 
 Structure the manifest as follows:
 
-```
 ---
 aap_version: X.Y # The version being migrated
 platform: rpm # The source platform type
@@ -19,5 +15,4 @@ version: x.y.z
 version: x.y.z
 - name: gateway
 version: x.y.z
-```
 

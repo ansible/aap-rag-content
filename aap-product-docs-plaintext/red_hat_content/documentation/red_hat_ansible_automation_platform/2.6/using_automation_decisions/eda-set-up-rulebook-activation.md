@@ -1,8 +1,5 @@
 # 7. Rulebook activations
-## 7.1. Setting up a rulebook activation
-
-
-
+## 7.1. Setting up a rulebook activation
 
 Create a rulebook activation to link a rulebook to a decision environment and event sources, initiating the event-driven automation process.
 
@@ -12,27 +9,97 @@ Create a rulebook activation to link a rulebook to a decision environment and ev
 - You have set up a project.
 - You have set up a decision environment.
 
-
 **Procedure**
 
 1. Log in to Ansible Automation Platform.
-1. Navigate to theAutomation Decisions→Rulebook Activations.
-1. ClickCreate rulebook activation.
-1. Insert the following:
+
+2. Navigate to the Automation Decisions → Rulebook Activations.
+
+3. Click Create rulebook activation.
+
+4. Insert the following:
 
 
-1. ClickCreate rulebook activation.
 
+Name
+Insert the name.
+
+Description
+This field is optional.
+
+Organization
+Enter your organization name or select Default from the list.
+
+Project
+Projects are a logical collection of rulebooks. This field is optional.
+
+Rulebook
+Rulebooks are displayed according to the project selected.
+
+Credential
+Select 0 or more credentials for this rulebook activation. This field is optional.
+
+
+Note
+
+
+- The credentials that display in this field are customized based on your rulebook activation and only include the following credential types: Vault, Red Hat Ansible Automation Platform, or any custom credential types that you have created. For more information about credentials, see [Credentials](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_decisions/eda-credentials).
+- If you plan to use a Red Hat Ansible Automation Platform credential, you can *only* select 1 Red Hat Ansible Automation Platform credential type for a rulebook activation.
+
+Decision environment
+Decision environments are a container image to run Ansible rulebooks.
+
+
+Note
+In Event-Driven Ansible controller, you cannot customize the pull policy of the decision environment. By default, it follows the behavior of the **always** policy. Every time an activation is started, the system tries to pull the most recent version of the image.
+
+Restart policy
+This is the policy that determines how an activation should restart after the container process running the source plugin ends.
+
+
+- Policies:
+
+
+1. **Always**: This restarts the rulebook activation immediately, regardless of whether it ends successfully or not, and occurs no more than 5 times.
+2. **Never**: This never restarts a rulebook activation when the container process ends.
+3. **On failure**: This restarts the rulebook activation after 60 seconds by default, only when the container process fails, and occurs no more than 5 times.
+
+Log level
+This field defines the severity and type of content in your logged events.
+
+
+- Levels:
+
+
+1. **Error**: Logs that contain error messages that are displayed in the **History** tab of an activation.
+2. **Info**: Logs that contain useful information about rulebook activations, such as a success or failure, triggered action names and their related action events, and errors.
+3. **Debug**: Logs that contain information that is only useful during the debug phase and might be of little value during production. This log level includes both error and log level data.
+
+Service name
+This defines a service name for Kubernetes to configure inbound connections if the activation exposes a port. This field is optional.
+
+Rulebook activation enabled?
+This automatically enables the rulebook activation to run.
+
+Variables
+The variables for the rulebook are in a JSON or YAML format. The content would be equivalent to the file passed through the `--vars` flag of ansible-rulebook command.
+
+
+Note
+In the context of automation controller and Event-Driven Ansible controller, you can use both `extra_vars` and credentials to store a variety of information. However, credentials are the preferred method of storing sensitive information such as passwords or API keys because they offer better security and centralized management, whereas `extra_vars` are more suitable for passing dynamic, non-sensitive data.
+
+Options
+Check the **Skip audit events** option if you do not want to see your events in the Rule Audit.
+
+5. Click Create rulebook activation.
 
 **Results**
 
 Your rulebook activation is now created and can be managed on the **Rulebook Activations** page.
 
-
-After saving the new rulebook activation, the rulebook activation’s details page is displayed, with either a **Pending** , **Running** , or **Failed** status. From there or the **Rulebook Activations** list view, you can restart or delete it.
+After saving the new rulebook activation, the rulebook activation’s details page is displayed, with either a **Pending**, **Running**, or **Failed** status. From there or the **Rulebook Activations** list view, you can restart or delete it.
 
 Note
-Occasionally, when a source plugin shuts down, it causes a rulebook to exit gracefully after a certain amount of time. When a rulebook activation shuts down, any tasks that are waiting to be performed will be canceled, and an info level message is sent to the activation log. For more information, see [Rulebooks](https://ansible.readthedocs.io/projects/rulebook/en/stable/rulebooks.html#) .
 
-
+Occasionally, when a source plugin shuts down, it causes a rulebook to exit gracefully after a certain amount of time. When a rulebook activation shuts down, any tasks that are waiting to be performed will be canceled, and an info level message is sent to the activation log. For more information, see [Rulebooks](https://ansible.readthedocs.io/projects/rulebook/en/stable/rulebooks.html#).
 

@@ -1,9 +1,6 @@
 # 3. Manage containers in private automation hub
 ## 3.6. Working with signed containers
-### 3.6.7. Deleting a container repository
-
-
-
+### 3.6.7. Deleting a container repository
 
 Delete a remote repository from your Ansible Automation Platform to manage your disk space. You can delete repositories from the Red Hat Ansible Automation Platform interface in the **Execution Environment** list view.
 
@@ -11,19 +8,14 @@ Delete a remote repository from your Ansible Automation Platform to manage your 
 
 - You have permissions to manage repositories.
 
-
 **Procedure**
 
 1. Log in to Ansible Automation Platform.
-1. From the navigation panel, selectAutomation Content→Execution Environments.
-1. On the container repository that you want to delete, click theMore Actionsicon **⋮** , and clickDelete execution environment.
-1. When the confirmation message is displayed, click the checkbox and clickDelete execution environment.
-
+2. From the navigation panel, select Automation Content → Execution Environments.
+3. On the container repository that you want to delete, click the More Actions icon **⋮**, and click Delete execution environment.
+4. When the confirmation message is displayed, click the checkbox and click Delete execution environment.
 
 **Verification**
 
 - Return to the **execution environment** list view. If the execution environment has been successfully deleted, it will no longer be in the list.
 
-
-
-<span id="idm139806114775040"></span>

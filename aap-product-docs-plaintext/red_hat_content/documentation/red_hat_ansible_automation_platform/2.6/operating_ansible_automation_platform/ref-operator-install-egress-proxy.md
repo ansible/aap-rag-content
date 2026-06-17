@@ -1,8 +1,5 @@
 # 3. Configuring Ansible Automation Platform to use egress proxy
-## 3.8. Configure operator-based Ansible Automation Platform to use egress proxy
-
-
-
+## 3.8. Configure operator-based Ansible Automation Platform to use egress proxy
 
 When installing Ansible Automation Platform using the operator-based installation method, you can configure the platform to use an egress proxy.
 
@@ -10,7 +7,6 @@ When creating an `automationcontroller` instance, select the YAML view and add `
 
 +
 
-```
 apiVersion: automationcontroller.ansible.com/v1beta1
 kind: AutomationController
 metadata:
@@ -43,5 +39,4 @@ NO_PROXY: 10.0.0.0/8
 http_proxy: 'https://192.168.0.XXX:3128'
 https_proxy: 'https://192.168.0.XXX:3128'
 no_proxy: 10.0.0.0/8
-```
 

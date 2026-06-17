@@ -1,9 +1,6 @@
 # 1. Key functionality and concepts
 ## 1.3. Automation content
-### 1.3.1. Ansible roles
-
-
-
+### 1.3.1. Ansible roles
 
 Ansible roles allow you to create reusable automation content that helps teams to work more efficiently and avoid duplicating efforts. With roles, you can group together a broader range of existing automation content, like playbooks, configuration files, templates, tasks, and handlers to create customized automation content that can be reused and shared with others.
 
