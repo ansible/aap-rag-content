@@ -1,0 +1,153 @@
++++
+title = "2.4 multi node automation controller deployment to a 2.6 enterprise topology - Red Hat Ansible Automation Platform 2.6"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.6/upgrade-con_upgrade_multi_controller_enterprise"
+template = "docs/aem-title.html"
+
+[extra]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.6", "2.6"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.6/upgrade-con_upgrade_infrastructure_rpm_deployments/", "Infrastructure changes for RPM deployments"]]
+category = "Upgrade"
+category_description = ""
+document_kind = "documentation"
+html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.6/upgrade-con_upgrade_multi_controller_enterprise/aem-page/upgrade-con_upgrade_multi_controller_enterprise.html"
+last_crumb = "2.4 multi node automation controller deployment to a 2.6 enterprise topology"
+modified = "2026-05-21T14:12:12.122Z"
+multi_page_path = ""
+name = "2.4 multi node automation controller deployment to a 2.6 enterprise topology"
+oversized = "false"
+page_slug = "upgrade-con_upgrade_multi_controller_enterprise"
+portal_content_subtype = "title"
+product = "Red Hat Ansible Automation Platform"
+product_slug = "red_hat_ansible_automation_platform"
+product_version = "2.6"
+reference_url = "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/upgrade-con_upgrade_multi_controller_enterprise"
+solr_index = "true"
+toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.6/upgrade-con_upgrade_multi_controller_enterprise/toc/toc.json"
+type = "aem-page"
++++
+
+# 2.4 multi node automation controller deployment to a 2.6 enterprise topology
+
+Upgrade your 2.4 multi-node automation controller setup to a 2.6 enterprise topology. Review the required infrastructure changes and requirements needed to successfully plan the upgrade.
+
+## 2.4 infrastructure topology diagram
+
+This diagram outlines the 2.4 infrastructure topology for this deployment model.
+
+*Figure 1. 2.4 infrastructure topology diagram*
+
+![2.4 multi controller topology](/webassets/aem/red_hat_ansible_automation_platform/2.6/images/rpm-b-controller-2-4.png)
+
+## 2.6 infrastructure topology diagram
+
+This diagram outlines the 2.6 infrastructure topology that Red Hat has tested with this deployment model.
+
+*Figure 2. 2.6 infrastructure topology diagram*
+
+![2.6 multi controller enterprise topology](/webassets/aem/red_hat_ansible_automation_platform/2.6/images/rpm-b-controller-2-6.png)
+
+## Requirements for upgrading a multi automation controller node deployment
+
+The following table highlights the requirements for upgrading from Ansible Automation Platform version 2.4 to 2.6.
+
+| Existing 2.4 topology                                                                                                                                                                                                                                                         | Tested 2.6 topology                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Requirements for each VM           |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| <br>Redundant automation controller-only deployment:<br>Two automation controller VMsOne automation mesh hop node VMTwo automation mesh execution node VMsOne customer-provided (external) PostgreSQL 15 databaseOne HA proxy load balancer in front of automation controller | <br>Enterprise topology:<br>Two platform gateway with colocated Redis VMsTwo automation controller VMsTwo private automation hub with colocated Redis VMsTwo Event-Driven Ansible controller with colocated Redis VMsOne automation mesh hop node VMTwo automation mesh execution node VMsOne customer-provided (external) PostgreSQL 15 databaseOne HA proxy load balancer in front of platform gateway<br>**Note**: Redis high availability requires 6 VMs. Redis can be colocated with automation hub, platform gateway, or Event-Driven Ansible components, but it cannot be colocated with automation controller, execution nodes, or the PostgreSQL database. | <br>See *RPM enterprise topology*. |
+
+## Example inventory file
+
+The following inventory file has been updated with the necessary changes to upgrade to the 2.6 enterprise topology.
+
+```yaml
+# This is the RPM-based Ansible Automation Platform installer inventory file intended for upgrading from a 2.4 multi node automation controller deployment to a 2.6 enterprise deployment.
+
+# For all optional variables consult the Red Hat documentation:
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation
+
+# This section is for your platform gateway hosts - NEW for 2.6 enterprise topology
+# -----------------------------------------------------
+[automationgateway]
+gateway1.example.org
+gateway2.example.org
+
+# This section is for your automation controller hosts from your 2.4 inventory
+# -----------------------------------------------------
+[automationcontroller]
+controller1.example.org
+controller2.example.org
+
+[automationcontroller:vars]
+peers=execution_nodes
+
+# This section is for your execution hosts from your 2.4 inventory
+# -----------------------------------------------------
+[execution_nodes]
+hop1.example.org node_type='hop'
+exec1.example.org
+exec2.example.org
+
+# This section is for your automation hub hosts - NEW for 2.6 enterprise topology
+# -----------------------------------------------------
+[automationhub]
+hub1.example.org
+hub2.example.org
+
+# This section is for your Event-Driven Ansible hosts - NEW for 2.6 enterprise topology
+# -----------------------------------------------------
+[automationedacontroller]
+eda1.example.org
+eda2.example.org
+
+# This section is for your Redis hosts - NEW for 2.6 enterprise topology
+# -----------------------------------------------------
+[redis]
+gateway1.example.org
+gateway2.example.org
+hub1.example.org
+hub2.example.org
+eda1.example.org
+eda2.example.org
+
+[all:vars]
+# Common variables from your 2.4 inventory
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/appendix-inventory-files-vars#general-variables
+# -----------------------------------------------------
+registry_username=<your RHN username>
+registry_password=<your RHN password>
+
+# Platform gateway - NEW for 2.6 enterprise topology
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/appendix-inventory-files-vars#platform-gateway-variables
+# -----------------------------------------------------
+automationgateway_admin_password=<set your own>
+automationgateway_main_url=<set your own> #Set to the URL of the load balancer
+automationgateway_pg_host=<set your own>
+automationgateway_pg_database=<set your own>
+automationgateway_pg_username=<set your own>
+automationgateway_pg_password=<set your own>
+
+# Automation controller variables from your 2.4 inventory
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/appendix-inventory-files-vars#controller-variables
+# -----------------------------------------------------
+admin_password=<set your own>
+pg_host=<set your own>
+pg_database=<set your own>
+pg_username=<set your own>
+pg_password=<set your own>
+
+# Automation hub - NEW for 2.6 enterprise topology
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/appendix-inventory-files-vars#hub-variables
+# -----------------------------------------------------
+automationhub_admin_password=<set your own>
+automationhub_pg_host=<set your own>
+automationhub_pg_database=<set your own>
+automationhub_pg_username=<set your own>
+automationhub_pg_password=<set your own>
+
+# Event-Driven Ansible - NEW for 2.6 enterprise topology
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/rpm_installation/appendix-inventory-files-vars#event-driven-ansible-variables
+# -----------------------------------------------------
+automationedacontroller_admin_password=<set your own>
+automationedacontroller_pg_host=<set your own>
+automationedacontroller_pg_database=<set your own>
+automationedacontroller_pg_username=<set your own>
+automationedacontroller_pg_password=<set your own>
+```

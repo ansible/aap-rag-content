@@ -1,8 +1,5 @@
 # 5. Developing Ansible content
-## 5.2. Installing and configuring the Ansible VS Code extension
-
-
-
+## 5.2. Installing and configuring the Ansible VS Code extension
 
 Red Hat Ansible Lightspeed with IBM watsonx Code Assistant is integrated with the Ansible Visual Studio (VS) Code extension in VS Code. The Ansible VS Code extension, with Red Hat Ansible Lightspeed features enabled, automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.
 

@@ -1,9 +1,6 @@
 # 5. Red Hat Ansible Automation Platform Service on AWS Service Definition
 ## 5.2. Control plane
-### 5.2.3. Service uptime
-
-
-
+### 5.2.3. Service uptime
 
 Uptime for Red Hat Ansible Automation Platform Service on AWS is measured by user access and function of the Ansible Automation Platform control plane. This is measured through the uptime of the product web user interface and REST APIs.
 

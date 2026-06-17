@@ -1,8 +1,5 @@
 # 6. Red Hat Ansible Automation Platform best practices
-## 6.1. Configure automation to use instance groups
-
-
-
+## 6.1. Configure automation to use instance groups
 
 Red Hat Ansible Automation Platform Service on AWS requires that customers implement their own automation execution plane.
 

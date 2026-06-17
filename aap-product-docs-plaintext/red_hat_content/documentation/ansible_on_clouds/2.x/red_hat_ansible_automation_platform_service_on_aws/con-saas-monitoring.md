@@ -1,9 +1,6 @@
 # 5. Red Hat Ansible Automation Platform Service on AWS Service Definition
 ## 5.3. Execution plane
-### 5.3.3. Monitoring
-
-
-
+### 5.3.3. Monitoring
 
 You can configure monitoring and hardening tools of your choice on the execution plane. You are responsible for their operation, functionality, and maintenance, ensuring they do not interfere with the execution plane’s operation.
 

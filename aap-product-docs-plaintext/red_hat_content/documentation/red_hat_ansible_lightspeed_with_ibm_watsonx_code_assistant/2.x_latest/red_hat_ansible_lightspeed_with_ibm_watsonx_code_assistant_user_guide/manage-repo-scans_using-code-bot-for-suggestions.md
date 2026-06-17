@@ -1,8 +1,5 @@
 # 7. Installing and configuring the Ansible code bot
-## 7.3. Managing repository scans
-
-
-
+## 7.3. Managing repository scans
 
 The Ansible code bot dashboard displays a list of your repositories where the code bot is installed, and indicates if the scan schedule is not set, or is set to manual or scheduled scan.
 
