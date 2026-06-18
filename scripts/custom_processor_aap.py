@@ -18,7 +18,7 @@ AAP_PRODUCT_DOCS = [
     "aap-product-docs-plaintext/red_hat_content/documentation/ansible_on_clouds",
     (
         "aap-product-docs-plaintext/red_hat_content/documentation/"
-        "red_hat_ansible_automation_platform/2.6"
+        "red_hat_ansible_automation_platform/2.7"
     ),
     (
         "aap-product-docs-plaintext/red_hat_content/documentation/"
