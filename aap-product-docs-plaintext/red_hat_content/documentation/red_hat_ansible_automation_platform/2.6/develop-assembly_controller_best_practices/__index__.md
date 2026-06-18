@@ -1,0 +1,85 @@
+# Best practices for automation execution
+
+Adopt these best practices to help ensure scalable, maintainable, and highly efficient automation. This guidance focuses on using source control, dynamic inventories, and robust file structures within automation controller.
+
+## Use source control
+
+Automation controller supports playbooks stored directly on the server. Therefore, you must store your playbooks, roles, and any associated details in source control.
+
+This way you have an audit trail describing when and why you changed the rules that are automating your infrastructure. Additionally, it permits sharing of playbooks with other parts of your infrastructure or team.
+
+## Ansible file and directory structure
+
+Follow recommended directory structures for Ansible projects to organize playbooks, inventories, and variables. A consistent layout improves maintainability and scaling.
+
+To ensure reliable and consistent automation, follow these best practices for managing your content:
+
+- Package reusable content, such as roles, modules, and plugins into Ansible Collections.
+- Reference all necessary Collections for a project in the project’s `requirements.yml` file. These dependencies are automatically installed into the execution environment (EE) at runtime, but only if they are not already present in the EE image.
+- Do not import content from other projects or common file-system locations, such as `/opt`, at runtime. All content must be explicitly defined within the EE.
+- Working directory: The playbook directory is used as the current working directory at runtime. However, always use the `playbook_dir` variable instead of relying on the current working directory path.
+
+
+Warning:
+
+Automation controller does not support interactive features.
+
+- Avoid using the `vars_prompt` feature, as automation controller does not permit interactive questions. For user input, use [Surveys in job templates](/documentation/en-us/red_hat_ansible_automation_platform/2.6/get_started-assembly_gs_auto_op#controller-surveys-in-job-templates "Surveys provide a way to prompt users for input when launching a job from a job template. This input can then be used as variables in the playbook run.").
+- Do not use the `pause` feature without a timeout. Automation controller does not permit canceling a pause interactively. If `pause` is necessary, you must set a timeout.
+
+## Use dynamic inventory sources
+
+Define an inventory synchronization process by using dynamic sources, such as a cloud provider or CMDB, to help ensure your infrastructure inventory in automation controller stays consistently up-to-date.
+
+Note:
+
+Edits and additions to Inventory host variables persist beyond an inventory synchronization as long as `--overwrite_vars` is **not** set.
+
+## Variable management for inventory
+
+Variables associated with hosts and groups in an inventory can be managed in several ways in automation controller.
+
+Keep variable data with the hosts and groups definitions (see the inventory editor), rather than using `group_vars/` and `host_vars/`. If you use dynamic inventory sources, automation controller can synchronize such variables with the database while the **Overwrite Variables** option is not set.
+
+## Autoscale
+
+Use the "callback" feature to permit newly booting instances to request configuration for auto-scaling scenarios or provisioning integration.
+
+## Larger host counts
+
+Set "forks" on a job template to larger values to increase parallelism of execution runs.
+
+## Continuous integration / Continuous deployment
+
+Continuous Integration (CI) and Continuous Deployment (CD) are development practices that require developers to integrate code into a shared repository several times a day.
+
+Each integration can then be verified by an automated build and automated tests. CI/CD is a method to deliver applications to customers by introducing automation into the stages of app development.
+
+The main concepts attributed to CI/CD are continuous integration, continuous delivery, and continuous deployment. Automation controller can be integrated with CI/CD systems to enable automated provisioning, configuration management, application deployment, and other IT tasks as part of the CI/CD pipeline.
+
+For a Continuous Integration system, such as Jenkins, to create a job, it must make a `curl` request to a job template. The credentials to the job template must not require prompting for any particular passwords.
+
+## Automation controller tips and tricks
+
+Automation controller provides tools, commands, and output to help you manage your automation platform.
+
+*Table 1. Tips and tricks for automation controller*
+
+| Tool or task                                                                              | Description                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Automation controller CLI Tool                                                            | Full-featured command CLI. See [AWX manage utility](/documentation/en-us/red_hat_ansible_automation_platform/2.6/administer-assembly_controller_awx_manage_utility#assembly-controller-awx-manage-utility "Use the awx-manage utility to access detailed internal information of automation controller. Commands for awx-manage must run as the awx user only.") for more information. |
+| Change the automation controller Administrator password                                   | Use the command: awx-manage changepassword admin<br>To set policies at creation time for password validation using Django, see [Django password policies](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-security-best-practices#controller-django-password-policies).                              |
+| Create a System Administrator (superuser) from the command line                           | Use the command: awx-manage createsuperuser                                                                                                                                                                                                                                                                                                                                            |
+| Use the API to obtain the Ansible Automation Platform outputs for commands in JSON format | Go to: https://<controller server name>/api/v2/jobs/<job\_id>/job\_events/                                                                                                                                                                                                                                                                                                             |
+| View ansible\_variables or "facts" about systems Ansible manages                          | Run the setup module as an ad hoc action: ansible -m setup hostname                                                                                                                                                                                                                                                                                                                    |
+Additonally, see these topics for more automation controller tips and tricks:
+
+- [Set up a jump host to use with automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-tips-and-tricks#ref-controller-set-up-jump-host)
+- [Locate and configure the Ansible configuration file](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-tips-and-tricks#ref-controller-locate-ansible-config-file)
+- [The ALLOW_JINJA_IN_EXTRA_VARS variable](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-tips-and-tricks#ref-controller-allow-jinja-in-extra-vars)
+- [Configure the controllerhost hostname for notifications](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-tips-and-tricks#ref-controller-configure-host-name-notifications)
+- [Launch Jobs with curl](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-tips-and-tricks#ref-controller-launch-jobs-with-curl)
+- [Filter instances returned by the dynamic inventory sources in automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-tips-and-tricks#ref-controller-filter-instances)
+- [Use an unreleased module from Ansible source with automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-tips-and-tricks#ref-controller-use-an-unreleased-module)
+- [Connect to Windows with winrm](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-tips-and-tricks#ref-controller-connect-with-winrm)
+- [Import existing inventory files and host/group vars into automation controller](https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-tips-and-tricks#ref-controller-import-inventory-files)

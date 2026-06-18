@@ -1,8 +1,5 @@
 # 2. New features and enhancements
-## 2.4. 29 May 2025
-
-
-
+## 2.4. 29 May 2025
 
 This release features the following enhancement:
 
@@ -17,6 +14,5 @@ This new offering provides the following benefits:
 - Enables organizations to use the Ansible Automation Platform for user authentication, instead of logging into the Red Hat cloud.
 - Enables organizations to deploy the Ansible Automation Platform in their preferred region.
 
-
-For information on setting up an on-premise or hybrid deployment model, see [Setting up Red Hat Ansible Lightspeed on-premise deployment](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/set-up-lightspeed_lightspeed-user-guide#configuring-lightspeed-onpremise_set-up-lightspeed) .
+For information on setting up an on-premise or hybrid deployment model, see [Setting up Red Hat Ansible Lightspeed on-premise deployment](https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/set-up-lightspeed_lightspeed-user-guide#configuring-lightspeed-onpremise_set-up-lightspeed).
 

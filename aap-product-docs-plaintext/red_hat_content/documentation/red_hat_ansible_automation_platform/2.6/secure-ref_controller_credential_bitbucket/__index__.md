@@ -1,0 +1,5 @@
+# BitBucket data center HTTP access token
+
+Bitbucket Data Center is a self-hosted Git repository for collaboration and management. Select this credential type to enable you to use HTTP access tokens in place of passwords for Git over HTTPS.
+
+For further information, see [HTTP access tokens](https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html) in the Bitbucket Data Center documentation..

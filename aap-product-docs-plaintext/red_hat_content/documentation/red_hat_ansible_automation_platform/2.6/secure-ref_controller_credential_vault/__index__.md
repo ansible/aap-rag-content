@@ -1,0 +1,15 @@
+# Ansible Vault credential type
+
+You can use the Ansible Vault credential type to store sensitive data, such as passwords or keys, in encrypted files.
+
+Select this credential type to enable synchronization of inventory with Ansible Vault.
+
+Vault credentials require the **Vault Password** and an optional **Vault Identifier** if applying multi-Vault credentialing.
+
+You can configure automation controller to ask the user for the password at launch time by selecting **Prompt on launch**.
+
+When you select **Prompt on launch**, a dialog opens when the job is launched, prompting the user to enter the password.
+
+Warning:
+
+Credentials that are used in scheduled jobs must not be configured as **Prompt on launch**.

@@ -1,0 +1,120 @@
++++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.6/develop-assembly_troubleshooting_navigator"
+template = "docs/aem-title.html"
+title = "Troubleshoot collections, execution environments, and playbooks - Red Hat Ansible Automation Platform 2.6"
+
+[extra]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.6", "2.6"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.6/develop-assembly_intro_navigator/", "Emulate a platform environment locally with automation content navigator"]]
+category = "Develop"
+category_description = ""
+document_kind = "documentation"
+html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.6/develop-assembly_troubleshooting_navigator/aem-page/develop-assembly_troubleshooting_navigator.html"
+last_crumb = "Troubleshoot collections, execution environments, and playbooks"
+modified = "2026-05-21T14:12:12.122Z"
+multi_page_path = ""
+name = "Troubleshoot collections, execution environments, and playbooks"
+oversized = "false"
+page_slug = "develop-assembly_troubleshooting_navigator"
+portal_content_subtype = "title"
+product = "Red Hat Ansible Automation Platform"
+product_slug = "red_hat_ansible_automation_platform"
+product_version = "2.6"
+reference_url = "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/develop-assembly_troubleshooting_navigator"
+solr_index = "true"
+toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.6/develop-assembly_troubleshooting_navigator/toc/toc.json"
+type = "aem-page"
++++
+
+# Troubleshoot collections, execution environments, and playbooks
+
+Troubleshoot Ansible collections, playbooks, and execution environments interactively with automation content navigator. Compare results inside or outside environments to resolve issues fast.
+
+## Review playbook results
+
+Automation content navigator saves playbook runs as JSON artifact files. You can use these files to share, review, or troubleshoot results without requiring access to the original playbook or inventory.
+
+### Before you begin
+
+- A automation content navigator artifact JSON file from a playbook run.
+
+### Procedure
+
+ Start automation content navigator with the artifact file.
+
+```
+$ ansible-navigator replay simple_playbook_artifact.json
+```
+
+1.  Review the playbook results that match when the playbook ran.  
+![Playbook results](/webassets/aem/red_hat_ansible_automation_platform/2.6/images/navigator-artifact-replay.png)  
+
+### Results
+
+You can now type the number next to the plays and tasks to step into each to review the results, as you would after executing the playbook.
+
+## Frequently asked questions about automation content navigator
+
+Review frequently asked questions about automation content navigator configuration and behavior. This information helps you troubleshoot common problems and optimize your environment setup.
+
+Where should the `ansible.cfg` file go when using an automation execution environment?
+The easiest place to have the `ansible.cfg` file is in the project directory next to the playbook. The playbook directory is automatically mounted in the automation execution environment and automation content navigator finds the `ansible.cfg` file there. If the `ansible.cfg` file is in another directory, set the `ANSIBLE_CONFIG` variable, and specify the directory as a custom volume mount. (See automation content navigator settings for `execution-environment-volume-mounts`)
+
+Where should the `ansible.cfg` file go when not using an automation execution environment?
+Ansible looks for the `ansible.cfg` in the typical locations when not using an automation execution environment. See [Reviewing your Ansible configuration with automation content navigator](/documentation/en-us/red_hat_ansible_automation_platform/2.6/develop-assembly_execute_playbook_navigator#assembly-review-config-navigator "As a content creator, you can review your Ansible configuration with automation content navigator and interactively delve into settings.").
+
+Where should Ansible collections be placed when using an automation execution environment?
+The easiest place to have Ansible collections is in the project directory, in a playbook adjacent collections directory (for example, `ansible-galaxy collections install ansible.utils -p ./collections`). The playbook directory is automatically mounted in the automation execution environment and automation content navigator finds the collections there. Another option is to build the collections into an automation execution environment using Ansible Builder. This helps content creators author playbooks that are production ready, since automation controller supports playbook adjacent collection directories. If the collections are in another directory, set the `ANSIBLE_COLLECTIONS_PATHS` variable and configure a custom volume mount for the directory. (See [Automation content navigator general settings](/documentation/en-us/red_hat_ansible_automation_platform/2.6/develop-assembly_settings_navigator#ref-navigator-general-settings "The following table describes each general parameter and setting options for automation content navigator.") for `execution-environment-volume-mounts`).
+
+Where should Ansible collections be placed when not using an automation execution environment?
+When not using an automation execution environment, Ansible looks in the default locations for collections. See [Creating a collection for distributing roles](/documentation/en-us/red_hat_ansible_automation_platform/2.6/develop-devtools_develop_collections#devtools-create-roles-collection "An Ansible role is a self-contained unit of Ansible automation content that groups related tasks and associated variables, files, handlers, and other assets in a defined directory structure.") for more information.
+
+Why does the playbook hang when `vars_prompt` or `pause/prompt` is used?
+By default, automation content navigator runs the playbook in the same manner that automation controller runs the playbook. This helps content creators author playbooks that are production ready. If you cannot avoid the use of `vars_prompt` or `pause\prompt`, disabling `playbook-artifact` creation causes automation content navigator to run the playbook in a manner that is compatible with `ansible-playbook` and allows for user interaction.
+
+Why does automation content navigator change the terminal colors or look terrible?
+Automation content navigator queries the terminal for its OSC4 compatibility. OSC4, 10, 11, 104, 110, 111 indicate the terminal supports color changing and reverting. It is possible that the terminal is misrepresenting its ability. You can disable OSC4 detection by setting `--osc4 false`. (See [Automation content navigator general settings](/documentation/en-us/red_hat_ansible_automation_platform/2.6/develop-assembly_settings_navigator#ref-navigator-general-settings "The following table describes each general parameter and setting options for automation content navigator.") for how to handle this with an environment variable or in the settings file).
+
+How can I change the colors used by automation content navigator?
+Use `--osc4 false` to force automation content navigator to use the terminal defined colors. (See [Automation content navigator general settings](/documentation/en-us/red_hat_ansible_automation_platform/2.6/develop-assembly_settings_navigator#ref-navigator-general-settings "The following table describes each general parameter and setting options for automation content navigator.") for how to handle this with an environment variable or in the settings file).
+
+What is with all these `site-artifact-2021-06-02T16:02:33.911259+00:00.json` files in the playbook directory?
+Automation content navigator creates a playbook artifact for every playbook run. These can be helpful for reviewing the outcome of automation after it is complete, sharing and troubleshooting with a colleague, or keeping for compliance or change-control purposes. The playbook artifact file has the detailed information about every play and task, and the `stdout` from the playbook run. You can review playbook artifacts with `ansible-navigator replay <filename>` or `:replay <filename>` while in an automation content navigator session. You can review all playbook artifacts with both `--mode stdout` and `--mode interactive`, depending on the required view. You can disable playbook artifacts writing and the default file naming convention. (See [Automation content navigator general settings](/documentation/en-us/red_hat_ansible_automation_platform/2.6/develop-assembly_settings_navigator#ref-navigator-general-settings "The following table describes each general parameter and setting options for automation content navigator.") for how to handle this with an environment variable or in the settings file).
+
+Why does `vi` open when I use `:open`?
+Automation content navigator opens anything showing in the terminal in the default editor. The default is set to either `vi +{line_number} {filename}` or the current value of the `EDITOR` environment variable. Related to this is the `editor-console` setting which indicates if the editor is console or terminal based. Here are examples of alternate settings that might be useful:
+
+```yaml
+# emacs
+ansible-navigator:
+  editor:
+    command: emacs -nw +{line_number} {filename}
+    console: true
+```
+
+```yaml
+# vscode
+ansible-navigator:
+  editor:
+    command: code -g {filename}:{line_number}
+    console: false
+```
+
+```yaml
+#pycharm
+ansible-navigator:
+  editor:
+    command: charm --line {line_number} {filename}
+    console: false
+```
+
+What is the order in which configuration settings are applied?
+The automation content navigator configuration system pulls in settings from various sources and applies them hierarchically in the following order (where the last applied changes are the most prevalent):
+
+1. Default internal values
+2. Values from a settings file
+3. Values from environment variables
+4. Flags and arguments specified on the command line
+5. While issuing `:` commands within the text-based user interface
+
+Something did not work, how can I troubleshoot it?
+Automation content navigator has reasonable logging messages. You can enable `debug` logging with `--log-level debug`. If you think you might have found a bug, log an issue and include the details from the log file.

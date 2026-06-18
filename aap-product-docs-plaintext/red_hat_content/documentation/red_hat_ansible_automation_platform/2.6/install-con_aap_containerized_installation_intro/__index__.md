@@ -1,0 +1,5 @@
+# Install containerized Ansible Automation Platform
+
+Containerized Ansible Automation Platform uses Podman to run the platform in containers on Red Hat Enterprise Linux host machines. With this installation method, you manage both the product and infrastructure lifecycle while taking advantage of containerized architecture.
+
+Containerized Ansible Automation Platform runs as rootless containers for enhanced security by default. You can install and operate Ansible Automation Platform with a non-root user account.

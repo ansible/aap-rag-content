@@ -1,0 +1,42 @@
++++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.6/plan-ref_installation_deployment_models"
+title = "Installation and deployment models - Red Hat Ansible Automation Platform 2.6"
+template = "docs/aem-title.html"
+
+[extra]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.6", "2.6"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.6/plan-assembly_overview_tested_deployment_models/", "Choose a deployment method and topology"]]
+category = "Plan"
+category_description = ""
+document_kind = "documentation"
+html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.6/plan-ref_installation_deployment_models/aem-page/plan-ref_installation_deployment_models.html"
+last_crumb = "Installation and deployment models"
+modified = "2026-05-21T14:12:12.122Z"
+multi_page_path = ""
+name = "Installation and deployment models"
+oversized = "false"
+page_slug = "plan-ref_installation_deployment_models"
+portal_content_subtype = "title"
+product = "Red Hat Ansible Automation Platform"
+product_slug = "red_hat_ansible_automation_platform"
+product_version = "2.6"
+reference_url = "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/plan-ref_installation_deployment_models"
+solr_index = "true"
+toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.6/plan-ref_installation_deployment_models/toc/toc.json"
+type = "aem-page"
++++
+
+# Installation and deployment models
+
+Ansible Automation Platform offers many installation and deployment options based on your infrastructure and organizational needs. Each installation type reference includes supported infrastructure types and links to tested topologies.
+
+Note:
+
+The Ansible Automation Platform RPM installer was deprecated in 2.5 and will be removed in Ansible Automation Platform 2.7. The RPM installer will be supported for RHEL 9 during the lifecycle of Ansible Automation Platform 2.6 to support migrations to existing supported topologies. For more information on upgrade and migration paths, see the [Supported upgrade and migration scenarios](/documentation/en-us/red_hat_ansible_automation_platform/2.6/upgrade-assembly_upgrade_support_matrix "Use these reference tables to find the supported upgrade paths for your Ansible Automation Platform deployment. Review Red Hat Enterprise Linux version compatibility and step-by-step processes for RPM, container, and OpenShift Container Platform deployment types.").
+
+*Table 1. Ansible Automation Platform installation and deployment models*
+
+| Mode           | Infrastructure                      | Description                                                                                                                                                                                                                        | Tested topologies                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| -------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <br>Containers | <br>Virtual machines and bare metal | <br>The containerized installer deploys Ansible Automation Platform on Red Hat Enterprise Linux by using Podman which runs the platform in containers on host machines. Customers manage the product and infrastructure lifecycle. | [Container growth topology](/documentation/en-us/red_hat_ansible_automation_platform/2.6/plan-ref_cont_a_env_a "The container-based growth topology provides a smaller footprint deployment without redundancy for organizations getting started with Ansible Automation Platform.")[Container enterprise topology](/documentation/en-us/red_hat_ansible_automation_platform/2.6/plan-ref_cont_b_env_a "The container-based enterprise topology provides redundancy and higher compute for large volumes of automation.")                                                                           |
+| <br>Operator   | <br>Red Hat OpenShift               | <br>The Operator uses Red Hat OpenShift Operators to deploy Ansible Automation Platform within Red Hat OpenShift. Customers manage the product and infrastructure lifecycle.                                                       | [Operator growth topology](/documentation/en-us/red_hat_ansible_automation_platform/2.6/plan-ref_ocp_a_env_a "The Operator-based growth topology provides a smaller footprint deployment without redundancy for organizations getting started with Ansible Automation Platform on Red Hat OpenShift Container Platform.")[Operator enterprise topology](/documentation/en-us/red_hat_ansible_automation_platform/2.6/plan-ref_ocp_b_env_a "The Operator-based enterprise topology provides redundancy and higher compute for large volumes of automation on Red Hat OpenShift Container Platform.") |
+| <br>RPM        | <br>Virtual machines and bare metal | <br>The RPM installer deploys Ansible Automation Platform on Red Hat Enterprise Linux by using RPMs to install the platform on host machines. Customers manage the product and infrastructure lifecycle.                           | [RPM growth topology](/documentation/en-us/red_hat_ansible_automation_platform/2.6/plan-ref_rpm_a_env_a "The RPM-based growth topology provides a smaller footprint deployment without redundancy for organizations getting started with Ansible Automation Platform.") [RPM enterprise topology](/documentation/en-us/red_hat_ansible_automation_platform/2.6/plan-ref_rpm_b_env_a "The RPM-based enterprise topology provides redundancy and higher compute for large volumes of automation.")                                                                                                    |

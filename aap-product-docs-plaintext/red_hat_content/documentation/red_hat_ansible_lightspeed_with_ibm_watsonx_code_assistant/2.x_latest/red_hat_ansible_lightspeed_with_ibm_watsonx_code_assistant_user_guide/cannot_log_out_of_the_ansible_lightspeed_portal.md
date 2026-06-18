@@ -1,9 +1,6 @@
 # 8. Troubleshooting
 ## 8.2. Troubleshooting Red Hat Ansible Lightspeed on-premise deployment errors
-### 8.2.1. Cannot log out of the Ansible Lightspeed portal
-
-
-
+### 8.2.1. Cannot log out of the Ansible Lightspeed portal
 
 After you log out from the Ansible Lightspeed portal, you are redirected to the automation controller API page instead of Ansible Lightspeed.
 

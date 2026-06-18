@@ -1,9 +1,13 @@
+"""Parse Mimir documentation archives into plaintext for RAG ingestion."""
+
+# pylint: disable=invalid-name
 import argparse
 import configparser
 import json
 import os
 import re
 import subprocess
+import sys
 import time
 import traceback
 
@@ -12,19 +16,22 @@ import traceback
 SOURCE_DIRS = [
     "red_hat_content/documentation/ansible_on_clouds/2.x",
     "red_hat_content/documentation/red_hat_ansible_automation_platform/2.6",
-    "red_hat_content/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest",
+    "red_hat_content/documentation"
+    "/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest",
 ]
 KNOWLEDGE_BASE_ARTICLES_DIR = "red_hat_content/solutions"
-PRODUCTS_TO_BE_INCLUDED = set([
-    "Red Hat Ansible Automation Platform"
-])
+PRODUCTS_TO_BE_INCLUDED = {"Red Hat Ansible Automation Platform"}
 
-class DocFinder:
+
+class DocFinder:  # pylint: disable=too-few-public-methods
+    """Locate document directories under the given target paths."""
+
     def __init__(self, target_dirs):
         self.target_dirs = target_dirs
         self.base_dirs = []
 
     def run(self):
+        """Scan target directories and collect document base paths."""
         for target_dir in self.target_dirs:
             for doc_dir in os.listdir(target_dir):
                 full_path = os.path.join(target_dir, doc_dir)
@@ -32,27 +39,51 @@ class DocFinder:
                     self.base_dirs.append(os.path.join(target_dir, doc_dir))
 
 
-class MimirParser:
-    def __init__(self, base_dir, out_dir, max_level, kb_article = False):
+class MimirParser:  # pylint: disable=too-many-instance-attributes
+    """Parse a single Mimir document directory into chunked plaintext."""
+
+    def __init__(self, base_dir, out_dir, max_level, kb_article=False):
         self.base_dir = base_dir
         self.out_dir = out_dir
         self.max_level = max_level
         self.kb_article = kb_article
         self.metadata_dir = os.path.join(self.out_dir, ".metadata")
+        self.doc_metadata = None
 
         if not os.path.isdir(self.out_dir):
             os.makedirs(self.out_dir)
         if not os.path.isdir(self.metadata_dir):
             os.makedirs(self.metadata_dir)
 
+        self.aem = os.path.isdir(os.path.join(self.base_dir, "aem-page"))  # detect AEM format
+
         if not kb_article:
             self.sections = []
-            self.toc = self.base_dir + "/toc/" + os.listdir(self.base_dir + "/toc")[0]
-            self.md = self.base_dir + "/single-page/" + \
-                      list(filter(lambda x: x.endswith(".md"),
-                                  os.listdir(self.base_dir + "/single-page")))[0]
+            if self.aem:
+                self.toc = None  # AEM archives lack a usable TOC file
+                self.md = (
+                    self.base_dir
+                    + "/aem-page/"
+                    + next(
+                        filter(lambda x: x.endswith(".md"), os.listdir(self.base_dir + "/aem-page"))
+                    )
+                )
+            else:  # legacy Pantheon format
+                self.toc = self.base_dir + "/toc/" + os.listdir(self.base_dir + "/toc")[0]
+                self.md = (
+                    self.base_dir
+                    + "/single-page/"
+                    + next(
+                        filter(
+                            lambda x: x.endswith(".md"), os.listdir(self.base_dir + "/single-page")
+                        )
+                    )
+                )
 
-    def process_section(self, section, level, parent_titles=[]):
+    def process_section(self, section, level, parent_titles=None):
+        """Recursively walk TOC sections up to max_level."""
+        if parent_titles is None:
+            parent_titles = []
         if level >= self.max_level:
             return
 
@@ -68,28 +99,48 @@ class MimirParser:
                 self.process_section(
                     s,
                     level + 1,
-                    (parent_titles + [section_title]) if section_title else parent_titles)
+                    (parent_titles + [section_title]) if section_title else parent_titles,
+                )
 
     def process_toc(self):
-        with open(self.toc, encoding="utf-8") as f:
-            toc = json.loads(f.read())
-        self.process_section(toc, -1)
+        """Load TOC JSON or synthesize a root section for AEM documents."""
+        if not self.toc:
+            # AEM: synthesize a single root section since no TOC is available
+            self.sections.append(
+                {
+                    "title": None,
+                    "visible": True,
+                    "weight": 1,
+                    "urlFragment": "index",
+                    "anchor": None,
+                    "singlePageAnchor": None,
+                    "parent_titles": [],
+                }
+            )
+        else:
+            with open(self.toc, encoding="utf-8") as f:
+                toc = json.loads(f.read())
+            self.process_section(toc, -1)
 
-
-    def process_md(self, md=None):
+    def process_md(
+        self, md=None
+    ):  # pylint: disable=too-many-locals,too-many-branches,too-many-statements
+        """Parse a markdown file, split by TOC sections, and write output."""
         in_md_header = False
         config = "[__default__]\n"
-        link_to_section = re.compile(r'\]\((#[\w\-_]+)\)')
+        link_to_section = re.compile(r"\]\((#[\w\-]+)\)")
+        f = None
+        section_index = 0
+        base_url = ""
 
         if self.kb_article:
             md_file = os.path.join(self.base_dir, md)
         else:
             out_file = os.path.join(self.out_dir, "__index__.md")
-            f = open(out_file, "w")
-            section_index = 0
+            f = open(out_file, "w", encoding="utf-8")  # pylint: disable=consider-using-with
             md_file = self.md
 
-        for line in open(md_file, encoding="utf-8"):
+        for line in open(md_file, encoding="utf-8"):  # pylint: disable=consider-using-with
             line = line.strip()
 
             if in_md_header:
@@ -110,13 +161,18 @@ class MimirParser:
                             return
 
                         out_file = os.path.join(self.out_dir, md)
-                        f = open(out_file, "w")
+                        f = open(  # pylint: disable=consider-using-with
+                            out_file, "w", encoding="utf-8"
+                        )
                         metadata_file = os.path.join(self.metadata_dir, md.replace(".md", ".json"))
                     else:
                         metadata_file = os.path.join(self.metadata_dir, "__index__.json")
 
-                    with open(metadata_file, "w") as meta:
-                        metadata = {s:dict(self.doc_metadata.items(s)) for s in self.doc_metadata.sections()}
+                    with open(metadata_file, "w", encoding="utf-8") as meta:
+                        metadata = {
+                            s: dict(self.doc_metadata.items(s))
+                            for s in self.doc_metadata.sections()
+                        }
                         metadata["url"] = self.doc_metadata["extra"]["reference_url"]
                         metadata["path"] = self.doc_metadata["__default__"]["path"]
                         if self.kb_article:
@@ -131,19 +187,26 @@ class MimirParser:
                     line = re.sub(r"^(.+)\s*=\s*\"(.+)\"", r"\1 = \2", line)
                     config += line + "\n"
                 continue
-            elif line == "+++":
+            if line == "+++":
                 in_md_header = True
                 continue
 
-            if not self.kb_article and line.startswith("#"):
+            # AEM: only process the first heading; Pantheon: match all headings against TOC
+            if (
+                not self.kb_article
+                and line.startswith("#")
+                and (not self.aem or section_index == 0)
+            ):
                 section = self.sections[section_index]
-                title_to_match = section["title"]
                 title = line.replace("\xa0", " ")
                 title = re.sub(r"^#+\s*", "", title)
                 title = re.sub(r"^Chapter\s*", "", title)
-                single_page_anchor = section['singlePageAnchor']
-                if title == title_to_match or single_page_anchor == None:
-                    if single_page_anchor == None:
+                title_to_match = (
+                    title if self.aem else section["title"]
+                )  # AEM: match against itself (no TOC)
+                single_page_anchor = section["singlePageAnchor"]
+                if title == title_to_match or single_page_anchor is None:
+                    if single_page_anchor is None:
                         single_page_anchor = "__index__"
                     base_url = self.doc_metadata["extra"]["reference_url"]
                     section_index += 1
@@ -154,8 +217,8 @@ class MimirParser:
                         f = None
 
                     metadata_file = os.path.join(self.metadata_dir, f"{single_page_anchor}.json")
-                    with open(metadata_file, "w") as meta:
-                        metadata = dict()
+                    with open(metadata_file, "w", encoding="utf-8") as meta:
+                        metadata = {}
                         if single_page_anchor == "__index__":
                             metadata["url"] = f"{base_url}"
                         else:
@@ -170,7 +233,7 @@ class MimirParser:
                         json.dump(metadata, meta, indent=2)
 
                     out_file = os.path.join(self.out_dir, single_page_anchor + ".md")
-                    f = open(out_file, "w")
+                    f = open(out_file, "w", encoding="utf-8")  # pylint: disable=consider-using-with
 
                     for i, parent_title in enumerate(section["parent_titles"]):
                         print(f"{'#' * (i + 1)} {parent_title}", file=f)
@@ -186,7 +249,9 @@ class MimirParser:
         if f:
             f.flush()
             f.close()
+
     def run(self):
+        """Process TOC and markdown for this document directory."""
         if self.kb_article:
             for f in filter(lambda x: x.endswith(".md"), os.listdir(self.base_dir)):
                 self.process_md(f)
@@ -196,6 +261,7 @@ class MimirParser:
 
 
 def main():
+    """Extract and parse Mimir archives into plaintext for RAG."""
     start = time.time()
     try:
         arg_parser = argparse.ArgumentParser()
@@ -216,26 +282,48 @@ def main():
                 secret = os.getenv("MIMIR_ENC_SECRET")
                 if not secret:
                     print("Envvar MIMIR_ENC_SECRET is not defined.")
-                    exit(1)
-                subprocess.run(f"openssl enc -aes-256-cbc -d -pbkdf2 -pass pass:{secret} -in {in_file} -out {out_file}".split(" "),
-                               capture_output=True, text=True, check=True)
+                    sys.exit(1)
+                openssl_cmd = (
+                    f"openssl enc -aes-256-cbc -d -pbkdf2"
+                    f" -pass pass:{secret}"
+                    f" -in {in_file} -out {out_file}"
+                )
+                subprocess.run(
+                    openssl_cmd.split(" "),
+                    capture_output=True,
+                    text=True,
+                    check=True,
+                )
                 dirs = " ".join(SOURCE_DIRS)
-                output = subprocess.run(f"tar xvzf {out_file} {dirs}".split(" "), capture_output=True, text=True, check=True)
+                output = subprocess.run(
+                    f"tar xvzf {out_file} {dirs}".split(" "),
+                    capture_output=True,
+                    text=True,
+                    check=True,
+                )
                 print(output)
                 if args.add_kb_articles:
                     print("Extracting knowledge base articles...")
-                    output = subprocess.run(f"tar xzf {out_file} {KNOWLEDGE_BASE_ARTICLES_DIR}".split(" "), capture_output=True, text=True,
-                                            check=True)
+                    output = subprocess.run(
+                        f"tar xzf {out_file} {KNOWLEDGE_BASE_ARTICLES_DIR}".split(" "),
+                        capture_output=True,
+                        text=True,
+                        check=True,
+                    )
                     print(output.stdout)
                     print(output.stderr)
                     print("done!")
                 print("Delete html files")
-                output = subprocess.run("find red_hat_content -name *.html -type f -delete".split(" "), capture_output=True,
-                                        text=True, check=True)
+                output = subprocess.run(
+                    "find red_hat_content -name *.html -type f -delete".split(" "),
+                    capture_output=True,
+                    text=True,
+                    check=True,
+                )
                 print(output)
             except subprocess.CalledProcessError:
                 traceback.print_stack()
-                exit(2)
+                sys.exit(2)
             finally:
                 if os.path.exists(in_file):
                     os.unlink(in_file)
@@ -245,8 +333,12 @@ def main():
             print(f"{in_file} is not found. Skip the file extraction step.")
 
         if args.add_kb_articles:
-            MimirParser(KNOWLEDGE_BASE_ARTICLES_DIR, os.path.join(args.out_dir, KNOWLEDGE_BASE_ARTICLES_DIR),
-                        max_level=1, kb_article=True).run()
+            MimirParser(
+                KNOWLEDGE_BASE_ARTICLES_DIR,
+                os.path.join(args.out_dir, KNOWLEDGE_BASE_ARTICLES_DIR),
+                max_level=1,
+                kb_article=True,
+            ).run()
 
         doc_finder = DocFinder(SOURCE_DIRS)
         doc_finder.run()
@@ -257,5 +349,5 @@ def main():
         print(f"Execution time: {(time.time() - start):.3f} secs")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

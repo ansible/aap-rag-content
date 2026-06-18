@@ -1,0 +1,58 @@
++++
+template = "docs/aem-title.html"
+title = "Configure the Ansible VS Code extension - Red Hat Ansible Automation Platform 2.6"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.6/proc_configure_vs_code_containerized_install"
+
+[extra]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.6", "2.6"]]
+category = ""
+category_description = ""
+document_kind = "documentation"
+html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.6/proc_configure_vs_code_containerized_install/aem-page/proc_configure_vs_code_containerized_install.html"
+last_crumb = "Configure the Ansible VS Code extension"
+modified = "2026-05-21T14:12:12.122Z"
+multi_page_path = ""
+name = "Configure the Ansible VS Code extension"
+oversized = "false"
+page_slug = "proc_configure_vs_code_containerized_install"
+portal_content_subtype = "title"
+product = "Red Hat Ansible Automation Platform"
+product_slug = "red_hat_ansible_automation_platform"
+product_version = "2.6"
+reference_url = "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/proc_configure_vs_code_containerized_install"
+solr_index = "true"
+toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.6/proc_configure_vs_code_containerized_install/toc/toc.json"
+type = "aem-page"
++++
+
+# Configure the Ansible VS Code extension
+
+If you deployed the Ansible Lightspeed coding assistant, you must also configure the Ansible VS Code extension with the generated Ansible Lightspeed URL. This configuration enables the Ansible users in your organization to use the Ansible Lightspeed coding assistant to create Ansible content.
+
+## Before you begin
+
+- You have installed VS Code version 1.70.1 or later.
+- Your organization administrator has configured an IBM watsonx Code Assistant model for your organization.
+- Your network or firewall configuration permits ingress traffic on port 8447. This port is required for containerized installations to connect IBM watsonx Code Assistant with the Ansible VS Code extension, which then provides access to the Ansible Lightspeed coding assistant.
+
+## About this task
+
+## Procedure
+
+1.  Open the VS Code application.
+2.  From the Activity bar, click the **Extensions** icon ![Extensions](/webassets/aem/red_hat_ansible_automation_platform/2.6/images/extensions-icon-vscode.png).
+3.  From the Installed Extensions list, select **Ansible**.
+4.  From the **Ansible** extension page, click the **Settings** icon and select **Extension Settings**.
+5.  Select **Ansible Lightspeed** settings, and specify the following information:
+  1.  Ensure that the **Enable Ansible Lightspeed with watsonx Code Assistant inline suggestions** checkbox is selected.
+  2.  In the **URL for Ansible Lightspeed** field, verify that you have the following URL: `https://<node.ansible.com>:8447`.
+  3.  Select the **Enable Ansible Lightspeed with watsonx Code Assistant inline suggestions** checkbox.
+6.  Optional: If you want to use the custom model instead of the default model, in the **Model ID Override** field, enter the custom model ID. The **model-override** setting enables you to override the default model and use the custom model, after your organization administrator has created a custom model and has shared the model ID with you separately. Your settings are automatically saved in VS Code.
+
+   Note:
+      If your organization recently subscribed to the Red Hat Ansible Automation Platform, it might take a few hours for Red Hat Ansible Lightspeed to detect the new subscription. In VS Code, use the **Refresh** button in the Ansible extension from the Activity bar to check again.
+
+## What to do next
+
+- After you configure the Ansible VS Code extension with the generated Ansible Lightspeed URL, you can use the Ansible VS Code extension and start developing Ansible content.   1. [Log in to Red Hat Ansible Lightspeed through the Ansible VS Code extension](/documentation/en-us/red_hat_ansible_automation_platform/2.6/develop-assembly_install_ansible_vscode_extension#login-vscode-extension "After installing and configuring the VS Code extension, you can log in to the Ansible Lightspeed service.").
+  2. [Develop Ansible content](/documentation/en-us/red_hat_ansible_automation_platform/2.6/develop-assembly_developing_ansible_content#developing-ansible-content "As an automation developer, you can use Red Hat Ansible Lightspeed to implement your organization’s automation strategy. Red Hat Ansible Lightspeed can help you create and use custom automation content.").
