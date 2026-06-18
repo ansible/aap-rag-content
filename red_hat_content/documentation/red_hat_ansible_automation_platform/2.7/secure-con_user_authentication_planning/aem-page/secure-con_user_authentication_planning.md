@@ -1,0 +1,82 @@
++++
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_user_authentication_planning"
+template = "docs/aem-title.html"
+title = "Best practices for securing user accounts - Red Hat Ansible Automation Platform 2.7"
+
+[extra]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_hardening_aap/", "Harden the platform security posture"]]
+category = "Secure"
+category_description = ""
+document_kind = "documentation"
+html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_user_authentication_planning/aem-page/secure-con_user_authentication_planning.html"
+last_crumb = "Best practices for securing user accounts"
+modified = "2026-06-05T07:48:10.594Z"
+multi_page_path = ""
+name = "Best practices for securing user accounts"
+oversized = "false"
+page_slug = "secure-con_user_authentication_planning"
+portal_content_subtype = "title"
+product = "Red Hat Ansible Automation Platform"
+product_slug = "red_hat_ansible_automation_platform"
+product_version = "2.7"
+reference_url = "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-con_user_authentication_planning"
+solr_index = "true"
+toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-con_user_authentication_planning/toc/toc.json"
+type = "aem-page"
++++
+
+# Best practices for securing user accounts
+
+When planning user authentication for Ansible Automation Platform, consider both infrastructure-level and application-level authentication requirements.
+
+There are two types of user accounts to consider in an Ansible Automation Platform environment:
+
+- Infrastructure accounts: user accounts on the RHEL servers that run the Ansible Automation Platform services.
+- Application accounts: user accounts for the Ansible Automation Platform web UI and API.
+
+## Infrastructure server account planning
+
+For user accounts on the RHEL servers that run Ansible Automation Platform services, follow your organizational policies to determine if individual user accounts should be local or should use an external authentication source.
+
+Only users who have a valid need to perform maintenance tasks on the Ansible Automation Platform components themselves should have access to the underlying RHEL servers, as the servers store configuration files that contain sensitive information, such as encryption keys and service passwords. Because these individuals must have privileged access to support Ansible Automation Platform services, minimizing access to the underlying RHEL servers is critical. Do not grant sudo access to the root account or local Ansible Automation Platform service accounts (awx, pulp, postgres) to untrusted users.
+
+Note:
+
+Some local service accounts are created and managed by the RPM-based installation program. These particular accounts on the underlying RHEL hosts cannot come from an external authentication source.
+
+## Ansible Automation Platform account planning
+
+Ansible Automation Platform user accounts for accessing the user interface or API can either be local (stored in the Ansible Automation Platform database) or mapped to an external authentication source, such as a *Lightweight Directory Access Protocol* (LDAP) server.
+
+Where possible, map all primary user accounts to an external authentication source. Using external account sources eliminates a source of error when working with permissions in this context and minimizes the amount of time devoted to maintaining a full set of users exclusively within Ansible Automation Platform. This includes accounts assigned to individual persons and for non-person entities, such as service accounts used for external application integration. Reserve any local accounts, such as the default “admin” account, for emergency access or “break glass” scenarios where the external authentication mechanism isn’t available.
+
+- LDAP
+
+
+1. Radius
+2. Azure Active Directory
+3. Google OAuth
+4. Generic OIDC
+5. Keycloak
+6. GitHub
+7. GitHub Organization
+8. GitHub team
+9. GitHub enterprise
+10. GitHub enterprise organization
+11. GitHub enterprise team
+
+
+Select an authentication mechanism compliant with your organization’s policies, and review [Access management and authentication](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication "Configure authentication methods such as LDAP or SAML to simplify the user login experience. Providing the correct connection details for your chosen identity provider helps ensure seamless and secure access to Ansible Automation Platform.") for prerequisite details. The authentication mechanism used must ensure that the authentication-related traffic between Ansible Automation Platform and the authentication back-end is encrypted when the traffic occurs on a public or insecure network (for example, LDAPS or LDAP over TLS, HTTPS for OAuth2 and SAML providers, and so on.).
+
+In the Ansible Automation Platform UI, any “system administrator” account can edit, change, and update any inventory or automation definition. Restrict these account privileges to the minimum set of users possible for low-level automation controller configuration and disaster recovery.
+
+Note:
+
+Ansible Automation Platform 2.6 introduces a new central authentication mechanism used by all of the platform components:
+
+- Automation controller
+- Private automation hub
+- Event-Driven Ansible controller
+
+
+Before 2.6, each of these components had their own authentication configuration.

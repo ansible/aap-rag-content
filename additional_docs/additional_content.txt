@@ -1,6 +1,10 @@
 # AAP Lifecycle Dates
 
 Here is a list of AAP Lifecycle Dates:
+- The date for AAP 2.7 General Availability (GA) is June 2, 2026
+- The date for AAP 2.7 Full Support Phase ending is June 2, 2027
+- The date for AAP 2.7 Maintenance Support 1 Phase ends on June 2, 2028
+- The date for AAP 2.7 Maintenance Support 2 Phase ends on June 2, 2029
 - The date for AAP 2.6 General Availability (GA) is October 1, 2025
 - The date for AAP 2.6 Full Support Phase ending is October 1, 2026
 - The date for AAP 2.6 Maintenance Support 1 Phase ends on October 1, 2027

@@ -1,0 +1,57 @@
+# Configure an external database for event streams in Operator on OpenShift Container Platform
+
+The Ansible Automation Platform Operator automatically creates a dedicated PostgreSQL user (`eda_event_stream`) for Event-Driven Ansible event stream operations. This user has minimal privileges (`CONNECT` only) to reduce the security impact if credentials are exposed in decision environments.
+
+## Before you begin
+
+- The external database must run an Ansible Automation Platform-supported version of PostgreSQL: version 15, 16, or 17.
+
+## Procedure
+
+1.  Create an `event_stream_postgres_configuration_secret` YAML file:
+
+
+```
+----
+apiVersion: v1
+kind: Secret
+metadata:
+name: eda-event-stream-postgres-configuration
+namespace: <target_namespace>
+stringData:
+host: "<external_ip_or_url_resolvable_by_the_cluster>"
+port: "<external_port>"
+database: "<desired_database_name>"
+username: "eda_event_stream"
+password: "<password_to_connect_with>"
+sslmode: "prefer"
+type: "unmanaged"
+type: Opaque
+----
+```
+
+2.  Apply the secret to your cluster:
+
+
+```
+----
+$ oc create -f eda-event-stream-postgres-configuration-secret.yml
+----
+```
+
+3.  When creating your `AnsibleAutomationPlatform` custom resource, specify the secret under the Event-Driven Ansible spec:
+
+
+```
+----
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+name: myaap
+namespace: ansible-automation-platform
+spec:
+eda:
+event_stream:
+postgres_configuration_secret: eda-event-stream-postgres-configuration
+----
+```

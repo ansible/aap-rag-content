@@ -1,0 +1,50 @@
++++
+title = "Database variables - Red Hat Ansible Automation Platform 2.7"
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-database_variables"
+
+[extra]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_inventory_file_vars/", "Inventory file variables"]]
+category = "Install"
+category_description = ""
+document_kind = "documentation"
+html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-database_variables/aem-page/install-database_variables.html"
+last_crumb = "Database variables"
+modified = "2026-06-05T07:48:10.594Z"
+multi_page_path = ""
+name = "Database variables"
+oversized = "false"
+page_slug = "install-database_variables"
+portal_content_subtype = "title"
+product = "Red Hat Ansible Automation Platform"
+product_slug = "red_hat_ansible_automation_platform"
+product_version = "2.7"
+reference_url = "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-database_variables"
+solr_index = "true"
+toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/install-database_variables/toc/toc.json"
+type = "aem-page"
++++
+
+# Database variables
+
+Inventory file variables for the database used with Ansible Automation Platform.
+
+| Variable name                            | Description                                                                                                                                                                                                                                                                                                                | Required or optional                               | Default             |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------------------- |
+| <br>`postgresql_admin_database`          | <br>Database name used for connections to the PostgreSQL database server.                                                                                                                                                                                                                                                  | <br>Optional                                       | <br>`postgres`      |
+| <br>`postgresql_admin_password`          | <br>Password for the PostgreSQL admin user. When used, the installation program creates each component's database and credentials.                                                                                                                                                                                         | <br>Required if using `postgresql_admin_username`. |                     |
+| <br>`postgresql_admin_username`          | <br>Username for the PostgreSQL admin user. When used, the installation program creates each component's database and credentials.                                                                                                                                                                                         | <br>Optional                                       | <br>`postgres`      |
+| <br>`postgresql_disable_tls`             | <br>Controls whether SSL/TLS is enabled or disabled for the PostgreSQL database.                                                                                                                                                                                                                                           | <br>Optional                                       | <br>`false`         |
+| <br>`postgresql_effective_cache_size`    | <br>Memory allocation available (in MB) for caching data.                                                                                                                                                                                                                                                                  | <br>Optional                                       |                     |
+| <br>`postgresql_extra_settings`          | <br>Defines additional settings for use by PostgreSQL.<br>Example usage:   ``` postgresql_extra_settings=[{"setting": "ssl_ciphers", "value": "HIGH:!aNULL:!MD5"}] ```                                                                                                                                                     | <br>Optional                                       |                     |
+| <br>`postgresql_firewall_zone`           | <br>The firewall zone where PostgreSQL related firewall rules are applied. This controls which networks can access PostgreSQL based on the zone's trust level.                                                                                                                                                             | <br>Optional                                       | <br>`public`        |
+| <br>`postgresql_keep_databases`          | <br>Controls whether or not to keep databases during uninstall. This variable applies to databases managed by the installation program only, and not external (customer-managed) databases. Set to `true` to keep databases during uninstall.                                                                              | <br>Optional                                       | <br>`false`         |
+| <br>`postgresql_log_destination`         | <br>Destination for server log output.                                                                                                                                                                                                                                                                                     | <br>Optional                                       | <br>`/dev/stderr`   |
+| <br>`postgresql_max_connections`         | <br>Maximum number of concurrent connections to the database if you are using an installer-managed database.                                                                                                                                                                                                               | <br>Optional                                       | <br>`1024`          |
+| <br>`postgresql_password_encryption`     | <br>The algorithm for encrypting passwords.                                                                                                                                                                                                                                                                                | <br>Optional                                       | <br>`scram-sha-256` |
+| <br>`postgresql_port`                    | <br>Port number that the PostgreSQL server listens on. This variable configures the server-side listening port in `postgresql.conf`. To configure the port that a specific component uses to connect to PostgreSQL, use the component-specific port variable, for example, `controller_pg_port` for automation controller. | <br>Optional                                       | <br>`5432`          |
+| <br>`postgresql_shared_buffers`          | <br>Memory allocation (in MB) for shared memory buffers.                                                                                                                                                                                                                                                                   | <br>Optional                                       |                     |
+| <br>`postgresql_tls_cert`                | <br>Path to the PostgreSQL SSL/TLS certificate file.                                                                                                                                                                                                                                                                       | <br>Optional                                       |                     |
+| <br>`postgresql_tls_key`                 | <br>Path to the PostgreSQL SSL/TLS key file.                                                                                                                                                                                                                                                                               | <br>Optional                                       |                     |
+| <br>`postgresql_tls_remote`              | <br>Denote whether the PostgreSQL provided certificate files are local to the installation program (`false`) or on the remote component server (`true`).                                                                                                                                                                   | <br>Optional                                       | <br>`false`         |
+| <br>`postgresql_use_archive_compression` | <br>Controls whether archive compression is enabled or disabled for PostgreSQL. You can control this functionality globally by using `use_archive_compression`.                                                                                                                                                            | <br>Optional                                       | <br>`true`          |

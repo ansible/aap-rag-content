@@ -1,0 +1,126 @@
++++
+template = "docs/aem-title.html"
+title = "Configuration as Code with the ansible.platform collection - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-about_configuration_as_code"
+
+[extra]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-about_configuration_as_code/", "Configuration as Code with the ansible.platform collection"]]
+category = "Configure"
+category_description = ""
+document_kind = "documentation"
+html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-about_configuration_as_code/aem-page/configure-about_configuration_as_code.html"
+last_crumb = "Configuration as Code with the ansible.platform collection"
+modified = "2026-06-05T07:48:10.594Z"
+multi_page_path = ""
+name = "Configuration as Code with the ansible.platform collection"
+oversized = "false"
+page_slug = "configure-about_configuration_as_code"
+portal_content_subtype = "title"
+product = "Red Hat Ansible Automation Platform"
+product_slug = "red_hat_ansible_automation_platform"
+product_version = "2.7"
+reference_url = "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/configure-about_configuration_as_code"
+solr_index = "true"
+toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/configure-about_configuration_as_code/toc/toc.json"
+type = "aem-page"
++++
+
+# Configuration as Code with the ansible.platform collection
+
+Configuration as Code (CaC) is an approach where you define and manage the configuration of Ansible Automation Platform using version-controlled files, such as YAML, instead of manually configuring resources through the web UI.
+
+The `ansible.platform` collection provides Ansible modules for managing Ansible Automation Platform resources programmatically. You can use this collection to automate the creation and management of organizations, users, teams, role-based access control (RBAC), authentication providers, gateway services, and platform-wide settings.
+
+## Benefits of Configuration as Code
+
+- **Repeatability**: Apply the same configuration across development, staging, and production environments.
+- **Change tracking**: Store configuration in Git to maintain a history of changes with diffs and rollback capability.
+- **Disaster recovery**: Rebuild your Ansible Automation Platform configuration quickly after outages or migrations.
+- **Reduced errors**: Route changes through CI/CD pipelines and pull requests for peer review and automated testing.
+- **Scalability**: Configure multiple organizations, teams, and users in bulk without manual intervention.
+
+## The four-state model
+
+Most modules in the `ansible.platform` collection support a four-state model for managing resources:
+
+present
+Create the resource if it does not exist, or update it if it does. Only the parameters you specify are set; other fields retain their current values.
+
+absent
+Delete the resource if it exists.
+
+exists
+Check whether the resource exists without creating or modifying it. Use this state to verify that prerequisites are in place before running further tasks.
+
+enforced
+Create or update the resource, and reset any parameters you did not specify to their API default values. Use this state when you want to ensure the complete desired state of a resource, not just the fields you explicitly define.
+
+The following example uses the `enforced` state to ensure that an organization has only the specified description. Any other fields that were previously set on this organization are reset to their default values:
+
+```yaml
+- name: Enforce organization configuration
+  ansible.platform.organization:
+    name: "Production"
+    description: "Production automation resources"
+    state: enforced
+```
+
+
+Note:
+
+Not all modules support every state. The `settings` module has no `state` parameter and always applies changes. The `token` module supports only `present` and `absent` and is not idempotent. The `feature_flag` module defaults to `exists` instead of `present`, so you must explicitly set `state: present` to modify a flag. For a complete list of supported states per module, see the module reference.
+
+## Resource names instead of IDs
+
+When you reference resources such as organizations, teams, or users in your playbooks, use human-readable names instead of numeric IDs. Names are portable across environments, which means you can apply the same playbook to development, staging, and production without modification. Using names also simplifies disaster recovery because you can rebuild your configuration without looking up IDs from a previous environment.
+
+## Check mode and idempotency
+
+All resource modules in the `ansible.platform` collection support Ansible check mode (`--check`). In check mode, modules report what changes they would make without applying them. Use check mode to verify your playbooks before applying changes to a production environment.
+
+Most modules are idempotent: running the same playbook multiple times produces the same result. The `token` module is an exception — each run creates a new token.
+
+## Module defaults for connection parameters
+
+The `ansible.platform` collection defines an action group called `gateway` that includes all modules. Use `module_defaults` to set connection parameters once instead of repeating them in every task:
+
+```yaml
+- name: Configure Ansible Automation Platform resources
+  hosts: localhost
+  gather_facts: false
+  module_defaults:
+    group/ansible.platform.gateway:
+      aap_hostname: "{{ aap_hostname }}"
+      aap_username: "{{ aap_username }}"
+      aap_password: "{{ aap_password }}"
+      aap_validate_certs: "{{ aap_validate_certs }}"
+  tasks:
+    - name: Ensure organization exists
+      ansible.platform.organization:
+        name: "My Organization"
+        state: present
+
+    - name: Ensure team exists
+      ansible.platform.team:
+        name: "My Team"
+        organization: "My Organization"
+        state: present
+```
+You can also use environment variables instead of specifying connection parameters in your playbook. The recommended naming convention is to use `AAP_` prefixed variable names, but `GATEWAY_` prefixed names are also accepted for backward compatibility:
+
+- `AAP_HOSTNAME` or `GATEWAY_HOSTNAME`
+- `AAP_USERNAME` or `GATEWAY_USERNAME`
+- `AAP_PASSWORD` or `GATEWAY_PASSWORD`
+- `AAP_TOKEN` or `GATEWAY_API_TOKEN` (the naming is asymmetric by design)
+- `AAP_VALIDATE_CERTS` or `GATEWAY_VERIFY_SSL`
+- `AAP_REQUEST_TIMEOUT` or `GATEWAY_REQUEST_TIMEOUT`
+
+## Authentication methods
+
+You can authenticate to Ansible Automation Platform by using one of the following module parameters:
+
+- **Username and password**: Set the `aap_username` and `aap_password` module parameters.
+- **OAuth2 token**: Set the `aap_token` module parameter with a token string or a token object returned by the `ansible.platform.token` module.
+
+
+All authentication module parameters accept both `aap_` and `gateway_` prefixed names for backward compatibility.
