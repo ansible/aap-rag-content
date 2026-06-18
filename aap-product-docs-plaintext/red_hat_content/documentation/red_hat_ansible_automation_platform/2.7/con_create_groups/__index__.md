@@ -1,0 +1,5 @@
+# Create a team in private automation hub
+
+You can create and assign permissions to a team in private automation hub that enables users to access specified features in the system.
+
+By default, new teams do not have any assigned permissions. You can add permissions when first creating a team or edit an existing team to add or remove permissions.

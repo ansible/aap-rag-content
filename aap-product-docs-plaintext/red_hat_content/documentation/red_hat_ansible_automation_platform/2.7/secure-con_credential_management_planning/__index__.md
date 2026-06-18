@@ -1,0 +1,22 @@
+# Manage platform credentials
+
+Red Hat Ansible Automation Platform uses credentials to authenticate requests to jobs against machines, synchronize with inventory sources, and import project content from a version control system.
+
+Ansible Automation Platform manages three sets of secrets:
+
+- User passwords for **local Ansible Automation Platform users**.
+- Secrets for Ansible Automation Platform **operational use** (database password, message bus password, and so on).
+- Secrets for **automation use** (SSH keys, cloud credentials, external password vault credentials, and so on).
+
+
+Implementing a privileged access or credential management solution to protect credentials from compromise is a highly recommended practice. Organizations should audit the use of, and provide additional programmatic control over, access and privilege escalation.
+
+You can further secure automation credentials by ensuring they are unique and stored only in Ansible Automation Platform or in a supported external secrets management system. Services such as OpenSSH can be configured to allow credentials on connections only from specific addresses. Use different credentials for automation from those used by system administrators to log in to a server. Although direct access should be limited where possible, it can be used for disaster recovery or other ad hoc management purposes, allowing for easier auditing.
+
+Different automation jobs might need to access a system at different levels. For example, you can have low-level system automation that applies patches and performs security baseline checking, while a higher-level piece of automation deploys applications. By using different keys or credentials for each piece of automation, the effect of any one key vulnerability is minimized. This also allows for easy baseline auditing.
+
+## External credential vault considerations
+
+Secrets management is an essential component of maintaining a secure automation platform. We recommend the following secrets management practice:
+
+Use an external system to manage secrets. In cases where credentials need to be updated, an external system can retrieve updated credentials with less complexity than an internal system. External systems for managing secrets include CyberArk, HashiCorp Vault, {Azure} Key Management, and others.

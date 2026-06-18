@@ -1,0 +1,59 @@
++++
+template = "docs/aem-title.html"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_react_to_security_events"
+title = "Configure automatic security reactions with Event-Driven Ansible - Red Hat Ansible Automation Platform 2.7"
+
+[extra]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_aap_security_use_cases/", "Security automation use cases"]]
+category = "Secure"
+category_description = ""
+document_kind = "documentation"
+html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_react_to_security_events/aem-page/secure-assembly_eda_react_to_security_events.html"
+last_crumb = "Configure automatic security reactions with Event-Driven Ansible"
+modified = "2026-06-05T07:48:10.594Z"
+multi_page_path = ""
+name = "Configure automatic security reactions with Event-Driven Ansible"
+oversized = "false"
+page_slug = "secure-assembly_eda_react_to_security_events"
+portal_content_subtype = "title"
+product = "Red Hat Ansible Automation Platform"
+product_slug = "red_hat_ansible_automation_platform"
+product_version = "2.7"
+reference_url = "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_react_to_security_events"
+solr_index = "true"
+toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_react_to_security_events/toc/toc.json"
+type = "aem-page"
++++
+
+# Configure automatic security reactions with Event-Driven Ansible
+
+Integrate different security technologies using Event-Driven Ansible to resolve complex configuration challenges. This helps ensure that different products, interfaces, and team workflows align seamlessly across your organization.
+
+## Use of Event-Driven Ansible for security
+
+Event-Driven Ansible is a powerful automation framework that enables organizations to respond to real-time events dynamically. It listens for triggers from various sources, evaluates conditions, and executes automated responses using Ansible Playbooks.
+
+In the context of security operations, Event-Driven Ansible enables rapid incident response, threat mitigation, and system hardening by automating reactions to security-related events. Event-driven automation is the process of responding automatically to changing conditions in an IT environment, enabling faster issue resolution and reducing routine, repetitive tasks. Event-Driven Ansible connects sources of events with corresponding actions using rules. Its decision-making capabilities receive an “event” from a monitoring tool and trigger the required action. Ansible Rulebooks define the source of the event and, using “if-this-then-that” instructions, explains the action to take when the event is encountered. Ansible Rulebooks map event conditions to an action, like running a playbook or directly executing a module. Through Ansible, this event-driven automation process is applied to security-related events for event-driven security. An extensive set of monitoring tools is required to promptly identify and address any security risk. When these tools identify an issue or concern, an event-driven automation solution delivers log sources back to a Security Information and Event Management (SIEM) system for human intervention, triage, or resolution. Example automated event-driven threat responses include shutting ports, IPs, or devices. If your event source is watching network routers and discovers that a router is not responding, it recognizes this as an event. Event-Driven Ansible receives this event and matches the event to the condition defined by the rule in the Rulebook, which in this case would be “if an event indicating ‘no response’ is encountered, then reset the router”. Event-Driven Ansible triggers the instructions in the Rulebook and the router is reset, restoring it to normal function. This can happen at any time without human intervention.
+
+Event-Driven Ansible can automate the following common security use cases:
+
+- Enterprise firewalls
+- *Intrusion Detection and Prevention Systems* (IDPS)
+- *Security Information and Event Management* (SIEM) systems
+- *Privileged Access Management* (PAM) tools
+- *Endpoint Protection Platform* (EPP)
+- Threat detection and response
+- Automated incident response
+- *Zero Trust Network Access* (ZTNA)
+- Compliance and hardening
+- Phishing mitigation
+
+
+The following is an example workflow scenario using Event-Driven Ansible for detection of and response to unauthorized SSH access:
+
+1. **Event Source**: A security monitoring tool detects multiple failed SSH login attempts.
+2. **Trigger**: The event is sent to Event-Driven Ansible.
+3. **Event-Driven Ansible rulebook evaluation**: If the failed login count exceeds a threshold, execute an Ansible Playbook.   - Automated response actions:
+  - Block the source IP in the firewall.
+  - Send a notification to security teams.
+  - Collect logs for forensic analysis.

@@ -1,0 +1,119 @@
++++
+template = "docs/aem-title.html"
+title = "Create standardized execution environment templates for teams - Red Hat Ansible Automation Platform 2.7"
+path = "/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_create_team_templates"
+
+[extra]
+breadcrumbs = [["/", "Home"], ["/products", "Product Documentation"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "Red Hat Ansible Automation Platform"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7", "2.7"], ["/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder/", "Configure a GitHub App for content discovery"]]
+category = "Develop"
+category_description = ""
+document_kind = "documentation"
+html = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_create_team_templates/aem-page/develop-proc_create_team_templates.html"
+last_crumb = "Create standardized execution environment templates for teams"
+modified = "2026-06-05T07:48:10.594Z"
+multi_page_path = ""
+name = "Create standardized execution environment templates for teams"
+oversized = "false"
+page_slug = "develop-proc_create_team_templates"
+portal_content_subtype = "title"
+product = "Red Hat Ansible Automation Platform"
+product_slug = "red_hat_ansible_automation_platform"
+product_version = "2.7"
+reference_url = "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/develop-proc_create_team_templates"
+solr_index = "true"
+toc = "data/docs_assets_aem/red_hat_ansible_automation_platform/2.7/develop-proc_create_team_templates/toc/toc.json"
+type = "aem-page"
++++
+
+# Create standardized execution environment templates for teams
+
+Create pre-configured EE templates so that your teams start from a known-good baseline without choosing every dependency from scratch.
+
+## Before you begin
+
+- You have configured content discovery and synced content sources.
+- You have the AAP Administrator role.
+- You know which collections and dependencies your team requires.
+
+## About this task
+
+When a user creates an EE definition through execution environment builder, the process generates a reusable `<ee-name>-template.yaml` file (with `spec.type: execution-environment`) that captures all selected defaults. The template structure follows the same format as the built-in "Start from scratch" template (`ee-start-from-scratch.yaml` from the `ansible-rhdh-templates` repository). You can use this to build standardized templates for each team.
+
+## Procedure
+
+1.  As an AAP administrator, log in to automation portal.
+2.  Navigate to **Execution Environments > Create**.
+3.  Select the **Start from scratch** template.
+4.  Select a base image appropriate for your environment.
+5.  In the collections picker, select the collections your team requires. For each collection, select the source (for example, `rh-certified` from your private automation hub).
+6.  Add any Python requirements and system packages the team needs.
+7.  Name the definition (for example, `team-ops-ee`) and add a descriptive tag such as `team-ops`.
+8.  Select **Publish to a Git repository** and save the definition to your organization's private Git repository.
+9.  After the definition is created, locate the generated `<ee-name>-template.yml` file in the repository and customize the following sections for your team.
+      Execution environment builder generates a reusable template with three parameter steps matching the wizard.
+
+    **Metadata** — set the name, description, and tags so team members can find the template:
+
+```
+metadata:
+  name: team-ops-ee
+  title: Team Ops EE
+  description: "Pre-configured EE for the operations team"
+  annotations:
+    ansible.io/saved-template: 'true'
+  tags:
+    - execution-environment
+    - team-ops
+```
+    **Collections** — pre-fill the collections your team needs, with version constraints and source:
+
+```
+collections:
+  default:
+    - name: ansible.netcommon
+      version: ">=2.0.0"
+      source: rh-certified
+    - name: ansible.utils
+      version: ">=1.5.0"
+      source: rh-certified
+```
+    **Build destination** — set where the built image is pushed:
+
+```
+publishAndBuild:
+  properties:
+    buildRegistry:
+      default: 'Private Automation Hub (PAH)'
+    buildImageName:
+      default: team-ops/team-ops-ee
+    buildImageTag:
+      default: latest
+    registryTlsVerify:
+      default: true
+```
+  Note:
+      Set `registryTlsVerify` to `false` for registries using self-signed certificates. Set `buildRegistry` to `'Custom Registry'` and add a `customRegistryUrl` if you use an internal registry other than private automation hub.
+
+    For the complete template structure including all steps and actions, see [Complete execution environment template reference](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_template_structure "The full structure of a team execution environment template as generated by execution environment builder, with key fields and customization options.").
+
+10.  Register the template in automation portal:
+  1.  Navigate to **Execution Environments > Create**.
+  2.  Open the kebab menu and select **Import Template**.
+  3.  Paste the URL to the template file in your Git repository.
+  4.  Click **Analyze**, then **Import**.
+      Alternatively, add the template to `catalog.locations` in your Helm chart configuration for automatic loading.
+
+11.  Configure RBAC to control access to the template.
+      For example, create a role `team-ops-ee-users` with `catalog.entity.read` permission and add a conditional rule scoping it to entities with `metadata.tags` containing `team-ops`. Assign the role to the appropriate group. For full RBAC configuration instructions, see [Grant execution environment builder access](/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_grant_ee_builder_access "Enable navigation permissions in the Ansible automation portal RBAC configuration so that non-admin users can access execution environment builder features.").
+
+## Results
+
+1. Log in as a member of the target team group.
+2. Navigate to **Execution Environments > Create**.
+3. Verify the team template appears.
+4. Launch the template and verify the wizard pre-populates the expected collections and dependencies.
+
+
+Note:
+
+This pattern works for any team — swap the collections, base image, and registry defaults to match your team's domain and infrastructure.
