@@ -1,0 +1,136 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="self-service-rbac"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Set up permissions for custom self-service templates</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Custom self-service templates that you set up in Ansible automation portal use a different set of RBAC rules than the RBAC rules for auto-generated self-service templates that are synchronized from Ansible Automation Platform.</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Auto-generated self-service templates</strong>: The RBAC settings for these templates are synchronized from Ansible Automation Platform.</li> 
+       <li class="li"><strong class="ph b">Custom self-service templates</strong>: You must set up RBAC for these templates in Ansible automation portal.</li> 
+      </ul> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="self-service-set-up-rbac"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Set up RBAC for custom self-service templates</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">By default, Ansible Automation Platform administrators can define Ansible automation portal RBAC roles.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have created a user, for example <code class="ph codeph">example-user</code>.</li> 
+         <li class="li">You have added this user as a member of a team, for example <code class="ph codeph">example-team</code>.</li> 
+        </ul> 
+       </section> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">This procedure describes how to create a role in Ansible automation portal that allows only a selected team to view and execute particular custom self-service templates.</p> 
+        <p class="p">Custom self-service templates in Ansible automation portal are associated with job templates in Ansible Automation Platform. This association is set in the <code class="ph codeph">steps.actions</code> section of the YAML file for the custom self-service template.</p> 
+        <p class="p">If you assign permissions to a particular team to launch a custom self-service template from Ansible automation portal, then you must make sure that that team has permission to run the associated job templates in Ansible Automation Platform.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">In a browser, log in to your Ansible automation portal instance as an Ansible Automation Platform user with Ansible Automation Platform administrator privileges.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Administration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">RBAC</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">RBAC</strong> view, click <strong class="ph b">Create</strong>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The <strong class="ph b">Create Role</strong> view appears.</p> 
+          </div> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Enter a name for the role.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">In the <strong class="ph b">Users and Groups</strong> section, select the Ansible Automation Platform teams and users to assign to this role.</span> 
+            <div class="itemgroup info"> 
+             <br> 
+             <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-rbac-select-users-groups.png" alt="Select users and groups table showing Members column"> 
+             <br> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">The <strong class="ph b">Members</strong> column displays the total count of users in each team, including both regular team members and administrators.</p> 
+              </div> 
+             </div> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">In the <strong class="ph b">Add Permission policies</strong> section, select the plug-ins that you want to enable for the role.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Select <strong class="ph b">Permission</strong> in the list of plug-ins to configure the fine-grained permission policies for the role.</span> </li> 
+          </ol> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Next</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Review the settings that you have selected for the role.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Create</strong> to create the role.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist reltasks"> <strong>Related tasks</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_users#proc-controller-creating-a-user" title="You can create three types of users in Ansible Automation Platform:">Creating a user</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_teams#proc-gw-team-add-user" title="To assign a user to a team, the user must already have been created. For more information, see Creating a user. Assigning a user to a team adds them as a member only. Use the Roles tab to assign a role that gives users on the team resource access.">Adding users to a team</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="self-service-verify-rbac"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Verify RBAC</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">This procedure describes how to verify that the role you set up is working correctly.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">Verify that users with permissions can use a template: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Log in to Ansible automation portal as a user who is a member of a team that has been enabled to use a role.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Verify that RBAC is applied and that the user can use the templates that you enabled for the role.</span> </li> 
+          </ol> </li> 
+         <li class="li step"> <span class="ph cmd">Log out of Ansible automation portal.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Verify that users without permissions can not see or use a template: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Log in to Ansible automation portal as a user who is not a member of the new team that has been enabled to use the role.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Verify that RBAC is applied and that the user cannot use the templates that you enabled for the role.</span> </li> 
+          </ol> </li> 
+         <li class="li step"> <span class="ph cmd">Log out of Ansible automation portal.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="self-service-deregister-templates"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Deregister custom self-service templates</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can deregister custom self-service templates. Deregistering templates deletes them from the <strong class="ph b">Templates</strong> view in the Ansible automation portal console.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">In a browser, log in to Ansible automation portal as a user with administrative privileges.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Templates</strong> to display the self-service templates.</span> </li> 
+         <li class="li step"> <span class="ph cmd">For each custom self-service template that you want to delete, execute the following steps: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Click a custom self-service template to open the <strong class="ph b">Template detail</strong> view. The navigation bar contains the <strong class="ph b">Unregister Template</strong> option.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Click <strong class="ph b">Unregister Template</strong>. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/self-service-unregister-template.png" alt="Unregister template option"><br></span> </li> 
+           <li class="li substep"> <span class="ph cmd">In the dialog, confirm that you want to deregister the template.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Click <strong class="ph b">Delete Entity</strong> to unregister the template.</span> </li> 
+          </ol> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">In a browser, navigate to the <strong class="ph b">Templates</strong> view for your Ansible automation portal instance. Verify that the custom self-service templates that you deregistered have been deleted.</p> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="creating-viewing-roles"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create roles and view roles explanations</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">You can create roles within Ansible collections using the Ansible VS Code extension. To create roles, use the Ansible VS Code extension, select the <strong class="ph b">Role Generation</strong> option, and then enter the natural language prompts in English language.</p> 
+      <p class="p">Red Hat Ansible Lightspeed reads the natural language prompts and creates a role recommendation based on your intent. You can also view the explanations for new or existing roles. The role explanations describe what the role does and contextualize its impact.</p> 
+      <p class="p">These capabilities enable Ansible developers to use natural language prompts to create Ansible roles quickly and more efficiently, as well as get an explanation for existing Ansible roles. In addition to generating playbooks, role generation can now further reduce your team’s overall onboarding learning period. For information about Ansible roles, see <em class="ph i">Bundle content with Ansible roles</em> in the <em class="ph i">Related Links</em> section. </p> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">You can create roles and view role explanations when connecting to the Red Hat Ansible Lightspeed cloud service only.</p> 
+       </div> 
+      </div> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-con_gs_ansible_roles#con-gs-ansible-roles" title="An role is a portable, self-contained unit of automation that bundles tasks, variables, templates, and handlers. Roles allow you to organize and reuse automation content to fit specific system needs.">Bundle content with Ansible roles </a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="create-roles"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create roles within collections</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can use the natural language interface in the Ansible VS Code extension to create one or more roles within an Ansible collection.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You meet <strong class="ph b">one</strong> of the following requirements: 
+          <ul class="ul"> 
+           <li class="li">Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.</li> 
+           <li class="li">Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.</li> 
+          </ul> </li> 
+         <li class="li">You have installed and configured the Ansible VS Code extension v25.3.0 or later. For the procedure, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#installing-ansible-vscode-extension" title="Red Hat Ansible Lightspeed with IBM watsonx Code Assistant integrates with the Ansible Visual Studio (VS) Code extension. When enabled, the extension automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.">Installing and configuring the Ansible VS Code extension</a>.</li> 
+         <li class="li">You have an existing Ansible environment configured with a valid collection directory within the Ansible VS Code extension.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to VS Code with your Red Hat account.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Activity</strong> bar, click the <strong class="ph b">Ansible</strong> icon.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use one of the following methods to create a role: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">From the Ansible panel</strong>: 
+             <ol class="ol" type="a"> 
+              <li class="li">From the navigation menu, click the <strong class="ph b">Ansible</strong> icon.</li> 
+              <li class="li">Click <strong class="ph b">Generate a role</strong>.</li> 
+             </ol> </li> 
+            <li class="li"><strong class="ph b">From the Command Palette</strong>:</li> 
+            <li class="li">From the Command Palette of the VS Code editor, click <span class="ph menucascade"><span class="ph uicontrol">View</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Command Palette</span></span>, and then enter <strong class="ph b">&gt; Ansible Lightspeed: Role generation</strong>. <p class="p">The <strong class="ph b">Create a role with Ansible Lightspeed</strong> page is displayed on the right panel of the VS Code screen.</p> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Select the collection to create role in</strong> list, choose the collection where you want to create the role. You must have a collection inside your workspace to create a role. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">If you do not have a collection, you must create it by using one of the following methods:</p> 
+           <ul class="ul"> 
+            <li class="li">By using the following command: <p class="p"><code class="ph codeph">ansible-creator init collection myns.mycollection my_directory</code></p> <p class="p">After you run the command, open the new directory with VS Code.</p> </li> 
+            <li class="li">By using the Ansible VS Code extension <p class="p">For more information, see the topic <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/getting_started_with_ansible_automation_platform/assembly-gs-auto-dev#con-gs-learn-about-collections_assembly-gs-auto-dev" target="_blank" rel="external noopener">About content collections</a> in the <em class="ph i">Getting started with Ansible Automation Platform</em> guide.</p> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Describe what you want to achieve in natural language</strong> field, enter the prompts to create a role and then click <strong class="ph b">Analyze</strong>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">After a few seconds, the recommended steps for your role intent are displayed in the <strong class="ph b">Review the suggested steps for your role and modify as needed</strong> field.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Perform the following tasks: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Review and optionally change the role name.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Review the collection where the role will be created.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Verify that the suggested steps match your intent and then click <strong class="ph b">Continue</strong>. </span> 
+            <div class="itemgroup info"> 
+             <p class="p">It takes a few seconds for the role to generate, and the newly generated role is displayed along with the list of files where the role was generated.</p> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <ul class="ul"> 
+                <li class="li">If you want to modify the steps: Click the editor field, update the prompts or steps to suit your intent, and then click <strong class="ph b">Continue</strong>.</li> 
+                <li class="li">If the role suggestions do not match your intent: Click <strong class="ph b">Back</strong> to change the original prompt and start over.</li> 
+                <li class="li">If you want to restore to the original suggested steps: Click <strong class="ph b">Reset</strong> and then click <strong class="ph b">Continue</strong> to proceed to the next step.</li> 
+               </ul> 
+              </div> 
+             </div> 
+            </div> </li> 
+          </ol> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save files</strong>. A list of files is displayed that includes the new role.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the files to open them in the VS Code editor directly.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="view-role-explanation"> 
+      <h2 class="title topictitle2" id="ariaid-title3">View the role explanations</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can request explanations for a newly created role as well as an existing Ansible role.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You meet <strong class="ph b">one</strong> of the following requirements: 
+          <ul class="ul"> 
+           <li class="li">Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.</li> 
+           <li class="li">Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.</li> 
+          </ul> </li> 
+         <li class="li">You have installed and configured the Ansible VS Code extension v25.3.0 or later. For the procedure, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#installing-ansible-vscode-extension" title="Red Hat Ansible Lightspeed with IBM watsonx Code Assistant integrates with the Ansible Visual Studio (VS) Code extension. When enabled, the extension automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.">Installing and configuring the Ansible VS Code extension</a>.</li> 
+         <li class="li">You have opened the role whose explanation you want to view in the VS Code editor.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to VS Code with your Red Hat account.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Open an Ansible role YAML file within the roles directory in VS Code.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use one of the following methods to view the playbook explanation: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">From an active role YAML file</strong>: 
+             <ol class="ol" type="a"> 
+              <li class="li">Place your cursor anywhere within the playbook file.</li> 
+              <li class="li">Right-click and select <strong class="ph b">Explain the role with Ansible Lightspeed</strong>.</li> 
+             </ol> </li> 
+            <li class="li"><strong class="ph b">From the Ansible panel</strong>: 
+             <ol class="ol" type="a"> 
+              <li class="li">From the navigation menu, click the <strong class="ph b">Ansible</strong> icon.</li> 
+              <li class="li">Select <strong class="ph b">Explain the current playbook</strong>.</li> 
+             </ol> </li> 
+            <li class="li"><strong class="ph b">From the Command Palette</strong>: 
+             <ul class="ul"> 
+              <li class="li">From the Command Palette of the VS Code editor, enter <strong class="ph b">Explain the role with Ansible Lightspeed</strong>. <p class="p">The role explanation is displayed on the right panel of the VS Code screen.</p> <p class="p">The following illustration shows an example of a role explanation:</p> 
+               <figure class="fig fignone"> 
+                <figcaption> <span class="fig--title-label">Figure 1. </span>Example of a role explanation 
+                </figcaption> 
+                <br> 
+                <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/lightspeed-playbook-explanation.png" alt="Example of a role explanation"> 
+                <br> 
+               </figure> </li> 
+             </ul> </li> 
+           </ul> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

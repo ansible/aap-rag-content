@@ -1,0 +1,118 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-how-do-playbooks-work"> 
+     <h1 class="title topictitle1" id="ariaid-title1">How do Ansible Playbooks work</h1> 
+     <div class="body refbody"> 
+      <p class="shortdesc">Ansible Playbooks are lists of tasks that run automatically for your specified inventory or groups of hosts. One or more Ansible tasks can be combined to make a play, that is, an ordered grouping of tasks mapped to specific hosts.</p> 
+      <section class="section"> 
+       <p class="p">Tasks are executed in the order in which they are written.</p> 
+       <p class="p">A playbook can include one or more plays.</p> 
+       <p class="p">A playbook is composed of one or more <code class="ph codeph">plays</code> in an ordered list.</p> 
+       <p class="p">The terms <code class="ph codeph">playbook</code> and <code class="ph codeph">play</code> are sports analogies.</p> 
+       <p class="p">Each play executes part of the overall goal of the playbook, running one or more tasks.</p> 
+       <p class="p">Each task calls an Ansible module.</p> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+          Playbook 
+        </dt> 
+        <dd class="dd">
+          A list of plays that define the order in which Ansible performs operations, from top to bottom, to achieve an overall goal. 
+        </dd> 
+        <dt class="dt dlterm">
+          Play 
+        </dt> 
+        <dd class="dd">
+          An ordered list of tasks that maps to managed nodes in an inventory. 
+        </dd> 
+        <dt class="dt dlterm">
+          Task 
+        </dt> 
+        <dd class="dd">
+          A reference to a single module that defines the operations that Ansible performs. 
+        </dd> 
+        <dt class="dt dlterm">
+          Roles 
+        </dt> 
+        <dd class="dd">
+          Roles are a way to make code in playbooks reusable by putting the functionality into "libraries" that can then be used in any playbook as needed. 
+        </dd> 
+        <dt class="dt dlterm">
+          Module 
+        </dt> 
+        <dd class="dd">
+          A unit of code or binary that Ansible runs on managed nodes. 
+        </dd> 
+       </dl> 
+       <p class="p">Ansible modules are grouped in collections with a <em class="ph i">Fully Qualified Collection Name</em> (FQCN) for each module. Tasks are executed by modules, each of which performs a specific task in a playbook. A module contains metadata that determines when and where a task is executed, and which user executes it. There are thousands of Ansible modules that perform all kinds of IT tasks, such as:</p> 
+       <ul class="ul"> 
+        <li class="li">Cloud management</li> 
+        <li class="li">User management</li> 
+        <li class="li">Networking</li> 
+        <li class="li">Security</li> 
+        <li class="li">Configuration management</li> 
+        <li class="li">Communication</li> 
+       </ul> 
+       <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/playbook.png" alt="Structure of a typical playbook"> </p> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-how-to-use-ansible-playbooks"> 
+      <h2 class="title topictitle2" id="ariaid-title2">How do I use Ansible Playbooks</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Ansible Playbooks are files containing a series of instructions that define the required state of a system or application. They are written in YAML, a human-readable data serialization format, and used to automate IT tasks such as configuration management, application deployment, and orchestration.</p> 
+       <section class="section"> 
+        <p class="p">You can use YAML to create playbooks without having to learn a complicated coding language.</p> 
+        <p class="p">There are two ways of using Ansible Playbooks:</p> 
+        <ul class="ul"> 
+         <li class="li">From the <em class="ph i">command line interface</em> (CLI)</li> 
+         <li class="li">Using Red Hat Ansible Automation Platform’s push-button deployments.</li> 
+        </ul> 
+       </section> 
+       <section class="section" id="ref-how-to-use-ansible-playbooks___from_the_cli"> 
+        <h3 class="title sectiontitle">From the CLI</h3> 
+        <p class="p">After installing the open source Ansible project or Red Hat Ansible Automation Platform by using</p> 
+        <pre class="pre codeblock"><code>$ sudo dnf install ansible</code></pre> 
+        <p class="p">in the Red Hat Enterprise Linux CLI, you can use the <code class="ph codeph">ansible-playbook</code> command to run Ansible Playbooks.</p> 
+       </section> 
+       <section class="section" id="ref-how-to-use-ansible-playbooks___from_within_the_platform"> 
+        <h3 class="title sectiontitle">From within the platform</h3> 
+        <p class="p">The Red Hat Ansible Automation Platform user interface offers push-button Ansible Playbook deployments that can be used as part of larger jobs or job templates. These deployments come with additional safeguards that are particularly helpful to users who are newer to IT automation, or those without as much experience working in the CLI.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-starting-automation"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Start automating with Ansible</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Get started with Ansible by creating an automation project, building an inventory, and creating a <code class="ph codeph">Hello World</code> playbook.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">The Ansible package must be installed.</li> 
+         <li class="li">A text editor must be available to create and edit files.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <div class="ul steps-unordered"> 
+         <div class="li step p"> <span class="ph cmd">Create a project folder on your filesystem. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>mkdir ansible_quickstart
+cd ansible_quickstart</code></pre> 
+           <p class="p">Using a single directory structure makes it easier to add to source control, and reuse and share automation content.</p> 
+          </div> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

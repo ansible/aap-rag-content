@@ -1,0 +1,256 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-create-notification-template"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create a notification template</h1> 
+     <div class="body taskbody"> 
+      <p class="shortdesc">Use the following procedure to create a notification template.</p> 
+      <section> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">Procedure</h2> 
+       </div> 
+       <ol class="ol steps"> 
+        <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Administration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Notifiers</span></span>.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Add notifier</span>.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Complete the following fields: </span> 
+         <div class="itemgroup info"> 
+          <ul class="ul"> 
+           <li class="li"><strong class="ph b">Name</strong>: Enter the name of the notification.</li> 
+           <li class="li"><strong class="ph b">Description</strong>: Enter a description for the notification. This field is optional.</li> 
+           <li class="li"><strong class="ph b">Organization</strong>: Specify the organization that the notification belongs to.</li> 
+           <li class="li"><strong class="ph b">Type</strong>: Choose a type of notification from the drop-down menu. For more information, see the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template#controller-notification-types" title="Automation controller supports multiple notification types that you can use to send notifications about job status and other events.">Notification types</a> section.</li> 
+          </ul> 
+         </div> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save notifier</span>.</span> </li> 
+       </ol> 
+      </section> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="controller-notification-types"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Notification types</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Automation controller supports multiple notification types that you can use to send notifications about job status and other events.</p> 
+       <p class="p">The following notification types are supported with automation controller:</p> 
+       <ul class="ul"> 
+        <li class="li"> Email </li> 
+        <li class="li"> Grafana </li> 
+        <li class="li"> IRC </li> 
+        <li class="li"> Mattermost </li> 
+        <li class="li"> PagerDuty </li> 
+        <li class="li"> Rocket.Chat </li> 
+        <li class="li"> Slack </li> 
+        <li class="li"> Twilio </li> 
+        <li class="li"> Webhook </li> 
+       </ul> 
+       <p class="p">Each notification type has its own configuration and behavioral semantics. You might need to test them in different ways. Additionally, you can customize each type of notification down to a specific detail or a set of criteria to trigger a notification.</p> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist"> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-con_controller_configure_hostname_notifications#controller-create-custom-notifications" title="You can customize the text content of each Notification type on the notification form.">Create custom notifications</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template#controller-notification-email" title="The email notification type supports a wide variety of SMTP servers and has support for SSL/TLS connections.">Email</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template#controller-notification-grafana" title="You can configure automation controller to send notifications to Grafana.">Grafana</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template#controller-notification-irc" title="You can configure automation controller to send notifications by using IRC (Internet Relay Chat).">IRC </a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template#controller-notification-mattermost" title="The Mattermost notification type provides a simple interface to Mattermost’s messaging and collaboration workspace.">Mattermost</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template#controller-notification-pagerduty" title="To integrate Pagerduty, you must first create an API key in the PagerDuty system. This is the token that is given to automation controller. Then create a Service which provides an Integration Key that is also given to automation controller.">Pagerduty</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template#controller-notification-rocketchat" title="The Rocket.Chat notification type provides an interface to Rocket.Chat’s collaboration and communication platform.">Rocket.Chat</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template#controller-notification-slack" title="Slack is a collaborative team communication and messaging tool.">Slack</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template#controller-notification-twilio" title="Configure automation controller to send notifications by using Twilio.">Twilio</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-proc_controller_create_notification_template#controller-notification-webhook" title="The webhook notification type provides a simple interface for sending POSTs to a predefined web service.">Webhook</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title3" id="controller-notification-email"> 
+       <h3 class="title topictitle3" id="ariaid-title3">Email</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">The email notification type supports a wide variety of SMTP servers and has support for SSL/TLS connections.</p> 
+        <section class="section"> 
+         <p class="p">Provide the following details to set up an email notification:</p> 
+         <ul class="ul"> 
+          <li class="li"> <strong class="ph b">Host</strong> </li> 
+          <li class="li"> <strong class="ph b">Recipient list</strong> </li> 
+          <li class="li"> <strong class="ph b">Sender e-mail</strong> </li> 
+          <li class="li"> <strong class="ph b">Port</strong> </li> 
+          <li class="li"><strong class="ph b">Timeout</strong> (in seconds): You can set this up to 120 seconds. This is the length of time that automation controller tries to connect to the email server before failure.</li> 
+         </ul> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-email.png" alt="Notification template email"> 
+         <br> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title4" id="controller-notification-grafana"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Grafana</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">You can configure automation controller to send notifications to Grafana.</p> 
+        <section class="section"> 
+         <p class="p">To integrate Grafana, you must first create an API key in the <a class="xref" href="http://docs.grafana.org/tutorials/api_org_token_howto/" target="_blank" rel="external noopener">Grafana system</a>. This is the token that is given to automation controller.</p> 
+         <p class="p">Provide the following details to set up a Grafana notification:</p> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Grafana URL</strong>: The URL of the Grafana API service, such as: http://yourcompany.grafana.com.</li> 
+          <li class="li"><strong class="ph b">Grafana API key</strong>: You must first create an API key in the Grafana system.</li> 
+          <li class="li">Optional: <strong class="ph b">ID of the dashboard</strong>: When you create an API key for the Grafana account, you can set up a dashboard with a unique ID.</li> 
+          <li class="li">Optional: <strong class="ph b">ID of the panel</strong>: If you added panels and graphs to your Grafana interface, you can give its ID here.</li> 
+          <li class="li">Optional: <strong class="ph b">Tags for the annotation</strong>: Enter keywords to identify the types of events of the notification that you are configuring.</li> 
+          <li class="li"><strong class="ph b">Disable SSL verification</strong>: SSL/TLS verification is on by default, but you can turn off verification of the authenticity of the target’s certificate. Select this option to disable verification for environments that use internal or private CA’s.</li> 
+         </ul> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-grafana.png" alt="Notification template Grafana"> 
+         <br> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title5" id="controller-notification-irc"> 
+       <h3 class="title topictitle3" id="ariaid-title5">IRC</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">You can configure automation controller to send notifications by using IRC (Internet Relay Chat).</p> 
+        <section class="section"> 
+         <p class="p">The IRC notification takes the form of an IRC bot that connects, delivers its messages to channels or individual users, and then disconnects. The notification bot also supports SSL/TLS authentication. The bot does not currently support Nickserv identification. If a channel or user does not exist or is not online then the notification fails. The failure scenario is reserved specifically for connectivity.</p> 
+         <p class="p">Provide the following details to set up an IRC notification:</p> 
+         <ul class="ul"> 
+          <li class="li">Optional: <strong class="ph b">IRC server password</strong>: IRC servers can require a password to connect. If the server does not require one leave it blank. <strong class="ph b">IRC Server Port</strong>: The IRC server port. <strong class="ph b">IRC Server Address</strong>: The hostname or address of the IRC server. <strong class="ph b">IRC Nick</strong>: The bot’s nickname once it connects to the server. <strong class="ph b">Destination Channels or Users</strong>: A list of users or channels to which the notification is sent.</li> 
+          <li class="li">Optional: <strong class="ph b">Disable SSL verification</strong>: Check if you want the bot to use SSL/TLS when connecting.</li> 
+         </ul> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-irc.png" alt="Notification template IRC"> 
+         <br> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title6" id="controller-notification-mattermost"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Mattermost</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">The Mattermost notification type provides a simple interface to Mattermost’s messaging and collaboration workspace.</p> 
+        <section class="section"> 
+         <p class="p">Provide the following details to set up a Mattermost notification:</p> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Target URL</strong>: The full URL that is posted to.</li> 
+          <li class="li">Optional: <strong class="ph b">Username</strong>: Enter a username for the notification.</li> 
+          <li class="li">Optional: <strong class="ph b">Channel</strong>: Enter a channel for the notification.</li> 
+          <li class="li"><strong class="ph b">Icon URL</strong>: Specifies the icon to display for this notification.</li> 
+          <li class="li"><strong class="ph b">Disable SSL verification</strong>: Turns off verification of the authenticity of the target’s certificate. Select this option to disable verification for environments that use internal or private CA’s.</li> 
+         </ul> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-mattermost.png" alt="Notification template Mattermost"> 
+         <br> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title7" id="controller-notification-pagerduty"> 
+       <h3 class="title topictitle3" id="ariaid-title7">Pagerduty</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">To integrate Pagerduty, you must first create an API key in the <a class="xref" href="http://docs.grafana.org/tutorials/api_org_token_howto/" target="_blank" rel="external noopener">PagerDuty system</a>. This is the token that is given to automation controller. Then create a <strong class="ph b">Service</strong> which provides an <strong class="ph b">Integration Key</strong> that is also given to automation controller.</p> 
+        <section class="section"> 
+         <p class="p">Provide the following details to set up a Pagerduty notification:</p> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">API Token</strong>: You must first create an API key in the Pagerduty system. This is the token that is given to automation controller.</li> 
+          <li class="li"><strong class="ph b">PagerDuty subdomain</strong>: When you sign up for the Pagerduty account, you receive a unique subdomain to communicate with. For example, if you signed up as "testuser", the web dashboard is at <code class="ph codeph">testuser.pagerduty.com</code> and you give the API <code class="ph codeph">testuser</code> as the subdomain, not the full domain.</li> 
+          <li class="li"><strong class="ph b">API service/Integration Key</strong>: Enter the API service/integration key created in Pagerduty.</li> 
+          <li class="li"><strong class="ph b">Client Identifier</strong>: This is sent along with the alert content to the Pagerduty service to help identify the service that is using the API key and service. This is helpful if multiple integrations are using the same API key and service.</li> 
+         </ul> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-pagerduty.png" alt="Notification template Pagerduty"> 
+         <br> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title8" id="controller-notification-rocketchat"> 
+       <h3 class="title topictitle3" id="ariaid-title8">Rocket.Chat</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">The Rocket.Chat notification type provides an interface to Rocket.Chat’s collaboration and communication platform.</p> 
+        <section class="section"> 
+         <p class="p">Provide the following details to set up a Rocket.Chat notification:</p> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Target URL</strong>: The full URL that is <code class="ph codeph">POSTed</code> to.</li> 
+          <li class="li">Optional: <strong class="ph b">Username</strong>: Enter a username.</li> 
+          <li class="li">Optional: <strong class="ph b">Icon URL</strong>: Specifies the icon to display for this notification</li> 
+          <li class="li"><strong class="ph b">Disable SSL Verification</strong>: Turns off verification of the authenticity of the target’s certificate. Select this option to disable verification for environments that use internal or private CA’s.</li> 
+         </ul> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-rocketchat.png" alt="Notification template rocketchat"> 
+         <br> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title9" id="controller-notification-slack"> 
+       <h3 class="title topictitle3" id="ariaid-title9">Slack</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">Slack is a collaborative team communication and messaging tool.</p> 
+        <section class="section"> 
+         <p class="p">Give the following details to set up a Slack notification:</p> 
+         <ul class="ul"> 
+          <li class="li">A Slack application. For more information, see the <a class="xref" href="https://api.slack.com/authentication/basics" target="_blank" rel="external noopener">Quickstart</a> page of the Slack documentation on how to create one.</li> 
+          <li class="li"><strong class="ph b">Token</strong>: A token. For more information, see <a class="xref" href="https://api.slack.com/legacy/enabling-bot-users" target="_blank" rel="external noopener">Legacy bots</a> and specific details on bot tokens on the <a class="xref" href="https://api.slack.com/authentication/token-types#bot" target="_blank" rel="external noopener">Current token types</a> documentation page.</li> 
+          <li class="li"><strong class="ph b">Destination Channel</strong>: One Slack channel per line. The pound symbol (#) is required for channels. To respond to or start a thread to a specific message add the parent message Id to the channel where the parent message Id is 16 digits. A dot (.) must be manually inserted after the 10th digit. For example, :#destination-channel, 1231257890.006423.</li> 
+          <li class="li"><strong class="ph b">Notification color</strong>: Specify a notification color. Acceptable colors are hex color code, for example: #3af or #789abc. When you have a bot or app set up, you must complete the following steps: 
+           <ol class="ol"> 
+            <li class="li">Go to <strong class="ph b">Apps</strong>.</li> 
+            <li class="li">Click the newly-created app and then go to <strong class="ph b">Add features and functionality</strong>, which enables you to configure incoming webhooks, bots, and permissions, and <strong class="ph b">Install your app to your workspace</strong>.</li> 
+           </ol></li> 
+         </ul> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-slack.png" alt="Notification template slack"> 
+         <br> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title10" id="controller-notification-twilio"> 
+       <h3 class="title topictitle3" id="ariaid-title10">Twilio</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">Configure automation controller to send notifications by using Twilio.</p> 
+        <section class="section"> 
+         <p class="p">Twilio is a voice and SMS automation service. When you are signed in, you must create a telephone number from which the messages are sent. You can then define a <strong class="ph b">Messaging Service</strong> under <strong class="ph b">Programmable SMS</strong> and associate the number you previously created with it.</p> 
+         <p class="p">You might need to verify this number or some other information before you are permitted to use it to send to any numbers. The <strong class="ph b">Messaging Service</strong> does not require a status callback URL and it does not need the ability to process inbound messages.</p> 
+         <p class="p">Under your individual (or sub) account settings, you have API credentials. Twilio uses two credentials to determine which account an API request is coming from. The <strong class="ph b">Account SID</strong>, which acts as a username, and the <strong class="ph b">Auth Token</strong> which acts as a password.</p> 
+         <p class="p">Provide the following details to set up a Twilio notification:</p> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Account SID</strong>: Enter the account SID.</li> 
+          <li class="li"><strong class="ph b">Account Token</strong>: Enter the account token.</li> 
+          <li class="li"><strong class="ph b">Source Phone Number</strong>: Enter the number associated with the messaging service in the form of "+15556667777".</li> 
+          <li class="li"><strong class="ph b">Destination SMS Numbers</strong>: Enter the list of numbers you want to receive the SMS. It must be a 10 digit telephone number.</li> 
+         </ul> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-twilio.png" alt="Notification template Twilio"> 
+         <br> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title11" id="controller-notification-webhook"> 
+       <h3 class="title topictitle3" id="ariaid-title11">Webhook</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">The webhook notification type provides a simple interface for sending <code class="ph codeph">POSTs</code> to a predefined web service.</p> 
+        <section class="section"> 
+         <p class="p">Automation controller <code class="ph codeph">POSTs</code> to this address by using application and JSON content type with the data payload containing the relevant details in JSON format. Some web service APIs expect HTTP requests to be in a certain format with certain fields.</p> 
+         <p class="p">Configure the webhook notification with the following:</p> 
+         <ul class="ul"> 
+          <li class="li">Configure the HTTP method, usingBasic authentication <code class="ph codeph">PUT</code>.</li> 
+          <li class="li">The body of the outgoing request.</li> 
+          <li class="li">Configure authentication, using Basic authentication.</li> 
+         </ul> 
+         <p class="p">Provide the following details to set up a webhook notification:</p> 
+         <ul class="ul"> 
+          <li class="li">Optional: <strong class="ph b">Username</strong>: Enter a username.</li> 
+          <li class="li">Optional: <strong class="ph b">Basic auth password</strong>:</li> 
+          <li class="li"><strong class="ph b">Target URL</strong>: Enter the full URL to which the webhook notification is <code class="ph codeph">PUT</code> or <code class="ph codeph">POSTed</code>.</li> 
+          <li class="li"><strong class="ph b">HTTP Headers</strong>: Enter Headers in JSON format where the keys and values are strings. For example:</li> 
+         </ul> 
+         <pre class="pre"> {"Authentication": "988881adc9fc3655077dc2d4d757d480b5ea0e11", "MessageType": "Test"}`.</pre> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Disable SSL Verification</strong>: SSL/TLS verification is on by default, but you can choose to turn off verification of the authenticity of the target’s certificate. Select this option to disable verification for environments that use internal or private CA’s.</li> 
+          <li class="li"><strong class="ph b">HTTP Method</strong>: Select the method for your webhook:</li> 
+          <li class="li"><strong class="ph b">POST</strong>: Creates a new resource. It also acts as a catch-all for operations that do not fit into the other categories. It is likely that you need to <strong class="ph b">POST</strong> unless you know your webhook service expects a <strong class="ph b">PUT</strong>.</li> 
+          <li class="li"><strong class="ph b">PUT</strong>: Updates a specific resource (by an identifier) or a collection of resources. You can also use <strong class="ph b">PUT</strong> to create a specific resource if the resource identifier is known beforehand.</li> 
+         </ul> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-webhook.png" alt="Notification template webhook"> 
+         <br> 
+        </section> 
+       </div> 
+      </article> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="design-patterns"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Design patterns for mesh</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">The automation mesh topologies in this section provide examples you can use to design a mesh deployment in your environment. Examples range from a simple, hydrid node deployment to a complex pattern that deploys numerous automation controller instances, employing several execution and hop nodes.</p> 
+      <div class="note important note_important"> <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">If you are creating a mesh similar to the following in a containerized environment:</p> 
+        <ul class="ul"> 
+         <li class="li">Replace the <code class="ph codeph">node_type</code> variable with <code class="ph codeph">receptor_type</code></li> 
+         <li class="li">Replace the <code class="ph codeph">peers</code> variable with <code class="ph codeph">receptor_peers</code></li> 
+         <li class="li">Replace inventory group names with explicit comma-separated lists of hostnames</li> 
+        </ul> 
+        <p class="p">The value of <code class="ph codeph">receptor_peers</code> must be a comma-separated list of hostnames. Do not use inventory group names. For more information, see Adding execution nodes below.</p> 
+       </div> 
+      </div> 
+      <p class="p"> <strong class="ph b">Prerequisites</strong> </p> 
+      <ul class="ul"> 
+       <li class="li">You reviewed conceptual information on node types and relationships.</li> 
+      </ul> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The following examples include images that illustrate the mesh topology. The arrows in the images indicate the direction of peering. After peering is established, the connection between the nodes allows bidirectional communication.</p> 
+       </div> 
+      </div> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relref"> <strong>Related reference</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_adding_execution_nodes" title="Containerized Ansible Automation Platform can deploy remote execution nodes.">Add execution nodes</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-multiple-hybrid-nodes"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Multiple hybrid nodes inventory file example</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">This example inventory file deploys a control plane consisting of multiple hybrid nodes. The nodes in the control plane are automatically peered to one another.</p> 
+       <section class="section"> 
+        <pre class="pre codeblock language-yaml"><code>[automationcontroller]
+aap_c_1.example.com
+aap_c_2.example.com
+aap_c_3.example.com</code></pre> 
+        <p class="p">The following image displays the topology of this mesh network.</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-multiple-hybrid-nodes.png" alt="The topology map of the multiple hybrid node mesh configuration consists of an automation controller group. The automation controller group contains three hybrid nodes: aap_c_1, aap_c_2, and aap_c_3. The control nodes are peered to one another as follows: aap_c_3 is peered to aap_c_1 and aap_c_1 is peered to aap_c_2."> 
+        <br> 
+        <p class="p">The default <code class="ph codeph">node_type</code> for nodes in the control plane is <code class="ph codeph">hybrid</code>. You can explicitly set the <code class="ph codeph">node_type</code> of individual nodes to <code class="ph codeph">hybrid</code> in the <code class="ph codeph">[automationcontroller group]</code>:</p> 
+        <pre class="pre codeblock language-yaml"><code>[automationcontroller]
+aap_c_1.example.com node_type=hybrid
+aap_c_2.example.com node_type=hybrid
+aap_c_3.example.com node_type=hybrid</code></pre> 
+        <p class="p">Alternatively, you can set the <code class="ph codeph">node_type</code> of all nodes in the <code class="ph codeph">[automationcontroller]</code> group. When you add new nodes to the control plane they are automatically set to hybrid nodes.</p> 
+        <pre class="pre codeblock language-yaml"><code>[automationcontroller]
+aap_c_1.example.com
+aap_c_2.example.com
+aap_c_3.example.com
+
+[automationcontroller:vars]
+node_type=hybrid</code></pre> 
+        <p class="p">If you think that you might add control nodes to your control plane in future, it is better to define a separate group for the hybrid nodes, and set the <code class="ph codeph">node_type</code> for the group:</p> 
+        <pre class="pre codeblock language-yaml"><code>[automationcontroller]
+aap_c_1.example.com
+aap_c_2.example.com
+aap_c_3.example.com
+
+[hybrid_group]
+aap_c_1.example.com
+aap_c_2.example.com
+aap_c_3.example.com
+
+[hybrid_group:vars]
+node_type=hybrid</code></pre> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-single-node-control-plane-single-execution-node"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Single node control plane with single execution node</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">This example inventory file deploys a single-node control plane and establishes a peer relationship to an execution node.</p> 
+       <section class="section"> 
+        <pre class="pre codeblock language-yaml"><code>[automationcontroller]
+aap_c_1.example.com
+
+[automationcontroller:vars]
+node_type=control
+peers=execution_nodes
+
+[execution_nodes]
+aap_e_1.example.com</code></pre> 
+        <p class="p">The following image displays the topology of this mesh network.</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-single-control-node.png" alt="The topology map shows an automation controller group and an execution node. The automation controller group contains a single control node: aap_c_1. The execution node is aap_e_1. The aap_c_1 node is peered to aap_e_1."> 
+        <br> 
+        <p class="p">The <code class="ph codeph">[automationcontroller]</code> stanza defines the control nodes. If you add a new node to the automationcontroller group, it will automatically peer with the <code class="ph codeph">aap_c_1.example.com</code> node.</p> 
+        <p class="p">The <code class="ph codeph">[automationcontroller:vars]</code> stanza sets the node type to <code class="ph codeph">control</code> for all nodes in the control plane and defines how the nodes peer to the execution nodes:</p> 
+        <ul class="ul"> 
+         <li class="li">If you add a new node to the <code class="ph codeph">execution_nodes</code> group, the control plane nodes automatically peer to it.</li> 
+         <li class="li">If you add a new node to the <code class="ph codeph">automationcontroller</code> group, the node type is set to <code class="ph codeph">control</code>.</li> 
+        </ul> 
+        <p class="p">The <code class="ph codeph">[execution_nodes]</code> stanza lists all the execution and hop nodes in the inventory. The default node type is <code class="ph codeph">execution</code>. You can specify the node type for an individual node:</p> 
+        <pre class="pre codeblock language-yaml"><code>[execution_nodes]
+aap_e_1.example.com node_type=execution</code></pre> 
+        <p class="p">Alternatively, you can set the node_type of all execution nodes in the <code class="ph codeph">[execution_nodes]</code> group. When you add new nodes to the group, they are automatically set to execution nodes.</p> 
+        <pre class="pre codeblock language-yaml"><code>[execution_nodes]
+aap_e_1.example.com
+
+[execution_nodes:vars]
+node_type=execution</code></pre> 
+        <p class="p">If you plan to add hop nodes to your inventory in future, it is better to define a separate group for the execution nodes, and set the <code class="ph codeph">node_type</code> for the group:</p> 
+        <pre class="pre codeblock language-yaml"><code>[execution_nodes]
+aap_e_1.example.com
+
+[local_execution_group]
+aap_e_1.example.com
+
+[local_execution_group:vars]
+node_type=execution</code></pre> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="mesh-min-resilient"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Minimum resilient configuration</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">This inventory deploys a control plane with two control nodes and two execution nodes. All control nodes peer automatically. Because each control node connects to every node in the <strong class="ph b">execution_nodes</strong> group, the configuration is resilient.</p> 
+       <section class="section"> 
+        <p class="p">The capacity algorithm determines which control node is chosen when a job is launched. Refer to <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_determination#controller-capacity-determination" title="The automation controller capacity system determines how many jobs can run on an instance given the amount of resources available to the instance and the size of the jobs that are running (referred to as Impact). The algorithm used to determine this is based on the following two things:">Automation controller capacity determination and job impact</a> in Configuring automation execution for more information.</p> 
+        <p class="p">The following inventory file defines this configuration.</p> 
+        <pre class="pre codeblock language-yaml"><code>[automationcontroller]
+aap_c_1.example.com
+aap_c_2.example.com
+
+[automationcontroller:vars]
+node_type=control
+peers=execution_nodes
+
+[execution_nodes]
+aap_e_1.example.com
+aap_e_2.example.com</code></pre> 
+        <p class="p">The <code class="ph codeph">[automationcontroller]</code> stanza defines the control nodes. All nodes in the control plane are peered to one another. If you add a new node to the <code class="ph codeph">automationcontroller</code> group, it will automatically peer with the original nodes.</p> 
+        <p class="p">The <code class="ph codeph">[automationcontroller:vars]</code> stanza sets the node type to <code class="ph codeph">control</code> for all nodes in the control plane and defines how the nodes peer to the execution nodes:</p> 
+        <ul class="ul"> 
+         <li class="li">If you add a new node to the <code class="ph codeph">execution_nodes</code> group, the control plane nodes automatically peer to it.</li> 
+         <li class="li">If you add a new node to the <code class="ph codeph">automationcontroller</code> group, the node type is set to <code class="ph codeph">control</code>.</li> 
+        </ul> 
+        <p class="p">The following image displays the topology of this mesh network.</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-resilient-config.png" alt="The topology map of the minimum resilient mesh configuration consists of an automation controller group and two execution nodes. The automation controller group consists of two control nodes: aap_c_1 and aap_c_2. The execution nodes are aap_e_1 and aap_e_2. The aap_c_1 node is peered to aap_c_2. Every control node is peered to every execution node."> 
+        <br> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="mesh-segregated-execution"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Segregated local and remote execution configuration</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">This configuration adds a hop node and a remote execution node to the resilient configuration. The remote execution node is reachable from the hop node.</p> 
+       <section class="section"> 
+        <p class="p">You can use this setup if you are setting up execution nodes in a remote location, or if you need to run automation in a DMZ network.</p> 
+        <pre class="pre codeblock language-yaml"><code>[automationcontroller]
+aap_c_1.example.com
+aap_c_2.example.com
+
+[automationcontroller:vars]
+node_type=control
+peers=instance_group_local
+
+[execution_nodes]
+aap_e_1.example.com
+aap_e_2.example.com
+aap_h_1.example.com node_type=hop
+aap_e_3.example.com
+
+[instance_group_local]
+aap_e_1.example.com
+aap_e_2.example.com
+
+[hop]
+aap_h_1.example.com
+
+[hop:vars]
+peers=automationcontroller
+
+[instance_group_remote]
+aap_e_3.example.com
+
+[instance_group_remote:vars]
+peers=hop</code></pre> 
+        <p class="p">The following image displays the topology of this mesh network.</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-segegrated-execution.png" alt="The topology map of the configuration consists of an automation controller group, a local execution group, a hop node group, and a remote execution node group. The automation controller group consists of two control nodes: aap_c_1 and aap_c_2. The local execution nodes are aap_e_1 and aap_e_2. Every control node is peered to every local execution node. The hop node group contains one hop node, aap_h_1. It is peered to the controller group. The remote execution node group contains one execution node, aap_e_3. It is peered to the hop node group."> 
+        <br> 
+        <p class="p">The <code class="ph codeph">[automationcontroller:vars]</code> stanza sets the node types for all nodes in the control plane and defines how the control nodes peer to the local execution nodes:</p> 
+        <ul class="ul"> 
+         <li class="li">All nodes in the control plane are automatically peered to one another.</li> 
+         <li class="li">All nodes in the control plane are peered with all local execution nodes.</li> 
+        </ul> 
+        <p class="p">If the name of a group of nodes begins with <code class="ph codeph">instance_group_</code>, the installer recognises it as an instance group and adds it to the Ansible Automation Platform user interface.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="mesh-multi-hop-execution"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Multi-hopped execution node</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">In this configuration, resilient controller nodes are peered with resilient local execution nodes. Resilient local hop nodes are peered with the controller nodes. A remote execution node and a remote hop node are peered with the local hop nodes.</p> 
+       <section class="section"> 
+        <p class="p">You can use this setup if you need to run automation in a DMZ network from a remote network.</p> 
+        <pre class="pre codeblock language-yaml"><code>[automationcontroller]
+aap_c_1.example.com
+aap_c_2.example.com
+aap_c_3.example.com
+
+[automationcontroller:vars]
+node_type=control
+peers=instance_group_local
+
+[execution_nodes]
+aap_e_1.example.com
+aap_e_2.example.com
+aap_e_3.example.com
+aap_e_4.example.com
+aap_h_1.example.com node_type=hop
+aap_h_2.example.com node_type=hop
+aap_h_3.example.com node_type=hop
+
+[instance_group_local]
+aap_e_1.example.com
+aap_e_2.example.com
+
+[instance_group_remote]
+aap_e_3.example.com
+
+[instance_group_remote:vars]
+peers=local_hop
+
+[instance_group_multi_hop_remote]
+aap_e_4.example.com
+
+[instance_group_multi_hop_remote:vars]
+peers=remote_multi_hop
+
+[local_hop]
+aap_h_1.example.com
+aap_h_2.example.com
+
+[local_hop:vars]
+peers=automationcontroller
+
+[remote_multi_hop]
+aap_h_3 peers=local_hop</code></pre> 
+        <p class="p">The following image displays the topology of this mesh network.</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-multi-hop.png" alt="The topology map of the configuration consists of an automation controller group, a local execution group, a hop node group, and a remote execution node group. The automation controller group consists of three control nodes: aap_c_1, aap_c_2, and aap_c_3. The local execution nodes are aap_e_1 and aap_e_2. Every control node is peered to every local execution node. The hop node group contains two hop nodes, aap_h_1 and aap_h_2. It is peered to the controller group. The remote execution node group contains one execution node, aap_e_3. It is peered to the hop node group. A remote hop node group, consisting of node aap_h_3, is peered with the local hop node group. An execution node, aap_e_4, is peered with the remote hop group"> 
+        <br> 
+        <p class="p">The <code class="ph codeph">[automationcontroller:vars]</code> stanza sets the node types for all nodes in the control plane and defines how the control nodes peer to the local execution nodes:</p> 
+        <ul class="ul"> 
+         <li class="li">All nodes in the control plane are automatically peered to one another.</li> 
+         <li class="li">All nodes in the control plane are peered with all local execution nodes.</li> 
+        </ul> 
+        <p class="p">The <code class="ph codeph">[local_hop:vars]</code> stanza peers all nodes in the <code class="ph codeph">[local_hop]</code> group with all the control nodes.</p> 
+        <p class="p">If the name of a group of nodes begins with <code class="ph codeph">instance_group_</code>, the installer recognises it as an instance group and adds it to the Ansible Automation Platform user interface.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title7" id="mesh-one-way-commuication"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Outbound only connections to controller nodes</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">This example inventory file deploys a control plane consisting of two control nodes, and several execution nodes. Only outbound connections are allowed to the controller nodes All nodes in the 'execution_nodes' group are peered with all nodes in the controller plane.</p> 
+       <section class="section"> 
+        <pre class="pre codeblock language-yaml"><code>[automationcontroller]
+controller-[1:2].example.com
+
+[execution_nodes]
+execution-[1:5].example.com
+
+[execution_nodes:vars]
+# connection is established *from* the execution nodes *to* the automationcontroller
+peers=automationcontroller</code></pre> 
+        <p class="p">The following image displays the topology of this mesh network.</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mesh-one-way-communication.png" alt="The topology map consists of an automation controller group, and local execution group. The automation controller group consists of two control nodes: aap_c_1, and aap_c_2. The local execution nodes are aap-e-1, aap-e-2, aap-e-3, aap-e-4, and aap-e-5. Every execution node is peered to every control node in an outgoing connection."> 
+        <br> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

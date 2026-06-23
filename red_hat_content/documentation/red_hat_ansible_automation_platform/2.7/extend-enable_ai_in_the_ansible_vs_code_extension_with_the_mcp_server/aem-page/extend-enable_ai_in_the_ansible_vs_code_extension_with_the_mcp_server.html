@@ -1,0 +1,91 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="GUID-f00e524b-b295-4b67-9d46-a80ce419d584"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Enable AI in the Ansible VS Code extension with the MCP server</h1> 
+    <div class="body taskbody"> 
+     <p class="shortdesc">Enable the AI assistant through the MCP server for Red Hat Ansible Automation Platform so that you can create new content with the Ansible VS Code extension.</p> 
+     <section class="section prereq" id="GUID-f00e524b-b295-4b67-9d46-a80ce419d584__prereq_1"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Before you begin</h2> 
+      </div> 
+      <ul class="ul" id="GUID-f00e524b-b295-4b67-9d46-a80ce419d584__ul_1"> 
+       <li class="li">VS Code is installed and running.</li> 
+       <li class="li">The GitHub Copilot extension is installed, running, and enabled in Agent Mode.</li> 
+       <li class="li">The Ansible VS Code extension is installed.</li> 
+      </ul> 
+     </section> 
+     <section class="section context" id="GUID-f00e524b-b295-4b67-9d46-a80ce419d584__context_1"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">About this task</h2> 
+      </div> 
+      <p class="p">As an automation developer, you can enable the MCP (Model context protocol) server through the Ansible VS Code extension. Doing so empowers Ansible devtools to give customized suggestions tuned specifically to your working environment.</p> 
+      <p class="p">You can enable the MCP server for Red Hat Ansible Automation Platform through the <strong class="ph b">command palette </strong>or the <strong class="ph b">Settings menu </strong>in VS Code.</p> 
+     </section> 
+     <section> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Procedure</h2> 
+      </div> 
+      <div class="li stepsection">
+        To enable the server through the command palette: 
+      </div> 
+      <ol class="ol steps"> 
+       <li class="li step"> <span class="ph cmd">In VS Code, click into the command palette at the top of the window, or type <code class="ph codeph">Ctrl+Shift+P</code> or <code class="ph codeph">Cmd+Shift+P</code>.</span> </li> 
+       <li class="li step"> <span class="ph cmd">Type and select <strong class="ph b">Ansible: Enable Ansible Development Tools MCP Server</strong>. A message confirms that you have successfully enabled the MCP server and that it is now available for AI assistants that support MCP.</span> </li> 
+       <li class="li step"> <span class="ph cmd">In the command palette, find and select <strong class="ph b">MCP: List servers</strong>. Find the entry for <strong class="ph b">Ansible Development Tools MCP Server</strong>.</span> </li> 
+       <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Ansible Development Tools MCP Server</strong>to start the server. Verify that the server has started by looking for <code class="ph codeph">Discovered 10 tools</code> in your VS Code output window. </span> </li> 
+      </ol> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links"> 
+     <ul class="ullinks"> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-set_up_your_development_environment_to_use_the_mcp_server">Set up your development environment to use the MCP server</a></strong><br>Use the Ansible AI assistant to query your environment to understand what tools you have installed, and to install <code class="ph codeph">ansible-dev-tools</code> and set up your development environment.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-install_ansible_development_tools_with_the_ai_assistant">Install Ansible Development Tools with the AI assistant</a></strong><br>If you do not have Ansible Development Tools installed, you can instruct the assistant to install them.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-configure_ansible_devtools_and_the_development_environment">Configure Ansible DevTools and the development environment</a></strong><br>After installing ADT, use the MCP server for Red Hat Ansible Automation Platform to configure your workspace by setting up a virtual environment, installing specific Python versions, and adding necessary Ansible collections.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-manage_your_ansible_dev_environment">Manage your Ansible dev environment</a></strong><br>Use the AI assistant to help you understand what is happening in your own environment without having to leave the editor.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-scaffold_an_ansible_project_with_the_ai_assistant">Scaffold an Ansible project with the AI assistant</a></strong><br>Use the MCP server for Red Hat Ansible Automation Platform through the Ansible VS Code extension to generate a new project structure, and to create and scaffold new content such as playbooks or collections.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-validating_and_debugging_with_the_ai_assistant">Validate and debug with the AI assistant</a></strong><br>Use the AI assistant to validate playbooks in real time, identify issues before execution, and automatically apply fixes.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-create_and_validate_an_execution_environment_with_the_assistant">Create and validate an execution environment with the assistant</a></strong><br>To create an execution environment, first generate a definition file that defines the environment.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-run_playbooks_with_ansible_navigator_using_the_assistant">Run playbooks with ansible-navigator using the assistant</a></strong><br>After you have built a suitable execution environment, you can ask the assistant to generate the correct <code class="ph codeph">ansible-navigator</code> command to execute your playbook in that particular environment.</li> 
+     </ul> 
+    </nav> 
+    <article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_1"> 
+     <h2 class="title topictitle2" id="ariaid-title2">Enable the MCP server through the settings menu</h2> 
+     <div class="body taskbody"> 
+      <p class="shortdesc">Take the following steps to enable the MCP server through the VS Code settings menu.</p> 
+      <section id="task_1__steps_1"> 
+       <div class="tasklabel"> 
+        <h3 class="sectiontitle tasklabel">Procedure</h3> 
+       </div> 
+       <ol class="ol steps" id="task_1__steps_1"> 
+        <li class="li step"> <span class="ph cmd">In VS Code, select the <strong class="ph b">Extensions</strong> icon <img class="image" id="task_1__image_4" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/vscode-extensions-icon.png" alt="Extensions"> in the left menu.</span> </li> 
+        <li class="li step"> <span class="ph cmd">Find the Ansible extension and click the <strong class="ph b">Settings</strong> wheel <img class="image" id="task_1__image_2" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/settings-icon-ansible-vscode-extension.png" alt="settings wheel">.</span> </li> 
+        <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Settings</strong> from the menu that appears.</span> </li> 
+        <li class="li step"> <span class="ph cmd">In the Settings window, select <span class="ph menucascade"><span class="ph uicontrol">Extensions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Ansible</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">MCP Server</span></span>.</span> </li> 
+        <li class="li step"> <span class="ph cmd">Click the checkbox next to <strong class="ph b">Enable the Ansible Development Tools MCP server for AI integration</strong>. A message confirms that the MCP server is enabled.</span> </li> 
+        <li class="li step"> <span class="ph cmd">Find and select <strong class="ph b">MCP: List servers</strong>in the command palette.</span> </li> 
+        <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Ansible Development Tools MCP Server</strong> to start the server. Verify that the server has started by looking for <code class="ph codeph">Discovered 10 tools</code> in your VS Code output window.</span> </li> 
+       </ol> 
+      </section> 
+     </div> 
+     <article class="topic task nested2" aria-labelledby="ariaid-title3" id="task_2"> 
+      <h3 class="title topictitle3" id="ariaid-title3">Disable the server</h3> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can disable the MCP server from the VS Code command palette or the settings menu.</p> 
+       <section id="task_2__steps-unordered_1"> 
+        <div class="tasklabel"> 
+         <h4 class="sectiontitle tasklabel">Procedure</h4> 
+        </div> 
+        <ul class="ul steps-unordered" id="task_2__steps-unordered_1"> 
+         <li class="li step"> <span class="ph cmd">To disable the server from the command palette, find and select <strong class="ph b">Disable Ansible Development Tools MCP Server</strong>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">To disable the server from the settings menu, click the <strong class="ph b">Settings</strong> wheel <img class="image" id="task_2__image_3" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/settings-icon-ansible-vscode-extension.png" alt="settings wheel">in the Ansible VS Code extension, navigate to <span class="ph menucascade"><span class="ph uicontrol">Extensions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Ansible</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">MCP Server</span></span> &nbsp;and un-check the checkbox next to <strong class="ph b">Enable the Ansible MCP server for AI integration</strong>.</span> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

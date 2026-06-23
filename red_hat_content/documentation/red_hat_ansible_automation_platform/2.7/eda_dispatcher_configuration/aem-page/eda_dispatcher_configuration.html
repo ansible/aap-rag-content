@@ -1,0 +1,81 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Dispatcherd configuration</h1> 
+    <div class="body refbody">
+     <p class="shortdesc"><code class="ph codeph">Dispatcherd</code> uses PostgreSQL's pg_notify as its message transport to coordinate background task processing for Event-Driven Ansible controller. The following environment variables control how <code class="ph codeph">dispatcherd</code> connects to PostgreSQL, identifies worker queues, and manages health checks.</p> 
+     <section class="section" id="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__section_1"> 
+      <p class="p">For single-node deployments, the default values are sufficient and no additional configuration is required. <code class="ph codeph">Dispatcherd</code> automatically connects to the same PostgreSQL instance used by Event-Driven Ansible controller.</p> 
+      <p class="p">For multi-node deployments, you must configure queue names to ensure that each node runs its own activation workers and that workloads are distributed across nodes. See the <strong class="ph b">Multi-node deployments</strong> for details.</p> 
+      <table class="table" id="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1">
+       <caption>
+        <span class="table--title-label">Table 1. </span><span class="title">Dispatcherd environment variables</span>
+       </caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__1">Variable</th> 
+         <th class="entry" id="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__2">Description</th> 
+         <th class="entry" id="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__3">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__1"><code class="ph codeph">EDA_PG_NOTIFY_DSN_SERVER</code></td> 
+         <td class="entry" headers="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__2">The PostgreSQL connection string for the pg_notify broker. Must point to the same PostgreSQL instance used by the Event-Driven Ansible controller.</td> 
+         <td class="entry" headers="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__3">Application database connection</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__1"><code class="ph codeph">EDA_RULEBOOK_QUEUE_NAME</code></td> 
+         <td class="entry" headers="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__2">The base queue name for the activation worker on the current node.</td> 
+         <td class="entry" headers="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__3"><code class="ph codeph">activation</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__1"><code class="ph codeph">EDA_RULEBOOK_WORKER_QUEUES</code></td> 
+         <td class="entry" headers="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__2">A comma-separated list of all activation worker queue names across the deployment. Required for multi-node deployments (for example, activation-node1, activation-node2).</td> 
+         <td class="entry" headers="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__3">Empty (single-node)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__1"><code class="ph codeph">EDA_DISPATCHERD_QUEUE_HEALTHCHECK_TIMEOUT</code></td> 
+         <td class="entry" headers="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__2">The amount of time, in seconds, to wait when checking worker health.</td> 
+         <td class="entry" headers="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__table_1__entry__3"><code class="ph codeph">3</code></td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__section_2">
+      <h2 class="title sectiontitle">Worker services</h2> 
+      <p class="p">Each Event-Driven Ansible controller deployment requires at least one default worker and one activation worker. Use the following commands to initialize these services:</p> 
+      <pre class="pre codeblock"><code>aap-eda-manage dispatcherd --worker-class DefaultWorker 
+aap-eda-manage dispatcherd --worker-class ActivationWorker</code></pre> 
+     </section> 
+     <section class="section" id="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__section_3">
+      <h2 class="title sectiontitle">Multi-node deployments</h2> 
+      <p class="p">In multi-node deployments, each node runs its own activation workers with a unique queue name. You must set <code class="ph codeph">EDA_RULEBOOK_QUEUE_NAME</code> to a node-specific value on each node and set <code class="ph codeph">EDA_RULEBOOK_WORKER_QUEUES</code> to the full list of all node queue names across the deployment. This ensures the Event-Driven Ansible controller can distribute activation workloads and route operations to the correct node.</p> 
+     </section> 
+     <section class="section" id="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__section_4">
+      <h2 class="title sectiontitle">Deprecated Redis variables</h2> 
+      <div class="p">
+       The following Redis-related variables are no longer used by the Event-Driven Ansible controller in Ansible Automation Platform 2.7. You can safely remove these from your inventory files: 
+       <ul class="ul" id="GUID-dc6d8118-1d26-4a09-916b-446927b6aa4e__ul_1"> 
+        <li class="li"><code class="ph codeph">EDA_MQ_HOST</code></li> 
+        <li class="li"><code class="ph codeph">EDA_MQ_PORT</code></li> 
+        <li class="li"><code class="ph codeph">EDA_MQ_USER</code></li> 
+        <li class="li"><code class="ph codeph">EDA_MQ_USER_PASSWORD</code></li> 
+        <li class="li"><code class="ph codeph">EDA_MQ_CLIENT_CERT_PATH</code></li> 
+        <li class="li"><code class="ph codeph">EDA_MQ_CLIENT_KEY_PATH</code></li> 
+        <li class="li"><code class="ph codeph">EDA_MQ_CLIENT_CACERT_PATH</code></li> 
+       </ul> 
+      </div> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

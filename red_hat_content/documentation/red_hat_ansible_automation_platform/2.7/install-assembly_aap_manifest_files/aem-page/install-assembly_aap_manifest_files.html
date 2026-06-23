@@ -1,0 +1,99 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-aap-obtain-manifest-files"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Obtain a manifest file</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">You can obtain a subscription manifest in the <strong class="ph b">Subscription Allocations</strong> section of Red Hat Subscription Management.</p> 
+      <p class="p">After you obtain a subscription allocation, you can download its manifest file and upload it to activate Ansible Automation Platform.</p> 
+      <p class="p">To begin, log in to the <strong class="ph b">Red Hat Customer Portal</strong> by using your administrator user account and follow the procedures listed.</p> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://access.redhat.com/" target="_blank" rel="external noopener">Red Hat Customer Portal</a></li>
+        <li class="linklist"><a class="link" href="https://access.redhat.com/management/subscription_allocations/" target="_blank" rel="external noopener">Subscription Allocations</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-create-subscription-allocation"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create a subscription allocation</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">With a new subscription allocation you can set aside subscriptions and entitlements for a system that is currently offline or air-gapped. This is necessary before you download its manifest and upload it to Ansible Automation Platform.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the <a class="xref" href="https://access.redhat.com/management/subscription_allocations/" target="_blank" rel="external noopener">Subscription Allocations</a> page, click <span class="ph uicontrol button">New Subscription Allocation</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Enter a name for the allocation so that you can find it later.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Type: Satellite 6.16</strong> as the management application.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-add-merge-subscriptions"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Add subscriptions to a subscription allocation</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After you create an allocation, you can add the subscriptions you need for Ansible Automation Platform to run properly. This is necessary before you download the manifest and add it to Ansible Automation Platform.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the <a class="xref" href="https://access.redhat.com/management/subscription_allocations/" target="_blank" rel="external noopener">Subscription Allocations</a> page, click the name of the <strong class="ph b">Subscription Allocation</strong> to which you want to add a subscription.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click the <strong class="ph b">Subscriptions</strong> tab.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Add Subscriptions</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Enter the number of Ansible Automation Platform Entitlements you plan to add.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Submit</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-aap-generate-manifest-file"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Download a manifest file</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After you create an allocation with the appropriate subscriptions on it, you can download the manifest file from Red Hat Subscription Management.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the <a class="xref" href="https://access.redhat.com/management/subscription_allocations/" target="_blank" rel="external noopener">Subscription Allocations</a> page, click the name of the <strong class="ph b">Subscription Allocation</strong> to which you want to generate a manifest.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click the <strong class="ph b">Subscriptions</strong> tab.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Export Manifest</span> to download the manifest file.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">This downloads a file <code class="ph codeph">manifest_&lt;allocation name&gt;_&lt;date&gt;.zip</code> to your default downloads folder.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,7 @@
+# Ansible components
+## Ansible development tools
+
+Ansible development tools are an integrated and supported suite of capabilities that help IT practitioners at any skill level generate automation content faster than they might with manual coding.
+
+Ansible development tools can help you create, test, and deploy automation content like playbooks, execution environments, and collections quickly and accurately using recommended practices.
+

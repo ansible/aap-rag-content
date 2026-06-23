@@ -1,0 +1,71 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="controller-projects"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Logically group playbooks with projects</h1> 
+    <div class="body conbody"> 
+     <p class="shortdesc">A project is a logical collection of Ansible playbooks, represented in automation controller. </p> 
+     <p class="p">You can manage playbooks and playbook directories different ways:</p> 
+     <ul class="ul"> 
+      <li class="li">By placing them manually under the Project Base Path on your automation controller server.</li> 
+      <li class="li">By placing your playbooks into a source code management (SCM) system supported by the automation controller.</li> 
+     </ul> 
+     <div class="div"> 
+      <p class="p">These include Git, Subversion, Mercurial and Red Hat Lightspeed.</p> 
+      <p class="p">For more information on creating a Red Hat Lightspeed project, see Setting up Red Hat Lightspeed Remediations.</p> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The Project Base Path is <code class="ph codeph">/var/lib/awx/projects</code>. However, this can be modified by the system administrator. It is configured in <code class="ph codeph">/etc/tower/conf.d/custom.py</code>.</p> 
+        <p class="p">Use caution when editing this file, as incorrect settings can disable your installation.</p> 
+       </div> 
+      </div> 
+      <p class="p">The <strong class="ph b">Projects</strong> page displays the list of the projects that are currently available.</p> 
+      <p class="p">A <strong class="ph b">Demo Project</strong> is provided that you can work with initially.</p> 
+      <p class="p">For each project listed, you can get the latest SCM revision <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/sync.png" width="15" alt="Refresh">, edit <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit"> the project, or duplicate <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/copy.png" width="15" alt="Copy"> the project attributes, using the icons next to each project.</p> 
+      <p class="p">Projects can be updated while a related job is running.</p> 
+      <p class="p">In cases where you have a large project (around 10 GB), disk space on <code class="ph codeph">/tmp</code> may be an issue.</p> 
+      <p class="p"><strong class="ph b">Status</strong> indicates the state of the project and may be one of the following (note that you can also filter your view by specific status types):</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Pending</strong> - The source control update has been created, but not queued or started yet. Any job (not just source control updates) stays in pending until it is ready to be run by the system. Possible reasons for it not being ready are: 
+        <ul class="ul"> 
+         <li class="li">It has dependencies that are currently running so it has to wait until they are done.</li> 
+         <li class="li">There is not enough capacity to run in the locations it is configured to.</li> 
+        </ul> </li> 
+       <li class="li"><strong class="ph b">Waiting</strong> - The source control update is in the queue waiting to be executed.</li> 
+       <li class="li"><strong class="ph b">Running</strong> - The source control update is currently in progress.</li> 
+       <li class="li"><strong class="ph b">Successful</strong> - The last source control update for this project succeeded.</li> 
+       <li class="li"><strong class="ph b">Failed</strong> - The last source control update for this project failed.</li> 
+       <li class="li"><strong class="ph b">Error</strong> - The last source control update job failed to run at all.</li> 
+       <li class="li"><strong class="ph b">Canceled</strong> - The last source control update for the project was canceled.</li> 
+       <li class="li"><strong class="ph b">Never updated</strong> - The project is configured for source control, but has never been updated.</li> 
+       <li class="li"><strong class="ph b">OK</strong> - The project is not configured for source control, and is correctly in place.</li> 
+       <li class="li"><strong class="ph b">Missing</strong> - Projects are absent from the project base path of <code class="ph codeph">/var/lib/awx/projects</code>. This is applicable for manual or source control managed projects.</li> 
+      </ul> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Projects of credential type <code class="ph codeph">Manual</code> cannot update or schedule source control-based actions without being reconfigured as an SCM type credential.</p> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+    <nav role="navigation" class="related-links"> 
+     <ul class="ullinks"> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_adding_a_project">Add a new project</a></strong><br>You can create a logical collection of playbooks, called projects in automation controller.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_collections_support#proc-projects-manage-playbooks-manually">Manage playbooks manually</a></strong><br>Manage Ansible playbooks and directories directly on the automation controller filesystem. This approach helps ensure proper file ownership and permissions when you cannot use source control.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#ref-projects-manage-playbooks-with-source-control">Configure playbooks to use source control management (SCM) systems</a></strong><br>Choose one of the following options when managing playbooks by using source control:</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_collections_support#ref-projects-collections-support">Configure collections from source management to run in a project</a></strong><br>Automation controller supports project-specific Ansible collections in job runs.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_work_with_permissions#ref-work-with-permissions">Configure project permissions</a></strong><br>The set of permissions assigned to a project (role-based access controls) that provide the ability to read, change, and administer projects, inventories, job templates, and other elements are privileges.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_project_signing#assembly-controller-project-signing">Enforce project integrity with signing and verification</a></strong><br>Use project signing and verification in your project directory to sign files. You can then verify whether or not that content has changed in any way, or files have been added to, or removed from the project unexpectedly.</li> 
+     </ul> 
+     <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+      <br> 
+      <ul class="linklist"> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_ug_controller_setting_up_insights#controller-setting-up-insights" title="Automation controller supports integration with Red Hat Lightspeed.">Setting up Red Hat Lightspeed Remediations</a></li> 
+      </ul> 
+     </div> 
+    </nav> 
+   </article> 
+  </main>  
+ </body>
+</html>

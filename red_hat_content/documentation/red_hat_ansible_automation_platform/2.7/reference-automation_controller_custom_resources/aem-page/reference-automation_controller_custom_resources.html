@@ -1,0 +1,437 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-controller-crds"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Automation controller custom resources</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The automation controller operator provides custom resources for deploying, configuring, and protecting a standalone automation controller instance on OpenShift Container Platform.</p> 
+      <p class="p">The <code class="ph codeph">AutomationController</code> custom resource deploys and configures automation controller independently of the full Ansible Automation Platform deployment. Use this custom resource when you need to manage automation controller as a standalone component rather than through the <code class="ph codeph">AnsibleAutomationPlatform</code> resource.</p> 
+      <p class="p">The <code class="ph codeph">AutomationControllerMeshIngress</code> custom resource creates a mesh ingress hop node inside the OpenShift cluster. This enables remote execution nodes outside the cluster to connect to automation controller through the automation mesh network.</p> 
+      <p class="p">The <code class="ph codeph">AutomationControllerBackup</code> and <code class="ph codeph">AutomationControllerRestore</code> custom resources manage data protection for standalone automation controller deployments. A backup captures the controller database and configuration. A restore recreates the controller from a previously created backup.</p> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="AutomationControllerAndMeshIngress"> 
+      <h2 class="title topictitle2" id="ariaid-title2">AutomationController and AutomationControllerMeshIngress [automationcontroller.ansible.com]</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The <code class="ph codeph">AutomationController</code> custom resource deploys and configures a standalone automation controller instance. The <code class="ph codeph">AutomationControllerMeshIngress</code> custom resource creates a mesh ingress hop node inside the OpenShift cluster for automation mesh connectivity.</p> 
+       <section class="section" id="AutomationControllerAndMeshIngress__controller-description">
+        <h3 class="title sectiontitle">AutomationController</h3> 
+        <table class="table" id="AutomationControllerAndMeshIngress__controller-desc-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Group</strong></td> 
+           <td class="entry"><code class="ph codeph">automationcontroller.ansible.com</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Version</strong></td> 
+           <td class="entry"><code class="ph codeph">v1beta1</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Kind</strong></td> 
+           <td class="entry"><code class="ph codeph">AutomationController</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Scope</strong></td> 
+           <td class="entry">Namespaced</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationControllerAndMeshIngress__controller-spec">
+        <h3 class="title sectiontitle">AutomationController spec</h3> 
+        <p class="p">The <code class="ph codeph">spec</code> fields for the <code class="ph codeph">AutomationController</code> custom resource.</p> 
+        <table class="table" id="AutomationControllerAndMeshIngress__controller-spec-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="AutomationControllerAndMeshIngress__controller-spec-table__entry__1">Field</th> 
+           <th class="entry" id="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">Type</th> 
+           <th class="entry" id="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Description</th> 
+           <th class="entry" id="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">image_pull_policy</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Image pull policy for automation controller pods. Options: <code class="ph codeph">Always</code>, <code class="ph codeph">Never</code>, <code class="ph codeph">IfNotPresent</code>.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4"><code class="ph codeph">IfNotPresent</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">postgres_configuration_secret</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Name of a Kubernetes secret containing external PostgreSQL connection details for the automation controller database.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">route_tls_termination_mechanism</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">TLS termination mechanism for the automation controller route.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">uwsgi_processes</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">Integer</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Number of uWSGI worker processes for the web pod.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4"><code class="ph codeph">2</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">termination_grace_period_seconds</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">Integer</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Grace period in seconds for running jobs to complete before the pod terminates.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">ee_extra_env</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Extra environment variables to pass to execution environment pods.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">extra_settings</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">Array</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">List of additional automation controller settings as name-value pairs.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">task_affinity</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Kubernetes pod affinity rules for the task pod.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">web_affinity</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Kubernetes pod affinity rules for the web pod.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">task_resource_requirements</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Kubernetes resource requests and limits for the task pod.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">cpu: 100m/1000m, memory: 150Mi/1200Mi</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">web_resource_requirements</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Kubernetes resource requests and limits for the web pod.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">cpu: 100m/200m, memory: 200Mi/1600Mi</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">ee_resource_requirements</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Kubernetes resource requests and limits for execution environment pods.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">cpu: 100m/1000m, memory: 64Mi/500Mi</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">redis_resource_requirements</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Kubernetes resource requests and limits for the automation controller Redis pod.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">cpu: 50m/100m, memory: 64Mi/200Mi</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">rsyslog_resource_requirements</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Kubernetes resource requests and limits for the rsyslog pod.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">cpu: 100m/500m, memory: 128Mi/250Mi</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__1"><code class="ph codeph">init_container_resource_requirements</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__3">Kubernetes resource requests and limits for init containers.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__controller-spec-table__entry__4">cpu: 100m/500m, memory: 128Mi/200Mi</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationControllerAndMeshIngress__controller-example">
+        <h3 class="title sectiontitle">Example AutomationController custom resource</h3> 
+        <pre class="pre codeblock"><code>apiVersion: automationcontroller.ansible.com/v1beta1
+kind: AutomationController
+metadata:
+  name: my-controller
+spec:
+  uwsgi_processes: 4
+  task_resource_requirements:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 2000m
+      memory: 2Gi
+  web_resource_requirements:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 2Gi</code></pre> 
+       </section> 
+       <section class="section" id="AutomationControllerAndMeshIngress__meshingress-description">
+        <h3 class="title sectiontitle">AutomationControllerMeshIngress</h3> 
+        <table class="table" id="AutomationControllerAndMeshIngress__meshingress-desc-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Group</strong></td> 
+           <td class="entry"><code class="ph codeph">automationcontroller.ansible.com</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Version</strong></td> 
+           <td class="entry"><code class="ph codeph">v1alpha1</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Kind</strong></td> 
+           <td class="entry"><code class="ph codeph">AutomationControllerMeshIngress</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Scope</strong></td> 
+           <td class="entry">Namespaced</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationControllerAndMeshIngress__meshingress-spec">
+        <h3 class="title sectiontitle">AutomationControllerMeshIngress spec</h3> 
+        <p class="p">The <code class="ph codeph">spec</code> fields for the <code class="ph codeph">AutomationControllerMeshIngress</code> custom resource.</p> 
+        <table class="table" id="AutomationControllerAndMeshIngress__meshingress-spec-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="AutomationControllerAndMeshIngress__meshingress-spec-table__entry__1">Field</th> 
+           <th class="entry" id="AutomationControllerAndMeshIngress__meshingress-spec-table__entry__2">Type</th> 
+           <th class="entry" id="AutomationControllerAndMeshIngress__meshingress-spec-table__entry__3">Description</th> 
+           <th class="entry" id="AutomationControllerAndMeshIngress__meshingress-spec-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__meshingress-spec-table__entry__1"><code class="ph codeph">deployment_name</code></td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__meshingress-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__meshingress-spec-table__entry__3">Name of the <code class="ph codeph">AutomationController</code> instance to attach the mesh ingress to. Required. Must be in the same namespace as the mesh ingress resource.</td> 
+           <td class="entry" headers="AutomationControllerAndMeshIngress__meshingress-spec-table__entry__4">-</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationControllerAndMeshIngress__meshingress-example">
+        <h3 class="title sectiontitle">Example AutomationControllerMeshIngress custom resource</h3> 
+        <pre class="pre codeblock"><code>apiVersion: automationcontroller.ansible.com/v1alpha1
+kind: AutomationControllerMeshIngress
+metadata:
+  name: my-mesh-ingress
+  namespace: aap
+spec:
+  deployment_name: my-controller</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="AutomationControllerBackupRestore"> 
+      <h2 class="title topictitle2" id="ariaid-title3">AutomationControllerBackup and AutomationControllerRestore [automationcontroller.ansible.com]</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The <code class="ph codeph">AutomationControllerBackup</code> and <code class="ph codeph">AutomationControllerRestore</code> custom resources manage backup and restore operations for standalone automation controller deployments.</p> 
+       <section class="section" id="AutomationControllerBackupRestore__backup-description">
+        <h3 class="title sectiontitle">AutomationControllerBackup</h3> 
+        <table class="table" id="AutomationControllerBackupRestore__backup-desc-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Group</strong></td> 
+           <td class="entry"><code class="ph codeph">automationcontroller.ansible.com</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Version</strong></td> 
+           <td class="entry"><code class="ph codeph">v1beta1</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Kind</strong></td> 
+           <td class="entry"><code class="ph codeph">AutomationControllerBackup</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Scope</strong></td> 
+           <td class="entry">Namespaced</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationControllerBackupRestore__backup-spec">
+        <h3 class="title sectiontitle">AutomationControllerBackup spec</h3> 
+        <table class="table" id="AutomationControllerBackupRestore__backup-spec-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="AutomationControllerBackupRestore__backup-spec-table__entry__1">Field</th> 
+           <th class="entry" id="AutomationControllerBackupRestore__backup-spec-table__entry__2">Type</th> 
+           <th class="entry" id="AutomationControllerBackupRestore__backup-spec-table__entry__3">Description</th> 
+           <th class="entry" id="AutomationControllerBackupRestore__backup-spec-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">deployment_name</code></td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__3">Name of the <code class="ph codeph">AutomationController</code> instance to back up. Required.</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">no_log</code></td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__2">Boolean</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__3">Suppress logging of sensitive data during the backup process.</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__4"><code class="ph codeph">true</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">backup_pvc</code></td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__3">Name of the persistent volume claim (PVC) to use for backup storage.</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">backup_storage_class</code></td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__3">Kubernetes storage class for the backup PVC.</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">backup_storage_requirements</code></td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__3">Storage size for the backup PVC, for example <code class="ph codeph">15Gi</code>.</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">create_backup_pvc</code></td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__2">Boolean</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__3">Set to <code class="ph codeph">true</code> to have the operator create the PVC automatically.</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__backup-spec-table__entry__4"><code class="ph codeph">false</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationControllerBackupRestore__backup-example">
+        <h3 class="title sectiontitle">Example AutomationControllerBackup custom resource</h3> 
+        <pre class="pre codeblock"><code>apiVersion: automationcontroller.ansible.com/v1beta1
+kind: AutomationControllerBackup
+metadata:
+  name: controller-backup
+spec:
+  deployment_name: my-controller
+  backup_pvc: controller-backup-pvc
+  backup_storage_requirements: 15Gi
+  create_backup_pvc: true</code></pre> 
+       </section> 
+       <section class="section" id="AutomationControllerBackupRestore__restore-description">
+        <h3 class="title sectiontitle">AutomationControllerRestore</h3> 
+        <table class="table" id="AutomationControllerBackupRestore__restore-desc-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Group</strong></td> 
+           <td class="entry"><code class="ph codeph">automationcontroller.ansible.com</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Version</strong></td> 
+           <td class="entry"><code class="ph codeph">v1beta1</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Kind</strong></td> 
+           <td class="entry"><code class="ph codeph">AutomationControllerRestore</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Scope</strong></td> 
+           <td class="entry">Namespaced</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationControllerBackupRestore__restore-spec">
+        <h3 class="title sectiontitle">AutomationControllerRestore spec</h3> 
+        <table class="table" id="AutomationControllerBackupRestore__restore-spec-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="AutomationControllerBackupRestore__restore-spec-table__entry__1">Field</th> 
+           <th class="entry" id="AutomationControllerBackupRestore__restore-spec-table__entry__2">Type</th> 
+           <th class="entry" id="AutomationControllerBackupRestore__restore-spec-table__entry__3">Description</th> 
+           <th class="entry" id="AutomationControllerBackupRestore__restore-spec-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerBackupRestore__restore-spec-table__entry__1"><code class="ph codeph">deployment_name</code></td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__restore-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__restore-spec-table__entry__3">Name of the <code class="ph codeph">AutomationController</code> instance to restore. Required.</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__restore-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerBackupRestore__restore-spec-table__entry__1"><code class="ph codeph">backup_name</code></td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__restore-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__restore-spec-table__entry__3">Name of the <code class="ph codeph">AutomationControllerBackup</code> resource to restore from. Required.</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__restore-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationControllerBackupRestore__restore-spec-table__entry__1"><code class="ph codeph">no_log</code></td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__restore-spec-table__entry__2">Boolean</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__restore-spec-table__entry__3">Suppress logging of sensitive data during the restore process.</td> 
+           <td class="entry" headers="AutomationControllerBackupRestore__restore-spec-table__entry__4"><code class="ph codeph">true</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationControllerBackupRestore__restore-example">
+        <h3 class="title sectiontitle">Example AutomationControllerRestore custom resource</h3> 
+        <pre class="pre codeblock"><code>apiVersion: automationcontroller.ansible.com/v1beta1
+kind: AutomationControllerRestore
+metadata:
+  name: controller-restore
+spec:
+  deployment_name: my-controller
+  backup_name: controller-backup</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

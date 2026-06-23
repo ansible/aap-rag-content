@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-4a72422f-5c96-4c64-b898-45b90e98c3e9">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Fine-tune Receptor worker backoff strategies for API reliability</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Configure the Receptor worker within the Ansible Automation Platform Operator through the<code class="ph codeph">RECEPTOR_KUBE_RETRY_COUNT</code> environment variable. This variable controls how the worker handles Kubernetes API connection failures.</p> 
+     <section class="section" id="GUID-4a72422f-5c96-4c64-b898-45b90e98c3e9__section_1"> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The retry mechanism uses an exponential backoff strategy which is capped at 5 minutes to prevent excessive wait times during job execution errors.</p> 
+       </div>
+      </div> 
+     </section> 
+     <table class="table" id="GUID-4a72422f-5c96-4c64-b898-45b90e98c3e9__table_6">
+      <caption>
+       <span class="table--title-label">Table 1. </span><span class="title">RECEPTOR_KUBE_RETRY_COUNT details</span>
+      </caption>
+      <colgroup>
+       <col style="width:26%">
+       <col style="width:43%">
+       <col style="width:16%">
+       <col style="width:15%">
+      </colgroup>
+      <thead class="thead"> 
+       <tr class="row"> 
+        <th class="entry" id="GUID-4a72422f-5c96-4c64-b898-45b90e98c3e9__table_6__entry__1">Variable</th> 
+        <th class="entry" id="GUID-4a72422f-5c96-4c64-b898-45b90e98c3e9__table_6__entry__2">Description</th> 
+        <th class="entry" id="GUID-4a72422f-5c96-4c64-b898-45b90e98c3e9__table_6__entry__3">Default value</th> 
+        <th class="entry" id="GUID-4a72422f-5c96-4c64-b898-45b90e98c3e9__table_6__entry__4">Valid range</th> 
+       </tr> 
+      </thead>
+      <tbody class="tbody"> 
+       <tr class="row"> 
+        <td class="entry" headers="GUID-4a72422f-5c96-4c64-b898-45b90e98c3e9__table_6__entry__1"><code class="ph codeph">RECEPTOR_KUBE_RETRY_COUNT</code></td> 
+        <td class="entry" headers="GUID-4a72422f-5c96-4c64-b898-45b90e98c3e9__table_6__entry__2">Sets the maximum number of retry attempts for Kubernetes API operations within the Receptor worker. Retry delays increase using exponential backoff with a Fibonacci-like sequence.</td> 
+        <td class="entry" headers="GUID-4a72422f-5c96-4c64-b898-45b90e98c3e9__table_6__entry__3">5</td> 
+        <td class="entry" headers="GUID-4a72422f-5c96-4c64-b898-45b90e98c3e9__table_6__entry__4">1-100</td> 
+       </tr> 
+      </tbody>
+     </table> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

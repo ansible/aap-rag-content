@@ -1,0 +1,101 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Deploy your custom image to an operator-based installation</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Deploy the BYOK RAG image to the intelligent assistant for operator-based Ansible Automation Platform 2.7 installations.</p> 
+     <section class="section prereq" id="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul" id="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__ul_1"> 
+       <li class="li">The BYOK RAG image built from your documentation has been published to a registry accessible from the OpenShift cluster.</li> 
+       <li class="li">The Ansible Automation Platform operator installation is complete, and the intelligent assistant has been deployed. You can also install the BYOK image and the intelligent assistant simultaneously.</li> 
+       <li class="li"><code class="ph codeph">oc</code>CLI is configured with cluster access.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform as an administrator.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Navigate to the namespace where you want to deploy the BYOK RAG image.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span></span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">From the list of installed operators, select Ansible Automation Platform.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">AnsibleAutomationPlatform</strong> custom resource, select the YAML view, and set the following values in the <code class="ph codeph">chatbot_extra_settings </code>parameters under the <code class="ph codeph">spec: </code>section:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>---
+...
+  spec: 
+     lightspeed:
+       ... 
+       chatbot_extra_settings:
+       chatbot_byok_image: 'quay.io/&lt;repository&gt;/rag-content-output'                                                          chatbot_byok_image_version: latest chatbot_byok_storage_size: '500Mi'                        chatbot_byok_score_multiplier: 1.2</code></pre> 
+         <p class="p">The parameters above correspond to the values in the following table.</p> 
+         <table class="table" id="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1">
+          <caption></caption>
+          <colgroup>
+           <col style="width:33.33333333333333%">
+           <col style="width:33.33333333333333%">
+           <col style="width:33.33333333333333%">
+          </colgroup>
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry" id="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__1">Parameter</th> 
+            <th class="entry" id="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__2">Description</th> 
+            <th class="entry" id="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__3">Default value</th> 
+           </tr> 
+          </thead>
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry" headers="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__1"><code class="ph codeph">chatbot_byok_image</code></td> 
+            <td class="entry" headers="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__2">The full registry path to your RAG image.</td> 
+            <td class="entry" headers="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__3">n/a</td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__1"><code class="ph codeph">chatbot_byok_image_version</code></td> 
+            <td class="entry" headers="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__2">The specific version tag (for example,<code class="ph codeph">1.0</code>) of the image to pull.</td> 
+            <td class="entry" headers="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__3"><code class="ph codeph">latest</code></td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__1"><code class="ph codeph">chatbot_byok_storage_size</code></td> 
+            <td class="entry" headers="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__2"> <p dir="ltr" class="p">The amount of persistent storage allocated for the BYOK volume.</p> <p dir="ltr" class="p">Keep the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended.</p> </td> 
+            <td class="entry" headers="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__3"><code class="ph codeph">2 Gi</code></td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__1"><code class="ph codeph">chatbot_byok_score_multiplier</code></td> 
+            <td class="entry" headers="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__2">The score multiplier for BYOK content priority. It adjusts how heavily the AI weighs your custom data versus base knowledge.</td> 
+            <td class="entry" headers="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__table_1__entry__3"><code class="ph codeph">1.2</code></td> 
+           </tr> 
+          </tbody>
+         </table> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">If the BYOK image is in a private registry, you must create an image pull secret, and set the following values in the <code class="ph codeph">chatbot_extra_settings</code> parameters under the <code class="ph codeph">spec: </code>section:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>spec:
+lightspeed:
+...
+image_pull_secrets:
+ - my-image-pull-secret</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save</strong>. The operator deployes the BYOK RAG image.</span> </li>
+      </ol>
+     </section> 
+     <section class="section postreq" id="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__postreq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div><strong class="ph b">Verification</strong> 
+      <ol class="ol" id="GUID-9b9d8cbf-a5d2-4e31-8a83-2554e9eff375__ol_1"> 
+       <li class="li">Verify that the chat interface is running correctly.</li> 
+       <li class="li">Verify the BYOK configuration if you specified the <code class="ph codeph">chatbot_byok_image </code>parameter. Ensure that the file <code class="ph codeph">configmap lightspeed-ansible-lightspeed-lightspeed-stack-config</code> contains the <code class="ph codeph">byok_rag</code> section.</li> 
+       <li class="li">Ask the intelligent assistant questions and evaluate whether responses reflect the BYOK content.</li> 
+      </ol> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

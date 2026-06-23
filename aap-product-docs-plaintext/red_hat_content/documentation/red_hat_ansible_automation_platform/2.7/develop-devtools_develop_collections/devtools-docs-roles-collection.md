@@ -1,0 +1,37 @@
+# Package and distribute automation content with collections
+## Understand collections for distributing roles
+### Add documentation for your roles collection
+
+It is important to provide documentation for your roles and roles collection, so that other users understand what your roles do and how to use them.
+
+#### About this task
+
+#### Procedure
+
+1.  To add documentation for a role, navigate to the role directory.
+2.  Open the `README.md` file in an editor. This file was added in the role directory when you scaffolded your collection directory.
+3.  Provide the following information in the `README.md` files for every role in your collection:
+
+- Role description: A brief summary of what the role does
+
+- Requirements: List the collections, libraries, and required installations
+
+- Dependencies
+
+- Role variables: Provide the following information about the variables your role uses.     * Description
+* Defaults
+* Example values
+* Required variables
+
+- Example playbook: Show an example of a playbook that uses your role. Use comments in the playbook to help users understand where to set variables. The `README.md` file in [`controller_configuration.ad_hoc_command_cancel`](https://github.com/redhat-cop/controller_configuration/tree/devel/roles/ad_hoc_command_cancel) is an example of a role with standard documentation.
+
+4.  To add documentation for your roles collection, navigate to the collection directory.
+5.  In the `README.md` file for your collection, provide the following information:
+
+- Collection description: Describe what the collection does.
+- Requirements: List required collections.
+- List the roles as a component of the collection.
+- Using the collection: Describe how to run the components of the collection.
+- Add a troubleshooting section.
+- Versioning: Describe the release cycle of your collection.
+

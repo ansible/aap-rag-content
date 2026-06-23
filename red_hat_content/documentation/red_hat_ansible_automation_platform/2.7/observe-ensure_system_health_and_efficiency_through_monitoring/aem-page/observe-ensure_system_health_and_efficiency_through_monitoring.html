@@ -1,0 +1,86 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="GUID-b7eabd99-f12e-4c5a-8af9-f76feba693b7"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Ensure system health and efficiency through monitoring</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">Monitor your deployment to maintain system health and identify performance issues before they affect operations. Track application metrics and system resources to understand workload patterns and optimize capacity allocation. </p> 
+      <section class="section" id="GUID-b7eabd99-f12e-4c5a-8af9-f76feba693b7__section_1"> 
+       <div class="p">
+        Monitoring your deployment helps you to: 
+        <ul class="ul" id="GUID-b7eabd99-f12e-4c5a-8af9-f76feba693b7__ul_1"> 
+         <li class="li"><strong class="ph b">Track application performance</strong>: Monitor job status, system performance, and event processing to identify bottlenecks and understand how jobs impact your deployment. </li> 
+         <li class="li"><strong class="ph b">Manage system resources</strong>: Monitor CPU, memory, and disk performance to prevent resource exhaustion and maintain optimal system responsiveness. </li> 
+         <li class="li"><strong class="ph b">Optimize capacity allocation</strong>: Use monitoring data to adjust instance capacity settings and balance workloads across available resources based on actual usage patterns. </li> 
+        </ul> 
+       </div> 
+      </section> 
+      <section class="section" id="GUID-b7eabd99-f12e-4c5a-8af9-f76feba693b7__section_2">
+       <h2 class="title sectiontitle">How Ansible Automation Platform supports monitoring </h2> 
+       <p class="p">Ansible Automation Platform provides metrics endpoints for job status and subsystem performance data. Access these endpoints to view job output processing, scheduling, and other operational metrics. </p> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-metrics-monitoring"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Metrics for monitoring automation controller application</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">For application level monitoring, automation controller provides Prometheus-style metrics on an API endpoint <code class="ph codeph">/api/v2/metrics</code>. Use these metrics to check data about job status and subsystem performance, such as for job output processing or job scheduling.</p> 
+       <section class="section"> 
+        <p class="p">The metrics endpoint includes descriptions of each metric. Metrics of particular interest for performance include:</p> 
+        <ul class="ul"> 
+         <li class="li"> <code class="ph codeph">awx_status_total</code> 
+          <ul class="ul"> 
+           <li class="li">Current total of jobs in each status. Helps correlate other events to activity in system.</li> 
+           <li class="li">Can check upticks in errored or failed jobs.</li> 
+          </ul> </li> 
+         <li class="li">awx_instance_remaining_capacity 
+          <ul class="ul">
+           <li class="li">Amount of capacity remaining for running additional jobs.</li>
+          </ul></li> 
+         <li class="li"> <code class="ph codeph">callback_receiver_event_processing_avg_seconds</code> 
+          <ul class="ul"> 
+           <li class="li">colloquially called “job events lag”.</li> 
+           <li class="li">Running average of the lag time between when a task occurred in ansible and when the user is able to see it. This indicates how far behind the callback receiver is in processing events. When this number is very high, users can consider scaling up the control plane or using the capacity adjustment feature to reduce the number of jobs a control node controls.</li> 
+          </ul> </li> 
+         <li class="li"> <code class="ph codeph">callback_receiver_events_insert_db</code> 
+          <ul class="ul"> 
+           <li class="li">Counter of events that have been inserted by a node. Can be used to calculate the job event insertion rate over a given time period.</li> 
+          </ul> </li> 
+         <li class="li"> <code class="ph codeph">callback_receiver_events_queue_size_redis</code> 
+          <ul class="ul"> 
+           <li class="li">Indicator of how far behind callback receiver is in processing events. If too high, Redis can cause the control node to run out of memory (OOM).</li> 
+          </ul> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="con-controller-system-level-monitoring"> 
+      <h2 class="title topictitle2" id="ariaid-title3">System level monitoring</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Monitoring CPU and memory is vital since instance capacity management doesn't introspect host resource usage. Automation impact varies by playbook; cloud modules process on the execution node, while native modules like "yum" perform work on target hosts, leaving the node waiting for results.</p> 
+       <p class="p">If CPU or memory usage is very high, consider lowering the capacity adjustment (available on the instance detail page) on affected instances in the automation controller. This limits how many jobs are run on or controlled by this instance.</p> 
+       <p class="p">Monitor the disk I/O and use of your system. The manner in which an automation controller node runs Ansible and caches output on the file system, and eventually saves it in the database, creates high levels of disk reads and writes. Identifying poor disk performance early can help prevent poor user experience and system degradation.</p> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_metrics#assembly-controller-metrics" title="Automation controller provides metrics that can be used to monitor the health and performance of the system.">Metrics</a></li>
+        </ul>
+       </div>
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://www.ansible.com/products/insights-for-ansible" target="_blank" rel="external noopener">Automation analytics and Red Hat Lightspeed for Red Hat Ansible Automation Platform</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

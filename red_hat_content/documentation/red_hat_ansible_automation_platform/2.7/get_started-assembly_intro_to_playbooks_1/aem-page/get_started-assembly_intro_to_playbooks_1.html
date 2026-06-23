@@ -1,0 +1,74 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-intro-to-playbooks"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Get started automating with playbooks</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">An Ansible Playbook is a blueprint for automation tasks, which are actions executed with limited manual effort across an inventory of solutions. Playbooks tell Ansible what to do on which devices.</p> 
+      <p class="p">A playbook automatically executes the same action across a specified inventory type, such as a set of routers, replacing manual repetitive work.</p> 
+      <p class="p">Playbooks are regularly used to automate IT infrastructure, such as operating systems, Kubernetes platforms, networks, security systems, and code repositories such as GitHub.</p> 
+      <p class="p">You can use playbooks to program applications, services, server nodes, and other devices, without the effort of creating everything from scratch. Playbooks, and the conditions, variables, and tasks within them, can be saved, shared, or reused indefinitely. This makes it easier for you to codify operational knowledge and ensure that the same actions are performed consistently.</p> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-how-do-playbooks-work"> 
+      <h2 class="title topictitle2" id="ariaid-title2">How do Ansible Playbooks work</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Ansible Playbooks are lists of tasks that run automatically for your specified inventory or groups of hosts. One or more Ansible tasks can be combined to make a play, that is, an ordered grouping of tasks mapped to specific hosts.</p> 
+       <section class="section"> 
+        <p class="p">Tasks are executed in the order in which they are written.</p> 
+        <p class="p">A playbook can include one or more plays.</p> 
+        <p class="p">A playbook is composed of one or more <code class="ph codeph">plays</code> in an ordered list.</p> 
+        <p class="p">The terms <code class="ph codeph">playbook</code> and <code class="ph codeph">play</code> are sports analogies.</p> 
+        <p class="p">Each play executes part of the overall goal of the playbook, running one or more tasks.</p> 
+        <p class="p">Each task calls an Ansible module.</p> 
+        <dl class="dl"> 
+         <dt class="dt dlterm">
+           Playbook 
+         </dt> 
+         <dd class="dd">
+           A list of plays that define the order in which Ansible performs operations, from top to bottom, to achieve an overall goal. 
+         </dd> 
+         <dt class="dt dlterm">
+           Play 
+         </dt> 
+         <dd class="dd">
+           An ordered list of tasks that maps to managed nodes in an inventory. 
+         </dd> 
+         <dt class="dt dlterm">
+           Task 
+         </dt> 
+         <dd class="dd">
+           A reference to a single module that defines the operations that Ansible performs. 
+         </dd> 
+         <dt class="dt dlterm">
+           Roles 
+         </dt> 
+         <dd class="dd">
+           Roles are a way to make code in playbooks reusable by putting the functionality into "libraries" that can then be used in any playbook as needed. 
+         </dd> 
+         <dt class="dt dlterm">
+           Module 
+         </dt> 
+         <dd class="dd">
+           A unit of code or binary that Ansible runs on managed nodes. 
+         </dd> 
+        </dl> 
+        <p class="p">Ansible modules are grouped in collections with a <em class="ph i">Fully Qualified Collection Name</em> (FQCN) for each module. Tasks are executed by modules, each of which performs a specific task in a playbook. A module contains metadata that determines when and where a task is executed, and which user executes it. There are thousands of Ansible modules that perform all kinds of IT tasks, such as:</p> 
+        <ul class="ul"> 
+         <li class="li">Cloud management</li> 
+         <li class="li">User management</li> 
+         <li class="li">Networking</li> 
+         <li class="li">Security</li> 
+         <li class="li">Configuration management</li> 
+         <li class="li">Communication</li> 
+        </ul> 
+        <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/playbook.png" alt="Structure of a typical playbook"> </p> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

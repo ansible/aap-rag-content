@@ -1,0 +1,30 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-e07a443d-9e0b-4593-9710-769702b132bc">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">OIDC authentication for HashiCorp Vault</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Ansible Automation Platform supports zero trust access to HashiCorp Vault using OpenID Connect (OIDC)-based workload identity, eliminating the need to store Vault credentials in Ansible Automation Platform.</p> 
+     <p class="p">For each automation job configured with a Vault OIDC credential, Ansible Automation Platform issues a JSON Web Token (JWT) to authenticate the workload with HashiCorp Vault. Vault then validates this token via OIDC and applies your configured policies to either allow or deny access to the requested secrets.</p> 
+     <p class="p">JWTs are issued with an expiration time that matches the job timeout when available. When the timeout is not available, a configurable platform default is used.</p> 
+     <div class="p">
+      To configure OIDC for your environment, follow this workflow: 
+      <ol class="ol" id="GUID-e07a443d-9e0b-4593-9710-769702b132bc__ol_1"> 
+       <li class="li">Configure the HashiCorp Vault server to allow OIDC/JWT Authentication.</li> 
+       <li class="li">Configure credentials in Ansible Automation Platform to use either of these credential types: HashiCorp Vault Secret Lookup (OIDC) or HashiCorp Vault Signed SSH (OIDC).</li> 
+      </ol> 
+     </div> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-configure_the_hashicorp_vault_server">Configure the HashiCorp Vault server</a></strong><br>You must perform a one-time configuration of the Vault server to enable OIDC authentication with Ansible Automation Platform. This configuration allows OIDC-enabled credential plugins to use JWT-based workload identity to request secure, short-lived tokens instead of relying on static passwords.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-oidc_credential_types_for_hashicorp_vault">OIDC credential types for HashiCorp Vault</a></strong><br>Ansible Automation Platform supports OIDC credential types for HashiCorp Vault that use short-lived JSON Web Tokens instead of static credentials, providing secure, automatic authentication without the need to store or rotate Vault secrets.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-claims_for_workload_identity">Claims for workload identity</a></strong><br>Ansible Automation Platform uses OpenID Connect (OIDC) and short-lived JSON Web Tokens (JWTs) with digitally signed claims to verify identity across systems. Understanding this claims structure allows you to create secure access control policies.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-example_hashicorp_vault_policy">Example HashiCorp Vault Policy</a></strong><br>HashiCorp Vault policies secure sensitive data by granting path-based access. When creating the JWT Role for Ansible Automation Platform JWT authentication, the role must reference a valid policy to maintain administrator security control.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

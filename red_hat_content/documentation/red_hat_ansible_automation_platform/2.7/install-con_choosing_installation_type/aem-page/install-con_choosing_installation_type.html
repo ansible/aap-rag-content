@@ -1,0 +1,44 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="choosing-installation-type">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Choose an installation type</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Containerized Ansible Automation Platform supports two installation types: online and disconnected. Review the requirements for each to decide which is appropriate for your environment.</p> 
+     <section class="section" id="choosing-installation-type___online_installation">
+      <h2 class="title sectiontitle">Online installation</h2> 
+      <p class="p">An online installation pulls container images directly from Red Hat registries during the installation process.</p> 
+      <p class="p"> <strong class="ph b">Requirements:</strong> </p> 
+      <ul class="ul"> 
+       <li class="li">An active internet connection on all Ansible Automation Platform nodes</li> 
+       <li class="li">A Red Hat registry service account with credentials (<code class="ph codeph">registry_username</code> and <code class="ph codeph">registry_password</code>)</li> 
+       <li class="li">Network access to Red Hat registries (registry.redhat.io)</li> 
+      </ul> 
+      <p class="p">For online installation instructions, see <em class="ph i">Prepare the installation</em> in the related information section.</p> 
+     </section> 
+     <section class="section" id="choosing-installation-type___disconnected_bundled_installation">
+      <h2 class="title sectiontitle">Disconnected (bundled) installation</h2> 
+      <p class="p">A disconnected installation uses a pre-packaged bundle that includes all container images and dependencies. This installation type is designed for air-gapped or restricted network environments.</p> 
+      <p class="p"> <strong class="ph b">Requirements:</strong> </p> 
+      <ul class="ul"> 
+       <li class="li">Local RPM repository configured with required dependencies</li> 
+       <li class="li">No internet connection required during installation</li> 
+       <li class="li">Red Hat registry credentials are not required</li> 
+      </ul> 
+      <p class="p">For disconnected installation instructions, see <em class="ph i">Install in a disconnected environment</em> in the related information section.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_containerized_disconnected_installation#aap-containerized-disconnected-installation" title="You can install containerized Ansible Automation Platform in an environment that does not have an active internet connection. To do this you need to obtain and configure the RPM source dependencies before performing the disconnected installation.">Install in a disconnected environment</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

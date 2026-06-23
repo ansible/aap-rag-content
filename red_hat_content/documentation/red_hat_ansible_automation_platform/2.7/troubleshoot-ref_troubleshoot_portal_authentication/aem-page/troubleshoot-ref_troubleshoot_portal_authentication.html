@@ -1,0 +1,181 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-troubleshoot-portal-authentication">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Troubleshoot Ansible automation portal authentication</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Identify and resolve common authentication and login issues when connecting Ansible automation portal to Ansible Automation Platform.</p> 
+     <section class="section">
+      <h2 class="title sectiontitle">Overview</h2> 
+      <p class="p">Use the symptom table to identify your issue, then follow the resolution steps. If the table does not cover your issue, use the diagnostic procedure to check portal logs for additional information.</p> 
+      <p class="p">For issues specific to execution environment builder, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_ee_builder" title="Identify and resolve common issues when configuring or using execution environment builder in Ansible automation portal.">Troubleshoot execution environment builder</a>. For issues specific to the RHEL appliance deployment, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_rhel_troubleshooting" title="Common issues and solutions for deploying and managing Ansible automation portal RHEL appliances.">Troubleshooting RHEL appliances</a>.</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Common authentication issues</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:28.57142857142857%">
+        <col style="width:42.857142857142854%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-troubleshoot-portal-authentication__entry__1">Symptom</th> 
+         <th class="entry" id="ref-troubleshoot-portal-authentication__entry__2">Cause</th> 
+         <th class="entry" id="ref-troubleshoot-portal-authentication__entry__3">Resolution</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__1"><strong class="ph b">Sign In</strong> redirects to a browser certificate error page instead of the Ansible Automation Platform login form</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__2">Ansible Automation Platform uses a self-signed certificate or a certificate from an untrusted CA. The browser rejects the connection to the Ansible Automation Platform OAuth authorization endpoint (<code class="ph codeph">/o/authorize/</code>).</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__3">Before signing in to Ansible automation portal, open the Ansible Automation Platform URL directly in your browser (for example, <code class="ph codeph">https://<var class="keyword varname">aap-host</var>/</code>) and accept the certificate warning. After accepting, return to Ansible automation portal and click <strong class="ph b">Sign In</strong> again. For production environments, use a CA-signed certificate on Ansible Automation Platform.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__1"><strong class="ph b">Sign In</strong> completes at Ansible Automation Platform but returns to the portal with <code class="ph codeph">Failed to send POST request: fetch failed</code></td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__2">The portal backend cannot reach the Ansible Automation Platform OAuth token endpoint (<code class="ph codeph">/o/token/</code>) because <code class="ph codeph">checkSSL</code> is set to <code class="ph codeph">true</code> and Ansible Automation Platform uses a self-signed certificate. The Node.js backend rejects the untrusted certificate during the authorization code exchange.</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__3">Set <code class="ph codeph">checkSSL</code> to <code class="ph codeph">false</code> in <strong class="ph b">both</strong> locations in the Helm chart values: under <code class="ph codeph">ansible.rhaap.checkSSL</code> and under <code class="ph codeph">auth.providers.rhaap.production.checkSSL</code>. Restart the portal deployment. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_portal_authentication#ref-troubleshoot-portal-authentication__configure-checkssl">Configure checkSSL for self-signed certificates</a>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__1"><strong class="ph b">Sign In</strong> completes at Ansible Automation Platform but returns to the portal with <code class="ph codeph">Auth response is missing cookie nonce</code></td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__2">The OAuth nonce cookie set during the authorization start was not sent back with the callback request. This can occur when the Ansible Automation Platform host is a bare IP address, when browser cookie policies block cross-site cookies, or when there is a protocol mismatch between the portal and Ansible Automation Platform URLs.</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__3">Verify that <code class="ph codeph">app.baseUrl</code> and <code class="ph codeph">backend.baseUrl</code> use the same protocol (<code class="ph codeph">https://</code>). If Ansible Automation Platform is accessed by IP address, accept the certificate in your browser before starting the OAuth flow. Clear browser cookies for the portal domain and retry.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__1">Catalog sync fails with <code class="ph codeph">Failed to send fetch data: fetch failed</code> (users and teams not synced from Ansible Automation Platform)</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__2">The portal backend cannot reach the Ansible Automation Platform API because <code class="ph codeph">ansible.rhaap.checkSSL</code> is <code class="ph codeph">true</code> and Ansible Automation Platform uses a self-signed certificate. This is the same root cause as the OAuth token exchange failure.</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__3">Set <code class="ph codeph">ansible.rhaap.checkSSL</code> to <code class="ph codeph">false</code> in the Helm chart values or <code class="ph codeph">app-config.yaml</code>. Restart the portal deployment. Catalog sync runs on a schedule and resumes automatically after the restart.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__1">Portal shows <code class="ph codeph">Authenticated but no permissions</code> or users see an empty interface after login</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__2">Catalog synchronization has not completed, or the user does not exist in the portal catalog. The <code class="ph codeph">allowNewAAPUserSignIn</code> resolver creates users automatically, but requires the catalog backend module to be functioning.</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__3">Verify catalog sync is running without errors. Check that <code class="ph codeph">catalog.providers.rhaap</code> is configured with the correct Ansible Automation Platform organization. Check logs for <code class="ph codeph">AapEntityProvider</code> errors. If using the <code class="ph codeph">usernameMatchingUser</code> resolver, verify the user exists in the portal catalog.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__1">OAuth login redirects to Ansible Automation Platform but Ansible Automation Platform returns <code class="ph codeph">invalid redirect_uri</code></td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__2">The redirect URI configured in the Ansible Automation Platform OAuth application does not match the portal callback URL. The redirect URI must be exactly <code class="ph codeph">https://<var class="keyword varname">portal-host</var>/api/auth/rhaap/handler/frame</code>.</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__3">In Ansible Automation Platform, navigate to <strong class="ph b">Administration</strong> &gt; <strong class="ph b">OAuth Applications</strong>, edit the application, and set the redirect URI to <code class="ph codeph">https://<var class="keyword varname">portal-host</var>/api/auth/rhaap/handler/frame</code>. Verify there are no trailing slashes or protocol mismatches.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__1">Portal pod logs show errors reaching Ansible Automation Platform but <code class="ph codeph">curl -k</code> from the pod works</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__2"><code class="ph codeph">checkSSL</code> is <code class="ph codeph">true</code> in the portal configuration. The <code class="ph codeph">-k</code> flag in <code class="ph codeph">curl</code> skips certificate verification, but the portal Node.js backend respects the <code class="ph codeph">checkSSL</code> setting.</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__3">Set <code class="ph codeph">checkSSL</code> to <code class="ph codeph">false</code> in both locations. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_portal_authentication#ref-troubleshoot-portal-authentication__configure-checkssl">Configure checkSSL for self-signed certificates</a>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__1">The login page shows <strong class="ph b">Sign in with GitHub</strong> instead of <strong class="ph b">Sign in with RHAAP</strong>, or both options appear</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__2">The <code class="ph codeph">app.baseUrl</code>, <code class="ph codeph">backend.baseUrl</code>, and <code class="ph codeph">backend.cors.origin</code> values in the configuration do not match the URL used to access Ansible automation portal. This commonly happens when accessing the portal by IP address or through port-forwarding (for example, <code class="ph codeph">localhost:7007</code>) but the configuration uses the OpenShift Container Platform route URL, or vice versa. The CORS mismatch can cause the RHAAP provider to fail silently, falling back to a GitHub provider if one is configured.</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__3"> 
+          <ol class="ol"> 
+           <li class="li">Access Ansible automation portal using the OpenShift Container Platform route URL, not through port-forwarding to <code class="ph codeph">localhost</code>.</li> 
+           <li class="li">Verify that <code class="ph codeph">app.baseUrl</code>, <code class="ph codeph">backend.baseUrl</code>, and <code class="ph codeph">backend.cors.origin</code> all match the URL you use to access the portal in your browser. Check the Helm chart values: <pre class="pre codeblock language-terminal"><code>$ helm get values <var class="keyword varname">release-name</var> -n <var class="keyword varname">namespace</var> | grep -E 'baseUrl|origin'</code></pre> </li> 
+           <li class="li">Verify that the <code class="ph codeph">auth.providers</code> section does not contain an uncommented <code class="ph codeph">github</code> provider. If a <code class="ph codeph">github</code> provider is present and not required for execution environment builder SCM integration, remove it.</li> 
+           <li class="li">Apply the corrected values: <pre class="pre codeblock language-terminal"><code>$ helm upgrade <var class="keyword varname">release-name</var> <var class="keyword varname">chart</var> -f values.yaml -n <var class="keyword varname">namespace</var></code></pre> </li> 
+          </ol> <p class="p">For RHEL appliance deployments, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_rhel_troubleshooting" title="Common issues and solutions for deploying and managing Ansible automation portal RHEL appliances.">Troubleshooting RHEL appliances</a>.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__1">Portal deployed with <code class="ph codeph">global._environment._development: true</code> in Helm values</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__2">The <code class="ph codeph">_development</code> flag changes plugin image sources and catalog environment settings. It is intended for internal development and testing only. Production deployments must use <code class="ph codeph">_development: false</code> and <code class="ph codeph">_production: true</code> (the defaults).</td> 
+         <td class="entry" headers="ref-troubleshoot-portal-authentication__entry__3">In the Helm chart <code class="ph codeph">values.yaml</code>, verify the environment settings: <pre class="pre codeblock language-yaml"><code>global:
+  _environment:
+    _development: false
+    _stage: false
+    _production: true</code></pre> <p class="p">Apply the corrected values with <code class="ph codeph">helm upgrade</code> and wait for the pods to restart.</p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="ref-troubleshoot-portal-authentication__configure-checkssl">
+      <h2 class="title sectiontitle">Configure checkSSL for self-signed certificates</h2> 
+      <p class="p">When Ansible Automation Platform uses a self-signed certificate or a certificate from an untrusted certificate authority, configure Ansible automation portal to skip TLS certificate verification for backend-to-Ansible Automation Platform communication. This setting affects only the portal backend and does not change browser behavior.</p> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <ul class="ul"> 
+         <li class="li">Setting <code class="ph codeph">checkSSL</code> to <code class="ph codeph">false</code> disables TLS certificate verification between the portal backend and Ansible Automation Platform. Use this setting only in development, testing, or demo environments.</li> 
+         <li class="li">For production environments, use a CA-signed certificate on Ansible Automation Platform or add the Ansible Automation Platform CA certificate to the portal trust store. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_configure_custom_ssl" title="If your Ansible Automation Platform instance uses custom or self-signed SSL certificates, configure the Ansible automation portal to trust those certificates to prevent authentication failures.">Configure custom SSL certificates for the Ansible automation portal</a>.</li> 
+         <li class="li">You must set <code class="ph codeph">checkSSL</code> to <code class="ph codeph">false</code> in <strong class="ph b">two separate locations</strong> in the configuration. Missing either location causes different failures.</li> 
+        </ul> 
+       </div>
+      </div> 
+      <p class="p">In your Helm chart <code class="ph codeph">values.yaml</code> or <code class="ph codeph">app-config.yaml</code>, locate and update both <code class="ph codeph">checkSSL</code> settings:</p> 
+      <pre class="pre codeblock language-yaml"><code>ansible:
+  rhaap:
+    baseUrl: https://<var class="keyword varname">aap-host</var>
+    checkSSL: false    # Backend API calls to AAP (catalog sync, token exchange)
+    token: ${AAP_TOKEN}
+
+auth:
+  providers:
+    rhaap:
+      production:
+        host: https://<var class="keyword varname">aap-host</var>
+        checkSSL: false  # OAuth authentication calls to AAP
+        clientId: ${OAUTH_CLIENT_ID}
+        clientSecret: ${OAUTH_CLIENT_SECRET}</code></pre> 
+      <p class="p">If you deployed with Helm, upgrade the release:</p> 
+      <pre class="pre codeblock language-terminal"><code>$ helm upgrade <var class="keyword varname">release-name</var> <var class="keyword varname">chart</var> -f values.yaml -n <var class="keyword varname">namespace</var></code></pre> 
+      <p class="p">If you edited the ConfigMap directly, restart the deployment:</p> 
+      <pre class="pre codeblock language-terminal"><code>$ oc rollout restart deployment/<var class="keyword varname">portal-deployment-name</var> -n <var class="keyword varname">namespace</var></code></pre> 
+      <p class="p">Wait for the new pod to become ready:</p> 
+      <pre class="pre codeblock language-terminal"><code>$ oc rollout status deployment/<var class="keyword varname">portal-deployment-name</var> -n <var class="keyword varname">namespace</var></code></pre> 
+      <p class="p">Verify the configuration took effect by checking the pod logs for successful Ansible Automation Platform connectivity:</p> 
+      <pre class="pre codeblock language-terminal"><code>$ oc logs -n <var class="keyword varname">namespace</var> deployment/<var class="keyword varname">portal-deployment-name</var> -c backstage-backend | grep -i "rhaap\|AAP\|error"</code></pre> 
+      <p class="p">Successful catalog sync logs look like:</p> 
+      <pre class="pre codeblock"><code>[catalog] info  Fetching job templates from RH AAP.
+[catalog] info  [backstage-rhaap-common]: Executing get request to https://<var class="keyword varname">aap-host</var>/api/controller/v2/job_templates...</code></pre> 
+      <p class="p">If you still see <code class="ph codeph">fetch failed</code> errors, verify that the correct ConfigMap was updated and the pod restarted with the new configuration.</p> 
+      <p class="p"><strong class="ph b">Accept the Ansible Automation Platform certificate in your browser</strong></p> 
+      <p class="p">Setting <code class="ph codeph">checkSSL</code> to <code class="ph codeph">false</code> fixes backend communication but does not affect your browser. Before signing in to Ansible automation portal for the first time in a new browser session:</p> 
+      <ol class="ol"> 
+       <li class="li">Open a new tab and navigate directly to your Ansible Automation Platform URL (for example, <code class="ph codeph">https://<var class="keyword varname">aap-host</var>/</code>).</li> 
+       <li class="li">Accept the browser certificate warning (click <strong class="ph b">Advanced</strong>, then <strong class="ph b">Proceed</strong>).</li> 
+       <li class="li">Return to Ansible automation portal and click <strong class="ph b">Sign In</strong>.</li> 
+      </ol> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        For RHEL appliance deployments, the <code class="ph codeph">check_ssl</code> cloud-init setting automatically mirrors to both configuration locations. If you edit <code class="ph codeph">app-config.production.yaml</code> manually, you must update both locations.
+       </div>
+      </div> 
+     </section> 
+     <section class="section" id="ref-troubleshoot-portal-authentication__diagnose-auth-failures">
+      <h2 class="title sectiontitle">Diagnose authentication failures</h2> 
+      <p class="p">If the symptom table does not match your issue, use the following steps to gather diagnostic information.</p> 
+      <ol class="ol"> 
+       <li class="li">Check portal backend logs for authentication errors: <pre class="pre codeblock language-terminal"><code>$ oc logs -n <var class="keyword varname">namespace</var> deployment/<var class="keyword varname">portal-deployment-name</var> -c backstage-backend | grep -i "auth\|rhaap\|error\|fetch\|token"</code></pre> </li> 
+       <li class="li">Check for certificate-related failures from inside the pod: <pre class="pre codeblock language-terminal"><code>$ oc exec -n <var class="keyword varname">namespace</var> deployment/<var class="keyword varname">portal-deployment-name</var> -c backstage-backend -- \
+  curl -k -s -o /dev/null -w "HTTP_CODE: %{http_code}\nSSL_VERIFY: %{ssl_verify_result}\n" \
+  https://<var class="keyword varname">aap-host</var>/</code></pre> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">HTTP_CODE: 200</code> confirms Ansible Automation Platform is reachable.</li> 
+         <li class="li"><code class="ph codeph">SSL_VERIFY: 0</code> means the certificate is trusted. <code class="ph codeph">SSL_VERIFY: 20</code> means the issuer certificate is not in the trust store (self-signed CA).</li> 
+        </ul> </li> 
+       <li class="li">Verify the Ansible Automation Platform OAuth application configuration: <pre class="pre codeblock language-terminal"><code>$ curl -k -s -u <var class="keyword varname">admin-user</var>:<var class="keyword varname">password</var> https://<var class="keyword varname">aap-host</var>/api/gateway/v1/me/ | python3 -m json.tool</code></pre> <p class="p">A successful response confirms Ansible Automation Platform credentials are valid and the API is accessible.</p> </li> 
+      </ol> 
+      <p class="p">For a complete list of common log messages and their meanings, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-proc_view_ee_builder_logs" title="View Ansible automation portal logs to diagnose authentication failures, sync errors, catalog registration issues, and SCM connectivity problems.">View Ansible automation portal logs for execution environment builder</a>.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-proc_view_ee_builder_logs" title="View Ansible automation portal logs to diagnose authentication failures, sync errors, catalog registration issues, and SCM connectivity problems.">View Ansible automation portal logs</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_configure_custom_ssl" title="If your Ansible Automation Platform instance uses custom or self-signed SSL certificates, configure the Ansible automation portal to trust those certificates to prevent authentication failures.">Configure custom SSL certificates for Ansible automation portal</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_rhel_troubleshooting" title="Common issues and solutions for deploying and managing Ansible automation portal RHEL appliances.">Troubleshoot the Ansible automation portal RHEL appliance</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_ee_builder" title="Identify and resolve common issues when configuring or using execution environment builder in Ansible automation portal.">Troubleshoot execution environment builder</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

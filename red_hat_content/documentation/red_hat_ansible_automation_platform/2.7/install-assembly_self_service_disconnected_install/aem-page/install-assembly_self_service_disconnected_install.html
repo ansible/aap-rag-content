@@ -1,0 +1,703 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="self-service-disconnected-install"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Install Ansible automation portal in air-gapped OpenShift Container Platform environments</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">You can install Ansible automation portal in a disconnected OpenShift Container Platform environment. For new installations, use OCI container delivery and mirror required container images and plug-in artifacts to your internal registry.</p>
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="self-service-install-disconnected-prerequisites"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Prerequisites for disconnected installation</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Review the mandatory subscriptions, permissions, and platform access required before starting the disconnected installation of the Ansible automation portal.</p> 
+       <p class="p">Fulfilling these prerequisites helps ensure a successful deployment.</p> 
+       <ul class="ul"> 
+        <li class="li">You have a valid subscription to Red Hat Ansible Automation Platform.</li> 
+        <li class="li">You have access to an instance of Red Hat Ansible Automation Platform with the appropriate permissions to create an OAuth application.</li> 
+        <li class="li">You have access to a Red Hat OpenShift Container Platform instance with the appropriate permissions within your project to create an application.</li> 
+        <li class="li">You have installed <code class="ph codeph">oc</code>, the OpenShift command-line interface (CLI) tool, on your local machine.</li> 
+        <li class="li">You have installed Helm 3.10 or newer.</li> 
+        <li class="li">You have installed <code class="ph codeph">skopeo</code> and <code class="ph codeph">podman</code> for mirroring container images and plug-in artifacts.</li> 
+        <li class="li">You have internet access to pull images and charts from public repositories, including <code class="ph codeph">registry.redhat.io</code>.</li> 
+        <li class="li">A Red Hat pull secret that allows you to pull images from <code class="ph codeph">registry.redhat.io</code>.</li> 
+        <li class="li">You have a method to provide the Ansible plug-ins in the disconnected environment: 
+         <ul class="ul"> 
+          <li class="li">For OCI delivery: A method to mirror the OCI artifacts image referenced by <code class="ph codeph">imageTagInfo</code>.</li> 
+          <li class="li">For HTTP plug-in registry: The ability to host the plug-in tarball files.</li> 
+         </ul> </li> 
+        <li class="li">You have registry credentials for the registry endpoint used by the dynamic plug-in installer.</li> 
+       </ul> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">The image versions and compatibility requirements vary between Helm chart releases. Before you begin, consult the <a class="xref" href="https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle" target="_blank" rel="external noopener">Ansible Automation Portal Lifecycle</a> page for version mappings between the Helm chart, Red Hat Developer Hub, and PostgreSQL.</p> 
+        </div>
+       </div> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="self-service-disconnected-install-prepare"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Prepare for air-gapped installation</h2> 
+      <p class="shortdesc">Before you can install Ansible automation portal in a disconnected OpenShift Container Platform environment, you must complete some processes on a connected bastion host.</p> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="self-service-install-disconnected-mirror-images"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Mirror container images</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use <code class="ph codeph">skopeo copy</code> to mirror the required container images from the Red Hat registry to your disconnected registry for installing the Ansible automation portal in an isolated environment.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">skopeo</code> is installed.</li> 
+         <li class="li">You have authenticated to <code class="ph codeph">registry.redhat.io</code>: <pre class="pre codeblock language-terminal"><code>$ skopeo login registry.redhat.io</code></pre> </li> 
+         <li class="li">You have authenticated to your disconnected registry: <pre class="pre codeblock language-terminal"><code>$ skopeo login &lt;disconnected_registry_url&gt;</code></pre> </li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p"><code class="ph codeph">skopeo copy</code> preserves SHA256 digests, so the Helm chart's default digest-based image references work without additional tag overrides.</p> 
+        <p class="p">If you mirror <code class="ph codeph">registry.redhat.io</code> content to a different registry host (or to a registry prefix such as <code class="ph codeph">quay.io/&lt;org&gt;</code>), you can set <code class="ph codeph">redhat-developer-hub.global.imageRegistry</code> so the Helm chart pulls all of its images from that mirrored location. <code class="ph codeph">imageRegistry</code> is a single override that controls the registry for the base application image, PostgreSQL image, OCI plug-in artifacts, and Ansible Dev Tools sidecar.</p> 
+        <p class="p">The dynamic plug-in init container does not use cluster-level image mirror configuration (for example, <code class="ph codeph">ImageDigestMirrorSet</code> or <code class="ph codeph">ImageTagMirrorSet</code>). You must set <code class="ph codeph">imageRegistry</code> even if your cluster redirects <code class="ph codeph">registry.redhat.io</code> pulls.</p> 
+        <table class="table">
+         <caption>
+          <span class="table--title-label">Table 1. </span><span class="title">Required container images</span>
+         </caption>
+         <colgroup>
+          <col>
+          <col>
+          <col>
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="self-service-install-disconnected-mirror-images__entry__1">Image</th> 
+           <th class="entry" id="self-service-install-disconnected-mirror-images__entry__2">Source registry</th> 
+           <th class="entry" id="self-service-install-disconnected-mirror-images__entry__3">Purpose</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__1"><code class="ph codeph">rhdh/rhdh-hub-rhel9:&lt;rhdh_version&gt;</code></td> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__2"><code class="ph codeph">registry.redhat.io</code></td> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__3">Red Hat Developer Hub application and <code class="ph codeph">install-dynamic-plugins</code> init container</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__1"><code class="ph codeph">rhel9/postgresql-&lt;version&gt;:&lt;tag&gt;</code></td> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__2"><code class="ph codeph">registry.redhat.io</code></td> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__3">Built-in PostgreSQL database (skip if using an external database)</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__1"><code class="ph codeph">ansible-automation-platform-25/ansible-dev-tools-rhel8:latest</code> or <code class="ph codeph">ansible-automation-platform-26/ansible-dev-tools-rhel9:latest</code></td> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__2"><code class="ph codeph">registry.redhat.io</code></td> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__3">Ansible Dev Tools sidecar (base image varies by Ansible Automation Platform version)</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__1"><code class="ph codeph">ansible-automation-platform/automation-portal:&lt;plugin-version&gt;</code></td> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__2"><code class="ph codeph">registry.redhat.io</code></td> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__3">Ansible plug-in OCI artifacts (OCI delivery only)</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__1"><code class="ph codeph">rhdh/rhdh-plugin-catalog-index-rhel9:&lt;rhdh_version&gt;</code></td> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__2"><code class="ph codeph">registry.redhat.io</code></td> 
+           <td class="entry" headers="self-service-install-disconnected-mirror-images__entry__3">Plug-in catalog index (rebuilt by <code class="ph codeph">mirror-plugins.sh</code>)</td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p">Replace version placeholders with the versions bundled with your Helm chart. See the <a class="xref" href="https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle" target="_blank" rel="external noopener">Ansible Automation Portal Lifecycle</a> page for version mappings.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Copy the Red Hat Developer Hub hub image to your disconnected registry:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ skopeo copy \
+    docker://registry.redhat.io/rhdh/rhdh-hub-rhel9:&lt;rhdh_version&gt; \
+    docker://&lt;disconnected_registry_url&gt;/rhdh/rhdh-hub-rhel9:&lt;rhdh_version&gt;</code></pre> 
+           <p class="p">This image is used for both the main application container and the <code class="ph codeph">install-dynamic-plugins</code> init container. Replace <code class="ph codeph">&lt;rhdh_version&gt;</code> with the Red Hat Developer Hub version bundled with your Helm chart.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If you use the built-in PostgreSQL database, copy the PostgreSQL image.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">An external database is the supported production architecture and does not require this step.</p> 
+           <pre class="pre codeblock language-terminal"><code>$ skopeo copy \
+    docker://registry.redhat.io/rhel9/postgresql-&lt;version&gt;:&lt;tag&gt; \
+    docker://&lt;disconnected_registry_url&gt;/rhel9/postgresql-&lt;version&gt;:&lt;tag&gt;</code></pre> 
+           <p class="p">Replace <code class="ph codeph">&lt;version&gt;</code> with the PostgreSQL major version and <code class="ph codeph">&lt;tag&gt;</code> with the image tag bundled with your Helm chart. See the <a class="xref" href="https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle" target="_blank" rel="external noopener">Ansible Automation Portal Lifecycle</a> page for version mappings.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Copy the plug-in catalog index image:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ skopeo copy \
+    docker://registry.redhat.io/rhdh/rhdh-plugin-catalog-index-rhel9:&lt;rhdh_version&gt; \
+    docker://&lt;disconnected_registry_url&gt;/rhdh/rhdh-plugin-catalog-index-rhel9:&lt;rhdh_version&gt;</code></pre> 
+           <p class="p">The Mirror dynamic plug-in artifacts procedure rebuilds this image with updated registry references. You must still mirror the original image because the script uses it as its source.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If you use OCI container delivery, copy the Ansible plug-ins OCI artifacts image:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ skopeo copy \
+    docker://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;plugin-version&gt; \
+    docker://&lt;disconnected_registry_url&gt;/ansible-automation-platform/automation-portal:&lt;plugin-version&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Copy the Ansible Dev Tools sidecar image, using the path that matches your Ansible Automation Platform version.</span> 
+          <div class="itemgroup info"> 
+           <p class="p"><strong class="ph b">Ansible Automation Platform 2.5:</strong></p> 
+           <pre class="pre codeblock language-terminal"><code>$ skopeo copy \
+    docker://registry.redhat.io/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest \
+    docker://&lt;disconnected_registry_url&gt;/ansible-automation-platform-25/ansible-dev-tools-rhel8:latest</code></pre> 
+           <p class="p"><strong class="ph b">Ansible Automation Platform 2.6:</strong></p> 
+           <pre class="pre codeblock language-terminal"><code>$ skopeo copy \
+    docker://registry.redhat.io/ansible-automation-platform-26/ansible-dev-tools-rhel9:latest \
+    docker://&lt;disconnected_registry_url&gt;/ansible-automation-platform-26/ansible-dev-tools-rhel9:latest</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Verify that each image is accessible in your disconnected registry. For example:</p> 
+        <pre class="pre codeblock language-terminal"><code>$ skopeo inspect docker://&lt;disconnected_registry_url&gt;/rhdh/rhdh-hub-rhel9:&lt;rhdh_version&gt;</code></pre> 
+        <p class="p">A successful response returns the image manifest metadata. An error indicates the image was not mirrored correctly.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="self-service-install-disconnected-mirror-plugins"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Mirror dynamic plug-in artifacts</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">In Red Hat Developer Hub 1.9 and later, dynamic plug-ins are distributed as OCI artifacts referenced by a plug-in catalog index. In a disconnected environment, mirror these artifacts and rebuild the catalog index with updated registry references.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">skopeo</code> 1.20 or later is installed.</li> 
+         <li class="li"><code class="ph codeph">podman</code> 5.6 or later is installed.</li> 
+         <li class="li"><code class="ph codeph">jq</code> 1.7 or later is installed.</li> 
+         <li class="li">GNU <code class="ph codeph">tar</code> 1.35 or later is installed.</li> 
+         <li class="li">You have authenticated to <code class="ph codeph">registry.redhat.io</code> and your disconnected registry.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Without this step, the <code class="ph codeph">install-dynamic-plugins</code> init container attempts to pull plug-ins from external registries and fails with <code class="ph codeph">i/o timeout</code> errors.</p> 
+        <p class="p">Use the <code class="ph codeph">mirror-plugins.sh</code> script from the Red Hat Developer Hub operator repository to mirror the plug-in artifacts.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Download the <code class="ph codeph">mirror-plugins.sh</code> script from the Red Hat Developer Hub operator repository:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ curl -LO https://raw.githubusercontent.com/redhat-developer/rhdh-operator/release-&lt;rhdh_version&gt;/.rhdh/scripts/mirror-plugins.sh
+$ chmod +x mirror-plugins.sh</code></pre> 
+           <p class="p">Replace <code class="ph codeph">&lt;rhdh_version&gt;</code> with the Red Hat Developer Hub version bundled with your Helm chart. See the <a class="xref" href="https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle" target="_blank" rel="external noopener">Ansible Automation Portal Lifecycle</a> page for version mappings.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Mirror the plug-in catalog index and all referenced plug-in artifacts to your disconnected registry:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ ./mirror-plugins.sh \
+  --plugin-index oci://registry.redhat.io/rhdh/rhdh-plugin-catalog-index-rhel9:&lt;rhdh_version&gt; \
+  --to-registry &lt;disconnected_registry_url&gt;</code></pre> 
+           <p class="p">The script copies all OCI plug-in artifacts, rewrites the catalog index with your mirror registry URLs, and pushes the updated index to your disconnected registry.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If your disconnected environment has no direct network path to the connected bastion host, use the export-then-import workflow.</span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">On the connected bastion host, export the plug-in artifacts to a directory:</span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock language-terminal"><code>$ ./mirror-plugins.sh \
+  --plugin-index oci://registry.redhat.io/rhdh/rhdh-plugin-catalog-index-rhel9:&lt;rhdh_version&gt; \
+  --to-dir /path/to/plugin-export</code></pre> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Transfer the export directory to a host in the disconnected environment.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">On the disconnected host, import the artifacts into your mirror registry:</span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock language-terminal"><code>$ ./mirror-plugins.sh \
+  --from-dir /path/to/plugin-export \
+  --to-registry &lt;disconnected_registry_url&gt;</code></pre> 
+            </div> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Check the <code class="ph codeph">rhdh-plugin-mirroring-summary.txt</code> file generated by the script. It lists all mirrored artifacts and their destination paths.</li> 
+         <li class="li">Verify that the catalog index image exists in your disconnected registry: <pre class="pre codeblock language-terminal"><code>$ skopeo inspect docker://&lt;disconnected_registry_url&gt;/rhdh/rhdh-plugin-catalog-index-rhel9:&lt;rhdh_version&gt;</code></pre> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="self-service-install-disconnected-download-helm"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Download the helm chart package</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Download the Helm chart package and modify the internal image references to point to your disconnected registry. This prepares the installation package for the air-gapped environment.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Add the OpenShift Helm charts repository and update your local cache:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>helm repo add openshift-helm-charts https://charts.openshift.io/
+helm repo update</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Pull the required version of the chart:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>helm pull openshift-helm-charts/redhat-rhaap-portal --version x.y.z</code></pre> 
+           <p class="p">The chart is saved as a <code class="ph codeph">.tgz</code> file (for example, <code class="ph codeph">redhat-rhaap-portal-1.0.1.tgz</code>).</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Extract the chart files:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>tar -xvf redhat-rhaap-portal-x.y.z.tgz</code></pre> 
+           <p class="p">This creates a directory with a name similar to <code class="ph codeph">redhat-rhaap-portal-1.0.1/</code>.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <code class="ph codeph">redhat-rhaap-portal/values.yaml</code> file, replace all <code class="ph codeph">image:</code> references with the full path to the images in your disconnected registry.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Repack the chart with your modifications:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>helm package redhat-rhaap-portal-x.y.z</code></pre> 
+           <p class="p">A new <code class="ph codeph">.tgz</code> file is created containing your changes.</p> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="self-service-install-disconnected-transfer-assets"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Transfer assets to the disconnected environment</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Transfer the modified Helm chart package from the connected bastion host to a machine inside your disconnected network. This action stages the installation assets for deployment within the isolated OpenShift environment.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Copy the modified Helm chart <code class="ph codeph">.tgz</code> file or files (for example, <code class="ph codeph">redhat-rhaap-portal-1.0.1.tgz</code>) from your connected bastion host to a machine or jump box within your disconnected OpenShift network.</span> </li>
+         <li class="li step"> <span class="ph cmd">If you use the HTTP plug-in registry method, transfer the plug-in tarball files to the disconnected environment.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title8" id="self-service-disconnected-install-helm-chart"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Install the Helm chart in the disconnected OpenShift environment</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">You can install the modified Helm chart using the <code class="ph codeph">helm install</code> command in your disconnected OpenShift environment. This deploys the Ansible automation portal using the locally available assets.</p> 
+       <p class="p">After preparing the disconnected environment with mirrored images and transferred assets, install the Helm chart to deploy the Ansible automation portal.</p> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title9" id="self-service-install-disconnected-access-ocp"> 
+      <h2 class="title topictitle2" id="ariaid-title9">Access the disconnected OpenShift environment</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Ensure your disconnected OpenShift cluster is configured to trust the private registry containing the mirrored container images. This step is crucial for successful image pulling during installation.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have the necessary kubeconfig and permissions for setting up image pull secrets or insecure registries.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">In a terminal, log in to your disconnected OpenShift cluster using the <code class="ph codeph">oc</code> CLI.</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc login --token=&lt;your_token&gt; --server=&lt;your_openshift_api_url&gt;</code></pre> 
+           <p class="p">Use the following command if you have a kubeconfig:</p> 
+           <pre class="pre codeblock"><code>export KUBECONFIG=/path/to/your/kubeconfig
+oc login</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Ensure that your OpenShift cluster is configured to trust your disconnected registry.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title10" id="self-service-install-disconnected-define-parameters"> 
+      <h2 class="title topictitle2" id="ariaid-title10">Configure plug-in delivery for disconnected environments</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Create the registry authentication secret so the dynamic plug-in init container can pull OCI artifacts from your disconnected registry.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have mirrored the required container images and plug-in artifacts to your disconnected registry.</li> 
+         <li class="li">You have credentials for your disconnected registry.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create an <span class="ph filepath">auth.json</span> file with credentials for your disconnected registry:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>{
+  "auths": {
+    "&lt;disconnected_registry_url&gt;": {
+      "auth": "&lt;base64-encoded-registry-credentials&gt;"
+    }
+  }
+}</code></pre> 
+           <p class="p">Generate the base64-encoded value:</p> 
+           <pre class="pre codeblock"><code>$ printf '%s' '&lt;registry_username&gt;:&lt;registry_password&gt;' | base64 -w0</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create the registry authentication secret:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc create secret generic &lt;release-name&gt;-dynamic-plugins-registry-auth \
+  --from-file=auth.json=./auth.json \
+  -n &lt;project_name&gt;</code></pre> 
+           <p class="p">Replace <code class="ph codeph">&lt;release-name&gt;</code> with your Helm release name. If you use the default release name from the OpenShift catalog, the secret name is <code class="ph codeph">redhat-rhaap-portal-dynamic-plugins-registry-auth</code>.</p> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Verify that the secret exists in the project:</p> 
+        <pre class="pre codeblock"><code>$ oc get secret &lt;release-name&gt;-dynamic-plugins-registry-auth -n &lt;project_name&gt;</code></pre> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_oci_container_delivery" title="Use OCI container delivery to pull plug-in artifacts from registry.redhat.io/ansible-automation-platform/automation-portal. The plug-in version must match the imageTagInfo value in your Helm chart configuration. This is the recommended method for new installations.">OCI container delivery</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title11" id="self-service-install-disconnected-installing-chart"> 
+      <h2 class="title topictitle2" id="ariaid-title11">Install the Helm chart</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Install the Ansible automation portal by using the <code class="ph codeph">helm install</code> command, referencing the local Helm chart file and required configuration values.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">On the machine within your disconnected environment, navigate to the directory where you placed the transferred Helm chart <code class="ph codeph">.tgz</code> file:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ cd /path/to/your/transferred/charts/</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Define your namespace and cluster router base as environment variables:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ export MY_NAMESPACE="&lt;your_namespace_name&gt;"
+$ export MY_CLUSTER_ROUTER_BASE="&lt;your_cluster_router_base&gt;"</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If the namespace does not exist, create it:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ oc new-project "${MY_NAMESPACE}"</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create a custom values file and reuse it for install and upgrade.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">Choose the example that matches your plug-in delivery method.</p> 
+           <p class="p"><strong class="ph b">OCI delivery</strong> (<code class="ph codeph">values-oci.yaml</code>):</p> 
+           <pre class="pre codeblock language-yaml"><code>redhat-developer-hub:
+  global:
+    clusterRouterBase: &lt;your_cluster_router_base&gt;
+    pluginMode: oci
+    imageTagInfo: "&lt;plugin-version&gt;"
+    # Registry host only. Replaces registry.redhat.io for all images.
+    imageRegistry: "&lt;disconnected_registry_url&gt;"
+    # Optional. Full OCI plugin image path for mirrors with non-standard
+    # repository paths. Overrides imageRegistry for OCI plugin artifacts only.
+    # Use when your mirror does not preserve the default repository path
+    # (ansible-automation-platform/automation-portal).
+    # ociPluginImage: "&lt;disconnected_registry_url&gt;/custom-path/automation-portal"
+  catalogIndex:
+    image:
+      registry: "&lt;disconnected_registry_url&gt;"
+  upstream:
+    backstage:
+      # The Helm chart pins images by SHA256 digest by default.
+      # Override with tag-based references if your mirroring method
+      # does not preserve digests.
+      image:
+        repository: rhdh/rhdh-hub-rhel9
+        tag: "&lt;rhdh_version&gt;"
+      appConfig:
+        ansible:
+          rhaap:
+            checkSSL: true  # Set to false if using self-signed certificates.
+        catalog:
+          providers:
+            rhaap:
+              '{{- include "catalog.providers.env" . }}':
+                orgs: "&lt;your-aap-organization-name&gt;"
+    postgresql:
+      image:
+        repository: rhel9/postgresql-&lt;version&gt;
+        tag: "&lt;postgresql_tag&gt;"</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The Helm chart pins the PostgreSQL image by SHA256 digest. If your mirroring method does not preserve digests, set <code class="ph codeph">postgresql.image.tag</code> to the tag you used when mirroring the image.</p> 
+            </div>
+           </div> 
+           <p class="p"><strong class="ph b">HTTP plug-in registry delivery</strong> (<code class="ph codeph">values-tarball.yaml</code>):</p> 
+           <pre class="pre codeblock language-yaml"><code>redhat-developer-hub:
+  global:
+    clusterRouterBase: &lt;your_cluster_router_base&gt;
+    pluginMode: tarball
+    # Registry host only. Replaces registry.redhat.io for the images.
+    imageRegistry: "&lt;disconnected_registry_url&gt;"
+  catalogIndex:
+    image:
+      registry: "&lt;disconnected_registry_url&gt;"
+  upstream:
+    backstage:
+      image:
+        repository: rhdh/rhdh-hub-rhel9
+        tag: "&lt;rhdh_version&gt;"
+      appConfig:
+        ansible:
+          rhaap:
+            checkSSL: true  # Set to false if using self-signed certificates.
+        catalog:
+          providers:
+            rhaap:
+              '{{- include "catalog.providers.env" . }}':
+                orgs: "&lt;your-aap-organization-name&gt;"
+    postgresql:
+      image:
+        repository: rhel9/postgresql-&lt;version&gt;
+        tag: "&lt;postgresql_tag&gt;"</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Replace <code class="ph codeph">&lt;rhdh_version&gt;</code> and <code class="ph codeph">&lt;version&gt;</code> with the versions bundled with your Helm chart. See the <a class="xref" href="https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle" target="_blank" rel="external noopener">Ansible Automation Portal Lifecycle</a> page for version mappings.</p> 
+            </div>
+           </div> 
+           <div class="note important note_important">
+            <span class="note__title">Important:</span> 
+            <div class="note__body"> 
+             <p class="p">Set <code class="ph codeph">imageRegistry</code> to the registry host only (for example, <code class="ph codeph">mirror.example.com</code>). Do not include repository paths. The chart appends the default repository path <code class="ph codeph">ansible-automation-platform/automation-portal</code> automatically. If your mirror uses a different repository structure, set <code class="ph codeph">ociPluginImage</code> to the full image path instead.</p> 
+            </div>
+           </div> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The <code class="ph codeph">secrets-scm</code> secret is only required if you use private SCM repositories for importing catalog entities or running software templates that access SCM. If you do not use SCM integration, you can skip creating this secret.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Install the chart using the <code class="ph codeph">helm install</code> command:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ helm install redhat-rhaap-portal \
+  redhat-rhaap-portal-x.y.z.tgz \
+  --namespace "${MY_NAMESPACE}" \
+  -f /path/to/values-oci.yaml</code></pre> 
+           <p class="p">To apply changes after deployment, upgrade the Helm release. If you install from the OpenShift web console, use Developer -&gt; Helm -&gt; select the release -&gt; Actions -&gt; Upgrade -&gt; YAML view.</p> 
+           <p class="p">To upgrade from the command line:</p> 
+           <pre class="pre codeblock language-terminal"><code>$ helm upgrade redhat-rhaap-portal \
+  redhat-rhaap-portal-x.y.z.tgz \
+  --namespace "${MY_NAMESPACE}" \
+  -f /path/to/values-oci.yaml</code></pre> 
+           <p class="p">Alternatively, you can pass values using <code class="ph codeph">--set</code> flags.</p> 
+           <p class="p"><strong class="ph b">OCI delivery:</strong></p> 
+           <pre class="pre codeblock language-terminal"><code>$ helm install redhat-rhaap-portal \
+  redhat-rhaap-portal-x.y.z.tgz \
+  --namespace "${MY_NAMESPACE}" \
+  --set redhat-developer-hub.global.clusterRouterBase="${MY_CLUSTER_ROUTER_BASE}" \
+  --set redhat-developer-hub.global.imageRegistry="&lt;disconnected_registry_url&gt;" \
+  --set redhat-developer-hub.global.pluginMode=oci</code></pre> 
+           <p class="p">To also set <code class="ph codeph">ociPluginImage</code> via <code class="ph codeph">--set</code>:</p> 
+           <pre class="pre codeblock language-terminal"><code>  --set redhat-developer-hub.global.ociPluginImage="&lt;disconnected_registry_url&gt;/custom-path/automation-portal"</code></pre> 
+           <p class="p"><strong class="ph b">HTTP plug-in registry delivery:</strong></p> 
+           <pre class="pre codeblock language-terminal"><code>$ helm install redhat-rhaap-portal \
+  redhat-rhaap-portal-x.y.z.tgz \
+  --namespace "${MY_NAMESPACE}" \
+  --set redhat-developer-hub.global.clusterRouterBase="${MY_CLUSTER_ROUTER_BASE}" \
+  --set redhat-developer-hub.global.imageRegistry="&lt;disconnected_registry_url&gt;" \
+  --set redhat-developer-hub.global.pluginMode=tarball</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title12" id="self-service-install-disconnected-configure-ca-certs"> 
+      <h2 class="title topictitle2" id="ariaid-title12">Configure CA certificates for private registries</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">If your private registry uses a certificate signed by an internal or self-signed CA, mount the CA certificate into the <code class="ph codeph">install-dynamic-plugins</code> init container so that <code class="ph codeph">skopeo</code> trusts the registry.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Obtain the CA certificate chain that signed your mirror registry's TLS certificate.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">If the registry uses a certificate chain, include the full chain:</p> 
+           <pre class="pre codeblock language-terminal"><code>$ cat registry.crt intermediate.crt root.crt &gt; ca-bundle.crt</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create a ConfigMap from the CA certificate:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-terminal"><code>$ oc create configmap registry-ca-crt \
+  --from-file=ca.crt=ca-bundle.crt -n <var class="keyword varname">namespace</var></code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the volume and mount to your values file.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">Add the <code class="ph codeph">registry-ca-crt</code> volume to <code class="ph codeph">extraVolumes</code>, and add the CA certificate volume mount to the <code class="ph codeph">install-dynamic-plugins</code> init container:</p> 
+           <pre class="pre codeblock language-yaml"><code>redhat-developer-hub:
+  upstream:
+    backstage:
+      extraVolumes:
+        - name: registry-ca-crt
+          configMap:
+            name: registry-ca-crt
+      initContainers:
+        - name: install-dynamic-plugins
+          volumeMounts:
+            - name: registry-ca-crt
+              mountPath: /etc/containers/certs.d/<var class="keyword varname">registry-host</var>
+              readOnly: true</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The <code class="ph codeph">mountPath</code> for the CA certificate must be the registry hostname only (for example, <code class="ph codeph">/etc/containers/certs.d/mirror.example.com</code>). Do not include repository paths. If the registry uses a non-standard port, include it in the path (for example, <code class="ph codeph">/etc/containers/certs.d/mirror.example.com:5000</code>).</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">After the deployment restarts, check the <code class="ph codeph">install-dynamic-plugins</code> init container logs for certificate errors:</p> 
+        <pre class="pre codeblock language-terminal"><code>$ oc logs <var class="keyword varname">pod-name</var> -c install-dynamic-plugins -n <var class="keyword varname">namespace</var> | grep -i "x509\|certificate"</code></pre> 
+        <p class="p">If the CA certificate is mounted correctly, there are no <code class="ph codeph">x509: certificate signed by unknown authority</code> errors.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title13" id="self-service-install-disconnected-verify"> 
+      <h2 class="title topictitle2" id="ariaid-title13">Verify the disconnected installation</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Verify the successful installation of the Helm chart in the disconnected environment. Check the Helm release status, monitor the pods, and verify that the application routes are accessible.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Check the Helm release status: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ helm list -n ${MY_NAMESPACE}</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Monitor the pods in your namespace to ensure they are running: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc get pods -n ${MY_NAMESPACE}</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Check for <code class="ph codeph">ImagePullBackOff</code> or other errors in pod events: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc describe pod &lt;pod_name&gt; -n ${MY_NAMESPACE}</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If the chart uses routes to expose services, verify that the routes are created and accessible: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc get route -n ${MY_NAMESPACE}</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title14" id="self-service-install-disconnected-configure-oci"> 
+      <h2 class="title topictitle2" id="ariaid-title14">Configure the Helm chart for air-gapped OCI delivery</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Configure Helm chart values for disconnected OCI plug-in delivery by setting the mirror registry, plug-in mode, and container image references.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Set the following values in your Helm values file for a disconnected installation with OCI delivery:</p> 
+        <pre class="pre codeblock"><code>redhat-developer-hub:
+  global:
+    pluginMode: oci
+    imageTagInfo: "&lt;plugin-version&gt;"
+    imageRegistry: "&lt;your-mirror-registry-host&gt;"
+    catalogIndex:
+      image:
+        registry: "&lt;your-mirror-registry-host&gt;"
+  upstream:
+    backstage:
+      image:
+        repository: rhdh/rhdh-hub-rhel9
+        tag: "&lt;platform-version&gt;"
+    postgresql:
+      image:
+        repository: rhel9/postgresql-15
+        tag: "latest"</code></pre> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Set <code class="ph codeph">imageRegistry</code> and <code class="ph codeph">catalogIndex.image.registry</code> to the registry host only (for example, <code class="ph codeph">mirror.example.com</code> or <code class="ph codeph">mirror.example.com:5000</code>). Use a hostname that cluster nodes can resolve and pull from. Do not include a repository path in <code class="ph codeph">imageRegistry</code>. Setting <code class="ph codeph">imageRegistry</code> does not override the catalog index registry; you must set <code class="ph codeph">catalogIndex.image.registry</code> separately.</p> 
+         </div>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">If your mirror uses a non-standard path for the Ansible plug-in OCI image, set <code class="ph codeph">ociPluginImage</code> to the full image path (for example, <code class="ph codeph">&lt;your-mirror-registry-host&gt;/custom-path/automation-portal</code>).</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ol steps">
+         <div class="li step p"> <span class="ph cmd">Complete the standard install steps using these values.</span> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title15" id="self-service-install-disconnected-troubleshooting"> 
+      <h2 class="title topictitle2" id="ariaid-title15">Troubleshooting disconnected installations</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use this reference to troubleshoot common issues that occur during disconnected Ansible automation portal installations.</p> 
+       <table class="table">
+        <caption></caption>
+        <colgroup>
+         <col>
+         <col>
+         <col>
+        </colgroup>
+        <thead class="thead"> 
+         <tr class="row"> 
+          <th class="entry" id="self-service-install-disconnected-troubleshooting__entry__1">Symptom</th> 
+          <th class="entry" id="self-service-install-disconnected-troubleshooting__entry__2">Cause</th> 
+          <th class="entry" id="self-service-install-disconnected-troubleshooting__entry__3">Solution</th> 
+         </tr> 
+        </thead>
+        <tbody class="tbody"> 
+         <tr class="row"> 
+          <td class="entry" headers="self-service-install-disconnected-troubleshooting__entry__1"><code class="ph codeph">authentication required</code> or <code class="ph codeph">unauthorized</code> in <code class="ph codeph">install-dynamic-plugins</code> init container logs</td> 
+          <td class="entry" headers="self-service-install-disconnected-troubleshooting__entry__2">Auth secret missing or malformed. The init container uses <code class="ph codeph">skopeo</code> and does not use cluster pull secrets.</td> 
+          <td class="entry" headers="self-service-install-disconnected-troubleshooting__entry__3">Create <code class="ph codeph">&lt;release-name&gt;-dynamic-plugins-registry-auth</code> secret. Use <code class="ph codeph">base64 -w0</code> to avoid multiline values that corrupt <code class="ph codeph">auth.json</code>.</td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="self-service-install-disconnected-troubleshooting__entry__1">Duplicate path in OCI URL (for example, <code class="ph codeph">.../ansible-automation-platform/ansible-automation-platform/...</code>)</td> 
+          <td class="entry" headers="self-service-install-disconnected-troubleshooting__entry__2"><code class="ph codeph">imageRegistry</code> includes a repository path instead of the registry host only.</td> 
+          <td class="entry" headers="self-service-install-disconnected-troubleshooting__entry__3">Set <code class="ph codeph">imageRegistry</code> to the registry host only. If your mirror uses a different repository structure, use <code class="ph codeph">ociPluginImage</code> to set the full image path.</td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="self-service-install-disconnected-troubleshooting__entry__1"><code class="ph codeph">x509: certificate signed by unknown authority</code> in init container logs</td> 
+          <td class="entry" headers="self-service-install-disconnected-troubleshooting__entry__2">Private registry uses a self-signed or internal CA certificate.</td> 
+          <td class="entry" headers="self-service-install-disconnected-troubleshooting__entry__3">Mount the CA certificate into the init container. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_disconnected_install#self-service-install-disconnected-configure-ca-certs" title="If your private registry uses a certificate signed by an internal or self-signed CA, mount the CA certificate into the install-dynamic-plugins init container so that skopeo trusts the registry.">Configure CA certificates for private registries</a>.</td> 
+         </tr> 
+        </tbody>
+       </table> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

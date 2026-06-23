@@ -1,0 +1,199 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="deploy-rhel-appliance-disconnected">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Deploy a RHEL appliance in a disconnected environment</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Deploy the Ansible automation portal RHEL appliance in a disconnected or air-gapped environment where the appliance has no access to external registries or the internet.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have downloaded the appliance disk image (QCOW2 or VMDK) from the <a class="xref" href="https://access.redhat.com/downloads/content/480" target="_blank" rel="external noopener">Red Hat Ansible Automation Platform downloads page</a> on a connected system.</li> 
+       <li class="li">You have a method to transfer the disk image to the disconnected environment (for example, removable media, secure file transfer, or an internal mirror registry).</li> 
+       <li class="li">You have a virtualization platform available in the disconnected environment (Red Hat OpenShift Virtualization, VMware vSphere, or KVM).</li> 
+       <li class="li">You have network connectivity from the appliance to your Ansible Automation Platform instance (internal network).</li> 
+       <li class="li">You have Ansible Automation Platform credentials: host URL, API token, OAuth client ID, and OAuth client secret. See <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/html/installing_self-service_automation_portal/self-service-preinstall-config_aap-self-service-install" target="_blank" rel="external noopener">Pre-installation configuration</a> in the installation guide.</li> 
+       <li class="li">You have an SSH key pair for appliance access.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">The appliance image includes everything needed to run without pulling content from external registries:</p> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Pre-bundled Ansible plugins
+       </dt> 
+       <dd class="dd">
+        Dynamic plugins are extracted at build time and stored at <code class="ph codeph">/usr/share/portal/plugins/</code>. The appliance loads plugins from the local filesystem, not from a registry.
+       </dd> 
+       <dt class="dt dlterm">
+        Pre-pulled container images
+       </dt> 
+       <dd class="dd">
+        The Ansible automation portal and PostgreSQL container images are embedded in the appliance image. No container image pulls occur at runtime.
+       </dd> 
+       <dt class="dt dlterm">
+        Self-signed SSL certificates
+       </dt> 
+       <dd class="dd">
+        Generated locally at first boot. You can replace them with your own certificates after deployment.
+       </dd> 
+       <dt class="dt dlterm">
+        No registry authentication required
+       </dt> 
+       <dd class="dd">
+        The appliance starts and runs without registry credentials. Registry authentication is only needed for future upgrades.
+       </dd> 
+      </dl> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <div class="li stepsection">
+       Transfer the appliance image
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Transfer the disk image from a connected machine to your disconnected environment. Choose the method that fits your network topology.</span> 
+        <div class="itemgroup info"> 
+         <p class="p"><strong class="ph b">Removable media:</strong> Copy the disk image directly to the disconnected host using removable media (USB drive, portable storage) or a secure file transfer mechanism.</p> 
+         <ol class="ol" type="a"> 
+          <li class="li">On a connected machine, download the QCOW2 or VMDK disk image from the <a class="xref" href="https://access.redhat.com/downloads/content/480" target="_blank" rel="external noopener">Red Hat Ansible Automation Platform downloads page</a>.</li> 
+          <li class="li">Copy the disk image to removable media.</li> 
+          <li class="li">Transfer the media to the disconnected environment and copy the image to the target host. For example, for a KVM deployment: <pre class="pre codeblock language-terminal"><code>$ rsync --progress /media/usb/portal-appliance.qcow2 /var/lib/libvirt/images/portal-appliance.qcow2</code></pre> </li> 
+         </ol> 
+         <p class="p"><strong class="ph b">Internal mirror registry:</strong> If your disconnected environment has an internal container registry, you can copy the bootc container image to your mirror and build disk images from it.</p> 
+         <ol class="ol" type="a"> 
+          <li class="li">On a connected machine, copy the bootc container image to your internal registry: <pre class="pre codeblock language-terminal"><code>$ skopeo copy \
+  docker://registry.redhat.io/ansible-automation-platform/bootc-automation-portal-rhel9:&lt;version&gt; \
+  docker://mirror.internal.example.com:5000/ansible-automation-platform/bootc-automation-portal-rhel9:&lt;version&gt;</code></pre> </li> 
+          <li class="li">If your mirror registry uses a self-signed certificate, add the CA certificate to the system trust store on the machine where you will build the disk image: <pre class="pre codeblock language-terminal"><code>$ sudo cp ca.crt /etc/pki/ca-trust/source/anchors/
+$ sudo update-ca-trust</code></pre> </li> 
+          <li class="li">Build the disk image from the mirror registry in your disconnected environment. Refer to the Red Hat documentation for building bootc disk images from a custom registry source.</li> 
+          <li class="li">Deploy the resulting disk image using the standard installation procedure for your platform.</li> 
+         </ol> 
+        </div> </li>
+      </ol>
+      <div class="li stepsection">
+       Deploy the appliance
+      </div>
+      <ol class="ol steps" start="2">
+       <li class="li step stepexpand"> <span class="ph cmd">Deploy the appliance on your virtualization platform following the standard deployment procedure for your environment:</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li">For RHEL with KVM, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_kvm" title="Deploy the Ansible automation portal appliance on a RHEL 9 host with KVM using virt-install.">Install Ansible automation portal on RHEL with KVM</a>.</li> 
+          <li class="li">For Red Hat OpenShift Virtualization, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_openshift_virt" title="Deploy the Ansible automation portal appliance on Red Hat OpenShift Virtualization to run the portal as a virtual machine alongside container workloads within your Red Hat OpenShift Container Platform cluster.">Install Ansible automation portal on Red Hat OpenShift Virtualization</a>.</li> 
+          <li class="li">For VMware vSphere, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_vmware" title="Deploy the Ansible automation portal appliance on VMware vSphere using the vSphere web client.">Install Ansible automation portal on VMware vSphere</a>.</li> 
+         </ul> 
+        </div> </li>
+      </ol>
+      <div class="li stepsection">
+       Configure the appliance
+      </div>
+      <ol class="ol steps" start="3">
+       <li class="li step stepexpand"> <span class="ph cmd">Provide initial configuration through cloud-init, VMware <code class="ph codeph">guestinfo</code> properties, or a pre-seeded configuration file.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">The cloud-init configuration for a disconnected deployment is the same as a connected deployment. Use the templates from <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_initial_config_wizard" title="Provide initial configuration for the Ansible automation portal appliance so that portal services can start and connect to Ansible Automation Platform.">Configure the appliance at first boot</a>.</p> 
+         <p class="p">The following differences apply in a disconnected environment:</p> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Source control integrations require network access.</strong> The <code class="ph codeph">integrations.github</code> and <code class="ph codeph">integrations.gitlab</code> cloud-init fields require network access to the source control service. If your disconnected environment has internal GitHub Enterprise or GitLab instances, configure these fields with the internal hostnames.</li> 
+          <li class="li"><strong class="ph b">Set <code class="ph codeph">network.base_url</code> to match your internal DNS or IP.</strong> Set <code class="ph codeph">network.base_url</code> to the hostname or IP address that users will use to access the Ansible automation portal RHEL appliance on your internal network. If omitted, the appliance auto-detects the VM IP address.</li> 
+         </ul> 
+         <p class="p">Minimal cloud-init template for disconnected deployment:</p> 
+         <pre class="pre codeblock language-yaml"><code>#cloud-config
+
+users:
+  - name: &lt;username&gt;
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - "&lt;your-ssh-public-key&gt;"
+
+aap:
+  host_url: "https://&lt;internal-aap-host&gt;"
+  token: "&lt;aap-api-token&gt;"
+  oauth:
+    client_id: "&lt;oauth-client-id&gt;"
+    client_secret: "&lt;oauth-client-secret&gt;"
+
+database:
+  type: builtin
+  builtin:
+    password: "auto"
+    admin_password: "auto"</code></pre> 
+        </div> </li>
+      </ol>
+      <div class="li stepsection">
+       Verify the installation
+      </div>
+      <ol class="ol steps" start="4">
+       <li class="li step stepexpand"> <span class="ph cmd">SSH into the Ansible automation portal RHEL appliance:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ ssh &lt;username&gt;@&lt;appliance-ip&gt;</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Check that all three services are running:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo systemctl status portal postgres devtools</code></pre> 
+         <p class="p">All three services (portal, postgres, devtools) should show <code class="ph codeph">active (running)</code>.</p> 
+         <p class="p">Alternatively, use the portal management CLI for detailed diagnostics:</p> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo ansible-portal status</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify that the Ansible automation portal is accessible:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ curl -fk https://&lt;appliance-address&gt;</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify that Ansible plugins loaded from the local filesystem:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo podman exec portal ls /opt/app-root/src/dynamic-plugins-root/</code></pre> 
+         <p class="p">You should see plugin directories listed. These plugins were loaded from the pre-baked files at <code class="ph codeph">/usr/share/portal/plugins/</code>, not from a registry.</p> 
+        </div> </li>
+      </ol>
+      <div class="li stepsection">
+       Set up registry credentials for upgrades (optional)
+      </div>
+      <ol class="ol steps" start="8">
+       <li class="li step stepexpand"> <span class="ph cmd">If you plan to upgrade the appliance using <code class="ph codeph">bootc upgrade</code> from <code class="ph codeph">registry.redhat.io</code> or a mirror registry, log in to the container registry and save the credentials:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo podman login --authfile /etc/ostree/auth.json registry.redhat.io</code></pre> 
+         <p class="p">The <code class="ph codeph">/etc/ostree/auth.json</code> file is what <code class="ph codeph">bootc upgrade</code> and <code class="ph codeph">bootc switch</code> use for registry authentication.</p> 
+         <p class="p">If no registry is available for image upgrades, you can bypass the registry authentication gate:</p> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo touch /etc/portal/.registry-auth-override</code></pre> 
+         <p class="p">This override marker allows the appliance to start without registry credentials. It is preserved across backups, restores, and bootc upgrades.</p> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">Verify that the portal URL is accessible from your browser.</li> 
+       <li class="li">Verify that all services show a healthy status.</li> 
+      </ul> 
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p">For appliance upgrades in disconnected environments, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_upgrade_disconnected" title="In disconnected environments, you can upgrade the Ansible automation portal RHEL appliance using a mirror registry. Configure the mirror registry so that bootc upgrade pulls images from your internal registry instead of registry.redhat.io.">Upgrade the appliance in a disconnected environment</a>.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_portal_cli_commands" title="The Ansible automation portal appliance provides the ansible-portal management CLI for administration and troubleshooting.">Portal CLI commands reference</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_rhel_troubleshooting" title="Common issues and solutions for deploying and managing Ansible automation portal RHEL appliances.">Troubleshooting RHEL appliances</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_cloud_init_reference" title="The following tables describe all cloud-init fields supported by the Ansible automation portal RHEL appliance.">Cloud-init reference</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -30,28 +30,3 @@ In this example the data is first passed through the `json_filter` and then thro
 
 Since every event should record the origin of the event the filter `eda.builtin.insert_meta_info` is added automatically by ansible-rulebook to add the `source name`, `type`, and `received_at`. The `received_at` stores a date time in UTC ISO8601 format and includes the microseconds. The `uuid` stores the unique id for the event. The `meta key` is used to store metadata about the event and its needed to correctly report about the events in the aap-server.
 
-## Author event filters
-
-You can create custom Python event filters to clean, normalize, or enrich incoming event data, ensuring it meets the format and quality required for rulebook condition evaluation.
-
-The basic structure follows:
-
-```
-# my_namespace.my_collection/extensions/eda/plugins/event_filter/my_filter.py
-def main(event: dict, arg1, arg2):
-# Process event data here
-return event
-```
-You can use this filter in a rulebook by adding it to the filters list in an event source:
-
-```
-sources:
-- name: azure_service_bus
-ansible.eda.azure_service_bus:
-conn_str: "{{connection_str}}"
-queue_name: "{{queue_name}}"
-filters:
-- my_namespace.my_collection.my_filter:
-arg1: hello
-arg2: world
-```

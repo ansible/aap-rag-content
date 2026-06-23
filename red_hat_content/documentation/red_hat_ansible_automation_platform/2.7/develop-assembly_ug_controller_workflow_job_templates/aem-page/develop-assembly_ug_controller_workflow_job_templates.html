@@ -1,0 +1,50 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="controller-workflow-job-templates"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Orchestrate complex automation with workflow job templates</h1> 
+    <div class="body conbody"> 
+     <p class="shortdesc">A workflow job template links together a sequence of disparate resources that tracks the full set of jobs that were part of the release process as a single unit.</p> 
+     <p class="p">These resources include the following:</p> 
+     <ul class="ul"> 
+      <li class="li">Job templates</li> 
+      <li class="li">Workflow job templates</li> 
+      <li class="li">Project syncs</li> 
+      <li class="li">Inventory source syncs</li> 
+     </ul> 
+     <p class="p">You can create both Job templates and Workflow job templates from <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</p> 
+     <p class="p">For Job templates, see Job templates.</p> 
+     <p class="p">The <strong class="ph b">Automation Templates</strong> page shows the workflow and job templates that are currently available.</p> 
+     <p class="p">Select the template name to display more information about the template, including when it last ran. This list is sorted alphabetically by name, but you can sort by other criteria, or search by various fields and attributes of a template.</p> 
+     <p class="p">From this screen you can launch <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rightrocket.png" width="15" alt="Launch icon"> , edit <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit icon">, and duplicate <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/copy.png" width="15" alt="Duplicate icon"> a workflow job template.</p> 
+     <p class="p">Only workflow templates have the workflow visualizer <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/visualizer.png" width="15" alt="Workflow visualizer"> icon as a shortcut for accessing the workflow editor.</p> 
+     <br> 
+     <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-templates-home.png" alt="Workflow templates home"> 
+     <br> 
+     <div class="note note note_note"> <span class="note__title">Note:</span> 
+      <div class="note__body"> 
+       <p class="p">Workflow templates can be used as building blocks for another workflow template. You can enable <strong class="ph b">Prompt on Launch</strong> by setting up several settings in a workflow template, which you can edit at the workflow job template level. These do not affect the values assigned at the individual workflow template level. For further instructions, see the Workflow visualizer section.</p> 
+      </div> 
+     </div> 
+    </div> 
+    <nav role="navigation" class="related-links"> 
+     <ul class="ullinks"> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_role_based_access_controls">Role-based access controls</a></strong><br>Learn the specific roles required to create, edit, and run automation controller workflow job templates. Understanding these permissions help ensures that access is properly delegated among users and teams.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflows#controller-workflows">Understand how to configure workflows</a></strong><br>Workflows enable you to configure a sequence of disparate job templates (or workflow templates) that might or might not share inventory, playbooks, or permissions.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_create_workflow_template#controller-create-workflow-template">Create a workflow job template</a></strong><br>To create a new workflow job template, complete the following steps:</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_workflow_visualizer#controller-workflow-visualizer">Build a graphical workflow representation with workflow visualizer</a></strong><br>The Workflow Visualizer provides a graphical way of linking together job templates, workflow templates, project syncs, and inventory syncs to build a workflow template.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_controller_approval_nodes#controller-approval-nodes">Configure nodes in workflow visualizer</a></strong><br>Use an Approval node to manually pause a workflow between playbooks. This allows you to review and approve the next step within a set timeframe or advance the process immediately.</li> 
+     </ul> 
+     <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+      <br> 
+      <ul class="linklist"> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates#controller-job-templates" title="You can create both Job templates and Workflow job templates from Automation Execution > Templates .">Job templates</a></li> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_workflow_visualizer#controller-workflow-visualizer" title="The Workflow Visualizer provides a graphical way of linking together job templates, workflow templates, project syncs, and inventory syncs to build a workflow template.">Workflow visualizer</a></li> 
+      </ul> 
+     </div> 
+    </nav> 
+   </article> 
+  </main>  
+ </body>
+</html>

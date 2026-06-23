@@ -1,0 +1,1323 @@
+<body><div xml:lang="en-US" class="book" id="idm140497594481312"><div class="titlepage"><div><div class="producttitle"><span class="productname">Ansible on Clouds</span> <span class="productnumber">2.x</span></div><div><h2 class="subtitle">Install and configure Red Hat Ansible Automation Platform on Microsoft Azure</h2></div><div><div xml:lang="en-US" class="authorgroup"><span class="orgname">Red Hat Customer Content Services </span></div></div><div><a href="#idm140497595277568">Legal Notice</a></div><div><div class="abstract"><p class="title"><strong>Abstract</strong></p>
+			Ansible Automation Platform helps teams manage complex multi-tier deployments by adding control, knowledge, and delegation to Ansible-powered environments. This guide helps you to understand the installation and use of Ansible Automation Platform on Microsoft Azure. This document has been updated to include information for the latest release of Ansible Automation Platform on Microsoft Azure.
+		</div></div></div><hr/></div><section class="preface Role ARG Spec" id="providing-feedback"><div class="titlepage"><div><div><h1 class="title">Providing feedback on Red Hat documentation</h1></div></div></div><p class="Role ARG Spec Role ARG Spec">
+			If you have a suggestion to improve this documentation, or find an error, you can contact technical support at <a class="link" href="https://access.redhat.com">https://access.redhat.com</a> to open a request.
+		</p><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+				<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Disclaimer</span></strong></span>: Links contained in this document to external websites are provided for convenience only. Red Hat has not reviewed the links and is not responsible for the content or its availability. The inclusion of any link to an external website does not imply endorsement by Red Hat of the website or their entities, products or services. You agree that Red Hat is not responsible or liable for any loss or expenses that may result due to your use of (or reliance on) the external site or content.
+			</p></div></div></section><section class="chapter Role ARG Spec" id="intro-to-aap-on-azure"><div class="titlepage"><div><div><h1 class="title">Chapter 1. Introduction to Red Hat Ansible Automation Platform on Microsoft Azure</h1></div></div></div><p class="_abstract _abstract">
+			Learn about Red Hat Ansible Automation Platform on Microsoft Azure, and how to quickly deploy, configure, and manage infrastructure.
+		</p><section class="section Role ARG Spec" id="con-azure-about_azure-intro"><div class="titlepage"><div><div><h2 class="title">1.1. About Ansible Automation Platform on Microsoft Azure</h2></div></div></div><p class="_abstract _abstract">
+				Ansible Automation Platform on Microsoft Azure is a managed application that you can deploy from the <a class="link" href="https://azure.microsoft.com/en-us/marketplace/">Azure Marketplace</a> portal to a resource group in your Azure tenant.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Ansible Automation Platform on Microsoft Azure provides access to a library of Ansible content collections, and it is integrated with key Azure services, so you can start deploying, configuring, and managing infrastructure and applications quickly.
+			</p></section><section class="section Role ARG Spec" id="con-azure-pricing_azure-intro"><div class="titlepage"><div><div><h2 class="title">1.2. Ansible Automation Platform on Microsoft Azure pricing tier</h2></div></div></div><p class="_abstract _abstract">
+				As of December 16, 2024, Microsoft has adjusted the API, quotas, and limits of Azure Kubernetes Service (AKS) cluster tiers.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				All Ansible Automation Platform on Microsoft Azure deployments will move from the AKS <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Free tier</span></strong></span> to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Standard tier</span></strong></span> as part of infrastructure changes when upgrading to Ansible Automation Platform 2.6. This transition aligns the management requirements of Ansible Automation Platform on Microsoft Azure deployments to the proper Azure solution. This change increases the Azure infrastructure costs as the new infrastructure is added to the offering.
+			</p></section><section class="section Role ARG Spec" id="con-azure-architecture_azure-intro"><div class="titlepage"><div><div><h2 class="title">1.3. Application Architecture</h2></div></div></div><p class="_abstract _abstract">
+				Ansible Automation Platform on Microsoft Azure is installed as a managed application. Red Hat manages both the underlying Azure resources and the software running on it while that infrastructure runs in your Azure tenant.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				The managed application resource group (RG) is completely separate from other RGs in your tenant. Red Hat only has access to the managed application RG, with no visibility into other tenant resources.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For information about how this works and how resources and access are isolated from the rest of your Azure resources, refer to <a class="link" href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/overview">Azure managed applications overview</a> in the Microsoft <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Azure managed applications</span></em></span> guide.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Ansible Automation Platform on Microsoft Azure uses the following RGs:
+			</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						A new or existing RG in your tenant. This RG includes a single resource referring to the Ansible Automation Platform on Microsoft Azure managed application deployment. Red Hat has access to the managed app to perform support, maintenance, and upgrades, but the RG is outside of Red Hat’s management.
+					</li><li class="listitem">
+						A multi-tenant managed resource group (MRG) that contains most of the infrastructure needed to operate Ansible Automation Platform on Microsoft Azure. This multi-tenant MRG is shared between the Red Hat tenant and your tenant. Red Hat has full administrative control and you have read-only access to the RG.
+					</li><li class="listitem">
+						An AKS node pool resource group (NPRG). Microsoft requires the NPRG for AKS deployments. It contains resources that AKS uses to function. It is created on deployment, and it is outside of Red Hat’s management. Refer to <a class="link" href="https://learn.microsoft.com/en-us/azure/aks/faq#why-are-two-resource-groups-created-with-aks">Microsoft’s AKS documentation</a> for more information about NPRGs.
+					</li></ul></div><div class="admonition note Role ARG Spec"><div class="admonition_header">Note</div><div><p class="Role ARG Spec Role ARG Spec">
+					Do not interact with any resources in the NPRG unless explicitly directed to by the Ansible Automation Platform on Microsoft Azure SRE team. Changes to resources in the NPRG cannot be protected by Red Hat and can cause irrecoverable damage to the application.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					Red Hat cannot restrict your ability to change or delete resources in the NPRG.
+				</p></div></div><p class="Role ARG Spec Role ARG Spec">
+				When you install Ansible Automation Platform on Microsoft Azure, you choose whether the deployment is public or private. This affects how users can access the Ansible Automation Platform user interfaces.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Regardless of whether you choose a public or private deployment, you must configure network peering for outbound communication from Ansible Automation Platform to the private networks that contain resources that you want to automate against. You can configure network peering from Ansible Automation Platform on Microsoft Azure to your private Azure VNets and to on-premises or multi-cloud networks where transit routing with Azure exists.
+			</p><section class="section Role ARG Spec" id="con-aap-public-access_azure-intro"><div class="titlepage"><div><div><h3 class="title">1.3.1. Public deployment</h3></div></div></div><p class="_abstract _abstract">
+					Public deployments permit ingress to the Ansible Automation Platform on Microsoft Azure user interfaces over the public internet.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					Upon deployment, a domain name is issued to the Ansible Automation Platform on Microsoft Azure instance. No configuration is required to access Ansible Automation Platform. You can navigate to the domain from the public internet and log in to the user interfaces.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					The following diagram outlines the application resources and architecture that are deployed into the managed application resource group on a public deployment of Ansible Automation Platform on Microsoft Azure into your Azure subscription. The IP ranges change based on the networking address range you set on deployment.
+				</p><div class="informalfigure"><div class="mediaobject"><img src="https://access.redhat.com/webassets/avalon/d/Ansible_on_Clouds-2.x-Red_Hat_Ansible_Automation_Platform_on_Microsoft_Azure_Guide-en-US/images/4e2be3c507dff0ba01ec5353f07e312b/aap-on-azure-public-deployment.png" alt="aap on azure public deployment"/></div></div></section><section class="section Role ARG Spec" id="con-aap-private-access_azure-intro"><div class="titlepage"><div><div><h3 class="title">1.3.2. Private deployment</h3></div></div></div><p class="_abstract _abstract">
+					A private deployment of Ansible Automation Platform resides in an isolated Azure VNet with no access from external sources: traffic to and from the public internet and other Azure VNets and subnets is blocked.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					To access the URL for the Ansible Automation Platform user interfaces, you must configure network peering.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					After you have configured peering and routing, you can access Ansible Automation Platform through a VM on a connected Azure subnet, or directly if your organization has transit routing set up between Azure and your local network.
+				</p><div class="admonition note Role ARG Spec"><div class="admonition_header">Note</div><div><p class="Role ARG Spec Role ARG Spec">
+						No two Azure networking configurations are the same. To allow user access to your Ansible Automation Platform URL, your organization needs to work with your Azure administrators to connect the private access deployment.
+					</p></div></div><p class="Role ARG Spec Role ARG Spec">
+					The following diagram outlines the application resources and architecture that are deployed into the managed application resource group on a private deployment of Ansible Automation Platform on Microsoft Azure into your Azure subscription. The IP ranges change based on the networking address range you set on deployment.
+				</p><div class="informalfigure"><div class="mediaobject"><img src="https://access.redhat.com/webassets/avalon/d/Ansible_on_Clouds-2.x-Red_Hat_Ansible_Automation_Platform_on_Microsoft_Azure_Guide-en-US/images/cccc9c904ab44793c49b0d2dedebd634/aap-on-azure-private-deployment.png" alt="aap on azure private deployment"/></div></div></section><section class="section Role ARG Spec" id="con-aap-security_azure-intro"><div class="titlepage"><div><div><h3 class="title">1.3.3. Security</h3></div></div></div><p class="_abstract _abstract">
+					Ansible Automation Platform on Microsoft Azure follows security best practices from both Red Hat and Microsoft. The following resources describe the security posture of the application and the infrastructure.
+				</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem"><p class="simpara">
+							Data encryption in flight and at rest
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+									<a class="link" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest#azure-storage">All Azure Storage Services enable server-side encryption by default using service-managed keys</a>
+								</li><li class="listitem">
+									<a class="link" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest#conclusion">All Azure hosted services are committed to providing Encryption at Rest options</a>
+								</li><li class="listitem">
+									<a class="link" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-overview">Azure encryption overview</a>
+								</li><li class="listitem">
+									All communications between services within Azure Kubernetes Service (AKS) (for example, Ansible Automation Platform, Postgres, storage accounts) use Transport Layer Security (TLS) v1.2 or higher.
+								</li><li class="listitem">
+									<a class="link" href="https://learn.microsoft.com/en-us/security/benchmark/azure/baselines/azure-kubernetes-service-aks-security-baseline">Azure security baseline for Azure Kubernetes Service (AKS)</a>
+								</li></ul></div></li><li class="listitem"><p class="simpara">
+							Password storage
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+									The customer-supplied Ansible Automation Platform admin password is encrypted in transit. It is accessible to site reliability engineers (SREs) from the Kubernetes API and can be reset by the SREs upon customer request.
+								</li></ul></div></li><li class="listitem"><p class="simpara">
+							Keys generated with industry standards
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+									<a class="link" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-overview#azure-storage-service-encryption">Data in Azure Storage is encrypted and decrypted transparently using 256-bit AES encryption, one of the strongest block ciphers available, and is FIPS 140-2 compliant</a>
+								</li></ul></div></li><li class="listitem"><p class="simpara">
+							Key installation, rotation
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+									<a class="link" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-models#key-access">Microsoft manages key rotation, backup, and redundancy</a>
+								</li></ul></div></li><li class="listitem"><p class="simpara">
+							SSL/TLS traffic encryption
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+									All communications between services within AKS (for example, Ansible Automation Platform, Postgres, storage accounts) use TLS v1.2 or higher.
+								</li><li class="listitem">
+									All communications to Ansible Automation Platform UIs, either via the application gateway for public deployments or the nginx ingress for private deployments, use TLS v1.2 or higher.
+								</li></ul></div></li><li class="listitem"><p class="simpara">
+							API security
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+									Any parts of the Ansible Automation Platform APIs that could leak any sensitive information are only accessible via authenticating as a known Ansible Automation Platform user and require that user to have the right level of authorization to use those APIs. In a private deployment, access to the Ansible Automation Platform APIs is only accessible to the customer via the route they choose to connect to the private deployment.
+								</li><li class="listitem">
+									The Kubernetes API is private and only accessible from a private endpoint
+								</li><li class="listitem">
+									Workload identity is enabled and it allows Kubernetes applications to access Azure cloud resources securely with Microsoft Entra ID.
+								</li></ul></div></li><li class="listitem"><p class="simpara">
+							Updates and patching
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+									The Red Hat SREs regularly update the Kubernetes version, underlying node OS, and Ansible Automation Platform version to the latest available stable versions to get the latest features, bug fixes, and security fixes.
+								</li></ul></div></li></ul></div></section></section><section class="section Role ARG Spec" id="con-azure-disaster-recovery_azure-intro"><div class="titlepage"><div><div><h2 class="title">1.4. Disaster recovery</h2></div></div></div><p class="_abstract _abstract">
+				When you deploy Ansible Automation Platform on Microsoft Azure, you must enable or disable disaster recovery in the <code class="literal Role ARG Spec">Business Continuity</code> tab of the form. There is no default setting for disaster recovery.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				The disaster recovery feature incurs additional Microsoft Azure infrastructure costs. See <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#con-azure-infrastructure-usage_azure-intro">Ansible Automation Platform on Microsoft Azure infrastructure usage</a> for details of the Service Shape of the Storage account.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				If you want to enable disaster recovery on an existing instance of Ansible Automation Platform on Microsoft Azure, contact Red Hat customer support.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				The disaster recovery feature creates a nightly backup of your managed application and stores it in a business continuity region that is geographically distant to your primary region. For information about regional pairings, refer to <a class="link" href="https://learn.microsoft.com/en-us/azure/reliability/cross-region-replication-azure#azure-cross-region-replication-pairings-for-all-geographies">Azure cross-region replication pairings for all geographies</a> in the Microsoft Azure reliability documentation.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For information about recovering your application after a service-impacting event, see the <a class="link" href="https://access.redhat.com/articles/7010302">Disaster recovery for Ansible Automation Platform on Microsoft Azure</a> article on the Red Hat customer portal.
+			</p><section class="section Role ARG Spec" id="primary_and_business_continuity_regions"><div class="titlepage"><div><div><h3 class="title">1.4.1. Primary and business continuity regions</h3></div></div></div><p class="Role ARG Spec Role ARG Spec">
+					Ansible Automation Platform on Microsoft Azure uses Azure regional pairs to ensure data residency and compliance within the same geography. The following table lists primary regions and their corresponding business continuity (secondary) regions.
+				</p><div class="scrollable-table scrollable-table">
+					<div class="informaltable"><table class="lt-4-cols lt-7-rows Role ARG Spec"><colgroup><col style="width: 50%; " class="col_1"><!--Empty--></col><col style="width: 50%; " class="col_2"><!--Empty--></col></colgroup><thead><tr><th align="left" valign="top" id="idm140497602411776" scope="col">Primary Region</th><th align="left" valign="top" id="idm140497602410688" scope="col">Business continuity region</th></tr></thead><tbody><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Australia East
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										Australia Southeast
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Austria East
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										N/A
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Belgium Central
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										N/A
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Brazil South
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										South Central US
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Canada Central
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										Canada East
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Central India
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										South India
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Central US
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										East US 2
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Chile Central
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										N/A
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Denmark East
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										N/A
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										East Asia
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										Southeast Asia
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										East US
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										West US
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										East US 2
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										Central US
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										France Central
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										France South
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Germany West Central
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										Germany North
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Indonesia Central
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										N/A
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Israel Central
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										N/A
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Italy North
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										N/A
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Japan East
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										Japan West
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Japan West
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										Japan East
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Korea Central
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										Korea South
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Malaysia West
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										N/A
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Mexico Central
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										N/A
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										New Zealand North
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										N/A
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										North Europe
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										West Europe
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Norway East
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										Norway West
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Poland Central
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										N/A
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Qatar Central
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										N/A
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										South Africa North
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										South Africa West
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										South Central US
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										North Central US
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Southeast Asia
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										East Asia
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Sweden Central
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										Sweden South
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										Switzerland North
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										Switzerland West
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										UAE North
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										UAE Central
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										UK South
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										UK West
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										West Europe
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										North Europe
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										West US 2
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										West Central US
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140497602411776"> <p>
+										West US 3
+									</p>
+									 </td><td align="left" valign="top" headers="idm140497602410688"> <p>
+										East US
+									</p>
+									 </td></tr></tbody></table></div>
+
+				</div></section></section><section class="section Role ARG Spec" id="con-azure-infrastructure-usage_azure-intro"><div class="titlepage"><div><div><h2 class="title">1.5. Ansible Automation Platform on Microsoft Azure infrastructure usage</h2></div></div></div><p class="_abstract _abstract">
+				When you install Ansible Automation Platform on Microsoft Azure, you deploy the following infrastructure into your Microsoft Azure subscription:
+			</p><div class="variablelist Role ARG Spec"><dl class="variablelist Role ARG Spec"><dt><span class="term">Managed identity</span></dt><dd>
+							A Microsoft Azure service that enables Ansible Automation Platform components to communicate with other Microsoft Azure services such as database, DNS, storage, and other services.
+						</dd><dt><span class="term">Key vault</span></dt><dd>
+							A secure key vault used to store secrets that are unique to the Ansible Automation Platform deployment.
+						</dd><dt><span class="term">Log Analytics Workspace</span></dt><dd>
+							A Microsoft Azure service that enables Red Hat site reliability engineers to inspect the operations of Ansible Automation Platform on Microsoft Azure.
+						</dd><dt><span class="term">Private DNS Zone</span></dt><dd>
+							Manages local DNS requests for the services used by Ansible Automation Platform on Microsoft Azure.
+						</dd><dt><span class="term">Storage account</span></dt><dd><p class="simpara">
+							The Microsoft Azure service is used for file and block storage such as local storage of projects and containers.
+						</p><p class="Role ARG Spec Role ARG Spec">
+							<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Service Shape:</span></strong></span>
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+									If disaster recovery is not enabled: StorageV2 - Standard_LRS
+								</li><li class="listitem">
+									If disaster recovery is enabled: StorageV2 - Standard_GRS
+								</li></ul></div></dd><dt><span class="term">Virtual network</span></dt><dd><p class="simpara">
+							The Microsoft Azure service is used to manage all internal networking and dependent services such as the Azure Application Gateway.
+						</p><p class="Role ARG Spec Role ARG Spec">
+							<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Service Shape:</span></strong></span> Application Gateway: WAF_v2
+						</p></dd><dt><span class="term">Azure Kubernetes service (AKS)</span></dt><dd><p class="simpara">
+							The Kubernetes cluster used to deploy Ansible Automation Platform applications and services.
+						</p><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+								All deployments will move from the Azure Kubernetes Service (AKS) <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Free tier</span></strong></span> to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Standard tier</span></strong></span> as part of infrastructure changes when upgrading to Ansible Automation Platform 2.6.
+							</p></div></div><p class="Role ARG Spec Role ARG Spec">
+							<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Service Shape for all Ansible Automation Platform plan sizes:</span></strong></span>
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+									Compute nodes: Standard_D4ds_v5 (4 vCPUs x 16 GiB)
+								</li><li class="listitem">
+									Autoscaling minimum nodes: 3
+								</li><li class="listitem">
+									Autoscaling maximum nodes: 20
+								</li></ul></div></dd><dt><span class="term">Azure Database for PostgreSQL</span></dt><dd><p class="simpara">
+							A Microsoft Azure database service used for Ansible Automation Platform’s PostgreSQL database. The following table presents the different configuration tiers based on the plan purchased.
+						</p><div class="informaltable"><table class="gt-4-cols lt-7-rows Role ARG Spec"><colgroup><col style="width: 25%; " class="col_1"><!--Empty--></col><col style="width: 25%; " class="col_2"><!--Empty--></col><col style="width: 25%; " class="col_3"><!--Empty--></col><col style="width: 25%; " class="col_4"><!--Empty--></col></colgroup><tbody><tr><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Ansible Automation Platform plan size (minimum node count)
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Database shape configuration
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Database storage
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											<a class="link" href="https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-compute-storage#storage">IOPS</a>
+										</p>
+										 </td></tr><tr><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											50
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Standard_D2s_v3
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											512 GB
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Provisioned 2,300; up to 3,500
+										</p>
+										 </td></tr><tr><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											400
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Standard_D4s_v3
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											512 GB
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Provisioned 2,300; up to 3,500
+										</p>
+										 </td></tr><tr><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											1000
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Standard_D4s_v3
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											512 GB
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Provisioned 2,300; up to 3,500
+										</p>
+										 </td></tr><tr><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											2500
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Standard_D4s_v3
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											512 GB
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Provisioned 2,300; up to 3,500
+										</p>
+										 </td></tr><tr><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											5000
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Standard_D4s_v3
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											1 TB
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											5000
+										</p>
+										 </td></tr><tr><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											10000
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											Standard_D4s_v3
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											1 TB
+										</p>
+										 </td><td style="text-align: left; vertical-align: top; "> <p class="Role ARG Spec Role ARG Spec">
+											5000
+										</p>
+										 </td></tr></tbody></table></div></dd></dl></div><p class="Role ARG Spec Role ARG Spec">
+				Exact infrastructure usage depends on the length of time that the managed application is deployed in your tenancy, and the automation requirements that might cause the Kubernetes cluster to autoscale to meet the demands of your workload.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Microsoft provides a <a class="link" href="https://azure.microsoft.com/en-us/pricing/calculator/">Pricing calculator</a> to estimate your costs for Microsoft Azure products and services. Red Hat has configured an example scenario in the pricing calculator: use the <a class="link" href="https://azure.com/e/d12a08795a4942c1801c610810791764">Red Hat Ansible Automation Platform on Azure Infrastructure Estimate</a> to tune Kubernetes expected auto scaling variables based on your organization’s workloads.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				If Red Hat determines that a deployment’s automation might exceed the capabilities of the current tier of the deployment, then Red Hat site reliability engineers will work with you to upgrade the infrastructure tier based on automation needs.
+			</p></section><section class="section Role ARG Spec" id="con-azure-lifecycle_azure-intro"><div class="titlepage"><div><div><h2 class="title">1.6. Lifecycle management</h2></div></div></div><p class="_abstract _abstract">
+				Ansible Automation Platform is responsible for the monitoring, health, and maintenance of the underlying services and Ansible Automation Platform on Microsoft Azure core systems as well as the operation of Ansible Automation Platform on Microsoft Azure itself. This includes lifecycle management of the components.
+			</p></section><section class="section Role ARG Spec" id="con-azure-scaling_azure-intro"><div class="titlepage"><div><div><h2 class="title">1.7. Ansible Automation Platform on Microsoft Azure scaling</h2></div></div></div><p class="_abstract _abstract">
+				Ansible Automation Platform on Microsoft Azure default configuration of <a class="link" href="https://learn.microsoft.com/en-us/azure/aks/cluster-autoscaler#about-the-cluster-autoscaler">Microsoft Azure cluster autoscaler</a> for autoscaling, with the following settings to limit the number of nodes:
+			</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						Minimum Nodes: 3
+					</li><li class="listitem">
+						Maximum Nodes: 20
+					</li></ul></div></section><section class="section Role ARG Spec" id="con-azure-migration_azure-intro"><div class="titlepage"><div><div><h2 class="title">1.8. Migration</h2></div></div></div><p class="_abstract _abstract">
+				Red Hat does not provide a solution to migrate existing deployments to Ansible Automation Platform on Microsoft Azure.
+			</p></section></section><section class="chapter Role ARG Spec" id="azure-install-prerequisites"><div class="titlepage"><div><div><h1 class="title">Chapter 2. Prerequisites for Installing Red Hat Ansible Automation Platform on Microsoft Azure</h1></div></div></div><p class="_abstract _abstract">
+			To install Ansible Automation Platform on Microsoft Azure, you must first ensure your environment meets all technical prerequisites.
+		</p><section class="section Role ARG Spec" id="azure_requirements"><div class="titlepage"><div><div><h2 class="title">2.1. Azure requirements</h2></div></div></div><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						A subscription for Microsoft Azure.
+					</li><li class="listitem">
+						Contributor or Administrator access to that Azure subscription.
+					</li><li class="listitem">
+						Access to the Azure command line interface (CLI).
+					</li></ul></div></section><section class="section Role ARG Spec" id="ansible_automation_platform_requirements"><div class="titlepage"><div><div><h2 class="title">2.2. Ansible Automation Platform requirements</h2></div></div></div><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						An account on the Red Hat Red Hat Customer Portal (<a class="link" href="https://access.redhat.com/">access.redhat.com</a>).
+					</li><li class="listitem">
+						A specific subscription entitlement for Red Hat Ansible Automation Platform.
+					</li></ul></div></section><section class="section Role ARG Spec" id="ref-azure-resource-quotas_azure-install-prerequisites"><div class="titlepage"><div><div><h2 class="title">2.3. Azure resource quotas and infrastructure limits</h2></div></div></div><p class="_abstract _abstract">
+				Microsoft imposes resource limits within each Azure region. The CPU limit is the most likely to impact Red Hat Ansible Automation Platform on Microsoft Azure.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Before you install Ansible Automation Platform on Microsoft Azure, ensure that you have capacity to deploy the managed application into your desired region. Refer to <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#con-azure-infrastructure-usage_azure-intro">Ansible Automation Platform on Microsoft Azure infrastructure usage</a> for infrastructure requirements.
+			</p><section class="section Role ARG Spec" id="regional_vcpu_limits"><div class="titlepage"><div><div><h3 class="title">2.3.1. Regional vCPU limits</h3></div></div></div><p class="Role ARG Spec Role ARG Spec">
+					The Azure resources used during the deployment of the managed application temporarily exceed the resource requirements in <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#con-azure-infrastructure-usage_azure-intro">Ansible Automation Platform on Microsoft Azure infrastructure usage</a>. The <code class="literal Role ARG Spec">Total Regional vCPUs</code> quota is temporarily consumed when deploying the managed application.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					Every Azure region has a separate <code class="literal Role ARG Spec">Total Regional vCPUs</code> quota. To prevent installation failure, ensure that you have at least 80 DDSv5 and 8 DSV3 vCPUs available in the Azure region where you want to deploy the managed application.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					You can view the resource quotas for your subscription from the Azure console. Open the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">My Quotas</span></strong></span> page and select the region where you wish to deploy the managed application to view your allocation and usage metrics for that region. Ensure that you have selected a single region. Viewing all regions at once does not show the limitations of a single Azure region.
+				</p></section><section class="section Role ARG Spec" id="regional_standardcore_limits"><div class="titlepage"><div><div><h3 class="title">2.3.2. Regional StandardCore limits</h3></div></div></div><p class="Role ARG Spec Role ARG Spec">
+					The <code class="literal Role ARG Spec">StandardCore</code> limit is a compute metric for the resources that are temporarily consumed when deploying the managed application.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					It is possible that the Ansible Automation Platform on Microsoft Azure can deploy without hitting the <code class="literal Role ARG Spec">StandardCore</code> limit. When a deployment fails because the consumed resources hit the <code class="literal Role ARG Spec">StandardCore</code> limit, the error message includes <code class="literal Role ARG Spec">container group quota 'StandardCores' exceeded</code>:
+				</p><pre class="screen Role ARG Spec Role ARG Spec">code: DeploymentFailed
+message:
+  At least one resource deployment operation failed. Please list deployment operations for details.
+  Please see https://aka.ms/DeployOperations for usage details.
+details:
+  - code: DeploymentScriptContainerGroupInvalidSettings
+    message:
+      Resource type 'Microsoft.ContainerInstance/containerGroups'
+      container group quota 'StandardCores' exceeded in region 'eastus'.
+      Limit: '10', Usage: '10' Requested: '1'.</pre></section><section class="section Role ARG Spec" id="requesting_standardcore_limit_increase"><div class="titlepage"><div><div><h3 class="title">2.3.3. Requesting StandardCore limit increase</h3></div></div></div><p class="Role ARG Spec Role ARG Spec">
+					The <code class="literal Role ARG Spec">StandardCore</code> metric is not displayed in the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">My Quotas</span></strong></span> page in the Azure console. To request the value of your regional limit, contact Microsoft directly.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					If your deployments fail because the consumed resources reach this limit, you must submit a resource increase request for <code class="literal Role ARG Spec">StandardCore</code> to Microsoft. Only submit a quota increase request if you encounter a deployment failure due to this issue.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					Use the following information to respond to questions from Microsoft support:
+				</p><div class="variablelist Role ARG Spec"><dl class="variablelist Role ARG Spec"><dt><span class="term">Will the container groups be run in Linux or Windows?</span></dt><dd>
+								Linux
+							</dd><dt><span class="term">What will the core and memory be in your Container Group instance?</span></dt><dd>
+								Red Hat recommends 20 cores, 16 GB
+							</dd><dt><span class="term">When will you create all the Container Group Instances?</span></dt><dd>
+								During managed application deployment of Red Hat Ansible Automation Platform on Microsoft Azure
+							</dd><dt><span class="term">How frequent will you create/delete the container groups?</span></dt><dd>
+								Only during managed application deployment of Red Hat Ansible Automation Platform on Microsoft Azure
+							</dd></dl></div></section></section><section class="section Role ARG Spec" id="ref-azure-resource-providers_azure-install-prerequisites"><div class="titlepage"><div><div><h2 class="title">2.4. Azure resource providers</h2></div></div></div><p class="_abstract _abstract">
+				Microsoft uses Azure resource providers as a set of REST operations that enable functionality for a specific Azure service in an Azure subscription.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For example, the Key Vault service consists of a resource provider named Microsoft.KeyVault. The resource provider defines REST operations for managing vaults, secrets, keys, and certificates.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				The resource provider defines the Azure resources you can deploy in your Azure subscription.
+			</p><section class="section Role ARG Spec" id="required_azure_resource_providers"><div class="titlepage"><div><div><h3 class="title">2.4.1. Required Azure Resource Providers</h3></div></div></div><p class="Role ARG Spec Role ARG Spec">
+					Ansible Automation Platform on Microsoft Azure installation requires specific Azure Resource Providers registered in your Azure subscription before you attempt a new installation:
+				</p><pre class="screen Role ARG Spec Role ARG Spec">"Microsoft.Compute"
+"Microsoft.ContainerService/"
+"Microsoft.DBforPostgreSQL/"
+"Microsoft.KeyVault/"
+"Microsoft.ManagedIdentity/"
+"Microsoft.Network/"
+"Microsoft.OperationalInsights/"
+"Microsoft.OperationsManagement/"
+"Microsoft.Resources/"
+"Microsoft.ResourceGraph"
+"Microsoft.Storage/"
+"Microsoft.Solutions"</pre></section><section class="section Role ARG Spec" id="registering_azure_resource_providers"><div class="titlepage"><div><div><h3 class="title">2.4.2. Registering Azure Resource Providers</h3></div></div></div><p class="Role ARG Spec Role ARG Spec">
+					To register Azure Resource Providers, follow the instructions in the <a class="link" href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types#register-resource-provider">Register resource provider</a> section of the Azure documentation.
+				</p></section></section><section class="section Role ARG Spec" id="con-azure-network_azure-install-prerequisites"><div class="titlepage"><div><div><h2 class="title">2.5. Network</h2></div></div></div><p class="_abstract _abstract">
+				When you deploy Ansible Automation Platform on Microsoft Azure, you can configure the following networks in the <code class="literal Role ARG Spec">Networking</code> tab of the form:
+			</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						The networking address range (CIDR block) for the VNet that your Ansible Automation Platform on Microsoft Azure application uses.
+					</li><li class="listitem">
+						AKS network CIDR blocks.
+					</li></ul></div><div class="admonition note Role ARG Spec"><div class="admonition_header">Note</div><div><p class="Role ARG Spec Role ARG Spec">
+					Plan your networking configuration before you deploy the Ansible Automation Platform on Microsoft Azure application, because you cannot change it after deployment.
+				</p></div></div><section class="section Role ARG Spec" id="azure-vnet-cidr_azure-install-prerequisites"><div class="titlepage"><div><div><h3 class="title">2.5.1. VNet CIDR blocks</h3></div></div></div><p class="_abstract _abstract">
+					You can configure the networking address range (CIDR block) for the VNet that your Ansible Automation Platform on Microsoft Azure application uses.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					You set the CIDR block for the application in the <code class="literal Role ARG Spec">Configure virtual networks</code> section of the form when you deploy Ansible Automation Platform on Microsoft Azure.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					When you are planning your network configuration, bear the following in mind:
+				</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem"><p class="simpara">
+							The managed application requires at least a /24 VNet that is divided into four subnets. The subnets have minimum address spacing.
+						</p><div class="informaltable"><table class="lt-4-cols lt-7-rows Role ARG Spec"><colgroup><col style="width: 50%; " class="col_1"><!--Empty--></col><col style="width: 50%; " class="col_2"><!--Empty--></col></colgroup><thead><tr><th align="left" valign="top" id="idm140497599417056" scope="col">Networking entity</th><th align="left" valign="top" id="idm140497599415968" scope="col">Minimum CIDR Block</th></tr></thead><tbody><tr><td align="left" valign="top" headers="idm140497599417056"> <p class="Role ARG Spec Role ARG Spec">
+											VNet
+										</p>
+										 </td><td align="left" valign="top" headers="idm140497599415968"> <p class="Role ARG Spec Role ARG Spec">
+											/24
+										</p>
+										 </td></tr><tr><td align="left" valign="top" headers="idm140497599417056"> <p class="Role ARG Spec Role ARG Spec">
+											Cluster subnet
+										</p>
+										 </td><td align="left" valign="top" headers="idm140497599415968"> <p class="Role ARG Spec Role ARG Spec">
+											/26
+										</p>
+										 </td></tr><tr><td align="left" valign="top" headers="idm140497599417056"> <p class="Role ARG Spec Role ARG Spec">
+											Gateway subnet
+										</p>
+										 </td><td align="left" valign="top" headers="idm140497599415968"> <p class="Role ARG Spec Role ARG Spec">
+											/28
+										</p>
+										 </td></tr><tr><td align="left" valign="top" headers="idm140497599417056"> <p class="Role ARG Spec Role ARG Spec">
+											Database subnet
+										</p>
+										 </td><td align="left" valign="top" headers="idm140497599415968"> <p class="Role ARG Spec Role ARG Spec">
+											/28
+										</p>
+										 </td></tr><tr><td align="left" valign="top" headers="idm140497599417056"> <p class="Role ARG Spec Role ARG Spec">
+											Private link subnet
+										</p>
+										 </td><td align="left" valign="top" headers="idm140497599415968"> <p class="Role ARG Spec Role ARG Spec">
+											/28
+										</p>
+										 </td></tr></tbody></table></div></li><li class="listitem">
+							Ensure that the VNet range you configure does not intersect with the default CIDR block for AKS clusters (10.0.0.0/16). The Azure user interface does not prevent you entering this range, but using the default AKS CIDR block for your VNet causes networking issues.
+						</li><li class="listitem">
+							To ensure successful network peering and communication between Ansible Automation Platform on Microsoft Azure and your existing networks, your enterprise network ranges must not overlap with the VNet network range.
+						</li><li class="listitem">
+							If you do not have any existing Azure VNets, the Azure user interface suggests a default CIDR block and range for the VNet. Do not accept these defaults. Instead, use the network configuration that you have planned.
+						</li></ul></div><p class="Role ARG Spec Role ARG Spec">
+					For information about planning the network address range and completing the networking configuration form on deployment, refer to <a class="link" href="https://access.redhat.com/articles/6973251">Red Hat Ansible Automation Platform on Microsoft Azure VNet Preparation</a>.
+				</p></section><section class="section Role ARG Spec" id="azure_aks-cidr_azure-install-prerequisites"><div class="titlepage"><div><div><h3 class="title">2.5.2. AKS CIDR Blocks</h3></div></div></div><p class="_abstract _abstract">
+					You can configure the AKS network CIDR blocks. Traffic that originates from the AKS cluster appears to come from the range configured in AKS, not from the VNet.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					When you are planning your AKS CIDR block configuration, bear the following in mind:
+				</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+							Ensure that these network ranges do not overlap with any existing network range in your enterprise network.
+						</li><li class="listitem"><p class="simpara">
+							Do not use the following reserved network ranges:
+						</p><div class="informaltable"><table class="lt-4-cols lt-7-rows Role ARG Spec"><colgroup><col style="width: 100%; " class="col_1"><!--Empty--></col></colgroup><thead><tr><th align="left" valign="top" id="idm140497594821952" scope="col">AKS Reserved CIDR Blocks</th></tr></thead><tbody><tr><td align="left" valign="top" headers="idm140497594821952"> <p class="Role ARG Spec Role ARG Spec">
+											169.254.0.0/16
+										</p>
+										 </td></tr><tr><td align="left" valign="top" headers="idm140497594821952"> <p class="Role ARG Spec Role ARG Spec">
+											172.30.0.0/16
+										</p>
+										 </td></tr><tr><td align="left" valign="top" headers="idm140497594821952"> <p class="Role ARG Spec Role ARG Spec">
+											172.31.0.0/16
+										</p>
+										 </td></tr><tr><td align="left" valign="top" headers="idm140497594821952"> <p class="Role ARG Spec Role ARG Spec">
+											192.0.2.0/24
+										</p>
+										 </td></tr><tr><td align="left" valign="top" headers="idm140497594821952"> <p class="Role ARG Spec Role ARG Spec">
+											172.17.0.1/26
+										</p>
+										 </td></tr></tbody></table></div></li></ul></div><p class="Role ARG Spec Role ARG Spec">
+					You can configure the AKS network CIDR blocks in the <code class="literal Role ARG Spec">Configure AKS networks</code> area of the <code class="literal Role ARG Spec">networking</code> tab. Do not accept the default values suggested in the Azure user interface. Instead, use the CIDR blocks that you have planned. The settings have the following requirements:
+				</p><div class="informaltable"><table class="lt-4-cols lt-7-rows Role ARG Spec"><colgroup><col style="width: 20%; " class="col_1"><!--Empty--></col><col style="width: 40%; " class="col_2"><!--Empty--></col><col style="width: 40%; " class="col_3"><!--Empty--></col></colgroup><tbody><tr><td align="left" valign="top"> <p>
+									Network
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									Description
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									Requirements
+								</p>
+								 </td></tr><tr><td align="left" valign="top"> <p>
+									Service CIDR
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									A CIDR notation IP range from which to assign service cluster IPs.
+								</p>
+								 <p>
+									It must not overlap with any Subnet IP ranges.
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									Requires a /24 block at minimum. A larger block is not necessary.
+								</p>
+								 <p>
+									This CIDR block must not intersect with the CIDR of the Pod CIDR block.
+								</p>
+								 <p>
+									This CIDR block also must not intersect with the CIDR of the VNet CIDR block.
+								</p>
+								 </td></tr><tr><td align="left" valign="top"> <p>
+									DNS Service IP
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									An IP address assigned to the Kubernetes DNS service.
+								</p>
+								 <p>
+									It must be within the Kubernetes service address range specified in <code class="literal Role ARG Spec">serviceCidr</code>.
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									Must be an IP address in the Service CIDR other than the first IP in that range.
+								</p>
+								 <p>
+									Red Hat recommends using the first <code class="literal Role ARG Spec">.10</code> IP address within the Service CIDR block.
+								</p>
+								 </td></tr><tr><td align="left" valign="top"> <p>
+									Pod CIDR
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									A CIDR notation IP range from which to assign pod IPs when kubenet is used.
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									Requires a /19 or larger block.
+								</p>
+								 <p>
+									This CIDR block must not intersect with the CIDR of the Service CIDR block.
+								</p>
+								 </td></tr></tbody></table></div></section></section><section class="section Role ARG Spec" id="azure-policy_azure-install-prerequisites"><div class="titlepage"><div><div><h2 class="title">2.6. Azure Policy</h2></div></div></div><p class="_abstract _abstract">
+				Azure Policy is a tool to help organizations enforce compliance of Azure resources to defined standards.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For information on using Azure Policy with Ansible Automation Platform on Microsoft Azure, see <a class="link" href="https://access.redhat.com/articles/7013454">Azure Policy and Ansible on Azure</a>.
+			</p></section><section class="section Role ARG Spec" id="azure-entitling-subscription_azure-install-prerequisites"><div class="titlepage"><div><div><h2 class="title">2.7. Entitling your subscription</h2></div></div></div><p class="_abstract _abstract">
+				To access your deployment, you need an existing subscription entitlement that you can assign to your Ansible Automation Platform when you first log in.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For information on obtaining a subscription entitlement and attaching it to Ansible Automation Platform, see <a class="link" href="https://access.redhat.com/articles/6761811">Red Hat Ansible Automation Platform on Microsoft Azure Subscription Entitlement Association</a>.
+			</p></section></section><section class="chapter Role ARG Spec" id="azure-deploy"><div class="titlepage"><div><div><h1 class="title">Chapter 3. Deploying Red Hat Ansible Automation Platform on Microsoft Azure</h1></div></div></div><p class="_abstract _abstract">
+			Learn how to deploy and configure the Red Hat Ansible Automation Platform on Microsoft Azure.
+		</p><section class="section Role ARG Spec" id="proc-azure-locate-aap-marketplace_azure-deploy"><div class="titlepage"><div><div><h2 class="title">3.1. Locating Ansible Automation Platform in Azure Marketplace</h2></div></div></div><p class="_abstract _abstract">
+				Before you can start provisioning your Ansible Automation Platform on Microsoft Azure, you must find the offering on the Azure marketplace, enable your subscription, and initiate a deployment.
+			</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+						In a browser, navigate to the Azure Marketplace.
+					</li><li class="listitem">
+						Click <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Private Products</span></strong></span> from the menu on the left of the screen.
+					</li><li class="listitem">
+						Search for "Red Hat Ansible Automation Platform".
+					</li><li class="listitem">
+						Click the card that is returned in the search. Be sure to select the official offering from Red Hat.
+					</li><li class="listitem">
+						Click <span class="guibutton">Get it Now</span>.
+					</li><li class="listitem">
+						Click <span class="guibutton">Continue</span>.
+					</li><li class="listitem"><p class="simpara">
+						The <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Overview</span></strong></span> tab contains important information about activating your subscription for Ansible Automation Platform.
+					</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="a"><li class="listitem">
+								Read the entire <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Before you begin</span></strong></span> section.
+							</li><li class="listitem">
+								Follow the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Click here</span></strong></span> link to enable your subscription. You cannot use Ansible Automation Platform without a valid subscription.
+							</li></ol></div></li><li class="listitem">
+						Return to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Overview</span></strong></span> tab and click <span class="guibutton">Create</span> to initiate the deployment process.
+					</li></ol></div></section><section class="section Role ARG Spec" id="proc-azure-provisioning-aap_azure-deploy"><div class="titlepage"><div><div><h2 class="title">3.2. Provisioning Ansible Automation Platform on Microsoft Azure</h2></div></div></div><p class="_abstract _abstract">
+				When you initiate the deployment of the Red Hat Ansible Automation Platform managed app from Azure marketplace, a form is displayed in the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Create Red Hat Ansible Automation Platform on Microsoft Azure</span></strong></span> window.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Before you fill in the form, decide whether you want to create a public or private deployment of Ansible Automation Platform on Microsoft Azure:
+			</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						Public deployments allow ingress to the Ansible Automation Platform on Microsoft Azure user interfaces over the public internet. No configuration is required to access the application URL.
+					</li><li class="listitem">
+						Private deployments are created in an isolated Azure VNet that blocks access from the public internet. To access Ansible Automation Platform on Microsoft Azure user interfaces, you must configure network peering and routing.
+					</li></ul></div><p class="Role ARG Spec Role ARG Spec">
+				You create the network configuration for the Ansible Automation Platform on Microsoft Azure VNet when you initiate the deployment. Refer to your network configuration plan before deploying the managed application. For information about planning your network configuration, see <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#con-azure-network_azure-install-prerequisites">Network</a>.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Complete the form to provision Red Hat Ansible Automation Platform infrastructure and resources into your Azure tenant.
+			</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem"><p class="simpara">
+						Click the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Basics</span></strong></span> tab and enter values for your deployment in the following fields in the form:
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Subscription</span></strong></span>: Select <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Ansible on Clouds</span></strong></span>.
+							</li><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Resource Group</span></strong></span>: Create or select a resource group where you want to deploy the managed application.
+							</li><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Region</span></strong></span>: The Azure region where the application is deployed.
+							</li><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Application Name</span></strong></span>: A unique name for the managed application.
+							</li><li class="listitem"><p class="simpara">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Administrator Password</span></strong></span>: Create an administrator password for your deployment.
+							</p><p class="Role ARG Spec Role ARG Spec">
+								The <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Administrator Password</span></em></span> must contain at least 8 characters, and must include uppercase letters, lowercase letters, and numbers.
+							</p></li><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Confirm Administrator Password</span></strong></span>: Confirm the <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Administrator Password</span></em></span>.
+							</li><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Access</span></strong></span>: Choose whether your deployment is public or private.
+							</li><li class="listitem"><p class="simpara">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Managed Resource Group</span></strong></span>: A resource group for the managed application infrastructure.
+							</p><p class="Role ARG Spec Role ARG Spec">
+								Keep this resource group isolated from other resource groups, including the <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Resource Group</span></em></span> where you deployed the managed application.
+							</p></li></ul></div></li><li class="listitem">
+						Store the information that you entered in the form in a secure place. You must provide the <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Administrator password</span></em></span> to access your Ansible Automation Platform.
+					</li><li class="listitem">
+						Click <span class="guibutton">Next</span>
+					</li><li class="listitem">
+						Follow the steps in <a class="link" href="https://access.redhat.com/articles/6973251">Red Hat Ansible Automation Platform on Microsoft Azure Networking Preparation</a> to configure your network configuration.
+					</li><li class="listitem">
+						Click <span class="guibutton">Next</span>.
+					</li><li class="listitem">
+						Click the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Business continuity</span></strong></span> tab.
+					</li><li class="listitem">
+						From the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Disaster Recovery</span></strong></span> list, select an option to enable or disable disaster recovery.
+					</li><li class="listitem">
+						From the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Tags</span></strong></span> tab, you can select the resources you want to apply a tag to, otherwise, the default applies.
+					</li><li class="listitem">
+						Select the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Deployment</span></strong></span> tab.
+					</li><li class="listitem"><p class="simpara">
+						Note the following requirements in the description:
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								You must have a Red Hat account.
+							</li><li class="listitem">
+								To use Ansible Automation Platform, you must have a valid subscription linked to your Red Hat account.
+							</li><li class="listitem">
+								You must use the Deployment Driver during deployment.
+							</li></ul></div></li><li class="listitem">
+						Select the checkboxes to indicate that you understand these requirements.
+					</li><li class="listitem">
+						Click <span class="guibutton">Review + Create</span>.
+					</li><li class="listitem">
+						If the information you entered in the form is valid, the window displays <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Validation Passed</span></strong></span>.
+					</li><li class="listitem">
+						Select <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">I agree</span></strong></span> to accept the Co-Admin Access Permissions terms and conditions.
+					</li><li class="listitem">
+						Click <span class="guibutton">Create</span> to begin the provisioning process for the application.
+					</li></ol></div><div class="Role ARG Spec Role ARG Spec"><p class="title"><strong>Verification</strong></p><p>
+					The application begins provisioning.
+				</p></div><p class="Role ARG Spec Role ARG Spec">
+				You can use the deployment engine to view the progress of your deployment a few minutes after the Azure console displays "Your deployment is complete". See <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#azure-monitor-deployment-engine_azure-deploy">Monitoring deployments on the Ansible Automation Platform Deployment Engine</a> for more information.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				It may take 30 minutes or longer for the infrastructure and software to fully provision.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				After provisioning is complete, you can access and log in to your new Ansible Automation Platform instance. For help with configuring your automation controller and automation hub instances see <a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/configuring_automation_execution/index">Configuring automation execution</a> and <a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/managing_automation_content">Managing automation content</a> respectively.
+			</p></section><section class="section Role ARG Spec" id="con-aap-notifications-feed_azure-deploy"><div class="titlepage"><div><div><h2 class="title">3.3. Product Notification Feed</h2></div></div></div><p class="_abstract _abstract">
+				Effective July 2025, the Ansible Automation Platform RSS notification feed is available. This feed serves as a method for communicating various product updates and changes to customers.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Customers can subscribe to the notifications by visiting <a class="link" href="https://announcements.ansiblecloud.redhat.com/feed.atom">announcements.ansiblecloud.redhat.com/feed.atom</a>. Using an RSS feed reader, customers are updated with events such as Ansible Automation Platform upgrades and system maintenance.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				All Ansible Automation Platform customers can subscribe to this content. Messages include categorization tags to specify deployment types: managed, self-managed (on-premises), or a combination. Red Hat is developing a future enhancement to integrate this feature directly into the UI.
+			</p></section><section class="section Role ARG Spec" id="azure-monitor-deployment-engine_azure-deploy"><div class="titlepage"><div><div><h2 class="title">3.4. Monitoring deployments on the Ansible Automation Platform Deployment Engine</h2></div></div></div><p class="_abstract _abstract">
+				The deployment engine displays information about your Ansible Automation Platform on Microsoft Azure deployment. You can monitor the progress of the deployment, restart failed deployment steps, and cancel the deployment.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				When you begin deploying Ansible Automation Platform on Microsoft Azure, the Azure interface displays the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Overview</span></strong></span> page for the deployment. The <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Overview</span></strong></span> page displays the deployment status.
+			</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+						When the status in the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Overview</span></strong></span> page shows "Your deployment is complete", navigate to the deployed managed application.
+					</li><li class="listitem"><p class="simpara">
+						Click <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Parameters and Outputs</span></strong></span> in the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Settings</span></strong></span> menu for the deployed managed application.
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Note:</span></strong></span> Approximately 10 minutes into the deployment process, the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Outputs</span></strong></span> section of the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Parameters and Outputs</span></strong></span> page displays a link to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec"><code class="literal Role ARG Spec">deploymentEngineUrl</code></span></strong></span>.
+							</li></ul></div></li><li class="listitem">
+						Copy the link and paste it in another browser tab to open the login page for the deployment engine.
+					</li><li class="listitem"><p class="simpara">
+						Log in to the deployment using the following credentials:
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Username</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">admin</span></em></span>
+							</li><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Password</span></strong></span>: Use the <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Administrator Password</span></em></span> that you chose when configuring your deployment.
+							</li></ul></div></li><li class="listitem">
+						The deployment driver displays a message indicating that your deployment is underway. Click <span class="guibutton">Log in with Red Hat account</span>. The <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Red Hat login</span></strong></span> page opens.
+					</li><li class="listitem"><p class="simpara">
+						In the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Red Hat login</span></strong></span> page, enter your credentials if you already have a Red Hat account.
+					</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="a"><li class="listitem">
+								If you do not have a Red Hat account, click <span class="guibutton">Register for a Red Hat account</span> to create one.
+							</li></ol></div></li></ol></div><div class="Role ARG Spec Role ARG Spec"><p class="title"><strong>Verification</strong></p><p>
+					After logging in with your Red Hat account, the Ansible Automation Platform Deployment Engine page opens.
+				</p></div><section class="section Role ARG Spec" id="azure-deploy-engine-interface_azure-deploy"><div class="titlepage"><div><div><h3 class="title">3.4.1. Ansible Automation Platform Deployment Engine interface</h3></div></div></div><p class="_abstract _abstract">
+					The Ansible Automation Platform Deployment Engine displays a list of the steps in the deployment process. A progress bar shows how far along the deployment is.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					Icons indicate the steps that have been completed, the steps that are in progress, and steps that have failed.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					To view extended information about a step that failed, click on the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">failed</span></strong></span> icon for that step.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					To restart a failed step, click <span class="guibutton">Restart Step</span>.
+				</p></section></section><section class="section Role ARG Spec" id="azure-cancel-deployment_azure-deploy"><div class="titlepage"><div><div><h2 class="title">3.5. Canceling Ansible Automation Platform on Microsoft Azure deployments</h2></div></div></div><p class="_abstract _abstract">
+				You can gracefully cancel an Ansible Automation Platform on Microsoft Azure deployment.
+			</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+						Log in to the deployment engine to display the progress of the deployment steps in the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Ansible Automation Platform Deployment Engine</span></strong></span> page. Refer to <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#azure-monitor-deployment-engine_azure-deploy">Monitoring deployments on the Ansible Automation Platform Deployment Engine</a> for information on accessing and logging into the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Ansible Automation Platform Deployment Engine</span></strong></span> page.
+					</li><li class="listitem">
+						To cancel the deployment, click <span class="guibutton">Cancel Deployment</span> and confirm.
+					</li></ol></div><div class="itemizedlist Role ARG Spec"><p class="title"><strong>Verification</strong></p><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						To confirm you cancelled the deployment processes on Azure, navigate to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Overview</span></strong></span> page for the managed resource group in which you deployed Ansible Automation Platform and select <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Deployments</span></strong></span>.
+					</li></ul></div><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+					Canceling the deployment does not delete the managed application from your Azure subscription. To avoid incurring costs for the managed application and other resources that are still running, you must delete them.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					To delete Azure resources, navigate to the resource group for your deployment in the Azure portal. Select the resources you want to delete and click <span class="guibutton">Delete</span>. For more information about deleting resources, refer to <a class="link" href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resources-portal">Manage Azure resources by using the Azure portal</a> in the Microsoft Azure documentation.
+				</p></div></div></section></section><section class="chapter Role ARG Spec" id="azure-post-deployment-requirements"><div class="titlepage"><div><div><h1 class="title">Chapter 4. Red Hat Ansible Automation Platform on Microsoft Azure post-deployment requirements</h1></div></div></div><p class="_abstract _abstract">
+			Understand the post-deployment requirements for private deployments of Red Hat Ansible Automation Platform on Microsoft Azure, focusing primarily on establishing private network peering.
+		</p><section class="section Role ARG Spec" id="azure-network-peering"><div class="titlepage"><div><div><h2 class="title">4.1. Private network peering for private deployments</h2></div></div></div><p class="_abstract _abstract">
+				Deploying Ansible Automation Platform on Microsoft Azure creates an independent managed resource group with its own Azure virtual network (VNet). By default, the platform can only send requests to external networks through the public internet.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				To enable access to resources in private, internet-gapped deployments, you must configure Azure network peering between your private VNets and the managed application VNet of Ansible Automation Platform.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Azure network peering allows:
+			</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						Private communication between multiple Azure VNets.
+					</li><li class="listitem">
+						Private transit routing between Azure VNets and external VPN-routed networks, which can include on-premises systems or other cloud environments.
+					</li></ul></div><p class="Role ARG Spec Role ARG Spec">
+				Each Azure networking configuration is unique. To enable user access to Ansible Automation Platform, collaborate with your Azure administrators to establish connections between the platform’s deployment, your VNets, and external VPN-routed networks.
+			</p><div class="admonition note Role ARG Spec"><div class="admonition_header">Note</div><div><p class="Role ARG Spec Role ARG Spec">
+					Network peering must be configured by Azure administrators in your organization who are familiar with Azure networking. Configuring network changes to your Azure account can cause outages or other disruptions.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					The network peering procedures described in this document are not supported by Red Hat, as the processes and services are controlled and managed by Microsoft Azure. Contact Microsoft for assistance in peering Azure networks.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					While every effort has been made to align with Microsoft’s documentation for this content, there may be drift in accuracy over time. <a class="link" href="https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview">Microsoft’s documentation</a> is the definitive source for information about networking topics for Azure.
+				</p></div></div><p class="Role ARG Spec Role ARG Spec">
+				Azure offers different ways to peer private networks. These are typically divided into two categories:
+			</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Hub-and-spoke peering</span></strong></span>: In this topology, there is a centralized hub VNet that other virtual networks peer with. This hub network has mechanisms to route traffic through transit routing. Cloud networks, including VPN/Express Connect connections with on-premises and other cloud networks, can communicate through the hub VNet.
+					</li><li class="listitem">
+						<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Azure Virtual WAN (VWAN)</span></strong></span>: Azure Virtual WAN is a networking service that provides simplified hub-and-spoke network modeling across Azure, on-premises, and other VPN/Direct Connect networks. For more about VWAN, refer to Microsoft’s <a class="link" href="https://learn.microsoft.com/en-us/azure/virtual-wan/virtual-wan-about">Virtual WAN documentation</a>.
+					</li><li class="listitem">
+						<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Direct peering</span></strong></span>: Private networks are individually connected to one another with no routing hops between them. This is a simpler peering model: it is useful when you only want to connect a few networks.
+					</li></ul></div><p class="Role ARG Spec Role ARG Spec">
+				Refer to <a class="link" href="https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/vnet-peering">Choose between virtual network peering and VPN gateways</a> in the Microsoft <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Application architecture fundamentals guide</span></em></span> to determine the correct peering approach for your organization.
+			</p><section class="section Role ARG Spec" id="azure-hub-spoke-peering"><div class="titlepage"><div><div><h3 class="title">4.1.1. Hub-and-spoke peering (Transit routes)</h3></div></div></div><p class="_abstract _abstract">
+					The Hub-and-spoke peering model establishes a centralized hub VNet for managing private network communication and transit routing between your existing spoke networks and the dedicated Ansible Automation Platform VNet.
+				</p><div class="admonition note Role ARG Spec"><div class="admonition_header">Note</div><div><p class="Role ARG Spec Role ARG Spec">
+						Updating route tables incorrectly can break your network. Only execute the steps in these procedures if you are confident that you can reverse any unexpected network behavior.
+					</p></div></div><section class="section Role ARG Spec" id="proc-azure-hub-spoke-peering_azure-hub-spoke-peering"><div class="titlepage"><div><div><h4 class="title">4.1.1.1. Hub-and-spoke peering process overview</h4></div></div></div><p class="_abstract _abstract">
+						Understand the necessary preparation and three core steps for enabling private network communication after deploying the managed application.
+					</p><div class="itemizedlist Role ARG Spec"><p class="title"><strong>Prerequisites</strong></p><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								You have deployed Ansible Automation Platform on Microsoft Azure.
+							</li><li class="listitem">
+								You have configured and tested an Azure VNet hub-and-spoke implementation in your Azure tenant. This prerequisite requires many Azure resources to be configured, including a Virtual Network Gateway.
+							</li><li class="listitem">
+								You have configured transit routing between your spoke networks, including your VPNs. Refer to <a class="link" href="https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-peering-gateway-transit">Configure VPN gateway transit for virtual network peering</a> in the Microsoft Azure documentation for instructions.
+							</li><li class="listitem"><p class="simpara">
+								You have identified the following:
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+										The CIDR blocks of your existing VNets (including VPNs and direct connects) that need access to Ansible Automation Platform on Microsoft Azure UIs.
+									</li><li class="listitem">
+										The CIDR blocks of your existing VNets (including VPNs and direct connects) that contain hosts or endpoints for Ansible Automation Platform on Microsoft Azure.
+									</li><li class="listitem">
+										The CIDR blocks of the Ansible Automation Platform on Microsoft Azure VNet from the managed resource group of the application. Refer to <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-find-cluster-cidr_azure-hub-spoke-peering">Finding the CIDR Block of the managed resource group</a> for instructions.
+									</li></ul></div></li></ul></div><p class="Role ARG Spec Role ARG Spec">
+						Before peering any networks, ensure that there is no network address space overlap between your private VNets and your Ansible Automation Platform on Microsoft Azure network.
+					</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+								Find the CIDR Block for the Ansible Automation Platform on Microsoft Azure managed application Kubernetes cluster. See <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-find-cluster-cidr_azure-hub-spoke-peering">Finding the CIDR Block of the managed application Kubernetes cluster</a>.
+							</li><li class="listitem">
+								Configure Network Peering with the Ansible Automation Platform Subnet. See <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-nw-peering-aap-subnet_azure-hub-spoke-peering">Configuring Network Peering with the Ansible Automation Platform Subnet</a>.
+							</li><li class="listitem"><p class="simpara">
+								Update the route tables:
+							</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="a"><li class="listitem">
+										Configure route tables from your existing networks to send traffic to the managed application CIDR. You must add routes to the routing tables of every network requesting Ansible Automation Platform user interfaces and of every network that will have automation performed against its resources. See <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-route-to-azure_azure-hub-spoke-peering">Routing to Ansible Automation Platform on Microsoft Azure</a>.
+									</li><li class="listitem">
+										Configure routing to your VNets for each spoke network that you would like Ansible Automation Platform to communicate with, for automation or for accessing the user interfaces. See <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-route-to-vnets_azure-hub-spoke-peering">Routing to your VNets</a>.
+									</li></ol></div></li></ol></div></section><section class="section Role ARG Spec" id="proc-azure-find-cluster-cidr_azure-hub-spoke-peering"><div class="titlepage"><div><div><h4 class="title">4.1.1.2. Finding the CIDR Block of the managed resource group</h4></div></div></div><p class="_abstract _abstract">
+						You can use the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Resource Groups</span></strong></span> page to find the CIDR Block of the managed resource group.
+					</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+								Navigate to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Resource Groups</span></strong></span> page in the Azure portal.
+							</li><li class="listitem">
+								Click the managed resource group for Red Hat Ansible Automation Platform on Microsoft Azure. The resource group name is prefixed with “-mrg”.
+							</li><li class="listitem">
+								Select the VNet within the resource group to view its settings in the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Overview</span></strong></span> page.
+							</li></ol></div><div class="Role ARG Spec Role ARG Spec"><p class="title"><strong>Verification</strong></p><p>
+							The CIDR block of the cluster is displayed in the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Address Space</span></strong></span>.
+						</p></div><div class="itemizedlist _additional-resources"><p class="title"><strong>Additional resources</strong></p><ul class="itemizedlist _additional-resources" type="disc"><li class="listitem">
+								<a class="link" href="https://learn.microsoft.com/en-us/azure/virtual-network/manage-virtual-network#view-virtual-networks-and-settings">View virtual networks and settings</a>
+							</li></ul></div></section><section class="section Role ARG Spec" id="proc-azure-nw-peering-aap-subnet_azure-hub-spoke-peering"><div class="titlepage"><div><div><h4 class="title">4.1.1.3. Configuring network peering with the Ansible Automation Platform subnet</h4></div></div></div><p class="_abstract _abstract">
+						Within the Azure console, the Azure virtual network (VNet) is known as <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">this virtual network</span></em></span>, and the VNet that you want to peer with is known as <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">remote virtual network</span></em></span>.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						In the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Virtual Networks</span></strong></span> page in the Azure portal, use the following settings to configure peering between the Azure VNet and the VNet that you want to peer with the Ansible Automation Platform on Microsoft Azure app:
+					</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem"><p class="simpara">
+								Under <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Remote virtual network</span></strong></span>, select the settings for the virtual network that you want to peer with Azure:
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem"><p class="simpara">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Summary</span></strong></span>:
+									</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Peering link name</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">&lt;aap_to_hub_peering_link_name&gt;</span></em></span>
+											</li><li class="listitem"><p class="simpara">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Peering settings</span></strong></span>:
+											</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="square"><li class="listitem">
+														<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Traffic to remote virtual network</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Allow</span></em></span>
+													</li><li class="listitem">
+														<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Traffic forwarded from remote virtual network</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Allow</span></em></span>
+													</li></ul></div></li></ul></div></li></ul></div></li><li class="listitem"><p class="simpara">
+								Under <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Local virtual network</span></strong></span>, select <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Settings</span></strong></span> the Ansible Automation Platform on Microsoft Azure virtual network:
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem"><p class="simpara">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Summary</span></strong></span>:
+									</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Peering link name</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">&lt;hub_to_aap_peering_link_name&gt;</span></em></span>
+											</li><li class="listitem"><p class="simpara">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Peering settings</span></strong></span>:
+											</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="square"><li class="listitem">
+														<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Traffic to remote virtual network</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Allow</span></em></span>
+													</li><li class="listitem">
+														<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Traffic forwarded from remote virtual network</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Allow</span></em></span>
+													</li><li class="listitem">
+														<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Enable this virtual network to use peered VNet’s remote gateway or Route Sever</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Enabled</span></em></span>
+													</li></ul></div></li></ul></div></li></ul></div></li></ol></div><div class="itemizedlist _additional-resources"><p class="title"><strong>Additional resources</strong></p><ul class="itemizedlist _additional-resources" type="disc"><li class="listitem">
+								<a class="link" href="https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering#create-a-peering">Create a peering</a>
+							</li></ul></div></section><section class="section Role ARG Spec" id="proc-azure-update-route-tables_azure-hub-spoke-peering"><div class="titlepage"><div><div><h4 class="title">4.1.1.4. Updating the route tables</h4></div></div></div><p class="_abstract _abstract">
+						Route tables in the Azure portal are sets of rules, known as routes, that determine how network traffic is directed between subnets, virtual networks (VNets), on-premises networks, and the internet.
+					</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+								Before you update the route tables, confirm that you satisfy the <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-hub-spoke-peering_azure-hub-spoke-peering">Prerequisites</a> for the hub-and-spoke peering process.
+							</li></ol></div><section class="section Role ARG Spec" id="proc-azure-route-to-azure_azure-hub-spoke-peering"><div class="titlepage"><div><div><h5 class="title">4.1.1.4.1. Routing to Ansible Automation Platform on Microsoft Azure</h5></div></div></div><p class="_abstract _abstract">
+							Use the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Route Tables</span></strong></span> page in the Azure portal to route traffic to Ansible Automation Platform.
+						</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+									Navigate to <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Route Tables</span></strong></span> in the Azure portal.
+								</li><li class="listitem">
+									As part of your hub-and-spoke configuration, you created one or more route tables to define the routes between the networks. Click on one of these route tables.
+								</li><li class="listitem">
+									From the route table menu bar, click <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Routes</span></strong></span> &gt; <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Add</span></strong></span>.
+								</li><li class="listitem"><p class="simpara">
+									Configure routes from your existing networks to send traffic to Ansible Automation Platform. You must configure routes for any network requesting Ansible Automation Platform user interfaces and for any network that will have automation performed against its resources. For each route that you add, enter the following information:
+								</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+											<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Route name</span></strong></span>: Enter a route name for the Ansible Automation Platform managed application network
+										</li><li class="listitem">
+											<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Address Prefix</span></strong></span>: The CIDR block of the managed application kubernetes cluster
+										</li><li class="listitem">
+											<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Next Hop Type</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Virtual network gateway</span></em></span>
+										</li></ul></div></li><li class="listitem">
+									Click <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">OK</span></strong></span> to save the new route to the route list.
+								</li><li class="listitem">
+									Repeat this procedure for all other route tables where you want to route traffic to Ansible Automation Platform.
+								</li></ol></div></section><section class="section Role ARG Spec" id="proc-azure-route-to-vnets_azure-hub-spoke-peering"><div class="titlepage"><div><div><h5 class="title">4.1.1.4.2. Routing to your VNets</h5></div></div></div><p class="_abstract _abstract">
+							Add a route for each spoke network that you would like Ansible Automation Platform to communicate with, for automation or for accessing the user interfaces.
+						</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+									Navigate to <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Route Tables</span></strong></span> in the Azure portal.
+								</li><li class="listitem"><p class="simpara">
+									In the list of route tables, select the route table for the Ansible Automation Platform on Microsoft Azure managed application.
+								</p><p class="Role ARG Spec Role ARG Spec">
+									The name of the Ansible Automation Platform route table uses the following convention:
+								</p><pre class="screen Role ARG Spec Role ARG Spec">aks-agentpool-&lt;numbers&gt;-routetable</pre></li><li class="listitem">
+									From the route table menu bar, click <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Routes</span></strong></span> &gt; <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Add</span></strong></span>.
+								</li><li class="listitem">
+									Configure routing to your VNets for each spoke network that you would like Ansible Automation Platform to communicate with, for both automation or accessing the user interfaces.
+								</li><li class="listitem"><p class="simpara">
+									For each route that you add, enter the following information:
+								</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+											<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Route name</span></strong></span>: Enter a route name for the spoke network that you want Ansible Automation Platform to route to
+										</li><li class="listitem">
+											<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Address Prefix</span></strong></span>: The CIDR block of the spoke network
+										</li><li class="listitem">
+											<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Next Hop Type</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Virtual network gateway</span></em></span>
+										</li></ul></div></li><li class="listitem">
+									Click <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">OK</span></strong></span> to save the new route to the route list.
+								</li></ol></div><div class="Role ARG Spec Role ARG Spec"><p class="title"><strong>Verification</strong></p><p>
+								After you have configured the routing rules, traffic is routed to and from Ansible Automation Platform on Azure through your hub network.
+							</p></div></section><section class="section Role ARG Spec" id="proc-azure-outbound-route_azure-hub-spoke-peering"><div class="titlepage"><div><div><h5 class="title">4.1.1.4.3. Outbound routing through virtual appliances</h5></div></div></div><p class="_abstract _abstract">
+							If your organization uses Azure firewall services or third-party firewall appliances through a Virtual Appliance connection, you must configure outbound connectivity from the managed application, to enable Red Hat to maintain your application and to enable automation against external resources.
+						</p><p class="Role ARG Spec Role ARG Spec">
+							The easiest way to implement this is to create a firewall rule that allows all outbound traffic from port 443.
+						</p><p class="Role ARG Spec Role ARG Spec">
+							If you choose not to allow all outbound traffic from port 443, you must configure routes.
+						</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem"><p class="simpara">
+									For Red Hat to manage and upgrade Ansible Automation Platform on Microsoft Azure and execute security patching, any machine in the Azure Kubernetes service (AKS) cluster must be allowed to submit a request to pull updates for containers used by Ansible Automation Platform.
+								</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="a"><li class="listitem">
+											Add routes in the Ansible Automation Platform route table for outbound traffic from the full CIDR range of the Ansible Automation Platform on Microsoft Azure managed application to the domains listed in the <a class="link" href="https://access.redhat.com/articles/6972355">Azure Virtual Appliance Routing with Ansible Automation Platform on Azure</a> article on the Red Hat Customer Portal.
+										</li></ol></div></li><li class="listitem">
+									You must also allow traffic from your firewall to any other external domain or IP address that you want Ansible Automation Platform to run automation jobs against. Otherwise, your firewall blocks connectivity between Ansible Automation Platform and destinations for automation.
+								</li><li class="listitem">
+									Ansible Automation Platform requires a public DNS zone to provide SSL certificates. This public DNS zone is in the managed resource group of the deployment. The platform must be able to communicate via DNS queries with the servers listed in the DNS zone to complete certificate challenges with our upstream provider. Blocking this communication prevents successful certificate renewal.
+								</li></ol></div><div class="itemizedlist Role ARG Spec"><p class="title"><strong>Additional resources</strong></p><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+									<a class="link" href="https://learn.microsoft.com/en-us/azure/virtual-network/manage-route-table#create-a-route">Create a route</a>
+								</li></ul></div></section></section></section><section class="section Role ARG Spec" id="azure-vwan-peering"><div class="titlepage"><div><div><h3 class="title">4.1.2. Azure Virtual WAN (VWAN)</h3></div></div></div><p class="_abstract _abstract">
+					Create a connection within the VWAN portal that links your selected VWAN hub to the Ansible Automation Platform’s managed application VNet.
+				</p><section class="section Role ARG Spec" id="proc-peer-vwan-hub-to-aap_azure-vwan-peering"><div class="titlepage"><div><div><h4 class="title">4.1.2.1. Peering a VWAN Hub to the Ansible Automation Platform on Microsoft Azure Network</h4></div></div></div><p class="_abstract _abstract">
+						Before peering, you must connect a hub network, and at least one spoke network, to the hub network of the Azure VWAN to which you intend to connect Ansible Automation Platform on Microsoft Azure.
+					</p><div class="itemizedlist Role ARG Spec"><p class="title"><strong>Prerequisites</strong></p><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								A pre-configured Azure VWAN.
+							</li><li class="listitem"><p class="simpara">
+								One or more of the following connections to the VWAN:
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+										A DMZ network that contains Azure virtual machines that users can remotely log into to access Ansible Automation Platform on Microsoft Azure.
+									</li><li class="listitem">
+										A DMZ network that contains an Azure virtual machine that local machines can connect to with SSH tunneling to access Ansible Automation Platform on Microsoft Azure.
+									</li><li class="listitem">
+										A VPN or Direct Connect service to your local network that routes traffic from local machines to Ansible Automation Platform on Microsoft Azure.
+									</li></ul></div></li></ul></div><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+								Navigate to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Virtual Network Connections</span></strong></span> page for the VWAN that you want to peer with your Ansible Automation Platform instance.
+							</li><li class="listitem"><p class="simpara">
+								To create a connection between the VWAN hub and your Ansible Automation Platform instance, use the following settings:
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Connection Name</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">&lt;Ansible_Automation_Platform_connection_name&gt;</span></em></span>
+									</li><li class="listitem">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Hubs</span></strong></span>: Select one or more VWAN hub networks that the managed application VNet peers with.
+									</li><li class="listitem">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Subscription</span></strong></span>: Select the subscription where Ansible Automation Platform on Microsoft Azure has been deployed.
+									</li><li class="listitem">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Resource group</span></strong></span>: The managed resource group of the managed application. It is typically prefixed with “mrg-”.
+									</li><li class="listitem">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Virtual network</span></strong></span>: The VNet of the managed application. There is only one VNet in the managed resource group.
+									</li><li class="listitem">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Propagate to none</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">No</span></em></span>
+									</li><li class="listitem">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Associate Route Table</span></strong></span>: Select the default route table or the appropriate route table that your organization has configured for VWAN.
+									</li><li class="listitem">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Propagate to Route Tables</span></strong></span>: Select one or more default route tables or the appropriate route table that your organization has configured for VWAN.
+									</li><li class="listitem">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Propagate to labels</span></strong></span>: Select labels if your organization uses them.
+									</li><li class="listitem">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Static routes</span></strong></span>: Do not complete this field.
+									</li></ul></div></li></ol></div><div class="Role ARG Spec Role ARG Spec"><p class="title"><strong>Verification</strong></p><p>
+							When network peering completes, traffic routes to and from Ansible Automation Platform on Microsoft Azure though your VWAN hub network.
+						</p></div><div class="itemizedlist _additional-resources"><p class="title"><strong>Additional resources</strong></p><ul class="itemizedlist _additional-resources" type="disc"><li class="listitem">
+								<a class="link" href="https://learn.microsoft.com/en-us/azure/virtual-wan/howto-connect-vnet-hub">Connect a virtual network to a Virtual WAN hub - portal</a>
+							</li></ul></div></section></section><section class="section Role ARG Spec" id="azure-direct-peering"><div class="titlepage"><div><div><h3 class="title">4.1.3. Direct peering</h3></div></div></div><p class="_abstract _abstract">
+					You can use direct peering to directly connect virtual networks. When two networks are peered, Azure updates routes between them so that traffic automatically flows between them.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					The direct peering method is easier to configure than the hub-and-spoke model. However, the number of direct network peerings is limited. Direct peering becomes difficult to manage as the number of virtual networks grows, because each new network requires peering to all other networks.
+				</p><section class="section Role ARG Spec" id="proc-azure-nw-direct-peering_azure-direct-peering"><div class="titlepage"><div><div><h4 class="title">4.1.3.1. Configuring direct network peering</h4></div></div></div><p class="_abstract _abstract">
+						You can configure network peering between your Azure network and your VNet in the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Virtual Networks</span></strong></span> page of the Azure Portal.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						Within the Azure console, the Azure virtual network is known as <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">this virtual network</span></em></span>, and the VNet that you want to peer with is known as <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">remote virtual network</span></em></span>.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						In the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Virtual Networks</span></strong></span> page in the Azure portal, use the following settings to configure the Azure network and the VNet that you want to peer with the Ansible Automation Platform on Microsoft Azure app:
+					</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem"><p class="simpara">
+								Under <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Remote virtual network</span></strong></span>, select the settings for the virtual network that you want to peer with Azure:
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem"><p class="simpara">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Summary</span></strong></span>:
+									</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Peering link name</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">&lt;aap_to_hub_peering_link_name&gt;</span></em></span>
+											</li><li class="listitem">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Subscription</span></strong></span>: Select the subscription where you deployed the Ansible Automation Platform on Microsoft Azure.
+											</li><li class="listitem">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Virtual network</span></strong></span>: Select the Ansible Automation Platform on Microsoft Azure virtual network: vnet-&lt;aap_identifier&gt;-&lt;region&gt;
+											</li></ul></div></li><li class="listitem"><p class="simpara">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Peering settings</span></strong></span>:
+									</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Traffic to remote virtual network</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Allow</span></em></span>
+											</li><li class="listitem">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Traffic forwarded from remote virtual network</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Allow</span></em></span>
+											</li><li class="listitem">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Virtual network gateway or Route Server</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Use the remote virtual network’s gateway or Route server</span></em></span>
+											</li></ul></div></li></ul></div></li><li class="listitem"><p class="simpara">
+								Under <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Local virtual network</span></strong></span>, select the settings the Ansible Automation Platform on Microsoft Azure virtual network:
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem"><p class="simpara">
+										<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Summary</span></strong></span>:
+									</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Peering link name</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">&lt;hub_to_aap_peering_link_name&gt;</span></em></span>
+											</li><li class="listitem">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Traffic to remote virtual network</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Allow</span></em></span>
+											</li><li class="listitem">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Traffic forwarded from remote virtual network</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Allow</span></em></span>
+											</li><li class="listitem">
+												<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Enable this virtual network to use peered VNet’s remote gateway or Route Sever</span></strong></span>: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Enabled</span></em></span>
+											</li></ul></div></li></ul></div></li><li class="listitem">
+								After you have configured direct network peering, traffic routes between Ansible Automation Platform on Microsoft Azure and private hosts and IPs on your VNet.
+							</li></ol></div><div class="itemizedlist _additional-resources"><p class="title"><strong>Additional resources</strong></p><ul class="itemizedlist _additional-resources" type="disc"><li class="listitem">
+								<a class="link" href="https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering#create-a-peering">Create a peering</a>
+							</li><li class="listitem">
+								<a class="link" href="https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview">Virtual network peering</a>
+							</li></ul></div></section></section></section><section class="section Role ARG Spec" id="azure-user-defined-routing-tables_azure-post-deployment-requirements"><div class="titlepage"><div><div><h2 class="title">4.2. User defined routing tables</h2></div></div></div><p class="_abstract _abstract">
+				You can create user defined routes from the VNet deployed with the managed application to internal network ranges, firewalls, virtual network appliances.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For information on how to configure user defined routes, see <a class="link" href="https://access.redhat.com/articles/7005411">Ansible on Azure User Defined Routes</a>.
+			</p></section><section class="section Role ARG Spec" id="azure-virtual-appliance-routing_azure-post-deployment-requirements"><div class="titlepage"><div><div><h2 class="title">4.3. Virtual appliance routing</h2></div></div></div><p class="_abstract _abstract">
+				The managed application requires access to systems external to your subscription. You must take into account expected outbound traffic that the offering requires in order to be managed by Red Hat and Microsoft.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For information on domains that you must allow as a destination, see <a class="link" href="https://access.redhat.com/articles/6972355">Azure Virtual Appliance Routing with Ansible Automation Platform on Azure</a>.
+			</p></section><section class="section Role ARG Spec" id="azure-private-dns_azure-post-deployment-requirements"><div class="titlepage"><div><div><h2 class="title">4.4. Private DNS</h2></div></div></div><p class="_abstract _abstract">
+				Ansible Automation Platform on Microsoft Azure uses Azure’s managed DNS services when deployed.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For information on how to use private DNS records that cannot be resolved publicly, see <a class="link" href="https://access.redhat.com/articles/6983525">Private DNS with Red Hat Ansible Automation Platform on Microsoft Azure</a>.
+			</p></section></section><section class="chapter Role ARG Spec" id="azure-connecting-to-aap"><div class="titlepage"><div><div><h1 class="title">Chapter 5. Connecting to Red Hat Ansible Automation Platform</h1></div></div></div><p class="_abstract _abstract">
+			When network peering is complete and your Azure routing configuration is established, you can choose how your team accesses Ansible Automation Platform through your Azure network configuration.
+		</p><section class="section Role ARG Spec" id="proc-azure-nw-access-details_azure-connecting-to-aap"><div class="titlepage"><div><div><h2 class="title">5.1. Access details</h2></div></div></div><p class="_abstract _abstract">
+				Regardless of whether Ansible Automation Platform was deployed with public or private access, a set of DNS records is created. The DNS records are created so that Ansible Automation Platform can be issued a valid TLS certificate for your deployment and to enable easy access to your applications.
+			</p><div class="itemizedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						To view the URL for the Ansible Automation Platform applications, navigate to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Parameters and Outputs</span></strong></span> page of the Azure Marketplace managed application listing for your deployment.
+					</li></ul></div><div class="itemizedlist _additional-resources"><p class="title"><strong>Additional resources</strong></p><ul class="itemizedlist _additional-resources" type="disc"><li class="listitem">
+						<a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#proc-azure-accessing-aap_azure-connecting-to-aap">Accessing Red Hat Ansible Automation Platform on Microsoft Azure</a>
+					</li></ul></div></section><section class="section Role ARG Spec" id="ref-azure-nw-public-deploy_azure-connecting-to-aap"><div class="titlepage"><div><div><h2 class="title">5.2. Public Deployments</h2></div></div></div><p class="_abstract _abstract">
+				If you choose public access during the deployment of Ansible Automation Platform on Microsoft Azure, the application URL is accessible over the public internet through a browser.
+			</p></section><section class="section Role ARG Spec" id="ref-azure-nw-private-deploy_azure-connecting-to-aap"><div class="titlepage"><div><div><h2 class="title">5.3. Private deployments</h2></div></div></div><p class="_abstract _abstract">
+				If you choose private access during the deployment of Ansible Automation Platform on Microsoft Azure, the DNS record for the application points to a private address within the selected CIDR block.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				To access this private address, you must configure network peering and establish connectivity. The method for connecting to the Ansible Automation Platform depends on your organization’s Azure infrastructure management practices. Azure administrators must determine the most suitable model and configure the setup accordingly.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Common access options include:
+			</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						<a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#ref-azure-nw-private-deploy-az-hosted-vm_azure-connecting-to-aap">Azure hosted virtual machine</a>
+					</li><li class="listitem">
+						<a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_on_microsoft_azure_guide/index#ref-azure-nw-private-deploy-vpn_azure-connecting-to-aap">VPN</a>
+					</li></ul></div><section class="section Role ARG Spec" id="ref-azure-nw-private-deploy-az-hosted-vm_azure-connecting-to-aap"><div class="titlepage"><div><div><h3 class="title">5.3.1. Azure hosted virtual machine</h3></div></div></div><p class="_abstract _abstract">
+					A straightforward way to configure access for a small set of users to access private network resources on Azure networks is to create a jumpbox VM in a perimeter network (DMZ VNet) that users can remotely log in to from the public internet. The jumpbox VM requires workstation features such as a GUI and browser.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					Users can remotely log in to the publicly accessible virtual machine from on-premises machines through VNC, RDP, or other screen-sharing protocols.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					To access the Ansible Automation Platform web UIs on the Azure private network, users navigate to the URL using the browser on the jumpbox VM.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					You connect the DMZ VNet to other Azure VNets through network peering, with routing rules established to send network traffic to the Ansible Automation Platform VNet.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					The following diagram shows the topology for an example configuration of private network access via an Azure virtual machine.
+				</p><div class="informalfigure"><div class="mediaobject"><img src="https://access.redhat.com/webassets/avalon/d/Ansible_on_Clouds-2.x-Red_Hat_Ansible_Automation_Platform_on_Microsoft_Azure_Guide-en-US/images/5813aeb8ca353af0662270b829907cf1/aap-on-azure-private-nw-access-vm.png" alt="aap on azure private nw access vm"/></div></div><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+							For more information about perimeter (DMZ) networks, refer to <a class="link" href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/perimeter-networks">Perimeter Networks</a> in the Microsoft <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Azure Cloud Adoption Framework</span></em></span> documentation.
+						</li><li class="listitem">
+							For more information about jumpboxes, refer to <a class="link" href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/cloud-scale-analytics/architectures/connect-to-environments-privately#about-azure-bastion-host-and-jumpboxes">About Azure bastion host and jumpboxes</a> in the Microsoft <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Azure Cloud Adoption Framework</span></em></span> documentation.
+						</li></ul></div></section><section class="section Role ARG Spec" id="ref-azure-nw-private-deploy-vpn_azure-connecting-to-aap"><div class="titlepage"><div><div><h3 class="title">5.3.2. VPN</h3></div></div></div><p class="_abstract _abstract">
+					If your organization requires that many users access Ansible Automation Platform over a private connection, or if your organization already uses VPNs or direct connections with Azure, then this approach might be suitable.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					In this configuration, your on-premises infrastructure is connected to Azure through a Network Application Gateway and has routing rules that can enable access to Ansible Automation Platform to any connected computer on the local network. The VNet connected to the Virtual Network Gateway is connected to other Azure VNets through network peering, with routing rules established to send network traffic to the Ansible Automation Platform VNet.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					With this configuration, users can access Ansible Automation Platform through the application URL as if they were using the public access approach.
+				</p><div class="informalfigure"><div class="mediaobject"><img src="https://access.redhat.com/webassets/avalon/d/Ansible_on_Clouds-2.x-Red_Hat_Ansible_Automation_Platform_on_Microsoft_Azure_Guide-en-US/images/0b63828f43fc06901c9bff69f4b337a7/aap-on-azure-private-nw-access-vpn.png" alt="aap on azure private nw access vpn"/></div></div></section></section><section class="section Role ARG Spec" id="proc-azure-accessing-aap_azure-connecting-to-aap"><div class="titlepage"><div><div><h2 class="title">5.4. Accessing Red Hat Ansible Automation Platform on Microsoft Azure</h2></div></div></div><p class="_abstract _abstract">
+				When you initiate the deployment of the Red Hat Ansible Automation Platform managed app from Azure marketplace, a form displays in the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Create Red Hat Ansible Automation Platform on Microsoft Azure</span></strong></span> window. Complete the form to provision Ansible Automation Platform infrastructure and resources into your Azure tenant.
+			</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+						In a web browser, navigate to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Managed Applications</span></strong></span> section in the Azure console.
+					</li><li class="listitem">
+						Select the instance of Ansible Automation Platform on Microsoft Azure that you deployed.
+					</li><li class="listitem"><p class="simpara">
+						Select <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Parameters and Outputs</span></strong></span> in the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Settings</span></strong></span> section in the left navigation menu.
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								If this is your first time accessing your Ansible Automation Platform through the Azure portal, you must select and copy the deploymentEngineUrl under the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">output</span></strong></span> section to continue setting up your deployment. After you set up your instance through the deploymentEngineUrl, it is removed from the outputs section because it is no longer needed.
+							</li><li class="listitem">
+								If you have already set up your Ansible Automation Platform deployment, you can go directly to it by copying the platformUrl output.
+							</li></ul></div></li><li class="listitem">
+						Paste the selected URL into your browser search bar and hit enter. This brings you to your Ansible Automation Platform deployment.
+					</li><li class="listitem">
+						The first time you log in to Ansible Automation Platform with the URL, you must configure the subscription. For help see the <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Logging in for the first time</span></em></span> section of the <a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/getting_started_with_ansible_automation_platform/index">Getting started with Ansible Automation Platform</a> guide.
+					</li></ol></div><section class="section Role ARG Spec" id="ref-azure-license-association_azure-connecting-to-aap"><div class="titlepage"><div><div><h3 class="title">5.4.1. License association</h3></div></div></div><p class="_abstract _abstract">
+					Red Hat provided a specific subscription entitlement manifest when you subscribed to Red Hat Ansible Automation Platform on Microsoft Azure.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					When asked to submit information about your license, select your license manifest file that you obtained from access.redhat.com.
+				</p></section><section class="section Role ARG Spec" id="proc-azure-configure-ad-sso_azure-connecting-to-aap"><div class="titlepage"><div><div><h3 class="title">5.4.2. Microsoft Entra ID SSO configuration</h3></div></div></div><p class="_abstract _abstract">
+					Set up your Microsoft Entra ID SSO configuration.
+				</p><div class="itemizedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+							For help with setting up and configuring your enterprise authentication, see the <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Chapter 3. Configuring Microsoft Entra ID authentication</span></em></span> section of the <a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/access_management_and_authentication/index">Access management and authentication</a> guide.
+						</li></ul></div><section class="section Role ARG Spec" id="proc-azure-create-registered-app_azure-connecting-to-aap"><div class="titlepage"><div><div><h4 class="title">5.4.2.1. Creating a registered application in Microsoft Entra ID</h4></div></div></div><p class="_abstract _abstract">
+						To create a Microsoft Entra ID SSO configuration you must first register for Microsoft Entra ID.
+					</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+								In a web browser, open the Azure portal.
+							</li><li class="listitem">
+								Ensure that you are using the tenant where you deployed Ansible Automation Platform.
+							</li><li class="listitem">
+								Type <code class="literal Role ARG Spec">Microsoft Entra ID</code> in the search bar.
+							</li><li class="listitem">
+								Select <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Microsoft Entra ID</span></strong></span> from the search results.
+							</li><li class="listitem">
+								Under <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Manage</span></strong></span> in the menu options, click <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">App registrations</span></strong></span>.
+							</li><li class="listitem">
+								In the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">App registrations</span></strong></span> page, click <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">+ New registration</span></strong></span>.
+							</li><li class="listitem"><p class="simpara">
+								Configure the new registration as follows:
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+										In the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Name</span></strong></span> field, enter the same name that you used for the deployed application.
+									</li><li class="listitem">
+										Select the default value for <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Supported account types</span></strong></span>.
+									</li><li class="listitem">
+										Select <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Web</span></strong></span> for <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Redirect URI (optional)</span></strong></span>.
+									</li><li class="listitem">
+										In the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Redirect URI (optional)</span></strong></span> field, enter the <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Microsoft Entra ID OAuth2 Callback URL</span></em></span> value that you fetched from Ansible Automation Platform.
+									</li></ul></div></li><li class="listitem">
+								Click <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Register</span></strong></span> to create the registration.
+							</li></ol></div><div class="Role ARG Spec Role ARG Spec"><p class="title"><strong>Verification</strong></p><p>
+							When registration is complete, the registration page for the Ansible Automation Platform application is displayed.
+						</p></div></section><section class="section Role ARG Spec" id="proc-azure-generating-secrets_azure-connecting-to-aap"><div class="titlepage"><div><div><h4 class="title">5.4.2.2. Generating secrets for communication</h4></div></div></div><p class="_abstract _abstract">
+						Create secrets so your applications can communicate with one another.
+					</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem"><p class="simpara">
+								In the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Ansible Automation Platform application registration page</span></strong></span> on Azure, copy and save the value of <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Application (client) ID</span></em></span>.
+							</p><p class="Role ARG Spec Role ARG Spec">
+								You need this value for the <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Microsoft Entra ID OAuth2 Key</span></em></span> in the Ansible Automation Platform settings.
+							</p></li><li class="listitem">
+								Under <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Manage</span></strong></span>, click <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Certificates &amp; secrets</span></strong></span>.
+							</li><li class="listitem">
+								Click <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Client secrets</span></strong></span> and then <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">New client secret</span></strong></span>.
+							</li><li class="listitem"><p class="simpara">
+								Provide a description for the new secret.
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+										It is not possible to automatically renew a certificate or identify when it is about to expire.
+									</li><li class="listitem">
+										It is useful to include the date in the description, for example: <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Ansible Automation Platform Client Secret &lt;Today’s Date in YYYY-MM-DD format&gt;</span></em></span>.
+									</li></ul></div></li><li class="listitem"><p class="simpara">
+								Provide an expiration date for the new secret.
+							</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="a"><li class="listitem">
+										The maximum lifetime for the certificate is 2 years. Unless you have specific security needs that prevent the creation of a long term certificate, select an expiration date of <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">24 months</span></strong></span>.
+									</li></ol></div></li><li class="listitem">
+								Save the secret <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Value</span></em></span> to a location on your local machine. After you navigate away from this page the secret value is no longer retrievable.
+							</li></ol></div></section><section class="section Role ARG Spec" id="proc-azure-create-service-principal_azure-connecting-to-aap"><div class="titlepage"><div><div><h4 class="title">5.4.2.3. Creating a service principal for automating Azure resources</h4></div></div></div><p class="_abstract _abstract">
+						To enable the Ansible Automation Platform application to access and manage Azure resources, you must provide authorization credentials after deployment. The Microsoft Azure collection supports service principal authentication.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						To create a service principal, you must have administrator privileges with tenancy-wide permissions on your Azure tenant. Your Ansible Automation Platform on Microsoft Azure deployment provisions in the same Subscription ID as the service principal created in this step.
+					</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+								Navigate to the Azure portal
+							</li><li class="listitem">
+								Click the <a class="link" href="https://learn.microsoft.com/en-us/azure/cloud-shell/overview">Cloud Shell</a> icon to open a bash Cloud Shell in your browser.
+							</li><li class="listitem"><p class="simpara">
+								Set the Azure CLI to use the subscription that you intend to use for automating Azure services. Run the following command from the shell:
+							</p><pre class="screen Role ARG Spec Role ARG Spec">az account set --subscription &lt;your_subscription_id&gt;</pre></li><li class="listitem"><p class="simpara">
+								Run the following command using the Azure CLI to create a privileged service principal in Microsoft Entra ID:
+							</p><pre class="screen Role ARG Spec Role ARG Spec">az ad sp create-for-rbac --name ansible --role Contributor</pre><p class="Role ARG Spec Role ARG Spec">
+								The output displays the <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">appID</span></em></span> and <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">tenant</span></em></span> keys for the service principal:
+							</p><pre class="screen Role ARG Spec Role ARG Spec">{
+  "appId": "xxxxxxx-xxx-xxxx",
+  "displayName": "ansible",
+  "name": "xxxxxxx-xxx-xxxx",
+  "password": "xxxxxxx-xxx-xxxx",
+  "tenant": "xxxxxxx-xxx-xxxx"
+}</pre></li><li class="listitem">
+								Store the service principal details securely, as they are displayed only when you create the secret.
+							</li></ol></div></section><section class="section Role ARG Spec" id="ref-azure-maintain-your-service-principles_azure-connecting-to-aap"><div class="titlepage"><div><div><h4 class="title">5.4.2.4. Maintain your service principals</h4></div></div></div><p class="_abstract _abstract">
+						Service principal credentials have a limited lifetime that is set in your Microsoft Entra ID configuration.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						Track the lifespan of the service principal if you intend to automate against Azure for an extended period of time. You can create a new one when needed.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						To view records of updated or deleted service principles, run the following Azure CLI command:
+					</p><pre class="screen Role ARG Spec Role ARG Spec">az ad sp list -o table | grep ansible</pre><p class="Role ARG Spec Role ARG Spec">
+						This command does not display the secrets for your service principals. Delete the service principal and create a new one if the secret is lost.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						When you create a new service principal to replace an expired or deleted one, you must update the credential that uses the service principal that you are replacing. If the credential is not updated, automations that use that credential will fail.
+					</p></section></section></section></section><section class="chapter Role ARG Spec" id="assembly-azure-support"><div class="titlepage"><div><div><h1 class="title">Chapter 6. Support for Red Hat Ansible Automation Platform on Microsoft Azure</h1></div></div></div><p class="_abstract _abstract">
+			Ansible Automation Platform on Microsoft Azure is a managed application, supported and maintained by Red Hat. Due to the architecture of the application and the deployment strategy in Azure, there are some situations where customizing and changing some aspects of the configuration could lead to a change in the responsibilities of some components.
+		</p><section class="section Role ARG Spec" id="azure_virtual_appliance_routing_with_ansible_automation_platform_on_microsoft_azure"><div class="titlepage"><div><div><h2 class="title">6.1. Azure Virtual Appliance routing with Ansible Automation Platform on Microsoft Azure</h2></div></div></div><p class="Role ARG Spec Role ARG Spec">
+				As an Ansible Automation Platform on Microsoft Azure user, you can configure the Ansible Automation Platform network to peer your own network. By doing so, you can grant access from the Ansible Automation Platform instance to all the assets associated with your own network that you want to manage. Also, you can route all the Ansible Automation Platform traffic to your own Virtual Network Appliances to control, audit, or block traffic from the Ansible Automation Platform instance to the internet. To do this, you must allowlist the URL for Ansible Automation Platform to work properly.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For more information about Azure Virtual Appliance Routing, see the <a class="link" href="https://access.redhat.com/articles/6972355">Azure Virtual Appliance Routing with Ansible Automation Platform on Azure</a> article on the Red Hat customer portal.
+			</p></section><section class="section Role ARG Spec" id="private_dns_zones"><div class="titlepage"><div><div><h2 class="title">6.2. Private DNS zones</h2></div></div></div><p class="Role ARG Spec Role ARG Spec">
+				Ansible Automation Platform on Microsoft Azure uses Azure’s managed DNS services when deployed.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				To use private DNS records that cannot be resolved publicly, you can either use Azure Private DNS zones that are peered to the managed application VNet, or you can make a submit request to Red Hat to submit DNS zones that must be forwarded to a customer-managed private DNS server.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				A limitation of Private DNS zones is that only one instance of a given zone may be linked to a Virtual Network. Attempting to link zones that match the names of Private DNS zones in the managed resource group causes conflicts. Microsoft recommends consolidating DNS records into a single zone to work around this limitation.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				You can replicate the records from the zones in the managed resource group into your own instance of the Private DNS zone. You can then unlink Private DNS zones in the managed resource group from the Virtual Network and replace it with your own instance of the Private DNS zone.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Failure to properly maintain the records in the Private DNS zone can prevent the managed application from operating.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				The Azure Kubernetes Service (AKS) Private DNS zone cannot be customer managed and still allow Red Hat to update or upgrade the managed AKS that is a part of this offering. To allow Red Hat to upgrade the customer AKS to the latest version during the maintenance windows, do not unlink the <code class="literal Role ARG Spec">&lt;GUID&gt;.privatelink.&lt;region&gt;.azmk8s.io</code> Private DNS zone. For more information on this limitation, see <a class="link" href="https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/create-upgrade-delete/createorupdatevirtualnetworklinkfailed-error">"CreateOrUpdateVirtualNetworkLinkFailed" error when updating or upgrading an AKS cluster</a> in the Microsoft Azure documentation.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				To work around this limitation, Red Hat allows you to manage A and CNAME records in the Private DNS zones in the managed resource group. Any records that you put in the Private DNS zones in the managed resource group are visible to the Red Hat SREs. If you decide to use the Private DNS zones in the managed resource group, you are responsible for updating them with the records you need. Customer supplied records are not backed up as a part of the disaster recovery process. Removing any Azure supplied records can cause network connectivity issues with Ansible Automation Platform on Microsoft Azure.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For more information about working with Private DNS zones, see <a class="link" href="https://access.redhat.com/articles/6983525">Private DNS with Red Hat Ansible Automation Platform on Microsoft Azure</a> on the Red Hat customer portal.
+			</p></section><section class="section Role ARG Spec" id="microsoft_azure_policy"><div class="titlepage"><div><div><h2 class="title">6.3. Microsoft Azure Policy</h2></div></div></div><p class="Role ARG Spec Role ARG Spec">
+				In some situations, using Azure Policy to enforce, for example, tagging rules and conventions, can adversely affect the Resource Group where the components of Ansible Automation Platform on Microsoft Azure reside. The enforcement of Azure Policy could prevent changes, impact operations, or block deployment of new components in the Resource Group. These situations are identified by Red Hat during maintenance or daily operations. You must exclude the enforcement of Azure Policy, for example by using exceptions, on resources associated with the managed application.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For more information about working with Azure Policy, see the <a class="link" href="https://access.redhat.com/articles/7013454">Azure Policy and Ansible on Azure</a> article on the Red Hat customer portal.
+			</p></section><section class="section Role ARG Spec" id="policy_remediation_timeline_and_enforcement"><div class="titlepage"><div><div><h2 class="title">6.4. Policy remediation timeline and enforcement</h2></div></div></div><p class="Role ARG Spec Role ARG Spec">
+				If Red Hat identifies a policy issue in your environment, the following timeline applies:
+			</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Notification period:</span></strong></span> Red Hat provides weekly notices to the customer after identifying and reporting a policy issue.
+					</li><li class="listitem">
+						<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Unsupported state transition:</span></strong></span> Environments that are not remediated within two weeks of the initial report move into an unsupported state.
+					</li><li class="listitem">
+						<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Resource management:</span></strong></span> If an environment remains in an unsupported state for 90 consecutive days, Red Hat might scale down the environment infrastructure to minimize resource impact.
+					</li></ul></div><section class="section Role ARG Spec" id="azure-limited-support-status_azure-support"><div class="titlepage"><div><div><h3 class="title">6.4.1. Limited support status</h3></div></div></div><p class="_abstract _abstract">
+					Customers may implement Azure infrastructure changes or policies that negatively affect the functionality of the service and Red Hat’s ability to monitor and service it. In such scenarios, the deployment can transition into a limited support status. A deployment may move to a limited support status for many reasons, including the following scenarios:
+				</p><div class="variablelist Role ARG Spec"><dl class="variablelist Role ARG Spec"><dt><span class="term">Inactive Ansible subscriptions</span></dt><dd><p class="simpara">
+								Red Hat issues subscription entitlements through the application deployment process. The entitlement expires one year after it is issued. Customers are emailed prior to expiration to renew the entitlement. This process issues a new entitlement for the next year and can be imported into Ansible Automation Platform.
+							</p><div class="variablelist Role ARG Spec"><dl class="variablelist Role ARG Spec"><dt><span class="term">Failure to renew</span></dt><dd>
+											When an entitlement expires, customers can continue to use Ansible Automation Platform on Microsoft Azure. However, Red Hat support requires a valid entitlement before assisting with support issues.
+										</dd></dl></div></dd><dt><span class="term">Changes to customized policies</span></dt><dd><p class="simpara">
+								Ansible Automation Platform on Microsoft Azure runs on infrastructure within a customer’s Azure tenant. This means that customer Azure policies can affect the deployment and function of the platform. Given the flexibility of Azure policy definitions, it is impossible to list all policies that can cause infrastructure or operational issues with the platform. When those events happen, the Red Hat SRE team can help identify the policy causing the issue, and suggested remediation. That remediation may require customer policy changes in order for the managed application to function correctly.
+							</p><div class="variablelist Role ARG Spec"><dl class="variablelist Role ARG Spec"><dt><span class="term">Failure to remediate</span></dt><dd>
+											When a policy conflict arises, the Red Hat team reaches out to the customer to remediate. Some of these changes are time sensitive and can impact the platform’s operational function. The Red Hat Site Reliability Engineering (SRE) team will pause maintenance and upgrades until the customer resolves the policy issues.
+										</dd></dl></div></dd><dt><span class="term">Changes to firewall and network configurations</span></dt><dd><p class="simpara">
+								When configuring egress routes from Ansible Automation Platform on Microsoft Azure, customers are required to route traffic to a set of domains on the public internet used for the deployment, monitoring and maintenance of the platform.
+							</p><div class="variablelist Role ARG Spec"><dl class="variablelist Role ARG Spec"><dt><span class="term">Failure to set up</span></dt><dd>
+											The Ansible Automation Platform on Managed Azure will be in a state where it cannot be monitored or serviced by the Red Hat SRE team.
+										</dd></dl></div></dd><dt><span class="term">Changes to quota limits</span></dt><dd><p class="simpara">
+								A prerequisite for Ansible Automation Platform on Microsoft Azure requires adequate capacity to deploy the managed application in the selected region. Microsoft imposes restrictions on limits (CPU) in each region. It is expected that the customers set up their infrastructure with the specifications as listed in the Product Documentation.
+							</p><div class="variablelist Role ARG Spec"><dl class="variablelist Role ARG Spec"><dt><span class="term">Failure to remediate</span></dt><dd>
+											As the Red Hat SRE team perform regular maintenance and improvements, the quota limitations in the region could prevent them to manage the deployment consistently and can eventually result in an inability to manage the offering.
+										</dd></dl></div></dd><dt><span class="term">Incorrect CIDR ranges</span></dt><dd><p class="simpara">
+								During initial deployment, customers can configure networking address range (CIDR block) for the VNet the Ansible Automation Platform uses. After configuration, when you have created the network, you cannot change CIDR blocks. To make a change you must redeploy the managed Ansible Automation Platform application with the configurations specified in the documentation.
+							</p><div class="variablelist Role ARG Spec"><dl class="variablelist Role ARG Spec"><dt><span class="term">Failure to remediate</span></dt><dd>
+											While the Azure user experiences allow customers to set CIDR blocks of choice, the use of the smaller CIDR ranges smaller than our guidelines can create the circumstance that your deployment is in limited supported state where the platform is unable to scale for both automation and management workloads.
+										</dd></dl></div></dd></dl></div></section></section></section><div><div xml:lang="en-US" class="legalnotice" id="idm140497595277568"><h1 class="legalnotice">Legal Notice</h1><div class="para">
+		Copyright <span class="trademark"><!--Empty--></span>© Red Hat.
+	</div><div class="para">
+		Except as otherwise noted below, the text of and illustrations in this documentation are licensed by Red Hat under the Creative Commons Attribution–Share Alike 3.0 Unported license . If you distribute this document or an adaptation of it, you must provide the URL for the original version.
+	</div><div class="para">
+		Red Hat, as the licensor of this document, waives the right to enforce, and agrees not to assert, Section 4d of CC-BY-SA to the fullest extent permitted by applicable law.
+	</div><div class="para">
+		Red Hat, the Red Hat logo, JBoss, Hibernate, and RHCE are trademarks or registered trademarks of Red Hat, LLC. or its subsidiaries in the United States and other countries.
+	</div><div class="para">
+		<span class="trademark">Linux</span>® is the registered trademark of Linus Torvalds in the United States and other countries.
+	</div><div class="para">
+		XFS is a trademark or registered trademark of Hewlett Packard Enterprise Development LP or its subsidiaries in the United States and other countries.
+	</div><div class="para">
+		The <span class="trademark">OpenStack</span>® Word Mark and OpenStack logo are trademarks or registered trademarks of the Linux Foundation, used under license.
+	</div><div class="para">
+		All other trademarks are the property of their respective owners.
+	</div></div></div></div></body>

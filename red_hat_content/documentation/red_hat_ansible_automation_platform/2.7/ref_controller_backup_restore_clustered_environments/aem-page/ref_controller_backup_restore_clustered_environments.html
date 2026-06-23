@@ -1,0 +1,28 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="controller-backup-restore-clustered-environments">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Backup and restore in clustered environments</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Learn how to back up and restore automation controller in a clustered environment.</p> 
+     <section class="section"> 
+      <p class="p">The procedure for backup and restore for a clustered environment is similar to a single install, except for some of the following considerations:</p> 
+      <ul class="ul"> 
+       <li class="li">If restoring to a new cluster, ensure that the old cluster is shut down before proceeding because they can conflict with each other when accessing the database.</li> 
+       <li class="li">Per-node backups are only restored to nodes bearing the same hostname as the backup.</li> 
+       <li class="li">When restoring to an existing cluster, the restore has the following: 
+        <ul class="ul"> 
+         <li class="li">A dump of the PostgreSQL database</li> 
+         <li class="li">UI artifacts, included in the database dump</li> 
+         <li class="li">An automation controller configuration (retrieved from <code class="ph codeph">/etc/tower</code>)</li> 
+         <li class="li">An automation controller secret key</li> 
+         <li class="li">Manual projects</li> 
+        </ul> </li> 
+      </ul> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

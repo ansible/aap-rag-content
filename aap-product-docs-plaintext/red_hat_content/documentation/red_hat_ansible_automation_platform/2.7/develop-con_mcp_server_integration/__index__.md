@@ -12,14 +12,3 @@ You can configure MCP servers in two ways:
 - **For remote (external) MCP servers**: The EE build process facilitates defining remote connection details in a manifest file contained within the EE. This manifest informs the core MCP collection plugin on how to connect, typically pointing to a specific remote URL using an HTTP connection.
 
 
-## Supported MCP servers
-
-To use MCP servers, you must specify the required MCP support information in your EE definitions. This configuration pulls the necessary dependencies into your EE YAML file. The following MCP servers are currently targeted for support:
-
-- **AWS Core MCP**: Serves as a starting point for working across Amazon MCPs.
-- **AWS Cloud Control API MCP**: Provides the execution layer for AWS resource management.
-- **GitHub MCP**: Used for testing and validation, often targeting remote server connections.
-
-## Dependencies
-
-Dependencies are incorporated into the EE YAML when you create the definition files. For example, the demonstration jobs target scenarios like AWS EC2 and VPC management, GitHub repository, and pull request operations.

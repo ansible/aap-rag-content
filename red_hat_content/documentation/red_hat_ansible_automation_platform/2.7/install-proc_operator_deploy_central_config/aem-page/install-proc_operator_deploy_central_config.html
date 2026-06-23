@@ -1,0 +1,89 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="operator-deploy-central-config">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Add components to an existing deployment</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">You can link any components of the Ansible Automation Platform, that you have already installed to a new <strong class="ph b">Ansible Automation Platform</strong> instance.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">The following procedure simulates a scenario where you have automation controller as an existing component and want to add automation hub and Event-Driven Ansible.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select your Ansible Automation Platform Operator deployment.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Subscriptions</span> and edit your <strong class="ph b">Update channel</strong> to <code class="ph codeph">stable-2.7</code>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Details</span> and on the <strong class="ph b">Ansible Automation Platform</strong> tile click <span class="ph uicontrol button">Create instance</span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Create Ansible Automation Platform</strong> page enter a name for your instance in the <strong class="ph b">Name</strong> field. </span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li">When deploying an Ansible Automation Platform instance, ensure that <code class="ph codeph">auto_update</code> is set to the default value of <code class="ph codeph">false</code> on your existing automation controller instance in order for the integration to work.</li> 
+         </ul> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">YAML view</span> and copy in the following: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: example-aap
+  namespace: aap
+spec:
+  database:
+    resource_requirements:
+      requests:
+        cpu: 200m
+        memory: 512Mi
+    storage_requirements:
+      requests:
+        storage: 100Gi
+
+  # Platform
+  image_pull_policy: IfNotPresent
+
+  # Components
+  controller:
+    disabled: false
+    name: existing-controller-name
+  eda:
+    disabled: false
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: &lt;your-read-write-many-storage-class&gt;
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage</code></pre> 
+        </div> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep"> <span class="ph cmd">For new components, if you do not specify a name, a default name is generated.</span> </li> 
+        </ol> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create</span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">To access your new instance, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_operator_access_aap" title="Use the Ansible Automation Platform instance as your default. This instance links the automation controller, automation hub, and Event-Driven Ansible deployments to a single interface.">Accessing the platform gateway</a>. </span> 
+        <div class="itemgroup info"> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">If you have an existing controller with a managed Postgres pod, after creating the <strong class="ph b">Ansible Automation Platform</strong> resource your automation controller instance will continue to use that original Postgres pod. If you were to do a fresh install you would have a single Postgres managed pod for all instances.</p> 
+          </div>
+         </div> 
+        </div> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

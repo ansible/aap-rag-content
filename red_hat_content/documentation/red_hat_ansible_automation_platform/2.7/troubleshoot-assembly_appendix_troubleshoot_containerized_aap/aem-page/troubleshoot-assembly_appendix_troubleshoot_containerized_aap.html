@@ -1,0 +1,520 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="troubleshooting-containerized-ansible-automation-platform"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Troubleshoot your containerized deployment</h1> 
+     <p class="shortdesc">Use this information to troubleshoot your containerized Ansible Automation Platform installation.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="gathering-ansible-automation-platform-logs"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Gather logs from your containerized deployment</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use the <code class="ph codeph">sos</code> utility to collect configuration and diagnostic data for Red Hat Technical Support. An <code class="ph codeph">sos</code> report is the standard starting point for troubleshooting.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">You can collect an <code class="ph codeph">sos</code> report for each host in your containerized Ansible Automation Platform deployment by running the <code class="ph codeph">log_gathering</code> playbook with the appropriate parameters.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Go to the Ansible Automation Platform installation directory.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the <code class="ph codeph">log_gathering</code> playbook. This playbook connects to each host in the inventory file, installs the <code class="ph codeph">sos</code> tool, and generates the <code class="ph codeph">sos</code> report. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-playbook -i &lt;path_to_inventory_file&gt; ansible.containerized_installer.log_gathering</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To collect container-level logs, run the <code class="ph codeph">sos</code> report directly on each host with the <code class="ph codeph">aap_containerized</code> plugin enabled:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ sudo sos report -e aap_containerized -k aap_containerized.username=<var class="keyword varname">&lt;username&gt;</var></code></pre> 
+           <p class="p">where <var class="keyword varname">&lt;username&gt;</var> is the service account or user running the containerized installation.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: To define additional parameters, specify them with the <code class="ph codeph">-e</code> option. For example: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-playbook -i &lt;path_to_inventory_file&gt; ansible.containerized_installer.log_gathering -e 'target_sos_directory=&lt;path_to_files&gt;' -e 'case_number=0000000' -e 'clean=true' -e 'upload=true' -s</code></pre> 
+          </div> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">You can use the <code class="ph codeph">-s</code> option to step through each task in the playbook and confirm its execution. This is optional but can be helpful for debugging.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">The following is a list of the parameters you can use with the <code class="ph codeph">log_gathering</code> playbook: </span> 
+            <div class="itemgroup info"> 
+             <table class="table">
+              <caption>
+               <span class="table--title-label">Table 1. </span><span class="title">Parameter reference</span>
+              </caption>
+              <colgroup>
+               <col style="width:33.3333%">
+               <col style="width:33.3333%">
+               <col style="width:33.3334%">
+              </colgroup>
+              <thead class="thead"> 
+               <tr class="row"> 
+                <th class="entry" id="gathering-ansible-automation-platform-logs__entry__1">Parameter name</th> 
+                <th class="entry" id="gathering-ansible-automation-platform-logs__entry__2">Description</th> 
+                <th class="entry" id="gathering-ansible-automation-platform-logs__entry__3">Default</th> 
+               </tr> 
+              </thead>
+              <tbody class="tbody"> 
+               <tr class="row"> 
+                <td class="entry" headers="gathering-ansible-automation-platform-logs__entry__1"> <p class="p"> <code class="ph codeph">target_sos_directory</code> </p> </td> 
+                <td class="entry" headers="gathering-ansible-automation-platform-logs__entry__2"> <p class="p">Used to change the default location for the <code class="ph codeph">sos</code> report files.</p> </td> 
+                <td class="entry" headers="gathering-ansible-automation-platform-logs__entry__3"> <p class="p"><code class="ph codeph">/tmp</code> directory of the current server.</p> </td> 
+               </tr> 
+               <tr class="row"> 
+                <td class="entry" headers="gathering-ansible-automation-platform-logs__entry__1"> <p class="p"> <code class="ph codeph">case_number</code> </p> </td> 
+                <td class="entry" headers="gathering-ansible-automation-platform-logs__entry__2"> <p class="p">Specifies the support case number if relevant to the log gathering.</p> </td> 
+                <td class="entry" headers="gathering-ansible-automation-platform-logs__entry__3"></td> 
+               </tr> 
+               <tr class="row"> 
+                <td class="entry" headers="gathering-ansible-automation-platform-logs__entry__1"> <p class="p"> <code class="ph codeph">clean</code> </p> </td> 
+                <td class="entry" headers="gathering-ansible-automation-platform-logs__entry__2"> <p class="p">Obfuscates sensitive data that might be present on the <code class="ph codeph">sos</code> report.</p> </td> 
+                <td class="entry" headers="gathering-ansible-automation-platform-logs__entry__3"> <p class="p"> <code class="ph codeph">false</code> </p> </td> 
+               </tr> 
+               <tr class="row"> 
+                <td class="entry" headers="gathering-ansible-automation-platform-logs__entry__1"> <p class="p"> <code class="ph codeph">upload</code> </p> </td> 
+                <td class="entry" headers="gathering-ansible-automation-platform-logs__entry__2"> <p class="p">Automatically uploads the <code class="ph codeph">sos</code> report data to Red Hat.</p> </td> 
+                <td class="entry" headers="gathering-ansible-automation-platform-logs__entry__3"> <p class="p"> <code class="ph codeph">false</code> </p> </td> 
+               </tr> 
+              </tbody>
+             </table> 
+            </div> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Gather the <code class="ph codeph">sos</code> report files described in the playbook output and share them with the support engineer or directly upload the <code class="ph codeph">sos</code> report to Red Hat using the <code class="ph codeph">upload=true</code> additional parameter.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://access.redhat.com/solutions/3592" target="_blank" rel="external noopener">What is an sos report and how to create one in Red Hat Enterprise Linux?</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="diagnosing-the-problem"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Diagnose the problem</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">For general container-based troubleshooting, you can inspect the container logs for any running service to help troubleshoot underlying issues.</p> 
+       <section class="section"> 
+        <p class="p"> <strong class="ph b">Identifying the running containers</strong> </p> 
+        <p class="p">To get a list of the running container names run the following command:</p> 
+        <pre class="pre codeblock"><code>$ podman ps --all --format "{{.Names}}"</code></pre> 
+        <table class="table">
+         <caption>
+          <span class="table--title-label">Table 2. </span><span class="title">Container details</span>
+         </caption>
+         <colgroup>
+          <col style="width:25%">
+          <col style="width:25%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="diagnosing-the-problem__entry__1">Component group</th> 
+           <th class="entry" id="diagnosing-the-problem__entry__2">Container name</th> 
+           <th class="entry" id="diagnosing-the-problem__entry__3">Purpose</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-controller-rsyslog</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">Handles centralized logging for automation controller.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-controller-task</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">Manages and runs tasks related to automation controller, such as running playbooks and interacting with inventories.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Automation controller</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-controller-web</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">A web server that provides a REST API for automation controller. This is accessed and routed through platform gateway for user interaction.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-eda-api</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">Exposes the API for Event-Driven Ansible, allowing external systems to trigger and manage event-driven automations.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-eda-daphne</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">A web server for Event-Driven Ansible, handling WebSocket connections and serving static files.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-eda-web</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">A web server that provides a REST API for Event-Driven Ansible. This is accessed and routed through platform gateway for user interaction.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-eda-worker-&lt;number&gt;</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">These containers run the automation rules and playbooks based on incoming events.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-eda-activation-worker-&lt;number&gt;</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">These containers manage the activation of automation rules, ensuring they run when specific conditions are met.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Event-Driven Ansible</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-eda-scheduler</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">Responsible for scheduling and managing recurring tasks and rule activations.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Platform gateway</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-gateway-proxy</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">Acts as a reverse proxy, routing incoming requests to the appropriate Ansible Automation Platform services.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Platform gateway</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-gateway</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">Responsible for authentication, authorization, and overall request handling for the platform, all of which is exposed through a REST API and served by a web server.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-hub-api</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">Provides the API for automation hub, enabling interaction with collection content, user management, and other automation hub functionality.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-hub-content</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">Manages and serves Ansible Content Collections, roles, and modules stored in automation hub.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-hub-web</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">A web server that provides a REST API for automation hub. This is accessed and routed through platform gateway for user interaction.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Automation hub</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">automation-hub-worker-&lt;number&gt;</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">These containers handle background tasks for automation hub, such as content synchronization, indexing, and validation.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Performance Co-Pilot</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">pcp</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">If Performance Co-Pilot Monitoring is enabled, this container is used for system performance monitoring and data collection.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">PostgreSQL</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">postgresql</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">Hosts the PostgreSQL database for Ansible Automation Platform.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Receptor</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">receptor</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">Facilitates secure and reliable communication within Ansible Automation Platform.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="diagnosing-the-problem__entry__1"> <p class="p">Redis</p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__2"> <p class="p"> <code class="ph codeph">redis-&lt;suffix&gt;</code> </p> </td> 
+           <td class="entry" headers="diagnosing-the-problem__entry__3"> <p class="p">Responsible for caching, real-time analytics and fast data retrieval.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">Inspecting the logs</strong> </p> 
+        <p class="p">Containerized Ansible Automation Platform uses <code class="ph codeph">journald</code> for Podman logging. To inspect any running container logs, run the <code class="ph codeph">journalctl</code> command:</p> 
+        <pre class="pre codeblock"><code>$ journalctl CONTAINER_NAME=&lt;container_name&gt;</code></pre> 
+        <p class="p">Example command with output:</p> 
+        <pre class="pre codeblock"><code>$ journalctl CONTAINER_NAME=automation-gateway-proxy
+
+Oct 08 01:40:12 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 00:40:12.885][2][info][upstream] [external/envoy/source/common/upstream/cds_ap&gt;
+Oct 08 01:40:12 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 00:40:12.885][2][info][upstream] [external/envoy/source/common/upstream/cds_ap&gt;
+Oct 08 01:40:19 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T00:40:16.753Z] "GET /up HTTP/1.1" 200 - 0 1138 10 0 "192.0.2.1" "python-&gt;</code></pre> 
+        <p class="p">To view the logs of a running container in real-time, run the <code class="ph codeph">podman logs -f</code> command:</p> 
+        <pre class="pre codeblock"><code>$ podman logs -f &lt;container_name&gt;</code></pre> 
+        <p class="p"> <strong class="ph b">Controlling container operations</strong> </p> 
+        <p class="p">You can control operations for a container by running the <code class="ph codeph">systemctl</code> command:</p> 
+        <pre class="pre codeblock"><code>$ systemctl --user status &lt;container_name&gt;</code></pre> 
+        <p class="p">Example command with output:</p> 
+        <pre class="pre codeblock"><code>$ systemctl --user status automation-gateway-proxy
+● automation-gateway-proxy.service - Podman automation-gateway-proxy.service
+    Loaded: loaded (/home/user/.config/systemd/user/automation-gateway-proxy.service; enabled; preset: disabled)
+    Active: active (running) since Mon 2024-10-07 12:39:23 BST; 23h ago
+       Docs: man:podman-generate-systemd(1)
+    Process: 780 ExecStart=/usr/bin/podman start automation-gateway-proxy (code=exited, status=0/SUCCESS)
+   Main PID: 1919 (conmon)
+      Tasks: 1 (limit: 48430)
+     Memory: 852.0K
+        CPU: 2.996s
+     CGroup: /user.slice/user-1000.slice/user@1000.service/app.slice/automation-gateway-proxy.service
+             └─1919 /usr/bin/conmon --api-version 1 -c 2dc3c7b2cecd73010bad1e0aaa806015065f92556ed3591c9d2084d7ee209c7a -u 2dc3c7b2cecd73010bad1e0aaa80&gt;
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:02.926Z] "GET /api/galaxy/_ui/v1/settings/ HTTP/1.1" 200 - 0 654 58 47 "&gt;
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:03.387Z] "GET /api/controller/v2/config/ HTTP/1.1" 200 - 0 4018 58 44 "1&gt;
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:03.370Z] "GET /api/galaxy/v3/plugin/ansible/search/collection-versions/?&gt;
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:03.405Z] "GET /api/controller/v2/organizations/?role_level=notification_&gt;
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:04.366Z] "GET /api/galaxy/_ui/v1/me/ HTTP/1.1" 200 - 0 1368 79 40 "192.1&gt;
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:04.360Z] "GET /api/controller/v2/workflow_approvals/?page_size=200&amp;statu&gt;
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:04.379Z] "GET /api/controller/v2/job_templates/7/ HTTP/1.1" 200 - 0 1356&gt;
+Oct 08 11:44:10 aap.example.org automation-gateway-proxy[1919]: [2024-10-08T10:44:04.378Z] "GET /api/galaxy/_ui/v1/feature-flags/ HTTP/1.1" 200 - 0 207 81&gt;
+Oct 08 11:44:13 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 10:44:13.856][2][info][upstream] [external/envoy/source/common/upstream/cds_ap&gt;
+Oct 08 11:44:13 aap.example.org automation-gateway-proxy[1919]: [2024-10-08 10:44:13.856][2][info][upstream] [external/envoy/source/common/upstream/cds_ap</code></pre> 
+        <p class="p"> <strong class="ph b">Getting container information about the execution plane</strong> </p> 
+        <p class="p">To get container information about automation controller, Event-Driven Ansible, and <code class="ph codeph">execution_nodes</code> nodes, prefix any Podman commands with either:</p> 
+        <pre class="pre codeblock"><code>CONTAINER_HOST=unix://run/user/&lt;user_id&gt;/podman/podman.sock</code></pre> 
+        <p class="p">or</p> 
+        <pre class="pre codeblock"><code>CONTAINERS_STORAGE_CONF=&lt;user_home_directory&gt;/aap/containers/storage.conf</code></pre> 
+        <p class="p">Example with output:</p> 
+        <pre class="pre codeblock"><code>$ CONTAINER_HOST=unix://run/user/1000/podman/podman.sock podman images
+
+REPOSITORY                                                            TAG         IMAGE ID      CREATED     SIZE
+registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8  latest      59d1bc680a7c  6 days ago  2.24 GB
+registry.redhat.io/ansible-automation-platform-25/ee-minimal-rhel8    latest      a64b9fc48094  6 days ago  338 MB</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="troubleshooting-containerized-ansible-automation-platform-installation"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Troubleshoot your containerized installation</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use this information to troubleshoot your containerized installation of Ansible Automation Platform.</p> 
+       <section class="section"> 
+        <p class="p"> <strong class="ph b">The installation takes a long time, or has errors, what should I check?</strong> </p> 
+        <ol class="ol"> 
+         <li class="li">Ensure your system meets the minimum requirements as outlined in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_cont_aap_system_requirements" title="Use this information when planning your installation of containerized Ansible Automation Platform.">System requirements</a>. Factors such as improper storage choices and high latency when distributing across many hosts will all have an impact on installation time.</li> 
+         <li class="li">Review the installation log file which is located by default at <code class="ph codeph">./aap_install.log</code>. You can change the log file location within the <code class="ph codeph">ansible.cfg</code> file in the installation directory.</li> 
+         <li class="li">Enable task profiling callbacks on an ad hoc basis to give an overview of where the installation program spends the most time. To do this, use the local <code class="ph codeph">ansible.cfg</code> file. Add a callback line under the <code class="ph codeph">[defaults]</code> section, for example: <pre class="pre codeblock"><code>$ cat ansible.cfg
+[defaults]
+callbacks_enabled = ansible.posix.profile_tasks</code></pre> </li> 
+        </ol> 
+        <p class="p"> <strong class="ph b">Automation controller returns an error of 413</strong> </p> 
+        <p class="p">This error occurs when <code class="ph codeph">manifest.zip</code> license files that are larger than the <code class="ph codeph">controller_nginx_client_max_body_size</code> setting. If this error occurs, update the inventory file to include the following variable:</p> 
+        <pre class="pre codeblock"><code>controller_nginx_client_max_body_size=5m</code></pre> 
+        <p class="p">The default setting of <code class="ph codeph">5m</code> should prevent this issue, but you can increase the value as needed.</p> 
+        <p class="p"> <strong class="ph b">When attempting to install containerized Ansible Automation Platform in Amazon Web Services you receive output that there is no space left on device</strong> </p> 
+        <pre class="pre codeblock"><code>TASK [ansible.containerized_installer.automationcontroller : Create the receptor container] ***************************************************
+fatal: [ec2-13-48-25-168.eu-north-1.compute.amazonaws.com]: FAILED! =&gt; {"changed": false, "msg": "Can't create container receptor", "stderr": "Error: creating container storage: creating an ID-mapped copy of layer \"98955f43cc908bd50ff43585fec2c7dd9445eaf05eecd1e3144f93ffc00ed4ba\": error during chown: storage-chown-by-maps: lchown usr/local/lib/python3.9/site-packages/azure/mgmt/network/v2019_11_01/operations/__pycache__/_available_service_aliases_operations.cpython-39.pyc: no space left on device: exit status 1\n", "stderr_lines": ["Error: creating container storage: creating an ID-mapped copy of layer \"98955f43cc908bd50ff43585fec2c7dd9445eaf05eecd1e3144f93ffc00ed4ba\": error during chown: storage-chown-by-maps: lchown usr/local/lib/python3.9/site-packages/azure/mgmt/network/v2019_11_01/operations/__pycache__/_available_service_aliases_operations.cpython-39.pyc: no space left on device: exit status 1"], "stdout": "", "stdout_lines": []}</code></pre> 
+        <p class="p">If you are installing a <code class="ph codeph">/home</code> filesystem into a default Amazon Web Services marketplace RHEL instance, it might be too small since <code class="ph codeph">/home</code> is part of the root <code class="ph codeph">/</code> filesystem. To resolve this issue you must make more space available. For more information about the system requirements, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_cont_aap_system_requirements" title="Use this information when planning your installation of containerized Ansible Automation Platform.">System requirements</a>.</p> 
+        <p class="p"> <strong class="ph b">"Install container tools" task fails due to unavailable packages</strong> </p> 
+        <p class="p">This error can be seen in the installation process output as the following:</p> 
+        <pre class="pre codeblock"><code>TASK [ansible.containerized_installer.common : Install container tools] **********************************************************************************************************
+fatal: [192.0.2.1]: FAILED! =&gt; {"changed": false, "failures": ["No package crun available.", "No package podman available.", "No package slirp4netns available.", "No package fuse-overlayfs available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
+fatal: [192.0.2.2]: FAILED! =&gt; {"changed": false, "failures": ["No package crun available.", "No package podman available.", "No package slirp4netns available.", "No package fuse-overlayfs available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
+fatal: [192.0.2.3]: FAILED! =&gt; {"changed": false, "failures": ["No package crun available.", "No package podman available.", "No package slirp4netns available.", "No package fuse-overlayfs available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
+fatal: [192.0.2.4]: FAILED! =&gt; {"changed": false, "failures": ["No package crun available.", "No package podman available.", "No package slirp4netns available.", "No package fuse-overlayfs available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}
+fatal: [192.0.2.5]: FAILED! =&gt; {"changed": false, "failures": ["No package crun available.", "No package podman available.", "No package slirp4netns available.", "No package fuse-overlayfs available."], "msg": "Failed to install some of the specified packages", "rc": 1, "results": []}</code></pre> 
+        <p class="p">To fix this error, run the following command on the target hosts:</p> 
+        <pre class="pre codeblock"><code>sudo subscription-manager register</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="troubleshooting-containerized-ansible-automation-platform-configuration"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Troubleshoot your containerized configuration</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use this information to troubleshoot your containerized Ansible Automation Platform configuration.</p> 
+       <section class="section"> 
+        <p class="p"> <strong class="ph b">Sometimes the post install for seeding my Ansible Automation Platform content errors out</strong> </p> 
+        <p class="p">This could manifest itself as output similar to this:</p> 
+        <pre class="pre codeblock"><code>TASK [infra.controller_configuration.projects : Configure Controller Projects | Wait for finish the projects creation] ***************************************
+Friday 29 September 2023  11:02:32 +0100 (0:00:00.443)       0:00:53.521 ******
+FAILED - RETRYING: [daap1.lan]: Configure Controller Projects | Wait for finish the projects creation (1 retries left).
+failed: [daap1.lan] (item={'failed': 0, 'started': 1, 'finished': 0, 'ansible_job_id': '536962174348.33944', 'results_file': '/home/aap/.ansible_async/536962174348.33944', 'changed': False, '__controller_project_item': {'name': 'AAP Config-As-Code Examples', 'organization': 'Default', 'scm_branch': 'main', 'scm_clean': 'no', 'scm_delete_on_update': 'no', 'scm_type': 'git', 'scm_update_on_launch': 'no', 'scm_url': 'https://github.com/user/repo.git'}, 'ansible_loop_var': '__controller_project_item'}) =&gt; {"__projects_job_async_results_item": {"__controller_project_item": {"name": "AAP Config-As-Code Examples", "organization": "Default", "scm_branch": "main", "scm_clean": "no", "scm_delete_on_update": "no", "scm_type": "git", "scm_update_on_launch": "no", "scm_url": "https://github.com/user/repo.git"}, "ansible_job_id": "536962174348.33944", "ansible_loop_var": "__controller_project_item", "changed": false, "failed": 0, "finished": 0, "results_file": "/home/aap/.ansible_async/536962174348.33944", "started": 1}, "ansible_job_id": "536962174348.33944", "ansible_loop_var": "__projects_job_async_results_item", "attempts": 30, "changed": false, "finished": 0, "results_file": "/home/aap/.ansible_async/536962174348.33944", "started": 1, "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}</code></pre> 
+        <p class="p">The <code class="ph codeph">infra.controller_configuration.dispatch</code> role uses an asynchronous loop with 30 retries to apply each configuration type, and the default delay between retries is 1 second. If the configuration is large, this might not be enough time to apply everything before the last retry occurs.</p> 
+        <p class="p">Increase the retry delay by setting the <code class="ph codeph">controller_configuration_async_delay</code> variable to 2 seconds for example. You can set this variable in the <code class="ph codeph">[all:vars]</code> section of the installation program inventory file.</p> 
+        <p class="p">Re-run the installation program to ensure everything works as expected.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="containerized-ansible-automation-platform-reference"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Understand the architecture of your containerized deployment</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use this information to understand the architecture for your containerized Ansible Automation Platform deployment.</p> 
+       <section class="section"> 
+        <p class="p"> <strong class="ph b">Can you give details of the architecture for the Ansible Automation Platform containerized design?</strong> </p> 
+        <p class="p">We use as much of the underlying Red Hat Enterprise Linux technology as possible. Podman is used for the container runtime and management of services.</p> 
+        <p class="p">Use <code class="ph codeph">podman ps</code> to list the running containers on the system.</p> 
+        <p class="p">Use <code class="ph codeph">podman images</code> to display information about locally stored images.</p> 
+        <p class="p">Containerized Ansible Automation Platform runs as rootless containers for enhanced security by default. This means you can install containerized Ansible Automation Platform by using any local unprivileged user account. Privilege escalation is only needed for certain root level tasks, and by default is not needed to use root directly.</p> 
+        <p class="p">The installation program adds the following files to the filesystem where you run the installation program on the underlying Red Hat Enterprise Linux host:</p> 
+        <pre class="pre codeblock"><code>$ tree -L 1
+    .
+    ├── aap_install.log
+    ├── ansible.cfg
+    ├── collections
+    ├── galaxy.yml
+    ├── inventory
+    ├── LICENSE
+    ├── meta
+    ├── playbooks
+    ├── plugins
+    ├── README.md
+    ├── requirements.yml
+    ├── roles</code></pre> 
+        <p class="p">The installation root directory includes other containerized services that make use of Podman volumes.</p> 
+        <p class="p">Here are some examples for further reference:</p> 
+        <p class="p">The <code class="ph codeph">containers</code> directory includes some of the Podman specifics used and installed for the execution plane:</p> 
+        <pre class="pre codeblock"><code>    containers/
+    ├── podman
+    ├── storage
+    │   ├── defaultNetworkBackend
+    │   ├── libpod
+    │   ├── networks
+    │   ├── overlay
+    │   ├── overlay-containers
+    │   ├── overlay-images
+    │   ├── overlay-layers
+    │   ├── storage.lock
+    │   └── userns.lock
+    └── storage.conf</code></pre> 
+        <p class="p">The <code class="ph codeph">controller</code> directory has some of the installed configuration and runtime data points:</p> 
+        <pre class="pre codeblock"><code>    controller/
+    ├── data
+    │   ├── job_execution
+    │   ├── projects
+    │   └── rsyslog
+    ├── etc
+    │   ├── conf.d
+    │   ├── launch_awx_task.sh
+    │   ├── settings.py
+    │   ├── tower.cert
+    │   └── tower.key
+    ├── nginx
+    │   └── etc
+    ├── rsyslog
+    │   └── run
+    └── supervisor
+        └── run</code></pre> 
+        <p class="p">The <code class="ph codeph">receptor</code> directory has the automation mesh configuration:</p> 
+        <pre class="pre codeblock"><code>    receptor/
+    ├── etc
+    │   └── receptor.conf
+    └── run
+        ├── receptor.sock
+        └── receptor.sock.lock</code></pre> 
+        <p class="p">After installation, you will also find other files in the local user’s <code class="ph codeph">/home</code> directory such as the <code class="ph codeph">.cache</code> directory:</p> 
+        <pre class="pre codeblock"><code>    .cache/
+    ├── containers
+    │   └── short-name-aliases.conf.lock
+    └── rhsm
+        └── rhsm.log</code></pre> 
+        <p class="p">As services are run using rootless Podman by default, you can use other services such as running <code class="ph codeph">systemd</code> as non-privileged users. Under <code class="ph codeph">systemd</code> you can see some of the component service controls available:</p> 
+        <p class="p">The <code class="ph codeph">.config</code> directory:</p> 
+        <pre class="pre codeblock"><code>    .config/
+    ├── cni
+    │   └── net.d
+    │       └── cni.lock
+    ├── containers
+    │   ├── auth.json
+    │   └── containers.conf
+    └── systemd
+        └── user
+            ├── automation-controller-rsyslog.service
+            ├── automation-controller-task.service
+            ├── automation-controller-web.service
+            ├── default.target.wants
+            ├── podman.service.d
+            ├── postgresql.service
+            ├── receptor.service
+            ├── redis.service
+            └── sockets.target.wants</code></pre> 
+        <p class="p">This is specific to Podman and conforms to the Open Container Initiative (OCI) specifications. When you run Podman as the root user <code class="ph codeph">/var/lib/containers</code> is used by default. For standard users the hierarchy under <code class="ph codeph">$HOME/.local</code> is used.</p> 
+        <p class="p">The <code class="ph codeph">.local</code> directory:</p> 
+        <pre class="pre codeblock"><code>    .local/
+    └── share
+        └── containers
+            ├── cache
+            ├── podman
+            └── storage</code></pre> 
+        <p class="p">As an example <code class="ph codeph">.local/storage/volumes</code> contains what the output from <code class="ph codeph">podman volume ls</code> provides:</p> 
+        <pre class="pre codeblock"><code>$ podman volume ls
+
+DRIVER      VOLUME NAME
+local       d73d3fe63a957bee04b4853fd38c39bf37c321d14fdab9ee3c9df03645135788
+local       postgresql
+local       redis_data
+local       redis_etc
+local       redis_run</code></pre> 
+        <p class="p">The execution plane is isolated from the control plane main services to ensure it does not affect the main services.</p> 
+        <p class="p">Control plane services run with the standard Podman configuration and can be found in: <code class="ph codeph">~/.local/share/containers/storage</code>.</p> 
+        <p class="p">Execution plane services (automation controller, Event-Driven Ansible and execution nodes) use a dedicated configuration found in <code class="ph codeph">~/aap/containers/storage.conf</code>. This separation prevents execution plane containers from affecting the control plane services.</p> 
+        <p class="p">You can view the execution plane configuration with one of the following commands:</p> 
+        <pre class="pre codeblock"><code>CONTAINERS_STORAGE_CONF=~/aap/containers/storage.conf podman &lt;subcommand&gt;</code></pre> 
+        <pre class="pre codeblock"><code>CONTAINER_HOST=unix://run/user/&lt;user uid&gt;/podman/podman.sock podman &lt;subcommand&gt;</code></pre> 
+        <p class="p"> <strong class="ph b">How can I see host resource utilization statistics?</strong> </p> 
+        <p class="p">Run the following command to display host resource utilization statistics:</p> 
+        <pre class="pre codeblock"><code>$ podman container stats -a</code></pre> 
+        <p class="p">Example output based on a Dell sold and offered containerized Ansible Automation Platform solution (DAAP) install that utilizes ~1.8 GB RAM:</p> 
+        <pre class="pre codeblock"><code>ID            NAME                           CPU %       MEM USAGE / LIMIT  MEM %       NET IO      BLOCK IO    PIDS        CPU TIME    AVG CPU %
+0d5d8eb93c18  automation-controller-web      0.23%       959.1MB / 3.761GB  25.50%      0B / 0B     0B / 0B     16          20.885142s  1.19%
+3429d559836d  automation-controller-rsyslog  0.07%       144.5MB / 3.761GB  3.84%       0B / 0B     0B / 0B     6           4.099565s   0.23%
+448d0bae0942  automation-controller-task     1.51%       633.1MB / 3.761GB  16.83%      0B / 0B     0B / 0B     33          34.285272s  1.93%
+7f140e65b57e  receptor                       0.01%       5.923MB / 3.761GB  0.16%       0B / 0B     0B / 0B     7           1.010613s   0.06%
+c1458367ca9c  redis                          0.48%       10.52MB / 3.761GB  0.28%       0B / 0B     0B / 0B     5           9.074042s   0.47%
+ef712cc2dc89  postgresql                     0.09%       21.88MB / 3.761GB  0.58%       0B / 0B     0B / 0B     21          15.571059s  0.80%</code></pre> 
+        <p class="p"> <strong class="ph b">How much storage is used and where?</strong> </p> 
+        <p class="p">The container volume storage is under the local user at <code class="ph codeph">$HOME/.local/share/containers/storage/volumes</code>.</p> 
+        <ol class="ol"> 
+         <li class="li">To view the details of each volume, run the following command: <pre class="pre codeblock"><code>$ podman volume ls</code></pre></li> 
+         <li class="li">Run the following command to display detailed information about a specific volume: <pre class="pre codeblock"><code>$ podman volume inspect &lt;volume_name&gt;</code></pre></li> 
+        </ol> 
+        <p class="p">For example:</p> 
+        <pre class="pre codeblock"><code>$ podman volume inspect postgresql</code></pre> 
+        <p class="p">Example output:</p> 
+        <pre class="pre codeblock"><code>[
+    {
+        "Name": "postgresql",
+        "Driver": "local",
+        "Mountpoint": "/home/aap/.local/share/containers/storage/volumes/postgresql/_data",
+        "CreatedAt": "2024-01-08T23:39:24.983964686Z",
+        "Labels": {},
+        "Scope": "local",
+        "Options": {},
+        "MountCount": 0,
+        "NeedsCopyUp": true
+    }
+]</code></pre> 
+        <p class="p">Several files created by the installation program are located in <code class="ph codeph">$HOME/aap/</code> and bind-mounted into various running containers.</p> 
+        <ol class="ol"> 
+         <li class="li">To view the mounts associated with a container run the following command: <pre class="pre codeblock"><code>$ podman ps --format "{{.ID}}\t{{.Command}}\t{{.Names}}"</code></pre><p class="p">Example output:</p><pre class="pre codeblock"><code>89e779b81b83	run-postgresql	postgresql
+4c33cc77ef7d	run-redis	redis
+3d8a028d892d	/usr/bin/receptor...	receptor
+09821701645c	/usr/bin/launch_a...	automation-controller-rsyslog
+a2ddb5cac71b	/usr/bin/launch_a...	automation-controller-task
+fa0029a3b003	/usr/bin/launch_a...	automation-controller-web
+20f192534691	gunicorn --bind 1...	automation-eda-api
+f49804c7e6cb	daphne -b 127.0.0...	automation-eda-daphne
+d340b9c1cb74	/bin/sh -c nginx ...	automation-eda-web
+111f47de5205	aap-eda-manage rq...	automation-eda-worker-1
+171fcb1785af	aap-eda-manage rq...	automation-eda-worker-2
+049d10555b51	aap-eda-manage rq...	automation-eda-activation-worker-1
+7a78a41a8425	aap-eda-manage rq...	automation-eda-activation-worker-2
+da9afa8ef5e2	aap-eda-manage sc...	automation-eda-scheduler
+8a2958be9baf	gunicorn --name p...	automation-hub-api
+0a8b57581749	gunicorn --name p...	automation-hub-content
+68005b987498	nginx -g daemon o...	automation-hub-web
+cb07af77f89f	pulpcore-worker	automation-hub-worker-1
+a3ba05136446	pulpcore-worker	automation-hub-worker-2</code></pre></li> 
+         <li class="li">Run the following command: <pre class="pre codeblock"><code>$ podman inspect &lt;container_name&gt; | jq -r .[].Mounts[].Source</code></pre><p class="p">Example output:</p><pre class="pre codeblock"><code>/home/aap/.local/share/containers/storage/volumes/receptor_run/_data
+/home/aap/.local/share/containers/storage/volumes/redis_run/_data
+/home/aap/aap/controller/data/rsyslog
+/home/aap/aap/controller/etc/tower.key
+/home/aap/aap/controller/etc/conf.d/callback_receiver_workers.py
+/home/aap/aap/controller/data/job_execution
+/home/aap/aap/controller/nginx/etc/controller.conf
+/home/aap/aap/controller/etc/conf.d/subscription_usage_model.py
+/home/aap/aap/controller/etc/conf.d/cluster_host_id.py
+/home/aap/aap/controller/etc/conf.d/insights.py
+/home/aap/aap/controller/rsyslog/run
+/home/aap/aap/controller/data/projects
+/home/aap/aap/controller/etc/settings.py
+/home/aap/aap/receptor/etc/receptor.conf
+/home/aap/aap/controller/etc/conf.d/execution_environments.py
+/home/aap/aap/tls/extracted
+/home/aap/aap/controller/supervisor/run
+/home/aap/aap/controller/etc/uwsgi.ini
+/home/aap/aap/controller/etc/conf.d/container_groups.py
+/home/aap/aap/controller/etc/launch_awx_task.sh
+/home/aap/aap/controller/etc/tower.cert</code></pre></li> 
+         <li class="li">If the <code class="ph codeph">jq</code> RPM is not installed, install it by running the following command: <pre class="pre codeblock"><code>$ sudo dnf -y install jq</code></pre></li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

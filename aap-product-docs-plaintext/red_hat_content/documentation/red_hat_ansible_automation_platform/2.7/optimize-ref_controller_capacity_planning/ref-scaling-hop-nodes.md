@@ -1,0 +1,9 @@
+# Capacity plan for node types and workload characteristics
+## Benefits of scaling hop nodes
+
+Hop nodes offer a communication bridge between the control plane and execution nodes, especially where execution nodes are located in a different network segment or behind firewalls.
+
+Because hop nodes use very low memory and CPU, vertically scaling these nodes does not impact capacity. Check the network bandwidth of any hop node that serves as the sole connection between many execution nodes and the control plane. If bandwidth use is saturated, consider changing the network.
+
+Horizontally scaling by adding more hop nodes could offer redundancy when one hop node goes down, which can allow traffic to continue to flow between the control plane and the execution nodes.
+

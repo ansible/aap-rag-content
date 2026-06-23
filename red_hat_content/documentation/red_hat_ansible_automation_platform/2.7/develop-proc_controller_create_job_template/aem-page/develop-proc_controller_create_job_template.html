@@ -1,0 +1,349 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-create-job-template"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create repeatable, shareable job templates to standardize automation runs</h1> 
+     <div class="body taskbody"> 
+      <p class="shortdesc">A job template is a definition and set of parameters for running an Ansible job. Use job templates to launch jobs.</p> 
+      <section> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">Procedure</h2> 
+       </div> 
+       <ol class="ol steps"> 
+        <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Automation Templates</strong> page, select <strong class="ph b">Create job template</strong> from the <strong class="ph b">Create template</strong> list.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details in the following fields: </span> 
+         <div class="itemgroup info"> 
+          <div class="note note note_note"> <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">If a field has the <strong class="ph b">Prompt on launch</strong> checkbox selected, launching the job prompts you for the value for that field when launching.</p> 
+            <p class="p">Most prompted values override any values set in the job template.</p> 
+            <p class="p">Note the exceptions in the following table.</p> 
+           </div> 
+          </div> 
+          <table class="table"> 
+           <caption></caption> 
+           <colgroup> 
+            <col style="width:33.3333%"> 
+            <col style="width:33.3333%"> 
+            <col style="width:33.3334%"> 
+           </colgroup> 
+           <thead class="thead"> 
+            <tr class="row"> 
+             <th class="entry" id="controller-create-job-template__entry__1"> <strong class="ph b">Field</strong> </th> 
+             <th class="entry" id="controller-create-job-template__entry__2"> <strong class="ph b">Options</strong> </th> 
+             <th class="entry" id="controller-create-job-template__entry__3"> <strong class="ph b">Prompt on Launch</strong> </th> 
+            </tr> 
+           </thead> 
+           <tbody class="tbody"> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Name</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Enter a name for the job.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">N/A</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Description</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Enter an arbitrary description as appropriate (optional).</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">N/A</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Job type</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Choose a job type:</p> 
+              <ul class="ul"> 
+               <li class="li">Run: Start the playbook when launched, running Ansible tasks on the selected hosts.</li> 
+               <li class="li">Check: Perform a "dry run" of the playbook and report changes that would be made without actually making them. Tasks that do not support check mode are missed and do not report potential changes.</li> 
+              </ul> <p class="p">For more information about job types see the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_jobs" title="A job is an instance of automation controller launching an Ansible Playbook against an inventory of hosts.">Jobs in automation controller</a>.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Inventory</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Choose the inventory to use with this job template from the inventories available to the logged in user.</p> <p class="p">A System Administrator must grant you or your team permissions to be able to use certain inventories in a job template.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> <p class="p">Inventory prompts show up as its own step in a later prompt window.</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Project</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Select the project to use with this job template from the projects available to the user that is logged in.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">N/A</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Source control branch</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">This field is only present if you chose a project that allows branch override. Specify the overriding branch to use in your job run. If left blank, the specified SCM branch (or commit hash or tag) from the project is used.</p> <p class="p">For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_job_branch_overriding#controller-job-branch-overriding" title="In automation controller, you can configure projects to allow job templates to override the branch, tag, or reference used for source control.">Job branch overriding</a>.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Playbook</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Choose the playbook to be launched with this job template from the available playbooks. This field automatically populates with the names of the playbooks found in the project base path for the selected project. Alternatively, you can enter the name of the playbook if it is not listed, such as the name of a file (such as <code class="ph codeph">test.yml</code>) you want to use to run with that playbook. If you enter a filename that is not valid, the template displays an error, or causes the job to fail.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">N/A</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Execution Environment</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Select the container image to be used to run this job. You must select a project before you can select an execution environment.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> <p class="p">Execution environment prompts show up as its own step in a later prompt window.</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Credentials</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Select the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/examine.png" width="15" alt="examine"> icon to open a separate window.</p> <p class="p">Choose the credential from the available options to use with this job template.</p> <p class="p">Use the drop-down menu list to filter by credential type if the list is extensive. Some credential types are not listed because they do not apply to certain job templates.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> 
+              <ul class="ul"> 
+               <li class="li">If selected, when launching a job template that has a default credential and supplying another credential replaces the default credential if it is the same type. The following is an example this message:</li> 
+              </ul> <p class="p"> <code class="ph codeph">Job Template default credentials must be replaced with one of the same type. Please select a credential for the following types in order to proceed: Machine.</code> </p> 
+              <ul class="ul"> 
+               <li class="li">You can add more credentials as you see fit.</li> 
+               <li class="li">Credential prompts show up as its own step in a later prompt window.</li> 
+              </ul> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Labels</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> 
+              <ul class="ul"> 
+               <li class="li">Optionally supply labels that describe this job template, such as <code class="ph codeph">dev</code> or <code class="ph codeph">test</code>.</li> 
+               <li class="li">Use labels to group and filter job templates and completed jobs in the display.</li> 
+               <li class="li">Labels are created when they are added to the job template. Labels are associated with a single Organization by using the Project that is provided in the job template. Members of the Organization can create labels on a job template if they have edit permissions (such as the admin role).</li> 
+               <li class="li">Once you save the job template, the labels appear in the <strong class="ph b">Job Templates</strong> overview in the Expanded view.</li> 
+               <li class="li">Select <img class="image" height="10" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/disassociate.png" width="10" alt="Disassociate"> beside a label to remove it. When a label is removed, it is no longer associated with that particular Job or Job Template, but it remains associated with any other jobs that reference it.</li> 
+               <li class="li">Jobs inherit labels from the Job Template at the time of launch. If you delete a label from a Job Template, it is also deleted from the Job.</li> 
+              </ul> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> 
+              <ul class="ul"> 
+               <li class="li">If selected, even if a default value is supplied, you are prompted when launching to supply additional labels, if needed.</li> 
+               <li class="li">You cannot delete existing labels, selecting <img class="image" height="10" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/disassociate.png" width="10" alt="Disassociate"> only removes the newly added labels, not existing default labels.</li> 
+              </ul> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Forks</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">The number of parallel or simultaneous processes to use while executing the playbook. A value of zero uses the Ansible default setting, which is five parallel processes unless overridden in <code class="ph codeph">/etc/ansible/ansible.cfg</code>.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Limit</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">A host pattern to further constrain the list of hosts managed or affected by the playbook. You can separate many patterns by colons (:). As with core Ansible:</p> 
+              <ul class="ul"> 
+               <li class="li">a:b means "in group a or b"</li> 
+               <li class="li">a:b:&amp;c means "in a or b but must be in c"</li> 
+               <li class="li">a:!b means "in a, and definitely not in b"</li> 
+              </ul> <p class="p">If not selected, the job template executes against all nodes in the inventory or only the nodes predefined on the <strong class="ph b">Limit</strong> field. When running as part of a workflow, the workflow job template limit is used instead.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"></td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Verbosity</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Control the level of output Ansible produces as the playbook executes. Choose the verbosity from Normal to various Verbose or Debug settings. This is only displayed in the <strong class="ph b">details</strong> report view. Verbose logging includes the output of all commands. Debug logging is exceedingly verbose and includes information about SSH operations that can be useful in certain support instances.</p> <p class="p">Verbosity <code class="ph codeph">5</code> causes automation controller to block heavily when jobs are running, which could delay reporting that the job has finished (even though it has) and can cause the browser tab to lock up.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Job slicing</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Specify the number of slices you want this job template to run. Each slice runs the same tasks against a part of the inventory. For more information about job slices, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_slicing#controller-job-slicing" title="A sliced job refers to the concept of a distributed job. Use distributed jobs for running a job across a large number of hosts.">Job Slicing</a>.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Timeout</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">This enables you to specify the length of time (in seconds) that the job can run before it is canceled. Consider the following for setting the timeout value:</p> 
+              <ul class="ul"> 
+               <li class="li">There is a global timeout defined in the settings which defaults to 0, indicating no timeout.</li> 
+               <li class="li">A negative timeout (&lt;0) on a job template is a true "no timeout" on the job.</li> 
+               <li class="li">A timeout of 0 on a job template defaults the job to the global timeout (which is no timeout by default).</li> 
+               <li class="li">A positive timeout sets the timeout for that job template.</li> 
+              </ul> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Show changes</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Enables you to see the changes made by Ansible tasks.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Instance groups</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Choose Instance and Container Groupsto associate with this job template. If the list is extensive, use the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/examine.png" width="15" alt="examine"> icon to narrow the options. Job template instance groups contribute to the job scheduling criteria, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups#controller-control-job-run" title="Use instance groups to control job execution locations. While the controller automatically selects groups based on capacity, you can override this by associating groups with job templates, inventories, or organizations.">Job Runtime Behavior</a> and <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups#controller-control-job-run" title="Use instance groups to control job execution locations. While the controller automatically selects groups based on capacity, you can override this by associating groups with job templates, inventories, or organizations.">Control where a job runs</a> for rules. A System Administrator must grant you or your team permissions to be able to use an instance group in a job template. Use of a container group requires admin rights.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> <p class="p">If selected, you are providing the jobs preferred instance groups in order of preference. If the first group is out of capacity, later groups in the list are considered until one with capacity is available, at which point that is selected to run the job.</p> 
+              <ul class="ul"> 
+               <li class="li">If you prompt for an instance group, what you enter replaces the normal instance group hierarchy and overrides all of the organizations' and inventories' instance groups.</li> 
+               <li class="li">The Instance Groups prompt shows up as its own step in a later prompt window.</li> 
+              </ul> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Job tags</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Type and select the <strong class="ph b">Create</strong> menu to specify which parts of the playbook should be executed.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Skip tags</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> <p class="p">Type and select the <strong class="ph b">Create</strong> menu to specify certain tasks or parts of the playbook to skip.</p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-create-job-template__entry__1"> <p class="p"> <strong class="ph b">Extra variables</strong> </p> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__2"> 
+              <ul class="ul"> 
+               <li class="li">Pass extra command line variables to the playbook. This is the "-e" or "-extra-vars" command line parameter for ansible-playbook.</li> 
+               <li class="li">Give key or value pairs by using either YAML or JSON. These variables have a maximum value of precedence and overrides other variables specified elsewhere. The following is an example value: <code class="ph codeph">git_branch: production release_version: 1.5</code></li> 
+              </ul> </td> 
+             <td class="entry" headers="controller-create-job-template__entry__3"> <p class="p">Yes</p> <p class="p">If you want to be able to specify <code class="ph codeph">extra_vars</code> on a schedule, you must select <strong class="ph b">Prompt on launch</strong> for Variables on the job template, or enable a survey on the job template. Those answered survey questions become <code class="ph codeph">extra_vars</code>.</p> </td> 
+            </tr> 
+           </tbody> 
+          </table> 
+         </div> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">You can set the following options for launching this template, if necessary: </span> 
+         <div class="itemgroup info"> 
+          <ul class="ul"> 
+           <li class="li"><strong class="ph b">Privilege escalation</strong>: If checked, you enable this playbook to run as an administrator. This is the equal of passing the <code class="ph codeph">--become</code> option to the <code class="ph codeph">ansible-playbook</code> command.</li> 
+           <li class="li"><strong class="ph b">Provisioning callback</strong>: If checked, you enable a host to call back to automation controller through the REST API and start a job from this job template. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_provisioning_callbacks#controller-provisioning-callbacks" title="Provisioning Callbacks are a feature of automation controller that enable a host to start a playbook run against itself, rather than waiting for a user to launch a job to manage the host from the automation controller console.">Provisioning Callbacks</a>.</li> 
+           <li class="li"><strong class="ph b">Enable webhook</strong>: If checked, you turn on the ability to interface with a predefined SCM system web service that is used to launch a job template. GitHub and GitLab are the supported SCM systems. 
+            <ul class="ul"> 
+             <li class="li">If you enable webhooks, other fields display, prompting for additional information:</li> 
+             <li class="li"><strong class="ph b">Webhook service</strong>: Select which service to listen for webhooks from.</li> 
+             <li class="li"><strong class="ph b">Webhook URL</strong>: Automatically populated with the URL for the webhook service to POST requests to.</li> 
+             <li class="li"><strong class="ph b">Webhook key</strong>: Generated shared secret to be used by the webhook service to sign payloads sent to automation controller. You must configure this in the settings on the webhook service in order for automation controller to accept webhooks from this service.</li> 
+             <li class="li"><strong class="ph b">Webhook credential</strong>: Optionally, give a GitHub or GitLab personal access token (PAT) as a credential to use to send status updates back to the webhook service. <p class="p">Before you can select it, the credential must exist.</p> <p class="p">See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_types" title="Ansible Automation Platform supports a number of credential types.">Credential types</a> to create one.</p> </li> 
+             <li class="li">For additional information about setting up webhooks, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_work_with_webhooks#controller-work-with-webhooks" title="Use webhooks to run specified commands between applications over the web. Automation controller currently provides webhook integration with GitHub and GitLab.">Working with Webhooks</a>.</li> 
+            </ul> </li> 
+           <li class="li"><strong class="ph b">Concurrent jobs</strong>: If checked, you are allowing jobs in the queue to run simultaneously if not dependent on one another. Check this box if you want to run job slices simultaneously. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_determination#controller-capacity-determination" title="The automation controller capacity system determines how many jobs can run on an instance given the amount of resources available to the instance and the size of the jobs that are running (referred to as Impact). The algorithm used to determine this is based on the following two things:">Automation controller capacity determination and job impact</a>.</li> 
+           <li class="li"><strong class="ph b">Enable fact storage</strong>: If checked, automation controller stores gathered facts for all hosts in an inventory related to the job running.</li> 
+           <li class="li"><strong class="ph b">Prevent instance group fallback</strong>: Check this option to allow only the instance groups listed in the <strong class="ph b">Instance Groups</strong> field to run the job. If clear, all available instances in the execution pool are used based on the hierarchy described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups#controller-control-job-run" title="Use instance groups to control job execution locations. While the controller automatically selects groups based on capacity, you can override this by associating groups with job templates, inventories, or organizations.">Control where a job runs</a>.</li> 
+          </ul> 
+         </div> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create job template</span>, when you have completed configuring the details of the job template. </span> 
+         <div class="itemgroup info"> 
+          <p class="p">Creating the template does not exit the job template page but advances to the Job Template <strong class="ph b">Details</strong> tab.</p> 
+          <p class="p">After saving the template, you can click <span class="ph uicontrol button">Launch template</span> to start the job. You can also click <span class="ph uicontrol button">Edit</span> to add or change the attributes of the template, such as permissions, notifications, view completed jobs, and add a survey (if the job type is not a scan). You must first save the template before launching, otherwise, <span class="ph uicontrol button">Launch template</span> remains disabled.</p> 
+         </div> </li> 
+       </ol> 
+      </section> 
+      <section class="section result"> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">Results</h2> 
+       </div> 
+       <ol class="ol"> 
+        <li class="li">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</li> 
+        <li class="li">Verify that the newly created template is displayed on the <strong class="ph b">Templates</strong> page.</li> 
+       </ol> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-intro-job-template"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Automation templates</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">The <strong class="ph b">Automation Templates</strong> page shows both <strong class="ph b">job templates</strong> and <strong class="ph b">workflow job templates</strong> that are currently available.</p> 
+       <section class="section"> 
+        <p class="p">Automation Templates serve as a powerful blueprint for automating and orchestrating complex IT tasks.</p> 
+        <p class="p">Whether defined as a Job Template or Workflow Template, they standardize and streamline routine operations, enabling consistent execution across various environments.</p> 
+        <p class="p">By specifying playbooks, inventory, credentials, and other configuration details, an Automation Template eliminates manual intervention, reduces errors, and accelerates task completion.</p> 
+        <p class="p">It also provides flexibility by allowing the chaining of multiple tasks in a Workflow Template, supporting sophisticated automation use cases that can span across multiple systems and processes.</p> 
+        <p class="p">This ensures IT teams can reliably scale automation while maintaining high efficiency and control.</p> 
+        <p class="p">The default view is collapsed (Compact), showing the template name, template type, and the timestamp of the last job that ran using that template. You can click the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/arrow.png" width="15" alt="Arrow"> icon next to each entry to expand and view more information. This list is sorted alphabetically by name, but you can sort by other criteria, or search by various fields and attributes of a template.</p> 
+        <p class="p">From this screen you can launch <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rightrocket.png" width="15" alt="Launch icon"> , edit <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit icon">, and duplicate <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/copy.png" width="15" alt="Duplicate icon"> a job template.</p> 
+        <p class="p">Select the template name to display more information about the template, including when it last ran.</p> 
+        <p class="p">This list is sorted alphabetically by name, but you can sort by other criteria, or search by various fields and attributes of a template.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Search functionality for Job templates is limited to alphanumeric characters only.</p> 
+         </div> 
+        </div> 
+        <p class="p">Workflow templates have the workflow visualizer <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/visualizer.png" width="15" alt="Workflow visualizer"> icon as a shortcut for accessing the workflow editor.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You can use job templates to build a workflow template. Templates that show the <strong class="ph b">Workflow Visualizer</strong><img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/visualizer.png" width="15" alt="Visualizer"> icon next to them are workflow templates. Clicking the icon allows you to build a workflow graphically. Many parameters in a job template enable you to select <strong class="ph b">Prompt on Launch</strong> that you can change at the workflow level, and do not affect the values assigned at the job template level. For instructions, see the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-con_controller_workflow_visualizer#controller-workflow-visualizer" title="The Workflow Visualizer provides a graphical way of linking together job templates, workflow templates, project syncs, and inventory syncs to build a workflow template.">Workflow Visualizer</a> section.</p> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-controller-adding-permissions"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Add permissions to templates</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can add permissions to a template to allow specific users or teams to have access to it.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Use the following steps to add permissions for the team.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select a template, and in the <strong class="ph b">Team Access</strong> or <strong class="ph b">User Access</strong> tab, click <span class="ph uicontrol button">Add roles</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Teams</strong> or <strong class="ph b">Users</strong> and click <span class="ph uicontrol button">Next</span>. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Select one or more users or teams from the list by clicking the check boxes next to the names to add them as members and click <span class="ph uicontrol button">Next</span>.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Choose the roles that you want users or teams to have. Ensure that you scroll down for a complete list of roles. Each resource has different options available.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Finish</span> to apply the roles to the selected users or teams and to add them as members. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The window to add users and teams closes to display the updated roles assigned for each user and team</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To remove roles for a particular user, click the <img class="image" height="10" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/disassociate.png" width="10" alt="Disassociate"> icon next to its resource. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">This launches a confirmation dialog, asking you to confirm the disassociation.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="set-domain-of-interest"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Set your domains of interest</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">With Domain filtering lets you customize content in Automation Execution's <strong class="ph b">Jobs</strong> and <strong class="ph b">Templates</strong> sections. Jobs and templates are linked to labels; selecting one filters out less-relevant items, providing easy access to resources tailored to your specific area of interest.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Jobs</span></span> or <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Beneath the page heading, next to <strong class="ph b">Domains</strong>, is a list of topic-related labels. Select a label to filter jobs and job templates so that only content related to the labels is shown. You can choose more than one label.</span> </li> 
+         <li class="li step"> <span class="ph cmd">To clear your selection, click the <strong class="ph b">X</strong>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">To customize your domain options, select the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/wrench.png" width="15" alt="Wrench"> icon. In the modal that appears, select <strong class="ph b">Add Domain</strong> to add new domains to filter with.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section postreq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">What to do next</h3> 
+        </div> 
+        <p class="p">You can add labels to your individual job templates to make the templates appear as resources when you filter with the related domain label. Go to <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>, select your job template, and click <span class="ph uicontrol button">Edit template</span>. On the editing screen, enter the label you want to use in the <strong class="ph b">Labels</strong> field and click <span class="ph uicontrol button">Save job template</span>.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="controller-scheduling-job-templates"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Schedule job templates</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can schedule job templates in automation controller to run at specific times or intervals.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Access the schedules for a particular job template from the <strong class="ph b">Schedules</strong> tab.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ul class="ul steps-unordered"> 
+         <li class="li step stepexpand"> <span class="ph cmd">To schedule a job template, select the <strong class="ph b">Schedules</strong> tab from the job template, and select the appropriate method: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">If schedules are already set up, review, edit, enable or disable your schedule preferences.</li> 
+            <li class="li">If schedules have not been set up, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_schedules#controller-schedules" title="From the navigation panel, click Automation Execution > Schedules to access your configured schedules. The schedules list can be sorted by any of the attributes from each column by using the directional arrows. You can also search by name, date, or the name of the month in which a schedule runs.">Schedules</a> for more information.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If you select <strong class="ph b">Prompt on Launch</strong> for the <strong class="ph b">Credentials field</strong>, and you create or edit scheduling information for your job template, a <strong class="ph b">Prompt</strong> option displays on the Schedules form. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">You cannot remove the default machine credential in the <strong class="ph b">Prompt</strong> dialog without replacing it with another machine credential before you can save it.</p> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">To set <code class="ph codeph">extra_vars</code> on schedules, you must select <strong class="ph b">Prompt on Launch</strong> for <strong class="ph b">Variables</strong> on the job template, or configure and enable a survey on the job template.</p> 
+             <p class="p">The answered survey questions then become <code class="ph codeph">extra_vars</code>.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

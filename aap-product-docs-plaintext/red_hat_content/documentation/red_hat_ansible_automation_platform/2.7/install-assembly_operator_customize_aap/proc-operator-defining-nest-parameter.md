@@ -1,0 +1,37 @@
+# Customize your Red Hat Ansible Automation Platform Operator
+## Configure component parameters
+
+To define a parameter, such as the `resource_requirements` for automation controller, you add the configuration to the parent Ansible Automation Platform CR YAML. This ensures that the Ansible Automation Platform CR is the single source of truth for your deployment.
+
+### About this task
+
+Note:
+
+The `image` and `image_version`, as well as the `{component}_image` and `{component}_image_version` parameters are intended for development or hotfix purposes only.
+
+**Do not use these in production environments.** These settings bypass standard version management and can lead to configuration drift, inconsistent deployments, and difficulty troubleshooting issues.
+
+### Procedure
+
+1.  Log in to OpenShift Container Platform.
+2.  Navigate to Operators> (and then)Installed Operators.
+3.  Select your Ansible Automation Platform Operator deployment.
+4.  Go to the Ansible Automation Platform tab and click the name of your CR.
+5.  In the **YAML view** tab, locate the **spec** section.
+6.  Add the `automationcontroller` parameter with the nested `resource_requirements` parameter and its value:
+
+
+```
+spec:
+database:
+resource_requirements:
+requests:
+cpu: 200m
+memory: 512Mi
+storage_requirements:
+requests:
+storage: 100Gi
+```
+
+7.  Click Save to apply the changes. The operator automatically applies this configuration to the automation controller component.
+

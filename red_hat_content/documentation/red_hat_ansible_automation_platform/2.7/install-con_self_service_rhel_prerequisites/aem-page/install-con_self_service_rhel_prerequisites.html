@@ -1,0 +1,303 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-rhel-prerequisites">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Prerequisites for deploying Ansible automation portal on RHEL</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Before you deploy an Ansible automation portal RHEL appliance, verify that your environment meets the system, network, and access requirements.</p> 
+     <section class="section">
+      <h2 class="title sectiontitle">System requirements</h2> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 1. </span><span class="title">System requirements for Ansible automation portal RHEL appliances</span>
+       </caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="self-service-rhel-prerequisites__entry__1">Resource</th> 
+         <th class="entry" id="self-service-rhel-prerequisites__entry__2">Minimum</th> 
+         <th class="entry" id="self-service-rhel-prerequisites__entry__3">Recommended</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__1">CPU</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__2">4 vCPU</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__3">6 vCPU</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__1">Memory</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__2">16 GB</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__3">24 GB</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__1">Disk space</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__2">40 GB</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__3">60 GB</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__1">Architecture</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__2">AMD64/x86_64</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__3">--</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__1">Operating system</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__2">RHEL 9.6 or later (included in appliance)</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__3">RHEL 9.7</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">The recommended values include headroom for the built-in database. For production deployments, use an external PostgreSQL database. The built-in database is suitable for evaluation and small environments.</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Network requirements</h2> 
+      <p class="p">The following table lists the default ports used by the Ansible automation portal RHEL appliance. The HTTPS port is configurable after deployment.</p> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 2. </span><span class="title">Default ports for Ansible automation portal RHEL appliances</span>
+       </caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="self-service-rhel-prerequisites__entry__19">Direction</th> 
+         <th class="entry" id="self-service-rhel-prerequisites__entry__20">Port</th> 
+         <th class="entry" id="self-service-rhel-prerequisites__entry__21">Protocol</th> 
+         <th class="entry" id="self-service-rhel-prerequisites__entry__22">Purpose</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__19">Inbound</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__20">443 (default)</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__21">HTTPS</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__22">User access to Ansible automation portal</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__19">Inbound</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__20">22</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__21">SSH</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__22">Administrator access to the appliance</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__19">Outbound</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__20">443</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__21">HTTPS</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__22">Communication with the Ansible Automation Platform instance</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__19">Outbound</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__20">443</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__21">HTTPS</td> 
+         <td class="entry" headers="self-service-rhel-prerequisites__entry__22">Image pulls from <code class="ph codeph">registry.redhat.io</code> (upgrades only, not required with a mirror registry)</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">Port 5432 (PostgreSQL) is used internally between containers and is not exposed to the network.</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Required access</h2> 
+      <ul class="ul"> 
+       <li class="li">An Ansible Automation Platform 2.5 or later instance with administrator privileges.</li> 
+       <li class="li">An active Red Hat Ansible Automation Platform subscription.</li> 
+       <li class="li">An active RHEL subscription (for the KVM host, if applicable).</li> 
+       <li class="li">The pre-built QCOW2 or VMDK appliance image, available from the Red Hat Ansible Automation Platform downloads page.</li> 
+       <li class="li">An SSH key pair for appliance access.</li> 
+      </ul> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Create an OAuth application in Ansible Automation Platform</h2> 
+      <p class="p">Before deploying the appliance, create an OAuth 2.0 application in Ansible Automation Platform. The Ansible automation portal uses this application to authenticate users through Ansible Automation Platform.</p> 
+      <ol class="ol"> 
+       <li class="li">Log in to Ansible Automation Platform as an administrator.</li> 
+       <li class="li">Navigate to <strong class="ph b">Access Management</strong> &gt; <strong class="ph b">OAuth Applications</strong>.</li> 
+       <li class="li">Click <strong class="ph b">Create OAuth Application</strong> and set the following values: 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col>
+          <col>
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="self-service-rhel-prerequisites__entry__39">Field</th> 
+           <th class="entry" id="self-service-rhel-prerequisites__entry__40">Value</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="self-service-rhel-prerequisites__entry__39"><strong class="ph b">Name</strong></td> 
+           <td class="entry" headers="self-service-rhel-prerequisites__entry__40"><code class="ph codeph">automation-portal</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="self-service-rhel-prerequisites__entry__39"><strong class="ph b">Authorization grant type</strong></td> 
+           <td class="entry" headers="self-service-rhel-prerequisites__entry__40">Authorization code</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="self-service-rhel-prerequisites__entry__39"><strong class="ph b">Redirect URIs</strong></td> 
+           <td class="entry" headers="self-service-rhel-prerequisites__entry__40"><code class="ph codeph">https://placeholder.example.com</code> (you will update this after deployment)</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="self-service-rhel-prerequisites__entry__39"><strong class="ph b">Client type</strong></td> 
+           <td class="entry" headers="self-service-rhel-prerequisites__entry__40">Confidential</td> 
+          </tr> 
+         </tbody>
+        </table> </li> 
+       <li class="li">Click <strong class="ph b">Save</strong>.</li> 
+       <li class="li">Note the <strong class="ph b">Client ID</strong> and <strong class="ph b">Client Secret</strong> values. You need these for the cloud-init configuration.</li> 
+      </ol> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Generate an API token</h2> 
+      <p class="p">Generate a personal access token for an Ansible Automation Platform administrator. The Ansible automation portal uses this token to synchronize job templates from Ansible Automation Platform.</p> 
+      <ol class="ol"> 
+       <li class="li">Navigate to <strong class="ph b">Access Management</strong> &gt; <strong class="ph b">Users</strong> and select your administrator account.</li> 
+       <li class="li">Click <strong class="ph b">Tokens</strong> &gt; <strong class="ph b">Create Token</strong>.</li> 
+       <li class="li">Set the <strong class="ph b">Scope</strong> to <strong class="ph b">Write</strong>.</li> 
+       <li class="li">Click <strong class="ph b">Save</strong> and note the token value. You need this for the cloud-init configuration.</li> 
+      </ol> 
+      <p class="p">Optional: If you want to import custom templates from private GitHub or GitLab repositories, create a personal access token for each service before you begin. You provide these tokens in the cloud-init configuration.</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Prepare the cloud-init configuration</h2> 
+      <p class="p">The appliance uses cloud-init to apply your configuration at first boot. Cloud-init is a standard tool for automating the initial setup of virtual machines. It creates user accounts, injects SSH keys, and runs custom configuration scripts. The appliance extends cloud-init with custom fields for Ansible Automation Platform credentials and database settings.</p> 
+      <p class="p">Create a cloud-init user-data file with your SSH keys and Ansible Automation Platform credentials.</p> 
+      <p class="p">The following four Ansible Automation Platform fields are required. Without them, Ansible automation portal services do not start:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">aap.host_url</code></li> 
+       <li class="li"><code class="ph codeph">aap.token</code></li> 
+       <li class="li"><code class="ph codeph">aap.oauth.client_id</code></li> 
+       <li class="li"><code class="ph codeph">aap.oauth.client_secret</code></li> 
+      </ul> 
+      <p class="p">SSH keys are required for access. The appliance has no default password.</p> 
+      <p class="p">All other fields are optional. The Ansible automation portal RHEL appliance auto-generates passwords for the default built-in database deployed during initial installation, backend secrets, and a user-accessible URL if you omit them.</p> 
+      <div class="note tip note_tip">
+       <span class="note__title">Tip:</span> 
+       <div class="note__body"> 
+        <p class="p">Keep quotation marks around SSH public keys in the cloud-init user-data file.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Minimal cloud-init template</h2> 
+      <p class="p">Replace the placeholder values in angle brackets. All other values auto-generate at first boot.</p> 
+      <pre class="pre codeblock language-yaml"><code>#cloud-config
+
+users:
+  - name: &lt;username&gt;
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - "&lt;your-ssh-public-key&gt;"
+
+aap:
+  host_url: "https://&lt;aap-host&gt;"
+  token: "&lt;aap-api-token&gt;"
+  oauth:
+    client_id: "&lt;oauth-client-id&gt;"
+    client_secret: "&lt;oauth-client-secret&gt;"
+
+database:
+  type: builtin
+  builtin:
+    password: "auto"
+    admin_password: "auto"</code></pre> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Full cloud-init template</h2> 
+      <p class="p">This template includes all supported fields. Replace values marked with angle brackets. Remove or leave optional sections as-is.</p> 
+      <pre class="pre codeblock language-yaml"><code>#cloud-config
+
+users:
+  - name: &lt;username&gt;
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - "&lt;your-ssh-public-key&gt;"
+
+aap:
+  host_url: "https://&lt;aap-host&gt;"
+  token: "&lt;aap-api-token&gt;"
+  check_ssl: true
+  oauth:
+    client_id: "&lt;oauth-client-id&gt;"
+    client_secret: "&lt;oauth-client-secret&gt;"
+
+database:
+  type: builtin
+  builtin:
+    password: "auto"
+    admin_password: "auto"
+
+security:
+  backend_secret: "auto"
+
+network:
+  port: 443
+  base_url: "https://portal.example.com"
+
+integrations:
+  github:
+    url: "github.com"
+    token: "&lt;github-personal-access-token&gt;"
+  gitlab:
+    url: "gitlab.com"
+    token: "&lt;gitlab-personal-access-token&gt;"</code></pre> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b"><code class="ph codeph">aap.check_ssl</code></strong> -- Set to <code class="ph codeph">false</code> if your Ansible Automation Platform instance uses a self-signed certificate.</li> 
+       <li class="li"><strong class="ph b"><code class="ph codeph">network.base_url</code></strong> -- Set this when users access the Ansible automation portal RHEL appliance through a hostname, route, or load balancer. If omitted, the user-accessible URL is auto-detected from the VM IP address.</li> 
+       <li class="li"><strong class="ph b"><code class="ph codeph">network.port</code></strong> -- The HTTPS listen port. Default is <code class="ph codeph">443</code>. If you are using the standard port 443, you do not need to specify the port. If you set a custom port, you must also open that port on any firewall and, for Red Hat OpenShift Virtualization deployments, update the Red Hat OpenShift Container Platform route to use the custom port.</li> 
+       <li class="li"><strong class="ph b"><code class="ph codeph">integrations</code></strong> -- Optional. Only required if you need to import custom templates from private GitHub or GitLab repositories. Public repository access does not require a token.</li> 
+      </ul> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">External database cloud-init template</h2> 
+      <p class="p">To connect to an existing PostgreSQL database instead of the built-in one, use the following <code class="ph codeph">database</code> section:</p> 
+      <pre class="pre codeblock language-yaml"><code>database:
+  type: external
+  external:
+    host: "&lt;database-host&gt;"
+    port: 5432
+    name: "portal_db"
+    user: "&lt;database-user&gt;"
+    password: "&lt;database-password&gt;"
+    ssl: true</code></pre> 
+      <p class="p">The database user requires the <code class="ph codeph">CREATEDB</code> privilege.</p> 
+      <p class="p">Save the cloud-init user-data file. You will use it during the platform-specific installation procedure.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_configure_url" title="The Ansible automation portal RHEL appliance auto-detects the user-accessible URL from the VM IP address at each boot. To set a custom hostname or port, update the configuration file and restart the service.">Set a custom user-accessible URL or port</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_cloud_init_reference" title="The following tables describe all cloud-init fields supported by the Ansible automation portal RHEL appliance.">Cloud-init reference</a></li>
+      </ul>
+     </div>
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://access.redhat.com/downloads/content/480" target="_blank" rel="external noopener">Red Hat Ansible Automation Platform downloads page</a></li>
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_cloud-init_for_rhel_9/configuring-cloud-init_cloud-content" target="_blank" rel="external noopener">Configuring cloud-init (RHEL documentation)</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

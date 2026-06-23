@@ -1,0 +1,132 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-a2df90f5-9b4d-4e5b-b37a-d49d3d86a02b">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Create and validate an execution environment with the assistant</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">To create an execution environment, first generate a definition file that defines the environment.</p> 
+     <section class="section prereq" id="GUID-a2df90f5-9b4d-4e5b-b37a-d49d3d86a02b__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul" id="GUID-a2df90f5-9b4d-4e5b-b37a-d49d3d86a02b__ul_1"> 
+       <li class="li">VS Code is installed and running.</li> 
+       <li class="li">The GitHub Copilot Extension is installed and active.</li> 
+       <li class="li">The Ansible VS Code extension is installed.</li> 
+       <li class="li">The MCP server for Red Hat Ansible Automation Platform is enabled. Ensure the setting <code class="ph codeph">ansible.mcpServer.enabled</code> is set to <code class="ph codeph">true</code>.</li> 
+       <li class="li">Ansible Development Tools are installed through the assistant (<code class="ph codeph">adt_check_env</code>) or manually.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">In the Copilot chat window, enter a prompt describing your execution environment requirements. For example: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>Create an execution environment definition file. Use ee-minimal as the base, include ansible.builtin and the community.general collection, add git as a system package, and tag it as webserver-ee:1.0.</code></pre> In response, the assistant triggers the <code class="ph codeph">define_and_build_execution_env</code> tool to formulate a prompt using your requirements and the internal <code class="ph codeph">ee-rules.md</code> resource. 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           No file is created in this step. The assistant prepares the context for accurate YAML generation.
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Instruct the assistant to create the execution environment file. For example: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>Now generate the execution-environment.yml content based on the prompt you received.</code></pre> The assistant calls the tool again, this time with the <code class="ph codeph">generatedYaml</code> parameter. The tool validates the generated YAML against the execution environment schema.
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section postreq" id="GUID-a2df90f5-9b4d-4e5b-b37a-d49d3d86a02b__postreq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div>If successful, the assistant confirms the file creation and displays the validation status.
+     </section> 
+    </div> 
+    <article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_1"> 
+     <h2 class="title topictitle2" id="ariaid-title2">Generate an execution environment definition from an existing playbook</h2> 
+     <div class="body taskbody">
+      <p class="shortdesc">Use the AI assistant to inspect an existing playbook to determine the necessary collections and dependencies for a new execution environment based on the playbook.</p> 
+      <section id="task_1__steps_1">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">Procedure</h3>
+       </div>
+       <ol class="ol steps" id="task_1__steps_1">
+        <li class="li step stepexpand"> <span class="ph cmd">In the VS Code editor, open the playbook you intend to analyze.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">In the Copilot chat window, ask the assistant to analyze the playbook. For example:</span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>Analyze my current playbook, determine the necessary collections, and generate an execution environment definition file that includes them</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Review the output and confirm that the assistant has imported collections (for example, <code class="ph codeph">community.general</code>, <code class="ph codeph">amazon.aws</code>) required by the tasks in your playbook.</span> </li>
+       </ol>
+      </section> 
+      <section class="section postreq" id="task_1__postreq_2">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">What to do next</h3>
+       </div>Follow the previous procedure to create an execution environment definition file. The resulting <code class="ph codeph">execution-environment.yml </code>will automatically populate the dependencies section with the identified collections.
+      </section> 
+     </div> 
+     <article class="topic task nested2" aria-labelledby="ariaid-title3" id="task_2"> 
+      <h3 class="title topictitle3" id="ariaid-title3">Validate an execution environment file</h3> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use the AI assistant to validate an existing definition file against the schema and Ansible best practices.</p> 
+       <section class="section prereq" id="task_2__prereq_2">
+        <div class="tasklabel">
+         <h4 class="sectiontitle tasklabel">Before you begin</h4>
+        </div> 
+        <ul class="ul" id="task_2__ul_2"> 
+         <li class="li">The <code class="ph codeph">execution-environment.yml</code>file is open in the editor.</li> 
+         <li class="li">Copilot chat is active.</li> 
+        </ul> 
+       </section> 
+       <section id="task_2__steps_2">
+        <div class="tasklabel">
+         <h4 class="sectiontitle tasklabel">Procedure</h4>
+        </div>
+        <ol class="ol steps" id="task_2__steps_2">
+         <li class="li step stepexpand"> <span class="ph cmd">Ask the assistant to validate your execution environment file. For example:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>Check if my execution-environment.yml file is valid and follows best practices</code></pre> The assistant then analyzes the file structure against the execution environment v3 schema and rules. It verifies required sections (for example, <code class="ph codeph">version</code>, <code class="ph codeph">images</code>, <code class="ph codeph">dependencies</code>) and identifies missing fields or incorrect formatting.
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Review the assessment to confirm that it includes your requirements.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+      <article class="topic task nested3" aria-labelledby="ariaid-title4" id="task_3"> 
+       <h4 class="title topictitle4" id="ariaid-title4">Build the execution environment with the assistant</h4> 
+       <div class="body taskbody">
+        <p class="shortdesc">After the definition file is created and validated, you can prompt the assistant for the specific commands to build the image.</p> 
+        <section class="section prereq" id="task_3__prereq_3">
+         <div class="tasklabel">
+          <h5 class="sectiontitle tasklabel">Before you begin</h5>
+         </div> 
+         <ul class="ul" id="task_3__ul_3"> 
+          <li class="li">A container runtime like Podman is installed.</li> 
+          <li class="li">Copilot chat is active and your execution environment file is open in the editor.</li> 
+         </ul> 
+        </section> 
+        <section id="task_3__steps_3">
+         <div class="tasklabel">
+          <h5 class="sectiontitle tasklabel">Procedure</h5>
+         </div>
+         <ol class="ol steps" id="task_3__steps_3">
+          <li class="li step stepexpand"> <span class="ph cmd">Ask the assistant for build instructions. For example: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>How do I build this execution environment? What are the next steps?</code></pre> This prompts the assistant to generate an <code class="ph codeph">ansible-builder</code> command tailored to your file and tag.
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Copy the build command that was generated and run it in your VS Code terminal. An example command might look like this:</span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>ansible-builder build --file execution-environment.yml --context ./context --tag webserver-ee:1.0 -vvv.</code></pre> 
+           </div> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article> 
+     </article> 
+    </article> 
+   </article>
+  </main>
+ </body>
+</html>

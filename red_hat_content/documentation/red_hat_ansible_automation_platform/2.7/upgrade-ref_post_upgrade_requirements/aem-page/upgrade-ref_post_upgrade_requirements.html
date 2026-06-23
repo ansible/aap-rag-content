@@ -1,0 +1,32 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-post-upgrade-requirements">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Post-upgrade requirements</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">After upgrading to Ansible Automation Platform 2.7, update tokens, scripts, and integrations to use platform gateway for all external authentication and API access.</p> 
+     <section class="section"> 
+      <p class="p">After upgrading to Ansible Automation Platform 2.7, perform the following actions:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Regenerate tokens:</strong> Regenerate all Personal Access Tokens through platform gateway. </li> 
+       <li class="li"><strong class="ph b">Update CaC:</strong> Update Configuration as Code files to use platform gateway URLs.</li> 
+       <li class="li"><strong class="ph b">Update scripts:</strong> Update scripts and integrations to point to platform gateway.</li> 
+       <li class="li"><strong class="ph b">Update container registry:</strong> Re-authenticate to the container registry.</li> 
+       <li class="li"><strong class="ph b">Update collection connection parameters:</strong> Update playbooks that use <code class="ph codeph">ansible.controller</code>, <code class="ph codeph">ansible.hub</code>, or <code class="ph codeph">ansible.eda</code> collections to point to the platform gateway hostname instead of direct component hostnames. For example, change <code class="ph codeph">controller_host</code> from <code class="ph codeph">controller.example.com</code> to <code class="ph codeph">gateway.example.com</code>. Token parameters such as <code class="ph codeph">controller_oauthtoken</code> must use tokens created through platform gateway.</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_pre_upgrade_assessment_checklist#ref-pre-upgrade-assessment-checklist" title="Before upgrading to Red Hat Ansible Automation Platform 2.7, assess the environment to identify components and integrations that require migration to gateway-based authentication.">Pre-upgrade migration checklist</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

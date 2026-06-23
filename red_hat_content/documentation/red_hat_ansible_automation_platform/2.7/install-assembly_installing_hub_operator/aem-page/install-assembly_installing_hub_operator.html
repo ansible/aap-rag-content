@@ -1,0 +1,51 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="installing-hub-operator">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure automation hub</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">You can use these instructions to configure the automation hub operator on Red Hat OpenShift Container Platform, specify custom resources, and deploy Ansible Automation Platform with an external database.</p> 
+     <p class="p">Automation hub configuration can be done through the automation hub pulp_settings or directly in the user interface after deployment. However, it is important to note that configurations made in pulp_settings take precedence over settings made in the user interface. Hub settings should always be set as lowercase on the Hub custom resource specification.</p> 
+     <div class="note note note_note">
+      <span class="note__title">Note:</span> 
+      <div class="note__body"> 
+       <p class="p">When an instance of automation hub is removed, the PVCs are not automatically deleted. This can cause issues during migration if the new deployment has the same name as the previous one. Therefore, it is recommended that you manually remove old PVCs before deploying a new automation hub instance in the same namespace. </p> 
+      </div>
+     </div> 
+     <section class="section" id="installing-hub-operator___prerequisites">
+      <h2 class="title sectiontitle">Prerequisites</h2> 
+      <ul class="ul"> 
+       <li class="li">You have installed the Ansible Automation Platform Operator in Operator Hub.</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_storage_options_for_operator_installation_on_ocp">Storage options for automation hub</a></strong><br>Automation hub requires <code class="ph codeph">ReadWriteMany</code> file-based storage, Azure Blob storage, or Amazon S3 storage for operation so that multiple pods can access shared content, such as collections.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_provision_ocp_storage_with_readwritemany">Provision OpenShift Container Platform storage with ReadWriteMany access mode</a></strong><br>To ensure successful installation of Ansible Automation Platform Operator, you must provision your storage type for automation hub initially to <code class="ph codeph">ReadWriteMany</code> access mode.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_provision_ocp_storage_amazon_s3">Configure object storage on Amazon S3</a></strong><br>Red Hat supports Amazon Simple Storage Service (S3) for automation hub. You can configure it when deploying the <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource (CR), or you can configure it for an existing instance.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_provision_ocp_storage_azure_blob">Configure object storage on Azure Blob</a></strong><br>Red Hat supports Azure Blob Storage for automation hub. You can configure it when deploying the <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource (CR), or you can configure it for an existing instance.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_hub_route_options">Configure automation hub route options</a></strong><br>The Red Hat Ansible Automation Platform operator installation form allows you to further configure your automation hub operator route options under <strong class="ph b">Advanced configuration</strong>.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_hub_ingress_options">Configure ingress options for automation hub</a></strong><br>The Ansible Automation Platform Operator installation form allows you to further configure your automation hub operator ingress under <strong class="ph b">Advanced configuration</strong>.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_access_hub_operator_ui#proc-access-hub-operator-ui">Finding the automation hub route</a></strong><br>You can access the automation hub through the platform gateway or through the following procedure.</li>
+     </ul>
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_your_ansible_automation_platform_deployment#proc-find-delete-PVCs" title="A persistent volume claim (PVC) is a storage volume used to store data that automation hub and automation controller applications use.">Find and delete PVCs</a></li>
+      </ul>
+     </div>
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/openshift_container_platform/" target="_blank" rel="external noopener">OpenShift Container Platform product documentation</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

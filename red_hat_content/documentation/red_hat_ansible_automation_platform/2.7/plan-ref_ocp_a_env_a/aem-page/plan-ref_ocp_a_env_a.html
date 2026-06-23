@@ -1,0 +1,419 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="ocp-a-env-a"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Operator growth topology</h1> 
+    <div class="body refbody"> 
+     <p class="shortdesc">The Operator-based growth topology provides a smaller footprint deployment without redundancy for organizations getting started with Ansible Automation Platform on Red Hat OpenShift Container Platform. </p> 
+     <section class="section"> 
+      <p class="p">Included are the tested infrastructure topology, system requirements, network port configurations, and an example custom resource file for installation. </p> 
+      <div class="note important note_important"> <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">You can only install a single instance of the Ansible Automation Platform Operator into a single namespace. Installing multiple instances in the same namespace can lead to improper operation for both Operator instances.</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section" id="ocp-a-env-a___infrastructure_topology"> 
+      <h2 class="title sectiontitle">Infrastructure topology</h2> 
+      <p class="p">The Red&nbsp;Hat tested infrastructure topology for this deployment model:</p> 
+      <figure class="fig fignone"> 
+       <figcaption> <span class="fig--title-label">Figure 1. </span>Infrastructure topology diagram 
+       </figcaption> 
+       <img class="image" id="ocp-a-env-a__image_1" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ocp-a-env-a-2_7.png" alt="Operator growth topology diagram"> 
+      </figure> 
+      <div class="note important note_important"> <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">While Redis and PostgreSQL can be installed as part of the operator-based installation process, the topology diagram represents a Red Hat supported topology where both Redis and PostgreSQL are external to Ansible Automation Platform.</p> 
+       </div> 
+      </div> 
+      <p class="p">Red Hat tests a Single Node OpenShift (SNO) cluster with these requirements:</p> 
+      <table class="table" id="ocp-a-env-a__table_1"> 
+       <caption> <span class="table--title-label">Table 1. </span><span class="title">Single Node OpenShift (SNO) cluster requirements</span> 
+       </caption> 
+       <colgroup> 
+        <col style="width:50%"> 
+        <col style="width:50%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ocp-a-env-a__table_1__entry__1">Requirement</th> 
+         <th class="entry" id="ocp-a-env-a__table_1__entry__2">Minimum requirement</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a__table_1__entry__1">RAM</td> 
+         <td class="entry" headers="ocp-a-env-a__table_1__entry__2">32 GB</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a__table_1__entry__1">CPUs</td> 
+         <td class="entry" headers="ocp-a-env-a__table_1__entry__2">16</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a__table_1__entry__1">Local disk</td> 
+         <td class="entry" headers="ocp-a-env-a__table_1__entry__2">128 GB</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a__table_1__entry__1">Disk IOPS</td> 
+         <td class="entry" headers="ocp-a-env-a__table_1__entry__2">3000</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <table class="table"> 
+       <caption> <span class="table--title-label">Table 2. </span><span class="title">Infrastructure topology components</span> 
+       </caption> 
+       <colgroup> 
+        <col style="width:50%"> 
+        <col style="width:50%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ocp-a-env-a___infrastructure_topology__entry__11">Count</th> 
+         <th class="entry" id="ocp-a-env-a___infrastructure_topology__entry__12">Component</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Automation controller web pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Automation controller task pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Automation hub web pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Automation hub API pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">2</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Automation hub content pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">2</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Automation hub worker pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Automation hub Redis pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Metrics service web pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Metrics service tasks pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Metrics service scheduler pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Event-Driven Ansible API pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Event-Driven Ansible activation worker pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Event-Driven Ansible default worker pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Event-Driven Ansible event stream pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Event-Driven Ansible scheduler pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Platform gateway pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Database pod</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__11"> <p class="p">1</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___infrastructure_topology__entry__12"> <p class="p">Redis pod</p> </td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p dir="ltr" class="p">Metrics service is deployed automatically when the AnsibleAutomationPlatform Custom Resource (CR) includes metrics configuration. The operator creates a MetricsService CR (named <code class="ph codeph">&lt;aap-name&gt;</code>-metrics) and manages three pods:</p> 
+        <ul class="ul" id="ocp-a-env-a__ul_2"> 
+         <li class="li"><code class="ph codeph">&lt;aap-name&gt;</code>- <strong class="ph b">metrics-web</strong> - REST API for metrics and dashboard data</li> 
+         <li class="li"><code class="ph codeph">&lt;aap-name&gt;</code>- <strong class="ph b">metrics-tasks</strong> - dispatcherd worker for background data collection</li> 
+         <li class="li"><code class="ph codeph">&lt;aap-name&gt;</code>- <strong class="ph b">metrics-scheduler</strong> - APScheduler for periodic collection tasks (6-hourly schedule)</li> 
+        </ul> 
+        <p dir="ltr" class="p">All database provisioning, secrets management, and routing configuration is handled automatically by the operators.</p> 
+       </div> 
+      </div> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">You can deploy multiple isolated instances of Ansible Automation Platform into the same Red Hat OpenShift Container Platform cluster. To do this, use a namespace-scoped deployment model (isolated within a namespace).</p> 
+        <p class="p">This approach allows you to use the same cluster for several deployments.</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section" id="ocp-a-env-a___tested_system_configurations"> 
+      <h2 class="title sectiontitle">Tested system configurations</h2> 
+      <p class="p">Red&nbsp;Hat has tested these configurations to install and run Red Hat Ansible Automation Platform:</p> 
+      <table class="table"> 
+       <caption> <span class="table--title-label">Table 3. </span><span class="title">Tested system configurations</span> 
+       </caption> 
+       <colgroup> 
+        <col style="width:33.3333%"> 
+        <col style="width:33.3333%"> 
+        <col style="width:33.3334%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ocp-a-env-a___tested_system_configurations__entry__1">Type</th> 
+         <th class="entry" id="ocp-a-env-a___tested_system_configurations__entry__2">Description</th> 
+         <th class="entry" id="ocp-a-env-a___tested_system_configurations__entry__3">Notes</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__1"> <p class="p">Subscription</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__2"> <p class="p">Valid Red Hat Ansible Automation Platform subscription</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__1"> <p class="p">Red Hat OpenShift</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__2"> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">Version</code>: 4.14</li> 
+           <li class="li"><code class="ph codeph">num_of_control_nodes</code>: 1</li> 
+           <li class="li"><code class="ph codeph">num_of_worker_nodes</code>: 1</li> 
+          </ul> </td> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__3"> <p class="p">Single Node OpenShift (SNO) tested with 32 GB RAM, 16 CPUs, 128 GB disk. Metrics service adds approximately 3.5 Gi RAM request (7 Gi limit).</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__1"> <p class="p">Ansible-core</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__2"> <p class="p">Ansible-core version 2.16 or later</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__1"> <p class="p">Browser</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__2"> <p class="p">A currently supported version of Mozilla Firefox or Google Chrome.</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__3"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__1"> <p class="p">Database</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__2"> 
+          <ul class="ul"> 
+           <li class="li">For Ansible Automation Platform managed databases: PostgreSQL 15</li> 
+           <li class="li">For customer provided (external) databases: PostgreSQL 15, 16, or 17.</li> 
+          </ul> </td> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__3"> 
+          <ul class="ul"> 
+           <li class="li">External (customer supported) databases require International Components for Unicode (ICU) support.</li> 
+           <li class="li">External databases using PostgreSQL 16 or 17 must rely on external backup and restore processes. Backup and restore functionality depends on utilities provided with PostgreSQL 15.</li> 
+          </ul> 
+          <div class="p"> 
+           <div class="note warning note_warning"> <span class="note__title">Warning:</span> 
+            <div class="note__body"> 
+             <p class="p">Operator-deployed database connection limits</p> 
+             <p class="p">The operator-deployed PostgreSQL database has a default <code class="ph codeph">max_connections</code> limit of 100 and a maximum database size of 100 GB.</p> 
+             <p class="p">Do not use the operator-deployed database if any of the following conditions apply:</p> 
+             <div class="p"> 
+              <ul class="ul" id="ocp-a-env-a__ul_1"> 
+               <li class="li">You are running more than 1 replica of any component (platform gateway, automation controller, automation hub, Event-Driven Ansible, or metrics service).</li> 
+               <li class="li">The automation controller capacity exceeds 100 concurrent jobs. </li> 
+               <li class="li">Total database connections from all components exceed 100.</li> 
+               <li class="li">Estimated 30-day database storage exceeds 100 GB.</li> 
+              </ul> 
+             </div> 
+             <p class="p">If your deployment exceeds any of these limits, use an external database instead of the operator-deployed database.</p> 
+             <p class="p">Database storage consumption depends on your workload, including job frequency, playbook task count, output verbosity, and the number of managed hosts per job. Higher verbosity levels can increase storage consumption by 3-5x.</p> 
+            </div> 
+           </div> 
+          </div> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__1"> <p class="p">IP version</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__2"> <p class="p">IPv4, IPv6 (single-stack and dual-stack)</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___tested_system_configurations__entry__3"></td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </section> 
+     <section class="section" id="ocp-a-env-a___example_custom_resource_file"> 
+      <h2 class="title sectiontitle">Example custom resource file</h2> 
+      <p class="p">Use this example custom resource (CR) to add your Ansible Automation Platform instance to your project:</p> 
+      <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: &lt;aap instance name&gt;
+spec:
+  eda:
+    automation_server_ssl_verify: 'no'
+  hub:
+    storage_type: 's3'
+    object_storage_s3_secret: '&lt;name of the Secret resource holding s3 configuration&gt;'
+metrics:
+    disabled: false</code></pre> 
+     </section> 
+     <section class="section" id="ocp-a-env-a___metrics_service_configuration"> 
+      <h2 class="title sectiontitle">Metrics service configuration</h2> 
+      <p class="p"><code class="ph codeph">spec.metrics.disabled: false</code> - Enables metrics service deployment (default: false, meaning enabled)</p> 
+      <ul class="ul"> 
+       <li class="li">Setting <code class="ph codeph">disabled: true</code> will prevent metrics service deployment</li> 
+       <li class="li">The operator automatically creates a MetricsService CR named <code class="ph codeph">&lt;aap-name&gt;</code>-metrics</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="ocp-a-env-a___metrics_service_automatic_provisioning"> 
+      <h2 class="title sectiontitle">Metrics service automatic provisioning</h2> 
+      <p class="p">The operator handles all metrics service deployment details automatically:</p> 
+      <p class="p"><strong class="ph b">Database provisioning</strong></p> 
+      <p class="p">The operator automatically creates:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">metrics_service</code> database with full permissions for the <code class="ph codeph">metrics_service</code> user</li> 
+       <li class="li"><code class="ph codeph">ms_awx_readonly</code> user in the automation controller database with SELECT-only permissions</li> 
+       <li class="li">All database connection secrets as Kubernetes secrets</li> 
+      </ul> 
+      <p class="p">No manual database setup required for operator deployments with managed databases.</p> 
+      <p class="p"><strong class="ph b">Secrets management</strong></p> 
+      <p class="p">The operator creates and manages these Kubernetes secrets:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">&lt;aap-name&gt;</code>- <code class="ph codeph">automationmetrics-pg-password</code> - Metrics database credentials</li> 
+       <li class="li"><code class="ph codeph">&lt;aap-name&gt;</code>- <code class="ph codeph">automationmetrics-controller-read-pg-password</code> - Read-only controller database credentials</li> 
+       <li class="li"><code class="ph codeph">&lt;aap-name&gt;</code>- <code class="ph codeph">automationmetrics-secret-key</code> - Django secret key</li> 
+       <li class="li"><code class="ph codeph">&lt;aap-name&gt;</code>- <code class="ph codeph">automationmetrics-resource-server</code> - Resource server configuration</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Gateway routing</strong></p> 
+      <p class="p">The operator configures Envoy routing through platform gateway:</p> 
+      <ul class="ul"> 
+       <li class="li">Dashboard requests route to <code class="ph codeph">/api/metrics/</code> endpoint</li> 
+       <li class="li">Internal communication between gateway and metrics service web pod</li> 
+       <li class="li">No external exposure of metrics service (access only through gateway)</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">ConfigMap</strong></p> 
+      <p class="p">Configuration is managed via ConfigMap:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">&lt;aap-name&gt;</code>- <code class="ph codeph">metrics-env-properties</code> - Contains all metrics service environment variables including feature flags</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="ocp-a-env-a___external_database_configuration"> 
+      <h2 class="title sectiontitle">External database configuration</h2> 
+      <p class="p">When using an external database (not operator-managed), you must manually provision the metrics service databases before deployment.</p> 
+      <p class="p"><strong class="ph b">Create metrics_service database:</strong></p> 
+      <pre class="pre codeblock"><code>CREATE DATABASE metrics_service
+  WITH ENCODING='UTF8'
+       LC_COLLATE='en_US.UTF-8'
+       LC_CTYPE='en_US.UTF-8'
+       TEMPLATE=template0;
+
+CREATE USER metrics_service WITH PASSWORD '&lt;secure_password&gt;';
+GRANT ALL PRIVILEGES ON DATABASE metrics_service TO metrics_service;
+\c metrics_service
+GRANT ALL ON SCHEMA public TO metrics_service;</code></pre> 
+      <p class="p"><strong class="ph b">Create read-only user for controller database:</strong></p> 
+      <pre class="pre codeblock"><code>CREATE USER ms_awx_readonly WITH PASSWORD '&lt;readonly_password&gt;';
+\c awx  -- Connect to controller database
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+  GRANT SELECT ON TABLES TO ms_awx_readonly;</code></pre> 
+      <p class="p"><strong class="ph b">Configure external database in CR:</strong></p> 
+      <pre class="pre codeblock"><code>spec:
+  metrics:
+    disabled: false
+    postgres_configuration_secret: &lt;secret-name-with-db-credentials&gt;</code></pre> 
+     </section> 
+     <section class="section" id="ocp-a-env-a___nonfunctional_requirements"> 
+      <h2 class="title sectiontitle">Nonfunctional requirements</h2> 
+      <p class="p">Ansible Automation Platform’s performance characteristics and capacity depend on its resource allocation and configuration. With OpenShift, each Ansible Automation Platform component deploys as a pod. You can specify resource requests and limits for each pod.</p> 
+      <p class="p">Use the Ansible Automation Platform Custom Resource (CR) to configure resource allocation for OpenShift installations. Each configurable item has default settings. These settings are the minimum requirements for an installation, but might not meet your production workload needs.</p> 
+      <p class="p">By default, each component’s deployments use minimum resource requests but no resource limits. OpenShift only schedules pods with available resource requests, but the pods can consume unlimited RAM or CPU as long as the OpenShift worker node itself is not under node pressure.</p> 
+      <p class="p">In the Operator growth topology, Ansible Automation Platform runs on a Single Node OpenShift (SNO) with 32 GB RAM, 16 CPUs, 128 GB local disk, and 3000 IOPS. This is not a shared environment, so Ansible Automation Platform pods have full access to all of the compute resources of the OpenShift SNO. In this scenario, the capacity calculation for automation controller task pods comes from the underlying OpenShift Container Platform node that runs the pod. It does not have access to the entire node. This capacity calculation influences how many concurrent jobs automation controller can run.</p> 
+      <p class="p">OpenShift manages storage distinctly from VMs. This impacts how automation hub stores its artifacts. In the Operator growth topology, the topology uses S3 storage because automation hub requires a <code class="ph codeph">ReadWriteMany</code> type storage, which is not a default storage type in OpenShift.</p> 
+     </section> 
+     <section class="section" id="ocp-a-env-a___network_ports"> 
+      <h2 class="title sectiontitle">Network ports</h2> 
+      <p class="p">Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for Red Hat Ansible Automation Platform to work. Ensure that these ports are available and are not blocked by a firewall.</p> 
+      <table class="table"> 
+       <caption> <span class="table--title-label">Table 4. </span><span class="title">Network ports and protocols</span> 
+       </caption> 
+       <colgroup> 
+        <col style="width:20%"> 
+        <col style="width:20%"> 
+        <col style="width:20%"> 
+        <col style="width:20%"> 
+        <col style="width:20%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ocp-a-env-a___network_ports__entry__1">Port number</th> 
+         <th class="entry" id="ocp-a-env-a___network_ports__entry__2">Protocol</th> 
+         <th class="entry" id="ocp-a-env-a___network_ports__entry__3">Service</th> 
+         <th class="entry" id="ocp-a-env-a___network_ports__entry__4">Source</th> 
+         <th class="entry" id="ocp-a-env-a___network_ports__entry__5">Destination</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__2"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__3"> <p class="p">Receptor</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__4"> <p class="p">Execution node</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__5"> <p class="p">OpenShift Container Platform ingress</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__2"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__3"> <p class="p">Receptor</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__4"> <p class="p">Hop node</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__5"> <p class="p">OpenShift Container Platform ingress</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__1"> <p class="p">80/443</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__2"> <p class="p">HTTP/HTTPS</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__3"> <p class="p">Platform</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__4"> <p class="p">Customer clients</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__5"> <p class="p">OpenShift Container Platform ingress</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__1"> <p class="p">27199</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__3"> <p class="p">Receptor</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__4"> <p class="p">OpenShift Container Platform cluster</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__5"> <p class="p">Execution node</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__1"> <p class="p">27199</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__2"> <p class="p">TCP</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__3"> <p class="p">Receptor</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__4"> <p class="p">OpenShift Container Platform cluster</p> </td> 
+         <td class="entry" headers="ocp-a-env-a___network_ports__entry__5"> <p class="p">Hop node</p> </td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Metrics service communication in operator deployments:</p> 
+        <ul class="ul"> 
+         <li class="li">Platform gateway routes dashboard requests to metrics service via internal Kubernetes service</li> 
+         <li class="li">Metrics service connects to PostgreSQL via Kubernetes service (port 5432)</li> 
+         <li class="li">All communication is internal to the OpenShift cluster</li> 
+         <li class="li">No additional external ports required for metrics service</li> 
+        </ul> 
+       </div> 
+      </div> 
+     </section> 
+    </div> 
+   </article> 
+  </main>  
+ </body>
+</html>

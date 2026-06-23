@@ -2,14 +2,3 @@
 
 Horizontal scaling involves increasing the number of replicas (pods or virtual machines) for a given service. Similar to vertical scaling, this approach is useful for high resource utilization or workload scaling.
 
-## Benefits of horizontal scaling
-
-- Improved availability: Distributes load across more instances to reduce the impact of a single slow or failing node.
-- Redundancy: Provides extra capacity, allowing individual service nodes to recover or cool-off without impacting overall availability.
-- Increased authentication capacity: Scaling the platform gateway directly increases the platform’s authentication throughput, because each platform gateway pod includes its own authentication service.
-- Repeatable scaling procedure: After the instance size and configuration are verified for your environment, deploy identical instances to scale.
-
-## Drawbacks and other considerations for horizontal scaling
-
-- Database limitations: Scaling the application increases the maximum potential number of database connections from worker processes. This also increases the overall memory, I/O, and CPU utilization of the PostgreSQL instance. When you scale past the tested deployment models, deploy separate PostgreSQL instances per component (platform gateway, Event-Driven Ansible, automation controller, automation hub).
-- Health Check Overhead: In a mesh architecture, each Envoy proxy sends health checks to every other cluster member. Horizontal scaling increases this baseline traffic, adding to system usage.

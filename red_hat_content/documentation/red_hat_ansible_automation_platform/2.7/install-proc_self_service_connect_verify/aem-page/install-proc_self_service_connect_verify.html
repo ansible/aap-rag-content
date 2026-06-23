@@ -1,0 +1,73 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-connect-verify">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Connect and verify Ansible automation portal</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">After deploying the Ansible automation portal appliance, update the OAuth redirect URI, verify service health, and sign in to the portal.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">Complete these post-installation steps after deploying the Ansible automation portal appliance on any platform.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <div class="li stepsection">
+       Update the OAuth redirect URI
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform as an administrator.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">OAuth Applications</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">automation-portal</span></span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Update <span class="ph uicontrol">Redirect URIs</span> to <code class="ph codeph">https://&lt;portal-address&gt;/api/auth/rhaap/handler/frame</code>.</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li">For RHEL with KVM: use the VM IP address.</li> 
+          <li class="li">For Red Hat OpenShift Virtualization: use the route hostname.</li> 
+          <li class="li">For VMware <code class="ph codeph">vSphere</code>: use the VM IP address or hostname.</li> 
+         </ul> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol">Save</span>.</span> </li>
+      </ol>
+      <div class="li stepsection">
+       Verify service health
+      </div>
+      <ol class="ol steps" start="5">
+       <li class="li step stepexpand"> <span class="ph cmd">SSH into the Ansible automation portal RHEL appliance and check the service status.</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo systemctl status portal postgres devtools</code></pre> 
+         <p class="p">Example output for a healthy Ansible automation portal RHEL appliance:</p> 
+         <pre class="pre codeblock language-terminal"><code>portal.service - Automation portal
+     Active: active (running) since ...
+postgres.service - PostgreSQL database
+     Active: active (running) since ...
+devtools.service - Ansible development tools
+     Active: active (running) since ...</code></pre> 
+         <p class="p">All three services should show <code class="ph codeph">active (running)</code>.</p> 
+         <p class="p">To view detailed logs for a specific service:</p> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo journalctl -u portal -n 100 --no-pager</code></pre> 
+        </div> </li>
+      </ol>
+      <div class="li stepsection">
+       Sign in to Ansible automation portal
+      </div>
+      <ol class="ol steps" start="6">
+       <li class="li step stepexpand"> <span class="ph cmd">Open <code class="ph codeph">https://&lt;portal-address&gt;</code> in a browser.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol">Sign in with RHAAP</span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Authenticate with your Ansible Automation Platform credentials.</span> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">A successful login confirms that the OAuth integration with Ansible Automation Platform is working. The Ansible automation portal catalog displays synchronized job templates from Ansible Automation Platform. If no templates appear, verify that the API token has access to job templates in Ansible Automation Platform.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

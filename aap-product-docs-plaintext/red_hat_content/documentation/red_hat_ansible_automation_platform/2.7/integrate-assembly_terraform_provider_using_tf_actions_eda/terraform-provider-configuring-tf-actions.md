@@ -1,0 +1,151 @@
+# Use TF Actions with Event-Driven Ansible
+## Configure TF Actions
+
+To connect the event stream to Terraform actions, you configure the main TF file (`*.tf`) in Terraform.
+
+### Procedure
+
+1.  Add a lifecycle block to call the Event-Driven Ansible event stream to your `*.tf` file. The `after_create` action will trigger the `action.aap_eda_eventstream_post.create`.  **Example**
+
+The following example shows a `lifecycle` block added to the provisioning of an AWS EC2 server. After the new server is provisioned, the action runs.
+
+```
+terraform {
+required_providers {
+aws = {
+source  = "hashicorp/aws"
+version = "~> 6.0"
+}
+
+aap = {
+source  = "ansible/aap"
+version = "~> 1.4.0"
+}
+}
+}
+
+provider "aap" {
+# Configure authentication as needed.
+}
+
+provider "aws" {
+region = "us-west-1"
+# Configure authentication as needed.
+}
+
+variable "public_key_path" {
+type        = string
+description = "Local path to a public key file to inject into the VM. Your AAP Job Template must have the matching private key configured as a machine credential."
+}
+
+variable "event_stream_username" {
+type = string
+}
+
+variable "event_stream_password" {
+type = string
+}
+
+resource "aws_key_pair" "key_pair" {
+key_name   = "aap-terraform-actions-demo-key"
+public_key = file(var.public_key_path)
+}
+
+data "aws_ami" "rhel_ami" {
+most_recent = true
+
+filter {
+name   = "name"
+values = ["RHEL-9*"]
+}
+
+filter {
+name   = "virtualization-type"
+values = ["hvm"]
+}
+
+owners = ["309956199498"] # Red Hat
+}
+
+resource "aws_instance" "instance" {
+ami                         = data.aws_ami.rhel_ami.id
+instance_type               = "t2.micro"
+associate_public_ip_address = true
+key_name                    = aws_key_pair.key_pair.key_name
+}
+
+# Look up an inventory
+
+data "aap_inventory" "inventory" {
+name              = "EDA Actions Demo Inventory"
+organization_name = "Default"
+}
+
+#
+# EDA Event launch action example
+#
+
+resource "aap_host" "host" {
+inventory_id = data.aap_inventory.inventory.id
+name         = resource.aws_instance.instance.public_ip
+# Configure an EDA eventstream POST after the host is created in inventory
+lifecycle {
+action_trigger {
+events  = [after_create]
+actions = [action.aap_eda_eventstream_post.event_post]
+}
+}
+}
+
+data "aap_eda_eventstream" "eventstream" {
+name = "TF Actions Event Stream"
+}
+
+action "aap_eda_eventstream_post" "event_post" {
+config {
+limit             = "all"
+template_type     = "job"
+job_template_name = "Demo Job Template"
+organization_name = "Default"
+event_stream_config = {
+username = var.event_stream_username
+password = var.event_stream_password
+url      = data.aap_eda_eventstream.eventstream.url
+}
+}
+}
+```
+
+2.  (Required) Configure the following parameters:
+
+- **`event_stream_config`:** (Attributes) Details for the Event-Driven Ansible event stream. You must include:
+* **`username`:** (String) Username to use when performing the POST to the event stream URL
+* **`password`:** (String) Password to use when performing the POST to the event stream URL
+* **`url`:** (String) URL to receive the event POST
+- **`limit`:** (String) Ansible Automation Platform limit for job execution
+- **`organization_name`:** (String) Organization name
+- **`template_type`:** (String) Template type: either `job` or `workflow_job`
+
+3.  (Optional) You can set `owners` to the Red Hat RHEL image ID so that the latest image is used each time the job runs.
+4.  (Optional) Set additional parameters as needed.
+5.  Configure an action integration with event payload specifications and target rulebook mapping.  **Example:**
+
+```
+- name: Dispatch TF Workflow Job Template Action
+condition: event.payload.template_type == "workflow"
+throttle:
+once_after: 1 minute
+group_by_attributes:
+- event.payload.workflow_template_name
+- event.payload.limit
+- event.payload.organization_name
+actions:
+- debug:
+msg: "Executing Workflow Template {{ event.payload.workflow_template_name }}"
+- run_workflow_template:
+name: "{{ event.payload.workflow_template_name }}"
+organization: "{{ event.payload.organization_name }}"
+- debug:
+msg: "Executed Workflow Job Template {{ event.payload.workflow_template_name }}"
+```
+

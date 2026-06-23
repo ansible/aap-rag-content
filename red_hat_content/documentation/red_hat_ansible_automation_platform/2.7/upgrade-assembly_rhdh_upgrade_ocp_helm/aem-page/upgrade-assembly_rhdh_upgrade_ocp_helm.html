@@ -1,0 +1,160 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="rhdh-upgrade-ocp-helm"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Upgrade the Ansible plug-ins with Helm</h1> 
+     <p class="shortdesc">To upgrade the Ansible plug-ins, you must update the <code class="ph codeph">plugin-registry</code> application with the latest Ansible plug-ins files.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="rhdh-download-plugins"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Download the Ansible plug-ins files</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Download the Ansible plug-ins for Red Hat Developer Hub <strong class="ph b">Setup Bundle</strong> from the Red Hat Ansible Automation Platform Product Software downloads page.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">The HTTP plug-in registry method is deprecated and will be removed in a future release of Red Hat Ansible Automation Platform. For new installations, use OCI container delivery instead.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">In a browser, navigate to the <a class="xref" href="https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software" target="_blank" rel="external noopener">Red Hat Ansible Automation Platform Product Software downloads page</a> and select the <strong class="ph b">Product Software</strong> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Download now</strong> next to <strong class="ph b">Ansible plug-ins for Red Hat Developer Hub Setup Bundle</strong> to download the latest version of the plug-ins. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The format of the filename is <code class="ph codeph">ansible-rhdh-plugins-x.y.z.tar.gz</code>. Substitute the Ansible plug-ins release version, for example <code class="ph codeph">2.0.0</code>, for <code class="ph codeph">x.y.z</code>.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create a directory on your local machine to store the <code class="ph codeph">.tar</code> files. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ mkdir /path/to/&lt;ansible-backstage-plugins-local-dir-changeme&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Set an environment variable (<code class="ph codeph">$DYNAMIC_PLUGIN_ROOT_DIR</code>) to represent the directory path. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/&lt;ansible-backstage-plugins-local-dir-changeme&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Extract the <code class="ph codeph">ansible-rhdh-plugins-&lt;version-number&gt;.tar.gz</code> contents to <code class="ph codeph">$DYNAMIC_PLUGIN_ROOT_DIR</code>. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ tar --exclude='*code*' -xzf ansible-rhdh-plugins-x.y.z.tar.gz -C $DYNAMIC_PLUGIN_ROOT_DIR</code></pre> 
+           <p class="p">Substitute the Ansible plug-ins release version, for example <code class="ph codeph">2.0.0</code>, for <code class="ph codeph">x.y.z</code>.</p> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Run <code class="ph codeph">ls</code> to verify that the extracted files are in the <code class="ph codeph">$DYNAMIC_PLUGIN_ROOT_DIR</code> directory:</p> 
+        <pre class="pre codeblock"><code>$ ls $DYNAMIC_PLUGIN_ROOT_DIR
+ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz
+ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz.integrity
+ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz
+ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz.integrity</code></pre> 
+        <p class="p">The files with the <code class="ph codeph">.integrity</code> file type contain the plugin SHA value. The SHA value is used during the plug-in configuration.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="rhdh-update-plugin-registry"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Update the plug-in registry</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Rebuild your plug-in registry application in your OpenShift cluster with the latest Ansible plug-ins files.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have downloaded the Ansible plug-ins files.</li> 
+         <li class="li">You have set an environment variable, for example <code class="ph codeph">$DYNAMIC_PLUGIN_ROOT_DIR</code>, to represent the path to the local directory where you have stored the <code class="ph codeph">.tar</code> files.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to your OpenShift Container Platform instance with credentials to create a new application.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Open your Red Hat Developer Hub OpenShift project. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc project &lt;YOUR_DEVELOPER_HUB_PROJECT&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the following commands to update your plug-in registry build in the OpenShift cluster. The commands assume that <code class="ph codeph">$DYNAMIC_PLUGIN_ROOT_DIR</code> represents the directory for your <code class="ph codeph">.tar</code> files. Replace this in the command if you have chosen a different environment variable name. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc start-build plugin-registry --from-dir=$DYNAMIC_PLUGIN_ROOT_DIR --wait</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">When the registry has started, the output displays the following message: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>Uploading directory "/path/to/dynamic_plugin_root" as binary input for the build …
+Uploading finished
+build.build.openshift.io/plugin-registry-1 started</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Verify that the <code class="ph codeph">plugin-registry</code> has been updated.</p> 
+        <ol class="ol"> 
+         <li class="li">In the OpenShift UI, click <strong class="ph b">Topology</strong>.</li> 
+         <li class="li">Click the <strong class="ph b">redhat-developer-hub</strong> icon to view the pods for the plug-in registry.</li> 
+         <li class="li">Click <strong class="ph b">View logs</strong> for the plug-in registry pod.</li> 
+         <li class="li">Open the <strong class="ph b">Terminal</strong> tab and run <code class="ph codeph">ls</code> to view the <code class="ph codeph">.tar</code> files in the <code class="ph codeph">plug-in registry</code>.</li> 
+         <li class="li">Verify that the new <code class="ph codeph">.tar</code> file has been uploaded.</li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="rhdh-update-plugins-helm-version-numbers"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Update the Ansible plug-ins version numbers for a Helm installation</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To upgrade the Ansible plug-ins, you must update the <code class="ph codeph">imageTagInfo</code> parameter in the Helm chart configuration to the desired version. This triggers the Red Hat Developer Hub to pull the new container images directly from the Red Hat registry.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to your Red Hat OpenShift Container Platform instance.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the OpenShift Developer UI, navigate to <span class="ph menucascade"><span class="ph uicontrol">Helm</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">developer-hub</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Actions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Upgrade</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Yaml view</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Locate the <code class="ph codeph">global</code> section.</span> 
+          <div class="itemgroup stepxmp"> 
+           <pre class="pre codeblock language-yaml"><code>...
+global:
+  # Ensure OCI mode is enabled
+  pluginMode: oci
+
+  # UPDATE this value to the new desired version
+  imageTagInfo: "2.1"
+
+  # Note: Do not manually update 'plugins' packages;
+  # OCI mode handles the download automatically based on the tag above.
+  dynamic:
+    plugins: []</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol">Upgrade</span>.</span> 
+          <div class="itemgroup stepresult"> 
+           <p class="p">The Red Hat Developer Hub pods restart and pull the new plug-in versions.</p> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <ol class="ol"> 
+         <li class="li">In the OpenShift UI, click <span class="ph uicontrol">Topology</span>.</li> 
+         <li class="li">Make sure that the Red Hat Developer Hub instance is available.</li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

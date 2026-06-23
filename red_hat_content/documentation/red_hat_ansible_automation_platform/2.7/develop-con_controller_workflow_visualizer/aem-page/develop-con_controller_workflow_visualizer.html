@@ -1,0 +1,132 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-workflow-visualizer"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Build a graphical workflow representation with workflow visualizer</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">The Workflow Visualizer provides a graphical way of linking together job templates, workflow templates, project syncs, and inventory syncs to build a workflow template.</p> 
+      <p class="p">Before you build a workflow template, see the Workflows in automation controller section for considerations associated with various scenarios on parent, child, and sibling nodes.</p> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflows#controller-workflows" title="Workflows enable you to configure a sequence of disparate job templates (or workflow templates) that might or might not share inventory, playbooks, or permissions.">Workflows in automation controller</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-build-workflow"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Build a workflow</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can build a workflow by adding nodes and defining their relationships in the workflow visualizer.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">You can set up any combination of two or more of the following node types to build a workflow:</p> 
+        <ul class="ul"> 
+         <li class="li">Template (Job Template or Workflow Job Template)</li> 
+         <li class="li">Project Sync</li> 
+         <li class="li">Inventory Sync</li> 
+         <li class="li">Approval</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">To launch the workflow visualizer, use one of these methods: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>. 
+             <ul class="ul"> 
+              <li class="li">Select a workflow template and click <span class="ph uicontrol button">View workflow visualizer</span>.</li> 
+             </ul></li> 
+            <li class="li">From the <strong class="ph b">Automation Templates</strong> list view, click the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/visualizer.png" width="15" alt="Visualizer"> icon next to a workflow job template.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Add step</span> to display a list of nodes to add to your workflow.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Node type</strong> list, select the type of node that you want to add. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">If you select an <strong class="ph b">Approval</strong> node, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_controller_approval_nodes#controller-approval-nodes" title="Use an Approval node to manually pause a workflow between playbooks. This allows you to review and approve the next step within a set timeframe or advance the process immediately.">Approval nodes</a> for more information. <p class="p">Selecting a node provides the available valid options associated with it.</p> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">If you select a job template that does not have a default inventory when populating a workflow graph, the inventory of the parent workflow is used. Though a credential is not required in a job template, you cannot select a job template for your workflow if it has a credential that requires a password, unless the credential is replaced by a prompted credential.</p> 
+              </div> 
+             </div></li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">When you select a node type, the workflow begins to build, and you must specify the type of action to be taken for the selected node. This action is also referred to as edge type.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If the node is a root node, the edge type defaults to <strong class="ph b">Always</strong> and is non-editable. For subsequent nodes, you can select one of the following scenarios (edge type) to apply to each: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Always run</strong>: Continue to run regardless of success or failure.</li> 
+            <li class="li"><strong class="ph b">Run on success</strong>: After successful completion, run the next template.</li> 
+            <li class="li"><strong class="ph b">Run on fail</strong>: After failure, run a different template.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the behavior of the node if it is a convergent node from the <strong class="ph b">Convergence</strong> field: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Any</strong> is the default behavior, allowing any of the nodes to complete as specified, before triggering the next converging node. If the status of one parent meets one of those run conditions, an <strong class="ph b">any</strong> child node will run. An <strong class="ph b">any</strong> node requires all nodes to complete, but only one node must complete with the expected outcome.</li> 
+            <li class="li">Choose <strong class="ph b">All</strong> to ensure that all nodes complete as specified, before converging and triggering the next node. The purpose of <strong class="ph b">all</strong>* nodes is to make sure that every parent meets its expected outcome to run the child node. The workflow checks to make sure every parent behaves as expected to run the child node. Otherwise, it will not run the child node. <p class="p">If selected, the node is labeled as <strong class="ph b">ALL</strong> in the graphical view:</p><p class="p"><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-editor-convergent-node-all.png" alt="Convergent node all"></p> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">If a node is a root node, or a node that does not have any nodes converging into it, setting the Convergence rule does not apply, as its behavior is dictated by the action that triggers it.</p> 
+              </div> 
+             </div></li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If a job template used in the workflow has <strong class="ph b">Prompt on launch</strong> selected for any of its parameters, a <span class="ph uicontrol button">PROMPT</span> option is displayed, enabling you to change those values at the node level. Use the wizard to change the values in each of the tabs and click <span class="ph uicontrol button">Confirm</span> in the <strong class="ph b">Preview</strong> tab. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">If a workflow template used in the workflow has <strong class="ph b">Prompt on launch</strong> selected for the inventory option, use the wizard to supply the inventory at the prompt. If the parent workflow has its own inventory, it overrides any inventory that is supplied here.</p> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">For workflow job templates with required fields that prompt details, but do not have a default, you must give those values when creating a node before the <strong class="ph b">SELECT</strong> option is enabled.</p> 
+             <p class="p">The following two cases disable the <span class="ph uicontrol button">SELECT</span> option until a value is provided by the <span class="ph uicontrol button">PROMPT</span> option:</p> 
+             <ol class="ol" type="a"> 
+              <li class="li">When you select the <strong class="ph b">Prompt on launch</strong> checkbox in a workflow job template, but do not give a default.</li> 
+              <li class="li">When you create a survey question that is required but do not give a default answer.</li> 
+             </ol> 
+             <p class="p">However, this is not the case with credentials. Credentials that require a password on launch are not permitted when creating a workflow node, because everything required to launch the node must be provided when the node is created. If you are prompted for credentials in a workflow job template, it is not possible to select a credential that requires a password in automation controller.</p> 
+             <p class="p">You must also click <span class="ph uicontrol button">SELECT</span> when the prompt wizard closes, to apply the changes at that node. Otherwise, any changes you make revert back to the values set in the job template.</p> 
+            </div> 
+           </div> 
+           <p class="p">When the node is created, it is labeled with its job type. A template that is associated with each workflow node runs based on the selected run scenario as it proceeds. Click <span class="ph uicontrol button">Legend</span> to display the legend for each run scenario and their job types.</p> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-dropdown-list.png" alt="Workflow dropdown list"> 
+           <br> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Hover over a node to edit the node, add step and link, or delete the selected node: </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you hover over a step when adding a link and a red border is displayed, this means that you cannot connect those two steps together. This is a preventive measure to avoid users creating "circular dependencies", which can result in a workflow that ends up in an infinite loop and never finishes.</p> 
+            </div> 
+           </div> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-wf-add-template.png" alt="Node options"> 
+           <br> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">When you have added or edited a node, click <span class="ph uicontrol button">Finish</span> to save any modifications and render it on the graphical view. For possible ways to build your workflow, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_controller_approval_nodes#controller-building-nodes-scenarios" title="Learn how to manage nodes in the following scenarios.">Building nodes scenarios</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">When you have built your workflow job template, click <span class="ph uicontrol button">Save</span> to save your entire workflow template and return to the new workflow job template details page. </span> 
+          <div class="itemgroup info"> 
+           <div class="note important note_important"> <span class="note__title">Important:</span> 
+            <div class="note__body"> 
+             <p class="p">Clicking <span class="ph uicontrol button">Close</span> does not save your work, but instead, it closes the entire Workflow Visualizer so that you have to start again.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

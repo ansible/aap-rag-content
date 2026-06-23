@@ -1,0 +1,350 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-hub-crds"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Automation hub custom resources</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The automation hub operator provides custom resources for deploying, configuring, and protecting a standalone automation hub instance on OpenShift Container Platform.</p> 
+      <p class="p">The <code class="ph codeph">AutomationHub</code> custom resource deploys and configures automation hub independently of the full Ansible Automation Platform deployment. Automation hub provides a centralized location for managing Ansible content collections, execution environments, and container images. Use this custom resource when you need to manage automation hub as a standalone component rather than through the <code class="ph codeph">AnsibleAutomationPlatform</code> resource.</p> 
+      <p class="p">The <code class="ph codeph">AutomationHubBackup</code> and <code class="ph codeph">AutomationHubRestore</code> custom resources manage data protection for standalone automation hub deployments. A backup captures the hub database, content, and configuration. A restore recreates the hub from a previously created backup.</p> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="AutomationHub"> 
+      <h2 class="title topictitle2" id="ariaid-title2">AutomationHub [automationhub.ansible.com/v1beta1]</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The <code class="ph codeph">AutomationHub</code> custom resource deploys and configures a standalone automation hub instance for managing Ansible content collections, execution environments, and container images.</p> 
+       <section class="section" id="AutomationHub__description">
+        <h3 class="title sectiontitle">Description</h3> 
+        <table class="table" id="AutomationHub__desc-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Group</strong></td> 
+           <td class="entry"><code class="ph codeph">automationhub.ansible.com</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Version</strong></td> 
+           <td class="entry"><code class="ph codeph">v1beta1</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Kind</strong></td> 
+           <td class="entry"><code class="ph codeph">AutomationHub</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Scope</strong></td> 
+           <td class="entry">Namespaced</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationHub__spec">
+        <h3 class="title sectiontitle">Specification</h3> 
+        <table class="table" id="AutomationHub__spec-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="AutomationHub__spec-table__entry__1">Field</th> 
+           <th class="entry" id="AutomationHub__spec-table__entry__2">Type</th> 
+           <th class="entry" id="AutomationHub__spec-table__entry__3">Description</th> 
+           <th class="entry" id="AutomationHub__spec-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">image_pull_policy</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Image pull policy for automation hub pods. Options: <code class="ph codeph">Always</code>, <code class="ph codeph">Never</code>, <code class="ph codeph">IfNotPresent</code>.</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4"><code class="ph codeph">IfNotPresent</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">postgres_configuration_secret</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Name of a Kubernetes secret containing external PostgreSQL connection details for the automation hub database.</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">storage_type</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Storage backend type for automation hub content. Options: <code class="ph codeph">file</code>, <code class="ph codeph">S3</code>, <code class="ph codeph">azure</code>.</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">file_storage_storage_class</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Kubernetes storage class for file-based storage. Must support <code class="ph codeph">ReadWriteMany</code> access mode. Required when <code class="ph codeph">storage_type</code> is <code class="ph codeph">file</code>.</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">file_storage_size</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Size of the persistent volume for file-based storage, for example <code class="ph codeph">50Gi</code>. Required when <code class="ph codeph">storage_type</code> is <code class="ph codeph">file</code>.</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">object_storage_s3_secret</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Name of a Kubernetes secret containing S3-compatible object storage credentials. Required when <code class="ph codeph">storage_type</code> is <code class="ph codeph">S3</code>.</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">object_storage_azure_secret</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Name of a Kubernetes secret containing Azure Blob Storage credentials. Required when <code class="ph codeph">storage_type</code> is <code class="ph codeph">azure</code>.</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">pulp_settings</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Custom Pulp configuration settings as key-value pairs, for example <code class="ph codeph">MAX_PAGE_SIZE</code> or <code class="ph codeph">cache_enabled</code>.</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">api</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Automation hub API pod configuration. Contains <code class="ph codeph">replicas</code> (Integer) and <code class="ph codeph">resource_requirements</code> (Object).</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4">1 replica</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">content</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Automation hub content pod configuration. Contains <code class="ph codeph">replicas</code> (Integer) and <code class="ph codeph">resource_requirements</code> (Object).</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4">1 replica</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">worker</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Automation hub worker pod configuration. Contains <code class="ph codeph">replicas</code> (Integer) and <code class="ph codeph">resource_requirements</code> (Object).</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4">1 replica</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">web</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Automation hub web pod configuration. Contains <code class="ph codeph">replicas</code> (Integer) and <code class="ph codeph">resource_requirements</code> (Object).</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4">1 replica</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__1"><code class="ph codeph">redis</code></td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__3">Automation hub Redis pod configuration. Contains <code class="ph codeph">replicas</code> (Integer) and <code class="ph codeph">resource_requirements</code> (Object).</td> 
+           <td class="entry" headers="AutomationHub__spec-table__entry__4">1 replica</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationHub__example">
+        <h3 class="title sectiontitle">Example custom resource</h3> 
+        <pre class="pre codeblock"><code>apiVersion: automationhub.ansible.com/v1beta1
+kind: AutomationHub
+metadata:
+  name: my-hub
+spec:
+  storage_type: S3
+  object_storage_s3_secret: my-s3-secret
+  pulp_settings:
+    MAX_PAGE_SIZE: 501
+    cache_enabled: true
+  api:
+    replicas: 2
+  content:
+    replicas: 2</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="AutomationHubBackupRestore"> 
+      <h2 class="title topictitle2" id="ariaid-title3">AutomationHubBackup and AutomationHubRestore [automationhub.ansible.com/v1beta1]</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The <code class="ph codeph">AutomationHubBackup</code> and <code class="ph codeph">AutomationHubRestore</code> custom resources manage backup and restore operations for standalone automation hub deployments.</p> 
+       <section class="section" id="AutomationHubBackupRestore__backup-description">
+        <h3 class="title sectiontitle">AutomationHubBackup</h3> 
+        <table class="table" id="AutomationHubBackupRestore__backup-desc-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Group</strong></td> 
+           <td class="entry"><code class="ph codeph">automationhub.ansible.com</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Version</strong></td> 
+           <td class="entry"><code class="ph codeph">v1beta1</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Kind</strong></td> 
+           <td class="entry"><code class="ph codeph">AutomationHubBackup</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Scope</strong></td> 
+           <td class="entry">Namespaced</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationHubBackupRestore__backup-spec">
+        <h3 class="title sectiontitle">AutomationHubBackup spec</h3> 
+        <table class="table" id="AutomationHubBackupRestore__backup-spec-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="AutomationHubBackupRestore__backup-spec-table__entry__1">Field</th> 
+           <th class="entry" id="AutomationHubBackupRestore__backup-spec-table__entry__2">Type</th> 
+           <th class="entry" id="AutomationHubBackupRestore__backup-spec-table__entry__3">Description</th> 
+           <th class="entry" id="AutomationHubBackupRestore__backup-spec-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">deployment_name</code></td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__3">Name of the<code class="ph codeph">AutomationHub</code> instance to back up. Required.</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">no_log</code></td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__2">Boolean</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__3">Suppress logging of sensitive data during the backup process.</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__4"><code class="ph codeph">true</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">backup_pvc</code></td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__3">Name of the persistent volume claim (PVC) to use for backup storage.</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">backup_storage_class</code></td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__3">Kubernetes storage class for the backup PVC.</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">backup_storage_requirements</code></td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__3">Storage size for the backup PVC, for example<code class="ph codeph">15Gi</code>.</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">create_backup_pvc</code></td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__2">Boolean</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__3">Set to<code class="ph codeph">true</code> to have the operator create the PVC automatically.</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__backup-spec-table__entry__4"><code class="ph codeph">false</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationHubBackupRestore__backup-example">
+        <h3 class="title sectiontitle">Example AutomationHubBackup custom resource</h3> 
+        <pre class="pre codeblock"><code>apiVersion: automationhub.ansible.com/v1beta1
+kind: AutomationHubBackup
+metadata:
+  name: hub-backup
+spec:
+  deployment_name: my-hub
+  backup_pvc: hub-backup-pvc
+  backup_storage_requirements: 25Gi
+  create_backup_pvc: true</code></pre> 
+       </section> 
+       <section class="section" id="AutomationHubBackupRestore__restore-description">
+        <h3 class="title sectiontitle">AutomationHubRestore</h3> 
+        <table class="table" id="AutomationHubBackupRestore__restore-desc-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Group</strong></td> 
+           <td class="entry"><code class="ph codeph">automationhub.ansible.com</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Version</strong></td> 
+           <td class="entry"><code class="ph codeph">v1beta1</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Kind</strong></td> 
+           <td class="entry"><code class="ph codeph">AutomationHubRestore</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Scope</strong></td> 
+           <td class="entry">Namespaced</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationHubBackupRestore__restore-spec">
+        <h3 class="title sectiontitle">AutomationHubRestore spec</h3> 
+        <table class="table" id="AutomationHubBackupRestore__restore-spec-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="AutomationHubBackupRestore__restore-spec-table__entry__1">Field</th> 
+           <th class="entry" id="AutomationHubBackupRestore__restore-spec-table__entry__2">Type</th> 
+           <th class="entry" id="AutomationHubBackupRestore__restore-spec-table__entry__3">Description</th> 
+           <th class="entry" id="AutomationHubBackupRestore__restore-spec-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHubBackupRestore__restore-spec-table__entry__1"><code class="ph codeph">deployment_name</code></td> 
+           <td class="entry" headers="AutomationHubBackupRestore__restore-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__restore-spec-table__entry__3">Name of the<code class="ph codeph">AutomationHub</code> instance to restore. Required.</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__restore-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHubBackupRestore__restore-spec-table__entry__1"><code class="ph codeph">backup_name</code></td> 
+           <td class="entry" headers="AutomationHubBackupRestore__restore-spec-table__entry__2">String</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__restore-spec-table__entry__3">Name of the<code class="ph codeph">AutomationHubBackup</code> resource to restore from. Required.</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__restore-spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AutomationHubBackupRestore__restore-spec-table__entry__1"><code class="ph codeph">no_log</code></td> 
+           <td class="entry" headers="AutomationHubBackupRestore__restore-spec-table__entry__2">Boolean</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__restore-spec-table__entry__3">Suppress logging of sensitive data during the restore process.</td> 
+           <td class="entry" headers="AutomationHubBackupRestore__restore-spec-table__entry__4"><code class="ph codeph">true</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AutomationHubBackupRestore__restore-example">
+        <h3 class="title sectiontitle">Example AutomationHubRestore custom resource</h3> 
+        <pre class="pre codeblock"><code>apiVersion: automationhub.ansible.com/v1beta1
+kind: AutomationHubRestore
+metadata:
+  name: hub-restore
+spec:
+  deployment_name: my-hub
+  backup_name: hub-backup</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

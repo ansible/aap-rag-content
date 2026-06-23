@@ -1,0 +1,195 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-usability-analytics"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Get insights on automation across your environment with Automation Analytics</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Usability data collection is included with automation controller to collect data to better understand how automation controller users specifically interact with automation controller, to help enhance future releases, and to continue streamlining your user experience.</p> 
+      <p class="p">Only users installing a trial of automation controller or a fresh installation of automation controller are opted-in for this data collection.</p> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relinfo"> <strong>Related information</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="https://www.redhat.com/en/about/privacy-policy" target="_blank" rel="external noopener">Red Hat privacy policy</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-automation-analytics"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Automation Analytics</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">When you imported your license for the first time, you were automatically opted in for the collection of data that powers Automation Analytics, a cloud service that is part of the Ansible Automation Platform subscription.</p> 
+       <section class="section"> 
+        <div class="note important note_important"> <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">For opt-in of Automation Analytics to have any effect, your instance of automation controller must be running on Red Hat Enterprise Linux.</p> 
+         </div> 
+        </div> 
+        <p class="p">As with Red Hat Lightspeed, Automation Analytics is built to collect the minimum amount of data needed. No credential secrets, personal data, automation variables, or task output is gathered.</p> 
+        <p class="p">When you imported your license for the first time, you were automatically opted in to Automation Analytics. To configure or disable this feature, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_user_data_tracking#proc-controller-configure-analytics" title="When you imported your license for the first time, you were automatically opted in for the collection of data that powers Automation Analytics, a cloud service that is part of the Ansible Automation Platform subscription.">Configuring Automation Analytics</a>.</p> 
+        <p class="p">By default, the data is collected every four hours. When you enable this feature, data is collected up to a month in arrears (or until the previous collection). You can turn off this data collection at any time in the <strong class="ph b">Miscellaneous System settings</strong> of the System configuration window.</p> 
+        <p class="p">This setting can also be enabled through the API by specifying <code class="ph codeph">INSIGHTS_TRACKING_STATE = true</code> in either of these endpoints:</p> 
+        <ul class="ul"> 
+         <li class="li"> <code class="ph codeph">api/v2/settings/all</code> </li> 
+         <li class="li"> <code class="ph codeph">api/v2/settings/system</code> </li> 
+        </ul> 
+        <p class="p">The Automation Analytics generated from this data collection can be found on the <a class="xref" href="https://cloud.redhat.com" target="_blank" rel="external noopener">Red Hat Cloud Services</a> portal.</p> 
+        <p class="p"><strong class="ph b">Clusters</strong> data is the default view. This graph represents the number of job runs across all automation controller clusters over a period of time. The previous example shows a span of a week in a stacked bar-style chart that is organized by the number of jobs that ran successfully and jobs that failed.</p> 
+        <p class="p">Alternatively, you can select a single cluster to view its job status information.</p> 
+        <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/aa-job-run-status-over-time-period.png" alt="Job run status"> </p> 
+        <p class="p">This multi-line chart represents the number of job runs for a single automation controller cluster for a specified period of time. The preceding example shows a span of a week, organized by the number of successfully running jobs and jobs that failed. You can specify the number of successful and failed job runs for a selected cluster over a span of one week, two weeks, and monthly increments.</p> 
+        <p class="p">On the clouds navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Organization Statistics</span></span> to view information for the following:</p> 
+        <ul class="ul"> 
+         <li class="li">Use by organization</li> 
+         <li class="li">Job runs by organization</li> 
+         <li class="li">Organization status</li> 
+        </ul> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The organization statistics page will be deprecated in a future release.</p> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-controller-configure-analytics"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure Automation Analytics</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">When you imported your license for the first time, you were automatically opted in for the collection of data that powers Automation Analytics, a cloud service that is part of the Ansible Automation Platform subscription.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">A service account created with the <strong class="ph b">Automation Analytics Viewer</strong> role in console.redhat.com. For more information, see <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_hybrid_cloud_console/1-latest/html/creating_and_managing_service_accounts/proc-ciam-svc-acct-overview-creating-service-acct#proc-ciam-svc-acct-create-creating-service-acct" target="_blank" rel="external noopener">Creating a service account</a>.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Edit</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">In the field labeled <strong class="ph b">Red Hat Client ID for Analytics</strong>, enter the client ID you received when you created your service account to retrieve subscription and content information.</span> </li> 
+         <li class="li step"> <span class="ph cmd">In the field labeled <strong class="ph b">Red Hat Client Secret for Analytics</strong>, enter the client secret you received when you created your service account to send data to Automation Analytics.</span> </li> 
+         <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Options</strong> list select the checkbox to <strong class="ph b">Gather data for Automation Analytics</strong>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">After configuring the service account, run a test job to ensure everything is set up correctly.</p> 
+        <ol class="ol"> 
+         <li class="li">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Jobs</span></span> to launch a job.</li> 
+         <li class="li">Check <a class="xref" href="https://console.redhat.com/ansible/automation-analytics/reports" target="_blank" rel="external noopener">analytics at console.redhat.com</a> to confirm that the data is being posted.</li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="assembly-evaluating-automation-return"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Use automation calculator to determine automation savings</h2> 
+      <p class="shortdesc">The automation calculator provides graphs, metrics and calculations that help you determine the total savings on your investment in automated processes.</p> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title5" id="proc-calculating_automation"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Calculate your automation savings</h3> 
+       <div class="body taskbody"> 
+        <p class="shortdesc">The <strong class="ph b">Automation Calculator</strong> produces its default total savings figure based on estimates for each variable.</p> 
+        <section class="section context"> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">About this task</h4> 
+         </div> 
+         <p class="p">You can tune this calculation by providing more specific organizational cost information and adjusting the time values for each of the top templates.</p> 
+         <div class="note note note_note"> <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">Automation savings calculations are not saved in Automation Analytics.</p> 
+          </div> 
+         </div> 
+        </section> 
+        <section> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Procedure</h4> 
+         </div> 
+         <ol class="ol steps"> 
+          <li class="li step"> <span class="ph cmd">Under <strong class="ph b">Calculate your automation</strong> enter cost information for: </span> 
+           <ol type="a" class="ol substeps"> 
+            <li class="li substep"> <span class="ph cmd"> <strong class="ph b">Manual process cost</strong> </span> </li> 
+            <li class="li substep"> <span class="ph cmd"> <strong class="ph b">Automated process cost</strong> </span> </li> 
+           </ol> </li> 
+          <li class="li step"> <span class="ph cmd">Under <strong class="ph b">Top templates</strong>: </span> 
+           <ol type="a" class="ol substeps"> 
+            <li class="li substep"> <span class="ph cmd">Adjust time values for top templates to provide time to manually perform each task that the template automates.</span> </li> 
+           </ol> </li> 
+         </ol> 
+        </section> 
+        <section class="section result"> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Results</h4> 
+         </div> 
+         <p class="p"><strong class="ph b">Total savings</strong> updates based on the information you enter in each field.</p> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic concept nested2" aria-labelledby="ariaid-title6" id="con-top-templates"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Top templates</h3> 
+       <div class="body conbody"> 
+        <p class="shortdesc"><strong class="ph b">Top templates</strong> lists the 25 most frequently run templates across all hosts in your environment.</p> 
+        <p class="p">Templates are listed in descending order starting with the highest run count. You can enter the time it takes to perform tasks manually that are automated by templates in the field adjacent to the run totals to produce a more accurate total savings. The default value is set to <strong class="ph b">60</strong> minutes.</p> 
+       </div> 
+      </article> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title7" id="proc-curating-templates"> 
+       <h3 class="title topictitle3" id="ariaid-title7">Curate top templates</h3> 
+       <div class="body taskbody"> 
+        <p class="shortdesc">You can use the toggle switch for each template to show or hide it in the bar graph to compare performance and savings based on specific templates.</p> 
+        <section> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Procedure</h4> 
+         </div> 
+         <div class="ul steps-unordered"> 
+          <div class="li step p"> <span class="ph cmd">Click the toggle switch for each template to display or hide it.</span> 
+          </div> 
+         </div> 
+        </section> 
+        <section class="section result"> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Results</h4> 
+         </div> 
+         <p class="p">The bar graph on the <strong class="ph b">Automation Calculator</strong> will update to display those top templates selected and <strong class="ph b">Total savings</strong> will calculate based on those templates.</p> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title8" id="proc-view-template-details"> 
+       <h3 class="title topictitle3" id="ariaid-title8">View template details</h3> 
+       <div class="body taskbody"> 
+        <p class="shortdesc">View detailed information for each template in <strong class="ph b">Top templates</strong> to learn more about the template’s context in the calculation of automation savings.</p> 
+        <section> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Procedure</h4> 
+         </div> 
+         <div class="ol steps"> 
+          <div class="li step p"> <span class="ph cmd">Click the <strong class="ph b">Info</strong> icon for a job template to view template details. </span> 
+           <div class="itemgroup info"> 
+            <p class="p">Top template information includes the following:</p> 
+            <ul class="ul"> 
+             <li class="li"><strong class="ph b">Total elapsed sum</strong> - Total run time of the template.</li> 
+             <li class="li"><strong class="ph b">Success elapsed sum</strong> - Total run time for successful template runs.</li> 
+             <li class="li"><strong class="ph b">Failed elapsed sum</strong> - Total run time for failed template runs.</li> 
+             <li class="li"><strong class="ph b">Automation percentage</strong> - The template accounts for this percentage of automation in your organization.</li> 
+             <li class="li"><strong class="ph b">Associated organizations</strong> - The template runs against these organizations.</li> 
+             <li class="li"><strong class="ph b">Associated clusters</strong> - Automation controller clusters the template runs on.</li> 
+            </ul> 
+           </div> 
+          </div> 
+         </div> 
+        </section> 
+       </div> 
+      </article> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

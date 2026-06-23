@@ -1,0 +1,251 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="migrating-from-cloud-terraform"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Migrate from <code class="ph codeph">cloud.terraform</code> to <code class="ph codeph">hashicorp.terraform</code></h1> 
+     <p class="shortdesc">If you are using the existing <code class="ph codeph">cloud.terraform</code> (CLI-based) collection, you can migrate your existing playbooks to the <code class="ph codeph">hashicorp.terraform</code> (API-based) collection. The main modules for <code class="ph codeph">hashicorp.terraform</code> that you must configure are <code class="ph codeph">hashicorp.terraform.configuration_version</code> and <code class="ph codeph">hashicorp.terraform.run</code>.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="configuring-config-version-module"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure the <code class="ph codeph">hashicorp.terraform.configuration_version</code> module</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To migrate to the <code class="ph codeph">hashicorp.terraform</code> collection, you must configure the <code class="ph codeph">hashicorp.terraform.configuration_version</code> module. This module manages configuration versions in Terraform Enterprise or HCP Terraform.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Install the Ansible Automation Platform certified <code class="ph codeph">hashicorp.terraform</code> collection.</li> 
+         <li class="li">Verify that a valid organization and workspace are correctly set up in Terraform Enterprise or HCP Terraform.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Replicate your automation tasks from the <code class="ph codeph">cloud.terraform</code> modules. </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <strong class="ph b">Example</strong> </p> 
+           <pre class="pre codeblock"><code>- name: Create configuration version with auto_queue_runs to false
+  hashicorp.terraform.configuration_version:
+   workspace_id: ws-1234
+   configuration_files_path: "/usr/home/tf"
+   auto_queue_runs: false
+   tf_validate_certs: true
+   poll_interval: 3
+   poll_timeout: 15
+   state: present</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Configure the following required parameters: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">workspace_id</code> or <code class="ph codeph">workspace</code> + <code class="ph codeph">organization</code>:</strong> The workspace ID or the workspace name and organization where the configuration version will be created and the file will be uploaded (for <code class="ph codeph">state: present</code>).</li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">configuration_files_path</code>:</strong> The path where the required Terraform Enterprise or HCP Terraform files will be uploaded to create a configuration version (for <code class="ph codeph">state: present</code>). The module accepts two file types for <code class="ph codeph">configuration_files_path</code>: 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">Directory:</strong> Any folder containing Terraform Enterprise or HCP Terraform files. The module auto-creates the .tar.gz file from all contents recursively.</li> 
+              <li class="li"><strong class="ph b">.tar.gz Archive:</strong> Pre-compressed gzip tarball. The module validates TAR format and gzip compression.</li> 
+             </ul> </li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">configuration_version_id</code>:</strong> The configuration version ID that will be archived (<code class="ph codeph">state: archived</code>). This action deletes the associated uploaded .tar.gz file. Note the following: 
+             <ul class="ul"> 
+              <li class="li">Only uploaded versions that were created using the API or CLI, have no active runs, and are not the current version for any workspace can be archived.</li> 
+              <li class="li">When the <code class="ph codeph">configuration_version_id</code> is unspecified, Terraform Enterprise or HCP Terraform selects the latest approved <code class="ph codeph">configuration_version_id</code> in the workspace.</li> 
+             </ul> </li> 
+            <li class="li"><strong class="ph b">auto_queue_runs:</strong> Determines if Terraform Enterprise or HCP Terraform automatically starts a run after the configuration upload (<code class="ph codeph">true</code> by default) or requires manual initiation (<code class="ph codeph">false</code>).</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Set additional optional parameters as needed.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist">
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://console.redhat.com/ansible/automation-hub/repo/published/hashicorp/terraform/" target="_blank" rel="external noopener">hashicorp.terraform collection</a></li>
+         <li class="linklist"><a class="link" href="https://console.redhat.com/ansible/automation-hub/repo/published/hashicorp/terraform/content/module/configuration_version/" target="_blank" rel="external noopener">Optional parameters</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="configuring-run-module"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure the <code class="ph codeph">hashicorp.terraform.run</code> module</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The <code class="ph codeph">hashicorp.terraform.run</code> module lets you manage Terraform Enterprise or HCP Terraform runs using create, apply, cancel, and discard operations. You can trigger plans or apply operations on specified workspaces with customizable settings.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Ensure that a valid Terraform API token is properly configured to authenticate with your Terraform Enterprise or HCP Terraform environment.</li> 
+         <li class="li">Verify that a valid organization and workspace are correctly set up in Terraform Enterprise or HCP Terraform.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create a run module. </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <strong class="ph b">Example</strong> </p> 
+           <pre class="pre codeblock"><code>- name: Create a destroy run with auto_apply
+  hashicorp.terraform.run:
+  workspace_id: ws-1234
+  run_message: "destroy vpc"
+  state: "present"
+  tf_token: &lt;your token&gt;
+  is_destroy: true
+  auto_apply: true
+  target_addrs:
+    - "aws_vpc.vpc1"
+    - "aws_vpc.vpc2"
+  poll: true
+  poll_interval: 10
+  poll_timeout: 30</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Configure the following required parameters: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">workspace_id</code> or <code class="ph codeph">workspace</code> + <code class="ph codeph">organization</code>:</strong> The workspace ID or the workspace name and organization where the configuration version will be created and the file will be uploaded (for <code class="ph codeph">state: present</code>).</li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">run_id</code>:</strong> The unique identifier of the run to apply, cancel, or discard operations.</li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">tf_token</code>:</strong> The Terraform API authentication token. If this value is not set, the <code class="ph codeph">TF_TOKEN</code> environment variable is used.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">(Optional) Configure the built-in polling options that determine the wait period for Terraform Enterprise or HCP Terraform operations to complete: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">poll: true</code>:</strong> (Default) Checks the run status every <code class="ph codeph">poll_interval</code> seconds (default: 5s) until completion or <code class="ph codeph">poll_timeout</code> (default: 25s) is reached, returning the final status.</li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">poll: false</code>:</strong> Returns immediately after initiating the run without waiting.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Set additional optional parameters as needed.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist">
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/api-tokens" target="_blank" rel="external noopener">Terraform API tokens</a></li>
+         <li class="linklist"><a class="link" href="https://console.redhat.com/ansible/automation-hub/repo/published/hashicorp/terraform/content/module/run/" target="_blank" rel="external noopener">Optional parameters</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="terraform-migration-examples"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Examples for <code class="ph codeph">hashicorp.terraform</code> modules</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">These before and after examples help users understand how the modules can be configured in a real world environment.</p> 
+       <section class="section" id="terraform-migration-examples___migration_examples_plan_only">
+        <h3 class="title sectiontitle">Plan Only</h3> 
+        <ul class="ul"> 
+         <li class="li"> <strong class="ph b">Before (<code class="ph codeph">cloud.terraform.terraform</code>):</strong> </li> 
+        </ul> 
+        <pre class="pre codeblock"><code>- name: Create a plan file using check mode
+  cloud.terraform.terraform:
+   force_init: true
+   project_path: "/usr/home/tf"
+   plan_file: "/usr/home/tf/terraform.tfplan"
+   state: present
+   check_mode: true
+   check_destroy: true
+   variables:
+     environment: prod</code></pre> 
+        <ul class="ul"> 
+         <li class="li"> <strong class="ph b">After (<code class="ph codeph">hashicorp.terraform.*</code>):</strong> 
+          <ul class="ul"> 
+           <li class="li">The <code class="ph codeph">configuration_version</code> module: <pre class="pre codeblock"><code>- name: Create configuration version with auto_queue_runs to false
+  hashicorp.terraform.configuration_version:
+   workspace_id: ws-1234
+   configuration_files_path: "usr/home/tf_files"
+   auto_queue_runs: false
+   tf_validate_certs: true
+   poll_interval: 5
+   poll_timeout: 10
+   state: present</code></pre> </li> 
+           <li class="li">The <code class="ph codeph">plan_only</code> run with the run module: <pre class="pre codeblock"><code>- name: Create a plan only run with variables
+  hashicorp.terraform.run:
+   workspace_id: ws-1234
+   run_message: "plan-only vpc creation"
+   poll: false
+   state: "present"
+   tf_token: "{{ tfc_token }}"
+   plan_only: true
+   variables:
+    - key: "env"
+      value: "production"</code></pre> </li> 
+          </ul> </li> 
+        </ul> 
+       </section> 
+       <section class="section" id="terraform-migration-examples___migration_examples_plan_and_apply">
+        <h3 class="title sectiontitle">Plan and apply</h3> 
+        <ul class="ul"> 
+         <li class="li"> <strong class="ph b">Before (<code class="ph codeph">cloud.terraform.terraform</code>):</strong> 
+          <ol class="ol"> 
+           <li class="li">Generate the plan: <pre class="pre codeblock"><code>- name: Plan and Apply Workflow - Step 1 - Generate Plan
+  cloud.terraform.terraform:
+   force_init: true
+   project_path: "/usr/home/tf"
+   plan_file: "/usr/home/tf/workflow.tfplan"
+   state: present
+   check_mode: true
+   variables:
+     environment: prod</code></pre> </li> 
+           <li class="li">Apply the plan: <pre class="pre codeblock"><code>- name: Plan and Apply Workflow - Step 2 - Apply Plan
+  cloud.terraform.terraform:
+   project_path:  "/usr/home/tf"
+   plan_file: "/usr/home/tf/workflow.tfplan"
+   state: present</code></pre> </li> 
+          </ol> </li> 
+         <li class="li"> <strong class="ph b">After (<code class="ph codeph">hashicorp.terraform.run</code>):</strong> 
+          <ol class="ol"> 
+           <li class="li">The <code class="ph codeph">configuration_version</code> module: <pre class="pre codeblock"><code>- name: Create configuration version with auto_queue_runs to false
+  hashicorp.terraform.configuration_version:
+   workspace_id: ws-1234
+   configuration_files_path: "usr/home/tf_files"
+   auto_queue_runs: false
+   tf_validate_certs: true
+   poll_interval: 5
+   poll_timeout: 10
+   state: present</code></pre> </li> 
+           <li class="li">The run module with two options for plan and apply workflow:</li> 
+          </ol> </li> 
+         <li class="li"><strong class="ph b">Option 1:</strong> Uses the <code class="ph codeph">auto_apply</code> parameter to handle both the plan and apply workflows: <pre class="pre codeblock"><code>- name: Create a run with auto_apply
+  hashicorp.terraform.run:
+   workspace_id: ws-1234
+   run_message: "destroy vpc"
+   state: "present"
+   tf_token: "{{ tfc_token }}"
+   auto_apply: true
+   poll: true
+   poll_interval: 10
+   poll_timeout: 30</code></pre> </li> 
+         <li class="li"><strong class="ph b">Option 2:</strong> Uses two sub-steps to create a <code class="ph codeph">save_plan</code> run and then apply it: 
+          <ol class="ol"> 
+           <li class="li">Create the plan: <pre class="pre codeblock"><code>- name: Create a save plan run
+  hashicorp.terraform.run:
+   workspace_id: ws-1234
+   run_message: "save plan vpc creation"
+   state: "present"
+   tf_token: "{{ tfc_token }}"
+   poll: true
+   poll_interval: 10
+   poll_timeout: 30
+   save_plan: true</code></pre> </li> 
+           <li class="li">Apply the plan. You get the <code class="ph codeph">run_id</code> from the output of the run module task: <pre class="pre codeblock"><code>- name: Apply the save plan run
+  hashicorp.terraform.run:
+   run_id: run-1234
+   state: "applied"
+   tf_token: "{{ tfc_token }}"
+   poll: true
+   poll_interval: 10
+   poll_timeout: 30</code></pre> </li> 
+          </ol> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

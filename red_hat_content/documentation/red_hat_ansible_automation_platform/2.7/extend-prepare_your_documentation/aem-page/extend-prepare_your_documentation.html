@@ -1,0 +1,63 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-075b9645-a50a-4f15-826d-a5feb4152f3c">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Prepare your documentation</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Before creating a BYOK RAG image, collect and prepare your organization's documentation in supported file formats.</p> 
+     <section class="section prereq" id="GUID-075b9645-a50a-4f15-826d-a5feb4152f3c__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul" id="GUID-075b9645-a50a-4f15-826d-a5feb4152f3c__ul_1"> 
+       <li class="li">Access to your organization's documentation repository.</li> 
+       <li class="li">The conversion tool that is appropriate for your file format is installed.</li> 
+       <li class="li">Write permissions for a local directory to store the prepared documents.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Collect your knowledge sources:</span> 
+        <ol type="a" class="ol substeps" id="GUID-075b9645-a50a-4f15-826d-a5feb4152f3c__substeps_1"> 
+         <li class="li substep"> <span class="ph cmd">Identify all documents you want to include in the BYOK knowledge base.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Create a staging directory for your knowledge sources:</span> </li> 
+        </ol> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>mkdir -p knowledge-sources/staging</code></pre> 
+        </div> 
+        <ol type="a" class="ol substeps" id="GUID-075b9645-a50a-4f15-826d-a5feb4152f3c__substeps_2"> 
+         <li class="li substep"> <span class="ph cmd">Copy or download all source documents to the staging directory.</span> </li> 
+        </ol> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">If you have content that is not in Markdown (.md) and plain text (.txt) file format, convert them to Markdown or plain text format before uploading them to the BYOK RAG image:</span> 
+        <ol type="a" class="ol substeps" id="GUID-075b9645-a50a-4f15-826d-a5feb4152f3c__substeps_3"> 
+         <li class="li substep"> <span class="ph cmd">PDF conversion: use a tool like <a class="xref" href="https://github.com/docling-project/docling" target="_blank" rel="external noopener">docling</a>.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">AsciiDoc conversion: Use <a class="xref" href="https://github.com/openshift/lightspeed-rag-content/blob/main/scripts/asciidoctor-text/convert-it-all.py" target="_blank" rel="external noopener">custom scripts</a> or the <a class="xref" href="https://pandoc.org/" target="_blank" rel="external noopener">Pandoc</a> tool.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">HTML conversion: Use the <a class="xref" href="https://pandoc.org/" target="_blank" rel="external noopener">Pandoc</a> tool.</span> </li> 
+        </ol> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Follow these guidelines when structuring your converted documents for optimal indexing. You can also find examples of each guideline in this <a class="xref" href="https://github.com/ansible/aap-rag-content/tree/main/byok/ansible-collection-docs" target="_blank" rel="external noopener">collections repository.</a></span> 
+        <ol type="a" class="ol substeps" id="GUID-075b9645-a50a-4f15-826d-a5feb4152f3c__substeps_4"> 
+         <li class="li substep"> <span class="ph cmd"><strong class="ph b">Use clear file names</strong>: Name files descriptively to improve searchability.</span> </li> 
+         <li class="li substep"> <span class="ph cmd"><strong class="ph b">Organize by topic</strong>: Group related documents in directories by subject area (for example, security-policies, deployment-procedures, compliance).</span> </li> 
+         <li class="li substep"> <span class="ph cmd"><strong class="ph b">Use consistent formatting</strong>: Apply uniform heading structures and Markdown conventions across all documents.</span> </li> 
+         <li class="li substep"> <span class="ph cmd"><strong class="ph b">Include metadata</strong>: Add document titles and source URLs when configuring the metadata processor.</span> </li> 
+         <li class="li substep"> <span class="ph cmd"><strong class="ph b">Remove sensitive information</strong>: Exclude credentials, API keys, or proprietary details before creating the RAG image.</span> </li> 
+         <li class="li substep"> <span class="ph cmd"><strong class="ph b">Test document quality</strong>: Verify that documents are readable and technically accurate.</span> </li> 
+         <li class="li substep"> <span class="ph cmd"><strong class="ph b">Optimize storage volume:</strong> Keep the BYOK data between 1 Mi and 999 Mi for best performance. While the system supports larger allocations up to 2 Gi, smaller volumes are recommended.</span> </li> 
+        </ol> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Copy the converted documents to a final directory for processing them with the <code class="ph codeph">rag-content</code> tool.</span> </li>
+      </ol>
+     </section> 
+     <section class="section postreq" id="GUID-075b9645-a50a-4f15-826d-a5feb4152f3c__postreq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div>After preparing your knowledge sources, use the <code class="ph codeph">rag-content</code> tool to create a BYOK RAG image. The BYOK RAG image acts as a searchable knowledge base drawn from your documentation.
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

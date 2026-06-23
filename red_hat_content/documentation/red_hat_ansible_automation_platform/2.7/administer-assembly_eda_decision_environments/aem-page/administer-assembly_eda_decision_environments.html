@@ -1,0 +1,322 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="eda-decision-environments"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create runtime environments for event-driven automation</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Decision environments are container images that run Ansible rulebooks. They create a common language for communicating automation dependencies, and give a standard way to build and distribute the automation environment.</p> 
+      <p class="p">You can find the default decision environment in the <em class="ph i">Ansible Rulebook</em>.</p> 
+      <p class="p">To create your own decision environment, see <em class="ph i">Install Ansible Builder to create or edit execution environments</em> and <em class="ph i">Build a custom decision environment for Event-Driven Ansible</em>. Refer to the Related Links section for more details.</p> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist reltasks">
+       <strong>Related tasks</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_builder" title="Install Ansible Builder to create custom execution environments that contain the dependencies and collections required for your automation content. You need a valid Red Hat subscription and Podman installed on your RHEL system.">Install Ansible Builder to create or edit execution environments</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_decision_environments#eda-build-a-custom-decision-environment" title="Customize a decision environment container image to ensure your rulebook activations run with the precise, custom-maintained collections and dependencies they require.">Build a custom decision environment for Event-Driven Ansible</a></li>
+       </ul>
+      </div>
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://quay.io/repository/ansible/ansible-rulebook" target="_blank" rel="external noopener">Ansible Rulebook</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Supported event sources and filters</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The capabilities of your decision environment are largely defined by the event sources and filters included in your container image. Event sources serve as the foundation for {EDAcontroller}, determining where your rulebooks receive incoming signals.</p> 
+       <p class="p">Selecting compatible sources is critical for successful deployment, as availability can vary—some sources are exclusive to the web-based Event-Driven Ansible controller, while others are optimized for the <code class="ph codeph">ansible-rulebook</code> command-line interface (CLI).</p> 
+       <p class="p">When building your decision environments, the <code class="ph codeph">de-minimal</code> image provides a curated set of supported plugins designed to ensure stability and compatibility. However, as the ecosystem evolves, plugin namespaces have been updated to reflect their specific collection origins (for example, migrating from <code class="ph codeph">ansible.eda</code> to specific cloud collections). To ensure your rulebooks remain functional, verify that your definitions align with the latest plugin naming conventions.</p> 
+       <p class="p">The following table lists the supported plugins in the <code class="ph codeph">de-minimal</code> image, including their plugin type and any associated deprecated names:</p> 
+       <table class="table" id="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3">
+        <caption>
+         <span class="table--title-label">Table 1. </span><span class="title">Supported event sources and filters</span>
+        </caption>
+        <colgroup>
+         <col style="width:33.33333333333333%">
+         <col style="width:33.33333333333333%">
+         <col style="width:33.33333333333333%">
+        </colgroup>
+        <thead class="thead"> 
+         <tr class="row"> 
+          <th class="entry" id="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__1"> <p class="p">Plugin name</p> </th> 
+          <th class="entry" id="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__2"> <p class="p">Event filter </p> </th> 
+          <th class="entry" id="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__3"> <p class="p">Deprecated name</p> </th> 
+         </tr> 
+        </thead>
+        <tbody class="tbody"> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__1"><code class="ph codeph">eda.builtin.dashes_to_underscores</code></td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__2"> <p class="p">Event filter</p> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__3"><code class="ph codeph">ansible.eda.dashes_to_underscores</code></td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__1"><code class="ph codeph">eda.builtin.event_splitter</code> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__2"> <p class="p">Event filter</p> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__3"> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__1"><code class="ph codeph">eda.builtin.generic</code> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__2"> <p class="p">Event source</p> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__3"><code class="ph codeph">ansible.eda.generic</code></td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__1"><code class="ph codeph">eda.builtin.insert_hosts_to_meta</code> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__2"> <p class="p">Event filter</p> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__3"><code class="ph codeph">ansible.eda.insert_hosts_to_meta</code></td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__1"><code class="ph codeph">eda.builtin.insert_meta_info</code> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__2"> <p class="p">Event filter</p> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__3"> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__1"><code class="ph codeph">eda.builtin.json_filter</code> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__2"> <p class="p">Event filter</p> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__3"><code class="ph codeph">ansible.eda.json_filter</code></td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__1"><code class="ph codeph">eda.builtin.normalize_keys</code> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__2"> <p class="p">Event filter</p> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__3"><code class="ph codeph">ansible.eda.normalize_keys</code> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__1"><code class="ph codeph">eda.builtin.pg_listener</code></td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__2"> <p class="p">Event source</p> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__3"><code class="ph codeph">ansible.eda.pg_listener</code> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__1"><code class="ph codeph">eda.builtin.range</code> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__2"> <p class="p">Event source</p> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__3"><code class="ph codeph">ansible.eda.range</code> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__1"><code class="ph codeph">eda.builtin.webhook</code></td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__2"> <p class="p">Event source</p> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_3__entry__3"><code class="ph codeph">ansible.eda.webhook</code> </td> 
+         </tr> 
+        </tbody>
+       </table> 
+       <p class="p">The following event sources have been made available in dedicated collections. The original <code class="ph codeph">ansible.eda</code> names are currently supported as deprecated plugins in <code class="ph codeph">de-minimal</code>, but you must transition to the new <code class="ph codeph">de-supported</code> versions to ensure long-term compatibility and overall improvements:</p> 
+       <table class="table" id="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_2">
+        <caption>
+         <span class="table--title-label">Table 2. </span><span class="title"><code class="ph codeph">de-supported</code> event sources</span>
+        </caption>
+        <colgroup>
+         <col style="width:50%">
+         <col style="width:50%">
+        </colgroup>
+        <thead class="thead"> 
+         <tr class="row"> 
+          <th class="entry" id="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_2__entry__1"> <p class="p">Event source (in <code class="ph codeph">de-supported</code>)</p> </th> 
+          <th class="entry" id="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_2__entry__2"> <p class="p">Deprecated name (in <code class="ph codeph">de-minimal</code>)</p> </th> 
+         </tr> 
+        </thead>
+        <tbody class="tbody"> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_2__entry__1"><code class="ph codeph">amazon.aws.aws_cloudtrail</code> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_2__entry__2"><code class="ph codeph">ansible.eda.aws_cloudtrail</code> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_2__entry__1"><code class="ph codeph">amazon.aws.aws_sqs_queue</code> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_2__entry__2"><code class="ph codeph">ansible.eda.aws_sqs_queue</code> </td> 
+         </tr> 
+         <tr class="row"> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_2__entry__1"><code class="ph codeph">azure.azcollection.azure_service_bus</code> </td> 
+          <td class="entry" headers="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__table_2__entry__2"><code class="ph codeph">ansible.eda.azure_service_bus</code> </td> 
+         </tr> 
+        </tbody>
+       </table> 
+       <div class="p">
+        In addition, the <code class="ph codeph">de-minimal</code> image currently provides event sources that are not supported, and will be removed in a future release: 
+        <ul class="ul" id="GUID-d80f62cc-9f12-4faf-9fb6-91f794fa52c7__ul_1"> 
+         <li class="li"><code class="ph codeph">ansible.eda.file</code></li> 
+         <li class="li"><code class="ph codeph">ansible.eda.file_watch</code></li> 
+         <li class="li"><code class="ph codeph">ansible.eda.journald</code></li> 
+         <li class="li"><code class="ph codeph">ansible.eda.tick</code></li> 
+         <li class="li"><code class="ph codeph">ansible.eda.url_check</code></li> 
+        </ul> 
+       </div> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="eda-build-a-custom-decision-environment"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Build a custom decision environment for Event-Driven Ansible</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Customize a decision environment container image to ensure your rulebook activations run with the precise, custom-maintained collections and dependencies they require.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Ansible Automation Platform &gt; = 2.5</li> 
+         <li class="li">Event-Driven Ansible</li> 
+         <li class="li">Ansible Builder &gt; = 3.0</li> 
+        </ul> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <ul class="ul"> 
+           <li class="li">Use the correct Event-Driven Ansible controller decision environment in Ansible Automation Platform to prevent rulebook activation failure. 
+            <ul class="ul"> 
+             <li class="li">If you want to connect Event-Driven Ansible controller to Ansible Automation Platform 2.4, you must use <code class="ph codeph">registry.redhat.io/ansible-automation-platform-24/de-minimal-rhel9:latest</code> (recommended) or <code class="ph codeph">registry.redhat.io/ansible-automation-platform-24/de-minimal-rhel8:latest</code></li> 
+             <li class="li">If you want to connect Event-Driven Ansible controller to Ansible Automation Platform 2.5, you must use <code class="ph codeph">registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel9:latest</code> (recommended) or <code class="ph codeph">registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel8:latest</code></li> 
+             <li class="li">If you want to connect Event-Driven Ansible controller to Ansible Automation Platform 2.6, you must use <code class="ph codeph">registry.redhat.io/ansible-automation-platform-26/de-minimal-rhel9:latest</code></li> 
+            </ul> </li> 
+          </ul> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Use <code class="ph codeph">de-minimal</code> as the base image with Ansible Builder to build your custom decision environments. This image is built from a base image provided by Red Hat at <a class="xref" href="https://catalog.redhat.com/software/containers/ansible-automation-platform-25/de-minimal-rhel9/650a5672a370728c710acaab" target="_blank" rel="external noopener">Ansible Automation Platform minimal decision environment</a>. </span> 
+          <div class="itemgroup info"> 
+           <div class="p"> 
+            <div class="note important note_important">
+             <span class="note__title">Important:</span> 
+             <div class="note__body">
+              The <code class="ph codeph">ansible.eda</code><code class="ph codeph"></code> collection is already installed in the <code class="ph codeph">de-minimal </code>base image. To prevent Ansible Builder from attempting to reinstall it, add <code class="ph codeph">ansible.eda</code> to the <code class="ph codeph">exclude.all_from_collections</code> list as shown in the following examples.
+             </div>
+            </div> The following is an example of the Ansible Builder definition file that uses <code class="ph codeph">de-minimal</code> as a base image to build a custom decision environment with the ansible.eda collection: 
+           </div> 
+           <pre class="pre codeblock"><code>version: 3
+
+images:
+  base_image:
+    name: 'registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel9:latest'
+
+dependencies:
+  galaxy:
+    collections:
+      - name: servicenow.itsm
+  python_interpreter:
+    package_system: "python3.12"
+  exclude:
+    all_from_collections:
+      # ansible.eda is already installed in de-minimal
+      - ansible.eda
+
+options:
+  package_manager_path: /usr/bin/microdnf</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: If you need other Python packages or RPMs, add the following to a single definition file: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>version: 3
+
+images:
+  base_image:
+    name: 'registry.redhat.io/ansible-automation-platform-25/de-minimal-rhel9:latest'
+
+dependencies:
+  galaxy:
+    collections:
+      - name: servicenow.itsm
+  python:
+    - six
+    - psutil
+  python_interpreter:
+    package_system: "python3.12"
+  exclude:
+    all_from_collections:
+      # ansible.eda is already installed in de-minimal
+      - ansible.eda
+
+options:
+  package_manager_path: /usr/bin/microdnf</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="eda-set-up-new-decision-environment"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Set up a new decision environment</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Set up a new decision environment to define the dedicated, containerized runtime (including collections and dependencies) necessary to execute your rulebook activations.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have set up a credential, if necessary. For more information, see the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_eda_set_up_credential#eda-set-up-credential" title="Create a credential to securely store sensitive data (like tokens and passwords) required for rulebook activations to connect to source plugins or private registries.">Setting up credentials</a> section.</li> 
+         <li class="li">You have pushed a decision environment image to an image repository or you chose to use the <code class="ph codeph">de-minimal</code><a class="xref" href="https://catalog.redhat.com/en/software/containers/ansible-automation-platform-26/de-minimal-rhel9/66fed7ad6ae4c44aa5de8c72" target="_blank" rel="external noopener">image</a> located in <a class="xref" href="http://registry.redhat.io/" target="_blank" rel="external noopener">registry.redhat.io</a>.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Decision Environments</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create decision environment</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Insert the following: </span> 
+          <div class="itemgroup info"> 
+           <dl class="dl"> 
+            <dt class="dt dlterm">
+             Name
+            </dt> 
+            <dd class="dd">
+             Insert the name.
+            </dd> 
+            <dt class="dt dlterm">
+             Description
+            </dt> 
+            <dd class="dd">
+             This field is optional.
+            </dd> 
+            <dt class="dt dlterm">
+             Organization
+            </dt> 
+            <dd class="dd">
+             Select an organization to associate with the decision environment.
+            </dd> 
+            <dt class="dt dlterm">
+             Image
+            </dt> 
+            <dd class="dd">
+             This is the full image location, including the container registry, image name, and version tag.
+            </dd> 
+            <dt class="dt dlterm">
+             Pull
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">This optional field defines when the Event-Driven Ansible controller attempts to download (pull) the specified container image from the registry before running an automation rulebook. This setting is crucial for ensuring security, consistency, and efficient use of system resources by controlling when the local image cache is updated or reused.</p> 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">Always pull container before running</strong> - checks the registry for a new version of the image before every use, even if a local copy exists. This ensures that the freshest content is always used, which is critical for security patches, content updates, and staging environments.</li> 
+              <li class="li"><strong class="ph b">Only pull the image if not present before running</strong> - checks the local cache of Event-Driven Ansible controller first. If the image is found locally, it is used immediately. A pull from the registry only happens if the image is not found locally. This optimizes performance by avoiding unnecessary downloads and is best for production environments where the content image is stable and faster startup is required.</li> 
+              <li class="li"><strong class="ph b">Never pull container before running</strong> - never attempts to pull the image from the registry. It only uses an image that has been previously pulled and is present in the local cache. This option guarantees consistency by preventing unintended content changes. It requires the image to be manually pulled to Event-Driven Ansible controller beforehand. If the image isn’t present, the activation fails.</li> 
+             </ul> 
+            </dd> 
+            <dt class="dt dlterm">
+             Credential
+            </dt> 
+            <dd class="dd">
+             This field is optional. This is the credential needed to use the decision environment image.
+            </dd> 
+           </dl> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph uicontrol button">Create decision environment</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Your decision environment is now created and can be managed on the <strong class="ph b">Decision Environments</strong> page.</p> 
+        <p class="p">After saving the new decision environment, the decision environment’s details page is displayed. From there or the <strong class="ph b">Decision Environments</strong> list view, you can edit or delete it.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-gs-execution-env"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create automation runtimes with execution and decision environments</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">All automation in Red Hat Ansible Automation Platform runs on container images called automation execution environments.</p> 
+      <p class="p">Automation execution environments are consistent and shareable container images that serve as Ansible control nodes. Automation execution environments reduce the challenge of sharing Ansible content that has external dependencies.</p> 
+      <p class="p">If automation content is similar to a script that a developer has written, an automation execution environment is like a replica of that developer’s environment, thereby enabling you to reproduce and scale that automation content. In this way, execution environments make it easier for you to implement automation in a range of environments.</p> 
+      <p class="p">Automation execution environments contain:</p> 
+      <ul class="ul"> 
+       <li class="li">Ansible Core</li> 
+       <li class="li">Ansible Runner</li> 
+       <li class="li">Ansible Collections</li> 
+       <li class="li">Python libraries</li> 
+       <li class="li">System dependencies</li> 
+       <li class="li">Custom user needs</li> 
+      </ul> 
+      <p class="p">You can either use the default base execution environment included in your Ansible Automation Platform subscription, or you can define and create an automation execution environment using Ansible Builder.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-gs-use-base-execution-env"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Use the base automation execution environment</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Ansible Automation Platform provides access to some base automation execution environments. You can use a base execution environment as a starting point for creating a customized execution environment.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have a valid Red Hat Ansible Automation Platform subscription.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Ansible Automation Platform includes the following execution environments:</p> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">Minimal</code> - Includes the latest Ansible-core 2.15 release along with Ansible Runner, but does not include collections or other content</li> 
+         <li class="li"><code class="ph codeph">EE Supported</code> - Minimal, plus all Red Hat-supported collections and dependencies</li> 
+        </ul> 
+        <p class="p">Base images included with Ansible Automation Platform are hosted on the Red Hat Ecosystem Catalog (<code class="ph codeph">registry.redhat.io</code>).</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to <code class="ph codeph">registry.redhat.io</code>. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-bash"><code>$ podman login registry.redhat.io</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Pull the base images from the registry: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-bash"><code>$ podman pull registry.redhat.io/aap/&lt;image name&gt;</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_builder" title="Install Ansible Builder to create custom execution environments that contain the dependencies and collections required for your automation content. You need a valid Red Hat subscription and Podman installed on your RHEL system.">Install Ansible Builder to create or edit execution environments</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-gs-add-ee-to-job-template"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Add an execution environment to a job template</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After you have built an execution environment, use it to run jobs. To do so, first associate the execution environment with a job template.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">An execution environment created using <code class="ph codeph">ansible-builder</code> as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments" title="Run automation consistently across nodes with execution environments, which are container images that contain everything you need to run your automation.">Define, create, and build execution environments</a>.</li> 
+         <li class="li">Organization administrator privileges (if the execution environment is associated with an organization).</li> 
+         <li class="li">A credential with a username, host, and password (if assigned to the execution environment).</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Use the following procedure to add an execution environment to a job template.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Execution Environments</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create execution environment</span> to create an execution environment.</span> </li>
+         <li class="li step"> <span class="ph cmd">Enter the appropriate details into the following fields: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd"><strong class="ph b">Name</strong> (required): Enter a name for the execution environment.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd"><strong class="ph b">Image</strong> (required): Enter the image name. The image name requires its full location (repository), the registry, image name, and version tag, as in the following example: <code class="ph codeph">quay.io/ansible/awx-ee:latestrepo/project/image-name:tag</code></span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Optional: <strong class="ph b">Pull</strong>: Choose the type of pull when running jobs: </span> 
+            <div class="itemgroup info"> 
+             <ol class="ol" type="i"> 
+              <li class="li"><strong class="ph b">Always pull container before running</strong>: Pulls the latest image file for the container.</li> 
+              <li class="li"><strong class="ph b">Only pull the image if not present before running</strong>: Only pulls the latest image if none are specified.</li> 
+              <li class="li"><strong class="ph b">Never pull container before running</strong>: Never pull the latest version of the container image. 
+               <div class="note note note_note">
+                <span class="note__title">Note:</span> 
+                <div class="note__body">
+                 If you do not set a type for pull, the value defaults to <strong class="ph b">Only pull the image if not present before running</strong>.
+                </div>
+               </div> </li> 
+             </ol> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Optional: <strong class="ph b">Description</strong>: Enter an optional description.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Optional: <strong class="ph b">Organization</strong>: Assign the organization to specifically use this execution environment. To make the execution environment available for use across multiple organizations, leave this field blank.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd"><strong class="ph b">Registry credential</strong>: If the image has a protected container registry, provide the credential to access it.</span> </li> 
+          </ol> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create execution environment</span>. Your newly added execution environment is ready to be used in a job template.</span> </li>
+         <li class="li step"> <span class="ph cmd">To add an execution environment to a job template, navigate to <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span> and select your template. </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Click <span class="ph uicontrol button">Edit template</span> and specify your execution environment in the field labeled <strong class="ph b">execution environment</strong>.</span> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">After you add an execution environment to a job template, the template is listed in the <strong class="ph b">Templates</strong> tab in your execution environment details.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="about-container-registries"> 
+      <h2 class="title topictitle2" id="ariaid-title4">About container registries</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">If you have many automation execution environments that you want to support, you can store them in a container registry linked to your private automation hub.</p> 
+       <section class="section"> 
+        <p class="p">For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_container_registry#populate-container-registry" title="The automation hub remote registry is used for storing and managing automation execution environments.">Populating your private automation hub container registry</a>.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title5" id="con-gs-build-decision-env"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Build and use a decision environment</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Event-Driven Ansible includes an ansible.eda collection, which contains sample sources, event filters and rulebooks. All the collections, ansible rulebooks and their dependencies use a decision environment, which is an image that can be run on either Podman or Kubernetes.</p> 
+       <p class="p">In decision environments, sources, which are typically Python code, are distributed through ansible-collections. They inject external events into a rulebook for processing. The rulebook consists of the following:</p> 
+       <ul class="ul"> 
+        <li class="li">The python interpreter</li> 
+        <li class="li">Java Runtime Environment for Drools rule engine</li> 
+        <li class="li">ansible-rulebook python package</li> 
+        <li class="li">ansible.eda collection</li> 
+       </ul> 
+       <p class="p">You can use the base decision environment and build your own customized Decision Environments with additional collections and collection dependencies. You can build a decision environment using a Dockerfile or optionally you can deploy your CA certificate into the image.</p> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-gs-auto-dev-set-up-decision-env"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Set up a new decision environment</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The following steps describe how to import a decision environment into the platform.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have set up any necessary credentials. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_eda_set_up_credential#eda-set-up-credential" title="Create a credential to securely store sensitive data (like tokens and passwords) required for rulebook activations to connect to source plugins or private registries.">Setting up credentials</a>.</li> 
+         <li class="li">You have pushed a decision environment image to an image repository or you chose to use the image <code class="ph codeph">de-supported</code> provided at <a class="xref" href="http://registry.redhat.io/" target="_blank" rel="external noopener">registry.redhat.io</a>.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Decision Environments</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create decision environment</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the following: </span> 
+          <div class="itemgroup info"> 
+           <dl class="dl"> 
+            <dt class="dt dlterm">
+             Name
+            </dt> 
+            <dd class="dd">
+             Insert the name.
+            </dd> 
+            <dt class="dt dlterm">
+             Description
+            </dt> 
+            <dd class="dd">
+             This field is optional.
+            </dd> 
+            <dt class="dt dlterm">
+             Image
+            </dt> 
+            <dd class="dd">
+             This is the full image location, including the container registry, image name, and version tag.
+            </dd> 
+            <dt class="dt dlterm">
+             Credential
+            </dt> 
+            <dd class="dd">
+             This field is optional. This is the token needed to use the decision environment image.
+            </dd> 
+           </dl> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph uicontrol button">Create decision environment</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Your decision environment is now created and can be managed on the <strong class="ph b">Decision Environments</strong> page.</p> 
+        <p class="p">After saving the new decision environment, the decision environment’s details page is displayed. From there or the <strong class="ph b">Decision Environments</strong> list view, you can edit or delete it.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

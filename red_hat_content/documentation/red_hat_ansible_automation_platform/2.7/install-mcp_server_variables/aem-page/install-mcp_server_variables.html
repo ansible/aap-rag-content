@@ -1,0 +1,64 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">MCP server variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Inventory file variables for the MCP server for Red Hat Ansible Automation Platform.</p> 
+     <section class="section" id="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__section_1"> 
+      <table class="table" id="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:25%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__1">Variable name</th> 
+         <th class="entry" id="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__2">Descriptions</th> 
+         <th class="entry" id="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__3">Required or Optional</th> 
+         <th class="entry" id="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__1"><code class="ph codeph">mcp_allow_write_operations</code></td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__2">Controls the operational access level of the MCP server. Set to <code class="ph codeph">true</code> to grant the external AI tool read-write permissions, which authorizes the AI agent to execute job templates, manage resources, and apply infrastructure changes. Set to <code class="ph codeph">false</code> to enforce read-only access.</td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__4"><code class="ph codeph">false</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__1"><code class="ph codeph">mcp_ignore_certificate_errors</code></td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__2">Controls whether the MCP server bypasses SSL/TLS certificate validation when connecting to the Ansible Automation Platform API. Set to <code class="ph codeph">true</code> if Ansible Automation Platform uses a self-signed certificate.</td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__4"><code class="ph codeph">false</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__1"><code class="ph codeph">mcp_tls_cert</code></td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__2">Path to the TLS certificate file for the MCP server.</td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__4">n/a</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__1"><code class="ph codeph">mcp_tls_key</code></td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__2">Path to the TLS key file for the MCP server</td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__4">n/a</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__1"><code class="ph codeph">mcp_extra_settings</code></td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__2"> <p class="p">A list of additional configuration settings to pass to the MCP server. For example, set <code class="ph codeph">DEFAULT_PAGE_SIZE</code> to control the number of results returned by list-type API responses: </p> <p class="p"><code class="ph codeph">mcp_extra_settings: [{setting: DEFAULT_PAGE_SIZE,value:"25"}]</code></p> </td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__3">Optional</td> 
+         <td class="entry" headers="GUID-4eedb0f5-69e7-4e4e-baec-a59dee75d41d__table_1__entry__4">n/a</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

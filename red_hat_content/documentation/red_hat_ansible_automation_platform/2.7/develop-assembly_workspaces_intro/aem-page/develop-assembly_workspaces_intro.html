@@ -1,0 +1,66 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-workspaces-intro"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Access preconfigured development tools with Ansible development workspaces</h1> 
+     <p class="shortdesc">Ansible development workspaces provide a fully supported browser-based development environment that includes Ansible development tools for creating and testing Ansible playbooks, roles, and collections. The workspaces run as containers within Red Hat OpenShift Dev Spaces.</p> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-devspaces-intro"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Introduction to Ansible development workspaces</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Ansible development workspaces offer centralized management and policy enforcement, giving administrators better control and governance over secure, consistent automation development environments. Developers benefit by avoiding local application installs, especially in locked-down settings.</p> 
+       <p class="p">Ansible development tools and runtimes are pre-configured in Ansible development workspaces. Developers can start creating projects for automation content quickly by logging in to Ansible development workspaces in a browser.</p> 
+       <p class="p">The development tools in Ansible development workspaces are based on Ansible recommended practices, which improves the quality and reliability of your automation content. As a component of your Red Hat Ansible Automation Platform subscription, Ansible development workspaces are fully supported.</p> 
+       <p class="p">To ensure that your automation content files persist when you quit Ansible development workspaces, you push your projects to a Git repository that is linked to your workspace.</p> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="con-devspaces-components"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Ansible development workspaces components</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Each Ansible development workspace is a project-agnostic full development environment. Dependencies are satisfied for all the tools in the environment.</p> 
+       <p class="p">The following applications are pre-installed.</p> 
+       <ul class="ul"> 
+        <li class="li">Microsoft VS Code with the Ansible VS Code extension</li> 
+        <li class="li">Python</li> 
+        <li class="li"><code class="ph codeph">ansible-core</code></li> 
+        <li class="li"><code class="ph codeph">podman</code> for container-in-container operations, including building and running execution environments</li> 
+        <li class="li">Ansible development tools (ADT) package, which includes: 
+         <ul class="ul"> 
+          <li class="li"><code class="ph codeph">ansible-builder</code> for building Ansible execution environments</li> 
+          <li class="li"><code class="ph codeph">ansible-creator</code> for scaffolding directory structure for your automation content</li> 
+          <li class="li"><code class="ph codeph">ansible-lint</code> for identifying stylistic errors and anti-patterns</li> 
+          <li class="li"><code class="ph codeph">ansible-navigator</code> for developing and troubleshooting Ansible content with execution environments</li> 
+          <li class="li"><code class="ph codeph">ansible-sign</code> for signing and verifying Ansible content</li> 
+          <li class="li"><code class="ph codeph">molecule</code> for running functional tests on your automation content</li> 
+          <li class="li"><code class="ph codeph">pytest-ansible</code> for testing Ansible module and plugin Python code</li> 
+          <li class="li"><code class="ph codeph">tox-ansible</code> for multi-version testing of Ansible module and plugin code</li> 
+          <li class="li"><code class="ph codeph">ansible-dev-environment</code> for building and managing isolated virtual workspaces</li> 
+         </ul> </li> 
+       </ul> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="con-devspaces-image"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Ansible dev spaces container image</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Red Hat OpenShift Dev Spaces is a containerized cloud development environment (CDE) that provides pre-configured, consistent workspaces running on OpenShift Container Platform. It provisions ready-to-code workspaces on demand.</p> 
+       <p class="p">The Ansible dev spaces image is the container image for Ansible development workspaces. It is fully supported by Red Hat as part of your Ansible Automation Platform subscription.</p> 
+       <p class="p">The following diagram illustrates the relationship between OpenShift Container Platform, OpenShift Dev Spaces, and Ansible development workspaces.</p> 
+       <br> 
+       <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/devtools-workspaces-architecture.png" alt="Ansible development workspaces topology"> 
+       <br> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://catalog.redhat.com/software/containers/ansible-automation-platform-27/ansible-devspaces-rhel9/69fb1e26580272b336c0ed14" target="_blank" rel="external noopener">Ansible Automation Platform devspaces image page</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

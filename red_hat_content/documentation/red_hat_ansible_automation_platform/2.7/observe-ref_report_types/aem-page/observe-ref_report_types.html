@@ -1,0 +1,176 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-report-types"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure options for the Certified Cloud and Service Provider report (CCSPv2)</h1> 
+     <p class="shortdesc">Additional configurations for data gathering and report building based on a report type. Apply the environment variables to each report type based on your Ansible Automation Platform installation.</p> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-ccspv2"> 
+      <h2 class="title topictitle2" id="ariaid-title2">CCSPv2</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">CCSPv2 is a report which shows the following information:</p> 
+       <section class="section"> 
+        <ul class="ul"> 
+         <li class="li">Directly and indirectly managed node usage</li> 
+         <li class="li">The content of all inventories</li> 
+         <li class="li">Content usage</li> 
+        </ul> 
+        <p class="p">The primary use of this report is for partners under the <a class="xref" href="https://connect.redhat.com/en/programs/certified-cloud-service-provider" target="_blank" rel="external noopener">CCSP</a> program, but all customers can use it to obtain on-premise reporting showing managed nodes, jobs and content usage across their automation controller organizations.</p> 
+        <p class="p">Set the report type by using <code class="ph codeph">METRICS_UTILITY_REPORT_TYPE=CCSPv2</code>.</p> 
+       </section> 
+      </div> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title3" id="ref-optional-collectors"> 
+       <h3 class="title topictitle3" id="ariaid-title3">Optional collectors for <code class="ph codeph">gather</code> command</h3> 
+       <div class="body refbody">
+        <p class="shortdesc">You can use the following optional collectors for the <code class="ph codeph">gather</code> command:</p> 
+        <section class="section"> 
+         <ul class="ul"> 
+          <li class="li"> <code class="ph codeph">main_jobhostsummary</code> 
+           <ul class="ul"> 
+            <li class="li">If present by default, this incrementally collects data from the <code class="ph codeph">main_jobhostsummary</code> table in the automation controller database, containing information about jobs runs and managed nodes automated.</li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">main_host</code> 
+           <ul class="ul"> 
+            <li class="li">This collects daily snapshots of the <code class="ph codeph">main_host</code> table in the automation controller database and has managed nodes and hosts present across automation controller inventories.</li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">main_jobevent</code> 
+           <ul class="ul"> 
+            <li class="li">This incrementally collects data from the <code class="ph codeph">main_jobevent</code> table in the automation controller database and contains information about which modules, roles, and Ansible collections are being used.</li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">main_indirectmanagednodeaudit</code> 
+           <ul class="ul"> 
+            <li class="li">This incrementally collects data from the <code class="ph codeph">main_indirectmanagednodeaudit</code> table in the automation controller database and contains information about indirectly managed nodes. <pre class="pre codeblock"><code># Example with all optional collectors
+export METRICS_UTILITY_OPTIONAL_COLLECTORS="main_host,main_jobevent,main_indirectmanagednodeaudit"</code></pre></li> 
+           </ul> </li> 
+         </ul> 
+        </section> 
+       </div> 
+      </article>
+      <article class="topic reference nested2" aria-labelledby="ariaid-title4" id="ref-optional-sheets"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Optional sheets for <code class="ph codeph">build_report</code> command</h3> 
+       <div class="body refbody">
+        <p class="shortdesc">You can use the following optional sheets for the <code class="ph codeph">build_report</code> command:</p> 
+        <section class="section"> 
+         <ul class="ul"> 
+          <li class="li"> <code class="ph codeph">ccsp_summary</code> 
+           <ul class="ul"> 
+            <li class="li">This is a landing page specifically for partners under CCSP program. This report takes additional parameters to customize the summary page. For more information, see the following example: <pre class="pre codeblock"><code>export METRICS_UTILITY_PRICE_PER_NODE=11.55 # in USD
+export METRICS_UTILITY_REPORT_SKU=MCT3752MO
+export METRICS_UTILITY_REPORT_SKU_DESCRIPTION="EX: Red Hat Ansible Automation Platform, Full Support (1 Managed Node, Dedicated, Monthly)"
+export METRICS_UTILITY_REPORT_H1_HEADING="CCSP NA Direct Reporting Template"
+export METRICS_UTILITY_REPORT_COMPANY_NAME="Partner A"
+export METRICS_UTILITY_REPORT_EMAIL="email@email.com"
+export METRICS_UTILITY_REPORT_RHN_LOGIN="test_login"
+export METRICS_UTILITY_REPORT_PO_NUMBER="123"
+export METRICS_UTILITY_REPORT_END_USER_COMPANY_NAME="Customer A"
+export METRICS_UTILITY_REPORT_END_USER_CITY="Springfield"
+export METRICS_UTILITY_REPORT_END_USER_STATE="TX"
+export METRICS_UTILITY_REPORT_END_USER_COUNTRY="US"</code></pre></li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">jobs</code> 
+           <ul class="ul"> 
+            <li class="li">This is a list of automation controller jobs launched. It is grouped by job template.</li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">managed_nodes</code> 
+           <ul class="ul"> 
+            <li class="li">This is a deduplicated list of managed nodes automated by automation controller.</li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">indirectly_managed_nodes</code> 
+           <ul class="ul"> 
+            <li class="li">This is a deduplicated list of indirect managed nodes automated by automation controller.</li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">infrastructure_summary</code> 
+           <ul class="ul"> 
+            <li class="li">This additional tab summarizes the infrastructure taxonomy for indirect nodes in three levels: 
+             <ol class="ol">
+              <li class="li">Infrastructure</li>
+              <li class="li">Device category</li>
+              <li class="li">Device type 
+               <div class="note note note_note">
+                <span class="note__title">Note:</span> 
+                <div class="note__body">
+                 <p class="p">Taxonomy mapping is dependent on the facts column in the raw data.</p>
+                </div>
+               </div></li>
+             </ol></li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">inventory_scope</code> 
+           <ul class="ul"> 
+            <li class="li">This is a deduplicated list of managed nodes present across all inventories of automation controller.</li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">usage_by_organizations</code> 
+           <ul class="ul"> 
+            <li class="li">This is a list of all automation controller organizations with several metrics showing the organizations usage. This provides data suitable for doing internal chargeback.</li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">usage_by_collections</code> 
+           <ul class="ul"> 
+            <li class="li">This is a list of Ansible collections used in a automation controller job runs.</li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">usage_by_roles</code> 
+           <ul class="ul"> 
+            <li class="li">This is a list of roles used in automation controller job runs.</li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">usage_by_modules</code> 
+           <ul class="ul"> 
+            <li class="li">This is a list of modules used in automation controller job runs.</li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">managed_nodes_by_organization</code> 
+           <ul class="ul"> 
+            <li class="li">This generates a sheet per organization, listing managed nodes for every organization with the same content as the managed_nodes sheet.</li> 
+           </ul> </li> 
+          <li class="li"> <code class="ph codeph">data_collection_status</code> 
+           <ul class="ul"> 
+            <li class="li">This generates a sheet with the status of every data collection done by the <code class="ph codeph">gather</code> command for the date range the report is built for.</li> 
+            <li class="li">To outline the quality of data collected, <code class="ph codeph">data_collection_status</code> also lists: 
+             <ul class="ul">
+              <li class="li">Unusual gaps between collections (based on collection_start_timestamp)</li>
+              <li class="li">Gaps in collected intervals (based on <code class="ph codeph">since</code> compared to <code class="ph codeph">until</code>) <pre class="pre codeblock"><code># Example with all optional sheets
+export METRICS_UTILITY_OPTIONAL_CCSP_REPORT_SHEETS='ccsp_summary,jobs,managed_nodes,indirectly_managed_nodes,inventory_scope,usage_by_organizations,usage_by_collections,usage_by_roles,usage_by_modules,data_collection_status'</code></pre></li>
+             </ul></li> 
+           </ul> </li> 
+         </ul> 
+        </section> 
+       </div> 
+      </article>
+      <article class="topic reference nested2" aria-labelledby="ariaid-title5" id="ref-filter-by-organization"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Filter reports by organization</h3> 
+       <div class="body refbody">
+        <p class="shortdesc">When generating reports by using the metrics utility, you can filter the data by organization.</p> 
+        <section class="section"> 
+         <p class="p">To filter your report so that only certain organizations are present, use this environment variable with a semicolon separated list of organization names.</p> 
+         <p class="p"> <code class="ph codeph">export METRICS_UTILITY_ORGANIZATION_FILTER="Organization 1;Organization 2"</code> </p> 
+         <p class="p">This renders only the data from these organizations in the built report. This filter currently does not have any effect on the following optional sheets:</p> 
+         <ul class="ul"> 
+          <li class="li"> <code class="ph codeph">usage_by_collections</code> </li> 
+          <li class="li"> <code class="ph codeph">usage_by_roles</code> </li> 
+          <li class="li"> <code class="ph codeph">usage_by_modules</code> </li> 
+         </ul> 
+        </section> 
+       </div> 
+      </article>
+      <article class="topic reference nested2" aria-labelledby="ariaid-title6" id="ref-select-a-date-range-ccspv2"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Select a date range for your CCSPv2 report</h3> 
+       <div class="body refbody">
+        <p class="shortdesc">The default behavior of the CCSPv2 report is to build a report for the previous month. The following examples describe how to override this default behavior to select a specific date range for your report:</p> 
+        <section class="section"> 
+         <pre class="pre codeblock"><code># Build report for a specific month
+metrics-utility build_report --month=2025-03
+
+# Build report for a specific date range, including the provided days
+metrics-utility build_report --since=2025-03-01 --until=2025-03-31
+
+# Build report for a last 6 months from a current date
+metrics-utility build_report --since=6months
+
+# Build report for a last 6 months from a current date overwriting an existing report
+metrics-utility build_report --since=6months --force</code></pre> 
+        </section> 
+       </div> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

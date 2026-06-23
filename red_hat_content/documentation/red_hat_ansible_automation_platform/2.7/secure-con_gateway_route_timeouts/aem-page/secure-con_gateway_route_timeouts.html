@@ -1,0 +1,409 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-gateway-route-timeouts"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure platform gateway route timeouts</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">In Ansible Automation Platform 2.7, all API access to platform components goes through platform gateway. Gateway-level timeout settings control how long platform gateway waits for backend services to respond before closing a connection.</p> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">If you experience timeout errors when uploading container images or collections to automation hub, increase gateway route timeouts to allow more time for the upload to complete.</p> 
+       </div>
+      </div> 
+      <p class="p">As all traffic now routes through platform gateway, gateway-level settings for request body size limits and connection timeouts apply to uploads that previously went directly to automation hub.</p> 
+      <p class="p">Collection uploads and container image uploads have different size characteristics and are affected by different gateway settings.</p> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relconcepts">
+       <strong>Related concepts</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#con-gateway-collection-upload-limits" title="Collections uploaded to automation hub are typically under 20 MB for public content and under 200 MB for private automation hub. These uploads are affected by the gateway request body size limit.">Collection upload limits</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#con-gateway-container-image-uploads" title="Container images for execution environments can exceed 4 GB. These uploads use chunked transfer encoding, so they are primarily affected by gateway route timeout settings rather than body size limits.">Container image uploads</a></li>
+       </ul>
+      </div>
+      <div class="linklist reltasks">
+       <strong>Related tasks</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#proc-configure-gateway-routes-collection" title="You can configure platform gateway route timeouts during installation or redeployment to support large file uploads to automation hub.">Configure gateway routes using the ansible.platform collection</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#proc-configure-gateway-routes-api" title="You can adjust route timeouts on existing deployments to support large file uploads to automation hub.">Configure gateway routes using the API</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#proc-configure-lightspeed-route-timeouts" title="If you use Red Hat Ansible Lightspeed and need to adjust streaming timeouts, configure the request_timeout_seconds and idle_timeout_seconds fields on the Lightspeed route.">Configure Ansible Lightspeed route timeouts</a></li>
+       </ul>
+      </div>
+      <div class="linklist relref">
+       <strong>Related reference</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#ref-gateway-route-configuration" title="Adjust platform gateway settings when you experience upload errors or timeouts after routing traffic through platform gateway in Ansible Automation Platform 2.7.">When to configure gateway settings</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#ref-gateway-timeout-recommendations" title="Platform gateway route timeout values determine how long the gateway waits for requests to complete before terminating the connection.">Gateway timeout recommendations</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-gateway-collection-upload-limits"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Collection upload limits</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Collections uploaded to automation hub are typically under 20 MB for public content and under 200 MB for private automation hub. These uploads are affected by the gateway request body size limit.</p> 
+       <p class="p">Platform gateway controls request body size through the <code class="ph codeph">GRPC_SERVER_MAX_RECEIVE_MESSAGE_LENGTH</code> setting (default: 20 MiB, minimum: 4 MiB), which is enforced by the Envoy proxy. This default matches automation hub's 20 MB limit, so collection uploads work without additional configuration.</p> 
+       <p class="p">For collections larger than 20 MB, such as large private content, increase <code class="ph codeph">GRPC_SERVER_MAX_RECEIVE_MESSAGE_LENGTH</code> by setting the environment variable to match your largest expected collection size. When increasing this value, also increase <code class="ph codeph">ENVOY_PER_CONNECTION_BUFFER_LIMIT_BYTES</code> (default: 25 MiB) to remain at least 5 MiB above the request body size limit.</p> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">For containerized deployments, the installer variable <code class="ph codeph">gateway_nginx_client_max_body_size</code> (default: <code class="ph codeph">5m</code>) controls nginx body size limits. Since nginx sits in front of Envoy in containerized topologies, this limit is applied first. If collection uploads fail with HTTP 413 errors on containerized deployments, increase this value to at least <code class="ph codeph">20m</code> to match automation hub's default.</p> 
+        </div>
+       </div> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#con-gateway-route-timeouts" title="In Ansible Automation Platform 2.7, all API access to platform components goes through platform gateway. Gateway-level timeout settings control how long platform gateway waits for backend services to respond before closing a connection.">Configure platform gateway route timeouts</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="con-gateway-container-image-uploads"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Container image uploads</h2> 
+      <p class="shortdesc">Container images for execution environments can exceed 4 GB. These uploads use chunked transfer encoding, so they are primarily affected by gateway route timeout settings rather than body size limits.</p> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-gateway-route-configuration"> 
+      <h2 class="title topictitle2" id="ariaid-title4">When to configure gateway settings</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Adjust platform gateway settings when you experience upload errors or timeouts after routing traffic through platform gateway in Ansible Automation Platform 2.7.</p> 
+       <section class="section">
+        <h3 class="title sectiontitle">Symptoms requiring configuration changes</h3> 
+        <p class="p">Adjust platform gateway settings if you experience:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">HTTP 413 Request Entity Too Large errors</strong> when uploading collections: increase <code class="ph codeph">GRPC_SERVER_MAX_RECEIVE_MESSAGE_LENGTH</code> and <code class="ph codeph">ENVOY_PER_CONNECTION_BUFFER_LIMIT_BYTES</code> (and <code class="ph codeph">gateway_nginx_client_max_body_size</code> for containerized deployments).</li> 
+         <li class="li"><strong class="ph b">Timeout errors</strong> during container image pushes: increase route timeout values.</li> 
+         <li class="li"><strong class="ph b">Incomplete transfers or interrupted uploads:</strong> increase route timeout values.</li> 
+        </ul> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">Affected operations</h3> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:33.33333333333333%">
+          <col style="width:33.33333333333333%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-gateway-route-configuration__entry__1">Operation</th> 
+           <th class="entry" id="ref-gateway-route-configuration__entry__2">Primary setting</th> 
+           <th class="entry" id="ref-gateway-route-configuration__entry__3">Size range</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-gateway-route-configuration__entry__1">Collection uploads to automation hub</td> 
+           <td class="entry" headers="ref-gateway-route-configuration__entry__2"><code class="ph codeph">GRPC_SERVER_MAX_RECEIVE_MESSAGE_LENGTH</code></td> 
+           <td class="entry" headers="ref-gateway-route-configuration__entry__3">Up to 200 MB</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-gateway-route-configuration__entry__1">Container image push (<code class="ph codeph">podman push</code>, <code class="ph codeph">docker push</code>)</td> 
+           <td class="entry" headers="ref-gateway-route-configuration__entry__2">Route timeout</td> 
+           <td class="entry" headers="ref-gateway-route-configuration__entry__3">1-10+ GB</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-gateway-route-configuration__entry__1">Execution environment uploads</td> 
+           <td class="entry" headers="ref-gateway-route-configuration__entry__2">Route timeout</td> 
+           <td class="entry" headers="ref-gateway-route-configuration__entry__3">1-10+ GB</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-gateway-route-configuration__entry__1">Bulk content synchronization</td> 
+           <td class="entry" headers="ref-gateway-route-configuration__entry__2">Route timeout</td> 
+           <td class="entry" headers="ref-gateway-route-configuration__entry__3">Varies</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-configure-gateway-routes-collection"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Configure gateway routes using the ansible.platform collection</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can configure platform gateway route timeouts during installation or redeployment to support large file uploads to automation hub.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">The <code class="ph codeph">ansible.platform</code> collection is installed.</li> 
+         <li class="li">You have administrator access to the deployment environment.</li> 
+         <li class="li">For Red Hat OpenShift Container Platform deployments, you have cluster administrator privileges.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create or edit your platform gateway deployment playbook.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the route timeout configuration for your deployment type.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">For OpenShift Container Platform deployments:</p> 
+           <pre class="pre codeblock"><code>---
+- name: Set hub container registry route timeout
+  ansible.platform.route:
+    name: "hub container registry"
+    request_timeout_seconds: 600
+    idle_timeout_seconds: 600</code></pre> 
+           <p class="p">For containerized deployments:</p> 
+           <pre class="pre codeblock"><code>---
+- name: Set hub container registry route timeout
+  ansible.platform.route:
+    name: "hub container registry"
+    request_timeout_seconds: 600
+    idle_timeout_seconds: 600</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the playbook to apply the configuration:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-playbook -i inventory gateway-deploy.yml</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Upload a large container image to automation hub:</p> 
+        <pre class="pre codeblock"><code>$ podman push &lt;large-image&gt; &lt;gateway-host&gt;/automation-hub/&lt;repository&gt;/&lt;image&gt;:&lt;tag&gt;</code></pre> 
+        <p class="p">Confirm that the upload completes without timeout errors.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-configure-gateway-routes-api"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Configure gateway routes using the API</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can adjust route timeouts on existing deployments to support large file uploads to automation hub.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have platform gateway administrator access.</li> 
+         <li class="li">You have an OAuth2 token with administrative privileges.</li> 
+         <li class="li">Platform gateway is deployed and operational.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Obtain an administrative OAuth2 token:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ curl -k -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"&lt;admin-password&gt;"}' \
+  https://&lt;gateway-host&gt;/api/gateway/v1/tokens/</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Update the route timeout settings.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">For OpenShift Container Platform deployments:</p> 
+           <pre class="pre codeblock"><code>$ curl -k -X PATCH \
+  -H "Authorization: Bearer &lt;token&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "request_timeout_seconds": 3600,
+    "idle_timeout_seconds": 3600,
+    "route_annotations": {
+      "haproxy.router.openshift.io/timeout": "3600s"
+    }
+  }' \
+  https://&lt;gateway_host&gt;/api/gateway/v1/routes/$ROUTE_ID/</code></pre> 
+           <p class="p">For containerized deployments:</p> 
+           <pre class="pre codeblock"><code>$ curl -k -X PATCH \
+  -H "Authorization: Bearer &lt;token&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "request_timeout_seconds": 3600,
+    "idle_timeout_seconds": 3600
+  }' \
+  https://&lt;gateway_host&gt;/api/gateway/v1/routes/$ROUTE_ID/</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Verify the new timeout settings are active:</p> 
+        <pre class="pre codeblock"><code>$ curl -k -X GET \
+  -H "Authorization: Bearer &lt;token&gt;" \
+  https://&lt;gateway_host&gt;/api/gateway/v1/routes/</code></pre> 
+        <p class="p">Upload a large container image to automation hub and verify completion without errors.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="proc-configure-lightspeed-route-timeouts"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Configure Ansible Lightspeed route timeouts</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">If you use Red Hat Ansible Lightspeed and need to adjust streaming timeouts, configure the <code class="ph codeph">request_timeout_seconds</code> and <code class="ph codeph">idle_timeout_seconds</code> fields on the Lightspeed route.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have platform gateway administrator access.</li> 
+         <li class="li">The <code class="ph codeph">ansible.platform</code> collection is installed.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">These fields replace the <code class="ph codeph">max_stream_duration</code> and <code class="ph codeph">stream_idle_timeout</code> global proxy settings that were available in Ansible Automation Platform 2.6.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:33.33333333333333%">
+          <col style="width:33.33333333333333%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="proc-configure-lightspeed-route-timeouts__entry__1">Removed setting (2.6)</th> 
+           <th class="entry" id="proc-configure-lightspeed-route-timeouts__entry__2">Replacement field (2.7)</th> 
+           <th class="entry" id="proc-configure-lightspeed-route-timeouts__entry__3">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="proc-configure-lightspeed-route-timeouts__entry__1"><code class="ph codeph">max_stream_duration</code></td> 
+           <td class="entry" headers="proc-configure-lightspeed-route-timeouts__entry__2"><code class="ph codeph">request_timeout_seconds</code></td> 
+           <td class="entry" headers="proc-configure-lightspeed-route-timeouts__entry__3">3600</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="proc-configure-lightspeed-route-timeouts__entry__1"><code class="ph codeph">stream_idle_timeout</code></td> 
+           <td class="entry" headers="proc-configure-lightspeed-route-timeouts__entry__2"><code class="ph codeph">idle_timeout_seconds</code></td> 
+           <td class="entry" headers="proc-configure-lightspeed-route-timeouts__entry__3">60</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create or edit a playbook to configure the Ansible Lightspeed route timeouts:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>---
+- name: Configure Ansible Lightspeed route timeouts
+  hosts: localhost
+  tasks:
+    - name: Set Ansible Lightspeed streaming timeouts
+      ansible.platform.route:
+        name: 'lightspeed api'
+        request_timeout_seconds: 3600
+        idle_timeout_seconds: 60</code></pre> 
+           <ul class="ul"> 
+            <li class="li"><code class="ph codeph">request_timeout_seconds</code> - Maximum total duration in seconds for streaming requests. Replaces the former <code class="ph codeph">max_stream_duration</code> setting.</li> 
+            <li class="li"><code class="ph codeph">idle_timeout_seconds</code> - Idle timeout in seconds. The connection closes if no data is transmitted within this period. Replaces the former <code class="ph codeph">stream_idle_timeout</code> setting.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the playbook:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-playbook configure-lightspeed-timeouts.yml</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Verify the updated timeout settings by querying the route through the API:</p> 
+        <pre class="pre codeblock"><code>$ curl -s -k \
+  -H "Authorization: Bearer &lt;token&gt;" \
+  https://&lt;gateway-host&gt;/api/gateway/v1/routes/ \
+  | python3 -m json.tool</code></pre> 
+        <p class="p">Locate the Lightspeed route and confirm that <code class="ph codeph">effective_timeout_seconds</code> and <code class="ph codeph">effective_idle_timeout_seconds</code> reflect the expected values.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title8" id="ref-gateway-timeout-recommendations"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Gateway timeout recommendations</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Platform gateway route timeout values determine how long the gateway waits for requests to complete before terminating the connection.</p> 
+       <section class="section">
+        <h3 class="title sectiontitle">Recommended timeout values by upload size</h3> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:33.33333333333333%">
+          <col style="width:33.33333333333333%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-gateway-timeout-recommendations__entry__1">Expected upload size</th> 
+           <th class="entry" id="ref-gateway-timeout-recommendations__entry__2">Recommended timeout</th> 
+           <th class="entry" id="ref-gateway-timeout-recommendations__entry__3">Use case</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-gateway-timeout-recommendations__entry__1">Up to 1 GB</td> 
+           <td class="entry" headers="ref-gateway-timeout-recommendations__entry__2">600 seconds (10 minutes)</td> 
+           <td class="entry" headers="ref-gateway-timeout-recommendations__entry__3">Small execution environments</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-gateway-timeout-recommendations__entry__1">1-4 GB</td> 
+           <td class="entry" headers="ref-gateway-timeout-recommendations__entry__2">1800 seconds (30 minutes)</td> 
+           <td class="entry" headers="ref-gateway-timeout-recommendations__entry__3">Medium execution environments</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-gateway-timeout-recommendations__entry__1">4-10 GB</td> 
+           <td class="entry" headers="ref-gateway-timeout-recommendations__entry__2">3600 seconds (1 hour)</td> 
+           <td class="entry" headers="ref-gateway-timeout-recommendations__entry__3">Large execution environments</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-gateway-timeout-recommendations__entry__1">Over 10 GB</td> 
+           <td class="entry" headers="ref-gateway-timeout-recommendations__entry__2">7200 seconds (2 hours)</td> 
+           <td class="entry" headers="ref-gateway-timeout-recommendations__entry__3">Enterprise execution environments</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">Calculating timeout values</h3> 
+        <p class="p">If your environment requires specific settings, use the following formula to calculate a timeout value:</p> 
+        <ol class="ol"> 
+         <li class="li">Measure your upload bandwidth by timing a test file upload.</li> 
+         <li class="li">Calculate the base timeout: <code class="ph codeph">timeout_seconds = (file_size_in_GB x 1024) / (bandwidth_in_MB_per_second)</code></li> 
+         <li class="li">Add a 25% buffer to the result: <code class="ph codeph">recommended_timeout = timeout_seconds x 1.25</code></li> 
+         <li class="li">Round the result up to the nearest multiple of 300 seconds (5 minutes).</li> 
+        </ol> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">Performance considerations</h3> 
+        <p class="p">Increasing timeout values might lead to the following issues:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Increased memory usage:</strong> The gateway maintains connection state for all active uploads.</li> 
+         <li class="li"><strong class="ph b">Connection pool exhaustion:</strong> Many concurrent long-running uploads can consume all available connections.</li> 
+         <li class="li"><strong class="ph b">Delayed error detection:</strong> Network issues might take longer to surface.</li> 
+        </ul> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">Best practices</h3> 
+        <ul class="ul"> 
+         <li class="li">Set timeouts based on the largest file size you expect to upload.</li> 
+         <li class="li">Monitor gateway resource usage during large uploads to automation hub.</li> 
+         <li class="li">Schedule large uploads during off-peak hours.</li> 
+         <li class="li">Use multiple smaller images instead of a single large image when possible.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

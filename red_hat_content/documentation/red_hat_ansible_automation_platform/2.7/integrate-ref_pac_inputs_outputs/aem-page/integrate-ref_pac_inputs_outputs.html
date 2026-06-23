@@ -1,0 +1,407 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="pac-inputs-outputs">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Policy enforcement input and output options</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Use the following inputs and outputs to craft policies for use in policy enforcement.</p> 
+     <section class="section"> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 1. </span><span class="title">Input data</span>
+       </caption>
+       <colgroup>
+        <col style="width:33.3333%">
+        <col style="width:33.3333%">
+        <col style="width:33.3334%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="pac-inputs-outputs__entry__1"> <strong class="ph b">Input</strong> </th> 
+         <th class="entry" id="pac-inputs-outputs__entry__2"> <strong class="ph b">Type</strong> </th> 
+         <th class="entry" id="pac-inputs-outputs__entry__3"> <strong class="ph b">Description</strong> </th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">id</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Integer</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">The job’s unique identifier.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">name</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">String</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Job template name.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">created</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Datetime (ISO 8601)</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Timestamp indicating when the job was created.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">created by</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Object</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Information about the user who created the job.</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">id</code>(integer): Unique identifier for the user</li> 
+           <li class="li"><code class="ph codeph">username</code>(string): creator username</li> 
+           <li class="li"><code class="ph codeph">is_superuser</code>(boolean): indicates if the user is a superuser</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">credentials</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">List of objects</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Credentials associated with job execution.</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">id</code> (integer): the credential’s unique identifier</li> 
+           <li class="li"><code class="ph codeph">name</code> (string): credential name</li> 
+           <li class="li"><code class="ph codeph">description</code> (string): credential description</li> 
+           <li class="li"><code class="ph codeph">organization</code> (integer or null): organization identifier associated with the credential</li> 
+           <li class="li"><code class="ph codeph">credential_type</code> (integer): credential type identifier</li> 
+           <li class="li"><code class="ph codeph">managed</code> (boolean): indicates if the credential is managed internally</li> 
+           <li class="li"><code class="ph codeph">kind</code> (string): credential type ( such as <code class="ph codeph">ssh</code>, <code class="ph codeph">cloud</code>, or <code class="ph codeph">kubernetes</code>)</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">execution_environment</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Object</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Details about the execution environment used for the job.</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">id</code> (integer): the execution environment’s unique identifier</li> 
+           <li class="li"><code class="ph codeph">name</code> (string): execution environment name</li> 
+           <li class="li"><code class="ph codeph">image</code> (string): container image used for execution</li> 
+           <li class="li"><code class="ph codeph">pull</code> (string): pull policy for the execution environment</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">extra_vars</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">JSON</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Extra variables provided for job execution.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">forks</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Integer</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">The number of parallel processes used for job execution.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">hosts_count</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Integer</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">The number of hosts targeted by the job.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">instance_group</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Object</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Information about the instance group handling the job, including:</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">id</code> (integer): the instance group’s unique identifier</li> 
+           <li class="li"><code class="ph codeph">name</code> (string): the instance group name</li> 
+           <li class="li"><code class="ph codeph">capacity</code> (integer): the available capacity in the group</li> 
+           <li class="li"><code class="ph codeph">jobs_running</code> (integer): the number of currently running jobs</li> 
+           <li class="li"><code class="ph codeph">jobs_total</code> (integer): total jobs handled by the group</li> 
+           <li class="li"><code class="ph codeph">max_concurrent_jobs</code> (integer): maximum concurrent jobs allowed</li> 
+           <li class="li"><code class="ph codeph">max_forks</code> (integer): maximum forks allowed</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">inventory</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Object</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Inventory details used in the job execution, including:</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">id</code> (integer): the inventory’s unique identifier</li> 
+           <li class="li"><code class="ph codeph">name</code> (string): The inventory’s name</li> 
+           <li class="li"><code class="ph codeph">description</code> (string): inventory description</li> 
+           <li class="li"><code class="ph codeph">kind</code> (string): the inventory type</li> 
+           <li class="li"><code class="ph codeph">total_hosts</code> (integer): the total number of hosts in the inventory</li> 
+           <li class="li"><code class="ph codeph">total_groups</code> (integer): the total number of groups in the inventory</li> 
+           <li class="li"><code class="ph codeph">has_inventory_sources</code> (boolean): indicates if the inventory has external sources</li> 
+           <li class="li"><code class="ph codeph">total_inventory_sources</code> (integer): the number of external inventory sources</li> 
+           <li class="li"><code class="ph codeph">has_active_failures</code> (boolean): indicates if there are active failures in the inventory</li> 
+           <li class="li"><code class="ph codeph">hosts_with_active_failures</code> (boolean): the number of hosts with active failures</li> 
+           <li class="li"><code class="ph codeph">inventory_sources</code> (array): external inventory sources associated with the inventory</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">job_template</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Object</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Information about the job template, including:</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">id</code> (integer): the job template’s unique identifier</li> 
+           <li class="li"><code class="ph codeph">name</code> (string): the job template’s name</li> 
+           <li class="li"><code class="ph codeph">job_type</code> (string): type of job (for example, <code class="ph codeph">run</code>)</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">job_type</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Choice (String)</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Type of job execution. Allowed values are:</p> 
+          <ul class="ul"> 
+           <li class="li"> <code class="ph codeph">run</code> </li> 
+           <li class="li"> <code class="ph codeph">check</code> </li> 
+           <li class="li"> <code class="ph codeph">scan</code> </li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">job_type_name</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">String</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Human-readable name for the job type.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">labels</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">List of objects</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Labels associated with the job, including:</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">id</code> (integer): the label’s unique identifier</li> 
+           <li class="li"><code class="ph codeph">name</code> (string): the label name</li> 
+           <li class="li"><code class="ph codeph">organization</code> (object): the organization associated with the label 
+            <ul class="ul">
+             <li class="li"><code class="ph codeph">id</code> (integer): the organization’s unique identifier</li>
+             <li class="li"><code class="ph codeph">name</code> (string): the organization name</li>
+            </ul></li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">launch_type</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Choice (String)</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">How the job was launched. Allowed values include:</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">manual</code>: manual</li> 
+           <li class="li"><code class="ph codeph">relaunch</code>: relaunch</li> 
+           <li class="li"><code class="ph codeph">callback</code>: callback</li> 
+           <li class="li"><code class="ph codeph">scheduled</code>: scheduled</li> 
+           <li class="li"><code class="ph codeph">dependency</code>: dependency</li> 
+           <li class="li"><code class="ph codeph">workflow</code>: workflow</li> 
+           <li class="li"><code class="ph codeph">webhook</code>: webhook</li> 
+           <li class="li"><code class="ph codeph">sync</code>: sync</li> 
+           <li class="li"><code class="ph codeph">scm</code>: SCM update</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">limit</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">String</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">The limit applied to the job execution.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">launched_by</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Object</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Information about the user who launched the job, including:</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">id</code> (integer): the user’s unique identifier</li> 
+           <li class="li"><code class="ph codeph">name</code> (string): the user name</li> 
+           <li class="li"><code class="ph codeph">type</code> (type): the user type (for example, <code class="ph codeph">user</code> or <code class="ph codeph">system</code>)</li> 
+           <li class="li"><code class="ph codeph">url</code> (string): the user’s API URL</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">organization</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Object</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Information about the organization associated with the job, including:</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">id</code> (integer): the organization’s unique identifier</li> 
+           <li class="li"><code class="ph codeph">name</code> (name): the organization’s name</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">playbook</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">String</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">The playbook used in the job execution.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">project</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Object</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Details about the project associated with the job, including:</p> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">id</code> (integer): the project’s unique identifier</li> 
+           <li class="li"><code class="ph codeph">name</code> (string): the project name</li> 
+           <li class="li"><code class="ph codeph">status</code> (choice-string): the project status 
+            <ul class="ul">
+             <li class="li"><code class="ph codeph">successful</code>: Successful</li>
+             <li class="li"><code class="ph codeph">failed</code>: failed</li>
+             <li class="li"><code class="ph codeph">error</code>: error</li>
+            </ul></li> 
+           <li class="li"><code class="ph codeph">scm_type</code>(string): source control type (such as`git`, or <code class="ph codeph">svn</code>)</li> 
+           <li class="li"><code class="ph codeph">scm_url</code> (string): the source control repository URL</li> 
+           <li class="li"><code class="ph codeph">scm_branch</code> (string): the branch used in the repository</li> 
+           <li class="li"><code class="ph codeph">scm_refspec</code> (string): RefSpec for the repository</li> 
+           <li class="li"><code class="ph codeph">scm_clean</code> (boolean): whether the SCM is cleaned before updates</li> 
+           <li class="li"><code class="ph codeph">scm_track_submodules</code> (boolean): whether submodules are tracked</li> 
+           <li class="li"><code class="ph codeph">scm_delete_on_update</code> (boolean): whether SCM deletes files on update</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">scm_branch</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">String</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">The specific branch to use for SCM.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">scm_revision</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">String</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">SCM revision used for the job.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">workflow_job</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Object</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Workflow job details, if the job is part of a workflow.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__1"> <p class="p"> <code class="ph codeph">workflow_job_template</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__2"> <p class="p">Object</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__3"> <p class="p">Workflow job template details.</p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">The following code block shows example input data from a demo job template launch:</p> 
+      <pre class="pre codeblock language-rego"><code>{
+  "id": 70,
+  "name": "Demo Job Template",
+  "created": "2025-03-19T19:07:03.329426Z",
+  "created_by": {
+    "id": 1,
+    "username": "admin",
+    "is_superuser": true,
+    "teams": []
+  },
+  "credentials": [
+    {
+      "id": 3,
+      "name": "Example Machine Credential",
+      "description": "",
+      "organization": null,
+      "credential_type": 1,
+      "managed": false,
+      "kind": "ssh",
+      "cloud": false,
+      "kubernetes": false
+    }
+  ],
+  "execution_environment": {
+    "id": 2,
+    "name": "Default execution environment",
+    "image": "registry.redhat.io/ansible-automation-platform-25/ee-supported-rhel8@sha256:b9f60d9ebbbb5fdc394186574b95dea5763b045ceff253815afeb435c626914d",
+    "pull": ""
+  },
+  "extra_vars": {
+    "example": "value"
+  },
+  "forks": 0,
+  "hosts_count": 0,
+  "instance_group": {
+    "id": 2,
+    "name": "default",
+    "capacity": 0,
+    "jobs_running": 1,
+    "jobs_total": 38,
+    "max_concurrent_jobs": 0,
+    "max_forks": 0
+  },
+  "inventory": {
+    "id": 1,
+    "name": "Demo Inventory",
+    "description": "",
+    "kind": "",
+    "total_hosts": 1,
+    "total_groups": 0,
+    "has_inventory_sources": false,
+    "total_inventory_sources": 0,
+    "has_active_failures": false,
+    "hosts_with_active_failures": 0,
+    "inventory_sources": []
+  },
+  "job_template": {
+    "id": 7,
+    "name": "Demo Job Template",
+    "job_type": "run"
+  },
+  "job_type": "run",
+  "job_type_name": "job",
+  "labels": [
+    {
+      "id": 1,
+      "name": "Demo label",
+      "organization": {
+        "id": 1,
+        "name": "Default"
+      }
+    }
+  ],
+  "launch_type": "workflow",
+  "limit": "",
+  "launched_by": {
+    "id": 1,
+    "name": "admin",
+    "type": "user",
+    "url": "/api/v2/users/1/"
+  },
+  "organization": {
+    "id": 1,
+    "name": "Default"
+  },
+  "playbook": "hello_world.yml",
+  "project": {
+    "id": 6,
+    "name": "Demo Project",
+    "status": "successful",
+    "scm_type": "git",
+    "scm_url": "https://github.com/ansible/ansible-tower-samples",
+    "scm_branch": "",
+    "scm_refspec": "",
+    "scm_clean": false,
+    "scm_track_submodules": false,
+    "scm_delete_on_update": false
+  },
+  "scm_branch": "",
+  "scm_revision": "",
+  "workflow_job": {
+    "id": 69,
+    "name": "Demo Workflow"
+  },
+  "workflow_job_template": {
+    "id": 10,
+    "name": "Demo Workflow",
+    "job_type": null
+  }
+}</code></pre> 
+      <table class="table">
+       <caption>
+        <span class="table--title-label">Table 2. </span><span class="title">Output data</span>
+       </caption>
+       <colgroup>
+        <col style="width:33.3333%">
+        <col style="width:33.3333%">
+        <col style="width:33.3334%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="pac-inputs-outputs__entry__79"> <strong class="ph b">Input</strong> </th> 
+         <th class="entry" id="pac-inputs-outputs__entry__80"> <strong class="ph b">Type</strong> </th> 
+         <th class="entry" id="pac-inputs-outputs__entry__81"> <strong class="ph b">Description</strong> </th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__79"> <p class="p"> <code class="ph codeph">allowed</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__80"> <p class="p">Boolean</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__81"> <p class="p">Indicates whether the action is permitted</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="pac-inputs-outputs__entry__79"> <p class="p"> <code class="ph codeph">violations</code> </p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__80"> <p class="p">List of strings</p> </td> 
+         <td class="entry" headers="pac-inputs-outputs__entry__81"> <p class="p">Reasons why the action is not permitted</p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">The following code block shows an example of expected output from the OPA policy query:</p> 
+      <pre class="pre codeblock language-rego"><code>{
+  "allowed": false,
+  "violations": [
+    "No job execution is allowed",
+    ...
+  ],
+  ...
+}</code></pre> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

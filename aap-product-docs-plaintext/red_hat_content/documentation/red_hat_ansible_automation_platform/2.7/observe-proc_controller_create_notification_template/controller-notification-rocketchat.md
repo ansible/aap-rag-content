@@ -1,0 +1,15 @@
+# Create a notification template
+## Notification types
+### Rocket.Chat
+
+The Rocket.Chat notification type provides an interface to Rocket.Chat’s collaboration and communication platform.
+
+Provide the following details to set up a Rocket.Chat notification:
+
+- **Target URL**: The full URL that is `POSTed` to.
+- Optional: **Username**: Enter a username.
+- Optional: **Icon URL**: Specifies the icon to display for this notification
+- **Disable SSL Verification**: Turns off verification of the authenticity of the target’s certificate. Select this option to disable verification for environments that use internal or private CA’s.
+
+![Notification template rocketchat](/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-notification-template-rocketchat.png)
+

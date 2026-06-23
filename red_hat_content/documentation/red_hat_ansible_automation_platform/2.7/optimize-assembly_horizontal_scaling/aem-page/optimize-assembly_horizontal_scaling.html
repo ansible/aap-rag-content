@@ -1,0 +1,183 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-horizontal-scaling"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Horizontally scale in Event-Driven Ansible</h1> 
+     <p class="shortdesc">You can set up multi-node deployments for components across Ansible Automation Platform. Whether you require horizontal scaling for Automation Execution, Automation Decisions, or automation mesh, you can scale your deployments based on your organization’s needs.</p> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-hs-eda-controller"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Horizontal scaling in Event-Driven Ansible controller</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">With Event-Driven Ansible controller, you can set up horizontal scaling for events automation. This multi-node deployment allows you to define as many nodes as preferred during installation. You can also increase or decrease the node count at any time to meet organizational needs.</p> 
+       <p class="p">The following node types are used in this deployment:</p> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+         API node type
+        </dt> 
+        <dd class="dd">
+         Responds to the HTTP REST API of Event-Driven Ansible controller.
+        </dd> 
+        <dt class="dt dlterm">
+         Worker node type
+        </dt> 
+        <dd class="dd">
+         Runs an Event-Driven Ansible worker, which is the component of Event-Driven Ansible that not only manages projects and activations, but also executes the activations themselves.
+        </dd> 
+        <dt class="dt dlterm">
+         Hybrid node type
+        </dt> 
+        <dd class="dd">
+         Is a combination of the API node and the worker node.
+        </dd> 
+       </dl> 
+       <section class="section" id="con-hs-eda-controller__section_1">
+        <h3 class="title sectiontitle">Inventory file updates for RPM-based installations (VMs) </h3> 
+        <p class="p">The following example shows how you can set up an inventory file for horizontal scaling of Event-Driven Ansible controller on Red Hat Enterprise Linux VMs using the host group name <code class="ph codeph">[automationedacontroller]</code> and the node type variable <code class="ph codeph">eda_node_type</code>:</p> 
+        <pre class="pre codeblock"><code>[automationedacontroller]
+
+3.88.116.111 routable_hostname=automationedacontroller-api.example.com eda_node_type=api
+
+# worker node
+3.88.116.112 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker</code></pre> 
+       </section> 
+       <section class="section" id="con-hs-eda-controller__section_2">
+        <h3 class="title sectiontitle">Inventory file updates for containerized installations </h3> 
+        <p class="p">The following example shows how you can set up an inventory file for horizontal scaling of Event-Driven Ansible controller on Red Hat Enterprise Linux VMs using the host group name <code class="ph codeph">[automationeda]</code> and the node type variable <code class="ph codeph">eda_type</code>:</p> 
+        <pre class="pre codeblock"><code>[automationeda]
+
+3.88.116.111 routable_hostname=automationeda-api.example.com eda_type=api
+
+# worker node
+3.88.116.112 routable_hostname=automationeda-api.example.com eda_type=worker</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="con-hs-eda-sizing-scaling"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Sizing and scaling guidelines</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Scaling guidelines for Event-Driven Ansible define how to properly size API nodes based on user requests and worker nodes based on automation activations. You can ensure independent scaling and optimized resource utilization for your environment by separating the node roles.</p> 
+       <p class="p">API nodes process user requests (interactions with the UI or API) while worker nodes process the activations and other background tasks required for Event-Driven Ansible to function properly. The number of API nodes you require correlates to the required number of users of the application and the number of worker nodes correlates to the required number of activations you want to run.</p> 
+       <p class="p">Since activations are variable and controlled by worker nodes, the supported approach for scaling is to use separate API and worker nodes instead of hybrid nodes due to the efficient allocation of hardware resources by worker nodes. By separating the nodes, you can scale each type independently based on specific needs, leading to better resource utilization and cost efficiency.</p> 
+       <p class="p">An example of an instance in which you might consider scaling up your node deployment is when you want to deploy Event-Driven Ansible for a small group of users who will run a large number of activations. In this case, one API node is adequate, but if you require more, you can scale up to three additional worker nodes.</p> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-hs-eda-setup"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Set up horizontal scaling for Event-Driven Ansible controller</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To scale up (add more nodes) or scale down (remove nodes), you must update the content of the inventory file to add or remove nodes and rerun the installation program.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Update the inventory to add two more worker nodes: </span> 
+          <ul class="ul choices" id="proc-hs-eda-setup__choices_1"> 
+           <li class="li choice">For RPM-based installations: <pre class="pre codeblock"><code>[automationedacontroller]
+
+3.88.116.111 routable_hostname=automationedacontroller-api.example.com eda_node_type=api
+
+3.88.116.112 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker
+
+# two more worker nodes
+3.88.116.113 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker
+
+3.88.116.114 routable_hostname=automationedacontroller-api.example.com eda_node_type=worker</code></pre> </li> 
+           <li class="li choice">For containerized installations: <pre class="pre codeblock"><code>[automationeda]
+
+3.88.116.111 routable_hostname=automationeda-api.example.com eda_type=api
+
+3.88.116.112 routable_hostname=automationeda-api.example.com eda_type=worker
+
+# two more worker nodes
+3.88.116.113 routable_hostname=automationeda-api.example.com eda_type=worker
+
+3.88.116.114 routable_hostname=automationeda-api.example.com eda_type=worker</code></pre> </li> 
+          </ul> </li>
+         <li class="li step"> <span class="ph cmd">Re-run the installer.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="scaling-and-management-by-installer-type"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Scale and manage by installation type</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Considerations for scaling and managing each Ansible Automation Platform component differ based on the installation type. The following table provides information on scaling and management operations for each installation type, and other common operations to consider when planning your deployment:</p> 
+       <section class="section"> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Red Hat OpenShift Container Platform-based deployments provide the most flexibility and customizability, which enables you to adapt the deployment as needs change. OpenShift Container Platform also provides fine-grained observability through its built-in metrics capabilities and integrations, with log aggregation tools that capture all logs from all pods in the Ansible Automation Platform deployment.</p> 
+         </div>
+        </div> 
+        <table class="table">
+         <caption>
+          <span class="table--title-label">Table 1. </span><span class="title">Comparison of Scaling and Management Operations by installation Type</span>
+         </caption>
+         <colgroup>
+          <col style="width:7.6923%">
+          <col style="width:30.7692%">
+          <col style="width:30.7692%">
+          <col style="width:30.7693%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="scaling-and-management-by-installer-type__entry__1">Task</th> 
+           <th class="entry" id="scaling-and-management-by-installer-type__entry__2">OpenShift Container Platform</th> 
+           <th class="entry" id="scaling-and-management-by-installer-type__entry__3">VM-based installation</th> 
+           <th class="entry" id="scaling-and-management-by-installer-type__entry__4">Containerized Deployments (Podman based)</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__1"> <p class="p">Horizontally scale up</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__2"> <p class="p">Scale control, execution, automation hub, and Event-Driven Ansible components independently by adjusting replicas. Expanding total capacity by adding worker nodes to OpenShift Container Platform does not disrupt Ansible Automation Platform operation.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__3"> <p class="p">Requires updating inventory file and re-running entire installation, which restarts and requires halting use of the platform.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__4"> <p class="p">Requires updating inventory file and re-running entire installation, which restarts and requires halting use of the platform.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__1"> <p class="p">Horizontally scale down</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__2"> <p class="p">Reduces replicas handled by operator. For scaling down automation controller task pods, usage of <code class="ph codeph">termination_grace_period_seconds</code> allows the scale down to occur after jobs are drained from the task pod.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__3"> <p class="p">Requires updating the inventory file and re-running the entire installation. This restarts the platform, halting use.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__4"> <p class="p">Requires updating the inventory file and re-running the entire installation. This restarts the platform, halting use.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__1"> <p class="p">Vertically scaling up or down</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__2"> <p class="p">Increases or decreases requests and limits on individual deployment types. The operator deploys a new pod with these resources, and previous pods scale down. For automation controller task pods, usage of <code class="ph codeph">termination_grace_period_seconds allows</code> the old replicas to scale down after jobs are drained from task pods.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__3"> <p class="p">Depending on your virtualization provider, the virtual machine might require shutdown to resize. Attaining the full benefit of vertical scaling requires re-running the installation program, which restarts and halts use of the platform. Running the installation program adapts any settings that were tuned based on the number of available cores and RAM.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__4"> <p class="p">Depending on your virtualization provider, the virtual machine might require shutdown to resize. Attaining the full benefit of vertical scaling requires re-running the installation program, which restarts and halts use of the platform. Running the installation program adapts any settings that were tuned based on the number of available cores and RAM.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__1"> <p class="p">Installation</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__2"> <p class="p">Utilizes OpenShift Container Platform Operators for automated deployment and management.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__3"> <p class="p">Ansible Playbook-based installation program installs RPMs and configures the platform.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__4"> <p class="p">Ansible Playbook-based installation program that configures platform services in Podman containers, which are managed by <code class="ph codeph">systemd</code>.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__1"> <p class="p">Upgrade</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__2"> <p class="p">Handled by OpenShift Container Platform Operators with automated rolling updates. Usage of <code class="ph codeph">termination_grace_period_seconds</code> allows upgrades without downtime and without halting job execution.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__3"> <p class="p">Requires running the installation program and restarting services, which halts use of the platform.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__4"> <p class="p">Requires running the installation program and restarting services, which halts use of the platform.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__1"> <p class="p">Aggregating Application Logs</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__2"> <p class="p">Centralized logging through OpenShift Container Platform’s built-in logging stack or integrations with external aggregators.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__3"> <p class="p">Requires external log aggregation solutions (e.g., ELK stack, Splunk) to collect logs from individual nodes.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__4"> <p class="p">Requires external log aggregation solutions (e.g., ELK stack, Splunk) to collect logs from container instances.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__1"> <p class="p">Monitoring Resource Utilization</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__2"> <p class="p">Comprehensive monitoring with OpenShift Container Platform’s built-in Prometheus and Grafana dashboards, providing detailed pod and node metrics.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__3"> <p class="p">Requires external monitoring tools to collect and visualize resource metrics from nodes.</p> </td> 
+           <td class="entry" headers="scaling-and-management-by-installer-type__entry__4"> <p class="p">Requires external monitoring tools to collect and visualize resource metrics from nodes.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

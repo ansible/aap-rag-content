@@ -1,0 +1,685 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="con-metrics-service-architecture"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Understand metrics service architecture</h1> 
+    <div class="body conbody"> 
+     <p class="shortdesc">Learn the architectural components and deployment topology of metrics service to make informed infrastructure decisions and ensure successful integration with Ansible Automation Platform.</p> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Metrics service overview</h2> 
+      <p class="p">Metrics service is a Django-based application component of Ansible Automation Platform 2.7. It collects anonymized usage and performance data from your automation controller. The service runs as containerized workloads managed by either systemd (containerized installer) or Kubernetes (operator). It maintains its own PostgreSQL database and read-only access to the controller database.</p> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Default behavior in Ansible Automation Platform 2.7</h2> 
+      <p class="p">Metrics service is enabled by default in Ansible Automation Platform 2.7 for both operator-based (OpenShift) and containerized installations that include automation controller. It is deployed automatically as a required component when you install automation controller.</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Containerized installations:</strong> [automationmetrics] inventory group is required when installing Ansible Automation Platform if automationcontroller is present in the inventory file</li> 
+       <li class="li"><strong class="ph b">Operator installations:</strong> Enabled when <code class="ph codeph">metrics.disabled: false</code> is set in the AnsibleAutomationPlatform custom resource</li> 
+      </ul> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Key characteristics</h2> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Django-based application:</strong> Built on Django framework with database migrations managed through <span class="ph filepath">/app/scripts/init.sh</span></li> 
+       <li class="li"><strong class="ph b">Containerized deployment:</strong> Runs as three containers (<code class="ph codeph">automation-metrics-web</code>, <code class="ph codeph">automation-metrics-tasks</code>, <code class="ph codeph">automation-metrics-scheduler</code>) managed by systemd (containerized installer) or Kubernetes (operator)</li> 
+       <li class="li"><strong class="ph b">Automatic anonymization:</strong> Customer-defined object names are replaced with "Custom" before transmission. Only built-in object names and publicly available collection names are sent in their original form</li> 
+       <li class="li"><strong class="ph b">Auto-configured ingress:</strong> Establishes secure connection to Red Hat Data Ingress without manual setup</li> 
+       <li class="li"><strong class="ph b">Read-only access:</strong> Accesses automation controller database in read-only mode to prevent operational impact</li> 
+       <li class="li"><strong class="ph b">Isolated database:</strong> Maintains its own <code class="ph codeph">metrics_service</code> database for metrics processing and storage</li> 
+       <li class="li"><strong class="ph b">Health monitoring:</strong> Provides health check endpoint (returns <code class="ph codeph">"status": "good"</code> when healthy)</li> 
+       <li class="li"><strong class="ph b">HTTP proxy support:</strong> Supports HTTP/HTTPS proxy configuration for environments without direct internet access</li> 
+       <li class="li"><strong class="ph b">Startup validation:</strong> Validates required production environment variables at startup. Containers exit immediately with validation errors if required variables are missing or invalid</li> 
+       <li class="li"><strong class="ph b">Deployment flexibility:</strong> Supports both RHEL-based containerized deployments and OpenShift operator-based deployments with different configuration approaches</li> 
+      </ul> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Relationship to automation dashboard</h2> 
+      <p class="p">Metrics service serves as the unified backend for automation dashboard, a Technology Preview feature in Ansible Automation Platform 2.7. When dashboard collection is enabled (<code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code>), metrics service collects additional dashboard-specific metrics, including:</p> 
+      <ul class="ul"> 
+       <li class="li">Cost and pricing data for ROI calculations</li> 
+       <li class="li">Automation savings metrics</li> 
+       <li class="li">Executive reporting data</li> 
+      </ul> 
+      <p class="p">Dashboard collection is disabled by default and must be enabled separately. Dashboard collection runs on a 6-hourly schedule to minimize database impact.</p> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Dashboard collection feature flag</h2> 
+      <p class="p">Automation dashboard data collection is controlled by the <code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED</code> feature flag. This is an official Ansible Automation Platform feature flag that customers can configure during installation or post-installation.</p> 
+      <p class="p"><strong class="ph b">Default:</strong> <code class="ph codeph">false</code> (dashboard collection disabled)</p> 
+      <p class="p"><strong class="ph b">Purpose:</strong> When enabled, metrics service collects additional dashboard-specific metrics (cost data, ROI calculations, pricing information) in addition to standard anonymized metrics.</p> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Architecture components</h2> 
+      <figure class="fig fignone" id="con-metrics-service-architecture__fig_1"> 
+       <figcaption> <span class="fig--title-label">Figure 1. </span>Metrics service overall system architecture 
+       </figcaption> 
+       <img class="image" id="con-metrics-service-architecture__image_1" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/metrics-service-system-architecture.png" alt="Overall system architecture diagram for metrics service"> 
+      </figure> 
+      <p class="p"><strong class="ph b">Core components</strong></p> 
+      <table class="table frame-all"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:20%"> 
+        <col style="width:20%"> 
+        <col style="width:60%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__1">Component</th> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__2">Container Name</th> 
+         <th class="entry rowsep-1" id="con-metrics-service-architecture__entry__3">Purpose</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__1"><strong class="ph b">Metrics service (web)</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__2"><code class="ph codeph">automation-metrics-web</code></td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__3">Nginx reverse proxy + Gunicorn serving the Django application. Internal Gunicorn port: 8006. External via nginx: 8087 (HTTP) / 8450 (HTTPS). Health endpoint:<span class="ph filepath">/health/</span> (returns HTTP 2** for healthy, 50* for unhealthy)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__1"><strong class="ph b">Metrics service (tasks)</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__2"><code class="ph codeph">automation-metrics-tasks</code></td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__3">Dispatcherd async task worker for background job execution</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__1"><strong class="ph b">Metrics service (scheduler)</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__2"><code class="ph codeph">automation-metrics-scheduler</code></td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__3">APScheduler process that triggers periodic data collection tasks</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__1"><strong class="ph b">Init container</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__2"><code class="ph codeph">automation-metrics-init</code></td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__3">One-shot container that runs Django database migrations and system initialization via<span class="ph filepath">/app/scripts/init.sh</span>. Exits on completion.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__1"><strong class="ph b">metrics_service database</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__2">PostgreSQL database</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__3">Stores processed metrics data and configuration. Created with user<code class="ph codeph">metrics_service</code> (ALL privileges)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__1"><strong class="ph b">awx/automation controller database (read-only)</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__2">PostgreSQL database</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__3">Source of automation controller usage data. Accessed via user<code class="ph codeph">ms_awx_readonly</code> (SELECT-only privileges on all tables in schema)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__1"><strong class="ph b">Red Hat Data Ingress</strong></td> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__2">External endpoint</td> 
+         <td class="entry" headers="con-metrics-service-architecture__entry__3">Receives anonymized data from customer environments via Segment write key. Data flows through Gateway<span class="ph filepath">/api/metrics/</span> endpoint (no direct customer-facing endpoints in 2.7 GA)</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <p class="p"><strong class="ph b">Database architecture</strong></p> 
+      <table class="table frame-all"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:18.181818181818183%"> 
+        <col style="width:18.181818181818183%"> 
+        <col style="width:27.27272727272727%"> 
+        <col style="width:36.36363636363637%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__25">Database</th> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__26">User</th> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__27">Privileges</th> 
+         <th class="entry rowsep-1" id="con-metrics-service-architecture__entry__28">Purpose</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__25"><code class="ph codeph">metrics_service</code></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__26"><code class="ph codeph">metrics_service</code></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__27">ALL</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__28">Metrics service own data storage, schema migrations, configuration</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__25"><strong class="ph b">awx/automation controller</strong></td> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__26"><code class="ph codeph">ms_awx_readonly</code></td> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__27">SELECT ON ALL TABLES IN SCHEMA public</td> 
+         <td class="entry" headers="con-metrics-service-architecture__entry__28">Read-only access to controller data for metrics collection</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The two-database model ensures metrics service cannot modify controller data. The <code class="ph codeph">ms_awx_readonly</code> user has only SELECT privileges on the <strong class="ph b">awx/automation controller</strong> database, preventing any writes to automation controller tables.</p> 
+       </div> 
+      </div> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">When <code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code>, the <code class="ph codeph">metrics_service</code> database includes additional tables from <span class="ph filepath">apps/dashboard_reports/migrations/</span> for dashboard-specific data. These tables are created automatically during database migration if the feature flag is enabled.</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Database schema architecture</h2> 
+      <figure class="fig fignone" id="con-metrics-service-architecture__fig_2"> 
+       <figcaption> <span class="fig--title-label">Figure 2. </span>Metrics service database scheme architecture 
+       </figcaption> 
+       <img class="image" id="con-metrics-service-architecture__image_2" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/metrics-service-simplified-schema.png" alt="Architectural diagram for metrics service database schema (simplified)"> 
+      </figure> 
+      <p class="p"><strong class="ph b">Collection phase</strong></p> 
+      <ol class="ol"> 
+       <li class="li">Metrics service queries automation controller/<code class="ph codeph">awx</code> database (read-only connection using <code class="ph codeph">ms_awx_readonly</code> user)</li> 
+       <li class="li">Raw usage data extracted from the following tables: jobs, job host summaries, credentials, execution environments, controller versions, and feature flags</li> 
+      </ol> 
+      <p class="p"><strong class="ph b">What is NOT collected:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Event data</li> 
+       <li class="li">Host inventory data</li> 
+       <li class="li">Customer-defined template names, playbook names, or workflow names</li> 
+      </ul> 
+      <div class="note important note_important"> <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Host and inventory data collection is handled separately by the metrics-utility CLI for CCSP reports only. Metrics service does not collect this data.</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Complete task schedule</h2> 
+      <figure class="fig fignone" id="con-metrics-service-architecture__fig_3"> 
+       <figcaption> <span class="fig--title-label">Figure 3. </span>Task system module 
+       </figcaption> 
+       <img class="image" id="con-metrics-service-architecture__image_3" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/automation-dashboard-task-system-module.png" alt="Architectural diagram for metrics service and automation dashboard task system module"> 
+      </figure> 
+      <p class="p">Metrics service uses three task groups controlled by feature flags:</p> 
+      <p class="p"><strong class="ph b">METRICS_COLLECTION group</strong></p> 
+      <p class="p">Gated by <code class="ph codeph">METRICS_COLLECTION</code> feature flag (default: <code class="ph codeph">true</code>). When disabled, all tasks in this group skip execution.</p> 
+      <table class="table frame-all"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:36.36363636363637%"> 
+        <col style="width:27.27272727272727%"> 
+        <col style="width:36.36363636363637%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__37">Task</th> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__38">Schedule</th> 
+         <th class="entry rowsep-1" id="con-metrics-service-architecture__entry__39">Description</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__37"><code class="ph codeph">collect_hourly_metrics</code> (job_host_summary)</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__38">Every hour at XX:05</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__39">Collects job host summary metrics from controller database</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__37"><code class="ph codeph">collect_hourly_metrics</code> (unified_jobs)</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__38">Every hour at XX:10</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__39">Collects unified jobs metrics from controller database</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__37"><code class="ph codeph">collect_hourly_metrics</code> (credentials)</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__38">Every hour at XX:15</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__39">Collects credentials usage metrics from controller database</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__37"><code class="ph codeph">collect_snapshot_metrics</code> (execution_environments)</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__38">Daily at 1:00 AM</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__39">Snapshot of execution environment configuration</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__37"><code class="ph codeph">collect_snapshot_metrics</code> (config)</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__38">Daily at 1:30 AM</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__39">Snapshot of system configuration</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__37"><code class="ph codeph">collect_snapshot_metrics</code> (controller_version)</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__38">Daily at 1:35 AM</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__39">Snapshot of controller version information</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__37"><code class="ph codeph">collect_snapshot_metrics</code> (table_metadata)</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__38">Daily at 1:40 AM</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__39">Snapshot of database table metadata</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__37"><code class="ph codeph">collect_snapshot_metrics</code> (feature_flags)</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__38">Daily at 1:45 AM</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__39">Snapshot of feature flag states</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__37"><code class="ph codeph">collect_daily_metrics</code> (task_executions)</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__38">Daily at 1:50 AM</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__39">Pipeline health metrics (task execution observability)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__37"><code class="ph codeph">daily_metrics_rollup</code></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__38">Daily at 2:00 AM</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__39">Aggregates hourly data into daily summaries</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__37"><code class="ph codeph">cleanup_metrics_data</code></td> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__38">Daily at 4:00 AM</td> 
+         <td class="entry" headers="con-metrics-service-architecture__entry__39">Purges expired data based on retention policies</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <p class="p"><strong class="ph b">ANONYMIZATION group</strong></p> 
+      <p class="p">Gated by <code class="ph codeph">ANONYMIZED_DATA_COLLECTION</code> feature flag (default: <code class="ph codeph">true</code>). When disabled, anonymization and transmission skip execution.</p> 
+      <table class="table frame-all"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:36.36363636363637%"> 
+        <col style="width:27.27272727272727%"> 
+        <col style="width:36.36363636363637%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__73">Task</th> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__74">Schedule</th> 
+         <th class="entry rowsep-1" id="con-metrics-service-architecture__entry__75">Description</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__73"><code class="ph codeph">daily_anonymize_and_prepare</code></td> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__74">Daily at 3:00 AM</td> 
+         <td class="entry" headers="con-metrics-service-architecture__entry__75">Anonymizes collected data and transmits to Segment.com</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <p class="p"><strong class="ph b">SYSTEM group</strong></p> 
+      <p class="p">Always enabled regardless of feature flag state. System maintenance tasks continue even when all collection is disabled.</p> 
+      <table class="table frame-all"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:33.33333333333333%"> 
+        <col style="width:22.22222222222222%"> 
+        <col style="width:44.44444444444444%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__79">Task</th> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__80">Schedule</th> 
+         <th class="entry rowsep-1" id="con-metrics-service-architecture__entry__81">Description</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__79"><code class="ph codeph">cleanup_old_tasks</code></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__80">Daily at 5:00 AM</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__81">Purges old task execution records from database</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__79"><code class="ph codeph">hello_world</code></td> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__80">Every hour</td> 
+         <td class="entry" headers="con-metrics-service-architecture__entry__81">Health check heartbeat for monitoring</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <p class="p"><strong class="ph b">Task dependencies</strong></p> 
+      <p class="p">Tasks are scheduled in dependency order:</p> 
+      <ol class="ol"> 
+       <li class="li"><strong class="ph b">Hourly collection</strong> (XX:05, XX:10, XX:15) - provides raw data</li> 
+       <li class="li"><strong class="ph b">Daily snapshots</strong> (1:00 AM - 1:50 AM) - supplements hourly data</li> 
+       <li class="li"><strong class="ph b">Daily rollup</strong> (2:00 AM) - aggregates hourly data (depends on hourly collectors completing)</li> 
+       <li class="li"><strong class="ph b">Anonymization</strong> (3:00 AM) - anonymizes aggregated data (depends on rollup completing)</li> 
+       <li class="li"><strong class="ph b">Cleanup</strong> (4:00 AM, 5:00 AM) - purges old data (runs after rollup/anonymization to avoid race conditions)</li> 
+      </ol> 
+      <div class="note important note_important"> <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">If hourly collectors fail, daily rollup will have incomplete data. Always verify hourly collection completed before troubleshooting rollup issues.</p> 
+       </div> 
+      </div> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">To ensure the readonly user can access tables created in the future, we recommend setting the following default privileges: <code class="ph codeph">ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_readonly;</code></p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Anonymization phase</h2> 
+      <p class="p">No personal data leaves the customer environment. Only publicly available collection names (for example from Galaxy) and built-in object names (such as built-in credential types and execution environments) are transmitted.</p> 
+      <p class="p"><strong class="ph b">Anonymization method:</strong> Statistics and counts only</p> 
+      <p class="p">Metrics service transmits only aggregated statistics, counts, and built-in/public object names. Customer-defined object names are never transmitted. For example, if you have 3 custom credentials, metrics service sends the count "3" but does not send the credential names.</p> 
+      <p class="p"><strong class="ph b">What data is sent:</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Job statistics:</strong> Aggregated job execution data grouped by job type, launch type, and version (success/failure counts, duration statistics, timestamps). Job template names are NOT included.</li> 
+       <li class="li"><strong class="ph b">Job host summary statistics:</strong> Aggregated job execution results per host (success/failure counts, execution performance metrics).</li> 
+       <li class="li"><strong class="ph b">Credential type statistics:</strong> Built-in credential type names (e.g., "Machine", "Source Control", "Vault") and count of customer-defined credentials (e.g., "3 custom credentials"). Customer-defined credential names are NOT sent.</li> 
+       <li class="li"><strong class="ph b">Execution environment statistics:</strong> Built-in EE names (e.g., "ee-minimal-rhel9", "ee-supported-rhel9") and count of customer-defined EEs (e.g., "5 custom EEs"). Customer-defined EE names are NOT sent.</li> 
+       <li class="li"><strong class="ph b">Collection statistics:</strong> Public collection names from Galaxy or Red Hat Certified Collections (e.g., "ansible.builtin", "ansible.posix") and count of customer-defined collections. Customer-defined collection names are NOT sent.</li> 
+       <li class="li"><strong class="ph b">Project SCM types:</strong> Source control management types for projects (e.g., Git, SVN).</li> 
+       <li class="li"><strong class="ph b">Organization counts:</strong> Total number of organizations configured.</li> 
+       <li class="li"><strong class="ph b">Version information:</strong> Controller version, Ansible core version, installed collection versions.</li> 
+       <li class="li"><strong class="ph b">Warnings and deprecations:</strong> Statistics on deprecation warnings encountered.</li> 
+       <li class="li"><strong class="ph b">Feature flag states:</strong> Boolean status of enabled/disabled feature flags.</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">What data is NOT sent:</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Job template names</strong> (not collected at all)</li> 
+       <li class="li"><strong class="ph b">Customer-defined credential names</strong> (only counts transmitted, e.g., "3 custom credentials")</li> 
+       <li class="li"><strong class="ph b">Customer-defined execution environment names</strong> (only counts transmitted, e.g., "5 custom EEs")</li> 
+       <li class="li"><strong class="ph b">Customer-defined collection names</strong> (only counts transmitted)</li> 
+       <li class="li"><strong class="ph b">Event data</strong> (removed from metrics service in February 2026)</li> 
+       <li class="li"><strong class="ph b">Host inventory data</strong> (not queried by metrics service; handled separately by metrics-utility CLI for CCSP reports only)</li> 
+       <li class="li"><strong class="ph b">Playbook names</strong> (customer-defined content)</li> 
+       <li class="li"><strong class="ph b">Variable names and values</strong> (customer-defined content)</li> 
+       <li class="li"><strong class="ph b">Workflow template names</strong> (customer-defined content)</li> 
+      </ul> 
+      <div class="note important note_important"> <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Customer-defined object names are never transmitted. Metrics service sends only counts (e.g., "3 custom credentials") and statistics (e.g., "50 jobs executed"). There is no way to identify which specific custom objects belong to which customer, and no individual object names can be recovered from the transmitted data.</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Transmission phase</h2> 
+      <ol class="ol"> 
+       <li class="li">Anonymized data packaged for transmission</li> 
+       <li class="li">Secure HTTPS connection established to Red Hat Data Ingress endpoint using <strong class="ph b">Segment</strong> (a third-party data pipeline service)</li> 
+       <li class="li">Data transmitted through the Gateway <span class="ph filepath">/api/metrics/</span> endpoint (no direct customer-facing endpoints in 2.7 GA)</li> 
+       <li class="li">Transmission status logged in <code class="ph codeph">metrics_service</code> database</li> 
+       <li class="li">HTTP/HTTPS proxy supported for environments without direct internet access</li> 
+      </ol> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Segment is a third-party data pipeline service that securely routes anonymized metrics from your environment to Red Hat analytics infrastructure. The Segment write key is pre-configured during installation.</p> 
+       </div> 
+      </div> 
+      <p class="p"><strong class="ph b">Message size handling</strong></p> 
+      <p class="p">Metrics service splits anonymized data deterministically into separate messages. If any message exceeds 32 KB, the service splits it further. This ensures reliable transmission of large datasets without message size errors.</p> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Deployment topology options</h2> 
+      <p class="p"><strong class="ph b">AIO Growth (All-in-One) topology</strong></p> 
+      <p class="p">A single host runs all Ansible Automation Platform components, including metrics service. The <code class="ph codeph">[automationmetrics]</code> inventory group points to the same host as <code class="ph codeph">[automationcontroller]</code>.</p> 
+      <p class="p">Characteristics:</p> 
+      <ul class="ul"> 
+       <li class="li">All components share the same host</li> 
+       <li class="li">Simplest deployment for small to medium environments</li> 
+       <li class="li">Metrics service, controller, and databases on one node</li> 
+       <li class="li">Suitable for development, testing, or small production environments</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Enterprise / Multi-Node topology</strong></p> 
+      <p class="p">Metrics service runs on a dedicated node or alongside Gateway. Key design decision: metrics service is NOT required to be co-located with automation controller. You define which node hosts metrics service by using the <code class="ph codeph">[automationmetrics]</code> inventory group.</p> 
+      <p class="p">Characteristics:</p> 
+      <ul class="ul"> 
+       <li class="li">Flexible topology: metrics service can run on any node</li> 
+       <li class="li">Scaled independently from controller</li> 
+       <li class="li">Metrics processing isolated from automation execution</li> 
+       <li class="li">Suitable for large-scale production environments</li> 
+      </ul> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Deployment method comparison</h2> 
+      <p class="p">Metrics service supports two deployment methods with different configuration complexity and automation levels:</p> 
+      <table class="table frame-all"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:27.27272727272727%"> 
+        <col style="width:36.36363636363637%"> 
+        <col style="width:36.36363636363637%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__88">Aspect</th> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__89">Containerized Installer</th> 
+         <th class="entry rowsep-1" id="con-metrics-service-architecture__entry__90">Operator (OpenShift)</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__88"><strong class="ph b">Deployment method</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__89">Ansible role (<code class="ph codeph">automationmetrics</code>) in containerized installation program</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__90">Kubernetes operator (<code class="ph codeph">automation-metrics-operator</code>) managed by AAP gateway operator</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__88"><strong class="ph b">Configuration complexity</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__89">Manual: requires inventory file edits, database passwords, network variables</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__90">Automatic: single CR field (<code class="ph codeph">metrics.disabled: false</code>)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__88"><strong class="ph b">Database provisioning</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__89">Administrator provisions databases and configures credentials in inventory</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__90">Operator automatically provisions databases and manages credentials via Kubernetes secrets</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__88"><strong class="ph b">Container management</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__89">Podman with systemd user-scope units</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__90">Kubernetes deployments managed by operator</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__88"><strong class="ph b">Network configuration</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__89">Manual firewall rules, port configuration in inventory</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__90">Automatic Kubernetes services and Envoy routing through gateway</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__88"><strong class="ph b">OAuth integration</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__89">Manual configuration if needed</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__90">Automatic integration with platform gateway OAuth</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__88"><strong class="ph b">Upgrades</strong></td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__89">Re-run installer with updated inventory</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__90">Operator handles upgrades automatically via CR updates</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__88"><strong class="ph b">Backup/restore</strong></td> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__89">Manual playbook execution</td> 
+         <td class="entry" headers="con-metrics-service-architecture__entry__90">Operator-managed backup/restore via AutomationMetricsBackup CR (when available)</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <div class="note tip note_tip"> <span class="note__title">Tip:</span> 
+       <div class="note__body"> 
+        <p class="p">For OpenShift deployments, use the operator method for simplified configuration and automatic lifecycle management. For RHEL-based containerized deployments, use the containerized installer method.</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Containerized installer deployment details</h2> 
+      <p class="p">Metrics service is deployed through the <code class="ph codeph">automationmetrics</code> Ansible role included in the Ansible Automation Platform 2.7 containerized installation program:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Container runtime:</strong> Podman with host networking mode (rootless, user namespace)</li> 
+       <li class="li"><strong class="ph b">Service management:</strong> Three systemd user-scope units: <code class="ph codeph">automation-metrics-web.service</code>, <code class="ph codeph">automation-metrics-tasks.service</code>, <code class="ph codeph">automation-metrics-scheduler.service</code></li> 
+       <li class="li"><strong class="ph b">Data persistence:</strong> Host volumes mounted from <code class="ph codeph">{{ aap_volumes_dir }}/automationmetrics</code> into container path <span class="ph filepath">/var/lib/ansible-automation-platform/metrics</span></li> 
+       <li class="li"><strong class="ph b">Secrets management:</strong> Four Podman secrets: <code class="ph codeph">automationmetrics_pg_password</code>, <code class="ph codeph">automationmetrics_controller_read_pg_password</code>, <code class="ph codeph">automationmetrics_secret_key</code>, <code class="ph codeph">automationmetrics_resource_server</code></li> 
+       <li class="li"><strong class="ph b">Firewall integration:</strong> Ports 8087/tcp (HTTP) and 8450/tcp (HTTPS) opened in configured firewall zone (default: public)</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Configuration requirements:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Hosts must be added to <code class="ph codeph">[automationmetrics]</code> inventory group</li> 
+       <li class="li">Database connection variables must be configured (<code class="ph codeph">automationmetrics_pg_host</code>, <code class="ph codeph">automationmetrics_pg_password</code>, etc.)</li> 
+       <li class="li">Read-only controller database user must be provisioned manually or by installer</li> 
+       <li class="li">Segment write key must be provided for data transmission</li> 
+      </ul> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Operator-based deployment details</h2> 
+      <p class="p">Metrics service is deployed through the <code class="ph codeph">automation-metrics-operator</code> running on OpenShift. The AAP gateway operator manages the metrics operator lifecycle:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Container runtime:</strong> Kubernetes pods managed by operator deployments</li> 
+       <li class="li"><strong class="ph b">Service management:</strong> Three Kubernetes deployments: <code class="ph codeph">metrics-api</code>, <code class="ph codeph">metrics-tasks</code>, <code class="ph codeph">metrics-scheduler</code></li> 
+       <li class="li"><strong class="ph b">Data persistence:</strong> Kubernetes persistent volumes managed by operator</li> 
+       <li class="li"><strong class="ph b">Secrets management:</strong> Kubernetes secrets automatically created and managed by operator (database credentials, OAuth tokens, Segment write key)</li> 
+       <li class="li"><strong class="ph b">Network integration:</strong> Kubernetes services and Envoy routing through platform gateway</li> 
+       <li class="li"><strong class="ph b">Database provisioning:</strong> Operator automatically creates and configures both <code class="ph codeph">metrics_service</code> database and read-only controller database user</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Configuration simplicity:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Single CR field: <code class="ph codeph">spec.metrics.disabled: false</code> in AnsibleAutomationPlatform CR</li> 
+       <li class="li">Zero manual database configuration required</li> 
+       <li class="li">Zero manual network configuration required</li> 
+       <li class="li">Automatic OAuth integration with platform gateway</li> 
+       <li class="li">Operator handles all credential rotation and secret management</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Operator-managed resources:</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">MetricsService CR:</strong> Created as <code class="ph codeph">&lt;aap-name&gt;-automationmetricsservice</code> in same namespace as AnsibleAutomationPlatform CR</li> 
+       <li class="li"><strong class="ph b">Database:</strong> PostgreSQL database for metrics service, automatically provisioned with credentials stored in Kubernetes secrets</li> 
+       <li class="li"><strong class="ph b">Read-only user:</strong> Automatically created in controller database with SELECT privileges</li> 
+       <li class="li"><strong class="ph b">Services:</strong> Kubernetes Service resources for metrics API, tasks, and scheduler pods</li> 
+       <li class="li"><strong class="ph b">Routes/Ingress:</strong> Traffic routing through platform gateway Envoy proxy (no direct external endpoints)</li> 
+      </ul> 
+      <div class="note important note_important"> <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">In AAP 2.7, the operator removes ownerReferences from the MetricsService CR. This means the CR is not automatically deleted when you set <code class="ph codeph">metrics.disabled: true</code>. You must manually delete the CR if you want to fully remove metrics service from your cluster.</p> 
+       </div> 
+      </div> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">In standard operator deployments, database provisioning is fully automatic. The operator creates all required databases and users. This includes the metrics service database and the read-only user for the controller database.</p> 
+        <p class="p"><strong class="ph b">Externally managed databases:</strong> If you use a fully externally managed database such as RDS or Cloud SQL, you must manually provision databases and configure credentials before deploying metrics service. See the related information for external database configuration procedures.</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Network architecture</h2> 
+      <p class="p"><strong class="ph b">Required network connectivity</strong></p> 
+      <table class="table frame-all"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:30.76923076923077%"> 
+        <col style="width:23.076923076923077%"> 
+        <col style="width:15.384615384615385%"> 
+        <col style="width:30.76923076923077%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__115">Source</th> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__116">Destination</th> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__117">Protocol/Port</th> 
+         <th class="entry rowsep-1" id="con-metrics-service-architecture__entry__118">Purpose</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__115"><code class="ph codeph">automation-metrics-tasks</code> /<code class="ph codeph">automation-metrics-scheduler</code> containers</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__116">Automation controller database</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__117">PostgreSQL (5432)</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__118">Read-only data collection via<code class="ph codeph">ms_awx_readonly</code> user</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__115"><code class="ph codeph">automation-metrics-tasks</code> /<code class="ph codeph">automation-metrics-scheduler</code> containers</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__116"><code class="ph codeph">metrics_service</code> database</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__117">PostgreSQL (5432)</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__118">Read-write metrics storage via<code class="ph codeph">metrics_service</code> user</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__115"><code class="ph codeph">automation-metrics-tasks</code> container</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__116">Red Hat Data Ingress (via Segment)</td> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__117">HTTPS (443)</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__118">Anonymized data transmission authenticated via Segment write key</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__115">Monitoring systems (optional)</td> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__116"><code class="ph codeph">automation-metrics-web</code> container</td> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__117">HTTP (8087)</td> 
+         <td class="entry" headers="con-metrics-service-architecture__entry__118">Health check endpoint at<span class="ph filepath">/health/</span> via nginx</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <p class="p"><strong class="ph b">Firewall requirements</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Protocol:</strong> HTTPS (TLS 1.2 or higher); supported TLS versions: TLSv1.2, TLSv1.3</li> 
+       <li class="li"><strong class="ph b">Direction:</strong> Outbound from metrics service container to Red Hat Data Ingress</li> 
+       <li class="li"><strong class="ph b">Nginx ports:</strong> 8087/tcp (HTTP) and 8450/tcp (HTTPS) opened in firewall (default zone: public)</li> 
+       <li class="li"><strong class="ph b">Internal Gunicorn port:</strong> 8006 (localhost only, not opened in firewall)</li> 
+       <li class="li"><strong class="ph b">Proxy support:</strong> HTTP/HTTPS proxy configuration supported via standard environment variables (<code class="ph codeph">HTTP_PROXY</code>, <code class="ph codeph">HTTPS_PROXY</code>, <code class="ph codeph">NO_PROXY</code>)</li> 
+      </ul> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Naming conventions</h2> 
+      <table class="table frame-all"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:42.857142857142854%"> 
+        <col style="width:57.14285714285714%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="con-metrics-service-architecture__entry__135">Element</th> 
+         <th class="entry rowsep-1" id="con-metrics-service-architecture__entry__136">Value</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__135">Role name</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__136"><code class="ph codeph">automationmetrics</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__135">Inventory group</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__136"><code class="ph codeph">[automationmetrics]</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__135">Web container</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__136"><code class="ph codeph">automation-metrics-web</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__135">Tasks container</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__136"><code class="ph codeph">automation-metrics-tasks</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__135">Scheduler container</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__136"><code class="ph codeph">automation-metrics-scheduler</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__135">Init container</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__136"><code class="ph codeph">automation-metrics-init</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__135">Variable prefix</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__136"><code class="ph codeph">automationmetrics_</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__135">Gunicorn port (internal)</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__136"><code class="ph codeph">8006</code> (localhost only)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__135">Nginx HTTP port</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__136"><code class="ph codeph">8087</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__135">Nginx HTTPS port</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__136"><code class="ph codeph">8450</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__135">Health endpoint</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__136"><span class="ph filepath">http://localhost:8087/health/</span></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="con-metrics-service-architecture__entry__135">Host volume path</td> 
+         <td class="entry rowsep-1" headers="con-metrics-service-architecture__entry__136"><code class="ph codeph">{{ aap_volumes_dir }}/automationmetrics</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="con-metrics-service-architecture__entry__135">Container data path</td> 
+         <td class="entry" headers="con-metrics-service-architecture__entry__136"><span class="ph filepath">/var/lib/ansible-automation-platform/metrics</span></td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links"> 
+     <ul class="ullinks"> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_deployment_requirements">Metrics service deployment requirements</a></strong><br>Review infrastructure requirements and prerequisites for deploying metrics service to provision appropriate resources and ensure successful deployment without capacity or compatibility issues.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_install_metrics_service_with_containerized_installer">Install metrics service with containerized installer</a></strong><br>Enable and configure metrics service during containerized installation to automatically collect anonymized usage data and transmit it to Red Hat.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_enable_metrics_service_operator">Enable metrics service in operator deployments</a></strong><br>Enable metrics service using the operator to collect anonymized usage data without manual database configuration or inventory file editing.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_containerized">Configure external PostgreSQL database for metrics service with containerized installer</a></strong><br>Configure metrics service to use an external PostgreSQL database to leverage enterprise database management, backup, and high availability infrastructure.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_operator">Configure external PostgreSQL database for metrics service with OpenShift operator</a></strong><br>Configure metrics service to use external PostgreSQL databases instead of operator-provisioned databases to leverage enterprise infrastructure.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_configuration_variables">Metrics service configuration variables</a></strong><br>Review configuration variables to customize metrics service deployment, database connections, security settings, and operational parameters.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_tls_ssl_metrics_service_databases">Configure TLS/SSL for metrics service databases</a></strong><br>Enable TLS/SSL encryption for metrics service database connections to protect metrics data in transit and meet security policies.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_uninstall_metrics_service">Uninstall metrics service</a></strong><br>Completely uninstall all metrics service components and optionally preserve or delete data to cleanly remove the service without orphaned resources or configuration conflicts.</li> 
+     </ul> 
+     <div class="linklist reltasks"> <strong>Related tasks</strong> 
+      <br> 
+      <ul class="linklist"> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_install_metrics_service_with_containerized_installer" title="Enable and configure metrics service during containerized installation to automatically collect anonymized usage data and transmit it to Red Hat.">Install metrics service with containerized installer</a></li> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_enable_metrics_service_operator" title="Enable metrics service using the operator to collect anonymized usage data without manual database configuration or inventory file editing.">Enable metrics service in operator deployments</a></li> 
+      </ul> 
+     </div> 
+     <div class="linklist relref"> <strong>Related reference</strong> 
+      <br> 
+      <ul class="linklist"> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_deployment_requirements" title="Review infrastructure requirements and prerequisites for deploying metrics service to provision appropriate resources and ensure successful deployment without capacity or compatibility issues.">Metrics service deployment requirements</a></li> 
+      </ul> 
+     </div> 
+    </nav> 
+   </article> 
+  </main>  
+ </body>
+</html>

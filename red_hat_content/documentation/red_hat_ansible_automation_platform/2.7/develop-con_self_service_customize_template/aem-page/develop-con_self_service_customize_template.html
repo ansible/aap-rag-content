@@ -1,0 +1,129 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="self-service-customize-template"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Add and launch custom self-service templates</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Custom self-service templates are stored as YAML files in repositories in GitHub or Gitlab. When a user launches a software template from Ansible automation portal, they must fill in a form with the values needed to run the associated job template in Ansible Automation Platform.</p> 
+      <p class="p">The custom self-service template YAML file must have a <code class="ph codeph">token:</code> section that includes a <code class="ph codeph">ui:field:</code> key for the authentication token for Ansible Automation Platform. This generates a field for the token in the form that appears when the user launches the template in Ansible automation portal. The user enters the token: it is used to authenticate job template execution in Ansible Automation Platform.</p> 
+      <p class="p">The following example shows the <code class="ph codeph">token:</code> section in a template. For security reasons, set the value of <code class="ph codeph">token.ui:backstage.review.show</code> to <code class="ph codeph">false</code> to ensure that the token is not visible to the user.</p> 
+      <pre class="pre codeblock"><code>spec:
+  ...
+  parameters:
+    ...
+      properties:
+        token:
+          title: Token
+          type: string
+          description: Oauth2 token
+          ui:field: AAPTokenField
+          ui:widget: hidden
+          ui:backstage:
+            review:
+              show: false</code></pre> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Setting the <code class="ph codeph">ui:widget: hidden</code> field hides the Red Hat Ansible Automation Platform token input in the form.</p> 
+       </div>
+      </div> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="self-service-add-template"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Add a template to Ansible automation portal</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can add a custom self-service template to the <strong class="ph b">Templates</strong> view of your Ansible automation portal instance. Custom self-service templates are stored in git repositories. Ansible automation portal supports GitLab and GitHub Source Control Management (SCM).</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have created repositories in your Git SCM for the templates that you want to use.</li> 
+         <li class="li">In the git repository for your custom templates, ensure that the <code class="ph codeph">metadata.name</code> field is unique and does not match an existing auto-generated template or another custom self-service template. For example, append <code class="ph codeph">*-custom</code> to the value of the <code class="ph codeph">metadata.name</code> key.</li> 
+        </ul> 
+        <pre class="pre codeblock"><code>metadata:
+  name: provision-database-custom</code></pre> 
+        <ul class="ul"> 
+         <li class="li">You must be logged in to Ansible automation portal as an Ansible Automation Platform platform administrator.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Names for custom self-service templates must be unique. Custom self-service templates must have a different name to auto-generated job templates and also to other custom self-service templates.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">In a browser, navigate to your Ansible automation portal instance and sign in with your Ansible Automation Platform credentials.</span> </li>
+         <li class="li step"> <span class="ph cmd">Navigate to the <strong class="ph b">Templates</strong> Page.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Add template</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Enter a valid Git SCM URL for the template that you want to add.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Analyze</span> to fetch the template.</span> </li>
+         <li class="li step"> <span class="ph cmd">After the template has been fetched, review the list of what will be imported and added to the catalog.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Import</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">After the import is complete, return to the <strong class="ph b">Templates</strong> page to view the newly created template. You can now launch your template.</p> 
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You must configure RBAC for your imported custom templates to allow users to view and run them. To do this, you must be logged into Ansible automation portal as a platform administrator. <p class="p">For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_self_service_rbac#self-service-set-up-rbac" title="By default, Ansible Automation Platform administrators can define Ansible automation portal RBAC roles.">Setting up RBAC for custom self-service templates</a>.</p> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="self-service-launch-template"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Launch a template</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">This procedure describes how to launch a template from a tile in the <strong class="ph b">Templates</strong> view of your Ansible automation portal instance.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have configured RBAC in Ansible Automation Platform for templates that are associated with Ansible Automation Platform job templates.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">In a browser, navigate to your Ansible automation portal instance and sign in with your Ansible Automation Platform credentials.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to the <strong class="ph b">Templates</strong> page. The templates you have set up are displayed as tiles on the page.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the template that you want to launch, click <strong class="ph b">Start</strong>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">A description of the template is displayed.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Launch</strong> to begin configuring the parameters for running the template.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Fill out the required fields.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Next</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Review the entered information.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Create</strong> to launch the template.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">The progress for the template execution is displayed.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

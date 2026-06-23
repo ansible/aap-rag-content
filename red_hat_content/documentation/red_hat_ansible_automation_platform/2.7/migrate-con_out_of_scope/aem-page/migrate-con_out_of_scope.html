@@ -1,0 +1,23 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="out-of-scope">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Out of scope</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Understand which Ansible Automation Platform components and configurations require manual re-creation in the target environment and are not covered by the migration process.</p> 
+     <p class="p">Migration covers core Ansible Automation Platform components. Some components and configurations are out of scope and require manual re-creation in the target environment:</p> 
+     <ul class="ul"> 
+      <li class="li">Event-Driven Ansible: Manually recreate configuration and content for Event-Driven Ansible in the target environment.</li> 
+      <li class="li">Instance groups: Manually recreate instance group configurations after migration.</li> 
+      <li class="li">Hub content: Manually re-import or reconfigure content hosted in automation hub.</li> 
+      <li class="li">Custom Certificate Authority (CA) for receptor mesh: Manually reconfigure custom CA configurations for receptor mesh.</li> 
+      <li class="li">Disconnected environments: The migration process does not cover disconnected environments.</li> 
+      <li class="li">Execution environments (other than the default one): Manually rebuild or re-import custom execution environments.</li> 
+     </ul> 
+     <p class="p">Manually re-create, import, or configure these items in the target environment.</p> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

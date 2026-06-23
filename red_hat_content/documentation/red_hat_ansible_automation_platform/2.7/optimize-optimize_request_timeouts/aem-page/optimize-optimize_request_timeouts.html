@@ -1,0 +1,79 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="GUID-e6e33f92-14a6-49dd-8654-5e2f3da9b090"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Optimize request timeouts</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Ansible Automation Platform on OpenShift Container Platform manages request timeouts through a synchronized, cascading architecture. This structure ensures that if a high-level service (the Gateway) reaches a timeout limit, all dependent internal processes terminate. </p> 
+      <p class="p">placeholder</p> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="GUID-dc18d7e7-cd13-40be-8523-d6c3d66daac1"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Cascading client timeouts</h2> 
+      <div class="body conbody">
+       <p class="shortdesc"> Cascading timeouts ensure that if an outer layer times out, inner processes also terminate to prevent resource exhaustion. Set the primary timeout at the Gateway level to synchronize timeouts across applications.</p> 
+       <section class="section" id="GUID-dc18d7e7-cd13-40be-8523-d6c3d66daac1__section_1">
+        <h3 class="title sectiontitle">Timeout mathematical relationships </h3> 
+        <p class="p">Ansible Automation Platform maintains a downward mathematical cascade to ensure correct behavior and assist with debugging. Ansible Automation Platform applies the following logic to internal layers: </p> 
+        <ul class="ul" id="GUID-dc18d7e7-cd13-40be-8523-d6c3d66daac1__ul_1"> 
+         <li class="li">The <code class="ph codeph">client_request_timeout</code> serves as the primary value from which others are derived. </li> 
+         <li class="li">The sum of the Envoy <code class="ph codeph">request_timeout</code> and the gRPC authentication timeout (<code class="ph codeph">gateway_grpc_auth_service_timeout</code>) is less than the <code class="ph codeph">client_request_timeout</code>. </li> 
+         <li class="li">The Nginx read timeout (<code class="ph codeph">nginx_read_timeout</code>) is less than or equal to the Envoy <code class="ph codeph">request_timeout</code>. </li> 
+         <li class="li">The Python web server timeout (<code class="ph codeph">python_webserver_timeout</code>) is less than or equal to the <code class="ph codeph">nginx_read_timeout</code>. </li> 
+        </ul> 
+       </section> 
+       <section class="section" id="GUID-dc18d7e7-cd13-40be-8523-d6c3d66daac1__section_2">
+        <h3 class="title sectiontitle">Timeout grace periods </h3> 
+        <p class="p">At the uWSGI layer, the <code class="ph codeph">uwsgi_timeout_grace_period</code> allows the application to attempt a graceful shutdown. During this period, the application displays a traceback of the current stack position at the time of the timeout. If the process does not exit within the grace period, Ansible Automation Platform maintains forcefully terminates it.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="GUID-9be68a8a-ed83-4e25-9fea-79213a49aace"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Increase the OpenShift Route timeout</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">High-volume API operations can exceed the default 30-second OpenShift Route timeout. To resolve HTTP 504 or 503 errors, you must increase <code class="ph codeph">client_request_timeout</code> in the <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource.. </p> 
+       <section class="section prereq" id="GUID-9be68a8a-ed83-4e25-9fea-79213a49aace__prereq_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul" id="GUID-9be68a8a-ed83-4e25-9fea-79213a49aace__ul_1"> 
+         <li class="li">Access to the Red Hat OpenShift Container Platform (RHOCP) web console. </li> 
+         <li class="li">Update the Ansible Automation Platform 2.6 operator to the latest version to ensure configuration changes propagate correctly to the OpenShift Route. </li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to the OpenShift web console. </span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <strong class="ph b">Installed Operators → Ansible Automation Platform → All Instances</strong>. </span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click your <code class="ph codeph">AnsibleAutomationPlatform</code> instance. </span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">YAML</strong> tab. Under the spec: section, add the <code class="ph codeph">route_annotations</code> to extend the timeout: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>spec:
+  route_annotations: |
+    haproxy.router.openshift.io/timeout: 180s
+ </code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Save the changes.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result" id="GUID-9be68a8a-ed83-4e25-9fea-79213a49aace__result_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Confirm that the <code class="ph codeph">haproxy.router.openshift.io/timeout</code> annotation in the <strong class="ph b">Route</strong> reflects the new value.</p> 
+        <ul class="ul" id="GUID-9be68a8a-ed83-4e25-9fea-79213a49aace__ul_2"> 
+         <li class="li">Navigate to <strong class="ph b">Networking → Routes </strong>in the OpenShift console. <p class="p">Select the route for your <strong class="ph b">Ansible Automation Platform</strong> instance. </p> </li> 
+         <li class="li">Verify the <strong class="ph b">Annotations</strong> section contains the updated timeout value.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

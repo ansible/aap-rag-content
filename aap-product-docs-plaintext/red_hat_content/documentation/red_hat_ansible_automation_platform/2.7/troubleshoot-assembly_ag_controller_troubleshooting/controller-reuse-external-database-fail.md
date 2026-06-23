@@ -1,0 +1,13 @@
+# Troubleshoot automation controller
+## Prevent installation failures when reusing an external database
+
+When reusing an external database for clustered installations, you must manually clear the database before performing subsequent installations.
+
+Instances have been reported where reusing the external database during subsequent installation of nodes causes installation failures.
+
+**Example**
+
+You perform a clustered installation. Then, you need to do this again and perform a second clustered installation reusing the same external database, only this subsequent installation failed.
+
+When setting up an external database that has been used in a prior installation, you must manually clear the database used for the clustered node before any additional installations can succeed.
+

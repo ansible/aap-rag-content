@@ -1,0 +1,8 @@
+# Configure custom TLS certificates
+## Redis certificate considerations
+
+When using custom TLS certificates for Redis-related services, consider the following for mutual TLS (mTLS) communication if specifying Extended Key Usage (EKU):
+
+- The Redis server certificate (`redis_tls_cert`) should include the `serverAuth` (web server authentication) and `clientAuth` (client authentication) EKU.
+- The Redis client certificate (`gateway_redis_tls_cert`) should include the `clientAuth` (client authentication) EKU.
+

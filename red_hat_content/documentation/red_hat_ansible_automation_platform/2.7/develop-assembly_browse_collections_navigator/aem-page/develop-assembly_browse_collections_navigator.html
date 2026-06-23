@@ -1,0 +1,219 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-review-collections-navigator"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Browse collections in a text-based format</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">As a content creator, you can browse your Ansible collections with automation content navigator and interactively delve into each collection developed locally or within Automation execution environments.</p> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-navigator-collections"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Automation content navigator collections display</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Understand the information displayed by Automation content navigator about your collections, such as shadowing, type, and path. This overview helps you verify the collection source and search priority.</p> 
+       <p class="p">Automation content navigator displays information about your collections with the following details for each collection:</p> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+          SHADOWED 
+        </dt> 
+        <dd class="dd">
+          Indicates that an additional copy of the collection is higher in the search order, and playbooks prefer that collection. 
+        </dd> 
+        <dt class="dt dlterm">
+          TYPE 
+        </dt> 
+        <dd class="dd">
+          Shows if the collection is contained within an automation execution environment or volume mounted on onto the automation execution environment as a <code class="ph codeph">bind_mount</code>. 
+        </dd> 
+        <dt class="dt dlterm">
+          PATH 
+        </dt> 
+        <dd class="dd">
+          Reflects the collections location within the automation execution environment or local file system based on the collection TYPE field. 
+        </dd> 
+       </dl> 
+       <br> 
+       <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-collections-shadow.png" alt="Automation content navigator collections display"> 
+       <br> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-browse-collections-tui"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Browse collections from automation content navigator</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can browse Ansible collections with the automation content navigator text-based user interface in interactive mode and delve into each collection. automation content navigator shows collections within the current project directory and those available in the automation execution environments</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">A locally accessible collection or installed automation execution environments.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Start automation content navigator </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-navigator</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Browse the collection. Alternately, you can type <code class="ph codeph">ansible-navigator collections</code> to directly browse the collections. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ :collections</code></pre> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-collection-list.png" alt="A list of Ansible collections shown in the automation content navigator"> 
+           <br> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Type the number of the collection you want to explore. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>:4</code></pre> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-plugin-list.png" alt="A collection shown in the automation content navigator"> 
+           <br> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Type the number corresponding to the module you want to delve into. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>ANSIBLE.UTILS.IP_ADDRESS: Test if something in an IP address
+ 0│---
+ 1│additional_information: {}
+ 2│collection_info:
+ 3│  authors:
+ 4│  - Ansible Community
+ 5│  dependencies: {}
+ 6│  description: Ansible Collection with utilities to ease the management, manipulation,
+ 7│    and validation of data within a playbook
+ 8│  documentation: null
+ 9│  homepage: null
+10│  issues: null
+11│  license: []
+12│  license_file: LICENSE
+13│  name: ansible.utils
+14│  namespace: ansible
+15│  path:/usr/share/ansible/collections/ansible_collections/ansible/utils/
+16│  readme: README.md
+&lt;... output truncated...&gt;</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: jump to the documentation examples for this module. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>:{{ examples }}
+
+0│
+1│
+2│#### Simple examples
+3│
+4│- name: Check if 10.1.1.1 is a valid IP address
+5│  ansible.builtin.set_fact:
+6│    data: "{{ '10.1.1.1' is ansible.utils.ip_address }}"
+7│
+8│# TASK [Check if 10.1.1.1 is a valid IP address] *********************
+9│# ok: [localhost] =&gt; {
+10│#     "ansible_facts": {
+11│#         "data": true
+12│#     },
+13│#     "changed": false
+14│# }
+15│</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: open the example in your editor to copy it into a playbook. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>:open</code></pre> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-vscode-example.png" alt="Documentation example shown in the editing tool"> 
+           <br> 
+          </div> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Browse the collection list. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-collection-list.png" alt="Collection list"><br></li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-review-docs-tui"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Review collection and plugin documentation</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can review Ansible documentation for collections and plugins with the automation content navigator text-based user interface in interactive mode. automation content navigator shows collections within the current project directory and those available in the automation execution environments</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">A locally accessible collection or installed automation execution environments.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Start automation content navigator </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-navigator</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Review the module you are interested in. Alternately, you can type <code class="ph codeph">ansible-navigator doc</code> to access the documentation. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>:doc ansible.utils.ip_address</code></pre> 
+           <pre class="pre codeblock"><code>ANSIBLE.UTILS.IP_ADDRESS: Test if something in an IP address
+ 0│---
+ 1│additional_information: {}
+ 2│collection_info:
+ 3│  authors:
+ 4│  - Ansible Community
+ 5│  dependencies: {}
+ 6│  description: Ansible Collection with utilities to ease the management, manipulation,
+ 7│    and validation of data within a playbook
+ 8│  documentation: null
+ 9│  homepage: null
+10│  issues: null
+11│  license: []
+12│  license_file: LICENSE
+13│  name: ansible.utils
+14│  namespace: ansible
+15│  path:/usr/share/ansible/collections/ansible_collections/ansible/utils/
+16│  readme: README.md
+&lt;... output truncated...&gt;</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Jump to the documentation examples for this module. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>:{{ examples }}
+
+0│
+1│
+2│#### Simple examples
+3│
+4│- name: Check if 10.1.1.1 is a valid IP address
+5│  ansible.builtin.set_fact:
+6│    data: "{{ '10.1.1.1' is ansible.utils.ip_address }}"
+7│
+8│# TASK [Check if 10.1.1.1 is a valid IP address] *********************
+9│# ok: [localhost] =&gt; {
+10│#     "ansible_facts": {
+11│#         "data": true
+12│#     },
+13│#     "changed": false
+14│# }
+15│</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: open the example in your editor to copy it into a playbook. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>:open</code></pre> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-vscode-example.png" alt="Documentation example in editor"> 
+           <br> 
+           <p class="p">See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_settings_navigator#ref-navigator-general-settings" title="The following table describes each general parameter and setting options for automation content navigator.">Automation content navigator general settings</a> for details on how to set up your editor.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

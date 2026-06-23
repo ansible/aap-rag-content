@@ -1,0 +1,65 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="gw-openAPI-specification"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Understanding the platform gateway OpenAPI specification</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Platform gateway serves as the single entry point for Ansible Automation Platform, unifying the user interface and routing all API traffic to services such as automation controller, Event-Driven Ansible, and automation hub.</p> 
+      <p class="p">The OpenAPI specification provides a standardized, machine-readable definition of the unified API endpoints available through platform gateway. It is essential for external developers and automation engineers building reliable custom integrations.</p> 
+      <p class="p"> <strong class="ph b">Key roles of the specification</strong> </p> 
+      <p class="p">The OpenAPI specification ensures successful integration by fulfilling the following roles:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Enables custom integrations</strong>: Developers use the specification to understand endpoint structures, required parameters, and response schemas, which is needed for building custom applications and third-party tools.</li> 
+       <li class="li"><strong class="ph b">Ensures API longevity</strong>: Integration with the platform gateway API future-proofs custom applications against disruptions that might occur when legacy, direct-access component APIs are retired.</li> 
+       <li class="li"><strong class="ph b">Defines core functions</strong>: The specification details endpoints that support fundamental operational and administrative functions, including: 
+        <ul class="ul">
+         <li class="li">Platform health, such as <code class="ph codeph">/api/gateway/v1/status/</code>.</li>
+         <li class="li">Activity monitoring, such as <code class="ph codeph">/api/gateway/v1/activitystream/</code>.</li>
+         <li class="li">Configuration management, such as authentication configuration and role-based access control assignments.</li>
+        </ul></li> 
+      </ul> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="gw-download-openAPI"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Download the platform gateway OpenAPI specification</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can download the OpenAPI specification by using the <code class="ph codeph">curl</code> command from the schema endpoint.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <p class="p">Token authentication is the recommended method for programmatic API use.</p> 
+        <ol class="ol"> 
+         <li class="li">Create a Personal Access Token (PAT): From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Users</span></span>, select your user, go to the <strong class="ph b">Tokens</strong> tab, and click <span class="ph uicontrol button">Create token</span>.</li> 
+         <li class="li">Copy the generated token value. Use this value as the <code class="ph codeph">&lt;OAUTH2_TOKEN_VALUE&gt;</code> in the following commands.</li> 
+        </ol> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Retrieve the OpenAPI specification from the schema endpoint located at <code class="ph codeph"><a class="xref" href="https://$AAP_INSTANCE/api/gateway/v1/docs/schema/" target="_blank" rel="external noopener">https://$AAP_INSTANCE/api/gateway/v1/docs/schema/</a></code>, using one of the following methods: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Get the YAML specification (Default format): To download the specification as a YAML file, run the following command: <pre class="pre">curl -o "gateway_openapi_spec.yaml" "https://$AAP_INSTANCE/api/gateway/v1/docs/schema/"</pre> </li> 
+            <li class="li">Get the JSON specification (Optional format): To explicitly request the specification in JSON format, append <code class="ph codeph">?format=json</code> to the URL path and run the following command: <pre class="pre">curl -o "gateway_openapi_spec.json" "https://$AAP_INSTANCE/api/gateway/v1/docs/schema/?format=json"</pre> 
+             <div class="note important note_important">
+              <span class="note__title">Important:</span> 
+              <div class="note__body"> 
+               <p class="p">Replace <code class="ph codeph">$AAP_INSTANCE</code> with your Ansible Automation Platform hostname in the commands.</p> 
+              </div>
+             </div> </li> 
+           </ul> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

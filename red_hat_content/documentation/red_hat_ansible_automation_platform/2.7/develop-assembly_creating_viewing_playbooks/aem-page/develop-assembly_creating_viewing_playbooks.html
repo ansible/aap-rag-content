@@ -1,0 +1,155 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="creating-viewing-playbooks"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create playbooks and view playbook explanations</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Using the Ansible VS Code extension, you can create Ansible playbooks using a natural language interface in English.</p> 
+      <p class="p">Red Hat Ansible Lightspeed with IBM watsonx Code Assistant reads the natural language prompts and generates an entire playbook recommendation based on your intent. You can also view the explanations for new or existing playbooks. The playbook explanations describe what the playbook does and contextualize its impact.</p> 
+      <p class="p">These capabilities enable Ansible developers to use natural language prompts to create new Ansible playbooks quickly and more efficiently and also get an explanation for existing Ansible playbook, thereby reducing the overall onboarding learning period.</p> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">You can create playbooks and view playbook explanations when connecting to the Red Hat Ansible Lightspeed cloud service and on-premise deployments.</p> 
+       </div> 
+      </div> 
+      <section class="section" id="creating-viewing-playbooks___best_practices_to_create_playbooks"> 
+       <h2 class="title sectiontitle">Best practices to create playbooks</h2> 
+       <p class="p">Follow these guidelines for the highest quality of a playbook recommendation.</p> 
+       <ul class="ul"> 
+        <li class="li">Ensure that the goal statements directly specify what the playbook must do. <p class="p">Your statement should start with the goal of the playbook, for example, <code class="ph codeph">Apply security patches to RHEL9</code>. Avoid starting statements with <code class="ph codeph">Create a playbook that</code>, <code class="ph codeph">Please prepare a playbook that</code>, or <code class="ph codeph">I need help with</code>.</p> </li> 
+        <li class="li">Ensure that the goal statement does not contain new lines.</li> 
+        <li class="li">Ensure that the goal statement is not more than one sentence. <p class="p">You might have to repeat the details in the goal statement to produce the best results. It is recommended that you use the generated outline as feedback about whether your goal statement might benefit from more or less details, and then modify the goal statement as necessary.</p> </li> 
+        <li class="li">Ensure the following when you edit the outline: 
+         <ul class="ul"> 
+          <li class="li">Do not restate the goal of the playbook.</li> 
+          <li class="li">Verify that the steps considered capture the key steps in the playbook. The steps need not reflect each and every task that is expected in the playbook.</li> 
+          <li class="li">Keep the step description in one sentence without adding new lines to the outline.</li> 
+         </ul> </li> 
+       </ul> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_to_playbooks" title="An Ansible Playbook is a blueprint for automation tasks, which are actions executed with limited manual effort across an inventory of solutions. Playbooks tell Ansible what to do on which devices.">Get started with Ansible Playbooks</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="generate-playbook"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Generate Ansible playbooks</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can use the natural language interface in the Ansible VS Code extension to generate an entire Ansible playbook.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You meet <strong class="ph b">one</strong> of the following requirements: 
+          <ul class="ul"> 
+           <li class="li">Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.</li> 
+           <li class="li">Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.</li> 
+          </ul> </li> 
+         <li class="li">You have <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#installing-ansible-vscode-extension" title="Red Hat Ansible Lightspeed with IBM watsonx Code Assistant integrates with the Ansible Visual Studio (VS) Code extension. When enabled, the extension automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.">installed and configured the Ansible VS Code extension</a>.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to VS Code with your Red Hat account.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Activity</strong> bar, click the <strong class="ph b">Ansible</strong> icon.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Under <strong class="ph b">Ansible Creator</strong>, click <strong class="ph b">Get started</strong>. The <strong class="ph b">Ansible Content Creator</strong> page is displayed. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The following illustration displays the <strong class="ph b">Ansible Content Creator</strong> page:</p> 
+           <figure class="fig fignone"> 
+            <figcaption> <span class="fig--title-label">Figure 1. </span>Settings to create Ansible playbooks 
+            </figcaption> 
+            <br> 
+            <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/lightspeed-create-ansible-content.png" alt="Settings to create Ansible playbooks"> 
+            <br> 
+           </figure> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Playbook with Ansible Lightspeed</strong> tile. The <strong class="ph b">Create a playbook</strong> page is displayed.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">What do you want the playbook to accomplish?</strong> field, enter the prompts to create a playbook and click <strong class="ph b">Analyze</strong>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">After a few seconds, the recommended steps for your playbook intent are displayed in the <strong class="ph b">Review the suggested steps for your playbook and modify as needed</strong> field.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Perform one of the following tasks: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">If the steps match your intent: Click <strong class="ph b">Generate Playbook</strong>.</li> 
+            <li class="li">If any modifications are required: Click the editor and update the tasks or steps to suit your intent.</li> 
+            <li class="li">If the task suggestions do not match your intent: Click <strong class="ph b">Back</strong> to change the original prompt and start over.</li> 
+            <li class="li">If you want to restore the original task suggestions: Click <strong class="ph b">Reset</strong> and proceed to the next step.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">After you verify the steps, click <strong class="ph b">Generate playbook</strong>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">It takes a few seconds for the playbook to generate, and <strong class="ph b">The following playbook was generated for you</strong> field displays the newly generated playbook.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Open editor</strong>. The generated playbook opens as an untitled YAML file in the VS Code editor.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Save the untitled YAML file.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="view-playbook-explanation"> 
+      <h2 class="title topictitle2" id="ariaid-title3">View the playbook explanations</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can request explanations for a newly created playbook as well as an existing Ansible playbook.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You meet <strong class="ph b">one</strong> of the following requirements: 
+          <ul class="ul"> 
+           <li class="li">Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.</li> 
+           <li class="li">Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.</li> 
+          </ul> </li> 
+         <li class="li">You have <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#installing-ansible-vscode-extension" title="Red Hat Ansible Lightspeed with IBM watsonx Code Assistant integrates with the Ansible Visual Studio (VS) Code extension. When enabled, the extension automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.">installed and configured the Ansible VS Code extension</a>.</li> 
+         <li class="li">You have opened the playbook whose explanation you want to view.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to VS Code with your Red Hat account.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Open an Ansible playbook YAML file in VS Code.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use one of the following methods to view the playbook explanation: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">From an active playbook YAML file</strong>: 
+             <ol class="ol" type="a"> 
+              <li class="li">Place your cursor anywhere within the playbook file.</li> 
+              <li class="li">Right-click and select <strong class="ph b">Explain the playbook with Ansible Lightspeed</strong>.</li> 
+             </ol> </li> 
+            <li class="li"><strong class="ph b">From the Ansible panel</strong>: 
+             <ol class="ol" type="a"> 
+              <li class="li">From the navigation menu, click the <strong class="ph b">Ansible</strong> icon.</li> 
+              <li class="li">Select <strong class="ph b">Explain the current playbook</strong>. <p class="p">The playbook explanation is displayed on the right panel of the VS Code screen.</p> <p class="p">The following illustration shows an example of a playbook explanation:</p> 
+               <figure class="fig fignone"> 
+                <figcaption> <span class="fig--title-label">Figure 2. </span>Example of a playbook explanation 
+                </figcaption> 
+                <br> 
+                <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/lightspeed-playbook-explanation.png" alt="Example of a playbook explanation"> 
+                <br> 
+               </figure> </li> 
+             </ol> </li> 
+           </ul> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

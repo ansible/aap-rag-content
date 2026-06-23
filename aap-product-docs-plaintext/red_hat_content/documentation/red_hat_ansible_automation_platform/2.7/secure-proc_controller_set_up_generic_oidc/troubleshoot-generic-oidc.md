@@ -1,0 +1,4 @@
+# Configure generic OIDC authentication
+## Troubleshoot Generic OIDC Single Sign-On authentication failures
+
+Authentication fails if the `OIDC JWT Algorithm` setting is not explicitly defined. The authentication code requires a list of acceptable algorithms, which it does not retrieve automatically from the OpenID Connect (OIDC) configuration endpoint.

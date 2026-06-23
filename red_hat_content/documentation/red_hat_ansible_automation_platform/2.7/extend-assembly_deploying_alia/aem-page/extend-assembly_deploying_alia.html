@@ -1,0 +1,492 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="deploying-alia"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Deploy the automation intelligent assistant</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">The automation intelligent assistant is an AI-powered chat interface embedded in Ansible Automation Platform. It uses large language models (LLMs) to answer questions about your Ansible Automation Platform environment in natural language.</p> 
+      <div class="p">
+        Red Hat Ansible Lightspeed includes two components: 
+       <ul class="ul" id="deploying-alia__ul_1"> 
+        <li class="li">The automation intelligent assistant: A chat interface that generates answers to questions about Ansible Automation Platform. The intelligent assistant interacts with users in English and uses LLMs to provide contextual responses. </li> 
+        <li class="li">The coding assistant: A generative AI service that works with IBM watsonx Code Assistant to help developers create Ansible content, including single-task and multi-task recommendations, playbooks, and roles. </li> 
+       </ul> The following documentation covers deploying the automation intelligent assistant on an Ansible Automation Platform containerized installation, and on Ansible Automation Platform on Openshift Container Platform (OCP). For information on deploying the coding assistant, see Install and configure the Ansible code bot. 
+      </div> 
+      <section class="section" id="deploying-alia___ansible_lightspeed_intelligent_assistant"> 
+       <h2 class="title sectiontitle">Automation intelligent assistant</h2> 
+       <p class="p">The automation intelligent assistant is an intuitive chat interface embedded in the Ansible Automation Platform, and uses generative artificial intelligence (AI) to answer questions about the platform.</p> 
+       <p class="p">The automation intelligent assistant interacts with users in English, and uses Large Language Models (LLMs) to generate quick, accurate, and personalized responses. These responses empower Ansible users to work more efficiently, thereby improving productivity and the overall quality of their work.</p> 
+       <p class="p">To use the automation intelligent assistant, you need:</p> 
+       <ul class="ul" id="deploying-alia__ul_2"> 
+        <li class="li">A valid subscription to Ansible Automation Platform.</li> 
+        <li class="li">Deployment of an LLM service that is hosted on one of these platforms: Red Hat Enterprise Linux AI, Red Hat OpenShift AI, or Red Hat AI Inference Server.</li> 
+       </ul> 
+      </section> 
+      <section class="section" id="deploying-alia___integration_with_mcp_server"> 
+       <h2 class="title sectiontitle">Integration with the MCP server</h2> 
+       <p class="p">The automation intelligent assistant integration with the Model Context Protocol (MCP) server is available as a Technology Preview release. MCP is an open protocol that enables applications to give real-time context to LLMs.</p> 
+       <p class="p">This integration enables the automation intelligent assistant to request and receive the latest information from external resources, and give more relevant, dynamically-sourced answers when responding to your questions. To set up this integration, you need to specify the MCP server variables when configuring the Red Hat Ansible Lightspeed variables in the inventory file.</p> 
+       <div class="note note note_note"> <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">Technology Preview features are not supported with Red Hat production service level agreements (SLAs) and might not be functionally complete. Red Hat does not recommend using them in production. These features give early access to upcoming product features, enabling customers to test functionality and leave feedback during the development process.</p> 
+        </div> 
+       </div> 
+      </section> 
+      <section class="section" id="deploying-alia___deployment_models"> 
+       <h2 class="title sectiontitle">Deployment models</h2> 
+       <p class="p">The Ansible Lightspeed coding assistant supports two deployment models. No telemetry data is collected in either configuration.</p> 
+       <ul class="ul" id="deploying-alia__ul_3"> 
+        <li class="li"> <strong class="ph b">On-premise deployment</strong> <p class="p">Both Red Hat Ansible Lightspeed and the IBM watsonx Code Assistant model (IBM Cloud Pak for Data) are on-premise deployments.</p> </li> 
+        <li class="li"> <strong class="ph b">Hybrid deployment</strong> <p class="p">Red Hat Ansible Lightspeed is an on-premise deployment, while IBM watsonx Code Assistant model is a cloud deployment.</p> <p class="p">A hybrid deployment model provides the following benefits:</p> 
+         <ul class="ul" id="deploying-alia__ul_4"> 
+          <li class="li">Flexibility to choose an environment that best suits your organizational needs.</li> 
+          <li class="li">Integrated authentication by using the Ansible Automation Platform for user authentication and removing the need for a separate Red Hat cloud login.</li> 
+          <li class="li">Regional choice for organizations to deploy Red Hat Ansible Lightspeed in their preferred geographical region.</li> 
+         </ul> </li> 
+       </ul> 
+      </section> 
+      <section class="section" id="deploying-alia___ansible_automation_platform_requirements"> 
+       <h2 class="title sectiontitle">Ansible Automation Platform requirements</h2> 
+       <ul class="ul" id="deploying-alia__ul_5"> 
+        <li class="li">Licensing requirements: 
+         <ul class="ul" id="deploying-alia__ul_6"> 
+          <li class="li">A valid Ansible Automation Platform subscription.</li> 
+          <li class="li">Administrator privileges for the Ansible Automation Platform.</li> 
+         </ul> </li> 
+        <li class="li">Additional requirements for Ansible Lightspeed coding assistant: 
+         <ul class="ul" id="deploying-alia__ul_7"> 
+          <li class="li">A valid subscription to IBM watsonx Code Assistant (for on-premise deployment), or IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data (for hybrid deployment).</li> 
+          <li class="li">An API key and a model ID from IBM watsonx Code Assistant.</li> 
+          <li class="li">VS Code version 1.70.1 or later.</li> 
+         </ul> </li> 
+        <li class="li">Additional requirements for automation intelligent assistant: 
+         <ul class="ul" id="deploying-alia__ul_8"> 
+          <li class="li">Deployment of an LLM service that is hosted on one of these platforms: Red Hat Enterprise Linux AI, Red Hat OpenShift AI, or Red Hat AI Inference Server.</li> 
+         </ul> </li> 
+       </ul> 
+      </section> 
+      <section class="section" id="deploying-alia___large_language_model_llm_provider_requirements"> 
+       <h2 class="title sectiontitle">Large Language Model (LLM) provider requirements</h2> 
+       <p class="p">You must have configured an LLM provider that you will use before deploying the automation intelligent assistant. An LLM is a type of machine learning model that can interpret and generate human-like language. When an LLM is used with the automation intelligent assistant, the LLM can interpret questions accurately and provide helpful answers in a conversational manner.</p> 
+       <p class="p">Your LLM must have tool calling enabled to handle tool-related requests. Tool calling allows the assistant to interact with platform services and execute complex workflows.</p> 
+       <p class="p">The automation intelligent assistant can rely on the following LLM providers:</p> 
+       <ul class="ul" id="deploying-alia__ul_9"> 
+        <li class="li"> <strong class="ph b">Red Hat LLM providers:</strong> 
+         <ul class="ul" id="deploying-alia__ul_10"> 
+          <li class="li"> <strong class="ph b">Red Hat Enterprise Linux AI</strong> <p class="p">You can configure Red Hat Enterprise Linux AI as the LLM provider. As the Red Hat Enterprise Linux is in a different environment than the Ansible Lightspeed deployment, the model deployment must allow access using a secure connection.</p> <p class="p">The automation intelligent assistant supports vLLM Server. When self-hosting an LLM with Red Hat Enterprise Linux AI, you can use vLLM Server as the inference engine.</p> </li> 
+          <li class="li"> <strong class="ph b">Red Hat OpenShift AI</strong> <p class="p">You must deploy an LLM on the Red Hat OpenShift AI single-model serving platform that uses the Virtual Large Language Model (vLLM) runtime. If the model deployment lives in a different OpenShift environment than the Ansible Lightspeed deployment, include a route to expose the model deployment outside the cluster.</p> <p class="p">The automation intelligent assistant supports vLLM Server. When self-hosting an LLM with Red Hat OpenShift AI, you can use vLLM Server as the inference engine.</p> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">For configurations with Red Hat Enterprise Linux AI or Red Hat OpenShift AI, you must host your own LLM provider instead of using a SaaS LLM provider.</p> 
+            </div> 
+           </div> </li> 
+          <li class="li"> <strong class="ph b">Red Hat AI Inference Server</strong> <p class="p">You can deploy an LLM by using Red Hat AI Inference Server as your inference runtime. Red Hat AI Inference Server supports vLLM runtimes for efficient model serving and can be configured to work with the automation intelligent assistant.</p> <p class="p">If the Red Hat AI Inference Server deployment is in a different environment than the Ansible Lightspeed deployment, ensure the model deployment allows access by using a secure connection and configure appropriate network routing.</p> <p class="p">The automation intelligent assistant supports vLLM Server when self-hosting an LLM with Red Hat AI Inference Server as the inference engine.</p> </li> 
+         </ul> </li> 
+        <li class="li"> <strong class="ph b">Third-party LLM providers:</strong> 
+         <ul class="ul" id="deploying-alia__ul_11"> 
+          <li class="li"> <strong class="ph b">OpenAI</strong> <p class="p">To use OpenAI with the automation intelligent assistant, you need access to the OpenAI API platform.</p> </li> 
+          <li class="li"> <strong class="ph b">Microsoft Azure OpenAI</strong> <p class="p">To use Microsoft Azure with the automation intelligent assistant, you need access to Microsoft Azure OpenAI.</p> </li> 
+         </ul> </li> 
+       </ul> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_using_code_bot_for_suggestions#using-code-bot-for-suggestions" title="Ansible code bot scans GitHub repositories (collections, roles, playbooks) and proactively creates pull requests with best practice or quality improvement recommendations.">Install and configure the Ansible code bot</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="deploying-chatbot-operator"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Deploy the automation intelligent assistant on OpenShift Container Platform</h2> 
+      <p class="shortdesc">As a system administrator, you can deploy the automation intelligent assistant on Ansible Automation Platform on OpenShift Container Platform.</p> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="con-about-lightspeed-intelligent-assistant"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Overview</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Install and use the automation intelligent assistant on Ansible Automation Platform for OpenShift Container Platform. An intuitive chat interface, embedded in Ansible Automation Platform, it uses generative artificial intelligence (AI) to answer questions about Ansible Automation Platform.</p> 
+       <p class="p">The automation intelligent assistant interacts with users in their natural language prompts in English, and uses Large Language Models (LLMs) to generate quick, accurate, and personalized responses. These responses empower Ansible users to work more efficiently, thereby improving productivity and the overall quality of their work.</p> 
+       <p class="p">The automation intelligent assistant requires the following configurations:</p> 
+       <ul class="ul"> 
+        <li class="li">Installation of Ansible Automation Platform 2.6 or later on Red Hat OpenShift Container Platform</li> 
+        <li class="li">Deployment of an LLM provider served by either a Red Hat AI platform or a third-party AI platform. To know the LLM providers that you can use, see LLM Providers below.</li> 
+       </ul> 
+       <div class="note important note_important"> <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">Red Hat does not collect any telemetry data from your interactions with the automation intelligent assistant.</p> 
+        </div> 
+       </div> 
+       <section class="section" id="con-about-lightspeed-intelligent-assistant___integration_with_mcp_server"> 
+        <h3 class="title sectiontitle">Integration with MCP server</h3> 
+        <p class="p">Automation intelligent assistant integration with the Model Context Protocol (MCP) server is now generally available. This integration enhances the user experience by delivering relevant, dynamically sourced data results to your queries.</p> 
+        <p class="p">MCP is an open protocol that standardizes how applications provide context to LLMs. Using the protocol, an MCP server provides a standardized way for an LLM to increase context by requesting and receiving real-time information from external resources. The integration with an MCP server enables the automation intelligent assistant to offer an enhanced user experience by delivering relevant, dynamically sourced data results to your queries. You can configure a MCP server in the chatbot configuration secret.</p> 
+       </section> 
+       <section class="section" id="con-about-lightspeed-intelligent-assistant___ansible_automation_platform_2_6_requirements"> 
+        <h3 class="title sectiontitle">Ansible Automation Platform requirements</h3> 
+        <ul class="ul"> 
+         <li class="li">You have installed Ansible Automation Platform 2.6 or later on your OpenShift Container Platform environment.</li> 
+         <li class="li">You have administrator privileges for Ansible Automation Platform.</li> 
+         <li class="li">You have provisioned an OpenShift cluster with Operator Lifecycle Management installed.</li> 
+        </ul> 
+       </section> 
+       <section class="section" id="con-about-lightspeed-intelligent-assistant__LLMproviders"> 
+        <h3 class="title sectiontitle">Large Language Model (LLM) provider requirements</h3> 
+        <p class="p">You must have configured an LLM provider that you will use before deploying the automation intelligent assistant.</p> 
+        <p class="p">An LLM is a type of machine learning model that can interpret and generate human-like language. When an LLM is used with the automation intelligent assistant, the LLM can interpret questions accurately and provide helpful answers in a conversational manner. Your LLM must have tool calling enabled to handle tool-related requests. Tool calling allows the assistant to interact with platform services and execute complex workflows.</p> 
+        <p class="p">The automation intelligent assistant can rely on the following LLM providers:</p> 
+        <ul class="ul"> 
+         <li class="li"> <strong class="ph b">Red Hat LLM providers:</strong> 
+          <ul class="ul"> 
+           <li class="li"> <strong class="ph b">Red Hat Enterprise Linux AI</strong> <p class="p">You can configure Red Hat Enterprise Linux AI as the LLM provider. As the Red Hat Enterprise Linux is in a different environment than the Ansible Lightspeed deployment, the model deployment must allow access using a secure connection.</p> <p class="p">The automation intelligent assistant supports vLLM Server. When self-hosting an LLM with Red Hat Enterprise Linux AI, you can use vLLM Server as the inference engine.</p> </li> 
+           <li class="li"> <strong class="ph b">Red Hat OpenShift AI</strong> <p class="p">You must deploy an LLM on the Red Hat OpenShift AI single-model serving platform that uses the Virtual Large Language Model (vLLM) runtime. If the model deployment resides in a different OpenShift environment than the Ansible Lightspeed deployment, include a route to expose the model deployment outside the cluster.</p> <p class="p">The automation intelligent assistant supports vLLM Server. When self-hosting an LLM with Red Hat OpenShift AI, you can use vLLM Server as the inference engine.</p> 
+            <div class="note note note_note"> <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">For configurations with Red Hat Enterprise Linux AI or Red Hat OpenShift AI, you must host your own LLM provider instead of using a SaaS LLM provider.</p> 
+             </div> 
+            </div> </li> 
+           <li class="li"> <strong class="ph b">Red Hat AI Inference Server</strong> <p class="p">You can deploy an LLM using Red Hat AI Inference Server as your inference runtime. Red Hat AI Inference Server supports vLLM runtimes for efficient model serving and can be configured to work with automation intelligent assistant.</p> <p class="p">If the Red Hat AI Inference Server deployment is in a different environment than the Ansible Lightspeed deployment, ensure the model deployment allows access using a secure connection and configure appropriate network routing.</p> <p class="p">The automation intelligent assistant supports vLLM Server when self-hosting an LLM with Red Hat AI Inference Server as the inference engine.</p> </li> 
+          </ul> </li> 
+         <li class="li"> <strong class="ph b">Third-party LLM providers:</strong> 
+          <ul class="ul"> 
+           <li class="li"> <strong class="ph b">OpenAI</strong> <p class="p">To use OpenAI with the automation intelligent assistant, you need access to the OpenAI API platform.</p> </li> 
+           <li class="li"> <strong class="ph b">Microsoft Azure OpenAI</strong> <p class="p">To use Microsoft Azure with the automation intelligent assistant, you need access to Microsoft Azure OpenAI.</p> </li> 
+          </ul> </li> 
+        </ul> 
+       </section> 
+       <section class="section" id="con-about-lightspeed-intelligent-assistant___process_for_configuring_and_using_the_ansible_lightspeed_intelligent_assistant"> 
+        <h3 class="title sectiontitle">Process for configuring and using the automation intelligent assistant</h3> 
+        <p class="p">Perform the following tasks to set up and use the automation intelligent assistant in your Ansible Automation Platform instance on the OpenShift Container Platform environment:</p> 
+        <table class="table"> 
+         <caption></caption> 
+         <colgroup> 
+          <col style="width:35%"> 
+          <col style="width:65%"> 
+         </colgroup> 
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="con-about-lightspeed-intelligent-assistant___process_for_configuring_and_using_the_ansible_lightspeed_intelligent_assistant__entry__1">Task</th> 
+           <th class="entry" id="con-about-lightspeed-intelligent-assistant___process_for_configuring_and_using_the_ansible_lightspeed_intelligent_assistant__entry__2">Description</th> 
+          </tr> 
+         </thead> 
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="con-about-lightspeed-intelligent-assistant___process_for_configuring_and_using_the_ansible_lightspeed_intelligent_assistant__entry__1"> <p class="p">Deploy the automation intelligent assistant on OpenShift Container Platform</p> </td> 
+           <td class="entry" headers="con-about-lightspeed-intelligent-assistant___process_for_configuring_and_using_the_ansible_lightspeed_intelligent_assistant__entry__2"> <p class="p">An Ansible Automation Platform administrator who wants to deploy the automation intelligent assistant for all Ansible users in the organization.</p> <p class="p">Perform the following tasks:</p> 
+            <ol class="ol"> 
+             <li class="li">Create a chatbot configuration secret.</li> 
+             <li class="li">Update the YAML file of the Ansible Automation Platform to use the chatbot connection secret.</li> 
+             <li class="li">Optional: Change your LLM model if you want to use a different LLM provider after deploying Red Hat Ansible Lightspeed.</li> 
+            </ol> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-about-lightspeed-intelligent-assistant___process_for_configuring_and_using_the_ansible_lightspeed_intelligent_assistant__entry__1"> <p class="p">Access and use the automation intelligent assistant</p> </td> 
+           <td class="entry" headers="con-about-lightspeed-intelligent-assistant___process_for_configuring_and_using_the_ansible_lightspeed_intelligent_assistant__entry__2"> <p class="p">All Ansible users who want to use the intelligent assistant to get answers to their questions about the Ansible Automation Platform.</p> </td> 
+          </tr> 
+         </tbody> 
+        </table> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist"> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_alia#deploying-chatbot-operator" title="As a system administrator, you can deploy the automation intelligent assistant on Ansible Automation Platform on OpenShift Container Platform.">Deploy the automation intelligent assistant on OpenShift Container Platform</a></li> 
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_ai/1.5#creating_secure_endpoint" target="_blank" rel="external noopener">Optional: Allowing access to a model from a secure endpoint</a></li> 
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.3#about-the-single-model-serving-platform_serving-large-models" target="_blank" rel="external noopener">About the single-model serving platform</a></li> 
+         <li class="linklist"><a class="link" href="http://docs.redhat.com/en/documentation/red_hat_ai_inference_server/3.2/html/getting_started/rhaiis-getting-started-overview_getting-started" target="_blank" rel="external noopener">Red Hat AI Inference Server documentation</a></li> 
+         <li class="linklist"><a class="link" href="https://openai.com/api/" target="_blank" rel="external noopener">OpenAI API platform</a></li> 
+         <li class="linklist"><a class="link" href="https://azure.microsoft.com/en-us/products/ai-foundry/models/openai/" target="_blank" rel="external noopener">Microsoft Azure OpenAI</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_alia#deploying-alia" title="The automation intelligent assistant is an AI-powered chat interface embedded in Ansible Automation Platform. It uses large language models (LLMs) to answer questions about your Ansible Automation Platform environment in natural language.">Deploy and use the automation intelligent assistant</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/proc_change_llm_model_chatbot_containerized_install" title="To change the LLM model for your containerized Ansible Automation Platform deployment of Ansible Lightspeed intelligent assistant, you must edit the inventory file with the specific details of your new LLM provider and then rerun the install playbook.">Change your LLM model</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-create-chatbot-config-secret"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Create a chatbot configuration secret</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Create a configuration secret for the intelligent assistant so that you can connect it to the Ansible Automation Platform operator.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator" title="As a system administrator, you can use Ansible Automation Platform Operator to deploy new Ansible Automation Platform instances in your OpenShift environment.">You have installed and configured the Ansible Automation Platform operator</a>.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform as an administrator.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Secrets</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Projects</strong> list, select the namespace that you created when you installed the Ansible Automation Platform operator.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">Create</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Key/value secret</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Secret name</strong> field, enter a unique name for the secret. For example, <code class="ph codeph">chatbot-configuration-secret</code>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Add the following keys and their associated values individually: </span> 
+          <div class="itemgroup info"> 
+           <table class="table"> 
+            <caption></caption> 
+            <colgroup> 
+             <col style="width:25%"> 
+             <col style="width:75%"> 
+            </colgroup> 
+            <thead class="thead"> 
+             <tr class="row"> 
+              <th class="entry" id="proc-create-chatbot-config-secret__entry__1">Key</th> 
+              <th class="entry" id="proc-create-chatbot-config-secret__entry__2">Value</th> 
+             </tr> 
+            </thead> 
+            <tbody class="tbody"> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__1 proc-create-chatbot-config-secret__entry__2" colspan="2"> <p class="p"> <strong class="ph b">Settings for all LLM setups</strong> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__1"> <p class="p"> <code class="ph codeph">chatbot_model</code> </p> </td> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__2"> <p class="p">Enter the LLM model name that is configured on your LLM setup.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__1"> <p class="p"> <code class="ph codeph">chatbot_url</code> </p> </td> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__2"> <p class="p">Enter the inference API base URL on your LLM setup. For example, <code class="ph codeph">https://your_inference_api/v1</code>. If you are using Microsoft Azure OpenAI, then set the base URL to <code class="ph codeph">https://your_inference_api/openai/v1</code>. </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__1"> <p class="p"> <code class="ph codeph">chatbot_token</code> </p> </td> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__2"> <p class="p">Enter the API token or the API key. This token is sent along with the authorization header when an inference API is called.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__1"> <p class="p"> <code class="ph codeph">chatbot_llm_provider_type</code> </p> </td> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__2"> <p class="p"> <em class="ph i">Optional</em> </p> <p class="p">Enter the value as per the provider type of your LLM setup:</p> 
+               <ul class="ul"> 
+                <li class="li">Red Hat Enterprise Linux AI: <code class="ph codeph">rhelai_vllm</code></li> 
+                <li class="li">Red Hat OpenShift AI: <code class="ph codeph">rhoai_vllm</code></li> 
+                <li class="li">OpenAI: <code class="ph codeph">openai</code></li> 
+                <li class="li">Microsoft Azure OpenAI: <code class="ph codeph">azure_openai</code></li> 
+               </ul> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__1"> <p class="p"> <code class="ph codeph">chatbot_model_config_extras</code> </p> </td> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__2"> <p class="p"> <em class="ph i">Optional</em> </p> <p class="p">Use this field to pass a JSON dictionary of extra parameters to pass directly to the model provider, for settings not covered by other standard fields.</p> <p class="p">For example, you can specify a parameter <code class="ph codeph">api_version</code> for Microsoft Azure OpenAI in the JSON format <code class="ph codeph">'{"api_version": "&lt;your API version&gt;"}'</code>.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__1"><code class="ph codeph">chatbot_agent_config_extras</code></td> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__2"> <p class="p"><em class="ph i">Optional</em> </p> <p class="p">Use this parameter to customize agent behavior, such as controlling the temperature of the LLM. For example, <code class="ph codeph">'{"chatbot_temperature_override": 1}</code>. </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__1 proc-create-chatbot-config-secret__entry__2" colspan="2"> <p class="p"> <strong class="ph b">Additional settings for MCP server configuration</strong> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__1"> 
+               <ul class="ul"> 
+                <li class="li"> <code class="ph codeph">aap_gateway_url</code> </li> 
+                <li class="li"> <code class="ph codeph">aap_controller_url</code> </li> 
+               </ul> </td> 
+              <td class="entry" headers="proc-create-chatbot-config-secret__entry__2"> <p class="p">Configure a Model Context Protocol (MCP) server that interfaces with the intelligent assistant.</p> <p class="p">The values <code class="ph codeph">aap_gateway_url</code> and <code class="ph codeph">aap_controller_url</code> are internal URLs accessible to the platform gateway and automation controller services on the OpenShift cluster. For example, if the name of your Ansible Automation Platform custom resource is <code class="ph codeph">myaap</code>, these URLs will be:</p> 
+               <ul class="ul"> 
+                <li class="li"><code class="ph codeph">aap_gateway_url</code>: <code class="ph codeph">http://myaap</code></li> 
+                <li class="li"><code class="ph codeph">aap_controller_url</code>: <code class="ph codeph">http://myaap-controller-service</code></li> 
+               </ul> <p class="p">For MCP server configuration:</p> 
+               <ul class="ul"> 
+                <li class="li">If none of these values are configured, no MCP server is provisioned or registered with the underlying LLM’s tool at runtime.</li> 
+                <li class="li">If you configure the <code class="ph codeph">aap_gateway_url</code> value only, the Ansible Lightspeed Service MCP server is provisioned. Authentication attempts to use the JSON Web Token (JWT) token associated with the user’s authenticated context.</li> 
+                <li class="li">If you configure both values <code class="ph codeph">aap_gateway_url</code> and <code class="ph codeph">aap_controller_url</code>, the Ansible Lightspeed Service MCP server and Ansible Automation Platform Controller Service MCP server are both configured. Authentication attempts to use the JWT token associated with the user’s authenticated context.</li> 
+               </ul> </td> 
+             </tr> 
+            </tbody> 
+           </table> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Create</strong>. The chatbot authorization secret is successfully created.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="example"> 
+        <h3 class="title sectiontitle">Examples of chatbot configuration secrets</h3> 
+        <p class="p">The following snippet shows a few examples of secrets configuration for different LLM models. </p> 
+        <pre class="pre codeblock yaml"><code># Example of a secret configuration for Red Hat OpenShift AI 
+apiVersion: v1
+kind: Secret
+metadata:
+  name: chatbot-configuration-secret
+  namespace: aap
+stringData:
+  chatbot_llm_provider_type: rhoai_vllm
+  chatbot_url: https://llm-dev-wisdom-model-staging.apps.stage2-west.v2dz.p1.openshiftapps.com/v1
+  chatbot_model: granite-3.3-8b-instruct
+  chatbot_token: &lt;token number&gt;</code></pre> 
+        <p class="p"></p> 
+        <pre class="pre codeblock yaml"><code># Example of a secret configuration for OpenAI
+apiVersion: v1
+kind: Secret
+metadata:
+  name: chatbot-configuration-secret
+  namespace: aap
+stringData:
+  chatbot_llm_provider_type: openai
+  chatbot_url: https://api.openai.com/v1
+  chatbot_model: gpt-4o-mini
+  chatbot_token: &lt;token number&gt;</code></pre> 
+        <p class="p"></p> 
+        <pre class="pre codeblock yaml"><code># Example of a secret configuration for Microsoft Azure OpenAI
+apiVersion: v1
+kind: Secret
+metadata:
+  name: chatbot-configuration-secret
+  namespace: aap
+stringData:
+  chatbot_llm_provider_type: azure_openai
+  chatbot_url: https://ols-test.openai.azure.com
+  chatbot_model: gpt-4o-mini
+  chatbot_token: &lt;token number&gt;
+  chatbot_model_config_extras: '{"api_version": "2025-01-01-preview"}'</code></pre> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-update-aap-operator-chatbot"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Update the YAML file of the Ansible Automation Platform operator</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">After you create the chatbot authorization secret, you must update the YAML file of the Ansible Automation Platform operator to use the secret.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform as an administrator.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the list of installed operators, select the <strong class="ph b">Ansible Automation Platform</strong> operator.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Locate and select the <strong class="ph b">Ansible Automation Platform</strong> custom resource, and then click the required app.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">YAML</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Scroll the text to find the <code class="ph codeph">spec:</code> section, and add the following details under the <code class="ph codeph">spec:</code> section: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>spec:
+  lightspeed:
+    disabled: false
+    chatbot_config_secret_name: &lt;name of your chatbot configuration secret&gt;</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save</strong>. The intelligent assistant service takes a few minutes to set up. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Upgrading from Ansible Automation Platform 2.5 to 2.6.1 enables HTTPS and enables TLS by default for internal communication between the Ansible Lightspeed API and the intelligent assistant pod. Following the upgrade to Ansible Automation Platform 2.6.1, the intelligent assistant will be unavailable for approximately 60 seconds while its pod restarts.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <ol class="ol"> 
+         <li class="li">Verify that the chat interface service is running successfully: 
+          <ol class="ol" type="a"> 
+           <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Workloads</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Pods</span></span>.</li> 
+           <li class="li">Filter with the term <strong class="ph b">api</strong> and ensure that the following APIs are displayed in <strong class="ph b">Running</strong> status: 
+            <ul class="ul"> 
+             <li class="li"><code class="ph codeph">myaap-lightspeed-api-&lt;version number&gt;</code></li> 
+             <li class="li"><code class="ph codeph">myaap-lightspeed-chatbot-api-&lt;version number&gt;</code></li> 
+            </ul> </li> 
+          </ol> </li> 
+         <li class="li">Verify the MCP server configuration if you specified either <code class="ph codeph">aap_gateway_url</code> or <code class="ph codeph">aap_controller_url</code> parameter: 
+          <ul class="ul"> 
+           <li class="li">Open the <code class="ph codeph">lightspeed-chatbot-api</code> pod and click the <strong class="ph b">Containers</strong> section. 
+            <ul class="ul"> 
+             <li class="li">If the <code class="ph codeph">ansible-mcp-lightspeed</code> container is displayed, the Ansible Lightspeed MCP server is running.</li> 
+             <li class="li">If the <code class="ph codeph">ansible-mcp-controller</code> container is displayed, the Ansible Automation Platform Controller Service MCP server is running.</li> 
+            </ul> </li> 
+          </ul> </li> 
+         <li class="li">Verify that the chat interface is displayed on the Ansible Automation Platform: 
+          <ol class="ol" type="a"> 
+           <li class="li">Access the Ansible Automation Platform: 
+            <ol class="ol" type="i"> 
+             <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</li> 
+             <li class="li">From the list of installed operators, click <strong class="ph b">Ansible Automation Platform</strong>.</li> 
+             <li class="li">Locate and select the <strong class="ph b">Ansible Automation Platform</strong> custom resource, and then click the app that you created.</li> 
+             <li class="li">From the <strong class="ph b">Details</strong> tab, record the information available in the following fields: 
+              <ul class="ul"> 
+               <li class="li"><strong class="ph b">URL</strong>: This is the URL of your Ansible Automation Platform instance.</li> 
+               <li class="li"><strong class="ph b">Gateway Admin User</strong>: This is the username to log into your Ansible Automation Platform instance.</li> 
+               <li class="li"><strong class="ph b">Gateway Admin password</strong>: This is the password to log into your Ansible Automation Platform instance.</li> 
+              </ul> </li> 
+             <li class="li">Log in to the Ansible Automation Platform using the URL, username, and password that you recorded earlier.</li> 
+            </ol> </li> 
+           <li class="li">Access the intelligent assistant: 
+            <ol class="ol" type="i"> 
+             <li class="li">Click the intelligent assistant icon <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/chatbot-icon.png" alt="intelligent assistant icon"> that is displayed at the top right corner of the taskbar.</li> 
+             <li class="li">Verify that the chat interface is displayed, as shown in the following image: <p class="p"><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/aap-ansible-lightspeed-intelligent-assistant.png" alt="Intelligent assistant">.</p> </li> 
+            </ol> </li> 
+          </ol> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-change-llm-model"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Change your LLM model</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">If you have already deployed Ansible Lightspeed intelligent assistant but want to change your LLM model, you can create a new chatbot configuration secret for the new LLM model.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Alternatively, if you want to use the same chatbot configuration secret, you must delete and redeploy the Ansible Lightspeed intelligent assistant.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ul class="ul steps-unordered"> 
+         <li class="li step"> <span class="ph cmd">To create and use a new chatbot configuration secret: </span> 
+          <ol class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator" title="As a system administrator, you can use Ansible Automation Platform Operator to deploy new Ansible Automation Platform instances in your OpenShift environment.">Create a new chatbot configuration secret</a> with a different name for the new LLM model.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator" title="As a system administrator, you can use Ansible Automation Platform Operator to deploy new Ansible Automation Platform instances in your OpenShift environment.">Update the YAML file of the Ansible Automation Platform operator</a> with the new chatbot configuration secret name. </span> 
+            <div class="itemgroup info"> 
+             <p class="p">The Ansible Automation Platform operator detects the new configuration and redeploys the Ansible Lightspeed intelligent assistant.</p> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Verify that the chat interface service is running successfully. See the verification steps mentioned in the topic <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator" title="As a system administrator, you can use Ansible Automation Platform Operator to deploy new Ansible Automation Platform instances in your OpenShift environment.">Update the YAML file of the Ansible Automation Platform operator</a>. </span> 
+            <div class="itemgroup info"> 
+             <div class="note important note_important"> <span class="note__title">Important:</span> 
+              <div class="note__body"> 
+               <p class="p">Do not update the existing chatbot configuration secret with the new LLM model, as the reconciliation logic does not check the updates made to the secret.</p> 
+              </div> 
+             </div> 
+            </div> </li> 
+          </ol> </li> 
+         <li class="li step"> <span class="ph cmd">To use the same chatbot secret by deleting and redeploying the Ansible Lightspeed intelligent assistant: </span> 
+          <ol class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Disable the Ansible Lightspeed operator instance: </span> 
+            <div class="itemgroup info"> 
+             <ol class="ol" type="a"> 
+              <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</li> 
+              <li class="li">From the list of installed operators, select <strong class="ph b">Ansible Automation Platform</strong>.</li> 
+              <li class="li">Locate and select the Ansible Automation Platform custom resource.</li> 
+              <li class="li">Select the <strong class="ph b">YAML</strong> tab and under the <code class="ph codeph">spec:</code> section for <code class="ph codeph">lightspeed</code> category, specify <code class="ph codeph">disabled:true</code>.</li> 
+              <li class="li">Click <strong class="ph b">Save</strong>.</li> 
+             </ol> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Delete the Ansible Lightspeed operator instance: </span> 
+            <div class="itemgroup info"> 
+             <ol class="ol" type="a"> 
+              <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</li> 
+              <li class="li">From the list of installed operators, select <strong class="ph b">Ansible Lightspeed</strong> and delete the operator.</li> 
+             </ol> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Re-enable the Ansible Automation Platform instance: </span> 
+            <div class="itemgroup info"> 
+             <ol class="ol" type="a"> 
+              <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</li> 
+              <li class="li">From the list of installed operators, select <strong class="ph b">Ansible Automation Platform</strong>.</li> 
+              <li class="li">Locate and select the Ansible Automation Platform custom resource.</li> 
+              <li class="li">Select the <strong class="ph b">YAML</strong> tab and under the <code class="ph codeph">spec:</code> section for <code class="ph codeph">lightspeed</code> category, specify <code class="ph codeph">disabled:false</code>.</li> 
+              <li class="li">Click <strong class="ph b">Save</strong>.</li> 
+             </ol> 
+            </div> </li> 
+          </ol> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

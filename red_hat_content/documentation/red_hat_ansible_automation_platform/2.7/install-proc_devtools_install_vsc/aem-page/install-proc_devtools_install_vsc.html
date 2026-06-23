@@ -1,0 +1,135 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="devtools-install-vsc"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Install and configure VS Code</h1> 
+     <div class="body taskbody"> 
+      <p class="shortdesc">Install VS Code by following the instructions found on the Download Visual Studio Code page in the official documentation.</p> 
+      <section class="section context"> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">About this task</h2> 
+       </div> 
+      </section> 
+      <section> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">Procedure</h2> 
+       </div> 
+       <div class="ul steps-unordered"> 
+        <div class="li step p"> <span class="ph cmd">To install VS Code, follow the instructions on the <a class="xref" href="https://code.visualstudio.com/download" target="_blank" rel="external noopener">Download Visual Studio Code page</a> in the Visual Studio Code documentation.</span> 
+        </div> 
+       </div> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="devtools-install-extension"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Install the VS Code Ansible extension</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">The Ansible extension adds language support for Ansible to VS Code. It incorporates Ansible development tools to facilitate creating and running automation content.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">For a full description of the Ansible extension, see the <a class="xref" href="https://marketplace.visualstudio.com/items?itemName=redhat.ansible" target="_blank" rel="external noopener">Visual Studio Code Marketplace</a>.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">Open VS Code.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click the <strong class="ph b">Extensions</strong> (<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/vscode-extensions-icon.png" width="15" alt="Extensions">) icon in the Activity Bar, or click <span class="ph menucascade"><span class="ph uicontrol">View</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Extensions</span></span>, to display the <strong class="ph b">Extensions</strong> view.</span> </li> 
+         <li class="li step"> <span class="ph cmd">In the search field in the <strong class="ph b">Extensions</strong> view, type <code class="ph codeph">Ansible Red Hat</code>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the Ansible extension and click <span class="ph uicontrol button">Install</span>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">When the language for a file is recognized as Ansible, the Ansible extension provides features such as auto-completion, hover, diagnostics, and goto. The language identified for a file is displayed in the Status bar at the bottom of the VS Code window.</p> 
+        <p class="p">The following files are assigned the Ansible language:</p> 
+        <ul class="ul"> 
+         <li class="li">YAML files in a <code class="ph codeph">/playbooks</code> directory</li> 
+         <li class="li">Files with the following double extension: <code class="ph codeph">.ansible.yml</code> or <code class="ph codeph">.ansible.yaml</code></li> 
+         <li class="li">Certain YAML names recognized by Ansible, for example <code class="ph codeph">site.yml</code> or <code class="ph codeph">site.yaml</code></li> 
+         <li class="li">YAML files whose filename contains "playbook": <code class="ph codeph"><strong class="ph b">playbook</strong>.yml</code> or <code class="ph codeph"><strong class="ph b">playbook</strong>.yaml</code></li> 
+        </ul> 
+       </section> 
+       <section class="section tasktroubleshooting"> 
+        <p class="p">If the extension does not identify the language for your playbook files as Ansible, follow the procedure in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_devtools_install" title="You have two options for installing Ansible development tools, so that you can choose the installation method that best suits your preferred operating system and development environment.">Associating the Ansible language to YAML files</a>.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="devtools-extension-settings"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure Ansible extension settings</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">The Ansible extension supports multiple configuration options.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Open a workspace or folder, or create a new folder, in VS Code using the <span class="ph menucascade"><span class="ph uicontrol">File</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Open Folder</span></span> menu. This is necessary because the file that stores settings preferences for workspaces is specific to a folder or workspace.</li> 
+        </ul> 
+       </section> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">You can configure the settings for the extension on a user level, on a workspace level, or for a particular directory. User-based settings are applied globally for any instance of VS Code that is opened. A VS Code workspace is a collection of one or more folders that you can open in a single VS Code window. Workspace settings are stored within your workspace and only apply when the current workspace is opened.</p> 
+        <p class="p">It is useful to configure settings for your workspace for the following reasons:</p> 
+        <ul class="ul"> 
+         <li class="li">If you define and maintain configurations specific to your playbook project, you can customize your Ansible development environment for individual projects without altering your preferred setup for other work. You can have different settings for a Python project, an Ansible project, and a C++ project, each optimized for the respective stack without the need to manually reconfigure settings each time you switch projects.</li> 
+         <li class="li">If you include workspace settings when setting up version control for a project you want to share with your team, everyone uses the same configuration for that project.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Open the Ansible extension settings: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Click the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/vscode-extensions-icon.png" width="15" alt="Extensions"><strong class="ph b">Extensions</strong> icon in the activity bar.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Select the Ansible extension, and click the 'gear' icon and then <strong class="ph b">Extension Settings</strong> to display the extension settings. </span> 
+            <div class="itemgroup info"> 
+             <ul class="ul"> 
+              <li class="li">Alternatively, click <span class="ph menucascade"><span class="ph uicontrol">Code</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Settings</span></span> to open the <strong class="ph b">Settings</strong> page.</li> 
+             </ul> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Enter <code class="ph codeph">Ansible</code> in the search bar to display the settings for the extension.</span> </li> 
+          </ol> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Workspace</strong> tab to configure your settings for the current VS Code workspace. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">If the <strong class="ph b">Workspace</strong> tab is not displayed, open a folder or create a new folder using the <span class="ph menucascade"><span class="ph uicontrol">File</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Open Folder</span></span> menu.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">The Ansible extension settings are pre-populated. Modify the settings to suit your requirements: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Check the <span class="ph menucascade"><span class="ph uicontrol">Ansible</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Validation</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Lint: Enabled</span></span> box to enable ansible-lint.</li> 
+            <li class="li">Check the <code class="ph codeph">Ansible Execution Environment: Enabled</code> box to use an execution environment.</li> 
+            <li class="li">Specify the execution environment image you want to use in the <strong class="ph b">Ansible &gt; Execution Environment: image</strong> field.</li> 
+            <li class="li">To use Red Hat Ansible Lightspeed, check the <strong class="ph b">Ansible &gt; Lightspeed: Enabled</strong> box, and enter the URL for Lightspeed.</li> 
+           </ul> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://marketplace.visualstudio.com/items?itemName=redhat.ansible" target="_blank" rel="external noopener">Ansible VS Code Extension by Red Hat page</a></li> 
+         <li class="linklist"><a class="link" href="https://code.visualstudio.com/docs/editing/workspaces/workspaces" target="_blank" rel="external noopener">What is a VS Code workspace?</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

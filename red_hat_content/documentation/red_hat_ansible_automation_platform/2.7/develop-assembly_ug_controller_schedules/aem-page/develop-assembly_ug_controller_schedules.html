@@ -1,0 +1,200 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-schedules"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Schedule recurring automation</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">From the navigation panel, click <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Schedules</span></span> to access your configured schedules. The schedules list can be sorted by any of the attributes from each column by using the directional arrows. You can also search by name, date, or the name of the month in which a schedule runs.</p> 
+      <p class="p">Use the <strong class="ph b">On</strong> or <strong class="ph b">Off</strong> toggle to stop an active schedule or activate a stopped schedule.</p> 
+      <p class="p">Click the Edit <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit"> icon to edit a schedule.</p> 
+      <br> 
+      <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-schedules-sample-list.png" alt="Schedules sample list"> 
+      <br> 
+      <p class="p">If you are setting up a template, a project, or an inventory source, click the <strong class="ph b">Schedules</strong> tab on the <strong class="ph b">Details</strong> page for that resource, to configure schedules for these resources. When you create a schedule, it has the following parameters:</p> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+         Name 
+       </dt> 
+       <dd class="dd">
+         Click the schedule name to open its details. 
+       </dd> 
+       <dt class="dt dlterm">
+         Related resource 
+       </dt> 
+       <dd class="dd">
+         Describes the function of the schedule. 
+       </dd> 
+       <dt class="dt dlterm">
+         Type 
+       </dt> 
+       <dd class="dd">
+         This identifies whether the schedule is associated with a source control update or a system-managed job schedule. 
+       </dd> 
+       <dt class="dt dlterm">
+         Next run 
+       </dt> 
+       <dd class="dd">
+         The next scheduled run of this task. 
+       </dd> 
+      </dl> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-adding-new-schedule"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Add a new schedule</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can create a new schedule for a job template, workflow job template, inventory source, project sync, or management job template.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">You can create schedules from a template, project, or inventory source, and directly on the main <strong class="ph b">Schedules</strong> page.</p> 
+        <p class="p">To create a new schedule on the <strong class="ph b">Schedules</strong> page:</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Schedules</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create schedule</span>. This opens the <strong class="ph b">Create schedule</strong> window.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select a <strong class="ph b">Resource type</strong> onto which this schedule is applied. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">Select from:</p> 
+           <ul class="ul"> 
+            <li class="li"> <strong class="ph b">Job template</strong> 
+             <ul class="ul"> 
+              <li class="li">For <strong class="ph b">Job template</strong> select a <strong class="ph b">Job template</strong> from the menu.</li> 
+             </ul> </li> 
+            <li class="li"> <strong class="ph b">Workflow job template</strong> 
+             <ul class="ul"> 
+              <li class="li">For <strong class="ph b">Workflow job template</strong> select a <strong class="ph b">Workflow job template</strong> from the menu.</li> 
+             </ul> </li> 
+            <li class="li"> <strong class="ph b">Inventory source</strong> 
+             <ul class="ul"> 
+              <li class="li">For <strong class="ph b">Inventory source</strong> select an <strong class="ph b">Inventory</strong> and an <strong class="ph b">Inventory source</strong> from the appropriate menu.</li> 
+             </ul> </li> 
+            <li class="li"> <strong class="ph b">Project sync</strong> 
+             <ul class="ul"> 
+              <li class="li">For <strong class="ph b">Project sync</strong> select a <strong class="ph b">Project</strong> from the menu.</li> 
+             </ul> </li> 
+            <li class="li"> <strong class="ph b">Management job template</strong> 
+             <ul class="ul"> 
+              <li class="li">For <strong class="ph b">Management job template</strong> select a <strong class="ph b">Workflow job template</strong> from the menu.</li> 
+             </ul> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">For <strong class="ph b">Job template</strong> and <strong class="ph b">Project sync</strong> enter the appropriate details into the following fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Schedule name</strong>: Enter the name.</li> 
+            <li class="li">Optional: <strong class="ph b">Description</strong>: Enter a description.</li> 
+            <li class="li"><strong class="ph b">Start date/time</strong>: Enter the date and time to start the schedule.</li> 
+            <li class="li"><strong class="ph b">Time zone</strong>: Select the time zone. The <strong class="ph b">Start date/time</strong> that you enter must be in this time zone. <p class="p">The <strong class="ph b">Schedule Details</strong> display when you establish a schedule, enabling you to review the schedule settings and a list of the scheduled occurrences in the selected <strong class="ph b">Local Time Zone</strong>.</p> 
+             <div class="note important note_important"> <span class="note__title">Important:</span> 
+              <div class="note__body"> 
+               <p class="p">Jobs are scheduled in UTC. Repeating jobs that run at a specific time of day can move relative to a local time zone when Daylight Saving Time shifts occur. The system resolves the local time zone based time to UTC when the schedule is saved. To ensure your schedules are correctly created, set your schedules in UTC time.</p> 
+              </div> 
+             </div></li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>. The <strong class="ph b">Define rules</strong> page is displayed.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="controller-adding-new-schedule-from-resource"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Add a new schedule from a resource page</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can create a new schedule from the <strong class="ph b">Schedules</strong> tab of a resource page, such as a template, project, or inventory source.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">To create a new schedule from a resource page:</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the <strong class="ph b">Schedules</strong> tab of the resource that you are configuring. This can be a template, project, or inventory source.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create schedule</span>. This opens the <strong class="ph b">Create schedule</strong> window.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details into the following fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Schedule name</strong>: Enter the name.</li> 
+            <li class="li">Optional: <strong class="ph b">Description</strong>: Enter a description.</li> 
+            <li class="li"><strong class="ph b">Start date/time</strong>: Enter the date and time to start the schedule.</li> 
+            <li class="li"><strong class="ph b">Time zone</strong>: Select the time zone. The <strong class="ph b">Start date/time</strong> that you enter must be in this time zone. <p class="p">The <strong class="ph b">Schedule Details</strong> display when you establish a schedule, enabling you to review the schedule settings and a list of the scheduled occurrences in the selected <strong class="ph b">Local Time Zone</strong>.</p> 
+             <div class="note important note_important"> <span class="note__title">Important:</span> 
+              <div class="note__body"> 
+               <p class="p">Jobs are scheduled in UTC. Repeating jobs that run at a specific time of day can move relative to a local time zone when Daylight Saving Time shifts occur. The system resolves the local time zone based time to UTC when the schedule is saved. To ensure your schedules are correctly created, set your schedules in UTC time.</p> 
+              </div> 
+             </div></li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>. The <strong class="ph b">Define rules</strong> page is displayed.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-controller-define-schedule-rules"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Define rules for the schedule</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">After you create a schedule, you can define rules for when the schedule runs.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the following information: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Frequency</strong>: Enter how often the schedule runs.</li> 
+            <li class="li"><strong class="ph b">Interval</strong>: Select the interval at which the rule will repeat.</li> 
+            <li class="li"><strong class="ph b">Week start</strong>: Select the day of the week that you want the week to begin.</li> 
+            <li class="li"><strong class="ph b">Minutes of the hour</strong>: Use this field to declare minute(s) of the hour that the schedule should run.</li> 
+            <li class="li"><strong class="ph b">Hours of day</strong>: Use this field to declare the hours of day that the schedule should run.</li> 
+            <li class="li"><strong class="ph b">Days of the week</strong>: Select the days of the week on which to run the schedule.</li> 
+            <li class="li"><strong class="ph b">Days of the month</strong>: Select the months of the year on which to run the schedule</li> 
+            <li class="li"><strong class="ph b">Weeks of the year</strong>: Use this field to declare numbered weeks of the year that the schedule should run.</li> 
+            <li class="li"><strong class="ph b">Months of the year</strong>: Use this field to declare ordinal days number of the month that the schedule should run.</li> 
+            <li class="li"><strong class="ph b">Days of the year</strong>: Use this field to declare ordinal number days of the year that the schedule should run.</li> 
+            <li class="li"><strong class="ph b">Occurrences</strong>: Use this field to filter down indexed rules based on those declared using the form fields in the Rule section.</li> 
+            <li class="li"><strong class="ph b">Schedule ending type</strong>: Use this field to select when the schedule is set to end. <p class="p">For more information, see the <a class="xref" href="https://datatracker.ietf.org/doc/html/rfc5545" target="_blank" rel="external noopener">link</a> to the <code class="ph codeph">iCalendar RFC for bysetpos</code> field in the iCalendar documentation when you have set the rules for the schedule.</p> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save rule</span>. The <strong class="ph b">Schedule Rules</strong> summary page is displayed.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Add rule</span> to add additional rules.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The <strong class="ph b">Schedule Exceptions</strong> page is displayed.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-controller-define-schedule-exceptions"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Set exceptions to the schedule</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Define specific dates or times when automated jobs should skip execution by using schedule exceptions.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Schedule Exceptions</strong> page, click <span class="ph uicontrol button">Create exception</span>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">Use the same format as for the schedule rules to create a schedule exception.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span> to save and review both the schedule and the exception.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-controller-radius-settings">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure RADIUS authentication</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">You can configure Ansible Automation Platform to centrally use RADIUS as a source for authentication information.</p> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd"> From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication Methods</span></span> . </span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd"> Click <span class="ph uicontrol button">Create authentication</span> . </span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd"> Enter a <strong class="ph b">Name</strong> for this authentication configuration. </span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd"> Select <strong class="ph b">Radius</strong> from the <strong class="ph b">Authentication type</strong> list. The <strong class="ph b">Authentication details</strong> section automatically updates to show the fields relevant to the selected authentication type. </span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd"> Enter the host or IP of the RADIUS server in the <strong class="ph b">RADIUS Server</strong> field. If you leave this field blank, RADIUS authentication is disabled. </span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd"> Enter the <strong class="ph b">Shared secret</strong> for authenticating to RADIUS server. </span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd"> Optional: Enter any <strong class="ph b">Additional Authenticator Fields</strong> that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. </span> 
+        <div class="itemgroup info"> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd"> To automatically create organizations, users, and teams upon successful login, select <strong class="ph b">Create objects</strong> . </span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd"> To enable this authentication method upon creation, select <strong class="ph b">Enabled</strong> . </span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd"> To remove a user for any groups they were previously added to when they authenticate from this source, select <strong class="ph b">Remove users</strong> . </span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd"> Click <span class="ph uicontrol button">Create Authentication Method</span> . </span> </li>
+      </ol>
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p"> To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (like username and email address) or to what groups they belong, continue to <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-mapping" title="To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or what groups they belong to, you can configure authenticator maps.">Mapping</a> . </p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

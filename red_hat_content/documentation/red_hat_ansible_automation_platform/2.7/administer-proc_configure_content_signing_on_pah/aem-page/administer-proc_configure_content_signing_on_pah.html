@@ -1,0 +1,186 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="proc-configure-content-signing-on-pah"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure content signing on private automation hub</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">To successfully sign and publish Ansible Certified Content Collections, you must configure private automation hub for signing.</p> 
+      <section class="section prereq">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Before you begin</h2>
+       </div> 
+       <ul class="ul"> 
+        <li class="li">Your GnuPG key pairs have been securely set up and managed by your organization.</li> 
+        <li class="li">Your public-private key pair has proper access for configuring content signing on private automation hub.</li> 
+       </ul> 
+      </section> 
+      <section class="section context">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div>
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">Create a signing script that accepts only a filename. </span> 
+         <div class="itemgroup info"> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">This script acts as the signing service and must generate an ascii-armored detached <code class="ph codeph">gpg</code> signature for that file using the key specified through the <code class="ph codeph">PULP_SIGNING_KEY_FINGERPRINT</code> environment variable.</p> 
+           </div>
+          </div> 
+          <p class="p">The script prints out a JSON structure with the following format.</p> 
+          <pre class="pre codeblock"><code>{"file": "filename", "signature": "filename.asc"}</code></pre> 
+          <p class="p">All the file names are relative paths inside the current working directory. The file name must remain the same for the detached signature.</p> 
+          <p class="p"><strong class="ph b">Example:</strong> The following script produces signatures for content:</p> 
+          <pre class="pre codeblock language-shell"><code>#!/usr/bin/env bash
+
+FILE_PATH=$1
+SIGNATURE_PATH="$1.asc"
+
+ADMIN_ID="$PULP_SIGNING_KEY_FINGERPRINT"
+PASSWORD="password"
+
+# Create a detached signature
+gpg --quiet --batch --pinentry-mode loopback --yes --passphrase \
+   $PASSWORD --homedir ~/.gnupg/ --detach-sign --default-key $ADMIN_ID \
+   --armor --output $SIGNATURE_PATH $FILE_PATH
+
+# Check the exit status
+STATUS=$?
+if [ $STATUS -eq 0 ]; then
+   echo {\"file\": \"$FILE_PATH\", \"signature\": \"$SIGNATURE_PATH\"}
+else
+   exit $STATUS
+fi</code></pre> 
+          <p class="p">After you deploy a private automation hub with signing enabled to your Ansible Automation Platform cluster, new UI additions are displayed in collections.</p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Review the Ansible Automation Platform installer inventory file for options that begin with <code class="ph codeph">automationhub_*</code>. </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>[all:vars]
+.
+.
+.
+automationhub_create_default_collection_signing_service = True
+automationhub_auto_sign_collections = True
+automationhub_require_content_approval = True
+automationhub_collection_signing_service_key = /abs/path/to/galaxy_signing_service.gpg
+automationhub_collection_signing_service_script = /abs/path/to/collection_signing.sh</code></pre> 
+          <p class="p">The two new keys (<strong class="ph b">automationhub_auto_sign_collections</strong> and <strong class="ph b">automationhub_require_content_approval</strong>) indicate that the collections must be signed and approved after they are uploaded to private automation hub.</p> 
+         </div> </li>
+       </ol>
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-downloading-signature-public-keys"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Download signature public keys</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After you sign and approve collections, download the signature public keys from the Ansible Automation Platform UI. </p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Signature Keys</span></span>. The Signature Keys dashboard displays a list of multiple keys: collections and container images. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">To verify collections, download the key prefixed with <code class="ph codeph">collections-</code>.</li> 
+            <li class="li">To verify container images, download the key prefixed with <code class="ph codeph">container-</code>.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Choose one of the following methods to download your public key: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Click the <span class="ph uicontrol button">Download Key</span> icon to download the public key.</li> 
+            <li class="li">Click the <span class="ph uicontrol button">Copy to clipboard</span> next to the public key you want to copy.</li> 
+           </ul> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Use the public key that you copied to verify the content collection that you are installing.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-configure-ansible-galaxy-cli-verify"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure Ansible-Galaxy CLI to verify collections</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can configure Ansible-Galaxy CLI to verify collections. This ensures that downloaded collections are approved by your organization and have not been changed after they were uploaded to automation hub.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Public key for verification has been added to the local system keyring.</li> 
+         <li class="li">Signed collections are available in automation hub to verify signature.</li> 
+         <li class="li">Certified collections can be signed by approved roles within your organization.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">If a collection has been signed by automation hub, the server provides ASCII armored, GPG-detached signatures to verify the authenticity of <code class="ph codeph">MANIFEST.json</code> before using it to verify the collection’s contents. First you must opt into signature verification by configuring a keyring for <code class="ph codeph">ansible-galaxy</code> or providing the path with the <code class="ph codeph">--keyring</code> option.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">To import a public key into a non-default keyring for use with <code class="ph codeph">ansible-galaxy</code>, run the following command. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>gpg --import --no-default-keyring --keyring ~/.ansible/pubring.kbx my-public-key.asc</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">In addition to any signatures provided by automation hub, signature sources can also be provided in the requirements file and on the command line. Signature sources should be URIs.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To verify the collection name provided on the CLI with an additional signature, run the following command: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>ansible-galaxy collection install namespace.collection
+--signature https://examplehost.com/detached_signature.asc
+--signature file:///path/to/local/detached_signature.asc --keyring ~/.ansible/pubring.kbx</code></pre> 
+           <p class="p">You can use this option multiple times to provide multiple signatures.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Confirm that the collections in a requirements file list any additional signature sources following the collection’s signatures key, as in the following example. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-yaml"><code># requirements.yml
+collections:
+  - name: ns.coll
+    version: 1.0.0
+    signatures:
+      - https://examplehost.com/detached_signature.asc
+      - file:///path/to/local/detached_signature.asc
+
+ansible-galaxy collection verify -r requirements.yml --keyring ~/.ansible/pubring.kbx</code></pre> 
+           <p class="p">When you install a collection from automation hub, the signatures provided by the server are saved along with the installed collections to verify the collection’s authenticity.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">(Optional) If you need to verify the internal consistency of your collection again without querying the Ansible Galaxy server, run the same command you used previously using the <code class="ph codeph">--offline</code> option.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://docs.ansible.com/projects/ansible/latest/reference_appendices/config.html#galaxy-gpg-keyring" target="_blank" rel="external noopener">Configuring a keyring</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

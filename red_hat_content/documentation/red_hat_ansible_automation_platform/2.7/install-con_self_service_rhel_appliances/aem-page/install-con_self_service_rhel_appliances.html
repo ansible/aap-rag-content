@@ -1,0 +1,172 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-rhel-appliances">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Deploy Ansible automation portal RHEL appliance</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">The Ansible automation portal RHEL virtual machine appliances provide pre-configured virtual machines that you can deploy across multiple virtualization platforms.</p> 
+     <p class="p">The appliances are available in the following formats:</p> 
+     <ul class="ul"> 
+      <li class="li"><strong class="ph b">QCOW2</strong> - For Red Hat OpenShift Virtualization and KVM-based environments</li> 
+      <li class="li"><strong class="ph b">VMDK</strong> - For VMware <code class="ph codeph">vSphere</code> infrastructure</li> 
+     </ul> 
+     <section class="section">
+      <h2 class="title sectiontitle">Supported platforms</h2> 
+      <p class="p">You can deploy Ansible automation portal appliances on the following platforms:</p> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Red Hat OpenShift Virtualization
+       </dt> 
+       <dd class="dd">
+        Deploy the appliance as a virtual machine within your Red Hat OpenShift Container Platform environment using the QCOW2 image format.
+       </dd> 
+       <dt class="dt dlterm">
+        VMware <code class="ph codeph">vSphere</code>
+       </dt> 
+       <dd class="dd">
+        Deploy the appliance on VMware infrastructure using ESXi hosts and VMFS datastores with the VMDK image format.
+       </dd> 
+       <dt class="dt dlterm">
+        QEMU for local testing
+       </dt> 
+       <dd class="dd">
+        Deploy the appliance on your local machine for testing and demonstrations using the QCOW2 image format. This deployment model is not supported for production environments.
+       </dd> 
+      </dl> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Ansible automation portal appliances support AMD64/x86_64 platforms only.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Initial configuration</h2> 
+      <p class="p">The appliance requires configuration at first boot to connect to Ansible Automation Platform and start portal services. You must provide configuration through one of the following methods, listed in priority order:</p> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Baked-in configuration
+       </dt> 
+       <dd class="dd">
+        For advanced installations using the Ansible collection to build a customized appliance image with pre-baked settings.
+       </dd> 
+       <dt class="dt dlterm">
+        VMware <code class="ph codeph">guestinfo</code> properties
+       </dt> 
+       <dd class="dd">
+        For VMware deployments, provide SSH keys and portal configuration through <code class="ph codeph">guestinfo</code> properties set in <code class="ph codeph">vSphere</code>.
+       </dd> 
+       <dt class="dt dlterm">
+        cloud-init user-data
+       </dt> 
+       <dd class="dd">
+        For cloud and Red Hat OpenShift Virtualization deployments, provide SSH keys and portal configuration through cloud-init user-data. The appliance configures itself automatically on first boot.
+       </dd> 
+       <dt class="dt dlterm">
+        Pre-seeded configuration file
+       </dt> 
+       <dd class="dd">
+        Place a YAML configuration file at <span class="ph filepath">/etc/portal/config.yaml</span> before first boot for automated deployment.
+       </dd> 
+      </dl> 
+      <p class="p">If no configuration source is found at first boot, portal services do not start. You can provide configuration after deployment by editing <span class="ph filepath">/etc/portal/configs/app-config/app-config.production.yaml</span> and restarting the portal service.</p> 
+      <p class="p">The initial configuration includes:</p> 
+      <ul class="ul"> 
+       <li class="li">SSH key authentication for administrative access</li> 
+       <li class="li">Ansible Automation Platform URL, OAuth application credentials, and admin token</li> 
+       <li class="li">Database settings (built-in or external PostgreSQL)</li> 
+       <li class="li">Base URL and network configuration</li> 
+      </ul> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The <code class="ph codeph">admin</code> user account is locked by default and console login is disabled. Administrative access is available only through SSH using the key you provided during configuration.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Disconnected environments</h2> 
+      <p class="p">You can deploy Ansible automation portal appliances in disconnected or air-gapped environments. The pre-built appliance images include all required container images and plug-ins, so no external network access is required during initial deployment.</p> 
+      <p class="p">For appliance upgrades in disconnected environments, a mirror registry or OCI archive provides the updated container images. Use the <code class="ph codeph">ansible-portal registry-login</code> command to authenticate to a private registry mirror.</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Understanding the appliance</h2> 
+      <p class="p">Before configuring or managing the appliance, review how its key components work together.</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Configuration files</h2> 
+      <p class="p">The Ansible automation portal RHEL appliance uses two YAML configuration files at <span class="ph filepath">/etc/portal/configs/app-config/</span>:</p> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">app-config.yaml</code>
+       </dt> 
+       <dd class="dd">
+        Infrastructure configuration including the base URL, database connection, TLS, and system defaults. This file is set during initial deployment and is not typically modified.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">app-config.production.yaml</code>
+       </dt> 
+       <dd class="dd">
+        Application configuration including Ansible Automation Platform connection, OAuth settings, SCM integrations, and catalog synchronization. Edit this file for day-to-day configuration changes. To apply changes, edit the file and restart the Ansible automation portal service. Changes take effect after the restart, which takes approximately 60 seconds.
+       </dd> 
+      </dl> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Service management</h2> 
+      <p class="p">The Ansible automation portal RHEL appliance runs three <code class="ph codeph">systemd</code> services that manage Podman containers:</p> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">portal.service</code>
+       </dt> 
+       <dd class="dd">
+        Ansible automation portal application. Listens on port 443 (HTTPS).
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">postgres.service</code>
+       </dt> 
+       <dd class="dd">
+        PostgreSQL database. Listens on port 5432 (internal container network only). This service is skipped when an external database is configured.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">devtools.service</code>
+       </dt> 
+       <dd class="dd">
+        Ansible development tools. Provides Ansible Navigator and content creator services for building execution environments and developing Ansible content from the Ansible automation portal interface.
+       </dd> 
+      </dl> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Restarting the <code class="ph codeph">portal</code> service also restarts <code class="ph codeph">postgres</code> and <code class="ph codeph">devtools</code> due to service dependencies.</p> 
+       </div>
+      </div> 
+      <p class="p">Use standard <code class="ph codeph">systemctl</code> and <code class="ph codeph">journalctl</code> commands to manage and inspect these services:</p> 
+      <pre class="pre codeblock language-terminal"><code>$ sudo systemctl restart portal
+$ sudo journalctl -u portal -f</code></pre> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">SSL certificates</h2> 
+      <p class="p">The appliance generates self-signed SSL certificates at first boot and stores them at <span class="ph filepath">/etc/portal/ssl/</span>. Replace these with certificates from a trusted certificate authority for production use.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_rhel_prerequisites">Prerequisites for deploying Ansible automation portal on RHEL</a></strong><br>Before you deploy an Ansible automation portal RHEL appliance, verify that your environment meets the system, network, and access requirements.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_kvm">Install Ansible automation portal on RHEL with KVM</a></strong><br>Deploy the Ansible automation portal appliance on a RHEL 9 host with KVM using <code class="ph codeph">virt-install</code>.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_openshift_virt">Install Ansible automation portal on Red Hat OpenShift Virtualization</a></strong><br>Deploy the Ansible automation portal appliance on Red Hat OpenShift Virtualization to run the portal as a virtual machine alongside container workloads within your Red Hat OpenShift Container Platform cluster.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_install_vmware">Install Ansible automation portal on VMware vSphere</a></strong><br>Deploy the Ansible automation portal appliance on VMware vSphere using the vSphere web client.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_initial_config_wizard">Configure the appliance at first boot</a></strong><br>Provide initial configuration for the Ansible automation portal appliance so that portal services can start and connect to Ansible Automation Platform.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_connect_verify">Connect and verify Ansible automation portal</a></strong><br>After deploying the Ansible automation portal appliance, update the OAuth redirect URI, verify service health, and sign in to the portal.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_deploy_rhel_appliance_disconnected">Deploy a RHEL appliance in a disconnected environment</a></strong><br>Deploy the Ansible automation portal RHEL appliance in a disconnected or air-gapped environment where the appliance has no access to external registries or the internet.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_configure_ssl">Replace self-signed SSL certificates</a></strong><br>The Ansible automation portal RHEL appliance generates self-signed SSL certificates at first boot and stores them at <span class="ph filepath">/etc/portal/ssl/</span>. Replace these certificates with certificates from a trusted certificate authority for production use.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_configure_url">Set a custom user-accessible URL or port</a></strong><br>The Ansible automation portal RHEL appliance auto-detects the user-accessible URL from the VM IP address at each boot. To set a custom hostname or port, update the configuration file and restart the service.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_configure_external_db">Configure an external database</a></strong><br>By default, the Ansible automation portal RHEL appliance runs a built-in PostgreSQL database. For production deployments, connect to an external PostgreSQL database.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_cloud_init_reference">Cloud-init reference</a></strong><br>The following tables describe all cloud-init fields supported by the Ansible automation portal RHEL appliance.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_portal_cli_commands">Portal CLI commands reference</a></strong><br>The Ansible automation portal appliance provides the <code class="ph codeph">ansible-portal</code> management CLI for administration and troubleshooting.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

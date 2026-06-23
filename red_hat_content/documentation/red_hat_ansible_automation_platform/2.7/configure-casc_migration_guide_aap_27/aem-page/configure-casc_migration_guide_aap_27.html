@@ -1,0 +1,261 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="casc-migration-guide-aap-27">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configuration as Code migration guide for Ansible Automation Platform 2.7</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">If you are upgrading to Ansible Automation Platform 2.7, upgrade all component collections to their latest versions and update your playbooks to use platform gateway for authentication and API access.</p> 
+     <section class="section" id="casc-migration-guide-aap-27__collection-version-requirements">
+      <h2 class="title sectiontitle">Collection version requirements</h2> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">You must upgrade to the latest version of all component collections shipped for Ansible Automation Platform 2.7 before running automation against the upgraded platform. Older collection versions might construct URLs or authentication flows that target component APIs directly, resulting in HTTP 404 errors or authentication failures after direct access removal.</p> 
+       </div>
+      </div> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:33.33333333333333%">
+        <col style="width:66.66666666666666%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="casc-migration-guide-aap-27__collection-version-requirements__entry__1">Collection</th> 
+         <th class="entry" id="casc-migration-guide-aap-27__collection-version-requirements__entry__2">Purpose</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="casc-migration-guide-aap-27__collection-version-requirements__entry__1"><code class="ph codeph">ansible.controller</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__collection-version-requirements__entry__2">Automation controller API modules and resource management through platform gateway.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="casc-migration-guide-aap-27__collection-version-requirements__entry__1"><code class="ph codeph">ansible.hub</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__collection-version-requirements__entry__2">Automation hub and Galaxy API modules through platform gateway.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="casc-migration-guide-aap-27__collection-version-requirements__entry__1"><code class="ph codeph">ansible.eda</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__collection-version-requirements__entry__2">Event-Driven Ansible API modules through platform gateway.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="casc-migration-guide-aap-27__collection-version-requirements__entry__1"><code class="ph codeph">ansible.platform</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__collection-version-requirements__entry__2">Platform gateway authentication, tokens, and platform-wide resource management.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">After you upgrade the collections, complete the following tasks:</p> 
+      <ul class="ul"> 
+       <li class="li">Pin or upgrade collections in <code class="ph codeph">requirements.yml</code> and execution environments to the latest versions available for your release.</li> 
+       <li class="li">Rebuild execution environments and refresh project and collection dependencies.</li> 
+       <li class="li">Verify collection versions in use before running production playbooks.</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="casc-migration-guide-aap-27__gateway-connection-values">
+      <h2 class="title sectiontitle">Gateway-managed connection values</h2> 
+      <p class="p">All <code class="ph codeph">host</code>, <code class="ph codeph">username</code>, <code class="ph codeph">password</code>, and <code class="ph codeph">token</code> values used by existing playbooks and automation content must be created and managed in platform gateway.</p> 
+      <p class="p">Do not continue using the following patterns:</p> 
+      <ul class="ul"> 
+       <li class="li">Component-specific hostnames, such as <code class="ph codeph">controller.example.com</code> or <code class="ph codeph">hub.example.com</code>, as API targets in playbooks.</li> 
+       <li class="li">Legacy Personal Access Tokens (PATs) or API tokens issued directly from automation controller, automation hub, or Event-Driven Ansible controller.</li> 
+       <li class="li">Username and password pairs scoped only to a single component.</li> 
+      </ul> 
+      <p class="p">Instead, do the following:</p> 
+      <ul class="ul"> 
+       <li class="li">Create credentials, OAuth2 applications, and API tokens in platform gateway.</li> 
+       <li class="li">Update existing playbooks, inventory variables, and Configuration as Code content to use the platform gateway URL for <code class="ph codeph">aap_hostname</code> or equivalent module parameters.</li> 
+       <li class="li">Use platform gateway-issued tokens for <code class="ph codeph">aap_token</code> or equivalent authentication parameters.</li> 
+      </ul> 
+      <p class="p">For detailed setup instructions and before/after examples, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-set_up_automation_environment_for_casc" title="Configuration as Code is a way of working where you define and manage the configuration of Ansible Automation Platform using version-controlled configuration files, such as YAML, instead of clicking through the web UI.">Set up your automation environment for Configuration as Code</a>.</p> 
+     </section> 
+     <section class="section" id="casc-migration-guide-aap-27__deprecated-parameters">
+      <h2 class="title sectiontitle">Deprecated parameters</h2> 
+      <p class="p">The following parameters are deprecated and scheduled for removal in a future release of Ansible Automation Platform. Update your playbooks to use the replacement parameters.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:20%">
+        <col style="width:20%">
+        <col style="width:20%">
+        <col style="width:40%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="casc-migration-guide-aap-27__deprecated-parameters__entry__1">Module</th> 
+         <th class="entry" id="casc-migration-guide-aap-27__deprecated-parameters__entry__2">Deprecated parameter</th> 
+         <th class="entry" id="casc-migration-guide-aap-27__deprecated-parameters__entry__3">Replacement</th> 
+         <th class="entry" id="casc-migration-guide-aap-27__deprecated-parameters__entry__4">Details</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__1"><code class="ph codeph">user</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__2"><code class="ph codeph">organizations</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__3"><code class="ph codeph">role_user_assignment</code> module</td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__4">Use the <code class="ph codeph">role_user_assignment</code> module to assign organization roles to users instead of the <code class="ph codeph">organizations</code> parameter.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__1"><code class="ph codeph">user</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__2"><code class="ph codeph">is_platform_auditor</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__3"><code class="ph codeph">role_user_assignment</code> module</td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__4">Assign the Platform Auditor role by using the <code class="ph codeph">role_user_assignment</code> module.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__1"><code class="ph codeph">user</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__2"><code class="ph codeph">authenticators</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__3"><code class="ph codeph">associated_authenticators</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__4">The <code class="ph codeph">associated_authenticators</code> parameter accepts a dictionary keyed by authenticator ID with values containing <code class="ph codeph">uid</code> and <code class="ph codeph">email</code>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__1"><code class="ph codeph">user</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__2"><code class="ph codeph">authenticator_uid</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__3"><code class="ph codeph">associated_authenticators</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__4">Use the <code class="ph codeph">associated_authenticators</code> parameter instead.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__1"><code class="ph codeph">role_user_assignment</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__2"><code class="ph codeph">object_id</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__3"><code class="ph codeph">object_ids</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__deprecated-parameters__entry__4">The <code class="ph codeph">object_ids</code> parameter accepts a list of resource identifiers, enabling batch role assignments in a single task.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="casc-migration-guide-aap-27__removed-modules">
+      <h2 class="title sectiontitle">Removed modules from the ansible.hub collection</h2> 
+      <p class="p">Ansible Automation Platform 2.7 removes the following modules from the <code class="ph codeph">ansible.hub</code> collection. Use the <code class="ph codeph">ansible.platform</code> replacements instead. Other modules in the <code class="ph codeph">ansible.hub</code> collection remain available.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="casc-migration-guide-aap-27__removed-modules__entry__1">Removed module</th> 
+         <th class="entry" id="casc-migration-guide-aap-27__removed-modules__entry__2">Replacement</th> 
+         <th class="entry" id="casc-migration-guide-aap-27__removed-modules__entry__3">Action required</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="casc-migration-guide-aap-27__removed-modules__entry__1"><code class="ph codeph">ansible.hub.ah_user</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__removed-modules__entry__2"><code class="ph codeph">ansible.platform.user</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__removed-modules__entry__3">Update all playbooks that use <code class="ph codeph">ansible.hub.ah_user</code> to use <code class="ph codeph">ansible.platform.user</code>. The <code class="ph codeph">ansible.platform.user</code> module manages users through platform gateway and supports additional parameters such as <code class="ph codeph">associated_authenticators</code>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="casc-migration-guide-aap-27__removed-modules__entry__1"><code class="ph codeph">ansible.hub.ah_token</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__removed-modules__entry__2"><code class="ph codeph">ansible.platform.token</code></td> 
+         <td class="entry" headers="casc-migration-guide-aap-27__removed-modules__entry__3">Update all playbooks that use <code class="ph codeph">ansible.hub.ah_token</code> to use <code class="ph codeph">ansible.platform.token</code>. Note that the <code class="ph codeph">ansible.platform.token</code> module is not idempotent; each run creates a new token.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="casc-migration-guide-aap-27__new-modules">
+      <h2 class="title sectiontitle">New modules</h2> 
+      <p class="p">The following modules are new in <code class="ph codeph">ansible.platform</code> version 2.7:</p> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">feature_flag</code>
+       </dt> 
+       <dd class="dd">
+        Query and manage feature flags. Use this module to enable or disable run-time feature flags for your platform.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">ca_certificate</code>
+       </dt> 
+       <dd class="dd">
+        Manage CA certificates for mutual TLS (mTLS) authentication between services.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">role_team_assignment</code>
+       </dt> 
+       <dd class="dd">
+        Assign roles to teams for specific resources or organizations. Supports batch operations through the <code class="ph codeph">assignment_objects</code> parameter.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">role_definition</code>
+       </dt> 
+       <dd class="dd">
+        Create custom RBAC role definitions with specific permissions scoped to a content type.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">ui_plugin_route</code>
+       </dt> 
+       <dd class="dd">
+        Configure UI plugin routes for front-end plugin integration with platform gateway.
+       </dd> 
+      </dl> 
+     </section> 
+     <section class="section" id="casc-migration-guide-aap-27__new-features">
+      <h2 class="title sectiontitle">New features in existing modules</h2> 
+      <p class="p">The following features are available in existing modules:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Mutual TLS support</strong>: The <code class="ph codeph">service</code> and <code class="ph codeph">route</code> modules support an <code class="ph codeph">enable_mtls</code> parameter for mutual TLS authentication. When you enable mTLS, set <code class="ph codeph">enable_gateway_auth</code> to <code class="ph codeph">false</code>.</li> 
+       <li class="li"><strong class="ph b">Route timeouts</strong>: The <code class="ph codeph">service</code>, <code class="ph codeph">route</code>, and <code class="ph codeph">ui_plugin_route</code> modules support <code class="ph codeph">request_timeout_seconds</code> and <code class="ph codeph">idle_timeout_seconds</code> parameters for per-route timeout configuration.</li> 
+       <li class="li"><strong class="ph b">OIDC User Identity</strong>: The <code class="ph codeph">authenticator</code> module supports OIDC User Identity configuration for platform gateway.</li> 
+       <li class="li"><strong class="ph b">Batch role assignments</strong>: The <code class="ph codeph">role_user_assignment</code> module supports <code class="ph codeph">object_ids</code> for assigning a role to a user across multiple resources in a single task.</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="casc-migration-guide-aap-27__example-update">
+      <h2 class="title sectiontitle">Example: Update a playbook for 2.7</h2> 
+      <p class="p">The following example shows how to update a playbook that uses deprecated parameters.</p> 
+      <p class="p"><strong class="ph b">Before (2.6)</strong></p> 
+      <pre class="pre codeblock language-yaml"><code>- name: Create user with org membership
+  ansible.platform.user:
+    username: "demo-user"
+    organizations:
+      - "Demo-Organization"
+    is_platform_auditor: true</code></pre> 
+      <p class="p"><strong class="ph b">After (2.7)</strong></p> 
+      <pre class="pre codeblock language-yaml"><code>- name: Create user
+  ansible.platform.user:
+    username: "demo-user"
+    state: present
+
+- name: Assign organization role to user
+  ansible.platform.role_user_assignment:
+    user: "demo-user"
+    role_definition: "Organization Member"
+    object_ids:
+      - "Demo-Organization"
+    state: present
+
+- name: Assign Platform Auditor role to user
+  ansible.platform.role_user_assignment:
+    user: "demo-user"
+    role_definition: "Platform Auditor"
+    # object_ids is not required for platform-wide roles
+    state: present</code></pre> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27#con-architectural-changes-27" title="Ansible Automation Platform 2.7 removes direct API access and component-level authentication. All external access to platform components must go through platform gateway.">Architectural changes in Ansible Automation Platform 2.7</a></li>
+      </ul>
+     </div>
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-set_up_automation_environment_for_casc" title="Configuration as Code is a way of working where you define and manage the configuration of Ansible Automation Platform using version-controlled configuration files, such as YAML, instead of clicking through the web UI.">Set up your automation environment for Configuration as Code</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_post_upgrade_requirements" title="After upgrading to Ansible Automation Platform 2.7, update tokens, scripts, and integrations to use platform gateway for all external authentication and API access.">Post-upgrade requirements</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_pre_upgrade_assessment_checklist#ref-pre-upgrade-detection-tooling" title="A CLI detection tool is available to identify direct API usage in Ansible Automation Platform 2.5 or 2.6 environments. The tool analyzes NGINX logs to detect requests that bypass platform gateway.">Pre-upgrade detection tooling</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

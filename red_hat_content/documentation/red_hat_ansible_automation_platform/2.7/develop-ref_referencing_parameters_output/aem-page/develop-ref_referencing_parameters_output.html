@@ -1,0 +1,65 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="referencing-parameters-output">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Reference parameters in output</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">You can reference any value the user entered in the <code class="ph codeph">parameters</code> section by using the <code class="ph codeph">${{ parameters.&lt;field_name&gt; }}</code> syntax.</p> 
+     <section class="section"> 
+      <p class="p">The following table lists common parameter references:</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:40%">
+        <col style="width:30%">
+        <col style="width:30%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="referencing-parameters-output__entry__1">Reference</th> 
+         <th class="entry" id="referencing-parameters-output__entry__2">Description</th> 
+         <th class="entry" id="referencing-parameters-output__entry__3">Example output</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="referencing-parameters-output__entry__1"><code class="ph codeph">${{ parameters.app_name }}</code></td> 
+         <td class="entry" headers="referencing-parameters-output__entry__2">User-entered text field value</td> 
+         <td class="entry" headers="referencing-parameters-output__entry__3"><code class="ph codeph">my-app</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="referencing-parameters-output__entry__1"><code class="ph codeph">${{ parameters.inventory }}</code></td> 
+         <td class="entry" headers="referencing-parameters-output__entry__2">User-selected Ansible Automation Platform resource name</td> 
+         <td class="entry" headers="referencing-parameters-output__entry__3"><code class="ph codeph">Production Servers</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="referencing-parameters-output__entry__1"><code class="ph codeph">${{ parameters.credentials }}</code></td> 
+         <td class="entry" headers="referencing-parameters-output__entry__2">User-selected credentials (array)</td> 
+         <td class="entry" headers="referencing-parameters-output__entry__3"><code class="ph codeph">["SSH Key", "AWS Credentials"]</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="referencing-parameters-output__entry__1"><code class="ph codeph">${{ parameters.environment }}</code></td> 
+         <td class="entry" headers="referencing-parameters-output__entry__2">User-selected enum value</td> 
+         <td class="entry" headers="referencing-parameters-output__entry__3"><code class="ph codeph">production</code></td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Displaying user selections in the output</h2> 
+      <pre class="pre codeblock"><code>output:
+  text:
+    - title: Request submitted
+      content: |
+        Your request for **${{ parameters.app_name }}** has been submitted.
+
+        **Configuration:**
+        - Inventory: ${{ parameters.inventory }}
+        - Environment: ${{ parameters.environment }}</code></pre> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

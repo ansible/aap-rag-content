@@ -1,0 +1,106 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-a917cf94-2ce4-4a24-9ba2-f53cc3c077a8">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Manage your Ansible dev environment</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Use the AI assistant to help you understand what is happening in your own environment without having to leave the editor.</p> 
+     <section class="section prereq" id="GUID-a917cf94-2ce4-4a24-9ba2-f53cc3c077a8__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul" id="GUID-a917cf94-2ce4-4a24-9ba2-f53cc3c077a8__ul_1"> 
+       <li class="li">VS Code is open with the Ansible VS Code Extension active.</li> 
+       <li class="li">The Ansible MCP Server is enabled.</li> 
+       <li class="li">GitHub Copilot is active.</li> 
+      </ul> 
+     </section> 
+     <section class="section context" id="GUID-a917cf94-2ce4-4a24-9ba2-f53cc3c077a8__context_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div>You can ask the AI assistant to list the automations (collections and tools) available in your local environment. This way, you can verify what tools are available to you before starting development.
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">In the GitHub Copilot chat window, enter a natural language prompt to check the environment. For example:</span> 
+        <ol type="a" class="ol substeps" id="GUID-a917cf94-2ce4-4a24-9ba2-f53cc3c077a8__substeps_1"> 
+         <li class="li substep"> <span class="ph cmd"><code class="ph codeph">Check my Ansible environment and tell me what's installed.</code></span> </li> 
+         <li class="li substep"> <span class="ph cmd"><code class="ph codeph">What collections are installed?</code></span> </li> 
+        </ol> 
+        <div class="itemgroup stepxmp">
+         The AI assistant triggers the <code class="ph codeph">ade_environment_info</code> tool.
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Review the output, which displays: </span> 
+        <ol type="a" class="ol substeps" id="GUID-a917cf94-2ce4-4a24-9ba2-f53cc3c077a8__substeps_2"> 
+         <li class="li substep"> <span class="ph cmd">Ansible Version: The core version installed.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Ansible Lint Version: Confirmation of the linting tool status.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Installed Collections: A list of collections available for use (such as <code class="ph codeph">amazon.aws</code>, <code class="ph codeph">ansible.posix</code>).</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Python Environment: Details about the active virtual environment.</span> </li> 
+        </ol> </li>
+      </ol>
+     </section> 
+    </div> 
+    <article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_1"> 
+     <h2 class="title topictitle2" id="ariaid-title2">Understand your automation with the AI assistant</h2> 
+     <div class="body taskbody">
+      <p class="shortdesc">If you are working with an existing playbook and need to understand its components, you can ask the assistant to analyze the file.</p> 
+      <section id="task_1__steps_1">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">Procedure</h3>
+       </div>
+       <ol class="ol steps" id="task_1__steps_1">
+        <li class="li step stepexpand"> <span class="ph cmd">Open the playbook you want to investigate in the VS Code editor.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">In the Copilot chat window, enter a prompt instructing the AI agent to analyze dependencies. For example:</span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>Analyze my web server playbook and tell me which Ansible collections are being used.</code></pre> 
+         </div> 
+         <div class="itemgroup info">
+          The assistant then analyzes the content and identifies: 
+          <ul class="ul" id="task_1__ul_2"> 
+           <li class="li">Collections: Which collections are required (for example,<code class="ph codeph"> ansible.builtin</code>, <code class="ph codeph">community.general</code>).</li> 
+           <li class="li">Modules: Specific modules utilized within the tasks.</li> 
+           <li class="li">FQCN Compliance: The assistant verifies if the automations are referenced using their Fully Qualified Collection Names (FQCN)</li> 
+          </ul> 
+         </div> </li>
+       </ol>
+      </section> 
+     </div> 
+     <article class="topic task nested2" aria-labelledby="ariaid-title3" id="task_2"> 
+      <h3 class="title topictitle3" id="ariaid-title3">List available Ansible MCP tools </h3> 
+      <div class="body taskbody">
+       <p class="shortdesc">To discover other automation tasks the assistant can perform with the MCP server, you can query the toolset directly.</p> 
+       <section id="task_2__steps_2">
+        <div class="tasklabel">
+         <h4 class="sectiontitle tasklabel">Procedure</h4>
+        </div>
+        <ol class="ol steps" id="task_2__steps_2">
+         <li class="li step stepexpand"> <span class="ph cmd">In the GitHub Copilot chat window, enter the following prompt:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>What Ansible tools are available through MCP?</code></pre> The assistant then triggers the <code class="ph codeph">list_available_tools</code> function.
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">The assistant returns a list of tools, including:</span> 
+          <ol type="a" class="ol substeps" id="task_2__substeps_3"> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">zen_of_ansible</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">ansible_content_best_practices</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">list_available_tools</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">ansible_lint</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">ansible_navigator</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">ade_environment_info</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">ade_setup_environment</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">adt_check_env</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">create_ansible_projects</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">define_and_build_execution_env</code></span> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article>
+  </main>
+ </body>
+</html>

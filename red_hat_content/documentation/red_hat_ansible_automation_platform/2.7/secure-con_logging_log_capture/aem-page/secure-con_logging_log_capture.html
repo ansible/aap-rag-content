@@ -1,0 +1,283 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-logging-log-capture"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Best practices for setting up secure logging</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Visibility and analytics are important pillars of Enterprise Security and Zero Trust architectures. Logging is key to capturing actions and auditing.</p> 
+      <p class="p">You can manage logging and auditing by using the built-in audit support described in the Auditing the system section of the Security hardening for Red Hat Enterprise Linux guide. Ansible Automation Platform’s built-in logging and activity stream logs all change within Red Hat Ansible Automation Platform and automation logs for auditing purposes.</p> 
+      <p class="p">Ansible Automation Platform and the underlying Red Hat Enterprise Linux systems should be configured to collect logging and auditing centrally, rather than reviewing it on the local system. Configure Ansible Automation Platform to use external logging to compile log records from multiple components within the Ansible Automation Platform server. The events occurring must be time-correlated to conduct accurate forensic analysis. </p> 
+      <p class="p">Another critical capability of logging is the ability to use cryptography to protect the integrity of log tools. Log data includes all information (for example, log records, log settings, and log reports) needed to successfully log information system activity. It is common for attackers to replace the log tools or inject code into the existing tools to hide or erase system activity from the logs. To address this risk, log tools must be cryptographically signed so that you can identify when the log tools have been modified, manipulated, or replaced. For example, one way to validate that the log tool(s) have not been modified, manipulated or replaced is to use a checksum hash against the tool file(s). This ensures the integrity of the tool(s) has not been compromised.</p> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist"> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/auditing-the-system_security-hardening" target="_blank" rel="external noopener">Auditing the system</a></li> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/observe-assembly_controller_logging_aggregation" title="Logging enables sending detailed logs to third-party aggregation services. These feeds provide insights into Ansible Automation Platform controller use and technical trends. Data can be used to analyze infrastructure events, monitor for anomalies, and correlate events across multiple services.">Send log files to third-party aggregation services</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-configure-centralized-logging"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure centralized logging</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Configure centralized logging to collect all Ansible Automation Platform logs in a single location. Consolidating this data makes it easier to troubleshoot issues, detect tampering, and helps ensure the overall security and stability of your environment.</p> 
+       <section class="section"> 
+        <p class="p">There are several additional benefits including:</p> 
+        <ul class="ul"> 
+         <li class="li">The data is sent in JSON format over a HTTP connection using minimal service-specific tweaks engineered in a custom handler or through an imported library. The types of data that are most useful to the controller are job fact data, job events/job runs, activity stream data, and log messages.</li> 
+         <li class="li">Deeper insights into the automation process by analyzing logs from different parts of the infrastructure, including playbook execution details, task outcomes, and system events.</li> 
+         <li class="li">Identifying performance bottlenecks and optimizing the Ansible playbooks by analyzing execution times and resource usage from the logs.</li> 
+         <li class="li">Centralized logging helps meet compliance mandates by providing a single source of truth for auditing purposes.</li> 
+         <li class="li">Third Party integration with a centralized log management platform like Splunk, Logstash, ElasticSearch, or Loggly to collect and analyze logs.</li> 
+        </ul> 
+        <p class="p">The logging aggregator service works with the following monitoring and data analysis systems:</p> 
+        <ul class="ul"> 
+         <li class="li">Splunk</li> 
+         <li class="li">Loggly</li> 
+         <li class="li">Sumologic</li> 
+         <li class="li">Elastic stack (formerly ELK stack)</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-controller-set-up-logging"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Set up logging</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">To set up logging to any of the aggregator types for centralized logging follow these steps:</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ul class="ul steps-unordered"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Logging</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Logging settings</strong> page, click <span class="ph uicontrol button">Edit</span>. </span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">You can configure the following options: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Logging Aggregator</strong>: Enter the hostname or IP address that you want to send logs to.</li> 
+            <li class="li"><strong class="ph b">Logging Aggregator Port</strong>: Specify the port for the aggregator if it requires one. 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">When the connection type is HTTPS, you can enter the hostname as a URL with a port number, after which, you are not required to enter the port again. However, TCP and UDP connections are determined by the hostname and port number combination, rather than URL. Therefore, in the case of a TCP or UDP connection, supply the port in the specified field. If a URL is entered in the <strong class="ph b">Logging Aggregator</strong> field instead, its hostname portion is extracted as the hostname.</p> 
+              </div> 
+             </div> </li> 
+            <li class="li"><strong class="ph b">Logging Aggregator Type</strong>: Click to select the aggregator service from the list: </li> 
+            <li class="li"><strong class="ph b">Logging Aggregator Username</strong>: Enter the username of the logging aggregator if required.</li> 
+            <li class="li"><strong class="ph b">Logging Aggregator Password/Token</strong>: Enter the password of the logging aggregator if required.</li> 
+            <li class="li"><strong class="ph b">Loggers to Send Data to the Log Aggregator Form</strong>: All four types of data are pre-populated by default. Click the tooltip <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/question-circle.png" width="15" alt="Help"> icon next to the field for additional information on each data type. Delete the data types you do not want.</li> 
+            <li class="li"><strong class="ph b">Cluster wide unique identifier</strong>: Use this to uniquely identify instances.</li> 
+            <li class="li"><strong class="ph b">Logging Aggregator Protocol</strong>: Click to select a connection type (protocol) to communicate with the log aggregator. Subsequent options vary depending on the selected protocol.</li> 
+            <li class="li"><strong class="ph b">TCP Connection Timeout</strong>: Specify the connection timeout in seconds. This option is only applicable to HTTPS and TCP log aggregator protocols.</li> 
+            <li class="li"><strong class="ph b">Logging Aggregator Level Threshold</strong>: Select the level of severity you want the log handler to report.</li> 
+            <li class="li"><strong class="ph b">Maximum number of messages that can be stored in the log action queue</strong>:Defines how large the <code class="ph codeph">rsyslog</code> action queue can grow in number of messages stored. This can have an impact on memory use. When the queue reaches 75% of this number, the queue starts writing to disk (<code class="ph codeph">queue.highWatermark</code> in <code class="ph codeph">rsyslog</code>). When it reaches 90%, <code class="ph codeph">NOTICE</code>, <code class="ph codeph">INFO</code>, and <code class="ph codeph">DEBUG</code> messages start to be discarded (<code class="ph codeph">queue.discardMark</code> with <code class="ph codeph">queue.discardSeverity=5</code>).</li> 
+            <li class="li"><strong class="ph b">Maximum disk persistence for rsyslogd action queuing (in GB)</strong>: The amount of data to store (in gigabytes) if an <code class="ph codeph">rsyslog</code> action takes time to process an incoming message (defaults to 1). Equivalent to the <code class="ph codeph">rsyslogd queue.maxdiskspace</code> setting on the action (e.g. <code class="ph codeph">omhttp</code>). It stores files in the directory specified by <code class="ph codeph">LOG_AGGREGATOR_MAX_DISK_USAGE_PATH</code>.</li> 
+            <li class="li"><strong class="ph b">File system location for rsyslogd disk persistence</strong>: Location to persist logs that should be retried after an outage of the external log aggregator (defaults to <code class="ph codeph">/var/lib/awx</code>). Equivalent to the <code class="ph codeph">rsyslogd queue.spoolDirectory</code> setting.: Configure a specific error message. When the API encounters an issue with a request, it typically returns an HTTP error code in the 400 range along with an error. When this happens, an error message is generated in the log that follows the following pattern: </li> 
+            <li class="li"><strong class="ph b">Log Format For API 4XX Errors: </strong>When the API encounters an issue with a request, it typically returns an HTTP error code in the 400 range along with an error. When this happens, an error message is generated in the log that follows the following pattern: <code class="ph codeph">' status {status_code} received by user {user_name} attempting to access {url_path} from {remote_addr} '</code></li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">You can set the following options: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Log System Tracking Facts Individually</strong>: Click the tooltip <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/question-circle.png" width="15" alt="Help"> icon for additional information, such as whether or not you want to turn it on, or leave it off by default.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Review your entries for your chosen logging aggregation. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Enable External Logging</strong>: Select this checkbox if you want to send logs to an external log aggregator.</li> 
+            <li class="li"><strong class="ph b">Enable/disable HTTPS certificate verification</strong>: Certificate verification is enabled by default for the HTTPS log protocol. Select this checkbox if you want the log handler to verify the HTTPS certificate sent by the external log aggregator before establishing a connection.</li> 
+            <li class="li"><strong class="ph b">Enable rsyslogd debugging</strong>: Select this checkbox to enable high verbosity debugging for <code class="ph codeph">rsyslogd</code>. Useful for debugging connection issues for external log aggregation.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span> or <span class="ph uicontrol button">Cancel</span> to abandon the changes. </span> </li> 
+        </ul> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/assembly-controller-logging-aggregation#proc-controller-api-4xx-error-config" target="_blank" rel="external noopener">API 4XX Error Configuration</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-configure-ldap-logging"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Configure LDAP logging</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Enable debug logging for LDAP in the platform gateway settings to capture detailed authentication messages. Reviewing these logs ensures that you can effectively troubleshoot and resolve LDAP connection issues.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">Edit the gateway settings file: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">On Ansible Automation Platform 2.6 Containerized, the file is <code class="ph codeph">~/aap/gateway/etc/settings.py</code> (as the user running the platform gateway container).</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">On Ansible Automation Platform 2.6 RPM-based, the file is <code class="ph codeph">/etc/ansible-automation-platform/gateway/settings.py</code>. </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code> (...)
+  CACHES['fallback']['LOCATION'] = '/var/cache/ansible-automation-platform/gateway'
+
+  LOGGING['loggers']['aap']['level'] = 'INFO'
+  LOGGING['loggers']['ansible_base']['level'] = 'INFO'
+  LOGGING['loggers']['django_auth_ldap']['level'] = 'DEBUG'      ######      add this line
+
+  (...)</code></pre> 
+            </div> </li> 
+          </ol> </li> 
+         <li class="li step"> <span class="ph cmd">Restart the platform gateway service or container: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">On Ansible Automation Platform 2.6 Containerized, restart the platform gateway service so that it restarts the platform gateway container: </span> 
+            <div class="itemgroup info"> 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">Ensure that you run <code class="ph codeph">systemctl with the `--user`</code> flag as follows:</p> 
+               <p class="p">+ <code class="ph codeph">$ systemctl --user restart automation-gateway</code></p> 
+              </div> 
+             </div> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">On Ansible Automation Platform 2.6 RPM-based, use the <code class="ph codeph">automation-gateway-service</code> command: </span> 
+            <div class="itemgroup info"> 
+             <p class="p"> <code class="ph codeph"># automation-gateway-service restart</code> </p> 
+            </div> </li> 
+          </ol> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-implement-security-control"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Implement security control</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Some of the following examples of meeting compliance requirements come from the US DoD <em class="ph i">Security Technical Implementation Guide</em>, but go back to integrity and security best practices.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Automation controller must use external log providers that can collect user activity logs in independent, protected repositories to prevent modification or repudiation. Automation controller must be configured to use external logging to compile log records from multiple components within the server. The events occurring must be time-correlated in order to conduct accurate forensic analysis. In addition, the correlation must meet certain tolerance criteria.</p> 
+        <p class="p">The following steps implement the security control:</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to automation controller as an administrator.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Logging</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Logging settings</strong> page, click <span class="ph uicontrol button">Edit</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Set the following fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Set <strong class="ph b">Logging Aggregator</strong> to <code class="ph codeph">Not configured</code>. This is the default.</li> 
+            <li class="li">Set <strong class="ph b">Enable External Logging</strong> to <code class="ph codeph">On</code>.</li> 
+            <li class="li">Set <strong class="ph b">Logging Aggregator Level Threshold</strong> to DEBUG.</li> 
+            <li class="li">Set <strong class="ph b">TCP Connection Timeout</strong> to 5 (the default) or to the organizational timeout.</li> 
+            <li class="li">Set <strong class="ph b">Enable/disable HTTPS certificate verification</strong> to <code class="ph codeph">On</code>.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">Automation controller must allocate log record storage capacity and shut down by default upon log failure (unless availability is an overriding concern). It is critical that when a system is at risk of failing to process logs, it detects and takes action to mitigate the failure. Log processing failures include software/hardware errors, failures in the log capturing mechanisms, and log storage capacity being reached or exceeded. During a failure, the application server must be configured to shut down unless the application server is part of a high availability system. When availability is an overriding concern, other approved actions in response to a log failure are as follows:</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If the failure was caused by the lack of log record storage capacity, the application must continue generating log records if possible (automatically restarting the log service if necessary), overwriting the oldest log records in a first-in-first-out manner.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If log records are sent to a centralized collection server and communication with this server is lost or the server fails, the application must queue log records locally until communication is restored or until the log records are retrieved manually. Upon restoration of the connection to the centralized collection server, action must be taken to synchronize the local log data with the collection server. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The following steps implement the security control:</p> 
+          </div> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Open a web browser and navigate to the logging API, <code class="ph codeph">/api/v2/settings/logging/</code></span> 
+            <div class="itemgroup info"> 
+             <p class="p">Ensure that you are authenticated as an automation controller administrator.</p> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">In the <strong class="ph b">Content</strong> section, modify the following values: </span> 
+            <div class="itemgroup info"> 
+             <ul class="ul"> 
+              <li class="li"><code class="ph codeph">LOG_AGGREGATOR_ACTION_MAX_DISK_USAGE_GB</code> = organization-defined requirement for log buffering.</li> 
+              <li class="li"><code class="ph codeph">LOG_AGGREGATOR_MAX_DISK_USAGE_PATH</code> = <code class="ph codeph">/var/lib/awx</code></li> 
+             </ul> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">PUT</span>.</span> </li> 
+          </ol> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-implement-security-controller"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Implement security control for each host</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Restrict access to automation controller log files using explicitly defined privileges. Protecting log confidentiality prevents attackers from gathering sensitive system details and helps ensure your environment is safe from privilege escalation or lateral movement.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">To implement the security control, use the following procedure:</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">As a system administrator for each automation controller host, set the permissions and owner of the automation controller NGINX log directory: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"> <code class="ph codeph">chmod 770 /var/log/nginx</code> </li> 
+            <li class="li"> <code class="ph codeph">chown nginx:root /var/log/nginx</code> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Set the permissions and owner of the automation controller log directory: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"> <code class="ph codeph">chmod 770 /var/log/tower</code> </li> 
+            <li class="li"> <code class="ph codeph">chown awx:awx /var/log/tower</code> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Set the permissions and owner of the automation controller supervisor log directory: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"> <code class="ph codeph">chmod 770 /var/log/supervisor/</code> </li> 
+            <li class="li"> <code class="ph codeph">chown root:root /var/log/supervisor/</code></li> 
+            <li class="li">If automation controller is not in an HA configuration, the administrator must reinstall automation controller.</li> 
+           </ul> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="proc-implement-security-for-admin"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Implement security control for system administrators</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Configure your automation controller web server to log detailed user session records. Capturing this data supports troubleshooting, debugging, and forensic analysis, and helps ensure you retain essential auditing tools for event investigations.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Use the following procedure to implement the security control as a System Administrator for each automation controller host:</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span>. The System Settings page is displayed.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Edit</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Set the following: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Enable Activity Stream</strong> = On</li> 
+            <li class="li"><strong class="ph b">Enable Activity Stream for Inventory Sync</strong> = On</li> 
+            <li class="li"><strong class="ph b">Organization Admins Can Manage Users and Teams</strong> = On</li> 
+            <li class="li"><strong class="ph b">All Users Visible to Organization Admins</strong> = On</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

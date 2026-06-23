@@ -1,0 +1,90 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-3ddcdcda-f0da-481a-9820-1a83d919bba3">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Scaffold an Ansible project with the AI assistant</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Use the MCP server for Red Hat Ansible Automation Platform through the Ansible VS Code extension to generate a new project structure, and to create and scaffold new content such as playbooks or collections.</p> 
+     <section class="section prereq" id="GUID-3ddcdcda-f0da-481a-9820-1a83d919bba3__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul" id="GUID-3ddcdcda-f0da-481a-9820-1a83d919bba3__ul_1"> 
+       <li class="li">The Ansible VS Code extension is installed, running, and enabled in Agent Mode.</li> 
+       <li class="li">The MCP server for Red Hat Ansible Automation Platform is enabled in the Ansible VS Code extension.</li> 
+       <li class="li">Ansible Development Tools are installed.</li> 
+      </ul> 
+     </section> 
+     <section class="section context" id="GUID-3ddcdcda-f0da-481a-9820-1a83d919bba3__context_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div>Use the AI assistant to ensure that your project aligns with best practices and organizational standards without manually creating boilerplate code. You can also generate and view Ansible best practices and coding guidelines.
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Open the Copilot chat window by clicking the GitHub Copilot icon in the VS Code sidebar.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Enter a prompt requesting Ansible best practices. For example:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>Show me Ansible best practices and coding guidelines so that I can write high-quality playbooks.</code></pre> This triggers the <code class="ph codeph">ansible_content_best_practices </code>tool, which will display the guidelines for you to read within the editor.
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Enter a prompt requesting The Zen of Ansible. For example:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>Show me The Zen of Ansible.</code></pre> This triggers the <code class="ph codeph">zen_of_ansible</code> tool, which will list Zen of Ansible principles for you to read within the editor.
+        </div> </li>
+      </ol>
+     </section> 
+    </div> 
+    <article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_1"> 
+     <h2 class="title topictitle2" id="ariaid-title2">Create the project structure</h2> 
+     <div class="body taskbody">
+      <p class="shortdesc">Enter a prompt in natural language to trigger the project creation tool. When prompted, <code class="ph codeph">ansible-creator</code> works in the background to generate the directory structure.</p> 
+      <section id="task_1__steps_1">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">Procedure</h3>
+       </div>
+       <ol class="ol steps" id="task_1__steps_1">
+        <li class="li step stepexpand"> <span class="ph cmd">In the Copilot chat window, enter a prompt specifying the project name and type. For example:</span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>Create a new Ansible playbook project called 'webserver-deployment'.</code></pre> 
+          <p class="p">This triggers the <code class="ph codeph">create_ansible_projects</code>tool.</p> 
+          <p class="p">The extension executes <code class="ph codeph">ansible-creator init playbook</code>and generates the content.</p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Verify that the generated structure is consistent with the standard layout by navigating to the VS Code Explorer view and locating the new directory (<code class="ph codeph">webserver-deployment</code>)</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Confirm the presence of standard artifacts like:</span> 
+         <ol type="a" class="ol substeps" id="task_1__substeps_1"> 
+          <li class="li substep"> <span class="ph cmd">Initial playbook files.</span> </li> 
+          <li class="li substep"> <span class="ph cmd">Recommended configuration files (such as <code class="ph codeph">ansible.cfg</code> or <code class="ph codeph">inventory</code>).</span> </li> 
+         </ol> </li>
+       </ol>
+      </section> 
+     </div> 
+     <article class="topic task nested2" aria-labelledby="ariaid-title3" id="task_2"> 
+      <h3 class="title topictitle3" id="ariaid-title3">Scaffold content</h3> 
+      <div class="body taskbody">
+       <p class="shortdesc">If you need to generate specific content within that project using specific templates (such as a playbook or execution environment), you can continue the conversation.</p> 
+       <section id="task_2__steps-unordered_1">
+        <div class="tasklabel">
+         <h4 class="sectiontitle tasklabel">Procedure</h4>
+        </div>
+        <ul class="ul steps-unordered" id="task_2__steps-unordered_1">
+         <li class="li step stepexpand"> <span class="ph cmd">For a playbook project, enter the following prompt:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>Following best practices, help me create a playbook called 'webserver'.</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">For an execution environment, enter the following prompt:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>Create an execution environment definition file using Fedora minimal as the base.</code></pre> 
+          </div> </li>
+        </ul>
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article>
+  </main>
+ </body>
+</html>

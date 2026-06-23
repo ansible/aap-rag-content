@@ -1,0 +1,61 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="eda-user-guide-overview">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Trigger automation from events with Event-Driven Ansible</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Event-Driven Ansible is a highly scalable, flexible automation capability. It works with external event sources (like software vendors' monitoring tools) to identify IT events and automatically implement the defined changes or responses within a rulebook.</p> 
+     <p class="p">Learn how to configure and manage the end-to-end lifecycle of event-driven automation within the Red Hat Ansible Automation Platform. Event-Driven Ansible provides you the ability to perform the following actions:</p> 
+     <ul class="ul"> 
+      <li class="li">Manage projects for rulebook storage</li> 
+      <li class="li">Build and restore decision environments for execution</li> 
+      <li class="li">Define credentials for secure authentication</li> 
+      <li class="li">Create event streams for centralized routing</li> 
+      <li class="li">Manage rulebook activations to main persistent, scalable listeners that monitor infrastructure and trigger automated workflows in real time</li> 
+     </ul> 
+     <div class="note note note_note">
+      <span class="note__title">Note:</span> 
+      <div class="note__body"> 
+       <ul class="ul" id="eda-user-guide-overview__ul_2"> 
+        <li class="li">API documentation for Event-Driven Ansible controller is available through the platform gateway (for example, <code class="ph codeph">https://&lt;<em class="ph i">gateway-host</em>&gt;/api/eda/v1/docs</code>) </li> 
+        <li class="li">Event-Driven Ansible controller uses PostgreSQL for data storage and background task workers via the <code class="ph codeph">dispatcherd</code> service. When the workers are unavailable, you will not be able to create or sync projects, or enable rulebook activations.</li> 
+       </ul> 
+      </div>
+     </div> 
+     <div class="note important note_important">
+      <span class="note__title">Important:</span> 
+      <div class="note__body"> 
+       <p class="p">In new installations of Ansible Automation Platform, using Event-Driven Ansible controller’s API to manage organizations, teams, or users requires an automated sync of up to 15 minutes to propagate changes to the rest of the Ansible Automation Platform components. To avoid potential errors and ensure immediate access, use the platform gateway API instead, or the unified UI.</p> 
+      </div>
+     </div> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-background_task_processing_for_event_driven_ansible">Background task processing for Event-Driven Ansible</a></strong><br>In Ansible Automation Platform 2.7, Event-Driven Ansible controller uses <code class="ph codeph">dispatcherd</code>, a PostgreSQL-based task broker, for all background task processing. Dispatcherd replaces the previous Redis-based task queue and uses the PostgreSQL pg_notify feature as its message transport.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_projects#eda-projects">Organize rulebooks for event-driven automation</a></strong><br>Projects are a logical collection of rulebooks. They must be a git repository and located in the path defined for Event-Driven Ansible content in Ansible collections: <code class="ph codeph">/extensions/eda/rulebooks</code> at the root of the project.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_decision_environments#eda-decision-environments">Create runtime environments for event-driven automation</a></strong><br>Decision environments are container images that run Ansible rulebooks. They create a common language for communicating automation dependencies, and give a standard way to build and distribute the automation environment.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_activations#eda-rulebook-activations">Define rules that trigger automation from events</a></strong><br>A rulebook is a set of conditional rules that Event-Driven Ansible uses to perform IT actions in an event-driven automation model. Rulebooks are the means that users tell Event-Driven Ansible which source to check for an event and when that event occurs what to do when certain conditions are met.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_manage_active_rulebook_activations#eda-manage-active-rulebook-activations">Manage active event-driven automation integrations</a></strong><br>To maintain efficient event-driven workflows, you must manage the lifecycle of your rulebook activations. Managing these activations effectively ensures that your automation remains responsive, reduces resource duplication, and minimizes downtime during configuration updates.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_reuse_rulebook_activation_configurations#eda-reuse-rulebook-activation-configurations">Reuse event-driven automation configurations</a></strong><br>Streamline your workflow by duplicating existing rulebook activations to reuse proven configurations. This section covers how to create copies, manage unique naming requirements, and navigate bulk-enablement safety warnings to avoid duplicate job failures.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_eda_activate_webhook#eda-activate-webhook">Activate webhook-based automation in Openshift</a></strong><br>In Openshift environments, you can activate webhooks by creating a route to expose the activation’s service, enabling external systems to send events and trigger automation.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rule_audit#eda-rule-audit">Audit pipeline-triggered automation activity</a></strong><br>Rule audit allows the auditing of rules which have been triggered by all the rules that were activated at some point.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_troubleshooting#eda-rulebook-troubleshooting">Troubleshoot failed event-driven automation triggers</a></strong><br>Rulebook activations might occasionally fail due to various reasons. While many issues can be resolved through basic checks, diagnosing failures across a distributed system requires robust logging.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_simplified_event_routing#simplified-event-routing">Respond to events from external systems</a></strong><br>Simplified event routing provides Event-Driven Ansible controller the capability to capture and analyze data from various remote systems (like GitHub or GitLab) using event streams. You can attach one or more event streams to an activation by swapping out sources in a rulebook.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-automate_responses_to_real_world_it_events#GUID-01323c9f-54fd-4bf5-b44d-195391406252">Automate actions by routing external event streams: User scenarios</a></strong><br>The following user scenario provides end-to-end instructions for integrating event streams with rulebook activations. You can automate responses to environmental events and streamline cross-platform workflows.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_event_filter_plugins#eda-event-filter-plugins">Filter events before triggering automation</a></strong><br>Events sometimes have extra data that is unnecessary and might overwhelm the rule engine. Use event filters to remove that extra data so you can focus on what matters to your rules. Event filters might also change the format of the data so that the rule conditions can better match the data.</li>
+     </ul>
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_configure_authentication" title="Configure authentication methods such as LDAP or SAML to simplify the user login experience. Providing the correct connection details for your chosen identity provider helps ensure seamless and secure access to Ansible Automation Platform.">Configure central authentication for Ansible Automation Platform</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_access" title="Role-based access control (RBAC) restricts user access based on the user’s role within the organization they are assigned to in Ansible Automation Platform. The roles in RBAC refer to the levels of access that users have to Ansible Automation Platform components and resources.">Manage access with role-based access control</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_user_guide_overview" title="Event-Driven Ansible is a highly scalable, flexible automation capability. It works with external event sources (like software vendors' monitoring tools) to identify IT events and automatically implement the defined changes or responses within a rulebook.">Trigger automation from events with Event-Driven Ansible</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="gw-local-authentication">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure local authentication</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">As a platform administrator, you can configure local system authentication. With local authentication, users and their passwords are checked against local system accounts.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">A local authenticator is automatically created by the Ansible Automation Platform installation process, and is configured with the specified admin credentials in the inventory file before installation. After successful installation, you can log in to the Ansible Automation Platform using those credentials.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication Methods</span></span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create authentication</span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Enter a <strong class="ph b">Name</strong> for this Local configuration. The configuration name is required, must be unique across all authenticators, and must not be longer than 512 characters.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Local</strong> from the <strong class="ph b">Authentication type</strong> list.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Optional: Enter any <strong class="ph b">Additional Authenticator Fields</strong> that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. </span> 
+        <div class="itemgroup info"> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">To automatically create organizations, users, and teams upon successful login, select <strong class="ph b">Create objects</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">To enable this authentication method upon creation, select <strong class="ph b">Enabled</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">To remove a user for any groups they were previously added to when they authenticate from this source, select <strong class="ph b">Remove users</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>.</span> </li>
+      </ol>
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p">To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong, continue to <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-mapping" title="To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or what groups they belong to, you can configure authenticator maps.">Mapping</a>.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_ldap#controller-set-up-LDAP">Configure LDAP authentication</a></strong><br>As a platform administrator, you can configure LDAP as the source for account authentication information for Ansible Automation Platform users.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_saml#controller-set-up-SAML">Configure SAML authentication</a></strong><br>SAML allows the exchange of authentication and authorization data between an Identity Provider (IdP) and a Service Provider (SP). Ansible Automation Platform is a SAML SP that you can configure to talk with one or more SAML IdPs to authenticate users.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_tacacs">Configure TACACS+ authentication</a></strong><br>Terminal Access Controller Access-Control System Plus (TACACS+) provides centralized AAA services (authentication, authorization, and accounting). You can configure Ansible Automation Platform to use TACACS+ as a source for remote authentication and access control.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_azure">Configure Microsoft Entra ID authentication</a></strong><br>To set up enterprise authentication for Microsoft Entra ID, formerly known as Microsoft Azure Active Directory (AD), follow these steps:</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_google_oauth2_settings">Configure Google OAuth2 authentication</a></strong><br>To set up social authentication for Google, you must obtain an OAuth2 key and secret for a web application. To do this, you must first create a project and set it up with Google.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_set_up_generic_oidc#controller-set-up-generic-oidc">Configure generic OIDC authentication</a></strong><br>OpenID Connect (OIDC) uses OAuth 2.0 to verify identity and obtain user info. Unlike SAML’s provider-to-provider trust, OIDC relies on the HTTPS channel to secure tokens. To set up OIDC with Ansible Automation Platform, consult your IdP's documentation for the required credentials.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_gw_config_jwt_algorithms">Configure JWT_Algorithms manually</a></strong><br>To resolve the authentication failure, manually provide the list of supported algorithms in the platform gateway configuration.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_gw_enable_debugging">Enable debugging for enterprise authentication</a></strong><br>To further diagnose authentication issues, enable debug logging in platform gateway.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_gw_troubleshoot_oidc_scope_mismatch">Troubleshoot Generic OIDC scope mismatches</a></strong><br>Authentication fails when the Identity Provider (IdP) does not support the default scopes automatically appended by the system.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_gw_config_keycloak_settings">Configure keycloak authentication</a></strong><br>You can configure Ansible Automation Platform to integrate Keycloak to manage user authentication.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_github_settings">Configure GitHub authentication</a></strong><br>You can connect GitHub identities to Ansible Automation Platform using OAuth. To set up GitHub authentication, you need to obtain an OAuth2 key and secret by registering your organization-owned application from GitHub by using the <a class="xref" href="https://docs.github.com/en/apps/using-github-apps/installing-your-own-github-app" target="_blank" rel="external noopener">registering the new application with GitHub</a>.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_github_organization_settings">Configure GitHub organization authentication</a></strong><br>When defining account authentication with either an organization or a team within an organization, you should use the specific organization and team settings. Account authentication can be limited by an organization and by a team within an organization.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_github_team_settings">Configure GitHub team authentication</a></strong><br>To set up social authentication for a GitHub team, you must obtain an OAuth2 key and secret for a web application by using the instructions provided in <a class="xref" href="https://docs.github.com/en/apps/using-github-apps/installing-your-own-github-app" target="_blank" rel="external noopener">registering the new application with GitHub</a>.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_github_enterprise_settings">Configure GitHub enterprise authentication</a></strong><br>To set up social authentication for a GitHub enterprise, you must obtain a GitHub Enterprise URL, an API URL, OAuth2 key and secret for a web application.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_github_enterprise_org_settings">Configure GitHub enterprise organization authentication</a></strong><br>To set up social authentication for a GitHub enterprise organization, you must obtain a GitHub enterprise organization URL, an Organization API URL, an Organization OAuth2 key and secret for a web application.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_controller_github_enterprise_team_settings">Configure GitHub enterprise team authentication</a></strong><br>To set up social authentication for a GitHub enterprise team, you must obtain a GitHub Enterprise Organization URL, an Organization API URL, an Organization OAuth2 key and secret for a web application.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-configure_radius_authentication">Configure RADIUS authentication</a></strong><br>You can configure Ansible Automation Platform to centrally use RADIUS as a source for authentication information.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

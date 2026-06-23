@@ -1,0 +1,8 @@
+# Package and distribute automation content with collections
+## Understand collections for distributing roles
+### Plan your collection
+
+Organize smaller bundles of curated automation into separate collections for specific functions, rather than creating one big general collection for all of your roles.
+
+For example, you could store roles that manage the networking for an internal system called `myapp` in a `company_namespace.myapp_network` collection, and store roles that manage and deploy networking in AWS in a collection called `company_namespace.aws_net`.
+

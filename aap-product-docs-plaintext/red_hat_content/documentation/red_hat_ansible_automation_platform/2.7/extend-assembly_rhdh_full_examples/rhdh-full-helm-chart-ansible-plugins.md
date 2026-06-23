@@ -1,0 +1,65 @@
+# Full configuration examples
+## Full Helm chart config example for Ansible plug-ins
+
+This example provides a full YAML configuration for the Helm chart using OCI container delivery.
+
+```yaml
+global:
+# ...
+dynamic:
+# ...
+plugins:
+- disabled: false
+package: >-
+oci://registry.redhat.io/ansible-automation-platform/automation-portal:<tag>!ansible-plugin-backstage-rhaap
+pluginConfig:
+dynamicPlugins:
+frontend:
+ansible.plugin-backstage-rhaap:
+appIcons:
+- importName: AnsibleLogo
+name: AnsibleLogo
+dynamicRoutes:
+- importName: AnsiblePage
+menuItem:
+icon: AnsibleLogo
+text: Ansible
+path: /ansible
+- disabled: false
+package: >-
+oci://registry.redhat.io/ansible-automation-platform/automation-portal:<tag>!ansible-plugin-backstage-self-service
+pluginConfig:
+dynamicPlugins:
+frontend:
+ansible.plugin-backstage-self-service:
+scaffolderFieldExtensions:
+- importName: AAPTokenFieldExtension
+- importName: AAPResourcePickerExtension
+- disabled: false
+package: >-
+oci://registry.redhat.io/ansible-automation-platform/automation-portal:<tag>!ansible-backstage-plugin-catalog-backend-module-rhaap
+pluginConfig: {}
+- disabled: false
+package: >-
+oci://registry.redhat.io/ansible-automation-platform/automation-portal:<tag>!ansible-plugin-scaffolder-backend-module-backstage-rhaap
+pluginConfig:
+dynamicPlugins:
+backend:
+ansible.plugin-scaffolder-backend-module-backstage-rhaap:
+upstream:
+backstage:
+# ...
+extraAppConfig:
+- configMapRef: app-config-rhdh
+filename: app-config-rhdh.yaml
+extraContainers:
+- command:
+- adt
+- server
+image: >-
+registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+imagePullPolicy: IfNotPresent
+name: ansible-devtools-server
+ports:
+- containerPort: 8000
+```

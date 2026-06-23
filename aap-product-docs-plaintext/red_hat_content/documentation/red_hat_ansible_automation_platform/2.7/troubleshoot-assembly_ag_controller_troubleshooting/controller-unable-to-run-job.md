@@ -1,0 +1,5 @@
+# Troubleshoot automation controller
+## Unable to run a job
+
+If you are unable to run a job from a playbook, review the playbook YAML file. When importing a playbook, either manually or by a source control mechanism, remember that the host definition is controlled by automation controller and should be set to `hosts:all`.
+

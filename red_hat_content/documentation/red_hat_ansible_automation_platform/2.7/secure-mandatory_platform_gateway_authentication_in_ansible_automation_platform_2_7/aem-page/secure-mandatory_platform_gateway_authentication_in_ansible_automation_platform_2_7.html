@@ -1,0 +1,81 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-mandatory-gateway-auth"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Mandatory platform gateway authentication in Ansible Automation Platform 2.7</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">In Red Hat Ansible Automation Platform 2.7, platform gateway is the only supported method for external authentication to platform components. Direct API access to automation controller, automation hub, and Event-Driven Ansible has been removed.</p> 
+      <p class="p">Platform components enforce gateway-only authentication through an immutable configuration. This enforcement activates automatically when components are deployed and cannot be bypassed or disabled.</p> 
+      <p class="p">Attempts to authenticate directly to a platform component using legacy methods result in an HTTP 401 Unauthorized error. Legacy methods include:</p> 
+      <ul class="ul"> 
+       <li class="li">Basic authentication</li> 
+       <li class="li">Session authentication</li> 
+       <li class="li">Component-level tokens</li> 
+      </ul> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relconcepts">
+       <strong>Related concepts</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27#con-auth-changes-27" title="In Ansible Automation Platform 2.7, all authentication has been consolidated through platform gateway. Direct API access to individual platform components has been removed.">Authentication changes in platform gateway</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-mandatory_platform_gateway_authentication_in_ansible_automation_platform_2_7#con-gateway-unaffected-operations" title="Internal platform operations continue to function normally using internal JWT-based authentication. The following communications do not go through platform gateway.">Unaffected internal operations</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27#con-auth-changes-27" title="In Ansible Automation Platform 2.7, all authentication has been consolidated through platform gateway. Direct API access to individual platform components has been removed.">Authentication changes in Ansible Automation Platform 2.7</a></li>
+       </ul>
+      </div>
+      <div class="linklist relref">
+       <strong>Related reference</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/ref_upgrade_api_general_changes" title="In Ansible Automation Platform 2.5 and later, API endpoints across components changed with the addition of platform gateway.">General API changes</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-gateway-auth-changes"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Authentication changes in platform gateway</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">In Ansible Automation Platform 2.7, all user authentication and API access is centralized through platform gateway. Third-party provider configuration must also be performed in platform gateway.</p> 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">Centralized flow:</strong> All user authentication flows through platform gateway.</li> 
+        <li class="li"><strong class="ph b">API requests:</strong> All API requests must use platform gateway URLs and gateway-issued tokens.</li> 
+        <li class="li"><strong class="ph b">Third-party providers:</strong> Configuration for LDAP, SAML, and OAuth, must be performed in platform gateway.</li> 
+        <li class="li"><strong class="ph b">Disabled methods:</strong> Basic and session authentication are no longer available at the component level.</li> 
+       </ul> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-mandatory_platform_gateway_authentication_in_ansible_automation_platform_2_7#con-mandatory-gateway-auth" title="In Red Hat Ansible Automation Platform 2.7, platform gateway is the only supported method for external authentication to platform components. Direct API access to automation controller, automation hub, and Event-Driven Ansible has been removed.">Mandatory platform gateway authentication in Ansible Automation Platform 2.7</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="con-gateway-unaffected-operations"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Unaffected internal operations</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Internal platform operations continue to function normally using internal JWT-based authentication. The following communications do not go through platform gateway.</p> 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">Service-to-service communication:</strong> Interactions between components, such as automation controller retrieving images from automation hub.</li> 
+        <li class="li"><strong class="ph b">Rulebook workers:</strong> Event-Driven Ansible worker processes communicating with automation controller through WebSockets.</li> 
+        <li class="li"><strong class="ph b">Container registry:</strong> The automation hub container registry supports authentication using gateway tokens by using <code class="ph codeph">podman login</code> or <code class="ph codeph">docker login</code>. To authenticate, use your platform gateway credentials: <pre class="pre codeblock"><code>$ podman login &lt;platform-host&gt; --username &lt;gateway-username&gt; --password</code></pre> <p class="p">For large container image uploads, you might need to adjust platform gateway route timeout settings. </p> </li> 
+       </ul> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#con-gateway-route-timeouts" title="In Ansible Automation Platform 2.7, all API access to platform components goes through platform gateway. Gateway-level timeout settings control how long platform gateway waits for backend services to respond before closing a connection.">Configure platform gateway route timeouts</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="proc-run-jobs-on-execution-nodes"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Run jobs on execution nodes</h1> 
+     <div class="body taskbody"> 
+      <p class="shortdesc">You must specify where jobs run from, or they default to running in the control cluster. To do this, set up a Job Template. For more information about Job Templates, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates" title="You can create both Job templates and Workflow job templates from Automation Execution > Templates .">Standardize and streamline automation with automation job templates</a>.</p> 
+      <section> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">Procedure</h2> 
+       </div> 
+       <ol class="ol steps"> 
+        <li class="li step"> <span class="ph cmd">The <strong class="ph b">Templates</strong> list view shows job templates that are currently available. From this screen you can launch <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rightrocket.png" width="15" alt="Launch">, edit <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edoit">, and duplicate <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/copy.png" width="15" alt="Duplicate"> a workflow job template.</span> </li> 
+        <li class="li step"> <span class="ph cmd">Select the job you want and click the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rightrocket.png" width="15" alt="Launch"> icon.</span> </li> 
+        <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">Instance Group</strong> on which you want to run the job. Note that a System Administrator must grant you or your team permissions to be able to use an instance group in a job template. If you select multiple jobs templates, the order in which you select them sets the execution precedence.</span> </li> 
+        <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span>.</span> </li> 
+        <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Launch</span>.</span> </li> 
+       </ol> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-connecting-nodes-through-mesh-ingress"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Set up mesh ingress for environments that forbid inbound connections</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">If your network restricts inbound connections, using a hop node peered to the control plane can cause issues, as it requires a defined 'listener_port'. Instead, you can use <em class="ph i">mesh ingress</em> as an alternative method for setting up your automation mesh.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Create node instances within the remote networks for execution nodes in the automation mesh.</li> 
+        </ul> 
+        <p class="p">Use the following procedure to set up mesh nodes.</p> 
+       </section> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">When you instantiate mesh ingress you set up a pod, or receptor hop node inside the kubernetes control cluster, registered to the database through the operator. It also creates a service, and a route URL that is used by the control plane to connect to the hop node, and automation controller.</p> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/meshIngress.png" alt="mesh ingress architecture"> 
+        <br> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a YAML file (in this case named <code class="ph codeph">oc_meshingress.yml</code>) to set up the mesh ingress node. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">Your file should resemble the following:</p> 
+           <pre class="pre codeblock"><code>apiVersion: automationcontroller.ansible.com/v1alpha1
+kind: AutomationControllerMeshIngress
+metadata:
+    name:
+    namespace:
+spec:
+    deployment_name: aap-controller</code></pre> 
+           <p class="p">Where:</p> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">apiVersion</strong>: defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and might reject unrecognized values. This value is static.</li> 
+            <li class="li"><strong class="ph b">kind</strong>: Is the type of node to create. <p class="p">Use the value <code class="ph codeph">AutomationControllerMeshIngress</code>.</p> <p class="p"><code class="ph codeph">AutomationControllerMeshIngress</code> controls the deployment and configuration of mesh ingress on automation controller.</p> </li> 
+            <li class="li"><strong class="ph b">name</strong>: enter a name for the mesh ingress node.</li> 
+            <li class="li"><strong class="ph b">namespace</strong>: enter a name for the Kubernetes namespace to deploy the mesh ingress into. <p class="p">This must be in the same namespace as the automation controller that the mesh is connected to.</p> </li> 
+            <li class="li"><strong class="ph b">deployment_name</strong>: is the automation controller instance that this mesh ingress is attached to. Provide the name of your automation controller instance.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Apply this YAML file using: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc apply -f oc_meshingress.yml</code></pre> 
+           <p class="p">Run this playbook to creates the <code class="ph codeph">AutomationControllerMeshIngress</code> resource. The operator creates a hop node in automation controller with the <code class="ph codeph">name</code> you supplied.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">When the MeshIngress instance has been created, it appears in the Instances page. </span> 
+          <div class="itemgroup info"> 
+           <div class="note important note_important"> <span class="note__title">Important:</span> 
+            <div class="note__body"> 
+             <p class="p">Any instance that is to function as a remote execution node in "pull" mode need to be created after this procedure and must be configured as follows:</p> 
+             <pre class="pre codeblock"><code>instance type: Execution
+listener port: keep empty
+options:
+    Enable instance: checked
+    Managed by Policy: as needed
+    Peers from control nodes: unchecked (this one is important)</code></pre> 
+            </div> 
+           </div> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Associate this new instance with the hop node you created using the procedure in this paragraph</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Download the tarball. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Association with the hop node must be done before creating the tarball.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-pulling-the-secret"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create a pull secret to run the default execution environment on remote nodes</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">If you are using the default execution environment provided with automation controller to run on remote execution nodes, you must add a pull secret in automation controller that has the credential for pulling the execution environment image.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">This does not apply to Ansible Automation Platform on Microsoft Azure.</p> 
+         </div> 
+        </div> 
+        <p class="p">Create a pull secret on the automation controller namespace and configure the <code class="ph codeph">ee_pull_credentials_secret</code> parameter in the Operator as follows:</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a secret using the following command: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc create secret generic ee-pull-secret \
+     --from-literal=username=&lt;username&gt; \
+     --from-literal=password=&lt;password&gt; \
+     --from-literal=url=registry.redhat.io</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Add <code class="ph codeph">ee_pull_credentials_secret</code> and <code class="ph codeph">ee-pull-secret</code> to the specification by editing the deployment specification: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc edit automationcontrollers aap-controller-o yaml</code></pre> 
+           <p class="p">and add the following:</p> 
+           <pre class="pre codeblock"><code>spec
+  ee_pull_credentials_secret=ee-pull-secret</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To manage instances from the automation controller UI, you must have System Administrator or System Auditor permissions.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-use-custom-signed-certificates"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Use custom signed certificates in managed cloud and operator environments</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Execution nodes verify incoming connections by ensuring the x509 certificate was issued by a trusted Certificate Authority (CA). You might want to provide your own CA for this validation. If no CA is provided. Controller Operator generates a self-signed CA during installation.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">The control nodes on the Kubernetes cluster communicate with execution nodes through mutual TLS/TCP connections, running using receptor. Controller Operator generates a self-signed CA during installation by using OpenSSL.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">If custom <code class="ph codeph">ca.crt</code> and <code class="ph codeph">ca.key</code> are stored locally, run the following: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">kubectl create secret tls controller-demo-12345-receptor-ca \ --cert=/path/to/ca.crt --key=/path/to/ca.key</code> </p> 
+           <p class="p">The secret should be named <code class="ph codeph">&lt;Controller Custom Resource name&gt;-receptor-ca</code>. In this example the Controller CR name is <code class="ph codeph">controller-demo-12345</code>.</p> 
+           <p class="p">Replace <code class="ph codeph">controller-demo-12345</code> with your Controller Custom Resource name.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If this secret is created after automation controller is deployed, run the following to restart the deployment: </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">kubectl rollout restart deployment controller-demo-12345</code> </p> 
+           <div class="note warning note_warning"> <span class="note__title">Warning:</span> 
+            <div class="note__body"> 
+             <p class="p">Changing the receptor CA breaks connections to any existing execution nodes. These nodes enter an unavailable state, and jobs cannot run on them. You must download and re-run the install bundle for each execution node. This replaces the TLS certificate files with those signed by the new CA. The execution nodes then appear in a ready state after a few minutes.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-removing-instances"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Remove instances</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">From the <strong class="ph b">Instances</strong> page, you can add, remove or run health checks on your nodes.</p> 
+       <section class="section"> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You must follow the procedures for installing RHEL packages for any additional nodes you create. If you peer this additional node to an existing hop node, you must also install the Install Bundle on each node.</p> 
+         </div> 
+        </div> 
+        <p class="p">Use the check boxes next to an instance to select it to remove it, or run a health check against it.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <ul class="ul"> 
+           <li class="li">If a node is removed using the UI, then the node is "removed" and does not show a status. If you delete the VM of the node before it is removed in the UI, it will show an error.</li> 
+           <li class="li">You only need to reinstall the Install Bundle if the topology changes the communication pattern, that is, hop nodes change or you add nodes.</li> 
+          </ul> 
+         </div> 
+        </div> 
+        <p class="p">When a button is disabled, you do not have permission for that particular action. Contact your Administrator to grant you the required level of access.</p> 
+        <p class="p">If you are able to remove an instance, you receive a prompt for confirmation.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You can still remove an instance even if it is active and jobs are running on it. Automation controller waits for jobs running on this node to complete before removing it.</p> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-operator-mesh-upgrading-receptors"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Upgrade receptors</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">A software update addresses any issues or bugs to provide a better experience of working with the technology. Anyone with administrative rights can update the receptor on an execution node.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Red Hat recommends performing updates to the receptor after any Ansible Automation Platform control plane updates. This ensures you are using the latest version. The best practice is to perform regular updates outside of any updates to the control plane.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Check the current receptor version: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>receptor --version</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Update the receptor: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>sudo dnf update ansible-runner receptor -y</code></pre> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">To upgrade all packages (not just the receptor), use <code class="ph codeph">dnf update</code>, then reboot with <code class="ph codeph">reboot</code>.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Verify the installation. After the update is complete, check the receptor version again to verify the update: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>receptor --version</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Restart the receptor service: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>sudo systemctl restart receptor</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Ensure the receptor is working correctly and is properly connected to the controller or other nodes in the system.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

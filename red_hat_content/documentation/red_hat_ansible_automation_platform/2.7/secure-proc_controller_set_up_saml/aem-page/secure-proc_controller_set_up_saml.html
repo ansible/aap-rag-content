@@ -1,0 +1,185 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-set-up-SAML"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure SAML authentication</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">SAML allows the exchange of authentication and authorization data between an Identity Provider (IdP) and a Service Provider (SP). Ansible Automation Platform is a SAML SP that you can configure to talk with one or more SAML IdPs to authenticate users.</p> 
+      <section class="section prereq">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Before you begin</h2>
+       </div> 
+       <p class="p">Before you configure SAML authentication in Ansible Automation Platform, be sure you do the following:</p> 
+       <ul class="ul"> 
+        <li class="li">Configure a SAML Identity Provider (IdP).</li> 
+        <li class="li">Pre-configure the SAML IdP with the settings required for integration with Ansible Automation Platform. For example, in Microsoft Entra ID you can configure the following: 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Identifier (Entity ID):</strong> This can be any value that you want, but it needs to match the one configured in your Ansible Automation Platform.</li> 
+          <li class="li"><strong class="ph b">Reply URL (Assertion Consumer Service (ACS) URL):</strong> This URL is auto generated when the SAML method is configured in Ansible Automation Platform. Copy that value from Ansible Automation Platform and paste in your IdP settings.</li> 
+         </ul> </li> 
+        <li class="li">Gather the user attributes for your SAML IdP application. Different IdPs might use different attribute names and formats. Refer to documentation for your specific IdP for the exact attribute names and the expected values.</li> 
+        <li class="li">Generate a private key and public certificate using the following command: <pre class="pre codeblock"><code>$ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 3650 -nodes</code></pre> </li> 
+       </ul> 
+      </section> 
+      <section class="section context">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div> 
+       <p class="p">Based on groups and attributes optionally provided by the SAML IdP, users can be placed into teams and organizations in Ansible Automation Platform based on the authenticator maps tied to this authenticator. This mapping ensures that when a user logs in through SAML, Ansible Automation Platform can correctly identify the user and assign the proper attributes such as given name, surname, email, and group membership.</p> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication Methods</span></span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create authentication</span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter a <strong class="ph b">Name</strong> for this SAML configuration.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">SAML</strong> from the <strong class="ph b">Authentication type</strong> list. The <strong class="ph b">Authentication details</strong> section automatically updates to show the fields relevant to the selected authentication type.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter the application-defined unique identifier used as the audience of the SAML service provider configuration in the <strong class="ph b">SAML Service Provider Entity ID</strong> field. This is usually the base URL of your service provider, but the actual value depends on the Entity ID expected by your IdP.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Include the certificate content in the <strong class="ph b">SAML Service Provider Public Certificate</strong> field. This information is contained in the cert.pem you created as a prerequisite and must include the <code class="ph codeph">--BEGIN CERTIFICATE--</code> and <code class="ph codeph">--END CERTIFICATE--</code>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Include the private key content in the <strong class="ph b">SAML Service Provider Private Key</strong> field. This information is contained in the key.pem you created as a prerequisite and must include the <code class="ph codeph">--BEGIN PRIVATE KEY--</code> and <code class="ph codeph">--END PRIVATE KEY--</code>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter the URL to redirect the user to for login initiation in the <strong class="ph b">IdP Login URL</strong> field. This is the login URL from your SAML IdP application.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter the public cert used for secrets coming from the <strong class="ph b">IdP in the IdP Public Cert</strong> field. This is the SAML certificate available for download from IdP. </span> 
+         <div class="itemgroup info"> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">The IdP in the IdP Public Cert field should contain the entire certificate, including the <code class="ph codeph">--BEGIN--</code> and <code class="ph codeph">--END CERTIFICATE--</code>. You must manually enter the prefix and suffix if the IdP does not include it.</p> 
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter the entity ID returned in the assertion in the <strong class="ph b">Entity ID</strong>. This is the identifier from your IdP SAML application. You can find this value in the SAML metadata provided by your IdP.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter user details in the <strong class="ph b">Groups</strong>, <strong class="ph b">User Email</strong>, <strong class="ph b">Username</strong>, <strong class="ph b">User Last Name</strong> and <strong class="ph b">User First Name</strong>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter a permanent ID for the user in the <strong class="ph b">User Permanent ID</strong> field. This field is required. </span> 
+         <div class="itemgroup info"> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">Additional attributes might be available through your SAML IdP. Those values must be included in either the <strong class="ph b">Additional Authenticators Fields</strong> or the <strong class="ph b">SAML IDP to extra_data attribute mapping</strong> field. Refer to those steps for details.</p> 
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">The <strong class="ph b">SAML Assertion Consumer Service (ACS) URL</strong> field registers the service as a service provider (SP) with each identity provider (IdP) you have configured. Leave this field blank. After you save this authentication method, it is auto generated. This field must match the <strong class="ph b">Reply URL</strong> setting in your IdP.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Optional: Enter any <strong class="ph b">Additional Authenticator Fields</strong> that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. For example, to ensure all SAML IdP attributes other than Email, Username, Last Name, First Name are included for mapping, enter the following: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>GET_ALL_EXTRA_DATA: true</code></pre> 
+          <p class="p">Alternatively, you can include a list of SAML IdP attributes in the <strong class="ph b">SAML IDP to extra_data attribute mapping</strong> field.</p> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.</p> 
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">SAML Service Provider Organization Info</strong> field, provide the URL, display name, and the name of your app. </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>{
+  "en-US": {
+    "url": "http://www.example.com",
+    "displayname": "Example",
+    "name": "example"
+  }
+}</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">SAML Service Provider Technical Contact</strong> field, give the name and email address of the technical contact for your service provider. </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>{
+"givenName": "Some User",
+"emailAddress": "suser@example.com"
+}</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">SAML Service Provider Support Contact</strong> field, give the name and email address of the support contact for your service provider. </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>{
+"givenName": "Some User",
+"emailAddress": "suser@example.com"
+}</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Optional: Provide extra configuration data in the <strong class="ph b">SAML Service Provider extra configuration data</strong> field. For example, you can choose to enable signing requests for added security: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>{
+"sign_request": True,
+}</code></pre> 
+          <p class="p">This field is the equivalent to the <code class="ph codeph">SOCIAL_AUTH_SAML_SP_EXTRA</code> in the API. For more information, see <a class="xref" href="https://github.com/SAML-Toolkits/python-saml#settings" target="_blank" rel="external noopener">OneLogin’s SAML Python Toolkit</a> to learn about the valid service provider extra (SP_EXTRA) parameters.</p> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body">
+            References to the OneLogin SAML Python Toolkit are for formatting examples only. Some configuration entries in the OneLogin documentation might not apply to Ansible Automation Platform.
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Optional: Provide security settings in the <strong class="ph b">SAML Security Config</strong> field. This field is the equivalent to the <code class="ph codeph">SOCIAL_AUTH_SAML_SECURITY_CONFIG</code> field in the API. </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>// Indicates whether the &lt;samlp:AuthnRequest&gt; messages sent by this SP // will be signed. [Metadata of the SP will offer this info]
+"authnRequestsSigned": false,
+
+// Indicates a requirement for the &lt;samlp:Response&gt;, &lt;samlp:LogoutRequest&gt; // and &lt;samlp:LogoutResponse&gt; elements received by this SP to be signed.
+"wantMessagesSigned": false,
+
+// Indicates a requirement for the &lt;saml:Assertion&gt; elements received by // this SP to be signed. [Metadata of the SP will offer this info]
+"wantAssertionsSigned": false,
+
+// Authentication context.
+// Set to false and no AuthContext will be sent in the AuthNRequest,
+// Set true or don't present this parameter and you will get an AuthContext 'exact' 'urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport'
+// Set an array with the possible auth context values: array ('urn:oasis:names:tc:SAML:2.0:ac:classes:Password', 'urn:oasis:names:tc:SAML:2.0:ac:classes:X509'),
+"requestedAuthnContext": true,</code></pre> 
+          <p class="p">For more information and additional options, see <a class="xref" href="https://github.com/SAML-Toolkits/python-saml#settings" target="_blank" rel="external noopener">OneLogin’s SAML Python Toolkit</a>.</p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Optional: In the <strong class="ph b">SAML IDP to extra_data attribute mapping</strong> field, enter values to map IDP attributes to extra_data attributes. These values will include additional user information beyond standard attributes such as Email or Username to be mapped. For example: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>- Department
+- UserType
+- Organization</code></pre> 
+          <p class="p">For more information on the values you can include, see <a class="xref" href="https://python-social-auth.readthedocs.io/en/latest/backends/saml.html#advanced-settings" target="_blank" rel="external noopener">advanced SAML settings</a>.</p> 
+          <div class="note important note_important">
+           <span class="note__title">Important:</span> 
+           <div class="note__body"> 
+            <p class="p">Ensure to include all relevant values so that everything gets mapped correctly for your configuration. Alternatively, you can include the <code class="ph codeph">GET_ALL_EXTRA_DATA: true</code> in the <strong class="ph b">Additional Authenticator Fields</strong> to allow mapping of all available SAML IdP attributes.</p> 
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">To automatically create organizations, users, and teams upon successful login, select <strong class="ph b">Create objects</strong>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">To enable this authentication method upon creation, select <strong class="ph b">Enabled</strong>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">To remove a user for any groups they were previously added to when they authenticate from this source, select <strong class="ph b">Remove users</strong>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create Authentication Method</span>. </span> 
+         <div class="itemgroup info"> 
+          <div class="note important note_important">
+           <span class="note__title">Important:</span> 
+           <div class="note__body"> 
+            <p class="p">You can configure an HTTPS redirect for SAML in operator-based deployments to simplify login for your users.</p> 
+           </div>
+          </div> 
+         </div> </li>
+       </ol>
+      </section> 
+      <section class="section postreq">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">What to do next</h2>
+       </div> 
+       <p class="p">To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong.</p> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="controller-configure-transparent-SAML"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure transparent SAML logins</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">For transparent logins to work, you must first get IdP-initiated logins to work.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Set the <code class="ph codeph">RelayState</code> on the IdP to "IdP".</span> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

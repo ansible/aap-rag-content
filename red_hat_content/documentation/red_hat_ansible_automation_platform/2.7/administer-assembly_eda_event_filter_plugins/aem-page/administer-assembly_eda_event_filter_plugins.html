@@ -1,0 +1,99 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="eda-event-filter-plugins"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Filter events before triggering automation</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Events sometimes have extra data that is unnecessary and might overwhelm the rule engine. Use event filters to remove that extra data so you can focus on what matters to your rules. Event filters might also change the format of the data so that the rule conditions can better match the data.</p> 
+      <p class="p">Events are defined as python code and distributed as collections. The default EDA collection has the following filters:</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:50%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="eda-event-filter-plugins__entry__1">Name</th> 
+         <th class="entry" id="eda-event-filter-plugins__entry__2">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="eda-event-filter-plugins__entry__1"> <p class="p">json_filter</p> </td> 
+         <td class="entry" headers="eda-event-filter-plugins__entry__2"> <p class="p">This filter includes and excludes keys from the event object</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="eda-event-filter-plugins__entry__1"> <p class="p">dashes_to_underscores</p> </td> 
+         <td class="entry" headers="eda-event-filter-plugins__entry__2"> <p class="p">This filter changes the dashes in all keys in the payload to be underscore</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="eda-event-filter-plugins__entry__1"> <p class="p">ansible.eda.insert_hosts_to_meta</p> </td> 
+         <td class="entry" headers="eda-event-filter-plugins__entry__2"> <p class="p">This filter is used to add host information into the event so that ansible-rulebook can locate it and use it</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="eda-event-filter-plugins__entry__1"> <p class="p">ansible.eda.normalize_keys</p> </td> 
+         <td class="entry" headers="eda-event-filter-plugins__entry__2"> <p class="p">This filter is used if you want to change non alpha numeric keys to underscore</p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">You can chain event filters one after the other, and the updated data is sent from one filter to the next. Event filters are defined in the rulebook after a source is defined. When the rulebook starts the source plugin it associates the correct filters and transforms the data before putting it into the queue.</p> 
+      <pre class="pre codeblock"><code>sources:
+  - name: azure_service_bus
+    ansible.eda.azure_service_bus:
+      conn_str: "{{connection_str}}"
+      queue_name: "{{queue_name}}"
+    filters:
+      - json_filter:
+          include_keys: ['clone_url']
+          exclude_keys: ['*_url', '_links', 'base', 'sender', 'owner', 'user']
+      - dashes_to_underscores:</code></pre> 
+      <p class="p">In this example the data is first passed through the <code class="ph codeph">json_filter</code> and then through the <code class="ph codeph">dashes_to_underscores</code> filter. In the event payload, keys can only contain letters, numbers, and underscores. The period (.) is used to access nested keys.</p> 
+      <p class="p">Since every event should record the origin of the event the filter <code class="ph codeph">eda.builtin.insert_meta_info</code> is added automatically by ansible-rulebook to add the <code class="ph codeph">source name</code>, <code class="ph codeph">type</code>, and <code class="ph codeph">received_at</code>. The <code class="ph codeph">received_at</code> stores a date time in UTC ISO8601 format and includes the microseconds. The <code class="ph codeph">uuid</code> stores the unique id for the event. The <code class="ph codeph">meta key</code> is used to store metadata about the event and its needed to correctly report about the events in the aap-server.</p> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://github.com/ansible/event-driven-ansible/tree/main/extensions/eda/plugins/event_filter" target="_blank" rel="external noopener">EDA Event Filters</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="eda-author-event-filters"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Author event filters</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">You can create custom Python event filters to clean, normalize, or enrich incoming event data, ensuring it meets the format and quality required for rulebook condition evaluation.</p> 
+       <p class="p">The basic structure follows:</p> 
+       <pre class="pre codeblock"><code>   # my_namespace.my_collection/extensions/eda/plugins/event_filter/my_filter.py
+    def main(event: dict, arg1, arg2):
+        # Process event data here
+        return event</code></pre> 
+       <p class="p">You can use this filter in a rulebook by adding it to the filters list in an event source:</p> 
+       <pre class="pre codeblock"><code>  sources:
+    - name: azure_service_bus
+      ansible.eda.azure_service_bus:
+        conn_str: "{{connection_str}}"
+        queue_name: "{{queue_name}}"
+      filters:
+        - my_namespace.my_collection.my_filter:
+            arg1: hello
+            arg2: world</code></pre> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://github.com/ansible/event-driven-ansible/tree/main/extensions/eda/plugins/event_filter" target="_blank" rel="external noopener">ansible.eda collection</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

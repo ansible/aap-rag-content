@@ -1,0 +1,110 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="task-configure-tls-ssl-databases">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure TLS/SSL for metrics service databases</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Enable TLS/SSL encryption for metrics service database connections to protect metrics data in transit and meet security policies.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">Use this procedure when securing database connections for compliance requirements.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Configure PostgreSQL for TLS</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Edit <span class="ph filepath">postgresql.conf</span>:</p> 
+         <pre class="pre codeblock"><code>ssl = on
+ssl_cert_file = '/path/to/server.crt'
+ssl_key_file = '/path/to/server.key'
+ssl_ca_file = '/path/to/ca.crt'</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Configure metrics service for TLS</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Edit your inventory file:</p> 
+         <pre class="pre codeblock"><code>[all:vars]
+automationmetrics_pg_sslmode=require
+automationmetrics_pg_cert_auth=true
+ca_trust_bundle=/path/to/ca-bundle.crt</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">When <code class="ph codeph">automationmetrics_pg_cert_auth</code> is set to <code class="ph codeph">true</code>, the installer automatically generates TLS certificates for database connections. For custom certificates, use the <span class="ph filepath">tasks/tls_postgresql.yml</span> task.</p> 
+          </div>
+         </div> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p"><strong class="ph b">TLS/SSL modes</strong></p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="task-configure-tls-ssl-databases__entry__1">Mode</th> 
+         <th class="entry" id="task-configure-tls-ssl-databases__entry__2">Encryption</th> 
+         <th class="entry" id="task-configure-tls-ssl-databases__entry__3">Certificate Verification</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__1"><code class="ph codeph">disable</code></td> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__2">No</td> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__3">No</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__1"><code class="ph codeph">allow</code></td> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__2">Attempts encrypted, accepts unencrypted</td> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__3">No</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__1"><code class="ph codeph">prefer</code></td> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__2">Prefers encrypted, accepts unencrypted</td> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__3">No</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__1"><code class="ph codeph">require</code></td> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__2">Yes</td> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__3">No</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__1"><code class="ph codeph">verify-ca</code></td> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__2">Yes</td> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__3">CA verification</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__1"><code class="ph codeph">verify-full</code></td> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__2">Yes</td> 
+         <td class="entry" headers="task-configure-tls-ssl-databases__entry__3">CA + hostname</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_containerized" title="Configure metrics service to use an external PostgreSQL database to leverage enterprise database management, backup, and high availability infrastructure.">Configure external PostgreSQL database</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

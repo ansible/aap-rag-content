@@ -1,0 +1,189 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-pac"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Implement policy enforcement</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Policy enforcement at automation runtime is a feature that uses encoded rules to define, manage, and enforce policies that govern how your users interact with your Ansible Automation Platform instance. Policy enforcement automates policy management, improving security, compliance, and efficiency.</p> 
+      <p class="p">Open Policy Agent, or OPA, is a policy engine that offloads policy decisions from your Ansible instance. When it is triggered, the policy enforcement feature connects to OPA to retrieve policies specified in your configuration, and applies policy rules to your automation content. If OPA detects a policy violation, it will stop the action and give your user information about the policy violation. For more information, see <em class="ph i">Open Policy Agent</em> in the Related Links section.</p> 
+      <p class="p"> <strong class="ph b">Prerequisites</strong> </p> 
+      <p class="p">Before you can implement policy enforcement in your Ansible Automation Platform instance, you must have:</p> 
+      <ul class="ul"> 
+       <li class="li">Access to an OPA server that is reachable from your Ansible Automation Platform deployment.</li> 
+       <li class="li">Configured Ansible Automation Platform with settings required for authenticating to your OPA server.</li> 
+       <li class="li">Some familiarity with OPA and the Rego language, which is the language policies are written in.</li> 
+      </ul> 
+      <p class="p">For policy enforcement to work correctly, you must both configure the OPA server in your policy settings, and associate a specific policy with a particular resource. For example, a particular organization, inventory, or job template.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">OPA API V1 is the only version currently supported in Ansible Automation Platform.</p> 
+       </div>
+      </div> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://www.openpolicyagent.org/docs" target="_blank" rel="external noopener">Open Policy Agent</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="configure-pac-settings"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure policy enforcement settings</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can specify how your Ansible Automation Platform instance interacts with OPA by modifying your global settings.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">To configure policy enforcement, you must have administrative privileges.</li> 
+        </ul> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">If you do not configure the OPA server in your policy settings, policy evaluation will not occur when you run the job.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Policy</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Edit policy settings</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">On the Policy Settings page, fill out the following fields: </span> 
+          <div class="itemgroup info"> 
+           <dl class="dl"> 
+            <dt class="dt dlterm">
+             OPA Server hostname
+            </dt> 
+            <dd class="dd">
+             Enter the name of the host that connects to the OPA service.
+            </dd> 
+            <dt class="dt dlterm">
+             OPA server port
+            </dt> 
+            <dd class="dd">
+             Enter the port that connects to the OPA service.
+            </dd> 
+            <dt class="dt dlterm">
+             OPA authentication type
+            </dt> 
+            <dd class="dd">
+             Select the OPA authentication type.
+            </dd> 
+            <dt class="dt dlterm">
+             OPA custom authentication header
+            </dt> 
+            <dd class="dd">
+             Enter a custom header to append to request headers for OPA authentication.
+            </dd> 
+            <dt class="dt dlterm">
+             OPA request timeout
+            </dt> 
+            <dd class="dd">
+             Enter the number of seconds until the connection times out.
+            </dd> 
+            <dt class="dt dlterm">
+             OPA request retry count
+            </dt> 
+            <dd class="dd">
+             Enter a figure for the number of times a request can attempt to connect to the OPA service before failing.
+            </dd> 
+           </dl> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Depending on your authentication type, you might need to fill out the following fields. </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">If you selected Token as your authentication type: </span> 
+            <div class="itemgroup info"> 
+             <dl class="dl"> 
+              <dt class="dt dlterm">
+               OPA authentication token
+              </dt> 
+              <dd class="dd">
+               Enter the OPA authentication token.
+              </dd> 
+             </dl> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">If you selected Certificate as your authentication type: </span> 
+            <div class="itemgroup info"> 
+             <dl class="dl"> 
+              <dt class="dt dlterm">
+               OPA client certificate content
+              </dt> 
+              <dd class="dd">
+               Enter content of the CA certificate for mTLS authentication.
+              </dd> 
+              <dt class="dt dlterm">
+               OPA client key content
+              </dt> 
+              <dd class="dd">
+               Enter the client key for mTLS authentication.
+              </dd> 
+              <dt class="dt dlterm">
+               OPA CA certificate content
+              </dt> 
+              <dd class="dd">
+               Enter the content of the CA certificate for mTLS authentication.
+              </dd> 
+             </dl> 
+            </div> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Beneath the heading labeled <strong class="ph b">Options</strong>: </span> 
+          <div class="itemgroup info"> 
+           <dl class="dl"> 
+            <dt class="dt dlterm">
+             Use SSL for OPA connection
+            </dt> 
+            <dd class="dd">
+             Check this box to enable an SSL/TLS connection to the OPA service.
+            </dd> 
+           </dl> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save policy settings</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="pac-policies-rules"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Understand OPA packages and rules</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">An OPA policy is organized in packages, which are namespaced collections of rules. The basic structure of an OPA policy looks like this:</p> 
+       <pre class="pre codeblock language-rego"><code>package aap_policy_examples  # Package name
+
+import rego.v1  # Import required for Rego v1 syntax
+
+# Rules define the policy logic
+allowed := {
+    "allowed": true,
+    "violations": []
+}</code></pre> 
+       <p class="p">The key components of the rule’s structure are:</p> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+         Package declaration
+        </dt> 
+        <dd class="dd">
+         This defines the namespace for your policy.
+        </dd> 
+        <dt class="dt dlterm">
+         Rules
+        </dt> 
+        <dd class="dd">
+         This defines the policy’s logic and the decision that it returns.
+        </dd> 
+       </dl> 
+       <p class="p">These components together form the OPA policy name, with the format <code class="ph codeph">[package]/[rule]</code>. Enter the OPA policy name when you configure enforcement points.</p> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

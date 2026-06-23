@@ -1,0 +1,93 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-rhel-backup-restore">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Back up and restore data</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Use the built-in backup tool to create and restore backups of the database, configuration, and SSL certificates for the Ansible automation portal RHEL appliance.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Backups contain credentials in plain text. Restrict file permissions on backup archives. Encrypt archives before transferring to remote storage:</p> 
+        <pre class="pre codeblock language-terminal"><code>$ gpg --symmetric --cipher-algo AES256 /var/lib/portal/backups/<var class="keyword varname">backup-file</var>.tar.gz</code></pre> 
+       </div>
+      </div> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <div class="li stepsection">
+       Create a backup
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Run the backup tool:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo portal-backup</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select a backup type from the menu. Select option 1 to create a backup with recommended defaults.</span> 
+        <div class="itemgroup stepxmp"> 
+         <pre class="pre codeblock"><code>Portal Backup Tool
+==================
+1) Full backup (config + database + secrets) [recommended]
+2) Config only (config + secrets, no database)
+3) Database only
+
+Select backup type [1]: 1
+
+Creating backup...
+  Backing up configuration... done
+  Backing up secrets... done
+  Backing up database... done
+
+Backup created: /var/lib/portal/backups/portal-backup-2026-05-07-143022.tar.gz</code></pre> 
+        </div> 
+        <div class="itemgroup info"> 
+         <p class="p">Backups are stored in <span class="ph filepath">/var/lib/portal/backups/</span> as <span class="ph filepath">.tar.gz</span> files.</p> 
+        </div> </li>
+      </ol>
+      <div class="li stepsection">
+       Preview a backup
+      </div>
+      <ol class="ol steps" start="3">
+       <li class="li step stepexpand"> <span class="ph cmd">Preview the contents of the most recent backup without restoring:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo portal-restore --latest --dry-run</code></pre> 
+        </div> </li>
+      </ol>
+      <div class="li stepsection">
+       Restore from backup
+      </div>
+      <ol class="ol steps" start="4">
+       <li class="li step stepexpand"> <span class="ph cmd">Restore the most recent backup:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo portal-restore --latest</code></pre> 
+        </div> 
+        <div class="itemgroup stepxmp"> 
+         <pre class="pre codeblock"><code>Portal Restore Tool
+===================
+Restoring from: /var/lib/portal/backups/portal-backup-2026-05-07-143022.tar.gz
+
+Stopping services...
+  Restoring configuration... done
+  Restoring secrets... done
+  Restoring database... done
+Starting services...
+
+Restore complete.</code></pre> 
+        </div> 
+        <div class="itemgroup info"> 
+         <p class="p">Services stop during restore and restart automatically.</p> 
+        </div> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

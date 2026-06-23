@@ -1,0 +1,294 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="GUID-ba5d1cd9-6a90-4400-acc3-5ff02f257771"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Back up and restore your containerized deployment</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">Protecting your Ansible Automation Platform containerized deployment ensures that you can recover from system failures, data corruption, or configuration errors. Regular backups minimize downtime and protect your configurations and data. </p> 
+      <section class="section" id="GUID-ba5d1cd9-6a90-4400-acc3-5ff02f257771__section_1"> 
+       <p class="p">Implementing backup and restore procedures helps you to: </p> 
+       <div class="p"> 
+        <ul class="ul" id="GUID-ba5d1cd9-6a90-4400-acc3-5ff02f257771__ul_1"> 
+         <li class="li"><strong class="ph b">Protect critical automation assets</strong>: Safeguard your data including configurations, inventory, credentials, and job history from unexpected failures or data loss. </li> 
+         <li class="li"><strong class="ph b">Enable disaster recovery</strong>: Restore your environment quickly after hardware failures or other unexpected events to maintain business continuity. </li> 
+         <li class="li"><strong class="ph b">Support testing and development</strong>: Create copies of your environment for testing upgrades or configuration changes without affecting production systems. </li> 
+        </ul> 
+       </div> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="backing-up-containerized-ansible-automation-platform"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Back up containerized Ansible Automation Platform</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Perform a backup of your container-based installation of Ansible Automation Platform.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have logged in to the Red Hat Enterprise Linux host as your dedicated non-root user.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <ul class="ul"> 
+           <li class="li">When backing up Ansible Automation Platform, use the installation program that matches your currently installed version of Ansible Automation Platform.</li> 
+           <li class="li">Backup functionality only works with the PostgreSQL versions supported by your current Ansible Automation Platform version.</li> 
+           <li class="li">Backup and restore for content stored in Azure Blob Storage or Amazon S3 must be handled through the vendor portals, as each vendor provides their own backup solutions.</li> 
+          </ul> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Go to the Red Hat Ansible Automation Platform installation directory on your Red Hat Enterprise Linux host.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To control compression of the backup artifacts before they are sent to the host running the backup operation, you can use the following variables in your inventory file: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">For control of compression for filesystem related backup files: </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code># Global control of compression for filesystem backup files
+use_archive_compression=true
+
+# Component-level control of compression for filesystem backup files
+#controller_use_archive_compression=true
+#eda_use_archive_compression=true
+#gateway_use_archive_compression=true
+#hub_use_archive_compression=true
+#pcp_use_archive_compression=true
+#postgresql_use_archive_compression=true
+#receptor_use_archive_compression=true
+#redis_use_archive_compression=true</code></pre> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">For control of compression for database related backup files: </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code># Global control of compression for database backup files
+use_db_compression=true
+
+# Component-level control of compression for database backup files
+#controller_use_db_compression=true
+#eda_use_db_compression=true
+#hub_use_db_compression=true
+#gateway_use_db_compression=true</code></pre> 
+            </div> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the <code class="ph codeph">backup</code> playbook: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-playbook -i &lt;path_to_inventory&gt; ansible.containerized_installer.backup</code></pre> 
+           <p class="p">The backup process creates archives of the following data:</p> 
+           <ul class="ul"> 
+            <li class="li">PostgreSQL databases</li> 
+            <li class="li">Configuration files</li> 
+            <li class="li">Data files</li> 
+           </ul> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">To customize the backup process, you can use the following variables in your inventory file:</p> 
+        <ul class="ul"> 
+         <li class="li">Change the backup destination directory from the default <code class="ph codeph">./backups</code> by using the <code class="ph codeph">backup_dir</code> variable.</li> 
+         <li class="li"> <p class="p">Exclude paths that contain duplicated data, such as snapshot subdirectories, by using the <code class="ph codeph">hub_data_path_exclude</code> variable.</p> <p class="p">For example, to exclude a <code class="ph codeph">.snapshots</code> subdirectory from the backup, add the following to your inventory file:</p> <pre class="pre codeblock"><code>hub_data_path_exclude=["*/.snapshots", "*/.snapshots/*"]</code></pre> <p class="p">Alternatively, you can pass this variable at runtime by using the <code class="ph codeph">-e</code> flag:</p> <pre class="pre codeblock"><code>$ ansible-playbook -i inventory ansible.containerized_installer.backup -e hub_data_path_exclude="['*/.snapshots', '*/.snapshots/*']"</code></pre> <p class="p">You can also define the exclusion patterns in a YAML extra variables file and pass it at runtime:</p> <p class="p"><strong class="ph b">exclude_vars.yml</strong></p> <pre class="pre codeblock"><code>hub_data_path_exclude:
+    - "*/.snapshots/*"
+    - "*/.snapshots"</code></pre> <pre class="pre codeblock"><code>$ ansible-playbook -i inventory ansible.containerized_installer.backup -e @exclude_vars.yml</code></pre> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-restore-aap-container"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Restore containerized Ansible Automation Platform</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Restore your container-based installation of Ansible Automation Platform from a backup, or to a different environment.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have logged in to the Red Hat Enterprise Linux host as your dedicated non-root user.</li> 
+         <li class="li">You have a backup of your Ansible Automation Platform deployment. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment#backing-up-containerized-ansible-automation-platform" title="Perform a backup of your container-based installation of Ansible Automation Platform.">Back up containerized Ansible Automation Platform</a>.</li> 
+         <li class="li">If restoring to a different environment with the same hostnames, you have performed a fresh installation on the target environment with the same topology as the original (source) environment.</li> 
+         <li class="li">You have ensured that the administrator credentials on the target environment match the administrator credentials from the source environment.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">When restoring Ansible Automation Platform, use the latest installation program available at the time of the restore. For example, if you are restoring a backup taken from version <code class="ph codeph">2.6-1</code>, use the latest <code class="ph codeph">2.6-x</code> installation program available at the time of the restore.</p> 
+          <p class="p">Restore functionality only works with the PostgreSQL versions supported by your current Ansible Automation Platform version. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_cont_aap_system_requirements" title="Use this information when planning your installation of containerized Ansible Automation Platform.">System requirements</a>.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Go to the installation directory on your Red Hat Enterprise Linux host.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Perform the relevant restoration steps: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">If you are restoring to the same environment with the same hostnames, run the <code class="ph codeph">restore</code> playbook: <pre class="pre codeblock"><code>$ ansible-playbook -i &lt;path_to_inventory&gt; ansible.containerized_installer.restore</code></pre> <p class="p">This restores the important data deployed by the containerized installer such as:</p> 
+             <ul class="ul"> 
+              <li class="li">PostgreSQL databases</li> 
+              <li class="li">Configuration files</li> 
+              <li class="li">Data files <p class="p">By default, the backup directory is set to <code class="ph codeph">./backups</code>. You can change this by using the <code class="ph codeph">backup_dir</code> variable in your <code class="ph codeph">inventory</code> file.</p> </li> 
+             </ul> </li> 
+            <li class="li">If you are restoring to a different environment with different hostnames, perform the following additional steps before running the <code class="ph codeph">restore</code> playbook: 
+             <div class="note important note_important">
+              <span class="note__title">Important:</span> 
+              <div class="note__body">
+               Restoring to a different environment with different hostnames is not recommended and is intended only as a workaround.
+              </div>
+             </div> 
+             <ol class="ol" type="a"> 
+              <li class="li">For each component, identify the backup file from the source environment that contains the PostgreSQL dump file. <p class="p">For example:</p> <pre class="pre codeblock"><code>$ cd ansible-automation-platform-containerized-setup-&lt;version_number&gt;/backups</code></pre> <pre class="pre codeblock"><code>$ tar tvf gateway_env1-gateway-node1.tar.gz | grep db
+
+-rw-r--r-- ansible/ansible 4850774 2025-06-30 11:05 aap/backups/awx.db</code></pre> </li> 
+              <li class="li">Copy the backup files from the source environment to the target environment.</li> 
+              <li class="li">Rename the backup files on the target environment to reflect the new node names. <p class="p">For example:</p> <pre class="pre codeblock"><code>$ cd ansible-automation-platform-containerized-setup-&lt;version_number&gt;/backups</code></pre> <pre class="pre codeblock"><code>$ mv gateway_env1-gateway-node1.tar.gz gateway_env2-gateway-node1.tar.gz</code></pre> </li> 
+              <li class="li">For enterprise topologies, ensure that the component backup file containing the <code class="ph codeph">component.db</code> file is listed first in its group within the inventory file. <p class="p">For example:</p> <pre class="pre codeblock"><code>$ cd ansible-automation-platform-containerized-setup-&lt;version_number&gt;</code></pre> <pre class="pre codeblock"><code>$ ls backups/gateway*
+
+gateway_env2-gateway-node1.tar.gz
+gateway_env2-gateway-node2.tar.gz</code></pre> <pre class="pre codeblock"><code>$ tar tvf backups/gateway_env2-gateway-node1.tar.gz | grep db
+
+-rw-r--r-- ansible/ansible 416687 2025-06-30 11:05 aap/backups/gateway.db</code></pre> <pre class="pre codeblock"><code>$ tar tvf backups/gateway_env2-gateway-node2.tar.gz | grep db</code></pre> <pre class="pre codeblock"><code>$ vi inventory
+
+[automationgateway]
+env2-gateway-node1
+env2-gateway-node2</code></pre> </li> 
+             </ol> </li> 
+           </ul> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="task-backup-restore-metrics-service"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Back up and restore metrics service</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Back up and restore the metrics service database and configuration to recover from hardware failures, data corruption, or operational errors without losing historical metrics data.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">For <strong class="ph b">Ansible Automation Platform 2.7</strong> (base metrics service without dashboard), no backup retention policy is required. Base metrics service does not contain user-visible data that needs backup or retention.</p> 
+        <p class="p"><strong class="ph b">When dashboard becomes GA:</strong> Define retention based on dashboard data retention requirements (90 days default) and customer compliance requirements.</p> 
+        <p class="p"><strong class="ph b">Installer-provided backup script:</strong> The Ansible Automation Platform containerized installer includes <span class="ph filepath">backup.yml</span> and <span class="ph filepath">restore.yml</span> playbooks that handle backup and restore operations for metrics service.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Backup procedure</span> 
+          <div class="itemgroup info"> 
+           <p class="p"><strong class="ph b">Method 1: Use installer playbook (recommended)</strong></p> 
+           <pre class="pre codeblock"><code>cd /path/to/aap-containerized-installer
+ansible-playbook -i inventory backup.yml</code></pre> 
+           <p class="p">The <span class="ph filepath">backup.yml</span> playbook automatically backs up:</p> 
+           <ul class="ul"> 
+            <li class="li"><code class="ph codeph">metrics_service</code> database</li> 
+            <li class="li">Volume directories (<code class="ph codeph">{{ aap_volumes_dir }}/automationmetrics</code>)</li> 
+            <li class="li">Podman secrets (four secrets)</li> 
+            <li class="li">Service configuration</li> 
+           </ul> 
+           <p class="p">Backup files are stored in the location specified by your inventory backup configuration.</p> 
+           <p class="p"><strong class="ph b">Method 2: Manual backup</strong></p> 
+           <p class="p">Use this method if you need custom backup procedures or granular control.</p> 
+           <p class="p"><strong class="ph b">What to back up:</strong></p> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">metrics_service database:</strong> All collected and processed metrics data</li> 
+            <li class="li"><strong class="ph b">Volume directories:</strong> <code class="ph codeph">{{ aap_volumes_dir }}/automationmetrics</code> (host path; maps to <span class="ph filepath">/var/lib/ansible-automation-platform/metrics</span> in container)</li> 
+            <li class="li"><strong class="ph b">Podman secrets:</strong> Four secrets: 
+             <ul class="ul"> 
+              <li class="li"><code class="ph codeph">automationmetrics_pg_password</code></li> 
+              <li class="li"><code class="ph codeph">automationmetrics_controller_read_pg_password</code></li> 
+              <li class="li"><code class="ph codeph">automationmetrics_secret_key</code></li> 
+              <li class="li"><code class="ph codeph">automationmetrics_resource_server</code></li> 
+             </ul> </li> 
+            <li class="li"><strong class="ph b">Inventory file:</strong> Configuration variables</li> 
+           </ul> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">For Ansible Automation Platform 2.7 base metrics service (without dashboard), backup is optional. When automation dashboard is enabled, back up the <code class="ph codeph">metrics_service</code> database to preserve dashboard historical data.</p> 
+            </div>
+           </div> 
+           <p class="p"><strong class="ph b">Step 1: Back up database</strong></p> 
+           <pre class="pre codeblock"><code>pg_dump -h localhost -U metrics_service -F c -b -v \
+  -f /backup/metrics_service_$(date +%Y%m%d_%H%M%S).dump \
+  metrics_service</code></pre> 
+           <p class="p"><strong class="ph b">Step 2: Back up volumes</strong></p> 
+           <pre class="pre codeblock"><code>tar -czf /backup/automationmetrics_data_$(date +%Y%m%d_%H%M%S).tar.gz \
+  {{ aap_volumes_dir }}/automationmetrics</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Restore procedure</span> 
+          <div class="itemgroup info"> 
+           <div class="note warning note_warning">
+            <span class="note__title">Warning:</span> 
+            <div class="note__body"> 
+             <p class="p">Restoring from backup overwrites current metrics service data.</p> 
+            </div>
+           </div> 
+           <p class="p"><strong class="ph b">Method 1: Use installer playbook (recommended)</strong></p> 
+           <pre class="pre codeblock"><code>cd /path/to/aap-containerized-installer
+ansible-playbook -i inventory restore.yml</code></pre> 
+           <p class="p">The <span class="ph filepath">restore.yml</span> playbook automatically performs the restore sequence:</p> 
+           <ol class="ol" type="a"> 
+            <li class="li">Unarchives backup data</li> 
+            <li class="li">Restores Podman secrets (via <span class="ph filepath">common/restore_secrets.yml</span>)</li> 
+            <li class="li">Imports TLS certificates (via <span class="ph filepath">tasks/tls_postgresql.yml</span>)</li> 
+            <li class="li">Restores database</li> 
+            <li class="li">Restarts services</li> 
+           </ol> 
+           <p class="p"><strong class="ph b">Method 2: Manual restore</strong></p> 
+           <p class="p">Use this method for custom restore procedures or troubleshooting.</p> 
+           <p class="p"><strong class="ph b">Step 1: Stop metrics service</strong></p> 
+           <pre class="pre codeblock"><code>systemctl --user stop automation-metrics-web.service automation-metrics-tasks.service automation-metrics-scheduler.service</code></pre> 
+           <p class="p"><strong class="ph b">Step 2: Restore database</strong></p> 
+           <pre class="pre codeblock"><code>psql -h localhost -U postgres -c "DROP DATABASE IF EXISTS metrics_service;"
+psql -h localhost -U postgres -c "CREATE DATABASE metrics_service;"
+pg_restore -h localhost -U metrics_service -d metrics_service -v \
+  /backup/metrics_service_TIMESTAMP.dump</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The restore sequence (from installer <span class="ph filepath">tasks/restore.yml</span>): unarchive data → restore secrets (via <span class="ph filepath">common/restore_secrets.yml</span>) → import TLS certificates (via <span class="ph filepath">tasks/tls_postgresql.yml</span>) → restore database → restart services.</p> 
+            </div>
+           </div> 
+           <p class="p"><strong class="ph b">Step 3: Start metrics service</strong></p> 
+           <pre class="pre codeblock"><code>systemctl --user start automation-metrics-web.service automation-metrics-tasks.service automation-metrics-scheduler.service</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-task_upgrade_metrics_service" title="Safely upgrade metrics service when upgrading Ansible Automation Platform to benefit from new features and bug fixes while maintaining continuous data collection.">Upgrade metrics service</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

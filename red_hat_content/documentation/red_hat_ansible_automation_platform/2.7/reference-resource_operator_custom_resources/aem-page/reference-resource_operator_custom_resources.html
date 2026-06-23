@@ -1,0 +1,696 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-resource-operator-crds"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Resource Operator custom resources</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The Resource Operator provides custom resources that enable you to manage automation controller resources directly from your Kubernetes cluster using a declarative, GitOps-compatible workflow.</p> 
+      <p class="p">Resource Operator custom resources connect to the platform gateway to create and manage automation resources such as jobs, templates, projects, inventories, credentials, schedules, and workflows. All Resource Operator custom resources require a <code class="ph codeph">connection_secret</code> that references a Kubernetes secret containing the platform gateway URL and an OAuth2 token.</p> 
+      <p class="p">By defining automation resources as Kubernetes custom resources, you can manage them alongside your other cluster resources using standard Kubernetes tools and practices, including version control and continuous delivery pipelines.</p> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ResourceOperator"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Resource Operator custom resources [tower.ansible.com/v1alpha1]</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The Resource Operator custom resources enable you to manage automation controller resources directly from your Kubernetes cluster. These custom resources connect to the platform gateway to create and manage jobs, templates, projects, inventories, credentials, schedules, and workflows.</p> 
+       <section class="section" id="ResourceOperator__connection-secret">
+        <h3 class="title sectiontitle">Connection secret</h3> 
+        <p class="p">All Resource Operator custom resources require a <code class="ph codeph">connection_secret</code> field that references a Kubernetes secret containing the platform gateway URL and an OAuth2 token. Create this secret before using any Resource Operator custom resources.</p> 
+        <pre class="pre codeblock"><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: aap-access
+  type: Opaque
+stringData:
+  token: &lt;generated-token&gt;
+  host: https://my-aap-gateway.example.com/</code></pre> 
+       </section> 
+       <section class="section" id="ResourceOperator__ansiblejob">
+        <h3 class="title sectiontitle">AnsibleJob</h3> 
+        <p class="p">Launches a job or workflow job template on the automation controller instance specified in the connection secret.</p> 
+        <table class="table" id="ResourceOperator__ansiblejob-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ResourceOperator__ansiblejob-table__entry__1">Field</th> 
+           <th class="entry" id="ResourceOperator__ansiblejob-table__entry__2">Type</th> 
+           <th class="entry" id="ResourceOperator__ansiblejob-table__entry__3">Description</th> 
+           <th class="entry" id="ResourceOperator__ansiblejob-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__1"><code class="ph codeph">connection_secret</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__3">Name of the Kubernetes secret containing the platform gateway connection details. Required.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__1"><code class="ph codeph">job_template_name</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__3">Name of the job template to launch. Specify either this or <code class="ph codeph">workflow_template_name</code>.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__1"><code class="ph codeph">workflow_template_name</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__3">Name of the workflow job template to launch. Specify either this or <code class="ph codeph">job_template_name</code>.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__1"><code class="ph codeph">inventory</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__3">Name of the inventory to use. Prompt on launch must be enabled on the template.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__1"><code class="ph codeph">extra_vars</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__2">Object</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__3">Extra variables to pass to the job as key-value pairs. Prompt on launch must be enabled on the template.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__1"><code class="ph codeph">job_tags</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__3">Comma-separated list of tags to run, for example <code class="ph codeph">"provision,install,configuration"</code>.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__1"><code class="ph codeph">skip_tags</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__3">Comma-separated list of tags to skip, for example <code class="ph codeph">"configuration,restart"</code>.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__1"><code class="ph codeph">runner_image</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__3">Container image for the runner pod.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__1"><code class="ph codeph">runner_version</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__3">Version of the runner image to use.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__1"><code class="ph codeph">job_ttl</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__2">Integer</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__3">Time to live in seconds for the job resource after completion.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblejob-table__entry__4">-</td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Example:</strong></p> 
+        <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleJob
+metadata:
+  generateName: demo-job-1
+spec:
+  connection_secret: aap-access
+  job_template_name: Demo Job Template
+  inventory: Demo Inventory
+  extra_vars:
+    test_var: test
+  job_tags: "provision,install"</code></pre> 
+       </section> 
+       <section class="section" id="ResourceOperator__jobtemplate">
+        <h3 class="title sectiontitle">JobTemplate</h3> 
+        <p class="p">Creates a job template on the automation controller.</p> 
+        <table class="table" id="ResourceOperator__jobtemplate-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ResourceOperator__jobtemplate-table__entry__1">Field</th> 
+           <th class="entry" id="ResourceOperator__jobtemplate-table__entry__2">Type</th> 
+           <th class="entry" id="ResourceOperator__jobtemplate-table__entry__3">Description</th> 
+           <th class="entry" id="ResourceOperator__jobtemplate-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__1"><code class="ph codeph">connection_secret</code></td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__3">Name of the Kubernetes secret containing the platform gateway connection details. Required.</td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__1"><code class="ph codeph">job_template_name</code></td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__3">Name of the job template to create.</td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__1"><code class="ph codeph">job_template_project</code></td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__3">Name of the project to associate with the job template.</td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__1"><code class="ph codeph">job_template_playbook</code></td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__3">Name of the playbook file to run.</td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__1"><code class="ph codeph">job_template_inventory</code></td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__3">Name of the inventory to associate with the job template.</td> 
+           <td class="entry" headers="ResourceOperator__jobtemplate-table__entry__4">-</td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Example:</strong></p> 
+        <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: JobTemplate
+metadata:
+  name: jobtemplate-4
+spec:
+  connection_secret: aap-access
+  job_template_name: ExampleJobTemplate4
+  job_template_project: Demo Project
+  job_template_playbook: hello_world.yml
+  job_template_inventory: Demo Inventory</code></pre> 
+       </section> 
+       <section class="section" id="ResourceOperator__ansibleproject">
+        <h3 class="title sectiontitle">AnsibleProject</h3> 
+        <p class="p">Creates a project (a logical collection of Ansible playbooks) on the automation controller.</p> 
+        <table class="table" id="ResourceOperator__ansibleproject-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ResourceOperator__ansibleproject-table__entry__1">Field</th> 
+           <th class="entry" id="ResourceOperator__ansibleproject-table__entry__2">Type</th> 
+           <th class="entry" id="ResourceOperator__ansibleproject-table__entry__3">Description</th> 
+           <th class="entry" id="ResourceOperator__ansibleproject-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__1"><code class="ph codeph">connection_secret</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__3">Name of the Kubernetes secret containing the platform gateway connection details. Required.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__1"><code class="ph codeph">repo</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__3">URL of the source control repository.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__1"><code class="ph codeph">branch</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__3">Branch of the source control repository to use.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__1"><code class="ph codeph">name</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__3">Display name for the project in the automation controller.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__1"><code class="ph codeph">scm_type</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__3">Source control type, for example <code class="ph codeph">git</code>.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__1"><code class="ph codeph">organization</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__3">Organization the project belongs to.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__1"><code class="ph codeph">description</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__3">Description of the project.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__1"><code class="ph codeph">runner_pull_policy</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__3">Image pull policy for the runner pod. Options: <code class="ph codeph">Always</code>, <code class="ph codeph">Never</code>, <code class="ph codeph">IfNotPresent</code>.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleproject-table__entry__4"><code class="ph codeph">IfNotPresent</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Example:</strong></p> 
+        <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleProject
+metadata:
+  name: git
+spec:
+  connection_secret: aap-access
+  repo: https://github.com/ansible/ansible-tower-samples
+  branch: main
+  name: ProjectDemo-git
+  scm_type: git
+  organization: Default</code></pre> 
+       </section> 
+       <section class="section" id="ResourceOperator__ansibleinventory">
+        <h3 class="title sectiontitle">AnsibleInventory</h3> 
+        <p class="p">Creates an inventory on the automation controller.</p> 
+        <table class="table" id="ResourceOperator__ansibleinventory-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ResourceOperator__ansibleinventory-table__entry__1">Field</th> 
+           <th class="entry" id="ResourceOperator__ansibleinventory-table__entry__2">Type</th> 
+           <th class="entry" id="ResourceOperator__ansibleinventory-table__entry__3">Description</th> 
+           <th class="entry" id="ResourceOperator__ansibleinventory-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__1"><code class="ph codeph">connection_secret</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__3">Name of the Kubernetes secret containing the platform gateway connection details. Required.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__1"><code class="ph codeph">name</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__3">Display name for the inventory.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__1"><code class="ph codeph">description</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__3">Description of the inventory.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__1"><code class="ph codeph">organization</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__3">Organization the inventory belongs to.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__1"><code class="ph codeph">state</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__3">Desired state of the inventory. Options: <code class="ph codeph">present</code>, <code class="ph codeph">absent</code>.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__4"><code class="ph codeph">present</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__1"><code class="ph codeph">instance_groups</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__2">Array</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__3">List of instance groups to associate with the inventory.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__1"><code class="ph codeph">variables</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__2">Object</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__3">Inventory variables as key-value pairs. Supports strings, booleans, numbers, lists, and nested objects.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinventory-table__entry__4">-</td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Example:</strong></p> 
+        <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleInventory
+metadata:
+  name: inventory-new
+spec:
+  connection_secret: aap-access
+  name: newinventory
+  organization: Default
+  state: present
+  variables:
+    env: production
+    region: us-east-1</code></pre> 
+       </section> 
+       <section class="section" id="ResourceOperator__ansiblecredential">
+        <h3 class="title sectiontitle">AnsibleCredential</h3> 
+        <p class="p">Creates a credential on the automation controller for authenticating with external systems.</p> 
+        <table class="table" id="ResourceOperator__ansiblecredential-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ResourceOperator__ansiblecredential-table__entry__1">Field</th> 
+           <th class="entry" id="ResourceOperator__ansiblecredential-table__entry__2">Type</th> 
+           <th class="entry" id="ResourceOperator__ansiblecredential-table__entry__3">Description</th> 
+           <th class="entry" id="ResourceOperator__ansiblecredential-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__1"><code class="ph codeph">connection_secret</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__3">Name of the Kubernetes secret containing the platform gateway connection details. Required.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__1"><code class="ph codeph">name</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__3">Display name for the credential.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__1"><code class="ph codeph">organization</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__3">Organization the credential belongs to.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__1"><code class="ph codeph">description</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__3">Description of the credential.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__1"><code class="ph codeph">type</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__3">Credential type, for example <code class="ph codeph">Machine</code>, <code class="ph codeph">Amazon Web Services</code>.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__1"><code class="ph codeph">ssh_username</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__3">SSH username for Machine type credentials.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__1"><code class="ph codeph">ssh_secret</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__3">Name of a Kubernetes secret containing the SSH private key for Machine type credentials.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__1"><code class="ph codeph">username_secret</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__3">Name of a Kubernetes secret containing the username for cloud credentials.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__1"><code class="ph codeph">password_secret</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__3">Name of a Kubernetes secret containing the password for cloud credentials.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__1"><code class="ph codeph">runner_pull_policy</code></td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__3">Image pull policy for the runner pod.</td> 
+           <td class="entry" headers="ResourceOperator__ansiblecredential-table__entry__4"><code class="ph codeph">IfNotPresent</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Example (SSH):</strong></p> 
+        <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleCredential
+metadata:
+  name: ssh-cred
+spec:
+  connection_secret: aap-access
+  name: ssh-cred
+  organization: Default
+  type: "Machine"
+  ssh_username: "ansible"
+  ssh_secret: my-ssh-secret</code></pre> 
+       </section> 
+       <section class="section" id="ResourceOperator__ansibleschedule">
+        <h3 class="title sectiontitle">AnsibleSchedule</h3> 
+        <p class="p">Creates a schedule on the automation controller to run a job template at specified intervals.</p> 
+        <table class="table" id="ResourceOperator__ansibleschedule-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ResourceOperator__ansibleschedule-table__entry__1">Field</th> 
+           <th class="entry" id="ResourceOperator__ansibleschedule-table__entry__2">Type</th> 
+           <th class="entry" id="ResourceOperator__ansibleschedule-table__entry__3">Description</th> 
+           <th class="entry" id="ResourceOperator__ansibleschedule-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__1"><code class="ph codeph">connection_secret</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__3">Name of the Kubernetes secret containing the platform gateway connection details. Required.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__1"><code class="ph codeph">name</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__3">Display name for the schedule.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__1"><code class="ph codeph">rrule</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__3">Recurrence rule in iCalendar RRULE format defining the schedule, for example <code class="ph codeph">DTSTART:20210101T000000Z RRULE:FREQ=DAILY;INTERVAL=1;COUNT=1</code>.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__1"><code class="ph codeph">unified_job_template</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__3">Name of the job template or workflow to schedule.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__1"><code class="ph codeph">runner_pull_policy</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__3">Image pull policy for the runner pod.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleschedule-table__entry__4"><code class="ph codeph">IfNotPresent</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Example:</strong></p> 
+        <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleSchedule
+metadata:
+  name: schedule
+spec:
+  connection_secret: aap-access
+  name: "Demo Schedule"
+  rrule: "DTSTART:20210101T000000Z RRULE:FREQ=DAILY;INTERVAL=1;COUNT=1"
+  unified_job_template: "Demo Job Template"</code></pre> 
+       </section> 
+       <section class="section" id="ResourceOperator__ansibleworkflow">
+        <h3 class="title sectiontitle">AnsibleWorkflow</h3> 
+        <p class="p">Creates a workflow on the automation controller.</p> 
+        <table class="table" id="ResourceOperator__ansibleworkflow-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ResourceOperator__ansibleworkflow-table__entry__1">Field</th> 
+           <th class="entry" id="ResourceOperator__ansibleworkflow-table__entry__2">Type</th> 
+           <th class="entry" id="ResourceOperator__ansibleworkflow-table__entry__3">Description</th> 
+           <th class="entry" id="ResourceOperator__ansibleworkflow-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__1"><code class="ph codeph">connection_secret</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__3">Name of the Kubernetes secret containing the platform gateway connection details. Required.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__1"><code class="ph codeph">workflow_template_name</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__3">Name of the workflow template.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__1"><code class="ph codeph">inventory</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__3">Name of the inventory to associate with the workflow.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__1"><code class="ph codeph">runner_pull_policy</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__3">Image pull policy for the runner pod.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleworkflow-table__entry__4"><code class="ph codeph">IfNotPresent</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Example:</strong></p> 
+        <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleWorkflow
+metadata:
+  name: workflow
+spec:
+  connection_secret: aap-access
+  workflow_template_name: Demo Job Template
+  inventory: Demo Inventory</code></pre> 
+       </section> 
+       <section class="section" id="ResourceOperator__workflowtemplate">
+        <h3 class="title sectiontitle">WorkflowTemplate</h3> 
+        <p class="p">Creates a workflow job template that links together a sequence of job templates on the automation controller.</p> 
+        <table class="table" id="ResourceOperator__workflowtemplate-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ResourceOperator__workflowtemplate-table__entry__1">Field</th> 
+           <th class="entry" id="ResourceOperator__workflowtemplate-table__entry__2">Type</th> 
+           <th class="entry" id="ResourceOperator__workflowtemplate-table__entry__3">Description</th> 
+           <th class="entry" id="ResourceOperator__workflowtemplate-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__1"><code class="ph codeph">connection_secret</code></td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__3">Name of the Kubernetes secret containing the platform gateway connection details. Required.</td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__1"><code class="ph codeph">name</code></td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__3">Display name for the workflow template.</td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__1"><code class="ph codeph">description</code></td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__3">Description of the workflow template.</td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__1"><code class="ph codeph">organization</code></td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__3">Organization the workflow template belongs to.</td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__1"><code class="ph codeph">inventory</code></td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__3">Default inventory for the workflow template.</td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__1"><code class="ph codeph">workflow_nodes</code></td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__2">Array</td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__3">List of workflow nodes defining the sequence of jobs. Each node contains an <code class="ph codeph">identifier</code> and a <code class="ph codeph">unified_job_template</code> object with <code class="ph codeph">name</code>, <code class="ph codeph">type</code>, and <code class="ph codeph">inventory</code> fields.</td> 
+           <td class="entry" headers="ResourceOperator__workflowtemplate-table__entry__4">-</td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Example:</strong></p> 
+        <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: workflowtemplate-sample
+spec:
+  connection_secret: aap-access
+  name: ExampleWorkflow
+  organization: Default
+  inventory: Demo Inventory
+  workflow_nodes:
+  - identifier: node101
+    unified_job_template:
+      name: Demo Job Template
+      type: job_template
+  - identifier: node102
+    unified_job_template:
+      name: Demo Job Template
+      type: job_template</code></pre> 
+       </section> 
+       <section class="section" id="ResourceOperator__ansibleinstancegroup">
+        <h3 class="title sectiontitle">AnsibleInstanceGroup</h3> 
+        <p class="p">Creates an instance group on the automation controller for organizing and managing execution capacity.</p> 
+        <table class="table" id="ResourceOperator__ansibleinstancegroup-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ResourceOperator__ansibleinstancegroup-table__entry__1">Field</th> 
+           <th class="entry" id="ResourceOperator__ansibleinstancegroup-table__entry__2">Type</th> 
+           <th class="entry" id="ResourceOperator__ansibleinstancegroup-table__entry__3">Description</th> 
+           <th class="entry" id="ResourceOperator__ansibleinstancegroup-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleinstancegroup-table__entry__1"><code class="ph codeph">connection_secret</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleinstancegroup-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinstancegroup-table__entry__3">Name of the Kubernetes secret containing the platform gateway connection details. Required.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinstancegroup-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleinstancegroup-table__entry__1"><code class="ph codeph">name</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleinstancegroup-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinstancegroup-table__entry__3">Display name for the instance group.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinstancegroup-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ResourceOperator__ansibleinstancegroup-table__entry__1"><code class="ph codeph">runner_pull_policy</code></td> 
+           <td class="entry" headers="ResourceOperator__ansibleinstancegroup-table__entry__2">String</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinstancegroup-table__entry__3">Image pull policy for the runner pod.</td> 
+           <td class="entry" headers="ResourceOperator__ansibleinstancegroup-table__entry__4"><code class="ph codeph">IfNotPresent</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Example:</strong></p> 
+        <pre class="pre codeblock"><code>apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleInstanceGroup
+metadata:
+  name: my-instance-group
+spec:
+  connection_secret: aap-access
+  name: production-instances</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

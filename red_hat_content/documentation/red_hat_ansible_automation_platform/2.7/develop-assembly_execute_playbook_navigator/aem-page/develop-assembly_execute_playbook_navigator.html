@@ -1,0 +1,204 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-execute-playbooks-navigator"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Run playbooks locally with automation content navigator</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Use automation content navigator to run playbooks and interactively delve into play and task results. Compare execution inside and outside of execution environments to identify and troubleshoot problems.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-execute-playbook-tui"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Run a playbook from automation content navigator</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can run Ansible playbooks with the automation content navigator text-based user interface to follow the execution of the tasks and delve into the results of each task.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">A playbook.</li> 
+         <li class="li">A valid inventory file if not using <code class="ph codeph">localhost</code> or an inventory plugin.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Start automation content navigator </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-navigator</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Run the playbook. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ :run</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: type <code class="ph codeph">ansible-navigator run simple-playbook.yml -i inventory.yml</code> to run the playbook.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Verify or add the inventory and any other command line parameters. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>INVENTORY OR PLAYBOOK NOT FOUND, PLEASE CONFIRM THE FOLLOWING
+─────────────────────────────────────────────────────────────────────────
+   Path to playbook: /home/ansible-navigator_demo/simple_playbook.yml
+   Inventory source: /home/ansible-navigator-demo/inventory.yml
+  Additional command line parameters: Please provide a value (optional)
+──────────────────────────────────────────────────────────────────────────
+                                                           Submit Cancel</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Tab to <code class="ph codeph">Submit</code> and hit Enter. You should see the tasks executing. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-play-list.png" alt="Executing playbook tasks"><br></span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Type the number next to a play to step into the play results, or type <code class="ph codeph">:&lt;number&gt;</code> for numbers above 9. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-task-list.png" alt="Task list"><br></span> 
+          <div class="itemgroup info"> 
+           <p class="p">Notice failed tasks show up in red if you have colors enabled for automation content navigator.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Type the number next to a task to review the task results, or type <code class="ph codeph">:&lt;number&gt;</code> for numbers above 9. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-task-output-failed.png" alt="Failed task results"><br></span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: type <code class="ph codeph">:doc</code> bring up the documentation for the module or plugin used in the task to aid in troubleshooting. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>ANSIBLE.BUILTIN.PACKAGE_FACTS (MODULE)
+  0│---
+  1│doc:
+  2│  author:
+  3│  - Matthew Jones (@matburt)
+  4│  - Brian Coca (@bcoca)
+  5│  - Adam Miller (@maxamillion)
+  6│  collection: ansible.builtin
+  7│  description:
+  8│  - Return information about installed packages as facts.
+&lt;... output omitted ...&gt;
+ 11│  module: package_facts
+ 12│  notes:
+ 13│  - Supports C(check_mode).
+ 14│  options:
+ 15│    manager:
+ 16│      choices:
+ 17│      - auto
+ 18│      - rpm
+ 19│      - apt
+ 20│      - portage
+ 21│      - pkg
+ 22│      - pacman
+
+&lt;... output truncated ...&gt;</code></pre> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_to_playbooks" title="An Ansible Playbook is a blueprint for automation tasks, which are actions executed with limited manual effort across an inventory of solutions. Playbooks tell Ansible what to do on which devices.">Getting started with playbooks</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-review-artifact"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Review playbook results</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Automation content navigator saves playbook runs as JSON artifact files. You can use these files to share, review, or troubleshoot results without requiring access to the original playbook or inventory.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">A automation content navigator artifact JSON file from a playbook run.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <div class="ul steps-unordered"> 
+         <div class="li step p"> <span class="ph cmd">Start automation content navigator with the artifact file. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-navigator replay simple_playbook_artifact.json</code></pre> 
+          </div> 
+          <ol class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Review the playbook results that match when the playbook ran. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-artifact-replay.png" alt="Playbook results"><br></span> </li> 
+          </ol> 
+         </div> 
+        </div> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">You can now type the number next to the plays and tasks to step into each to review the results, as you would after executing the playbook.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_to_playbooks" title="An Ansible Playbook is a blueprint for automation tasks, which are actions executed with limited manual effort across an inventory of solutions. Playbooks tell Ansible what to do on which devices.">Getting started with playbooks</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="assembly-review-config-navigator"> 
+      <h2 class="title topictitle2" id="ariaid-title4">View Ansible configuration file contents in text-based format</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">As a content creator, you can review your Ansible configuration with automation content navigator and interactively delve into settings.</p> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title5" id="proc-review-config-tui"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Review your Ansible configuration from automation content navigator</h3> 
+       <div class="body taskbody"> 
+        <p class="shortdesc">Use the automation content navigator interactive interface to review Ansible settings. The tool pulls data from your configuration file or returns defaults if no configuration file is present.</p> 
+        <section class="section prereq"> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Before you begin</h4> 
+         </div> 
+         <ul class="ul"> 
+          <li class="li">You have authenticated to the Red Hat registry if you need to access additional automation execution environments. See <a class="xref" href="https://access.redhat.com/RegistryAuthentication" target="_blank" rel="external noopener">Red Hat Container Registry Authentication</a> for details.</li> 
+         </ul> 
+        </section> 
+        <section> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Procedure</h4> 
+         </div> 
+         <ol class="ol steps"> 
+          <li class="li step stepexpand"> <span class="ph cmd">Start automation content navigator </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ ansible-navigator</code></pre> 
+            <p class="p">Optional: type <code class="ph codeph">ansible-navigator config</code> from the command line to access the Ansible configuration settings.</p> 
+           </div> </li> 
+          <li class="li step stepexpand"> <span class="ph cmd">Review the Ansible configuration. </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code> :config</code></pre> 
+            <br> 
+            <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-ansible-config.png" alt="Ansible configuration"> 
+            <br> 
+            <p class="p">Some values reflect settings from within the automation execution environments needed for the automation execution environments to function. These display as non-default settings you cannot set in your Ansible configuration file.</p> 
+           </div> </li> 
+          <li class="li step stepexpand"> <span class="ph cmd">Type the number corresponding to the setting you want to delve into, or type <code class="ph codeph">:&lt;number&gt;</code> for numbers greater than 9. </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>ANSIBLE COW ACCEPTLIST (current: ['bud-frogs', 'bunny', 'cheese']) (default:
+ 0│---
+ 1│current:
+ 2│- bud-frogs
+ 3│- bunny
+ 4│- cheese
+ 5│default:
+ 6│- bud-frogs
+ 7│- bunny
+ 8│- cheese
+ 9│- daemon</code></pre> 
+            <p class="p">The output shows the current <code class="ph codeph">setting</code> as well as the <code class="ph codeph">default</code>. Note the <code class="ph codeph">source</code> in this example is <code class="ph codeph">env</code> since the setting comes from the automation execution environments.</p> 
+           </div> </li> 
+         </ol> 
+        </section> 
+        <section class="section result"> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Results</h4> 
+         </div> 
+         <ul class="ul"> 
+          <li class="li">Review the configuration output. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-ansible-config.png" alt="Configuration output"><br></li> 
+         </ul> 
+        </section> 
+       </div> 
+      </article> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

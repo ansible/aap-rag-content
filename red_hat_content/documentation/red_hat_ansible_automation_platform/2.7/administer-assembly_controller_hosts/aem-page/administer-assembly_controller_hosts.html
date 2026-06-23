@@ -1,0 +1,88 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-controller-hosts"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Add new hosts as automation targets</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">A host is a system managed by Ansible Automation Platform, which might include a physical, virtual, cloud-based server, or other device.</p> 
+      <p class="p">Typically a host is an operating system instance.</p> 
+      <p class="p">Hosts are grouped in inventories and are sometimes referred to as a “nodes”.</p> 
+      <p class="p">Ansible works against multiple managed nodes or “hosts” in your infrastructure at the same time, using a list or group of lists known as an inventory.</p> 
+      <p class="p">Once your inventory is defined, use patterns to select the hosts or groups you want Ansible to run against.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-controller-create-host"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create a host</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to create a new host by providing a name, selecting an inventory, and optionally defining a description and associated variables.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">To create a new host.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Hosts</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create host</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Create Host</strong> page enter the following information: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Name</strong>: Enter a name for your host.</li> 
+            <li class="li">(Optional) <strong class="ph b">Description</strong>: Enter a description for your host.</li> 
+            <li class="li"><strong class="ph b">Inventory</strong>: Select the inventory for this host to belong to.</li> 
+            <li class="li"><strong class="ph b">Variables</strong>: Enter the inventory file variables associated with your host.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create host</span> to save your changes.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-controller-view-host"> 
+      <h2 class="title topictitle2" id="ariaid-title3">View the host details</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Examine the Host details shown below for a job run.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Hosts</span></span>. The <strong class="ph b">Hosts</strong> page displays the following information about the host or hosts affected by recent job runs.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Selecting a particular host displays the <strong class="ph b">Details</strong> page for that host, with the following information: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">The <strong class="ph b">Name</strong> of the Host.</li> 
+            <li class="li">The <strong class="ph b">Inventory</strong> associated with that host. Selecting this inventory displays details of the inventory.</li> 
+            <li class="li">When the Host was <strong class="ph b">Created</strong> and by whom. Selecting the creator displays details of the creator.</li> 
+            <li class="li">When the Host was <strong class="ph b">Last modified</strong>. Selecting the creator displays details of the creator.</li> 
+            <li class="li"><strong class="ph b">Variables</strong> associated with the Host. You can display the variables in YAML or JSON format.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Edit host</span> to edit details of the host. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Select the <strong class="ph b">Facts</strong> tab to display facts associated with the host.</li> 
+            <li class="li">Select the <strong class="ph b">Groups</strong> tab to display the Groups associated with the host. 
+             <ul class="ul"> 
+              <li class="li">Click <span class="ph uicontrol button">Associate groups</span> to associate a group with the host.</li> 
+             </ul> </li> 
+            <li class="li">Select the <strong class="ph b">Jobs</strong> tab to display the Jobs which ran on the host. 
+             <ul class="ul"> 
+              <li class="li">Click the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/arrow.png" width="15" alt="Expand"> icon to display details of the job. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/hosts_jobs_details.png" alt="Details of job associated with a host"><br></li> 
+             </ul> </li> 
+           </ul> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

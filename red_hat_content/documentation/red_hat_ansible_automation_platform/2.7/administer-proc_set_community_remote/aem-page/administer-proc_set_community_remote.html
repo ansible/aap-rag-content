@@ -1,0 +1,56 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-set-community-remote">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure the private automation hub community remote</h1> 
+    <div class="body taskbody" id="proc-set-community-remote__proc-set-community-remote-task">
+     <p class="shortdesc">Configure the community remote so you can sync content from Ansible Galaxy.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have a <code class="ph codeph">requirements.yml</code> file that identifies those collections to synchronize from Ansible Galaxy as in the following example: <p class="p"><strong class="ph b">Requirements.yml example</strong></p> </li> 
+      </ul> 
+      <pre class="pre codeblock"><code>collections:
+  # Install a collection from Ansible Galaxy.
+  - name: community.aws
+    version: 5.2.0
+    source: https://galaxy.ansible.com</code></pre> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">You can edit the <strong class="ph b">community</strong> remote repository to synchronize chosen collections from Ansible Galaxy to your private automation hub. By default, your private automation hub community repository directs to <code class="ph codeph">galaxy.ansible.com/api/</code>.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+       <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Remotes</span></span>.</span> </li>
+       <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Details</strong> tab in the <strong class="ph b">Community</strong> remote, click <span class="ph uicontrol button">Edit remote</span>.</span> </li>
+       <li class="li step"> <span class="ph cmd">In the <strong class="ph b">YAML requirements</strong> field, paste the contents of your <code class="ph codeph">requirements.yml</code> file.</span> </li>
+       <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Save remote</span>.</span> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">You can now synchronize collections identified in your <code class="ph codeph">requirements.yml</code> file from Ansible Galaxy to your private automation hub.</p> 
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p">See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist" title="You can sync certified and validated collections in Ansible automation hub from console.redhat.com.">Synchronizing content collections</a>for syncing steps.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-specify-dedicted-nodes_performance-considerations"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Specify dedicated nodes for pods and job execution</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">A Kubernetes cluster runs on multiple nodes. Use the <code class="ph codeph">topologySpreadConstraints</code> setting to control how pods are distributed across your nodes during scheduling. This ensures high availability and balanced workloads across your infrastructure.</p> 
+      <p class="p">Do not schedule your pods on a single node, because if that node fails, the services that those pods provide also fails.</p> 
+      <p class="p">Schedule the control plane nodes to run on different nodes to the automation job pods. If the control plane pods share nodes with the job pods, the control plane can become resource starved and degrade the performance of the whole application.</p> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-assign-pods-to-nodes"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Assign pods to specific nodes</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can constrain the automation controller pods created by the operator to run on a certain subset of nodes.</p> 
+       <section class="section"> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">node_selector</code> and <code class="ph codeph">postgres_selector</code> constrain the automation controller pods to run only on the nodes that match all the specified key, or value, pairs.</li> 
+         <li class="li"><code class="ph codeph">tolerations</code> and <code class="ph codeph">postgres_tolerations</code> enable the automation controller pods to be scheduled onto nodes with matching taints. See <a class="xref" href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/" target="_blank" rel="external noopener">Taints and Toleration</a> in the Kubernetes documentation for further details.</li> 
+        </ul> 
+        <p class="p">The following table shows the settings and fields that can be set on the automation controller’s specification section of the YAML (or using the OpenShift UI form).</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:40%">
+          <col style="width:40%">
+          <col style="width:20%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-assign-pods-to-nodes__entry__1">Name</th> 
+           <th class="entry" id="ref-assign-pods-to-nodes__entry__2">Description</th> 
+           <th class="entry" id="ref-assign-pods-to-nodes__entry__3">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__1"> <p class="p"> <code class="ph codeph">postgres_image</code> </p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__2"> <p class="p">Path of the image to pull</p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__3"> <p class="p">postgres</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__1"> <p class="p"> <code class="ph codeph">postgres_image_version</code> </p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__2"> <p class="p">Image version to pull</p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__3"> <p class="p">15</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__1"> <p class="p"> <code class="ph codeph">node_selector</code> </p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__2"> <p class="p">AutomationController pods’ nodeSelector</p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__3"> <p class="p">“”’’</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__1"> <p class="p"> <code class="ph codeph">topology_spread_constraints</code> </p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__2"> <p class="p">AutomationController pods’ topologySpreadConstraints</p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__3"> <p class="p">“”’’</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__1"> <p class="p"> <code class="ph codeph">tolerations</code> </p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__2"> <p class="p">AutomationController pods’ tolerations</p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__3"> <p class="p">“”’’</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__1"> <p class="p"> <code class="ph codeph">annotations</code> </p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__2"> <p class="p">AutomationController pods’ annotations</p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__3"> <p class="p">“”’’</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__1"> <p class="p"> <code class="ph codeph">postgres_selector</code> </p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__2"> <p class="p">Postgres pods’ nodeSelector</p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__3"> <p class="p">“”’’</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__1"> <p class="p"> <code class="ph codeph">postgres_tolerations</code> </p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__2"> <p class="p">Postgres pods’ tolerations</p> </td> 
+           <td class="entry" headers="ref-assign-pods-to-nodes__entry__3"> <p class="p">“”’’</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><code class="ph codeph">topology_spread_constraints</code> can help optimize spreading your control plane pods across the compute nodes that match your node selector. For example, with the <code class="ph codeph">maxSkew</code> parameter of this option set to <code class="ph codeph">100</code>, this means maximally spread across available nodes. So if there are three matching compute nodes and three pods, one pod will be assigned to each compute node. This parameter helps prevent the control plane pods from competing for resources with each other.</p> 
+        <p class="p"> <strong class="ph b">Example of a custom configuration for constraining controller pods to specific nodes</strong> </p> 
+        <pre class="pre codeblock"><code>spec:
+  ...
+  node_selector: |
+    disktype: ssd
+    kubernetes.io/arch: amd64
+    kubernetes.io/os: linux
+  topology_spread_constraints: |
+    - maxSkew: 100
+      topologyKey: "topology.kubernetes.io/zone"
+      whenUnsatisfiable: "ScheduleAnyway"
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/name: "&lt;resourcename&gt;"
+  tolerations: |
+    - key: "dedicated"
+      operator: "Equal"
+      value: "AutomationController"
+      effect: "NoSchedule"
+  postgres_selector: |
+    disktype: ssd
+    kubernetes.io/arch: amd64
+    kubernetes.io/os: linux
+  postgres_tolerations: |
+    - key: "dedicated"
+      operator: "Equal"
+      value: "AutomationController"
+      effect: "NoSchedule"</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-specify-nodes-job-execution"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Specify nodes for job execution</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can add a node selector to the container group pod specification to ensure they only run against certain nodes. First add a label to the nodes you want to run jobs against.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">The following procedure adds a label to a node.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">List the nodes in your cluster, along with their labels: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>kubectl get nodes --show-labels</code></pre> 
+           <p class="p">The output is similar to this (shown here in a table):</p> 
+           <table class="table">
+            <caption></caption>
+            <colgroup>
+             <col style="width:15%">
+             <col style="width:15%">
+             <col style="width:15%">
+             <col style="width:15%">
+             <col style="width:15%">
+             <col style="width:25%">
+            </colgroup>
+            <thead class="thead"> 
+             <tr class="row"> 
+              <th class="entry" id="proc-specify-nodes-job-execution__entry__1">Name</th> 
+              <th class="entry" id="proc-specify-nodes-job-execution__entry__2">Status</th> 
+              <th class="entry" id="proc-specify-nodes-job-execution__entry__3">Roles</th> 
+              <th class="entry" id="proc-specify-nodes-job-execution__entry__4">Age</th> 
+              <th class="entry" id="proc-specify-nodes-job-execution__entry__5">Version</th> 
+              <th class="entry" id="proc-specify-nodes-job-execution__entry__6">Labels</th> 
+             </tr> 
+            </thead>
+            <tbody class="tbody"> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__1"> <p class="p"> <code class="ph codeph">worker0</code> </p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__2"> <p class="p">Ready</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__3"> <p class="p">&lt;none&gt;</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__4"> <p class="p">1d</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__5"> <p class="p">v1.13.0</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__6"> <p class="p"> <code class="ph codeph">…​,kubernetes.io/hostname=worker0</code> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__1"> <p class="p"> <code class="ph codeph">worker1</code> </p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__2"> <p class="p">Ready</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__3"> <p class="p">&lt;none&gt;</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__4"> <p class="p">1d</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__5"> <p class="p">v1.13.0</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__6"> <p class="p"> <code class="ph codeph">…​,kubernetes.io/hostname=worker1</code> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__1"> <p class="p"> <code class="ph codeph">worker2</code> </p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__2"> <p class="p">Ready</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__3"> <p class="p">&lt;none&gt;</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__4"> <p class="p">1d</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__5"> <p class="p">v1.13.0</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__6"> <p class="p"> <code class="ph codeph">…​,kubernetes.io/hostname=worker2</code> </p> </td> 
+             </tr> 
+            </tbody>
+           </table> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Choose one of your nodes, and add a label to it by using the following command: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>kubectl label nodes &lt;your-node-name&gt; &lt;aap_node_type&gt;=&lt;execution&gt;</code></pre> 
+           <p class="p">For example:</p> 
+           <pre class="pre codeblock"><code>kubectl label nodes &lt;your-node-name&gt; disktype=ssd</code></pre> 
+           <p class="p">where <code class="ph codeph">&lt;your-node-name&gt;</code> is the name of your chosen node.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Verify that your chosen node has a <code class="ph codeph">disktype=ssd</code> label: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>kubectl get nodes --show-labels</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">The output is similar to this (shown here in a table): </span> 
+          <div class="itemgroup info"> 
+           <table class="table">
+            <caption></caption>
+            <colgroup>
+             <col style="width:15%">
+             <col style="width:15%">
+             <col style="width:15%">
+             <col style="width:15%">
+             <col style="width:15%">
+             <col style="width:25%">
+            </colgroup>
+            <thead class="thead"> 
+             <tr class="row"> 
+              <th class="entry" id="proc-specify-nodes-job-execution__entry__25">Name</th> 
+              <th class="entry" id="proc-specify-nodes-job-execution__entry__26">Status</th> 
+              <th class="entry" id="proc-specify-nodes-job-execution__entry__27">Roles</th> 
+              <th class="entry" id="proc-specify-nodes-job-execution__entry__28">Age</th> 
+              <th class="entry" id="proc-specify-nodes-job-execution__entry__29">Version</th> 
+              <th class="entry" id="proc-specify-nodes-job-execution__entry__30">Labels</th> 
+             </tr> 
+            </thead>
+            <tbody class="tbody"> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__25"> <p class="p"> <code class="ph codeph">worker0</code> </p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__26"> <p class="p">Ready</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__27"> <p class="p">&lt;none&gt;</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__28"> <p class="p">1d</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__29"> <p class="p">v1.13.0</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__30"> <p class="p"> <code class="ph codeph">…​disktype=ssd,kubernetes.io/hostname=worker0</code> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__25"> <p class="p"> <code class="ph codeph">worker1</code> </p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__26"> <p class="p">Ready</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__27"> <p class="p">&lt;none&gt;</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__28"> <p class="p">1d</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__29"> <p class="p">v1.13.0</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__30"> <p class="p"> <code class="ph codeph">…​,kubernetes.io/hostname=worker1</code> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__25"> <p class="p"> <code class="ph codeph">worker2</code> </p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__26"> <p class="p">Ready</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__27"> <p class="p">&lt;none&gt;</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__28"> <p class="p">1d</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__29"> <p class="p">v1.13.0</p> </td> 
+              <td class="entry" headers="proc-specify-nodes-job-execution__entry__30"> <p class="p"> <code class="ph codeph">…​,kubernetes.io/hostname=worker2</code> </p> </td> 
+             </tr> 
+            </tbody>
+           </table> 
+           <p class="p">You can see that the <code class="ph codeph">worker0</code> node now has a <code class="ph codeph">disktype=ssd</code> label.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the automation controller UI, specify that label in the metadata section of your customized pod specification in the container group. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: v1
+kind: Pod
+metadata:
+  disktype: ssd
+  namespace: ansible-automation-platform
+spec:
+  serviceAccountName: default
+  automountServiceAccountToken: false
+  nodeSelector:
+    aap_node_type: execution
+  containers:
+    - image: &gt;-
+     registry.redhat.io/ansible-automation-platform-22/ee-supported-rhel8@sha256:d134e198b179d1b21d3f067d745dd1a8e28167235c312cdc233860410ea3ec3e
+      name: worker
+      args:
+        - ansible-runner
+        - worker
+        - '--private-data-dir=/runner'
+      resources:
+        requests:
+          cpu: 250m
+          memory: 100Mi</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-set-custom-pod-timeout"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Extra settings</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">With <code class="ph codeph">extra_settings</code>, you can pass many custom settings by using the awx-operator. The parameter <code class="ph codeph">extra_settings</code> is appended to <code class="ph codeph">/etc/tower/settings.py</code> and can be an alternative to the <code class="ph codeph">extra_volumes</code> parameter.</p> 
+       <section class="section"> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.3333%">
+          <col style="width:33.3333%">
+          <col style="width:33.3334%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-set-custom-pod-timeout__entry__1">Name</th> 
+           <th class="entry" id="ref-set-custom-pod-timeout__entry__2">Description</th> 
+           <th class="entry" id="ref-set-custom-pod-timeout__entry__3">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-set-custom-pod-timeout__entry__1"> <p class="p"> <code class="ph codeph">extra_settings</code> </p> </td> 
+           <td class="entry" headers="ref-set-custom-pod-timeout__entry__2"> <p class="p">Extra settings</p> </td> 
+           <td class="entry" headers="ref-set-custom-pod-timeout__entry__3"> <p class="p">‘’</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"> <strong class="ph b">Example configuration of <code class="ph codeph">extra_settings</code> parameter</strong> </p> 
+        <pre class="pre codeblock"><code> spec:
+    extra_settings:
+      - setting: MAX_PAGE_SIZE
+        value: "500"
+
+      - setting: AUTH_LDAP_BIND_DN
+        value: "cn=admin,dc=example,dc=com"
+
+      - setting: SYSTEM_TASK_ABS_MEM
+        value: "500"</code></pre> 
+        <p class="p"> <strong class="ph b">Custom pod timeouts</strong> </p> 
+        <p class="p">A container group job in automation controller transitions to the <code class="ph codeph">running</code> state just before you submit the pod to the Kubernetes API. Automation controller then expects the pod to enter the <code class="ph codeph">Running</code> state before <code class="ph codeph">AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT</code> seconds has elapsed. You can set <code class="ph codeph">AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT</code> to a higher value if you want automation controller to wait for longer before canceling jobs that fail to enter the <code class="ph codeph">Running</code> state. <code class="ph codeph">AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT</code> is how long automation controller waits from creation of a pod until the Ansible work begins in the pod. You can also extend the time if the pod cannot be scheduled because of resource constraints. You can do this using <code class="ph codeph">extra_settings</code> on the automation controller specification. The default value is two hours.</p> 
+        <p class="p">This is used if you are consistently launching many more jobs than Kubernetes can schedule, and jobs are spending periods longer than <code class="ph codeph">AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT</code> in <em class="ph i">pending</em>.</p> 
+        <p class="p">Jobs are not launched until control capacity is available. If many more jobs are being launched than the container group has capacity to run, consider scaling up your Kubernetes worker nodes.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-schedule-jobs-worker-nodes"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Jobs scheduled on the worker nodes</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Both automation controller and Kubernetes play a role in scheduling a job.</p> 
+       <section class="section"> 
+        <p class="p">When a job is launched, its dependencies are fulfilled, meaning any project updates or inventory updates are launched by automation controller as required by the job template, project, and inventory settings.</p> 
+        <p class="p">If the job is not blocked by other business logic in automation controller and there is control capacity in the control plane to start the job, the job is submitted to the dispatcher. The default settings of the "cost" to control a job is 1 <em class="ph i">capacity</em>. So, a control pod with 100 capacity is able to control up to 100 jobs at a time. Given control capacity, the job transitions from <em class="ph i">pending</em> to <em class="ph i">waiting</em>.</p> 
+        <p class="p">The dispatcher, which is a background process in the control plan pod, starts a worker process to run the job. This communicates with the Kubernetes API using a service account associated with the container group and uses the pod specification as defined on the Container Group in automation controller to provision the pod. The job status in automation controller is shown as <em class="ph i">running</em>.</p> 
+        <p class="p">Kubernetes now schedules the pod. A pod can remain in the <em class="ph i">pending</em> state for <code class="ph codeph">AWX_CONTAINER_GROUP_POD_PENDING_TIMEOUT</code>. If the pod is denied through a <code class="ph codeph">ResourceQuota</code>, the job starts over at <em class="ph i">pending</em>. You can configure a resource quota on a namespace to limit how many resources may be consumed by pods in the namespace. For further information about ResourceQuotas, see <a class="xref" href="https://kubernetes.io/docs/concepts/policy/resource-quotas/" target="_blank" rel="external noopener">Resource Quotas</a>.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="configure-controller-OCP"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Minimize downtime during OpenShift Container Platform upgrade</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Make the following configuration changes in automation controller to minimize downtime during the upgrade.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Ansible Automation Platform 2.4 or later</li> 
+         <li class="li">Ansible automation controller 4.4 or later</li> 
+         <li class="li">OpenShift Container Platform: 
+          <ul class="ul"> 
+           <li class="li">Later than 4.10.42</li> 
+           <li class="li">Later than 4.11.16</li> 
+           <li class="li">Later than 4.12.0</li> 
+          </ul> </li> 
+         <li class="li">High availability (HA) deployment of Postgres</li> 
+         <li class="li">Multiple worker nodes that automation controller pods can be scheduled on</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Enable <code class="ph codeph">RECEPTOR_KUBE_SUPPORT_RECONNECT</code> in AutomationController specification: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: automationcontroller.ansible.com/v1beta1
+kind: AutomationController
+metadata:
+  ...
+spec:
+  ...
+  ee_extra_env: |
+    - name: RECEPTOR_KUBE_SUPPORT_RECONNECT
+      value: enabled
+    ```</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enable the graceful termination feature in AutomationController specification: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>termination_grace_period_seconds: &lt;time to wait for job to finish&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Configure <code class="ph codeph">podAntiAffinity</code> for web and task the pod to spread out the deployment in AutomationController specification: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>task_affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - awx-task
+          topologyKey: topology.kubernetes.io/zone
+        weight: 100
+  web_affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - awx-web
+          topologyKey: topology.kubernetes.io/zone
+        weight: 100</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Configure <code class="ph codeph">PodDisruptionBudget</code> in OpenShift Container Platform: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: automationcontroller-job-pods
+spec:
+  maxUnavailable: 0
+  selector:
+    matchExpressions:
+      - key: ansible-awx-job-id
+        operator: Exists
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: automationcontroller-web-pods
+spec:
+  minAvailable: 1
+  selector:
+    matchExpressions:
+      - key: app.kubernetes.io/name
+        operator: In
+        values:
+          - &lt;automationcontroller_instance_name&gt;-web
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: automationcontroller-task-pods
+spec:
+  minAvailable: 1
+  selector:
+    matchExpressions:
+      - key: app.kubernetes.io/name
+        operator: In
+        values:
+          - &lt;automationcontroller_instance_name&gt;-task</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

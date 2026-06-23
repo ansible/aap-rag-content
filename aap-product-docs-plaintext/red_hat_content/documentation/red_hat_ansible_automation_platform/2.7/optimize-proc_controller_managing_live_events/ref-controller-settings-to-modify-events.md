@@ -1,0 +1,18 @@
+# Manage live event streams to the UI
+## Settings to modify rate and size of events
+
+If your system generates a large number of events, the live streaming of events to the user interface (UI) can cause performance issues. You can disable live streaming of events or reduce the number of events that are displayed in the UI by modifying the following settings.
+
+If you cannot disable live streaming of events because of their size, reduce the number of events that are displayed in the UI. You can use the following settings to manage how many events are displayed:
+
+**Settings available for editing in the UI or API**:
+
+- `EVENT_STDOUT_MAX_BYTES_DISPLAY`: Maximum amount of `stdout` to display (as measured in bytes). This truncates the size displayed in the UI. The default is 1024 bytes. Minimum = 0.
+- `MAX_WEBSOCKET_EVENT_RATE`: Number of events to send to clients per second. Default is 30 messages/second. Minimum = 0 (no limit).
+
+
+**Settings available by using file based settings**:
+
+- `MAX_UI_JOB_EVENTS`: Number of events to display before truncating.This setting hides the rest of the events in the list. Default value is 4000. Minimum = 100. Set `hidden=True`.
+- `MAX_EVENT_RES_DATA`: The maximum size of the ansible callback event’s "res" data structure. The "res" is the full "result" of the module. When the maximum size of ansible callback events is reached, then the remaining output will be truncated. Default value is 700000 bytes.
+- `LOCAL_STDOUT_EXPIRE_TIME`: The amount of time before a `stdout` file is expired and removed locally. They can be regenerated on demand if downloaded again. The default value is 25992000 seconds (30 days).

@@ -1,0 +1,62 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="rhdh-upgrade"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Upgrade the Ansible plug-ins</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Upgrade the Ansible plug-ins for Red Hat Developer Hub to a newer version.</p>
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="rhdh-upgrade-oci"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Upgrade the Ansible plug-ins using OCI delivery</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To upgrade the Ansible plug-ins for Red Hat Developer Hub, update the OCI image tag in your dynamic plug-ins configuration to the new version.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have installed the Ansible plug-ins using OCI container delivery.</li> 
+         <li class="li">You have the new Ansible plug-ins image tag for your release.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Edit your dynamic plug-ins configuration:</span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">For Operator deployments, edit the dynamic plug-ins ConfigMap (for example, <code class="ph codeph">dynamic-plugins-rhdh</code>).</li> 
+            <li class="li">For Helm deployments, in the OpenShift Container Platform Developer UI, navigate to <strong class="ph b">Helm</strong> &gt; <strong class="ph b">developer-hub</strong> &gt; <strong class="ph b">Actions</strong> &gt; <strong class="ph b">Upgrade</strong> &gt; <strong class="ph b">Yaml view</strong>.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Update the <code class="ph codeph">&lt;tag&gt;</code> value in each <code class="ph codeph">oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;</code> reference to the new version.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Apply the changes:</span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">For Operator deployments, click <strong class="ph b">Save</strong>. The Red Hat Developer Hub pod restarts automatically with the updated plug-ins.</li> 
+            <li class="li">For Helm deployments, click <strong class="ph b">Upgrade</strong>.</li> 
+           </ul> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Verify the upgrade:</p> 
+        <ol class="ol"> 
+         <li class="li">Check the <code class="ph codeph">install-dynamic-plugin</code> container logs for the new version.</li> 
+         <li class="li">Verify that the Ansible plug-in is present in the navigation pane.</li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

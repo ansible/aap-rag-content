@@ -1,0 +1,134 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="proc-upgrading-automation-dashboard"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Upgrade automation dashboard</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">This procedure applies when upgrading from automation dashboard versions before 0.1 (which did not include Redis) to the current version. This process involves running the installation program and updating your cluster configuration with new authentication requirements.</p> 
+      <section class="section context" id="proc-upgrading-automation-dashboard__context_1">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body">
+         For more information about recent updates to automation dashboard, see <a class="xref" href="https://access.redhat.com/articles/7136888" target="_blank" rel="external noopener">What’s new: Updates for automation dashboard</a>.
+        </div>
+       </div> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">Download the latest installation bundle from access.redhat.com. Navigate to Downloads &gt; Red Hat Ansible Automation Platform Product Software.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Extract the bundle to a new directory.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Copy the <code class="ph codeph">inventory</code> file from your previous installation directory to the new directory.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Edit the <code class="ph codeph">inventory</code> file to include the mandatory Redis configuration. You must add a <code class="ph codeph">[redis]</code> group and define the <code class="ph codeph">redis_mode</code> variable: </span> 
+         <div class="itemgroup info"> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">The inventory file lines prefixed with + must be added when upgrading your automation dashboard.</p> 
+           </div>
+          </div> 
+          <pre class="pre codeblock language-ini"><code> [database]
+host.example.com ansible_connection=local
+
++[redis]
++host.example.com ansible_connection=local
++
+ [all:vars]
++redis_mode=standalone
++
+ postgresql_admin_username=postgres
+ postgresql_admin_password=TODO
+ # registry_username=</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Run the installation playbook from the new directory: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock language-bash"><code>ansible-galaxy collection install -r requirements.yml
+ansible-playbook -i inventory ansible.containerized_installer.dashboard_install --ask-become-pass</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Update your <code class="ph codeph">clusters.yaml</code> file. You must add the <code class="ph codeph">refresh_token</code>, <code class="ph codeph">client_id</code>, and <code class="ph codeph">client_secret</code> variables to your existing cluster configurations. </span> 
+         <div class="itemgroup info"> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">For instructions on obtaining these values, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_view_key_metrics#proc-integrating-automation-dashboard" title="Integrate your Ansible Automation Platform instances into the automation dashboard configuration to collect and visualise data and gain insights into your automation.">Integrating automation dashboard with your Ansible Automation Platform</a>.</p> 
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Apply the updated configuration to the dashboard. You must copy the configuration file to the container's <code class="ph codeph">/tmp/</code> directory: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock language-bash"><code>podman cp clusters.yaml automation-dashboard-web:/tmp/
+podman exec -it automation-dashboard-web /venv/bin/python manage.py setclusters /tmp/clusters.yaml</code></pre> 
+         </div> </li>
+       </ol>
+      </section> 
+      <section class="section result">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Results</h2>
+       </div> 
+       <ol class="ol"> 
+        <li class="li">Retrieve the current cluster configuration: <pre class="pre codeblock language-bash"><code>podman exec -it automation-dashboard-web /venv/bin/python ./manage.py getclusters --decrypt</code></pre> </li> 
+        <li class="li">Verify that the output displays the content from your <code class="ph codeph">clusters.yaml</code> file, including the <code class="ph codeph">access_token</code>, <code class="ph codeph">refresh_token</code>, <code class="ph codeph">client_id</code>, and <code class="ph codeph">client_secret</code> fields.</li> 
+       </ol> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-troubleshooting-sync-failures"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Troubleshoot synchronization failures</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">If new jobs from Ansible Automation Platform do not synchronize to the automation dashboard after an upgrade, an interrupted synchronization job might be blocking the process. This occurs if the automation dashboard service stops or restarts while a synchronization task is active.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have ssh access to the host machine.</li> 
+         <li class="li">You have access to the PostgreSQL database, including the database user password defined in your inventory file (variable <code class="ph codeph">dashboard_pg_password</code>).</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">To resolve this issue, you must manually remove the stuck jobs from the database.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Connect to the automation dashboard database. You must replace <code class="ph codeph">&lt;password&gt;</code> with your configured <code class="ph codeph">dashboard_pg_password</code>. Replace 127.0.0.1 with database server address if external database is used. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-bash"><code>POSTGRES_PASSWORD=&lt;password&gt; psql -h 127.0.0.1 -p 5432 -U aapdashboard -d aapdashboard</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Identify jobs that are in a pending or running state: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-sql"><code>SELECT * FROM scheduler_syncjob WHERE status IN ('pending','waiting','running');</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Wait approximately one minute and run the command again. If the same job IDs appear in the output, these jobs are stuck.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Delete the stuck jobs using their ID. Replace <code class="ph codeph">&lt;id&gt;</code> with the ID returned in the previous step (for example, <code class="ph codeph">20, 21</code>): </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock language-sql"><code>DELETE from scheduler_syncjob WHERE id IN (&lt;id&gt;);</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Refresh the automation dashboard to confirm that synchronization has resumed.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

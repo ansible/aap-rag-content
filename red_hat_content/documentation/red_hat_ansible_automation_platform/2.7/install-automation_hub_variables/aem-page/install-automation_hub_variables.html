@@ -1,0 +1,358 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Automation hub variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Reference information for the inventory file variables used to configure automation hub.</p> 
+     <section class="section"> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:40%">
+        <col style="width:15%">
+        <col style="width:20%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1">Variable name</th> 
+         <th class="entry" id="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2">Description</th> 
+         <th class="entry" id="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3">Required or optional</th> 
+         <th class="entry" id="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_admin_password</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Automation hub administrator password. Use of special characters for this variable is limited. The password can include any printable ASCII character except <code class="ph codeph">/</code>, <code class="ph codeph">"</code>, or <code class="ph codeph">@</code>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_azure_account_key</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Azure blob storage account key.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required if using an Azure blob storage backend.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_azure_account_name</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Account name associated with the Azure blob storage.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required when using an Azure blob storage backend.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_azure_container</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Name of the Azure blob storage container.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">pulp</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_azure_extra_settings</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Defines extra parameters for the Azure blob storage backend. For more information about the list of parameters, see <a class="xref" href="https://django-storages.readthedocs.io/en/latest/backends/azure.html#settings" target="_blank" rel="external noopener">django-storages documentation - Azure Storage</a>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">{}</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_collection_auto_sign</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">If a collection signing service is enabled, collections are not signed automatically by default. Set this variable to <code class="ph codeph">true</code> to sign collections by default.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_collection_signing</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Set this variable to <code class="ph codeph">true</code> to enable a collection signing service.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_collection_signing_key</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Path to the collection signing key file.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required if a collection signing service is enabled.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_collection_signing_pass</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Password for the automation content collection signing service.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required if the collection signing service is protected by a passphrase.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_collection_signing_service</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Service for signing collections.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">ansible-default</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_container_signing</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Set this variable to <code class="ph codeph">true</code> to enable a container signing service.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_container_signing_key</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Path to the container signing key file.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required if a container signing service is enabled.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_container_signing_pass</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Password for the automation content container signing service.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required if the container signing service is protected by a passphrase.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_container_signing_service</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Service for signing containers.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">container-default</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_data_path_exclude</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Automation hub backup path to exclude.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_extra_settings</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Defines additional settings for use by automation hub during installation.</p> <p class="p">For example:</p> <pre class="pre codeblock"><code>hub_extra_settings=[{"setting": "REDIRECT_IS_HTTPS", "value": True}]</code></pre> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_firewall_zone</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">The firewall zone where automation hub related firewall rules are applied. This controls which networks can access automation hub based on the zone's trust level.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">public</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_galaxy_importer</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Dictionary of settings to pass to the <code class="ph codeph">galaxy-importer.cfg</code> configuration file. These settings control how the <code class="ph codeph">galaxy-importer</code> service processes and validates Ansible content. Example values include: <code class="ph codeph">ansible-doc</code>, <code class="ph codeph">ansible-lint</code>, and <code class="ph codeph">flake8</code>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_nginx_client_max_body_size</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Maximum allowed size for data sent to automation hub through NGINX.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">20m</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_nginx_disable_hsts</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Controls whether HTTP Strict Transport Security (HSTS) is enabled or disabled for automation hub. Set this variable to <code class="ph codeph">true</code> to disable HSTS.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_nginx_disable_https</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Controls whether HTTPS is enabled or disabled for automation hub. Set this variable to <code class="ph codeph">true</code> to disable HTTPS.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_nginx_hsts_max_age</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Maximum duration (in seconds) that HTTP Strict Transport Security (HSTS) is enforced for automation hub.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">63072000</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_nginx_http_port</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Port number that automation hub listens on for HTTP requests.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">8081</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_nginx_https_port</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Port number that automation hub listens on for HTTPS requests.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">8444</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_nginx_https_protocols</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Protocols that automation hub will support when handling HTTPS traffic.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">[TLSv1.2, TLSv1.3]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_nginx_user_headers</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">List of additional NGINX headers to add to automation hub's NGINX configuration.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_pg_cert_auth</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Controls whether client certificate authentication is enabled or disabled on the automation hub PostgreSQL database. Set this variable to <code class="ph codeph">true</code> to enable client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_pg_database</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Name of the PostgreSQL database used by automation hub.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">pulp</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_pg_host</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Hostname of the PostgreSQL database used by automation hub.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_pg_password</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Password for the automation hub PostgreSQL database user. Use of special characters for this variable is limited. The <code class="ph codeph">!</code>, <code class="ph codeph">#</code>, <code class="ph codeph">0</code> and <code class="ph codeph">@</code> characters are supported. Use of other special characters can cause the setup to fail.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_pg_port</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Port number for the PostgreSQL database used by automation hub.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">5432</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_pg_socket</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">UNIX socket used by automation hub to connect to the PostgreSQL database.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_pg_sslmode</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Controls the SSL/TLS mode to use when automation hub connects to the PostgreSQL database. Valid options include <code class="ph codeph">verify-full</code>, <code class="ph codeph">verify-ca</code>, <code class="ph codeph">require</code>, <code class="ph codeph">prefer</code>, <code class="ph codeph">allow</code>, <code class="ph codeph">disable</code>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">prefer</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_pg_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Path to the PostgreSQL SSL/TLS certificate file for automation hub.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required if using client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_pg_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Path to the PostgreSQL SSL/TLS key file for automation hub.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required if using client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_pg_username</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Username for the automation hub PostgreSQL database user.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">pulp</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_s3_access_key</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">AWS S3 access key.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required if using an AWS S3 storage backend.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_s3_bucket_name</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Name of the AWS S3 storage bucket.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">pulp</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_s3_extra_settings</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Used to define extra parameters for the AWS S3 storage backend. For more information about the list of parameters, see <a class="xref" href="https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings" target="_blank" rel="external noopener">django-storages documentation - Amazon S3</a>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">{}</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_s3_secret_key</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">AWS S3 secret key.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required if using an AWS S3 storage backend.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_secret_key</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Secret key value used by automation hub to sign and encrypt data.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_seed_collections</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Controls whether or not pre-loading of collections is enabled. When you run the bundle installer, validated content is uploaded to the <code class="ph codeph">validated</code> repository, and certified content is uploaded to the <code class="ph codeph">rh-certified</code> repository. By default, certified content and validated content are both uploaded. If you do not want to pre-load content, set this variable to <code class="ph codeph">false</code>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_shared_data_mount_opts</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Mount options for the Network File System (NFS) share.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">rw,sync,hard</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_shared_data_path</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Path to the Network File System (NFS) share with read, write, and execute (RWX) access. The value must match the format <code class="ph codeph">host:dir</code>, for example <code class="ph codeph">nfs-server.example.com:/exports/hub</code>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Required if installing more than one instance of automation hub with a <code class="ph codeph">file</code> storage backend. When installing a single instance of automation hub, it is optional.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_storage_backend</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Automation hub storage backend type. Possible values include: <code class="ph codeph">azure</code>, <code class="ph codeph">file</code>, <code class="ph codeph">s3</code>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">file</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Path to the SSL/TLS certificate file for automation hub.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Path to the SSL/TLS key file for automation hub.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_tls_remote</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Denote whether the automation hub provided certificate files are local to the installation program (<code class="ph codeph">false</code>) or on the remote component server (<code class="ph codeph">true</code>).</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_use_archive_compression</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Controls whether archive compression is enabled or disabled for automation hub. You can control this functionality globally by using <code class="ph codeph">use_archive_compression</code>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_use_db_compression</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Controls whether database compression is enabled or disabled for automation hub. You can control this functionality globally by using <code class="ph codeph">use_db_compression</code>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_workers</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Number of automation hub workers.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">2</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">--</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">Gunicorn worker timeout in seconds for automation hub. Controls how long a Gunicorn worker can process a single request before it is terminated. Computed from <code class="ph codeph">client_request_timeout</code>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">max(client_request_timeout, 10) / 3</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_nginx_read_timeout</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">NGINX <code class="ph codeph">proxy_read_timeout</code> value in seconds for automation hub. Controls how long NGINX waits to receive a response from the upstream Gunicorn server. Computed from <code class="ph codeph">client_request_timeout</code>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">max(client_request_timeout, 10) / 2</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__1"> <p class="p"><code class="ph codeph">hub_nginx_send_timeout</code></p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__2"> <p class="p">NGINX <code class="ph codeph">proxy_send_timeout</code>value in seconds for automation hub. Controls how long NGINX waits to transmit a request to the upstream Gunicorn server. Computed from <code class="ph codeph">client_request_timeout</code>.</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-e0d7099d-04f4-415e-a492-b1ef6f53dc20__entry__4"> <p class="p"><code class="ph codeph">max(client_request_timeout, 10) / 2</code></p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

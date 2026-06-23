@@ -1,0 +1,134 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="installing-aap-operator-cli"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Install Ansible Automation Platform Operator from the CLI</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Use these instructions to install the Ansible Automation Platform Operator on Red Hat OpenShift Container Platform from the OpenShift Container Platform command-line interface (CLI) using the <code class="ph codeph">oc</code> command.</p>
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="install-cli-aap-operator"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Install the Ansible Automation Platform Operator in a namespace</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use this procedure to subscribe a namespace to an operator.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Access to Red Hat OpenShift Container Platform using an account with operator installation permissions.</li> 
+         <li class="li">The OpenShift Container Platform CLI <code class="ph codeph">oc</code> command is installed on your local system. Refer to <a class="xref" href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.15/html/cli_tools/openshift-cli-oc#installing-openshift-cli" target="_blank" rel="external noopener">Installing the OpenShift CLI</a> in the Red Hat OpenShift Container Platform product documentation for further information.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">You cannot deploy Ansible Automation Platform in the default namespace on your OpenShift Cluster. The 'ansible-automation-platform' namespace is recommended. You can use a custom namespace, but it should run only Ansible Automation Platform.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create a project for the operator. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc new-project ansible-automation-platform</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create a file called <span class="ph filepath">sub.yaml</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the following YAML code to the <span class="ph filepath">sub.yaml</span> file. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: ansible-automation-platform-operator
+  namespace: ansible-automation-platform
+spec:
+  targetNamespaces:
+    - ansible-automation-platform
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ansible-automation-platform
+  namespace: ansible-automation-platform
+spec:
+  channel: 'stable-2.7'
+  installPlanApproval: Automatic
+  name: ansible-automation-platform-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+---</code></pre> 
+           <p class="p">This file creates a <code class="ph codeph">Subscription</code> object called <code class="ph codeph"><em class="ph i">ansible-automation-platform</em></code> that subscribes the <code class="ph codeph">ansible-automation-platform</code> namespace to the <code class="ph codeph">ansible-automation-platform-operator</code> operator.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the <span class="keyword cmdname">oc apply</span> command to create the objects specified in the <span class="ph filepath">sub.yaml</span> file: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc apply -f sub.yaml</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Verify the CSV PHASE reports "Succeeded" before proceeding using the <span class="keyword cmdname">oc get csv -n ansible-automation-platform</span> command: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc get csv -n ansible-automation-platform
+
+NAME                               DISPLAY                       VERSION              REPLACES                           PHASE
+aap-operator.v2.7.0-0.1728520175   Ansible Automation Platform   2.7.0+0.1728520175   aap-operator.v2.7.0-0.1727875185   Succeeded</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create an <code class="ph codeph">AnsibleAutomationPlatform</code> object called <code class="ph codeph"><em class="ph i">example</em></code> in the <code class="ph codeph">ansible-automation-platform</code> namespace. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">To change the Ansible Automation Platform and its components from <code class="ph codeph"><em class="ph i">example</em></code>, edit the <em class="ph i">name</em> field in the <code class="ph codeph">metadata:</code> section and replace example with the name you want to use:</p> 
+           <pre class="pre codeblock"><code>oc apply -f - &lt;&lt;EOF
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: example
+  namespace: ansible-automation-platform
+spec:
+  # Platform
+  image_pull_policy: IfNotPresent
+  # Components
+  controller:
+    disabled: false
+  eda:
+    disabled: false
+  hub:
+    disabled: false
+    ## Modify to contain your RWM storage class name
+    storage_type: file
+    file_storage_storage_class: &lt;your-read-write-many-storage-class&gt;
+    file_storage_size: 10Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+  lightspeed:
+    disabled: true
+EOF</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.15/html/operators/user-tasks#olm-installing-operator-from-operatorhub-using-cli_olm-installing-operators-in-namespace" target="_blank" rel="external noopener">Installing from OperatorHub using the CLI</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

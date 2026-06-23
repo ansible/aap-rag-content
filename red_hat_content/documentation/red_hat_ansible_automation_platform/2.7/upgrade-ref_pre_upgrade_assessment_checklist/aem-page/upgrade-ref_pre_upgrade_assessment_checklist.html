@@ -1,0 +1,76 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-pre-upgrade-assessment-checklist"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Pre-upgrade migration checklist</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">Before upgrading to Red Hat Ansible Automation Platform 2.7, assess the environment to identify components and integrations that require migration to gateway-based authentication.</p> 
+      <section class="section"> 
+       <p class="p">Before upgrading, identify the following items in your environment:</p> 
+       <ul class="ul"> 
+        <li class="li">Scripts using direct component URLs (for example, <code class="ph codeph">controller.example.com</code>, <code class="ph codeph">hub.example.com</code>, or <code class="ph codeph">eda.example.com</code>).</li> 
+        <li class="li">Configuration as Code (CaC) implementations.</li> 
+        <li class="li">Active Personal Access Tokens (PATs).</li> 
+        <li class="li">API integrations and custom applications.</li> 
+        <li class="li">Container registry workflows, such as <code class="ph codeph">podman login</code> or <code class="ph codeph">docker login</code>.</li> 
+        <li class="li">Certified collection usage, specifically the latest versions of <code class="ph codeph">ansible.controller</code>, <code class="ph codeph">ansible.hub</code>, and <code class="ph codeph">ansible.eda</code> (these may be replaced by <code class="ph codeph">ansible.platform</code>).</li> 
+        <li class="li">Third-party authentication provider configurations, including LDAP, SAML, RADIUS, and TACACS+.</li> 
+       </ul> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relref">
+       <strong>Related reference</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_pre_upgrade_assessment_checklist#ref-pre-upgrade-detection-tooling" title="A CLI detection tool is available to identify direct API usage in Ansible Automation Platform 2.5 or 2.6 environments. The tool analyzes NGINX logs to detect requests that bypass platform gateway.">Pre-upgrade detection tooling</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_post_upgrade_requirements" title="After upgrading to Ansible Automation Platform 2.7, update tokens, scripts, and integrations to use platform gateway for all external authentication and API access.">Post-upgrade requirements</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-pre-upgrade-detection-tooling"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Pre-upgrade detection tooling</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">A CLI detection tool is available to identify direct API usage in Ansible Automation Platform 2.5 or 2.6 environments. The tool analyzes NGINX logs to detect requests that bypass platform gateway.</p> 
+       <section class="section"> 
+        <p class="p">You can run the tool directly from the GitHub repository using <code class="ph codeph">uvx</code>.</p> 
+        <p class="p"><strong class="ph b">Prerequisites</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Ansible Automation Platform 2.5 or 2.6 is installed.</li> 
+         <li class="li">You have one of the following, depending on your deployment type: 
+          <ul class="ul"> 
+           <li class="li">Containerized deployments: An SOSReport.</li> 
+           <li class="li">OpenShift Container Platform deployments: A must-gather or ocp-inspect output.</li> 
+          </ul> </li> 
+        </ul> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The tool requires NGINX log format updates introduced in the Ansible Automation Platform 2.6 patch released March 25, 2026. If you are running an earlier 2.6.x patch and your logs do not contain the required fields, apply the provided patch script or upgrade to the latest 2.6.x release.</p> 
+         </div>
+        </div> 
+        <p class="p"><strong class="ph b">Scan a containerized or RPM SOSReport:</strong></p> 
+        <pre class="pre codeblock"><code>$ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/sosreport/</code></pre> 
+        <p class="p"><strong class="ph b">Scan an OpenShift must-gather tarball:</strong></p> 
+        <pre class="pre codeblock"><code>$ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/must-gather/</code></pre> 
+        <p class="p"><strong class="ph b">Scan an OpenShift Container Platform inspect output:</strong></p> 
+        <pre class="pre codeblock"><code>$ uvx --from "git+https://github.com/ansible/aap-detect-direct-component-access" aap-detect-direct-component-access /path/to/ocp-inspect/</code></pre> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relref">
+        <strong>Related reference</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-ref_pre_upgrade_assessment_checklist#ref-pre-upgrade-assessment-checklist" title="Before upgrading to Red Hat Ansible Automation Platform 2.7, assess the environment to identify components and integrations that require migration to gateway-based authentication.">Pre-upgrade migration checklist</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

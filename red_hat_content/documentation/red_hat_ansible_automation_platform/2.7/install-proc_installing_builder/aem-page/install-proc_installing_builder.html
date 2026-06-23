@@ -1,0 +1,42 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-installing-builder">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Install Ansible Builder to create or edit execution environments</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Install Ansible Builder to create custom execution environments that contain the dependencies and collections required for your automation content. You need a valid Red Hat subscription and Podman installed on your RHEL system.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have installed the Podman container runtime.</li> 
+       <li class="li">You have valid subscriptions attached on the host. With a valid subscription you can access the subscription-only resources needed to install <code class="ph codeph">ansible-builder</code>, and ensures that the necessary repository for <code class="ph codeph">ansible-builder</code> is automatically enabled. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_attaching_subscriptions_1" title="You must have valid subscriptions on all nodes before installing Red Hat Ansible Automation Platform.">Attaching your Red Hat Ansible Automation Platform subscription</a> for more information. 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">To install the developer tools without consuming a managed node subscription, you can use MCT4589-Red Hat Ansible Developer, Standard (10 Managed Nodes), which is available at no cost. This subscription requires the approval of the Ansible Business Unit.</p> 
+         </div>
+        </div> </li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <div class="ul steps-unordered">
+       <div class="li step p"> <span class="ph cmd">Run the following command to install Ansible Builder and activate your Ansible Automation Platform repo: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>#  dnf install --enablerepo=ansible-automation-platform-<var class="keyword varname">aap-version</var>-for-rhel-<var class="keyword varname">rhel-version</var>-x86_64-rpms
+  ansible-builder</code></pre> 
+         <p class="p">Replace <var class="keyword varname">aap-version</var> with your Ansible Automation Platform version and <var class="keyword varname">rhel-version</var> with your Red Hat Enterprise Linux major version.</p> 
+        </div> 
+       </div>
+      </div>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

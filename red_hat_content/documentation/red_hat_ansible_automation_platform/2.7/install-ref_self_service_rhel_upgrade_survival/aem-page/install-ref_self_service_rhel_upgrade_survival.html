@@ -1,0 +1,104 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-rhel-upgrade-survival">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">What survives an upgrade</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The following table describes what happens to each type of content during a bootc upgrade of the Ansible automation portal RHEL appliance.</p> 
+     <section class="section" id="self-service-rhel-upgrade-survival__upgrade-survival-table"> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__1">Content</th> 
+         <th class="entry" id="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__2">Location</th> 
+         <th class="entry" id="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__3">Survives upgrade</th> 
+         <th class="entry" id="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__4">Notes</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__1">Portal configuration</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__2"><span class="ph filepath">/etc/portal/configs/</span></td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__3">Yes</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__4">Three-way merge preserves your modifications</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__1">SSL certificates</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__2"><span class="ph filepath">/etc/portal/ssl/</span></td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__3">Yes</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__4">Three-way merge</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__1">Quadlet drop-ins</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__2"><span class="ph filepath">/etc/containers/systemd/portal.container.d/</span></td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__3">Yes</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__4">Three-way merge</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__1">Quadlet port customization</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__2"><span class="ph filepath">/etc/containers/systemd/</span></td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__3">Yes</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__4">Three-way merge</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__1">PostgreSQL data</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__2"><span class="ph filepath">/var/lib/portal/postgres-data/</span></td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__3">Yes</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__4">Never touched by bootc</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__1">Backups</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__2"><span class="ph filepath">/var/lib/portal/backups/</span></td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__3">Yes</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__4">Never touched by bootc</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__1">Podman secrets</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__2"><span class="ph filepath">/var/lib/containers/</span></td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__3">Yes</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__4">Never touched by bootc</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__1">Ansible plugins</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__2"><span class="ph filepath">/usr/share/portal/plugins/</span></td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__3">Updated</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__4">New plugins from the new image</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__1">Portal scripts</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__2"><span class="ph filepath">/usr/share/portal/scripts/</span></td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__3">Updated</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__4">New scripts from the new image</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__1">Dynamic plugin configs</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__2"><span class="ph filepath">/var/lib/portal/dynamic-plugins-root/</span></td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__3">Cleared</td> 
+         <td class="entry" headers="self-service-rhel-upgrade-survival__upgrade-survival-table__entry__4">Regenerated from new plugins on first start</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="self-service-rhel-upgrade-survival__post-upgrade-reconciliation">
+      <h2 class="title sectiontitle">Post-upgrade reconciliation</h2> 
+      <p class="p">After reboot, the appliance automatically reconciles Ansible plugins and configuration with the new image version:</p> 
+      <ol class="ol"> 
+       <li class="li">Clears the dynamic plugins directory so that plugins are regenerated from the new image.</li> 
+       <li class="li">Clears generated configuration files (regenerated on portal start).</li> 
+       <li class="li">Creates any new directories required by the new image version.</li> 
+       <li class="li">Fixes file ownership for portal and PostgreSQL directories.</li> 
+      </ol> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

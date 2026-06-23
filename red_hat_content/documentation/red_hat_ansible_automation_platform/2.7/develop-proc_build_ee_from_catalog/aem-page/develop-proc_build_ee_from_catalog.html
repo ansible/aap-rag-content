@@ -1,0 +1,42 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-build-ee-from-catalog">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Build an execution environment image from the catalog</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Trigger a container image build on an existing execution environment definition from the catalog, independent of the creation workflow.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">The execution environment definition was saved to a GitHub repository.</li> 
+       <li class="li">You can authenticate with GitHub through OAuth.</li> 
+       <li class="li">Your AAP administrator has configured GitHub repository secrets for builds.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">From the execution environment catalog or definition detail page, click <strong class="ph b">Build</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the build dialog, configure the following settings:</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Registry</strong> -- private automation hub or a custom registry URL.</li> 
+          <li class="li"><strong class="ph b">Image Name</strong> -- in <code class="ph codeph">namespace/name</code> format.</li> 
+          <li class="li"><strong class="ph b">Image Tag</strong>.</li> 
+          <li class="li"><strong class="ph b">Verify TLS certificates</strong>.</li> 
+         </ul> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Build</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Monitor the build from the <strong class="ph b">Actions</strong> tab on the GitHub repository where the definition was saved.</span> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

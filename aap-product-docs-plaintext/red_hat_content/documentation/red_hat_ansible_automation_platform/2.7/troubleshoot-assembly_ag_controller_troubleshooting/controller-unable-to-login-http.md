@@ -1,0 +1,19 @@
+# Troubleshoot automation controller
+## Unable to login to automation controller through HTTP
+
+Access to automation controller is intentionally restricted through a secure protocol (HTTPS).
+
+In cases where your configuration is set up to run an automation controller node behind a load balancer or proxy as "HTTP only", and you only want to access it without SSL/TLS (for troubleshooting, for example), you must add the following settings in the `custom.py` file located at `/etc/tower/conf.d` of your automation controller instance:
+
+```
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+```
+If you change these settings to `false` it enables automation controller to manage cookies and login sessions when using the HTTP protocol. You must do this on every node of a cluster installation.
+
+To apply the changes, run:
+
+```
+automation-controller-service restart
+```
+

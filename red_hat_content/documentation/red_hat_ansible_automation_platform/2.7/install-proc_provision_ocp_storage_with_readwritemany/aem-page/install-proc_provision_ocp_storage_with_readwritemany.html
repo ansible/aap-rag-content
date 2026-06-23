@@ -1,0 +1,32 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-provision-ocp-storage-with-readwritemany">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Provision OpenShift Container Platform storage with <code class="ph codeph">ReadWriteMany</code> access mode</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">To ensure successful installation of Ansible Automation Platform Operator, you must provision your storage type for automation hub initially to <code class="ph codeph">ReadWriteMany</code> access mode.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div>
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step"> <span class="ph cmd">Go to <span class="ph menucascade"><span class="ph uicontrol">Storage</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">PersistentVolume</span></span>.</span> </li>
+       <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create PersistentVolume</span>.</span> </li>
+       <li class="li step"> <span class="ph cmd">In the first step, update the <code class="ph codeph">accessModes</code> from the default <code class="ph codeph">ReadWriteOnce</code> to <code class="ph codeph">ReadWriteMany</code>. </span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep"> <span class="ph cmd">See <a class="xref" href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.10/html-single/storage/index#persistent-storage-nfs-provisioning_persistent-storage-nfs" target="_blank" rel="external noopener">Provisioning</a> to update the access mode. for a detailed overview.</span> </li> 
+        </ol> </li>
+       <li class="li step"> <span class="ph cmd">Complete the additional steps in this section to create the persistent volume claim (PVC).</span> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

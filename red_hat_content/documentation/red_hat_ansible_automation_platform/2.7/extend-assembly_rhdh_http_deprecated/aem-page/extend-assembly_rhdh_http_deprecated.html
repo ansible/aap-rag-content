@@ -1,0 +1,212 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="rhdh-http-deprecated"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Install Ansible plug-ins using an HTTP plug-in registry (deprecated)</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">The HTTP plug-in registry installation method is deprecated and will be removed in a future release. Use OCI-based plug-in delivery instead.</p> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="rhdh-http-registry-deprecated"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Install Ansible plug-ins using an HTTP plug-in registry (deprecated)</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">The HTTP plug-in registry method is deprecated and will be removed in a future release. Red Hat recommends using OCI-based plug-in delivery instead.</p> 
+       <div class="note important note_important"> <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">The HTTP plug-in registry method is deprecated and will be removed in a future release. Red Hat recommends using OCI-based plug-in delivery as described in the main installation procedure. For disconnected environments, use OCI image mirroring instead of an HTTP registry.</p> 
+        </div> 
+       </div> 
+       <p class="p">The following procedures describe how to install the Ansible plug-ins using an HTTP plug-in registry hosted in your OpenShift Container Platform cluster. This method requires downloading plug-in tarballs, creating an HTTP registry in the cluster, and referencing the plug-ins by HTTP URL with SHA integrity hashes.</p> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_developer_hub/1.9/html-single/configuring_dynamic_plugins_in_red_hat_developer_hub/index#configuring-dynamic-plugins-with-an-oci-registry-in-a-restricted-network" target="_blank" rel="external noopener">Configuring dynamic plugins with an OCI registry in a restricted network</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="rhdh-download-plugins"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Download the Ansible plug-ins files</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Download the Ansible plug-ins for Red Hat Developer Hub <strong class="ph b">Setup Bundle</strong> from the Red Hat Ansible Automation Platform Product Software downloads page.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">In a browser, navigate to the <a class="xref" href="https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software" target="_blank" rel="external noopener">Red Hat Ansible Automation Platform Product Software downloads page</a> and select the <strong class="ph b">Product Software</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Download now</strong> next to <strong class="ph b">Ansible plug-ins for Red Hat Developer Hub Setup Bundle</strong> to download the latest version of the plug-ins. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The format of the filename is <code class="ph codeph">ansible-rhdh-plugins-x.y.z.tar.gz</code>. Substitute the Ansible plug-ins release version, for example <code class="ph codeph">2.0.0</code>, for <code class="ph codeph">x.y.z</code>.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a directory on your local machine to store the <code class="ph codeph">.tar</code> files. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ mkdir /path/to/&lt;ansible-backstage-plugins-local-dir-changeme&gt;</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Set an environment variable (<code class="ph codeph">$DYNAMIC_PLUGIN_ROOT_DIR</code>) to represent the directory path. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ export DYNAMIC_PLUGIN_ROOT_DIR=/path/to/&lt;ansible-backstage-plugins-local-dir-changeme&gt;</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Extract the <code class="ph codeph">ansible-rhdh-plugins-&lt;version-number&gt;.tar.gz</code> contents to <code class="ph codeph">$DYNAMIC_PLUGIN_ROOT_DIR</code>. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ tar --exclude='*code*' -xzf ansible-rhdh-plugins-x.y.z.tar.gz -C $DYNAMIC_PLUGIN_ROOT_DIR</code></pre> 
+           <p class="p">Substitute the Ansible plug-ins release version, for example <code class="ph codeph">2.0.0</code>, for <code class="ph codeph">x.y.z</code>.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">Run <code class="ph codeph">ls</code> to verify that the extracted files are in the <code class="ph codeph">$DYNAMIC_PLUGIN_ROOT_DIR</code> directory:</p> 
+        <pre class="pre codeblock"><code>$ ls $DYNAMIC_PLUGIN_ROOT_DIR
+ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz
+ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz.integrity
+ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz
+ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz.integrity</code></pre> 
+        <p class="p">The files with the <code class="ph codeph">.integrity</code> file type contain the plugin SHA value. The SHA value is used during the plug-in configuration.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="rhdh-create-plugin-registry"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Create a registry for the Ansible plug-ins</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Set up a registry in your OpenShift cluster to host the Ansible plug-ins and make them available for installation in Red Hat Developer Hub (RHDH).</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to your OpenShift Container Platform instance with credentials to create a new application.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Open your Red Hat Developer Hub OpenShift project. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc project &lt;YOUR_DEVELOPER_HUB_PROJECT&gt;</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Run the following commands to create a plug-in registry build in the OpenShift cluster. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc new-build httpd --name=plugin-registry --binary
+$ oc start-build plugin-registry --from-dir=$DYNAMIC_PLUGIN_ROOT_DIR --wait
+$ oc new-app --image-stream=plugin-registry</code></pre> 
+          </div> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">To verify that the plugin-registry was deployed successfully, open the <strong class="ph b">Topology</strong> view in the <strong class="ph b">Developer</strong> perspective on the Red Hat Developer Hub application in the OpenShift Web console.</p> 
+        <ol class="ol"> 
+         <li class="li">Click the plug-in registry to view the log. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rhdh-plugin-registry.png" alt="Developer perspective"><br> <p class="p">(1) Developer hub instance</p> <p class="p">(2) Plug-in registry</p> </li> 
+         <li class="li">Click the terminal tab and login to the container.</li> 
+         <li class="li">In the terminal, run <code class="ph codeph">ls</code> to confirm that the <code class="ph codeph">.tar</code> files are in the plugin registry. <pre class="pre codeblock"><code>ansible-plugin-backstage-rhaap-dynamic-x.y.z.tgz
+ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-x.y.z.tgz</code></pre> <p class="p">The version numbers and file names can differ.</p> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="rhdh-install-plugins-http-registry"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Install the plug-ins from the HTTP registry</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Add the Ansible plug-ins from the HTTP registry to your Red Hat Developer Hub dynamic plug-in configuration.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">For each plug-in, you need the HTTP URL to the <code class="ph codeph">.tgz</code> file in the registry and the SHA-512 integrity hash from the corresponding <code class="ph codeph">.integrity</code> file.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Add the plug-ins to your dynamic plug-ins configuration. Replace <code class="ph codeph"><em class="ph i">&lt;x.y.z&gt;</em></code> with the correct plug-in version. Use the SHA-512 hash from the corresponding <code class="ph codeph">.integrity</code> file for each <code class="ph codeph">integrity</code> value.</span> 
+          <div class="itemgroup info"> 
+           <p class="p"><strong class="ph b">Operator installation</strong></p> 
+           <p class="p">Add the plug-ins to your dynamic plug-ins ConfigMap (for example, <code class="ph codeph">rhaap-dynamic-plugins-config</code>).</p> 
+           <pre class="pre codeblock language-yaml"><code>kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: rhaap-dynamic-plugins-config
+data:
+  dynamic-plugins.yaml: |
+    # ...
+    plugins:
+      - disabled: false
+        package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-dynamic-&lt;x.y.z&gt;.tgz'
+        integrity: &lt;SHA512_value&gt;
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-rhaap:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - disabled: false
+        package: &gt;-
+          http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-&lt;x.y.z&gt;.tgz
+        integrity: &lt;SHA512_value&gt;
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap: null</code></pre> 
+           <p class="p">Reference this ConfigMap in your <code class="ph codeph">Backstage</code> CR under <code class="ph codeph">spec.application.dynamicPluginsConfigMapName</code>.</p> 
+           <p class="p"><strong class="ph b">Helm chart installation</strong></p> 
+           <p class="p">In the OpenShift Container Platform Developer UI, navigate to <strong class="ph b">Helm</strong> &gt; <strong class="ph b">developer-hub</strong> &gt; <strong class="ph b">Actions</strong> &gt; <strong class="ph b">Upgrade</strong> &gt; <strong class="ph b">Yaml view</strong>. Add the plug-ins under the <code class="ph codeph">global.dynamic.plugins</code> section.</p> 
+           <pre class="pre codeblock language-yaml"><code>global:
+  # ...
+    plugins:
+      - disabled: false
+        integrity: &lt;SHA512_value&gt;
+        package: 'http://plugin-registry:8080/ansible-plugin-backstage-rhaap-dynamic-&lt;x.y.z&gt;.tgz'
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-rhaap:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - disabled: false
+        integrity: &lt;SHA512_value&gt;
+        package: &gt;-
+          http://plugin-registry:8080/ansible-plugin-scaffolder-backend-module-backstage-rhaap-dynamic-&lt;x.y.z&gt;.tgz
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap: null</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Apply the changes. For Helm deployments, click <strong class="ph b">Upgrade</strong>. The Developer Hub pods restart and the plug-ins are installed.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <ol class="ol"> 
+         <li class="li">In the OpenShift Container Platform web console, open the pod details for the Red Hat Developer Hub deployment.</li> 
+         <li class="li">Select the <strong class="ph b">Logs</strong> tab and choose the <code class="ph codeph">install-dynamic-plugins</code> container from the drop-down list.</li> 
+         <li class="li">Search the log for the Ansible plug-ins. A successful installation produces log entries similar to: <pre class="pre codeblock language-terminal"><code>=&gt; Successfully installed dynamic plugin http://plugin-registry:8080/ansible-plugin-backstage-rhaap-dynamic-&lt;x.y.z&gt;.tgz</code></pre> </li> 
+        </ol> 
+        <p class="p">After installing the plug-ins from the HTTP registry, continue with the configuration steps.</p> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

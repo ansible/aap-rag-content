@@ -1,0 +1,5 @@
+{
+  "url": "https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/administer-proc_run_jobs_on_execution_nodes#proc-connecting-nodes-through-mesh-ingress",
+  "path": "/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_run_jobs_on_execution_nodes",
+  "title": "Set up mesh ingress for environments that forbid inbound connections"
+}

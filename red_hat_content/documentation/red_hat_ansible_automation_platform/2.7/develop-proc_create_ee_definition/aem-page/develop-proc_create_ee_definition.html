@@ -1,0 +1,557 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="proc-create-ee-definition"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create an execution environment definition using the UI wizard</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">Use the execution environment builder wizard in Ansible automation portal to create a custom execution environment definition by selecting a template, base image, collections, and dependencies.</p> 
+      <section class="section prereq">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Before you begin</h2>
+       </div> 
+       <ul class="ul"> 
+        <li class="li">You have access to Ansible automation portal with the <code class="ph codeph">ansible.execution-environments.view</code> permission granted.</li> 
+        <li class="li">Your AAP administrator has configured and synced content sources.</li> 
+       </ul> 
+      </section> 
+      <section class="section context">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div> 
+       <p class="p">Navigate to <strong class="ph b">Execution Environments &gt; Create</strong> and select a template. The wizard walks you through base image selection, collections, dependencies, and build steps.</p> 
+       <p class="p">AAP administrators manage which templates are available and can control access with RBAC. The following built-in templates are available:</p> 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">Start from scratch</strong> -- minimal starting point for custom definitions (loaded by default).</li> 
+        <li class="li"><strong class="ph b">Networking Automation</strong> -- pre-selected networking collections (included in Helm chart but commented out by default; requires collections to be discoverable from a configured content source).</li> 
+        <li class="li"><strong class="ph b">Cloud Automation</strong> -- pre-selected cloud collections (included in Helm chart but commented out by default; requires collections to be discoverable from a configured content source).</li> 
+       </ul> 
+       <p class="p">Custom templates created by your AAP administrator also appear on this page. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_create_team_templates" title="Create pre-configured EE templates so that your teams start from a known-good baseline without choosing every dependency from scratch.">Create standardized EE templates for teams</a> for details.</p> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">Navigate to <strong class="ph b">Execution Environments &gt; Create</strong>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Select a template.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Choose a base image appropriate for your environment.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">In the collections picker, select the Ansible collections your execution environment requires.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Optional: Add Python requirements and system packages.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Optional: Add custom build steps at specific phases (prepend or append to base, galaxy, builder, or final stages).</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Name the definition and add a descriptive tag.</span> 
+         <div class="itemgroup info"> 
+          <p class="p">The wizard uses <code class="ph codeph">spec.type: execution-environment</code> to tag the definition. This tag is optional but recommended to make definitions searchable and filterable in the catalog.</p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Choose to select <strong class="ph b">Publish to a Git repository</strong> to save definition files to a repository, or leave the checkbox cleared to register in the catalog and download files locally.</span> </li>
+       </ol>
+      </section> 
+      <section class="section result">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Results</h2>
+       </div> 
+       <p class="p">The generated execution environment definition includes:</p> 
+       <ul class="ul"> 
+        <li class="li"><code class="ph codeph">&lt;ee-name&gt;.yml</code> -- the EE definition with all dependencies (collections, Python packages, system packages) declared inline. The file name matches the name you entered in the form.</li> 
+        <li class="li"><code class="ph codeph">ansible.cfg</code> -- galaxy server configuration (auto-generated from configured collection sources).</li> 
+        <li class="li"><code class="ph codeph">&lt;ee-name&gt;-template.yaml</code> -- a reusable template for sharing your configuration.</li> 
+       </ul> 
+      </section> 
+      <section class="section postreq">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">What to do next</h2>
+       </div> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">Collections available in the picker come from configured content sources. If a collection is missing, ask your AAP administrator to verify the content source configuration and sync status.</p> 
+        </div>
+       </div> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-save-ee-definition-git"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Save definition files to a Git repository and build</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Save execution environment definition files to a GitHub or GitLab repository and optionally trigger an automated container image build.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Your AAP administrator has configured GitHub or GitLab OAuth. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder" title="Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.">Configure a GitHub OAuth App for saving definitions</a> or <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_gitlab_ee_builder" title="Configure GitLab content discovery and OAuth so that execution environment builder can scan GitLab groups for Ansible collections and save definition files.">Set up GitLab integration</a>.</li> 
+         <li class="li">For automated builds: your AAP administrator has configured GitHub repository secrets.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">When you select <strong class="ph b">Publish to a Git repository</strong> in the wizard, the definition files are saved to a GitHub or GitLab repository and can optionally trigger an automated container image build.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body">
+          <p class="p">Automated image builds are available for GitHub only in this release. GitLab CI support is planned for a future release.</p>
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">In the final step of the wizard, select <strong class="ph b">Publish to a Git repository</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Authenticate with your Git provider through OAuth when prompted.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the target repository or allow the wizard to create a new one.</span> </li>
+         <li class="li step"> <span class="ph cmd">Optional: Select <strong class="ph b">Build Execution Environment</strong> to trigger an automated image build after saving.</span> </li>
+         <li class="li step"> <span class="ph cmd">Configure the target registry (private automation hub or custom), image name, tag, and TLS settings.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <strong class="ph b">Create</strong>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">The following files are saved to the repository:</p> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">&lt;ee-name&gt;.yml</code> -- EE definition with all dependencies inline. The file name matches the name you entered in the form.</li> 
+         <li class="li"><code class="ph codeph">&lt;ee-name&gt;-template.yaml</code> -- reusable template file that administrators can register in the catalog.</li> 
+         <li class="li"><code class="ph codeph">ansible.cfg</code> -- galaxy server configuration.</li> 
+         <li class="li"><code class="ph codeph">ee-build.yml</code> (GitHub only) -- GitHub Actions workflow for automated builds.</li> 
+        </ul> 
+        <p class="p">After saving, check the build status directly from the GitHub Actions tab on the target repository.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body">
+          <p class="p">If the target repository does not exist, it is created automatically. If it exists, a pull request is created instead.</p>
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-use-custom-registry"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Use a custom registry or self-signed certificates</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Adjust the execution environment build configuration when targeting a private or internal container registry that uses custom URLs or self-signed certificates.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Your AAP administrator has configured templates and internal content sources. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_host_templates_private_repo" title="Copy the EE Builder wizard templates from the public Ansible GitHub repository to a private repository for use in private or air-gapped environments.">Host execution environment wizard templates in a private Git repository</a>.</li> 
+         <li class="li">You have access to an internal container registry.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">In the wizard, select <strong class="ph b">Custom Registry</strong> instead of private automation hub and enter your internal registry URL.</span> </li>
+         <li class="li step"> <span class="ph cmd">Clear the <strong class="ph b">Verify TLS certificates</strong> checkbox if your internal registry uses self-signed certificates.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select a base image from your internal registry instead of the default <code class="ph codeph">registry.redhat.io</code> images.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-download-ee-definition-files"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Download definition files without saving to a repository</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Create an execution environment definition and download the generated files as a <code class="ph codeph">.tar</code> archive instead of saving them to a Git repository.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">In the wizard, clear the <strong class="ph b">Publish to a Git repository</strong> checkbox.</span> </li>
+         <li class="li step"> <span class="ph cmd">Complete the remaining steps and click <strong class="ph b">Create</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">After creation, click <strong class="ph b">Download EE files</strong> to download a <code class="ph codeph">.tar</code> archive containing all generated files.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">The execution environment definition is registered in the catalog. The archive includes <code class="ph codeph">&lt;ee-name&gt;.yml</code> (with all dependencies declared inline), <code class="ph codeph">&lt;ee-name&gt;-template.yaml</code>, <code class="ph codeph">ansible.cfg</code>, and an optional readme.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-import-ee-template"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Import an existing execution environment definition</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Import a previously generated execution environment template to make it available for other users to create definitions with the same defaults.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have the AAP Administrator role.</li> 
+         <li class="li">You have a <code class="ph codeph">&lt;ee-name&gt;-template.yaml</code> file hosted in a Git repository or available as a URL.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body">
+          <p class="p">Importing templates requires AAP administrator access. Only users with the AAP Administrator role can import templates.</p>
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Navigate to <strong class="ph b">Execution Environments &gt; Create</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Open the kebab menu and select <strong class="ph b">Import Template</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Paste the template URL and click <strong class="ph b">Analyze</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <strong class="ph b">Import</strong>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">The imported template appears on the <strong class="ph b">Create</strong> tab. Launch the template to verify the wizard pre-populates the expected collections and configuration.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title6" id="ref-devtools-ee-builder-ui-components"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Execution environment builder custom UI components</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Custom UI components are available for use in software templates to provide specialized form fields for creating and configuring execution environment definitions in Ansible automation portal.</p> 
+       <section class="section"> 
+        <p class="p">To use a component in your template, set the <code class="ph codeph">ui:field</code> property on a parameter:</p> 
+        <pre class="pre codeblock language-yaml"><code>parameters:
+  myField:
+    type: string
+    ui:field: BaseImagePicker</code></pre> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">BaseImagePicker</h3> 
+        <p class="p">Displays a selection of pre-configured base container images for execution environment definitions. Includes an option to specify a custom image.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__1">Property</th> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__2">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__1"><code class="ph codeph">ui:field</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__2"><code class="ph codeph">BaseImagePicker</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__1"><code class="ph codeph">enum</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__2">Array of base image references, plus <code class="ph codeph">custom</code> for a custom image entry.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__1"><code class="ph codeph">enumNames</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__2">Display labels for each base image option.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Example:</strong></p> 
+        <pre class="pre codeblock language-yaml"><code>baseImage:
+  title: Base image
+  type: string
+  ui:field: BaseImagePicker
+  enum:
+    - registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.18
+    - custom
+  enumNames:
+    - Red Hat Ansible Minimal EE - Ansible Core 2.18 (RHEL 9)
+    - Custom Image</code></pre> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">CollectionsPicker</h3> 
+        <p class="p">Provides an interactive interface for selecting Ansible collections to include in an execution environment. Supports searching and adding collections from private automation hub, Galaxy, and SCM repositories. Includes version selection and source management.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__9">Property</th> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__10">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__9"><code class="ph codeph">ui:field</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__10"><code class="ph codeph">CollectionsPicker</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__9"><code class="ph codeph">type</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__10"><code class="ph codeph">array</code> (returns an array of collection objects with <code class="ph codeph">name</code>, <code class="ph codeph">version</code>, and <code class="ph codeph">source</code> fields)</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">PackagesPicker</h3> 
+        <p class="p">Enables adding Python packages or system packages to an execution environment definition. Supports direct entry and bulk addition through comma-separated values.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__15">Property</th> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__16">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__15"><code class="ph codeph">ui:field</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__16"><code class="ph codeph">PackagesPicker</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__15"><code class="ph codeph">type</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__16"><code class="ph codeph">array</code> (returns an array of package name strings)</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">FileUploadPicker</h3> 
+        <p class="p">Provides a file upload interface for importing requirements files, such as <code class="ph codeph">requirements.txt</code> for Python packages or <code class="ph codeph">bindep.txt</code> for system packages. The file content is parsed and merged with manually entered values.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__21">Property</th> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__22">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__21"><code class="ph codeph">ui:field</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__22"><code class="ph codeph">FileUploadPicker</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__21"><code class="ph codeph">type</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__22"><code class="ph codeph">string</code> (returns the file content as a string)</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">EEFileNamePicker</h3> 
+        <p class="p">A text input field for specifying the execution environment definition name. Validates the name against existing EE definitions in the catalog to prevent duplicates and enforces naming conventions.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__27">Property</th> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__28">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__27"><code class="ph codeph">ui:field</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__28"><code class="ph codeph">EEFileNamePicker</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__27"><code class="ph codeph">type</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__28"><code class="ph codeph">string</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">EETagsPicker</h3> 
+        <p class="p">Provides an interface for adding discovery tags to an execution environment definition. Tags help users find and categorize EE definitions in the catalog.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__33">Property</th> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__34">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__33"><code class="ph codeph">ui:field</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__34"><code class="ph codeph">EETagsPicker</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__33"><code class="ph codeph">type</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__34"><code class="ph codeph">array</code> (returns an array of tag strings)</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">MCPServersPicker</h3> 
+        <p class="p">Displays available Model Context Protocol (MCP) servers as selectable cards. Users can select which MCP servers to integrate with their execution environment.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__39">Property</th> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__40">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__39"><code class="ph codeph">ui:field</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__40"><code class="ph codeph">MCPServersPicker</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__39"><code class="ph codeph">type</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__40"><code class="ph codeph">array</code> (returns an array of selected MCP server identifier strings)</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__39"><code class="ph codeph">schema.items.enum</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__40">Array of available MCP server identifiers.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">ScmSelector</h3> 
+        <p class="p">Provides a source control management (SCM) provider selector with built-in authentication. Users select a configured GitHub or GitLab instance, then authenticate through the SCM provider OAuth flow. The component validates credentials and displays connection status.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__47">Property</th> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__48">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__47"><code class="ph codeph">ui:field</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__48"><code class="ph codeph">ScmSelector</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__47"><code class="ph codeph">type</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__48"><code class="ph codeph">string</code> (returns the selected SCM provider identifier)</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__47"><code class="ph codeph">ui:options.providers</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__48">Array of provider configuration objects with <code class="ph codeph">label</code>, <code class="ph codeph">provider</code> (<code class="ph codeph">github</code> or <code class="ph codeph">gitlab</code>), and optional <code class="ph codeph">host</code>.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__47"><code class="ph codeph">ui:options.requestUserCredentials.secretsKey</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__48">Key used to store the authenticated SCM token in template secrets.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">AdditionalBuildStepsPicker</h3> 
+        <p class="p">Provides an interface for specifying custom build steps to include in the execution environment build process. Supports multiple build phases with command entry.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__57">Property</th> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__58">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__57"><code class="ph codeph">ui:field</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__58"><code class="ph codeph">AdditionalBuildStepsPicker</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__57"><code class="ph codeph">type</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__58"><code class="ph codeph">array</code> (returns an array of build step objects with <code class="ph codeph">stepType</code> and <code class="ph codeph">commands</code> fields)</td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Available build step phases:</strong></p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__63">Phase</th> 
+           <th class="entry" id="ref-devtools-ee-builder-ui-components__entry__64">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">prepend_base</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__64">Commands to run before base image dependencies are installed.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">append_base</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__64">Commands to run after base image dependencies are installed.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">prepend_galaxy</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__64">Commands to run before Galaxy collections are installed.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">append_galaxy</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__64">Commands to run after Galaxy collections are installed.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">prepend_builder</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__64">Commands to run before builder dependencies are installed.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">append_builder</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__64">Commands to run after builder dependencies are installed.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">prepend_final</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__64">Commands to run before the final image stage.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">append_final</code></td> 
+           <td class="entry" headers="ref-devtools-ee-builder-ui-components__entry__64">Commands to run after the final image stage.</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

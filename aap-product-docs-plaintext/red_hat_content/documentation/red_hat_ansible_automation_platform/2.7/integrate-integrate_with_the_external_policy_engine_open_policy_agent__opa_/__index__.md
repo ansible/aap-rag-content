@@ -8,8 +8,3 @@ Integrating with OPA helps you to:
 - **Centralize policy management**: Offload policy decisions to your OPA server and manage automation governance rules alongside organizational policies.
 - **Improve compliance and security**: Apply policy rules to automation content at the organization, inventory, or job template level to ensure consistent governance.
 
-## How Ansible Automation Platform supports OPA integration
-
-When you trigger policy enforcement, policies are retrieved from your OPA server. These policies are applied to automation content before jobs run. If a violation is detected, the action stops and you receive information about the specific policy violation.
-
-Associate policies with organizations, inventories, or job templates to control where policy enforcement occurs.

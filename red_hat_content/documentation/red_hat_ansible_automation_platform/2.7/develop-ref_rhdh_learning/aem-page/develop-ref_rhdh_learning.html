@@ -1,0 +1,125 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="rhdh-learning"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Access learning paths, labs, and collections</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">To learn more about getting started with automation, click <strong class="ph b">Learn</strong> from the <strong class="ph b">Overview</strong> page of the plug-in dashboard. The <strong class="ph b">Learn</strong> page provides the following options for learning:</p> 
+      <section class="section"> 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">Learning Paths</strong> lists a curated selection of learning tools hosted on developers.redhat.com that guide you through the foundations of working with Ansible, the Ansible VS Code extension, and using YAML. <p class="p">You can select other Ansible learning paths from the <strong class="ph b">Useful links</strong> section.</p></li> 
+        <li class="li"><strong class="ph b">Labs</strong> are self-led labs that are designed to give you hands-on experience in writing Ansible content and using Ansible development tools.</li> 
+       </ul> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="rhdh-discover-collections"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Discover existing collections</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">From the <strong class="ph b">Overview</strong> page in the Ansible plug-ins dashboard on Red Hat Developer Hub, click <strong class="ph b">Discover Existing Collections</strong>.</p> 
+       <section class="section"> 
+        <p class="p">The links in this pane provide access to the source of reusable automation content collections that you configured during plug-in installation.</p> 
+        <p class="p">If you configured private automation hub when installing the plug-in, you can click <strong class="ph b">Go to Automation Hub</strong> to view the collections and execution environments that your enterprise has curated.</p> 
+        <p class="p">If you did not configure a private automation hub URL when installing the plug-in, the <strong class="ph b">Discover existing collection</strong> pane provides a link to Red Hat automation hub on console.redhat.com. You can explore certified and validated Ansible content collections on this site.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="rhdh-create"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create a project in the Red Hat Developer Hub UI</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Create a new Ansible Playbook project in the Red Hat Developer Hub by logging in, navigating to the Ansible section, and selecting the project creation template. You must have the correct access (RBAC) assigned by your administrator to view the templates.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have the correct access (RBAC) to view the templates in Red Hat Developer Hub. Ask your administrator to assign access to you if necessary.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to your Red Hat Developer Hub UI.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the Ansible <code class="ph codeph">A</code> icon in the Red Hat Developer Hub navigation panel.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to the <strong class="ph b">Overview</strong> page.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Create</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Create Ansible Git Project</strong>. The <strong class="ph b">Available Templates</strong> page opens.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Create Ansible Playbook project</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create Ansible Playbook Project</strong> page, enter information for your new project in the form. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">You can see sample values for this form in the Example project.</p> 
+           <table class="table">
+            <caption></caption>
+            <colgroup>
+             <col style="width:50%">
+             <col style="width:50%">
+            </colgroup>
+            <thead class="thead"> 
+             <tr class="row"> 
+              <th class="entry" id="rhdh-create__entry__1">Field</th> 
+              <th class="entry" id="rhdh-create__entry__2">Description</th> 
+             </tr> 
+            </thead>
+            <tbody class="tbody"> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-create__entry__1"> <p class="p">Source code repository organization name or username</p> </td> 
+              <td class="entry" headers="rhdh-create__entry__2"> <p class="p">The name of your source code repository username or organization name</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-create__entry__1"> <p class="p">Playbook repository name </p> </td> 
+              <td class="entry" headers="rhdh-create__entry__2"> <p class="p">The name of your new Git repository</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-create__entry__1"> <p class="p">Playbook description (Optional)</p> </td> 
+              <td class="entry" headers="rhdh-create__entry__2"> <p class="p">A description of the new playbook project</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-create__entry__1"> <p class="p">Playbook project’s collection namespace</p> </td> 
+              <td class="entry" headers="rhdh-create__entry__2"> <p class="p">The new playbook Git project creates an example collection folder for you. Enter a value for the collection namespace.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-create__entry__1"> <p class="p">Playbook project’s collection name</p> </td> 
+              <td class="entry" headers="rhdh-create__entry__2"> <p class="p">The name of the collection</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-create__entry__1"> <p class="p">Catalog Owner Name</p> </td> 
+              <td class="entry" headers="rhdh-create__entry__2"> <p class="p">The name of the Developer Hub catalog item owner. This is a Red Hat Developer Hub field.</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-create__entry__1"> <p class="p">Source code repository organization name or username</p> </td> 
+              <td class="entry" headers="rhdh-create__entry__2"> <p class="p">The name of your source code repository username or organization name</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-create__entry__1"> <p class="p">Playbook repository name</p> </td> 
+              <td class="entry" headers="rhdh-create__entry__2"> <p class="p">The name of your new Git repository</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-create__entry__1"> <p class="p">Playbook description (Optional)</p> </td> 
+              <td class="entry" headers="rhdh-create__entry__2"> <p class="p">A description of the new playbook project</p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-create__entry__1"> <p class="p">System (Optional)</p> </td> 
+              <td class="entry" headers="rhdh-create__entry__2"> <p class="p">This is a Red Hat Developer Hub field</p> </td> 
+             </tr> 
+            </tbody>
+           </table> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Collection namespaces must follow Python module naming conventions. Collections must have short, all lowercase names. You can use underscores in the collection name if it improves readability.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Review</strong>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

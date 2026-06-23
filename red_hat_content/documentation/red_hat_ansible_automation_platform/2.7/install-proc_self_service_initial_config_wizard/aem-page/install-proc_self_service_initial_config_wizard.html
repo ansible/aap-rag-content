@@ -1,0 +1,112 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-initial-config-wizard">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure the appliance at first boot</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Provide initial configuration for the Ansible automation portal appliance so that portal services can start and connect to Ansible Automation Platform.</p> 
+     <p class="p">You must supply SSH keys and portal settings through one of the supported configuration methods during or before deployment.</p> 
+     <section class="section" id="self-service-initial-config-wizard__prerequisites">
+      <h2 class="title sectiontitle">Prerequisites</h2> 
+      <ul class="ul"> 
+       <li class="li">The Ansible Automation Platform OAuth application Client ID and Client Secret.</li> 
+       <li class="li">The Ansible Automation Platform admin token.</li> 
+       <li class="li">An SSH public key for administrative access.</li> 
+       <li class="li">The URL of your Ansible Automation Platform instance.</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="self-service-initial-config-wizard__using-cloud-init">
+      <h2 class="title sectiontitle">Using cloud-init user-data</h2> 
+      <p class="p">Use this method for Red Hat OpenShift Virtualization, cloud, and KVM/QEMU deployments.</p> 
+      <ol class="ol"> 
+       <li class="li">Create a cloud-init user-data file: <pre class="pre codeblock language-yaml"><code>#cloud-config
+users:
+  - name: admin
+    groups: sudo
+    ssh_authorized_keys:
+      - &lt;your_ssh_public_key&gt;
+
+aap:
+  host_url: https://&lt;aap_host&gt;
+  token: &lt;aap_admin_token&gt;
+  oauth:
+    client_id: &lt;oauth_client_id&gt;
+    client_secret: &lt;oauth_client_secret&gt;
+  check_ssl: true
+
+database:
+  type: builtin</code></pre> <p class="p">Replace the placeholder values with your Ansible Automation Platform credentials and SSH public key.</p> <p class="p">The appliance parses the custom <code class="ph codeph">aap</code> and <code class="ph codeph">database</code> fields directly from the cloud-init user-data at first boot.</p> <p class="p">The following additional fields are available for cloud-init configuration:</p> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">network.base_url</code> -- Set the user-accessible URL (auto-detected from the VM IP address if not specified). Set this when users access Ansible automation portal through a hostname, route, or load balancer.</li> 
+         <li class="li"><code class="ph codeph">network.port</code> -- Set the HTTPS port (default: 443).</li> 
+         <li class="li"><code class="ph codeph">security.backend_secret</code> -- Set the backend authentication secret (<code class="ph codeph">auto</code> generates a random value).</li> 
+         <li class="li"><code class="ph codeph">database.builtin.password</code> and <code class="ph codeph">database.builtin.admin_password</code> -- Set built-in database passwords (<code class="ph codeph">auto</code> generates random values).</li> 
+         <li class="li"><code class="ph codeph">database.external.*</code> -- Configure an external PostgreSQL database (<code class="ph codeph">host</code>, <code class="ph codeph">port</code>, <code class="ph codeph">name</code>, <code class="ph codeph">user</code>, <code class="ph codeph">password</code>, <code class="ph codeph">ssl</code>). The database user requires the <code class="ph codeph">CREATEDB</code> privilege.</li> 
+         <li class="li"><code class="ph codeph">integrations.github.url</code>, <code class="ph codeph">integrations.github.token</code> -- Configure GitHub integration (URL defaults to <code class="ph codeph">github.com</code>).</li> 
+         <li class="li"><code class="ph codeph">integrations.gitlab.url</code>, <code class="ph codeph">integrations.gitlab.token</code> -- Configure GitLab integration (URL defaults to <code class="ph codeph">gitlab.com</code>).</li> 
+         <li class="li"><code class="ph codeph">backup.enabled</code>, <code class="ph codeph">backup.schedule</code>, <code class="ph codeph">backup.retention_days</code> -- Configure automated backups.</li> 
+        </ul> </li> 
+       <li class="li">Provide the user-data file during deployment: 
+        <ul class="ul"> 
+         <li class="li">For Red Hat OpenShift Virtualization, add a <code class="ph codeph">cloudInitNoCloud</code> volume to the <code class="ph codeph">VirtualMachine</code> manifest.</li> 
+         <li class="li">For cloud providers (AWS, GCP, Azure), pass the user-data through the instance launch configuration.</li> 
+         <li class="li">For local KVM/QEMU, create a cloud-init ISO or use the <code class="ph codeph">-smbios</code> option to pass user-data.</li> 
+        </ul> </li> 
+      </ol> 
+     </section> 
+     <section class="section" id="self-service-initial-config-wizard__using-vmware-guestinfo">
+      <h2 class="title sectiontitle">Using VMware guestinfo properties</h2> 
+      <p class="p">Use this method for VMware vSphere deployments.</p> 
+      <ol class="ol"> 
+       <li class="li">Set the following <code class="ph codeph">guestinfo</code> properties on the virtual machine in vSphere: <pre class="pre codeblock language-terminal"><code>guestinfo.portal.ssh_public_key = "&lt;your_ssh_public_key&gt;"
+guestinfo.portal.config = "&lt;base64_encoded_config_yaml&gt;"</code></pre> <p class="p">Where <code class="ph codeph">&lt;base64_encoded_config_yaml&gt;</code> is the Base64-encoded content of your portal configuration YAML.</p> </li> 
+       <li class="li">Power on the virtual machine. The appliance detects and applies the <code class="ph codeph">guestinfo</code> properties on first boot.</li> 
+      </ol> 
+     </section> 
+     <section class="section" id="self-service-initial-config-wizard__using-pre-seeded-config">
+      <h2 class="title sectiontitle">Using a pre-seeded configuration file</h2> 
+      <p class="p">Use this method for automated deployments with Ansible or Terraform.</p> 
+      <ol class="ol"> 
+       <li class="li">Place a YAML configuration file at <code class="ph codeph">/etc/portal/config.yaml</code> on the appliance disk image before first boot: <pre class="pre codeblock language-yaml"><code>aap:
+  host_url: https://&lt;aap_host&gt;
+  token: &lt;aap_admin_token&gt;
+  oauth:
+    client_id: &lt;oauth_client_id&gt;
+    client_secret: &lt;oauth_client_secret&gt;
+database:
+  type: builtin</code></pre> </li> 
+       <li class="li">Boot the appliance. The first-boot service detects and applies the configuration automatically.</li> 
+      </ol> 
+     </section> 
+     <section class="section" id="self-service-initial-config-wizard__configuring-after-deployment">
+      <h2 class="title sectiontitle">Configure after deployment</h2> 
+      <p class="p">If you deployed the appliance without providing configuration, portal services do not start. You can configure the appliance after deployment by editing the configuration files directly.</p> 
+      <ol class="ol"> 
+       <li class="li">SSH into the appliance using the key you provided through cloud-init or another method.</li> 
+       <li class="li">Edit the application configuration file: <pre class="pre codeblock language-terminal"><code>$ sudo vi /etc/portal/configs/app-config/app-config.production.yaml</code></pre> </li> 
+       <li class="li">Restart the portal service: <pre class="pre codeblock language-terminal"><code>$ sudo systemctl restart portal</code></pre> </li> 
+      </ol> 
+     </section> 
+     <section class="section" id="self-service-initial-config-wizard__verification">
+      <h2 class="title sectiontitle">Verification</h2> 
+      <ul class="ul"> 
+       <li class="li">Verify that portal services are running: <pre class="pre codeblock language-terminal"><code>$ sudo ansible-portal status</code></pre> </li> 
+       <li class="li">Access the portal URL from your browser.</li> 
+       <li class="li">Log in using your Ansible Automation Platform credentials.</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_portal_cli_commands" title="The Ansible automation portal appliance provides the ansible-portal management CLI for administration and troubleshooting.">Portal CLI commands reference</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="AnsibleAutomationPlatformBackupRestore">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">AnsibleAutomationPlatformBackup and AnsibleAutomationPlatformRestore [aap.ansible.com/v1alpha1]</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The <code class="ph codeph">AnsibleAutomationPlatformBackup</code> and <code class="ph codeph">AnsibleAutomationPlatformRestore</code> custom resources manage backup and restore operations for your Ansible Automation Platform deployment on OpenShift Container Platform. You can configure global settings or override them per component.</p> 
+     <section class="section" id="AnsibleAutomationPlatformBackupRestore__backup-description">
+      <h2 class="title sectiontitle">AnsibleAutomationPlatformBackup</h2> 
+      <table class="table" id="AnsibleAutomationPlatformBackupRestore__backup-desc-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:33.33333333333333%">
+        <col style="width:66.66666666666666%">
+       </colgroup>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry"><strong class="ph b">API Group</strong></td> 
+         <td class="entry"><code class="ph codeph">aap.ansible.com</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry"><strong class="ph b">API Version</strong></td> 
+         <td class="entry"><code class="ph codeph">v1alpha1</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry"><strong class="ph b">Kind</strong></td> 
+         <td class="entry"><code class="ph codeph">AnsibleAutomationPlatformBackup</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry"><strong class="ph b">Scope</strong></td> 
+         <td class="entry">Namespaced</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatformBackupRestore__backup-spec">
+      <h2 class="title sectiontitle">AnsibleAutomationPlatformBackup spec</h2> 
+      <p class="p">The <code class="ph codeph">spec</code> fields for the <code class="ph codeph">AnsibleAutomationPlatformBackup</code> custom resource.</p> 
+      <table class="table" id="AnsibleAutomationPlatformBackupRestore__backup-spec-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__1">Field</th> 
+         <th class="entry" id="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__2">Type</th> 
+         <th class="entry" id="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__3">Description</th> 
+         <th class="entry" id="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">deployment_name</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__3">Name of the<code class="ph codeph">AnsibleAutomationPlatform</code> instance to back up. Required.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">no_log</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__2">Boolean</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__3">Suppress logging of sensitive data during the backup process.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__4"><code class="ph codeph">true</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">backup_pvc</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__3">Name of the persistent volume claim (PVC) to use for backup storage. This value applies globally to all components unless overridden.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">backup_storage_class</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__3">Kubernetes storage class for the backup PVC. Applies globally to the platform gateway. Components that do not specify their own<code class="ph codeph">backup_storage_class</code> inherit this value.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">backup_storage_requirements</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__3">Storage size for the backup PVC, for example<code class="ph codeph">15Gi</code>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">hub</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__3"> <p class="p">Override backup settings for the automation hub component. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatformbackup_and_ansibleautomationplatformrestore__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatformBackupRestore__backup-component-overrides">Component backup overrides</a>.</p> </td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">controller</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__3">Override backup settings for the automation controller component. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatformbackup_and_ansibleautomationplatformrestore__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatformBackupRestore__backup-component-overrides">Component backup overrides</a>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__1"><code class="ph codeph">eda</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__2">Object</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__3">Override backup settings for the Event-Driven Ansible component. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/reference-ansibleautomationplatformbackup_and_ansibleautomationplatformrestore__aap_ansible_com_v1alpha1_#AnsibleAutomationPlatformBackupRestore__backup-component-overrides">Component backup overrides</a>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-spec-table__entry__4">-</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatformBackupRestore__backup-component-overrides">
+      <h2 class="title sectiontitle">Component backup overrides</h2> 
+      <p class="p">Each component section (<code class="ph codeph">hub</code>, <code class="ph codeph">controller</code>, <code class="ph codeph">eda</code>) supports the following fields to override global backup settings.</p> 
+      <table class="table" id="AnsibleAutomationPlatformBackupRestore__backup-component-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__1">Field</th> 
+         <th class="entry" id="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__2">Type</th> 
+         <th class="entry" id="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__3">Description</th> 
+         <th class="entry" id="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__1"><code class="ph codeph">backup_pvc</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__3">Name of the PVC for this component's backup. Overrides the global<code class="ph codeph">backup_pvc</code>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__4">Inherited from global</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__1"><code class="ph codeph">backup_storage_requirements</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__3">Storage size for this component's backup PVC, for example<code class="ph codeph">25Gi</code>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__4">Inherited from global</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__1"><code class="ph codeph">backup_storage_class</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__3">Storage class for this component's backup PVC. Overrides the global<code class="ph codeph">backup_storage_class</code>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__4">Inherited from global</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__1"><code class="ph codeph">create_backup_pvc</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__2">Boolean</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__3">Set to <code class="ph codeph">true</code> to have the operator create the PVC automatically.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__4"><code class="ph codeph">false</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__1"><code class="ph codeph">no_log</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__2">Boolean</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__3">Suppress logging of sensitive data for this component. Overrides the global <code class="ph codeph">no_log</code>.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__backup-component-table__entry__4">Inherited from global</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatformBackupRestore__backup-example">
+      <h2 class="title sectiontitle">Example backup custom resource</h2> 
+      <p class="p">The following example shows a backup custom resource with per-component overrides for PVC names, storage sizes, and storage classes:</p> 
+      <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatformBackup
+metadata:
+  name: custom-backup
+spec:
+  deployment_name: myaap
+  no_log: false
+  backup_storage_class: rook-cephfs
+  hub:
+    backup_pvc: custom-hub-backup-pvc
+    backup_storage_requirements: 25Gi
+    backup_storage_class: rook-cephfs
+    create_backup_pvc: true
+    no_log: false
+  controller:
+    backup_pvc: custom-controller-backup-pvc
+    backup_storage_requirements: 15Gi
+    backup_storage_class: rook-block
+    create_backup_pvc: true
+    no_log: false
+  eda:
+    backup_pvc: custom-eda-backup-pvc
+    backup_storage_requirements: 7Gi
+    backup_storage_class: rook-block
+    create_backup_pvc: true
+    no_log: false</code></pre> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatformBackupRestore__restore-description">
+      <h2 class="title sectiontitle">AnsibleAutomationPlatformRestore</h2> 
+      <table class="table" id="AnsibleAutomationPlatformBackupRestore__restore-desc-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:33.33333333333333%">
+        <col style="width:66.66666666666666%">
+       </colgroup>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry"><strong class="ph b">API Group</strong></td> 
+         <td class="entry"><code class="ph codeph">aap.ansible.com</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry"><strong class="ph b">API Version</strong></td> 
+         <td class="entry"><code class="ph codeph">v1alpha1</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry"><strong class="ph b">Kind</strong></td> 
+         <td class="entry"><code class="ph codeph">AnsibleAutomationPlatformRestore</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry"><strong class="ph b">Scope</strong></td> 
+         <td class="entry">Namespaced</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatformBackupRestore__restore-spec">
+      <h2 class="title sectiontitle">AnsibleAutomationPlatformRestore spec</h2> 
+      <p class="p">The <code class="ph codeph">spec</code> fields for the <code class="ph codeph">AnsibleAutomationPlatformRestore</code> custom resource.</p> 
+      <table class="table" id="AnsibleAutomationPlatformBackupRestore__restore-spec-table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:42.857142857142854%">
+        <col style="width:14.285714285714285%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__1">Field</th> 
+         <th class="entry" id="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__2">Type</th> 
+         <th class="entry" id="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__3">Description</th> 
+         <th class="entry" id="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__1"><code class="ph codeph">deployment_name</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__3">Name of the<code class="ph codeph">AnsibleAutomationPlatform</code> instance to restore. Required.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__1"><code class="ph codeph">backup_name</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__2">String</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__3">Name of the<code class="ph codeph">AnsibleAutomationPlatformBackup</code> resource to restore from. Required.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__4">-</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__1"><code class="ph codeph">no_log</code></td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__2">Boolean</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__3">Suppress logging of sensitive data during the restore process.</td> 
+         <td class="entry" headers="AnsibleAutomationPlatformBackupRestore__restore-spec-table__entry__4"><code class="ph codeph">true</code></td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="AnsibleAutomationPlatformBackupRestore__restore-example">
+      <h2 class="title sectiontitle">Example restore custom resource</h2> 
+      <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatformRestore
+metadata:
+  name: restore-myaap
+spec:
+  deployment_name: myaap
+  backup_name: custom-backup</code></pre> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

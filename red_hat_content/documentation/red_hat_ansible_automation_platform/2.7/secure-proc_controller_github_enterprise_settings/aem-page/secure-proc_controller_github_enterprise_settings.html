@@ -1,0 +1,64 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-controller-github-enterprise-settings">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure GitHub enterprise authentication</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">To set up social authentication for a GitHub enterprise, you must obtain a GitHub Enterprise URL, an API URL, OAuth2 key and secret for a web application.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">To obtain the URLs, see the <a class="xref" href="https://docs.github.com/en/enterprise-server@3.1/rest/reference/enterprise-admin" target="_blank" rel="external noopener">GitHub Enterprise administration documentation</a>.</p> 
+      <p class="p">The OAuth2 key (Client ID) and secret (Client Secret) are used to supply the required fields in the UI. To register the application, you must supply it with your webpage URL, which is the <strong class="ph b">Callback URL</strong> shown in the Authenticator details for your authenticator configuration. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_managing_authentication#gw-display-auth-details" title="After you locate the authenticator you want to review, you can display the configuration details:">Displaying authenticator details</a> for instructions on accessing this information.</p> 
+      <p class="p">Each key and secret must belong to a unique application and cannot be shared or reused between different authentication backends. The OAuth2 key (Client ID) and secret (Client Secret) are used to supply the required fields in the UI.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication Methods</span></span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create authentication</span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Enter a <strong class="ph b">Name</strong> for this authentication configuration.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">GitHub enterprise</strong> from the <strong class="ph b">Authentication type</strong> list. The <strong class="ph b">Authentication details</strong> section automatically updates to show the fields relevant to the selected authentication type.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">When the application is registered, GitHub displays the <strong class="ph b">Client ID</strong> and <strong class="ph b">Client Secret</strong>: </span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep"> <span class="ph cmd">Copy and paste the GitHub Client ID into the GitHub OAuth2 Key field.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Copy and paste the GitHub Client Secret into the GitHub OAuth2 Secret field.</span> </li> 
+        </ol> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Base URL</strong> field, enter the hostname of the GitHub Enterprise instance, for example, <code class="ph codeph"><a class="xref" href="https://github.example.com" target="_blank" rel="external noopener">https://github.example.com</a></code>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Github OAuth2 Enterprise API URL</strong> field, enter the API URL of the GitHub Enterprise instance, for example, <code class="ph codeph"><a class="xref" href="https://github.example.com/api/v3" target="_blank" rel="external noopener">https://github.example.com/api/v3</a></code>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Optional: Enter any <strong class="ph b">Additional Authenticator Fields</strong> that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. </span> 
+        <div class="itemgroup info"> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">To automatically create organizations, users, and teams upon successful login, select <strong class="ph b">Create objects</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">To enable this authentication method upon creation, select <strong class="ph b">Enabled</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">To remove a user for any groups they were previously added to when they authenticate from this source, select <strong class="ph b">Remove users</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create Authentication Method</span>.</span> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">To verify that the authentication is configured correctly, log out of Ansible Automation Platform and check that the login screen displays the logo of your authentication chosen method to enable logging in with those credentials.</p> 
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p">To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong, continue to <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-mapping" title="To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or what groups they belong to, you can configure authenticator maps.">Mapping</a>.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

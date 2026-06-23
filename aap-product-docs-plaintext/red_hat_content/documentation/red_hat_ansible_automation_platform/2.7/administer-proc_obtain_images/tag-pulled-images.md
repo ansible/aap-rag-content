@@ -1,0 +1,28 @@
+# Pull execution environments for use in automation hub
+## Tag execution environments
+
+After you pull execution environments from a registry, tag them for use in your private automation hub remote registry.
+
+### Before you begin
+
+- You have pulled an execution environment from an external registry.
+- You have the FQDN or IP address of the automation hub instance.
+
+### Procedure
+
+Tag a local execution environment with the automation hub container repository:
+
+```
+$ podman tag registry.redhat.io/<ee_name>:<tag> <automation_hub_hostname>/<ee_name>
+```
+
+### Results
+
+1. List the images in local storage:
+
+```
+$ podman images
+```
+
+2. Verify that the execution environment you tagged with your automation hub information is contained in the list.
+

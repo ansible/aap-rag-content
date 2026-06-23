@@ -1,0 +1,109 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="rhdh-ocp-configure-optional"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Optional configuration</h1> 
+     <p class="shortdesc">Enable optional integrations to enhance the user experience and functionality of the Ansible plug-ins.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="rhdh-configure-devspaces"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure OpenShift Dev Spaces</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">When OpenShift Dev Spaces is configured for the Ansible plug-ins, users can click a link from the catalog item view in Red Hat Developer Hub and edit their provisioned Ansible Git projects using Dev Spaces.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have a Dev Spaces installation. For more details, see <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_openshift_dev_spaces/3.14/html-single/administration_guide/installing-devspaces" target="_blank" rel="external noopener">Installing Dev Spaces</a>.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">OpenShift Dev Spaces is a separate product and it is optional. The plug-ins will function without it.</p> 
+          <p class="p">It is a separate Red Hat product and is not included in the Ansible Automation Platform or Red Hat Developer Hub subscription.</p> 
+         </div>
+        </div> 
+        <p class="p">If the OpenShift Dev Spaces link is not configured in the Ansible plug-ins, the <strong class="ph b">Go to OpenShift Dev Spaces dashboard</strong> link in the <strong class="ph b">DEVELOP</strong> section of the Ansible plug-ins landing page redirects users to the <a class="xref" href="https://www.redhat.com/en/technologies/management/ansible/development-tools" target="_blank" rel="external noopener">Ansible development tools home page</a>.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Edit your custom Red Hat Developer Hub config map, for example <code class="ph codeph">app-config-rhdh</code>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the following code to your Red Hat Developer Hub <code class="ph codeph">app-config-rhdh.yaml</code> file. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>data:
+  app-config-rhdh.yaml: |-
+    ansible:
+      devSpaces:
+        baseUrl: &gt;-
+          https://&lt;Your OpenShift Dev Spaces URL&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Replace <code class="ph codeph">&lt;Your OpenShft Dev Spaces URL&gt;</code> with your OpenShift Dev Spaces URL.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the OpenShift Developer UI, select the <code class="ph codeph">Red Hat Developer Hub</code> pod.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Open <strong class="ph b">Actions</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Restart rollout</strong>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="rhdh-configure-pah-url"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure the private automation hub URL</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Private automation hub provides a centralized, on-premise repository for certified Ansible collections, execution environments and any additional, vetted content provided by your organization.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have a private automation hub instance. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_managing_collections_hub" title="As a content creator, you can use namespaces in automation hub to curate and manage collections.">Manage your automation content in private automation hub</a></li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">If the private automation hub URL is not configured in the Ansible plug-ins, users are redirected to the <a class="xref" href="https://console.redhat.com/ansible/automation-hub" target="_blank" rel="external noopener">Red Hat Hybrid Cloud Console automation hub</a>.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The private automation hub configuration is optional but recommended. The Ansible plug-ins will function without it.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Edit your custom Red Hat Developer Hub config map, for example <code class="ph codeph">app-config-rhdh</code>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the following code to your Red Hat Developer Hub <code class="ph codeph">app-config-rhdh.yaml</code> file. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>data:
+  app-config-rhdh.yaml: |-
+    ansible:
+    ...
+      automationHub:
+        baseUrl: '&lt;https://MyOwnPAHUrl&gt;'
+    ...</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Replace <code class="ph codeph">&lt;https://MyOwnPAHUrl/&gt;</code> with your private automation hub URL.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the OpenShift Developer UI, select the <code class="ph codeph">Red Hat Developer Hub</code> pod.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Open <strong class="ph b">Actions</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Restart rollout</strong>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-inventory-sync-jobs"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Sync inventory data with external sources</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Inventory synchronization jobs update automation controller data by pulling the latest information from configured sources. This ensures your inventory reflects the current state of the managed infrastructure.</p> 
+      <p class="p">Inventory sync jobs can be scheduled to run at regular intervals or triggered manually by users. These jobs gather data such as host details, group memberships, and variables from various sources such as cloud providers, dynamic inventory scripts, or static files.</p> 
+      <p class="p">When an inventory synchronization is executed, the results display in the <strong class="ph b">Output</strong> tab.</p> 
+      <p class="p">If used, the Ansible CLI displays the same information. This can be useful for debugging. The <code class="ph codeph">ANSIBLE_DISPLAY_ARGS_TO_STDOUT</code> parameter is set to <code class="ph codeph">False</code> for all playbook runs. This parameter matches Ansible’s default behavior and does not display task arguments in task headers in the Job <strong class="ph b">Details</strong> interface to avoid leaking certain sensitive module parameters to <code class="ph codeph">stdout</code>. To restore the earlier behavior, set <code class="ph codeph">ANSIBLE_DISPLAY_ARGS_TO_STDOUT</code> to <code class="ph codeph">True</code> through the <code class="ph codeph">AWX_TASK_ENV</code> configuration setting.</p> 
+      <p class="p">You can <span class="ph uicontrol button">Relaunch job</span>, <span class="ph uicontrol button">Cancel job</span>, download <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/download.png" width="15" alt="Download"> the job output, or delete <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/delete-button.png" width="15" alt="Delete"> the job.</p> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">You can perform an inventory update while a related job is running. In cases where you have a large project (around 10 GB), disk space on <code class="ph codeph">/tmp</code> can be an issue.</p> 
+       </div> 
+      </div> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relref"> <strong>Related reference</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-ref_controller_constructed_inventories#ref-controller-constructed-inventories" title="You can create a new inventory (called a constructed inventory) from a list of input inventories.">Create dynamic groups with constructed inventories</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="controller-inventory-sync-details"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Inventory sync details</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Access the <strong class="ph b">Details</strong> tab to view details about the job execution:</p> 
+       <section class="section"> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/sync.png" alt="Show job details for inventory sync"> 
+        <br> 
+        <p class="p">You can view the following details for an executed job:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Status</strong>: It can be any of the following: 
+          <ul class="ul"> 
+           <li class="li"><strong class="ph b">Pending</strong>: The inventory sync has been created, but not queued or started yet. Any job, not just inventory source syncs, stays in pending until it is ready to be run by the system. Reasons for inventory source syncs not being ready include: 
+            <ul class="ul"> 
+             <li class="li">Dependencies that are currently running (all dependencies must be completed before the next step can run).</li> 
+             <li class="li">Insufficient capacity to run in the locations it is configured for.</li> 
+            </ul></li> 
+           <li class="li"><strong class="ph b">Waiting</strong>: The inventory sync is in the queue waiting to be executed.</li> 
+           <li class="li"><strong class="ph b">Running</strong>: The inventory sync is currently in progress.</li> 
+           <li class="li"><strong class="ph b">Successful</strong>: The inventory sync job succeeded.</li> 
+           <li class="li"><strong class="ph b">Failed</strong>: The inventory sync job failed.</li> 
+          </ul></li> 
+         <li class="li"><strong class="ph b">Inventory</strong>: The name of the associated inventory group.</li> 
+         <li class="li"><strong class="ph b">Source</strong>: The type of cloud inventory.</li> 
+         <li class="li"><strong class="ph b">Inventory Source Project</strong>: The project used as the source of this inventory sync job.</li> 
+         <li class="li"><strong class="ph b">Execution Environment</strong>: The execution environment used.</li> 
+         <li class="li"><strong class="ph b">Execution node</strong>: The node used to run the job.</li> 
+         <li class="li"><strong class="ph b">Instance Group</strong>: The name of the instance group used with this job (automation controller is the default instance group).</li> 
+        </ul> 
+        <p class="p">Selecting these items enables you to view the corresponding job templates, projects, and other objects.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="controller-scm-inventory-jobs"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Sync inventory data with a source control management system</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">When you synchronize an inventory source that is configured to use a source control management (SCM) system, such as Git, automation controller creates and runs an SCM inventory job. This job pulls the latest inventory data from the SCM repository and updates the inventory in automation controller.</p> 
+       <p class="p">SCM inventory jobs function similarly to standard inventory source update jobs, but they specifically handle the interaction with the SCM system. These jobs ensure that the inventory data in automation controller remains up-to-date with the latest changes made in the SCM repository.</p> 
+       <p class="p">When an inventory sourced from an SCM, for example git, is executed, the results are displayed in the <strong class="ph b">Output</strong> tab. If used, the Ansible CLI displays the same information. This can be useful for debugging.</p> 
+       <p class="p">Use the navigation menu to <span class="ph uicontrol button">Relaunch job</span>, <span class="ph uicontrol button">Cancel job</span>, download <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/download.png" width="15" alt="Download"> the job output, or delete <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/delete-button.png" width="15" alt="Delete"> the job.</p> 
+      </div> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title4" id="controller-scm-inventory-details"> 
+       <h3 class="title topictitle3" id="ariaid-title4">SCM inventory details</h3> 
+       <div class="body refbody"> 
+        <p class="shortdesc">To view details about the job execution and its associated project, select the <strong class="ph b">Details</strong> tab.</p> 
+        <section class="section"> 
+         <p class="p">You can view the following details for an executed job:</p> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Status</strong>: It can be any of the following: 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Pending</strong>: The SCM job has been created, but not queued or started yet. Any job, not just SCM jobs, stay in pending until it is ready to be run by the system. Reasons for SCM jobs not being ready include dependencies that are currently running (all dependencies must be completed before the next step can run), or there is not enough capacity to run in the locations it is configured to.</li> 
+            <li class="li"><strong class="ph b">Waiting</strong>: The SCM job is in the queue waiting to be executed.</li> 
+            <li class="li"><strong class="ph b">Running</strong>: The SCM job is currently in progress.</li> 
+            <li class="li"><strong class="ph b">Successful</strong>: The last SCM job succeeded.</li> 
+            <li class="li"><strong class="ph b">Failed</strong>: The last SCM job failed.</li> 
+           </ul></li> 
+          <li class="li"><strong class="ph b">Type</strong>: SCM jobs display Source Control Update.</li> 
+          <li class="li"><strong class="ph b">Project</strong>: The name of the project.</li> 
+          <li class="li"><strong class="ph b">Status</strong>: Indicates whether the associated project was successfully updated.</li> 
+          <li class="li"><strong class="ph b">Revision</strong>: Indicates the revision number of the sourced project that was used in this job.</li> 
+          <li class="li"><strong class="ph b">Execution environment</strong>: Specifies the execution environment used to run this job.</li> 
+          <li class="li"><strong class="ph b">Execution node</strong>: Indicates the node on which the job ran.</li> 
+          <li class="li"><strong class="ph b">Instance group</strong>: Indicates the instance group on which the job ran, if specified.</li> 
+          <li class="li"><strong class="ph b">Job tags</strong>: Tags show the various job operations executed.</li> 
+         </ul> 
+         <p class="p">Select these items to view the corresponding job templates, projects, and other objects.</p> 
+        </section> 
+       </div> 
+      </article> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

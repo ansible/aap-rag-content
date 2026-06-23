@@ -1,0 +1,157 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="aap-backup-recovery"> 
+     <h1 class="title topictitle1" id="ariaid-title1">About backup and recovery</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Red Hat recommends backing up deployments of Red Hat Ansible Automation Platform in your Red Hat OpenShift Container Platform environment to prevent data loss.</p> 
+      <p class="p">A backup resource of your Red Hat Ansible Automation Platform deployment includes the following:</p> 
+      <ul class="ul"> 
+       <li class="li">Custom deployment of specific values in the <code class="ph codeph">spec</code> section of the Ansible Automation Platform custom resource object.</li> 
+       <li class="li">Back up of the <code class="ph codeph">postgresql</code> database.</li> 
+       <li class="li"><code class="ph codeph">secret_key</code>, <code class="ph codeph">admin_password</code>, and <code class="ph codeph">broadcast_websocket</code> secrets.</li> 
+       <li class="li">Database configuration.</li> 
+      </ul> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Be sure to secure your backup resources because they can include sensitive information.</p> 
+       </div>
+      </div> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="aap-backup-recommendations"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Backup recommendations</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Recovering from data loss requires that you plan for and create backup resources of your Red Hat Ansible Automation Platform deployments on a regular basis. At a minimum, Red Hat recommends backing up deployments of Red Hat Ansible Automation Platform under the following circumstances:</p> 
+       <ul class="ul"> 
+        <li class="li">Before upgrading your Red Hat Ansible Automation Platform deployments.</li> 
+        <li class="li">Before upgrading your OpenShift cluster.</li> 
+        <li class="li">Once per week. This is particularly important if your environment is configured for automatic upgrades.</li> 
+       </ul> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="GUID-34d275a0-4fb0-4869-addf-779c00b77bfa"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Backup database compression for operator-based deployments</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Ansible Automation Platform 2.6 supports database compression for operator-based backup operations. You can enable or disable compression globally or per component to optimize backup size and performance.</p> 
+       <p class="p">When you enable database compression, the operator compresses the PostgreSQL database dump for each component. This reduces the overall backup size but increases CPU usage during the backup process. </p> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="GUID-78e6ddce-816a-476e-ad3b-910727c16a36"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Backup compression configuration parameters</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use these compression parameters to configure the <code class="ph codeph">AnsibleAutomationPlatformBackup</code> custom resource:</p> 
+       <section class="section" id="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__section_1"> 
+        <div class="p"> 
+         <table class="table" id="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1">
+          <caption></caption>
+          <colgroup>
+           <col style="width:33.33333333333333%">
+           <col style="width:33.33333333333333%">
+           <col style="width:33.33333333333333%">
+          </colgroup>
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry" id="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__1">Parameter</th> 
+            <th class="entry" id="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__2">Description</th> 
+            <th class="entry" id="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__3">Default</th> 
+           </tr> 
+          </thead>
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__1"><code class="ph codeph">spec.use_db_compression</code></td> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__2">Enables or disables database dump compression for all components globally.</td> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__3"><code class="ph codeph">True</code></td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__1"><code class="ph codeph">spec.gateway.use_db_compression</code></td> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__2">Overrides the global compression setting for the platform gateway.</td> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__3">Value of<code class="ph codeph">spec.use_db_compression</code></td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__1"><code class="ph codeph">spec.controller.use_db_compression</code></td> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__2">Overrides the global compression setting for automation controller.</td> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__3">Value of<code class="ph codeph">spec.use_db_compression</code></td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__1"><code class="ph codeph">spec.hub.use_db_compression</code></td> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__2">Overrides the global compression setting for automation hub.</td> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__3">Value of<code class="ph codeph">spec.use_db_compression</code></td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__1"><code class="ph codeph">spec.eda.use_db_compression</code></td> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__2">Overrides the global compression setting for Event-Driven Ansible.</td> 
+            <td class="entry" headers="GUID-78e6ddce-816a-476e-ad3b-910727c16a36__table_1__entry__3">Value of<code class="ph codeph">spec.use_db_compression</code></td> 
+           </tr> 
+          </tbody>
+         </table> 
+        </div> 
+        <p class="p">When you set a per-component parameter, it overrides the global <code class="ph codeph">spec.use_db_compression</code> value for that component only.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="GUID-8dbb9768-b789-4449-b289-fc40c2778e5a"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Configure backup compression</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Configure database compression for your Ansible Automation Platform backup by setting compression parameters in the <code class="ph codeph">AnsibleAutomationPlatformBackup</code> custom resource.</p> 
+       <section class="section prereq" id="GUID-8dbb9768-b789-4449-b289-fc40c2778e5a__prereq_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul" id="GUID-8dbb9768-b789-4449-b289-fc40c2778e5a__ul_1"> 
+         <li class="li">You have installed Ansible Automation Platform 2.6 by using the operator.</li> 
+         <li class="li">You have administrator access to the Red Hat OpenShift Container Platform cluster.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create or edit an <code class="ph codeph">AnsibleAutomationPlatformBackup</code> custom resource file. The following example enables compression globally but disables it for automation controller:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>
+apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatformBackup
+metadata:
+  name: aap-backup
+  namespace: aap
+spec:
+  deployment_name: aap
+
+  # Global — applies to gateway and all child components by default
+  use_db_compression: true
+
+  # Per-component override (optional)
+  controller:
+    use_db_compression: false   # disable compression for controller only</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Apply the custom resource to your cluster: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc apply -f &lt;backup_cr_file&gt;.yml</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Monitor the backup progress:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc get ansibleautomationplatformbackup -n aap -w</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result" id="GUID-8dbb9768-b789-4449-b289-fc40c2778e5a__result_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <div class="p">
+         Verify that the backup completed successfully: 
+         <pre class="pre codeblock"><code>$ oc get ansibleautomationplatformbackup &lt;backup_name&gt; -n aap -o jsonpath='{.status.conditions}'</code></pre> 
+        </div> 
+        <p class="p">The output shows a <code class="ph codeph">Successful</code> condition when the backup completes. </p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

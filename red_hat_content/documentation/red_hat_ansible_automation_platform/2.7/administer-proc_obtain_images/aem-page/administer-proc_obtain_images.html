@@ -1,0 +1,279 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="obtain-images"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Pull execution environments for use in automation hub</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use.</p> 
+      <section class="section prereq">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Before you begin</h2>
+       </div> 
+       <ul class="ul"> 
+        <li class="li">You have permissions to pull automation execution environments from <code class="ph codeph">registry.redhat.io</code>.</li> 
+       </ul> 
+      </section> 
+      <section class="section context">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div> 
+       <p class="p">The following example details how to pull an execution environment from the Red Hat Ecosystem Catalog (<code class="ph codeph">registry.redhat.io</code>).</p> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">Log in to Podman with your <code class="ph codeph">registry.redhat.io</code> credentials: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>$ podman login registry.redhat.io</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Pull an execution environment: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>$ podman pull registry.redhat.io/<em class="ph i">&lt;ee_name&gt;</em>:<em class="ph i">&lt;tag&gt;</em></code></pre> 
+         </div> </li>
+       </ol>
+      </section> 
+      <section class="section result">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Results</h2>
+       </div> 
+       <p class="p">To verify that the execution environment you pulled is contained in the list, take these steps:</p> 
+       <ol class="ol"> 
+        <li class="li">List the images in local storage: <pre class="pre codeblock"><code>$ podman images</code></pre></li> 
+        <li class="li">Check the execution environment name, and verify that the tag is correct.</li> 
+       </ol> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://redhat-connect.gitbook.io/catalog-help/" target="_blank" rel="external noopener">Red Hat Ecosystem Catalog Help</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="tag-pulled-images"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Tag execution environments</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After you pull execution environments from a registry, tag them for use in your private automation hub remote registry.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have pulled an execution environment from an external registry.</li> 
+         <li class="li">You have the FQDN or IP address of the automation hub instance.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Tag a local execution environment with the automation hub container repository: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ podman tag registry.redhat.io/<em class="ph i">&lt;ee_name&gt;</em>:<em class="ph i">&lt;tag&gt;</em> <em class="ph i">&lt;automation_hub_hostname&gt;</em>/<em class="ph i">&lt;ee_name&gt;</em></code></pre> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <ol class="ol"> 
+         <li class="li">List the images in local storage: <pre class="pre codeblock"><code>$ podman images</code></pre></li> 
+         <li class="li">Verify that the execution environment you tagged with your automation hub information is contained in the list.</li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="push-containers"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Push an execution environment to private automation hub</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can push tagged execution environments to private automation hub to create new containers and populate the remote registry.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have permissions to create new containers.</li> 
+         <li class="li">You have the FQDN or IP address of the Ansible Automation Platform instance.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Podman using your Ansible Automation Platform location and credentials: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ podman login -u=<em class="ph i">&lt;username&gt;</em> -p=<em class="ph i">&lt;password&gt;</em> <em class="ph i">&lt;aap_url&gt;</em></code></pre> 
+           <div class="note warning note_warning">
+            <span class="note__title">Warning:</span> 
+            <div class="note__body"> 
+             <p class="p">Let Podman prompt you for your password when you log in. Entering your password at the same time as your username can expose your password to the shell history.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Push your execution environment to your automation hub remote registry: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ podman push <em class="ph i">&lt;automation_hub_url&gt;</em>/<em class="ph i">&lt;ee_name&gt;</em></code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <ol class="ol"> 
+         <li class="li">Log in to Ansible Automation Platform.</li> 
+         <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Execution Environments</span></span>.</li> 
+         <li class="li">Locate the container in the container repository list.</li> 
+        </ol> 
+       </section> 
+       <section class="section tasktroubleshooting"> 
+        <p class="p">The <code class="ph codeph">push</code> operation re-compresses image layers during the upload, which is not guaranteed to be reproducible and is client-implementation dependent. This may lead to image-layer digest changes and a failed push operation, resulting in <code class="ph codeph">Error: Copying this image requires changing layer representation, which is not possible (image is signed or the destination specifies a digest)</code>.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="pulling-images-container-repository"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Pull and sync images from automation hub to your local system</h2> 
+      <p class="shortdesc">Pull Ansible Automation Platform execution environments from the automation hub registry to your local machine. Use the provided <code class="ph codeph">podman pull</code> command for the <code class="ph codeph">latest</code> version in the repository, or specify a tag to copy a specific execution environment.</p> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title5" id="pulling-image"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Pull an image</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Use the user interface to pull an execution environment from your private automation hub remote registry to make a copy to your local machine.</p> 
+        <section class="section prereq">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Before you begin</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">You must have permission to view and pull from a private container repository.</li> 
+          <li class="li">If you are pulling automation execution environments from a password or token-protected registry, <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-manage_execution_environments_in_private_automation_hub#GUID-c616972e-1012-4d50-a64b-dc38f0d5105b" title="When you set up your container repository, you can add a description, include a README, add teams that can access the repository, and tag automation execution environments.">create a credential</a> first.</li> 
+         </ul> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Execution Environments</span></span>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Select your execution environment.</span> </li>
+          <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Pull this image</strong> entry, click <span class="ph uicontrol button">Copy to clipboard</span>.</span> </li>
+          <li class="li step"> <span class="ph cmd">Paste and run the command in your terminal.</span> </li>
+         </ol>
+        </section> 
+        <section class="section result">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Results</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">Run <code class="ph codeph">podman images</code> to view images on your local machine.</li> 
+         </ul> 
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title6" id="proc-sync-image-adoc"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Sync images from a container registry</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">You can pull automation execution environments from the private automation hub remote registry to sync an image to your local machine. To sync an execution environment from a remote registry, you must first configure a remote registry.</p> 
+        <section class="section prereq">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Before you begin</h4>
+         </div> 
+         <p class="p">You must have permission to view and pull from a private container repository.</p> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Execution Environments</span></span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Add <code class="ph codeph"><a class="xref" href="https://registry.redhat.io" target="_blank" rel="external noopener">https://registry.redhat.io</a></code> to the registry.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Add any required credentials to authenticate. </span> 
+           <div class="itemgroup info"> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">Some remote registries are aggressive with rate limiting. Set a rate limit under <strong class="ph b">Advanced Options</strong>.</p> 
+             </div>
+            </div> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Execution Environments</span></span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create execution environment</span> in the page header.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Select the registry you want to pull from. The <strong class="ph b">Name</strong> field displays the name of the automation execution environments displayed on your local registry. </span> 
+           <div class="itemgroup info"> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">The <strong class="ph b">Upstream name</strong> field is the name of the image on the remote server. For example, if the upstream name is set to "alpine" and the <strong class="ph b">Name</strong> field is "local/alpine", the alpine image is downloaded from the remote and renamed to "local/alpine".</p> 
+             </div>
+            </div> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Set a list of tags to include or exclude. Note that syncing automation execution environments with a large number of tags is time consuming and uses a lot of disk space.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+       <nav role="navigation" class="related-links">
+        <div class="linklist relinfo">
+         <strong>Related information</strong>
+         <br>
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="https://access.redhat.com/RegistryAuthentication" target="_blank" rel="external noopener">Red Hat Container Registry Authentication</a></li>
+          <li class="linklist"><a class="link" href="http://docs.podman.io/en/latest/index.html" target="_blank" rel="external noopener">What is Podman?</a></li>
+         </ul>
+        </div>
+       </nav> 
+      </article>
+      <article class="topic reference nested2" aria-labelledby="ariaid-title7" id="GUID-6fe92a24-f59a-439f-8559-bd3e367501d5"> 
+       <h3 class="title topictitle3" id="ariaid-title7">Automation execution environments precedence</h3> 
+       <div class="body refbody">
+        <p class="shortdesc">Identify and control the exact automation execution environment applied to your jobs by tracing the precedence hierarchy, ensuring you can troubleshoot environment mismatches or configure accurate defaults across your templates, projects, and organizations.</p> 
+        <section class="section" id="GUID-6fe92a24-f59a-439f-8559-bd3e367501d5__section_1"> 
+         <p class="p">Project updates always use the control plane automation execution environments by default.</p> 
+         <p class="p">However, jobs use the first available automation execution environments as follows:</p> 
+         <ol class="ol" id="GUID-6fe92a24-f59a-439f-8559-bd3e367501d5__ol_1"> 
+          <li class="li">The <code class="ph codeph">execution_environment</code> defined on the template (job template or inventory source) that created the job.</li> 
+          <li class="li">The <code class="ph codeph">execution_environment</code> defined on the project that the job uses.</li> 
+          <li class="li">The <code class="ph codeph">execution_environment</code> defined on the organization of the job.</li> 
+          <li class="li">The <code class="ph codeph">execution_environment</code> defined on the organization of the inventory the job uses.</li> 
+          <li class="li">The current Global default execution environment setting configurable at <code class="ph codeph">api/v2/settings/system/</code></li> 
+          <li class="li">Any image from the <code class="ph codeph">GLOBAL_JOB_EXECUTION_ENVIRONMENTS</code> setting.</li> 
+          <li class="li">Any other global execution environment. 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Where an <code class="ph codeph">execution_environment</code> is not available, the <code class="ph codeph">Default execution environment</code> can be used. However, you must select this, as the system does not automatically provide a default environment.</p> 
+             <p class="p">If more than one execution environment fits a criteria (applies for 6 and 7), the most recently created one is used.</p> 
+            </div>
+           </div> </li> 
+         </ol> 
+        </section> 
+        <section class="section" id="GUID-6fe92a24-f59a-439f-8559-bd3e367501d5__section_2"> 
+         <p class="p">When the "Default Execution Environment" is not used for a job, double-check the following:</p> 
+         <ol class="ol" id="GUID-6fe92a24-f59a-439f-8559-bd3e367501d5__ol_2"> 
+          <li class="li">Whether a different execution environment has been defined for the template, project, or organization of the job.</li> 
+          <li class="li">If the <strong class="ph b">Global default execution environment</strong> in <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span> specifies a different execution environment. 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body">
+             This setting is not configured by default.
+            </div>
+           </div> </li> 
+          <li class="li">Check the order of the <code class="ph codeph">GLOBAL_JOB_EXECUTION_ENVIRONMENTS</code> in <code class="ph codeph">/etc/tower/conf.d/execution_environments.py</code>. <code class="ph codeph">Default Execution Environment</code> should be the first item in the array.</li> 
+          <li class="li">Check the order of the execution environments defined in the database by running the following command as root on the Ansible Controller node to output the <code class="ph codeph">main_executionenvironment</code> table: <pre class="pre codeblock"><code># echo "select id, name, created from main_executionenvironment where organization_id is null and managed = False order by created desc;" | awx-manage dbshell</code></pre> <p class="p">To ensure that the Default Execution Environment is used regardless of the <code class="ph codeph">GLOBAL_JOB_EXECUTION_ENVIRONMENTS</code> setting and database order, set the Global default execution environment in <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span> to Default Execution Environment.</p> </li> 
+         </ol> 
+        </section> 
+       </div> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-sync-content-sources">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Synchronize content sources</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Sync content from your configured Git repositories and private automation hub to keep the Ansible automation portal catalog current.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have configured content sources. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery" title="Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.">Configure collection discovery sources</a>.</li> 
+       <li class="li">You have configured authentication. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder" title="Create and install a GitHub App so that execution environment builder can scan your organization's repositories for Ansible collections.">Configure a GitHub App for content discovery</a> or <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_gitlab_ee_builder" title="Configure GitLab content discovery and OAuth so that execution environment builder can scan GitLab groups for Ansible collections and save definition files.">Set up GitLab integration</a>.</li> 
+       <li class="li">You have applied configuration changes. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes" title="Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.">Apply configuration changes</a>.</li> 
+       <li class="li">As an AAP administrator, you have access to automation portal.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">After syncing, discovered collections and EE definitions become available for users to browse and use in execution environment builder.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Navigate to the <strong class="ph b">Collections</strong> page.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Sync Now</strong> in the top-right corner.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the modal, select the content sources you want to sync.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">You can sync selectively by provider, host, or organization rather than syncing all sources at once.</p> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           <p class="p">Synchronization time depends on the number of collections and metadata in your configured repositories. Large repositories can take significantly longer. To reduce sync time, configure your private automation hub to sync only the collections your teams need.</p>
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Sync Selected</strong>.</span> 
+        <div class="itemgroup info"> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body">
+           <p class="p">A toast notification confirms which sources are syncing. The <strong class="ph b">Sync Now</strong> button is disabled during the operation and re-enabled when all selected sources finish.</p>
+          </div>
+         </div> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">Navigate to <strong class="ph b">Collections</strong> and verify that collections from your synced sources appear.</li> 
+       <li class="li">Navigate to <strong class="ph b">Execution Environments</strong> and verify that EE definitions from synced repositories appear in the catalog.</li> 
+      </ul> 
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p"><strong class="ph b">Automatic synchronization</strong></p> 
+      <p class="p">Content sources sync automatically based on the schedule configured in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery" title="Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.">Configure collection discovery sources</a>. The <code class="ph codeph">schedule.frequency</code> parameter controls how often each source is scanned for changes.</p> 
+      <p class="p">To adjust the sync frequency, modify the schedule values in your content source configuration and apply the updated Helm chart. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes" title="Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.">Apply configuration changes</a>.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

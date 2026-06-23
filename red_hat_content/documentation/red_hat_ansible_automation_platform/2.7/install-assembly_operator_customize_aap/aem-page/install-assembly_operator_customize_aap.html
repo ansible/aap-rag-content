@@ -1,0 +1,374 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-operator-customize-aap"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Customize your Red Hat Ansible Automation Platform Operator</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Customize your deployment by setting configuration parameters in the parent <strong class="ph b">AnsibleAutomationPlatform</strong> custom resource (CR). The operator automatically applies these settings to all nested platform components.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-operator-crd-config-parameters-ui"> 
+      <h2 class="title topictitle2" id="ariaid-title2">View configuration parameters in the UI</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can discover the configuration parameters for your Ansible Automation Platform Operator by viewing its Custom Resource (CR). The parameters are listed in the YAML schema.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat OpenShift Container Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select your Ansible Automation Platform Operator deployment.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Go to the Ansible Automation Platform tab and click the name of your CR.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Switch to the <strong class="ph b">YAML view</strong> tab to view and edit the configuration. The available parameters are listed in the YAML schema. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you cannot see the <strong class="ph b">Schema</strong> panel, you might have closed or minimized the side bar. Click <span class="ph uicontrol button">view sidebar</span> to reopen it.</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-operator-crd-config-parameters"> 
+      <h2 class="title topictitle2" id="ariaid-title3">View configuration parameters by using the CLI</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The Ansible Automation Platform Operator manages multiple custom resources (CRs), each with its own configuration parameters. Use the <code class="ph codeph">oc explain</code> command to discover all available configuration options for the <code class="ph codeph">AnsibleAutomationPlatform</code> CR and its nested components.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">To see all available configuration parameters for a top-level CR, run: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc explain ansibleautomationplatform.spec</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To view component-specific configuration options nested under the Ansible Automation Platform CR, query them through the component section: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc explain ansibleautomationplatform.spec.controller.postgres_configuration_secret
+oc explain ansibleautomationplatform.spec.controller.route_tls_termination_mechanism
+oc explain ansibleautomationplatform.spec.hub.storage_type
+oc explain ansibleautomationplatform.spec.eda.automation_server_url</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To explore all nested fields for a specific component, use the <code class="ph codeph">--recursive</code> flag: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc explain ansibleautomationplatform.spec.controller --recursive
+oc explain ansibleautomationplatform.spec.hub --recursive
+oc explain ansibleautomationplatform.spec.eda --recursive</code></pre> 
+          </div> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body">
+             You can also query individual component CRs directly if needed: 
+             <pre class="pre codeblock"><code>oc explain automationcontroller.spec
+oc explain automationhub.spec
+oc explain eda.spec</code></pre> 
+             <p class="p">However, when configuring components through the Ansible Automation Platform CR (recommended approach), use the nested paths shown above.</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-operator-defining-nest-parameter"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Configure component parameters</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To define a parameter, such as the <code class="ph codeph">resource_requirements</code> for automation controller, you add the configuration to the parent Ansible Automation Platform CR YAML. This ensures that the Ansible Automation Platform CR is the single source of truth for your deployment.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The <code class="ph codeph">image</code> and <code class="ph codeph">image_version</code>, as well as the <code class="ph codeph">{component}_image</code> and <code class="ph codeph">{component}_image_version</code> parameters are intended for development or hotfix purposes only.</p> 
+          <p class="p"><strong class="ph b">Do not use these in production environments.</strong> These settings bypass standard version management and can lead to configuration drift, inconsistent deployments, and difficulty troubleshooting issues.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to OpenShift Container Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Operators</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Installed Operators</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select your Ansible Automation Platform Operator deployment.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Go to the Ansible Automation Platform tab and click the name of your CR.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">YAML view</strong> tab, locate the <strong class="ph b">spec</strong> section.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the <code class="ph codeph">automationcontroller</code> parameter with the nested <code class="ph codeph">resource_requirements</code> parameter and its value: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>spec:
+  database:
+    resource_requirements:
+      requests:
+        cpu: 200m
+        memory: 512Mi
+    storage_requirements:
+      requests:
+        storage: 100Gi</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span> to apply the changes. The operator automatically applies this configuration to the automation controller component.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-operator-crd-customize"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Customize your resource requirements</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Customize resource requirements for your Ansible Automation Platform components to optimize performance and resource allocation in your specific environment.</p> 
+       <section class="section"> 
+        <p class="p">The following section provides a complete code block with the default resource requirements for each component. The main reasons for customizing your resource requirements include:</p> 
+        <ul class="ul"> 
+         <li class="li">Performance Tuning: Increase resource limits for components that perform heavy workloads.</li> 
+         <li class="li">To comply with a <code class="ph codeph">ResourceQuota</code> enforced by the cluster admin.</li> 
+         <li class="li">Resource Constrained Environments: Decrease resource requests to conserve cluster resources in development or test environments.</li> 
+         <li class="li">Environment Specifics: Align the resource allocation with the capacity of your OpenShift or Kubernetes cluster nodes.</li> 
+        </ul> 
+        <p class="p">You can use this reference as a starting point. Copy the full code block for your Ansible Automation Platform instance and modify the values for the components you want to change. This method helps ensure all default settings are applied correctly, reducing the risk of deployment errors.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">When <em class="ph i">adding</em> parameters, you can add it to the Ansible Automation Platform custom resource (CR) only and those parameters will work their way down to the nested CRs.</p> 
+          <p class="p">When <em class="ph i">removing</em> parameters, you have to remove them both from the Ansible Automation Platform CR <em class="ph i">and</em> the nested CR, for example, the <strong class="ph b">Automation Controller</strong> CR.</p> 
+         </div>
+        </div> 
+        <pre class="pre codeblock"><code># Example of defining custom resource requirements for all components
+# This can be useful for clusters with a ResourceQuote in the AAP namespaceapiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: aap
+spec:
+
+  # Platform
+  api:
+    replicas: 1
+    resource_requirements:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 1000Mi
+  redis:
+    replicas: 1
+    resource_requirements:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 500Mi
+  database:
+    resource_requirements:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 800Mi
+
+  # Components
+  controller:
+    disabled: false
+    uwsgi_processes: 2
+    task_resource_requirements:
+      requests:
+        cpu: 100m
+        memory: 150Mi
+      limits:
+        cpu: 1000m
+        memory: 1200Mi
+    web_resource_requirements:
+      requests:
+        cpu: 100m
+        memory: 200Mi
+      limits:
+        cpu: 200m
+        memory: 1600Mi
+    ee_resource_requirements:
+      requests:
+        cpu: 100m
+        memory: 64Mi
+      limits:
+        cpu: 1000m
+        memory: 500Mi
+    redis_resource_requirements:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 100m
+        memory: 200Mi
+    rsyslog_resource_requirements:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 250Mi
+    init_container_resource_requirements:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 200Mi
+  eda:
+    disabled: false
+    api:
+      replicas: 1
+      resource_requirements:
+        requests:
+          cpu: 50m
+          memory: 350Mi
+        limits:
+          cpu: 500m
+          memory: 400Mi
+    ui:
+      replicas: 1
+      resource_requirements:
+        requests:
+          cpu: 25m
+          memory: 64Mi
+        limits:
+          cpu: 500m
+          memory: 150Mi
+    scheduler:
+      replicas: 1
+      resource_requirements:
+        requests:
+          cpu: 50m
+          memory: 200Mi
+        limits:
+          cpu: 500m
+          memory: 250Mi
+    worker:
+      replicas: 2
+      resource_requirements:
+        requests:
+          cpu: 25m
+          memory: 200Mi
+        limits:
+          cpu: 250m
+          memory: 250Mi
+    default_worker:
+      replicas: 1
+      resource_requirements:
+        requests:
+          cpu: 25m
+          memory: 200Mi
+        limits:
+          cpu: 500m
+          memory: 400Mi
+    activation_worker:
+      replicas: 1
+      resource_requirements:
+        requests:
+          cpu: 25m
+          memory: 150Mi
+        limits:
+          cpu: 500m
+          memory: 400Mi
+    event_stream:
+      replicas: 1
+      resource_requirements:
+        requests:
+          cpu: 25m
+          memory: 150Mi
+        limits:
+          cpu: 100m
+          memory: 300Mi
+  hub:
+    disabled: false
+    ## uncomment if using file storage for Content pod
+    storage_type: file
+    file_storage_storage_class: nfs-local-rwx  # replace with the rwx storage class for your cluster
+    file_storage_size: 50Gi
+
+    ## uncomment if using S3 storage for Content pod
+    # storage_type: S3
+    # object_storage_s3_secret: example-galaxy-object-storage
+
+    ## uncomment if using Azure storage for Content pod
+    # storage_type: azure
+    # object_storage_azure_secret: azure-secret-name
+
+    api:
+      replicas: 1
+      resource_requirements:
+        requests:
+          cpu: 150m
+          memory: 256Mi
+        limits:
+          cpu: 800m
+          memory: 500Mi
+    content:
+      replicas: 1
+      resource_requirements:
+        requests:
+          cpu: 150m
+          memory: 256Mi
+        limits:
+          cpu: 800m
+          memory: 1200Mi
+    worker:
+      replicas: 1
+      resource_requirements:
+        requests:
+          cpu: 150m
+          memory: 256Mi
+        limits:
+          cpu: 800m
+          memory: 400Mi
+    web:
+      replicas: 1
+      resource_requirements:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 500m
+          memory: 300Mi
+    redis:
+      replicas: 1
+      resource_requirements:
+        requests:
+          cpu: 100m
+          memory: 250Mi
+        limits:
+          cpu: 300m
+          memory: 400Mi
+
+
+  # lightspeed:
+  #   disabled: true
+
+# End state:
+# * Controller deployed and named: myaap-controller
+# * EDA deployed and named: myaap-eda
+# * Hub deployed and named: myaap-hub</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

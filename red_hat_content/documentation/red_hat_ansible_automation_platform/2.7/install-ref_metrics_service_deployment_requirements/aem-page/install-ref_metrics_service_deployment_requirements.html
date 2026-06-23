@@ -1,0 +1,467 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-metrics-service-deployment-requirements">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Metrics service deployment requirements</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Review infrastructure requirements and prerequisites for deploying metrics service to provision appropriate resources and ensure successful deployment without capacity or compatibility issues.</p> 
+     <section class="section">
+      <h2 class="title sectiontitle">System requirements</h2> 
+      <p class="p"><strong class="ph b">Supported platforms</strong></p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__1">Platform</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__2">Versions</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__3">Notes</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__1"><strong class="ph b">Red Hat Enterprise Linux</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__2"><strong class="ph b">9.2 or later</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__3">Required for containerized installer deployment.<strong class="ph b">RHEL 8 is NOT supported</strong> (Ansible Automation Platform 2.7 requirement)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__1"><strong class="ph b">Podman</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__2"><strong class="ph b">4.6.0 or later</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__3">Container runtime for metrics service</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__1"><strong class="ph b">PostgreSQL</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__2"><strong class="ph b">15 or later</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__3">For<code class="ph codeph">metrics_service</code> database and<strong class="ph b">awx/automation controller</strong> database</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__1"><strong class="ph b">Ansible Automation Platform</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__2"><strong class="ph b">2.7.0 or later</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__3">Metrics service integrated with Ansible Automation Platform 2.7 containerized installer</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Metrics service does not support RHEL 8. All Ansible Automation Platform 2.7 deployments require RHEL 9.2 or later.</p> 
+       </div>
+      </div> 
+      <p class="p"><strong class="ph b">Data retention periods</strong></p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:20%">
+        <col style="width:33.33333333333333%">
+        <col style="width:20%">
+        <col style="width:26.666666666666668%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__16">Data Category</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__17">Description</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__18">Retention Period</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__19">Cleanup Schedule</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__16">Hourly metrics</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__17">Raw metrics collected hourly from controller</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__18">7 days</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__19">Daily at 4:00-5:30 AM</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__16">Daily summaries</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__17">Aggregated daily metrics</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__18">30 days</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__19">Daily at 4:00-5:30 AM</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__16">Anonymized payloads</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__17">Anonymized data sent to Red Hat Data Ingress</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__18">7 days (after successful transmission) / 30 days (unsent/pending transmission)</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__19">Daily at 4:00-5:30 AM</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__16">Dashboard data</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__17">Job execution data for dashboard reporting (when<code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code>)</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__18">90 days</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__19">Daily at 5:30 AM</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Cleanup tasks run automatically daily at 4:00 AM to enforce retention policies.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Hardware requirements</h2> 
+      <p class="p">metrics service hardware requirements are the same as Gateway specifications:</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:21.428571428571427%">
+        <col style="width:14.285714285714285%">
+        <col style="width:21.428571428571427%">
+        <col style="width:42.857142857142854%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__36">Component</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__37">Minimum</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__38">Recommended</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__39">Notes</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__36"><strong class="ph b">CPU</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__37"><strong class="ph b">2 vCPUs</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__38"><strong class="ph b">4 vCPUs</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__39">Dedicated to metrics service container</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__36"><strong class="ph b">RAM</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__37"><strong class="ph b">4 GB</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__38"><strong class="ph b">8 GB</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__39">For metrics processing and database operations</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__36"><strong class="ph b">Storage (database)</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__37"><strong class="ph b">20 GB</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__38"><strong class="ph b">40 GB+ (SSD preferred)</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__39">For metrics_service database; grows based on data retention</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__36"><strong class="ph b">Storage (container)</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__37">Included in database storage</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__38">Included in database storage</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__39">For container images and temporary processing</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__36"><strong class="ph b">Network bandwidth</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__37">Standard Ansible Automation Platform networking</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__38">Standard Ansible Automation Platform networking</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__39">For data transmission to Red Hat Data Ingress via Gateway</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Metrics service is not required to be co-located with automation controller. It can run on any node defined in the <code class="ph codeph">[automationmetrics]</code> inventory group. Hardware requirements can be shared (AIO Growth topology) or dedicated (Enterprise Multi-Node topology).</p> 
+       </div>
+      </div> 
+      <p class="p"><strong class="ph b">Filesystem requirements</strong></p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:36.36363636363637%">
+        <col style="width:36.36363636363637%">
+        <col style="width:27.27272727272727%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__60">Path</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__61">Purpose</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__62">Minimum Size</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__60"><span class="ph filepath">/var/lib/containers</span></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__61">Container images and storage</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__62">10 GB (part of overall storage)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__60"><code class="ph codeph">{{ aap_volumes_dir }}/automationmetrics</code></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__61">Host-side volume mount (maps to<span class="ph filepath">/var/lib/ansible-automation-platform/metrics</span> inside container)</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__62">5 GB (part of overall storage)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__60"><span class="ph filepath">/var/lib/postgresql</span> (or custom path)</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__61">PostgreSQL data directory for metrics_service database</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__62">20 GB minimum, 40 GB+ recommended</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Network requirements</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:28.57142857142857%">
+        <col style="width:14.285714285714285%">
+        <col style="width:14.285714285714285%">
+        <col style="width:14.285714285714285%">
+        <col style="width:28.57142857142857%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__72">Connection</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__73">Protocol</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__74">Port</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__75">Direction</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__76">Purpose</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__72">metrics service → Controller database</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__73">PostgreSQL</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__74">5432 (default)</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__75">Outbound</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__76">Read-only data collection</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__72">metrics service → metrics_service database</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__73">PostgreSQL</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__74">5432 (default)</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__75">Outbound</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__76">Metrics storage and retrieval</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__72">metrics service → Gateway</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__73">HTTPS</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__74">443</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__75">Outbound</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__76">Anonymized data transmission to<code class="ph codeph">/api/metrics/</code> endpoint</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__72">Monitoring → metrics service (optional)</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__73">HTTP</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__74">8087</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__75">Inbound</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__76">Health check endpoint at<code class="ph codeph">/health/</code> via nginx</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p"><strong class="ph b">Proxy Support:</strong> metrics service supports HTTP/HTTPS proxy configuration via standard environment variables (<code class="ph codeph">HTTP_PROXY</code>, <code class="ph codeph">HTTPS_PROXY</code>, <code class="ph codeph">NO_PROXY</code>).</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Database requirements</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:18.75%">
+        <col style="width:25%">
+        <col style="width:31.25%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__97">Database</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__98">User</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__99">Privileges</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__100">Purpose</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__97"><code class="ph codeph">metrics_service</code></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__98"><code class="ph codeph">metrics_service</code></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__99">ALL</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__100">metrics service's own data storage, Django migrations, schema management</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__97"><strong class="ph b">awx/automation controller</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__98"><code class="ph codeph">ms_awx_readonly</code></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__99"><strong class="ph b">GRANT SELECT ON ALL TABLES IN SCHEMA public</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__100">Read-only access to controller data for metrics collection</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p"><strong class="ph b">PostgreSQL Version:</strong> 15 or later (both databases)</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The <code class="ph codeph">ms_awx_readonly</code> user requires SELECT privileges on all tables in the public schema of the <strong class="ph b">awx/automation controller</strong> database. This is configured automatically by the installer.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Performance impact and capacity planning</h2> 
+      <p class="p"><strong class="ph b">Validated performance characteristics</strong></p> 
+      <p class="p">Metrics service is designed for minimal impact on automation controller operations:</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:30.76923076923077%">
+        <col style="width:23.076923076923077%">
+        <col style="width:46.15384615384615%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__109">Metric</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__110">Measured Impact</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__111">Notes</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__109"><strong class="ph b">Controller performance impact</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__110">&lt;5%</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__111">Peak impact during hourly collection (XX:05, XX:10, XX:15)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__109"><strong class="ph b">Peak memory usage</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__110">300-500 MB</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__111">During active collection with chunked processing</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__109"><strong class="ph b">Local storage usage</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__110">&lt;1 GB per cycle</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__111">Includes hourly, daily, and anonymized data before cleanup</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__109"><strong class="ph b">Database query performance</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__110">Read-only access</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__111">No write impact on controller database</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__109"><strong class="ph b">Network bandwidth</strong></td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__110">Minimal</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__111">Anonymized payloads transmitted daily (varies by environment size)</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p"><strong class="ph b">Collection strategy</strong>:</p> 
+      <ul class="ul"> 
+       <li class="li">Hourly micro-batches with chunked processing (1000 rows per batch)</li> 
+       <li class="li">Read-only database access prevents controller impact</li> 
+       <li class="li">Scheduled during low-usage periods (1:00 AM - 5:00 AM for daily tasks)</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Data retention (local to metrics service database)</strong></p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:36.36363636363637%">
+        <col style="width:27.27272727272727%">
+        <col style="width:36.36363636363637%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__127">Data Category</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__128">Retention Period</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__129">Storage Impact</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__127">Hourly collection data</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__128">7 days</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__129">Primary storage consumer</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__127">Daily summaries</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__128">30 days</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__129">Aggregated, smaller than hourly</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__127">Anonymized payloads</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__128">7 days</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__129">Compressed before transmission</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__127">Dashboard report data</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__128">90 days (when dashboard enabled)</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__129">Largest storage consumer if dashboard enabled</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">All data is purged automatically by <code class="ph codeph">cleanup_metrics_data</code> task (daily at 4:00 AM).</p> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Capacity planning guidelines</h2> 
+      <p class="p"><strong class="ph b">When to scale metrics service resources</strong></p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:40%">
+        <col style="width:60%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__142">Condition</th> 
+         <th class="entry" id="ref-metrics-service-deployment-requirements__entry__143">Recommended Action</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__142">Hourly collection duration exceeds 10 minutes</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__143">Add 2 vCPUs or optimize database queries</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__142">Memory usage sustained above 80% (&gt;6.4 GB of 8 GB)</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__143">Add 4 GB RAM</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__142">Database size exceeds 10 GB</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__143">Increase storage OR reduce retention periods</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__142">Task execution failures increase</td> 
+         <td class="entry" headers="ref-metrics-service-deployment-requirements__entry__143">Check database performance, verify network connectivity</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p"><strong class="ph b">Storage growth estimates</strong> (without dashboard):</p> 
+      <ul class="ul"> 
+       <li class="li">Small environment (1000 jobs/day): ~50-100 MB/day</li> 
+       <li class="li">Medium environment (5000 jobs/day): ~200-300 MB/day</li> 
+       <li class="li">Large environment (20,000 jobs/day): ~500-800 MB/day</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Storage growth with dashboard enabled</strong> (90-day retention):</p> 
+      <ul class="ul"> 
+       <li class="li">Multiply above estimates by 3-4x due to additional dashboard data collection</li> 
+      </ul> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Disconnected environments</h2> 
+      <p class="p">Metrics service handles disconnected environments gracefully:</p> 
+      <p class="p"><strong class="ph b">If Segment.com is unreachable:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Service retries transmission 3 times per scheduled run</li> 
+       <li class="li">Logs failure and waits for next cycle (no retry storms)</li> 
+       <li class="li">No impact on automation controller operations when disconnected</li> 
+       <li class="li">Local collection continues normally</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">When connectivity is restored:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Next scheduled anonymization/transmission cycle resumes</li> 
+       <li class="li">Only most recent anonymized payload is sent (older payloads are purged per retention policy)</li> 
+       <li class="li">No backlog buildup or resource exhaustion</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Recommendation for disconnected environments:</strong> Disable <code class="ph codeph">ANONYMIZED_DATA_COLLECTION</code> feature flag if permanent disconnection is expected. This prevents log noise from failed transmission attempts while allowing local collection to continue.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist">
+      <strong>Next steps</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_install_metrics_service_with_containerized_installer" title="Enable and configure metrics service during containerized installation to automatically collect anonymized usage data and transmit it to Red Hat.">Install metrics service with containerized installer</a></li>
+      </ul>
+     </div>
+     <div class="linklist">
+      <strong>Prerequisites</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture" title="Learn the architectural components and deployment topology of metrics service to make informed infrastructure decisions and ensure successful integration with Ansible Automation Platform.">Understand metrics service architecture</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

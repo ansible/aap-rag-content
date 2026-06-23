@@ -1,0 +1,123 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="installing-aap-operator-fetch-details"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Access Ansible Automation Platform through the CLI</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">You can use the OpenShift Container Platform CLI to fetch the web address and the password of the Automation controller that you created. To login to the platform gateway, you need the web address and the password.</p>
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-cli-get-controller-address"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Fetch the platform gateway web address</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">A Red Hat OpenShift Container Platform route exposes a service at a host name, so that external clients can reach it by name. When you created the platform gateway instance, a route was created for it. The route inherits the name that you assigned to the platform gateway object in the YAML file.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Use the following command to fetch the routes: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc get routes -n <em class="ph i">&lt;platform_namespace&gt;</em></code></pre> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">You can see in the following example, the <code class="ph codeph"><em class="ph i">example</em></code> platform gateway is running in the <code class="ph codeph"><em class="ph i">ansible-automation-platform</em></code> namespace.</p> 
+        <pre class="pre codeblock"><code>$ oc get routes -n ansible-automation-platform
+
+NAME      HOST/PORT                                              PATH   SERVICES          PORT   TERMINATION     WILDCARD
+example   example-ansible-automation-platform.apps-crc.testing          example-service   http   edge/Redirect   None</code></pre> 
+        <p class="p">The address for the platform gateway instance is <code class="ph codeph">example-ansible-automation-platform.apps-crc.testing</code>.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-cli-get-controller-pwd"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Fetch the platform gateway password</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The YAML block for the platform gateway instance in the <code class="ph codeph">AnsibleAutomationPlatform</code> object assigns values to the <em class="ph i">name</em> and <em class="ph i">admin_user</em> keys.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Use these values in the following command to fetch the password for the platform gateway instance. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc get secret/&lt;your instance name&gt;-&lt;admin_user&gt;-password -o yaml</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">The default value for <em class="ph i">admin_user</em> is <code class="ph codeph"><em class="ph i">admin</em></code>. Modify the command if you changed the admin username in the <code class="ph codeph">AnsibleAutomationPlatform</code> object. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The following example retrieves the password for a platform gateway object called <code class="ph codeph"><em class="ph i">example</em></code>:</p> 
+           <pre class="pre codeblock"><code>oc get secret/example-admin-password -o yaml</code></pre> 
+           <p class="p">The base64 encoded password for the platform gateway instance is listed in the <code class="ph codeph">metadata</code> field in the output:</p> 
+           <pre class="pre codeblock"><code>$ oc get secret/example-admin-password -o yaml
+
+apiVersion: v1
+data:
+  password: ODzLODzLODzLODzLODzLODzLODzLODzLODzLODzLODzL
+kind: Secret
+metadata:
+  labels:
+    app.kubernetes.io/component: aap
+    app.kubernetes.io/name: example
+    app.kubernetes.io/operator-version: ""
+    app.kubernetes.io/part-of: example
+  name: example-admin-password
+  namespace: ansible-automation-platform</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-cli-get-controller-pwd-decode"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Decode the platform gateway password</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After you have fetched your gateway password, you must decode it from base64.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Run the following command to decode your password from base64: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc get secret/example-admin-password -o jsonpath={.data.password} | base64 --decode</code></pre> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/openshift_container_platform/" target="_blank" rel="external noopener">OpenShift Container Platform product documentation</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

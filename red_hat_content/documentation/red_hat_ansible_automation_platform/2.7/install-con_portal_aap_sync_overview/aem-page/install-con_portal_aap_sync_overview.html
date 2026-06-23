@@ -1,0 +1,492 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="portal-aap-sync-overview"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Understanding Ansible Automation Platform synchronization</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The synchronization feature imports your Organization, Users, Teams, and Job Templates from Ansible Automation Platform into Ansible automation portal, making these entities securely discoverable and accessible to portal users.</p> 
+      <section class="section" id="portal-aap-sync-overview__overview">
+       <h2 class="title sectiontitle">Overview</h2> 
+       <p class="p">Ansible automation portal synchronizes two types of data from Ansible Automation Platform:</p> 
+       <ul class="ul"> 
+        <li class="li">Organization, Users, and Teams: Identity and organizational structure data</li> 
+        <li class="li">Job Templates: Executable automation templates</li> 
+       </ul> 
+       <p class="p">Both synchronizations run on a scheduled basis and can be manually triggered by Ansible Automation Platform Administrators in the portal UI.</p> 
+      </section> 
+      <section class="section" id="portal-aap-sync-overview__how-it-works">
+       <h2 class="title sectiontitle">How it works</h2> 
+       <ol class="ol"> 
+        <li class="li">Ansible automation portal connects to your Ansible Automation Platform instance using configured credentials.</li> 
+        <li class="li">Ansible automation portal fetches data based on the configured Ansible Automation Platform Organization and filter criteria.</li> 
+        <li class="li">Ansible automation portal converts Ansible Automation Platform entities into portal entities and displays them in the UI.</li> 
+        <li class="li">Synchronization runs on a configurable schedule (for example, every 60 minutes).</li> 
+        <li class="li">Users access and launch resources based on their existing Ansible Automation Platform permissions.</li> 
+       </ol> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="portal-aap-sync-config-ref"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Ansible Automation Platform synchronization configuration reference</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Definitions for all required and optional configuration parameters for the Ansible Automation Platform synchronization feature, including data types, filter options, and label normalization logic.</p> 
+       <section class="section" id="portal-aap-sync-config-ref__required-settings">
+        <h3 class="title sectiontitle">Required synchronization settings</h3> 
+        <p class="p">These parameters must be included in the <code class="ph codeph">catalog.providers.rhaap</code> section of your Helm values file to enable identity synchronization.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="portal-aap-sync-config-ref__required-settings__entry__1">Option</th> 
+           <th class="entry" id="portal-aap-sync-config-ref__required-settings__entry__2">Type</th> 
+           <th class="entry" id="portal-aap-sync-config-ref__required-settings__entry__3">Requirement</th> 
+           <th class="entry" id="portal-aap-sync-config-ref__required-settings__entry__4">Default</th> 
+           <th class="entry" id="portal-aap-sync-config-ref__required-settings__entry__5">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__1"><code class="ph codeph">orgs</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__2"><code class="ph codeph">string</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__3">Must be provided</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__4">-</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__5">The Ansible Automation Platform Organization to synchronize from. The configuration supports only one Ansible Automation Platform Organization.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__1"><code class="ph codeph">sync.orgsUsersTeams.schedule.frequency</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__2"><code class="ph codeph">object</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__3">Must be provided</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__4">-</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__5">Defines how often the identity data (Organization, Users, and Teams) synchronization runs (for example, <code class="ph codeph">{ minutes: 60 }</code>).</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__1"><code class="ph codeph">sync.orgsUsersTeams.schedule.timeout</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__2"><code class="ph codeph">object</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__3">Must be provided</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__4">-</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__required-settings__entry__5">The maximum duration for identity synchronization before a timeout error occurs (for example, <code class="ph codeph">{ minutes: 15 }</code>).</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="portal-aap-sync-config-ref__optional-job-template-settings">
+        <h3 class="title sectiontitle">Optional Job Template synchronization settings</h3> 
+        <p class="p">These parameters apply specifically to Job Template synchronization. If synchronization is enabled, the schedule and timeout settings must be provided.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+          <col style="width:12.5%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="portal-aap-sync-config-ref__optional-job-template-settings__entry__1">Option</th> 
+           <th class="entry" id="portal-aap-sync-config-ref__optional-job-template-settings__entry__2">Type</th> 
+           <th class="entry" id="portal-aap-sync-config-ref__optional-job-template-settings__entry__3">Requirement</th> 
+           <th class="entry" id="portal-aap-sync-config-ref__optional-job-template-settings__entry__4">Default</th> 
+           <th class="entry" id="portal-aap-sync-config-ref__optional-job-template-settings__entry__5">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__1"><code class="ph codeph">sync.jobTemplates.enabled</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__2"><code class="ph codeph">boolean</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__3">Must be provided</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__4"><code class="ph codeph">true</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__5">Set to <code class="ph codeph">true</code> to enable Job Template synchronization, or <code class="ph codeph">false</code> to disable it.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__1"><code class="ph codeph">sync.jobTemplates.surveyEnabled</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__2"><code class="ph codeph">boolean</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__3">Optional</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__4">-</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__5">Filters Job Templates based on whether an Ansible Automation Platform Survey is enabled. See the Filter Options section for details.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__1"><code class="ph codeph">sync.jobTemplates.labels</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__2"><code class="ph codeph">array</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__3">Optional</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__4"><code class="ph codeph">[]</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__5">Filters Job Templates based on specific Ansible Automation Platform Labels. See the Filter Options section for details.</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__1"><code class="ph codeph">sync.jobTemplates.schedule.frequency</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__2"><code class="ph codeph">object</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__3">Must be provided if template sync is enabled</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__4">-</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__5">Defines how often the Job Template synchronization runs (for example, <code class="ph codeph">{ minutes: 60 }</code>).</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__1"><code class="ph codeph">sync.jobTemplates.schedule.timeout</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__2"><code class="ph codeph">object</code></td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__3">Must be provided if template sync is enabled</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__4">-</td> 
+           <td class="entry" headers="portal-aap-sync-config-ref__optional-job-template-settings__entry__5">The maximum duration for Job Template synchronization before a timeout error occurs (for example, <code class="ph codeph">{ minutes: 15 }</code>).</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="portal-aap-sync-config-ref__filter-options">
+        <h3 class="title sectiontitle">Filter options</h3> 
+        <p class="p">The following filter options apply only to Job Template synchronization.</p> 
+        <p class="p">The <code class="ph codeph">surveyEnabled</code> filter accepts one of the following values:</p> 
+        <ul class="ul"> 
+         <li class="li">Omitted: Sync all Job Templates, regardless of their Ansible Automation Platform Survey status.</li> 
+         <li class="li"><code class="ph codeph">true</code>: Sync only Job Templates that have Ansible Automation Platform Surveys enabled.</li> 
+         <li class="li"><code class="ph codeph">false</code>: Sync only Job Templates that do not have Ansible Automation Platform Surveys enabled.</li> 
+        </ul> 
+        <p class="p">The <code class="ph codeph">labels</code> filter accepts an array of strings:</p> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">[]</code> (empty array) or omitted: Sync all Job Templates, regardless of associated Ansible Automation Platform Labels.</li> 
+         <li class="li"><code class="ph codeph">["label1", "label2"]</code>: Sync only Job Templates that have any of the specified Ansible Automation Platform Labels (OR logic).</li> 
+         <li class="li">Label matching is case-insensitive.</li> 
+        </ul> 
+       </section> 
+       <section class="section" id="portal-aap-sync-config-ref__label-normalization">
+        <h3 class="title sectiontitle">Ansible Automation Platform label normalization</h3> 
+        <p class="p">Before filtering is applied, Ansible Automation Platform Labels are normalized by applying the following transformations:</p> 
+        <ul class="ul"> 
+         <li class="li">Convert the label to lowercase (for example, "CaC" becomes "cac")</li> 
+         <li class="li">Replace invalid characters</li> 
+         <li class="li">Collapse multiple hyphens into a single hyphen (for example, "app--dev" becomes "app-dev")</li> 
+         <li class="li">Remove leading and trailing hyphens (for example, "--tag--" becomes "tag")</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="portal-aap-sync-examples"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Ansible Automation Platform synchronization configuration examples</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Complete, tested YAML blocks for common synchronization scenarios, such as minimal setup, filtered synchronization, and production configurations. Use these examples to implement and validate settings in your Helm values file.</p> 
+       <section class="section" id="portal-aap-sync-examples__minimal-config">
+        <h3 class="title sectiontitle">Minimal configuration</h3> 
+        <p class="p">Synchronizes the Organization, Users, Teams, and Job Templates using the default 60-minute frequency and 15-minute timeout.</p> 
+        <pre class="pre codeblock language-yaml"><code>catalog:
+  providers:
+    rhaap:
+      '{{- include "catalog.providers.env" . }}':
+        orgs: Default
+        sync:
+          orgsUsersTeams:
+            schedule:
+              frequency: { minutes: 60 }
+              timeout: { minutes: 15 }
+          jobTemplates:
+            enabled: true
+            schedule:
+              frequency: { minutes: 60 }
+              timeout: { minutes: 15 }</code></pre> 
+       </section> 
+       <section class="section" id="portal-aap-sync-examples__filter-by-survey">
+        <h3 class="title sectiontitle">Filter by survey status</h3> 
+        <p class="p">Synchronize identity data, but filter Job Templates to include only those that have Ansible Automation Platform Surveys enabled.</p> 
+        <p class="p">To sync Job Templates without Ansible Automation Platform Surveys, set <code class="ph codeph">surveyEnabled:</code> to <code class="ph codeph">false</code>.</p> 
+        <pre class="pre codeblock language-yaml"><code>catalog:
+  providers:
+    rhaap:
+      development:
+        orgs: Default
+        sync:
+          orgsUsersTeams:
+            schedule:
+              frequency: { minutes: 60 }
+              timeout: { minutes: 15 }
+          jobTemplates:
+            enabled: true
+            surveyEnabled: true
+            schedule:
+              frequency: { minutes: 60 }
+              timeout: { minutes: 15 }</code></pre> 
+       </section> 
+       <section class="section" id="portal-aap-sync-examples__filter-by-labels">
+        <h3 class="title sectiontitle">Filter by labels</h3> 
+        <p class="p">Synchronize Job Templates that match any of the specified Ansible Automation Platform Labels: <code class="ph codeph">portal</code>, <code class="ph codeph">self-service</code>, or <code class="ph codeph">production</code>. The configuration uses OR logic for labels.</p> 
+        <pre class="pre codeblock language-yaml"><code>catalog:
+  providers:
+    rhaap:
+      development:
+        orgs: Default
+        sync:
+          orgsUsersTeams:
+            schedule:
+              frequency: { minutes: 60 }
+              timeout: { minutes: 15 }
+          jobTemplates:
+            enabled: true
+            labels:
+              - portal
+              - self-service
+              - production
+            schedule:
+              frequency: { minutes: 60 }
+              timeout: { minutes: 15 }</code></pre> 
+       </section> 
+       <section class="section" id="portal-aap-sync-examples__exclude-by-labels">
+        <h3 class="title sectiontitle">Exclude by labels</h3> 
+        <p class="p">To prevent templates with specific labels from syncing into the portal, use the <code class="ph codeph">excludeLabels</code> parameter in your template configuration or search query.</p> 
+        <p class="p">You must format excluded labels as an array (for example, <code class="ph codeph">excludeLabels: ["test", "deprecated"]</code>).</p> 
+        <pre class="pre codeblock language-yaml"><code>catalog:
+  providers:
+    rhaap:
+      development:
+        orgs: Default
+        sync:
+          orgsUsersTeams:
+            schedule:
+              frequency: { minutes: 60 }
+              timeout: { minutes: 15 }
+          jobTemplates:
+            enabled: true
+            labels:
+              - portal
+              - self-service
+              - production
+            excludeLabels:
+              - "test"
+              - "example"
+            schedule:
+              frequency: { minutes: 60 }
+              timeout: { minutes: 15 }</code></pre> 
+       </section> 
+       <section class="section" id="portal-aap-sync-examples__combine-filters">
+        <h3 class="title sectiontitle">Combine filters for production</h3> 
+        <p class="p">Combine survey status and label filters:</p> 
+        <pre class="pre codeblock language-yaml"><code>catalog:
+  providers:
+    rhaap:
+      production:
+        orgs: Default
+        sync:
+          orgsUsersTeams:
+            schedule:
+              frequency: { hours: 1 }
+              timeout: { minutes: 15 }
+          jobTemplates:
+            enabled: true
+            surveyEnabled: true
+            labels:
+              - portal
+              - self-service
+            schedule:
+              frequency: { hours: 1 }
+              timeout: { minutes: 15 }</code></pre> 
+        <p class="p">This configuration syncs:</p> 
+        <ul class="ul"> 
+         <li class="li">All Users and Teams from the "Default" organization</li> 
+         <li class="li">Job Templates that belong to "Default" organization AND have Ansible Automation Platform Surveys enabled AND have Ansible Automation Platform Labels "portal" OR "self-service"</li> 
+        </ul> 
+       </section> 
+       <section class="section" id="portal-aap-sync-examples__custom-frequencies">
+        <h3 class="title sectiontitle">Custom sync frequencies</h3> 
+        <p class="p">Fast synchronization (development):</p> 
+        <pre class="pre codeblock language-yaml"><code>catalog:
+  providers:
+    rhaap:
+      development:
+        orgs: Default
+        sync:
+          orgsUsersTeams:
+            schedule:
+              frequency: { minutes: 5 }
+              timeout: { seconds: 30 }
+          jobTemplates:
+            enabled: true
+            schedule:
+              frequency: { minutes: 5 }
+              timeout: { seconds: 30 }</code></pre> 
+        <p class="p">Standard synchronization:</p> 
+        <pre class="pre codeblock language-yaml"><code>catalog:
+  providers:
+    rhaap:
+      development:
+        orgs: Default
+        sync:
+          orgsUsersTeams:
+            schedule:
+              frequency: { hours: 1 }
+              timeout: { minutes: 15 }
+          jobTemplates:
+            enabled: true
+            schedule:
+              frequency: { hours: 1 }
+              timeout: { minutes: 15 }</code></pre> 
+        <p class="p">Slow synchronization:</p> 
+        <pre class="pre codeblock language-yaml"><code>catalog:
+  providers:
+    rhaap:
+      development:
+        orgs: Default
+        sync:
+          orgsUsersTeams:
+            schedule:
+              frequency: { hours: 4 }
+              timeout: { minutes: 30 }
+          jobTemplates:
+            enabled: true
+            schedule:
+              frequency: { hours: 4 }
+              timeout: { minutes: 30 }</code></pre> 
+       </section> 
+       <section class="section" id="portal-aap-sync-examples__different-frequencies">
+        <h3 class="title sectiontitle">Different frequencies for identity and templates</h3> 
+        <p class="p">Sync identity data less frequently than Job Templates:</p> 
+        <pre class="pre codeblock language-yaml"><code>catalog:
+  providers:
+    rhaap:
+      production:
+        orgs: Default
+        sync:
+          orgsUsersTeams:
+            schedule:
+              frequency: { hours: 4 }
+              timeout: { minutes: 15 }
+          jobTemplates:
+            enabled: true
+            schedule:
+              frequency: { minutes: 30 }
+              timeout: { minutes: 10 }</code></pre> 
+       </section> 
+       <section class="section" id="portal-aap-sync-examples__disable-template-sync">
+        <h3 class="title sectiontitle">Disable Job Template sync</h3> 
+        <p class="p">Set <code class="ph codeph">enabled: false</code> to temporarily disable Job Template synchronization while maintaining identity sync.</p> 
+        <pre class="pre codeblock language-yaml"><code>catalog:
+  providers:
+    rhaap:
+      development:
+        orgs: Default
+        sync:
+          orgsUsersTeams:
+            schedule:
+              frequency: { minutes: 60 }
+              timeout: { minutes: 15 }
+          jobTemplates:
+            enabled: false
+            schedule:
+              frequency: { minutes: 60 }
+              timeout: { minutes: 15 }</code></pre> 
+       </section> 
+       <section class="section" id="portal-aap-sync-examples__production-example">
+        <h3 class="title sectiontitle">Production configuration example</h3> 
+        <p class="p">Complete production configuration with filters:</p> 
+        <pre class="pre codeblock language-yaml"><code>catalog:
+  providers:
+    rhaap:
+      production:
+        orgs: Default
+        sync:
+          orgsUsersTeams:
+            schedule:
+              frequency: { hours: 1 }
+              timeout: { minutes: 15 }
+          jobTemplates:
+            enabled: true
+            surveyEnabled: true
+            labels:
+              - production
+              - self-service
+            schedule:
+              frequency: { hours: 1 }
+              timeout: { minutes: 15 }</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="portal-aap-sync-manual"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Manually triggering synchronization</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Ansible Automation Platform administrators can manually trigger synchronization from the Ansible automation portal UI instead of waiting for the next scheduled sync.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to Ansible automation portal as an Ansible Automation Platform Administrator.</span> </li>
+         <li class="li step"> <span class="ph cmd">Navigate to the <span class="ph uicontrol">Synchronization management</span> page.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol">Manual sync</span> for Organization or Job Templates.</span> </li>
+         <li class="li step"> <span class="ph cmd">Monitor the sync progress in the UI.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">The synchronization is listed as <span class="ph uicontrol">Successful</span> on the <span class="ph uicontrol">Synchronization management</span> page.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="portal-aap-sync-troubleshooting"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Troubleshooting Ansible Automation Platform synchronization</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Review common issues, symptoms, and solutions if synchronization between Ansible Automation Platform and Ansible automation portal does not function as expected.</p> 
+       <section class="section" id="portal-aap-sync-troubleshooting__no-job-templates">
+        <h3 class="title sectiontitle">No Job Templates appearing in portal</h3> 
+        <p class="p"><strong class="ph b">Issue:</strong> Expected Job Templates are missing from the portal interface.</p> 
+        <p class="p"><strong class="ph b">Solutions:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Verify the <code class="ph codeph">surveyEnabled</code> setting in your Helm values file matches the status of your Job Templates.</li> 
+         <li class="li">Confirm the <code class="ph codeph">labels</code> filter includes the correct, approved Ansible Automation Platform Label names.</li> 
+         <li class="li">Try temporarily removing filters to confirm if the Job Templates appear without restrictions.</li> 
+         <li class="li">Verify the Ansible Automation Platform Organization name spelling is exact (it is case-sensitive).</li> 
+         <li class="li">Check Ansible Automation Platform connectivity and the configured token permissions.</li> 
+        </ul> 
+       </section> 
+       <section class="section" id="portal-aap-sync-troubleshooting__no-users-teams">
+        <h3 class="title sectiontitle">No Users or Teams appearing in portal</h3> 
+        <p class="p"><strong class="ph b">Issue:</strong> Expected users or teams are missing from the portal interface.</p> 
+        <p class="p"><strong class="ph b">Solutions:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Check Ansible Automation Platform connectivity and the configured token permissions.</li> 
+         <li class="li">Verify the Ansible Automation Platform Organization name matches exactly.</li> 
+         <li class="li">Review the configured synchronization schedule and check system logs.</li> 
+         <li class="li">Ensure users have the proper organization or team memberships within Ansible Automation Platform.</li> 
+        </ul> 
+       </section> 
+       <section class="section" id="portal-aap-sync-troubleshooting__slow-sync">
+        <h3 class="title sectiontitle">Slow synchronization</h3> 
+        <p class="p"><strong class="ph b">Issue:</strong> Synchronization takes too long to complete or times out.</p> 
+        <p class="p"><strong class="ph b">Symptoms:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Timeouts during synchronization.</li> 
+         <li class="li">Timeout errors appear in the logs.</li> 
+        </ul> 
+        <p class="p"><strong class="ph b">Solutions:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Increase the <code class="ph codeph">timeout</code> value in the synchronization schedule.</li> 
+         <li class="li">Reduce the synchronization <code class="ph codeph">frequency</code> (sync less often).</li> 
+         <li class="li">Add more specific filters to the Job Templates configuration to reduce the overall count of entities processed.</li> 
+         <li class="li">For large organizations, increase the <code class="ph codeph">timeout</code> specifically for the identity sync (<code class="ph codeph">orgsUsersTeams</code>).</li> 
+        </ul> 
+       </section> 
+       <section class="section" id="portal-aap-sync-troubleshooting__wrong-org">
+        <h3 class="title sectiontitle">Wrong Ansible Automation Platform organization</h3> 
+        <p class="p"><strong class="ph b">Issue:</strong> The portal displays unexpected Job Templates, users, or teams.</p> 
+        <p class="p"><strong class="ph b">Symptoms:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Expected Job Templates do not appear.</li> 
+         <li class="li">Incorrect templates appear.</li> 
+         <li class="li">Users or teams are missing, or the wrong ones are present.</li> 
+        </ul> 
+        <p class="p"><strong class="ph b">Solutions:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Verify the Ansible Automation Platform Organization name spelling is exact (it is case-sensitive).</li> 
+         <li class="li">Check the organization names in Ansible Automation Platform itself.</li> 
+         <li class="li">Ensure the configured organization exists in Ansible Automation Platform.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

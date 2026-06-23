@@ -1,0 +1,114 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="configure-enforcement-points"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure enforcement points</h1> 
+     <div class="body taskbody"> 
+      <p class="shortdesc">After you have set up your Ansible Automation Platform instance to communicate with the OPA server, you can set up enforcement points where you want the policy to be applied.</p> 
+      <section> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">Procedure</h2> 
+       </div> 
+       <div class="ul steps-unordered"> 
+        <div class="li step p"> <span class="ph cmd">You can associate a policy with a job template, an inventory, or an organization. Enforcement then occurs in the following ways: </span> 
+         <div class="itemgroup info"> 
+          <dl class="dl"> 
+           <dt class="dt dlterm">
+             Organization 
+           </dt> 
+           <dd class="dd">
+             Jobs launched from a template owned by an organization will fail if the policy is violated. This configuration provides broad control over automation within organizational boundaries. 
+           </dd> 
+           <dt class="dt dlterm">
+             Inventory 
+           </dt> 
+           <dd class="dd">
+             Jobs that use an inventory associated with a policy fail if the policy is violated. This configuration allows you to control access to specific infrastructure resources. 
+           </dd> 
+           <dt class="dt dlterm">
+             Job template 
+           </dt> 
+           <dd class="dd"> 
+            <p class="p">Jobs launched from a template associated with a policy fail if the job violates the associated policy. This configuration provides granular control over specific automation tasks.</p> 
+            <div class="note note note_note"> <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">If you do not associate a policy with a resource, policy evaluation will not occur when you run the related job.</p> 
+             </div> 
+            </div> 
+           </dd> 
+          </dl> 
+         </div> 
+        </div> 
+       </div> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="pac-add-policy-to-org"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Associate a policy with an organization</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to associate a policy with an organization.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Organizations</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">On the <strong class="ph b">Organizations</strong> page: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">To edit an existing organization, find the organization you want to edit and click the pencil icon <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit page"> to go to the editing screen.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">To create a new organization, click <span class="ph uicontrol button">Create organization</span>.</span> </li> 
+          </ol> </li> 
+         <li class="li step"> <span class="ph cmd">In the field labeled <strong class="ph b">Policy enforcement</strong>, enter the query path associated with the policy you want to implement. You must format the query path as <code class="ph codeph">package/rule</code>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Next</span> and then <span class="ph uicontrol button">Finish</span> to save your settings.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="pac-add-policy-to-inventory"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Associate a policy with an inventory</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to associate a policy with an inventory.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">On the <strong class="ph b">Inventories</strong> page: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">To edit an existing inventory, find the inventory you want to edit and click the pencil icon <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit page"> to go to the editing screen.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">To create a new inventory, click <span class="ph uicontrol button">Create inventory</span>.</span> </li> 
+          </ol> </li> 
+         <li class="li step"> <span class="ph cmd">In the field titled <strong class="ph b">Policy enforcement.</strong>, enter the query path associated with the policy you want to implement. You must format the query path as <code class="ph codeph">package/rule</code>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Save inventory</span> if you are editing an existing inventory, or click <span class="ph uicontrol button">Create inventory</span> if you are creating a new inventory.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="pac-add-policy-to-template"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Associate a policy with a job template</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to associate a policy with a job template.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">On the <strong class="ph b">Automation Templates</strong> page: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">To edit an existing job template, find the job template you want to edit and click the pencil icon <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit page"> to go to the editing screen.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">To create a new job template, click <span class="ph uicontrol button">Create template</span>.</span> </li> 
+          </ol> </li> 
+         <li class="li step"> <span class="ph cmd">In the field titled <strong class="ph b">Policy enforcement</strong>, enter the query path associated with the policy you want to implement. You must format the query path as <code class="ph codeph">package/rule</code>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Save job template</span> if you are editing an existing job template, or click <span class="ph uicontrol button">Create job template</span> if you are creating a new job template.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

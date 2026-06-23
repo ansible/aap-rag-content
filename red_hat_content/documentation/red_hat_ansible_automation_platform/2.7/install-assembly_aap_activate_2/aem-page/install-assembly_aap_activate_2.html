@@ -1,0 +1,184 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-aap-activate"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Activate your subscription</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Red Hat Ansible Automation Platform uses available subscriptions or a subscription manifest to allow the use of Ansible Automation Platform.</p> 
+      <p class="p">To obtain a subscription, you can do either of the following:</p> 
+      <ol class="ol"> 
+       <li class="li">Use your Red Hat username and password, service account credentials, or Satellite credentials when you launch Ansible Automation Platform.</li> 
+       <li class="li">Upload a subscriptions manifest file either using the Red Hat Ansible Automation Platform interface or manually in an Ansible Playbook.</li> 
+      </ol> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist reltasks">
+       <strong>Related tasks</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_aap_activate_with_credentials" title="Activate your Ansible Automation Platform subscription at first launch using Red Hat service account credentials or a personal login. This retrieves and imports the license, granting access to Red Hat content and entitlement services.">Activate with credentials</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_aap_activate_with_manifest" title="If you have a subscriptions manifest, you can upload the manifest file by using the Red Hat Ansible Automation Platform interface.">Activate with a manifest file</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-aap-activate-with-credentials"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Activate with credentials</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Activate your Ansible Automation Platform subscription at first launch using Red Hat service account credentials or a personal login. This retrieves and imports the license, granting access to Red Hat content and entitlement services.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You are opted in for Automation Analytics by default when you activate the platform on first login. This helps Red Hat improve the product by delivering you a much better user experience. You can opt out after activating Ansible Automation Platform by taking the following steps:</p> 
+          <ol class="ol"> 
+           <li class="li">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span>.</li> 
+           <li class="li">Clear the <strong class="ph b">Gather data for Automation Analytics</strong> option.</li> 
+           <li class="li">Click <span class="ph uicontrol button">Save</span>.</li> 
+          </ol> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat Ansible Automation Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Service Account</strong> tab in the subscription wizard.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter your <strong class="ph b">Client ID</strong> and <strong class="ph b">Client secret</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select your subscription from the <strong class="ph b">Subscription</strong> list. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">You can also enter your Satellite username and password in the <strong class="ph b">Satellite</strong> tab if your cluster nodes are registered to Satellite through Subscription Manager.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Review the End User License Agreement and select <strong class="ph b">I agree to the End User License Agreement</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Finish</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">After your subscription has been accepted, subscription details are displayed. A status of <em class="ph i">Compliant</em> indicates your subscription is in compliance with the number of hosts you have automated within your subscription count. Otherwise, your status shows as <em class="ph i">Out of Compliance</em>, indicating you have exceeded the number of hosts in your subscription. Other important information displayed include the following:</p> 
+        <dl class="dl"> 
+         <dt class="dt dlterm">
+          Hosts automated
+         </dt> 
+         <dd class="dd">
+          Host count automated by the job, which consumes the license count
+         </dd> 
+         <dt class="dt dlterm">
+          Hosts imported
+         </dt> 
+         <dd class="dd">
+          Host count considering all inventory sources (does not impact hosts remaining)
+         </dd> 
+         <dt class="dt dlterm">
+          Hosts remaining
+         </dt> 
+         <dd class="dd">
+          Total host count minus hosts automated
+         </dd> 
+        </dl> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-aap-activate-with-manifest"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Activate with a manifest file</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">If you have a subscriptions manifest, you can upload the manifest file by using the Red Hat Ansible Automation Platform interface.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <p class="p">You must have a Red Hat subscription manifest file exported from the Red Hat Customer Portal. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_aap_activate_1#assembly-aap-obtain-manifest-files" title="You can obtain a subscription manifest in the Subscription Allocations section of Red Hat Subscription Management.">Obtaining a manifest file</a>.</p> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You are opted in for Automation Analytics by default when you activate the platform on first login. This helps Red Hat improve the product by delivering you a much better user experience. You can opt out after activating Ansible Automation Platform by taking the following steps:</p> 
+          <ol class="ol"> 
+           <li class="li">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">System</span></span>.</li> 
+           <li class="li">Clear the <strong class="ph b">Gather data for Automation Analytics</strong> option.</li> 
+           <li class="li">Click <span class="ph uicontrol button">Save</span>.</li> 
+          </ol> 
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Red Hat Ansible Automation Platform. </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">If you are not immediately taken to the subscription wizard, go to <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Subscription</span></span>.</span> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the <strong class="ph b">Subscription manifest</strong> tab.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Browse</span> and select your manifest file.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Review the End User License Agreement and select <strong class="ph b">I agree to the End User License Agreement</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Finish</span>. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If the <span class="ph uicontrol button">BROWSE</span> button is disabled on the subscription wizard page, clear the <strong class="ph b">USERNAME</strong> and <strong class="ph b">PASSWORD</strong> fields.</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">After your subscription has been accepted, subscription details are displayed. A status of <em class="ph i">Compliant</em> indicates your subscription is in compliance with the number of hosts you have automated within your subscription count. Otherwise, your status shows as <em class="ph i">Out of Compliance</em>, indicating you have exceeded the number of hosts in your subscription. Other important information displayed include the following:</p> 
+        <dl class="dl"> 
+         <dt class="dt dlterm">
+          Hosts automated
+         </dt> 
+         <dd class="dd">
+          Host count automated by the job, which uses the subscription count
+         </dd> 
+         <dt class="dt dlterm">
+          Hosts imported
+         </dt> 
+         <dd class="dd">
+          Host count considering all inventory sources (does not impact hosts remaining)
+         </dd> 
+         <dt class="dt dlterm">
+          Hosts remaining
+         </dt> 
+         <dd class="dd">
+          Total host count minus hosts automated
+         </dd> 
+        </dl> 
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You can return to the subscription wizard by selecting <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Subscription</span></span> from the navigation panel and clicking <span class="ph uicontrol button">Edit subscription</span>.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

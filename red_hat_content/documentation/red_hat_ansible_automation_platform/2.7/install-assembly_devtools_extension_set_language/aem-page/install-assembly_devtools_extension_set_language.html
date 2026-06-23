@@ -1,0 +1,74 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="extension-set-language"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Set the language for the VS Code extension</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The Ansible VS Code extension works only when the language associated with a file is set to Ansible. The extension provides features that help create Ansible playbooks, such as auto-completion, hover, and diagnostics.</p> 
+      <p class="p">The Ansible VS Code extension automatically associates the Ansible language with some files. The procedures below describe how to set the language for files that are not recognized as Ansible files.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="devtools-extension-set-language"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Associate the Ansible language to YAML files</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The following procedure describes how to manually assign the Ansible language to a YAML file that is open in VS Code.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Open or create a YAML file in VS Code.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Hover the cursor over the language identified in the status bar at the bottom of the VS Code window to open the <strong class="ph b">Select Language Mode</strong> list.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Ansible</strong> in the list. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The language shown in the status bar at the bottom of the VS Code window for the file is changed to Ansible.</p> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="devtools-extension-set-persistant-file"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Add the persistent file association for the Ansible language to <code class="ph codeph">settings.json</code></h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Instead of manually associating the Ansible language to YAML files, you can add file association for the Ansible language in your <code class="ph codeph">settings.json</code> file.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Open the <code class="ph codeph">settings.json</code> file: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Click <span class="ph menucascade"><span class="ph uicontrol">View</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Command Palette</span></span> to open the command palette.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Enter <code class="ph codeph">Workspace settings</code> in the search box and select <strong class="ph b">Open Workspace Settings (JSON)</strong>.</span> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the following code to <code class="ph codeph">settings.json</code>. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>{
+  ...
+
+  "files.associations": {
+    "*plays.yml": "ansible",
+    "*init.yml": "yaml",
+  }
+}</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,18 @@
+# Configure custom TLS certificates
+## Provide a custom CA certificate
+
+When you manually provide TLS certificates for Ansible Automation Platform services (such as `gateway_tls_cert`, `controller_tls_cert`, or `hub_tls_cert`), those certificates might be signed by a custom CA.
+
+### About this task
+
+Use the `custom_ca_cert` variable to add your CA certificate to the environment for proper authentication and trust of the manually provided certificates.
+
+### Procedure
+
+If any of the TLS certificates you manually provided are signed by a custom CA, specify the CA certificate by using the following variable in your inventory file:
+
+```
+custom_ca_cert=<path_to_custom_ca_certificate>
+```
+If you have more than one CA certificate, combine them into a single file and reference the combined certificate with the `custom_ca_cert` variable.
+

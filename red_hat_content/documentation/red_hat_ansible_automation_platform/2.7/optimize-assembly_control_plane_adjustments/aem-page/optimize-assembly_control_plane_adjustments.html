@@ -1,0 +1,124 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-control-plane-adjustments_performance-considerations"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Adjust the control plane to tune performance</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The control plane refers to the automation controller pods which contain the web and task containers that, among other things, provide the user interface and handle the scheduling and launching of jobs.</p> 
+      <p class="p">On the automation controller custom resource, the number of <em class="ph i">replicas</em> determines the number of automation controller pods in the automation controller deployment.</p> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-set-requests-limits-for-containers"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Requests and limits for task containers</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You must set a value for the task container’s CPU and memory resource limits. For each job that is run in an execution node, processing must occur on the control plane to schedule, open, and receive callback events for that job.</p> 
+       <section class="section"> 
+        <p class="p">For Operator deployments of automation controller, this control plane capacity usage is tracked on the <strong class="ph b">controlplane</strong> instance group. The available capacity is determined based on the limits the user sets on the task container, using the <strong class="ph b">task_resource_requirements</strong> field in the automation controller specification, or in the OpenShift UI, when creating automation controller.</p> 
+        <p class="p">You can also set memory and CPU resource limits that make sense for your cluster.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-container-resource-requirements"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Containers resource requirements</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can configure the resource requirements of tasks and the web containers, at both the lower end (requests) and the upper end (limits). The execution environment control plane is used for project updates, but is normally the same as the default execution environment for jobs.</p> 
+       <section class="section"> 
+        <p class="p">Setting resource requests and limits is a best practice because a container that has both defined is given a higher <em class="ph i">Quality of Service</em> class. This means that if the underlying node is resource constrained and the cluster has to reap a pod to prevent running memory or other failure, the control plane pod is less likely to be reaped.</p> 
+        <p class="p">These requests and limits apply to the control pods for automation controller and if limits are set, determine the <em class="ph i">capacity</em> of the instance. By default, controlling a job takes one unit of capacity. The memory and CPU limits of the task container are used to determine the capacity of control nodes. For more information about how this is calculated, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_controller_capacity_determination#controller-capacity-determination" title="The automation controller capacity system determines how many jobs can run on an instance given the amount of resources available to the instance and the size of the jobs that are running (referred to as Impact). The algorithm used to determine this is based on the following two things:">Automation controller capacity determination and job impact</a>.</p> 
+        <p class="p">See also <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_specify_dedicated_nodes#ref-schedule-jobs-worker-nodes" title="Both automation controller and Kubernetes play a role in scheduling a job.">Jobs scheduled on the worker nodes</a>.</p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.3333%">
+          <col style="width:33.3333%">
+          <col style="width:33.3334%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="ref-container-resource-requirements__entry__1">Name</th> 
+           <th class="entry" id="ref-container-resource-requirements__entry__2">Description</th> 
+           <th class="entry" id="ref-container-resource-requirements__entry__3">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-container-resource-requirements__entry__1"> <p class="p"> <code class="ph codeph">web_resource_requirements</code> </p> </td> 
+           <td class="entry" headers="ref-container-resource-requirements__entry__2"> <p class="p">Web container resource requirements</p> </td> 
+           <td class="entry" headers="ref-container-resource-requirements__entry__3"> <p class="p">requests: {CPU: 100m, memory: 128Mi}</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-container-resource-requirements__entry__1"> <p class="p"> <code class="ph codeph">task_resource_requirements</code> </p> </td> 
+           <td class="entry" headers="ref-container-resource-requirements__entry__2"> <p class="p">Task container resource requirements</p> </td> 
+           <td class="entry" headers="ref-container-resource-requirements__entry__3"> <p class="p">requests: {CPU: 100m, memory: 128Mi}</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-container-resource-requirements__entry__1"> <p class="p"> <code class="ph codeph">ee_resource_requirements</code> </p> </td> 
+           <td class="entry" headers="ref-container-resource-requirements__entry__2"> <p class="p">EE control plane container resource requirements</p> </td> 
+           <td class="entry" headers="ref-container-resource-requirements__entry__3"> <p class="p">requests: {CPU: 100m, memory: 128Mi}</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="ref-container-resource-requirements__entry__1"> <p class="p"> <code class="ph codeph">redis_resource_requirements</code> </p> </td> 
+           <td class="entry" headers="ref-container-resource-requirements__entry__2"> <p class="p">Redis control plane container resource requirements</p> </td> 
+           <td class="entry" headers="ref-container-resource-requirements__entry__3"> <p class="p">requests: {CPU:100m, memory: 128Mi}</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p">The use of <code class="ph codeph">topology_spread_constraints</code> to maximally spread control nodes onto separate underlying Kubernetes worker nodes is recommended. A reasonable set of requests and limits would be limits whose sum is equal to the actual resources on the node. If only <code class="ph codeph">limits</code> are set, then the request is automatically set to be equal to the limit. But because some variability of resource usage between the containers in the control pod is permitted, you can set <code class="ph codeph">requests</code> to a lower amount, for example to 25% of the resources available on the node. An example of container customization for a cluster where the worker nodes have 4 CPUs and 16 GB of RAM could be:</p> 
+        <pre class="pre codeblock"><code>spec:
+  ...
+  web_resource_requirements:
+    requests:
+      cpu: 250m
+      memory: 1Gi
+    limits:
+      cpu: 1000m
+      memory: 4Gi
+  task_resource_requirements:
+    requests:
+      cpu: 250m
+      memory: 1Gi
+    limits:
+      cpu: 2000m
+      memory: 4Gi
+  redis_resource_requirements
+    requests:
+      cpu: 250m
+      memory: 1Gi
+    limits:
+      cpu: 1000m
+      memory: 4Gi
+  ee_resource_requirements:
+    requests:
+      cpu: 250m
+      memory: 1Gi
+    limits:
+      cpu: 1000m
+      memory: 4Gi</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="con-alternative-capacity-limits"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Alternative capacity limiting with automation controller settings</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The capacity of a control node in OpenShift is determined by the memory and CPU limits. However, if these are not set then the capacity is determined by the memory and CPU detected by the pod on the filesystem, which are actually the CPU and memory of the underlying Kubernetes node.</p> 
+       <p class="p">This can lead to issues with overwhelming the underlying Kubernetes pod if the automation controller pod is not the only pod on that node. If you do not want to set limits directly on the task container, you can use <code class="ph codeph">extra_settings</code>.</p> 
+       <pre class="pre codeblock"><code>SYSTEM_TASK_ABS_MEM = 3gi
+SYSTEM_TASK_ABS_CPU = 750m</code></pre> 
+       <p class="p">This acts as a soft limit within the application that enables automation controller to control how much work it attempts to run, while not risking any CPU throttling from Kubernetes itself, or being reaped if memory usage peaks above the required limit. These settings accept the same format accepted by resource requests and limits in the Kubernetes resource definition.</p> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-assembly_specify_dedicated_nodes#proc-specify-nodes-job-execution" title="You can add a node selector to the container group pod specification to ensure they only run against certain nodes. First add a label to the nodes you want to run jobs against.">Specify nodes for job execution</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

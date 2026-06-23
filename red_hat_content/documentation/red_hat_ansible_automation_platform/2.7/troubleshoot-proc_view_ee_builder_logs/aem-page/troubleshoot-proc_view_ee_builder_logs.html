@@ -1,0 +1,97 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-view-ee-builder-logs">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">View Ansible automation portal logs for execution environment builder</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">View Ansible automation portal logs to diagnose authentication failures, sync errors, catalog registration issues, and SCM connectivity problems.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">Ansible automation portal logs contain diagnostic information for troubleshooting execution environment builder issues. The procedure for accessing logs depends on your deployment type.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step"> <span class="ph cmd">Access the logs for your deployment type.</span> 
+        <ul class="ul choices"> 
+         <li class="li choice"> <p class="p">For OpenShift deployments, run the following command to view backend logs:</p> <pre class="pre codeblock"><code>$ oc logs -n <var class="keyword varname">namespace</var> deployment/<var class="keyword varname">portal-deployment-name</var> -c backstage-backend</code></pre> <p class="p">To filter results for relevant entries, pipe the output through <code class="ph codeph">grep</code>:</p> <pre class="pre codeblock"><code>$ oc logs -n <var class="keyword varname">namespace</var> deployment/<var class="keyword varname">portal-deployment-name</var> -c backstage-backend | grep -i "catalog\|ansible\|sync\|error"</code></pre> </li> 
+         <li class="li choice"> <p class="p">For RHEL appliance deployments, use <code class="ph codeph">journalctl</code> to view recent portal logs:</p> <pre class="pre codeblock"><code>$ sudo journalctl -u portal --since "1 hour ago"</code></pre> <p class="p">Alternatively, view container logs directly:</p> <pre class="pre codeblock"><code>$ sudo podman logs <var class="keyword varname">portal-container-name</var></code></pre> </li> 
+        </ul> </li>
+       <li class="li step"> <span class="ph cmd">Compare the log output against the common log patterns table to identify the issue.</span> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">The following table lists common log messages and their meanings to help you diagnose execution environment builder issues.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:40%">
+        <col style="width:60%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="proc-view-ee-builder-logs__entry__1">Log message</th> 
+         <th class="entry" id="proc-view-ee-builder-logs__entry__2">Meaning</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__1"><code class="ph codeph">Failed to send POST request: TypeError: fetch failed</code></td> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__2">Portal backend cannot reach AAP due to TLS certificate rejection. Set <code class="ph codeph">checkSSL</code> to <code class="ph codeph">false</code> in both <code class="ph codeph">ansible.rhaap</code> and <code class="ph codeph">auth.providers.rhaap</code>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__1"><code class="ph codeph">Failed to send fetch data: fetch failed</code></td> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__2">Same TLS issue affecting catalog sync API calls. Set <code class="ph codeph">checkSSL</code> to <code class="ph codeph">false</code>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__1"><code class="ph codeph">Auth response is missing cookie nonce</code></td> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__2">OAuth nonce cookie lost during redirect. Accept the AAP certificate in your browser first.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__1"><code class="ph codeph">Error retrieving organization details</code> or <code class="ph codeph">job_templates</code></td> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__2">Catalog sync failed. Check <code class="ph codeph">checkSSL</code> and verify the AAP token has read permissions.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__1"><code class="ph codeph">No GitHub integration configured for host</code></td> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__2">Missing <code class="ph codeph">integrations.github</code> entry in configuration.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__1"><code class="ph codeph">No credentials for GitHub host</code></td> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__2">Personal access token missing or GitHub App not installed for the organization.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__1"><code class="ph codeph">catalog processing error</code></td> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__2">Invalid template YAML or unreachable <code class="ph codeph">catalog.locations</code> URL.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__1"><code class="ph codeph">ansible content sync</code></td> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__2">Sync progress and errors for <code class="ph codeph">ansibleGitContents</code> or <code class="ph codeph">pahCollections</code> providers.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__1"><code class="ph codeph">Access-Control-Allow-Origin</code> or <code class="ph codeph">CORS policy</code> (browser console)</td> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__2">Request blocked because the origin is not in <code class="ph codeph">backend.cors.origin</code>. Add the missing URL.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__1"><code class="ph codeph">invalid redirect_uri</code></td> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__2">OAuth callback URL does not match the configured portal base URL or Git provider OAuth app settings.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__1"><code class="ph codeph">ENOTFOUND plugin-registry</code></td> 
+         <td class="entry" headers="proc-view-ee-builder-logs__entry__2">Tarball mode configured but plugin registry service not deployed.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

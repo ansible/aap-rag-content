@@ -1,0 +1,257 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ansible-platform-collection-modules">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Modules in the ansible.platform collection</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The <code class="ph codeph">ansible.platform</code> collection provides modules for managing Ansible Automation Platform resources. The following tables list the available modules grouped by category.</p> 
+     <section class="section" id="ansible-platform-collection-modules__identity-access">
+      <h2 class="title sectiontitle">Identity and access management</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:50%">
+        <col style="width:25%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ansible-platform-collection-modules__identity-access__entry__1">Module</th> 
+         <th class="entry" id="ansible-platform-collection-modules__identity-access__entry__2">Description</th> 
+         <th class="entry" id="ansible-platform-collection-modules__identity-access__entry__3">Supported states</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__1"><code class="ph codeph">organization</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__2">Create, update, or delete organizations.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__1"><code class="ph codeph">user</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__2">Create, update, or delete users. Configure superuser status and authenticator associations.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__1"><code class="ph codeph">team</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__2">Create, update, or delete teams within an organization.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__1"><code class="ph codeph">role_definition</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__2">Create, update, or delete custom RBAC role definitions with specific permissions.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__1"><code class="ph codeph">role_user_assignment</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__2">Assign roles to users for specific resources or organizations.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__3">present, absent, exists</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__1"><code class="ph codeph">role_team_assignment</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__2">Assign roles to teams for specific resources or organizations. Supports batch operations with<code class="ph codeph">assignment_objects</code>.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__identity-access__entry__3">present, absent, exists</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="ansible-platform-collection-modules__authentication">
+      <h2 class="title sectiontitle">Authentication</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:50%">
+        <col style="width:25%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ansible-platform-collection-modules__authentication__entry__1">Module</th> 
+         <th class="entry" id="ansible-platform-collection-modules__authentication__entry__2">Description</th> 
+         <th class="entry" id="ansible-platform-collection-modules__authentication__entry__3">Supported states</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__authentication__entry__1"><code class="ph codeph">authenticator</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__authentication__entry__2">Configure authentication providers such as LDAP, OIDC, SAML, and GitHub.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__authentication__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__authentication__entry__1"><code class="ph codeph">authenticator_map</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__authentication__entry__2">Define authentication mapping rules to map external groups to Ansible Automation Platform roles, teams, and organizations.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__authentication__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__authentication__entry__1"><code class="ph codeph">authenticator_user</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__authentication__entry__2">Associate users with authentication providers for migration between providers. This module does not support deleting associations.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__authentication__entry__3">present, exists</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="ansible-platform-collection-modules__gateway-infrastructure">
+      <h2 class="title sectiontitle">Gateway infrastructure</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:50%">
+        <col style="width:25%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ansible-platform-collection-modules__gateway-infrastructure__entry__1">Module</th> 
+         <th class="entry" id="ansible-platform-collection-modules__gateway-infrastructure__entry__2">Description</th> 
+         <th class="entry" id="ansible-platform-collection-modules__gateway-infrastructure__entry__3">Supported states</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__1"><code class="ph codeph">service</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__2">Configure API service routes for automation controller, automation hub, and Event-Driven Ansible controller.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__1"><code class="ph codeph">route</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__2">Configure non-API gateway routes.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__1"><code class="ph codeph">service_cluster</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__2">Manage service clusters with health check and outlier detection settings.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__1"><code class="ph codeph">service_node</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__2">Add or remove individual service nodes within clusters.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__1"><code class="ph codeph">service_type</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__2">Define service type definitions with login and logout paths.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__1"><code class="ph codeph">service_key</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__2">Manage service authentication keys for inter-service communication.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__1"><code class="ph codeph">http_port</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__2">Configure HTTP listener ports for the Envoy proxy.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__1"><code class="ph codeph">ui_plugin_route</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__2">Configure UI plugin routes for front-end plugin integration.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__gateway-infrastructure__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="ansible-platform-collection-modules__platform-configuration">
+      <h2 class="title sectiontitle">Platform configuration</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:50%">
+        <col style="width:25%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ansible-platform-collection-modules__platform-configuration__entry__1">Module</th> 
+         <th class="entry" id="ansible-platform-collection-modules__platform-configuration__entry__2">Description</th> 
+         <th class="entry" id="ansible-platform-collection-modules__platform-configuration__entry__3">Supported states</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__platform-configuration__entry__1"><code class="ph codeph">settings</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__platform-configuration__entry__2">Modify platform-wide settings including token authentication, JWT configuration, password policies, and session settings. This module has no<code class="ph codeph">state</code> parameter and always applies changes. To get a full list of available setting keys for your environment, query the platform gateway REST API.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__platform-configuration__entry__3">N/A (always applies)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__platform-configuration__entry__1"><code class="ph codeph">feature_flag</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__platform-configuration__entry__2">Query and manage feature flags. Only run-time flags can be modified; install-time flags are read-only. This module defaults to<code class="ph codeph">exists</code> instead of<code class="ph codeph">present</code>, so you must explicitly set<code class="ph codeph">state: present</code> to modify a flag.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__platform-configuration__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">The <code class="ph codeph">settings</code> module requires a dictionary of setting keys and values, but the full list of available keys depends on your Ansible Automation Platform deployment. To discover all available setting keys and their current values, query the following REST API endpoint on your platform gateway:</p> 
+      <p class="p"><code class="ph codeph">https://<var class="keyword varname">aap-host</var>/api/gateway/v1/settings/all/</code></p> 
+     </section> 
+     <section class="section" id="ansible-platform-collection-modules__app-token">
+      <h2 class="title sectiontitle">Application and token management</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:50%">
+        <col style="width:25%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ansible-platform-collection-modules__app-token__entry__1">Module</th> 
+         <th class="entry" id="ansible-platform-collection-modules__app-token__entry__2">Description</th> 
+         <th class="entry" id="ansible-platform-collection-modules__app-token__entry__3">Supported states</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__app-token__entry__1"><code class="ph codeph">application</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__app-token__entry__2">Create, update, or delete OAuth2 applications for platform gateway. Configure grant types, client types, and redirect URIs.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__app-token__entry__3">present, absent, exists, enforced</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__app-token__entry__1"><code class="ph codeph">token</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__app-token__entry__2">Create or delete OAuth2 tokens. Each run creates a new token; this module is not idempotent. The token value is only available at creation time.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__app-token__entry__3">present, absent</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__app-token__entry__1"><code class="ph codeph">ca_certificate</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__app-token__entry__2">Manage CA certificates for mutual TLS (mTLS) authentication.</td> 
+         <td class="entry" headers="ansible-platform-collection-modules__app-token__entry__3">present, absent, exists</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="ansible-platform-collection-modules__lookup-plugin">
+      <h2 class="title sectiontitle">Lookup plugin</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:33.33333333333333%">
+        <col style="width:66.66666666666666%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ansible-platform-collection-modules__lookup-plugin__entry__1">Plugin</th> 
+         <th class="entry" id="ansible-platform-collection-modules__lookup-plugin__entry__2">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ansible-platform-collection-modules__lookup-plugin__entry__1"><code class="ph codeph">gateway_api</code></td> 
+         <td class="entry" headers="ansible-platform-collection-modules__lookup-plugin__entry__2">Query Ansible Automation Platform component API endpoints through the platform gateway. Supports pagination, filtering, and returning objects or IDs. Use for read-only lookups of users, teams, organizations, settings, and other resources. The automation controller, platform gateway, Event-Driven Ansible, and automation hub APIs can be queried with this plugin.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/platform/content/?showing=module" target="_blank" rel="external noopener">ansible.platform module documentation on Automation hub</a></li>
+       <li class="linklist"><a class="link" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/platform/content/?showing=lookup" target="_blank" rel="external noopener">ansible.platform lookup plugin documentation on Automation hub</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-configure-lightspeed-variables">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure Red Hat Ansible Lightspeed variables</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">To deploy Red Hat Ansible Lightspeed, configure the required installation variables in your inventory file.</p> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Add the required installation variables to your inventory file under the <code class="ph codeph">[all: vars]</code> group.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">You will also need to add specific variables to enable the coding assistant, the intelligent assistant, and the MCP server integration. Refer to the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_lightspeed_variables" title="Configure Red Hat Ansible Lightspeed by setting inventory file variables during installation. Use this reference to determine which variables to set for your deployment requirements.">Appendix: Red Hat Ansible Lightspeed variables</a> for information about required and optional variables. </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code># This is the list of inventory file variables required to deploy Red Hat Ansible Lightspeed on a containerized installation.
+
+# Consult the docs if you are unsure what to add.
+# For information about required and optional variables, refer to the Appendix: Red Hat Ansible Lightspeed variables
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-ref_lightspeed_variables
+
+# This section is for your Red Hat Ansible Lightspeed host
+# ---------------------------------------------------------
+[ansiblelightspeed]
+aap.example.com
+
+# This section is for Red Hat Ansible Lightspeed deployment
+# ----------------------------------------------------------
+lightspeed_admin_user: &lt;set your own&gt;
+lightspeed_admin_password: &lt;set your own&gt;
+lightspeed_admin_email: &lt;set your own&gt;
+lightspeed_pg_host: &lt;set your own&gt;
+lightspeed_pg_password: &lt;set your own&gt;
+
+
+# This section is to configure the automation intelligent assistant
+# ----------------------------------------------------------------------
+lightspeed_chatbot_model_url: &lt;set your own&gt;
+lightspeed_chatbot_model_api_key: &lt;set your own&gt;
+lightspeed_chatbot_model_id: : &lt;set your own&gt;
+lightspeed_chatbot_default_provider: 'rhoai'
+lightspeed_chatbot_model_extra_settings: {}
+lightspeed_chatbot_agent_extra_settings: {} 
+# If you want to use Microsoft Azure OpenAI as the LLM provider, specify the lightspeed_chatbot_model_extra_settings value as '{"api_type": ""}', and the lightspeed_chatbot_model_url value to 'https://your_inference_api/openai/v1'.
+
+# This section is to configure the automation intelligent assistant with MCP server integration
+# --------------------------------------------------------------------------------------------------
+lightspeed_mcp_controller_enabled: false
+lightspeed_mcp_lightspeed_enabled: false
+
+
+# This section is to configure the coding assistant
+# -----------------------------------------------------------------
+lightspeed_wca_model_type: 'wca'
+lightspeed_wca_model_url: 'https://api.dataplatform.cloud.ibm.com'
+lightspeed_wca_model_verify_ssl: true
+lightspeed_wca_model_enable_anonymization: true
+lightspeed_wca_health_check: true</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap#installing-containerized-aap" title="Run the install playbook to install containerized Ansible Automation Platform after preparing the Red Hat Enterprise Linux host, downloading the installation program, and configuring the inventory file.">Installing containerized Ansible Automation Platform</a> </li> 
+      </ul> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

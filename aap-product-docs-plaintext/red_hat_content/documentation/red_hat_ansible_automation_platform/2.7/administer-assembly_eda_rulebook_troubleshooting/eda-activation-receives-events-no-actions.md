@@ -1,0 +1,11 @@
+# Troubleshoot failed event-driven automation triggers
+## Troubleshoot actions that fail to trigger after receiving events
+
+If your rulebook activation is **Running** and successfully receiving events, but no actions are being executed, the issue is likely within the logic of your rulebook.
+
+### Procedure
+
+1.  **Check rule conditions:** Review the rulebook YAML to confirm that the conditions (the when statements) are accurately written and precisely match the structure and values of the incoming event payload.
+2.  **Verify indentation and syntax:** Ensure all rulebook syntax and indentation are correct, as a simple error can prevent the rule engine from evaluating conditions.
+3.  **Validate actions:** Confirm that the specified action is a recognized and correctly configured action (for example, `run_job_template` with the proper arguments).
+

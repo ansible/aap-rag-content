@@ -1,0 +1,334 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="configure-portal-rbac">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure role-based access control for Ansible automation portal</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Configure RBAC permissions in Ansible automation portal to control which users can view and execute templates, and which sidebar items are visible to non-admin users.</p> 
+     <section class="section" id="configure-portal-rbac__overview"> 
+      <p class="p">After you install Ansible automation portal and synchronize it with Ansible Automation Platform, only users with AAP administrator privileges can view the auto-generated templates. You must configure role-based access control (RBAC) permissions to allow non-admin users to view and execute templates.</p> 
+      <p class="p">Ansible automation portal uses two categories of permissions:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Catalog and scaffolder permissions</strong> control whether users can view templates, execute actions, and manage tasks.</li> 
+       <li class="li"><strong class="ph b">Navigation permissions</strong> control which sidebar items and pages are visible to users. Without the required navigation permission, a sidebar item and its associated pages are hidden.</li> 
+      </ul> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">RBAC differs by template type:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Auto-generated templates:</strong> Permissions are synchronized from Ansible Automation Platform. Users must have permissions on the underlying AAP job template.</li> 
+         <li class="li"><strong class="ph b">Custom templates:</strong> Permissions must be explicitly configured within Ansible automation portal. Users must also have permissions to run the associated job templates in Ansible Automation Platform.</li> 
+        </ul> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section" id="configure-portal-rbac__permission-model">
+      <h2 class="title sectiontitle">Understand the permission model</h2> 
+      <p class="p">Ansible automation portal and Ansible Automation Platform use separate but related permission systems. Ansible Automation Platform RBAC is the source of truth for synchronization scope and execution permissions.</p> 
+      <p class="p"><strong class="ph b">Ansible automation portal RBAC:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Controls which users can view templates in the Ansible automation portal catalog.</li> 
+       <li class="li">Controls which users can access portal templates and submit jobs.</li> 
+       <li class="li">Controls which navigation items are visible in the sidebar.</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Ansible Automation Platform RBAC:</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Controls synchronization scope:</strong> Only Ansible Automation Platform job templates accessible by the configured API token (<code class="ph codeph">ansible.rhaap.token</code>) are synchronized to Ansible automation portal.</li> 
+       <li class="li"><strong class="ph b">Controls job template visibility and execution:</strong> Ansible Automation Platform permissions determine whether authenticated users can view and execute job templates in Ansible automation portal.</li> 
+       <li class="li"><strong class="ph b">Validates execution permissions:</strong> When a user executes a template, Ansible Automation Platform checks that user's execute permissions before launching the job.</li> 
+      </ul> 
+      <p class="p">If a user can see a template in the catalog but lacks Ansible Automation Platform execute permissions for the associated job template, the user cannot run the job.</p> 
+     </section> 
+     <section class="section" id="configure-portal-rbac__configure-rbac-for-synchronization">
+      <h2 class="title sectiontitle">Configure RBAC for synchronization</h2> 
+      <p class="p">Synchronization uses the Ansible Automation Platform API token configured in Ansible automation portal to determine which data to synchronize from Ansible Automation Platform.</p> 
+      <p class="p">Before you begin:</p> 
+      <ul class="ul"> 
+       <li class="li">You have credentials for an Ansible Automation Platform administrator.</li> 
+       <li class="li">Synchronization of Ansible Automation Platform organization information from Ansible Automation Platform is complete.</li> 
+       <li class="li">Users who execute job templates through Ansible automation portal must have job template execute permissions assigned in Ansible Automation Platform.</li> 
+       <li class="li">The <strong class="ph b">Allow external users to create OAuth2 tokens</strong> setting is enabled in <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Platform gateway settings</span></span> in Ansible Automation Platform.</li> 
+      </ul> 
+      <p class="p">Procedure:</p> 
+      <ol class="ol"> 
+       <li class="li">Log in to Ansible automation portal as an administrator.</li> 
+       <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Administration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">RBAC</span></span>.</li> 
+       <li class="li">Click <strong class="ph b">Create Role</strong> and provide a name (for example, <code class="ph codeph">portal-user</code>).</li> 
+       <li class="li">In the <strong class="ph b">Users and Groups</strong> section, select the Ansible Automation Platform teams and users to assign to this role. Click <strong class="ph b">Next</strong>. <p class="p">You can only select teams and users from the Ansible Automation Platform organization that you configured for synchronization with Ansible automation portal.</p> </li> 
+       <li class="li">In the <strong class="ph b">Add permission policies</strong> section, select the <strong class="ph b">Catalog</strong> plugin from the dropdown menu and enable <code class="ph codeph">catalog.entity.read</code>.</li> 
+       <li class="li">Select the <strong class="ph b">Scaffolder</strong> plugin and enable the following permissions: 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">scaffolder.template.parameter.read</code></li> 
+         <li class="li"><code class="ph codeph">scaffolder.template.step.read</code></li> 
+         <li class="li"><code class="ph codeph">scaffolder.action.execute</code></li> 
+         <li class="li"><code class="ph codeph">scaffolder.task.create</code></li> 
+         <li class="li"><code class="ph codeph">scaffolder.task.read</code> — Required for users to view previous task runs on the <strong class="ph b">History</strong> page.</li> 
+         <li class="li"><code class="ph codeph">scaffolder.task.cancel</code></li> 
+        </ul> </li> 
+       <li class="li">Add the base navigation permissions so users can see the <strong class="ph b">Templates</strong> and <strong class="ph b">History</strong> sidebar items: 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">ansible.templates.view</code></li> 
+         <li class="li"><code class="ph codeph">ansible.history.view</code></li> 
+        </ul> </li> 
+       <li class="li">Click <strong class="ph b">Next</strong> to review your settings, then click <strong class="ph b">Create</strong>.</li> 
+      </ol> 
+      <p class="p">Your new role appears in the <strong class="ph b">All roles</strong> list under <span class="ph menucascade"><span class="ph uicontrol">Administration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">RBAC</span></span>.</p> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">If you are upgrading from plug-in version 2.1, you must add <code class="ph codeph">ansible.templates.view</code> and <code class="ph codeph">ansible.history.view</code> to existing roles. Without these permissions, non-admin users cannot see the <strong class="ph b">Templates</strong> and <strong class="ph b">History</strong> navigation items. For more information, see the upgrade guide for your platform.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section" id="configure-portal-rbac__configure-navigation-permissions">
+      <h2 class="title sectiontitle">Configure navigation permissions</h2> 
+      <p class="p">Ansible automation portal controls the visibility of sidebar items through navigation permissions. Each sidebar item requires a corresponding permission. Users without the required permission do not see the sidebar item or its associated pages.</p> 
+     </section> 
+     <section class="section" id="configure-portal-rbac__base-navigation-permissions">
+      <h2 class="title sectiontitle">Base navigation permissions</h2> 
+      <p class="p">The following permissions control core Ansible automation portal sidebar items. Grant these to all portal users.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:40%">
+        <col style="width:60%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="configure-portal-rbac__base-navigation-permissions__entry__1">Permission</th> 
+         <th class="entry" id="configure-portal-rbac__base-navigation-permissions__entry__2">Controls</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__base-navigation-permissions__entry__1"><code class="ph codeph">ansible.templates.view</code></td> 
+         <td class="entry" headers="configure-portal-rbac__base-navigation-permissions__entry__2"><strong class="ph b">Templates</strong> sidebar item — template catalog and launch wizard</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__base-navigation-permissions__entry__1"><code class="ph codeph">ansible.history.view</code></td> 
+         <td class="entry" headers="configure-portal-rbac__base-navigation-permissions__entry__2"><strong class="ph b">History</strong> sidebar item — task execution history and logs</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="configure-portal-rbac__ee-builder-navigation-permissions">
+      <h2 class="title sectiontitle">Execution environment builder navigation permissions</h2> 
+      <p class="p">The following permissions control execution environment builder sidebar items. Grant these to users who need access to execution environment builder features.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:40%">
+        <col style="width:60%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="configure-portal-rbac__ee-builder-navigation-permissions__entry__1">Permission</th> 
+         <th class="entry" id="configure-portal-rbac__ee-builder-navigation-permissions__entry__2">Controls</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__ee-builder-navigation-permissions__entry__1"><code class="ph codeph">ansible.execution-environments.view</code></td> 
+         <td class="entry" headers="configure-portal-rbac__ee-builder-navigation-permissions__entry__2"><strong class="ph b">Execution Environments</strong> sidebar item — creation wizard and EE catalog</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__ee-builder-navigation-permissions__entry__1"><code class="ph codeph">ansible.collections.view</code></td> 
+         <td class="entry" headers="configure-portal-rbac__ee-builder-navigation-permissions__entry__2"><strong class="ph b">Collections</strong> sidebar item — collection catalog for EE definitions</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__ee-builder-navigation-permissions__entry__1"><code class="ph codeph">ansible.git-repositories.view</code></td> 
+         <td class="entry" headers="configure-portal-rbac__ee-builder-navigation-permissions__entry__2"><strong class="ph b">Git Repositories</strong> sidebar item — saving and syncing EE definitions</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p">Each permission can be assigned individually for granular control.</p> 
+     </section> 
+     <section class="section" id="configure-portal-rbac__grant-navigation-permissions">
+      <h2 class="title sectiontitle">Grant navigation permissions to a role</h2> 
+      <p class="p">Before you begin:</p> 
+      <ul class="ul"> 
+       <li class="li">You have configured base RBAC roles as described in the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-configure_portal_rbac#configure-portal-rbac__configure-rbac-for-synchronization">Configure RBAC for synchronization</a> section.</li> 
+       <li class="li">You have the AAP Administrator role and access to <span class="ph menucascade"><span class="ph uicontrol">Administration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">RBAC</span></span> in Ansible automation portal.</li> 
+      </ul> 
+      <p class="p">Procedure:</p> 
+      <ol class="ol"> 
+       <li class="li">In Ansible automation portal, navigate to <span class="ph menucascade"><span class="ph uicontrol">Administration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">RBAC</span></span> in the sidebar.</li> 
+       <li class="li">Select an existing role to edit, or click <strong class="ph b">Create Role</strong> to create a new role (for example, <code class="ph codeph">ee-builder-users</code>).</li> 
+       <li class="li">In the permissions section, add the navigation permissions your users require: 
+        <ul class="ul"> 
+         <li class="li">For all portal users: <code class="ph codeph">ansible.templates.view</code> and <code class="ph codeph">ansible.history.view</code>.</li> 
+         <li class="li">For execution environment builder users: <code class="ph codeph">ansible.execution-environments.view</code>, <code class="ph codeph">ansible.collections.view</code>, and <code class="ph codeph">ansible.git-repositories.view</code>.</li> 
+        </ul> </li> 
+       <li class="li">If creating a new role, assign the role to the appropriate users or groups.</li> 
+       <li class="li">Click <strong class="ph b">Save</strong>.</li> 
+      </ol> 
+      <p class="p">To hide specific sidebar items from a user group, remove the corresponding permissions from their assigned roles.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Importing and deleting EE templates are AAP administrator-only actions. Users with the AAP Administrator role can perform these actions without additional permission grants.</p> 
+       </div>
+      </div> 
+      <p class="p">Verification:</p> 
+      <ul class="ul"> 
+       <li class="li">Log out and log in as a user assigned to the modified role.</li> 
+       <li class="li">Verify that the expected sidebar items are visible based on the permissions you assigned.</li> 
+       <li class="li">If you granted execution environment builder access, navigate to <span class="ph menucascade"><span class="ph uicontrol">Execution Environments</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Create</span></span> and verify that templates are visible and the wizard launches.</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="configure-portal-rbac__configure-conditional-access">
+      <h2 class="title sectiontitle">Configure conditional access</h2> 
+      <p class="p">You can configure conditional RBAC policies to filter role access by tag. This restricts specific teams or users to a subset of job templates. Ansible Automation Platform labels applied to job templates are synchronized to Ansible automation portal as tags.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Ansible Automation Platform labels are converted to lowercase tags with special characters replaced by hyphens. For example, the Ansible Automation Platform label <code class="ph codeph">Network-Automation</code> becomes the tag <code class="ph codeph">network-automation</code>.</p> 
+       </div>
+      </div> 
+      <p class="p">Before you begin:</p> 
+      <ul class="ul"> 
+       <li class="li">Ansible Automation Platform job templates must have Ansible Automation Platform labels applied and synchronized with Ansible automation portal.</li> 
+       <li class="li">Users who execute job templates through Ansible automation portal must have job template execute permissions assigned in Ansible Automation Platform.</li> 
+      </ul> 
+      <p class="p">Procedure:</p> 
+      <ol class="ol"> 
+       <li class="li">Log in to Ansible automation portal as an administrator.</li> 
+       <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Administration</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">RBAC</span></span>.</li> 
+       <li class="li">Click <strong class="ph b">Create Role</strong> and provide a name (for example, <code class="ph codeph">network-portal-user</code>).</li> 
+       <li class="li">In the <strong class="ph b">Users and Groups</strong> section, select the Ansible Automation Platform teams and users to assign to this role (for example, the <code class="ph codeph">network-team</code>). Click <strong class="ph b">Next</strong>.</li> 
+       <li class="li">In the <strong class="ph b">Add permission policies</strong> section, select the <strong class="ph b">Catalog</strong> plugin and enable <code class="ph codeph">catalog.entity.read</code>.</li> 
+       <li class="li">Click <strong class="ph b">Conditional</strong> to configure a condition-based policy: 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Rule:</strong> Select <code class="ph codeph">HAS_METADATA</code>.</li> 
+         <li class="li"><strong class="ph b">Key:</strong> Enter <code class="ph codeph">tags</code>.</li> 
+         <li class="li"><strong class="ph b">Value:</strong> Enter the tag value to filter by (for example, <code class="ph codeph">network-automation</code>).</li> 
+        </ul> </li> 
+       <li class="li">Select the <strong class="ph b">Scaffolder</strong> plugin and enable all scaffolder permissions listed in the previous procedure.</li> 
+       <li class="li">Click <strong class="ph b">Next</strong> to review your settings, then click <strong class="ph b">Create</strong>.</li> 
+      </ol> 
+      <p class="p">Verification:</p> 
+      <ul class="ul"> 
+       <li class="li">If you configured conditional access by tag, the user should see only templates with the specified tags.</li> 
+       <li class="li">If you did not configure conditional access, the user should see all Ansible Automation Platform job templates for which they have execute permissions in Ansible Automation Platform.</li> 
+       <li class="li">To verify execution permissions, attempt to execute a template. If the user has execute permissions in Ansible Automation Platform for the template, the job launches successfully.</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="configure-portal-rbac__permissions-reference">
+      <h2 class="title sectiontitle">Permissions reference</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:30%">
+        <col style="width:20%">
+        <col style="width:10%">
+        <col style="width:40%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="configure-portal-rbac__permissions-reference__entry__1">Permission</th> 
+         <th class="entry" id="configure-portal-rbac__permissions-reference__entry__2">Resource type</th> 
+         <th class="entry" id="configure-portal-rbac__permissions-reference__entry__3">Policy</th> 
+         <th class="entry" id="configure-portal-rbac__permissions-reference__entry__4">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__1"><code class="ph codeph">catalog.entity.read</code></td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__2">catalog-entity</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__3">read</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__4">View synchronized AAP job templates in the Ansible automation portal catalog.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__1"><code class="ph codeph">scaffolder.template.parameter.read</code></td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__2">scaffolder-template</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__3">read</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__4">Read template parameters in the launch wizard.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__1"><code class="ph codeph">scaffolder.template.step.read</code></td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__2">scaffolder-template</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__3">read</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__4">Read template steps in the launch wizard.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__1"><code class="ph codeph">scaffolder.action.execute</code></td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__2">scaffolder-action</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__3">use</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__4">Execute actions through templates.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__1"><code class="ph codeph">scaffolder.task.create</code></td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__2">scaffolder-task</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__3">create</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__4">Trigger the execution of job templates.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__1"><code class="ph codeph">scaffolder.task.read</code></td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__2">scaffolder-task</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__3">read</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__4">View task execution history and logs on the <strong class="ph b">History</strong> page.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__1"><code class="ph codeph">scaffolder.task.cancel</code></td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__2">scaffolder-task</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__3">use</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__4">Cancel running templates.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__1"><code class="ph codeph">ansible.templates.view</code></td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__2">—</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__3">—</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__4">Show the <strong class="ph b">Templates</strong> sidebar item and pages. Required for all portal users.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__1"><code class="ph codeph">ansible.history.view</code></td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__2">—</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__3">—</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__4">Show the <strong class="ph b">History</strong> sidebar item and pages. Required for all portal users.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__1"><code class="ph codeph">ansible.execution-environments.view</code></td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__2">—</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__3">—</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__4">Show the <strong class="ph b">Execution Environments</strong> sidebar item and pages.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__1"><code class="ph codeph">ansible.collections.view</code></td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__2">—</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__3">—</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__4">Show the <strong class="ph b">Collections</strong> sidebar item and pages.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__1"><code class="ph codeph">ansible.git-repositories.view</code></td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__2">—</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__3">—</td> 
+         <td class="entry" headers="configure-portal-rbac__permissions-reference__entry__4">Show the <strong class="ph b">Git Repositories</strong> sidebar item and pages.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="configure-portal-rbac__adjust-synchronization-frequency">
+      <h2 class="title sectiontitle">Adjust synchronization frequency</h2> 
+      <p class="p">Ansible automation portal synchronizes users, teams, organization, and job template information from Ansible Automation Platform at regular intervals. By default, synchronization occurs hourly.</p> 
+      <p class="p">To change the synchronization frequency:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">RHEL appliance:</strong> Edit <span class="ph filepath">/etc/portal/configs/app-config/app-config.production.yaml</span> and update the <code class="ph codeph">schedule.frequency</code> value under the <code class="ph codeph">catalog.providers.rhaap</code> section. Restart the portal service after saving.</li> 
+       <li class="li"><strong class="ph b">OpenShift Container Platform:</strong> Update the <code class="ph codeph">schedule.frequency</code> value in the Helm chart values file and upgrade the Helm release.</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/html/installing_self-service_automation_portal" target="_blank" rel="external noopener">Installing Ansible automation portal</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

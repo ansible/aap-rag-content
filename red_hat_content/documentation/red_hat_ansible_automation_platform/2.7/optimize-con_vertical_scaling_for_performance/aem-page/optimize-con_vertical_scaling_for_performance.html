@@ -1,0 +1,33 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="vertical-scaling-for-performance">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Vertically scale tested deployment models to improve performance</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Vertical scaling increases the physical resources available to a service, including the CPU, memory, disk volume, and disk Input/Output Operations per Second (IOPS). Use vertical scaling for deployments with high resource utilization or workload demand.</p> 
+     <section class="section" id="vertical-scaling-for-performance___benefits_of_vertical_scaling">
+      <h2 class="title sectiontitle">Benefits of vertical scaling</h2> 
+      <ul class="ul"> 
+       <li class="li">Relieves resource contention: Applications have access to more resources and this can relieve resource contention or exhaustion.</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="vertical-scaling-for-performance___drawbacks_and_other_considerations_for_vertical_scaling">
+      <h2 class="title sectiontitle">Drawbacks and other considerations for vertical scaling</h2> 
+      <ul class="ul"> 
+       <li class="li">Extensive testing required: The installation program attempts to tune application and system configurations to use additional resources, but not all components of the application automatically scale in relation to machine size. Manually tuning each variable requires extensive testing. For this reason, after an instance size has been verified for an environment, horizontal scaling by adding more instances of the same size is recommended.</li> 
+       <li class="li">Application-level limitations: For VM-based installation or Containerized deployments, instances with more than 64 CPU cores and 128 GB of RAM might not scale linearly due to system and application-level limits.</li> 
+       <li class="li">Resource overcommit: Overcommitting virtual machine resources (for example, allocating more virtual CPU/RAM to guests than is physically available on the host) leads to unpredictable performance.</li> 
+       <li class="li">CPU throttling: In OpenShift Container Platform, setting a CPU <code class="ph codeph">limit</code> without an equivalent <code class="ph codeph">request</code> can lead to CPU throttling, even if the node has spare CPU capacity. This throttling negatively impacts API latency. 
+        <ul class="ul">
+         <li class="li">To mitigate this, always set CPU <code class="ph codeph">requests</code> equal to CPU <code class="ph codeph">limits</code>.</li>
+         <li class="li">Monitor CPU throttling using the <code class="ph codeph">container_cpu_cfs_throttled_seconds_total</code> metric.</li>
+        </ul></li> 
+       <li class="li">Database limitations: Scaling the application increases the maximum potential number of database connections from worker processes and the overall memory, I/O, and CPU utilization of the PostgreSQL instance. As you scale past the tested deployment models, deploy your separate Postgres instances per component (platform gateway, Event-Driven Ansible, automation controller, automation hub).</li> 
+      </ul> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

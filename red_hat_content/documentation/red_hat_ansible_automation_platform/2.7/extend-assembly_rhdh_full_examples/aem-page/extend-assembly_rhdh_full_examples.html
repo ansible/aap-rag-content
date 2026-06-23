@@ -1,0 +1,168 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="rhdh-full-examples"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Full configuration examples</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Review complete configuration examples for Ansible plug-ins for Red Hat Developer Hub deployments.</p>
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="rhdh-full-aap-configmap-example"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Full app-config-rhdh ConfigMap example for Ansible plug-ins entries</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">This example details necessary settings like the creatorService URL, optional integrations for Ansible Automation Platform and OpenShift Dev Spaces, and the addition of Ansible software templates to the catalog.</p> 
+       <section class="section"> 
+        <pre class="pre codeblock"><code>kind: ConfigMap
+...
+metadata:
+  name: app-config-rhdh
+  ...
+data:
+  app-config-rhdh.yaml: |-
+    ansible:
+      creatorService:
+        baseUrl: 127.0.0.1
+        port: '8000'
+      # Optional integrations
+      rhaap:
+        baseUrl: '&lt;https://your-controller-url&gt;'
+        token: '&lt;AAP Personal Access Token&gt;'
+        checkSSL: true
+      devSpaces:
+        baseUrl: '&lt;https://MyDevSpacesURL&gt;'
+      automationHub:
+        baseUrl: '&lt;https://MyPrivateAutomationHubURL&gt;'
+
+    ...
+    catalog:
+      locations:
+        - type: url
+          target: https://github.com/ansible/ansible-rhdh-templates/blob/main/all.yaml
+          rules:
+            - allow: [Template]
+    ...</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="rhdh-full-operator-cr-example"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Full Operator Backstage CR example for Ansible plug-ins</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">This example shows the full Backstage custom resource configuration for an Operator-based deployment, including the ADT sidecar container and <code class="ph codeph">imagePullSecrets</code>.</p> 
+       <section class="section"> 
+        <pre class="pre codeblock language-yaml"><code>apiVersion: rhdh.redhat.com/v1alpha5
+kind: Backstage
+metadata:
+  name: developer-hub
+  namespace: &lt;your_rhdh_namespace&gt;
+spec:
+  application:
+    appConfig:
+      configMaps:
+      - name: app-config-rhdh
+      mountPath: /opt/app-root/src
+    dynamicPluginsConfigMapName: dynamic-plugins-rhdh
+    extraEnvs:
+      secrets:
+      - name: &lt;your_scm_credentials_secret&gt;
+      - name: &lt;your_rhaap_credentials_secret&gt;
+    extraFiles:
+      mountPath: /opt/app-root/src
+      secrets:
+      - key: private-key.pem
+        name: &lt;your_scm_credentials_secret&gt;
+    route:
+      enabled: true
+  database:
+    enableLocalDb: true
+  deployment:
+    patch:
+      spec:
+        template:
+          spec:
+            imagePullSecrets:
+              - name: rhdh-registry-pull-secret
+            containers:
+              - name: ansible-devtools-server
+                command:
+                  - adt
+                  - server
+                image: registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+                imagePullPolicy: Always
+                ports:
+                  - containerPort: 8000
+                    protocol: TCP</code></pre> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="rhdh-full-helm-chart-ansible-plugins"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Full Helm chart config example for Ansible plug-ins</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">This example provides a full YAML configuration for the Helm chart using OCI container delivery.</p> 
+       <section class="section"> 
+        <pre class="pre codeblock language-yaml"><code>global:
+  # ...
+  dynamic:
+    # ...
+    plugins:
+      - disabled: false
+        package: &gt;-
+          oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-plugin-backstage-rhaap
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-rhaap:
+                appIcons:
+                  - importName: AnsibleLogo
+                    name: AnsibleLogo
+                dynamicRoutes:
+                  - importName: AnsiblePage
+                    menuItem:
+                      icon: AnsibleLogo
+                      text: Ansible
+                    path: /ansible
+      - disabled: false
+        package: &gt;-
+          oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-plugin-backstage-self-service
+        pluginConfig:
+          dynamicPlugins:
+            frontend:
+              ansible.plugin-backstage-self-service:
+                scaffolderFieldExtensions:
+                  - importName: AAPTokenFieldExtension
+                  - importName: AAPResourcePickerExtension
+      - disabled: false
+        package: &gt;-
+          oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-backstage-plugin-catalog-backend-module-rhaap
+        pluginConfig: {}
+      - disabled: false
+        package: &gt;-
+          oci://registry.redhat.io/ansible-automation-platform/automation-portal:&lt;tag&gt;!ansible-plugin-scaffolder-backend-module-backstage-rhaap
+        pluginConfig:
+          dynamicPlugins:
+            backend:
+              ansible.plugin-scaffolder-backend-module-backstage-rhaap:
+upstream:
+  backstage:
+    # ...
+    extraAppConfig:
+      - configMapRef: app-config-rhdh
+        filename: app-config-rhdh.yaml
+    extraContainers:
+      - command:
+          - adt
+          - server
+        image: &gt;-
+          registry.redhat.io/ansible-automation-platform-2.7/ansible-dev-tools-rhel9:latest
+        imagePullPolicy: IfNotPresent
+        name: ansible-devtools-server
+        ports:
+          - containerPort: 8000</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

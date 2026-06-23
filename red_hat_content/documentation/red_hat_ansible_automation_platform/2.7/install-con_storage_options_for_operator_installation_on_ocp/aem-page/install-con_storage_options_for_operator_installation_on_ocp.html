@@ -1,0 +1,26 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="con-storage-options-for-operator-installation-on-ocp">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Storage options for automation hub</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Automation hub requires <code class="ph codeph">ReadWriteMany</code> file-based storage, Azure Blob storage, or Amazon S3 storage for operation so that multiple pods can access shared content, such as collections.</p> 
+     <p class="p">The process for configuring object storage on the <code class="ph codeph">AutomationHub</code> CR is similar for Amazon S3 and Azure Blob Storage.</p> 
+     <p class="p">If you are using file-based storage and your installation scenario includes automation hub, ensure that the storage option for Ansible Automation Platform Operator is set to <code class="ph codeph">ReadWriteMany</code>. <code class="ph codeph">ReadWriteMany</code> is the default storage option.</p> 
+     <p class="p">In addition, OpenShift Data Foundation provides a <code class="ph codeph">ReadWriteMany</code> or S3 implementation. Also, you can set up NFS storage configuration to support <code class="ph codeph">ReadWriteMany</code>. This, however, introduces the NFS server as a potential, single point of failure.</p> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://docs.openshift.com/container-platform/4.15/storage/persistent_storage/persistent-storage-nfs.html" target="_blank" rel="external noopener">Persistent storage using NFS</a></li>
+       <li class="linklist"><a class="link" href="https://www.ibm.com/support/pages/how-do-i-create-storage-class-nfs-dynamic-storage-provisioning-openshift-environment" target="_blank" rel="external noopener">How do I create a storage class for NFS dynamic storage provisioning in an OpenShift environment?</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

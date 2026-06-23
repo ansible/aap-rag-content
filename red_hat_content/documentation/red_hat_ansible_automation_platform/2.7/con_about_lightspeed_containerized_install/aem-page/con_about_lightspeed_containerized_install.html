@@ -1,0 +1,86 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="con-about-lightspeed-containerized-install">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Overview</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">You can deploy and use Red Hat Ansible Lightspeed when you perform a new container-based installation of Ansible Automation Platform, or when you upgrade your containerized Ansible Automation Platform.</p> 
+     <p class="p">Red Hat Ansible Lightspeed includes two main components that enhance your automation experience with generative artificial intelligence (AI):</p> 
+     <ul class="ul"> 
+      <li class="li">The automation intelligent assistant: An AI-powered chat interface embedded within the Ansible Automation Platform.</li> 
+      <li class="li">The coding assistant: A generative AI service that helps developers create Ansible content more efficiently and accurately.</li> 
+     </ul> 
+     <div class="note important note_important">
+      <span class="note__title">Important:</span> 
+      <div class="note__body"> 
+       <p class="p">Red Hat does not collect any telemetry data from your interactions with Red Hat Ansible Lightspeed.</p> 
+      </div>
+     </div> 
+     <section class="section" id="con-about-lightspeed-containerized-install___process_to_deploy_red_hat_ansible_lightspeed_on_a_container_based_installation">
+      <h2 class="title sectiontitle">Process to deploy Red Hat Ansible Lightspeed on a container-based installation</h2> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:75%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-about-lightspeed-containerized-install___process_to_deploy_red_hat_ansible_lightspeed_on_a_container_based_installation__entry__1">Task</th> 
+         <th class="entry" id="con-about-lightspeed-containerized-install___process_to_deploy_red_hat_ansible_lightspeed_on_a_container_based_installation__entry__2">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-about-lightspeed-containerized-install___process_to_deploy_red_hat_ansible_lightspeed_on_a_container_based_installation__entry__1"> <p class="p">Deploy Red Hat Ansible Lightspeed during a container-based installation of Ansible Automation Platform</p> </td> 
+         <td class="entry" headers="con-about-lightspeed-containerized-install___process_to_deploy_red_hat_ansible_lightspeed_on_a_container_based_installation__entry__2"> <p class="p">An Ansible Automation Platform administrator who wants to deploy Red Hat Ansible Lightspeed for all Ansible users in the organization.</p> <p class="p">Perform the following tasks:</p> 
+          <ol class="ol"> 
+           <li class="li">Configure the Red Hat Ansible Lightspeed variables in the inventory file.</li> 
+           <li class="li">Install or upgrade to containerized Ansible Automation Platform 2.6 or later.</li> 
+           <li class="li">If you want to install the coding assistant, configure the Ansible VS Code extension.</li> 
+           <li class="li">Optional: Change your LLM model if you want to use a different LLM provider after deploying Red Hat Ansible Lightspeed.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-about-lightspeed-containerized-install___process_to_deploy_red_hat_ansible_lightspeed_on_a_container_based_installation__entry__1"> <p class="p">Access and use the automation intelligent assistant</p> </td> 
+         <td class="entry" headers="con-about-lightspeed-containerized-install___process_to_deploy_red_hat_ansible_lightspeed_on_a_container_based_installation__entry__2"> <p class="p">All Ansible users within the organization who want to use the intelligent assistant to get answers to their questions about the Ansible Automation Platform.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-about-lightspeed-containerized-install___process_to_deploy_red_hat_ansible_lightspeed_on_a_container_based_installation__entry__1"> <p class="p">Access and use the coding assistant</p> </td> 
+         <td class="entry" headers="con-about-lightspeed-containerized-install___process_to_deploy_red_hat_ansible_lightspeed_on_a_container_based_installation__entry__2"> <p class="p">All Ansible users within the organization who want to use the coding assistant to develop Ansible content:</p> 
+          <ul class="ul"> 
+           <li class="li"> Single task or multitask recomendations</li> 
+           <li class="li"> Create playbooks and view playbook explanations</li> 
+           <li class="li">Create roles and view role explanations</li> 
+          </ul> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist">
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-proc_configure_lightspeed_variables_container_install" title="To deploy Red Hat Ansible Lightspeed, configure the required installation variables in your inventory file.">Configure Red Hat Ansible Lightspeed variables</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap" title="Run the install playbook to install containerized Ansible Automation Platform after preparing the Red Hat Enterprise Linux host, downloading the installation program, and configuring the inventory file.">Install containerized Ansible Automation Platform</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_update_aap_container" title="Perform an upgrade of containerized Ansible Automation Platform.">Upgrade your containerized deployment of Ansible Automation Platform</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/proc_configure_vs_code_containerized_install" title="If you deployed the Ansible Lightspeed coding assistant, you must also configure the Ansible VS Code extension with the generated Ansible Lightspeed URL. This configuration enables the Ansible users in your organization to use the Ansible Lightspeed coding assistant to create Ansible content.">Configure the Ansible VS Code extension</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/proc_change_llm_model_chatbot_containerized_install" title="To change the LLM model for your containerized Ansible Automation Platform deployment of Ansible Lightspeed intelligent assistant, you must edit the inventory file with the specific details of your new LLM provider and then rerun the install playbook.">Change your LLM model</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-assembly_deploying_alia#deploying-alia" title="The automation intelligent assistant is an AI-powered chat interface embedded in Ansible Automation Platform. It uses large language models (LLMs) to answer questions about your Ansible Automation Platform environment in natural language.">Deploy and use the automation intelligent assistant</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_developing_ansible_content#developing-ansible-content" title="As an automation developer, you can use Red Hat Ansible Lightspeed to implement your organization’s automation strategy. Red Hat Ansible Lightspeed can help you create and use custom automation content.">Develop Ansible content with Red Hat Ansible Lightspeed</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_task_recommendations#creating-task-recommendations" title="Red Hat Ansible Lightspeed is integrated into Visual Studio (VS) Code through the Ansible VS Code extension. You can request code recommendations for your task intent by using Ansible VS Code extension.">Single task or multitask recommendations</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_viewing_playbooks#creating-viewing-playbooks" title="Using the Ansible VS Code extension, you can create Ansible playbooks using a natural language interface in English.">Create playbooks and view playbook explanations</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_creating_viewing_roles#creating-viewing-roles" title="You can create roles within Ansible collections using the Ansible VS Code extension. To create roles, use the Ansible VS Code extension, select the Role Generation option, and then enter the natural language prompts in English language.">Create roles and view role explanations</a></li>
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux_ai/1.5#creating_secure_endpoint" target="_blank" rel="external noopener">Optional: Allowing access to a model from a secure endpoint</a></li>
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/2.23#about-the-single-model-serving-platform_serving-large-models" target="_blank" rel="external noopener">About the single-model serving platform</a></li>
+       <li class="linklist"><a class="link" href="http://docs.redhat.com/en/documentation/red_hat_ai_inference_server/3.2/html/getting_started/rhaiis-getting-started-overview_getting-started" target="_blank" rel="external noopener">Red Hat AI Inference Server documentation</a></li>
+       <li class="linklist"><a class="link" href="https://openai.com/api/" target="_blank" rel="external noopener">OpenAI API platform</a></li>
+       <li class="linklist"><a class="link" href="https://azure.microsoft.com/en-us/products/ai-foundry/models/openai/" target="_blank" rel="external noopener">Microsoft Azure OpenAI</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

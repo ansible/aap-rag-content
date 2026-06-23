@@ -8,6 +8,3 @@ Note:
 
 When an instance of automation hub is removed, the PVCs are not automatically deleted. This can cause issues during migration if the new deployment has the same name as the previous one. Therefore, it is recommended that you manually remove old PVCs before deploying a new automation hub instance in the same namespace.
 
-## Prerequisites
-
-- You have installed the Ansible Automation Platform Operator in Operator Hub.

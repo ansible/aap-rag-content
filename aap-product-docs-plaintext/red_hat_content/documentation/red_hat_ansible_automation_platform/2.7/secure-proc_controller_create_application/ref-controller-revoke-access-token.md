@@ -1,0 +1,22 @@
+# Create a new application
+## Revoke an access token
+
+You can revoke an access token by deleting the token in the platform UI, or by using the `/o/revoke-token/` endpoint.
+
+Revoking an access token by this method is the same as deleting the token resource object, but it enables you to delete a token by providing its token value, and the associated `client_id` (and `client_secret` if the application is `confidential`). For example:
+
+```
+curl -X POST -d "token=rQONsve372fQwuc2pn76k3IHDCYpi7" \
+-u "gwSPoasWSdNkMDtBN3Hu2WYQpPWCO9SwUEsKK22l:fI6ZpfocHYBGfm1tP92r0yIgCyfRdDQt0Tos9L8a4fNsJjQQMwp9569eIaUBsaVDgt2eiwOGe0bg5m5vCSstClZmtdy359RVx2rQK5YlIWyPlrolpt2LEpVeKXWaiybo" \
+http://<gateway>/o/revoke_token/ -i
+```
+
+
+Note:
+
+- The special OAuth 2 endpoints only support using the `x-www-form-urlencoded`**Content-type**, so as a result, none of the `/o/*` endpoints accept `application/json`.
+- The **Allow External Users to Create Oauth2 Tokens** (`ALLOW_OAUTH2_FOR_EXTERNAL_USERS` in the API) setting is disabled by default. External users refer to users authenticated externally with a service such as LDAP, or any of the other SSO services. This setting ensures external users cannot create their own tokens. If you enable then disable it, any tokens created by external users in the meantime will still exist, and are not automatically revoked. This setting can be configured from the Settings> (and then)Platform gateway menu.
+
+You can also revoke OAuth2 tokens by using the `manage` utility, see [Revoke oauth2 tokens](/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-revoke-oauth2-token "Use this command to revoke OAuth2 tokens, both application tokens and personal access tokens (PAT). It revokes all application tokens (but not their associated refresh tokens), and revokes all personal access tokens. However, you can also specify a user for whom to revoke all tokens.").
+
+On success, a response of `200 OK` is displayed. Verify the deletion by checking whether the token is present in the `api/gateway/v1/tokens/` endpoint.

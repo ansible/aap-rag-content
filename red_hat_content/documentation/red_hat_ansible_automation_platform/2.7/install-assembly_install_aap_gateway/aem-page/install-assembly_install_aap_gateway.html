@@ -1,0 +1,38 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="install-aap-gateway">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Deploy Ansible Automation Platform</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">As a namespace administrator, you can use Ansible Automation Platform gateway to manage Ansible Automation Platform components in your OpenShift environment.</p> 
+     <p class="p">The Ansible Automation Platform gateway uses the Ansible Automation Platform custom resource to manage and integrate the following Ansible Automation Platform components into a unified user interface:</p> 
+     <ul class="ul"> 
+      <li class="li">Automation controller</li> 
+      <li class="li">Automation hub</li> 
+      <li class="li">Event-Driven Ansible</li> 
+      <li class="li">Red Hat Ansible Lightspeed (This feature is disabled by default, you must opt in to use it.)</li> 
+     </ul> 
+     <p class="p">Before you can deploy the platform gateway you must have Ansible Automation Platform Operator installed in a namespace. If you have not installed Ansible Automation Platform Operator see <strong class="ph b">Installing the Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform</strong>.</p> 
+     <p class="p">If you have the Ansible Automation Platform Operator and some or all of the Ansible Automation Platform components installed see <strong class="ph b">Deploying the platform gateway with existing Ansible Automation Platform components</strong> for how to proceed.</p> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_operator_link_components">Deploy a new Ansible Automation Platform instance with components</a></strong><br>After installing the Ansible Automation Platform Operator in your namespace you can set up your <strong class="ph b">Ansible Automation Platform</strong> instance. Then link all the platform components to a single user interface.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_operator_deploy_central_config">Add components to an existing deployment</a></strong><br>You can link any components of the Ansible Automation Platform, that you have already installed to a new <strong class="ph b">Ansible Automation Platform</strong> instance.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_operator_access_aap">Access Ansible Automation Platform through the UI</a></strong><br>Use the <strong class="ph b">Ansible Automation Platform</strong> instance as your default. This instance links the automation controller, automation hub, and Event-Driven Ansible deployments to a single interface.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_installing_aap_operator_fetch_details#installing-aap-operator-fetch-details">Access Ansible Automation Platform through the CLI</a></strong><br>You can use the OpenShift Container Platform CLI to fetch the web address and the password of the Automation controller that you created. To login to the platform gateway, you need the web address and the password.</li>
+     </ul>
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_install_aap_operator#proc-install-aap-operator" title="When installing your Ansible Automation Platform Operator you have a choice of a namespace-scoped operator or a cluster-scoped operator. This depends on the update channel you choose, stable-2.x or cluster-scoped-2.x.">Install the Red Hat Ansible Automation Platform Operator on Red Hat OpenShift Container Platform</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_operator_deploy_central_config" title="You can link any components of the Ansible Automation Platform, that you have already installed to a new Ansible Automation Platform instance.">Add components to an existing deployment</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

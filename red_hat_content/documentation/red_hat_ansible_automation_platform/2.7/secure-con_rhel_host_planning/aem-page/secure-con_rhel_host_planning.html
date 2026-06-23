@@ -1,0 +1,32 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-rhel-host-planning"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Secure your Red Hat Enterprise Linux hosts</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The security of Ansible Automation Platform relies in part on the configuration of the underlying Red Hat Enterprise Linux servers.</p> 
+      <p class="p">For this reason, the underlying Red Hat Enterprise Linux hosts for each Ansible Automation Platform component must be installed and configured in accordance with the Security hardening for Red Hat Enterprise Linux 8, Security hardening for Red Hat Enterprise Linux 9, or Security hardening for Red Hat Enterprise Linux 10 (depending on which operating system is used). In addition, install and configure any security profile requirements (<em class="ph i">Center for Internet Security</em> (CIS), STIG, <em class="ph i">Health Insurance Portability and Accountability Act</em> (HIPAA), and so on) used by your organization. This document recommends Red Hat Enterprise Linux 9 for all new deployments. When using the container-based installation method, Red Hat Enterprise Linux 9 is required.</p> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist">
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html-single/security_hardening/index" target="_blank" rel="external noopener">Security hardening for Red Hat Enterprise Linux 8</a></li>
+        <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/security_hardening/index" target="_blank" rel="external noopener">Security hardening for Red Hat Enterprise Linux 9</a></li>
+        <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html-single/security_hardening/index" target="_blank" rel="external noopener">Security hardening for Red Hat Enterprise Linux 10</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-aap-additional-software"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Ansible Automation Platform and additional software</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Dedicate your Red Hat Enterprise Linux servers exclusively to Ansible Automation Platform components. Avoiding the installation of additional server capabilities helps protect system security and performance while maintaining a supported configuration.</p> 
+       <p class="p">Similarly, when Ansible Automation Platform is deployed on a Red Hat Enterprise Linux host, it installs software such as the nginx web server, the Pulp software repository, and the PostgreSQL database server (unless a user-provided external database is used). This software should not be modified or used in a more generic fashion (for example, do not use nginx to serve additional website content or PostgreSQL to host additional databases) as this is an unsupported configuration and might affect the security and performance of Ansible Automation Platform. The configuration of this software is managed by the Ansible Automation Platform installation program, and any manual changes might be undone when performing upgrades.</p> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

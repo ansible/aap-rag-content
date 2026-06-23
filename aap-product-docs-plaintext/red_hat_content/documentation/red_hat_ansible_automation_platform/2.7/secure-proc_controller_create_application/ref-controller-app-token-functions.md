@@ -1,0 +1,5 @@
+# Create a new application
+## Application token functions
+
+The `refresh` and `revoke` functions associated with tokens, for tokens at the `/o/` endpoints can currently only be carried out with application tokens.
+

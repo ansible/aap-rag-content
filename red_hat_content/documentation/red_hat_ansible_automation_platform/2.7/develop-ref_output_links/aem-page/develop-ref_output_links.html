@@ -1,0 +1,33 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="output-links">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Output links</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Use <code class="ph codeph">output.links</code> to display clickable buttons. Each link has a <code class="ph codeph">title</code> and <code class="ph codeph">url</code> field. You can optionally set an <code class="ph codeph">icon</code> field.</p> 
+     <section class="section"> 
+      <pre class="pre codeblock"><code>output:
+  links:
+    - title: Check Request Status
+      url: https://portal.example.com/requests/status
+      icon: help</code></pre> 
+      <p class="p">You can reference step output data in link URLs:</p> 
+      <pre class="pre codeblock"><code>output:
+  links:
+    - title: View job in Ansible Automation Platform
+      url: ${{ steps['launch-job'].output.data.url }}</code></pre> 
+      <p class="p">You can include multiple links:</p> 
+      <pre class="pre codeblock"><code>output:
+  links:
+    - title: View job in Ansible Automation Platform
+      url: ${{ steps['launch-job'].output.data.url }}
+    - title: RHEL documentation
+      url: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/
+      icon: docs</code></pre> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

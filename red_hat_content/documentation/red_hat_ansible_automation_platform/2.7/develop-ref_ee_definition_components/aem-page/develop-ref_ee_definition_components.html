@@ -1,0 +1,109 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-ee-definition-components">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Execution environment definition components</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">When you create a custom execution environment definition, you configure the core components that determine the environment's capabilities, security, and dependencies.</p> 
+     <section class="section" id="ref-ee-definition-components__components"> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:37.5%">
+        <col style="width:37.5%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-ee-definition-components__components__entry__1">Component</th> 
+         <th class="entry" id="ref-ee-definition-components__components__entry__2">Description</th> 
+         <th class="entry" id="ref-ee-definition-components__components__entry__3">Key considerations and examples</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__1"><strong class="ph b">Base images</strong></td> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__2"> <p class="p">The foundation layer of your execution environment, pre-configured with a specific operating system and toolset.</p> <p class="p">The following base images are available in all predefined templates:</p> 
+          <ul class="ul"> 
+           <li class="li">Red Hat Ansible Minimal EE - Ansible Core 2.18 (RHEL 9)</li> 
+           <li class="li">Red Hat Ansible Minimal EE - Ansible Core 2.18 (RHEL 8)</li> 
+           <li class="li">Red Hat Ansible Minimal EE - Ansible Core 2.16 (RHEL 9)</li> 
+           <li class="li">Red Hat Ansible Minimal EE - Ansible Core 2.16 (RHEL 8)</li> 
+          </ul> </td> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__3"> <p class="p">If you provide a custom image, it must include <strong class="ph b">ansible-core</strong> and <strong class="ph b">ansible-runner</strong>.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__1"><strong class="ph b">Collections</strong></td> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__2">Specifies the Ansible collections and Python libraries required by your automation content. You can add collections manually or upload a <code class="ph codeph">requirements.yml</code> file.</td> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__3"> <p class="p">When collections overlap, the system merges the contents. If duplicates occur:</p> 
+          <ul class="ul"> 
+           <li class="li">If a version is not specified, the system prioritizes the most recent version available.</li> 
+           <li class="li">If versions are explicitly specified for both collections, the system uses the most recent version.</li> 
+          </ul> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__1"><strong class="ph b">Python requirements</strong></td> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__2">Defines the minimum Python version and any extra Python packages required for this execution environment.</td> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__3"> <p class="p">Must reflect the version compatibility used across your organization for running automation reliably.</p> <p class="p">Avoid repeating Python requirements already specified as a dependency by the selected collections (for example, in their respective <code class="ph codeph">requirements.txt</code> files).</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__1"><strong class="ph b">System packages</strong></td> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__2">Operating system libraries and packages required by the Python packages or collections in the execution environment.</td> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__3"> <p class="p">Examples: <strong class="ph b">git</strong>, <strong class="ph b">gcc</strong>, <strong class="ph b">python3-devel</strong>. These are necessary for compiling Python packages during the build process.</p> <p class="p">This list supplements, and must not repeat, any base OS dependencies already managed by your environment's build system.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__1"><strong class="ph b">Additional build steps</strong></td> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__2">Custom shell commands injected directly into the container runtime instruction file at specific build phases (prepend or append to base, galaxy, builder, or final stages).</td> 
+         <td class="entry" headers="ref-ee-definition-components__components__entry__3">Use additional build steps for actions like installing private certificates or configuring environment variables not covered by standard package installation.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="ref-ee-definition-components__templates">
+      <h2 class="title sectiontitle">Predefined execution environment templates</h2> 
+      <p class="p">Predefined templates accelerate environment setup for common use cases. AAP administrators manage which templates are available and can control access with RBAC.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:37.5%">
+        <col style="width:37.5%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-ee-definition-components__templates__entry__1">Template</th> 
+         <th class="entry" id="ref-ee-definition-components__templates__entry__2">Description</th> 
+         <th class="entry" id="ref-ee-definition-components__templates__entry__3">Use cases</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-definition-components__templates__entry__1"><strong class="ph b">Start from scratch</strong></td> 
+         <td class="entry" headers="ref-ee-definition-components__templates__entry__2">A blank-slate template for creating custom execution environments (loaded by default).</td> 
+         <td class="entry" headers="ref-ee-definition-components__templates__entry__3">Use this template when you require complete control over the base image and dependencies to build a highly customized or minimized execution environment.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-definition-components__templates__entry__1"><strong class="ph b">Networking Automation</strong></td> 
+         <td class="entry" headers="ref-ee-definition-components__templates__entry__2">A template optimized for network device interaction with pre-selected networking collections (included in Helm chart but commented out by default).</td> 
+         <td class="entry" headers="ref-ee-definition-components__templates__entry__3">Use this template when your automation primarily interacts with switches, routers, firewalls, and other network infrastructure.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-ee-definition-components__templates__entry__1"><strong class="ph b">Cloud Automation</strong></td> 
+         <td class="entry" headers="ref-ee-definition-components__templates__entry__2">A template optimized for deploying and managing cloud resources with pre-selected cloud collections (included in Helm chart but commented out by default).</td> 
+         <td class="entry" headers="ref-ee-definition-components__templates__entry__3">Use this template when your automation targets provisioning, configuration, and management of cloud services.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        <p class="p">Networking Automation and Cloud Automation templates require their referenced collections to be discoverable from a configured content source.</p>
+       </div>
+      </div> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

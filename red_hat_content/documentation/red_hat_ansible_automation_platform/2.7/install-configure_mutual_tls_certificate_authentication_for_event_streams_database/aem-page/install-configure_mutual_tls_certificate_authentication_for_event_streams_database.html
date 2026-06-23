@@ -1,0 +1,73 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-1134e263-329e-4908-93b6-4bf4188d2794">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure mutual TLS certificate authentication for event streams database</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Configure mutual TLS (mTLS) authentication to secure event streams database connections with client certificates. This eliminates password management, provides stronger identity verification, and meets enterprise security and compliance requirements.</p> 
+     <section class="section prereq" id="GUID-1134e263-329e-4908-93b6-4bf4188d2794__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul" id="GUID-1134e263-329e-4908-93b6-4bf4188d2794__ul_1"> 
+       <li class="li">An external PostgreSQL database configured for mTLS connections</li> 
+       <li class="li">Client certificate and key files for the eda_event_stream database user</li> 
+       <li class="li">PostgreSQL server configured to accept certificate authentication</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Configure your PostgreSQL <code class="ph codeph">pg_hba.conf</code> file to allow certificate authentication for the event streams user.</span> 
+        <div class="itemgroup stepxmp"> 
+         <div class="p">
+          For example: 
+          <pre class="pre codeblock"><code>
+---- 
+# TYPE      DATABASE           USER                 ADDRESS      METHOD 
+hostssl     &lt;database_name&gt;    eda_event_stream     all          cert 
+----</code></pre> 
+         </div> 
+         <p class="p">Replace <code class="ph codeph">&lt;database_name&gt;</code> with your actual database name (for example, <code class="ph codeph">eda</code>).</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Reload the PostgreSQL configuration:</span> 
+        <div class="itemgroup stepxmp"> 
+         <pre class="pre codeblock"><code>
+----  
+# systemctl reload postgresql  
+----</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Add the following variables to your inventory file under the <code class="ph codeph">[all:vars]</code> group:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>
+---- 
+eda_event_stream_pg_cert_auth=true
+eda_event_stream_pg_tls_cert=/path/to/client-cert.pem eda_event_stream_pg_tls_key=/path/to/client-key.pem eda_event_stream_pg_sslmode=verify-full 
+----</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <ul class="ul" id="GUID-1134e263-329e-4908-93b6-4bf4188d2794__ul_2"> 
+            <li class="li">When using certificate authentication (<code class="ph codeph">eda_event_stream_pg_cert_auth=true</code>), you do not need to provide the <code class="ph codeph">eda_event_stream_pg_password</code>.</li> 
+            <li class="li">The <code class="ph codeph">sslmode</code> value determines the level of verification. Valid options include <code class="ph codeph">verify-full</code>, <code class="ph codeph">verify-ca</code>, <code class="ph codeph">require</code>, <code class="ph codeph">prefer</code>, <code class="ph codeph">allow</code>, and <code class="ph codeph">disable</code>. For production environments, use <code class="ph codeph">prefer</code>.</li> 
+           </ul> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Ensure the certificate and key files are accessible to the installation program by completing one of the following options:</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul" id="GUID-1134e263-329e-4908-93b6-4bf4188d2794__ul_3"> 
+          <li class="li">If the files are on the Ansible control node (where you run the installer), set <code class="ph codeph">eda_event_stream_pgclient_tls_files_remote=false</code> (default).</li> 
+          <li class="li">If the files are on the remote event streams server, set <code class="ph codeph">eda_event_stream_pgclient_tls_files_remote=true</code>.</li> 
+         </ul> 
+        </div> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

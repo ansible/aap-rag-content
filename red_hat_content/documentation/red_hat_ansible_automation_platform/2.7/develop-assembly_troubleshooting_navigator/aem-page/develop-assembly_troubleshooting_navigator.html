@@ -1,0 +1,156 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-troubleshooting-navigator"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Troubleshoot collections, execution environments, and playbooks</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Troubleshoot Ansible collections, playbooks, and execution environments interactively with automation content navigator. Compare results inside or outside environments to resolve issues fast.</p> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-review-artifact"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Review playbook results</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Automation content navigator saves playbook runs as JSON artifact files. You can use these files to share, review, or troubleshoot results without requiring access to the original playbook or inventory.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">A automation content navigator artifact JSON file from a playbook run.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <div class="ul steps-unordered"> 
+         <div class="li step p"> <span class="ph cmd">Start automation content navigator with the artifact file. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-navigator replay simple_playbook_artifact.json</code></pre> 
+          </div> 
+          <ol class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Review the playbook results that match when the playbook ran. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/navigator-artifact-replay.png" alt="Playbook results"><br></span> </li> 
+          </ol> 
+         </div> 
+        </div> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">You can now type the number next to the plays and tasks to step into each to review the results, as you would after executing the playbook.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_to_playbooks" title="An Ansible Playbook is a blueprint for automation tasks, which are actions executed with limited manual effort across an inventory of solutions. Playbooks tell Ansible what to do on which devices.">Getting started with playbooks</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-navigator-faq"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Frequently asked questions about automation content navigator</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Review frequently asked questions about automation content navigator configuration and behavior. This information helps you troubleshoot common problems and optimize your environment setup.</p> 
+       <section class="section"> 
+        <dl class="dl"> 
+         <dt class="dt dlterm">
+           Where should the <code class="ph codeph">ansible.cfg</code> file go when using an automation execution environment? 
+         </dt> 
+         <dd class="dd">
+           The easiest place to have the <code class="ph codeph">ansible.cfg</code> file is in the project directory next to the playbook. The playbook directory is automatically mounted in the automation execution environment and automation content navigator finds the <code class="ph codeph">ansible.cfg</code> file there. If the <code class="ph codeph">ansible.cfg</code> file is in another directory, set the <code class="ph codeph">ANSIBLE_CONFIG</code> variable, and specify the directory as a custom volume mount. (See automation content navigator settings for <code class="ph codeph">execution-environment-volume-mounts</code>) 
+         </dd> 
+         <dt class="dt dlterm">
+           Where should the <code class="ph codeph">ansible.cfg</code> file go when not using an automation execution environment? 
+         </dt> 
+         <dd class="dd">
+           Ansible looks for the <code class="ph codeph">ansible.cfg</code> in the typical locations when not using an automation execution environment. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_execute_playbook_navigator#assembly-review-config-navigator" title="As a content creator, you can review your Ansible configuration with automation content navigator and interactively delve into settings.">Reviewing your Ansible configuration with automation content navigator</a>. 
+         </dd> 
+         <dt class="dt dlterm">
+           Where should Ansible collections be placed when using an automation execution environment? 
+         </dt> 
+         <dd class="dd">
+           The easiest place to have Ansible collections is in the project directory, in a playbook adjacent collections directory (for example, <code class="ph codeph">ansible-galaxy collections install ansible.utils -p ./collections</code>). The playbook directory is automatically mounted in the automation execution environment and automation content navigator finds the collections there. Another option is to build the collections into an automation execution environment using Ansible Builder. This helps content creators author playbooks that are production ready, since automation controller supports playbook adjacent collection directories. If the collections are in another directory, set the <code class="ph codeph">ANSIBLE_COLLECTIONS_PATHS</code> variable and configure a custom volume mount for the directory. (See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_settings_navigator#ref-navigator-general-settings" title="The following table describes each general parameter and setting options for automation content navigator.">Automation content navigator general settings</a> for <code class="ph codeph">execution-environment-volume-mounts</code>). 
+         </dd> 
+         <dt class="dt dlterm">
+           Where should Ansible collections be placed when not using an automation execution environment? 
+         </dt> 
+         <dd class="dd">
+           When not using an automation execution environment, Ansible looks in the default locations for collections. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-devtools_develop_collections#devtools-create-roles-collection" title="An Ansible role is a self-contained unit of Ansible automation content that groups related tasks and associated variables, files, handlers, and other assets in a defined directory structure.">Creating a collection for distributing roles</a> for more information. 
+         </dd> 
+         <dt class="dt dlterm">
+           Why does the playbook hang when <code class="ph codeph">vars_prompt</code> or <code class="ph codeph">pause/prompt</code> is used? 
+         </dt> 
+         <dd class="dd">
+           By default, automation content navigator runs the playbook in the same manner that automation controller runs the playbook. This helps content creators author playbooks that are production ready. If you cannot avoid the use of <code class="ph codeph">vars_prompt</code> or <code class="ph codeph">pause\prompt</code>, disabling <code class="ph codeph">playbook-artifact</code> creation causes automation content navigator to run the playbook in a manner that is compatible with <code class="ph codeph">ansible-playbook</code> and allows for user interaction. 
+         </dd> 
+         <dt class="dt dlterm">
+           Why does automation content navigator change the terminal colors or look terrible? 
+         </dt> 
+         <dd class="dd">
+           Automation content navigator queries the terminal for its OSC4 compatibility. OSC4, 10, 11, 104, 110, 111 indicate the terminal supports color changing and reverting. It is possible that the terminal is misrepresenting its ability. You can disable OSC4 detection by setting <code class="ph codeph">--osc4 false</code>. (See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_settings_navigator#ref-navigator-general-settings" title="The following table describes each general parameter and setting options for automation content navigator.">Automation content navigator general settings</a> for how to handle this with an environment variable or in the settings file). 
+         </dd> 
+         <dt class="dt dlterm">
+           How can I change the colors used by automation content navigator? 
+         </dt> 
+         <dd class="dd">
+           Use <code class="ph codeph">--osc4 false</code> to force automation content navigator to use the terminal defined colors. (See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_settings_navigator#ref-navigator-general-settings" title="The following table describes each general parameter and setting options for automation content navigator.">Automation content navigator general settings</a> for how to handle this with an environment variable or in the settings file). 
+         </dd> 
+         <dt class="dt dlterm">
+           What is with all these <code class="ph codeph">site-artifact-2021-06-02T16:02:33.911259+00:00.json</code> files in the playbook directory? 
+         </dt> 
+         <dd class="dd">
+           Automation content navigator creates a playbook artifact for every playbook run. These can be helpful for reviewing the outcome of automation after it is complete, sharing and troubleshooting with a colleague, or keeping for compliance or change-control purposes. The playbook artifact file has the detailed information about every play and task, and the <code class="ph codeph">stdout</code> from the playbook run. You can review playbook artifacts with <code class="ph codeph">ansible-navigator replay &lt;filename&gt;</code> or <code class="ph codeph">:replay &lt;filename&gt;</code> while in an automation content navigator session. You can review all playbook artifacts with both <code class="ph codeph">--mode stdout</code> and <code class="ph codeph">--mode interactive</code>, depending on the required view. You can disable playbook artifacts writing and the default file naming convention. (See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_settings_navigator#ref-navigator-general-settings" title="The following table describes each general parameter and setting options for automation content navigator.">Automation content navigator general settings</a> for how to handle this with an environment variable or in the settings file). 
+         </dd> 
+         <dt class="dt dlterm">
+           Why does <code class="ph codeph">vi</code> open when I use <code class="ph codeph">:open</code>? 
+         </dt> 
+         <dd class="dd"> 
+          <p class="p">Automation content navigator opens anything showing in the terminal in the default editor. The default is set to either <code class="ph codeph">vi +{line_number} {filename}</code> or the current value of the <code class="ph codeph">EDITOR</code> environment variable. Related to this is the <code class="ph codeph">editor-console</code> setting which indicates if the editor is console or terminal based. Here are examples of alternate settings that might be useful:</p> 
+          <pre class="pre codeblock language-yaml"><code># emacs
+ansible-navigator:
+  editor:
+    command: emacs -nw +{line_number} {filename}
+    console: true</code></pre> 
+          <pre class="pre codeblock language-yaml"><code># vscode
+ansible-navigator:
+  editor:
+    command: code -g {filename}:{line_number}
+    console: false</code></pre> 
+          <pre class="pre codeblock language-yaml"><code>#pycharm
+ansible-navigator:
+  editor:
+    command: charm --line {line_number} {filename}
+    console: false</code></pre> 
+         </dd> 
+         <dt class="dt dlterm">
+           What is the order in which configuration settings are applied? 
+         </dt> 
+         <dd class="dd"> 
+          <p class="p">The automation content navigator configuration system pulls in settings from various sources and applies them hierarchically in the following order (where the last applied changes are the most prevalent):</p> 
+          <ol class="ol"> 
+           <li class="li">Default internal values</li> 
+           <li class="li">Values from a settings file</li> 
+           <li class="li">Values from environment variables</li> 
+           <li class="li">Flags and arguments specified on the command line</li> 
+           <li class="li">While issuing <code class="ph codeph">:</code> commands within the text-based user interface</li> 
+          </ol> 
+         </dd> 
+         <dt class="dt dlterm">
+           Something did not work, how can I troubleshoot it? 
+         </dt> 
+         <dd class="dd">
+           Automation content navigator has reasonable logging messages. You can enable <code class="ph codeph">debug</code> logging with <code class="ph codeph">--log-level debug</code>. If you think you might have found a bug, log an issue and include the details from the log file. 
+         </dd> 
+        </dl> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

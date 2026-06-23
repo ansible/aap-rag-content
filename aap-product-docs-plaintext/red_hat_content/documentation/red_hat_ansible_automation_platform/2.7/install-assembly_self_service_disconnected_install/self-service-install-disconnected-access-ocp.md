@@ -1,0 +1,26 @@
+# Install Ansible automation portal in air-gapped OpenShift Container Platform environments
+## Access the disconnected OpenShift environment
+
+Ensure your disconnected OpenShift cluster is configured to trust the private registry containing the mirrored container images. This step is crucial for successful image pulling during installation.
+
+### Before you begin
+
+- You have the necessary kubeconfig and permissions for setting up image pull secrets or insecure registries.
+
+### Procedure
+
+1.  In a terminal, log in to your disconnected OpenShift cluster using the `oc` CLI.
+
+
+```
+oc login --token=<your_token> --server=<your_openshift_api_url>
+```
+Use the following command if you have a kubeconfig:
+
+```
+export KUBECONFIG=/path/to/your/kubeconfig
+oc login
+```
+
+2.  Ensure that your OpenShift cluster is configured to trust your disconnected registry.
+

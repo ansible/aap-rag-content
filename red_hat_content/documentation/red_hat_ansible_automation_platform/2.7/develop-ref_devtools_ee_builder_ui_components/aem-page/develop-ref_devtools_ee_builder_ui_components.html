@@ -1,0 +1,338 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="devtools-ee-builder-ui-components">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">EE Builder custom UI components</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Custom UI components are available for use in Backstage Software Templates to provide specialized form fields for creating and configuring execution environment definitions.</p> 
+     <section class="section"> 
+      <p class="p">To use a component in your template, set the <code class="ph codeph">ui:field</code> property on a parameter:</p> 
+      <pre class="pre codeblock language-yaml"><code>parameters:
+  myField:
+    type: string
+    ui:field: BaseImagePicker</code></pre> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">BaseImagePicker</h2> 
+      <p class="p">Displays a selection of pre-configured base container images for execution environment definitions. Includes an option to specify a custom image.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__1">Property</th> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__2">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__1"><code class="ph codeph">ui:field</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__2"><code class="ph codeph">BaseImagePicker</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__1"><code class="ph codeph">enum</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__2">Array of base image references, plus <code class="ph codeph">custom</code> for a custom image entry.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__1"><code class="ph codeph">enumNames</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__2">Display labels for each base image option.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p"><strong class="ph b">Example:</strong></p> 
+      <pre class="pre codeblock language-yaml"><code>baseImage:
+  title: Base image
+  type: string
+  ui:field: BaseImagePicker
+  enum:
+    - registry.redhat.io/ansible-automation-platform/ee-minimal-rhel9:2.18
+    - custom
+  enumNames:
+    - Red Hat Ansible Minimal EE - Ansible Core 2.18 (RHEL 9)
+    - Custom Image</code></pre> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">CollectionsPicker</h2> 
+      <p class="p">Provides an interactive interface for selecting Ansible collections to include in an execution environment. Supports searching and adding collections from private automation hub, Galaxy, and SCM repositories. Includes version selection and source management.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__9">Property</th> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__10">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__9"><code class="ph codeph">ui:field</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__10"><code class="ph codeph">CollectionsPicker</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__9"><code class="ph codeph">type</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__10"><code class="ph codeph">array</code> (returns an array of collection objects with <code class="ph codeph">name</code>, <code class="ph codeph">version</code>, and <code class="ph codeph">source</code> fields)</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">PackagesPicker</h2> 
+      <p class="p">Enables adding Python packages or system packages to an execution environment definition. Supports direct entry and bulk addition through comma-separated values.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__15">Property</th> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__16">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__15"><code class="ph codeph">ui:field</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__16"><code class="ph codeph">PackagesPicker</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__15"><code class="ph codeph">type</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__16"><code class="ph codeph">array</code> (returns an array of package name strings)</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">FileUploadPicker</h2> 
+      <p class="p">Provides a file upload interface for importing requirements files, such as <code class="ph codeph">requirements.txt</code> for Python packages or <code class="ph codeph">bindep.txt</code> for system packages. The file content is parsed and merged with manually entered values.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__21">Property</th> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__22">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__21"><code class="ph codeph">ui:field</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__22"><code class="ph codeph">FileUploadPicker</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__21"><code class="ph codeph">type</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__22"><code class="ph codeph">string</code> (returns the file content as a string)</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">EEFileNamePicker</h2> 
+      <p class="p">A text input field for specifying the execution environment definition name. Validates the name against existing EE definitions in the catalog to prevent duplicates and enforces naming conventions.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__27">Property</th> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__28">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__27"><code class="ph codeph">ui:field</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__28"><code class="ph codeph">EEFileNamePicker</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__27"><code class="ph codeph">type</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__28"><code class="ph codeph">string</code></td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">EETagsPicker</h2> 
+      <p class="p">Provides an interface for adding discovery tags to an execution environment definition. Tags help users find and categorize EE definitions in the catalog.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__33">Property</th> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__34">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__33"><code class="ph codeph">ui:field</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__34"><code class="ph codeph">EETagsPicker</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__33"><code class="ph codeph">type</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__34"><code class="ph codeph">array</code> (returns an array of tag strings)</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">MCPServersPicker</h2> 
+      <p class="p">Displays available Model Context Protocol (MCP) servers as selectable cards. Users can select which MCP servers to integrate with their execution environment.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__39">Property</th> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__40">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__39"><code class="ph codeph">ui:field</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__40"><code class="ph codeph">MCPServersPicker</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__39"><code class="ph codeph">type</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__40"><code class="ph codeph">array</code> (returns an array of selected MCP server identifier strings)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__39"><code class="ph codeph">schema.items.enum</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__40">Array of available MCP server identifiers.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">ScmSelector</h2> 
+      <p class="p">Provides a source control management (SCM) provider selector with built-in authentication. Users select a configured GitHub or GitLab instance, then authenticate through the SCM provider's OAuth flow. The component validates credentials and displays connection status.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__47">Property</th> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__48">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__47"><code class="ph codeph">ui:field</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__48"><code class="ph codeph">ScmSelector</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__47"><code class="ph codeph">type</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__48"><code class="ph codeph">string</code> (returns the selected SCM provider identifier)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__47"><code class="ph codeph">ui:options.providers</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__48">Array of provider configuration objects with <code class="ph codeph">label</code>, <code class="ph codeph">provider</code> (<code class="ph codeph">github</code> or <code class="ph codeph">gitlab</code>), and optional <code class="ph codeph">host</code>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__47"><code class="ph codeph">ui:options.requestUserCredentials.secretsKey</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__48">Key used to store the authenticated SCM token in template secrets.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">AdditionalBuildStepsPicker</h2> 
+      <p class="p">Provides an interface for specifying custom build steps to include in the execution environment build process. Supports multiple build phases with command entry.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__57">Property</th> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__58">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__57"><code class="ph codeph">ui:field</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__58"><code class="ph codeph">AdditionalBuildStepsPicker</code></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__57"><code class="ph codeph">type</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__58"><code class="ph codeph">array</code> (returns an array of build step objects with <code class="ph codeph">stepType</code> and <code class="ph codeph">commands</code> fields)</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p"><strong class="ph b">Available build step phases:</strong></p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__63">Phase</th> 
+         <th class="entry" id="devtools-ee-builder-ui-components__entry__64">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">prepend_base</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__64">Commands to run before base image dependencies are installed.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">append_base</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__64">Commands to run after base image dependencies are installed.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">prepend_galaxy</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__64">Commands to run before Galaxy collections are installed.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">append_galaxy</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__64">Commands to run after Galaxy collections are installed.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">prepend_builder</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__64">Commands to run before builder dependencies are installed.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">append_builder</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__64">Commands to run after builder dependencies are installed.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">prepend_final</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__64">Commands to run before the final image stage.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__63"><code class="ph codeph">append_final</code></td> 
+         <td class="entry" headers="devtools-ee-builder-ui-components__entry__64">Commands to run after the final image stage.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

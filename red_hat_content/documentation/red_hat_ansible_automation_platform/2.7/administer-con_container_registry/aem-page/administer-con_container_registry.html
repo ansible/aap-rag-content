@@ -1,0 +1,375 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="container-registries"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Manage containers in your private automation hub</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Private automation hub functions as an internal container registry for your organization. It allows you to store, manage, and govern the container images, or automation execution environments, that your teams use to run automation. </p> 
+      <p class="p">Private automation hub functions as an internal container registry for your organization. It allows you to store, manage, and govern the container images, or automation execution environments, that your teams use to run automation.</p> 
+      <p class="p">To effectively manage these containers, first learn the difference between the two types of registries in your workflow:</p> 
+      <div class="p"> 
+       <ul class="ul" id="container-registries__ul_1"> 
+        <li class="li">External registries (the source): Public or third-party registries where you source your initial images. Common examples include the Red Hat Ecosystem Catalog (registry.redhat.io) or Quay.io. You can pull images from these registries to your local environment.</li> 
+        <li class="li">Private automation hub registry, or your remote registry (the destination): Your internal, secure registry hosted on private automation hub. You push your curated and approved images here. Your Ansible Automation Platform infrastructure then pulls these images from private automation hub to execute jobs.</li> 
+       </ul> 
+      </div> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="populate-container-registry"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Populate your private automation hub container registry</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The automation hub remote registry is used for storing and managing automation execution environments.</p> 
+       <p class="p">When you have built or sourced an execution environment, you can push that execution environment to the registry portion of private automation hub to create a container repository. Then, you can grant your team access to the container repository, and customize the repository with a README, relevant links and other information for your team's use.</p> 
+       <div class="p">
+        The workflow is as follows: 
+        <ol class="ol" id="populate-container-registry__ol_1"> 
+         <li class="li"> <p class="p">Pull an execution environment from an external registry (like registry.redhat.io) to your local machine.</p> </li> 
+         <li class="li"> <p class="p">Tag the image locally for your private automation hub registry.</p> </li> 
+         <li class="li"> <p class="p">Push the image to your private automation hub.</p> </li> 
+         <li class="li"> <p class="p">Configure access permissions and documentation (such as READMEs) within private automation hub so your teams can use the image.</p> </li> 
+        </ol> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">As of <strong class="ph b">April 1st, 2025</strong>, <code class="ph codeph">quay.io</code> is adding three additional endpoints. As a result, you must adjust the allow/block lists within your firewall systems lists to include the following endpoints:</p> 
+          <ul class="ul" id="populate-container-registry__ul_1"> 
+           <li class="li"> <code class="ph codeph">cdn04.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn05.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn06.quay.io</code> </li> 
+          </ul> 
+          <p class="p">To avoid problems pulling container images, customers must allow outbound TCP connections (ports 80 and 443) to the following hostnames:</p> 
+          <ul class="ul" id="populate-container-registry__ul_2"> 
+           <li class="li"> <code class="ph codeph">cdn.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn01.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn02.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn03.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn04.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn05.quay.io</code> </li> 
+           <li class="li"> <code class="ph codeph">cdn06.quay.io</code> </li> 
+          </ul> 
+          <p class="p">This change should be made to any firewall configuration that specifically enables outbound connections to <code class="ph codeph">registry.redhat.io</code> or <code class="ph codeph">registry.access.redhat.com</code>.</p> 
+          <p class="p">Use the hostnames instead of IP addresses when configuring firewall rules.</p> 
+          <p class="p">After making this change, you can continue to pull images from <code class="ph codeph">registry.redhat.io</code> or <code class="ph codeph">registry.access.redhat.com</code>. You do not require a <code class="ph codeph">quay.io</code> login, or need to interact with the <code class="ph codeph">quay.io</code> registry directly in any way to continue pulling Red Hat container images.</p> 
+         </div>
+        </div> 
+       </div> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-assembly_network_ports_protocols#network-ports-protocols" title="Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work.">Network ports and protocols</a></li>
+        </ul>
+       </div>
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://access.redhat.com/articles/7084334" target="_blank" rel="external noopener">Firewall changes for container image pulls 2024/2025</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="obtain-images"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Pull execution environments for use in automation hub</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Before you can push execution environments to your private automation hub, you must first pull them from an existing registry and tag them for use.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have permissions to pull automation execution environments from <code class="ph codeph">registry.redhat.io</code>.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">The following example details how to pull an execution environment from the Red Hat Ecosystem Catalog (<code class="ph codeph">registry.redhat.io</code>).</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Podman with your <code class="ph codeph">registry.redhat.io</code> credentials: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ podman login registry.redhat.io</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Pull an execution environment: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ podman pull registry.redhat.io/<em class="ph i">&lt;ee_name&gt;</em>:<em class="ph i">&lt;tag&gt;</em></code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">To verify that the execution environment you pulled is contained in the list, take these steps:</p> 
+        <ol class="ol"> 
+         <li class="li">List the images in local storage: <pre class="pre codeblock"><code>$ podman images</code></pre></li> 
+         <li class="li">Check the execution environment name, and verify that the tag is correct.</li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://redhat-connect.gitbook.io/catalog-help/" target="_blank" rel="external noopener">Red Hat Ecosystem Catalog Help</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-tag-image"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Tag container images</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Tag automation execution environments to add an additional name to automation execution environments stored in your automation hub container repository. If no tag is added to an automation execution environment, automation hub defaults to <code class="ph codeph">latest</code> for the name.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have <strong class="ph b">change automation execution environment tags</strong> permissions.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Execution Environments</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select your automation execution environments.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click the <strong class="ph b">Images</strong> tab.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong>, and click <span class="ph uicontrol button">Manage tags</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Add a new tag in the text field and click <span class="ph uicontrol button">Add</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Optional: Remove <strong class="ph b">current tags</strong> by clicking <span class="ph uicontrol button">x</span> on any of the tags for that image.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Click the <strong class="ph b">Activity</strong> tab and review the latest changes.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title5" id="pulling-images-container-repository"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Pull and sync images from automation hub to your local system</h2> 
+      <p class="shortdesc">Pull Ansible Automation Platform execution environments from the automation hub registry to your local machine. Use the provided <code class="ph codeph">podman pull</code> command for the <code class="ph codeph">latest</code> version in the repository, or specify a tag to copy a specific execution environment.</p> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="pulling-image"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Pull an image</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use the user interface to pull an execution environment from your private automation hub remote registry to make a copy to your local machine.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You must have permission to view and pull from a private container repository.</li> 
+         <li class="li">If you are pulling automation execution environments from a password or token-protected registry, <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-manage_execution_environments_in_private_automation_hub#GUID-c616972e-1012-4d50-a64b-dc38f0d5105b" title="When you set up your container repository, you can add a description, include a README, add teams that can access the repository, and tag automation execution environments.">create a credential</a> first.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Execution Environments</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select your execution environment.</span> </li>
+         <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Pull this image</strong> entry, click <span class="ph uicontrol button">Copy to clipboard</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Paste and run the command in your terminal.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Run <code class="ph codeph">podman images</code> to view images on your local machine.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="proc-sync-image-adoc"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Sync images from a container registry</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can pull automation execution environments from the private automation hub remote registry to sync an image to your local machine. To sync an execution environment from a remote registry, you must first configure a remote registry.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <p class="p">You must have permission to view and pull from a private container repository.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Execution Environments</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add <code class="ph codeph"><a class="xref" href="https://registry.redhat.io" target="_blank" rel="external noopener">https://registry.redhat.io</a></code> to the registry.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add any required credentials to authenticate. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Some remote registries are aggressive with rate limiting. Set a rate limit under <strong class="ph b">Advanced Options</strong>.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Execution Environments</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create execution environment</span> in the page header.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select the registry you want to pull from. The <strong class="ph b">Name</strong> field displays the name of the automation execution environments displayed on your local registry. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The <strong class="ph b">Upstream name</strong> field is the name of the image on the remote server. For example, if the upstream name is set to "alpine" and the <strong class="ph b">Name</strong> field is "local/alpine", the alpine image is downloaded from the remote and renamed to "local/alpine".</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Set a list of tags to include or exclude. Note that syncing automation execution environments with a large number of tags is time consuming and uses a lot of disk space.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://access.redhat.com/RegistryAuthentication" target="_blank" rel="external noopener">Red Hat Container Registry Authentication</a></li>
+         <li class="linklist"><a class="link" href="http://docs.podman.io/en/latest/index.html" target="_blank" rel="external noopener">What is Podman?</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title8" id="proc-create-credential"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Create a credential</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To pull automation execution environments images from a password or token-protected registry, you must create a credential.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">In earlier versions of Ansible Automation Platform, you were required to deploy a registry to store execution environment images. On Ansible Automation Platform 2.0 and later, the system operates as if you already have a remote registry up and running. To store execution environment images, add the credentials of only your selected remote registries.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Credentials</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create credential</span> to create a new credential.</span> </li>
+         <li class="li step"> <span class="ph cmd">Enter an authorization <strong class="ph b">Name</strong>, <strong class="ph b">Description</strong>, and <strong class="ph b">Organization</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Credential Type</strong> drop-down, select <strong class="ph b">Container Registry</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Enter the <strong class="ph b">Authentication URL</strong>. This is the remote registry address.</span> </li>
+         <li class="li step"> <span class="ph cmd">Enter the <strong class="ph b">Username</strong> and <strong class="ph b">Password or Token</strong> required to log in to the remote registry.</span> </li>
+         <li class="li step"> <span class="ph cmd">Optional: To enable SSL verification, select <strong class="ph b">Verify SSL</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create credential</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title9" id="container-registry-group-permissions"> 
+      <h2 class="title topictitle2" id="ariaid-title9">Remote registry team permissions</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Configure team access to container repositories in private automation hub to control who can access and manage execution environments.</p> 
+       <section class="section"> 
+        <p class="p">New teams do not have any assigned permissions by default. You must add permissions when first creating a team or edit an existing team to add or remove permissions.</p> 
+        <p class="p">The following table lists permissions you can grant to teams to ensure they have the correct level of access and privileges to your remote registries.</p> 
+        <table class="table">
+         <caption>
+          <span class="table--title-label">Table 1. </span><span class="title">Team permissions for managing containers in private automation hub</span>
+         </caption>
+         <colgroup>
+          <col style="width:50%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="container-registry-group-permissions__entry__1">Permission name</th> 
+           <th class="entry" id="container-registry-group-permissions__entry__2">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="container-registry-group-permissions__entry__1"> <p class="p">Create new containers</p> </td> 
+           <td class="entry" headers="container-registry-group-permissions__entry__2"> <p class="p">Users can create new containers</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="container-registry-group-permissions__entry__1"> <p class="p">Change container namespace permissions</p> </td> 
+           <td class="entry" headers="container-registry-group-permissions__entry__2"> <p class="p">Users can change permissions on the container repository</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="container-registry-group-permissions__entry__1"> <p class="p">Change container</p> </td> 
+           <td class="entry" headers="container-registry-group-permissions__entry__2"> <p class="p">Users can change information on a container</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="container-registry-group-permissions__entry__1"> <p class="p">Change execution environment tags</p> </td> 
+           <td class="entry" headers="container-registry-group-permissions__entry__2"> <p class="p">Users can modify execution environment tags</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="container-registry-group-permissions__entry__1"> <p class="p">Push to existing container</p> </td> 
+           <td class="entry" headers="container-registry-group-permissions__entry__2"> <p class="p">Users can push an execution environment to an existing container</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_teams#proc-controller-user-permissions" title="You can grant a team granular access to specific resources such as inventories, projects, and job templates by assigning the team roles associated with those particular resources. You can also set permissions at the level of the organization from the Organizations view.">Assign roles to a team</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title10" id="adding-readme-container-repo"> 
+      <h2 class="title topictitle2" id="ariaid-title10">Add a README to your container repository</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Add a README to your container repository to provide instructions to your users on how to work with the container. Automation hub container repositories support Markdown for creating a README. By default, the README is empty.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have permissions to change containers.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Execution Environments</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select your execution environment.</span> </li>
+         <li class="li step"> <span class="ph cmd">On the <strong class="ph b">Detail</strong> tab, click <span class="ph uicontrol button">Add</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Raw Markdown</strong> text field, enter your README text in Markdown.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span> when you are finished.</span> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">After you add a README, you can edit it at any time by clicking <span class="ph uicontrol button">Edit</span> and repeating steps 4 and 5.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

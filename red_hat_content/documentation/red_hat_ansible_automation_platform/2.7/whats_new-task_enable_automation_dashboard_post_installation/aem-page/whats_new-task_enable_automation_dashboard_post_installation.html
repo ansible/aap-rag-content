@@ -1,0 +1,514 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="enable-automation-dashboard-post-installation"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Enable automation dashboard post-installation</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">Activate dashboard data collection with automatic historical data backfill to generate comprehensive usage and ROI reports without reinstalling the platform or losing historical automation activity data.</p> 
+      <section class="section prereq">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Before you begin</h2>
+       </div> 
+       <ul class="ul"> 
+        <li class="li">Red Hat Ansible Automation Platform 2.7 installed and operational</li> 
+        <li class="li">Metrics service installed and running</li> 
+        <li class="li">For containerized: access to the installer inventory file</li> 
+        <li class="li">For operator: <code class="ph codeph">kubectl</code> or <code class="ph codeph">oc</code> access and edit permissions on the AnsibleAutomationPlatform CR</li> 
+       </ul> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p"><strong class="ph b">Technology Preview:</strong> Automation dashboard is a Technology Preview feature in Red Hat Ansible Automation Platform 2.7. Enabling it post-installation triggers up to 90 days of historical data backfill from Controller database. Monitor data collection logs to know when complete dashboard data is available.</p> 
+        </div>
+       </div> 
+      </section> 
+      <section class="section context">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div> 
+       <p class="p">This procedure enables automation dashboard on an existing Red Hat Ansible Automation Platform 2.7 installation without platform downtime or service disruption. When you enable dashboard collection post-installation, metrics service automatically backfills up to 90 days of historical data from the Controller database, allowing the dashboard UI to display historical trends within hours of enablement. This zero-disruption activation eliminates the need to reinstall the platform and enables 6-hourly automated collection for ongoing dashboard metrics after backfill completion, providing comprehensive usage and ROI reports using both historical and current automation activity data.</p> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <div class="ol steps">
+        <div class="li step p"> <span class="ph cmd">Choose your deployment method and follow the corresponding procedure</span> 
+         <ul class="ul choices"> 
+          <li class="li choice">For containerized installation, follow the containerized procedure</li> 
+          <li class="li choice">For operator deployment, follow the operator procedure</li> 
+         </ul> 
+        </div>
+       </div>
+      </section> 
+      <section class="section result">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Results</h2>
+       </div> 
+       <p class="p">After completing the procedure for your deployment method, dashboard is enabled and historical data backfill begins automatically.</p> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="enable-dashboard-containerized-post-install"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Procedure (containerized installation)</h2> 
+      <div class="body taskbody"> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Update inventory file</span> 
+          <div class="itemgroup info"> 
+           <p class="p">Edit your Ansible Automation Platform containerized installer inventory file to add the dashboard collection variable:</p> 
+           <pre class="pre codeblock"><code>[all:vars]
+postgresql_admin_username=postgres
+postgresql_admin_password=''
+
+# Enable automation dashboard data collection (Technology Preview)
+feature_flags:
+  FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Re-run installer</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>cd /path/to/aap-containerized-installer
+ansible-playbook -i inventory install.yml</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">There is no separate update playbook. Re-running <span class="ph filepath">install.yml</span> on an existing installation automatically detects the current state and applies only the necessary updates (in this case, dashboard enablement).</p> 
+            </div>
+           </div> 
+           <p class="p">Expected duration: Approximately 30 minutes for dashboard enablement on an existing installation.</p> 
+           <p class="p">The installer detects existing Ansible Automation Platform installation and performs dashboard-specific updates:</p> 
+           <ul class="ul"> 
+            <li class="li">Updates metrics service container settings with <code class="ph codeph">FEATURE_ENABLED: {'DASHBOARD_COLLECTION': True}</code></li> 
+            <li class="li">Runs the <code class="ph codeph">automation-metrics-init</code> container to create dashboard tables</li> 
+            <li class="li">Restarts metrics service containers — which triggers <code class="ph codeph">initial_dashboard_collection</code> task creation</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Monitor historical data backfill progress</span> 
+          <div class="itemgroup info"> 
+           <p class="p">After enabling automation dashboard, metrics service backfills up to 90 days of historical data from the Controller database (if available). This process runs in the background and may take several hours depending on data volume.</p> 
+          </div> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Check backfill status by using CLI</span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code>podman logs automation-metrics-scheduler | grep -i initial_dashboard
+podman logs automation-metrics-tasks | grep -i initial_dashboard</code></pre> 
+             <p class="p">Expected log messages:</p> 
+             <p class="p"><strong class="ph b">automation-metrics-scheduler:</strong></p> 
+             <pre class="pre codeblock"><code>{"timestamp": "2026-04-22T08:53:39.627Z", "level": "INFO", "logger": "apps.tasks.cron_scheduler", "message": "Found new immediate task: initial_dashboard_collection (ID: 568) - executing now"}
+
+{"timestamp": "2026-04-22T08:53:39.635Z", "level": "INFO", "logger": "apps.tasks.cron_scheduler", "message": "Executing database task: initial_dashboard_collection (ID: 568)"}
+
+{"timestamp": "2026-04-22T08:53:39.640Z", "level": "INFO", "logger": "apps.tasks.tasks_system", "message": "Submitted task initial_dashboard_collection (ID: 568) to dispatcher queue dashboard"}
+
+{"timestamp": "2026-04-22T09:03:39.665Z", "level": "INFO", "logger": "apscheduler.executors.default", "message": "Running job \"DB Task: initial_dashboard_collection (trigger: date[2026-04-22 09:03:39 UTC], next run at: 2026-04-22 09:03:39 UTC)\" (scheduled at 2026-04-22 09:03:39.664342+00:00)"}</code></pre> 
+             <p class="p"><strong class="ph b">automation-metrics-tasks:</strong></p> 
+             <pre class="pre codeblock"><code>{"timestamp": "2026-04-22T09:03:39.685Z", "level": "INFO", "logger": "apps.tasks.utils", "message": "Task 'initial_dashboard_collection' running: Executing function: collect_dashboard_reports_initial_data"}
+
+{"timestamp": "2026-04-22T09:03:39.709Z", "level": "INFO", "logger": "apps.tasks.utils", "message": "Task 'initial_dashboard_collection' completed: Task execution finished with status: completed"}</code></pre> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Query database for backfill metadata</span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code>podman exec automation-metrics-database \
+  psql -h localhost -U metrics_service -d metrics_service \
+  -c "SELECT COUNT(*), MIN(finished), MAX(finished) FROM dashboard_job_data;"</code></pre> 
+             <p class="p">Expected output for successful collection:</p> 
+             <ul class="ul"> 
+              <li class="li"><code class="ph codeph">COUNT &gt; 0</code> - Data has been collected</li> 
+              <li class="li"><code class="ph codeph">MAX(finished)</code> close to current date - Collection is up-to-date</li> 
+             </ul> 
+             <p class="p">If <code class="ph codeph">COUNT = 0</code>, no data has been collected yet (backfill may still be in progress or no jobs exist in Controller).</p> 
+            </div> </li> 
+          </ol> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist">
+        <strong>Background</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_post_installation#con-historical-data-backfill-details" title="Understand how automation dashboard backfills historical data after post-installation enablement by learning the backfill scope, behavior, performance impact, and duration estimates for dashboard data collection.">Historical data backfill details</a></li>
+        </ul>
+       </div>
+       <div class="linklist">
+        <strong>Reference</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_post_installation#GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864" title="Use this reference when choosing between during-installation and post-installation dashboard enablement to compare historical data collection, downtime requirements, and time to availability.">Difference between automation dashboard enablement during-installation and post-installation</a></li>
+        </ul>
+       </div>
+       <div class="linklist">
+        <strong>Troubleshooting</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-ref_troubleshoot_automation_dashboard_configuration_and_deployment" title="Diagnose automation dashboard issues including Gateway integration failures, RBAC access problems, UI feature limitations, and data collection errors.">Troubleshoot automation dashboard configuration and deployment</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="enable-dashboard-operator-post-install"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Procedure (operator deployment)</h2> 
+      <div class="body taskbody"> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Edit the AnsibleAutomationPlatform Custom Resource</span> 
+          <div class="itemgroup info"> 
+           <p class="p">Post-installation enablement on the operator uses the same CR edit as during-installation. There is no separate update playbook or process.</p> 
+           <pre class="pre codeblock"><code>kubectl edit AnsibleAutomationPlatform &lt;aap-cr-name&gt; -n &lt;namespace&gt;</code></pre> 
+           <p class="p">Or with OpenShift:</p> 
+           <pre class="pre codeblock"><code>oc edit AnsibleAutomationPlatform &lt;aap-cr-name&gt; -n &lt;namespace&gt;</code></pre> 
+           <p class="p">Add <code class="ph codeph">spec.feature_flags.FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code>:</p> 
+           <pre class="pre codeblock"><code>spec:
+  feature_flags:
+    FEATURE_DASHBOARD_COLLECTION_ENABLED: true   # ADD THIS
+  metrics:
+    disabled: false
+    name: &lt;aap-cr-name&gt;-metrics
+  # ... rest of your existing spec unchanged</code></pre> 
+           <p class="p">Save and exit. The Ansible Automation Platform operator and automationmetricsservice operator begin reconciliation automatically.</p> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">There is no separate update playbook. Unlike the containerized installer, you do not re-run an install command.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Verify the feature flag reached metrics service</span> 
+          <div class="itemgroup info"> 
+           <p class="p">After reconciliation (typically 1–2 minutes), confirm the feature flag appears in the metrics service ConfigMap:</p> 
+           <pre class="pre codeblock"><code>kubectl get cm &lt;aap-cr-name&gt;-metrics-env-properties \
+  -n &lt;namespace&gt; -o yaml | grep DASHBOARD</code></pre> 
+           <p class="p">Expected output:</p> 
+           <pre class="pre codeblock"><code>METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED: '@bool True'</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Verify metrics service pods restarted with new configuration</span> 
+          <div class="itemgroup info"> 
+           <p class="p">After the ConfigMap is updated, the operator restarts the metrics service pods. Confirm they are running and the pod age reflects the restart:</p> 
+           <pre class="pre codeblock"><code>kubectl get pods -n &lt;namespace&gt; -l app.kubernetes.io/name=&lt;aap-cr-name&gt;-metrics</code></pre> 
+           <p class="p">Expected: Three pods running (metrics-web, metrics-tasks, metrics-scheduler), age matching the time since reconciliation.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Monitor historical data backfill progress</span> 
+          <div class="itemgroup info"> 
+           <p class="p">After the pods restart, metrics service creates and schedules the <code class="ph codeph">initial_dashboard_collection</code> task automatically. Monitor its progress by using the tasks pod logs:</p> 
+           <pre class="pre codeblock"><code># Get the tasks pod name
+TASKS_POD=$(kubectl get pods -n &lt;namespace&gt; \
+  -l app.kubernetes.io/name=&lt;aap-cr-name&gt;-metrics \
+  --field-selector=status.phase=Running \
+  -o jsonpath='{.items[?(@.metadata.name contains "tasks")].metadata.name}')
+
+kubectl logs -n &lt;namespace&gt; $TASKS_POD | grep -i initial_dashboard</code></pre> 
+           <p class="p">Or stream logs in real time:</p> 
+           <pre class="pre codeblock"><code>kubectl logs -n &lt;namespace&gt; -l app.kubernetes.io/name=&lt;aap-cr-name&gt;-metrics \
+  -c metrics-tasks -f | grep -i dashboard</code></pre> 
+           <p class="p">Example scheduler log output:</p> 
+           <pre class="pre codeblock"><code>{"timestamp": "2026-05-12T10:39:42.308Z", "level": "INFO", "logger": "apps.tasks.cron_scheduler", "message": "Found new immediate task: initial_dashboard_collection (ID: 52) - executing now"}
+{"timestamp": "2026-05-12T10:39:42.309Z", "level": "INFO", "logger": "apps.tasks.cron_scheduler", "message": "Executing database task: initial_dashboard_collection (ID: 52)"}
+{"timestamp": "2026-05-12T10:39:42.310Z", "level": "INFO", "logger": "apps.tasks.tasks_system", "message": "Submitted task initial_dashboard_collection (ID: 52) to dispatcher queue dashboard"}</code></pre> 
+           <p class="p">Example tasks worker log output:</p> 
+           <pre class="pre codeblock"><code>{"timestamp": "2026-05-12T10:39:45.685Z", "level": "INFO", "logger": "apps.tasks.utils", "message": "Task 'initial_dashboard_collection' running: Executing function: collect_dashboard_reports_initial_data"}
+{"timestamp": "2026-05-12T10:39:45.709Z", "level": "INFO", "logger": "apps.tasks.utils", "message": "Task 'collect_dashboard_reports_initial_data' processing: Collecting dashboard data for: 2026-02-11T00:00:00+00:00 to 2026-05-12T10:39:45+00:00"}
+{"timestamp": "2026-05-12T10:39:45.720Z", "level": "INFO", "logger": "apps.tasks.utils", "message": "Task 'collect_dashboard_reports_initial_data' processing: Synced batch of 1000 jobs (total so far: 1000, cursor id: 12500)"}
+{"timestamp": "2026-05-12T10:39:52.034Z", "level": "INFO", "logger": "apps.tasks.utils", "message": "Task 'initial_dashboard_collection' completed: Task execution finished with status: completed"}</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Backfill collects in cursor-paginated batches. Each batch log line shows progress. For large datasets, many batch lines appear before the completion message.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Query database for backfill status</span> 
+          <div class="itemgroup info"> 
+           <p class="p">Get the postgres pod name using the <code class="ph codeph">app.kubernetes.io/component=database</code> label:</p> 
+           <pre class="pre codeblock"><code>DB_POD=$(kubectl get pods -n &lt;namespace&gt; \
+  -l app.kubernetes.io/component=database,app.kubernetes.io/part-of=&lt;aap-cr-name&gt; \
+  -o jsonpath='{.items[0].metadata.name}')
+
+kubectl exec -n &lt;namespace&gt; $DB_POD -- \
+  psql -U metricsservice -d metricsservice \
+  -c "SELECT COUNT(*), MIN(finished), MAX(finished) FROM dashboard_job_data;"</code></pre> 
+           <p class="p">Expected output for successful collection:</p> 
+           <ul class="ul"> 
+            <li class="li"><code class="ph codeph">COUNT &gt; 0</code> — data has been collected</li> 
+            <li class="li"><code class="ph codeph">MAX(finished)</code> close to current date — collection is up to date</li> 
+           </ul> 
+           <p class="p">If <code class="ph codeph">COUNT = 0</code>, backfill may still be in progress or the Controller has no completed jobs yet.</p> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist">
+        <strong>Background</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_post_installation#con-historical-data-backfill-details" title="Understand how automation dashboard backfills historical data after post-installation enablement by learning the backfill scope, behavior, performance impact, and duration estimates for dashboard data collection.">Historical data backfill details</a></li>
+        </ul>
+       </div>
+       <div class="linklist">
+        <strong>Reference</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_post_installation#GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864" title="Use this reference when choosing between during-installation and post-installation dashboard enablement to compare historical data collection, downtime requirements, and time to availability.">Difference between automation dashboard enablement during-installation and post-installation</a></li>
+        </ul>
+       </div>
+       <div class="linklist">
+        <strong>Troubleshooting</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-ref_troubleshoot_automation_dashboard_configuration_and_deployment" title="Diagnose automation dashboard issues including Gateway integration failures, RBAC access problems, UI feature limitations, and data collection errors.">Troubleshoot automation dashboard configuration and deployment</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="con-historical-data-backfill-details"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Historical data backfill details</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Understand how automation dashboard backfills historical data after post-installation enablement by learning the backfill scope, behavior, performance impact, and duration estimates for dashboard data collection.</p> 
+       <section class="section">
+        <h3 class="title sectiontitle">Backfill scope and behavior</h3> 
+        <p class="p"><strong class="ph b">How backfill works:</strong></p> 
+        <p class="p">When you enable dashboard post-installation, metrics service initiates a historical data backfill using the following logic:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Starting point:</strong> 90 days before current time (<code class="ph codeph">since = now - 90 days</code>)</li> 
+         <li class="li"><strong class="ph b">End point:</strong> Current time (<code class="ph codeph">until = now</code>)</li> 
+         <li class="li"><strong class="ph b">Data query:</strong> Requests all jobs in Controller (AWX) database between <code class="ph codeph">since</code> and <code class="ph codeph">until</code></li> 
+         <li class="li"><strong class="ph b">Collection:</strong> Collects whatever data exists in that timeframe</li> 
+        </ul> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">90 days is the starting point, not a minimum or maximum requirement. Metrics service collects all available data within the 90-day window.</p> 
+         </div>
+        </div> 
+        <p class="p"><strong class="ph b">Examples:</strong></p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:25%">
+          <col style="width:41.66666666666667%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="con-historical-data-backfill-details__entry__1">Controller Data Available</th> 
+           <th class="entry" id="con-historical-data-backfill-details__entry__2">Data Collected</th> 
+           <th class="entry" id="con-historical-data-backfill-details__entry__3">Result</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__1">90+ days of job history</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__2">90 days</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__3">Backfill collects maximum (90 days from since point)</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__1">30 days of job history</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__2">30 days</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__3">Backfill collects all available data (no error)</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__1">0 days of job history (new installation)</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__2">0 jobs</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__3">Backfill completes successfully with<code class="ph codeph">job_count: 0</code></td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Key points:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Less than 90 days of data is not an error - backfill collects what exists</li> 
+         <li class="li">Backfill does not fail if Controller has less than 90 days of data</li> 
+         <li class="li">New installations with no historical jobs complete backfill immediately (within minutes)</li> 
+        </ul> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">Backfill process control</h3> 
+        <p class="p">The backfill process runs to completion automatically and cannot be paused or resumed. Once initiated, it continues until all available data within the 90-day window is collected. If metrics service is restarted during backfill, the process resumes from the last successful checkpoint.</p> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">Performance impact and duration</h3> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="con-historical-data-backfill-details__entry__13">Aspect</th> 
+           <th class="entry" id="con-historical-data-backfill-details__entry__14">Details</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__13">Data Source</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__14">Controller (awx) database by using<code class="ph codeph">ms_readonly</code> user (read-only access)</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__13">Performance Impact</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__14">Minimal - backfill uses same read-only queries as regular collection, spread over time</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__13">Duration</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__14">Varies based on data volume; typically completes within 24 hours for large datasets</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__13">Automatic</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__14">Yes - no manual intervention required after enablement</td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p"><strong class="ph b">Estimated completion times:</strong></p> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:50%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="con-historical-data-backfill-details__entry__23">Data Volume (Controller Jobs)</th> 
+           <th class="entry" id="con-historical-data-backfill-details__entry__24">Estimated Backfill Duration</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__23">&lt; 10,000 jobs</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__24">Under 5 minutes</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__23">10,000 - 50,000 jobs</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__24">5–20 minutes</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__23">50,000 - 100,000 jobs</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__24">20–45 minutes</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__23">&gt; 100,000 jobs</td> 
+           <td class="entry" headers="con-historical-data-backfill-details__entry__24">45 minutes–2 hours</td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">These duration figures are estimates. Actual duration depends on job complexity, number of hosts per job, database performance, and system load.</p> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_post_installation#enable-automation-dashboard-post-installation" title="Activate dashboard data collection with automatic historical data backfill to generate comprehensive usage and ROI reports without reinstalling the platform or losing historical automation activity data.">Enable automation dashboard post-installation</a></li>
+        </ul>
+       </div>
+       <div class="linklist relref">
+        <strong>Related reference</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-ref_troubleshoot_automation_dashboard_configuration_and_deployment" title="Diagnose automation dashboard issues including Gateway integration failures, RBAC access problems, UI feature limitations, and data collection errors.">Troubleshoot automation dashboard configuration and deployment</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Difference between automation dashboard enablement during-installation and post-installation</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use this reference when choosing between during-installation and post-installation dashboard enablement to compare historical data collection, downtime requirements, and time to availability.</p> 
+       <section class="section">
+        <h3 class="title sectiontitle">Comparison of enablement approaches</h3> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:27.27272727272727%">
+          <col style="width:36.36363636363637%">
+          <col style="width:36.36363636363637%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__1">Aspect</th> 
+           <th class="entry" id="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__2">During Installation</th> 
+           <th class="entry" id="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__3">Post-Installation</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__1">When to use</td> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__2">New Ansible Automation Platform deployment</td> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__3">Existing Ansible Automation Platform installation</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__1">Historical data</td> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__2">No historical data (new installation)</td> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__3">Up to 90 days backfilled</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__1">Downtime</td> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__2">Part of initial installation</td> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__3">None (container restart only)</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__1">Time to dashboard</td> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__2">Immediate after first collection (6 hours)</td> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__3">Available after backfill completes (hours to 1 day)</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__1">Configuration effort</td> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__2">One-time during install</td> 
+           <td class="entry" headers="GUID-a3d6c034-5a95-4b67-b8ac-bb9d253e4864__entry__3">Update inventory/CR and re-run installer</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section">
+        <h3 class="title sectiontitle">Decision criteria</h3> 
+        <p class="p"><strong class="ph b">Choose during-installation enablement when:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Deploying a new Ansible Automation Platform environment</li> 
+         <li class="li">No historical data needed (starting fresh)</li> 
+         <li class="li">You want dashboard available immediately after first collection cycle</li> 
+         <li class="li">Installation downtime is already planned</li> 
+        </ul> 
+        <p class="p"><strong class="ph b">Choose post-installation enablement when:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Ansible Automation Platform is already in production</li> 
+         <li class="li">You need historical data from existing automation jobs</li> 
+         <li class="li">Zero downtime is required</li> 
+         <li class="li">You want to evaluate dashboard with real historical trends</li> 
+        </ul> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_post_installation#con-historical-data-backfill-details" title="Understand how automation dashboard backfills historical data after post-installation enablement by learning the backfill scope, behavior, performance impact, and duration estimates for dashboard data collection.">Historical data backfill details</a></li>
+        </ul>
+       </div>
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_containerized_installation" title="Enable automation dashboard data collection during the initial installation to start collecting ROI and cost analysis data without post-installation configuration.">Enable automation dashboard during containerized installation</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_during_operator_installation" title="Enable automation dashboard using declarative Custom Resource configuration to leverage operator-managed dashboard deployment with automatic feature flag propagation to metrics service.">Enable automation dashboard during operator installation</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_post_installation#enable-automation-dashboard-post-installation" title="Activate dashboard data collection with automatic historical data backfill to generate comprehensive usage and ROI reports without reinstalling the platform or losing historical automation activity data.">Enable automation dashboard post-installation</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

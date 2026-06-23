@@ -1,0 +1,238 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Automation controller variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Inventory file variables for automation controller.</p> 
+     <section class="section"> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:40%">
+        <col style="width:15%">
+        <col style="width:20%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1">Variable name</th> 
+         <th class="entry" id="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2">Description</th> 
+         <th class="entry" id="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3">Required or optional</th> 
+         <th class="entry" id="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_admin_email</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Email address used by Django for the admin user for automation controller.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">admin@example.com</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_admin_password</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Automation controller administrator password. Use of special characters for this variable is limited. The password can include any printable ASCII character except <code class="ph codeph">/</code>, <code class="ph codeph">"</code>, or <code class="ph codeph">@</code>.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Required</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_admin_user</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Username used to identify and create the administrator user in automation controller.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">admin</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_create_preload_data</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Controls whether or not to create preloaded content during installation.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_event_workers</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Number of event workers that handle job-related events inside automation controller.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">4</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_extra_settings</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Defines additional settings for use by automation controller during installation.</p> <p class="p">For example:</p> <pre class="pre codeblock"><code>controller_extra_settings=[{"setting": "USE_X_FORWARDED_HOST", "value": True}]</code></pre> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_firewall_zone</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">The firewall zone where automation controller related firewall rules are applied. This controls which networks can access automation controller based on the zone's trust level.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">public</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_license_file</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Path to the automation controller license file.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"></td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_nginx_client_max_body_size</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Maximum allowed size for data sent to automation controller through NGINX.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">5m</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_nginx_disable_hsts</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Controls whether HTTP Strict Transport Security (HSTS) is enabled or disabled for automation controller. Set this variable to <code class="ph codeph">true</code> to disable HSTS.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_nginx_disable_https</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Controls whether HTTPS is enabled or disabled for automation controller. Set this variable to <code class="ph codeph">true</code> to disable HTTPS.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_nginx_hsts_max_age</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Maximum duration (in seconds) that HTTP Strict Transport Security (HSTS) is enforced for automation controller.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">63072000</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_nginx_http_port</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Port number that automation controller listens on for HTTP requests.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">8080</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_nginx_https_port</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Port number that automation controller listens on for HTTPS requests.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">8443</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_nginx_https_protocols</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Protocols that automation controller supports when handling HTTPS traffic.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">[TLSv1.2, TLSv1.3]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_nginx_user_headers</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">List of additional NGINX headers to add to automation controller's NGINX configuration.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_percent_memory_capacity</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Memory allocation for automation controller.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">1.0</code> (allocates 100% of the total system memory to automation controller)</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_pg_cert_auth</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Controls whether client certificate authentication is enabled or disabled on the automation controller PostgreSQL database. Set this variable to <code class="ph codeph">true</code> to enable client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_pg_database</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Name of the PostgreSQL database used by automation controller.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">awx</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_pg_host</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Hostname of the PostgreSQL database used by automation controller.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Required</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_pg_password</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Password for the automation controller PostgreSQL database user. Use of special characters for this variable is limited. The <code class="ph codeph">!</code>, <code class="ph codeph">#</code>, <code class="ph codeph">0</code> and <code class="ph codeph">@</code> characters are supported. Use of other special characters can cause the setup to fail.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Required if not using client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_pg_port</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Port number that automation controller uses to connect to its PostgreSQL database. This variable does not configure the PostgreSQL server listening port. To change the port the PostgreSQL server listens on, use <code class="ph codeph">postgresql_port</code>.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">5432</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_pg_socket</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">UNIX socket used by automation controller to connect to the PostgreSQL database.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_pg_sslmode</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Controls the SSL/TLS mode to use when automation controller connects to the PostgreSQL database. Valid options include <code class="ph codeph">verify-full</code>, <code class="ph codeph">verify-ca</code>, <code class="ph codeph">require</code>, <code class="ph codeph">prefer</code>, <code class="ph codeph">allow</code>, <code class="ph codeph">disable</code>.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">prefer</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_pg_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Path to the PostgreSQL SSL/TLS certificate file for automation controller.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Required if using client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_pg_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Path to the PostgreSQL SSL/TLS key file for automation controller.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Required if using client certificate authentication.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_pg_username</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Username for the automation controller PostgreSQL database user.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">awx</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_secret_key</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Secret key value used by automation controller to sign and encrypt data.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Path to the SSL/TLS certificate file for automation controller.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Path to the SSL/TLS key file for automation controller.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_tls_remote</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Denote whether the automation controller provided certificate files are local to the installation program (<code class="ph codeph">false</code>) or on the remote component server (<code class="ph codeph">true</code>).</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_use_archive_compression</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Controls whether archive compression is enabled or disabled for automation controller. You can control this functionality globally by using <code class="ph codeph">use_archive_compression</code>.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_use_db_compression</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Controls whether database compression is enabled or disabled for automation controller. You can control this functionality globally by using <code class="ph codeph">use_db_compression</code>.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__1"> <p class="p"><code class="ph codeph">controller_uwsgi_listen_queue_size</code></p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__2"> <p class="p">Number of requests <code class="ph codeph">uwsgi</code> allows in the queue on automation controller until <code class="ph codeph">uwsgi_processes</code> can serve them.</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-7d75ef75-16ab-4984-9c1b-056e2fff75c7__entry__4"> <p class="p"><code class="ph codeph">2048</code></p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

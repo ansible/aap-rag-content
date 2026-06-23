@@ -1,0 +1,49 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-d09c4a1e-b448-4589-a9ca-08bf8599b6b6">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Background task processing for Event-Driven Ansible</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">In Ansible Automation Platform 2.7, Event-Driven Ansible controller uses <code class="ph codeph">dispatcherd</code>, a PostgreSQL-based task broker, for all background task processing. Dispatcherd replaces the previous Redis-based task queue and uses the PostgreSQL pg_notify feature as its message transport.</p> 
+     <p class="p">This transition simplifies the platform architecture by eliminating Redis as an infrastructure dependency for Event-Driven Ansible controller.</p> 
+     <p class="p"><code class="ph codeph">Dispatcherd</code> requires a connection to the same PostgreSQL instance used by the Event-Driven Ansible controller. A separate message broker, such as Redis, is no longer required.</p> 
+     <section class="section" id="GUID-d09c4a1e-b448-4589-a9ca-08bf8599b6b6__section_1">
+      <h2 class="title sectiontitle"><code class="ph codeph">Dispatcherd</code> worker types</h2> 
+      <div class="p">
+       <code class="ph codeph">Dispatcherd</code> manages the following worker types to handle background operations: 
+       <ul class="ul" id="GUID-d09c4a1e-b448-4589-a9ca-08bf8599b6b6__ul_1"> 
+        <li class="li"><strong class="ph b">Default worker:</strong> Processes system tasks, including project imports, project synchronizations, analytics gathering, and resource synchronization.</li> 
+        <li class="li"><strong class="ph b">Activation worker:</strong> Processes rulebook activation tasks, such as container creation, process monitoring, heartbeat checks, and restart policy enforcement. In multi-node deployments, each node runs dedicated activation workers listening on node-specific queues (for example, <code class="ph codeph">activation-node1</code>).</li> 
+       </ul> 
+      </div> 
+     </section> 
+     <section class="section" id="GUID-d09c4a1e-b448-4589-a9ca-08bf8599b6b6__section_2">
+      <h2 class="title sectiontitle">Impact of service unavailability</h2> 
+      <div class="p">
+       If the task workers or the PostgreSQL database become unavailable, the following operations are disabled: 
+       <ul class="ul" id="GUID-d09c4a1e-b448-4589-a9ca-08bf8599b6b6__ul_2"> 
+        <li class="li">Creating or syncing a project.</li> 
+        <li class="li">Creating, enabling, or disabling an activation.</li> 
+        <li class="li">Deleting or restarting an activation (unless using the <strong class="ph b">Force</strong> option).</li> 
+       </ul> 
+      </div> 
+     </section> 
+     <section class="section" id="GUID-d09c4a1e-b448-4589-a9ca-08bf8599b6b6__section_3">
+      <h2 class="title sectiontitle">Verifying worker status</h2> 
+      <p class="p">To verify that the <code class="ph codeph">dispatcherd</code> workers are active, you must run the following management command:</p> 
+      <div class="p">
+       Bash 
+       <pre class="pre codeblock"><code>aap-eda-manage dispatcherctl alive</code></pre> 
+      </div> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/eda_dispatcher_configuration">Dispatcherd configuration</a></strong><br><code class="ph codeph">Dispatcherd</code> uses PostgreSQL's pg_notify as its message transport to coordinate background task processing for Event-Driven Ansible controller. The following environment variables control how <code class="ph codeph">dispatcherd</code> connects to PostgreSQL, identifies worker queues, and manages health checks.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

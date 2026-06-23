@@ -1,0 +1,77 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="GUID-2bd50e76-0f1c-4b6c-82d1-9309fbe49683"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Example: Use F5 with Event-Driven Ansible</h1> 
+     <div class="body taskbody"> 
+      <p class="shortdesc">Use F5 with Event-Driven Ansible to watch for events and trigger a rulebook based on F5 monitoring logs.</p> 
+      <section class="section context" id="GUID-2bd50e76-0f1c-4b6c-82d1-9309fbe49683__context_1"> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">About this task</h2> 
+       </div> 
+       <p class="p">Example code using F5 and Event-Driven Ansible is available on GitHub. This code notes each instance of the watcher finding a match in its filter and then copies the source IP from that code into a CSV list. The list is then sent as a variable within the webhook along with the message to execute the code, as described in the high level workflow.</p> 
+       <p class="p"><img class="image" id="GUID-2bd50e76-0f1c-4b6c-82d1-9309fbe49683__image_1" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/f5-and-ansible.png"></p> 
+      </section> 
+      <section> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">Procedure</h2> 
+       </div> 
+       <ol class="ol steps"> 
+        <li class="li step"> <span class="ph cmd">The F5 BIGIP pushes the monitoring logs to Elastic.</span> </li> 
+        <li class="li step"> <span class="ph cmd">Elastic takes that data and stores it while using a watcher with its filters and criteria.</span> </li> 
+        <li class="li step"> <span class="ph cmd">The Watcher detects an event that matches its criteria and sends the webhook with pauload to Event-Driven Ansible.</span> </li> 
+        <li class="li step"> <span class="ph cmd">From the event, the Event-Driven Ansible rulebook triggers a job template within Ansible Automation Platform, which sends the payload provided by Elastic.</span> </li> 
+        <li class="li step"> <span class="ph cmd">An Ansible Automation Platform template executes a playbook to secure the F5 BIG-IP using the payload provided by Event-Driven Ansible (originally provided by Elastic).</span> </li> 
+       </ol> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-drive-responses-from-logging-events"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Drive responses from logging events</h2> 
+      <p class="shortdesc">Ansible validated content provides pre-tested, trusted Roles and playbooks for secure, consistent infrastructure management. Use this content out-of-the-box to reduce the time needed for custom development, such as automating Event-Driven Ansible’s response to log events.</p> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-use-case-aws-cloud-trail"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Use case: AWS CloudTrail</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Configure Event-Driven Ansible rulebooks to automatically monitor and secure your AWS CloudTrail logs. Triggering actions to re-enable encryption or restore deleted trails helps ensure your sensitive data remains protected and compliant.</p> 
+       <section class="section"> 
+        <p class="p">AWS CloudTrail is a service that logs all the API calls made in your AWS account, including API calls made by other AWS services. By default, CloudTrail logs are stored in an S3 bucket in an unencrypted form. To verify that your CloudTrail logs are secure, enable encryption for CloudTrail logs using AWS KMS. Enable encryption for CloudTrail logs by creating a KMS key that is used to encrypt the S3 bucket where your CloudTrail logs are stored. Then configure CloudTrail to use this key to encrypt the logs.</p> 
+        <p class="p">With encryption enabled, all CloudTrail logs are automatically encrypted when they are written to the S3 bucket. The logs can only be decrypted using the KMS key that you specified. This establishes that your logs are secure and can only be accessed by authorized users and services.</p> 
+        <p class="p">Encrypting AWS CloudTrail logs is important for several reasons:</p> 
+        <ul class="ul"> 
+         <li class="li">Protection of sensitive information: CloudTrail logs contain a wealth of information about the AWS account, including API calls, user identities, and resource information. Encrypting CloudTrail logs helps protect this sensitive information from unauthorized access or tampering.</li> 
+         <li class="li">Compliance requirements: Many compliance standards, such as HIPAA and PCI DSS, require log encryption to protect sensitive information. Encrypting CloudTrail logs enables compliance with these standards.</li> 
+         <li class="li">Prevent tampering: CloudTrail’s log encryption helps prevent logs from being tampered with. This helps maintain log integrity and an accurate record of all API calls made to your AWS account.</li> 
+         <li class="li">Secure data: CloudTrail log’s encryption provides an additional layer of security for data. In the event that your S3 bucket is compromised, the encrypted logs cannot be accessed without the encryption key.</li> 
+        </ul> 
+        <p class="p">The Event-Driven Ansible rulebook is comprised of the following components to assist in actions on the log files:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Sources</strong>: define which event source will be used</li> 
+         <li class="li"><strong class="ph b">Rules</strong>: define which conditionals will be matched from the event source</li> 
+         <li class="li"><strong class="ph b">Actions</strong>: trigger events when conditions are met</li> 
+        </ul> 
+        <p class="p">In the following example, the rulebook implements a ruleset with three rules as follows:</p> 
+        <p class="p"> <strong class="ph b">Rule #1: Enable trail encryption</strong> </p> 
+        <p class="p">This rule handles the case when trail encryption is disabled. It is triggered when an UpdateTrail operation is performed on the trail and the parameters contained in the UpdateTrail request match these conditions:</p> 
+        <p class="p"><code class="ph codeph">event.CloudTrailEvent.requestParameters.kmsKeyId==""</code> AND <code class="ph codeph">event.CloudTrailEvent.requestParameters.name==vars.cloudtrail_name.</code></p> 
+        <p class="p">The action that is taken to mitigate this drift will run the</p> 
+        <p class="p">'playbooks/eda/aws_restore_cloudtrail_encryption.yml playbook` This playbook runs the Ansible validated role <code class="ph codeph">cloud.aws_ops.enable_cloudtrail_encryption_with_kms</code> that re-enables the trail’s encryption, restoring the system to its status quo.</p> 
+        <p class="p"> <strong class="ph b">Rule#2: Re-create the trail</strong> </p> 
+        <p class="p">This rule handles the case when the trail is deleted.</p> 
+        <p class="p">When the following conditions are met:</p> 
+        <p class="p"><code class="ph codeph">event.CloudTrailEvent.eventName=="DeleteTrail"</code> AND <code class="ph codeph">event.CloudTrailEvent.requestParameters.name==vars.cloudtrail_name</code></p> 
+        <p class="p">The action is running the <code class="ph codeph">playbooks/eda/aws_restore_cloudtrail.yml</code> playbook. This playbook runs the Ansible validated content <code class="ph codeph">cloud.aws_ops.awsconfig_multiregion_cloudtrail</code> role first, which re-creates the trail and then the <code class="ph codeph">cloud.aws_ops.enable_cloudtrail_encryption_with_kms</code> role, to enable the encryption on the newly created trail.</p> 
+        <p class="p"> <strong class="ph b">Rule#3: Cancels the deletion of the KMS key and re-enables it</strong> </p> 
+        <p class="p">This rule responds to the case of a KMS key being deleted or disabled. This results in the condition</p> 
+        <p class="p"><code class="ph codeph">event.CloudTrailEvent.eventName=="ScheduleKeyDeletion"</code> OR <code class="ph codeph">event.CloudTrailEvent.eventName=="DisableKey"</code></p> 
+        <p class="p">When someone attempts to delete a KMS key intentionally or accidentally, a <code class="ph codeph">ScheduleKeyDeletion</code> event is displayed in AWS CloudTrail. The KMS key is not deleted immediately, because deleting a KMS key is destructive and potentially dangerous. AWS KMS requires setting a 7–30 day waiting period. This situation is handled promptly by running playbooks/eda/aws_restore_kms_key.yml playbook, which cancels the deletion of the KMS key. Similarly, when the KMS key is disabled, the playbook reactivates it to restore the original state of the system. The playbook sets the KMS key ARN and uses it to determine whether to cancel the KMS key deletion, to re-enable the KMS key, or both.</p> 
+        <p class="p">Ansible validated content for cloud.aws_ops and Event-Driven Ansible create many opportunities for automated issue resolution and observation of cloud computing environments, helping you to easily automate, mitigate security issues, and maximize your mastery of cloud environments. For more information on using rulebooks, see <a class="xref" href="https://www.redhat.com/en/blog/ansible-validated-content-with-event-driven-ansible#:~:text=Event%2DDriven%20Ansible%20refers%20to,application%20failures%2C%20or%20security%20breaches" target="_blank" rel="external noopener">Validated content for Event-Driven ansible for AWS</a>.</p> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

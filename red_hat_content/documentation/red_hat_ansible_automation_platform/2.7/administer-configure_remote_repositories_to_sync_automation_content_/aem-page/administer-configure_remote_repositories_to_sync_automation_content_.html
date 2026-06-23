@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-948c0df3-ccf0-4d15-8e7c-28145946db2f">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Sync automation content from remote repositories </h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Storing automation content in a remote repository provides centralized control, increases security, and improves consistency for automation across your organization.</p> 
+     <div class="p">
+       Ansible Certified Content Collections are included in your subscription to Red Hat Ansible Automation Platform. Using Ansible automation hub, you can access and curate a unique set of collections from all forms of Ansible content. Red Hat Ansible content contains two types of content: 
+      <ul class="ul" id="GUID-948c0df3-ccf0-4d15-8e7c-28145946db2f__ul_1"> 
+       <li class="li">Ansible Certified Content Collections</li> 
+       <li class="li">Ansible validated content collections</li> 
+      </ul> 
+     </div> 
+     <p class="p">With Ansible Certified Content Collections and Ansible validated content collections, you can build your automation library. You can update these collections manually by downloading their packages.You can use Ansible automation hub to distribute the relevant Red Hat Ansible Certified Content Collections to your users by creating a requirements file.</p> 
+     <p class="p">Use remote configurations to configure your private automation hub to synchronize with Ansible Certified Content Collections hosted on <code class="ph codeph">console.redhat.com</code> or with your collections in Ansible Galaxy. Each remote configuration in Automation Content Remotes provides information for both the <strong class="ph b">community</strong> and <strong class="ph b">rh-certified</strong> repository about when the repository was <strong class="ph b">last updated</strong>. You can add new content to Ansible automation hub at any time by using the <strong class="ph b">Edit</strong> and <strong class="ph b">Sync</strong> features included on the Automation Content Repositories page.</p> 
+     <p class="p"><strong class="ph b">Understanding the difference between Ansible Galaxy and Ansible automation hub collections</strong></p> 
+     <p class="p">Collections published to Ansible Galaxy are the latest content published by the Ansible community and have no joint support claims associated with them. Ansible Galaxy is the recommended front end directory for the Ansible community to access content.Collections published to Ansible automation hub are targeted to joint customers of Red Hat and selected partners. Customers need an Ansible subscription to access and download collections on Ansible automation hub. A certified collection means that Red Hat and partners have a strategic relationship in place and are ready to support joint customers. Collections might also have had additional testing and validation done against them.</p> 
+     <p class="p"><strong class="ph b">Requesting a namespace on Ansible Galaxy</strong>To request a namespace through an Ansible Galaxy GitHub issue, send an email request to ansiblepartners@redhat.com that includes the GitHub username used to sign up on Ansible Galaxy.You must have logged in at least once for the system to validate.After users are added as administrators of the namespace, you can use the self-serve process to add more administrators.</p> 
+     <p class="p"><strong class="ph b">Ansible Galaxy namespace naming guidelines</strong>Collection namespaces must follow Python module name convention. This means collections should have short, all lowercase names. You can use underscores in the collection name if it improves readability.</p> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_managing_cert_valid_content">Red Hat Certified, validated, and Ansible Galaxy content in automation hub</a></strong><br>With Ansible automation hub, you can access and curate a unique set of collections from all forms of Ansible content. </li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_token_management_hub#token-management-hub">Configure automation hub tokens</a></strong><br>You must authenticate your hub instance before you can upload or download collections.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_set_rhcertified_remote">Configure the rh-certified remote repository</a></strong><br>You can edit the <strong class="ph b">rh-certified</strong> remote repository to synchronize collections from automation hub hosted on console.redhat.com to your private automation hub.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_set_community_remote">Configure the private automation hub community remote</a></strong><br>Configure the community remote so you can sync content from Ansible Galaxy.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_configure_proxy_remote">Configure proxy settings</a></strong><br>If your private automation hub is behind a network proxy, you can configure proxy settings on the remote to sync content located outside of your local network.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_requirements_file">Create a requirements file</a></strong><br>Use a requirements file to add collections to your automation hub. </li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist">Sync content collections</a></strong><br>You can sync certified and validated collections in Ansible automation hub from console.redhat.com.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_configure_content_signing_on_pah#proc-configure-content-signing-on-pah">Configure content signing on private automation hub</a></strong><br>To successfully sign and publish Ansible Certified Content Collections, you must configure private automation hub for signing.</li>
+     </ul>
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://access.redhat.com/support/articles/ansible-automation-platform-certified-content" target="_blank" rel="external noopener">Ansible Certified Content Collections and Ansible validated content</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

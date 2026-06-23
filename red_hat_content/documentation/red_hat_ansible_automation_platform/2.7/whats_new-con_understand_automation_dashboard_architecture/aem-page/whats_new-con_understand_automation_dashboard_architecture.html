@@ -1,0 +1,840 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="con-automation-dashboard-architecture"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Understand automation dashboard architecture</h1> 
+    <div class="body conbody"> 
+     <p class="shortdesc">This module explains the automation dashboard architecture in Red Hat Ansible Automation Platform 2.7, including its integration with metrics service, deployment options, and Technology Preview limitations.</p> 
+     <div class="note important note_important"> <span class="note__title">Important:</span> 
+      <div class="note__body"> 
+       <p class="p"><strong class="ph b">Technology Preview:</strong> Automation dashboard is a Technology Preview feature in Red Hat Ansible Automation Platform 2.7. Technology Preview features are not supported with Red Hat production service level agreements (SLAs) and might not be functionally complete. Red Hat does not recommend using them in production.</p> 
+       <p class="p">Automation dashboard is disabled by default in Red Hat Ansible Automation Platform 2.7. You must explicitly enable it by using installer configuration or Custom Resource (CR) definition.</p> 
+      </div> 
+     </div> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Automation dashboard overview</h2> 
+      <p class="p">Automation dashboard provides visualization, measurement, and return on investment (ROI) analysis for your Ansible automation usage. In Ansible Automation Platform 2.7, the dashboard becomes a native component of the platform. It integrates directly with the Ansible Automation Platform unified user interface (UI) and leverages metrics service as its data collection backend.</p> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">For information on the standalone automation dashboard, see View automation job metrics with automation dashboard.</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Key characteristics (Red Hat Ansible Automation Platform 2.7 native integration)</h2> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:27.27272727272727%"> 
+        <col style="width:36.36363636363637%"> 
+        <col style="width:36.36363636363637%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__1">Characteristic</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__2">Ansible Automation Platform 2.7 Native Dashboard</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__3">Standalone Dashboard Utility (Ansible Automation Platform 2.6)</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__1">Deployment</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__2">Containerized installer or operator-based deployment as part of Ansible Automation Platform installation</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__3">Separate RHEL 9 host, manual installation bundle</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__1">Backend</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__2">Metrics service - unified data collection service</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__3">Standalone database, direct Controller application programming interface (API) queries</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__1">UI Integration</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__2">Native Ansible Automation Platform unified UI (integrated navigation)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__3">Separate dashboard URL</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__1">Authentication</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__2">Ansible Automation Platform Gateway role-based access control (RBAC) (Lightweight Directory Access Protocol (LDAP), Security Assertion Markup Language (SAML), OpenID Connect (OIDC) support)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__3">OAuth tokens (clusters.yaml configuration)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__1">Data Collection</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__2">6-hourly automated collection by using metrics service</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__3">Configurable synchronization schedule</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__1">Multi-Instance Support</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__2">Single Ansible Automation Platform instance only (Technology Preview limitation)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__3">Multiple Ansible Automation Platform instances supported</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__1">Default State</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__2">Disabled (opt-in by using feature flag)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__3">N/A (separate installation)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__1">Database</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__2">Metrics service database</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__3">Standalone postgres instance</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__1">Historical Data Backfill</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__2">Up to 90 days from Controller DB when enabled post-installation</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__3">Configurable backfill period</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Architecture components</h2> 
+      <figure class="fig fignone" id="con-automation-dashboard-architecture__fig_1"> 
+       <figcaption> <span class="fig--title-label">Figure 1. </span>Automation dashboard architecture 
+       </figcaption> 
+       <img class="image" id="con-automation-dashboard-architecture__image_1" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/metrics-services-dashboard-architecture.png" alt="Architectural diagram showing relationship between automation dashboard and metrics service"> 
+      </figure> 
+      <p class="p"><strong class="ph b">Core components</strong></p> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:27.27272727272727%"> 
+        <col style="width:36.36363636363637%"> 
+        <col style="width:36.36363636363637%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__31">Component</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__32">Purpose</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__33">Dashboard Role</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__31">Automation dashboard UI</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__32">Visualization and reporting interface</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__33">Displays ROI metrics, cost analysis, and usage trends collected by metrics service</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__31">Metrics service</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__32">Unified data collection backend</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__33">Collects dashboard-specific metrics (cost, pricing, ROI) when FEATURE_DASHBOARD_COLLECTION_ENABLED feature flag enabled</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__31">Metrics service database</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__32">Metrics storage and processing</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__33">Once the feature flag is enabled, the data is stored in dashboard_* tables</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__31">awx database</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__32">Controller operational data</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__33">Source of automation usage data (accessed read-only by using ms_awx_readonly user)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__31">Ansible Automation Platform Gateway</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__32">Authentication and RBAC</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__33">Controls dashboard access by using configurable RBAC policies</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Metrics service as unified backend</h2> 
+      <p class="p">Automation dashboard uses metrics service as its data collection and storage backend. This architecture provides:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Single infrastructure:</strong> Avoids duplicate data collection mechanisms</li> 
+       <li class="li"><strong class="ph b">Unified API:</strong> Dashboard UI consumes data by using metrics service REST APIs</li> 
+       <li class="li"><strong class="ph b">Shared database:</strong> Dashboard tables coexist with standard metrics in metrics_service database</li> 
+       <li class="li"><strong class="ph b">Consistent data model:</strong> Same anonymization and retention policies</li> 
+       <li class="li"><strong class="ph b">Feature flag control:</strong> Dashboard collection enabled independently by using FEATURE_DASHBOARD_COLLECTION_ENABLED: true</li> 
+      </ul> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Metrics service REST API endpoints</h2> 
+      <p class="p">The dashboard UI consumes data by using the following metrics service REST API endpoints:</p> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:40%"> 
+        <col style="width:20%"> 
+        <col style="width:40%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__49">Endpoint</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__50">Method</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__51">Purpose</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__49">/api/metrics/v1/dashboard_reports/report/</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__50">GET</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__51">Paginated data list aggregated by templates</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__49">/api/metrics/v1/dashboard_reports/report/details/</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__50">GET</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__51">Summary, graphical data, top user/project data</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__49">/api/metrics/v1/dashboard_reports/organizations/</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__50">GET</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__51">Organization dropdown filter (from AWX database)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__49">/api/metrics/v1/dashboard_reports/templates/</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__50">GET</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__51">Job template dropdown filter (from AWX database)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__49">/api/metrics/v1/dashboard_reports/projects/</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__50">GET</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__51">Project dropdown filter (from AWX database)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__49">/api/metrics/v1/dashboard_reports/labels/</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__50">GET</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__51">Label dropdown filter (from AWX database)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__49">/api/metrics/v1/dashboard_reports/subscription_costs/</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__50">GET/PATCH</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__51">Cost parameters (singleton)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__49">/api/metrics/v1/dashboard_reports/template_metadata/</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__50">GET/PATCH</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__51">Manual/automated effort time metadata</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__49">/api/metrics/v1/dashboard_reports/filter_sets/</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__50">GET/POST/PATCH/DELETE</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__51">Saved filterset configurations</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Dashboard API quick reference</h2> 
+      <p class="p">The automation dashboard provides REST APIs for programmatic access to dashboard data. These APIs are consumed by the dashboard UI and can also be accessed directly for custom reporting and integrations.</p> 
+      <p class="p"><strong class="ph b">Base URL:</strong> <code class="ph codeph">https://&lt;AAP-FQDN&gt;/api/metrics/v1/dashboard_reports/</code></p> 
+      <p class="p"><strong class="ph b">Authentication:</strong> All dashboard API endpoints require authentication by using Ansible Automation Platform credentials and are subject to RBAC enforcement through the Ansible Automation Platform Gateway.</p> 
+      <p class="p"><strong class="ph b">Report endpoint</strong></p> 
+      <p class="p"><strong class="ph b">Endpoint:</strong> <code class="ph codeph">/api/metrics/v1/dashboard_reports/report/</code></p> 
+      <p class="p"><strong class="ph b">Method:</strong> GET</p> 
+      <p class="p"><strong class="ph b">Purpose:</strong> Retrieve paginated dashboard data aggregated by job templates</p> 
+      <p class="p"><strong class="ph b">Required Query Parameters:</strong></p> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:23.076923076923077%"> 
+        <col style="width:15.384615384615385%"> 
+        <col style="width:30.76923076923077%"> 
+        <col style="width:30.76923076923077%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__79">Parameter</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__80">Type</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__81">Description</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__82">Valid Values</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__79">period</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__80">string</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__81">Time period for data aggregation</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__82">last_30_days, last_60_days, last_90_days</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <p class="p"><strong class="ph b">Optional Filter Query Parameters:</strong></p> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:23.076923076923077%"> 
+        <col style="width:15.384615384615385%"> 
+        <col style="width:30.76923076923077%"> 
+        <col style="width:30.76923076923077%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__87">Parameter</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__88">Type</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__89">Description</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__90">Example</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__87">organization</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__88">integer</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__89">Filter by organization ID</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__90">?organization=3</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__87">template</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__88">integer</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__89">Filter by job template ID</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__90">?template=5</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__87">project</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__88">integer</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__89">Filter by project ID</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__90">?project=10</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__87">label</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__88">integer</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__89">Filter by label ID</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__90">?label=2</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <div class="note important note_important"> <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Filter parameter names are singular (organization, not organizations). Multiple filters can be combined using multiple query parameters of the same name (for example, ?organization=3&amp;organization=5).</p> 
+       </div> 
+      </div> 
+      <p class="p"><strong class="ph b">Example Requests:</strong></p> 
+      <pre class="pre codeblock"><code># Get all dashboard data for last 90 days
+curl -k -u admin:&lt;password&gt; \
+  "https://&lt;AAP-FQDN&gt;/api/metrics/v1/dashboard_reports/report/?period=last_90_days"
+
+# Filter by specific organization
+curl -k -u admin:&lt;password&gt; \
+  "https://&lt;AAP-FQDN&gt;/api/metrics/v1/dashboard_reports/report/?period=last_90_days&amp;organization=3"
+
+# Combine multiple filters
+curl -k -u admin:&lt;password&gt; \
+  "https://&lt;AAP-FQDN&gt;/api/metrics/v1/dashboard_reports/report/?period=last_60_days&amp;organization=3&amp;project=10"
+
+# Filter by multiple organizations
+curl -k -u admin:&lt;password&gt; \
+  "https://&lt;AAP-FQDN&gt;/api/metrics/v1/dashboard_reports/report/?period=last_90_days&amp;organization=3&amp;organization=5"</code></pre> 
+      <p class="p"><strong class="ph b">Response:</strong> Paginated JSON response containing job template aggregations with:</p> 
+      <ul class="ul"> 
+       <li class="li">Cost and savings calculations</li> 
+       <li class="li">ROI metrics</li> 
+       <li class="li">Job execution statistics</li> 
+       <li class="li">Time saved calculations</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Report details endpoint</strong></p> 
+      <p class="p"><strong class="ph b">Endpoint:</strong> <code class="ph codeph">/api/metrics/v1/dashboard_reports/report/details/</code></p> 
+      <p class="p"><strong class="ph b">Method:</strong> GET</p> 
+      <p class="p"><strong class="ph b">Purpose:</strong> Retrieve summary statistics, graphical data, and top user/project information</p> 
+      <p class="p"><strong class="ph b">Query Parameters:</strong> Same as /report/ endpoint (period required, filters optional)</p> 
+      <p class="p"><strong class="ph b">Example Request:</strong></p> 
+      <pre class="pre codeblock"><code>curl -k -u admin:&lt;password&gt; \
+  "https://&lt;AAP-FQDN&gt;/api/metrics/v1/dashboard_reports/report/details/?period=last_90_days"</code></pre> 
+      <p class="p"><strong class="ph b">Response:</strong> JSON response containing:</p> 
+      <ul class="ul"> 
+       <li class="li">Summary statistics (total jobs, total savings, total time saved)</li> 
+       <li class="li">Top 10 users by automation usage</li> 
+       <li class="li">Top 10 projects by savings</li> 
+       <li class="li">Time-series data for graphs</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Filter list endpoints</strong></p> 
+      <p class="p">These endpoints provide lists of available filter options for dropdown menus:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Organizations:</strong> <code class="ph codeph">GET /api/metrics/v1/dashboard_reports/organizations/</code></li> 
+       <li class="li"><strong class="ph b">Templates:</strong> <code class="ph codeph">GET /api/metrics/v1/dashboard_reports/templates/</code></li> 
+       <li class="li"><strong class="ph b">Projects:</strong> <code class="ph codeph">GET /api/metrics/v1/dashboard_reports/projects/</code></li> 
+       <li class="li"><strong class="ph b">Labels:</strong> <code class="ph codeph">GET /api/metrics/v1/dashboard_reports/labels/</code></li> 
+      </ul> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">These endpoints return the complete list of available filter values from the Controller database.</p> 
+       </div> 
+      </div> 
+      <p class="p"><strong class="ph b">Cost configuration endpoint</strong></p> 
+      <p class="p"><strong class="ph b">Endpoint:</strong> <code class="ph codeph">/api/metrics/v1/dashboard_reports/subscription_costs/</code></p> 
+      <p class="p"><strong class="ph b">Methods:</strong> GET (retrieve), PATCH (update)</p> 
+      <p class="p"><strong class="ph b">Purpose:</strong> Configure cost parameters for ROI calculations</p> 
+      <p class="p"><strong class="ph b">Example - Retrieve cost parameters:</strong></p> 
+      <pre class="pre codeblock"><code>curl -k -u admin:&lt;password&gt; \
+  https://&lt;AAP-FQDN&gt;/api/metrics/v1/dashboard_reports/subscription_costs/</code></pre> 
+      <p class="p"><strong class="ph b">Example - Update cost parameters:</strong></p> 
+      <pre class="pre codeblock"><code>curl -k -X PATCH -u admin:&lt;password&gt; \
+  https://&lt;AAP-FQDN&gt;/api/metrics/v1/dashboard_reports/subscription_costs/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "infrastructure_cost_per_hour": 2.50,
+    "currency": "USD"
+  }'</code></pre> 
+      <p class="p"><strong class="ph b">API documentation</strong></p> 
+      <p class="p">For complete API schema and additional endpoints, access the OpenAPI specification:</p> 
+      <pre class="pre codeblock"><code>curl -k -u admin:&lt;password&gt; \
+  https://&lt;AAP-FQDN&gt;/api/metrics/v1/dashboard_reports/schema/</code></pre> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p"><strong class="ph b">RBAC Note:</strong> Dashboard API access is controlled by Ansible Automation Platform Gateway RBAC policies. Users must have appropriate dashboard permissions to access these endpoints. System Auditor role provides read-only access to all dashboard data.</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Data collection architecture</h2> 
+      <p class="p"><strong class="ph b">Collection schedule</strong></p> 
+      <p class="p">When <code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code> is configured (containerized) or <code class="ph codeph">spec.metrics_service.FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code> (operator), metrics service collects dashboard-specific data on a 6-hourly schedule.</p> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:33.33333333333333%"> 
+        <col style="width:66.66666666666666%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__107">Aspect</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__108">Details</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__107">Frequency</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__108">Every 6 hours (balance between data freshness and Controller database load)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__107">Configurable?</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__108">No</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__107">Database Impact</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__108">Minimal - read-only queries by using ms_awx_readonly user, optimized for low overhead</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__107">Topology Support</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__108">Single VM (growth topology) supported with 6-hourly collection</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <p class="p"><strong class="ph b">Dashboard collection configuration</strong></p> 
+      <p class="p">The following configuration variables control dashboard collection behavior:</p> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:33.33333333333333%"> 
+        <col style="width:16.666666666666664%"> 
+        <col style="width:33.33333333333333%"> 
+        <col style="width:16.666666666666664%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__117">Variable</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__118">Default</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__119">Purpose</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__120">User-Configurable?</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__117">FEATURE_DASHBOARD_COLLECTION_ENABLED</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__118">False</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__119">Enables/disables all dashboard data collection</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__120">Yes</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__117">FEATURE_DASHBOARD_COLLECTION_ENABLED__COLLECTION_SCHEDULE_CRON</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__118">"0 */6 * * *"</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__119">Incremental data collection schedule (every 6 hours)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__120">No</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__117">retention_period_days</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__118">90</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__119">How many days JobData records are stored (configurable per task)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__120">Internal configuration only</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">In Technology Preview, the collection schedule is fixed at 6 hours.</p> 
+       </div> 
+      </div> 
+      <p class="p"><strong class="ph b">Dashboard-specific metrics collected</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Cost and pricing data:</strong> Infrastructure costs for automation execution</li> 
+       <li class="li"><strong class="ph b">ROI calculations:</strong> Time saved, cost savings, manual effort avoided</li> 
+       <li class="li"><strong class="ph b">Automation savings metrics:</strong> Efficiency gains and resource optimization</li> 
+       <li class="li"><strong class="ph b">Executive reporting data:</strong> High-level usage trends and adoption metrics</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Detailed metrics schema:</strong></p> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:25%"> 
+        <col style="width:16.666666666666664%"> 
+        <col style="width:25%"> 
+        <col style="width:33.33333333333333%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__133">Field</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__134">Type</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__135">Source (AWX database table)</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__136">Description</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">job_id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">int</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_unifiedjob.id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Job ID in AWX (unique)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">template_name</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">str</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_unifiedjobtemplate.name</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Job template name</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">template_id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">int (nullable)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_unifiedjobtemplate.id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Job template ID in AWX</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">project_id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">int (nullable)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_project.id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Project ID in AWX</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">project_name</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">str (nullable)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_project.name</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Project name</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">organization_id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">int (nullable)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_organization.id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Organization ID in AWX</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">organization_name</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">str (nullable)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_organization.name</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Organization name</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">status</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">str</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_unifiedjob.status</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Status: new, pending, waiting, running, successful, failed, error, cancelled</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">started</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">datetime (nullable)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_unifiedjob.started</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Job start time</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">finished</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">datetime (nullable)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_unifiedjob.finished</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Job end time</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">elapsed</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">decimal</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_unifiedjob.elapsed</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Job duration in seconds</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">num_hosts</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">int</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">Calculated from main_hostsummary</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Number of hosts in a job</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">launched_by_id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">int (nullable)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_unifiedjob.created_by_id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">ID of the user that started the job in AWX/Automation Controller</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">launched_by_username</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">str (nullable)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">auth_user.username</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Name of the user that started the job</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">awx_created</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">datetime</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_unifiedjob.created</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Date created in AWX/Automation Controller</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__133">awx_modified</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__134">datetime</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__135">main_unifiedjob.modified</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__136">Last changed date in AWX/Automation Controller (watermark for incremental collection)</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <p class="p"><strong class="ph b">Related raw data tables:</strong></p> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:25%"> 
+        <col style="width:16.666666666666664%"> 
+        <col style="width:25%"> 
+        <col style="width:33.33333333333333%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__201">Field</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__202">Type</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__203">Source (AWX database table)</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__204">Description</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__201">host_summary_id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__202">int</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__203">main_hostsummary.id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__204">Host summary ID in AWX/Automation Controller</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__201">host_id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__202">int (nullable)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__203">main_host.id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__204">Host ID in AWX/Automation Controller</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__201">host_name</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__202">str</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__203">main_host.name</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__204">Host name</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__201">label_id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__202">int</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__203">main_label.id</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__204">Label ID in AWX/Automation Controller (for filtering purposes)</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Database architecture</h2> 
+      <p class="p"><strong class="ph b">Technology Preview database approach</strong></p> 
+      <p class="p">In Ansible Automation Platform 2.7 Technology Preview, the metrics service database may be colocated with the Controller database on the same postgres instance. The 6-hourly collection schedule minimizes performance impact on Controller database operations.</p> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:27.27272727272727%"> 
+        <col style="width:36.36363636363637%"> 
+        <col style="width:36.36363636363637%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__221">Phase</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__222">Database Architecture</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__223">Notes</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__221">Technology Preview (Ansible Automation Platform 2.7.0)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__222">Metrics service DB may be colocated with Controller DB on the same postgres instance</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__223">6-hourly collection minimizes impact; performance monitoring active</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__221">General Availability (2.7 async release)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__222">Database architecture evaluated based on Technology Preview data</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__223"></td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Deployment topology</h2> 
+      <p class="p"><strong class="ph b">Single-instance limitation (Technology Preview)</strong></p> 
+      <p class="p">The integrated dashboard in Ansible Automation Platform 2.7 Technology Preview displays data for the local Ansible Automation Platform instance only. Multi-instance support (connecting multiple Ansible Automation Platform deployments to a single dashboard) is not available with the Ansible Automation Platform integration.</p> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:40%"> 
+        <col style="width:20%"> 
+        <col style="width:40%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__230">Deployment Scenario</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__231">Technology Preview Support</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__232">Current Workaround</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__230">Single Ansible Automation Platform instance</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__231">Fully supported</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__232">N/A</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__230">Multiple Ansible Automation Platform instances (different versions)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__231">Not supported</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__232">Use standalone dashboard utility for multi-instance aggregation</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__230">Multiple Ansible Automation Platform instances (same version)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__231">Not supported</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__232">Use standalone dashboard utility for multi-instance aggregation</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">If you need to aggregate data across multiple Ansible Automation Platform instances, continue using the standalone automation dashboard utility (Ansible Automation Platform 2.6 approach).</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Feature flag architecture</h2> 
+      <p class="p">Dashboard collection is controlled by a feature flag that enables or disables data collection when metrics service is installed.</p> 
+      <p class="p"><strong class="ph b">Containerized installation method</strong></p> 
+      <p class="p">Create a feature flags variables file (for example, feature_flags.yml) with the following information:</p> 
+      <pre class="pre codeblock"><code>feature_flags:
+  FEATURE_DASHBOARD_COLLECTION_ENABLED: True</code></pre> 
+      <p class="p">Then pass the file to the installer using the -e flag:</p> 
+      <pre class="pre codeblock"><code>cd /path/to/aap-containerized-installer
+ansible-playbook -i inventory ansible.containerized_installer.install -e @feature_flags.yml</code></pre> 
+      <p class="p"><strong class="ph b">Operator deployment</strong></p> 
+      <pre class="pre codeblock"><code>spec:
+  feature_flags:
+    FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code></pre> 
+      <p class="p">This maps to the internal metrics service configuration:</p> 
+      <pre class="pre codeblock"><code># In metrics service settings.yaml
+FEATURE_ENABLED:
+  FEATURE_DASHBOARD_COLLECTION_ENABLED: true
+
+# or in metrics service environment
+env | grep DASHBOARD
+METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED=true</code></pre> 
+      <p class="p"><strong class="ph b">Feature flag behavior</strong></p> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:25%"> 
+        <col style="width:75%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__242">Feature Flag State</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__243">Behavior</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__242">false (default)</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__243">Dashboard collection tasks not scheduled; no dashboard data collected; UI may show empty state or be disabled</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__242">true</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__243">Dashboard collection tasks run on 6-hourly schedule; dashboard-specific metrics collected; dashboard UI accessible</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Dependency: Metrics service required</h2> 
+      <p class="p">Automation dashboard requires metrics service to be configured and available.</p> 
+      <p class="p">If metrics service is not configured (no host in [automationmetrics] group for containerized, or no MetricsService CR for operator), dashboard configuration settings are ignored. The dashboard collection feature flag (FEATURE_DASHBOARD_COLLECTION_ENABLED: True) has no effect without metrics service enabled.</p> 
+      <div class="note warning note_warning"> <span class="note__title">Warning:</span> 
+       <div class="note__body"> 
+        <p class="p">There is currently no installer preflight validation for this dependency. If metrics service is not configured, dashboard settings are ignored during installation.</p> 
+       </div> 
+      </div> 
+      <p class="p"><strong class="ph b">Dependency Behavior:</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Dashboard requires metrics service:</strong> Dashboard collection cannot function without metrics service backend</li> 
+       <li class="li"><strong class="ph b">Metrics service is independent:</strong> Metrics service operates with or without dashboard enabled</li> 
+       <li class="li"><strong class="ph b">Configuration relationship:</strong> If metrics service is not configured, dashboard settings are ignored</li> 
+      </ul> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Performance characteristics</h2> 
+      <p class="p"><strong class="ph b">Collection impact on Controller database</strong></p> 
+      <p class="p">The 6-hourly collection schedule minimizes impact on the Controller (AWX) database:</p> 
+      <table class="table"> 
+       <caption></caption> 
+       <colgroup> 
+        <col style="width:42.857142857142854%"> 
+        <col style="width:57.14285714285714%"> 
+       </colgroup> 
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__248">Metric</th> 
+         <th class="entry" id="con-automation-dashboard-architecture__entry__249">Specification</th> 
+        </tr> 
+       </thead> 
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__248">Collection frequency</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__249">Every 6 hours</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__248">Database access</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__249">Read-only by using ms_awx_readonly user</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__248">Query optimization</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__249">Incremental data collection (only new/updated records)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__248">Topology support</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__249">Single VM (growth topology) supported</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__248">Expected CPU impact</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__249">&lt; 5% during collection (lasts ~5-10 minutes)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__248">Expected memory impact</td> 
+         <td class="entry" headers="con-automation-dashboard-architecture__entry__249">&lt; 500MB temporary increase during collection</td> 
+        </tr> 
+       </tbody> 
+      </table> 
+     </section> 
+     <section class="section"> 
+      <h2 class="title sectiontitle">Technology Preview to GA migration</h2> 
+      <p class="p"><strong class="ph b">What to expect</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Feature flag may change:</strong> GA enables dashboard by default</li> 
+       <li class="li"><strong class="ph b">Backup before upgrade:</strong> Always back up metrics_service database before upgrading from Technology Preview to GA</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links"> 
+     <ul class="ullinks"> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_containerized_installation">Enable automation dashboard during containerized installation</a></strong><br>Enable automation dashboard data collection during the initial installation to start collecting ROI and cost analysis data without post-installation configuration.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_during_operator_installation">Enable automation dashboard during operator installation</a></strong><br>Enable automation dashboard using declarative Custom Resource configuration to leverage operator-managed dashboard deployment with automatic feature flag propagation to metrics service.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_post_installation#enable-automation-dashboard-post-installation">Enable automation dashboard post-installation</a></strong><br>Activate dashboard data collection with automatic historical data backfill to generate comprehensive usage and ROI reports without reinstalling the platform or losing historical automation activity data.</li> 
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-ref_troubleshoot_automation_dashboard_configuration_and_deployment">Troubleshoot automation dashboard configuration and deployment</a></strong><br>Diagnose automation dashboard issues including Gateway integration failures, RBAC access problems, UI feature limitations, and data collection errors.</li> 
+     </ul> 
+     <div class="linklist"> <strong>Prerequisites</strong> 
+      <br> 
+      <ul class="linklist"> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_understand_metrics_service_architecture" title="Learn the architectural components and deployment topology of metrics service to make informed infrastructure decisions and ensure successful integration with Ansible Automation Platform.">Understanding metrics service architecture</a></li> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_install_metrics_service_with_containerized_installer" title="Enable and configure metrics service during containerized installation to automatically collect anonymized usage data and transmit it to Red Hat.">Install metrics service with containerized installer</a></li> 
+      </ul> 
+     </div> 
+     <div class="linklist"> <strong>Next steps</strong> 
+      <br> 
+      <ul class="linklist"> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_containerized_installation" title="Enable automation dashboard data collection during the initial installation to start collecting ROI and cost analysis data without post-installation configuration.">Enable automation dashboard during containerized installation</a></li> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_during_operator_installation" title="Enable automation dashboard using declarative Custom Resource configuration to leverage operator-managed dashboard deployment with automatic feature flag propagation to metrics service.">Enable automation dashboard during operator installation</a></li> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_post_installation#enable-automation-dashboard-post-installation" title="Activate dashboard data collection with automatic historical data backfill to generate comprehensive usage and ROI reports without reinstalling the platform or losing historical automation activity data.">Enable automation dashboard post-installation</a></li> 
+      </ul> 
+     </div> 
+    </nav> 
+   </article> 
+  </main>  
+ </body>
+</html>

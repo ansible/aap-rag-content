@@ -1,0 +1,76 @@
+# Associate cloud credentials with a job template
+## OpenStack
+
+Use this credential type to connect to OpenStack clouds. Automation controller uses the OpenStack SDK to interact with OpenStack clouds. When you create an OpenStack cloud credential, the controller prompts you for the following information:
+
+- **Username**: The username to authenticate to the OpenStack cloud.
+- **Password**: The password to authenticate to the OpenStack cloud.
+- **Project name**: The project name (also called tenant name) to use when connecting to the OpenStack cloud.
+- **Auth URL**: The authentication URL for the OpenStack cloud.
+- **Cloud name**: The name of the cloud as defined in your OpenStack clouds.yaml file.
+- **Region name** (optional): The region name to use when connecting to the OpenStack cloud.
+- **Domain name** (optional): The domain name to use when connecting to the OpenStack cloud.
+- **Project domain name** (optional): The project domain name to use when connecting to the OpenStack cloud.
+- **Validate SSL certificate**: Select this option to validate the SSL/TLS certificate presented by the OpenStack cloud. Clear this option to disable SSL/TLS certificate validation.
+
+
+The following sample playbook invokes the `nova_compute` Ansible OpenStack cloud module and requires credentials:
+
+-  `auth_url`
+-  `username`
+-  `password`
+-  `project name`
+
+
+These fields are made available to the playbook through the environmental variable `OS_CLIENT_CONFIG_FILE`, which points to a YAML file written by the controller based on the contents of the cloud credential. The following sample playbooks load the YAML file into the Ansible variable space:
+
+- OS_CLIENT_CONFIG_FILE example:
+
+```
+clouds:
+devstack:
+auth:
+auth_url: http://devstack.yoursite.com:5000/v2.0/
+username: admin
+password: your_password_here
+project_name: demo
+```
+
+
+- Playbook example:
+
+```
+- hosts: all
+gather_facts: false
+vars:
+config_file: "{{ lookup('env', 'OS_CLIENT_CONFIG_FILE') }}"
+nova_tenant_name: demo
+nova_image_name: "cirros-0.3.2-x86_64-uec"
+nova_instance_name: autobot
+nova_instance_state: 'present'
+nova_flavor_name: m1.nano
+
+
+nova_group:
+group_name: antarctica
+instance_name: deceptacon
+instance_count: 3
+tasks:
+- debug: msg="{{ config_file }}"
+- stat: path="{{ config_file }}"
+register: st
+- include_vars: "{{ config_file }}"
+when: st.stat.exists and st.stat.isreg
+
+
+- name: "Print out clouds variable"
+debug: msg="{{ clouds|default('No clouds found') }}"
+
+
+- name: "Setting nova instance state to: {{ nova_instance_state }}"
+local_action:
+module: nova_compute
+login_username: "{{ clouds.devstack.auth.username }}"
+login_password: "{{ clouds.devstack.auth.password }}"
+```
+

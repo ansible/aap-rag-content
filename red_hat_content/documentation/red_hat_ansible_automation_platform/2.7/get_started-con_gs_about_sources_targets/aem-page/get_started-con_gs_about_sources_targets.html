@@ -1,0 +1,158 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-gs-about-sources-targets"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Organize and define automation sources and targets</h1> 
+     <p class="shortdesc">Projects and inventory files help you organize your automation sources and targets.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-gs-auto-dev-create-automation-execution-proj"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create an automation execution project</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">A project is a logical collection of playbooks. Projects are useful as a way to group your automation content according to the organizing principle of your choice.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">You can set up an automation execution project in the platform UI.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Projects</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Projects</strong> page, click <span class="ph uicontrol button">Create project</span> to launch the <strong class="ph b">Create Project</strong> window.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details into the following required fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Name</strong> (required)</li> 
+            <li class="li">Optional: <strong class="ph b">Description</strong></li> 
+            <li class="li"><strong class="ph b">Organization</strong> (required): A project must have at least one organization. Select one organization now to create the project. When the project is created you can add additional organizations.</li> 
+            <li class="li">Optional: <strong class="ph b">Execution Environment</strong>: Enter the name of the execution environment or search from a list of existing ones to run this project.</li> 
+            <li class="li"><strong class="ph b">Source Control Type</strong> (required): Select an SCM type associated with this project from the menu. Options in the following sections become available depending on the type chosen. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_adding_a_project" title="You can create a logical collection of playbooks, called projects in automation controller.">Managing playbooks manually</a> or <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#ref-projects-manage-playbooks-with-source-control" title="Choose one of the following options when managing playbooks by using source control:">Managing playbooks using source control</a>.</li> 
+            <li class="li">Optional: <strong class="ph b">Content Signature Validation Credential</strong>: Use this field to enable content verification. Specify the GPG key to use for validating content signature during project synchronization. If the content has been tampered with, the job will not run. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_project_signing#assembly-controller-project-signing" title="Use project signing and verification in your project directory to sign files. You can then verify whether or not that content has changed in any way, or files have been added to, or removed from the project unexpectedly.">Project signing and verification</a>.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create project</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-gs-auto-dev-create-automation-decision-proj"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create an automation decision project</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Like automation execution projects, automation decision projects are logical collections of automation decision content. You can use the project function to organize your automation decision content in a way that makes sense to you.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have set up any neccessary credentials. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_eda_set_up_credential#eda-set-up-credential" title="Create a credential to securely store sensitive data (like tokens and passwords) required for rulebook activations to connect to source plugins or private registries.">Setting up credentials</a>.</li> 
+         <li class="li">You have an existing repository containing rulebooks that are integrated with playbooks contained in a repository to be used by automation controller.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div>
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <strong class="ph b"><span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Projects</span></span></strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create project</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the following information: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Name</strong>: Enter project name.</li> 
+            <li class="li"><strong class="ph b">Description</strong>: This field is optional.</li> 
+            <li class="li"><strong class="ph b">Organization</strong>: Select the organization associated with the project.</li> 
+            <li class="li"><strong class="ph b">Source control type</strong>: Git is the only SCM type available for use.</li> 
+            <li class="li"><strong class="ph b">Proxy</strong>: Proxy used to access HTTP or HTTPS servers.</li> 
+            <li class="li"><strong class="ph b">Source control branch/tag/commit</strong>: Branch to checkout. Can also be tags, commit hashes, or arbitrary refs.</li> 
+            <li class="li"><strong class="ph b">Source control refspec</strong>: A refspec to fetch. This parameter allows access to references through the branch field not otherwise available.</li> 
+            <li class="li">Optional: <strong class="ph b">Source control credential</strong>: The token needed to use the source control URL.</li> 
+            <li class="li"><strong class="ph b">Content signature validation credential</strong>: Enables content signing to verify that the content has remained secure during project syncing. If the content is tampered with, the job will not run.</li> 
+            <li class="li"><strong class="ph b">Options</strong>: Checking the box next to <strong class="ph b">Verify SSL</strong> verifies the SSL with HTTPS when the project is imported.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create project</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">Your project is now created and can be managed in the <strong class="ph b">Projects</strong> screen.</p> 
+        <p class="p">After saving the new project, the project’s details page is displayed. From there or the <strong class="ph b">Projects</strong> list view, you can edit or delete it.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-gs-auto-dev-about-inv"> 
+      <h2 class="title topictitle2" id="ariaid-title4">About inventories</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">An inventory is a file listing the collection of hosts managed by Ansible Automation Platform. </p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Organizations are assigned to inventories, while permissions to launch playbooks against inventories are controlled at the user or team level.</p> 
+        <p class="p">You can find inventories in the UI by navigating to <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>. The Inventories window displays a list of the inventories that are currently available. You can sort the inventory list by name and search by inventory type, organization, description, inventory creators or modifiers, or additional criteria. Use the following procedure to create a new inventory.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>. The <strong class="ph b">Inventories</strong> view displays a list of the inventories currently available.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create inventory</span>, and from the list menu select the type of inventory you want to create.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details into the following fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Name</strong>: Enter a name for the inventory.</li> 
+            <li class="li">Optional: <strong class="ph b">Description</strong>: Enter a description.</li> 
+            <li class="li"><strong class="ph b">Organization</strong>: Choose among the available organizations.</li> 
+            <li class="li">Only applicable to Smart Inventories: <strong class="ph b">Smart Host Filter</strong>: Filters are similar to tags in that tags are used to filter certain hosts that contain those names. Therefore, to populate this field, specify a tag that contains the hosts you want, not the hosts themselves. Filters are case-sensitive. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-ref_controller_smart_inventories#ref-controller-smart-host-filter" title="You can use a search filter to populate hosts for an inventory. This feature uses the fact searching feature.">Smart host filters</a>.</li> 
+            <li class="li"><strong class="ph b">Instance groups</strong>: Select the instance group or groups for this inventory to run on. If the list is extensive, use the search to narrow the options. You can select multiple instance groups and sort them in the order that you want them run.</li> 
+            <li class="li">Optional: <strong class="ph b">Labels</strong>: Add labels that describe this inventory, so they can be used to group and filter inventories and jobs.</li> 
+            <li class="li">Only applicable to constructed inventories: <strong class="ph b">Input inventories</strong>: Specify the source inventories to include in this constructed inventory. Empty groups from input inventories are copied into the constructed inventory.</li> 
+            <li class="li">Optional and only applicable to constructed inventories: <strong class="ph b">Cache timeout (seconds)</strong>:Set the length of time you want the cache plugin data to timeout.</li> 
+            <li class="li">Only applicable to constructed inventories: <strong class="ph b">Verbosity</strong>: Control the level of output that Ansible produces as the playbook executes related to inventory sources associated with constructed inventories. Select the verbosity from Normal to various Verbose or Debug settings. This only appears in the "details" report view. 
+             <ul class="ul"> 
+              <li class="li">Verbose logging includes the output of all commands.</li> 
+              <li class="li">Debug logging is exceedingly verbose and includes information on SSH operations that can be useful in certain support instances. Most users do not need to see debug mode output.</li> 
+             </ul> </li> 
+            <li class="li">Only applicable to constructed inventories: <strong class="ph b">Limit</strong>: Restricts the number of returned hosts for the inventory source associated with the constructed inventory. You can paste a group name into the limit field to only include hosts in that group. For more information, see the <strong class="ph b">Source variables</strong> setting.</li> 
+            <li class="li">Only applicable to standard inventories: <strong class="ph b">Options</strong>: Check the box next to <strong class="ph b">Prevent instance group fallback</strong> to enable only the instance groups listed in the <strong class="ph b">Instance groups</strong> field to execute the job. If unchecked, all available instances in the execution pool will be used based on the hierarchy described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_ug_controller_instance_groups#controller-control-job-run" title="Use instance groups to control job execution locations. While the controller automatically selects groups based on capacity, you can override this by associating groups with job templates, inventories, or organizations.">Control where a job runs</a> . Click the tooltip for more information. 
+             <div class="note note note_note">
+              <span class="note__title">Note:</span> 
+              <div class="note__body">
+               Set the <code class="ph codeph">prevent_instance_group_fallback</code> option for smart inventories through the API.
+              </div>
+             </div> </li> 
+            <li class="li"><strong class="ph b">Variables</strong> (<strong class="ph b">Source variables</strong> for constructed inventories): 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">Variables</strong>: Variable definitions and values to apply to all hosts in this inventory. Enter variables using either JSON or YAML syntax. Use the radio button to toggle between the two.</li> 
+              <li class="li"><strong class="ph b">Source variables</strong> for constructed inventories are used to configure the constructed inventory plugin. Source variables create groups under the <code class="ph codeph">groups</code> data key. The variable accepts Jinja2 template syntax, renders it for every host, makes a <code class="ph codeph">true</code> or <code class="ph codeph">false</code> evaluation, and includes the host in the group (from the key of the entry) if the result is <code class="ph codeph">true</code>.</li> 
+             </ul> </li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create inventory</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">After creating the new inventory, you can proceed with configuring permissions, groups, hosts, sources, and viewing completed jobs, if applicable to the type of inventory.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

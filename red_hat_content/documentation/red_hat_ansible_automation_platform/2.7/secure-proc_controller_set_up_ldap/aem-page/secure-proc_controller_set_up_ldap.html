@@ -1,0 +1,234 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-set-up-LDAP"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure LDAP authentication</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">As a platform administrator, you can configure LDAP as the source for account authentication information for Ansible Automation Platform users.</p> 
+      <section class="section context">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">If the LDAP server you want to connect to has a certificate that is self-signed or signed by an internal certificate authority (CA), the CA certificate must be added to the system’s trusted CAs. Otherwise, connection to the LDAP server will result in an error that the certificate issuer is not recognized.</p> 
+        </div>
+       </div> 
+       <p class="p">If you are upgrading Ansible Automation Platform and your LDAP authentication relies on a certificate added to the system's truststore, the LDAP certificate configuration is not automatically migrated to platform gateway. You must manually configure the LDAP certificate after upgrading.</p> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Authentication Methods</span></span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create authentication</span>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter a <strong class="ph b">Name</strong> for this authentication configuration.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">LDAP</strong> from the <strong class="ph b">Authentication type</strong> list. The <strong class="ph b">Authentication details</strong> section automatically updates to show the fields relevant to the selected authentication type.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">LDAP Server URI</strong> field, enter or modify the list of LDAP servers to which you want to connect. This field supports multiple addresses.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">LDAP Bind DN text</strong> field, enter the Distinguished Name (DN) to specify the user that the Ansible Automation Platform uses to connect to the LDAP server as shown in the following example: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>cn=josie,cn=users,dc=website,dc=com</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">LDAP Bind Password</strong> text field, enter the password to use for the binding user.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Select a group type from the <strong class="ph b">LDAP Group Type</strong> list. </span> 
+         <div class="itemgroup info"> 
+          <p class="p">The group type defines the class name of the group, which manages the groups associated with users in your LDAP directory and is returned by the search specified in Step 14 of this procedure. The group type, along with group parameters and the group search, is used to find and assign groups to users during log in, and can also be evaluated during the mapping process. The following table lists the available group types, along with their descriptions and the necessary parameters for each. By default, LDAP groups will be mapped to Django groups by taking the first value of the cn attribute. You can specify a different attribute with <code class="ph codeph">name_attr</code>. For example, <code class="ph codeph">name_attr='cn'</code>.</p> 
+          <table class="table">
+           <caption>
+            <span class="table--title-label">Table 1. </span><span class="title">Available LDAP group types</span>
+           </caption>
+           <colgroup>
+            <col style="width:40%">
+            <col style="width:40%">
+            <col style="width:20%">
+           </colgroup>
+           <thead class="thead"> 
+            <tr class="row"> 
+             <th class="entry" id="controller-set-up-LDAP__entry__1"><strong class="ph b">LDAP Group Type</strong></th> 
+             <th class="entry" id="controller-set-up-LDAP__entry__2"><strong class="ph b">Description</strong></th> 
+             <th class="entry" id="controller-set-up-LDAP__entry__3"><strong class="ph b">Initializer method (<em class="ph i">init</em>)</strong></th> 
+            </tr> 
+           </thead>
+           <tbody class="tbody"> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__1"> <p class="p"> <code class="ph codeph">PosixGroupType</code> </p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__2"> <p class="p">Handles the <code class="ph codeph">posixGroup</code> object class. This checks for both primary group and group membership.</p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__3"> <p class="p"> <code class="ph codeph">name_attr='cn'</code> </p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__1"> <p class="p"> <code class="ph codeph">MemberDNGroupType</code> </p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__2"> <p class="p">Handles the grouping mechanisms wherein the group object contains a list of its member DNs.</p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__3"> <p class="p"> <code class="ph codeph">member_attr, name_attr='cn'</code> </p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__1"> <p class="p"> <code class="ph codeph">GroupOfNamesType</code> </p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__2"> <p class="p">Handles the <code class="ph codeph">groupOfNames</code> object class. Equivalent to <code class="ph codeph">MemberDNGroupType('member')</code>.</p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__3"> <p class="p"> <code class="ph codeph">name_attr='cn'</code> </p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__1"> <p class="p"> <code class="ph codeph">GroupOfUniqueNamesType</code> </p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__2"> <p class="p">Handles the <code class="ph codeph">groupOfUniqueNames</code> object class. Equivalent to <code class="ph codeph">MemberDNGroupType('uniqueMember')</code>.</p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__3"> <p class="p"> <code class="ph codeph">name_attr='cn'</code> </p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__1"> <p class="p"> <code class="ph codeph">ActiveDirectoryGroupType</code> </p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__2"> <p class="p">Handles the Active Directory groups. Equivalent to <code class="ph codeph">MemberDNGroupType('member')</code>.</p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__3"> <p class="p"> <code class="ph codeph">name_attr='cn'</code> </p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__1"> <p class="p"> <code class="ph codeph">OrganizationalRoleGroupType</code> </p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__2"> <p class="p">Handles the <code class="ph codeph">organizationalRole</code> object class. Equivalent to <code class="ph codeph">MemberDNGroupType('roleOccupant')</code>.</p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__3"> <p class="p"> <code class="ph codeph">name_attr='cn'</code> </p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__1"> <p class="p"> <code class="ph codeph">NestedGroupOfNamesType</code> </p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__2"> <p class="p">Handles the <code class="ph codeph">groupOfNames</code> object class. Equivalent to <code class="ph codeph">NestedMemberDNGroupType('member')</code>.</p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__3"> <p class="p"> <code class="ph codeph">member_attr, name_attr='cn'</code> </p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__1"> <p class="p"> <code class="ph codeph">NestedGroupOfUniqueNamesType</code> </p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__2"> <p class="p">Handles the <code class="ph codeph">groupOfUniqueNames</code> object class. Equivalent to <code class="ph codeph">NestedMemberDNGroupType('uniqueMember')</code>.</p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__3"> <p class="p"> <code class="ph codeph">name_attr='cn'</code> </p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__1"> <p class="p"> <code class="ph codeph">NestedActiveDirectoryGroupType</code> </p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__2"> <p class="p">Handles the Active Directory groups. Equivalent to <code class="ph codeph">NestedMemberDNGroupType('member')</code>.</p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__3"> <p class="p"> <code class="ph codeph">name_attr='cn'</code> </p> </td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__1"> <p class="p"> <code class="ph codeph">NestedOrganizationalRoleGroupType</code> </p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__2"> <p class="p">Handles the <code class="ph codeph">organizationalRole</code> object class. Equivalent to <code class="ph codeph">NestedMemberDNGroupType('roleOccupant')</code>.</p> </td> 
+             <td class="entry" headers="controller-set-up-LDAP__entry__3"> <p class="p"> <code class="ph codeph">name_attr='cn'</code> </p> </td> 
+            </tr> 
+           </tbody>
+          </table> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">The group types that are supported by Ansible Automation Platform use the underlying <a class="xref" href="https://django-auth-ldap.readthedocs.io/en/latest/reference.html#django_auth_ldap.config.LDAPGroupType" target="_blank" rel="external noopener">django-auth-ldap library</a>. To specify the parameters for the selected group type, see Step 14 of this procedure.</p> 
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">You can use <strong class="ph b">LDAP User DN Template</strong> as an alternative to user search. This approach is more efficient for user lookups than searching if it is usable in your organizational environment. Enter the name of the template as shown in the following example: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>uid=%(user)s,cn=users,cn=accounts,dc=example,dc=com</code></pre> 
+          <p class="p">where: <code class="ph codeph">uid</code> is the user identifier, <code class="ph codeph">cn</code> is the common name and <code class="ph codeph">dc</code> is the domain component.</p> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">If this setting has a value it will be used instead of the <strong class="ph b">LDAP User Search</strong> setting.</p> 
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd"><strong class="ph b">LDAP Start TLS</strong> is disabled by default. StartTLS allows your LDAP connection to be upgraded from an unencrypted connection to a secure connection using Transport Layer Security (TLS). To enable StartTLS when the LDAP connection is not using SSL, set the switch to <strong class="ph b">On</strong>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Optional: Enter any <strong class="ph b">Additional Authenticator Fields</strong> that this authenticator can take. These fields are not validated and are passed directly back to the authenticator. </span> 
+         <div class="itemgroup info"> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">Values defined in this field override the dedicated fields provided in the UI. Any values not defined here are not provided to the authenticator.</p> 
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Enter any <strong class="ph b">LDAP Connection Options</strong> to set for the LDAP connection. By default, LDAP referrals are disabled to prevent certain LDAP queries from hanging with Active Directory. Option names should be strings as shown in the following example: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>OPT_REFERRALS: 0
+OPT_NETWORK_TIMEOUT: 30</code></pre> 
+          <p class="p">See the <a class="xref" href="https://www.python-ldap.org/en/python-ldap-3.4.3/reference/ldap.html#options" target="_blank" rel="external noopener">python-LDAP Reference</a> for possible options and values that can be set.</p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Depending on the selected <strong class="ph b">LDAP Group Type</strong>, different parameters are available in the <strong class="ph b">LDAP Group Type Parameters</strong> field to account for this. <code class="ph codeph">LDAP_GROUP_TYPE_PARAMS</code> is a dictionary, which is converted to <code class="ph codeph">kwargs</code> and passed to the <strong class="ph b">LDAP Group Type</strong> class selected. There are two common parameters used by group types: <code class="ph codeph">name_attr</code> and <code class="ph codeph">member_attr</code>. Where <code class="ph codeph">name_attr</code> defaults to <code class="ph codeph">cn</code> and <code class="ph codeph">member_attr</code> defaults to <code class="ph codeph">member</code>: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>{"name_attr": "cn", "member_attr": "member"}</code></pre> 
+          <p class="p">To determine the parameters that a specific <strong class="ph b">LDAP Group Type</strong> requires, refer to the <a class="xref" href="https://django-auth-ldap.readthedocs.io/en/latest/reference.html#django_auth_ldap.config.LDAPGroupType" target="_blank" rel="external noopener">django_auth_ldap documentation</a> on the classes <code class="ph codeph">init</code> parameters.</p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">LDAP Group Search</strong> field, specify which groups should be searched and how to search them as shown in the following example: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>[
+"dc=example,dc=com",
+"SCOPE_SUBTREE",
+"(objectClass=group)"
+ ]</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">LDAP User Attribute Map</strong> field, enter user attributes to map LDAP fields to your Ansible Automation Platform users, for example, <code class="ph codeph">email</code> or <code class="ph codeph">first_name</code> as shown in the following example: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>{
+"first_name": "givenname",
+"last_name": "sn",
+"email": "mail"
+}</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">LDAP User Search</strong> field, enter where to search for users during authentication as shown in the following example: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>[
+"ou=users,dc=website,dc=com",
+"SCOPE_SUBTREE",
+"(cn=%(user)s)"
+]</code></pre> 
+          <p class="p">If the <strong class="ph b">LDAP User DN Template</strong> is not set, the Ansible Automation Platform authenticates to LDAP using the <strong class="ph b">Bind DN Template</strong> and <strong class="ph b">LDAP Bind Password</strong>. After authentication, an LDAP search is performed to locate the user specified by this field. If the user is found, Ansible Automation Platform validates the provided password against the user found by the LDAP search. Multiple search queries are supported for users with <code class="ph codeph">LDAPUnion</code> by entering multiple search terms as shown in the following example:</p> 
+          <pre class="pre codeblock"><code>[
+    [
+        "ou=users,dc=example,dc=com",
+        "SCOPE_SUBTREE",
+        "uid=%(user)s"
+    ],
+     [
+        "ou=employees,dc=subdivision,dc=com",
+        "SCOPE_SUBTREE",
+        "uid=%(user)s"
+     ]
+]</code></pre> 
+          <p class="p">If non-unique users are found during multiple searches, those users will not be able to log in to Ansible Automation Platform. Based on the example provided, if a user with <code class="ph codeph">uid=jdoe</code> was found in both the <code class="ph codeph">ou=users,dc=example,dc=com</code> and <code class="ph codeph">ou=employees,dc=subdivision,dc=com</code>, neither <code class="ph codeph">jdoe</code> user would be able to log in. All other unique users that are found in either branch would still be able to log in.</p> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">If the field <strong class="ph b">LDAP User DN Template</strong> is populated, it takes precedence over the <strong class="ph b">LDAP User Search</strong> field and only the template will be used to authenticate users.</p> 
+           </div>
+          </div> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">To automatically create organizations, users, and teams upon successful login, select <strong class="ph b">Create objects</strong>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">To enable this authentication method upon creation, select <strong class="ph b">Enabled</strong>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">To remove a user for any groups they were previously added to when they authenticate from this source, select <strong class="ph b">Remove users</strong>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create Authentication Method</span>.</span> </li>
+       </ol>
+      </section> 
+      <section class="section postreq">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">What to do next</h2>
+       </div> 
+       <p class="p">To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or to what groups they belong, continue to <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_gw_mapping#gw-mapping" title="To control which users are allowed into the Ansible Automation Platform server, and placed into Ansible Automation Platform organizations or teams based on their attributes (such as username and email address) or what groups they belong to, you can configure authenticator maps.">Mapping</a>.</p> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="gw-import-cert-auth-ldaps"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Import a certificate authority in automation controller for LDAPS integration</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">You can authenticate to the automation controller server by using LDAP. However, if you change to using LDAPS (LDAP over SSL/TLS) to authenticate and the TLS certificate is not trusted by platform gateway, it fails with an error such as:</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <pre class="pre codeblock"><code>2025-08-26 16:40:56,141 WARNING   django_auth_ldap Caught LDAPError while authenticating: SERVER_DOWN({'result': -1, 'desc': "Can't contact LDAP server", 'ctrls': [], 'info': 'error:0A000086:SSL routines::certificate verify failed (self-signed certificate)'})</code></pre> 
+        <p class="p">To get Ansible Automation Platform to trust the certificate coming from LDAP, perform the following procedure on all platform gateway instances.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Place a copy of the LDAP servers certificate in the directory, <code class="ph codeph">/etc/pki/ca-trust/source/anchors/</code>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the command: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>update-ca-trust</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

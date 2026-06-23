@@ -1,0 +1,36 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="configuring-repository-scans"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure the Ansible code bot to scan your repository at regular intervals</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">After installing the Ansible code bot, it automatically scans the selected repositories that are in Jinja format. Once the scanning is complete, the code bot generates an initial PR for each repository; the initial PR also contains the scan schedule configured to run weekly.</p> 
+      <p class="p">You must review the initial PR for the suggested changes and merge the PR. Once the initial PR is merged, the scan schedule is triggered, and the subsequent repository scans are performed weekly. If required, you can change the scan schedule to a daily or monthly cadence.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">If you do not merge the initial PR, the weekly scan schedule is not triggered and the Ansible code bot dashboard displays the repositories without any associated scan history. In such a scenario, you must manually create a configuration file <code class="ph codeph">ansible-code-bot.yml</code> and specify your scan schedule within the file.</p> 
+       </div>
+      </div> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="ansible-code-bot-duplicate-pr"> 
+      <h2 class="title topictitle2" id="ariaid-title2">How Ansible code bot handles duplicate pull requests</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">This section outlines the conditional logic used by the Ansible code bot to manage repository scanning and pull request generation.</p> 
+       <ul class="ul"> 
+        <li class="li">If Ansible code bot has created a pull request on the latest commit default branch, it does not scan the repository. The bot skips scanning the repository because the pull request was committed on the latest default branch, and no new commit was made after that pull request.</li> 
+        <li class="li">If there is an existing pull request that is not on the latest commit default branch, the Ansible code bot does a pull request difference to compare the changes in both branches. The following scenarios are possible: 
+         <ul class="ul">
+          <li class="li"><strong class="ph b">There is no difference in the existing and new scan results</strong>: Ansible code bot does not push the scan results as a new pull request.</li>
+          <li class="li"><strong class="ph b">There are differences found in the existing and the new scan results</strong>: the Ansible code bot creates a new pull request. The newly-created pull request does not close the existing pull request, against which the pull request difference was noted. This behavior makes it easier for the repository administrator to review only the latest pull request created by the Ansible code bot, and the administrator can avoid reviewing the older pull requests created by the bot. If required, the administrator can close the older pull requests.</li>
+         </ul></li> 
+       </ul> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

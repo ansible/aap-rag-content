@@ -1,0 +1,136 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Database variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Inventory file variables for the database used with Ansible Automation Platform.</p> 
+     <section class="section"> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:40%">
+        <col style="width:15%">
+        <col style="width:20%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1">Variable name</th> 
+         <th class="entry" id="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2">Description</th> 
+         <th class="entry" id="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3">Required or optional</th> 
+         <th class="entry" id="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_admin_database</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Database name used for connections to the PostgreSQL database server.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"> <p class="p"><code class="ph codeph">postgres</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_admin_password</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Password for the PostgreSQL admin user. When used, the installation program creates each component's database and credentials.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Required if using <code class="ph codeph">postgresql_admin_username</code>.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_admin_username</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Username for the PostgreSQL admin user. When used, the installation program creates each component's database and credentials.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"> <p class="p"><code class="ph codeph">postgres</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_disable_tls</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Controls whether SSL/TLS is enabled or disabled for the PostgreSQL database.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_effective_cache_size</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Memory allocation available (in MB) for caching data.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_extra_settings</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Defines additional settings for use by PostgreSQL.</p> <p class="p">Example usage:</p> <pre class="pre codeblock"><code>postgresql_extra_settings=[{"setting": "ssl_ciphers", "value": "HIGH:!aNULL:!MD5"}]</code></pre> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_firewall_zone</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">The firewall zone where PostgreSQL related firewall rules are applied. This controls which networks can access PostgreSQL based on the zone's trust level.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"> <p class="p"><code class="ph codeph">public</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_keep_databases</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Controls whether or not to keep databases during uninstall. This variable applies to databases managed by the installation program only, and not external (customer-managed) databases. Set to <code class="ph codeph">true</code> to keep databases during uninstall.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_log_destination</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Destination for server log output.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"> <p class="p"><code class="ph codeph">/dev/stderr</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_max_connections</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Maximum number of concurrent connections to the database if you are using an installer-managed database.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"> <p class="p"><code class="ph codeph">1024</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_password_encryption</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">The algorithm for encrypting passwords.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"> <p class="p"><code class="ph codeph">scram-sha-256</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_port</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Port number that the PostgreSQL server listens on. This variable configures the server-side listening port in <code class="ph codeph">postgresql.conf</code>. To configure the port that a specific component uses to connect to PostgreSQL, use the component-specific port variable, for&nbsp;example, <code class="ph codeph">controller_pg_port</code> for automation controller.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"> <p class="p"><code class="ph codeph">5432</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_shared_buffers</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Memory allocation (in MB) for shared memory buffers.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_tls_cert</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Path to the PostgreSQL SSL/TLS certificate file.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_tls_key</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Path to the PostgreSQL SSL/TLS key file.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"></td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_tls_remote</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Denote whether the PostgreSQL provided certificate files are local to the installation program (<code class="ph codeph">false</code>) or on the remote component server (<code class="ph codeph">true</code>).</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"> <p class="p"><code class="ph codeph">false</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__1"> <p class="p"><code class="ph codeph">postgresql_use_archive_compression</code></p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__2"> <p class="p">Controls whether archive compression is enabled or disabled for PostgreSQL. You can control this functionality globally by using <code class="ph codeph">use_archive_compression</code>.</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-d0897360-115d-49d9-8b64-3eeef12c6c82__entry__4"> <p class="p"><code class="ph codeph">true</code></p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

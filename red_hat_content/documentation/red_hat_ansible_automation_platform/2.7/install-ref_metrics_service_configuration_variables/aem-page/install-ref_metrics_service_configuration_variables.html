@@ -1,0 +1,166 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-metrics-service-configuration-variables">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Metrics service configuration variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Review configuration variables to customize metrics service deployment, database connections, security settings, and operational parameters.</p> 
+     <section class="section">
+      <h2 class="title sectiontitle">Inventory variables reference</h2> 
+      <p class="p"><strong class="ph b">Required variables for automationmetrics group</strong></p> 
+      <p class="p">The following variables must be defined when deploying metrics service with the containerized installer:</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-metrics-service-configuration-variables__entry__1">Variable</th> 
+         <th class="entry" id="ref-metrics-service-configuration-variables__entry__2">Default</th> 
+         <th class="entry" id="ref-metrics-service-configuration-variables__entry__3">Required/Optional</th> 
+         <th class="entry" id="ref-metrics-service-configuration-variables__entry__4">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__1"><code class="ph codeph">automationmetrics_pg_host</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__2">(none)</td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__3"><strong class="ph b">Required</strong></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__4">PostgreSQL host for the metrics database</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__1"><code class="ph codeph">automationmetrics_pg_password</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__2">(none)</td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__3"><strong class="ph b">Required</strong>*</td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__4">Password for the metrics database user. *Not required when<code class="ph codeph">automationmetrics_pg_cert_auth: true</code> is set.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__1"><code class="ph codeph">automationmetrics_controller_read_pg_host</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__2">(none)</td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__3"><strong class="ph b">Required</strong>*</td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__4">PostgreSQL host for the controller database</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__1"><code class="ph codeph">automationmetrics_controller_read_pg_password</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__2">(none)</td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__3"><strong class="ph b">Required</strong>*</td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__4">Password for the read-only controller database user. *Not required when<code class="ph codeph">automationmetrics_pg_cert_auth: true</code> is set.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p"><strong class="ph b">Optional variables with defaults</strong></p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-metrics-service-configuration-variables__entry__21">Variable</th> 
+         <th class="entry" id="ref-metrics-service-configuration-variables__entry__22">Default</th> 
+         <th class="entry" id="ref-metrics-service-configuration-variables__entry__23">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__21"><code class="ph codeph">automationmetrics_pg_port</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__22"><code class="ph codeph">5432</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__23">PostgreSQL port</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__21"><code class="ph codeph">automationmetrics_pg_database</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__22"><code class="ph codeph">metrics_service</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__23">Database name</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__21"><code class="ph codeph">automationmetrics_pg_username</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__22"><code class="ph codeph">metrics_service</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__23">Database user</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__21"><code class="ph codeph">automationmetrics_api_port</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__22"><code class="ph codeph">8006</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__23">Port the metrics service API listens on (Gunicorn)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__21"><code class="ph codeph">automationmetrics_nginx_http_port</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__22"><code class="ph codeph">8087</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__23">nginx HTTP port (redirects to HTTPS)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__21"><code class="ph codeph">automationmetrics_nginx_https_port</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__22"><code class="ph codeph">8450</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__23">nginx HTTPS port</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__21"><code class="ph codeph">automationmetrics_pg_cert_auth</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__22"><code class="ph codeph">false</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__23">Use certificate authentication instead of passwords</td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p"><strong class="ph b">Note on certificate authentication:</strong> When <code class="ph codeph">automationmetrics_pg_cert_auth: true</code>, password variables (<code class="ph codeph">automationmetrics_pg_password</code> and <code class="ph codeph">automationmetrics_controller_read_pg_password</code>) are not required. The service uses PostgreSQL certificate-based authentication instead.</p> 
+       </div>
+      </div> 
+      <p class="p"><strong class="ph b">Dashboard and feature flags</strong></p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="ref-metrics-service-configuration-variables__entry__45">Variable</th> 
+         <th class="entry" id="ref-metrics-service-configuration-variables__entry__46">Default</th> 
+         <th class="entry" id="ref-metrics-service-configuration-variables__entry__47">Required/Optional</th> 
+         <th class="entry" id="ref-metrics-service-configuration-variables__entry__48">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__45"><code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__46"><code class="ph codeph">false</code></td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__47">Optional</td> 
+         <td class="entry" headers="ref-metrics-service-configuration-variables__entry__48">Enable automation dashboard data collection. When<code class="ph codeph">true</code>, metrics service collects dashboard-specific metrics (cost data, ROI calculations, and pricing information) in addition to standard anonymized metrics. Maps to environment variable<code class="ph codeph">METRICS_SERVICE_FEATURE_ENABLED__DASHBOARD_COLLECTION</code>.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Dashboard feature flag</h2> 
+      <p class="p"><strong class="ph b">Inventory Variable:</strong> <code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED</code></p> 
+      <p class="p"><strong class="ph b">Default:</strong> <code class="ph codeph">false</code></p> 
+      <p class="p"><strong class="ph b">Purpose:</strong> Enable automation dashboard data collection</p> 
+      <p class="p">When enabled (<code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code>):</p> 
+      <ul class="ul"> 
+       <li class="li">Collects dashboard-specific data (cost, ROI, pricing information)</li> 
+       <li class="li">Runs on 6-hourly schedule to minimize database impact</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_install_metrics_service_with_containerized_installer" title="Enable and configure metrics service during containerized installation to automatically collect anonymized usage data and transmit it to Red Hat.">Install metrics service with containerized installer</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

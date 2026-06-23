@@ -1,0 +1,188 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="vault-authenticating"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Authenticate to <code class="ph codeph">hashicorp.vault</code></h1> 
+     <p class="shortdesc">After you install or migrate to the <code class="ph codeph">hashicorp.vault</code> collection, authentication is configured in the Ansible Automation Platform user interface. An administrator creates a custom credential type to authenticate to Vault. Then users create credentials to use with job templates.</p> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="vault-intro"> 
+      <h2 class="title topictitle2" id="ariaid-title2">About the Vault integration</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Vault lets you centrally store and manage secrets securely. The Ansible Automation Platform certified <code class="ph codeph">hashicorp.vault</code> collection provides fully automated lifecycle and operation management for Vault. You can create, update, and delete secrets through playbooks.</p> 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">Existing <code class="ph codeph">community.hashi_vault</code> users:</strong> The <code class="ph codeph">hashicorp.vault</code> solution is intended to replace unsupported <code class="ph codeph">community.hashi_vault</code> collection. Use the migration path to keep your existing playbooks.</li> 
+        <li class="li"><strong class="ph b">New Vault users:</strong> The <code class="ph codeph">hashicorp.vault</code> collection is included in the supported execution environment from automation hub.</li> 
+       </ul> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">Although the <code class="ph codeph">hashicorp.vault</code> and <code class="ph codeph">hashi.terraform</code> collections work independently of each other and are designed for different tasks, you can use them together in advanced workflows.</p> 
+        </div>
+       </div> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist">
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_migrating_from_community" title="If you are using the community.hashi_vault collection, you can migrate your existing playbooks to the hashicorp.vault collection.">Migrate from community.hashi_vault</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="vault-auth-architecture"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Authentication architecture</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The <code class="ph codeph">hashicorp.vault</code> collection manages authentication through environment variables and client initialization. This approach enhances security by preventing sensitive credentials from being passed directly as module parameters within playbook tasks.</p> 
+       <p class="p">The <code class="ph codeph">hashicorp.vault</code> collection injects credentials into job templates with environment variables, so you get simpler, cleaner task definitions while ensuring that authentication details remain secure.</p> 
+       <p class="p">The following authentication types are supported:</p> 
+       <ul class="ul"> 
+        <li class="li"><strong class="ph b">appRole authentication:</strong> Use either one of the following methods when using appRole authentication: 
+         <ul class="ul">
+          <li class="li">Set the <code class="ph codeph">VAULT_APPROLE_ROLE_ID</code> and <code class="ph codeph">VAULT_APPROLE_SECRET_ID</code> environment variables. When you use environment variables, you must also create a custom credential type and credentials that will be passed to the job template.</li>
+          <li class="li">Directly pass the <code class="ph codeph">role_id</code> and <code class="ph codeph">secret_id</code> parameters to the tasks, for example: <pre class="pre codeblock"><code>- name: Create a secret with AppRole authentication
+  hashicorp.vault.kv2_secret:
+    url: https://vault.example.com:8200
+    auth_method: approle
+    role_id: "{{ vault_role_id }}"
+    secret_id: "{{ vault_secret_id }}"
+    path: myapp/config
+    data:
+      api_key: secret-api-key</code></pre></li>
+         </ul></li> 
+        <li class="li"><strong class="ph b">Token authentication:</strong> Set the <code class="ph codeph">VAULT_TOKEN</code> environment variable. <p class="p">Optionally, you can configure parameters for the token. If parameters are not provided, then the module uses environment variables.</p></li> 
+       </ul> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="vault-creating-credential-type"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Create a custom credential type for Vault</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">As an admin, you create a secure credential type in Ansible Automation Platform, which is used to authenticate to Vault.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <p class="p">Do <em class="ph i">one</em> of the following:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">New users:</strong> Install the Ansible Automation Platform certified <code class="ph codeph">hashicorp.vault</code> collection from Automation hub.</li> 
+         <li class="li"><strong class="ph b"><code class="ph codeph">community.hashi_vault</code> collection users:</strong> Migrate from <code class="ph codeph">community.hashi_vault</code>.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">You can configure role-based (appRole) authentication or allow users to directly provide a token.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <strong class="ph b"><span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Credential Types</span></span></strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create a credential type</span>. The <strong class="ph b">Create Credential Type</strong> page opens.</span> </li>
+         <li class="li step"> <span class="ph cmd">Enter a name and a description in the corresponding fields.</span> </li>
+         <li class="li step"> <span class="ph cmd">If you want to configure token authentication for individual users: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">For <strong class="ph b">Input configuration</strong>, enter: </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code>fields:
+ - id: vault_token
+   type: string
+   label: Hashicorp Vault Token
+   secret: true</code></pre> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">For <strong class="ph b">Injector configuration</strong>, enter: </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code>env:
+   VAULT_TOKEN: '{{ vault_token }}'</code></pre> 
+            </div> </li> 
+          </ol> </li>
+         <li class="li step"> <span class="ph cmd">If you want to configure appRole authentication using <code class="ph codeph">role_id</code> and <code class="ph codeph">secret_id</code>: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">For <strong class="ph b">Input configuration</strong>, enter: </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code>fields:
+  - id: vault_approle_role_id
+    type: string
+    label: Hashicorp Vault appRole Role ID
+    secret: true
+  - id: vault_approle_secret_id
+    type: string
+    label: Hashicorp Vault appRole Secret ID
+    secret: true</code></pre> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">For <strong class="ph b">Injector configuration</strong>, enter: </span> 
+            <div class="itemgroup info"> 
+             <pre class="pre codeblock"><code>env:
+    VAULT_APPROLE_ROLE_ID: '{{ vault_approle_role_id }}'
+    VAULT_APPROLE_SECRET_ID: '{{ vault_approle_secret_id }}'</code></pre> 
+            </div> </li> 
+          </ol> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create credential type</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_authenticating#vault-creating-custom-credential" title="Vault users must create a custom credential to use with job templates in Ansible Automation Platform.">Create a custom credential</a> </li> 
+        </ul> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_migrating_from_community" title="If you are using the community.hashi_vault collection, you can migrate your existing playbooks to the hashicorp.vault collection.">Migrate from community.hashi_vault</a></li>
+        </ul>
+       </div>
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://www.redhat.com/en/technologies/management/ansible/automation-hub" target="_blank" rel="external noopener">Automation hub</a></li>
+         <li class="linklist"><a class="link" href="https://developer.hashicorp.com/vault/api-docs" target="_blank" rel="external noopener">Vault API documentation</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="vault-creating-custom-credential"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Create a custom credential</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Vault users must create a custom credential to use with job templates in Ansible Automation Platform.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Your administrator has created a Vault credential type.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <strong class="ph b"><span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Credentials</span></span></strong>, and then select <span class="ph uicontrol button">Create credential</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Enter a name and a description in the corresponding fields.</span> </li>
+         <li class="li step"> <span class="ph cmd">(Optional) From the <strong class="ph b">Organization</strong> list, select an organization.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the <strong class="ph b">Credential type</strong> list, select a Vault credential type. The fields that display depend on the credential type.</span> </li>
+         <li class="li step"> <span class="ph cmd">Do <em class="ph i">one</em> of the following: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">For the token authentication, add your Vault token and edit any fields as needed.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">For the appRole authentication method, enter the IDs in the <strong class="ph b">appRole Role ID</strong> and <strong class="ph b">appRole Secret ID</strong> fields. Edit any other fields as needed.</span> </li> 
+          </ol> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Save credential</span>. You are ready to use the credential in a job template.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

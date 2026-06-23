@@ -1,0 +1,6 @@
+# Modules in the ansible.platform collection
+## Lookup plugin
+
+| Plugin        | Description                                                                                                                                                                                                                                                                                                                                                                |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `gateway_api` | Query Ansible Automation Platform component API endpoints through the platform gateway. Supports pagination, filtering, and returning objects or IDs. Use for read-only lookups of users, teams, organizations, settings, and other resources. The automation controller, platform gateway, Event-Driven Ansible, and automation hub APIs can be queried with this plugin. |

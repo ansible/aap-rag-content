@@ -23,14 +23,3 @@ Note:
 
 If the VMware guest tools are not running on the instance, VMware inventory synchronization does not return an IP address for that instance.
 
-## Access VMware vCenter credentials in an Ansible Playbook
-
-You can get VMware vCenter credential parameters from a job runtime environment:
-
-```
-vars:
-vmware:
-host: '{{ lookup("env", "VMWARE_HOST") }}'
-username: '{{ lookup("env", "VMWARE_USER") }}'
-password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
-```

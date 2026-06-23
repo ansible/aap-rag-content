@@ -1,0 +1,162 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Determine your upgrade path</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Use these reference tables to find the supported upgrade paths for your Ansible Automation Platform deployment.</p> 
+     <section class="section"> 
+      <p class="p">Review Red Hat Enterprise Linux version compatibility and supported processes for containerized and OpenShift Container Platform deployment types.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">In-place upgrades of major Red Hat Enterprise Linux versions are not supported. You must migrate your existing deployment of Ansible Automation Platform to a new Red Hat Enterprise Linux environment.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__rhel-support">
+      <h2 class="title sectiontitle">Supported RHEL versions by deployment type</h2> 
+      <p class="p">Supported RHEL versions differ among deployment types, as shown in the following table.</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:40%">
+        <col style="width:60%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__rhel-support__entry__1">Deployment type and version</th> 
+         <th class="entry" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__rhel-support__entry__2">Supported RHEL version</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__rhel-support__entry__1"> <p class="p">Containerized 2.7</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__rhel-support__entry__2"> <p class="p">RHEL 9.6 or later minor versions of RHEL 9, RHEL 10 or later minor versions of RHEL 10</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__rhel-support__entry__1"> <p class="p">Ansible Automation Platform 2.7 on OpenShift Container Platform</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__rhel-support__entry__2"> <p class="p">For RHEL versions included with OpenShift Container Platform, see <a class="xref" href="https://access.redhat.com/articles/6907891" target="_blank" rel="external noopener">Red Hat OpenShift Container Platform Life Cycle Policy</a>.</p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios">
+      <h2 class="title sectiontitle">Container-based upgrade scenarios</h2> 
+      <p class="p">Find the supported upgrade paths for your container-based Ansible Automation Platform deployment.</p> 
+      <p class="p"><strong class="ph b">Container-based Ansible Automation Platform 2.6 on RHEL 9</strong></p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__1">Source</th> 
+         <th class="entry" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__2">Target</th> 
+         <th class="entry" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__3">Process</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__1"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__2"> <p class="p">Container-based Ansible Automation Platform 2.7 on RHEL 9</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_update_aap_container" title="Perform an upgrade of containerized Ansible Automation Platform.">Upgrade your container deployment</a> from 2.6 to 2.7.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__1"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__2"> <p class="p">Container-based Ansible Automation Platform 2.7 on RHEL 10</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_update_aap_container" title="Perform an upgrade of containerized Ansible Automation Platform.">Upgrade your container deployment</a> from 2.6 to 2.7.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment#backing-up-containerized-ansible-automation-platform" title="Perform a backup of your container-based installation of Ansible Automation Platform.">Back up your deployment of container 2.7 </a>on RHEL 9, then restore to a RHEL 10 environment running a fresh container installation 2.7.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__1"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 9</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__2"> <p class="p">Ansible Automation Platform 2.7 on OpenShift Container Platform</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_update_aap_container" title="Perform an upgrade of containerized Ansible Automation Platform.">Upgrade your container deployment</a> from 2.6 to 2.7.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-con_migration_process_overview" title="Understand the complete migration workflow including preparation, export, artifact creation, import, reconciliation, and validation steps for moving between Ansible Automation Platform installation types.">Migration process overview</a> 2.7 to Ansible Automation Platform on OpenShift Container Platform.</li> 
+          </ol> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+      <p class="p"><strong class="ph b">Container-based Ansible Automation Platform 2.6 on RHEL 10</strong></p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__13">Source</th> 
+         <th class="entry" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__14">Target</th> 
+         <th class="entry" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__15">Process</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__13"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 10</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__14"> <p class="p">Container-based Ansible Automation Platform 2.7 on RHEL 10</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__15"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_update_aap_container" title="Perform an upgrade of containerized Ansible Automation Platform.">Upgrade your container deployment</a> from 2.6 to 2.7.</li> 
+          </ol> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__13"> <p class="p">Container-based Ansible Automation Platform 2.6 on RHEL 10</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__14"> <p class="p">Ansible Automation Platform 2.7 on OpenShift Container Platform</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__container-scenarios__entry__15"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_update_aap_container" title="Perform an upgrade of containerized Ansible Automation Platform.">Upgrade your container deployment</a> from 2.6 to 2.7.</li> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/migrate-con_migration_process_overview" title="Understand the complete migration workflow including preparation, export, artifact creation, import, reconciliation, and validation steps for moving between Ansible Automation Platform installation types.">Migration process overview</a> 2.7 to Ansible Automation Platform on OpenShift Container Platform.</li> 
+          </ol> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="section" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__ocp-scenarios">
+      <h2 class="title sectiontitle">OpenShift Container Platform upgrade scenarios</h2> 
+      <p class="p">Find the supported upgrade paths for Ansible Automation Platform deployments that use OpenShift Container Platform.</p> 
+      <p class="p"><strong class="ph b">Ansible Automation Platform 2.6 on OpenShift Container Platform</strong></p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:25%">
+        <col style="width:50%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__ocp-scenarios__entry__1">Source</th> 
+         <th class="entry" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__ocp-scenarios__entry__2">Target</th> 
+         <th class="entry" id="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__ocp-scenarios__entry__3">Process</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__ocp-scenarios__entry__1"> <p class="p">Ansible Automation Platform 2.6 on OpenShift Container Platform</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__ocp-scenarios__entry__2"> <p class="p">Ansible Automation Platform 2.7 on OpenShift Container Platform</p> </td> 
+         <td class="entry" headers="GUID-3578c7a2-9c0a-42e9-8f8c-711d8b4472bd__ocp-scenarios__entry__3"> 
+          <ol class="ol"> 
+           <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-assembly_operator_upgrade" title="The Ansible Automation Platform Operator simplifies the installation, upgrade, and deployment of new Red Hat Ansible Automation Platform instances in your OpenShift Container Platform environment.">Upgrade your OpenShift Container Platform deployment</a> from 2.6 to 2.7.</li> 
+          </ol> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

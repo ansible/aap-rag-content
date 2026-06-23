@@ -1,0 +1,92 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="proc-create-synclist"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Sync content collections</h1> 
+    <div class="body taskbody"> 
+     <p class="shortdesc">You can sync certified and validated collections in Ansible automation hub from console.redhat.com.</p> 
+     <section class="section prereq"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Before you begin</h2> 
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have a valid Ansible Automation Platform subscription.</li> 
+       <li class="li">You have organization administrator permissions for console.redhat.com.</li> 
+       <li class="li">You have created a requirements file.</li> 
+       <li class="li">The following domain names are part of either the firewall or the proxy’s allowlist. They are required for successful connection and download of collections from automation hub or Galaxy server: 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">galaxy.ansible.com</code></li> 
+         <li class="li"><code class="ph codeph">cloud.redhat.com</code></li> 
+         <li class="li"><code class="ph codeph">console.redhat.com</code></li> 
+         <li class="li"><code class="ph codeph">sso.redhat.com</code></li> 
+         <li class="li"><code class="ph codeph">ansible-galaxy-ng.s3.dualstack.us-east-1.amazonaws.com</code></li> 
+        </ul> </li> 
+       <li class="li">Ansible automation hub resources are stored in Amazon Simple Storage. The following domain names must be in the allow list: 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">automation-hub-prd.s3.us-east-2.amazonaws.com</code></li> 
+         <li class="li"><code class="ph codeph">ansible-galaxy.s3.amazonaws.com</code></li> 
+        </ul> </li> 
+       <li class="li">SSL inspection is disabled either when using self signed certificates or for the Red Hat domains.</li> 
+      </ul> 
+      <div class="note important note_important"> <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Before you begin your content sync, ensure that you have the resources to sync the collections you need.</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section class="section context"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">About this task</h2> 
+      </div> 
+      <div class="note note note_note"> <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">When syncing content, keep in mind that automation hub does not check other repositories for dependencies. To avoid an error, turn off dependency downloading by editing your remote settings.</p> 
+       </div> 
+      </div> 
+     </section> 
+     <section> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Procedure</h2> 
+      </div> 
+      <ol class="ol steps"> 
+       <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Remotes</span></span>.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Find the remote you want to sync from and click the pencil icon <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Edit"> to edit.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Find the field labeled <strong class="ph b">Requirements file</strong>. There, you can either paste the contents of your requirements file, or upload the file from your hard drive by selecting the upload button.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save remote</span>.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">To begin synchronization, from the navigation panel select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Repositories</span></span>.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">In the row containing the repository you want to sync, click the ⋮ icon and select the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/sync.png" width="15" alt="Sync repository"><strong class="ph b">Sync repository</strong> icon to initiate the remote repository synchronization to your private automation hub.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">On the modal that appears, you can toggle the following options: </span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Mirror</strong>: Select if you want your repository content to mirror the remote repository’s content.</li> 
+          <li class="li"><strong class="ph b">Optimize</strong>: Select if you want to sync only when changes are reported by the remote server.</li> 
+         </ul> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Sync</span> to complete the sync.</span> </li> 
+      </ol> 
+     </section> 
+     <section class="section result"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Results</h2> 
+      </div> 
+      <p class="p">The <strong class="ph b">Sync status</strong> column updates to notify you whether the synchronization is successful.</p> 
+      <ul class="ul"> 
+       <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Collections</span></span> to confirm that your collections content has synchronized successfully.</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links"> 
+     <div class="linklist relinfo"> <strong>Related information</strong> 
+      <br> 
+      <ul class="linklist"> 
+       <li class="linklist"><a class="link" href="https://access.redhat.com/articles/7118757" target="_blank" rel="external noopener">Resource requirements for syncing automation content</a></li> 
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/managing_automation_content/managing-collections-hub#proc-create-remote_remote-management" target="_blank" rel="external noopener">Creating a remote configuration in automation hub</a></li> 
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/managing_automation_content/managing-cert-valid-content#create-requirements-file_cloud-sync" target="_blank" rel="external noopener">Creating a requirements file</a></li> 
+      </ul> 
+     </div> 
+    </nav> 
+   </article> 
+  </main>  
+ </body>
+</html>

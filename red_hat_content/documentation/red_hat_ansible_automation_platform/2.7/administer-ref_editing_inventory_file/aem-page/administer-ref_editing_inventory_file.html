@@ -1,0 +1,131 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-editing-installer-inventory-file"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Edit the inventory file</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">You can use the Ansible Automation Platform installer inventory file to specify your installation scenario.</p> 
+      <section class="section" id="ref-editing-installer-inventory-file___for_online_installations">
+       <h2 class="title sectiontitle">For online installations</h2> 
+       <p class="p"> <strong class="ph b">For online installations</strong> </p> 
+       <pre class="pre codeblock"><code>cd &lt;path-to-source-file&gt;/ansible-automation-platform-containerized-setup-&lt;version_number&gt;</code></pre> 
+       <p class="p"> <strong class="ph b">For offline or bundled installations</strong> </p> 
+       <pre class="pre codeblock"><code>cd &lt;path-to-source-file/ansible-automation-platform-containerized-setup-bundle-&lt;version_number&gt;-&lt;arch_name&gt;</code></pre> 
+       <ol class="ol"> 
+        <li class="li">Open the <code class="ph codeph">inventory</code> file with a text editor.</li> 
+        <li class="li">Edit the <code class="ph codeph">inventory</code> file parameters to specify your installation scenario. <p class="p">For containerized installation, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_configuring_inventory_file#configuring-inventory-file" title="You can control the installation of Ansible Automation Platform with inventory files. Inventory files define the host details, certificate details, and component-specific settings needed to customize the installation.">Configuring the inventory file</a></p> </li> 
+       </ol> 
+      </section> 
+      <section class="section" id="ref-editing-installer-inventory-file___for_an_rpm_installation_deprecated">
+       <h2 class="title sectiontitle">For an RPM installation (deprecated)</h2> 
+       <p class="p"> <em class="ph i">Procedure</em> </p> 
+       <p class="p"> <strong class="ph b">RPM installed package (deprecated)</strong> </p> 
+       <pre class="pre codeblock"><code>$ cd /opt/ansible-automation-platform/installer/</code></pre> 
+       <p class="p"> <strong class="ph b">Bundled installer (deprecated)</strong> </p> 
+       <pre class="pre codeblock"><code>$ cd ansible-automation-platform-setup-bundle-&lt;latest-version&gt;</code></pre> 
+       <p class="p"> <strong class="ph b">Online installer (deprecated)</strong> </p> 
+       <pre class="pre codeblock"><code>$ cd ansible-automation-platform-setup-&lt;latest-version&gt;</code></pre> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relconcepts">
+       <strong>Related concepts</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_inventory_file_vars" title="The following tables contain information about the variables used in Ansible Automation Platform’s installation inventory files.">Inventory file variables</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-running-setup-script"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Run the setup script</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Run the installation program setup script after updating the inventory file with all the required parameters to begin the installation and configuration of the platform.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p"> <strong class="ph b">RPM installer</strong> </p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Run the <code class="ph codeph">setup.sh</code> script </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ sudo ./setup.sh</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you are running the setup as a non-root user with <code class="ph codeph">sudo</code> privileges, you can use the following command:</p> 
+             <pre class="pre codeblock"><code>$ ANSIBLE_BECOME_METHOD='sudo'
+ANSIBLE_BECOME=True ./setup.sh</code></pre> 
+            </div>
+           </div> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Installation of Red Hat Ansible Automation Platform will begin.</p> 
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p">If you want to add additional nodes to your automation mesh after the initial setup, edit the inventory file to add the new node, then rerun the <code class="ph codeph">setup.sh</code> script.</p> 
+        <p class="p"> <strong class="ph b">Containerized installer</strong> </p> 
+        <p class="p">For information on installing containerized Ansible Automation Platform, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap" title="Run the install playbook to install containerized Ansible Automation Platform after preparing the Red Hat Enterprise Linux host, downloading the installation program, and configuring the inventory file.">Installing containerized Ansible Automation Platform</a></p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="importing-mesh-ca"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Import a CA certificate</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">A Certificate Authority (CA) verifies and signs individual node certificates in an automation mesh environment. You can provide your own CA by specifying the path to the certificate and the private RSA key file in the <code class="ph codeph">inventory</code> file of your Red Hat Ansible Automation Platform installer.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body">
+          The Ansible Automation Platform installation program generates a CA if you do not provide one.
+         </div>
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Open the <code class="ph codeph">inventory</code> file for editing.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the <code class="ph codeph">mesh_ca_keyfile</code> variable and specify the full path to the private RSA key (<code class="ph codeph">.key</code>).</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the <code class="ph codeph">mesh_ca_certfile</code> variable and specify the full path to the CA certificate file (<code class="ph codeph">.crt</code>).</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Save the changes to the inventory file. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>[all:vars]
+mesh_ca_keyfile=/tmp/<em class="ph i">&lt;mesh_CA&gt;</em>.key
+mesh_ca_certfile=/tmp/<em class="ph i">&lt;mesh_CA&gt;</em>.crt</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">With the CA files added to the inventory file, run the installation program to apply the CA.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">This process copies the CA to the to <code class="ph codeph">/etc/receptor/tls/ca/</code> directory on each control and execution node on your mesh network.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

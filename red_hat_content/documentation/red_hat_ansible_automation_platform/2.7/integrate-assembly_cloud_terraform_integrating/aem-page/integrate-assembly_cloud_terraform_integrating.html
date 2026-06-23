@@ -1,0 +1,159 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="cloud-terraform-integrating"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Integrate with the cloud.terraform collection</h1> 
+     <p class="shortdesc">When you integrate with <code class="ph codeph">cloud.terraform</code>, you must create a credential, build an execution environment, and launch a job template in Ansible Automation Platform.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="cloud-terraform-creating-credential"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create a credential for using cloud.terraform</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can set up credentials directly from the Ansible Automation Platform user interface. The credentials are provided to the execution environment and Ansible Automation Platform reads them from there. This eliminates the need to manually update each playbook.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You must have a Terraform API token.</li> 
+         <li class="li">Install the certified <code class="ph codeph">cloud.terraform</code> collection from automation hub. (You need an Ansible subscription to access and download collections on automation hub.)</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <strong class="ph b"><span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Credential Types</span></span></strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create credential type</span>. The <strong class="ph b">Create Credential Type</strong> page opens and displays the <strong class="ph b">Details</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">For the <strong class="ph b">Credential Type</strong>, enter a name.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Input configuration</strong> field, enter the following YAML parameter and values: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>fields:
+   - id: token
+     type: string
+     label: token
+     secret: true</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Injector configuration</strong> field, enter the following configuration. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">For Terraform Enterprise, the hostname is the location where you have deployed TFE: <pre class="pre codeblock"><code>env:
+  TF_TOKEN_&lt;hostname&gt;:  ‘{{ token }}’</code></pre> </li> 
+            <li class="li">For HCP Terraform, use: <pre class="pre codeblock"><code>env:
+  TF_TOKEN_app_terraform_io:   ‘{{ token }}’</code></pre> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To save your configuration, click <span class="ph uicontrol button">Create Credential Type</span> again. The new credential type is created.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To create an instance of your new credential type, select <strong class="ph b"><span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Credentials</span></span></strong> page, and select <span class="ph uicontrol button">Create credential</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Credential type</strong>, select the name of the credential type you created earlier.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Token</strong> field, enter the Terraform API token.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">(Optional) Edit the <strong class="ph b">Description</strong> and select the TF organization from the <strong class="ph b">Organization</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save credential</span>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist"> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://console.redhat.com/ansible/automation-hub/repo/published/cloud/terraform/" target="_blank" rel="external noopener">cloud.terraform collection</a></li> 
+         <li class="linklist"><a class="link" href="https://developer.hashicorp.com/terraform/cloud-docs/users-teams-organizations/api-tokens#user-api-tokens" target="_blank" rel="external noopener">Terraform API tokens</a></li> 
+         <li class="linklist"><a class="link" href="https://developer.hashicorp.com/terraform/cli/config/config-file#environment-variable-credentials" target="_blank" rel="external noopener">Terraform CLI configuration</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="cloud-terraform-building-execution-environment"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Build an execution environment in Ansible Automation Platform</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You must build an execution environment using the automation controller so that Ansible Automation Platform can provide the credentials necessary for using its automation features.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You need a pre-existing execution environment with the latest version of <code class="ph codeph">cloud.terraform</code> collection before you can create it using an automation controller. You cannot use the default execution environment provided by Ansible Automation Platform because the default environment does not include the <code class="ph codeph">terraform</code> CLI binary. 
+          <div class="note note note_note"> <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">If you have migrated from Terraform Community Edition, you can continue to use your existing execution environment and update it to the latest version of <code class="ph codeph">cloud.terraform</code>.</p> 
+           </div> 
+          </div> </li> 
+         <li class="li">Install the <code class="ph codeph">terraform</code> CLI binary in your pre-existing execution environment. See <strong class="ph b">Additional resources</strong> below for a link to the binary.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <strong class="ph b"><span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Execution Environments</span></span></strong>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create execution environment</span>. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ee-create-new.png" alt="Create a new execution environment page"><br></span> </li> 
+         <li class="li step"> <span class="ph cmd">For <strong class="ph b">Name</strong>, enter a name for your Ansible Automation Platform execution environment.</span> </li> 
+         <li class="li step"> <span class="ph cmd">For <strong class="ph b">Image</strong>, enter the repository link to the image for your pre-existing execution environment.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create execution environment</span>. Your newly added execution environment is ready to be used in a job template.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_building_definition_file#con-building-definition-file" title="You can use Ansible Builder to create an execution environment. Building a new execution environment involves a definition that specifies which content you want to include in your execution environment, such as collections, Python requirements, and system-level packages.">Build a definition file</a></li> 
+        </ul> 
+       </div> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://developer.hashicorp.com/terraform/install" target="_blank" rel="external noopener"> CLI binary</a></li> 
+         <li class="linklist"><a class="link" href="https://catalog.redhat.com/search?gs&amp;q=execution%20environments&amp;searchType=containers" target="_blank" rel="external noopener">Red Hat ecosystem catalog</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="cloud-terraform-creating-launching-job-template"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Create and launch a job template</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Create and launch a job template to complete the integration and use the automation features in Ansible Automation Platform.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <strong class="ph b"><span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span></strong>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select <strong class="ph b">Create template &gt; Create Job Template</strong>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">From the <strong class="ph b">Execution Environment</strong> list, select the environment you created.</span> </li> 
+         <li class="li step"> <span class="ph cmd">From the <strong class="ph b">Credentials</strong> list, select the credentials instance you created previously. If you do not see the credentials, click <span class="ph uicontrol button">Browse</span> to see more options in the list.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Enter any additional information for the required fields.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create job template</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Launch template</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">To launch the job, click <span class="ph uicontrol button">Next</span> and <span class="ph uicontrol button">Finish</span>. The job output shows that the job has run.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">To see that the job has run successfully from the Terraform user interface, select <strong class="ph b">Workspaces &gt; Ansible-Content-Integration &gt; Run</strong>. The Run list shows the state of the Triggered via CLI job. You can see it go from the Queued to the Plan Finished state.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist reltasks"> <strong>Related tasks</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-con_gs_execution_env#proc-gs-add-ee-to-job-template" title="After you have built an execution environment, use it to run jobs. To do so, first associate the execution environment with a job template.">Add an execution environment to a job template</a></li> 
+        </ul> 
+       </div> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://developer.hashicorp.com/terraform/enterprise" target="_blank" rel="external noopener">Hashicorp Terraform Enterprise documentation</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

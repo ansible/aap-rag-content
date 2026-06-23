@@ -1,0 +1,109 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-lightspeed-crds"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Ansible Lightspeed custom resources</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The Ansible Lightspeed operator provides a custom resource for deploying and configuring the Ansible Lightspeed AI assistant service on OpenShift Container Platform.</p> 
+      <p class="p">The <code class="ph codeph">AnsibleLightspeed</code> custom resource deploys and configures Ansible Lightspeed independently of the full Ansible Automation Platform deployment. Ansible Lightspeed provides AI-powered assistance for Ansible content creation. Use this custom resource when you need to manage Ansible Lightspeed as a standalone component rather than through the <code class="ph codeph">AnsibleAutomationPlatform</code> resource.</p> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="AnsibleLightspeed"> 
+      <h2 class="title topictitle2" id="ariaid-title2">AnsibleLightspeed [lightspeed.ansible.com/v1alpha1]</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The <code class="ph codeph">AnsibleLightspeed</code> custom resource deploys and configures the Ansible Lightspeed AI assistant service.</p> 
+       <section class="section" id="AnsibleLightspeed__description">
+        <h3 class="title sectiontitle">Description</h3> 
+        <table class="table" id="AnsibleLightspeed__desc-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:33.33333333333333%">
+          <col style="width:66.66666666666666%">
+         </colgroup>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Group</strong></td> 
+           <td class="entry"><code class="ph codeph">lightspeed.ansible.com</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">API Version</strong></td> 
+           <td class="entry"><code class="ph codeph">v1alpha1</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Kind</strong></td> 
+           <td class="entry"><code class="ph codeph">AnsibleLightspeed</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry"><strong class="ph b">Scope</strong></td> 
+           <td class="entry">Namespaced</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AnsibleLightspeed__spec">
+        <h3 class="title sectiontitle">Specification</h3> 
+        <table class="table" id="AnsibleLightspeed__spec-table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:28.57142857142857%">
+          <col style="width:14.285714285714285%">
+          <col style="width:42.857142857142854%">
+          <col style="width:14.285714285714285%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="AnsibleLightspeed__spec-table__entry__1">Field</th> 
+           <th class="entry" id="AnsibleLightspeed__spec-table__entry__2">Type</th> 
+           <th class="entry" id="AnsibleLightspeed__spec-table__entry__3">Description</th> 
+           <th class="entry" id="AnsibleLightspeed__spec-table__entry__4">Default</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__1"><code class="ph codeph">disabled</code></td> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__2">Boolean</td> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__3">Set to <code class="ph codeph">true</code> to disable the Ansible Lightspeed component.</td> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__4"><code class="ph codeph">true</code></td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__1"><code class="ph codeph">database</code></td> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__2">Object</td> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__3">Database configuration. Contains<code class="ph codeph">database_secret</code> (String) specifying the name of a Kubernetes secret with external database connection details.</td> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__1"><code class="ph codeph">auth_config_secret_name</code></td> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__2">String</td> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__3">Name of a Kubernetes secret containing authentication configuration for Ansible Lightspeed.</td> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__4">-</td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__1"><code class="ph codeph">model_config_secret_name</code></td> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__2">String</td> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__3">Name of a Kubernetes secret containing model configuration for Ansible Lightspeed.</td> 
+           <td class="entry" headers="AnsibleLightspeed__spec-table__entry__4">-</td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+       <section class="section" id="AnsibleLightspeed__example">
+        <h3 class="title sectiontitle">Example custom resource</h3> 
+        <pre class="pre codeblock"><code>apiVersion: lightspeed.ansible.com/v1alpha1
+kind: AnsibleLightspeed
+metadata:
+  name: my-lightspeed
+spec:
+  disabled: false
+  auth_config_secret_name: lightspeed-auth-config
+  model_config_secret_name: lightspeed-model-config
+  database:
+    database_secret: lightspeed-db-secret</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

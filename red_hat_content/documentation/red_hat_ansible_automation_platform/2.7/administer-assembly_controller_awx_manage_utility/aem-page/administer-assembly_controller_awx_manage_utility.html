@@ -1,0 +1,79 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-controller-awx-manage-utility"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Use awx-manage to access automation controller information</h1> 
+     <p class="shortdesc">Use the <code class="ph codeph">awx-manage</code> utility to access detailed internal information of automation controller. Commands for <code class="ph codeph">awx-manage</code> must run as the <code class="ph codeph">awx</code> user only.</p> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-inventory-import"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Inventory Import</h2> 
+      <div class="body refbody">
+       <p class="shortdesc"><code class="ph codeph">awx-manage</code> is a mechanism by which an automation controller administrator can import inventory directly into automation controller.</p> 
+       <section class="section"> 
+        <p class="p">To use <code class="ph codeph">awx-manage</code> properly, you must first create an inventory in automation controller to use as the destination for the import.</p> 
+        <p class="p">For help with <code class="ph codeph">awx-manage</code>, run the following command:</p> 
+        <p class="p"> <code class="ph codeph">awx-manage inventory_import [--help]</code> </p> 
+        <p class="p">The <code class="ph codeph">inventory_import</code> command synchronizes an automation controller inventory object with a text-based inventory file, dynamic inventory script, or a directory of one or more, as supported by core Ansible.</p> 
+        <p class="p">When running this command, specify either an <code class="ph codeph">--inventory-id</code> or <code class="ph codeph">--inventory-name</code>, and the path to the Ansible inventory source (<code class="ph codeph">--source</code>).</p> 
+        <p class="p"> <code class="ph codeph">awx-manage inventory_import --source=/ansible/inventory/ --inventory-id=1</code> </p> 
+        <p class="p">By default, inventory data already stored in automation controller blends with data from the external source.</p> 
+        <p class="p">To use only the external data, specify <code class="ph codeph">--overwrite</code>.</p> 
+        <p class="p">To specify that any existing hosts get variable data exclusively from the <code class="ph codeph">--source</code>, specify <code class="ph codeph">--overwrite_vars</code>.</p> 
+        <p class="p">The default behavior adds any new variables from the external source, overwriting keys that already exist, but preserving any variables that were not sourced from the external data source.</p> 
+        <p class="p"> <code class="ph codeph">awx-manage inventory_import --source=/ansible/inventory/ --inventory-id=1 --overwrite</code> </p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Edits and additions to Inventory host variables persist beyond an inventory synchronization as long as <code class="ph codeph">--overwrite_vars</code> is not set.</p> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-controller-cleanup-old-data"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Cleanup of old data</h2> 
+      <div class="body refbody">
+       <p class="shortdesc"><code class="ph codeph">awx-manage</code> has a variety of commands used to clean old data from automation controller.</p> 
+       <section class="section"> 
+        <p class="p">Automation controller administrators can use the automation controller <strong class="ph b">Management Jobs</strong> interface for access or use the command line.</p> 
+        <ul class="ul"> 
+         <li class="li"> <code class="ph codeph">awx-manage cleanup_jobs [--help]</code> <p class="p">This permanently deletes the job details and job output for jobs older than a specified number of days.</p> </li> 
+         <li class="li"> <code class="ph codeph">awx-manage cleanup_activitystream [--help]</code> <p class="p">This permanently deletes any activity stream data older than a specific number of days.</p> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-controller-cluster-management"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Cluster management</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">This section describes how to manage a automation controller cluster by provisioning and deprovisioning cluster instances. Automation controller uses the <code class="ph codeph">awx-manage</code> command-line tool to manage cluster instances.</p> 
+       <section class="section"> 
+        <p class="p">For more information about the <code class="ph codeph">awx-manage provision_instance</code> and <code class="ph codeph">awx-manage deprovision_instance</code> commands, see <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/configuring_automation_execution/controller-clustering" target="_blank" rel="external noopener">Clustering</a>.</p> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">Do not run other <code class="ph codeph">awx-manage</code> commands unless instructed by Ansible Support.</p> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="ref-controller-analytics-gathering"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Analytics gathering</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use this command to gather analytics on-demand outside of the predefined window (the default is 4 hours):</p> 
+       <section class="section"> 
+        <p class="p"> <code class="ph codeph">$ awx-manage gather_analytics --ship</code> </p> 
+        <p class="p">For customers with disconnected environments who want to collect usage information about unique hosts automated across a time period, use this command:</p> 
+        <p class="p"> <code class="ph codeph">awx-manage host_metric --since YYYY-MM-DD --json</code> </p> 
+        <p class="p">The <code class="ph codeph">--since</code> parameter is optional.</p> 
+        <p class="p">The <code class="ph codeph">--json</code> flag specifies the output format and is optional.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

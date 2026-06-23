@@ -1,0 +1,264 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-networking-playbook"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Gather and display network device info with a playbook</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Learn how to create and run a simple Ansible Playbook that connects to a network device, gathers facts, and displays them.</p> 
+      <p class="p">To confirm your credentials, you can connect to a network device manually and retrieve its configuration. Replace the sample user and device name with your real credentials.</p> 
+      <p class="p">For example, for a VyOS router:</p> 
+      <pre class="pre codeblock"><code>ssh my_vyos_user@vyos.example.net
+show config
+exit</code></pre> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-run-network-command"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Run a network Ansible command</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Instead of manually connecting and running a command on the network device, you can retrieve its configuration with a single Ansible command.</p> 
+       <section class="section"> 
+        <pre class="pre codeblock"><code>ansible all -i vyos.example.net, -c ansible.netcommon.network_cli -u \
+my_vyos_user -k -m vyos.vyos.vyos_facts -e \
+ansible_network_os=vyos.vyos.vyos</code></pre> 
+        <p class="p">The flags in this command set seven values:</p> 
+        <ul class="ul"> 
+         <li class="li">the host group(s) to which the command should apply (in this case, <code class="ph codeph">all</code>)</li> 
+         <li class="li">the inventory (<code class="ph codeph">-i</code>, the device or devices to target - without the trailing comma <code class="ph codeph">-i</code> points to an inventory file)</li> 
+         <li class="li">the connection method (<code class="ph codeph">-c</code>, the method for connecting and executing ansible)</li> 
+         <li class="li">the user (<code class="ph codeph">-u</code>, the username for the SSH connection)</li> 
+         <li class="li">the SSH connection method (-<code class="ph codeph">k</code>, prompt for the password)</li> 
+         <li class="li">the module (<code class="ph codeph">-m</code>, the Ansible module to run, using the fully qualified collection name (FQCN))</li> 
+         <li class="li">an extra variable ( <code class="ph codeph">-e</code>, in this case, setting the network operating system value)</li> 
+        </ul> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">If you use <code class="ph codeph">ssh-agent</code> with SSH keys, Ansible loads them automatically. You can omit the <code class="ph codeph">-k</code> flag.</p> 
+          <p class="p">If you are running Ansible in a virtual environment, you must also add the variable <code class="ph codeph">ansible_python_interpreter=/path/to/venv/bin/python</code>.</p> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-run-ansible-network-playbook"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Run a network Ansible Playbook</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">If you want to run a particular command every day, you can save it in a playbook and run it with <code class="ph codeph">ansible-playbook</code> instead of ansible.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <p class="p">Download <code class="ph codeph">first_playbook.yml</code> from <a class="xref" href="https://docs.ansible.com/projects/ansible/latest/_downloads/588d4b6e9316c8eb903fbe2485b14d64/first_playbook.yml" target="_blank" rel="external noopener">here</a>.</p> 
+        <p class="p">The playbook looks like this:</p> 
+        <pre class="pre codeblock"><code>---
+
+- name: Network Getting Started First Playbook
+  connection: ansible.netcommon.network_cli
+  gather_facts: false					        	<strong class="ph b callout">①</strong>
+  hosts: all
+  tasks:
+
+    - name: Get config for VyOS devices
+      vyos.vyos.vyos_facts:
+        gather_subset: all
+
+    - name: Display the config
+      debug:
+        msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"</code></pre> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:30%">
+          <col style="width:70%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="proc-run-ansible-network-playbook__entry__1">Label</th> 
+           <th class="entry" id="proc-run-ansible-network-playbook__entry__2">Description</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="proc-run-ansible-network-playbook__entry__1"> <p class="p"> <code class="ph codeph">gather_facts</code> </p> </td> 
+           <td class="entry" headers="proc-run-ansible-network-playbook__entry__2"> <p class="p">Ansible’s native fact gathering (<code class="ph codeph">ansible.builtin.setup</code>) is disabled here because the playbook relies on the facts provided by a platform-specific module (<code class="ph codeph">vyos.vyos.vyos_facts</code>) in this networking collection.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p">The playbook sets three of the seven values from the command line above:</p> 
+        <ul class="ul"> 
+         <li class="li">the group (<code class="ph codeph">hosts: all</code>)</li> 
+         <li class="li">the connection method (<code class="ph codeph">connection: ansible.netcommon.network_cli</code>) and</li> 
+         <li class="li">the module (in each task).</li> 
+        </ul> 
+        <p class="p">With those values set in the playbook, you can omit them on the command line. The playbook also adds a second task to show the configuration output.</p> 
+        <p class="p">When facts are gathered from a system, either through a collection-specific fact module such as <code class="ph codeph">vyos.vyos.vyos_facts</code> or <code class="ph codeph">ansible.builtin.setup</code>, the gathered data is held in memory for use by future tasks instead of being written to the console.</p> 
+        <p class="p">When a module runs in a playbook, the output is held in memory for use by future tasks instead of written to the console. With most other modules you must explicitly register a variable to store and reuse the output of a module or task.</p> 
+        <p class="p">The following debug task lets you see the results in your shell.</p> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">The playbook can store many of the parameters you provided with flags at the command line, leaving less to type at the command line. You need two files for this, a playbook and an inventory file.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Run the playbook with the following command. </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <code class="ph codeph">ansible-playbook -i vyos.example.net, -u ansible -k -e ansible_network_os=vyos.vyos.vyos first_playbook.yml</code> </p> 
+           <p class="p">The playbook contains one play with two tasks, and generates output similar to the following:</p> 
+           <pre class="pre codeblock"><code>$ ansible-playbook -i vyos.example.net, -u ansible -k -e ansible_network_os=vyos.vyos.vyos first_playbook.yml
+
+PLAY [Network Getting Started First Playbook]
+***************************************************************************************************************************
+
+TASK [Get config for VyOS devices]
+***************************************************************************************************************************
+ok: [vyos.example.net]
+
+TASK [Display the config]
+***************************************************************************************************************************
+ok: [vyos.example.net] =&gt; {
+    "msg": "The hostname is vyos and the OS is VyOS 1.1.8"
+}</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Now that you can retrieve the device configuration, you can try updating it with Ansible.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Download <code class="ph codeph">first_playbook_ext.yml</code> from <a class="xref" href="https://docs.ansible.com/projects/ansible/latest/_downloads/47cc11a5d29fe635cb56cb6e1cd74e0f/first_playbook_ext.yml" target="_blank" rel="external noopener">here</a>, which is an extended version of the first playbook: </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The playbook looks like this:</p> 
+           <pre class="pre codeblock"><code>---
+
+- name: Network Getting Started First Playbook Extended
+  connection: ansible.netcommon.network_cli
+  gather_facts: false
+  hosts: all
+  tasks:
+
+    - name: Get config for VyOS devices
+      vyos.vyos.vyos_facts:
+        gather_subset: all
+
+    - name: Display the config
+      debug:
+        msg: "The hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"
+
+    - name: Update the hostname
+      vyos.vyos.vyos_config:
+        backup: yes
+        lines:
+          - set system host-name vyos-changed
+
+    - name: Get changed config for VyOS devices
+      vyos.vyos.vyos_facts:
+        gather_subset: all
+
+    - name: Display the changed config
+      debug:
+        msg: "The new hostname is {{ ansible_net_hostname }} and the OS is {{ ansible_net_version }}"</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">The extended first playbook has five tasks in a single play.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Run the playbook with the following command. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-playbook -i vyos.example.net, -u ansible -k -e ansible_network_os=vyos.vyos.vyos first_playbook_ext.yml</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">The output shows you the change Ansible made to the configuration: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ ansible-playbook -i vyos.example.net, -u ansible -k -e ansible_network_os=vyos.vyos.vyos first_playbook_ext.yml
+
+PLAY [Network Getting Started First Playbook Extended]
+************************************************************************************************************************************
+
+TASK [Get config for VyOS devices]
+**********************************************************************************************************************************
+ok: [vyos.example.net]
+
+TASK [Display the config]
+*************************************************************************************************************************************
+ok: [vyos.example.net] =&gt; {
+    "msg": "The hostname is vyos and the OS is VyOS 1.1.8"
+}
+
+TASK [Update the hostname]
+*************************************************************************************************************************************
+changed: [vyos.example.net]
+
+TASK [Get changed config for VyOS devices]
+*************************************************************************************************************************************
+ok: [vyos.example.net]
+
+TASK [Display the changed config]
+*************************************************************************************************************************************
+ok: [vyos.example.net] =&gt; {
+    "msg": "The new hostname is vyos-changed and the OS is VyOS 1.1.8"
+}
+
+PLAY RECAP
+************************************************************************************************************************************
+vyos.example.net           : ok=5    changed=1    unreachable=0    failed=0</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-gathering-facts"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Gather facts from network devices</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The <code class="ph codeph">gather_facts</code> keyword supports gathering network device facts in standardized key/value pairs. You can feed these network facts into further tasks to manage the network device.</p> 
+       <section class="section"> 
+        <p class="p">You can also use the <code class="ph codeph">gather_network_resources</code> parameter with the network <code class="ph codeph">*_facts</code> modules (such as <code class="ph codeph">arista.eos.eos_facts</code>) to return a subset of the device configuration, as the following example shows:</p> 
+        <pre class="pre codeblock"><code>- hosts: arista
+  gather_facts: True
+  gather_subset: interfaces
+  module_defaults:
+    arista.eos.eos_facts:
+      gather_network_resources: interfaces</code></pre> 
+        <p class="p">The playbook returns the following interface facts:</p> 
+        <pre class="pre codeblock"><code>"network_resources": {
+      "interfaces": [
+          {
+              "description": "test-interface",
+              "enabled": true,
+              "mtu": "512",
+              "name": "Ethernet1"
+          },
+          {
+              "enabled": true,
+              "mtu": "3000",
+              "name": "Ethernet2"
+          },
+          {
+              "enabled": true,
+              "name": "Ethernet3"
+          },
+          {
+              "enabled": true,
+              "name": "Ethernet4"
+          },
+          {
+              "enabled": true,
+              "name": "Ethernet5"
+          },
+          {
+              "enabled": true,
+              "name": "Ethernet6"
+          },
+      ]
+  }</code></pre> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p"><code class="ph codeph">gather_network_resources</code> renders configuration data as facts for all supported resources (<code class="ph codeph">interfaces/bgp/ospf/etc`</code>), whereas <code class="ph codeph">gather_subset</code> is primarily used to fetch operational data.</p> 
+         </div>
+        </div> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

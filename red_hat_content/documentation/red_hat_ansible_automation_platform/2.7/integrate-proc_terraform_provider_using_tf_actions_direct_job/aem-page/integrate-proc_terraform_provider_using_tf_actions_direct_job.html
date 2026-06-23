@@ -1,0 +1,169 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="terraform-provider-tf-actions-direct-job">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Use TF Actions as a direct job</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">When you use TF Actions to launch jobs directly with Ansible Automation Platform, the process is streamlined and sequential.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have configured the AAP Terraform provider to authenticate with Ansible Automation Platform.</li> 
+       <li class="li">You have configured the AWS Terraform provider to authenticate with Amazon Web Services. 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The example below uses Amazon Web Services (AWS) and requires an AWS account that might incur charges. You can adapt the pattern to use a different cloud provider.</p> 
+         </div>
+        </div> </li> 
+       <li class="li">You have job templates configured with: 
+        <ul class="ul"> 
+         <li class="li">Inventory set to <strong class="ph b">prompt on launch</strong>.</li> 
+         <li class="li">A machine credential (private key) matching a public key available in a local file.</li> 
+        </ul> </li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">The benefit of this approach is a clean, predictable state: the Ansible job launches during the Terraform apply cycle, and Terraform receives a clear, binary status. Note that each change launches a separate job with identical configuration.</p> 
+      <p class="p">This method can be useful when you want to execute Ansible automation against newly provisioned servers. For example, last mile provisioning or applying a routine security patching job on a new host.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Define the <code class="ph codeph">aap_job_launch</code> action in your <code class="ph codeph">*.tf</code> file.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Add a lifecycle job block to define which action will be invoked during the proper lifecycle event trigger. </span> 
+        <div class="itemgroup info"> 
+         <p class="p"> <strong class="ph b">Example</strong> </p> 
+         <pre class="pre codeblock"><code>terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~&gt; 6.0"
+    }
+
+    aap = {
+      source  = "ansible/aap"
+      version = "~&gt; 1.4.0"
+    }
+  }
+}
+
+provider "aap" {
+  # Configure authentication as needed.
+}
+
+provider "aws" {
+  region = "us-west-1"
+  # Configure authentication as needed.
+}
+
+variable "public_key_path" {
+  type        = string
+  description = "Local path to a public key file to inject into the VM. Your AAP Job Template must have the matching private key configured as a machine credential."
+}
+
+resource "aws_key_pair" "key_pair" {
+  key_name   = "aap-terraform-actions-demo-key"
+  public_key = file(var.public_key_path)
+}
+
+data "aws_ami" "rhel_ami" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["RHEL-9*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["309956199498"] # Red Hat
+}
+
+resource "aws_instance" "instance" {
+  ami                         = data.aws_ami.rhel_ami.id
+  instance_type               = "t2.micro"
+  associate_public_ip_address = true
+  key_name                    = aws_key_pair.key_pair.key_name
+}
+
+# Look up Organization ID
+
+data "aap_organization" "organization" {
+  name = "Default"
+}
+
+# Create an inventory
+
+resource "aap_inventory" "inventory" {
+  name         = "Actions Demo Inventory"
+  organization = data.aap_organization.organization.id
+}
+
+data "aap_job_template" "job_template" {
+  name              = "Demo Job Template"
+  organization_name = data.aap_organization.organization.name
+}
+
+#
+# Direct job launch action example
+#
+
+resource "aap_host" "host" {
+  inventory_id = aap_inventory.inventory.id
+  name         = resource.aws_instance.instance.public_ip
+  # Setting a value of 10 for SSH retries because terraform will mark the
+  # instance 'created' before it is ready to accept connections from Ansible.
+  variables = jsonencode(
+    {
+      "ansible_ssh_retries" : 10
+    }
+  )
+  # Configure a job launch after the host is created in inventory
+  lifecycle {
+    action_trigger {
+      events  = [after_create]
+      actions = [action.aap_job_launch.job_launch]
+    }
+  }
+}
+
+action "aap_job_launch" "job_launch" {
+  config {
+    inventory_id        = aap_inventory.inventory.id
+    job_template_id     = data.aap_job_template.job_template.id
+    wait_for_completion = true
+  }
+}</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">(Required) Change the job template name and the inventory name in this example to your corresponding variables.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">(Optional) You can set <code class="ph codeph">owners</code> to the Red Hat RHEL image ID so that the latest image is used each time the job runs.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">(Optional) Set additional parameters as needed. For example, you can set <code class="ph codeph">wait_for_completion</code> to <code class="ph codeph">true</code>, then Terraform will wait until this job is created and reaches any final state before continuing. You can also set <code class="ph codeph">wait_for_completion_timeout_seconds</code> to control the timeout limit.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Update and commit the Terraform code.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Execute the Terraform plan and apply it.</span> </li>
+      </ol>
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist">
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration" target="_blank" rel="external noopener">Authenticate with Amazon Web Services</a></li>
+       <li class="linklist"><a class="link" href="https://registry.terraform.io/providers/ansible/aap/latest" target="_blank" rel="external noopener">Additional parameters</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

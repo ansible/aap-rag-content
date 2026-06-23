@@ -1,0 +1,347 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="creating-task-recommendations"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Create task recommendations</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Red Hat Ansible Lightspeed is integrated into Visual Studio (VS) Code through the Ansible VS Code extension. You can request code recommendations for your task intent by using Ansible VS Code extension.</p> 
+      <p class="p">You can perform the following tasks from the Ansible VS Code extension:</p> 
+      <ul class="ul"> 
+       <li class="li"> <strong class="ph b">Create single task or multitask requests by using natural language prompts</strong> 
+        <ul class="ul"> 
+         <li class="li">Create a single task prompt <p class="p">Write a description of your task in the <code class="ph codeph">- name:</code> key of a new task line in your Ansible file. For example, to automate a task of installing PostgreSQL server, you can enter the prompt <code class="ph codeph">- name: Install postgresql-server</code>.</p> </li> 
+         <li class="li">Create a multitask prompt <p class="p">Place your cursor on a new line in your Ansible YAML file at the correct indentation, and start your prompt with a Pound key (#).</p> <p class="p">Write the descriptions of your tasks, separating each prompt by using Ampersand symbols (&amp;). For example, to automate a multitask of installing PostgreSQL server and running the initial PostgreSQL setup command, you can enter the prompt <code class="ph codeph"># Install postgresql-server &amp; run postgresql-setup command</code>.</p> <p class="p">The Ansible Lightspeed service reads the text, interacts with the IBM watsonx Code Assistant model, and generates Ansible task recommendations based on your natural language prompt.</p> 
+          <div class="note note note_note"> <span class="note__title">Note:</span> 
+           <div class="note__body"> 
+            <p class="p">Currently, Red Hat Ansible Lightspeed supports user prompts in English language only. However, there could be instances where the training data that was used to train the IBM watsonx Code Assistant models included non-English language. In such scenarios, the model can generate code recommendations for prompts made in the same non-English language, but the generated code recommendations might or might not be accurate.</p> 
+           </div> 
+          </div> </li> 
+        </ul> </li> 
+       <li class="li"> <strong class="ph b">View the content source matching results</strong> <p class="p">For each generated code recommendation, Red Hat Ansible Lightspeed lists content source matches, including details such as potential source, content author, and relevant licenses. You can use this data to gain insight into potential training data sources used to generate the code recommendations.</p> </li> 
+       <li class="li"> <strong class="ph b">Provide feedback on the Ansible Lightspeed service</strong> <p class="p">The Ansible Lightspeed service learns your organizational patterns and improves the code recommendation experience over time. You can provide feedback on whether the generated code recommendations were suitable for your task intent. This feedback enables Red Hat Ansible Lightspeed with IBM watsonx Code Assistant to improve on the quality of its suggestions.</p> </li> 
+      </ul> 
+      <section class="section" id="creating-task-recommendations___best_practices_to_improve_the_recommended_guidance"> 
+       <h2 class="title sectiontitle">Best practices to improve the recommended guidance</h2> 
+       <p class="p">Follow these guidelines to improve the likelihood of a quality code recommendation.</p> 
+       <ul class="ul"> 
+        <li class="li">Ensure that your YAML file is properly formatted.</li> 
+        <li class="li">Avoid context switching within a single playbook file. <p class="p">The Ansible Lightspeed service attempts to correlate earlier tasks to the active recommendation, and the entire contents of the file before the cursor position are used as context by the model. If the earlier task is not relevant to your prompt, VS code provides inline suggestions instead of code recommendations.</p> </li> 
+        <li class="li">Reword your natural language prompts to get code recommendations that match your task intent. <p class="p">If you get a recommendation that does not align with the intent of your task name, then rewording your prompt to provide more information about what is desired can lead to improved results.</p> </li> 
+        <li class="li">Use descriptive prompts and provide additional content to improve the code recommendations. <p class="p">Red Hat Ansible Lightspeed reads the full Ansible YAML file when generating a code recommendation. Using descriptive prompts and having additional YAML file content related to the desired task improves the code recommendation. For example, you can add the previous Ansible tasks and appropriate playbook and variable names to improve the code recommendations.</p> </li> 
+       </ul> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relinfo"> <strong>Related information</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html" target="_blank" rel="external noopener">Ansible YAML syntax guidelines</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="single-task-recs"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create single task recommendations</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can request code recommendations for a single task by entering natural language prompts in Ansible VS Code extension. The Ansible Lightspeed service reads the text, interacts with the IBM watsonx Code Assistant model, and generates the code recommendations.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You meet <strong class="ph b">one</strong> of the following requirements: 
+          <ul class="ul"> 
+           <li class="li">Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.</li> 
+           <li class="li">Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.</li> 
+          </ul> </li> 
+         <li class="li">You have <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#installing-ansible-vscode-extension" title="Red Hat Ansible Lightspeed with IBM watsonx Code Assistant integrates with the Ansible Visual Studio (VS) Code extension. When enabled, the extension automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.">installed and configured the Ansible VS Code extension</a>.</li> 
+        </ul> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to VS Code with your Red Hat account.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a new YAML file or use an existing YAML file: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Create a YAML file: 
+             <ol class="ol" type="a"> 
+              <li class="li">Select <span class="ph menucascade"><span class="ph uicontrol">File</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">New Text File</span></span>.</li> 
+              <li class="li">From the lower right of the screen, click <strong class="ph b">Plain Text</strong>, and in the language mode, select <strong class="ph b">Ansible</strong>.</li> 
+              <li class="li">Save the file as a YAML file format extension (<code class="ph codeph">.yml</code> or <code class="ph codeph">.yaml</code>).</li> 
+             </ol> </li> 
+            <li class="li">Use an existing YAML file: 
+             <ol class="ol" type="a"> 
+              <li class="li">On the bottom right of the screen, click the existing language mode, and in the language mode settings, select <strong class="ph b">Ansible</strong>. 
+               <div class="note note note_note"> <span class="note__title">Note:</span> 
+                <div class="note__body"> 
+                 <p class="p">If you do not see the language mode section in your VS Code editor, from the Command Palette, select <span class="ph menucascade"><span class="ph uicontrol">Configure Language Mode</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Ansible</span></span>.</p> 
+                </div> 
+               </div> </li> 
+             </ol> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Verify that you see an entry for <strong class="ph b">Lightspeed</strong> on the status bar at the lower right of VS Code. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">If <strong class="ph b">Ansible</strong> is already selected as the desired language but the <strong class="ph b">Lightspeed</strong> entry is not displayed, re-select <strong class="ph b">Ansible</strong> as the language mode. The following illustration shows <strong class="ph b">Lightspeed</strong> and <strong class="ph b">Ansible</strong> entries on the VS Code status bar.</p> 
+           <figure class="fig fignone"> 
+            <figcaption> <span class="fig--title-label">Figure 1. </span>Ansible and Lightspeed set as selected language mode 
+            </figcaption> 
+            <br> 
+            <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/lightspeed-vs-code.png" alt="Settings show Ansible and Lightspeed as selected language mode"> 
+            <br> 
+           </figure> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: If you see an error message about missing Ansible lint, you can install the missing module or disable it. Perform any one of the following tasks: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Install Ansible lint: For installation information, see the <a class="xref" href="https://ansible.readthedocs.io/projects/lint/installing/" target="_blank" rel="external noopener">Installing</a> section of the Ansible Lint documentation.</li> 
+            <li class="li">Disable Ansible lint: 
+             <ol class="ol" type="a"> 
+              <li class="li">From the Activity bar, click the <strong class="ph b">Extensions</strong> icon <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/extensions-icon-vscode.png" alt="Extensions">.</li> 
+              <li class="li">From the <strong class="ph b">Installed</strong> extensions list, select <strong class="ph b">Ansible</strong>.</li> 
+              <li class="li">From the <strong class="ph b">Ansible</strong> extension page, click the <strong class="ph b">Settings</strong> icon and select <strong class="ph b">Extension Settings</strong>.</li> 
+              <li class="li">Clear the <strong class="ph b">Ansible › Validation › Lint: Enabled</strong> checkbox.</li> 
+             </ol> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a playbook or use an existing playbook. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">For more information, see the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/getting_started_with_playbooks" target="_blank" rel="external noopener">Getting started with playbooks</a> guide.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the playbook, provide the following information to request code recommendations for a single task: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Add a new Ansible task by starting a new line with <code class="ph codeph">- name:</code> at the correct indentation.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Add a detailed natural language prompt in the task description after <code class="ph codeph">- name:</code> on the same line. For example, you can specify the following single task prompt: <code class="ph codeph">- name: Install postgresql-server</code></span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Press <strong class="ph b">Enter</strong> directly after the task description. Keep the cursor at the same location in your file, and wait for the code recommendation results to populate. </span> 
+            <div class="itemgroup info"> 
+             <p class="p">The Ansible Lightspeed service is engaged, and it starts generating code recommendations for a single task.</p> 
+             <div class="note important note_important"> <span class="note__title">Important:</span> 
+              <div class="note__body"> 
+               <p class="p">Ansible Lightspeed service takes around 5 seconds per task to populate the code recommendations. If you are using a multitask prompt, the Ansible Lightspeed service takes a bit longer (number of tasks times 5 seconds) to populate the results. Do not move your cursor or press any key while the code recommendation is being generated. If you change the cursor location or press any key, Ansible VS Code extension cancels the request and the Ansible Lightspeed service does not process your request.</p> 
+              </div> 
+             </div> 
+             <p class="p">When the Ansible Lightspeed service is engaged, a <strong class="ph b">Lightspeed</strong> processing status indicator is displayed in the lower right of the screen to denote that your code recommendation is being generated.</p> 
+             <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/lightspeed-task-in-progress.png" alt="Lightspeed icon"> </p> 
+            </div> </li> 
+          </ol> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">View your code recommendations and ensure that the recommendations match your task intent. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The following illustration shows the code recommendations generated by the Ansible Lightspeed service for the single task <strong class="ph b">Install postgresql-server</strong>:</p> 
+           <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/lightspeed-single-task-in-progress.png" alt="Lightspeed single task in progress"> </p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Accept or reject the code recommendations: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">To accept a code recommendation, press <strong class="ph b">Tab</strong>.</li> 
+            <li class="li">To reject a code recommendation, press <strong class="ph b">Esc</strong>. 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">If you reject a recommendation, you can modify the prompt and review the generated code recommendations once again to match your task intent.</p> 
+              </div> 
+             </div> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">After you accept the code recommendation, click the <strong class="ph b">ANSIBLE</strong> tab to see the content source matching results.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">For each generated code recommendation, Ansible Lightspeed lists content source matches, including details such as potential source, content author, and relevant licenses. You can use this data to gain insight into potential training data sources used to generate the code recommendations. </p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save</strong> to save the code recommendation changes in your Ansible YAML file.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_troubleshoot_lightspeed_configuration_errors#troubleshoot-ansible-vscode-errors" title="Use this topic to troubleshoot issues with Ansible VS Code.">Troubleshooting Ansible Visual Studio Code extension errors</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_troubleshoot_lightspeed_configuration_errors#troubleshoot-ansible-code-bot-errors" title="This section provides information about errors when using the Ansible code bot and their workarounds.">Troubleshooting Ansible code bot errors</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="multi-task-recs"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create multitask recommendations</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can request multitask code recommendations by entering a sequence of natural language task prompts in Ansible VS Code extension. In a YAML file, start your prompt with a pound symbol (#), and separate each prompt by using the ampersand symbol (&amp;).</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You meet <strong class="ph b">one</strong> of the following requirements: 
+          <ul class="ul"> 
+           <li class="li">Your organization has a trial or paid subscription to both the Red Hat Ansible Automation Platform and IBM watsonx Code Assistant.</li> 
+           <li class="li">Your organization has a trial or paid subscription to the Red Hat Ansible Automation Platform, and you have a Red Hat Ansible Lightspeed trial account.</li> 
+          </ul> </li> 
+         <li class="li">You have <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#installing-ansible-vscode-extension" title="Red Hat Ansible Lightspeed with IBM watsonx Code Assistant integrates with the Ansible Visual Studio (VS) Code extension. When enabled, the extension automatically collects recommendations, usage telemetry, and Ansible YAML file state through automated events.">installed and configured the Ansible VS Code extension</a>.</li> 
+        </ul> 
+       </section> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p"> <strong class="ph b">Example of a multitask prompt</strong> </p> 
+        <pre class="pre codeblock"><code># Install postgresql-server &amp; run postgresql-setup command</code></pre> 
+        <p class="p">For better readability, you can split your multitask inline prompts over multiple lines. To achieve this, end your current line with an ampersand symbol (&amp;) and start the next line with the hash symbol (#).</p> 
+        <p class="p"> <strong class="ph b">Example of a multitask prompt split over multiple lines</strong> </p> 
+        <pre class="pre codeblock"><code># Create a keypair called lightspeed-keypair &amp; create a vpc &amp; create vpc_id var &amp;
+# create a security group that allows SSH &amp; create subnet with 10.0.1.0/24 cidr &amp;
+# create an internet gateway &amp; create a route table</code></pre> 
+        <p class="p">The Ansible Lightspeed service reads the text, interacts with the IBM watsonx Code Assistant model, and generates the code recommendations.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">While entering a multitask prompt, the Ansible VS Code extension might display a warning if you have long lines in your prompt based on your ansible-lint settings. This warning is a minor readability error and does not impact the quality of your code recommendation output. To resolve the error, you can either ignore it or fix it by splitting your multitask inline prompt over multiple lines.</p> 
+         </div> 
+        </div> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to VS Code with your Red Hat account.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a new YAML file or use an existing YAML file. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Create a YAML file: 
+             <ol class="ol" type="a"> 
+              <li class="li">Select <span class="ph menucascade"><span class="ph uicontrol">File</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">New Text File</span></span>.</li> 
+              <li class="li">From the lower right of the screen, click <strong class="ph b">Plain Text</strong>, and in the language mode, select <strong class="ph b">Ansible</strong>.</li> 
+              <li class="li">Save the file as a YAML file format extension (<code class="ph codeph">.yml</code> or <code class="ph codeph">.yaml</code>).</li> 
+             </ol> </li> 
+            <li class="li">Use an existing YAML file: 
+             <ol class="ol" type="a"> 
+              <li class="li">On the bottom right of the screen, click the existing language mode, and in the language mode settings, select <strong class="ph b">Ansible</strong>. 
+               <div class="note note note_note"> <span class="note__title">Note:</span> 
+                <div class="note__body"> 
+                 <p class="p">If you do not see the language mode section in your VS Code editor, from the Command Palette, select <span class="ph menucascade"><span class="ph uicontrol">Configure Language Mode</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Ansible</span></span>.</p> 
+                </div> 
+               </div> </li> 
+             </ol> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Verify that you see an entry for <strong class="ph b">Lightspeed</strong> on the status bar at the lower right of VS Code. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">If <strong class="ph b">Ansible</strong> is already selected as the desired language but the <strong class="ph b">Lightspeed</strong> entry is not displayed, re-select <strong class="ph b">Ansible</strong> as the language mode. The following illustration shows <strong class="ph b">Lightspeed</strong> entry on the VS Code status bar.</p> 
+           <figure class="fig fignone"> 
+            <figcaption> <span class="fig--title-label">Figure 2. </span>Ansible and Lightspeed set as selected language mode 
+            </figcaption> 
+            <br> 
+            <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/lightspeed-multitask-vs-code.png" alt="Settings show Lightspeed as selected language mode"> 
+            <br> 
+           </figure> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: If you see an error message about missing Ansible lint, you can install the missing module or disable it. Perform any one of the following tasks: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Install Ansible lint: For installation information, see the <a class="xref" href="https://ansible.readthedocs.io/projects/lint/installing/" target="_blank" rel="external noopener">Installing</a> section of the Ansible Lint documentation.</li> 
+            <li class="li">Disable Ansible lint: 
+             <ol class="ol" type="a"> 
+              <li class="li">From the Activity bar, click the <strong class="ph b">Extensions</strong> icon <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/extensions-icon-vscode.png" alt="Extensions">.</li> 
+              <li class="li">From the <strong class="ph b">Installed</strong> extensions list, select <strong class="ph b">Ansible</strong>.</li> 
+              <li class="li">From the <strong class="ph b">Ansible</strong> extension page, click the <strong class="ph b">Settings</strong> icon and select <strong class="ph b">Extension Settings</strong>.</li> 
+              <li class="li">Clear the <strong class="ph b">Ansible › Validation › Lint: Enabled</strong> checkbox.</li> 
+             </ol> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a playbook or use an existing playbook. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">For more information, see the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/getting_started_with_playbooks" target="_blank" rel="external noopener">Getting started with playbooks</a> guide.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the playbook, provide the following information to request multitask code recommendations: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Start a new YAML file comment by entering a pound symbol (#) at the correct indentation.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Add a detailed natural language prompt in a sequence, separating each task by using the ampersand symbol (&amp;). </span> 
+            <div class="itemgroup info"> 
+             <p class="p"> <strong class="ph b">Example of a multitask prompt</strong> </p> 
+             <pre class="pre codeblock"><code># Install postgresql-server &amp; run postgresql-setup command</code></pre> 
+             <p class="p">For better readability, split your multitask inline prompts over multiple lines. To achieve this, end your current line with an ampersand symbol (&amp;) and start the next line with the hash symbol (#).</p> 
+             <p class="p"> <strong class="ph b">Example of a multitask prompt split over multiple lines</strong> </p> 
+             <pre class="pre codeblock"><code># Create a keypair called lightspeed-keypair &amp; create a vpc &amp; create vpc_id var &amp;
+# create a security group that allows SSH &amp; create subnet with 10.0.1.0/24 cidr &amp;
+# create an internet gateway &amp; create a route table</code></pre> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Press <strong class="ph b">Enter</strong> directly after the task description. Keep the cursor at the same location in your file, and wait for the code recommendation results to populate. </span> 
+            <div class="itemgroup info"> 
+             <p class="p">The Ansible Lightspeed service is engaged, and it starts generating code recommendations for multiple tasks.</p> 
+             <div class="note important note_important"> <span class="note__title">Important:</span> 
+              <div class="note__body"> 
+               <p class="p">Ansible Lightspeed service takes around 5 seconds per task to populate the code recommendations. If you are using a multitask prompt, the Ansible Lightspeed service takes a bit longer (number of tasks times 5 seconds) to populate the results. Do not move your cursor or press any key while the code recommendation is being generated. If you change the cursor location or press any key, Ansible VS Code extension cancels the request and the Ansible Lightspeed service does not process your request.</p> 
+              </div> 
+             </div> 
+             <p class="p">When the Ansible Lightspeed service is engaged, a <strong class="ph b">Lightspeed</strong> processing status indicator is displayed in the lower right of the screen to denote that your code recommendation is being generated.</p> 
+             <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/lightspeed-task-in-progress.png" alt="Lightspeed icon"> </p> 
+            </div> </li> 
+          </ol> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: If multitask code recommendations are not being generated, log out of VS Code and log in again using your Red Hat account.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">View your code recommendations and ensure that the recommendations match your task intent. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The following illustration shows the code recommendations generated by the Ansible Lightspeed service for the multitask prompt <strong class="ph b">Install postgresql-server &amp; run postgresql-setup command</strong>: :</p> 
+           <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/lightspeed-multitask-requests.png" alt="Lightspeed single task in progress"> </p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Accept or reject the code recommendations: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">To accept a code recommendation, press <strong class="ph b">Tab</strong>.</li> 
+            <li class="li">To reject a code recommendation, press <strong class="ph b">Esc</strong>. 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">If you reject a recommendation, you can modify the prompt and review the generated code recommendations once again to match your task intent.</p> 
+              </div> 
+             </div> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">After you accept the code recommendation, click the <strong class="ph b">ANSIBLE</strong> tab to see the content source matching results.</span> 
+          <div class="itemgroup info"> 
+           <p class="p">For each generated code recommendation, Ansible Lightspeed lists content source matches, including details such as potential source, content author, and relevant licenses. You can use this data to gain insight into potential training data sources used to generate the code recommendations. </p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Save</strong> to save the code recommendation changes in your Ansible YAML file.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_troubleshoot_lightspeed_configuration_errors#troubleshoot-ansible-vscode-errors" title="Use this topic to troubleshoot issues with Ansible VS Code.">Troubleshooting Ansible Visual Studio Code extension errors</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_troubleshoot_lightspeed_configuration_errors#troubleshoot-ansible-code-bot-errors" title="This section provides information about errors when using the Ansible code bot and their workarounds.">Troubleshooting Ansible code bot errors</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="view-training-matches"> 
+      <h2 class="title topictitle2" id="ariaid-title4">View the Ansible Lightspeed training matches</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">The Red Hat Ansible Lightspeed with IBM watsonx Code Assistant machine learning model is trained on the following content:</p> 
+       <ul class="ul"> 
+        <li class="li">Existing public or private Git repositories</li> 
+        <li class="li">Content from Ansible Galaxy</li> 
+       </ul> 
+       <p class="p">IBM watsonx Code Assistant uses generative AI technology and various types of Ansible content to train the model. Therefore, it is not possible to trace the specific training data that produced a given code recommendation.</p> 
+       <p class="p">For each generated code recommendation, Red Hat Ansible Lightspeed lists the content source matches, including details such as potential source, content author, and relevant licenses. You can use this data to gain insight into potential training data sources used to generate the code recommendations.</p> 
+       <p class="p">After you enter a natural language prompt in VS Code and see the generated code recommendations, you can view the content source matches on the <strong class="ph b">ANSIBLE: LIGHTSPEED TRAINING MATCHES</strong> tab.</p> 
+       <p class="p">For example, the following illustration shows the training matches for the multitask recommendation <strong class="ph b">Install postgresql-server &amp; run postgresql-setup command</strong>:</p> 
+       <figure class="fig fignone"> 
+        <figcaption> <span class="fig--title-label">Figure 3. </span>Training matches for a multitask recommendation 
+        </figcaption> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/lightspeed-multitask-content-matches.png" alt="Training matches for multitask recommendation"> 
+        <br> 
+       </figure> 
+       <p class="p">This capability enables you to find out the open source license terms that are associated with related training data. However, it is unlikely that either the training data used in fine-tuning the code or the output recommendations themselves are protected by copyright, or that the output reproduces training data that is controlled by copyright licensing terms.</p> 
+       <div class="note note note_note"> <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">Red Hat does not claim any copyright or other intellectual property rights in the suggestions generated by Red Hat Ansible Lightspeed with IBM watsonx Code Assistant.</p> 
+        </div> 
+       </div> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

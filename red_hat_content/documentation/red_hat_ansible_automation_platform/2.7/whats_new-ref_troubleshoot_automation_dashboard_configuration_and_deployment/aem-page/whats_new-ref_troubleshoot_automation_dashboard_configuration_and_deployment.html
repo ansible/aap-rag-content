@@ -1,0 +1,376 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-troubleshoot-automation-dashboard-configuration-deployment">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Troubleshoot automation dashboard configuration and deployment</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Diagnose automation dashboard issues including Gateway integration failures, RBAC access problems, UI feature limitations, and data collection errors.</p> 
+     <section class="section" id="ref-troubleshoot-automation-dashboard-configuration-deployment__issue-gateway-403-forbidden">
+      <h2 class="title sectiontitle">Issue 1: Dashboard returns 403 Forbidden errors (Gateway integration failure)</h2> 
+      <p class="p"><strong class="ph b">Symptom</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Dashboard navigation item appears in Ansible Automation Platform unified UI</li> 
+       <li class="li">Clicking dashboard link shows authentication errors</li> 
+       <li class="li">Browser console shows: <code class="ph codeph">HTTP 403 Forbidden: {"detail":"Authentication credentials were not provided."}</code></li> 
+       <li class="li">Metrics service API endpoints return "no healthy upstream" errors</li> 
+      </ul> 
+      <p class="p">After enabling <code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code> on the Ansible Automation Platform CR (operator deployment), the Gateway did NOT automatically register the metrics service. The dashboard UI navigation appeared, but accessing it resulted in 403 Forbidden errors because:</p> 
+      <ul class="ul"> 
+       <li class="li">No metrics service type/cluster/node/service route created in Gateway</li> 
+       <li class="li">JWT authentication chain (<code class="ph codeph">ANSIBLE_BASE_JWT_KEY</code>, resource server URL, <code class="ph codeph">service_id</code>) not configured between Gateway and metrics service</li> 
+       <li class="li">MetricsService operator did not set <code class="ph codeph">METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED</code> env var from the CR</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Root cause</strong></p> 
+      <p class="p">Gateway has not registered metrics service for routing and authentication. The dashboard feature flag enables dashboard collection in metrics service, but does not automatically configure Gateway to route dashboard API calls.</p> 
+      <p class="p"><strong class="ph b">Diagnostic commands</strong></p> 
+      <ol class="ol"> 
+       <li class="li"> <p class="p">Check if metrics service is running:</p> <pre class="pre codeblock"><code># Operator deployment
+kubectl get pods -n ansible-automation-platform | grep metrics
+
+# Containerized deployment
+podman ps | grep automation-metrics</code></pre> <p class="p">Expected: 3 metrics service pods/containers running (web, tasks, scheduler)</p> </li> 
+       <li class="li"> <p class="p">Check metrics service logs for JWT authentication errors:</p> <pre class="pre codeblock"><code># Operator deployment
+kubectl logs -n ansible-automation-platform &lt;metrics-web-pod&gt; | grep -i "ANSIBLE_BASE_JWT_KEY"
+
+# Containerized deployment
+podman logs automation-metrics-web | grep -i "ANSIBLE_BASE_JWT_KEY"</code></pre> <p class="p">Error indicating Gateway not configured:</p> <pre class="pre codeblock"><code>ansible_base.jwt_consumer.common.cert Failed to get the setting ANSIBLE_BASE_JWT_KEY</code></pre> </li> 
+       <li class="li"> <p class="p">Check Gateway logs for routing errors:</p> <pre class="pre codeblock"><code># Operator deployment
+kubectl logs -n ansible-automation-platform &lt;gateway-pod&gt; | grep -i metrics
+
+# Look for errors accessing /api/metrics/v1/dashboard_reports/</code></pre> <p class="p">Error indicating no upstream registered:</p> <pre class="pre codeblock"><code>no healthy upstream</code></pre> </li> 
+       <li class="li"> <p class="p">Check metrics service environment variables:</p> <pre class="pre codeblock"><code># Operator deployment                                                                                  
+kubectl exec &lt;metrics-web-pod&gt; -n ansible-automation-platform -- env | grep -A2 DASHBOARD_COLLECTION
+                                                                                                       
+# Containerized deployment
+cat /etc/ansible-automation-platform/metrics_service/settings.yaml | grep DASHBOARD</code></pre> <p class="p">Expected output:</p> <pre class="pre codeblock"><code># Operator deployment
+METRICS_SERVICE_FEATURE_DASHBOARD_COLLECTION_ENABLED=true
+
+# Containerized deployment
+FEATURE_ENABLED: {'DASHBOARD_COLLECTION': True}</code></pre> <p class="p">If missing or set to <code class="ph codeph">false</code>:</p> <p class="p">The MetricsService operator did not properly propagate the <code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code> setting from the Ansible Automation Platform CR to the metrics service container environment.</p> <p class="p">This indicates:</p> 
+        <ul class="ul"> 
+         <li class="li">Dashboard collection does not run (even if Gateway is configured)</li> 
+         <li class="li">CR setting not applied correctly</li> 
+         <li class="li">Operator may need restart or CR re-application</li> 
+        </ul> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Solution</strong></p> 
+      <p class="p"><strong class="ph b">For operator deployments (primary affected scenario):</strong></p> 
+      <ol class="ol"> 
+       <li class="li"> <p class="p">Verify operator version supports Gateway integration:</p> <pre class="pre codeblock"><code>kubectl get pods -n ansible-automation-platform | grep aap-operator</code></pre> <p class="p">Ensure operator version is <code class="ph codeph">aap-operator.v2.7.0-0.1776445599</code> or later.</p> </li> 
+       <li class="li"> <p class="p">Check Ansible Automation Platform CR feature flag:</p> <pre class="pre codeblock"><code>kubectl get AnsibleAutomationPlatform aap -n aap -o yaml | grep -A5 feature_flags</code></pre> <p class="p">Verify:</p> <pre class="pre codeblock"><code>feature_flags:
+  FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code></pre> </li> 
+       <li class="li"> <p class="p">Verify Gateway pod restarted after feature flag enabled:</p> <pre class="pre codeblock"><code>kubectl get pods -n ansible-automation-platform | grep gateway</code></pre> <p class="p">Check pod AGE. This should restart after the CR update.</p> </li> 
+       <li class="li"> <p class="p">If Gateway registration still failing:</p> <p class="p">Contact Red Hat Support for manual Gateway registration procedure. Manual registration requires:</p> 
+        <ul class="ul"> 
+         <li class="li">Creating service type, cluster, node, and service entries in Gateway database</li> 
+         <li class="li">Configuring JWT authentication chain</li> 
+         <li class="li">Setting <code class="ph codeph">METRICS_SERVICE_RESOURCE_SERVER__URL</code> environment variable in metrics service pod</li> 
+        </ul> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">For containerized deployments:</strong></p> 
+      <p class="p">Gateway registration should be automatic. If you encounter this issue:</p> 
+      <ul class="ul"> 
+       <li class="li">Verify Gateway and metrics service containers are running</li> 
+       <li class="li">Check Gateway configuration includes metrics service routes</li> 
+       <li class="li">Contact Red Hat Support - this issue primarily affects operator deployments</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Verification after fix</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Access dashboard UI:</strong> Navigate to Ansible Automation Platform UI → Automation dashboard</li> 
+       <li class="li"><strong class="ph b">Verify no authentication errors:</strong> Dashboard should load without 403 Forbidden errors</li> 
+       <li class="li"> <p class="p"><strong class="ph b">Check metrics service API accessible:</strong></p> <pre class="pre codeblock"><code># From a machine with access to AAP
+curl -k -u admin:&lt;password&gt; https://&lt;AAP-FQDN&gt;/api/metrics/v1/dashboard_reports/collection_status/</code></pre> <p class="p">Expected: JSON response (not 403 error)</p> </li> 
+      </ul> 
+     </section> 
+     <section class="section" id="ref-troubleshoot-automation-dashboard-configuration-deployment__issue-system-auditor-rbac">
+      <h2 class="title sectiontitle">Issue 2: System Auditor cannot access dashboard (RBAC broken)</h2> 
+      <p class="p"><strong class="ph b">Symptom</strong></p> 
+      <ul class="ul"> 
+       <li class="li">System Auditor role users cannot see dashboard navigation item in Ansible Automation Platform UI</li> 
+       <li class="li">Attempting to access dashboard URL directly shows access denied or 404</li> 
+       <li class="li">Only Administrator role users can access dashboard</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Expected behavior:</strong> System Auditor should have read-only access to dashboard</p> 
+      <p class="p"><strong class="ph b">Actual behavior:</strong> Dashboard completely unavailable to System Auditor role</p> 
+      <p class="p"><strong class="ph b">Root cause</strong></p> 
+      <p class="p">Dashboard RBAC permissions not correctly registered for System Auditor role. The dashboard permission model assumes both Administrator (read/write) and System Auditor (read-only) access, but implementation only grants access to Administrators.</p> 
+      <p class="p"><strong class="ph b">Diagnostic commands</strong></p> 
+      <ol class="ol"> 
+       <li class="li"> <p class="p">Verify user role:</p> <pre class="pre codeblock"><code># Check user's role assignments in AAP
+# Navigate to: Access → Users → [username] → Roles</code></pre> <p class="p">Confirm user has System Auditor role.</p> </li> 
+       <li class="li"> <p class="p">Check dashboard visibility in UI:</p> <p class="p">Log in as System Auditor user and check if "Automation dashboard" appears in navigation menu.</p> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Solution</strong></p> 
+      <p class="p"><strong class="ph b">Technology Preview Limitation:</strong></p> 
+      <p class="p">If System Auditor access is not working in your Ansible Automation Platform 2.7 build:</p> 
+      <ol class="ol"> 
+       <li class="li"> <p class="p"><strong class="ph b">Grant Administrator role temporarily:</strong></p> <p class="p">For users who need dashboard access during Technology Preview period:</p> 
+        <ul class="ul"> 
+         <li class="li">Navigate to <span class="ph menucascade"><span class="ph uicontrol">Access</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Users</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">[username]</span></span></li> 
+         <li class="li">Add Administrator role</li> 
+        </ul> 
+        <div class="note warning note_warning">
+         <span class="note__title">Warning:</span> 
+         <div class="note__body"> 
+          <p class="p">This grants full admin access, not just dashboard read-only</p> 
+         </div>
+        </div> </li> 
+       <li class="li"> <p class="p"><strong class="ph b">Use dedicated dashboard admin account:</strong></p> <p class="p">Create a separate admin account specifically for dashboard access:</p> 
+        <ul class="ul"> 
+         <li class="li">Username: <code class="ph codeph">dashboard-viewer</code></li> 
+         <li class="li">Role: Administrator</li> 
+         <li class="li">Purpose: Dashboard viewing only</li> 
+        </ul> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Verification after fix</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Log in as System Auditor:</strong> Use account with only System Auditor role (no Administrator role)</li> 
+       <li class="li"><strong class="ph b">Verify dashboard visible:</strong> "Automation dashboard" navigation item appears in Ansible Automation Platform UI</li> 
+       <li class="li"> <p class="p"><strong class="ph b">Verify read-only access:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Can view all dashboard data</li> 
+         <li class="li">Cannot modify cost settings</li> 
+         <li class="li">Cannot create/modify/delete saved reports (filter sets)</li> 
+        </ul> </li> 
+      </ul> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p"><strong class="ph b">Automation dashboard access (Technology Preview):</strong></p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Administrator:</strong> Full read/write access</li> 
+         <li class="li"><strong class="ph b">System Auditor:</strong> Not available in Technology Preview. Workaround: Grant Administrator role to users requiring dashboard access.</li> 
+        </ul> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section" id="ref-troubleshoot-automation-dashboard-configuration-deployment__issue-ui-features-missing">
+      <h2 class="title sectiontitle">Issue 3: Date range and currency selectors not working (UI features missing)</h2> 
+      <p class="p"><strong class="ph b">Symptom</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Cannot select custom date ranges in dashboard UI</li> 
+       <li class="li">Date range selector shows only predefined options (or is missing entirely)</li> 
+       <li class="li">Cannot change currency in dashboard settings</li> 
+       <li class="li">All cost values display in USD only</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Root cause</strong></p> 
+      <p class="p">Custom date range selection and currency selector features are not implemented in Ansible Automation Platform 2.7 Technology Preview dashboard UI.</p> 
+      <p class="p"><strong class="ph b">Impact</strong></p> 
+      <p class="p"><strong class="ph b">Technology Preview Limitations:</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Date filtering:</strong> Users can only use predefined date range options (Last 7 days, Last 30 days, Last 90 days, etc.)</li> 
+       <li class="li"><strong class="ph b">Currency:</strong> All cost values display in USD. Multi-currency support not available.</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Solution</strong></p> 
+      <p class="p"><strong class="ph b">Workaround:</strong></p> 
+      <p class="p">No workaround is available for Technology Preview.</p> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p"><strong class="ph b">Date range filtering (Technology Preview limitation):</strong></p> 
+        <p class="p">In Ansible Automation Platform 2.7 Technology Preview, dashboard supports the following predefined date ranges:</p> 
+        <ul class="ul"> 
+         <li class="li">Last 7 days</li> 
+         <li class="li">Last 30 days</li> 
+         <li class="li">Last 90 days</li> 
+        </ul> 
+        <p class="p">Custom date range selection (choosing specific start and end dates) is not available in Technology Preview.</p> 
+       </div>
+      </div> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p"><strong class="ph b">Cost currency (Technology Preview limitation):</strong></p> 
+        <p class="p">In Ansible Automation Platform 2.7 Technology Preview, all dashboard cost values display in USD ($). Currency selection and multi-currency support are not available in Technology Preview.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section" id="ref-troubleshoot-automation-dashboard-configuration-deployment__issue-duplicate-report-names">
+      <h2 class="title sectiontitle">Issue 4: Duplicate saved report names allowed</h2> 
+      <p class="p"><strong class="ph b">Symptom</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Creating a saved report (filter set) with an existing name succeeds</li> 
+       <li class="li">No warning or error message displayed</li> 
+       <li class="li">No overwrite confirmation dialog</li> 
+       <li class="li">Results in two different reports with identical names in the list</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Root cause</strong></p> 
+      <p class="p">Dashboard does not validate saved report names for uniqueness. The system allows multiple reports with the same name, relying on internal IDs to differentiate them.</p> 
+      <p class="p"><strong class="ph b">Impact</strong></p> 
+      <p class="p">User confusion when multiple reports have the same name. Users must open each report to see its filter configuration to determine which is which.</p> 
+      <p class="p"><strong class="ph b">Solution</strong></p> 
+      <p class="p"><strong class="ph b">Workaround:</strong></p> 
+      <p class="p">Use unique, descriptive names for all saved reports. Include identifying information in the name.</p> 
+      <p class="p"><strong class="ph b">Best practices:</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Good:</strong> "Q1-2026-Production-Org", "Weekly-Template-Usage", "EMEA-Region-ROI"</li> 
+       <li class="li"><strong class="ph b">Avoid:</strong> "Test Report", "My Report", "Dashboard" (too generic, likely to duplicate)</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Recommended naming convention:</strong></p> 
+      <pre class="pre codeblock"><code>[Purpose]-[Timeframe/Scope]-[Date Created]
+
+Examples:
+- Compliance-Audit-Last-90-Days-2026-04-27
+- Executive-Summary-Q1-2026
+- Development-Org-Weekly-Usage</code></pre> 
+      <p class="p"><strong class="ph b">Managing duplicate names</strong></p> 
+      <p class="p">If you have multiple reports with the same name:</p> 
+      <ol class="ol"> 
+       <li class="li"> <p class="p"><strong class="ph b">Identify each report:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Open each report with duplicate name</li> 
+         <li class="li">Note the filter configuration</li> 
+         <li class="li">Determine purpose/owner</li> 
+        </ul> </li> 
+       <li class="li"> <p class="p"><strong class="ph b">Rename to unique names:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Update each report with descriptive unique name</li> 
+         <li class="li">Save changes</li> 
+        </ul> </li> 
+       <li class="li"> <p class="p"><strong class="ph b">Delete unwanted duplicates:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Remove any obsolete or test reports</li> 
+        </ul> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Verification</strong></p> 
+      <p class="p">Expected behavior:</p> 
+      <ul class="ul"> 
+       <li class="li">Attempting to save report with existing name triggers warning</li> 
+       <li class="li">User can choose to overwrite or rename</li> 
+       <li class="li">System prevents unintentional duplicates</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="ref-troubleshoot-automation-dashboard-configuration-deployment__general-troubleshooting">
+      <h2 class="title sectiontitle">General dashboard troubleshooting</h2> 
+      <p class="p"><strong class="ph b">Dashboard shows no data</strong></p> 
+      <p class="p"><strong class="ph b">Possible causes:</strong></p> 
+      <ol class="ol"> 
+       <li class="li"> <p class="p">Collection not running:</p> 
+        <ul class="ul"> 
+         <li class="li">Verify metrics service containers running</li> 
+         <li class="li">Check logs for collection activity</li> 
+        </ul> </li> 
+       <li class="li"> <p class="p">No historical data in Controller:</p> 
+        <ul class="ul"> 
+         <li class="li">New Ansible Automation Platform installation with no jobs run yet</li> 
+         <li class="li">Controller database recently purged</li> 
+         <li class="li">Solution: Run some jobs and wait for next collection cycle (6 hours)</li> 
+        </ul> </li> 
+       <li class="li"> <p class="p">Gateway integration broken:</p> <p class="p">See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-ref_troubleshoot_automation_dashboard_configuration_and_deployment#ref-troubleshoot-automation-dashboard-configuration-deployment__issue-gateway-403-forbidden">Issue 1: Dashboard returns 403 Forbidden errors (Gateway integration failure)</a></p> </li> 
+       <li class="li"> <p class="p">RBAC access denied:</p> <p class="p">See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-ref_troubleshoot_automation_dashboard_configuration_and_deployment#ref-troubleshoot-automation-dashboard-configuration-deployment__issue-system-auditor-rbac">Issue 2: System Auditor cannot access dashboard (RBAC broken)</a></p> </li> 
+      </ol> 
+      <p class="p">Diagnostic steps:</p> 
+      <ul class="ul"> 
+       <li class="li">Verify data exists in database</li> 
+       <li class="li">Check metrics service logs for errors</li> 
+       <li class="li">Verify user has appropriate role</li> 
+       <li class="li">Test API access directly (bypass UI)</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Dashboard performance is slow</strong></p> 
+      <p class="p"><strong class="ph b">Possible causes:</strong></p> 
+      <ol class="ol"> 
+       <li class="li"> <p class="p">Large dataset:</p> 
+        <ul class="ul"> 
+         <li class="li">90 days of data with high job volume</li> 
+         <li class="li">Complex filter queries</li> 
+        </ul> </li> 
+       <li class="li"> <p class="p">Database performance:</p> 
+        <ul class="ul"> 
+         <li class="li">Metrics service DB colocated with Controller DB (Tech Preview)</li> 
+         <li class="li">Resource constraints</li> 
+        </ul> </li> 
+       <li class="li"> <p class="p">Network latency:</p> 
+        <ul class="ul"> 
+         <li class="li">Slow connection to Ansible Automation Platform</li> 
+        </ul> </li> 
+      </ol> 
+      <p class="p">Solutions:</p> 
+      <ol class="ol"> 
+       <li class="li"> <p class="p">Reduce date range:</p> 
+        <ul class="ul"> 
+         <li class="li">Use shorter predefined ranges (Last 7 days vs Last 90 days)</li> 
+        </ul> </li> 
+       <li class="li"> <p class="p">Add filters:</p> 
+        <ul class="ul"> 
+         <li class="li">Filter by specific organization, project, or template</li> 
+         <li class="li">Reduces dataset size</li> 
+        </ul> </li> 
+       <li class="li"> <p class="p">Check database resources:</p> 
+        <ul class="ul"> 
+         <li class="li">Monitor CPU/memory usage during dashboard queries</li> 
+         <li class="li">Consider separate database for metrics service in GA</li> 
+        </ul> </li> 
+      </ol> 
+      <p class="p">Dashboard UI not appearing in navigation</p> 
+      <p class="p">Possible causes:</p> 
+      <ol class="ol"> 
+       <li class="li"> <p class="p">Feature not enabled:</p> 
+        <ul class="ul"> 
+         <li class="li">Dashboard collection flag not set</li> 
+         <li class="li">Metrics service not installed</li> 
+        </ul> </li> 
+       <li class="li"> <p class="p">User role insufficient:</p> 
+        <ul class="ul"> 
+         <li class="li">User lacks Administrator or System Auditor role</li> 
+        </ul> </li> 
+       <li class="li"> <p class="p">UI cache:</p> 
+        <ul class="ul"> 
+         <li class="li">Browser cache showing old navigation</li> 
+        </ul> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Solutions:</strong></p> 
+      <ol class="ol"> 
+       <li class="li"> <p class="p">Verify enablement:</p> 
+        <ul class="ul"> 
+         <li class="li">Check <span class="ph filepath">settings.yaml</span> for <code class="ph codeph">FEATURE_DASHBOARD_COLLECTION_ENABLED: true</code></li> 
+        </ul> </li> 
+       <li class="li"> <p class="p">Verify user role:</p> 
+        <ul class="ul"> 
+         <li class="li">Ensure user has Administrator role</li> 
+         <li class="li">NOTE: System Auditor is not working</li> 
+        </ul> </li> 
+       <li class="li"> <p class="p">Clear browser cache:</p> 
+        <ul class="ul"> 
+         <li class="li">Hard refresh (Ctrl+F5) or clear cache completely</li> 
+        </ul> </li> 
+      </ol> 
+     </section> 
+     <section class="section" id="ref-troubleshoot-automation-dashboard-configuration-deployment__getting-help">
+      <h2 class="title sectiontitle">Getting help</h2> 
+      <p class="p">If dashboard issues persist:</p> 
+      <ol class="ol"> 
+       <li class="li"> <p class="p"><strong class="ph b">Collect diagnostic information:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Ansible Automation Platform version and build number</li> 
+         <li class="li">Deployment type (operator/containerized)</li> 
+         <li class="li">Metrics service logs (last 100 lines)</li> 
+         <li class="li">Gateway logs (last 100 lines)</li> 
+         <li class="li">Dashboard configuration (inventory file or CR)</li> 
+         <li class="li">Specific error messages</li> 
+        </ul> </li> 
+       <li class="li"> <p class="p"><strong class="ph b">Contact Red Hat Support:</strong></p> 
+        <ul class="ul"> 
+         <li class="li">Provide diagnostic information</li> 
+         <li class="li">Reference relevant Jira ticket if applicable</li> 
+         <li class="li">Specify Technology Preview status</li> 
+        </ul> </li> 
+      </ol> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist">
+      <strong>Configuration</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-con_understand_automation_dashboard_architecture" title="This module explains the automation dashboard architecture in Red Hat Ansible Automation Platform 2.7, including its integration with metrics service, deployment options, and Technology Preview limitations.">Understand automation dashboard architecture</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_containerized_installation" title="Enable automation dashboard data collection during the initial installation to start collecting ROI and cost analysis data without post-installation configuration.">Enable dashboard during containerized installation</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_during_operator_installation" title="Enable automation dashboard using declarative Custom Resource configuration to leverage operator-managed dashboard deployment with automatic feature flag propagation to metrics service.">Enable dashboard during operator installation</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/whats_new-task_enable_automation_dashboard_post_installation#enable-automation-dashboard-post-installation" title="Activate dashboard data collection with automatic historical data backfill to generate comprehensive usage and ROI reports without reinstalling the platform or losing historical automation activity data.">Enable dashboard post-installation</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

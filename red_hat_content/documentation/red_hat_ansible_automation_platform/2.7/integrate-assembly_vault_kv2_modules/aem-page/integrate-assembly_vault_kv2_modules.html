@@ -1,0 +1,368 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="vault-kv2-modules"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure KV2 modules</h1> 
+     <p class="shortdesc">If you are using KV2 with <code class="ph codeph">community.hashi_vault</code> collection, configure the corresponding modules in the <code class="ph codeph">hashicorp.vault</code> collection.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="vault-configuring-kv2-secret"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure the <code class="ph codeph">hashicorp.vault.kv2_secret</code> module</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The <code class="ph codeph">hashicorp.vault.kv2_secret</code> module performs Create, Update, and Delete (CRUD) operations on KV2 secrets through a unified interface.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">Install the Ansible Automation Platform certified <code class="ph codeph">hashicorp.vault</code> collection.</li> 
+        </ul> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">The corresponding <code class="ph codeph">community.hashi_vault</code> modules are:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b"><code class="ph codeph">community.hashi_vault.vault_kv2_write</code></strong> - Write KV2 secrets.</li> 
+         <li class="li"><strong class="ph b"><code class="ph codeph">community.hashi_vault.vault_kv2_delete</code></strong> - Delete KV2 secrets.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Replicate your automation tasks from both of the <code class="ph codeph">community.hashi_vault</code> modules to the following <code class="ph codeph">hashicorp.vault.kv2_secret</code> parameters. The <code class="ph codeph">hashicorp.vault.kv2_secret</code> parameters are similar to <code class="ph codeph">community.hashi_vault</code>. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>auth_method:
+ description: Authentication method to use
+ type: str
+ choices: [token, approle]
+ default: token
+ required: false
+
+cas:
+ description: Perform a check-and-set operation.
+ type: int
+ required: false
+
+data:
+ description: KV2 secret data to write.
+ type: dict
+ required: true
+
+engine_mount_point:
+ description: The path where the secret backend is mounted.
+ type: str
+ default: secret
+ required: false
+ aliases: [secret_mount_path]
+
+namespace:
+ description: Vault namespace where secrets reside.
+ type: str
+ default: admin
+ aliases: [vault_namespace]
+
+path:
+ description: Vault KVv2 path to be written to.
+ type: str
+ required: true
+ aliases: [secret_path]
+
+url:
+ description: URL of the Vault service
+ type: str
+ aliases: [vault_address]
+ required: true
+
+versions:
+ description: One or more versions of the secret to delete.
+ type: list of int
+ required: false
+
+state:
+ description: Desired state of the secret
+ type: str
+ choices: [present, absent]
+ default: present</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">You must add the <code class="ph codeph">state</code> parameter to the <code class="ph codeph">hashicorp.vault.kv2_secret</code> module, as shown above. Valid options are: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">present</code>:</strong> This is the equivalent of <code class="ph codeph">create</code> or <code class="ph codeph">update</code> in the <code class="ph codeph">community.hashi_vault.vault_kv2</code> modules.</li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">absent</code>:</strong> This is the equivalent of <code class="ph codeph">delete secret</code> in the <code class="ph codeph">community.hashi_vault.vault_kv2</code> modules.</li> 
+           </ul> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_kv2_modules#vault-configuring-kv2-secret-info" title="The hashicorp.vault.kv2_secret_info module reads KV2 secrets.">Configure the <code class="ph codeph">hashicorp.vault.kv2_secret_info</code> module</a>.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="vault-configuring-kv2-secret-info"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure the <code class="ph codeph">hashicorp.vault.kv2_secret_info</code> module</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The <code class="ph codeph">hashicorp.vault.kv2_secret_info</code> module reads KV2 secrets.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">The corresponding <code class="ph codeph">community.hashi_vault</code> module is:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b"><code class="ph codeph">community.hashi_vault.vault_kv2_get</code>:</strong> Gets secrets from the HashiCorp Vault KV version 2 secret store.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Replicate the <code class="ph codeph">community.hashi_vault</code> modules to the following <code class="ph codeph">hashicorp.vault.kv2_secret_info</code> parameters. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>  engine_mount_point:
+    description: KV secrets engine mount point.
+    default: secret
+    type: str
+    aliases: [secret_mount_path]
+  path:
+    description: Path to the secret.
+    required: true
+    type: str
+    aliases: [secret_path]
+  version:
+    description: The version to retrieve.
+    type: int
+extends_documentation_fragment:
+  - hashicorp.vault.vault_auth.modules</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Configure the required parameters: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">path</code>:</strong> The path where the secret is located in the community.<code class="ph codeph">hashi_vault.hashi_vault</code> modules. <strong class="ph b">Alias:</strong><code class="ph codeph">secret_path</code></li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">url</code>:</strong> Maps to <code class="ph codeph">url</code> in the <code class="ph codeph">community.hashi_vault.hashi_vault</code> modules. Uses the same aliases as <code class="ph codeph">vault_address</code>.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">If needed, configure the optional parameters.</span> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_kv2_modules#vault-configuring-kv2-secret-get-lookup" title="The hashicorp.vault.kv2_secret_get lookup plugin module reads KV2 secrets.">Configure the <code class="ph codeph">hashicorp.vault.kv2_secret_get</code> lookup plugin</a>.</li> 
+        </ul> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://console.redhat.com/ansible/automation-hub/repo/published/hashicorp/vault/content/module/kv2_secret_info/" target="_blank" rel="external noopener">Optional parameters</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="vault-configuring-kv2-secret-get-lookup"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Configure the <code class="ph codeph">hashicorp.vault.kv2_secret_get</code> lookup plugin</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The <code class="ph codeph">hashicorp.vault.kv2_secret_get</code> lookup plugin module reads KV2 secrets.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">The corresponding <code class="ph codeph">community.hashi_vault</code> modules are:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b"><code class="ph codeph">community.hashi_vault.hashi_vault</code>:</strong> Retrieves secrets from HashiCorp Vault.</li> 
+         <li class="li"><strong class="ph b"><code class="ph codeph">community.hashi_vault.vault_kv2_get</code> lookup:</strong> Gets secrets from the HashiCorp Vault KV version 2 secret store.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Replicate the <code class="ph codeph">community.hashi_vault</code> modules to the following <code class="ph codeph">hashicorp.vault.kv2_secret_get</code> parameters. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>auth_method:
+ description: Authentication method to use
+ type: str
+ choices: [token, approle]
+ default: token
+ required: false
+
+mount_point:
+ description: Vault mount point
+ type: str
+ required: false
+ aliases: [secret_mount_path]
+
+namespace:
+ description: Vault namespace where secrets reside.
+ type: str
+ default: admin
+ aliases: [vault_namespace]
+secret:
+ description: Vault path to the secret being requested in the format path[:field]
+ type: str
+ required: true
+ aliases: [secret_path]
+
+url:
+ description: URL of the Vault service
+ type: str
+ aliases: [vault_address]
+ required: true
+
+version:
+ description: Specifies the version to return. If not set the latest is returned.
+ type: int
+ required: false</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Use the following guidance to configure the <code class="ph codeph">hashicorp.vault.kv2_secret_get</code> parameters: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">auth_method</code>:</strong> Maps identically to <code class="ph codeph">auth_method</code> in the <code class="ph codeph">community.hashi_vault.hashi_vault</code> modules.</li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">mount_point</code>:</strong> Maps to <code class="ph codeph">mount_point</code> in the <code class="ph codeph">community.hashi_vault.hashi_vault</code> modules. <strong class="ph b">Alias:</strong><code class="ph codeph">secret_mount_path</code>.</li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">namespace</code>:</strong> Maps to <code class="ph codeph">namespace</code> in the <code class="ph codeph">community.hashi_vault.hashi_vault</code> modules. <strong class="ph b">Alias:</strong><code class="ph codeph">vault_namespace</code>.</li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">secret</code>:</strong> Maps to <code class="ph codeph">secret</code> in the <code class="ph codeph">community.hashi_vault.hashi_vault</code> modules.</li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">url</code>:</strong> Maps to <code class="ph codeph">url</code> in the <code class="ph codeph">community.hashi_vault.hashi_vault</code> modules. Uses the same aliases as <code class="ph codeph">vault_address</code>.</li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">version</code>:</strong> Maps identically to <code class="ph codeph">version</code> in the <code class="ph codeph">community.hashi_vault.hashi_vault</code> modules.</li> 
+           </ul> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_vault_authenticating#vault-creating-credential-type" title="As an admin, you create a secure credential type in Ansible Automation Platform, which is used to authenticate to Vault.">Create a credential type</a> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title5" id="vault-migration-examples-kv2-secret-module"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Examples: <code class="ph codeph">hashicorp.vault.kv2_secret</code> module</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The following migration examples show basic before and after configurations for the <code class="ph codeph">hashicorp.vault.kv2_secret</code> module.</p> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">KV2 delete operations are <code class="ph codeph">soft-delete</code>.</p> 
+        </div>
+       </div> 
+       <p class="p"> <strong class="ph b">Example 1: Basic Secret Write/Create</strong> </p> 
+       <p class="p">Before (<code class="ph codeph">community.hashi_vault</code>):</p> 
+       <pre class="pre codeblock"><code>- name: Write/create a secret
+  community.hashi_vault.vault_kv2_write:
+    url: https://vault:8200
+    path: hello
+    data:
+      foo: bar</code></pre> 
+       <p class="p">After (<code class="ph codeph">hashicorp.vault</code>):</p> 
+       <pre class="pre codeblock"><code>- name: Write/create a secret
+  hashicorp.vault.kv2_secret:
+    url: https://vault:8200
+    path: hello
+    data:
+      foo: bar</code></pre> 
+       <p class="p"> <strong class="ph b">Example 2: Basic Secret Delete</strong> </p> 
+       <p class="p">Before (<code class="ph codeph">community.hashi_vault</code>):</p> 
+       <pre class="pre codeblock"><code>- name: Delete the latest version of the secret/mysecret secret.
+  community.hashi_vault.vault_kv2_delete:
+    url: https://vault:8201
+    path: secret/mysecret</code></pre> 
+       <p class="p">After (<code class="ph codeph">hashicorp.vault</code>):</p> 
+       <pre class="pre codeblock"><code>- name: Delete the latest version of the secret/mysecret secret.
+  hashicorp.vault.kv2_secret:
+    url: https://vault:8201
+    path: secret/mysecret
+    state: absent</code></pre> 
+       <p class="p"> <strong class="ph b">Example 3: Secret Delete - specific version</strong> </p> 
+       <p class="p">Before (<code class="ph codeph">community.hashi_vault</code>):</p> 
+       <pre class="pre codeblock"><code>- name: Delete versions 1 and 3 of the secret/mysecret secret.
+  community.hashi_vault.vault_kv2_delete:
+    url: https://vault:8201
+    path: secret/mysecret
+    versions: [1, 3]</code></pre> 
+       <p class="p">After (<code class="ph codeph">hashicorp.vault</code>):</p> 
+       <pre class="pre codeblock"><code>- name: Delete versions 1 and 3 of the secret/mysecret secret.
+  hashicorp.vault.kv2_secret:
+    url: https://vault:8201
+    path: secret/mysecret
+    versions: [1, 3]
+    state: absent</code></pre> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist">
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://developer.hashicorp.com/vault/docs/secrets/kv/kv-v2/cookbook/delete-data" target="_blank" rel="external noopener">Delete data</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title6" id="vault-migration-examples-kv2-secret-info"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Examples: <code class="ph codeph">hashicorp.vault.kv2_secret_info</code> module</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The following migration examples show before and after configurations for the <code class="ph codeph">hashicorp.vault.kv2_secret_info</code> module.</p> 
+       <p class="p"> <strong class="ph b">Example 1: Read a secret with token authentication</strong> </p> 
+       <p class="p">Before (community.hashi_vault)</p> 
+       <pre class="pre codeblock"><code>- name: Read the latest version of a kv2 secret from Vault  community.hashi_vault.vault_kv2_get:
+    url: https://vault.example.com:8200
+    token: "{{ vault_token }}"
+    path: myapp/config
+  register: response</code></pre> 
+       <p class="p">After (hashicorp.vault)</p> 
+       <pre class="pre codeblock"><code>- name: Read a secret with token authentication
+  hashicorp.vault.kv2_secret_info:
+    url: https://vault.example.com:8200
+    token: "{{ vault_token }}"
+    path: myapp/config</code></pre> 
+       <p class="p"> <strong class="ph b">Example 2: Read a secret with a specific version</strong> </p> 
+       <p class="p">Before (community.hashi.vault)</p> 
+       <pre class="pre codeblock"><code>- name: Read version 5 of a secret from kv2
+  community.hashi_vault.vault_kv2_get:
+    url: https://vault.example.com:8200
+    path: myapp/config
+    version: 5</code></pre> 
+       <p class="p">After (hashicorp.vault)</p> 
+       <pre class="pre codeblock"><code>- name: Read a secret with a specific version
+  hashicorp.vault.kv2_secret_info:
+    url: https://vault.example.com:8200
+    path: myapp/config
+    version: 1</code></pre> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title7" id="vault-migration-examples-kv2-secret-get-lookup"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Examples: <code class="ph codeph">hashicorp.vault.kv2_secret_get</code> lookup</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The following migration example shows the KV2 secret get lookup for retrieving the latest version.</p> 
+       <p class="p"> <strong class="ph b">Example:</strong> </p> 
+       <p class="p">Before (<code class="ph codeph">community.hashi_vault</code>)</p> 
+       <pre class="pre codeblock"><code>- name: Return latest KV v2 secret from path
+  ansible.builtin.debug:
+    msg: "{{ lookup('community.hashi_vault.hashi_vault', 'secret=secret/data/hello
+  token=my_vault_token
+  url=http://myvault_url:8200') }}"</code></pre> 
+       <p class="p">After (<code class="ph codeph">hashicorp.vault</code>)</p> 
+       <pre class="pre codeblock"><code>name: Return latest KV v2 secret from path
+  ansible.builtin.debug:
+    msg: "{{ lookup('hashicorp.vault.kv2_secret_get', 'secret=secret/data/hello
+  url=http://myvault_url:8200') }}"</code></pre> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

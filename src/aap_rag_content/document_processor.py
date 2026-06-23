@@ -736,6 +736,7 @@ class DocumentProcessor:
         Documents with titles in this list will be included in the vector database
         regardless of their url_reachable status.
         """
+        LOG.info("Processing documents in %s", docs_dir)
         reader = SimpleDirectoryReader(
             str(docs_dir),
             recursive=True,

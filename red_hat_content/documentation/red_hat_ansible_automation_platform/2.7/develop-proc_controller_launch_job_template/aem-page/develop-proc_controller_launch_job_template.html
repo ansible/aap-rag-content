@@ -1,0 +1,200 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-launch-job-template"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Launch a job template</h1> 
+     <div class="body taskbody"> 
+      <p class="shortdesc">You can configure a job template to store all the parameters that you would normally pass to the Ansible Playbook on the command line. In addition to the playbooks, the template passes the inventory, credentials, extra variables, and all options and settings that you can specify on the command line.</p> 
+      <section class="section context"> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">About this task</h2> 
+       </div> 
+       <p class="p">Easier deployments drive consistency, by running your playbooks the same way each time, and allowing you to delegate responsibilities.</p> 
+      </section> 
+      <section> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">Procedure</h2> 
+       </div> 
+       <div class="ul steps-unordered"> 
+        <div class="li step p"> <span class="ph cmd">Launch a job template by using one of these methods: </span> 
+         <div class="itemgroup info"> 
+          <ul class="ul"> 
+           <li class="li">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span> and click <strong class="ph b">Launch template</strong><img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/rightrocket.png" width="15" alt="Launch"> on the job template card.</li> 
+           <li class="li">In the job template <strong class="ph b">Details</strong> tab of the job template you want to launch, click <span class="ph uicontrol button">Launch template</span>.</li> 
+          </ul> 
+         </div> 
+        </div> 
+       </div> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-job-template-additional-info"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Additional information requested when launching a job template</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">A job can require additional information to run. The following data can be requested at launch:</p> 
+       <section class="section"> 
+        <ul class="ul"> 
+         <li class="li">Credentials that were setup</li> 
+         <li class="li">The option <strong class="ph b">Prompt on Launch</strong> is selected for any parameter</li> 
+         <li class="li">Passwords or passphrases that have been set to <strong class="ph b">Ask</strong></li> 
+         <li class="li">A survey, if one has been configured for the job templates</li> 
+         <li class="li">Extra variables, if requested by the job template</li> 
+        </ul> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">If a job has user-provided values, then those are respected upon relaunch. If the user did not specify a value, then the job uses the default value from the job template. Jobs are not relaunched as-is. They are relaunched with the user prompts re-applied to the job template.</p> 
+         </div> 
+        </div> 
+        <p class="p">If you give values on one tab, return to a previous tab, continuing to the next tab results in having to re-provide values on the rest of the tabs. Ensure that you complete the tabs in the order that the prompts appear.</p> 
+        <p class="p">When launching, automation controller automatically redirects the web browser to the <strong class="ph b">Job Status</strong> page for this job under the <strong class="ph b">Jobs</strong> tab.</p> 
+        <p class="p">You can re-launch the most recent job from the list view to re-run on all hosts or just failed hosts in the specified inventory. For more information, see the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_jobs#controller-jobs" title="A job is an instance of automation controller launching an Ansible Playbook against an inventory of hosts.">Jobs in automation controller</a> section.</p> 
+        <p class="p">When slice jobs are running, job lists display the workflow and job slices, and a link to view their details individually.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">You can launch jobs in bulk by using the newly added endpoint in the API, <code class="ph codeph">/api/v2/bulk/job_launch</code>. This endpoint accepts JSON and you can specify a list of unified job templates (such as job templates and project updates) to launch. The user must have the appropriate permission to launch all the jobs. If all jobs are not launched an error is returned indicating why the operation was not able to complete. Use the <code class="ph codeph">OPTIONS</code> request to return relevant schema. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_api_tools" title="Representational State Transfer (REST) relies on a stateless, client/server, and cacheable communications protocol, usually the HTTP protocol.">Use the REST API to browse, query, filter, and authenticate</a></p> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="controller-job-template-variables"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Set extra variables in job templates</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Along with any extra variables set in the job template and survey, automation controller automatically adds the following variables to the job environment.</p> 
+       <section class="section"> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <ul class="ul"> 
+           <li class="li"><code class="ph codeph">awx_*</code> variables are defined by the system and cannot be overridden.</li> 
+           <li class="li">Variables about the job context, such as <code class="ph codeph">awx_job_template_name</code> are not affected if they are set in <code class="ph codeph">extra_vars</code>.</li> 
+          </ul> 
+         </div> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">awx_job_id</code>: The job ID for this job run.</li> 
+         <li class="li"><code class="ph codeph">awx_job_launch_type</code>: The description to indicate how the job was started: 
+          <ul class="ul"> 
+           <li class="li"><strong class="ph b">manual</strong>: The job was started manually by a user.</li> 
+           <li class="li"><strong class="ph b">relaunch</strong>: The job was started via relaunch.</li> 
+           <li class="li"><strong class="ph b">callback</strong>: The job was started via host callback.</li> 
+           <li class="li"><strong class="ph b">scheduled</strong>: The job was started from a schedule.</li> 
+           <li class="li"><strong class="ph b">dependency</strong>: The job was started as a dependency of another job.</li> 
+           <li class="li"><strong class="ph b">workflow</strong>: The job was started from a workflow job.</li> 
+           <li class="li"><strong class="ph b">sync</strong>: The job was started from a project sync.</li> 
+           <li class="li"><strong class="ph b">scm</strong>: The job was created as an Inventory SCM sync.</li> 
+          </ul></li> 
+         <li class="li"><code class="ph codeph">awx_job_template_id</code>: The job template ID that this job run uses.</li> 
+         <li class="li"><code class="ph codeph">awx_job_template_name</code>: The job template name that this job uses.</li> 
+         <li class="li"><code class="ph codeph">awx_execution_node</code>: The Execution Node name that launched this job.</li> 
+         <li class="li"><code class="ph codeph">awx_project_revision</code>: The revision identifier for the source tree that this particular job uses (it is also the same as the job’s field scm_revision).</li> 
+         <li class="li"><code class="ph codeph">awx_project_scm_branch</code>: The configured default project SCM branch for the project the job template uses.</li> 
+         <li class="li"><code class="ph codeph">awx_job_scm_branch</code>: If the SCM Branch is overwritten by the job, the value is shown here.</li> 
+         <li class="li"><code class="ph codeph">awx_user_email</code>: The user email of the controller user that started this job. This is not available for callback or scheduled jobs.</li> 
+         <li class="li"><code class="ph codeph">awx_user_first_name</code>: The user’s first name of the automation controller user that started this job. This is not available for callback or scheduled jobs.</li> 
+         <li class="li"><code class="ph codeph">awx_user_id</code>: The user ID of the automation controller user that started this job. This is not available for callback or scheduled jobs.</li> 
+         <li class="li"><code class="ph codeph">awx_user_last_name</code>: The last name of the automation controller user that started this job. This is not available for callback or scheduled jobs.</li> 
+         <li class="li"><code class="ph codeph">awx_user_name</code>: The user name of the automation controller user that started this job. This is not available for callback or scheduled jobs.</li> 
+         <li class="li"><code class="ph codeph">awx_schedule_id</code>: If applicable, the ID of the schedule that launched this job.</li> 
+         <li class="li"><code class="ph codeph">awx_schedule_name</code>: If applicable, the name of the schedule that launched this job.</li> 
+         <li class="li"><code class="ph codeph">awx_workflow_job_id</code>: If applicable, the ID of the workflow job that launched this job.</li> 
+         <li class="li"><code class="ph codeph">awx_workflow_job_name</code>: If applicable, the name of the workflow job that launched this job. Note this is also the same as the workflow job template.</li> 
+         <li class="li"><code class="ph codeph">awx_inventory_id</code>: If applicable, the ID of the inventory this job uses.</li> 
+         <li class="li"><code class="ph codeph">awx_inventory_name</code>: If applicable, the name of the inventory this job uses.</li> 
+        </ul> 
+        <p class="p">For compatibility, all variables are also given an "awx" prefix, for example, <code class="ph codeph">awx_job_id</code>.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="controller-relaunch-job-template"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Relaunch a job template</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Relaunching a job template creates a new job based on a previous job.</p> 
+       <p class="p">Instead of manually relaunching a job, a relaunch is denoted by setting <code class="ph codeph">launch_type</code> to <code class="ph codeph">relaunch</code>. The relaunch behavior deviates from the launch behavior in that it does not inherit <code class="ph codeph">extra_vars</code>.</p> 
+       <p class="p">Job relaunching does not go through the inherit logic. It uses the same <code class="ph codeph">extra_vars</code> that were calculated for the job being relaunched.</p> 
+       <p class="p"> <strong class="ph b">Example</strong> </p> 
+       <p class="p">You launch a job template with no <code class="ph codeph">extra_vars</code> which results in the creation of a job called <strong class="ph b">j1</strong>. Then you edit the job template and add <code class="ph codeph">extra_vars</code> (such as adding <code class="ph codeph">"{ "hello": "world" }"</code>).</p> 
+       <p class="p">Relaunching <strong class="ph b">j1</strong> results in the creation of <strong class="ph b">j2</strong>, but because there is no inherit logic and <strong class="ph b">j1</strong> has no extra_vars, <strong class="ph b">j2</strong> does not have any <code class="ph codeph">extra_vars</code>.</p> 
+       <p class="p">If you launch the job template with the <code class="ph codeph">extra_vars</code> that you added after the creation of <strong class="ph b">j1</strong>, the relaunch job created (<strong class="ph b">j3</strong>) includes the extra_vars. Relaunching <strong class="ph b">j3</strong> results in the creation of <strong class="ph b">j4</strong>, which also includes <code class="ph codeph">extra_vars</code>.</p> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="controller-delete-job-template"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Delete a job template</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can delete job templates in automation controller when they are no longer needed.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Before deleting a job template, ensure that it is not used in a workflow job template.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <div class="ol steps"> 
+         <div class="li step p"> <span class="ph cmd">Delete a job template using the following method: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Click the ⋮ icon and select the Delete Template <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/delete-button.png" width="15" alt="Delete Template"> icon, or</li> 
+            <li class="li">Select the required job template, on the <strong class="ph b">Details</strong> page click the ⋮ icon and select <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/delete-button.png" width="15" alt="Delete template"><span class="ph uicontrol button">Delete template</span>. 
+             <div class="note note note_note"> <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">If deleting items that are used by other work items, a message opens listing the items that are affected by the deletion and prompts you to confirm the deletion. Some screens contain items that are invalid or previously deleted, and will fail to run.</p> 
+              </div> 
+             </div></li> 
+           </ul> 
+          </div> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title6" id="controller-fact-caching"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Store host facts in cache for faster playbook execution</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Automation controller can store and retrieve facts on a per-host basis through an Ansible Fact Cache plugin. This behavior is configurable on a per-job template basis.</p> 
+       <p class="p">Fact caching is turned off by default but can be enabled to serve fact requests for all hosts in an inventory related to the job running. This enables you to use job templates with <code class="ph codeph">--limit</code> while still having access to the entire inventory of host facts. You can specify a global timeout setting that the plugin enforces per-host, (in seconds) from the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Job</span></span> and edit the <strong class="ph b">Per-Host Ansible Fact Cache Timeout</strong> field.</p> 
+       <p class="p">After launching a job that uses fact cache (<code class="ph codeph">use_fact_cache=True</code>), each host’s <code class="ph codeph">ansible_facts</code> are all stored by the controller in the job’s inventory.</p> 
+       <p class="p">The Ansible Fact Cache plugin that includes automation controller is enabled on jobs with fact cache enabled (<code class="ph codeph">use_fact_cache=True</code>).</p> 
+       <p class="p">When a job that has fact cache enabled (<code class="ph codeph">use_fact_cache=True</code>) has run, automation controller restores all records for the hosts in the inventory. Any records with update times newer than the currently stored facts per-host are updated in the database.</p> 
+       <p class="p">New and changed facts are logged through automation controller’s logging facility. Specifically, to the <code class="ph codeph">system_tracking namespace</code> or logger. The logging payload includes the following fields:</p> 
+       <ul class="ul"> 
+        <li class="li"> <code class="ph codeph">host_name</code> </li> 
+        <li class="li"> <code class="ph codeph">inventory_id</code> </li> 
+        <li class="li"> <code class="ph codeph">ansible_facts</code> </li> 
+       </ul> 
+       <p class="p"><code class="ph codeph">ansible facts</code> is a dictionary of all Ansible facts for <code class="ph codeph">host_name</code> in the automation controller inventory, <code class="ph codeph">inventory_id</code>.</p> 
+       <div class="note note note_note"> <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">If a hostname includes a forward slash (/), fact cache does not work for that host. If you have an inventory with 100 hosts and one host has a / in the name, the remaining 99 hosts still collect facts.</p> 
+        </div> 
+       </div> 
+      </div> 
+      <article class="topic concept nested2" aria-labelledby="ariaid-title7" id="controller-benefits-of-fact-caching"> 
+       <h3 class="title topictitle3" id="ariaid-title7">Benefits of fact caching</h3> 
+       <div class="body conbody"> 
+        <p class="shortdesc">Fact caching saves you time over running fact gathering. If you have a playbook in a job that runs against a thousand hosts and forks, it can take 10 minutes to gather facts across all of those hosts.</p> 
+        <p class="p">If you run a job on a regular basis, the first run of it caches these facts and the next run pulls them from the database. This reduces the runtime of jobs against large inventories.</p> 
+        <div class="note note note_note"> <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Do not change the ansible.cfg file to apply fact caching. Custom fact caching could conflict with the controller’s fact caching feature. You must use the fact caching module that includes automation controller.</p> 
+         </div> 
+        </div> 
+        <p class="p">You can select to use cached facts in your job by checking the <strong class="ph b">Enable fact storage</strong> option when you create or edit a job template.</p> 
+        <p class="p">The following is an example playbook that uses the Ansible <code class="ph codeph">clear_facts</code> meta task.</p> 
+        <pre class="pre codeblock"><code>- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Clear gathered facts from all currently targeted hosts
+      meta: clear_facts</code></pre> 
+        <p class="p">You can find the API endpoint for fact caching at:</p> 
+        <p class="p">http://&lt;controller server name&gt;/api/v2/hosts/x/ansible_facts</p> 
+       </div> 
+      </article> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

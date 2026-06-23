@@ -1,0 +1,123 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-inventory-file-importing"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Import your inventory file from source control</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">With automation controller you can select an inventory file from source control, rather than creating one from scratch.</p> 
+      <p class="p">The files are non-editable, and as inventories are updated at the source, the inventories within the projects are also updated accordingly, including the <code class="ph codeph">group_vars</code> and <code class="ph codeph">host_vars</code> files or directory associated with them. SCM types can consume both inventory files and scripts. Both inventory files and custom inventory types use scripts.</p> 
+      <p class="p">Imported hosts have a description of <em class="ph i">imported</em> by default. This can be overridden by setting the <code class="ph codeph">_awx_description</code> variable on a given host. For example, if importing from a sourced <code class="ph codeph">.ini</code> file, you can add the following host variables:</p> 
+      <pre class="pre">[main]
+127.0.0.1 _awx_description="my host 1"
+127.0.0.2 _awx_description="my host 2"</pre> 
+      <p class="p">Similarly, group descriptions also default to <em class="ph i">imported</em>, but can also be overridden by <code class="ph codeph">_awx_description</code>.</p> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relref">
+       <strong>Related reference</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#ref-controller-export-old-scripts" title="Despite the removal of the custom inventory scripts API, the scripts are still saved in the database.">Export old inventory scripts</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="ref-controller-scm-inv-source-fields"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Inventory file fields for source control</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can use a source control management (SCM) system, such as Git, to manage your inventory files in automation controller. You can use an SCM system to version control your inventory files and manage them in a collaborative manner.</p> 
+       <section class="section"> 
+        <p class="p">The source fields used are:</p> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">source_project</code>: the project to use.</li> 
+         <li class="li"><code class="ph codeph">source_path</code>: the relative path inside the project indicating a directory or a file. If left blank, "" is still a relative path indicating the root directory of the project.</li> 
+         <li class="li"><code class="ph codeph">source_vars</code>: if set on a "file" type inventory source then they are passed to the environment variables when running.</li> 
+        </ul> 
+        <p class="p">Additionally:</p> 
+        <ul class="ul"> 
+         <li class="li">An update of the project automatically triggers an inventory update where it is used.</li> 
+         <li class="li">An update of the project is scheduled immediately after creation of the inventory source.</li> 
+         <li class="li">Neither inventory nor project updates are blocked while a related job is running.</li> 
+         <li class="li">In cases where you have a large project (around 10 GB), disk space on <code class="ph codeph">/tmp</code> can be an issue.</li> 
+        </ul> 
+        <p class="p">You can specify a location manually in the automation controller UI from the <strong class="ph b">Add source</strong> page of an inventory. Refer to <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a> for instructions on creating an inventory source.</p> 
+        <p class="p">When you update a project, refresh the listing to use the latest source control management (SCM) information. If no inventory sources use a project as an SCM inventory source, then the inventory listing might not be refreshed on update.</p> 
+        <p class="p">For inventories with SCM sources, the job <strong class="ph b">Details</strong> page for inventory updates displays a status indicator for the project update and the name of the project.</p> 
+        <p class="p">The status indicator links to the project update job.</p> 
+        <p class="p">The project name links to the project.</p> 
+        <p class="p">You can perform an inventory update while a related job is running.</p> 
+       </section> 
+       <section class="section" id="ref-controller-scm-inv-source-fields___supported_file_syntax">
+        <h3 class="title sectiontitle">Supported file syntax</h3> 
+        <p class="p">Automation controller uses the <code class="ph codeph">ansible-inventory</code> module from Ansible to process inventory files, and supports all valid inventory syntax that automation controller requires.</p> 
+        <div class="note important note_important">
+         <span class="note__title">Important:</span> 
+         <div class="note__body"> 
+          <p class="p">You do not need to write inventory scripts in Python. You can enter any executable file in the source field and must run <code class="ph codeph">chmod +x</code> for that file and check it into Git.</p> 
+         </div>
+        </div> 
+        <p class="p">The following is a working example of JSON output that automation controller can read for the import:</p> 
+        <pre class="pre codeblock"><code>{
+    "_meta": {
+        "hostvars": {
+            "host1": {
+                "fly_rod": true
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "groupA",
+            "ungrouped"
+        ]
+    },
+    "groupA": {
+        "hosts": [
+            "host1",
+            "host10",
+            "host11",
+            "host12",
+            "host13",
+            "host14",
+            "host15",
+            "host16",
+            "host17",
+            "host18",
+            "host19",
+            "host2",
+            "host20",
+            "host21",
+            "host22",
+            "host23",
+            "host24",
+            "host25",
+            "host3",
+            "host4",
+            "host5",
+            "host6",
+            "host7",
+            "host8",
+            "host9"
+        ]
+    }
+}</code></pre> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://github.com/ansible/test-playbooks/tree/main/inventories" target="_blank" rel="external noopener">test-playbooks/inventories</a></li>
+         <li class="linklist"><a class="link" href="https://github.com/ansible/test-playbooks/blob/main/inventories/changes.py" target="_blank" rel="external noopener">inventories/changes.py</a></li>
+         <li class="linklist"><a class="link" href="https://access.redhat.com/solutions/6997130" target="_blank" rel="external noopener">How to migrate inventory scripts from Red Hat Ansible tower to Red Hat Ansible Automation Platform?</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

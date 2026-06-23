@@ -1,0 +1,184 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-approval-pipeline"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Approve content for custom repositories in automation hub</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">In automation hub you can approve collections into any repository marked with the <code class="ph codeph">pipeline=approved</code> label. </p> 
+      <p class="p">By default, automation hub includes one repository for approved content, but you have the option to add more from the repository creation screen. You cannot directly publish into a repository marked with the <code class="ph codeph">pipeline=approved</code> label. A collection must first go through a staging repository and be approved before being published into a <code class="ph codeph">pipeline=approved</code> repository.</p> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        Auto approval
+       </dt> 
+       <dd class="dd">
+        When auto approve is enabled, any collection you upload to a staging repository is automatically promoted to all of the repositories marked as <code class="ph codeph">pipeline=approved</code>.
+       </dd> 
+       <dt class="dt dlterm">
+        Approval required
+       </dt> 
+       <dd class="dd"> 
+        <p class="p">When auto approve is disabled, the administrator can view the approval dashboard and see collections that have been uploaded into any of the staging repositories. Sorting by <strong class="ph b">Approved</strong> displays a list of approved repositories. From this list, the administrator can select one or more repositories to which the content should be promoted.</p> 
+        <p class="p">If only one approved repository exists, the collection is automatically promoted into it and the administrator is not prompted to select a repository.</p> 
+       </dd> 
+       <dt class="dt dlterm">
+        Rejection
+       </dt> 
+       <dd class="dd">
+        Rejected collections are automatically placed into the rejected repository, which is pre-installed.
+       </dd> 
+      </dl> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-repo-rbac"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Manage access to custom content with role based access control</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Use Role Based Access Control (RBAC) to restrict user access to custom repositories by defining access permissions based on user roles.</p> 
+       <p class="p"> By default, users can view all public repositories in their automation hub, but they cannot modify a repository unless their role allows them access to do so. The same logic applies to other operations on the repository. For example, you can remove a user’s ability to download content from a custom repository by changing their role permissions.</p> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-create-repository"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Create a custom repository</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">When you create a repository in Ansible Automation Platform, you can configure the repository to be private or hide it from search results.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Repositories</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create repository</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Enter a <strong class="ph b">Name</strong> for your repository.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Description</strong> field, describe the purpose of the repository.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To retain previous versions of your repository each time you make a change, enter a figure in the field labeled <strong class="ph b">Retained number of versions</strong>. The number of retained versions can range anywhere between 0 and unlimited. To save all versions, leave this set to null. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you have a problem with a change to your custom repository, you can <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-con_approval_pipeline#proc-revert-repository-version" title="When automation content is added or removed from a repository, a new version is created. If a change to your repository causes a problem, you can revert to a previous version.">revert to a different repository version</a> that you have retained.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Pipeline</strong> field, select a pipeline for the repository. This option defines who can publish a collection into the repository. </span> 
+          <div class="itemgroup info"> 
+           <dl class="dl"> 
+            <dt class="dt dlterm">
+             Staging
+            </dt> 
+            <dd class="dd">
+             Anyone is allowed to publish automation content into the repository.
+            </dd> 
+            <dt class="dt dlterm">
+             Approved
+            </dt> 
+            <dd class="dd">
+             Collections added to this repository are required to go through the approval process by way of the staging repository. When auto approve is enabled, any collection uploaded to a staging repository is automatically promoted to all of the approved repositories.
+            </dd> 
+            <dt class="dt dlterm">
+             None
+            </dt> 
+            <dd class="dd">
+             Any user with permissions on the repository can publish to the repository directly, and the repository is not part of the approval pipeline.
+            </dd> 
+           </dl> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: To hide the repository from search results, select <strong class="ph b">Hide from search</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: To make the repository private, select <strong class="ph b">Make private</strong>. This hides the repository from anyone who does not have permissions to view the repository.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">To sync the content from a remote repository into this repository, in the <strong class="ph b">Remote</strong> field select the remote that contains the collections you want included in your custom repository.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create repository</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">After the repository is created, the details page is displayed. <p class="p">From here, you can provide access to your repository, review or add collections, and work with the saved versions of your custom repository.</p> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-provide-repository-access"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Configure access to a custom automation hub repository</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Use role-based access control to assign users to a repository so they can interact with it.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">By default, private repositories and the automation content collections are hidden from all users in the system. Public repositories can be viewed by all users, but cannot be modified. You must configure a custom repository to grant users access to it.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to private automation hub.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Repositories</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click into your repository in the list and select the <strong class="ph b">Team Access</strong> tab.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Assign teams</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the team to which you want to grant a role, then click <span class="ph uicontrol button">Next</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the roles you want to apply to the selected team, and then click <span class="ph uicontrol button">Next</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Review your selections and click <span class="ph uicontrol button">Finish</span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Close</span> to complete the process.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_teams#proc-controller-user-permissions" title="You can grant a team granular access to specific resources such as inventories, projects, and job templates by assigning the team roles associated with those particular resources. You can also set permissions at the level of the organization from the Organizations view.">Assign roles to a team</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-adding-collections-repository"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Add automation content to an automation hub repository</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After you create your repository, you can add automation content to it.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Repositories</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click into your repository in the list.</span> </li>
+         <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">Collection versions</strong> tab.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Add Collections</span> and select the collections that you want to add to your repository.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Select</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-revert-repository-version"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Manage automation hub repository versions</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">When automation content is added or removed from a repository, a new version is created. If a change to your repository causes a problem, you can revert to a previous version.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Reverting is a safe operation and does not delete content from the system, but rather changes the content associated with the repository. The number of versions saved is defined in the <strong class="ph b">Retained number of versions</strong> setting when a repository is created.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Repositories</span></span>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Click into your repository in the list and then select the <strong class="ph b">Versions</strong> tab.</span> </li>
+         <li class="li step"> <span class="ph cmd">Locate the version you want to revert to and click the <span class="ph uicontrol button">More Actions</span> icon <strong class="ph b">⋮</strong>, and select <strong class="ph b">Revert to this version</strong>.</span> </li>
+         <li class="li step"> <span class="ph cmd">Check the box confirming your selection, and then click <span class="ph uicontrol button">Revert to repository version</span>.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="proc-implementing-automation-content-for-ephemeral-mcp-agents"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Implement automation content for ephemeral MCP agents</h1> 
+    <div class="body taskbody"> 
+     <p class="shortdesc">Create an Ansible playbook that uses the execution environment (EE) setup so that ephemeral MCP servers are provisioned during Ansible Automation Platform controller job creation.</p> 
+     <section class="section prereq"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Before you begin</h2> 
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have securely stored all access credentials necessary for MCP plugin use exclusively within the Ansible Automation Platform credential store.</li> 
+       <li class="li">The execution environment (EE) image is configured to include the necessary MCP server component, which is typically accomplished by selecting a collection with specialized roles during the EE build process.</li> 
+      </ul> 
+     </section> 
+     <section class="section context"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">About this task</h2> 
+      </div> 
+      <p class="p">You can safely use AI as an operational assistant, which can take assigned actions in your enterprise platform. Ephemeral MCP servers are provisioned only for the duration of the job execution.</p> 
+     </section> 
+     <section> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Procedure</h2> 
+      </div> 
+      <ol class="ol steps"> 
+       <li class="li step stepexpand"> <span class="ph cmd">Create the <code class="ph codeph">execution-environment.yml</code> definition file, which specifies a step to install the MCP server components:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-yaml"><code>---
+version: 3
+
+images:
+  base_image:
+    name: ansible-automation-platform-26/ee-minimal-rhel9:latest
+dependencies:
+  galaxy: requirements.yml
+
+options:
+  package_manager_path: /usr/bin/microdnf
+
+additional_build_steps:
+  append_final: |
+    RUN ansible-playbook ansible.mcp_builder.install_mcp -e mcp_servers=github_mcp -e github_mcp_mode=remote</code></pre> 
+         <p class="p">The example definition file specifies the required MCP server, so that the necessary dependencies are pulled into the file.</p> 
+         <p class="p">During the EE build process the MCP server software is installed into the EE.</p> 
+         <ul class="ul"> 
+          <li class="li">For embedded servers, include the MCP server binaries or libraries explicitly on the EE image path.</li> 
+          <li class="li">For remote servers, define remote connection details in a manifest file within the EE.</li> 
+         </ul> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Write custom Ansible content:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-yaml"><code>---
+- name: Example Github MCP server interaction
+  hosts: github_mcp
+  tasks:
+    - name: Create a Github repository
+      ansible.mcp.run_tool:
+        name: create_repository
+        args:
+          name: my-github-repository
+          autoInit: true</code></pre> 
+         <p class="p">The playbook syntax for invoking MCP plugins is intuitive and aligns with existing Ansible module patterns.</p> 
+         <div class="note important note_important"> <span class="note__title">Important:</span> 
+          <div class="note__body"> 
+           <p class="p">You must configure the <code class="ph codeph">ansible.mcp.mcp</code> connection plugin to use the <code class="ph codeph">ansible.mcp</code> collection. For example, set the <code class="ph codeph">ansible_mcp_server_name</code> custom-defined configuration variable to the name of a server in the <code class="ph codeph">mcpserver.json</code> manifest file.</p> 
+           <p class="p">Your playbook might use inventory variables, such as setting the connection plugin to <code class="ph codeph">ansible_connection: ansible.mcp.mcp</code>, along with required timeout values like <code class="ph codeph">ansible_connect_timeout: 30</code> and <code class="ph codeph">ansible_command_timeout: 30</code>.</p> 
+          </div> 
+         </div> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Create and configure credentials in Ansible Automation Platform:</span> 
+        <div class="itemgroup info"> 
+         <p class="p">The required credentials vary based on which MCP server you are using. For example, the GitHub MCP server requires a GitHub Personal Access Token, which you set in the <code class="ph codeph">MCP_BEARER_TOKEN</code> environment variable.</p> 
+        </div> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep substepexpand"> <span class="ph cmd">Create a custom credential type in Ansible Automation Platform.</span> 
+          <div class="itemgroup info"> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mcp-agents-create-credential-type.png" alt="Creating a custom credential type in Ansible Automation Platform"> 
+           <br> 
+          </div> </li> 
+         <li class="li substep substepexpand"> <span class="ph cmd">Create a new credential and use the custom credential type you created.</span> 
+          <div class="itemgroup info"> 
+           <br> 
+           <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mcp-agents-create-credential.png" alt="Creating a credential with the custom credential type"> 
+           <br> 
+           <p class="p">The examples show how to set up the required credential structures in the Ansible Automation Platform credential store. This includes defining the relevant fields and the injector configuration needed to pass the secret as an environment variable (for example, <code class="ph codeph">MCP_BEARER_TOKEN: "{{ token }}"</code>).</p> 
+          </div> </li> 
+        </ol> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Create a new host and configure the connection variables.</span> 
+        <div class="itemgroup info"> 
+         <br> 
+         <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/mcp-agents-create-host.png" alt="Creating a host with MCP connection variables"> 
+         <br> 
+        </div> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Launch the relevant job in the Ansible Automation Platform controller GUI.</span> </li> 
+      </ol> 
+     </section> 
+     <section class="section result"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Results</h2> 
+      </div> 
+      <p class="p">The MCP server is provisioned ephemerally for the duration of the job execution. Upon job completion or failure, no residual data, services, or security artifacts remain.</p> 
+     </section> 
+     <section class="section postreq"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">What to do next</h2> 
+      </div> 
+      <p class="p"><strong class="ph b">Troubleshooting</strong></p> 
+      <p class="p">To manage the health of the MCP servers, the Ansible Automation Platform environment emphasizes governance and auditability, allowing you to trace workflow success and failures.</p> 
+      <p class="p">All MCP plugin invocations and credential usage events are logged and auditable through Ansible Automation Platform audit trail systems, including the job ID, user, and timestamp, along with Ansible eventstream data. This tracking supports governance requirements for enterprise compliance.</p> 
+      <p class="p">The system ensures that secrets are never hardcoded into playbooks or visible in execution logs; they are masked automatically. This robust auditing assists in identifying security issues or operational problems during task execution.</p> 
+     </section> 
+    </div> 
+   </article> 
+  </main>  
+ </body>
+</html>

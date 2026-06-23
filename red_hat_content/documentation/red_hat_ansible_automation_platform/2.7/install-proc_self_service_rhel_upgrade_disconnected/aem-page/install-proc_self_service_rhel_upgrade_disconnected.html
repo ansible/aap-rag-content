@@ -1,0 +1,126 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-self-service-rhel-upgrade-disconnected">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Upgrade the Ansible automation portal RHEL appliance in a disconnected environment</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">In disconnected environments, you can upgrade the Ansible automation portal RHEL appliance using a mirror registry. Configure the mirror registry so that <code class="ph codeph">bootc upgrade</code> pulls images from your internal registry instead of <code class="ph codeph">registry.redhat.io</code>.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">A mirror registry is accessible from the Ansible automation portal RHEL appliance on the internal network.</li> 
+       <li class="li">The new appliance image is copied to the mirror registry.</li> 
+       <li class="li">You have SSH access to the appliance.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">Once the mirror registry is configured, <code class="ph codeph">bootc upgrade</code> checks the mirror automatically.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">On a connected machine, copy the new appliance image to your internal registry:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ skopeo copy \
+  docker://registry.redhat.io/ansible-automation-platform/bootc-automation-portal-rhel9:<var class="keyword varname">version</var> \
+  docker://mirror.internal.example.com:5000/ansible-automation-platform/bootc-automation-portal-rhel9:<var class="keyword varname">version</var></code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">On the Ansible automation portal RHEL appliance, create a registry mirror configuration:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo tee /etc/containers/registries.conf.d/50-mirror.conf &gt; /dev/null &lt;&lt; 'EOF'
+[[registry]]
+prefix = "registry.redhat.io"
+location = "registry.redhat.io"
+
+[[registry.mirror]]
+location = "mirror.internal.example.com:5000"
+insecure = false
+EOF</code></pre> 
+         <p class="p">Replace <code class="ph codeph">mirror.internal.example.com:5000</code> with your mirror registry address.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">If your mirror registry uses a self-signed certificate, add the CA certificate to the system trust store:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo cp ca.crt /etc/pki/ca-trust/source/anchors/
+$ sudo update-ca-trust</code></pre> 
+         <p class="p">Alternatively, set <code class="ph codeph">insecure = true</code> in the mirror block. This is not recommended for production environments.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Authenticate to the mirror registry:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo ansible-portal registry-login</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Authenticate bootc to the mirror registry.</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Bootc requires credentials in <code class="ph codeph">/etc/ostree/auth.json</code> to pull images:</p> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo podman login --authfile /etc/ostree/auth.json mirror.internal.example.com:5000</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Run the upgrade:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo bootc upgrade</code></pre> 
+         <p class="p">If your mirror does not carry Red Hat GPG signatures, add <code class="ph codeph">--no-signature-verification</code> to the <code class="ph codeph">bootc switch</code> command when switching image sources. This flag is not needed for <code class="ph codeph">bootc upgrade</code> when the image source is already configured.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Reboot to activate the new image:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo systemctl reboot</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The mirror configuration in <code class="ph codeph">/etc/containers/registries.conf.d/</code> survives bootc upgrades because bootc preserves <code class="ph codeph">/etc</code> using a three-way merge. You do not need to reconfigure the mirror after each upgrade.</p> 
+       </div>
+      </div> 
+      <p class="p">Verify that the new image is booted:</p> 
+      <pre class="pre codeblock language-terminal"><code>$ sudo bootc status</code></pre> 
+      <p class="p">Verify that all services are running:</p> 
+      <pre class="pre codeblock language-terminal"><code>$ sudo systemctl status portal postgres devtools</code></pre> 
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p"><strong class="ph b">Sync new versions to the mirror</strong></p> 
+      <p class="p">When a new appliance version is available, copy it to the mirror from a connected machine:</p> 
+      <ol class="ol"> 
+       <li class="li">Copy the new image version to the mirror registry: <pre class="pre codeblock language-terminal"><code>$ skopeo copy \
+  docker://registry.redhat.io/ansible-automation-platform/bootc-automation-portal-rhel9:<var class="keyword varname">new-version</var> \
+  docker://mirror.internal.example.com:5000/ansible-automation-platform/bootc-automation-portal-rhel9:<var class="keyword varname">new-version</var></code></pre> </li> 
+       <li class="li">On the appliance, run the upgrade and reboot: <pre class="pre codeblock language-terminal"><code>$ sudo bootc upgrade
+$ sudo systemctl reboot</code></pre> </li> 
+      </ol> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_deploy_rhel_appliance_disconnected" title="Deploy the Ansible automation portal RHEL appliance in a disconnected or air-gapped environment where the appliance has no access to external registries or the internet.">Deploy a RHEL appliance in a disconnected environment</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_portal_cli_commands" title="The Ansible automation portal appliance provides the ansible-portal management CLI for administration and troubleshooting.">Portal CLI commands reference</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_rhel_upgrade_survival" title="The following table describes what happens to each type of content during a bootc upgrade of the Ansible automation portal RHEL appliance.">What survives an upgrade</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_rhel_upgrade" title="The Ansible automation portal RHEL appliance uses RHEL image mode (bootc) for atomic upgrades. Your configuration, data, and secrets are preserved, and you can roll back to the previous image if needed.">Upgrade the Ansible automation portal RHEL appliance</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-055157d3-1838-4a40-a24e-421fb9ca3618">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Deploy your custom image to a container-based installation</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Deploy the BYOK RAG image to the intelligent assistant in a Ansible Automation Platform containerized installation. </p> 
+     <section class="section prereq" id="GUID-055157d3-1838-4a40-a24e-421fb9ca3618__prereq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div>You have: 
+      <ul class="ul" id="GUID-055157d3-1838-4a40-a24e-421fb9ca3618__ul_1"> 
+       <li class="li">published the BYOK RAG image to an accessible registry.</li> 
+       <li class="li">a valid Ansible Automation Platform 2.7 subscription with the intelligent assistant deployed. </li> 
+       <li class="li">used Podman to pull the image on the node <strong class="ph b">before</strong>updating the inventory and running the installer. Note that if you do not do this, the containerized install will fail because the image is not loaded.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <div class="ul steps-unordered">
+       <div class="li step p"> <span class="ph cmd">Add the required variables to your inventory file under the <code class="ph codeph">[all: vars]</code> group. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_lightspeed_variables#lightspeed-variables___ansible_lightspeed_coding_assistant_variables">Ansible Lightspeed variables</a>for information about required and optional variables.</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code># This is the list of inventory file variables required to deploy Red Hat Ansible Lightspeed on a containerized installation. 
+# Consult the docs if you are unsure what to add.
+# For information about required and optional variables, refer to the Appendix: Red Hat Ansible Lightspeed variables
+# https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.7/install-ref_lightspeed_variables 
+# This section is for your Red Hat Ansible Lightspeed host
+# ---------------------------------------------------------
+[ansiblelightspeed]
+aap.example.com
+
+[all:vars]
+# This section is to configure Ansible Lightspeed intelligent assistant
+# ----------------------------------------------------------------------lightspeed_chatbot_model_url=&lt;set your own&gt;
+lightspeed_chatbot_model_api_key= &lt;set your own&gt;
+lightspeed_chatbot_model_id= &lt;set your own&gt;
+lightspeed_chatbot_default_provider='rhoai'
+lightspeed_chatbot_model_extra_settings={}
+# If you want to use {AzureOpenAI} as the LLM provider, specify the lightspeed_chatbot_model_extra_settings value as '{"api_type": ""}'. 
+# This section is to configure Ansible Lightspeed intelligent assistant with BYOK RAG image
+# -----------------------------------------------------------------------------------------
+lightspeed_chatbot_byok_image=&lt;your registry&gt;&lt;repository&gt;/&lt;image&gt;:&lt;label&gt;
+lightspeed_chatbot_byok_score_multiplier=1.2</code></pre> 
+        </div> 
+       </div>
+      </div>
+     </section> 
+     <section class="section postreq" id="GUID-055157d3-1838-4a40-a24e-421fb9ca3618__postreq_1">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p"><strong class="ph b">Verification</strong></p> 
+      <ol class="ol" id="GUID-055157d3-1838-4a40-a24e-421fb9ca3618__ol_1"> 
+       <li class="li">Ask BYOK-specific questions in the intelligent assistant, and evaluate whether the responses reflect the BYOK content.</li> 
+       <li class="li"><strong class="ph b">Optional</strong>: Review the intelligent assistant logs using the following command: <pre class="pre codeblock"><code>ssh ansible@&lt;lightspeed-node&gt; 'podman logs ansible-lightspeed-chatbot 2&gt;&amp;1 | grep -i "knowledge_search\|byok\|vector"'</code></pre> </li> 
+      </ol> 
+      <p class="p">In the search results, look for the following items: </p> 
+      <ul class="ul" id="GUID-055157d3-1838-4a40-a24e-421fb9ca3618__ul_2"> 
+       <li class="li"><code class="ph codeph">knowledge_search tool results</code>: this indicates that the BYOK RAG image is being used</li> 
+       <li class="li">Vector database initialization messages</li> 
+       <li class="li">No errors reported about a missing BYOK image</li> 
+      </ul> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

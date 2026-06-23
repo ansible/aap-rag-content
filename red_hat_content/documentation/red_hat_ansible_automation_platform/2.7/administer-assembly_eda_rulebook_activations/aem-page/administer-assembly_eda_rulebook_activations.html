@@ -1,0 +1,334 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="eda-rulebook-activations"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Define rules that trigger automation from events</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">A rulebook is a set of conditional rules that Event-Driven Ansible uses to perform IT actions in an event-driven automation model. Rulebooks are the means that users tell Event-Driven Ansible which source to check for an event and when that event occurs what to do when certain conditions are met.</p> 
+      <p class="p">A rulebook specifies actions to be performed when a rule is triggered. A rule gets triggered when the events match the conditions for the rules. The following actions are currently supported:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">run_playbook</code> (only supported with ansible-rulebook CLI)</li> 
+       <li class="li"> <code class="ph codeph">run_module</code> </li> 
+       <li class="li"> <code class="ph codeph">run_job_template</code> </li> 
+       <li class="li"> <code class="ph codeph">run_workflow_template</code> </li> 
+       <li class="li"> <code class="ph codeph">set_fact</code> </li> 
+       <li class="li"> <code class="ph codeph">post_event</code> </li> 
+       <li class="li"> <code class="ph codeph">retract_fact</code> </li> 
+       <li class="li"> <code class="ph codeph">print_event</code> </li> 
+       <li class="li"> <code class="ph codeph">shutdown</code> </li> 
+       <li class="li"> <code class="ph codeph">debug</code> </li> 
+       <li class="li"> <code class="ph codeph">none</code> </li> 
+      </ul> 
+      <p class="p">To view further details, see <cite class="cite">Ansible Actions.</cite></p> 
+      <p class="p">A rulebook activation is a process running in the background defined by a decision environment executing a specific rulebook. You can set up your rulebook activation by following <cite class="cite">Set up a rulebook activation</cite>.</p> 
+      <div class="note warning note_warning">
+       <span class="note__title">Warning:</span> 
+       <div class="note__body"> 
+        <p class="p">Red Hat does not recommend the use of a non-supported source plugin with 1 postgres database. This can pose a potential risk to your use of Ansible Automation Platform.</p> 
+       </div>
+      </div> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body">
+        Event-Driven Ansible controller uses PostgreSQL for data storage and background task workers via the <code class="ph codeph">dispatcherd</code> service. When the workers are unavailable, you will not be able to create or sync projects, or enable rulebook activations.
+       </div>
+      </div> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist reltasks">
+       <strong>Related tasks</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_activations#eda-set-up-rulebook-activation" title="Create a rulebook activation to link a rulebook to a decision environment and event sources, initiating the event-driven automation process.">Set up a rulebook activation</a></li>
+       </ul>
+      </div>
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://ansible.readthedocs.io/projects/rulebook/en/latest/actions.html" target="_blank" rel="external noopener">Ansible Actions</a></li>
+        <li class="linklist"><a class="link" href="https://github.com/ansible/dispatcherd" target="_blank" rel="external noopener">Dispatcherd</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="eda-set-up-rulebook-activation"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Set up a rulebook activation</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Create a rulebook activation to link a rulebook to a decision environment and event sources, initiating the event-driven automation process.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You are logged in to the Ansible Automation Platform Dashboard as a Content Consumer.</li> 
+         <li class="li">You have set up a project.</li> 
+         <li class="li">You have set up a decision environment.</li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to Ansible Automation Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to the <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Rulebook Activations</span></span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create rulebook activation</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Insert the following: </span> 
+          <div class="itemgroup info"> 
+           <dl class="dl"> 
+            <dt class="dt dlterm">
+             Name
+            </dt> 
+            <dd class="dd">
+             Insert the name.
+            </dd> 
+            <dt class="dt dlterm">
+             Description
+            </dt> 
+            <dd class="dd">
+             This field is optional.
+            </dd> 
+            <dt class="dt dlterm">
+             Organization
+            </dt> 
+            <dd class="dd">
+             Enter your organization name or select Default from the list.
+            </dd> 
+            <dt class="dt dlterm">
+             Project
+            </dt> 
+            <dd class="dd">
+             Projects are a logical collection of rulebooks. This field is optional.
+            </dd> 
+            <dt class="dt dlterm">
+             Rulebook
+            </dt> 
+            <dd class="dd">
+             Rulebooks are displayed according to the project selected.
+            </dd> 
+            <dt class="dt dlterm">
+             Credential
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">Select 0 or more credentials for this rulebook activation. This field is optional.</p> 
+             <div class="note note note_note">
+              <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <ul class="ul" id="eda-set-up-rulebook-activation__ul_7"> 
+                <li class="li">If you plan to use a Red Hat Ansible Automation Platform credential, you can <em class="ph i">only</em> select 1 Red Hat Ansible Automation Platform credential type for a rulebook activation.</li> 
+               </ul> 
+              </div>
+             </div> 
+             <p class="p">For more information on credentials and credential types, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-proc_eda_set_up_credential#eda-set-up-credential" title="Create a credential to securely store sensitive data (like tokens and passwords) required for rulebook activations to connect to source plugins or private registries.">Set up credentials</a>. </p> 
+            </dd> 
+            <dt class="dt dlterm">
+             Decision environment
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">Decision environments are a container image to run Ansible rulebooks.</p> 
+            </dd> 
+            <dt class="dt dlterm">
+             Restart policy
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">This is the policy that determines how an activation should restart after the container process running the source plugin ends.</p> 
+             <ul class="ul"> 
+              <li class="li">Policies: 
+               <ol class="ol" type="a"> 
+                <li class="li"><strong class="ph b">Always</strong>: This restarts the rulebook activation immediately, regardless of whether it ends successfully or not, and occurs no more than 5 times.</li> 
+                <li class="li"><strong class="ph b">Never</strong>: This never restarts a rulebook activation when the container process ends.</li> 
+                <li class="li"><strong class="ph b">On failure</strong>: This restarts the rulebook activation after 60 seconds by default, only when the container process fails, and occurs no more than 5 times.</li> 
+               </ol> </li> 
+             </ul> 
+            </dd> 
+            <dt class="dt dlterm">
+             Log level
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">This field defines the severity and type of content in your logged events.</p> 
+             <ul class="ul"> 
+              <li class="li">Levels: 
+               <ol class="ol" type="a"> 
+                <li class="li"><strong class="ph b">Error</strong>: Logs that contain error messages that are displayed in the <strong class="ph b">History</strong> tab of an activation.</li> 
+                <li class="li"><strong class="ph b">Info</strong>: Logs that contain useful information about rulebook activations, such as a success or failure, triggered action names and their related action events, and errors.</li> 
+                <li class="li"><strong class="ph b">Debug</strong>: Logs that contain information that is only useful during the debug phase and might be of little value during production. This log level includes both error and log level data.</li> 
+               </ol> </li> 
+             </ul> 
+            </dd> 
+            <dt class="dt dlterm">
+             Service name
+            </dt> 
+            <dd class="dd">
+             This defines a service name for Kubernetes to configure inbound connections if the activation exposes a port. This field is optional.
+            </dd> 
+            <dt class="dt dlterm">
+             Rulebook activation enabled?
+            </dt> 
+            <dd class="dd">
+             This automatically enables the rulebook activation to run.
+            </dd> 
+            <dt class="dt dlterm">
+             Variables
+            </dt> 
+            <dd class="dd"> 
+             <p class="p">The variables for the rulebook are in a JSON or YAML format. The content would be equivalent to the file passed through the <code class="ph codeph">--vars</code> flag of ansible-rulebook command.</p> 
+             <div class="note note note_note">
+              <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">In the context of automation controller and Event-Driven Ansible controller, you can use both <code class="ph codeph">extra_vars</code> and credentials to store a variety of information. However, credentials are the preferred method of storing sensitive information such as passwords or API keys because they offer better security and centralized management, whereas <code class="ph codeph">extra_vars</code> are more suitable for passing dynamic, non-sensitive data.</p> 
+              </div>
+             </div> 
+            </dd> 
+            <dt class="dt dlterm">
+             Options
+            </dt> 
+            <dd class="dd">
+             Includes the following: 
+             <ul class="ul" id="eda-set-up-rulebook-activation__ul_6"> 
+              <li class="li"><strong class="ph b"><span class="ph uicontrol">Skip audit events</span></strong> - Check this option if you do not want to see your events in the Rule Audit.</li> 
+              <li class="li"><strong class="ph b"><span class="ph uicontrol">Auto-restart on project update</span></strong> - Click this option to automatically restart the rulebook activation when its associated project is updated. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_activations#GUID-ee6ca40f-7699-473b-a826-f46d49d6c1e1" title="When a project synchronizes and the rulebook content has changed in the source repository, you can configure the system to automatically restart the affected rulebook activation. This ensures that running activations always use the most current rulebook logic without manual intervention.">Auto-restart on project update for rulebook activations</a>for further details. </li> 
+              <li class="li"><strong class="ph b"><span class="ph uicontrol">Enable event persistence</span></strong> - &nbsp;Click to save the event stream state to the database so that processing resumes without data loss after an activation restart . This is particularly critical when <span class="ph uicontrol">Auto-restart on project update</span> is enabled, as it prevents event gaps while the activation applies new project changes. 
+               <div class="note note note_note">
+                <span class="note__title">Note:</span> 
+                <div class="note__body">
+                 If you deploy the event persistence database during installation, the installer automatically creates a default Rule Engine credential so you do not need to manually select one. For more information about event persistence, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_activations#GUID-f6e62bfb-c9c5-45ef-9ed4-cc23676fd324" title="Event persistence stores incoming data from event sources in a dedicated database. After event persistence is enabled for an activation, the system retains matched events until the rule triggers, ensuring no data is lost before an action occurs.">Event persistence in rulebook activations</a>. If you prefer to create a custom Rule Engine credential, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_custom_credential_types#GUID-9acc771b-62bf-4875-8ec1-6beca34013d9" title="The Event-Driven Ansible Rule Engine credential type configures database connections for event persistence. If deployed during installation, the installer automatically creates a default credential so event persistence functions immediately.">Event-Driven Ansible Rule Engine credential type</a>.
+                </div>
+               </div> </li> 
+             </ul> 
+            </dd> 
+           </dl> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create rulebook activation</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Your rulebook activation is now created and can be managed on the <strong class="ph b">Rulebook Activations</strong> page.</p> 
+        <p class="p">After saving the new rulebook activation, the rulebook activation’s details page is displayed, with either a <strong class="ph b">Pending</strong>, <strong class="ph b">Running</strong>, or <strong class="ph b">Failed</strong> status. From there or the <strong class="ph b">Rulebook Activations</strong> list view, you can restart or delete it.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Occasionally, when a source plugin shuts down, it causes a rulebook to exit gracefully after a certain amount of time. When a rulebook activation shuts down, any tasks that are waiting to be performed will be canceled, and an info level message is sent to the activation log. For more information, see <a class="xref" href="https://docs.ansible.com/projects/rulebook/en/latest/rulebooks.html#" target="_blank" rel="external noopener">Rulebooks</a>.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section class="section postreq" id="eda-set-up-rulebook-activation__postreq_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div>For all activations that have run, you can view the <span class="ph uicontrol">Details</span> and <span class="ph uicontrol">History</span> tabs to get more information about what happened.
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist">
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_credentials" title="You can use credentials to store secrets that can be used for authentication purposes with resources, such as decision environments, rulebook activations and projects for Event-Driven Ansible controller, and projects for automation controller.">Configure credentials for Event-Driven Ansible</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_credential_types#eda-credential-types" title="Event-Driven Ansible controller includes built-in credentials to sync projects, run rulebooks, execute job templates, fetch container images, and process data through event streams.">Connect to external secret management systems with built-in credentials</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_eda_credential_types#eda-external-credential-types" title="In addition to the built-in credential types, Event-Driven Ansible supports a variety of external secret management credential types. These credential types allow rulebooks to securely retrieve sensitive information (API keys, and similar) directly from your organization’s centralized secret vault.">External secret management credential types</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="eda-rulebook-activation-list-view"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Rulebook activation list view</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Use the <strong class="ph b">Rulebook Activations</strong> list view to quickly monitor the operational status, event fire count, and restart frequency of all your deployed automation services.</p> 
+       <p class="p">If the <strong class="ph b">Status</strong> is <strong class="ph b">Running</strong>, it means that the rulebook activation is running in the background and executing the required actions according to the rules declared in the rulebook.</p> 
+       <p class="p">You can view more details by selecting the activation from the <strong class="ph b">Rulebook Activations</strong> list view.</p> 
+       <p class="p">For all activations that have run, you can view the <strong class="ph b">Details</strong> and <strong class="ph b">History</strong> tabs to get more information about what happened.</p> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title4" id="eda-view-activations-output"> 
+       <h3 class="title topictitle3" id="ariaid-title4">View activation output</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">View the activation output in the History tab to inspect the execution results, confirm successful automation runs, and diagnose runtime errors or task failures.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step"> <span class="ph cmd">Select the <strong class="ph b">History</strong> tab to access the list of all the activation instances. An activation instance represents a single execution of the activation.</span> </li>
+          <li class="li step"> <span class="ph cmd">Then select the activation instance you want to view. The <strong class="ph b">Output</strong> for the activation instance is displayed.</span> </li>
+         </ol>
+        </section> 
+        <section class="section postreq">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">What to do next</h4>
+         </div> 
+         <p class="p">To view events that came in and triggered an action, navigate to <span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Rule Audit</span></span> and follow instructions in the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/using_automation_decisions/eda-rule-audit" target="_blank" rel="external noopener">Rule Audit</a> section.</p> 
+        </section> 
+       </div> 
+      </article>
+      <article class="topic concept nested2" aria-labelledby="ariaid-title5" id="GUID-ee6ca40f-7699-473b-a826-f46d49d6c1e1"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Auto-restart on project update for rulebook activations</h3> 
+       <div class="body conbody">
+        <p class="shortdesc">When a project synchronizes and the rulebook content has changed in the source repository, you can configure the system to automatically restart the affected rulebook activation. This ensures that running activations always use the most current rulebook logic without manual intervention.</p> 
+        <p class="p">Without auto-restart, a project synchronization updates the rulebook files on disk but any currently running activations continue to use the previously loaded rulebook logic. This can lead to a mismatch between the rulebook definitions in your source repository and the logic that is actively processing events. Auto-restart eliminates this drift by ensuring that activations are automatically restarted with the updated rulebook content after a project sync.</p> 
+        <p class="p">The behavior of an auto-restart is determined by the combined state of the <span class="ph uicontrol">Update revision on launch</span> setting in the project and the <span class="ph uicontrol">Auto-restart on project update</span> setting in the activation. Because these features are interdependent, changing a project setting may trigger confirmation prompts to ensure you understand the impact on all associated rulebook activations. For more information on the interdependencies, see Project and rulebook activation settings interdependencies. </p> 
+       </div> 
+       <nav role="navigation" class="related-links">
+        <div class="linklist relref">
+         <strong>Related reference</strong>
+         <br>
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_projects#GUID-e264e1cd-4e68-4c61-a3ca-de8331031f93" title="Project and activation settings are interdependent. The Update revision on launch and Auto-restart on project update configurations combine to determine auto-restart behaviors and trigger specific user confirmation prompts.">Project and rulebook activation settings interdependencies</a></li>
+         </ul>
+        </div>
+       </nav> 
+      </article>
+      <article class="topic concept nested2" aria-labelledby="ariaid-title6" id="GUID-f6e62bfb-c9c5-45ef-9ed4-cc23676fd324"> 
+       <h3 class="title topictitle3" id="ariaid-title6">Event persistence in rulebook activations</h3> 
+       <div class="body conbody">
+        <p class="shortdesc">Event persistence stores incoming data from event sources in a dedicated database. After event persistence is enabled for an activation, the system retains matched events until the rule triggers, ensuring no data is lost before an action occurs.</p> 
+        <p class="p">Event persistence ensures continuity by retaining events during rulebook activation restarts. This feature requires a dedicated PostgreSQL database using one of the following options:</p> 
+        <ul class="ul" id="GUID-f6e62bfb-c9c5-45ef-9ed4-cc23676fd324__ul_1"> 
+         <li class="li"><strong class="ph b">Built-in event persistence database</strong> - Deployed automatically during Ansible Automation Platform installation, if selected. With this option, event persistence works out of the box with a default Event-Driven Ansible Rule Engine credential.</li> 
+         <li class="li"><strong class="ph b">External database</strong> - A PostgreSQL database instance you manage separately. This option requires creating a custom Rule Engine credential pointing to your external database. For more information on creating a custom Rule Engine, see the following <strong class="ph b">Related tasks</strong>. For specific information on <strong class="ph b">persistence database requirements</strong> (sizing, IOPs, and similar), refer to the deployment topology content in the following <strong class="ph b">Related concepts</strong> and <strong class="ph b">Related reference</strong>.</li> 
+        </ul> 
+        <p class="p">When event persistence is enabled for a rulebook activation:</p> 
+        <ol class="ol" id="GUID-f6e62bfb-c9c5-45ef-9ed4-cc23676fd324__ol_1"> 
+         <li class="li">Event-Driven Ansible receives events from the configured event source.</li> 
+         <li class="li">Each matched event is saved to the event persistence database.</li> 
+         <li class="li">Matched events are retained in the database until all conditions are met and an action is fired.</li> 
+         <li class="li">Processed events are then removed from the database.</li> 
+        </ol> 
+        <p class="p">Here are key factors to consider when choosing to enable event persistence:</p> 
+        <ul class="ul" id="GUID-f6e62bfb-c9c5-45ef-9ed4-cc23676fd324__ul_2"> 
+         <li class="li">If your events contain sensitive information, you must create a custom Rule Engine credential with encryption keys to protect your event data. To create your own custom Event-Driven Ansible Rule engine credential, see the following related concept and tasks.</li> 
+         <li class="li">The default Event-Driven Ansible Rule Engine credential does not support encryption of event data.</li> 
+        </ul> 
+       </div> 
+       <nav role="navigation" class="related-links">
+        <div class="linklist relconcepts">
+         <strong>Related concepts</strong>
+         <br>
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_custom_credential_types#GUID-9acc771b-62bf-4875-8ec1-6beca34013d9" title="The Event-Driven Ansible Rule Engine credential type configures database connections for event persistence. If deployed during installation, the installer automatically creates a default credential so event persistence functions immediately.">Event-Driven Ansible Rule Engine credential type</a></li>
+          <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-assembly_overview_tested_deployment_models" title="Red Hat tests Ansible Automation Platform with a defined set of topologies to give you opinionated deployment options. Deploy all components of Ansible Automation Platform so that all features and capabilities are available for use without the need to take further action.">Choose a deployment method and topology</a></li>
+         </ul>
+        </div>
+        <div class="linklist reltasks">
+         <strong>Related tasks</strong>
+         <br>
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_custom_credential_types#GUID-848d5c71-a5ce-4ef3-8720-9e4a8534cb56" title="Create a custom Event-Driven Ansible Rule Engine credential to connect to external PostgreSQL databases or to enable encryption for sensitive event data.">Create an Event-Driven Ansible Rule Engine credential</a></li>
+          <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_custom_credential_types#GUID-16194d69-8119-4837-913b-056b72daf8f6" title="Assign your custom Rule Engine credential to a rulebook activation to enable external database connectivity or data encryption. This ensures your automation uses specific security and storage configurations to persist event history effectively.">Assign your new Event-Driven Ansible Rule Engine credential type to rulebook activations</a></li>
+         </ul>
+        </div>
+        <div class="linklist relref">
+         <strong>Related reference</strong>
+         <br>
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-ref_cont_b_env_a" title="The container-based enterprise topology provides redundancy and higher compute for large volumes of automation.">Container enterprise topology</a></li>
+         </ul>
+        </div>
+       </nav> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

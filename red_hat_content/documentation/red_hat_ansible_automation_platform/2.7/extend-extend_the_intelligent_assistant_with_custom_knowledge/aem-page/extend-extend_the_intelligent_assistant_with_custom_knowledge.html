@@ -1,0 +1,128 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Extend the automation intelligent assistant with custom knowledge</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">The Bring Your Own Knowledge (BYOK) capability enables you to extend the automation intelligent assistant with your organization’s internal documentation.</p> 
+     <p class="p">By integrating custom knowledge sources into the assistant's Retrieval-Augmented Generation (RAG) pipeline, the intelligent assistant provides responses that reflect your organization’s specific Ansible policies, procedures, and best practices.</p> 
+     <p class="p">BYOK adds a second knowledge source to the intelligent assistant’s RAG pipeline:</p> 
+     <div class="p"> 
+      <ul class="ul" id="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__ul_1"> 
+       <li class="li"><strong class="ph b">Custom knowledge (BYOK)</strong>: Store your organization's documentation in a custom RAG image that you create and deploy to Ansible Automation Platform 2.7. This custom knowledge is the highest priority or <strong class="ph b">primary</strong> knowledge source.</li> 
+       <li class="li"><strong class="ph b">Ansible documentation</strong>: The default Ansible Automation Platform 2.7 documentation, which is the <strong class="ph b">secondary</strong> knowledge source.</li> 
+      </ul> When users query the intelligent assistant, the system retrieves relevant context from both knowledge sources, prioritizing your custom content to provide organization-specific answers. If your BYOK documentation covers the topic, the intelligent assistant leads with your organization's guidance. If it doesn't, the intelligent assistant seamlessly falls back to standard Ansible documentation. The default Ansible documentation RAG database remains active at all times, and you cannot disable it.
+     </div> 
+     <div class="p"> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        The BYO Knowledge tool is a Technology Preview feature only. Technology Preview features are not supported with Red Hat production service level agreements (SLAs) and might not be functionally complete. Red Hat does not recommend using them in production. These features provide early access to upcoming product features, enabling customers to test functionality and provide feedback during the development process. For more information about the support scope of Red Hat Technology Preview features, see the link to the Technology preview features support scope in the <strong class="ph b">Related Links</strong> section below.
+       </div>
+      </div> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The BYOK RAG image is created outside your AAP deployment and then imported as an additional component in the intelligent assistant’s RAG pipeline. The default Ansible documentation RAG database remains active and cannot be disabled</p> 
+       </div>
+      </div> 
+     </div> 
+     <section class="section" id="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__section_1">
+      <h2 class="title sectiontitle">BYOK Benefits</h2> 
+      <p class="p">Using BYOK with the intelligent assistant provides the following benefits: </p> 
+      <div class="p"> 
+       <ul class="ul" id="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__ul_2"> 
+        <li class="li"><strong class="ph b">Integrate custom knowledge sources</strong>: Add your organization's internal documentation, policies, manuals, FAQs, or any text-based knowledge.</li> 
+        <li class="li"><strong class="ph b">Improved accuracy</strong>: Users receive contextual answers tailored to their environment and terminology.</li> 
+        <li class="li"><strong class="ph b">Knowledge preservation</strong>: Keep your knowledge sources within your infrastructure, and make internal documentation accessible through natural language queries.</li> 
+        <li class="li"><strong class="ph b">Compliance support</strong>: Incorporate compliance protocols and security requirements into the intelligent assistant’s responses.</li> 
+       </ul> 
+      </div> 
+     </section> 
+     <section class="section" id="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__section_2"> 
+      <p class="p">Before you begin your BYOK implementation workflow, you will need:</p> 
+      <div class="p"> 
+       <ul class="ul" id="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__ul_3"> 
+        <li class="li"><strong class="ph b">Platform version</strong>: An instance of Ansible Automation Platform 2.7 or later.</li> 
+        <li class="li"><strong class="ph b">A deployment environment</strong>: 
+         <ul class="ul" id="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__ul_5"> 
+          <li class="li"><strong class="ph b">OpenShift:</strong> Access to an OpenShift cluster with permissions to install operators.</li> 
+          <li class="li"><strong class="ph b">Containerized:</strong> A supported container runtime.<strong class="ph b"></strong></li> 
+         </ul> </li> 
+        <li class="li"><strong class="ph b">Access credentials</strong>: Administrator permissions to your containerized or operator-based installation of Ansible Automation Platform.</li> 
+        <li class="li"><strong class="ph b">Existing integration:</strong> An active intelligent assistant installation that is compatible with the Ansible-documentation-based RAG pipeline.</li> 
+        <li class="li"><strong class="ph b">Custom data</strong>: A collection of markdown (.md) or text (.txt) files containing the information you wish to add. Currently, the tool does not support other file formats.</li> 
+       </ul> 
+      </div> 
+      <table class="table" id="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1">
+       <caption>
+        <span class="table--title-label">Table 1. </span><span class="title">BYOK Implementation Workflow</span>
+       </caption>
+       <colgroup>
+        <col style="width:11%">
+        <col style="width:42%">
+        <col style="width:47%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__1">Step</th> 
+         <th class="entry" id="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__2">Task</th> 
+         <th class="entry" id="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__3">Description</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__1">1</td> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__2">Prepare your documentation</td> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__3">An <strong class="ph b">administrator</strong> collects and converts the organization's documents to Markdown or plain-text formats.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__1">2</td> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__2">Build a searchable knowledge base image from your documentation</td> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__3">The <strong class="ph b">administrator</strong> uses the rag-content tool to generate a vector database from the docs and packages it as a container image.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__1">3</td> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__2">Deploy your custom image</td> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__3">The <strong class="ph b">administrator</strong> imports the BYOK RAG image into your containerized or operator-based Ansible Automation Platform installation and configures the Ansible Lightspeed intelligent assistant to use it.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__1">4</td> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__2">Get organization-specific answers from the intelligent assistant</td> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__3"> <p dir="ltr" class="p"><strong class="ph b">Ansible Automation Platform users</strong> ask the intelligent assistant questions and receive answers informed by their organization's custom documentation.</p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__1">5</td> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__2">Optional: Keep your custom knowledge current</td> 
+         <td class="entry" headers="GUID-60b163ec-6ca5-40e9-8231-917504cb2c02__table_1__entry__3"> <p dir="ltr" class="p">The <strong class="ph b">administrator</strong> updates or replaces the BYOK image as the organization’s documentation evolves, or removes the image entirely if no longer needed.</p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-prepare_your_documentation">Prepare your documentation</a></strong><br>Before creating a BYOK RAG image, collect and prepare your organization's documentation in supported file formats.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-build_a_searchable_knowledge_base_image_from_your_documentation">Build a searchable knowledge base image from your documentation</a></strong><br>The <code class="ph codeph">rag-content</code> tool converts your documentation into a vector database that the intelligent assistant uses to retrieve relevant content when responding to queries. Use this procedure to download the tool version best suited to your system's hardware.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-verify_the_vector_database">Verify the vector database</a></strong><br>Verify that you created a vector database of your documentation.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-publish_your_image_to_a_container_registry">Publish your image to a container registry</a></strong><br>Publish your BYOK RAG image to a container registry accessible from your Ansible Automation Platform deployment. </li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-deploy_your_custom_image">Deploy your custom image to a container-based installation</a></strong><br>Deploy the BYOK RAG image to the intelligent assistant in a Ansible Automation Platform containerized installation. </li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-deploy_your_custom_image_to_an_operator_based_installation">Deploy your custom image to an operator-based installation</a></strong><br>Deploy the BYOK RAG image to the intelligent assistant for operator-based Ansible Automation Platform 2.7 installations.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-get_organization_specific_answers_from_the_intelligent_assistant">Get organization-specific answers from the intelligent assistant</a></strong><br>Once your administrator has deployed a BYOK image in your Ansible Automation Platform environment, you can continue using the intelligent assistant chatbot without changing your workflow.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-keep_your_custom_knowledge_current#GUID-36560873-9057-49b4-ad02-5ff088cdf06d">Keep your custom knowledge current</a></strong><br>Administrators can update BYOK images to reflect their organization’s latest documentation changes. You can also remove the BYOK image entirely.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/update__replace__or_remove_the_byok_image">Update or replace the BYOK image</a></strong><br>When your organization's documentation changes, you can update or replace the deployed BYOK image with the latest image, or remove it entirely.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-troubleshooting_byok_for_the_intelligent_assistant">Troubleshooting BYOK for the intelligent assistant</a></strong><br>Resolve common issues when deploying or using BYOK with the intelligent assistant.</li>
+     </ul>
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://access.redhat.com/support/offerings/techpreview" target="_blank" rel="external noopener">Technology Preview Features - Scope of Support</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

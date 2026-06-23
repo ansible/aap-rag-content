@@ -1,0 +1,69 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-controller-topology-viewer"> 
+     <h1 class="title topictitle1" id="ariaid-title1">View details about mesh nodes with topology viewer</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">Use the <strong class="ph b">Topology View</strong> to view node type, node health, and specific details about each node if you already have a mesh topology deployed.</p> 
+      <p class="p">To access the topology viewer from the automation controller UI, you must have <strong class="ph b">System Administrator</strong> permissions.</p> 
+      <p class="p">For more information about automation mesh on an operator-based installation, see <em class="ph i">Automation mesh for managed cloud or operator environments</em> in the Related Links section.</p> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_automation_mesh_operator_aap" title="Scaling your automation mesh is available on OpenShift deployments of Red Hat Ansible Automation Platform and is possible through adding or removing nodes from your cluster dynamically, using the Instances resource of the Ansible Automation Platform UI, without running the installation script.">Scale with automation mesh in an operator environment</a></li> 
+       </ul> 
+      </div> 
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-controller-access-topology-viewer"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Access the topology viewer</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Use the following procedure to access the topology viewer from the automation controller UI.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Topology View</span></span>. The <strong class="ph b">Topology View</strong> opens and displays a graphical representation of how each receptor node links together.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To adjust the zoom levels, or manipulate the graphic views, use the control icons: zoom-in (<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/examine.png" width="15" alt="Examine">), zoom-out (<img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/reduce.png" width="15" alt="Reduce">), expand (<img class="image" height="10" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/expand.png" width="10" alt="Expand">), and reset (<img class="image" height="10" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/reset.png" width="10" alt="Reset">) on the toolbar. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">You can also click and drag to pan around; and scroll using your mouse or trackpad to zoom. The fit-to-screen feature automatically scales the graphic to fit on the screen and repositions it in the center. It is particularly useful when you want to see a large mesh in its entirety.</p> 
+           <p class="p">To reset the view to its default view, click the <strong class="ph b">Reset view</strong> (<img class="image" height="12" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/reset.png" width="12" alt="Reset">) icon.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Refer to the <strong class="ph b">Legend</strong> to identify the type of nodes that are represented. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">For VM-based installations, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh#con-automation-mesh-node-types" title="Automation mesh makes use of unique node types to create both the control and execution plane. Learn more about the control and execution plane and their node types before designing your automation mesh topology.">Control and execution planes</a>.</p> 
+           <p class="p">For operator-based installations, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_planning_mesh#con-automation-mesh-node-types" title="Automation mesh makes use of unique node types to create both the control and execution plane. Learn more about the control and execution plane and their node types before designing your automation mesh topology.">Control and execution planes</a> for more information about each type of node.</p> 
+           <p class="p">The Legend shows the <code class="ph codeph">node status &lt;node_statuses&gt;</code> by color, which is indicative of the health of the node. An <strong class="ph b">Error</strong> status in the Legend includes the <strong class="ph b">Unavailable</strong> state (as displayed in the Instances list view) plus any future error conditions encountered in later versions of automation controller.</p> 
+           <p class="p">The following link statuses are also shown in the Legend:</p> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Established</strong>: This is a link state that indicates a peer connection between nodes that are either ready, unavailable, or disabled.</li> 
+            <li class="li"><strong class="ph b">Adding</strong>: This is a link state indicating a peer connection between nodes that were selected to be added to the mesh topology.</li> 
+            <li class="li"><strong class="ph b">Removing</strong>: This is a link state indicating a peer connection between nodes that were selected to be removed from the topology.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Hover over a node and the connectors highlight to show its immediate connected nodes (peers) or click a node to retrieve details about it, such as its hostname, node type, and status.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the link for instance hostname from the details displayed to be redirected to its <strong class="ph b">Details</strong> page that provides more information about that node, most notably for information about an <code class="ph codeph">Error</code> status, as in the following example. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">You can use the <strong class="ph b">Details</strong> page to remove the instance, run a health check on the instance on an as-needed basis, or unassign jobs from the instance. By default, jobs can be assigned to each node. However, you can disable it to exclude the node from having any jobs running on it.</p> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_automation_mesh_operator_aap" title="Scaling your automation mesh is available on OpenShift deployments of Red Hat Ansible Automation Platform and is possible through adding or removing nodes from your cluster dynamically, using the Instances resource of the Ansible Automation Platform UI, without running the installation script.">Scale with automation mesh in an operator environment</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

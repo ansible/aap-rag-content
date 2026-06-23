@@ -1,0 +1,28 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="configuring-output-section">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure the output section</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The <code class="ph codeph">output</code> section defines what users see after a template runs. You can display text messages, reference user input from <code class="ph codeph">parameters</code>, show job execution data from <code class="ph codeph">steps</code>, and provide external links.</p> 
+     <section class="section"> 
+      <p class="p">The <code class="ph codeph">output</code> section supports two types of content:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b"><code class="ph codeph">text</code>:</strong> Displays text blocks with titles and markdown content.</li> 
+       <li class="li"><strong class="ph b"><code class="ph codeph">links</code>:</strong> Displays clickable buttons that open external URLs.</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_output_text">Output text</a></strong><br>Use <code class="ph codeph">output.text</code> to display information to the user after the template runs. Each text block has a <code class="ph codeph">title</code> and <code class="ph codeph">content</code> field. The <code class="ph codeph">content</code> field supports markdown formatting.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_output_links">Output links</a></strong><br>Use <code class="ph codeph">output.links</code> to display clickable buttons. Each link has a <code class="ph codeph">title</code> and <code class="ph codeph">url</code> field. You can optionally set an <code class="ph codeph">icon</code> field.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_referencing_parameters_output">Reference parameters in output</a></strong><br>You can reference any value the user entered in the <code class="ph codeph">parameters</code> section by using the <code class="ph codeph">${{ parameters.&lt;field_name&gt; }}</code> syntax.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_referencing_step_output">Reference step output in output</a></strong><br>After the <code class="ph codeph">rhaap:launch-job-template</code> action runs, the step output includes job execution data. Reference this data using the <code class="ph codeph">${{ steps['&lt;step-id&gt;'].output.data.&lt;field&gt; }}</code> syntax.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

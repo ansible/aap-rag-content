@@ -1,0 +1,327 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="aap-containerized-disconnected-installation"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Install in a disconnected environment</h1> 
+     <p class="shortdesc">You can install containerized Ansible Automation Platform in an environment that does not have an active internet connection. To do this you need to obtain and configure the RPM source dependencies before performing the disconnected installation.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="obtaining-and-configuring-rpm-dependencies"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Obtain and configure RPM source dependencies</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The Ansible Automation Platform containerized setup bundle installation program does not include RPM source dependencies from the BaseOS and AppStream repositories. It relies on the host system’s package manager to resolve these dependencies.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <div class="ul steps-unordered">
+         <div class="li step p"> <span class="ph cmd">Use one of the following methods to access these dependencies in a disconnected environment: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Use <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_satellite/6.16/html/installing_satellite_server_in_a_disconnected_network_environment/index" target="_blank" rel="external noopener">Red Hat Satellite</a> to synchronize repositories in your disconnected environment.</li> 
+            <li class="li">Use a local repository that you create with the <code class="ph codeph">reposync</code> command on a Red Hat Enterprise Linux host that has an active internet connection.</li> 
+            <li class="li">Use a local repository that you create from a mounted Red Hat Enterprise Linux Binary DVD ISO image.</li> 
+           </ul> 
+          </div> 
+         </div>
+        </div>
+       </section> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title3" id="configure-local-repo-reposync"> 
+       <h3 class="title topictitle3" id="ariaid-title3">Configure a local repository using reposync</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">With the <code class="ph codeph">reposync</code> command you can to synchronize the BaseOS and AppStream repositories to a local directory on a Red Hat Enterprise Linux host with an active internet connection. You can then transfer the repositories to your disconnected environment.</p> 
+        <section class="section prereq">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Before you begin</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">A Red Hat Enterprise Linux host with an active internet connection.</li> 
+         </ul> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">Attach the BaseOS and AppStream repositories using <code class="ph codeph">subscription-manager</code>, replacing <code class="ph codeph">&lt;RHEL_VERSION&gt;</code> with your RHEL version number: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ sudo subscription-manager repos \
+    --enable rhel-&lt;RHEL_VERSION&gt;-baseos-rhui-rpms \
+    --enable rhel-&lt;RHEL_VERSION&gt;-appstream-rhui-rpms</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Install the <code class="ph codeph">yum-utils</code> package: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ sudo dnf install yum-utils</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Synchronize the repositories with the <code class="ph codeph">reposync</code> command. Replace <code class="ph codeph">&lt;path_to_download&gt;</code> with a suitable value. </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ sudo reposync -m --download-metadata --gpgcheck \
+    -p &lt;path_to_download&gt;</code></pre> 
+            <p class="p">For example:</p> 
+            <pre class="pre codeblock"><code>$ sudo reposync -m --download-metadata --gpgcheck \
+    -p rhel-repos</code></pre> 
+            <ul class="ul"> 
+             <li class="li">Use reposync with the <code class="ph codeph">--download-metadata</code> option and without the <code class="ph codeph">--newest-only</code> option for optimal download time.</li> 
+            </ul> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">After the <code class="ph codeph">reposync</code> operation is complete, compress the directory: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ tar czvf rhel-repos.tar.gz rhel-repos</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Move the compressed archive to your disconnected environment.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">On the disconnected environment, create a directory to store the repository files: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ sudo mkdir /opt/rhel-repos</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Extract the archive into the <code class="ph codeph">/opt/rhel-repos</code> directory. The following command assumes the archive file is in your home directory: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ sudo tar xzvf ~/rhel-repos.tar.gz -C /opt</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Create a Yum repository file at <code class="ph codeph">/etc/yum.repos.d/rhel.repo</code> with the following content, replacing <code class="ph codeph">&lt;RHEL_VERSION&gt;</code> with your RHEL version number: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>[RHEL-BaseOS]
+name=Red Hat Enterprise Linux BaseOS
+baseurl=file:///opt/rhel-repos/rhel-&lt;RHEL_VERSION&gt;-baseos-rhui-rpms
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+
+[RHEL-AppStream]
+name=Red Hat Enterprise Linux AppStream
+baseurl=file:///opt/rhel-repos/rhel-&lt;RHEL_VERSION&gt;-appstream-rhui-rpms
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Import the gpg key to allow the system to verify the packages, replacing <code class="ph codeph">&lt;RHEL_VERSION&gt;</code> with your RHEL version number: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ sudo rpm --import /opt/rhel-repos/rhel-&lt;RHEL_VERSION&gt;-baseos-rhui-rpms/RPM-GPG-KEY-redhat-release</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Verify the repository configuration: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ sudo yum repolist</code></pre> 
+           </div> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title4" id="configure-local-repo-iso"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Configure a local repository from a mounted ISO</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">You can use a Red Hat Enterprise Linux Binary DVD image to access the necessary RPM source dependencies in a disconnected environment.</p> 
+        <section class="section prereq">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Before you begin</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">You have downloaded the Red Hat Enterprise Linux Binary DVD image from the <a class="xref" href="https://access.redhat.com/downloads/content/rhel" target="_blank" rel="external noopener">Red Hat Enterprise Linux downloads page</a> and moved it to your disconnected environment.</li> 
+         </ul> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">In your disconnected environment, create a mount point directory to serve as the location for the ISO file: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ sudo mkdir /media/rhel</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Mount the ISO image to the mount point. Replace <code class="ph codeph">&lt;version_number&gt;</code> and <code class="ph codeph">&lt;arch_name&gt;</code> with suitable values: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ sudo mount -o loop rhel-&lt;version_number&gt;-&lt;arch_name&gt;-dvd.iso /media/rhel</code></pre> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body">
+              The ISO is mounted in a read-only state.
+             </div>
+            </div> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Create a Yum repository file at <code class="ph codeph">/etc/yum.repos.d/rhel.repo</code> with the following content: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>[RHEL-BaseOS]
+name=Red Hat Enterprise Linux BaseOS
+baseurl=file:///media/rhel/BaseOS
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+
+[RHEL-AppStream]
+name=Red Hat Enterprise Linux AppStream
+baseurl=file:///media/rhel/AppStream
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Import the gpg key to allow the system to verify the packages: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ sudo rpm --import /media/rhel/RPM-GPG-KEY-redhat-release</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Verify the repository configuration: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>$ sudo yum repolist</code></pre> 
+           </div> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title5" id="perform-disconnected-installation"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Perform a disconnected installation</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">A disconnected installation installs containerized Ansible Automation Platform without requiring network access to external registries.</p> 
+        <section class="section prereq">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Before you begin</h4>
+         </div> 
+         <ul class="ul"> 
+          <li class="li">You have prepared the Red Hat Enterprise Linux host</li> 
+          <li class="li">You have obtained and configured the RPM source dependencies. The installation program uses your host system’s <code class="ph codeph">dnf</code> package manager to resolve these dependencies.</li> 
+          <li class="li">You have prepared the managed nodes</li> 
+          <li class="li">You have downloaded the containerized Ansible Automation Platform setup bundle from the <a class="xref" href="https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software" target="_blank" rel="external noopener">Ansible Automation Platform download page</a>.</li> 
+          <li class="li">You understand that metrics service is a required component in Ansible Automation Platform 2.7 and will be installed automatically. Metrics service operates fully in disconnected environments without requiring internet access.</li> 
+         </ul> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">Log in to the Red Hat Enterprise Linux host as your non-root user.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Update the inventory file by following the steps in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_configuring_inventory_file#configuring-inventory-file___inventory_file_for_online_installation_for_containerized_enterprise_topology">Configure the inventory file</a>. </span> 
+           <div class="itemgroup info"> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">Do not include <code class="ph codeph">registry_username</code> or <code class="ph codeph">registry_password</code> in your inventory file for disconnected installations. These variables are only required for online installations. All container images are pre-packaged in the setup bundle.</p> 
+             </div>
+            </div> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Ensure you include the following variables in your inventory file under the <code class="ph codeph">[all:vars]</code> group: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>bundle_install=true
+# The bundle directory must include /bundle in the path
+bundle_dir='{{ lookup("ansible.builtin.env", "PWD") }}/bundle'</code></pre> 
+           </div> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Follow the steps in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap#installing-containerized-aap" title="Run the install playbook to install containerized Ansible Automation Platform after preparing the Red Hat Enterprise Linux host, downloading the installation program, and configuring the inventory file.">Install containerized Ansible Automation Platform</a> to install containerized Ansible Automation Platform and verify your installation.</span> </li>
+         </ol>
+        </section> 
+       </div> 
+       <article class="topic concept nested3" aria-labelledby="ariaid-title6" id="metrics-service-disconnected-environments"> 
+        <h4 class="title topictitle4" id="ariaid-title6">Metrics service in disconnected environments</h4> 
+        <div class="body conbody">
+         <p class="shortdesc">Metrics service is a required component in Ansible Automation Platform 2.7 and is fully functional in disconnected environments. The service collects and stores automation metrics locally without requiring internet connectivity.</p> 
+         <section class="section" id="metrics-service-disconnected-environments___data_collection_behavior">
+          <h5 class="title sectiontitle">Data collection behavior</h5> 
+          <p class="p">In disconnected environments, metrics service operates as follows:</p> 
+          <p class="p"><strong class="ph b">Local data collection and storage:</strong></p> 
+          <ul class="ul"> 
+           <li class="li">Metrics service collects automation activity data from automation controller</li> 
+           <li class="li">All metrics data is stored in the local <code class="ph codeph">metrics_service</code> database</li> 
+           <li class="li">Users can access metrics dashboards and reports through the automation dashboard (when enabled)</li> 
+           <li class="li">No internet connection is required for metrics collection or local analysis</li> 
+          </ul> 
+          <p class="p"><strong class="ph b">Optional data transmission to Red Hat:</strong></p> 
+          <ul class="ul"> 
+           <li class="li">By default, metrics service attempts to transmit anonymized usage data to Red Hat at <code class="ph codeph">api.segment.io:443</code></li> 
+           <li class="li">In disconnected environments, this transmission fails silently and does not affect metrics service functionality</li> 
+           <li class="li">You can disable data transmission by setting the <code class="ph codeph">ANONYMIZED_DATA_COLLECTION</code> feature enabled flag to false by using the database</li> 
+          </ul> 
+         </section> 
+         <section class="section" id="metrics-service-disconnected-environments___disable_data_transmission">
+          <h5 class="title sectiontitle">Disable data transmission only (recommended for opt-out)</h5> 
+          <p class="p">To stop all data transmission to Red Hat while keeping the service installed and collecting local metrics, disable the <code class="ph codeph">ANONYMIZED_DATA_COLLECTION</code> setting.</p> 
+          <p class="p">This method takes effect on the next scheduled task cycle and does not require a service restart.</p> 
+          <p class="p"><strong class="ph b">Database setting</strong></p> 
+          <p class="p">Connect to the metrics service database and update the dynamic settings table:</p> 
+          <pre class="pre codeblock"><code>UPDATE dynamic_settings_setting
+SET current_value = 'false'
+WHERE setting_key = 'ANONYMIZED_DATA_COLLECTION';</code></pre> 
+          <p class="p">This change takes effect immediately. No restart is required.</p> 
+          <p class="p"><strong class="ph b">What happens when data transmission is disabled</strong></p> 
+          <ul class="ul"> 
+           <li class="li">The <code class="ph codeph">daily_anonymize_and_prepare</code> task skips execution on its next scheduled run.</li> 
+           <li class="li">No data is transmitted to Segment.com.</li> 
+           <li class="li">Local hourly collection, daily snapshots, rollup, and cleanup tasks continue to run normally (controlled by the separate <code class="ph codeph">METRICS_COLLECTION</code> flag).</li> 
+           <li class="li">Any data already collected but not yet transmitted is not sent. It is purged during the next scheduled cleanup cycle.</li> 
+           <li class="li">System maintenance tasks (database cleanup, health checks) continue to run.</li> 
+          </ul> 
+         </section> 
+         <section class="section" id="metrics-service-disconnected-environments___firewall_configuration">
+          <h5 class="title sectiontitle">Firewall configuration for disconnected environments</h5> 
+          <p class="p">In disconnected environments, metrics service does not require outbound internet access. Ensure the following internal connectivity:</p> 
+          <table class="table">
+           <caption>
+            <span class="table--title-label">Table 1. </span><span class="title">Metrics service network connectivity requirements</span>
+           </caption>
+           <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+           </colgroup>
+           <thead class="thead"> 
+            <tr class="row"> 
+             <th class="entry" id="metrics-service-disconnected-environments___firewall_configuration__entry__1">Source</th> 
+             <th class="entry" id="metrics-service-disconnected-environments___firewall_configuration__entry__2">Destination</th> 
+             <th class="entry" id="metrics-service-disconnected-environments___firewall_configuration__entry__3">Port</th> 
+             <th class="entry" id="metrics-service-disconnected-environments___firewall_configuration__entry__4">Protocol</th> 
+             <th class="entry" id="metrics-service-disconnected-environments___firewall_configuration__entry__5">Purpose</th> 
+            </tr> 
+           </thead>
+           <tbody class="tbody"> 
+            <tr class="row"> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__1">Metrics service</td> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__2">PostgreSQL (metrics_service database)</td> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__3">5432</td> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__4">TCP</td> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__5">Read/write metrics data</td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__1">Metrics service</td> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__2">PostgreSQL (automationcontroller database)</td> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__3">5432</td> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__4">TCP</td> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__5">Read-only access to automation data</td> 
+            </tr> 
+            <tr class="row"> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__1">Automation controller</td> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__2">Metrics service</td> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__3">443</td> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__4">TCP</td> 
+             <td class="entry" headers="metrics-service-disconnected-environments___firewall_configuration__entry__5">Internal metrics collection API</td> 
+            </tr> 
+           </tbody>
+          </table> 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body">
+            Port 443 outbound to <code class="ph codeph">cert.console.redhat.com</code> is optional and only required if you want to enable anonymized data transmission to Red Hat (not applicable in disconnected environments).
+           </div>
+          </div> 
+         </section> 
+        </div> 
+        <nav role="navigation" class="related-links">
+         <div class="linklist reltasks">
+          <strong>Related tasks</strong>
+          <br>
+          <ul class="linklist">
+           <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap" title="Run the install playbook to install containerized Ansible Automation Platform after preparing the Red Hat Enterprise Linux host, downloading the installation program, and configuring the inventory file.">Install containerized Ansible Automation Platform</a></li>
+          </ul>
+         </div>
+         <div class="linklist relref">
+          <strong>Related reference</strong>
+          <br>
+          <ul class="linklist">
+           <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_configuring_inventory_file#configuring-inventory-file" title="You can control the installation of Ansible Automation Platform with inventory files. Inventory files define the host details, certificate details, and component-specific settings needed to customize the installation.">Configure the inventory file</a></li>
+          </ul>
+         </div>
+        </nav> 
+       </article>
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

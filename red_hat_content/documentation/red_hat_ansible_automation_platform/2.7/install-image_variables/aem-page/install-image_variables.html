@@ -1,0 +1,130 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Image variables</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Reference information for the inventory file variables used to configure images.</p> 
+     <section class="section"> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:40%">
+        <col style="width:15%">
+        <col style="width:20%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1">Variable name</th> 
+         <th class="entry" id="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2">Description</th> 
+         <th class="entry" id="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3">Required or optional</th> 
+         <th class="entry" id="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4">Default</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">controller_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Container image for automation controller.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">controller-rhel9:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">de_extra_images</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Additional decision environment container images to pull from the configured container registry during deployment.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">de_supported_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Supported decision environment container image.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">de-supported-rhel9:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">eda_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Backend container image for Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">eda-controller-rhel9:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">eda_web_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Front-end container image for Event-Driven Ansible.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">eda-controller-ui-rhel9:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">ee_extra_images</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Additional execution environment container images to pull from the configured container registry during deployment.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">[]</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">ee_minimal_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Minimal execution environment container image.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">ee-minimal-rhel9:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">ee_supported_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Supported execution environment container image.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">ee-supported-rhel9:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">gateway_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Container image for platform gateway.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">gateway-rhel9:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">gateway_proxy_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Container image for platform gateway proxy.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">gateway-proxy-rhel9:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">hub_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Backend container image for automation hub.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">hub-rhel9:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">hub_web_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Front-end container image for automation hub.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">hub-web-rhel9:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">pcp_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Container image for Performance Co-Pilot.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">pcp:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">postgresql_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Container image for PostgreSQL.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">postgresql-15:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">receptor_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Container image for receptor.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">receptor-rhel9:latest</code></p> </td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__1"> <p class="p"><code class="ph codeph">redis_image</code></p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__2"> <p class="p">Container image for Redis.</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__3"> <p class="p">Optional</p> </td> 
+         <td class="entry" headers="GUID-c0a60f8c-f01d-4a7c-85c7-5a8b696bcf90__entry__4"> <p class="p"><code class="ph codeph">redis-6:latest</code></p> </td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

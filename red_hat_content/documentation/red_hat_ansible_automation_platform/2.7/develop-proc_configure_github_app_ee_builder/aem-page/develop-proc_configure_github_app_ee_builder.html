@@ -1,0 +1,206 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-configure-github-app-ee-builder">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure a GitHub App for content discovery</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Create and install a GitHub App so that execution environment builder can scan your organization's repositories for Ansible collections.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have owner or admin permissions in your GitHub organization.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">GitHub Apps provide organization-scoped permissions that do not depend on individual user accounts. Choose this option or a Personal Access Token (PAT) for content discovery. GitHub App and PAT are mutually exclusive.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">In a browser, log in to GitHub.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Navigate to your organization settings.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Developer settings &gt; GitHub Apps</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">New GitHub App</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Enter the following details:</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">GitHub App name:</strong> A descriptive name, for example <code class="ph codeph">ansible-portal-content-discovery</code>.</li> 
+          <li class="li"><strong class="ph b">Homepage URL:</strong> The URL of your automation portal deployment.</li> 
+          <li class="li"><strong class="ph b">Webhook:</strong> Clear the <strong class="ph b">Active</strong> checkbox if you do not require webhook events.</li> 
+          <li class="li"><strong class="ph b">Authorization callback URL:</strong> <code class="ph codeph">https://&lt;my_portal_domain&gt;/api/auth/github/handler/frame</code></li> 
+         </ul> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Permissions</strong> section, set the following repository permissions:</span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Contents:</strong> Read-only</li> 
+          <li class="li"><strong class="ph b">Actions:</strong> Read-only</li> 
+         </ul> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Where can this GitHub App be installed?</strong> section, select <strong class="ph b">Only on this account</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Create GitHub App</strong>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Note the <strong class="ph b">App ID</strong> from the GitHub App settings page.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Private keys</strong> section, click <strong class="ph b">Generate a private key</strong>. Store the downloaded <code class="ph codeph">.pem</code> file securely.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Client secrets</strong> section, click <strong class="ph b">Generate a new client secret</strong>. Save the client secret value immediately — you cannot view it again.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Install the GitHub App in your organization:</span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep"> <span class="ph cmd">On the GitHub App settings page, click <strong class="ph b">Install App</strong>.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Select your organization.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Select <strong class="ph b">All repositories</strong> or specific repositories that automation portal requires access to.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Click <strong class="ph b">Install</strong>.</span> </li> 
+        </ol> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">On the GitHub App settings page, the <strong class="ph b">Install App</strong> section shows your organization with an <strong class="ph b">Installed</strong> status.</p> 
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p">After creating the GitHub App, add the credentials and update your configuration. See Create the secrets below.</p> 
+      <p class="p"><strong class="ph b">Create the secrets</strong></p> 
+      <p class="p"><strong class="ph b">OpenShift — CLI:</strong></p> 
+      <pre class="pre codeblock"><code>$ oc create secret generic secrets-scm \
+  --from-literal=github-app-id=&lt;app_id&gt; \
+  --from-literal=github-app-client-id=&lt;client_id&gt; \
+  --from-literal=github-app-client-secret=&lt;client_secret&gt; \
+  --from-literal=github-app-private-key="$(cat &lt;path_to_private_key&gt;.pem)" \
+  -n &lt;namespace&gt;</code></pre> 
+      <p class="p"><strong class="ph b">OpenShift — web console:</strong></p> 
+      <ol class="ol"> 
+       <li class="li">Navigate to <strong class="ph b">Workloads &gt; Secrets &gt; Create &gt; Key/value secret</strong>.</li> 
+       <li class="li">Set the name to <code class="ph codeph">secrets-scm</code>.</li> 
+       <li class="li">Add keys: <code class="ph codeph">github-app-id</code>, <code class="ph codeph">github-app-client-id</code>, <code class="ph codeph">github-app-client-secret</code>, <code class="ph codeph">github-app-private-key</code> (paste the <code class="ph codeph">.pem</code> file contents as the value).</li> 
+      </ol> 
+      <p class="p"><strong class="ph b">RHEL appliance:</strong></p> 
+      <pre class="pre codeblock"><code>$ echo -n '&lt;app_id&gt;' | sudo podman secret create portal_github_app_id -
+$ echo -n '&lt;client_id&gt;' | sudo podman secret create portal_github_app_client_id -
+$ echo -n '&lt;client_secret&gt;' | sudo podman secret create portal_github_app_client_secret -
+$ sudo podman secret create portal_github_app_private_key &lt;path_to_private_key&gt;.pem</code></pre> 
+      <p class="p">Create (or update) the Quadlet drop-in file so the portal container can read these secrets as environment variables:</p> 
+      <pre class="pre codeblock"><code>$ sudo tee /etc/containers/systemd/portal.container.d/ee-builder-secrets.conf &lt;&lt; 'EOF'
+[Container]
+Secret=portal_github_app_id,type=env,target=GITHUB_APP_ID
+Secret=portal_github_app_client_id,type=env,target=GITHUB_APP_CLIENT_ID
+Secret=portal_github_app_client_secret,type=env,target=GITHUB_APP_CLIENT_SECRET
+Secret=portal_github_app_private_key,type=env,target=GITHUB_APP_PRIVATE_KEY
+EOF</code></pre> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        <p class="p">All EE Builder secrets use a single drop-in file (<code class="ph codeph">ee-builder-secrets.conf</code>). If you configure additional SCM integrations later (for example, GitHub OAuth or GitLab OAuth), append the new <code class="ph codeph">Secret=</code> lines to this file.</p>
+       </div>
+      </div> 
+      <p class="p"><strong class="ph b">Update the Helm chart configuration</strong></p> 
+      <p class="p">In your Helm chart configuration, update the <code class="ph codeph">integrations.github</code> section. The PAT and GitHub App configurations are mutually exclusive:</p> 
+      <pre class="pre codeblock"><code>upstream:
+  backstage:
+    appConfig:
+      integrations:
+        github:
+          ## Option A: PAT-based integration (default)
+          - host: github.com
+            token: ${GITHUB_TOKEN}
+
+          ## Option B: GitHub App integration (recommended)
+          ## To use GitHub App, comment out the token line above
+          ## and uncomment the following block:
+          # - host: github.com
+          #   apps:
+          #     - appId: ${GITHUB_APP_ID}
+          #       clientId: ${GITHUB_APP_CLIENT_ID}
+          #       clientSecret: ${GITHUB_APP_CLIENT_SECRET}
+          #       privateKey: ${GITHUB_APP_PRIVATE_KEY}</code></pre> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body">
+        <p class="p">Configure either a PAT or a GitHub App, not both. If using a GitHub App, comment out the <code class="ph codeph">token</code> line and uncomment the <code class="ph codeph">apps</code> block.</p>
+       </div>
+      </div> 
+      <p class="p"><strong class="ph b">RHEL appliance:</strong> Add the equivalent <code class="ph codeph">integrations.github</code> block to <code class="ph codeph">/etc/portal/configs/app-config/app-config.production.yaml</code> (without the <code class="ph codeph">upstream.backstage.appConfig</code> nesting):</p> 
+      <pre class="pre codeblock"><code>integrations:
+  github:
+    - host: github.com
+      apps:
+        - appId: ${GITHUB_APP_ID}
+          clientId: ${GITHUB_APP_CLIENT_ID}
+          clientSecret: ${GITHUB_APP_CLIENT_SECRET}
+          privateKey: ${GITHUB_APP_PRIVATE_KEY}</code></pre> 
+      <p class="p">The <code class="ph codeph">${...}</code> references are resolved from the Podman secrets you created above, through the Quadlet drop-in.</p> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body">
+        <p class="p">Adding an <code class="ph codeph">integrations:</code> section to <code class="ph codeph">app-config.production.yaml</code> replaces the auto-generated PAT-based integration from cloud-init. If you are switching from a PAT to a GitHub App, the PAT is no longer used for content discovery. To keep both, include the PAT configuration alongside the GitHub App in your <code class="ph codeph">integrations:</code> block:</p>
+       </div>
+      </div> 
+      <pre class="pre codeblock"><code>integrations:
+  github:
+    - host: github.com
+      token: ${GITHUB_TOKEN}
+      apps:
+        - appId: ${GITHUB_APP_ID}
+          clientId: ${GITHUB_APP_CLIENT_ID}
+          clientSecret: ${GITHUB_APP_CLIENT_SECRET}
+          privateKey: ${GITHUB_APP_PRIVATE_KEY}</code></pre> 
+      <p class="p"><strong class="ph b">Configure CORS for self-hosted GitHub Enterprise</strong></p> 
+      <p class="p">If the <code class="ph codeph">host</code> is a self-hosted GitHub Enterprise instance (not <code class="ph codeph">github.com</code>), add its URL to the CORS allowed origins so that OAuth redirects are accepted.</p> 
+      <p class="p"><strong class="ph b">OpenShift:</strong></p> 
+      <pre class="pre codeblock"><code>upstream:
+  backstage:
+    appConfig:
+      backend:
+        cors:
+          origin:
+            - ${BASE_URL}
+            - https://github.internal.example.com</code></pre> 
+      <p class="p"><strong class="ph b">RHEL appliance</strong> — add to the existing <code class="ph codeph">backend:</code> block in <code class="ph codeph">app-config.production.yaml</code>:</p> 
+      <pre class="pre codeblock"><code>backend:
+  cors:
+    origin:
+      - "https://portal.example.com"
+      - "https://github.internal.example.com"</code></pre> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body">
+        <p class="p">On RHEL appliances, <code class="ph codeph">app.baseUrl</code>, <code class="ph codeph">backend.baseUrl</code>, and <code class="ph codeph">backend.cors.origin</code> must all use the same portal URL. If any of these values are inconsistent, OAuth callbacks and API requests fail. Do not create a duplicate <code class="ph codeph">backend:</code> block — add <code class="ph codeph">cors</code> to the existing one.</p>
+       </div>
+      </div> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body">
+        <p class="p">If you only use <code class="ph codeph">github.com</code>, no CORS changes are needed.</p>
+       </div>
+      </div> 
+      <p class="p">For a complete working example of all settings in context, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_helm_values" title="A complete Helm chart values configuration for execution environment builder with GitHub App authentication, content discovery, and private automation hub enabled.">Complete Helm chart values reference</a>.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder">Configure a Personal Access Token for GitHub content discovery</a></strong><br>Create and store a GitHub Personal Access Token (PAT) so that execution environment builder can scan repositories for Ansible collections.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder">Save definition files to a GitHub repository</a></strong><br>Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_gitlab_ee_builder">Set up GitLab integration for execution environment builder</a></strong><br>Configure GitLab content discovery and OAuth so that execution environment builder can scan GitLab groups for Ansible collections and save definition files.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery">Configure collection discovery sources</a></strong><br>Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_host_templates_private_repo">Host execution environment wizard templates in a private Git repository</a></strong><br>Copy the EE Builder wizard templates from the public Ansible GitHub repository to a private repository for use in private or air-gapped environments.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_apply_configuration_changes">Apply configuration changes</a></strong><br>Apply configuration changes after modifying your Helm chart values or RHEL appliance configuration file for execution environment builder.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_sync_content_sources">Synchronize content sources</a></strong><br>Sync content from your configured Git repositories and private automation hub to keep the Ansible automation portal catalog current.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_create_team_templates">Create standardized execution environment templates for teams</a></strong><br>Create pre-configured EE templates so that your teams start from a known-good baseline without choosing every dependency from scratch.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_helm_values">Complete Helm chart values reference for execution environment builder</a></strong><br>A complete Helm chart values configuration for execution environment builder with GitHub App authentication, content discovery, and private automation hub enabled.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_ee_builder_template_structure">Complete execution environment template reference</a></strong><br>The full structure of a team execution environment template as generated by execution environment builder, with key fields and customization options.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

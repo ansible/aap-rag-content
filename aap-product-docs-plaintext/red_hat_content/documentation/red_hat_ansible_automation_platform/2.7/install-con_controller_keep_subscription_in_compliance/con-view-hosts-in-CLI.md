@@ -1,0 +1,5 @@
+# Keep subscriptions for managed hosts in compliance
+## View hosts automated in the CLI
+
+Automation controller provides a way to generate a CSV output of the host metric data and host metric summary through the *Command Line Interface* (CLI). You can also soft delete hosts in bulk through the API.
+

@@ -1,0 +1,113 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="task-recover-after-reinstallation">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Recover metrics service after reinstallation</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Restore metrics service operation when pods do not start after reinstalling Ansible Automation Platform by recreating the missing database credential secret.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li"><span class="keyword cmdname">oc</span> CLI access with sufficient RBAC permissions to create and patch secrets and CRs in the metrics service namespace</li> 
+       <li class="li">The name of your <code class="ph codeph">AnsibleAutomationPlatform</code> CR (<code class="ph codeph">&lt;aap-name&gt;</code>)</li> 
+       <li class="li">The name of your <code class="ph codeph">MetricsService</code> CR (<code class="ph codeph">&lt;metrics-cr-name&gt;</code>)</li> 
+       <li class="li">Access to the automation controller PostgreSQL database host and database name</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">This procedure restores metrics service operation when pods do not start after reinstalling or restoring Ansible Automation Platform because the <code class="ph codeph">&lt;aap-name&gt;-metrics-read-token</code> Kubernetes secret was deleted during cleanup and not automatically recreated. Use this procedure when the metrics service operator logs contain the error "Gateway-managed AWX read user secret '-metrics-read-token' not found in namespace ''" and the health endpoint does not respond.</p> 
+      <p class="p"><strong class="ph b">What causes this issue</strong></p> 
+      <p class="p">During reinstallation, the <code class="ph codeph">&lt;aap-name&gt;-metrics-read-token</code> Kubernetes secret is deleted as part of the cleanup. Under certain conditions the Ansible Automation Platform operator does not automatically recreate this secret on the next reconcile, leaving the metrics service operator unable to configure the read-only database connection to the automation controller.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">A permanent fix for this issue is available in the next async update. After applying the update, the Ansible Automation Platform operator automatically recreates the read token secret when it is missing, and the metrics service operator recovers gracefully without manual intervention.</p> 
+       </div>
+      </div> 
+      <p class="p">Choose one of the following options.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Option 1: Manually recreate the missing secret</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Use this option to restore normal operation without changing your metrics service configuration.</p> 
+         <ol class="ol" type="a"> 
+          <li class="li">Confirm the secret is missing. The secret name follows the pattern <code class="ph codeph">&lt;aap-name&gt;-metrics-read-token</code>: <pre class="pre codeblock"><code>oc get secret &lt;aap-name&gt;-metrics-read-token -n &lt;namespace&gt;</code></pre> <p class="p">If the command returns <code class="ph codeph">Error from server (NotFound)</code>, proceed to the next step.</p> </li> 
+          <li class="li">Retrieve the automation controller database host from the existing postgres configuration secret: <pre class="pre codeblock"><code>oc get secret &lt;aap-name&gt;-controller-postgres-configuration \
+  -n &lt;namespace&gt; \
+  -o jsonpath='{.data.host}' | base64 -d</code></pre> </li> 
+          <li class="li">Retrieve the automation controller database name: <pre class="pre codeblock"><code>oc get secret &lt;aap-name&gt;-controller-postgres-configuration \
+  -n &lt;namespace&gt; \
+  -o jsonpath='{.data.database}' | base64 -d</code></pre> </li> 
+          <li class="li">Create the missing secret using the values from the previous steps: <pre class="pre codeblock"><code>oc create secret generic &lt;aap-name&gt;-metrics-read-token \
+  --from-literal=username=ms_awx_readonly \
+  --from-literal=password=&lt;password&gt; \
+  --from-literal=database=&lt;controller-database-name&gt; \
+  --from-literal=host=&lt;controller-db-host&gt; \
+  --from-literal=port=5432 \
+  -n &lt;namespace&gt;</code></pre> <p class="p">Replace <code class="ph codeph">&lt;password&gt;</code> with a secure password for the <code class="ph codeph">ms_awx_readonly</code> database user. If you are restoring the same database, use the original password to avoid a credential mismatch. If you are reinstalling with a fresh database, any secure password is acceptable.</p> </li> 
+          <li class="li">Trigger a reconcile by annotating the <code class="ph codeph">AnsibleAutomationPlatform</code> CR: <pre class="pre codeblock"><code>oc annotate ansibleautomationplatform &lt;aap-name&gt; \
+  ansible.com/force-reconcile="$(date +%s)" \
+  --overwrite -n &lt;namespace&gt;</code></pre> </li> 
+          <li class="li">Verify that metrics service pods start successfully: <pre class="pre codeblock"><code>oc get pods -n &lt;namespace&gt; | grep metrics</code></pre> </li> 
+         </ol> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Option 2: Configure metrics service to manage its own read-only credentials</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Use this option if you cannot recreate the secret manually, or if you want to prevent the issue from recurring on future reinstallations. This directs the metrics service operator to create and manage the <code class="ph codeph">ms_awx_readonly</code> database user independently.</p> 
+         <ol class="ol" type="a"> 
+          <li class="li">Patch the <code class="ph codeph">MetricsService</code> CR to use operator-managed credentials: <pre class="pre codeblock"><code>oc patch metricsservice &lt;metrics-cr-name&gt; \
+  --type merge \
+  -p '{"spec":{"ms_awx_readonly_user":{"externally_managed":false}}}' \
+  -n &lt;namespace&gt;</code></pre> </li> 
+          <li class="li">Remove the <code class="ph codeph">database.ms_awx_readonly_user_secret</code> reference so the operator does not attempt to locate the missing gateway-managed secret: <pre class="pre codeblock"><code>oc patch metricsservice &lt;metrics-cr-name&gt; \
+  --type json \
+  -p '[{"op":"remove","path":"/spec/database/ms_awx_readonly_user_secret"}]' \
+  -n &lt;namespace&gt;</code></pre> </li> 
+          <li class="li">Verify that the operator reconciles successfully and pods start: <pre class="pre codeblock"><code>oc get pods -n &lt;namespace&gt; | grep metrics</code></pre> </li> 
+         </ol> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">Metrics service has recovered successfully when:</p> 
+      <ul class="ul"> 
+       <li class="li">All metrics service pods show <code class="ph codeph">Running</code> status: <pre class="pre codeblock"><code>oc get pods -n &lt;namespace&gt; | grep metrics</code></pre> </li> 
+       <li class="li">The health endpoint returns a successful response: <pre class="pre codeblock"><code>oc exec deployment/&lt;metrics-cr-name&gt;-web -n &lt;namespace&gt; -- \
+  curl -s http://localhost:8080/health/</code></pre> </li> 
+       <li class="li">No secret-related errors appear in the metrics service operator logs: <pre class="pre codeblock"><code>oc logs -l name=automation-metrics-operator -n &lt;namespace&gt; --tail=50</code></pre> </li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_containerized" title="Configure metrics service to use an external PostgreSQL database to leverage enterprise database management, backup, and high availability infrastructure.">Configure external PostgreSQL database for metrics service with OpenShift operator</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_metrics_service" title="Diagnostic procedures and solutions for common metrics service issues to resolve problems and restore data collection.">Troubleshoot metrics service</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

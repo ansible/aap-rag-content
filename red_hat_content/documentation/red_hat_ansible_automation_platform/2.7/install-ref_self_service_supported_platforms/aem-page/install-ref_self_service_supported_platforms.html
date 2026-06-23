@@ -1,0 +1,61 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="self-service-supported-platforms"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Supported platforms</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">Ansible automation portal supports installation using a Helm chart on OpenShift Container Platform.</p> 
+      <section class="section"> 
+       <ul class="ul"> 
+        <li class="li">For information about the Ansible automation portal lifecycle and supported platfoms, see the <a class="xref" href="https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle" target="_blank" rel="external noopener">Ansible Automation Platform Ansible automation portal lifecycle</a> page on the Red Hat customer portal.</li> 
+        <li class="li">For information about the Ansible automation portal support policy, see the <a class="xref" href="https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-support-policy" target="_blank" rel="external noopener">Ansible Automation Platform Ansible automation portal support policy</a> page on the Red Hat customer portal.</li> 
+       </ul> 
+      </section> 
+     </div> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title2" id="self-service-interactive-demo"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Interactive demonstration</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can explore the functionality of Ansible automation portal in an interactive demonstration:</p> 
+       <section class="section"> 
+        <ul class="ul"> 
+         <li class="li">Launch the <a class="xref" href="https://interact.redhat.com/share/RZM69zpDpc5ymd63pMQv" target="_blank" rel="external noopener">Ansible automation portal interactive demo</a>.</li> 
+        </ul> 
+       </section> 
+      </div> 
+      <article class="topic concept nested2" aria-labelledby="ariaid-title3" id="self-service-installation-prereqs"> 
+       <h3 class="title topictitle3" id="ariaid-title3">Prerequisites</h3> 
+       <div class="body conbody">
+        <p class="shortdesc">Review the mandatory subscriptions, permissions, and platform access required before starting the installation. Fulfilling these needs helps ensure a successful deployment.</p> 
+        <ul class="ul"> 
+         <li class="li">You have a valid subscription to Red Hat Ansible Automation Platform.</li> 
+         <li class="li">You have access to an instance of Red Hat Ansible Automation Platform 2.6 with the appropriate permissions to create an OAuth application.</li> 
+         <li class="li">You have access to an OpenShift Container Platform instance with the appropriate permissions within your project to create an application.</li> 
+         <li class="li">You have installed <code class="ph codeph">oc</code>, the OpenShift command-line interface (CLI) tool, on your local machine. You can use <code class="ph codeph">oc</code> commands in your terminal to interact with your OpenShift cluster.</li> 
+         <li class="li">You have installed Helm 3.10 or newer. Helm is a package manager for applications on OpenShift Container Platform.</li> 
+        </ul> 
+       </div> 
+       <nav role="navigation" class="related-links">
+        <div class="linklist">
+         <ul class="linklist">
+          <li class="linklist"><a class="link" href="https://access.redhat.com/page/ansible-automation-platform-self-service-automation-portal-lifecycle" target="_blank" rel="external noopener">Ansible Automation Platform Ansible automation portal lifecycle (for supported OpenShift Container Platform versions)</a></li>
+          <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/cli_tools/openshift-cli-oc#cli-getting-started" target="_blank" rel="external noopener">Getting started with the OpenShift CLI</a></li>
+          <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/building_applications/working-with-helm-charts#installing-helm" target="_blank" rel="external noopener">Installing Helm</a></li>
+         </ul>
+        </div>
+       </nav> 
+      </article>
+      <article class="topic concept nested2" aria-labelledby="ariaid-title4" id="self-service-installation-overview"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Pre-installation configuration</h3> 
+       <div class="body conbody">
+        <p class="shortdesc">You can deploy Ansible automation portal from a Helm chart on OpenShift Container Platform.</p> 
+        <p class="p">Helm is a tool that simplifies deployment of applications on Red Hat OpenShift Container Platform clusters. Helm uses a packaging format called Helm charts. A Helm chart is a package of files that define how an application is deployed and managed on OpenShift. The Helm chart for Ansible automation portal is available in the OpenShift Helm catalog.</p> 
+       </div> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,712 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="GUID-1a5151cf-2e2c-468a-bb08-2a8c8b9d1c92"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure an external database for Ansible Automation Platform</h1> 
+     <div class="body refbody">
+      <p class="shortdesc">Configure an external database for Ansible Automation Platform Operator to use your own database infrastructure. </p> 
+      <section class="section" id="GUID-1a5151cf-2e2c-468a-bb08-2a8c8b9d1c92__section_1"> 
+       <p class="p">Using an external database lets you share and reuse resources and manually manage backups, upgrades, and performance optimizations. </p> 
+       <p class="p">To configure an external database, create Kubernetes secrets with credentials for connecting to the database. The same external database (PostgreSQL instance) can be used for platform gateway, automation controller, automation hub, Event-Driven Ansible controller, and metrics service as long as the database names are different. </p> 
+       <div class="p"> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body">
+          The automation hub database requires the <code class="ph codeph">hstore</code> PostgreSQL extension. 
+         </div>
+        </div> 
+       </div> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-operator-external-db-gateway"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure an external database for platform gateway on Red Hat Ansible Automation Platform Operator</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">There are two scenarios for deploying Ansible Automation Platform with an external database:</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <p class="p">The external database must be a PostgreSQL database that is the version supported by the current release of Ansible Automation Platform. The external postgres instance credentials and connection information must be stored in a secret, which is then set on the platform gateway spec.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Ansible Automation Platform supports PostgreSQL 15 for its managed databases and additionally supports PostgreSQL 15, 16, and 17 for external databases.</p> 
+          <p class="p">If you choose to use an externally managed database with version 16 or 17 you must also rely on external backup and restore processes.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:20%">
+          <col style="width:80%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="proc-operator-external-db-gateway__entry__1">Scenario</th> 
+           <th class="entry" id="proc-operator-external-db-gateway__entry__2">Action required</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="proc-operator-external-db-gateway__entry__1"> <p class="p">Fresh install</p> </td> 
+           <td class="entry" headers="proc-operator-external-db-gateway__entry__2"> <p class="p">You must specify a single external database instance for the platform to use for the following:</p> 
+            <ul class="ul"> 
+             <li class="li">Platform gateway</li> 
+             <li class="li">Automation controller</li> 
+             <li class="li">Automation hub</li> 
+             <li class="li">Event-Driven Ansible</li> 
+             <li class="li">Metrics service</li> 
+             <li class="li">Red Hat Ansible Lightspeed (If enabled)</li> 
+            </ul> <p class="p">See the <em class="ph i">aap-configuring-external-db-all-default-components.yml</em> example in the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#unique_2099983463" title="Refer to the following custom resources you can use for various Ansible Automation Platform deployment scenarios.">Custom resources</a> section for help with this.</p> <p class="p">If using Red Hat Ansible Lightspeed, use the <em class="ph i">aap-configuring-external-db-with-lightspeed-enabled.yml</em> example.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="proc-operator-external-db-gateway__entry__1"> <p class="p">Existing external database in 2.4</p> </td> 
+           <td class="entry" headers="proc-operator-external-db-gateway__entry__2"> <p class="p">Your existing external database remains the same after upgrading but you must specify the <code class="ph codeph">external-postgres-configuration-gateway</code> (spec.database.database_secret) on the Ansible Automation Platform custom resource.</p> <p class="p">For detailed steps, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-configure_an_external_database_for_ansible_automation_platform#GUID-b94a38e1-9266-4338-a29a-1fd21ee08f5a" title="To upgrade from Ansible Automation Platform 2.4 to 2.6 with an external database, you must scale down your Operator deployment, upgrade your PostgreSQL, then scale your deployment back up.">Upgrading an external database for platform gateway on on Ansible Automation Platform</a></p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+        <p class="p">To deploy Ansible Automation Platform with an external database, you must first create a Kubernetes secret with credentials for connecting to the database.</p> 
+        <p class="p">By default, the Ansible Automation Platform Operator automatically creates and configures a managed PostgreSQL pod in the same namespace as your Ansible Automation Platform deployment. You can deploy Ansible Automation Platform with an external database instead of the managed PostgreSQL pod that the Ansible Automation Platform Operator automatically creates.</p> 
+        <p class="p">Using an external database lets you share and reuse resources and manually manage backups, upgrades, and performance optimizations.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The same external database (PostgreSQL instance) can be used for both automation hub, automation controller, platform gateway, and metrics service as long as the database names are different. In other words, you can have multiple databases with different names inside a single PostgreSQL instance.</p> 
+         </div>
+        </div> 
+        <p class="p">The following section outlines the steps to configure an external database for your platform gateway on a Ansible Automation Platform Operator.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create a <code class="ph codeph">postgres_configuration_secret</code> YAML file, following the template below: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: external-postgres-configuration
+  namespace: &lt;target_namespace&gt;
+stringData:
+  host: "&lt;external_ip_or_url_resolvable_by_the_cluster&gt;"
+  port: "&lt;external_port&gt;"
+  database: "&lt;desired_database_name&gt;"
+  username: "&lt;username_to_connect_as&gt;"
+  password: "&lt;password_to_connect_with&gt;"
+  type: "unmanaged"
+type: Opaque</code></pre> 
+           <p class="p">Where:</p> 
+           <dl class="dl"> 
+            <dt class="dt dlterm">
+             &lt;target_namespace&gt;
+            </dt> 
+            <dd class="dd">
+             Namespace to create the secret in. This should be the same namespace you want to deploy to.
+            </dd> 
+            <dt class="dt dlterm">
+             &lt;external_ip_or_url_resolvable_by_the_cluster&gt;
+            </dt> 
+            <dd class="dd">
+             The resolvable hostname for your database node.
+            </dd> 
+            <dt class="dt dlterm">
+             &lt;external_port&gt;
+            </dt> 
+            <dd class="dd">
+             External port defaults to <code class="ph codeph">5432</code>.
+            </dd> 
+            <dt class="dt dlterm">
+             &lt;password_to_connect_with&gt;
+            </dt> 
+            <dd class="dd">
+             Value for variable <code class="ph codeph">password</code> should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.
+            </dd> 
+           </dl> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Apply <code class="ph codeph">external-postgres-configuration-secret.yml</code> to your cluster using the <code class="ph codeph">oc create</code> command. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc create -f external-postgres-configuration-secret.yml</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">The following example is for a platform gateway deployment. To configure an external database for all components, use the <em class="ph i">aap-configuring-external-db-all-default-components.yml</em> example in the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#unique_2099983463" title="Refer to the following custom resources you can use for various Ansible Automation Platform deployment scenarios.">Custom resources</a> section.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">When creating your <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource object, specify the secret on your spec, following the example below: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: example-aap
+  Namespace: aap
+spec:
+  database:
+     database_secret: automation-platform-postgres-configuration</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-operator-external-db-controller"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure an external database for automation controller on Red Hat Ansible Automation Platform Operator</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">For users who prefer to deploy Ansible Automation Platform with an external database, they can do so by configuring a secret with instance credentials and connection information, then applying it to their cluster using the <code class="ph codeph">oc create</code> command.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <p class="p">The external database must be a PostgreSQL database that is the version supported by the current release of Ansible Automation Platform. The external postgres instance credentials and connection information must be stored in a secret, which is then set on the automation controller spec.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Ansible Automation Platform supports PostgreSQL 15 for its managed databases and additionally supports PostgreSQL 15, 16, and 17 for external databases.</p> 
+          <p class="p">If you choose to use an externally managed database with version 16 or 17 you must also rely on external backup and restore processes.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">By default, the Ansible Automation Platform Operator automatically creates and configures a managed PostgreSQL pod in the same namespace as your Ansible Automation Platform deployment. You can deploy Ansible Automation Platform with an external database instead of the managed PostgreSQL pod that the Ansible Automation Platform Operator automatically creates.</p> 
+        <p class="p">Using an external database lets you share and reuse resources and manually manage backups, upgrades, and performance optimizations.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The same external database (PostgreSQL instance) can be used for both automation hub, automation controller, platform gateway, and metrics service as long as the database names are different. In other words, you can have multiple databases with different names inside a single PostgreSQL instance.</p> 
+         </div>
+        </div> 
+        <p class="p">The following section outlines the steps to configure an external database for your automation controller on a Ansible Automation Platform Operator.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create a <code class="ph codeph">postgres_configuration_secret</code> YAML file, following the template below: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: external-postgres-configuration
+  namespace: &lt;target_namespace&gt;
+stringData:
+  host: "&lt;external_ip_or_url_resolvable_by_the_cluster&gt;"
+  port: "&lt;external_port&gt;"
+  database: "&lt;desired_database_name&gt;"
+  username: "&lt;username_to_connect_as&gt;"
+  password: "&lt;password_to_connect_with&gt;"
+  sslmode: "prefer"
+  type: "unmanaged"
+type: Opaque</code></pre> 
+           <p class="p">When configuring the secret:</p> 
+           <ul class="ul"> 
+            <li class="li"><code class="ph codeph">namespace</code>: Specify the namespace to create the secret in. This should be the same namespace you want to deploy to.</li> 
+            <li class="li"><code class="ph codeph">host</code>: Specify the resolvable hostname for your database node.</li> 
+            <li class="li"><code class="ph codeph">port</code>: Specify the external port. The default is <code class="ph codeph">5432</code>.</li> 
+            <li class="li"><code class="ph codeph">password</code>: Ensure the password does not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.</li> 
+            <li class="li"><code class="ph codeph">sslmode</code>: This variable is valid for external databases only. The allowed values are: <code class="ph codeph">prefer</code>, <code class="ph codeph">disable</code>, <code class="ph codeph">allow</code>, <code class="ph codeph">require</code>, <code class="ph codeph">verify-ca</code>, and <code class="ph codeph">verify-full</code>.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Apply <code class="ph codeph">external-postgres-configuration-secret.yml</code> to your cluster using the <code class="ph codeph">oc create</code> command. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc create -f external-postgres-configuration-secret.yml</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">When creating your <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource object, specify the secret under the <code class="ph codeph">controller</code> section in your spec, following the example below:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  controller:
+    name: controller-dev  # Optional: specify existing instance or custom name
+    postgres_configuration_secret: external-postgres-configuration</code></pre> 
+          </div> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you have an existing automation controller instance, specify its name under <code class="ph codeph">controller.name</code> to apply these settings to the existing instance. If you omit the <code class="ph codeph">name</code> field, the operator will create a new instance with the default name pattern <code class="ph codeph">&lt;aap-instance-name&gt;-controller</code>.</p> 
+             <p class="p">For more examples of Ansible Automation Platform custom resources, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#appendix-operator-crs_appendix-operator-crs" title="This appendix provides a reference for the Ansible Automation Platform custom resources for various deployment scenarios.">Red Hat Ansible Automation Platform custom resources</a> </p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-operator-external-db-hub"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Configure an external database for automation hub on Red Hat Ansible Automation Platform Operator</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">For users who prefer to deploy Ansible Automation Platform with an external database, they can do so by configuring a secret with instance credentials and connection information, then applying it to their cluster using the <code class="ph codeph">oc create</code> command.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <p class="p">The external database must be a PostgreSQL database that is the version supported by the current release of Ansible Automation Platform. The external postgres instance credentials and connection information will need to be stored in a secret, which will then be set on the automation hub spec.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Ansible Automation Platform supports PostgreSQL 15 for its managed databases and additionally supports PostgreSQL 15, 16, and 17 for external databases.</p> 
+          <p class="p">If you choose to use an externally managed database with version 16 or 17 you must also rely on external backup and restore processes.</p> 
+         </div>
+        </div> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">By default, the Ansible Automation Platform Operator automatically creates and configures a managed PostgreSQL pod in the same namespace as your Ansible Automation Platform deployment.</p> 
+        <p class="p">You can choose to use an external database instead if you prefer to use a dedicated node to ensure dedicated resources or to manually manage backups, upgrades, or performance tweaks.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">The same external database (PostgreSQL instance) can be used for both automation hub, automation controller, and platform gateway as long as the database names are different. In other words, you can have multiple databases with different names inside a single PostgreSQL instance.</p> 
+         </div>
+        </div> 
+        <p class="p">The following section outlines the steps to configure an external database for your automation hub on a Ansible Automation Platform Operator.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create a <code class="ph codeph">postgres_configuration_secret</code> YAML file, following the template below: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: external-postgres-configuration
+  namespace: &lt;target_namespace&gt; <strong class="ph b callout">①</strong>
+stringData:
+  host: "&lt;external_ip_or_url_resolvable_by_the_cluster&gt;" <strong class="ph b callout">②</strong>
+  port: "&lt;external_port&gt;" <strong class="ph b callout">③</strong>
+  database: "&lt;desired_database_name&gt;"
+  username: "&lt;username_to_connect_as&gt;"
+  password: "&lt;password_to_connect_with&gt;" <strong class="ph b callout">④</strong>
+  sslmode: "prefer" <strong class="ph b callout">⑤</strong>
+  type: "unmanaged"
+type: Opaque</code></pre> 
+          </div> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Namespace to create the secret in. This should be the same namespace you want to deploy to.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">The resolvable hostname for your database node.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">External port defaults to <code class="ph codeph">5432</code>.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Value for variable <code class="ph codeph">password</code> should not contain single or double quotes (', ") or backslashes (\) to avoid any issues during deployment, backup or restoration.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">The variable <code class="ph codeph">sslmode</code> is valid for <code class="ph codeph">external</code> databases only. The allowed values are: <code class="ph codeph"><strong class="ph b">prefer</strong></code>, <code class="ph codeph"><strong class="ph b">disable</strong></code>, <code class="ph codeph"><strong class="ph b">allow</strong></code>, <code class="ph codeph"><strong class="ph b">require</strong></code>, <code class="ph codeph"><strong class="ph b">verify-ca</strong></code>, and <code class="ph codeph"><strong class="ph b">verify-full</strong></code>.</span> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Apply <code class="ph codeph">external-postgres-configuration-secret.yml</code> to your cluster using the <code class="ph codeph">oc create</code> command. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ oc create -f external-postgres-configuration-secret.yml</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">When creating your <code class="ph codeph">AnsibleAutomationPlatform</code> custom resource object, specify the secret under the <code class="ph codeph">hub</code> section in your spec, following the example below: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  hub:
+    name: hub-dev  # Optional: specify existing instance or custom name
+    postgres_configuration_secret: external-postgres-configuration
+    storage_type: file
+    file_storage_storage_class: &lt;your-read-write-many-storage-class&gt;
+    file_storage_size: 10Gi</code></pre> 
+          </div> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If you have an existing automation hub instance, specify its name under <code class="ph codeph">hub.name</code> to apply these settings to the existing instance. If you omit the <code class="ph codeph">name</code> field, the operator will create a new instance with the default name pattern <code class="ph codeph">&lt;aap-instance-name&gt;-hub</code>.</p> 
+             <p class="p">For more examples of Ansible Automation Platform custom resources, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_appendix_operator_crs#appendix-operator-crs_appendix-operator-crs" title="This appendix provides a reference for the Ansible Automation Platform custom resources for various deployment scenarios.">Red Hat Ansible Automation Platform custom resources</a> </p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="configure-external-database-metrics-service-operator-aap"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Configure an external database for metrics service on Red Hat Ansible Automation Platform Operator</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Metrics service is a required component in Ansible Automation Platform 2.7. For users who prefer to deploy metrics service with an external database, they can do so by configuring secrets with database credentials and connection information.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <p class="p">The external database must be a PostgreSQL database that is the version supported by the current release of Ansible Automation Platform. The external postgres instance credentials and connection information must be stored in secrets, which are then set on the metrics service spec.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body">
+          Ansible Automation Platform supports PostgreSQL 15 for its managed databases and additionally supports PostgreSQL 15, 16, and 17 for external databases. If you choose to use an externally managed database with version 16 or 17 you must also rely on external backup and restore processes.
+         </div>
+        </div> 
+       </section> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">Metrics service requires access to two databases:</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b"><code class="ph codeph">metrics_service</code> database (read/write):</strong> Stores collected metrics data</li> 
+         <li class="li"><strong class="ph b"><code class="ph codeph">automationcontroller</code> database (read-only):</strong> Used to correlate metrics with automation activity</li> 
+        </ul> 
+        <p class="p">By default, the Ansible Automation Platform Operator automatically creates and configures a managed PostgreSQL pod in the same namespace as your Ansible Automation Platform deployment. You can deploy metrics service with an external database instead of the managed PostgreSQL pod that the Ansible Automation Platform Operator automatically creates.</p> 
+        <p class="p">Using an external database lets you share and reuse resources and manually manage backups, upgrades, and performance optimizations.</p> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body">
+          The same external database (PostgreSQL instance) can be used for automation hub, automation controller, platform gateway, and metrics service as long as the database names are different. In other words, you can have multiple databases with different names inside a single PostgreSQL instance.
+         </div>
+        </div> 
+        <p class="p">The following section outlines the steps to configure an external database for metrics service on Ansible Automation Platform Operator.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create a <code class="ph codeph">postgres_configuration_secret</code> YAML file for the <code class="ph codeph">metrics_service</code> database, following the template below:</span> 
+          <div class="itemgroup stepxmp"> 
+           <pre class="pre codeblock"><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: metrics-postgres-configuration
+  namespace: &lt;target_namespace&gt;
+stringData:
+  host: "&lt;external_ip_or_url_resolvable_by_the_cluster&gt;"
+  port: "&lt;external_port&gt;"
+  database: "metrics_service"
+  username: "&lt;username_to_connect_as&gt;"
+  password: "&lt;password_to_connect_with&gt;"
+  sslmode: "prefer"
+  type: "unmanaged"
+type: Opaque</code></pre> 
+          </div> 
+          <div class="itemgroup info"> 
+           <p class="p">When configuring the secret:</p> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">namespace:</strong> Specify the namespace to create the secret in. This should be the same namespace you want to deploy to.</li> 
+            <li class="li"><strong class="ph b">host:</strong> Specify the resolvable hostname for your database node.</li> 
+            <li class="li"><strong class="ph b">port:</strong> Specify the external port. The default is 5432.</li> 
+            <li class="li"><strong class="ph b">database:</strong> The database name for metrics service. Recommended: <code class="ph codeph">metrics_service</code></li> 
+            <li class="li"><strong class="ph b">password:</strong> Ensure the password does not contain single or double quotes (<code class="ph codeph">'</code>, <code class="ph codeph">"</code>) or backslashes (<code class="ph codeph">\</code>) to avoid any issues during deployment, backup or restoration.</li> 
+            <li class="li"><strong class="ph b">sslmode:</strong> This variable is valid for external databases only. The allowed values are: <code class="ph codeph">prefer</code>, <code class="ph codeph">disable</code>, <code class="ph codeph">allow</code>, <code class="ph codeph">require</code>, <code class="ph codeph">verify-ca</code>, and <code class="ph codeph">verify-full</code>.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Create a second secret for read-only access to the automation controller database:</span> 
+          <div class="itemgroup stepxmp"> 
+           <pre class="pre codeblock"><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: metrics-controller-readonly-configuration
+  namespace: &lt;target_namespace&gt;
+stringData:
+  host: "&lt;external_ip_or_url_resolvable_by_the_cluster&gt;"
+  port: "&lt;external_port&gt;"
+  database: "&lt;controller_database_name&gt;"
+  username: "ms_awx_readonly"
+  password: "&lt;readonly_user_password&gt;"
+  sslmode: "prefer"
+  type: "unmanaged"
+type: Opaque</code></pre> 
+          </div> 
+          <div class="itemgroup stepresult"> 
+           <div class="note important note_important">
+            <span class="note__title">Important:</span> 
+            <div class="note__body">
+             The <code class="ph codeph">ms_awx_readonly</code> user must be created in your external database with SELECT privileges on the automation controller database before deployment. For instructions on creating this user, see Configure an external database for Ansible Automation Platform (containerized).
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Apply both secrets to your cluster using the <code class="ph codeph">oc create</code> command:</span> 
+          <div class="itemgroup stepxmp"> 
+           <pre class="pre codeblock"><code>$ oc create -f metrics-postgres-configuration.yml
+$ oc create -f metrics-controller-readonly-configuration.yml</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">When creating your AnsibleAutomationPlatform custom resource object, specify both secrets under the metrics section in your spec, following the example below:</span> 
+          <div class="itemgroup stepxmp"> 
+           <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: myaap
+spec:
+  metrics:
+    disabled: false
+    postgres_configuration_secret: metrics-postgres-configuration
+    awx_postgres_configuration_secret: metrics-controller-readonly-configuration</code></pre> 
+          </div> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body">
+             If you have an existing metrics service instance, specify its name under <code class="ph codeph">metrics.name</code> to apply these settings to the existing instance. If you omit the name field, the operator will create a new instance with the default name pattern <code class="ph codeph">&lt;aap-instance-name&gt;</code>-metrics.
+            </div>
+           </div> 
+           <p class="p">For more examples of Ansible Automation Platform custom resources, see Red Hat Ansible Automation Platform custom resources</p> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <p class="p"><strong class="ph b">Additional considerations:</strong></p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Database user permissions:</strong> The metrics service database user requires CREATEDB role to run database migrations during installation.</li> 
+         <li class="li"><strong class="ph b">Cross-database permissions:</strong> The <code class="ph codeph">ms_awx_readonly</code> user must have SELECT privileges on all tables in the automation controller database's public schema, including future tables (use ALTER DEFAULT PRIVILEGES).</li> 
+         <li class="li"><strong class="ph b">Storage sizing:</strong> Plan for approximately 20-40 GB of database storage for the <code class="ph codeph">metrics_service</code> database, depending on automation scale and retention policies.</li> 
+         <li class="li"><strong class="ph b">Connection pooling:</strong> For high-scale deployments, consider using connection pooling (such as PgBouncer) between metrics service and the external database.</li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="GUID-b94a38e1-9266-4338-a29a-1fd21ee08f5a"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Upgrading an external database for platform gateway on Ansible Automation Platform</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To upgrade from Ansible Automation Platform 2.4 to 2.6 with an external database, you must scale down your Operator deployment, upgrade your PostgreSQL, then scale your deployment back up.</p> 
+       <section class="section prereq" id="GUID-b94a38e1-9266-4338-a29a-1fd21ee08f5a__prereq_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <div class="p"> 
+         <ul class="ul" id="GUID-b94a38e1-9266-4338-a29a-1fd21ee08f5a__ul_2"> 
+          <li class="li">A 2.4 automation controller and automation hub deployment with an external PostgreSQL 13 database</li> 
+          <li class="li">A newly provisioned PostgreSQL 15 database for the new platform gateway component </li> 
+         </ul> 
+        </div> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Create a secret <code class="ph codeph">postgres-config-gateway</code> with PostgreSQL 15 credentials for the platform gatewaycomponent. For example:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-config-gateway
+  namespace: aap
+stringData:
+  host: "&lt;DB_HOST_OR_IP&gt;"
+  port: "&lt;DB_PORT&gt;"     # default is 5432
+  database: "&lt;DB_NAME&gt;" # for example "gateway"
+  username: "&lt;DB_USER&gt;" # for example "gateway"
+  password: "&lt;DB_PASSWORD&gt;"
+  sslmode: "prefer"
+  type: "unmanaged"
+type: Opaque</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add your newly created secret to your Ansible Automation Platform instance:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>spec:
+  postgres_configuration_secret: postgres-config-gateway</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Scale down your deployments in their respective namespaces using:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc scale deployment --replicas=0 -n &lt;component-namespace&gt; &lt;component-deployment&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Automation contoller:</span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">automation-controller-operator-controller-manager</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">&lt;controller-name&gt;-controller-task</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">&lt;controller-name&gt;-controller-web</code></span> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Automation hub:</span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">automation-hub-operator-controller-manager</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">&lt;hub-name&gt;-hub-api</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">&lt;hub-name&gt;-hub-content </code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">&lt;hub-name&gt;-hub-redis</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">&lt;hub-name&gt;-hub-worker</code></span> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">The remaining operators:t</span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">ansible-lightspeed-operator-controller-manager</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">eda-server-operator-controller-manager</code></span> </li> 
+           <li class="li substep"> <span class="ph cmd"><code class="ph codeph">resource-operator-controller-manager</code></span> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Upgrade your PostgreSQL 13 to PostgreSQL 15.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Scale your deployments back up using:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc scale deployment --replicas=1 -n &lt;component-namespace&gt; &lt;component-deployment&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Log into OpenShift Container Platform.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Go to <strong class="ph b">Operators &gt; Installed Operators</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click the ⋮ icon next to your deployment and then click <strong class="ph b">Edit Subscription</strong></span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Details</strong> tab, select <strong class="ph b">Update Channel</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">stable-2.6</strong> as the channel and click <strong class="ph b">Save</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Deploy Ansible Automation Platform 2.6 using the following custom resource (CR):</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: aap
+spec:
+
+  database:
+    database_secret: postgres-config-gateway
+
+  controller:
+    name: existing-controller
+
+  eda:
+    disabled: true
+
+  hub:
+    name: existing-hub</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result" id="GUID-b94a38e1-9266-4338-a29a-1fd21ee08f5a__result_1">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div>To verify your upgrade was successful, go to your users, collection, job history or similar and confirm that they are on the new 2.6 instance and in the new PostgreSQL 15 databases.
+       </section> 
+       <section class="section postreq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">What to do next</h3>
+        </div> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body">
+          Metrics service is a new required component in Ansible Automation Platform 2.7. If you are upgrading from 2.4 to 2.6 or later, the operator will automatically provision a managed PostgreSQL database for metrics service unless you specify external database configuration.
+         </div>
+        </div> 
+        <p class="p">To configure metrics service with an external database during upgrade, add the metrics section to your custom resource:</p> 
+        <pre class="pre codeblock"><code>apiVersion: aap.ansible.com/v1alpha1
+kind: AnsibleAutomationPlatform
+metadata:
+  name: aap
+spec:
+
+  database:
+    database_secret: postgres-config-gateway
+
+  controller:
+    name: existing-controller
+
+  eda:
+    disabled: true
+
+  hub:
+    name: existing-hub
+
+  metrics:
+    disabled: false
+    postgres_configuration_secret: metrics-postgres-configuration
+    awx_postgres_configuration_secret: metrics-controller-readonly-configuration</code></pre> 
+        <p class="p">Create the required secrets before applying this configuration.</p> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="proc-enable-hstore-extension"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Enable the hstore extension</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The database migration script uses <code class="ph codeph">hstore</code> fields to store information, therefore the <code class="ph codeph">hstore</code> extension must be enabled in the automation hub PostgreSQL database.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">This process is automatic when using the Ansible Automation Platform installer and a managed PostgreSQL server.</p> 
+        <p class="p">If the PostgreSQL database is external, you must enable the <code class="ph codeph">hstore</code> extension in the automation hub PostgreSQL database manually before installation.</p> 
+        <p class="p">If the <code class="ph codeph">hstore</code> extension is not enabled before installation, a failure raises during database migration.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Check if the extension is available on the PostgreSQL server (automation hub database). </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ psql -d &lt;automation hub database&gt; -c "SELECT * FROM pg_available_extensions WHERE name='hstore'"</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Where the default value for <code class="ph codeph">&lt;automation hub database&gt;</code> is <code class="ph codeph">automationhub</code>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p"><strong class="ph b">Example output with <code class="ph codeph">hstore</code> available</strong>:</p> 
+           <pre class="pre codeblock"><code>name  | default_version | installed_version |comment
+------+-----------------+-------------------+---------------------------------------------------
+ hstore | 1.7           |                   | data type for storing sets of (key, value) pairs
+(1 row)</code></pre> 
+           <p class="p"><strong class="ph b">Example output with <code class="ph codeph">hstore</code> not available</strong>:</p> 
+           <pre class="pre codeblock"><code> name | default_version | installed_version | comment
+------+-----------------+-------------------+---------
+(0 rows)</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">On a RHEL based server, the <code class="ph codeph">hstore</code> extension is included in the <code class="ph codeph">postgresql-contrib</code> RPM package, which is not installed automatically when installing the PostgreSQL server RPM package. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">To install the RPM package, use the following command:</p> 
+           <pre class="pre codeblock"><code>dnf install postgresql-contrib</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Load the <code class="ph codeph">hstore</code> PostgreSQL extension into the automation hub database with the following command: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ psql -d &lt;automation hub database&gt; -c "CREATE EXTENSION hstore;"</code></pre> 
+           <p class="p">In the following output, the <code class="ph codeph">installed_version</code> field lists the <code class="ph codeph">hstore</code> extension used, indicating that <code class="ph codeph">hstore</code> is enabled.</p> 
+           <pre class="pre codeblock"><code>name | default_version | installed_version | comment
+-----+-----------------+-------------------+------------------------------------------------------
+hstore  |     1.7      |       1.7         | data type for storing sets of (key, value) pairs
+(1 row)</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title8" id="aap-operator-troubleshoot-ext-db"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Troubleshoot an external database</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">When upgrading the Ansible Automation Platform Operator you may encounter an error like the following:</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <pre class="pre codeblock"><code>NotImplementedError: can't parse timestamptz with DateStyle 'Redwood, SHOW_TIME': '18-MAY-23 20:33:55.765755 +00:00'</code></pre> 
+        <p class="p">Errors like this occur when you have an external database with an unexpected DateStyle set. You can refer to the following steps to resolve this issue.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Edit the <code class="ph codeph">/var/lib/pgsql/data/postgres.conf</code> file on the database server: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code># vi /var/lib/pgsql/data/postgres.conf</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Find and comment out the line: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>#datestyle = 'Redwood, SHOW_TIME'</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Add the following setting immediately below the newly-commented line: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>datestyle = 'iso, mdy'</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Save and close the <code class="ph codeph">postgres.conf</code> file.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Reload the database configuration: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code># systemctl reload postgresql</code></pre> 
+           <div class="note note note_note">
+            <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Running this command does not disrupt database operations.</p> 
+            </div>
+           </div> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

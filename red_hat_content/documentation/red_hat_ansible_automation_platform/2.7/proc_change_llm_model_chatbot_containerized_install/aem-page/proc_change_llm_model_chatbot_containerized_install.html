@@ -1,0 +1,39 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-change-llm-model-containerized-install">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Change your LLM model</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">To change the LLM model for your containerized Ansible Automation Platform deployment of Ansible Lightspeed intelligent assistant, you must edit the inventory file with the specific details of your new LLM provider and then rerun the install playbook.</p> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Edit the inventory file to update the following Ansible Lightspeed intelligent assistant variables with the specific details of your required LLM provider: </span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li"> <code class="ph codeph">lightspeed_chatbot_model_url</code> </li> 
+          <li class="li"> <code class="ph codeph">lightspeed_chatbot_model_api_key</code> </li> 
+          <li class="li"> <code class="ph codeph">lightspeed_chatbot_model_id</code> </li> 
+          <li class="li"> <code class="ph codeph">lightspeed_chatbot_default_provider</code> </li> 
+         </ul> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Rerun the <code class="ph codeph">install</code> playbook to <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_installing_containerized_aap#installing-containerized-aap" title="Run the install playbook to install containerized Ansible Automation Platform after preparing the Red Hat Enterprise Linux host, downloading the installation program, and configuring the inventory file.">install the containerized Ansible Automation Platform</a>.</span> </li>
+      </ol>
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_lightspeed_variables#lightspeed-variables" title="Configure Red Hat Ansible Lightspeed by setting inventory file variables during installation. Use this reference to determine which variables to set for your deployment requirements.">Appendix: Red Hat Ansible Lightspeed Inventory file variables</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

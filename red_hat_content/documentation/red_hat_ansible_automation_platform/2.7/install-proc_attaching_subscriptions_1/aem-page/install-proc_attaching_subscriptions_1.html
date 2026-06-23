@@ -1,0 +1,69 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-attaching-subscriptions">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Attach your Ansible Automation Platform subscription</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">You <strong class="ph b">must</strong> have valid subscriptions on all nodes before installing Red Hat Ansible Automation Platform.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Simple Content Access (SCA) is now the default subscription method for all Red Hat accounts. With SCA, you must register your systems to Red Hat Subscription Management (RHSM) or Satellite to access content. Traditional pool-based subscription attachment commands (such as <code class="ph codeph">subscription-manager attach --pool</code> or <code class="ph codeph">subscription-manager attach --auto</code>) are no longer required. For more information, see <a class="xref" href="https://access.redhat.com/articles/simple-content-access" target="_blank" rel="external noopener">Simple Content Access</a>.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <div class="ol steps">
+       <div class="li step p"> <span class="ph cmd">Register your system with Red Hat Subscription Management: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>$ sudo subscription-manager register --username &lt;$INSERT_USERNAME_HERE&gt; --password &lt;$INSERT_PASSWORD_HERE&gt;</code></pre> 
+         <p class="p">With Simple Content Access (SCA), registration is the only step required to access Ansible Automation Platform content.</p> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">For accounts still using legacy subscription pools, you might have to manually attach subscriptions using the commands shown in the troubleshooting section.</p> 
+          </div>
+         </div> 
+        </div> 
+       </div>
+      </div>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <ol class="ol"> 
+       <li class="li">Refresh the subscription information on your system: <pre class="pre codeblock"><code>$ sudo subscription-manager refresh</code></pre> </li> 
+       <li class="li">Verify your registration: <pre class="pre codeblock"><code>$ sudo subscription-manager identity</code></pre> <p class="p">This command displays your system identity, name, organization name, and organization ID, confirming successful registration.</p> </li> 
+      </ol> 
+     </section> 
+     <section class="section tasktroubleshooting"> 
+      <ul class="ul"> 
+       <li class="li">For legacy accounts not using SCA, you might have to manually attach subscriptions: <pre class="pre codeblock"><code>$ sudo subscription-manager list --available --all | grep -A 30 "Ansible Automation Platform"</code></pre> <p class="p">This command displays the subscription details including the Pool ID. Look for the <code class="ph codeph">Pool ID:</code> line in the output.</p> <p class="p">Once you have identified the correct Pool ID, attach the subscription:</p> <pre class="pre codeblock"><code>$ sudo subscription-manager attach --pool=&lt;pool_id&gt;</code></pre> 
+        <div class="note note note_note">
+         <span class="note__title">Note:</span> 
+         <div class="note__body"> 
+          <p class="p">Do not use MCT4022 as a <code class="ph codeph">pool_id</code> as it can cause subscription attachment to fail.</p> 
+         </div>
+        </div> </li> 
+       <li class="li">For legacy accounts not using SCA, if you are unable to locate certain packages that came bundled with the Ansible Automation Platform installer, or if you are seeing a <code class="ph codeph"><em class="ph i">Repositories disabled by configuration</em></code> message, use the following steps to identify and enable the required repository: 
+        <ol class="ol"> 
+         <li class="li">List available repositories: <pre class="pre codeblock"><code>$ sudo subscription-manager repos --list | grep -i ansible-automation-platform</code></pre> </li> 
+         <li class="li">Identify the repository name that matches your RHEL version, Ansible Automation Platform version, and architecture (for example, <code class="ph codeph">ansible-automation-platform-2.6-for-rhel-9-x86_64-rpms</code>).</li> 
+         <li class="li">Enable the repository: <pre class="pre codeblock"><code>$ sudo subscription-manager repos --enable &lt;repository_name&gt;</code></pre> </li> 
+        </ol> </li> 
+      </ul> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-gs-write-playbook">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Write a playbook</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Create a playbook that pings your hosts and prints a "Hello world" message.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">Ansible uses the YAML syntax. YAML is a human-readable language that enables you to create playbooks without having to learn a complicated coding language.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Create a file named <code class="ph codeph">playbook.yaml</code> in your <code class="ph codeph">ansible_quickstart</code> directory, with the following content: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>- name: My first play
+  hosts: myhosts
+  tasks:
+    - name: Ping my hosts
+    ansible.builtin.ping:
+
+    - name: Print message
+    ansible.builtin.debug:
+      msg: Hello world</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Run your playbook: </span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>$ ansible-playbook -i inventory.ini playbook.yaml</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">Ansible returns the following output:</p> 
+      <pre class="pre codeblock"><code>PLAY [My first play] ********************************************************
+
+TASK [Gathering Facts] ******************************************************
+ok: [192.0.2.50]
+ok: [192.0.2.51]
+ok: [192.0.2.52]
+
+TASK [Ping my hosts] ********************************************************
+ok: [192.0.2.50]
+ok: [192.0.2.51]
+ok: [192.0.2.52]
+
+TASK [Print message] ********************************************************
+ok: [192.0.2.50] =&gt; {
+    "msg": "Hello world"
+}
+ok: [192.0.2.51] =&gt; {
+
+    "msg": "Hello world"
+}
+ok: [192.0.2.52] =&gt; {
+    "msg": "Hello world"
+}
+
+PLAY RECAP ******************************************************************
+192.0.2.50: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+192.0.2.51: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+192.0.2.52: ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0</code></pre> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_to_playbooks" title="An Ansible Playbook is a blueprint for automation tasks, which are actions executed with limited manual effort across an inventory of solutions. Playbooks tell Ansible what to do on which devices.">Getting started with playbooks</a></li>
+      </ul>
+     </div>
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://developers.redhat.com/products/ansible/lightspeed?source=sso" target="_blank" rel="external noopener">Red Hat Ansible Lightspeed with IBM watsonx Code Assistant</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

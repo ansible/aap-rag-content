@@ -1,0 +1,70 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-rhel-configure-external-db">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure an external database</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">By default, the Ansible automation portal RHEL appliance runs a built-in PostgreSQL database. For production deployments, connect to an external PostgreSQL database.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">A PostgreSQL database instance accessible from the appliance.</li> 
+       <li class="li">A database user with the <code class="ph codeph">CREATEDB</code> privilege.</li> 
+       <li class="li">The database password.</li> 
+       <li class="li">SSH access to the appliance.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">You can provide external database settings in the cloud-init user-data at first boot or configure the database after deployment. For the cloud-init template fields, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_rhel_prerequisites" title="Before you deploy an Ansible automation portal RHEL appliance, verify that your environment meets the system, network, and access requirements.">External database cloud-init template</a>.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Edit the configuration file:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo vi /etc/portal/configs/app-config/app-config.production.yaml</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Update the <code class="ph codeph">backend.database</code> section:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-yaml"><code>backend:
+  database:
+    connection:
+      host: <var class="keyword varname">database-host</var>
+      port: 5432
+      user: <var class="keyword varname">database-user</var>
+      ssl:
+        require: true
+    client: pg</code></pre> 
+         <p class="p">The database user requires the <code class="ph codeph">CREATEDB</code> privilege.</p> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Store the database password as a Podman secret:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ printf '%s' "<var class="keyword varname">database-password</var>" | sudo podman secret create portal_postgresql_password -</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Restart the Ansible automation portal service:</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock language-terminal"><code>$ sudo systemctl restart portal</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">Check the portal logs to verify the database connection:</p> 
+      <pre class="pre codeblock language-terminal"><code>$ sudo journalctl -u portal --no-pager | grep -i "database"</code></pre> 
+      <p class="p">The output shows a successful database connection with no errors.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

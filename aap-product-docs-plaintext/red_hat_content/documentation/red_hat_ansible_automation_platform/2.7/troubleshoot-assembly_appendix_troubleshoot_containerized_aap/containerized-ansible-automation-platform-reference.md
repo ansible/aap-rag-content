@@ -1,0 +1,280 @@
+# Troubleshoot your containerized deployment
+## Understand the architecture of your containerized deployment
+
+Use this information to understand the architecture for your containerized Ansible Automation Platform deployment.
+
+**Can you give details of the architecture for the Ansible Automation Platform containerized design?**
+
+We use as much of the underlying Red Hat Enterprise Linux technology as possible. Podman is used for the container runtime and management of services.
+
+Use `podman ps` to list the running containers on the system.
+
+Use `podman images` to display information about locally stored images.
+
+Containerized Ansible Automation Platform runs as rootless containers for enhanced security by default. This means you can install containerized Ansible Automation Platform by using any local unprivileged user account. Privilege escalation is only needed for certain root level tasks, and by default is not needed to use root directly.
+
+The installation program adds the following files to the filesystem where you run the installation program on the underlying Red Hat Enterprise Linux host:
+
+```
+$ tree -L 1
+.
+├── aap_install.log
+├── ansible.cfg
+├── collections
+├── galaxy.yml
+├── inventory
+├── LICENSE
+├── meta
+├── playbooks
+├── plugins
+├── README.md
+├── requirements.yml
+├── roles
+```
+The installation root directory includes other containerized services that make use of Podman volumes.
+
+Here are some examples for further reference:
+
+The `containers` directory includes some of the Podman specifics used and installed for the execution plane:
+
+```
+containers/
+├── podman
+├── storage
+│   ├── defaultNetworkBackend
+│   ├── libpod
+│   ├── networks
+│   ├── overlay
+│   ├── overlay-containers
+│   ├── overlay-images
+│   ├── overlay-layers
+│   ├── storage.lock
+│   └── userns.lock
+└── storage.conf
+```
+The `controller` directory has some of the installed configuration and runtime data points:
+
+```
+controller/
+├── data
+│   ├── job_execution
+│   ├── projects
+│   └── rsyslog
+├── etc
+│   ├── conf.d
+│   ├── launch_awx_task.sh
+│   ├── settings.py
+│   ├── tower.cert
+│   └── tower.key
+├── nginx
+│   └── etc
+├── rsyslog
+│   └── run
+└── supervisor
+└── run
+```
+The `receptor` directory has the automation mesh configuration:
+
+```
+receptor/
+├── etc
+│   └── receptor.conf
+└── run
+├── receptor.sock
+└── receptor.sock.lock
+```
+After installation, you will also find other files in the local user’s `/home` directory such as the `.cache` directory:
+
+```
+.cache/
+├── containers
+│   └── short-name-aliases.conf.lock
+└── rhsm
+└── rhsm.log
+```
+As services are run using rootless Podman by default, you can use other services such as running `systemd` as non-privileged users. Under `systemd` you can see some of the component service controls available:
+
+The `.config` directory:
+
+```
+.config/
+├── cni
+│   └── net.d
+│       └── cni.lock
+├── containers
+│   ├── auth.json
+│   └── containers.conf
+└── systemd
+└── user
+├── automation-controller-rsyslog.service
+├── automation-controller-task.service
+├── automation-controller-web.service
+├── default.target.wants
+├── podman.service.d
+├── postgresql.service
+├── receptor.service
+├── redis.service
+└── sockets.target.wants
+```
+This is specific to Podman and conforms to the Open Container Initiative (OCI) specifications. When you run Podman as the root user `/var/lib/containers` is used by default. For standard users the hierarchy under `$HOME/.local` is used.
+
+The `.local` directory:
+
+```
+.local/
+└── share
+└── containers
+├── cache
+├── podman
+└── storage
+```
+As an example `.local/storage/volumes` contains what the output from `podman volume ls` provides:
+
+```
+$ podman volume ls
+
+DRIVER      VOLUME NAME
+local       d73d3fe63a957bee04b4853fd38c39bf37c321d14fdab9ee3c9df03645135788
+local       postgresql
+local       redis_data
+local       redis_etc
+local       redis_run
+```
+The execution plane is isolated from the control plane main services to ensure it does not affect the main services.
+
+Control plane services run with the standard Podman configuration and can be found in: `~/.local/share/containers/storage`.
+
+Execution plane services (automation controller, Event-Driven Ansible and execution nodes) use a dedicated configuration found in `~/aap/containers/storage.conf`. This separation prevents execution plane containers from affecting the control plane services.
+
+You can view the execution plane configuration with one of the following commands:
+
+```
+CONTAINERS_STORAGE_CONF=~/aap/containers/storage.conf podman <subcommand>
+```
+
+```
+CONTAINER_HOST=unix://run/user/<user uid>/podman/podman.sock podman <subcommand>
+```
+**How can I see host resource utilization statistics?**
+
+Run the following command to display host resource utilization statistics:
+
+```
+$ podman container stats -a
+```
+Example output based on a Dell sold and offered containerized Ansible Automation Platform solution (DAAP) install that utilizes ~1.8 GB RAM:
+
+```
+ID            NAME                           CPU %       MEM USAGE / LIMIT  MEM %       NET IO      BLOCK IO    PIDS        CPU TIME    AVG CPU %
+0d5d8eb93c18  automation-controller-web      0.23%       959.1MB / 3.761GB  25.50%      0B / 0B     0B / 0B     16          20.885142s  1.19%
+3429d559836d  automation-controller-rsyslog  0.07%       144.5MB / 3.761GB  3.84%       0B / 0B     0B / 0B     6           4.099565s   0.23%
+448d0bae0942  automation-controller-task     1.51%       633.1MB / 3.761GB  16.83%      0B / 0B     0B / 0B     33          34.285272s  1.93%
+7f140e65b57e  receptor                       0.01%       5.923MB / 3.761GB  0.16%       0B / 0B     0B / 0B     7           1.010613s   0.06%
+c1458367ca9c  redis                          0.48%       10.52MB / 3.761GB  0.28%       0B / 0B     0B / 0B     5           9.074042s   0.47%
+ef712cc2dc89  postgresql                     0.09%       21.88MB / 3.761GB  0.58%       0B / 0B     0B / 0B     21          15.571059s  0.80%
+```
+**How much storage is used and where?**
+
+The container volume storage is under the local user at `$HOME/.local/share/containers/storage/volumes`.
+
+1. To view the details of each volume, run the following command:
+
+```
+$ podman volume ls
+```
+
+2. Run the following command to display detailed information about a specific volume:
+
+```
+$ podman volume inspect <volume_name>
+```
+
+For example:
+
+```
+$ podman volume inspect postgresql
+```
+Example output:
+
+```
+[
+{
+"Name": "postgresql",
+"Driver": "local",
+"Mountpoint": "/home/aap/.local/share/containers/storage/volumes/postgresql/_data",
+"CreatedAt": "2024-01-08T23:39:24.983964686Z",
+"Labels": {},
+"Scope": "local",
+"Options": {},
+"MountCount": 0,
+"NeedsCopyUp": true
+}
+]
+```
+Several files created by the installation program are located in `$HOME/aap/` and bind-mounted into various running containers.
+
+1. To view the mounts associated with a container run the following command:
+
+```
+$ podman ps --format "{{.ID}}\t{{.Command}}\t{{.Names}}"
+```
+Example output:
+
+```
+89e779b81b83	run-postgresql	postgresql
+4c33cc77ef7d	run-redis	redis
+3d8a028d892d	/usr/bin/receptor...	receptor
+09821701645c	/usr/bin/launch_a...	automation-controller-rsyslog
+a2ddb5cac71b	/usr/bin/launch_a...	automation-controller-task
+fa0029a3b003	/usr/bin/launch_a...	automation-controller-web
+20f192534691	gunicorn --bind 1...	automation-eda-api
+f49804c7e6cb	daphne -b 127.0.0...	automation-eda-daphne
+d340b9c1cb74	/bin/sh -c nginx ...	automation-eda-web
+111f47de5205	aap-eda-manage rq...	automation-eda-worker-1
+171fcb1785af	aap-eda-manage rq...	automation-eda-worker-2
+049d10555b51	aap-eda-manage rq...	automation-eda-activation-worker-1
+7a78a41a8425	aap-eda-manage rq...	automation-eda-activation-worker-2
+da9afa8ef5e2	aap-eda-manage sc...	automation-eda-scheduler
+8a2958be9baf	gunicorn --name p...	automation-hub-api
+0a8b57581749	gunicorn --name p...	automation-hub-content
+68005b987498	nginx -g daemon o...	automation-hub-web
+cb07af77f89f	pulpcore-worker	automation-hub-worker-1
+a3ba05136446	pulpcore-worker	automation-hub-worker-2
+```
+
+2. Run the following command:
+
+```
+$ podman inspect <container_name> | jq -r .[].Mounts[].Source
+```
+Example output:
+
+```
+/home/aap/.local/share/containers/storage/volumes/receptor_run/_data
+/home/aap/.local/share/containers/storage/volumes/redis_run/_data
+/home/aap/aap/controller/data/rsyslog
+/home/aap/aap/controller/etc/tower.key
+/home/aap/aap/controller/etc/conf.d/callback_receiver_workers.py
+/home/aap/aap/controller/data/job_execution
+/home/aap/aap/controller/nginx/etc/controller.conf
+/home/aap/aap/controller/etc/conf.d/subscription_usage_model.py
+/home/aap/aap/controller/etc/conf.d/cluster_host_id.py
+/home/aap/aap/controller/etc/conf.d/insights.py
+/home/aap/aap/controller/rsyslog/run
+/home/aap/aap/controller/data/projects
+/home/aap/aap/controller/etc/settings.py
+/home/aap/aap/receptor/etc/receptor.conf
+/home/aap/aap/controller/etc/conf.d/execution_environments.py
+/home/aap/aap/tls/extracted
+/home/aap/aap/controller/supervisor/run
+/home/aap/aap/controller/etc/uwsgi.ini
+/home/aap/aap/controller/etc/conf.d/container_groups.py
+/home/aap/aap/controller/etc/launch_awx_task.sh
+/home/aap/aap/controller/etc/tower.cert
+```
+
+3. If the `jq` RPM is not installed, install it by running the following command:
+
+```
+$ sudo dnf -y install jq
+```

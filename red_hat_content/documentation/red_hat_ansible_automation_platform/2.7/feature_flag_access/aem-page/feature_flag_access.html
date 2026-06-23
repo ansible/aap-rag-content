@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-379b21a0-d869-43d4-94d2-121100a771c2">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Feature flag access</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Access to the feature flags page is role-based; in other words, access depends on the level of access a user has.</p> 
+     <section class="section" id="GUID-379b21a0-d869-43d4-94d2-121100a771c2__section_1"> 
+      <p class="p">When feature flags are enabled, the following access rules apply.</p> 
+      <p class="p">Superusers (administrators):</p> 
+      <div class="p"> 
+       <ul class="ul" id="GUID-379b21a0-d869-43d4-94d2-121100a771c2__ul_1"> 
+        <li class="li">Can view the feature flags section.</li> 
+        <li class="li">Can toggle runtime feature flags on and off.</li> 
+        <li class="li">Can access all editable feature flags.</li> 
+       </ul> 
+      </div> 
+      <p class="p">Auditors: </p> 
+      <div class="p"> 
+       <ul class="ul" id="GUID-379b21a0-d869-43d4-94d2-121100a771c2__ul_2"> 
+        <li class="li">Can view the feature flags section.</li> 
+        <li class="li">Can view all flag metadata and current states.</li> 
+        <li class="li"><strong class="ph b">Cannot</strong> toggle runtime feature flags, as they have read-only access</li> 
+       </ul> 
+      </div> 
+      <p class="p">Normal users: </p> 
+      <div class="p"> 
+       <ul class="ul" id="GUID-379b21a0-d869-43d4-94d2-121100a771c2__ul_3"> 
+        <li class="li">Cannot view the feature flags section.</li> 
+        <li class="li">Do not see the feature flags menu item in their UI navigation panel.</li> 
+        <li class="li">Are blocked from direct URL access to the feature flags section.</li> 
+       </ul> 
+      </div> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

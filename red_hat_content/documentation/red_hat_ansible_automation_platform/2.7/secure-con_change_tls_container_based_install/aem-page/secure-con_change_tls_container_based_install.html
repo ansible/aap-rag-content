@@ -1,0 +1,132 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-change-tls-container-based-install"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Container-based installations</h1> 
+     <p class="shortdesc">You can change the TLS certificates and keys for your container-based Ansible Automation Platform installation. This process involves a preparation step, either providing new custom certificates or deleting or moving the old certificates, followed by running the installation program.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="changing-tls-certificates-keys-using-installation-program"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Change TLS certificates and keys using the installation program</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">The following procedure describes how to update the TLS certificates and keys by using the installation program.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">To prepare the certificates and keys, choose one of the following methods: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">To provide custom certificates - For each service that requires updated TLS certificates, copy the new certificates and keys to a path relative to the Ansible Automation Platform installer. Then update the inventory file variables with the absolute paths to the new files. <pre class="pre codeblock language-yaml"><code># Platform gateway
+gateway_tls_cert=&lt;path_to_tls_certificate&gt;
+gateway_tls_key=&lt;path_to_tls_key&gt;
+gateway_pg_tls_cert=&lt;path_to_tls_certificate&gt;
+gateway_pg_tls_key=&lt;path_to_tls_key&gt;
+gateway_redis_tls_cert=&lt;path_to_tls_certificate&gt;
+gateway_redis_tls_key=&lt;path_to_tls_key&gt;
+
+# Automation controller
+controller_tls_cert=&lt;path_to_tls_certificate&gt;
+controller_tls_key=&lt;path_to_tls_key&gt;
+controller_pg_tls_cert=&lt;path_to_tls_certificate&gt;
+controller_pg_tls_key=&lt;path_to_tls_key&gt;
+
+# Automation hub
+hub_tls_cert=&lt;path_to_tls_certificate&gt;
+hub_tls_key=&lt;path_to_tls_key&gt;
+hub_pg_tls_cert=&lt;path_to_tls_certificate&gt;
+hub_pg_tls_key=&lt;path_to_tls_key&gt;
+
+# Event-Driven Ansible
+eda_tls_cert=&lt;path_to_tls_certificate&gt;
+eda_tls_key=&lt;path_to_tls_key&gt;
+eda_pg_tls_cert=&lt;path_to_tls_certificate&gt;
+eda_pg_tls_key=&lt;path_to_tls_key&gt;
+
+# PostgreSQL
+postgresql_tls_cert=&lt;path_to_tls_certificate&gt;
+postgresql_tls_key=&lt;path_to_tls_key&gt;
+
+# Receptor
+receptor_tls_cert=&lt;path_to_tls_certificate&gt;
+receptor_tls_key=&lt;path_to_tls_key&gt;</code></pre> </li> 
+            <li class="li">To generate new certificates - If you want the installation program to generate a new certificate for a service, delete or move the existing certificates and keys. 
+             <table class="table">
+              <caption>
+               <span class="table--title-label">Table 1. </span><span class="title">Certificate and key file paths per service</span>
+              </caption>
+              <colgroup>
+               <col style="width:20%">
+               <col style="width:40%">
+               <col style="width:40%">
+              </colgroup>
+              <thead class="thead"> 
+               <tr class="row"> 
+                <th class="entry" id="changing-tls-certificates-keys-using-installation-program__entry__1">Service</th> 
+                <th class="entry" id="changing-tls-certificates-keys-using-installation-program__entry__2">Certificate file path</th> 
+                <th class="entry" id="changing-tls-certificates-keys-using-installation-program__entry__3">Key file path</th> 
+               </tr> 
+              </thead>
+              <tbody class="tbody"> 
+               <tr class="row"> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__1"> <p class="p">Automation controller</p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__2"> <p class="p"><code class="ph codeph">~/aap/controller/etc/tower.cert</code></p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__3"> <p class="p"><code class="ph codeph">~/aap/controller/etc/tower.key</code></p> </td> 
+               </tr> 
+               <tr class="row"> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__1"> <p class="p">Event-Driven Ansible</p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__2"> <p class="p"><code class="ph codeph">~/aap/eda/etc/eda.cert</code></p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__3"> <p class="p"><code class="ph codeph">~/aap/eda/etc/eda.key</code></p> </td> 
+               </tr> 
+               <tr class="row"> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__1"> <p class="p">Platform gateway</p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__2"> <p class="p"><code class="ph codeph">~/aap/gateway/etc/gateway.cert</code></p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__3"> <p class="p"><code class="ph codeph">~/aap/gateway/etc/gateway.key</code></p> </td> 
+               </tr> 
+               <tr class="row"> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__1"> <p class="p">Automation hub</p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__2"> <p class="p"><code class="ph codeph">~/aap/hub/etc/pulp.cert</code></p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__3"> <p class="p"><code class="ph codeph">~/aap/hub/etc/pulp.key</code></p> </td> 
+               </tr> 
+               <tr class="row"> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__1"> <p class="p">PostgreSQL</p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__2"> <p class="p"><code class="ph codeph">~/aap/postgresql/server.crt</code></p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__3"> <p class="p"><code class="ph codeph">~/aap/postgresql/server.key</code></p> </td> 
+               </tr> 
+               <tr class="row"> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__1"> <p class="p">Receptor</p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__2"> <p class="p"><code class="ph codeph">~/aap/receptor/etc/receptor.crt</code></p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__3"> <p class="p"><code class="ph codeph">~/aap/receptor/etc/receptor.key</code></p> </td> 
+               </tr> 
+               <tr class="row"> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__1"> <p class="p">Redis</p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__2"> <p class="p"><code class="ph codeph">~/aap/redis/server.crt</code></p> </td> 
+                <td class="entry" headers="changing-tls-certificates-keys-using-installation-program__entry__3"> <p class="p"><code class="ph codeph">~/aap/redis/server.key</code></p> </td> 
+               </tr> 
+              </tbody>
+             </table> </li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">After preparing your certificates, run the <code class="ph codeph">install</code> playbook from your installation directory: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>ansible-playbook -i &lt;inventory_file_name&gt; ansible.containerized_installer.install</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">Verify that the new TLS certificates are in use by checking that the services are running and accessible. To do this, check a specific endpoint by using <code class="ph codeph">curl</code>:</p> 
+        <pre class="pre codeblock"><code>$ curl -vk https://&lt;hostname_or_ip&gt;:&lt;port_number&gt;/api/v2/</code></pre> 
+        <p class="p">The output of this command gives details about the TLS handshake. Look for the following output to confirm the correct certificate is being used:</p> 
+        <pre class="pre codeblock"><code>*  SSL certificate verify OK</code></pre> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

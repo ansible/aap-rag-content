@@ -1,0 +1,66 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="proc-configure-vs-code-containerized-install"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure the Ansible VS Code extension</h1> 
+    <div class="body taskbody"> 
+     <p class="shortdesc">If you deployed the Ansible Lightspeed coding assistant, you must also configure the Ansible VS Code extension with the generated Ansible Lightspeed URL. This configuration enables the Ansible users in your organization to use the Ansible Lightspeed coding assistant to create Ansible content.</p> 
+     <section class="section prereq"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Before you begin</h2> 
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have installed VS Code version 1.70.1 or later.</li> 
+       <li class="li">Your organization administrator has configured an IBM watsonx Code Assistant model for your organization.</li> 
+       <li class="li">Your network or firewall configuration permits ingress traffic on port 8447. This port is required for containerized installations to connect IBM watsonx Code Assistant with the Ansible VS Code extension, which then provides access to the Ansible Lightspeed coding assistant.</li> 
+      </ul> 
+     </section> 
+     <section class="section context"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">About this task</h2> 
+      </div> 
+     </section> 
+     <section> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">Procedure</h2> 
+      </div> 
+      <ol class="ol steps"> 
+       <li class="li step stepexpand"> <span class="ph cmd">Open the VS Code application.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">From the Activity bar, click the <strong class="ph b">Extensions</strong> icon <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/extensions-icon-vscode.png" alt="Extensions">.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">From the Installed Extensions list, select <strong class="ph b">Ansible</strong>.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Ansible</strong> extension page, click the <strong class="ph b">Settings</strong> icon and select <strong class="ph b">Extension Settings</strong>.</span> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b">Ansible Lightspeed</strong> settings, and specify the following information: </span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep"> <span class="ph cmd">Ensure that the <strong class="ph b">Enable Ansible Lightspeed with watsonx Code Assistant inline suggestions</strong> checkbox is selected.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">In the <strong class="ph b">URL for Ansible Lightspeed</strong> field, verify that you have the following URL: <code class="ph codeph">https://&lt;node.ansible.com&gt;:8447</code>.</span> </li> 
+         <li class="li substep"> <span class="ph cmd">Select the <strong class="ph b">Enable Ansible Lightspeed with watsonx Code Assistant inline suggestions</strong> checkbox.</span> </li> 
+        </ol> </li> 
+       <li class="li step stepexpand"> <span class="ph cmd">Optional: If you want to use the custom model instead of the default model, in the <strong class="ph b">Model ID Override</strong> field, enter the custom model ID. The <strong class="ph b">model-override</strong> setting enables you to override the default model and use the custom model, after your organization administrator has created a custom model and has shared the model ID with you separately. </span> 
+        <div class="itemgroup info"> 
+         <p class="p">Your settings are automatically saved in VS Code.</p> 
+         <div class="note note note_note"> <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">If your organization recently subscribed to the Red Hat Ansible Automation Platform, it might take a few hours for Red Hat Ansible Lightspeed to detect the new subscription. In VS Code, use the <strong class="ph b">Refresh</strong> button in the Ansible extension from the Activity bar to check again.</p> 
+          </div> 
+         </div> 
+        </div> </li> 
+      </ol> 
+     </section> 
+     <section class="section postreq"> 
+      <div class="tasklabel"> 
+       <h2 class="sectiontitle tasklabel">What to do next</h2> 
+      </div> 
+      <ul class="ul"> 
+       <li class="li">After you configure the Ansible VS Code extension with the generated Ansible Lightspeed URL, you can use the Ansible VS Code extension and start developing Ansible content. 
+        <ol class="ol"> 
+         <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_install_ansible_vscode_extension#login-vscode-extension" title="After installing and configuring the VS Code extension, you can log in to the Ansible Lightspeed service.">Log in to Red Hat Ansible Lightspeed through the Ansible VS Code extension</a>.</li> 
+         <li class="li"><a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_developing_ansible_content#developing-ansible-content" title="As an automation developer, you can use Red Hat Ansible Lightspeed to implement your organization’s automation strategy. Red Hat Ansible Lightspeed can help you create and use custom automation content.">Develop Ansible content</a>.</li> 
+        </ol> </li> 
+      </ul> 
+     </section> 
+    </div> 
+   </article> 
+  </main>  
+ </body>
+</html>

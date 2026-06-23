@@ -1,0 +1,46 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="dynamic-chained-dependencies">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Chain multiple dynamic dependencies</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">You can define multiple <code class="ph codeph">dependencies</code> in the same parameter step. Each dependency operates independently.</p> 
+     <section class="section"> 
+      <p class="p">In this example, selecting "Yes" for the restart confirmation reveals a reason field, while enabling advanced options reveals additional technical fields:</p> 
+      <pre class="pre codeblock"><code>    dependencies:
+      showAdvanced:
+        allOf:
+          - if:
+              properties:
+                showAdvanced:
+                  const: true
+            then:
+              properties:
+                maxSyncDelay:
+                  type: number
+                  title: Max sync delay (ms)
+                  default: 500
+      serviceRestart:
+        allOf:
+          - if:
+              properties:
+                serviceRestart:
+                  const: 'Yes'
+            then:
+              properties:
+                restartReason:
+                  type: string
+                  title: Reason for restart
+                  description: Provide a reason for restarting the service.
+                  default: Applying new configuration.
+                  minLength: 10
+                  errorMessage:
+                    minLength: 'Provide a more detailed reason (at least 10 characters).'</code></pre> 
+      <p class="p">Each key under <code class="ph codeph">dependencies</code> corresponds to a property name in the same parameter step. When the user changes a field value, only the matching <code class="ph codeph">if</code>/<code class="ph codeph">then</code> branch is displayed.</p> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

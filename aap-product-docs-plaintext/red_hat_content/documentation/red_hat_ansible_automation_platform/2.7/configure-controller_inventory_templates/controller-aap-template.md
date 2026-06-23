@@ -1,0 +1,11 @@
+# Configure supported inventory plugin templates
+## Red Hat Ansible Automation Platform
+
+Learn about the configuration options available in a automation controller Red Hat Ansible Automation Platform inventory
+
+```
+include_metadata: true
+inventory_id: <inventory_id or url_quoted_named_url>
+plugin: awx.awx.tower
+validate_certs: <true or false>
+```

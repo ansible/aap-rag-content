@@ -1,0 +1,594 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="proc-controller-add-source"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Add a source to an inventory</h1> 
+     <div class="body taskbody"> 
+      <p class="shortdesc">Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.</p> 
+      <section class="section context"> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">About this task</h2> 
+       </div> 
+       <p class="p">Inventory sources are not associated with groups. Spawned groups are top-level and can still have child groups. All of these spawned groups can have hosts. Adding a source to an inventory only applies to standard inventories.</p> 
+      </section> 
+      <section> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">Procedure</h2> 
+       </div> 
+       <ol class="ol steps"> 
+        <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want to add a source to.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">In the Inventory <strong class="ph b">Details</strong> page, select the <strong class="ph b">Sources</strong> tab.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details: </span> 
+         <div class="itemgroup info"> 
+          <ul class="ul"> 
+           <li class="li"><strong class="ph b">Name</strong> (required):</li> 
+           <li class="li">Optional: <strong class="ph b">Description</strong>: Enter a description as appropriate.</li> 
+           <li class="li">Optional: <strong class="ph b">Execution Environment</strong>: Click the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/search.png" width="15" alt="Search"> icon or enter the name of the execution environment with which you want to run your inventory imports.</li> 
+           <li class="li"><strong class="ph b">Source</strong>: Choose a source for your inventory. </li> 
+          </ul> 
+         </div> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">When the information for your chosen inventory sources is complete, you can optionally specify other common parameters, such as verbosity, host filters, and variables.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Verbosity</strong> menu to select the level of output on any inventory source’s update jobs.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Host filter</strong> field to specify only matching host names to be imported into automation controller.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Enabled variable</strong> field, specify that automation controller retrieves the enabled state from the dictionary of host variables. You can specify the enabled variable by using dot notation as 'car.key', in which case the lookup searches nested dictionaries, equal to: <code class="ph codeph">from_dict.get('car', {}).get('key', default)</code>. </span> 
+         <div class="itemgroup info"> 
+          <p class="p">The <strong class="ph b">Enabled value</strong> field is ignored unless you set the <strong class="ph b">Enabled variable</strong> field. If the enabled variable matches this value, the host is enabled on import.</p> 
+         </div> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">If you specified a dictionary of host variables in the <strong class="ph b">Enabled variable</strong> field, you can give a value to enable on import. For example, for <code class="ph codeph">enabled_var='status.power_state'</code> and <code class="ph codeph">'enabled_value='powered_on'</code> in the following host variables, the host is marked <code class="ph codeph">enabled</code>: </span> 
+         <div class="itemgroup info"> 
+          <pre class="pre">{
+"status": {
+"power_state": "powered_on",
+"created": "2020-08-04T18:13:04+00:00",
+"healthy": true
+},
+"name": "foobar",
+"ip_address": "192.168.2.1"
+}</pre> 
+          <p class="p">If <code class="ph codeph">power_state</code> is any value other than <code class="ph codeph">powered_on</code>, then the host is disabled when imported into automation controller. If the key is not found, then the host is enabled.</p> 
+         </div> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">All cloud inventory sources have the following update options: </span> 
+         <div class="itemgroup info"> 
+          <ul class="ul"> 
+           <li class="li"><strong class="ph b">Overwrite</strong>: If checked, any hosts and groups that were previously present on the external source but are now removed, are removed from the automation controller inventory. Hosts and groups that were not managed by the inventory source are promoted to the next manually created group, or, if there is no manually created group to promote them into, they are left in the "all" default group for the inventory. <p class="p">When not checked, local child hosts and groups not found on the external source remain untouched by the inventory update process.</p> </li> 
+           <li class="li"><strong class="ph b">Overwrite variables</strong>: If checked, all variables for child groups and hosts are removed and replaced by those found on the external source. <p class="p">When not checked, a merge is performed, combining local variables with those found on the external source.</p> </li> 
+           <li class="li"><strong class="ph b">Update on launch</strong>: Each time a job runs using this inventory, refresh the inventory from the selected source before executing job tasks. <p class="p">To avoid job overflows if jobs are spawned faster than the inventory can synchronize, selecting this enables you to configure a <strong class="ph b">Cache Timeout</strong> to previous cache inventory synchronizations for a certain number of seconds.</p> <p class="p">The <strong class="ph b">Update on launch</strong> setting refers to a dependency system for projects and inventory, and does not specifically exclude two jobs from running at the same time.</p> <p class="p">If a cache timeout is specified, then the dependencies for the second job are created, and it uses the project and inventory update that the first job spawned.</p> <p class="p">Both jobs then wait for that project or inventory update to finish before proceeding. If they are different job templates, they can then both start and run at the same time, if the system has the capacity to do so. If you intend to use automation controller’s provisioning callback feature with a dynamic inventory source, <strong class="ph b">Update on launch</strong> must be set for the inventory group.</p> <p class="p">If you synchronize an inventory source that uses a project that has <strong class="ph b">Update On launch</strong> set, then the project might automatically update (according to cache timeout rules) before the inventory update starts.</p> <p class="p">You can create a job template that uses an inventory that sources from the same project that the template uses. In such a case, the project updates and then the inventory updates (if updates are not already in progress, or if the cache timeout has not already expired).</p> </li> 
+          </ul> 
+         </div> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">Review your entries and selections. This enables you to configure additional details, such as schedules and notifications.</span> </li> 
+        <li class="li step stepexpand"> <span class="ph cmd">To configure schedules associated with this inventory source, click the <strong class="ph b">Schedules</strong> tab: </span> 
+         <div class="itemgroup info"> 
+          <ul class="ul"> 
+           <li class="li">If schedules are already set up, then review, edit, enable or disable your schedule preferences.</li> 
+           <li class="li">If schedules have not been set up, you can add a schedule.</li> 
+          </ul> 
+         </div> </li> 
+       </ol> 
+      </section> 
+     </div> 
+     <nav role="navigation" class="related-links"> 
+      <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+       <br> 
+       <ul class="linklist"> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments" title="Run automation consistently across nodes with execution environments, which are container images that contain everything you need to run your automation.">Define, create, and build execution environments</a></li> 
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_schedules#controller-schedules" title="From the navigation panel, click Automation Execution > Schedules to access your configured schedules. The schedules list can be sorted by any of the attributes from each column by using the directional arrows. You can also search by name, date, or the name of the month in which a schedule runs.">Add a new schedule</a></li> 
+       </ul> 
+      </div> 
+      <div class="linklist"></div> 
+     </nav> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-controller-sourced-from-project"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Source from a project’s source control management</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">An inventory that is sourced from a project means that it uses the SCM type from the project it is tied to. For example, if the project’s source is from GitHub, then the inventory uses the same source.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Use the following procedure to configure a project-sourced inventory:</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want a source to and click the <strong class="ph b">Sources</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create source</strong> page, select <strong class="ph b">Sourced from a Project</strong> from the <strong class="ph b">Source</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter the following details in the additional fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Optional: <strong class="ph b">Source control branch/tag/commit</strong>: Enter the SCM branch, tags, commit hashes, arbitrary refs, or revision number (if applicable) from the source control (Git or Subversion) to checkout. <p class="p">This field only displays if the sourced project has the <strong class="ph b">Allow branch override</strong> option checked. For further information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#proc-scm-git-subversion" title="Configure automation controller projects to synchronize Ansible playbooks directly from Git and Subversion. Integrating with Source Control Management supports collaboration and helps ensure you always deploy the latest automation code.">SSCM Types - Configuring playbooks to use Git and Subversion</a>.</p> <p class="p"><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/projects-create-scm-project-branch-override-checked.png" alt="Allow branch override"></p> <p class="p">Some commit hashes and refs might not be available unless you also give a custom refspec in the next field. If left blank, the default is HEAD which is the last checked out Branch/Tag/Commit for this project.</p> </li> 
+            <li class="li">Optional: <strong class="ph b">Credential</strong>: Specify the credential to use for this source.</li> 
+            <li class="li"><strong class="ph b">Project</strong> (required): Pre-populates with a default project, otherwise, specify the project this inventory is using as its source. Click the <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/search.png" width="15" alt="Search"> icon to choose from a list of projects. If the list is extensive, use the search to narrow the options.</li> 
+            <li class="li"><strong class="ph b">Inventory file</strong> (required): Select an inventory file associated with the sourced project. If not already populated, you can type it into the text field within the menu to filter extraneous file types. In addition to a flat file inventory, you can point to a directory or an inventory script. <p class="p"><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/inventories-create-source-sourced-from-project-filter.png" alt="image"></p> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: You can specify the verbosity, host filter, enabled variable/value, and update options as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: To pass to the custom inventory script, you can set environment variables in the <strong class="ph b">Source variables</strong> field. You can also place inventory scripts in source control and then run it from a project. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_inventory_file_importing#assembly-inventory-file-importing" title="With automation controller you can select an inventory file from source control, rather than creating one from scratch.">Inventory File Importing</a>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section tasktroubleshooting"> 
+        <p class="p">If you are executing a custom inventory script from SCM, ensure that you set the execution bit (<code class="ph codeph">chmod +x</code>) for the script in your upstream source control.</p> 
+        <p class="p">If you do not, automation controller throws a <code class="ph codeph">[Error 13] Permission denied</code> error on execution.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-controller-amazon-ec2"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Source an inventory from Amazon Web Services EC2</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Use the following procedure to configure an AWS EC2-sourced inventory.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want a source to and click the <strong class="ph b">Sources</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create source</strong> page, select <strong class="ph b">Amazon EC2</strong> from the <strong class="ph b">Source</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">The <strong class="ph b">Create source</strong> window expands with additional fields. Enter the following details: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Optional: <strong class="ph b">Credential</strong>: Choose from an existing AWS credential. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials#controller-credentials" title="Credentials authenticate the automation controller user when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.">Managing user credentials</a>. <p class="p">If automation controller is running on an EC2 instance with an assigned IAM Role, the credential can be omitted, and the security credentials from the instance metadata are used instead. For more information about using IAM Roles, see <a class="xref" href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html" target="_blank" rel="external noopener">IAM roles for Amazon EC2_documentation_at_Amazon</a> documentation at Amazon.</p> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Source variables</strong> field to override variables used by the <code class="ph codeph">aws_ec2</code> inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the <a class="xref" href="https://console.redhat.com/ansible/automation-hub/repo/published/amazon/aws/content/inventory/aws_ec2" target="_blank" rel="external noopener">aws inventory plugin documentation</a>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section tasktroubleshooting"> 
+        <p class="p">If you only use <code class="ph codeph">include_filters</code>, the AWS plugin always returns all the hosts. To use this correctly, the first condition on the <code class="ph codeph">or</code> must be on <code class="ph codeph">filters</code> and then build the rest of the <code class="ph codeph">OR</code> conditions on a list of <code class="ph codeph">include_filters</code>.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-controller-inv-source-gce"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Source an inventory from Google Compute Engine</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to configure a Google-sourced inventory:</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the inventory name you want a source to and click the <strong class="ph b">Sources</strong> tab.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Add new source</strong> page, select <strong class="ph b">Google Compute Engine</strong> from the <strong class="ph b">Source</strong> list.</span> </li> 
+         <li class="li step"> <span class="ph cmd">The <strong class="ph b">Create source</strong> window expands with the required <strong class="ph b">Credential</strong> field. Choose from an existing GCE Credential. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials#controller-credentials" title="Credentials authenticate the automation controller user when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.">Managing user credentials</a>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Use the <strong class="ph b">Source Variables</strong> field to override variables used by the <code class="ph codeph">gcp_compute</code> inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the <a class="xref" href="https://console.redhat.com/ansible/automation-hub/repo/published/google/cloud/content/inventory/gcp_compute" target="_blank" rel="external noopener">gcp_compute inventory plugin documentation</a>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title5" id="proc-controller-azure-resource-manager"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Source an inventory from Microsoft Azure resource manager</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Use the following procedure to configure an Microsoft Azure Resource Manager-sourced inventory.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select the inventory name you want a source to and click the <strong class="ph b">Sources</strong> tab.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Create source</strong> page, select <strong class="ph b">Microsoft Azure Resource Manager</strong> from the <strong class="ph b">Source</strong> list.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Enter the following details in the additional fields:</span> </li> 
+         <li class="li step"> <span class="ph cmd">Optional: <strong class="ph b">Credential</strong>: Choose from an existing Azure Credential. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials#controller-credentials" title="Credentials authenticate the automation controller user when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.">Managing user credentials</a>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Use the <strong class="ph b">Source variables</strong> field to override variables used by the <code class="ph codeph">azure_rm</code> inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the <a class="xref" href="https://console.redhat.com/ansible/automation-hub/repo/published/azure/azcollection/content/inventory/azure_rm" target="_blank" rel="external noopener">azure_rm inventory plugin documentation</a>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="proc-controller-inv-source-vm-vcenter"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Source an inventory from VMware vCenter</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can configure automation controller to synchronize inventory from a VMware vCenter server. You can manage virtual machines as part of your automation workflows.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want a source to and click the <strong class="ph b">Sources</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create source</strong> page, select <strong class="ph b">VMware vCenter</strong> from the <strong class="ph b">Source</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">The <strong class="ph b">Create source</strong> window expands with additional fields. Enter the following details: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Optional: <strong class="ph b">Credential</strong>: Choose from an existing VMware credential. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials#controller-credentials" title="Credentials authenticate the automation controller user when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.">Managing user credentials</a>.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Source Variables</strong> field to override variables used by the <code class="ph codeph">vmware_inventory</code> inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the <a class="xref" href="https://github.com/ansible-collections/community.vmware/blob/main/plugins/inventory/vmware_vm_inventory.py" target="_blank" rel="external noopener">vmware_inventory inventory plugin</a>.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section tasktroubleshooting"> 
+        <p class="p">VMWare properties have changed from lower case to camel case. Automation controller provides aliases for the top-level keys, but lower case keys in nested properties have been discontinued.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title7" id="proc-controller-inv-source-vm-esxi"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Source an inventory from VMware ESXi</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to configure a VMWare ESXi sourced inventory.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want to add a source to, and click the <strong class="ph b">Sources</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enter a <strong class="ph b">Name</strong> for the source (required).</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create source</strong> page, select <strong class="ph b">VMware ESXi</strong> from the <strong class="ph b">Source</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">The <strong class="ph b">Create source</strong> window expands with additional fields. Enter the following details: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Credential</strong>: Choose from an existing VMware credential. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials#controller-credentials" title="Credentials authenticate the automation controller user when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.">Managing user credentials</a>.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Verbosity</strong> menu to select the level of output on any inventory source’s update jobs.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: You can specify the host filter, enabled variables or values, and update options as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Source Variables</strong> field to override variables used by the <code class="ph codeph">vmware_inventory</code> inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section tasktroubleshooting"> 
+        <p class="p">VMWare properties have changed from lower case to camel case. Automation controller provides aliases for the top-level keys, but lower case keys in nested properties have been discontinued.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://github.com/ansible-collections/vmware.vmware/blob/main/plugins/inventory/esxi_hosts.py" target="_blank" rel="external noopener">VMware ESxi plugin</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title8" id="proc-controller-inv-source-satellite"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Source an inventory from Red Hat Satellite 6</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">automation controller can integrate with Red Hat Satellite 6 as a dynamic inventory source.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Use the following procedure to configure a Red Hat Satellite-sourced inventory.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want a source to and click the <strong class="ph b">Sources</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create source</strong> page,, select <strong class="ph b">Red Hat Satellite 6</strong> from the <strong class="ph b">Source</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">The <strong class="ph b">Create source</strong> window expands with additional fields. Enter the following details: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Optional: <strong class="ph b">Credential</strong>: Choose from an existing Satellite Credential. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials#controller-credentials" title="Credentials authenticate the automation controller user when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.">Managing user credentials</a>.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Source Variables</strong> field to specify parameters used by the <code class="ph codeph">foreman</code> inventory source. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section tasktroubleshooting"> 
+        <p class="p">If you meet an issue with the automation controller inventory not having the "related groups" from Satellite, you might need to define these variables in the inventory source. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/configure-controller_inventory_templates#controller-rh-satellite" title="You can use automation controller to manage hosts registered to Red Hat Satellite 6 by using the Foreman dynamic inventory plugin.">Red Hat Satellite 6</a>.</p> 
+        <p class="p">If you see the message, <code class="ph codeph">"no foreman.id" variable(s) when syncing the inventory</code>, see the solution on the Red Hat Customer Portal at: <a class="xref" href="https://access.redhat.com/solutions/5826451" target="_blank" rel="external noopener">https://access.redhat.com/solutions/5826451</a>. Be sure to login with your customer credentials to access the full article.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title9" id="proc-controller-inv-source-rhlightspeed"> 
+      <h2 class="title topictitle2" id="ariaid-title9">Source an inventory from Red Hat Lightspeed</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can create an inventory source that uses Red Hat Lightspeed as the source of hosts.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Use the following procedure to configure a Red Hat Lightspeed-sourced inventory.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want a source to and click the <strong class="ph b">Sources</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create source</strong> page, select <strong class="ph b">Red Hat Lightspeed</strong> from the <strong class="ph b">Source</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">The <strong class="ph b">Create source</strong> window expands with additional fields. Enter the following details: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Optional: <strong class="ph b">Credential</strong>: Choose from an existing Red Hat Lightspeed Credential. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials#controller-credentials" title="Credentials authenticate the automation controller user when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.">Managing user credentials</a>.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Source Variables</strong> field to override variables used by the <code class="ph codeph">Red Hat Lightspeed</code> inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see <a class="xref" href="https://console.redhat.com/ansible/automation-hub/repo/published/redhat/insights/content/inventory/insights" target="_blank" rel="external noopener">Red Hat Lightspeed inventory plugin</a>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title10" id="proc-controller-inv-source-openstack"> 
+      <h2 class="title topictitle2" id="ariaid-title10">Source an inventory from OpenStack</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can create an inventory source that uses the OpenStack inventory plugin to dynamically generate inventory from your OpenStack cloud.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want a source to and click the <strong class="ph b">Sources</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create source</strong> page, select <strong class="ph b">OpenStack</strong> from the <strong class="ph b">Source</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">The <strong class="ph b">Create source</strong> window expands with additional fields. Enter the following details: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Optional: <strong class="ph b">Credential</strong>: Choose from an existing OpenStack Credential. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials#controller-credentials" title="Credentials authenticate the automation controller user when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.">Managing user credentials</a>.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Source Variables</strong> field to override variables used by the <code class="ph codeph">openstack</code> inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title11" id="proc-controller-inv-source-rh-virt"> 
+      <h2 class="title topictitle2" id="ariaid-title11">Source an inventory from Red Hat Virtualization</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to configure a Red Hat virtualization-sourced inventory.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want a source to and click the <strong class="ph b">Sources</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create source</strong> page, select <strong class="ph b">Red Hat Virtualization</strong> from the <strong class="ph b">Source</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">The <strong class="ph b">Create source</strong> window expands with additional fields. Enter the following details: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Optional: <strong class="ph b">Credential</strong>: Choose from an existing Red Hat Virtualization Credential. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials#controller-credentials" title="Credentials authenticate the automation controller user when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.">Managing user credentials</a>.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Source Variables</strong> field to override variables used by the <code class="ph codeph">ovirt</code> inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see <a class="xref" href="https://console.redhat.com/ansible/automation-hub/repo/published/redhat/rhv/content/inventory/ovirt" target="_blank" rel="external noopener">ovirt inventory plugin</a></span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Red Hat Virtualization (ovirt) inventory source requests are secure by default. To change this default setting, set the key <code class="ph codeph">ovirt_insecure</code> to <strong class="ph b">true</strong> in <code class="ph codeph">source_variables</code>, which is only available from the API details of the inventory source at the <code class="ph codeph">/api/v2/inventory_sources/N/</code> endpoint.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title12" id="proc-controller-inv-source-aap"> 
+      <h2 class="title topictitle2" id="ariaid-title12">Source an inventory from Red Hat Ansible Automation Platform</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">An inventory that is sourced from Red Hat Ansible Automation Platform uses the Red Hat Ansible Automation Platform inventory plugin to gather inventory data from the Red Hat Ansible Automation Platform platform.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Use the following procedure to configure an automation controller-sourced inventory.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory name you want a source to and click the <strong class="ph b">Sources</strong> tab.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Create source</strong> page, select <strong class="ph b">Red Hat Ansible Automation Platform</strong> from the <strong class="ph b">Source</strong> list.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">The <strong class="ph b">Create source</strong> window expands with additional fields. Enter the following details: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Optional: <strong class="ph b">Credential</strong>: Choose from an existing Red Hat Ansible Automation Platform Credential. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-assembly_controller_credentials#controller-credentials" title="Credentials authenticate the automation controller user when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.">Managing user credentials</a>.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Optional: You can specify the verbosity, host filter, enabled variables or values, and update options as described in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Source Variables</strong> field to override variables used by the <code class="ph codeph">controller</code> inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see <a class="xref" href="https://console.redhat.com/ansible/automation-hub/repo/published/ansible/controller/content/inventory/controller" target="_blank" rel="external noopener">Controller inventory plugin</a>. This requires your Red Hat Customer login.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title13" id="proc-controller-inv-source-terraform"> 
+      <h2 class="title topictitle2" id="ariaid-title13">Source an inventory from Terraform State</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Use the following procedure to create a Terraform State inventory source.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">This inventory source uses the terraform_state inventory plugin from the <a class="xref" href="https://console.redhat.com/ansible/automation-hub/repo/published/cloud/terraform/content/inventory/terraform_state/" target="_blank" rel="external noopener">cloud.terraform</a> collection. The plugin parses a terraform state file and add hosts for AWS EC2, GCE, and Microsoft Azure instances.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Projects</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Projects</strong> page, click <span class="ph uicontrol button">Create project</span> to start the <strong class="ph b">Create project</strong> window. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">Enter the appropriate details according to the steps in <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_controller_adding_a_project#proc-controller-adding-a-project" title="You can create a logical collection of playbooks, called projects in automation controller.">Adding a new project</a>.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigational panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory that you want to add a source to.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Sources</strong> tab, click <span class="ph uicontrol button">Create source</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <span class="ph menucascade"><span class="ph uicontrol">Source</span></span> menu, select <strong class="ph b">Terraform State</strong>. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">The <strong class="ph b">Create source</strong> window expands with the optional <strong class="ph b">Credential</strong> field. <p class="p">Choose an existing Terraform backend configuration credential. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_terraform#ref-controller-credential-terraform" title="Terraform is a HashiCorp tool used to automate various infrastructure tasks. Select this credential type to enable synchronization with the Terraform inventory source.">Terraform backend configuration</a>.</p></li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Enable the options to <strong class="ph b">Overwrite</strong> and <strong class="ph b">Update on launch</strong>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Source variables</strong> field to override variables used by the <code class="ph codeph">terraform_state</code> inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the <a class="xref" href="https://console.redhat.com/ansible/automation-hub/repo/published/cloud/terraform/content/inventory/terraform_state/" target="_blank" rel="external noopener">terraform_state</a> file. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The <code class="ph codeph">backend_type</code> variable is required by the Terraform State inventory plugin. This should match the remote backend configured in the <strong class="ph b">Terraform backend credential</strong>. The following is an example Amazon S3 backend:</p> 
+           <pre class="pre codeblock"><code>backend_type: s3</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select an <strong class="ph b">Execution environment</strong> that has a Terraform binary. This is required for the inventory plugin to run the Terraform commands that read inventory data from the Terraform state file. </span> 
+          <div class="itemgroup info"> 
+           <div class="note important note_important"> <span class="note__title">Important:</span> 
+            <div class="note__body"> 
+             <p class="p">Terraform provider for Ansible Automation Platform inventories are managed by Terraform and you must not edit them in Ansible Automation Platform as it can introduce drift to the Terraform deployment.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relinfo"> <strong>Related information</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="https://github.com/ansible-cloud/terraform_ee" target="_blank" rel="external noopener">Terraform EE</a></li> 
+         <li class="linklist"><a class="link" href="https://registry.terraform.io/providers/ansible/aap/latest/docs" target="_blank" rel="external noopener">Red Hat Ansible Automation Platform provider</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title14" id="proc-controller-inv-source-open-shift-virt"> 
+      <h2 class="title topictitle2" id="ariaid-title14">Source an inventory from OpenShift Virtualization</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Learn how to add an OpenShift Virtualization inventory source to an existing inventory.</p> 
+       <section class="section prereq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Before you begin</h3> 
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You need a virtual machine deployed in a specific namespace and an OpenShift or Kubernetes API Bearer Token credential.</li> 
+        </ul> 
+       </section> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">This inventory source uses a cluster that is able to deploy Red Hat OpenShift Container Platform Virtualization.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigational panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the inventory that you want to add a source to.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Sources</strong> tab, click <span class="ph uicontrol button">Add source</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <span class="ph menucascade"><span class="ph uicontrol">Source</span></span> menu, select <strong class="ph b">OpenShift Virtualization</strong>. </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li">The <strong class="ph b">Add new source</strong> window expands with the required <strong class="ph b">Credential</strong> field. <p class="p">Choose from an existing Kubernetes API Bearer Token credential. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_credential_openshift#ref-controller-credential-openShift" title="Select this credential type to create instance groups that point to a Kubernetes or OpenShift container.">OpenShift or Kubernetes API Bearer Token credential type</a>. In this example, the <code class="ph codeph">cmv2.engineering.redhat.com</code> credential is used.</p></li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">You can optionally specify the <strong class="ph b">Verbosity</strong>, <strong class="ph b">Host Filter</strong>, <strong class="ph b">Enabled Variable/Value</strong>, and <strong class="ph b">Update options</strong> as described in the <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_controller_add_source#proc-controller-add-source" title="Use the following procedure to add a source to an inventory. When you add a source to an inventory, the system creates a new group for that source.">Adding a source</a> steps.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Use the <strong class="ph b">Source Variables</strong> field to override variables used by the <code class="ph codeph">kubernetes</code> inventory plugin. Enter variables by using either JSON or YAML syntax. Use the radio button to toggle between the two. For more information about these variables, see the <a class="xref" href="https://kubevirt.io/kubevirt.core/main/plugins/kubevirt.html#parameters" target="_blank" rel="external noopener">kubevirt.core.kubevirt inventory source</a> documentation. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">In the following example, the connections variable is used to specify access to a particular namespace in a cluster:</p> 
+           <pre class="pre codeblock"><code>---
+connections:
+- namespaces:
+  - hao-test</code></pre> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Save</span> and then click <span class="ph uicontrol button">Sync</span> to sync the inventory.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title15" id="proc-controller-use-custom-inventory"> 
+      <h2 class="title topictitle2" id="ariaid-title15">Source an inventory from a custom inventory plugin</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">This describes how to use the <code class="ph codeph">servicenow.itsm</code> collection inventory plugin to sync inventory on Ansible Automation Platform.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create and sync a project using a Source Control Git repository that includes the following files: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre">&gt;&gt; requirements.yml
+---
+collections: - name: servicenow.itsm
+
+
+&gt;&gt; inventories/myinventory.now.yml
+# Create a file following the example below. It must have a configuration file extension ending in either "now.yml" or "now.yaml".
+plugin: servicenow.itsm.now
+query:
+- os: = Linux Red Hat
+- os: = Windows XP
+keyed_groups:
+- key: os
+  prefix: os</pre> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">Refer to the official <a class="xref" href="https://console.redhat.com/ansible/automation-hub/repo/published/servicenow/itsm/content/inventory/now/" target="_blank" rel="external noopener">Ansible documentation</a> for detailed guidance on using and configuring the <code class="ph codeph">servicenow.itsm.now</code> plugin.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create an inventory by setting the source to <strong class="ph b">Sourced from a Project</strong>, selecting the new project, and choose <code class="ph codeph">/(project root)</code> in the inventory file section.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Synchronize the source in the inventory.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title16" id="ref-controller-export-old-scripts"> 
+      <h2 class="title topictitle2" id="ariaid-title16">Export old inventory scripts</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">Despite the removal of the custom inventory scripts API, the scripts are still saved in the database.</p> 
+       <section class="section"> 
+        <p class="p">To recover the scripts from the database in a format that is suitable for you to check into source control, use the following command:</p> 
+        <pre class="pre codeblock"><code>$ awx-manage export_custom_scripts --filename=my_scripts.tar
+
+Dump of old custom inventory scripts at my_scripts.tar</code></pre> 
+        <p class="p">Making use of the output:</p> 
+        <pre class="pre codeblock"><code>$ mkdir my_scripts
+$ tar -xf my_scripts.tar -C my_scripts</code></pre> 
+        <p class="p">The name of the scripts has the form: <code class="ph codeph"><em class="ph i">&lt;pk&gt;_</em>&lt;name&gt;</code>. This is the naming scheme used for project folders.</p> 
+        <pre class="pre codeblock"><code>$ ls my_scripts
+ <em class="ph i">10<em class="ph i">inventory_script_rawhook             _19</em>                                       _30<em class="ph i">inventory_script_listenhospital
+_11</em>inventory_script_upperorder          _1<em class="ph i">inventory_script_commercialinternet45   _4</em>inventory_script_whitestring
+_12<em class="ph i">inventory_script_eastplant           _22</em>inventory_script_pinexchange           _5<em class="ph i">inventory_script_literaturepossession
+_13</em>inventory_script_governmentculture   _23<em class="ph i">inventory_script_brainluck             _6</em>inventory_script_opportunitytelephone
+_14<em class="ph i">inventory_script_bottomguess         _25</em>inventory_script_buyerleague           _7<em class="ph i">inventory_script_letjury
+_15</em>inventory_script_wallisland          _26<em class="ph i">inventory_script_lifesport             _8</em>random_inventory_script</em>
+<em class="ph i">16<em class="ph i">inventory_script_wallisland          _27</em>inventory_script_exchangesomewhere     _9<em class="ph i">random_inventory_script</em>
+_17</em>inventory_script_bidstory            _28<em class="ph i">inventory_script_boxchild
+_18</em>p                                    _29__inventory_script_wearstress</code></pre> 
+        <p class="p">Each file contains a script. Scripts can be <code class="ph codeph">bash/python/ruby/more</code>, so the extension is not included. They are all directly executable. Executing the script dumps the inventory data.</p> 
+        <pre class="pre codeblock"><code>$ ./my_scripts/<em class="ph i">11__inventory_script_upperorder
+{"group</em>\ud801\udcb0\uc20e\u7b0e\ud81c\udfeb\ub12b\ub4d0\u9ac6\ud81e\udf07\u6ff9\uc17b": {"hosts":
+["host_\ud821\udcad\u68b6\u7a51\u93b4\u69cf\uc3c2\ud81f\uddbe\ud820\udc92\u3143\u62c7",
+"host_\u6057\u3985\u1f60\ufefb\u1b22\ubd2d\ua90c\ud81a\udc69\u1344\u9d15",
+"host_\u78a0\ud820\udef3\u925e\u69da\ua549\ud80c\ude7e\ud81e\udc91\ud808\uddd1\u57d6\ud801\ude57",
+"host_\ud83a\udc2d\ud7f7\ua18a\u779a\ud800\udf8b\u7903\ud820\udead\u4154\ud808\ude15\u9711",
+"host_\u18a1\u9d6f\u08ac\u74c2\u54e2\u740e\u5f02\ud81d\uddee\ufbd6\u4506"], "vars": {"ansible_host": "127.0.0.1", "ansible_connection":
+"local"}}}</code></pre> 
+        <p class="p">You can verify functionality with <code class="ph codeph">ansible-inventory</code>. This gives the same data, but reformatted.</p> 
+        <pre class="pre codeblock"><code>$ ansible-inventory -i ./my_scripts/_11__inventory_script_upperorder --list --export</code></pre> 
+        <p class="p">In the preceding example, you can <code class="ph codeph">cd</code> into <code class="ph codeph">my_scripts</code> and then issue a <code class="ph codeph">git init</code> command, add the scripts you want, push it to source control, and then create an SCM inventory source in the user interface.</p> 
+        <p class="p">For more information about syncing or using custom inventory scripts, see<a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_inventory_file_importing#assembly-inventory-file-importing" title="With automation controller you can select an inventory file from source control, rather than creating one from scratch.">Import your inventory file from source control</a> in <em class="ph i">Configuring automation execution</em>.</p> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

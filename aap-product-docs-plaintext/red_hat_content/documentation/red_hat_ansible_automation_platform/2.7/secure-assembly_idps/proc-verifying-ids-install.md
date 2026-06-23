@@ -1,0 +1,40 @@
+# Automate network intrusion detection and prevention systems
+## Verify your IDPS installation
+
+Use the following procedure to verify that Snort has been configured successfully:
+
+### Procedure
+
+1.  Call snort using `sudo` and ask for the version:
+
+
+```
+$ sudo snort --version
+
+,,_     -*> Snort! <*-
+o"  )~   Version 2.9.13 GRE (Build 15013)
+""    By Martin Roesch & The Snort Team: http://www.snort.org/contact#team
+Copyright (C) 2014-2019 Cisco and/or its affiliates. All rights reserved.
+Copyright (C) 1998-2013 Sourcefire, Inc., et al.
+Using libpcap version 1.5.3
+Using PCRE version: 8.32 2012-11-30
+Using ZLIB version: 1.2.7
+```
+
+2.  Verify that the service is actively running using the following command:
+`sudo systemctl`:
+
+```
+$ sudo systemctl status snort
+● snort.service - Snort service
+Loaded: loaded (/etc/systemd/system/snort.service; enabled; vendor preset: disabled)
+Active: active (running) since Mon 2019-08-26 17:06:10 UTC; 1s ago
+Main PID: 17217 (snort)
+CGroup: /system.slice/snort.service
+└─17217 /usr/sbin/snort -u root -g root -c /etc/snort/snort.conf -i eth0 -p -R 1 --pid-path=/var/run/snort --no-interface-pidfile --nolock-pidfile
+[...]
+```
+
+3.  If the Snort service is not actively running, restart it with `systemctl restart snort` and recheck the status.
+4.  When you confirm that the service is actively running, exit the Snort server by simultaneously pressing `CTRL` and `D`, or by typing `exit` on the command line. All further interaction will be done through Ansible Automation Platform from the Ansible control host.
+

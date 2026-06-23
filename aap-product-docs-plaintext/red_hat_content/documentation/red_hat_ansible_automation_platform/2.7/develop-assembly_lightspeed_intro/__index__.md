@@ -2,30 +2,3 @@
 
 Learn about Red Hat Ansible Lightspeed with IBM watsonx Code Assistant, its benefits, key features, process, and data gathered to train the IBM watsonx Code Assistant models.
 
-## Key features of Red Hat Ansible Lightspeed
-
-Red Hat Ansible Lightspeed offers the following key features:
-
--  **Ansible-specific IBM watsonx Code Assistant models** Red Hat Ansible Lightspeed with IBM watsonx Code Assistant uses Ansible-specific IBM watsonx Granite models unique to your organization, which are provided, managed, and maintained by IBM.
-
--  **Red Hat Ansible Lightspeed cloud service and on-premise deployments** Red Hat Ansible Lightspeed is available both as a cloud service and as an on-premise deployment. Red Hat Ansible Lightspeed on-premise deployments provide the Red Hat Ansible Automation Platform customers more control over their data and supports compliance with enterprise security policies. For example, organizations in sensitive industries with data privacy or air-gapped requirements can use on-premise deployments of both Red Hat Ansible Lightspeed and IBM watsonx Code Assistant for Red Hat Ansible Lightspeed on Cloud Pak for Data. Red Hat Ansible Lightspeed on-premise deployments are supported on Red Hat Ansible Automation Platform version 2.4 and later.
-
--  **Red Hat Ansible Lightspeed trial** Existing Ansible users can now start a free 90-day Red Hat Ansible Lightspeed cloud service trial. You can create single-task and multitask recommendations, generate playbooks, and view playbook explanations with a trial account.
-
-To start your Red Hat Ansible Lightspeed trial, you need a trial or paid subscription to the Red Hat Ansible Automation Platform; however, you do not need a trial or paid subscription to IBM watsonx Code Assistant.
-
--  **Playbook and task generation** This includes the following capabilities:
-
-*  **Playbook generation and explanations** Using the Ansible VS Code extension, you can create Ansible playbooks using a natural language interface in English. Red Hat Ansible Lightspeed with IBM watsonx Code Assistant reads the natural language prompts and generates an entire playbook recommendation based on your intent. You can also view the explanations for new or existing playbooks. The playbook explanations describe what the playbook or task within the playbook does and contextualize its impact.
-
-*  **Single and multitask generation** Using natural language prompts, you can generate single task or multiple task recommendations for Ansible task files and playbooks. To request multitask code recommendations, you can enter a sequence of natural language task prompts in a YAML file comment separated by ampersand (**&**) symbols.
-
-Currently, Red Hat Ansible Lightspeed supports user prompts in English language only. However, there could be instances where the training data that was used to train the IBM watsonx Code Assistant models included non-English language. In such scenarios, the model can generate code recommendations for prompts made in the same non-English language, but the generated code recommendations might or might not be accurate.
-
--  **Content source matching** For each generated code recommendation, Red Hat Ansible Lightspeed lists content source matches, including details such as potential source, content author, and relevant licenses. You can use this data to gain insight into potential training data sources used to generate the code recommendations.
-
--  **Post-processing capabilities** Red Hat Ansible Lightspeed offers post-processing capabilities that augment IBM watsonx Code Assistant and improve the quality and accuracy of code recommendations.
-
--  **Content maintenance and modernization** The Ansible code bot scans existing content collections, roles, and playbooks through Git repositories, and proactively creates pull requests whenever best practices or quality improvement recommendations are available. The bot automatically submits pull requests to the repository, which proactively alerts the repository owner to a recommended change to their content.
-
--  **Telemetry data collection on the Admin dashboard** Red Hat Ansible Lightspeed now collects Admin dashboard telemetry data that provides insight into how your organization users are using the Ansible Lightspeed service, and displays the metrics on the Admin dashboard. If you no longer want to collect and manage the Admin dashboard telemetry, you can disable it for your organization.

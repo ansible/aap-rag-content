@@ -1,0 +1,241 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="assembly-gs-auto-op"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Get started as an automation operator</h1> 
+     <p class="shortdesc">As an automation operator, Ansible Automation Platform helps you monitor and execute automation projects with Red Hat certified collections or custom content for your organization.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-gs-auto-op-projects"> 
+      <h2 class="title topictitle2" id="ariaid-title2">View automation execution projects</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">A project is a logical collection of Ansible playbooks that you can manage in Ansible Automation Platform.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Platform administrators and automation developers have the permissions to create projects. As an automation operator you can view and sync projects. The following procedure desribes how to view available projects.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Projects</span></span>. The <strong class="ph b">Projects</strong> page displays a list of projects that are currently available.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Click a project to view its details.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section postreq"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">What to do next</h3> 
+        </div> 
+        <p class="p">For each project listed, you can sync the latest revision, edit the project, or copy the project’s attributes using the icons next to each project.</p> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="con-gs-auto-op-job-templates"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Work with job templates</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">A job template is a definition and set of parameters for running an Ansible job.</p> 
+       <p class="p">A job template combines an Ansible Playbook from a project with the settings required to launch the job. Job templates are useful for running the same job many times. Job templates also encourage the reuse of Ansible Playbook content and collaboration between teams.</p> 
+       <p class="p">Platform administrators and automation developers have the permissions to create job templates. As an automation operator you can launch job templates and view their details.</p> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates" title="You can create both Job templates and Workflow job templates from Automation Execution > Templates .">Standardize and streamline automation with automation job templates</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="proc-gs-auto-op-launch-template"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Launch a job template</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Ansible Automation Platform provides push-button deployment with job templates. These templates store playbook parameters, inventories, and credentials normally passed through the command line.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Select a template to view its details. A default job template is created during your initial setup to help you get started, but you can also create your own.</span> </li> 
+         <li class="li step"> <span class="ph cmd">From the <strong class="ph b">Templates</strong> page, click the launch icon to run your job template.</span> </li> 
+        </ol> 
+       </section> 
+       <section class="section result"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Results</h3> 
+        </div> 
+        <p class="p">The <strong class="ph b">Templates</strong> list view shows job templates that are currently available. The default view is collapsed (Compact), showing the template name, template type, and the timestamp of the last job that ran using that template. You can click the arrow icon next to each entry to expand and view more information. This list is sorted alphabetically by name, but you can sort by other criteria, or search by various template fields and attributes.</p> 
+        <p class="p">From this screen you can launch, edit, and copy a job template.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links"> 
+       <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+        <br> 
+        <ul class="linklist"> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_job_templates" title="You can create both Job templates and Workflow job templates from Automation Execution > Templates .">Job Templates</a></li> 
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflow_job_templates" title="A workflow job template links together a sequence of disparate resources that tracks the full set of jobs that were part of the release process as a single unit.">Workflow job templates</a></li> 
+        </ul> 
+       </div> 
+      </nav> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title5" id="controller-surveys-in-job-templates"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Surveys in job templates</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Surveys provide a way to prompt users for input when launching a job from a job template. This input can then be used as variables in the playbook run.</p> 
+       <p class="p">Job types of <strong class="ph b">Run</strong> or <strong class="ph b">Check</strong> provide a way to set up surveys in the <strong class="ph b">Job Template</strong> creation or editing screens. Surveys set extra variables for the playbook similar to <strong class="ph b">Prompt for Extra Variables</strong> does, but in a user-friendly question and answer way. Surveys also permit for validation of user input. Select the <strong class="ph b">Survey</strong> tab to create a survey.</p> 
+       <p class="p"> <strong class="ph b">Example</strong> </p> 
+       <p class="p">You can use surveys for several situations. For example, operations want to give developers a "push to stage" button that they can run without advance knowledge of Ansible. When launched, this task could prompt for answers to questions such as "What tag should we release?".</p> 
+       <p class="p">You can ask many types of questions, including multiple-choice questions.</p> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title6" id="controller-create-survey"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Create a survey</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">You can create a survey for a job template to prompt users for input when they launch a job based on that template. Surveys can include many questions of various types, such as text input, multiple choice, and passwords.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">The responses provided by users are stored in Ansible variables that can be used within the playbook associated with the job template.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Templates</span></span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Select the job template you want to create a survey for.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Survey</strong> tab, click <span class="ph uicontrol button">Create survey question</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">A survey can consist of any number of questions. For each question, enter the following information: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Question</strong>: The question to ask the user.</li> 
+            <li class="li">Optional: <strong class="ph b">Description</strong>: A description of what is being asked of the user.</li> 
+            <li class="li"><strong class="ph b">Answer variable name</strong>: The Ansible variable name to store the user’s response in. This is the variable to be used by the playbook. Variable names cannot contain spaces.</li> 
+            <li class="li"><strong class="ph b">Answer type</strong>: Choose from the following question types: 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">Text</strong>: A single line of text. You can set the minimum and maximum length (in characters) for this answer.</li> 
+              <li class="li"><strong class="ph b">Textarea</strong>: A multi-line text field. You can set the minimum and maximum length (in characters) for this answer.</li> 
+              <li class="li"><strong class="ph b">Password</strong>: Responses are treated as sensitive information, similar to the way an actual password is treated. You can set the minimum and maximum length (in characters) for this answer.</li> 
+              <li class="li"><strong class="ph b">Multiple Choice (single select)</strong>: A list of options, of which only one can be selected at a time. Enter the options, one per line, in the <strong class="ph b">Multiple Choice Options</strong> field.</li> 
+              <li class="li"><strong class="ph b">Multiple Choice (multiple select)</strong>: A list of options, any number of which can be selected at a time. Enter the options, one per line, in the <strong class="ph b">Multiple Choice Options</strong> field.</li> 
+              <li class="li"><strong class="ph b">Integer</strong>: An integer number. You can set the minimum and maximum length (in characters) for this answer.</li> 
+              <li class="li"><strong class="ph b">Float</strong>: A decimal number. You can set the minimum and maximum length (in characters) for this answer.</li> 
+             </ul></li> 
+            <li class="li"><strong class="ph b">Required</strong>: Whether or not an answer to this question is required from the user.</li> 
+            <li class="li"><strong class="ph b">Minimum length</strong> and <strong class="ph b">Maximum length</strong>: Specify if a certain length in the answer is required.</li> 
+            <li class="li"><strong class="ph b">Default answer</strong>: The default answer to the question. This value is pre-filled in the interface and is used if the answer is not provided by the user.</li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Once you have entered the question information, click <span class="ph uicontrol button">Create question</span> to add the question. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">The survey question displays in the <strong class="ph b">Survey</strong> list. For any question, you can click <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/leftpencil.png" width="15" alt="Pencil"> to edit it.</p> 
+           <p class="p">Check the box next to each question and click <span class="ph uicontrol button">Delete</span> to delete the question, or use the toggle option in the menu bar to enable or disable the survey prompts.</p> 
+           <p class="p">If you have more than one survey question, click <span class="ph uicontrol button">Edit Order</span> to rearrange the order of the questions by clicking and dragging on the grid icon.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">To add more questions, click <span class="ph uicontrol button">Add</span>.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title7" id="con-gs-auto-op-about-inv"> 
+      <h2 class="title topictitle2" id="ariaid-title7">View hosts being automated in inventory files</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">An inventory is a file listing the collection of hosts managed by Ansible Automation Platform. Organizations are assigned to inventories, while permissions to launch playbooks against inventories are controlled at the user or team level.</p> 
+       <p class="p">Platform administrators and automation developers have the permissions to create inventories. As an automation operator you can view inventories and their details.</p> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title8" id="proc-gs-auto-op-execute-inv"> 
+       <h3 class="title topictitle3" id="ariaid-title8">Execute an inventory</h3> 
+       <div class="body taskbody"> 
+        <p class="shortdesc">The following steps describe how to execute an inventory.</p> 
+        <section> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Procedure</h4> 
+         </div> 
+         <ol class="ol steps"> 
+          <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Infrastructure</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Inventories</span></span>. The <strong class="ph b">Inventories</strong> window displays a list of inventories that are currently available, along with the following information: </span> 
+           <div class="itemgroup info"> 
+            <ul class="ul"> 
+             <li class="li"><strong class="ph b">Name</strong>: The inventory name.</li> 
+             <li class="li"><strong class="ph b">Status</strong>: The statuses are: 
+              <ul class="ul"> 
+               <li class="li"><strong class="ph b">Success</strong>: The inventory sync completed successfully.</li> 
+               <li class="li"><strong class="ph b">Disabled</strong>: No inventory source added to the inventory.</li> 
+               <li class="li"><strong class="ph b">Error</strong>: The inventory source completed with error.</li> 
+              </ul> </li> 
+             <li class="li"><strong class="ph b">Type</strong>: Identifies whether the inventory is a standard inventory, a smart inventory, or a constructed inventory.</li> 
+             <li class="li"><strong class="ph b">Organization</strong>: The organization to which the inventory belongs.</li> 
+            </ul> 
+           </div> </li> 
+          <li class="li step stepexpand"> <span class="ph cmd">Select an inventory name to display the <strong class="ph b">Details</strong> page for the inventory, including the inventory’s groups and hosts.</span> </li> 
+         </ol> 
+        </section> 
+       </div> 
+       <nav role="navigation" class="related-links"> 
+        <div class="linklist relconcepts"> <strong>Related concepts</strong> 
+         <br> 
+         <ul class="linklist"> 
+          <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_controller_inventories" title="Ansible Automation Platform works against a list of managed nodes or hosts in your infrastructure that are logically organized, using an inventory file. The installer inventory can specify your installation scenario and describe host deployments to Ansible.">Inventories</a></li> 
+         </ul> 
+        </div> 
+       </nav> 
+      </article> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title9" id="con-gs-automation-execution-jobs"> 
+      <h2 class="title topictitle2" id="ariaid-title9">View the status and output of automation jobs</h2> 
+      <p class="shortdesc">A job is an instance of Ansible Automation Platform launching an Ansible Playbook against an inventory of hosts. You can view the status and output of automation jobs.</p> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title10" id="proc-gs-auto-op-review-job-status"> 
+       <h3 class="title topictitle3" id="ariaid-title10">Review a job status</h3> 
+       <div class="body taskbody"> 
+        <p class="shortdesc">The <strong class="ph b">Jobs</strong> list view displays a list of jobs and their statuses, shown as completed successfully, failed, or as an active (running) job.</p> 
+        <section> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Procedure</h4> 
+         </div> 
+         <ol class="ol steps"> 
+          <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Jobs</span></span>. </span> 
+           <div class="itemgroup info"> 
+            <p class="p">The default view is collapsed (Compact) with the job name, status, job type, start, and finish times. You can click the arrow icon to expand and see more information. You can sort this list by various criteria, and perform a search to filter the jobs of interest.</p> 
+           </div> </li> 
+          <li class="li step stepexpand"> <span class="ph cmd">From this screen, you can complete the following tasks: </span> 
+           <div class="itemgroup info"> 
+            <ul class="ul"> 
+             <li class="li">View a job’s details and standard output.</li> 
+             <li class="li">Relaunch jobs.</li> 
+             <li class="li">Remove selected jobs. <p class="p">The relaunch operation only applies to relaunches of playbook runs and does not apply to project or inventory updates, system jobs, or workflow jobs.</p> </li> 
+            </ul> 
+           </div> </li> 
+         </ol> 
+        </section> 
+       </div> 
+      </article> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title11" id="proc-gs-auto-op-review-job-output"> 
+       <h3 class="title topictitle3" id="ariaid-title11">Review job output</h3> 
+       <div class="body taskbody"> 
+        <p class="shortdesc">When you relaunch a job, the jobs <strong class="ph b">Output</strong> view is displayed.</p> 
+        <section> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Procedure</h4> 
+         </div> 
+         <ol class="ol steps"> 
+          <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Jobs</span></span>.</span> </li> 
+          <li class="li step stepexpand"> <span class="ph cmd">Select a job. This takes you to the <strong class="ph b">Output</strong> view for that job, where you can filter job output by these criteria: </span> 
+           <div class="itemgroup info"> 
+            <ul class="ul"> 
+             <li class="li">The <strong class="ph b">Search output</strong> option allows you to search by keyword.</li> 
+             <li class="li">The <strong class="ph b">Event</strong> option enables you to filter by the events of interest, such as errors, host failures, host retries, and items skipped. You can include as many events in the filter as necessary.</li> 
+            </ul> 
+           </div> </li> 
+         </ol> 
+        </section> 
+       </div> 
+      </article> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

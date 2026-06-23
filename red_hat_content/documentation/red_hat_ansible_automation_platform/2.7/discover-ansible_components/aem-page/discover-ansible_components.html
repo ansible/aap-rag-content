@@ -1,0 +1,242 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="GUID-95f6927d-bb58-44e2-bedf-4e390fc29594"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Ansible components</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Ansible Automation Platform comprises integrated components that orchestrate the end-to-end automation process. This modular architecture allows teams to build, share, and scale secure workflows across the entire enterprise.</p> 
+      <section class="section" id="GUID-95f6927d-bb58-44e2-bedf-4e390fc29594__section_1"> 
+       <p class="p">Ansible Automation Platform is structured around three main components:</p> 
+       <div class="p"> 
+        <ul class="ul" id="GUID-95f6927d-bb58-44e2-bedf-4e390fc29594__ul_1"> 
+         <li class="li">Automation execution: where you can deploy, define, operate, scale, and delegate automation across your enterprise.</li> 
+         <li class="li">Automation content: the central location for your Ansible content, which you can integrate into your automation environment.</li> 
+         <li class="li">Automation decisions: where you can manage Event-Driven Ansible, an automation engine that listens to your system's even stream and reacts to events that you have specified with targeted automation tasks.</li> 
+        </ul> 
+       </div> 
+      </section> 
+      <section class="section" id="GUID-95f6927d-bb58-44e2-bedf-4e390fc29594__section_4">
+       These components are united by the platform gateway, which includes an activity stream that captures changes to platform gateway resources, including the creation or modification of organizations, users, and service clusters, among others.
+      </section> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-gs-automation-execution"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Automation execution</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">At the heart of Ansible Automation Platform is a centralized control center for deploying, scaling, and delegating enterprise automation. From one location, you can run playbooks via a web UI, monitor dashboard activity, and use centralized logging to track job execution.</p> 
+       <p class="p">In the automation execution environment, you can use automation controller tasks to build job templates, which standardize how automation is deployed, initiated, and delegated, making it more reusable and consistent.</p> 
+       <section class="section" id="con-gs-automation-execution___inventories">
+        <h3 class="title sectiontitle">Inventories</h3> 
+        <p class="p">An inventory is a single file, usually in INI or YAML format, containing a list of hosts and groups that can be acted upon using Ansible commands and playbooks. You can use an inventory file to specify your installation scenario and describe host deployments to Ansible. You can also use an inventory file to organize managed nodes in centralized files that give Ansible with system information and network locations.</p> 
+       </section> 
+       <section class="section" id="con-gs-automation-execution___policy_enforcement">
+        <h3 class="title sectiontitle">Policy enforcement</h3> 
+        <p class="p">Policy enforcement at automation runtime is a feature that uses encoded rules to define, manage, and enforce policies that govern how your users interact with your Ansible Automation Platform instance. Policy enforcement automates policy management, improving security, compliance, and efficiency. Policy enforcement points can be configured at the level of the inventory, job template, or organization. For more, see <strong class="ph b">Implementing policy enforcement</strong> .</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_controller_pac#controller-pac" title="Policy enforcement at automation runtime is a feature that uses encoded rules to define, manage, and enforce policies that govern how your users interact with your Ansible Automation Platform instance. Policy enforcement automates policy management, improving security, compliance, and efficiency.">Implement policy enforcement</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="con-gs-automation-content"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Automation content</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Automation hub is the central location for your Ansible Automation Platform content. In automation hub you can also find content collections that you can download and integrate into your automation environment. You can also create and upload your own content to distribute to your users.</p> 
+       <p class="p">An Ansible Content Collection is a ready-to-use toolkit for automation and can include multiple types of content, including roles, modules, playbooks, and plugins all in one place.</p> 
+       <p class="p">You can access automation hub in one of two ways:</p> 
+       <ul class="ul"> 
+        <li class="li">On the Red Hat-hosted Hybrid Cloud Console, where you can find Red Hat validated or certified content that you can sync to your platform environment.</li> 
+        <li class="li">On a self-hosted, on-premise private automation hub, where you can curate content for your automation users and manage access to collections and execution environments.</li> 
+       </ul> 
+       <p class="p">Depending on the way you access automation hub, you may have access to different types of content collections.</p> 
+       <p class="p">There are two types of Red Hat Ansible content:</p> 
+       <ul class="ul"> 
+        <li class="li">Ansible Certified Content Collections, which Red Hat builds, supports, and maintains. Certified collections are included in your subscription to Red Hat Ansible Automation Platform and can be found in automation hub.</li> 
+        <li class="li">Ansible validated content collections, which are customizable and therefore do not have a support guarantee, but have been tested in the Ansible Automation Platform environment.</li> 
+       </ul> 
+       <section class="section" id="con-gs-automation-content___ansible_roles">
+        <h3 class="title sectiontitle">Ansible roles</h3> 
+        <p class="p">Ansible roles allow you to create reusable automation content that helps teams to work more efficiently and avoid duplicating efforts. With roles, you can group together a broader range of existing automation content, like playbooks, configuration files, templates, tasks, and handlers to create customized automation content that can be reused and shared with others.</p> 
+        <p class="p">You can also make roles configurable by exposing variables that users can set when calling the role, allowing them to configure their system according to their organization’s requirements.</p> 
+        <p class="p">Roles are generally included in Ansible content collections.</p> 
+       </section> 
+       <section class="section" id="con-gs-automation-content___ansible_playbooks">
+        <h3 class="title sectiontitle">Ansible playbooks</h3> 
+        <p class="p">Playbooks are YAML files that contain specific sets of human-readable instructions, or “plays,” that you send to run on a single target or groups of targets. Ansible playbooks are repeatable and reusable configuration management tools designed to deploy complex applications.</p> 
+        <p class="p">You can use playbooks to manage configurations of and deployments to remote machines to sequence multitiered rollouts involving rolling updates. Use playbooks to delegate actions to other hosts, interacting with monitoring servers and load balancers along the way.</p> 
+        <p class="p">Once written, you can use and re-use playbooks for automation across your enterprise. For example, if you need to run a task more than once, write a playbook and put it under source control. Then, you can use the playbook to push out new configuration or confirm the configuration of remote systems.</p> 
+        <p class="p">Ansible playbooks can declare configurations, orchestrate steps of any manually ordered process on many machines in a defined order, or start tasks synchronously or asynchronously.</p> 
+        <p class="p">You can also use Red Hat Ansible Lightspeed, Ansible’s generative AI service, to create and develop playbooks to fit your needs.</p> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-assembly_gs_auto_dev" title="As an automation developer, you can use Ansible Automation Platform to implement your organization’s automation strategy.">Getting started as an automation developer</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_intro_to_playbooks" title="An Ansible Playbook is a blueprint for automation tasks, which are actions executed with limited manual effort across an inventory of solutions. Playbooks tell Ansible what to do on which devices.">Getting started with playbooks</a></li>
+        </ul>
+       </div>
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://console.redhat.com/" target="_blank" rel="external noopener">Hybrid Cloud Console</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="con-gs-automation-decisions"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Automation decisions</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Red Hat Ansible Automation Platform includes Event-Driven Ansible, an automation engine that listens to your system’s event stream and reacts to events that you have specified with targeted automation tasks. </p> 
+       <p class="p">Managed through Event-Driven Ansible controller, Ansible rulebooks are the framework for automation decisions. Ansible rulebooks are collections of rulesets, which in turn consist of one or more sources, rules, and conditions. Rulebooks tell the system what events to flag and how to respond to them. From the Automation Decisions section of the platform user interface, you can use rulebooks to connect and listen to event sources, and define actions that are triggered in response to certain events.</p> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/get_started-con_gs_define_events_rulebooks#con-gs-define-events-rulebooks" title="An Ansible rulebook is a collection of rulesets that references one or more sources, rules, and conditions.">Rulebook actions</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title5" id="con-gs-automation-mesh"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Automation mesh</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Automation mesh is an overlay network intended to ease the distribution of automation across a collection of execution nodes using existing connectivity. </p> 
+       <p class="p">Execution nodes are where Ansible Playbooks are actually executed. A node runs an automation execution environment which, in turn, runs the Ansible Playbook. </p> 
+       <p class="p">Automation mesh creates peer-to-peer connections between these execution nodes, increasing the resiliency of your automation workloads to network latency and connection disruptions. This also permits more flexible architectures and provides rapid, independent scaling of control and execution capacity.</p> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title6" id="con-gs-ansible-lightspeed"> 
+      <h2 class="title topictitle2" id="ariaid-title6">Red Hat Ansible Lightspeed</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Red Hat Ansible Lightspeed with IBM watsonx Code Assistant is a generative AI service for Ansible developers. It uses natural-language prompts and IBM watsonx models to provide best-practice code recommendations.</p> 
+       <p class="p">Red Hat Ansible Lightspeed with IBM watsonx Code Assistant helps automation teams learn, create, and maintain Red Hat Ansible Automation Platform content more efficiently.</p> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title7" id="con-aap-notifications-feed"> 
+      <h2 class="title topictitle2" id="ariaid-title7">Product Notification Feed</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">As of July 2025, the Ansible Automation Platform RSS notification feed is available. This feed serves as a method for communicating various product updates and changes to customers.</p> 
+       <p class="p">Customers can subscribe to the notifications by visiting Ansible Automation Platform Product Notifications through an RSS feed reader. This feed is updated with events such as Ansible Automation Platform upgrades and system maintenance.</p> 
+       <p class="p">All Ansible Automation Platform customers can subscribe to this content. Messages include categorization tags to specify deployment types: managed, self-managed (on-premise), or a combination. Red Hat is developing a future enhancement to integrate this feature directly into the UI.</p> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://announcements.ansiblecloud.redhat.com/feed.atom" target="_blank" rel="external noopener">Ansible Automation Platform Product Notifications</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title8" id="con-gs-developer-tools"> 
+      <h2 class="title topictitle2" id="ariaid-title8">Ansible development tools</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Ansible development tools are an integrated and supported suite of capabilities that help IT practitioners at any skill level generate automation content faster than they might with manual coding. </p> 
+       <p class="p">Ansible development tools can help you create, test, and deploy automation content like playbooks, execution environments, and collections quickly and accurately using recommended practices.</p> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_workspaces_develop" title="The Ansible development tools are installed as part of the Ansible extension in the Ansible development workspace. You can use Ansible development tools to scaffold directories for automation content in your repository.">Develop automation content in your workspace</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title9" id="ref-gs-install-config"> 
+      <h2 class="title topictitle2" id="ariaid-title9">Ansible Automation Platform installation and configuration</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Choose the appropriate installation methods to match your infrastructure and organizational requirements.</p> 
+       <section class="section"> 
+        <p class="p">Depending on your organization’s needs, you can install Red Hat Ansible Automation Platform using one of the following methods, based on your environment:</p> 
+        <ul class="ul"> 
+         <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/assembly_platform_install_overview" title="The Red Hat Ansible Automation Platform installation program offers you flexibility, allowing you to install Ansible Automation Platform by using several supported installation scenarios.">RPM installation</a> </li> 
+         <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_operator_install_operator" title="As a system administrator, you can use Ansible Automation Platform Operator to deploy new Ansible Automation Platform instances in your OpenShift environment.">Installing on OpenShift Container Platform</a> </li> 
+         <li class="li"> <a class="xref" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x" target="_blank" rel="external noopener">Cloud environments</a> </li> 
+         <li class="li"> <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_aap_containerized_installation_intro" title="Containerized Ansible Automation Platform uses Podman to run the platform in containers on Red Hat Enterprise Linux host machines. With this installation method, you manage both the product and infrastructure lifecycle while taking advantage of containerized architecture.">Containerized installation</a> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title10" id="con-gs-dashboard-components"> 
+      <h2 class="title topictitle2" id="ariaid-title10">Dashboard components</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">After you install Ansible Automation Platform on your system and log in for the first time, familiarize yourself with the platform dashboard.</p> 
+       <dl class="dl"> 
+        <dt class="dt dlterm">
+         Quick starts
+        </dt> 
+        <dd class="dd">
+         Learn about Ansible automation functions with guided tutorials called quick starts. In the dashboard, you can access quick starts by selecting <strong class="ph b">Quick starts</strong> from the navigation panel, and selecting a quick start tile. Click <span class="ph uicontrol button">Start</span> and complete the onscreen instructions. You can also filter quick starts by keyword and status.
+        </dd> 
+        <dt class="dt dlterm">
+         Resource status
+        </dt> 
+        <dd class="dd">
+         Indicates the status of your hosts, projects, and inventories. The status indicator links to your configured hosts, projects and inventories where you can search, filter, add and change these resources.
+        </dd> 
+        <dt class="dt dlterm">
+         Job Activity
+        </dt> 
+        <dd class="dd">
+         View a summary of your current job status. Filter the job status within a period of time or by job type, or click <span class="ph uicontrol button">Go to jobs</span> to view a complete list of jobs that are currently available.
+        </dd> 
+        <dt class="dt dlterm">
+         Jobs
+        </dt> 
+        <dd class="dd">
+         View recent jobs that have run, or click <span class="ph uicontrol button">View all Jobs</span> to view a complete list of jobs that are currently available, or create a new job.
+        </dd> 
+        <dt class="dt dlterm">
+         Projects
+        </dt> 
+        <dd class="dd">
+         View recently updated projects or click <span class="ph uicontrol button">View all Projects</span> to view a complete list of the projects that are currently available, or create a new project.
+        </dd> 
+        <dt class="dt dlterm">
+         Inventories
+        </dt> 
+        <dd class="dd">
+         View recently updated inventories or click <span class="ph uicontrol button">View all Inventories</span> to view a complete list of available inventories, or create a new inventory.
+        </dd> 
+        <dt class="dt dlterm">
+         Rulebook Activations
+        </dt> 
+        <dd class="dd">
+         View the list of recent rulebook activations and their status, display the complete list of rulebook activations that are currently available, or create a new rulebook activation.
+        </dd> 
+        <dt class="dt dlterm">
+         Rule Audit
+        </dt> 
+        <dd class="dd">
+         View recently fired rule audits, view rule audit records, and view rule audit data based on corresponding rulebook activation runs.
+        </dd> 
+        <dt class="dt dlterm">
+         Decision Environments
+        </dt> 
+        <dd class="dd">
+         View recently updated decision environments, or click <span class="ph uicontrol button">View all Decision Environments</span> to see a complete list of available inventories, or create a new decision environment.
+        </dd> 
+       </dl> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

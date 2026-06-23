@@ -1,0 +1,24 @@
+# Improve the security of nodes managed by Ansible Automation Platform
+## Create a dedicated service account with access limits
+
+Ansible Automation Platform can be configured to use various users or accounts for connecting to managed nodes.
+
+Create a single, dedicated service account for this purpose. This service account must be a local account on each managed node to ensure automation jobs continue to run, even if an external authentication mechanism experiences an outage. This recommendation applies unless organizational policy mandates centrally managed service accounts. The service account must be clearly named to indicate its purpose, for instance, `ansible` or `aapsvc`.
+
+"Ansible" is used here as the assumed name for a local service account in the examples.
+
+The local service account is configured as follows:
+
+- It is granted sufficient privileges to run any automation job required.
+- It is limited to SSH key authentication only. No password authentication is allowed.
+- Access is only granted to connections made from the Ansible Automation Platform {ControllerNames}s and execution nodes. Note:
+To execute tasks in an Ansible playbook or job template as a user other than the service account, use the `become` and `become_user` keywords. Connecting to the managed node as a different user is not necessary.
+
+- The `useradd` command can be used to create a local service account. For example:
+
+```
+sudo useradd ansible \
+--system --create-home \
+--comment "Ansible Automation Platform service account"
+```
+

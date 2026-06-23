@@ -1,0 +1,1016 @@
+<body><div xml:lang="en-US" class="book" id="idm140547378898304"><div class="titlepage"><div><div class="producttitle"><span class="productname">Ansible on Clouds</span> <span class="productnumber">2.x</span></div><div><h2 class="subtitle">Install and configure Red Hat Ansible Automation Platform Service on AWS</h2></div><div><div xml:lang="en-US" class="authorgroup"><span class="orgname">Red Hat Customer Content Services </span></div></div><div><a href="#idm140547383478672">Legal Notice</a></div><div><div class="abstract"><p class="title"><strong>Abstract</strong></p>
+			Ansible Automation Platform helps teams manage complex multi-tier deployments by adding control, knowledge, and delegation to Ansible-powered environments. This guide helps you to understand the installation and use of Ansible Automation Platform Service on AWS. This document has been updated to include information for the latest release of Ansible Automation Platform Service on AWS.
+		</div></div></div><hr/></div><section class="preface Role ARG Spec" id="idm140547386526416"><div class="titlepage"><div><div><h1 class="title">Preface</h1></div></div></div><p class="Role ARG Spec Role ARG Spec">
+			This document outlines the service definition and set up for Red Hat Ansible Automation Platform Service on AWS.
+		</p></section><section class="preface Role ARG Spec" id="providing-feedback"><div class="titlepage"><div><div><h1 class="title">Providing feedback on Red Hat documentation</h1></div></div></div><p class="Role ARG Spec Role ARG Spec">
+			If you have a suggestion to improve this documentation, or find an error, you can contact technical support at <a class="link" href="https://access.redhat.com">https://access.redhat.com</a> to open a request.
+		</p><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+				<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Disclaimer</span></strong></span>: Links contained in this document to external websites are provided for convenience only. Red Hat has not reviewed the links and is not responsible for the content or its availability. The inclusion of any link to an external website does not imply endorsement by Red Hat of the website or their entities, products or services. You agree that Red Hat is not responsible or liable for any loss or expenses that may result due to your use of (or reliance on) the external site or content.
+			</p></div></div></section><section class="chapter Role ARG Spec" id="saas-intro"><div class="titlepage"><div><div><h1 class="title">Chapter 1. Introduction to Red Hat Ansible Automation Platform Service on AWS</h1></div></div></div><p class="_abstract _abstract">
+			With the Red Hat Ansible Automation Platform Service on AWS, you can purchase and deploy Ansible Automation Platform through <a class="link" href="https://aws.amazon.com/marketplace">AWS Marketplace</a>. Red Hat configures and provisions an Ansible Automation Platform environment and then maintains it, ensuring reliability and security.
+		</p></section><section class="chapter Role ARG Spec" id="saas-pull-push"><div class="titlepage"><div><div><h1 class="title">Chapter 2. Red Hat Ansible Automation Platform Service on AWS PULL and PUSH models</h1></div></div></div><p class="_abstract _abstract">
+			There are two communication methods, PULL and PUSH, available for connecting your execution plane nodes to the Ansible Automation Platform Service on AWS control plane.
+		</p><section class="section Role ARG Spec" id="con-saas-automation"><div class="titlepage"><div><div><h2 class="title">2.1. Automation using the Red Hat Ansible Automation Platform Service on AWS control plane</h2></div></div></div><p class="_abstract _abstract">
+				The Red Hat Ansible Automation Platform Service on AWS offers a deployment of Ansible Automation Platform purchased through AWS Marketplace. Red Hat configures and provisions an Ansible Automation Platform. The Red Hat team handles the setup and maintenance of the Ansible Automation Platform, ensuring reliability and security.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				While Red Hat manages the control plane, the execution plane is implemented in your network using automation mesh hop nodes and execution nodes. For help with configuring execution nodes see <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec"><a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/automation_mesh_for_managed_cloud_or_operator_environments">Automation mesh for managed cloud or operator environments</a></span></em></span>.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				There are two ways to configure the communication between control nodes and execution nodes:
+			</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						The PULL connectivity model (recommended)
+					</li><li class="listitem">
+						The PUSH connectivity model
+					</li></ul></div></section><section class="section Role ARG Spec" id="ref-saas-egress-model"><div class="titlepage"><div><div><h2 class="title">2.2. PULL connectivity</h2></div></div></div><p class="_abstract _abstract">
+				Remote automation mesh nodes can access Ansible Automation Platform using a 'polling' or 'pull' model, which does not require opening ingress ports in your enterprise network.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				The pull model initiates a WebSocket from the remote execution node to the control plane hop node secured with mTLS for authentication and encryption. This model eliminates the need to deploy hop nodes into your demilitarized zone (DMZ) to establish connectivity to private networks if private networks have outbound internet connectivity. Proxy servers that terminate TLS are not supported and will disrupt automation mesh connectivity.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For help with configuring your automation mesh see <a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/automation_mesh_for_managed_cloud_or_operator_environments/assembly-automation-mesh-operator-aap#proc-define-mesh-node-types">defining automation mesh node types</a>.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Pull model</span></strong></span>
+			</p><p class="Role ARG Spec Role ARG Spec">
+				<span class="inlinemediaobject"><img src="https://access.redhat.com/webassets/avalon/d/Ansible_on_Clouds-2.x-Red_Hat_Ansible_Automation_Platform_Service_on_AWS-en-US/images/54104ceb343d4fa5ca7df794ddf477da/mesh_egress.png" alt="Pull model"/></span>
+
+			</p></section><section class="section Role ARG Spec" id="ref-saas-mesh-ingress-model"><div class="titlepage"><div><div><h2 class="title">2.3. PUSH connectivity</h2></div></div></div><p class="_abstract _abstract">
+				You can design your automation mesh architecture using the push model and configure the communication ports.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				The default port is 27199. If you choose a different port ensure it does not conflict with an existing service, such as HTTPS. Ansible Automation Platform Service on AWS supports current automation mesh features that push communication to both hop nodes and execution nodes.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Push model</span></strong></span>
+			</p><p class="Role ARG Spec Role ARG Spec">
+				<span class="inlinemediaobject"><img src="https://access.redhat.com/webassets/avalon/d/Ansible_on_Clouds-2.x-Red_Hat_Ansible_Automation_Platform_Service_on_AWS-en-US/images/2d6c1a44eae74696fce00e72887c2c45/mesh_ingress.png" alt="Push model"/></span>
+
+			</p></section></section><section class="chapter Role ARG Spec" id="saas-set-up"><div class="titlepage"><div><div><h1 class="title">Chapter 3. Setting up Red Hat Ansible Automation Platform Service on AWS</h1></div></div></div><p class="_abstract _abstract">
+			To set up Red Hat Ansible Automation Platform Service on AWS you must first accept an offer. You can accept a public offer through the AWS Marketplace, or a private offer directly from a Red Hat seller.
+		</p><section class="section Role ARG Spec" id="proc-saas-set-up-public"><div class="titlepage"><div><div><h2 class="title">3.1. Accepting a Public offer</h2></div></div></div><p class="_abstract _abstract">
+				To set up Red Hat Ansible Automation Platform Service on AWS you must link your Amazon Web Services (AWS) and Red Hat accounts through the AWS Marketplace.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				When you link your accounts you can provision and configure your cluster through the Red Hat Hybrid Cloud Console.
+			</p><div class="itemizedlist Role ARG Spec"><p class="title"><strong>Prerequisites</strong></p><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						An AWS Account
+					</li></ul></div><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+						Log in to your AWS account.
+					</li><li class="listitem">
+						Navigate to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Discover products</span></strong></span> page of the AWS Marketplace. If you have already accepted your offer you can find it in the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Manage subscriptions</span></strong></span> page.
+					</li><li class="listitem"><p class="simpara">
+						In the search field search for "Red Hat Ansible Automation Platform Service on AWS".
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem"><p class="simpara">
+								Depending on your region select one of the following:
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+										For EMEA, select <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Red Hat Limited</span></strong></span>.
+									</li><li class="listitem">
+										For the rest of the world, select <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Red Hat</span></strong></span>.
+									</li></ul></div></li></ul></div></li><li class="listitem">
+						Click <span class="guibutton">View purchase options</span>.
+					</li><li class="listitem">
+						Select your desired contract duration.
+					</li><li class="listitem">
+						If you would like your contract to auto renew, click <span class="guibutton">auto renewal settings</span>.
+					</li><li class="listitem">
+						Select the contract options.
+					</li><li class="listitem">
+						Optional: Add a purchase order number.
+					</li><li class="listitem">
+						Click <span class="guibutton">Create contract</span>.
+					</li><li class="listitem"><p class="simpara">
+						Select <span class="guibutton">Click here to set up your account</span>. This redirects you to Red Hat Single Sign-On where you must:
+					</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="a"><li class="listitem">
+								Create or sign into your Red Hat account.
+							</li><li class="listitem">
+								Connect your AWS account to the Red Hat account. This redirects you to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Provision environment</span></strong></span> page on the Red Hat Hybrid Cloud Console. Here you can start configuring your environment.
+							</li></ol></div></li><li class="listitem"><p class="simpara">
+						Enter your AWS account ID and click <span class="guibutton">Verify</span>.
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								This account ID must be the account ID that purchased the offer from the AWS Marketplace. The system does not recognize associated or nested accounts.
+							</li></ul></div></li><li class="listitem">
+						After your AWS ID is validated click <span class="guibutton">Next</span>.
+					</li><li class="listitem">
+						Select your required region.
+					</li><li class="listitem">
+						Click <span class="guibutton">Provision</span>.
+					</li></ol></div><div class="Role ARG Spec Role ARG Spec"><p class="title"><strong>Verification</strong></p><p>
+					This redirects you to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Environment details</span></strong></span> page of the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Instances</span></strong></span>, where you can see all the details of your created instance. Here you can check whether your instance is <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Ready</span></strong></span> or still in a <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Provision in progress</span></strong></span> state.
+				</p></div><p class="Role ARG Spec Role ARG Spec">
+				Provisioning your environment can take up to two hours. When it is ready, you will receive a confirmation email at the address linked to your account.
+			</p><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+					Update your password as soon as possible. The confirmation email includes a link to your admin password, which you will use to log in and change your password. This link is one-time use, so be prepared before clicking it.
+				</p></div></div><p class="Role ARG Spec Role ARG Spec">
+				If you did not receive the email or the initial admin password has expired, you must submit a <a class="link" href="https://access.redhat.com/support">support ticket</a> and the Red Hat team will assist you with next steps.
+			</p></section><section class="section Role ARG Spec" id="proc-saas-set-up-private"><div class="titlepage"><div><div><h2 class="title">3.2. Accepting a Private offer</h2></div></div></div><p class="_abstract _abstract">
+				A private offer is sent to you directly from a Red Hat seller. A private offer includes specific pricing and licensing terms for your account and has an expiration date. If you do not accept the offer by that date, you will either be moved to the public offer for the product or no longer subscribed to it.
+			</p><div class="itemizedlist Role ARG Spec"><p class="title"><strong>Prerequisites</strong></p><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						An AWS Account
+					</li><li class="listitem"><p class="simpara">
+						A Red Hat seller issues you a purchase order and provides it to you by email.
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+								For manual steps see <a class="link" href="https://docs.aws.amazon.com/marketplace/latest/buyerguide/buyer-private-offers.html#buyer-private-offers-subscribing">Viewing and subscribing to a private offer</a> page on the AWS Marketplace
+							</li></ul></div></li></ul></div><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+						Click the link in the private offer email to accept the terms.
+					</li><li class="listitem">
+						Log in to your AWS account.
+					</li><li class="listitem">
+						Navigate to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Private Offers</span></strong></span> page of the AWS Marketplace. If you have already accepted your offer you can find it in the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Manage subscriptions</span></strong></span> page.
+					</li><li class="listitem">
+						Click the URL under the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Offer ID</span></strong></span> column. This redirects you to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Offer Selection</span></strong></span> page.
+					</li><li class="listitem">
+						Click <span class="guibutton">Create contract</span>.
+					</li><li class="listitem"><p class="simpara">
+						Select <span class="guibutton">Click Set up your account</span>. This redirects you to Red Hat Single Sign-On where you must:
+					</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="a"><li class="listitem">
+								Create or sign into your Red Hat account.
+							</li><li class="listitem"><p class="simpara">
+								Connect your AWS account to the Red Hat account.
+							</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="i"><li class="listitem">
+										If you are connecting to your accounts for the first time you must accept the terms and conditions and click <span class="guibutton">Connect accounts</span>. This redirects you to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Provision environment</span></strong></span> page on the Red Hat Hybrid Cloud Console. Here you can start configuring your environment.
+									</li></ol></div></li></ol></div></li><li class="listitem"><p class="simpara">
+						Enter your AWS account ID and click <span class="guibutton">Verify</span>.
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								This account ID must be the account ID that purchased the offer from the AWS Marketplace. The system does not recognize associated or nested accounts.
+							</li></ul></div></li><li class="listitem">
+						After your AWS ID is validated click <span class="guibutton">Next</span>.
+					</li><li class="listitem">
+						Select your required region and click <span class="guibutton">Next</span>.
+					</li><li class="listitem">
+						Click <span class="guibutton">Provision</span>.
+					</li></ol></div><div class="Role ARG Spec Role ARG Spec"><p class="title"><strong>Verification</strong></p><p>
+					This redirects you to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Environment details</span></strong></span> page of the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Instances</span></strong></span>, where you can see all the details of your created instance. Here you can check whether your instance is <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Ready</span></strong></span> or still in a <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Provision in progress</span></strong></span> state.
+				</p></div><p class="Role ARG Spec Role ARG Spec">
+				Provisioning your environment can take up to two hours. When it is ready, you will receive a confirmation email at the address linked to your account.
+			</p><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+					Update your password as soon as possible. The confirmation email includes a link to your admin password, which you will use to log in and change your password. This link is one-time use, so be prepared before clicking it.
+				</p></div></div><p class="Role ARG Spec Role ARG Spec">
+				If you did not receive the email or the initial admin password has expired, you must submit a <a class="link" href="https://access.redhat.com/support">support ticket</a> and the Red Hat team will assist you with next steps.
+			</p></section><section class="section Role ARG Spec" id="con-aap-notifications-feed_saas-set-up"><div class="titlepage"><div><div><h2 class="title">3.3. Product Notification Feed</h2></div></div></div><p class="_abstract _abstract">
+				Effective July 2025, the Ansible Automation Platform RSS notification feed is available. This feed serves as a method for communicating various product updates and changes to customers.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Customers can subscribe to the notifications by visiting <a class="link" href="https://announcements.ansiblecloud.redhat.com/feed.atom">announcements.ansiblecloud.redhat.com/feed.atom</a>. Using an RSS feed reader, customers are updated with events such as Ansible Automation Platform upgrades and system maintenance.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				All Ansible Automation Platform customers can subscribe to this content. Messages include categorization tags to specify deployment types: managed, self-managed (on-premises), or a combination. Red Hat is developing a future enhancement to integrate this feature directly into the UI.
+			</p></section></section><section class="chapter Role ARG Spec" id="saas-post-install-config"><div class="titlepage"><div><div><h1 class="title">Chapter 4. Configuring Red Hat Ansible Automation Platform Service on AWS</h1></div></div></div><p class="_abstract _abstract">
+			After you subscribe to Ansible Automation Platform Service on AWS and gain access to Ansible Automation Platform, you must configure your automation mesh nodes and set up your automation jobs.
+		</p><p class="Role ARG Spec Role ARG Spec">
+			For help with configuring your automation mesh see <a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/automation_mesh_for_managed_cloud_or_operator_environments/index">Automation mesh for managed cloud or operator environments</a>.
+		</p><div class="admonition warning Role ARG Spec"><div class="admonition_header">Warning</div><div><p class="Role ARG Spec Role ARG Spec">
+				Do not change the "Gateway proxy URL" settings. Altering the gateway proxy might cause false outages on the status page.
+			</p></div></div></section><section class="chapter Role ARG Spec" id="saas-service-definition"><div class="titlepage"><div><div><h1 class="title">Chapter 5. Red Hat Ansible Automation Platform Service on AWS Service Definition</h1></div></div></div><p class="_abstract _abstract">
+			The service definition details the shared responsibilities between Red Hat, which manages the control plane, and the customer, who manages the execution plane.
+		</p><section class="section Role ARG Spec" id="assembly-saas-account-management"><div class="titlepage"><div><div><h2 class="title">5.1. Account management</h2></div></div></div><p class="_abstract _abstract">
+				This section provides an overview of the billing and environment management operations.
+			</p><section class="section Role ARG Spec" id="con-saas-billing"><div class="titlepage"><div><div><h3 class="title">5.1.1. Billing</h3></div></div></div><p class="_abstract _abstract">
+					Red Hat Ansible Automation Platform Service on AWS is billed through Amazon Web Services (AWS). Pricing is based on the number of managed active nodes and related infrastructure management costs. Discount tiers are available for pre-purchasing managed active nodes at the start of a billing cycle.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					The service includes one Ansible Automation Platform deployment and 10 Red Hat Enterprise Linux (RHEL) entitlements for running your automation execution plane.
+				</p></section><section class="section Role ARG Spec" id="con-saas-deployment-self-service"><div class="titlepage"><div><div><h3 class="title">5.1.2. Deployment-self-service</h3></div></div></div><p class="_abstract _abstract">
+					You can self-service deployments including, but not limited to, the following operations:
+				</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+							Buy and deploy an Ansible Automation Platform on AWS environment.
+						</li><li class="listitem">
+							Cancel an Ansible Automation Platform on AWS environment subscription.
+						</li></ul></div><p class="Role ARG Spec Role ARG Spec">
+					When you cancel or do not renew a subscription in the AWS Marketplace, the service begins the deprovisioning process 72 hours after the cancellation.
+				</p><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+						The system keeps an encrypted backup for a limited time after unsubscription to prevent data loss from accidental unsubscription.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						You may request a complete purge of the backup data after unsubscription, with the understanding that there is permanent data loss.
+					</p></div></div><p class="Role ARG Spec Role ARG Spec">
+					If you initiate a cancellation, your deployment will begin to shut down. If you initiated the cancellation in error you have 72 hours from the initial cancellation to submit a <a class="link" href="https://access.redhat.com/support">Support ticket</a> and the Red Hat team will assist you in recovering the cancelled deployment.
+				</p></section><section class="section Role ARG Spec" id="con-saas-regions"><div class="titlepage"><div><div><h3 class="title">5.1.3. Regions and availability zones</h3></div></div></div><p class="_abstract _abstract">
+					Each supported region is paired with a companion AWS region where backup data is stored in the event of a primary region catastrophe that requires restoration in another AWS region.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					Refer to <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html-single/red_hat_ansible_automation_platform_service_on_aws/index#con-saas-backup-and-disaster-recovery">Backup and disaster recovery</a> for the list of supported and backup regions.
+				</p></section><section class="section Role ARG Spec" id="con-saas-sla"><div class="titlepage"><div><div><h3 class="title">5.1.4. Service level agreement</h3></div></div></div><p class="_abstract _abstract">
+					Any service level agreements (SLAs) for the service itself are defined in Appendix 4 (Online Subscription Services) of the <a class="link" href="https://www.redhat.com/en/about/appendices">Red Hat Enterprise Agreement Product Appendices</a>.
+				</p><section class="section Role ARG Spec" id="con-saas-limited-support-status"><div class="titlepage"><div><div><h4 class="title">5.1.4.1. Limited support status</h4></div></div></div><p class="_abstract _abstract">
+						When a deployment transitions to "Limited Support" status, Red Hat will no longer troubleshoot execution plane issues.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						The SLA is no longer applicable and credits requested against the SLA are denied. However, this does not mean you lose all product support. A deployment can return to full support if you address the issues that caused the limited status.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						A deployment might move to a Limited Support status for several reasons, including:
+					</p><div class="variablelist Role ARG Spec"><dl class="variablelist Role ARG Spec"><dt><span class="term">Lack of an execution plane</span></dt><dd>
+									A customer execution plane is required for automation. If you have not configured one or if it’s in a degraded state, you must fix these issues before receiving automation support.
+								</dd><dt><span class="term">Unsupported Execution Plane Dependencies</span></dt><dd>
+									Both Red Hat Enterprise Linux (RHEL) and OpenShift-based execution planes need regular maintenance and upgrades to meet minimum supported versions for Ansible Automation Platform dependencies. You can upgrade these resources using various methods, such as Ansible for patching, Red Hat Satellite, or DNF automatic updates. Keeping your OS, cluster, and receptor resources updated with supported Ansible Automation Platform helps reduce support issues.
+								</dd></dl></div></section></section><section class="section Role ARG Spec" id="con-saas-responsibilities"><div class="titlepage"><div><div><h3 class="title">5.1.5. Responsibilities</h3></div></div></div><p class="_abstract _abstract">
+					Learn about your responsibilities and Red Hat’s responsibilities. Understanding these roles helps you manage your product effectively.
+				</p><div class="informaltable"><table class="lt-4-cols lt-7-rows Role ARG Spec"><colgroup><col style="width: 33%; " class="col_1"><!--Empty--></col><col style="width: 33%; " class="col_2"><!--Empty--></col><col style="width: 33%; " class="col_3"><!--Empty--></col></colgroup><thead><tr><th align="left" valign="top" id="idm140547383626112" scope="col">Feature</th><th align="left" valign="top" id="idm140547383625024" scope="col">Red Hat</th><th align="left" valign="top" id="idm140547383623936" scope="col">Customer</th></tr></thead><tbody><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Control plane infrastructure
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									✓
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									┄
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Execution plane infrastructure
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									┄
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									✓
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Control plane deployment
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									✓
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									┄
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Control plane uptime
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									✓
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									┄
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Control plane upgrades
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									✓
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									┄
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Control plane backup and restore
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									✓
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									┄
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Control plane security
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									✓
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									┄
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Execution plane (automation mesh) deployment
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									┄
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									✓
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Execution plane uptime
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									┄
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									✓
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Execution plane upgrades
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									┄
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									✓
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Execution plane backup and restore
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									┄
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									✓
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Execution plane security
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									┄
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									✓
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Settings and configuration
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									┄
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									✓
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Automation content
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									┄
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									✓
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Application integrations
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									┄
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									✓
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Identity and access
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									┄
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									✓
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383626112"> <p>
+									Monitoring SSL and TLS certificate expiration
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383625024"> <p>
+									┄
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383623936"> <p>
+									✓
+								</p>
+								 </td></tr></tbody></table></div></section></section><section class="section Role ARG Spec" id="assembly-saas-control-plane"><div class="titlepage"><div><div><h2 class="title">5.2. Control plane</h2></div></div></div><p class="_abstract _abstract">
+				The Ansible Automation Platform control plane includes the application UIs, APIs, components, and services used for managing automation. Red Hat manages these within its own infrastructure.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Each customer deployment is fully isolated at the infrastructure layer. Every deployment provisions its own dedicated network, compute, and database resources, remaining entirely independent from all other customer environments. By enforcing this level of isolation, there is a reduced risk of data leakage or unauthorized cross-deployment interactions, ensuring that actions and information remain confined within their designated environments.
+			</p><div class="informalfigure"><div class="mediaobject"><img src="https://access.redhat.com/webassets/avalon/d/Ansible_on_Clouds-2.x-Red_Hat_Ansible_Automation_Platform_Service_on_AWS-en-US/images/f911b4ac0130963cd5c313ded8bebb12/AWS_tenant_isolation.png" alt="The diagram shows two customer deployments. Both deployments are identical"/></div></div><section class="section Role ARG Spec" id="assembly-saas-preparing-for-deployment"><div class="titlepage"><div><div><h3 class="title">5.2.1. Preparing for deployment</h3></div></div></div><p class="_abstract _abstract">
+					The following optional configurations include custom domains and AWS PrivateLink setup. You can implement these settings to meet your specific security and networking requirements.
+				</p><section class="section Role ARG Spec" id="ref-saas-deploy-requirements"><div class="titlepage"><div><div><h4 class="title">5.2.1.1. Prerequisites</h4></div></div></div><p class="_abstract _abstract">
+						Before initiating these configuration requests, ensure the following are available.
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Access:</span></strong></span> You have access to Red Hat Customer Portal (<a class="link" href="https://access.redhat.com/support/cases/?extIdCarryOver=true&amp;sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true">Customer support</a>) and the AWS Console.
+							</li><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Infrastructure:</span></strong></span> You have an active Ansible Automation Platform Service on AWS deployment.
+							</li><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Network:</span></strong></span> You have an existing VPC with private subnets (for PrivateLink).
+							</li><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">DNS:</span></strong></span> You have administrative access to your public or private DNS provider.
+							</li></ul></div></section><section class="section Role ARG Spec" id="ref-saas-ex-plane-strategy"><div class="titlepage"><div><div><h4 class="title">5.2.1.2. Execution plane strategy</h4></div></div></div><p class="_abstract _abstract">
+						Red Hat strongly advises provisioning your own execution nodes and instance groups in your VPC.
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Cost Impact:</span></strong></span> Workloads running on the control plane trigger auto-scaling of vCPUs, which are billed at a higher variable rate ($0.10/vCPU/hr). For more information see <a class="link" href="https://access.redhat.com/articles/7133854">Ansible Automation Platform Service on AWS: Infrastructure Metering Changes</a>.
+							</li><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Recommendation:</span></strong></span> To maintain predictable costs and security isolation, use the control plane for management only and offload automation execution to your own EC2 instances.
+							</li></ul></div></section><section class="section Role ARG Spec" id="ref-saas-config-aws-privatelink"><div class="titlepage"><div><div><h4 class="title">5.2.1.3. Configure AWS PrivateLink</h4></div></div></div><p class="_abstract _abstract">
+						AWS PrivateLink establishes secure connectivity between your VPC and the Red Hat managed control plane without traversing the public internet.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						AWS PrivateLink connectivity is supported both into (ingress) and out of (egress) the Ansible Automation Platform control plane. Customers must work with the Red Hat SRE Team to set up the following AWS PrivateLink connectivity directions:
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								From customer VPC to Red Hat managed control Plane
+							</li><li class="listitem">
+								From Red Hat managed control plane to customer VPC
+							</li></ul></div><p class="Role ARG Spec Role ARG Spec">
+						To configure bi-directional connectivity, complete the following steps:
+					</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem"><p class="simpara">
+								Submit <a class="link" href="https://access.redhat.com/support/cases/?extIdCarryOver=true&amp;sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true">Customer support</a> cases to Red Hat to begin this process.
+							</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="a"><li class="listitem">
+										A separate ticket must be created for ingress and egress
+									</li></ol></div></li><li class="listitem">
+								The Redhat SRE team will work together with the customer and enable AWS PrivateLink Connectivity via the support case.
+							</li></ol></div><p class="Role ARG Spec Role ARG Spec">
+						To begin this process see <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html/red_hat_ansible_automation_platform_service_on_aws/saas-private-link#ref-saas-enabling-aws-privatelink">Enabling AWS PrivateLink connectivity</a>.
+					</p></section><section class="section Role ARG Spec" id="performance-metrics-eda-aap-aws_saas-service-definition"><div class="titlepage"><div><div><h4 class="title">5.2.1.4. Performance guidelines for Event-Driven Ansible on Ansible Automation Platform Service on AWS</h4></div></div></div><p class="_abstract _abstract">
+						Use this information to plan and configure <a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/using_automation_decisions/index">Event-Driven Ansible</a> on Ansible Automation Platform Service on AWS.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						All customer workloads differ, and performance results may vary. Red Hat recommends monitoring <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Subscription Watch</span></strong></span> for Ansible Automation Platform Service on AWS meters within Hybrid Cloud Console and creating cost alerts in AWS.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						The following table reflects the observed performance and resource utilization for the tested configuration.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Observed performance and resource utilization</span></strong></span>
+					</p><div class="informaltable"><table class="lt-4-cols lt-7-rows Role ARG Spec"><colgroup><col style="width: 38%; " class="col_1"><!--Empty--></col><col style="width: 38%; " class="col_2"><!--Empty--></col><col style="width: 25%; " class="col_3"><!--Empty--></col></colgroup><thead><tr><th align="left" valign="top" id="idm140547383704576" scope="col">Category</th><th align="left" valign="top" id="idm140547383703488" scope="col">Metric</th><th align="left" valign="top" id="idm140547383702400" scope="col">Value</th></tr></thead><tbody><tr><td rowspan="3" align="left" valign="top" headers="idm140547383704576"> <p>
+										Tested configuration
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383703488"> <p>
+										Rulebook Activations
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383702400"> <p>
+										5
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140547383703488"> <p>
+										Events published per second
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383702400"> <p>
+										120
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140547383703488"> <p>
+										Actions per second
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383702400"> <p>
+										20
+									</p>
+									 </td></tr><tr><td rowspan="2" align="left" valign="top" headers="idm140547383704576"> <p>
+										Derived metrics
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383703488"> <p>
+										Actions per activation (20 events/sec x 30 sec)
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383702400"> <p>
+										600
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140547383703488"> <p>
+										Total actions across all activations
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383702400"> <p>
+										3,000
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140547383704576"> <p>
+										Infrastructure
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383703488"> <p>
+										vCPUs
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383702400"> <p>
+										12
+									</p>
+									 </td></tr><tr><td rowspan="4" align="left" valign="top" headers="idm140547383704576"> <p>
+										Observed performance
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383703488"> <p>
+										Total Events Sent
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383702400"> <p>
+										3,000
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140547383703488"> <p>
+										Job Events
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383702400"> <p>
+										600
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140547383703488"> <p>
+										Failed Iterations
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383702400"> <p>
+										0
+									</p>
+									 </td></tr><tr><td align="left" valign="top" headers="idm140547383703488"> <p>
+										Event Processing Time
+									</p>
+									 </td><td align="left" valign="top" headers="idm140547383702400"> <p>
+										77.07 seconds
+									</p>
+									 </td></tr></tbody></table></div><div class="admonition note Role ARG Spec"><div class="admonition_header">Note</div><div><p class="Role ARG Spec Role ARG Spec">
+							Performance metrics change as the control plane scales (up or down) based on the running workload.
+						</p></div></div></section><section class="section Role ARG Spec" id="ref-saas-custom-domain-certs"><div class="titlepage"><div><div><h4 class="title">5.2.1.5. Configure a custom domain</h4></div></div></div><p class="_abstract _abstract">
+						Configure a custom domain, starting with generating a certificate and private key, submitting a support case for SRE configuration, and finalizing the setup with a required DNS update.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						For help with this process see the <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html/red_hat_ansible_automation_platform_service_on_aws/saas-service-definition#con-saas-custom-domain">Custom domain</a> section.
+					</p></section></section><section class="section Role ARG Spec" id="con-saas-customer-access"><div class="titlepage"><div><div><h3 class="title">5.2.2. Customer access</h3></div></div></div><p class="_abstract _abstract">
+					You can access the control plane through the Ansible Automation Platform user interfaces and APIs.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					During the initial configuration of an Ansible Automation Platform Service on AWS deployment, you will receive the URL for your deployment. You can also find this information through the Red Hat Hybrid Cloud Console (HCC).
+				</p><p class="Role ARG Spec Role ARG Spec">
+					The administrator account’s initial password is provided to the HCC user who performed the initial deployment.
+				</p><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+						You must change this initial password immediately after your first log in to Ansible Automation Platform.
+					</p></div></div><p class="Role ARG Spec Role ARG Spec">
+					If you need help accessing your deployment, submit a support request through <a class="link" href="https://access.redhat.com/support/cases/?extIdCarryOver=true&amp;sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true">Customer support</a>.
+				</p><div class="admonition note Role ARG Spec"><div class="admonition_header">Note</div><div><p class="Role ARG Spec Role ARG Spec">
+						You can provide a custom URL for your Ansible Automation Platform Service on AWS by using a domain name that you own. To request a custom domain name for your deployment, you can submit a customer support request to initiate the configuration process. The Red Hat SRE team will engage the support ticket for collaboration on next steps. Refer to the <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html/red_hat_ansible_automation_platform_service_on_aws/saas-service-definition#con-saas-custom-domain">Custom Domain</a> section for configuration information.
+					</p></div></div></section><section class="section Role ARG Spec" id="con-saas-service-uptime"><div class="titlepage"><div><div><h3 class="title">5.2.3. Service uptime</h3></div></div></div><p class="_abstract _abstract">
+					Uptime for Red Hat Ansible Automation Platform Service on AWS is measured by user access and function of the Ansible Automation Platform control plane. This is measured through the uptime of the product web user interface and REST APIs.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					Measurements are calculated through successful HTTP response codes (200) to entry points of the UI and API. If either of these return an unsuccessful response code, or are unavailable and time out entirely, then the service will be considered to be in an outage state. Uptime of the execution plane, which is managed by customers, is not included as part of the uptime of the service. Customers are responsible for ensuring that the execution plane is redundant, scalable, and available in order to meet customer uptime objectives.
+				</p></section><section class="section Role ARG Spec" id="con-saas-sre-access-and-management"><div class="titlepage"><div><div><h3 class="title">5.2.4. SRE access and management</h3></div></div></div><p class="_abstract _abstract">
+					Site Reliability Engineering (SRE) access is limited to the infrastructure and services running Ansible Automation Platform. Red Hat only accesses the Ansible Automation Platform interfaces or APIs in exceptional cases, such as during support engagements.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					SRE access to control plane resources is restricted to operations that require human intervention and cannot be automated. Any access follows a request-and-approval process and is audited to ensure only authorized personnel can perform these operations.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					SREs access resources and audit data are collected when:
+				</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+							The SRE team requests access to cluster resources using a tool that allows temporary access. This tool generates a log entry detailing the time and the SRE team member who requested access.
+						</li><li class="listitem">
+							Audit logs are created for any management operation performed on a customer instance and are sent to a centralized logging system.
+						</li></ul></div><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+						Red Hat erases job logs every 30 days.
+					</p></div></div></section><section class="section Role ARG Spec" id="con-saas-backup-and-disaster-recovery"><div class="titlepage"><div><div><h3 class="title">5.2.5. Backup and disaster recovery</h3></div></div></div><p class="_abstract _abstract">
+					Red Hat maintains daily database and file system snapshots in a separate region from each deployment.
+				</p><div class="informaltable"><table class="lt-4-cols lt-7-rows Role ARG Spec"><colgroup><col style="width: 33%; " class="col_1"><!--Empty--></col><col style="width: 33%; " class="col_2"><!--Empty--></col><col style="width: 33%; " class="col_3"><!--Empty--></col></colgroup><tbody><tr><td align="left" valign="top"> <p>
+									Component
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									Snapshot Frequency
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									Retention Policy
+								</p>
+								 </td></tr><tr><td align="left" valign="top"> <p>
+									Database
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									Daily
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									7 days
+								</p>
+								 </td></tr><tr><td align="left" valign="top"> <p>
+									File System
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									Daily
+								</p>
+								 </td><td align="left" valign="top"> <p>
+									7 days
+								</p>
+								 </td></tr></tbody></table></div><p class="Role ARG Spec Role ARG Spec">
+					This recovery data is used if an AWS regional outage cannot be resolved in a reasonable time.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					Customer data is replicated to a predefined secondary region based on the deployment region. The currently paired regions are:
+				</p><div class="informaltable"><table class="lt-4-cols lt-7-rows Role ARG Spec"><colgroup><col style="width: 50%; " class="col_1"><!--Empty--></col><col style="width: 50%; " class="col_2"><!--Empty--></col></colgroup><thead><tr><th align="left" valign="top" id="idm140547383599024" scope="col">Primary Region</th><th align="left" valign="top" id="idm140547383597936" scope="col">Business Continuity Region</th></tr></thead><tbody><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									af-south-1 (Cape Town)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									ap-southeast-2 (Sydney)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									ap-east-1 (Hong Kong)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									ap-south-1 (Mumbai)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									ap-northeast-1 (Tokyo)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									ap-northeast-3 (Osaka)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									ap-northeast-3 (Osaka)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									ap-northeast-1 (Tokyo)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									ap-southeast-2 (Sydney)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									ap-south-1 (Mumbai)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									ca-central-1 (Central Canada)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									us-east-2 (Ohio)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									ca-west-1 (Canada)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									ca-central-1 (Central Canada)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									eu-central-1 (Frankfurt)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									eu-central-2 (Zurich)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									eu-central-2 (Zurich)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									eu-central-1 (Frankfurt)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									eu-south-2 (Spain)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									eu-west-3 (Paris)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									eu-west-1 (Ireland)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									eu-north-1 (Stockholm)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									eu-west-2 (London)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									eu-west-1 (Ireland)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									eu-west-3 (Paris)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									eu-south-2 (Spain)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									sa-east-1 (São Paulo)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									us-east-1 (N. Virginia)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									us-east-1 (N. Virginia)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									us-west-2 (Oregon)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									us-east-2 (Ohio)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									us-west-2 (Oregon)
+								</p>
+								 </td></tr><tr><td align="left" valign="top" headers="idm140547383599024"> <p>
+									us-west-2 (Oregon)
+								</p>
+								 </td><td align="left" valign="top" headers="idm140547383597936"> <p>
+									us-east-1 (N. Virginia)
+								</p>
+								 </td></tr></tbody></table></div><p class="Role ARG Spec Role ARG Spec">
+					To recover an Ansible Automation Platform deployment in a different AWS region, a customer must submit a request specifying their preferred deployment region from the available options. Red Hat evaluates the request and begins building an instance in that region. Data from the previous instance is recovered from the customer’s business continuity region. The customer is responsible for any necessary post-deployment network configuration to integrate the new instance into their environment.
+				</p><div class="admonition note Role ARG Spec"><div class="admonition_header">Note</div><div><p class="Role ARG Spec Role ARG Spec">
+						Backup data is not directly accessible to customers. The data is only used in the event of infrastructure failure, not customer configuration errors. Red Hat encourages using configuration-as-code practices to maintain a customer-hosted backup of your configuration.
+					</p></div></div></section><section class="section Role ARG Spec" id="con-saas-infrastructure-monitoring"><div class="titlepage"><div><div><h3 class="title">5.2.6. Infrastructure monitoring</h3></div></div></div><p class="_abstract _abstract">
+					Red Hat is responsible for monitoring the control plane. You do not have access to add any additional monitoring to the resources that run the control plane.
+				</p></section><section class="section Role ARG Spec" id="application-monitoring-and-customer-audits"><div class="titlepage"><div><div><h3 class="title">5.2.7. Application monitoring and customer audits</h3></div></div></div><p class="_abstract _abstract">
+					The Ansible Automation Platform activity stream provides detailed information about access to Ansible Automation Platform and usage. To retain this information for auditing or compliance, you must export the logs to supported logging services for retention and querying.
+				</p></section><section class="section Role ARG Spec" id="con-saas-status-notification"><div class="titlepage"><div><div><h3 class="title">5.2.8. Status notification</h3></div></div></div><p class="_abstract _abstract">
+					Red Hat communicates the health and status of Red Hat Ansible Automation Platform Service on AWS clusters through the Red Hat Hybrid Cloud Console, email notifications to the original deployment contact, and any additional contacts you specify.
+				</p></section><section class="section Role ARG Spec" id="con-saas-security"><div class="titlepage"><div><div><h3 class="title">5.2.9. Security</h3></div></div></div><p class="_abstract _abstract">
+					The platform is a managed service with robust built-in security, including RBAC and data encryption at rest and in transit (AES-256).
+				</p><section class="section Role ARG Spec" id="con-saas-identity-and-access-management"><div class="titlepage"><div><div><h4 class="title">5.2.9.1. Identity and access management</h4></div></div></div><p class="_abstract _abstract">
+						Ansible Automation Platform includes a built-in user model for configuring users and RBAC permissions that define access.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						Red Hat recommends using an enterprise identity provider with Ansible Automation Platform to implement multi-factor authentication for users. See the <a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.5/html/access_management_and_authentication">Access management and authentication</a> guide for more information.
+					</p><div class="admonition note Role ARG Spec"><div class="admonition_header">Note</div><div><p class="Role ARG Spec Role ARG Spec">
+							Red Hat advises keeping at least one local administrator account with a long, complex password for emergency access.
+						</p></div></div></section><section class="section Role ARG Spec" id="con-saas-encryption"><div class="titlepage"><div><div><h4 class="title">5.2.9.2. Encryption</h4></div></div></div><p class="_abstract _abstract">
+						Data is encrypted at rest in both the database and file system using AWS Key Management Service (KMS), which uses AES-256 encryption. Data in transit is encrypted with TLS 1.2 or higher.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						We use AWS Customer Managed Keys (CMKs) to enforce encryption across databases, Amazon S3 buckets, and AWS Secrets Manager secrets. These KMS keys are securely stored in AWS Key Management Service (KMS) under Customer Managed Keys. KMS keys are automatically rotated every 365 days to reduce the risk of key compromise. The Amazon S3 bucket is used for automation hub configuration and backups. AWS Secrets Manager secrets is leveraged to store sensitive information such as credentials and configuration details.
+					</p></section></section><section class="section Role ARG Spec" id="con-saas-hosted-components"><div class="titlepage"><div><div><h3 class="title">5.2.10. Hosted components</h3></div></div></div><p class="_abstract _abstract">
+					The objective of this offering is to provide an Ansible Automation Platform deployment as a managed service, relieving customers of managing the Ansible Automation Platform control plane.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					All Ansible Automation Platform capabilities in the operator-based deployment model are supported.
+				</p></section><section class="section Role ARG Spec" id="con-saas-custom-domain"><div class="titlepage"><div><div><h3 class="title">5.2.11. Custom domain</h3></div></div></div><p class="_abstract _abstract">
+					Ansible Automation Platform control plane is accessible through its user interfaces, APIs, and mesh ingresses. While each service instance has an auto-generated Red Hat URL, you can set up a custom domain. This customization process varies based on whether you plan to use AWS PrivateLink or not.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					To use custom domains, you must configure three DNS records according to your service’s connectivity model. These records will be explained in greater detail in the following sections. The conventions for these records are:
+				</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+							<code class="literal Role ARG Spec">platform.&lt;optional_subdomain.<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">exampledomain</span></em></span>.com&gt;</code>
+						</li><li class="listitem">
+							<code class="literal Role ARG Spec">mesh-ingress-0.&lt;optional_subdomain.<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">exampledomain</span></em></span>.com&gt;</code>
+						</li><li class="listitem">
+							<code class="literal Role ARG Spec">mesh-ingress-1.&lt;optional_subdomain.<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">exampledomain</span></em></span>.com&gt;</code>
+						</li></ul></div><p class="Role ARG Spec Role ARG Spec">
+					You can create custom subdomains under the domain you own.
+				</p><section class="section Role ARG Spec" id="proc-saas-customizing-your-domain"><div class="titlepage"><div><div><h4 class="title">5.2.11.1. Planning for your custom domain</h4></div></div></div><p class="_abstract _abstract">
+						You can configure a custom URL through Red Hat SRE assistance for your deployment. First, however, you must complete the preparatory steps, for domain identification and TLS certificate creation.
+					</p><div class="itemizedlist Role ARG Spec"><p class="title"><strong>Prerequisites</strong></p><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								Ensure that you have management over the domain or subdomain you intend to use in order to add multiple records.
+							</li><li class="listitem">
+								Ensure the DNS servers that you use to resolve the record must be accessible wherever you intend to use the domain.
+							</li><li class="listitem">
+								Ensure that you use the same domain for all URLs in the deployment (for example, use <code class="literal Role ARG Spec">exampledomain.com</code> for custom URLs).
+							</li></ul></div><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+								Identify the domain or subdomain to use.
+							</li><li class="listitem"><p class="simpara">
+								Create the TLS certificate:
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+										Include all mesh-ingress records in the Subject Alternative Name (SAN) parameter.
+									</li><li class="listitem">
+										Alternatively, generate a wildcard certificate to cover subdomains (for example, <code class="literal Role ARG Spec">*.exampledomain.com</code>).
+									</li></ul></div></li><li class="listitem"><p class="simpara">
+								Bundle the certificate, private key, and any optional intermediary certificates into a zip.
+							</p><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+									TLS Certificate requirements for custom domains:
+								</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+											<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Private Key:</span></strong></span> The private key must be unencrypted and cannot have a passphrase or be password protected.
+										</li><li class="listitem">
+											<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Expiration:</span></strong></span> Initial certificates must be valid for at least one year.
+										</li><li class="listitem">
+											<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Renewal:</span></strong></span> You must initiate a support ticket to renew the certificate at least 14 days before the expiration date. When renewing you must use one of the following formats for the certificate’s Subject Alternative Names (SANs):
+										</li><li class="listitem"><p class="simpara">
+											<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Explicit SANs:</span></strong></span> List the required subdomains: <code class="literal Role ARG Spec">platform</code>, <code class="literal Role ARG Spec">mesh-ingress-0</code>, and <code class="literal Role ARG Spec">mesh-ingress-1</code>. For example, if your domain is <code class="literal Role ARG Spec">exampledomain.com</code>, include the following in the certificate’s SAN:
+										</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+													<code class="literal Role ARG Spec">platform.exampledomain.com</code>
+												</li><li class="listitem">
+													<code class="literal Role ARG Spec">mesh-ingress-0.exampledomain.com</code>
+												</li><li class="listitem">
+													<code class="literal Role ARG Spec">mesh-ingress-1.exampledomain.com</code>
+												</li><li class="listitem">
+													<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Wildcard certificate:</span></strong></span> Use a wildcard to cover all subdomains (for example, <code class="literal Role ARG Spec">*.exampledomain.com</code>).
+												</li></ul></div></li></ul></div></div></div></li><li class="listitem"><p class="simpara">
+								Open a <a class="link" href="https://access.redhat.com/support/cases/#/case/new/get-support?caseCreate=true">support ticket</a> with Red Hat requesting a custom URL configuration to your deployment and include the following information:
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+										Company Name
+									</li><li class="listitem">
+										Deployment information (for example, <code class="literal Role ARG Spec">cus-xxxx</code>)
+									</li><li class="listitem">
+										Custom domain (for example, <code class="literal Role ARG Spec">exampledomain.com</code>)
+									</li><li class="listitem">
+										Provide the zip file containing the certificates, or request a presigned URL for secure upload.
+									</li></ul></div></li><li class="listitem">
+								Allow the SRE team to apply the configuration to your deployment, verify the functionality, and collaborate with you on follow-up steps via the support ticket.
+							</li><li class="listitem">
+								Update image URLs for <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Execution Environments</span></strong></span> and <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Decision Environments</span></strong></span> to point to the new platform domain address if images are sourced from the private automation hub on the same Ansible Automation Platform instance.
+							</li><li class="listitem"><p class="simpara">
+								Reconfigure pull mode execution nodes if they were previously configured with the old domain:
+							</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="a"><li class="listitem">
+										Locate the <code class="literal Role ARG Spec">group_vars/all.yml</code> file in the tar archive used to set up the execution node.
+									</li><li class="listitem">
+										Modify the <code class="literal Role ARG Spec">receptor_peers</code> address variable to point to the new mesh ingress node.
+									</li><li class="listitem"><p class="simpara">
+										Rerun the <code class="literal Role ARG Spec">install_receptor.yml</code> playbook.
+									</p><div class="admonition note Role ARG Spec"><div class="admonition_header">Note</div><div><p class="Role ARG Spec Role ARG Spec">
+											New mesh-ingresses using the custom domain replace the original ones.
+										</p></div></div></li></ol></div></li></ol></div></section><section class="section Role ARG Spec" id="proc-saas-custom-dom-without-awsprivatelink"><div class="titlepage"><div><div><h4 class="title">5.2.11.2. Setting up a custom domain without AWS PrivateLink</h4></div></div></div><p class="_abstract _abstract">
+						If you are not planning to connect to the Ansible Automation Platform UI or use automation mesh through AWS PrivateLink, complete the following steps to configure your DNS.
+					</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem"><p class="simpara">
+								Identify the canonical names of the load balancers of your deployment.
+							</p><p class="Role ARG Spec Role ARG Spec">
+								You can use a DNS lookup on the Red Hat-generated URL to identify the DNS names for both load balancers:
+							</p><pre class="screen Role ARG Spec Role ARG Spec">Shell
+
+# Replace the URL with the "platform" URL of your deployment
+dig platform.cus-&lt;id&gt;.aws.ansiblecloud.com</pre><pre class="screen Role ARG Spec Role ARG Spec">Shell
+
+# Replace the URL with the "mesh-ingress" URL of your deployment
+dig mesh-ingress-0.cus-&lt;id&gt;.aws.ansiblecloud.com</pre></li><li class="listitem"><p class="simpara">
+								Create DNS CNAME records for your custom domain using the following hostnames pointing to the DNS names identified in the previous step:
+							</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+										platform (for example, <code class="literal Role ARG Spec">platform.<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">exampledomain</span></em></span>.com</code>) → <code class="literal Role ARG Spec">cus-xxxxx-alb-11111111.us-east-1.elb.amazonaws.com</code>
+									</li><li class="listitem">
+										mesh-ingress-0 (for example, <code class="literal Role ARG Spec">mesh-ingress-0.<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">exampledomain</span></em></span>.com</code>) → <code class="literal Role ARG Spec">xxxxx.elb.us-east-1.amazonaws.com</code>
+									</li><li class="listitem">
+										mesh-ingress-1 (for example, <code class="literal Role ARG Spec">mesh-ingress-1.<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">exampledomain</span></em></span>.com</code>) → <code class="literal Role ARG Spec">xxxxx.elb.us-east-1.amazonaws.com</code>
+									</li></ul></div></li></ol></div></section><section class="section Role ARG Spec" id="proc-saas-custom-dom-with-awsprivatelink"><div class="titlepage"><div><div><h4 class="title">5.2.11.3. Setting up a custom domain with AWS PrivateLink</h4></div></div></div><p class="_abstract _abstract">
+						If you are planning to connect to the Ansible Automation Platform UI or use automation mesh through AWS PrivateLink, complete the following steps to configure your DNS.
+					</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem"><p class="simpara">
+								Retrieve the main DNS name of the Amazon Virtual Private Cloud (VPC) endpoint you created to connect to AWS PrivateLink endpoint service by performing the following steps:
+							</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="a"><li class="listitem">
+										Log in to the Amazon Web Services portal and select <span class="guimenu">VPC</span> → <span class="guimenuitem">Endpoints</span>.
+									</li><li class="listitem">
+										Click the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">VPC</span></strong></span> Endpoint for Red Hat Ansible Automation Platform Service on AWS.
+									</li><li class="listitem"><p class="simpara">
+										Retrieve the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">DNS names</span></strong></span> in the Details tab.
+									</p><p class="Role ARG Spec Role ARG Spec">
+										There are a few entries. To find the correct DNS name, go to the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Details</span></strong></span> tab and look for the entry that is not tied to a specific Availability Zone (AZ). For instance, choose <code class="literal Role ARG Spec">vpce-xxxx-xxxx.vpce-svc-xxxx.us-east-1.vpce.amazonaws.com</code> rather than one that includes an AZ like <code class="literal Role ARG Spec">us-east-1a</code> or <code class="literal Role ARG Spec">us-east-1b</code>.
+									</p><p class="Role ARG Spec Role ARG Spec">
+										Alternatively, you can choose to use Amazon Web Services CLI to retrieve the DNS names of that endpoint by entering:
+									</p><pre class="screen Role ARG Spec Role ARG Spec">Shell
+aws ec2 describe-vpc-endpoints --vpc-endpoint-ids vpce-xxxx --query 'VpcEndpoints[0].DnsEntries[*].DnsName'</pre></li></ol></div></li><li class="listitem"><p class="simpara">
+								After you have retrieved the DNS name, create the DNS CNAME records for your custom domain using the following hostnames pointing to the DNS name identified in the previous step:
+							</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="a"><li class="listitem">
+										platform (for example, <code class="literal Role ARG Spec">platform.<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">exampledomain</span></em></span>.com</code>) → <code class="literal Role ARG Spec">vpce-xxxx-xxxx.vpce-svc-xxxx.us-east-1.vpce.amazonaws.com</code>
+									</li><li class="listitem">
+										mesh-ingress-0 (for example, <code class="literal Role ARG Spec">mesh-ingress-0.<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">exampledomain</span></em></span>.com</code>) → <code class="literal Role ARG Spec">vpce-xxxx-xxxx.vpce-svc-xxxx.us-east-1.vpce.amazonaws.com</code>
+									</li><li class="listitem">
+										mesh-ingress-1 (for example, <code class="literal Role ARG Spec">mesh-ingress-1.<span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">exampledomain</span></em></span>.com</code>) → <code class="literal Role ARG Spec">vpce-xxxx-xxxx.vpce-svc-xxxx.us-east-1.vpce.amazonaws.com</code>
+									</li></ol></div></li></ol></div></section></section></section><section class="section Role ARG Spec" id="saas-execution-plane"><div class="titlepage"><div><div><h2 class="title">5.3. Execution plane</h2></div></div></div><p class="_abstract _abstract">
+				You can only run test and cleanup jobs on the default or controller execution planes. All other automation must be configured to run on your execution plane.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				As part of the Ansible Automation Platform Service on AWS subscription, you receive 10 Red Hat Enterprise Linux (RHEL) entitlements for running the execution plane. Additional RHEL or OpenShift licenses can be purchased separately.
+			</p><section class="section Role ARG Spec" id="con-saas-shape"><div class="titlepage"><div><div><h3 class="title">5.3.1. Shape</h3></div></div></div><p class="_abstract _abstract">
+					Your execution plane’s size and shape depend on the type of automation and the locations connected to the mesh. Use the following guidelines for your automation mesh implementation:
+				</p><p class="Role ARG Spec Role ARG Spec">
+					Ansible Automation Platform minimum requirements:
+				</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem"><p class="simpara">
+							Hop Nodes: Red Hat Ansible Automation Platform Service on AWS includes two hop nodes that customers can use to peer with execution nodes. They typically require minimal resources. The shape of a hop node depends on the number of connected execution nodes. A virtual machine (VM) with 2 vCPUs and 2 GB RAM can route traffic for 2-4 execution nodes.
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+									For help with configuring your automation mesh see <a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/automation_mesh_for_managed_cloud_or_operator_environments/index">Automation mesh for managed cloud or operator environments</a>.
+								</li></ul></div></li><li class="listitem">
+							For automation in fewer locations (such as specific geographies or clouds), create a mesh with fewer VMs that can be scaled vertically. Most clouds and hypervisors allow shape changes with minimal downtime.
+						</li><li class="listitem">
+							For CPU or RAM-intensive automation, use larger machine shapes.
+						</li><li class="listitem">
+							For automation spanning multiple locations, create a mesh with nodes that connect to those locations.
+						</li><li class="listitem">
+							Consider using different CPU architectures, like ARM, and reserved instances to reduce execution plane costs.
+						</li><li class="listitem">
+							To configure redundancy in the automation mesh, set up at least two mesh nodes of the same shape in different availability zones within the same region, connecting each machine to both hosted hop nodes.
+						</li><li class="listitem">
+							Use OpenShift if auto-scaling the execution plane is necessary.
+						</li></ul></div></section><section class="section Role ARG Spec" id="con-saas-networking"><div class="titlepage"><div><div><h3 class="title">5.3.2. Networking</h3></div></div></div><p class="_abstract _abstract">
+					Understand the automation mesh architecture and the connectivity requirements for the execution plane
+				</p><section class="section Role ARG Spec" id="con-saas-automation-mesh"><div class="titlepage"><div><div><h4 class="title">5.3.2.1. Automation mesh</h4></div></div></div><p class="_abstract _abstract">
+						Ansible Automation Platform Service on AWS provides default “mesh-ingress” hop nodes. These hosted hop nodes allow execution nodes to poll for automation work through egress from a customer’s private network, eliminating the need to open inbound firewall ports. Hosted hop nodes use port 443 for inbound traffic.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						The following is an example of an execution node in a private address space with egress-only internet access connected to Ansible Automation Platform Service on AWS through this model.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						<span class="inlinemediaobject"><img src="https://access.redhat.com/webassets/avalon/d/Ansible_on_Clouds-2.x-Red_Hat_Ansible_Automation_Platform_Service_on_AWS-en-US/images/b67da351ac8afd1bb63c8e5afcc379c0/automation_mesh.png" alt="Execution node in a private address space"/></span>
+
+					</p><p class="Role ARG Spec Role ARG Spec">
+						You can also configure the automation mesh with outbound connectivity from the control plane to your execution plane, allowing you to specify the ports used by the automation mesh.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						You can use the <a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/automation_mesh_for_managed_cloud_or_operator_environments/index">Automation mesh for managed cloud or operator environments</a> documentation for instructions.
+					</p></section><section class="section Role ARG Spec" id="con-saas-privatelink-config-types"><div class="titlepage"><div><div><h4 class="title">5.3.2.2. PrivateLink configuration types</h4></div></div></div><p class="_abstract _abstract">
+						The PrivateLink configuration offers both ingress, for UI/API access to the Ansible Automation Platform control plane, and egress, for the control plane to connect to your private resources. For more information, see section <a class="link" href="https://docs.redhat.com/en/documentation/ansible_on_clouds/2.x/html/red_hat_ansible_automation_platform_service_on_aws/saas-private-link">AWS PrivateLink connectivity into the Ansible Automation Platform control plane</a>.
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Ingress PrivateLink:</span></strong></span> Connects your VPC to the Ansible Automation Platform control plane (for UI/API access). Requires a support ticket providing your AWS Account ID and Region.
+							</li><li class="listitem">
+								<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Egress PrivateLink:</span></strong></span> Connects the Ansible Automation Platform control plane to your private resources (for example, private automation hub). This requires a separate support ticket to authorize the connection to your Endpoint Service.
+							</li></ul></div></section><section class="section Role ARG Spec" id="con-saas-connectivity"><div class="titlepage"><div><div><h4 class="title">5.3.2.3. Connectivity</h4></div></div></div><p class="_abstract _abstract">
+						The execution plane can communicate with the control plane under the following conditions:
+					</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+								Polling (mesh-ingress): Execution nodes must route stateful egress traffic to the Ansible Automation Platform deployment domain over port 443.
+							</li><li class="listitem">
+								Push: A configurable firewall port must be open in the customer’s remote networks to allow Ansible Automation Platform to push information to execution nodes.
+							</li></ul></div><p class="Role ARG Spec Role ARG Spec">
+						You can configure automation mesh nodes behind firewalls, proxy servers, and similar services. These services route or proxy traffic originating from Ansible Automation Platform without altering headers, payload, or other information that would affect functionality of the automation mesh.
+					</p><p class="Role ARG Spec Role ARG Spec">
+						You can restrict access to the control plane by providing CIDR blocks to the Red Hat support team through a <a class="link" href="https://access.redhat.com/support/cases/?extIdCarryOver=true&amp;sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true">Customer support</a> request. This controls the inbound access to the control plane limiting it to the IP ranges you provide for traffic over the public internet. The application of these rules do not apply to traffic over PrivateLink. These restrictions do not affect outbound traffic that originates from the control plane.
+					</p><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+							Customers <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">must</span></strong></span> allowlist the following wildcard domain in their local firewalls to permit the SRE team’s maintenance and monitoring:
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+									<code class="literal Role ARG Spec">*.redhat.com</code>
+								</li></ul></div></div></div></section></section><section class="section Role ARG Spec" id="con-saas-monitoring"><div class="titlepage"><div><div><h3 class="title">5.3.3. Monitoring</h3></div></div></div><p class="_abstract _abstract">
+					You can configure monitoring and hardening tools of your choice on the execution plane. You are responsible for their operation, functionality, and maintenance, ensuring they do not interfere with the execution plane’s operation.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					Any additional workloads on the execution plane requires extra resources from the virtual machines or OpenShift clusters where the tools are deployed. Make sure to size resources accordingly to accommodate these additional requirements.
+				</p></section><section class="section Role ARG Spec" id="con-saas-dns"><div class="titlepage"><div><div><h3 class="title">5.3.4. DNS</h3></div></div></div><p class="_abstract _abstract">
+					Execution nodes use the DNS configuration of the host machine for DNS queries. Configure DNS using standard RHEL network practices to ensure proper lookups during automation execution.
+				</p></section><section class="section Role ARG Spec" id="con-saas-networking-with-overlapping-CIDR-blocks"><div class="titlepage"><div><div><h3 class="title">5.3.5. Networking with overlapping CIDR blocks</h3></div></div></div><p class="_abstract _abstract">
+					Automation mesh connects the control plane to multiple networks that share the same Classless Inter-Domain Routing (CIDR) block (that is, the same class A address space repeated across different clouds or data centers). Execution nodes regard their deployment network as the local network. You must have at least one execution node instance paired with an instance group to target automation in each network.
+				</p></section><section class="section Role ARG Spec" id="con-saas-updates-and-maintenance"><div class="titlepage"><div><div><h3 class="title">5.3.6. Updates and maintenance</h3></div></div></div><p class="_abstract _abstract">
+					Automation mesh execution nodes are designed to minimize the need for patching the execution plane when the control plane is updated. However, future updates to the technology will require customer involvement to update the components in each execution plane node.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					When patches are needed, customers should follow the process for updating an automation mesh node. For help with updating your receptor see the <span class="emphasis"><em><span class="Role ARG Spec Role ARG Spec">Updating Receptors</span></em></span> section of the <a class="link" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/html/automation_mesh_for_managed_cloud_or_operator_environments/index">Automation mesh for managed cloud or operator environments</a>.
+				</p></section></section><section class="section Role ARG Spec" id="saas-support"><div class="titlepage"><div><div><h2 class="title">5.4. Support</h2></div></div></div><p class="_abstract _abstract">
+				Red Hat Ansible Automation Platform Service on AWS includes Red Hat Premium Support, accessible through the <a class="link" href="https://access.redhat.com/support">Red Hat Customer Portal</a>.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For support response times, refer to the <a class="link" href="https://access.redhat.com/support/offerings/production/sla">Production Support Terms of Service</a>.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				AWS support is subject to the customer’s existing support contract with AWS.
+			</p></section></section><section class="chapter Role ARG Spec" id="saas-aap-best-practices"><div class="titlepage"><div><div><h1 class="title">Chapter 6. Red Hat Ansible Automation Platform best practices</h1></div></div></div><p class="_abstract _abstract">
+			This section covers Ansible Automation Platform product use that has specific content or context for using Ansible Automation Platform as a service.
+		</p><section class="section Role ARG Spec" id="con-saas-automation-for-instance-groups"><div class="titlepage"><div><div><h2 class="title">6.1. Configure automation to use instance groups</h2></div></div></div><p class="_abstract _abstract">
+				Red Hat Ansible Automation Platform Service on AWS requires that customers implement their own automation execution plane.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				Job templates must use a customer-configured instance or container group to run. If omitted, job runs can seem non-functional and eventually time out due to automation execution failure. Each job template must be assigned to a customer-configured instance group to function.
+			</p></section><section class="section Role ARG Spec" id="con-saas-sync-with-pah"><div class="titlepage"><div><div><h2 class="title">6.2. Syncing content with private automation hub</h2></div></div></div><p class="_abstract _abstract">
+				Private automation hub allows you to attempt to sync all content between automation hub or Ansible Galaxy. However, this synchronization fails due to the storage and resource demands of such a large task.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				When syncing content from external sources, limit the synchronization to the collections your organization plans to use, focusing on recent or known used versions to reduce the synchronization scope.
+			</p></section></section><section class="chapter Role ARG Spec" id="saas-private-link"><div class="titlepage"><div><div><h1 class="title">Chapter 7. Red Hat Ansible Automation Platform Service on AWS Private Link Connectivity</h1></div></div></div><p class="_abstract _abstract">
+			Private link connectivity is a networking feature commonly used in cloud environments. Private link connectivity allows services to communicate privately over a secure, internal network without exposing traffic to the public internet. On AWS, private link connectivity is known as AWS PrivateLink.
+		</p><section class="section Role ARG Spec" id="con-saas-private-link-benefits"><div class="titlepage"><div><div><h2 class="title">7.1. Key benefits of private link connectivity</h2></div></div></div><p class="_abstract _abstract">
+				To ensure maximum network isolation and security, AWS PrivateLink connectivity establishes a private connection for the Ansible Automation Platform Service on AWS, which is essential because:
+			</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+						It enables the Ansible Automation Platform Service on AWS control plane to connect to project and execution environment repositories hosted on private networks that are inaccessible from the public internet.
+					</li><li class="listitem">
+						It keeps automation mesh data within a private network rather than traversing the public internet.
+					</li></ul></div><div class="admonition note Role ARG Spec"><div class="admonition_header">Note</div><div><p class="Role ARG Spec Role ARG Spec">
+					Automation mesh uses industry standard TLS encryption regardless of how automation mesh nodes are connected. Consider this traffic secured in the same manner as all TLS traffic.
+				</p></div></div></section><section class="section Role ARG Spec" id="con-saas-how-private-link-works"><div class="titlepage"><div><div><h2 class="title">7.2. How AWS PrivateLink works</h2></div></div></div><p class="_abstract _abstract">
+				AWS PrivateLink connectivity is supported both into (ingress) and out of (egress) the Ansible Automation Platform control plane.
+			</p><p class="Role ARG Spec Role ARG Spec">
+				For more AWS specific information about how AWS PrivateLink works, see the <a class="link" href="https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html">Amazon Virtual Private Cloud</a> documentation.
+			</p><section class="section Role ARG Spec" id="aws_privatelink_connectivity_from_customer_vpc_into_the_ansible_automation_platform_control_plane"><div class="titlepage"><div><div><h3 class="title">7.2.1. AWS PrivateLink connectivity from customer VPC into the Ansible Automation Platform control plane</h3></div></div></div><p class="Role ARG Spec Role ARG Spec">
+					For AWS PrivateLink connectivity into the control plane, an AWS Endpoint Service has automatically provisioned AWS PrivateLink connectivity into the control plane in your AWS environment. You must create an AWS Endpoint to connect to this service in your Virtual Private Cloud (VPC), and enable private DNS resolution of the endpoint service hostname. With this in place, any traffic originating from your VPC to the control plane API or mesh ingress connects to a private IP address and does not traverse the public internet. Traffic is stateful, so there is no need to open a private link in the reverse direction for responses to Transmission Control Protocol (TCP) requests that originate from the customer VPC
+				</p></section><section class="section Role ARG Spec" id="aws_privatelink_connectivity_from_ansible_automation_platform_control_plane_to_customer_vpcs"><div class="titlepage"><div><div><h3 class="title">7.2.2. AWS PrivateLink connectivity from Ansible Automation Platform control plane to customer VPCs</h3></div></div></div><p class="Role ARG Spec Role ARG Spec">
+					You can configure Ansible Automation Platform to use external resources such as source code repositories, container registries, and execution nodes. By default, the control plane connects to these resources over the public internet. However, if your resources are not publicly available, you can leverage AWS PrivateLink to securely access your private resources without traversing the public internet.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					AWS PrivateLink connectivity allows the Ansible Automation Platform control plane to connect privately to your resources including, registries, repositories, and execution nodes. Traffic is stateful, eliminating the need to open a private link in the reverse direction for responses to Transmission Control Protocol (TCP) requests that originate from the control plane VPC.
+				</p><p class="Role ARG Spec Role ARG Spec">
+					To enable AWS PrivateLink connectivity from the control plane to your private resources, create one or more Endpoint Services in your VPC. Then reach out to Red Hat support to create the consuming Endpoints.
+				</p><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+						When creating the Endpoint Service in your VPC, you must enable the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Private DNS</span></strong></span> option. This ensures that the Ansible Automation Platform control plane can resolve and connect to your service using the specified domain over AWS PrivateLink. Private DNS enables DNS queries from Ansible Automation Platform resolve to the private IP addresses of the interface endpoint, facilitating secure and direct communication over PrivateLink.
+					</p></div></div></section></section><section class="section Role ARG Spec" id="ref-saas-inbound-traffic-control"><div class="titlepage"><div><div><h2 class="title">7.3. Inbound traffic control (IP restrictions)</h2></div></div></div><p class="_abstract _abstract">
+				Two distinct layers of traffic control are available depending on your connectivity method.
+			</p><div class="informaltable"><table class="gt-4-cols lt-7-rows Role ARG Spec"><colgroup><col style="width: 10%; " class="col_1"><!--Empty--></col><col style="width: 30%; " class="col_2"><!--Empty--></col><col style="width: 10%; " class="col_3"><!--Empty--></col><col style="width: 50%; " class="col_4"><!--Empty--></col></colgroup><thead><tr><th align="left" valign="top" id="idm140547380047200" scope="col">Method</th><th align="left" valign="top" id="idm140547380046112" scope="col">Scope</th><th align="left" valign="top" id="idm140547380045024" scope="col">Managed by</th><th align="left" valign="top" id="idm140547380043936" scope="col">Action required</th></tr></thead><tbody><tr><td align="left" valign="top" headers="idm140547380047200"> <p>
+								Public internet access
+							</p>
+							 </td><td align="left" valign="top" headers="idm140547380046112"> <p>
+								Restricts access to the Ansible Automation Platform UI and API over the public internet.
+							</p>
+							 </td><td align="left" valign="top" headers="idm140547380045024"> <p>
+								Red Hat SRE
+							</p>
+							 </td><td align="left" valign="top" headers="idm140547380043936"> <p>
+								Open a <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Support Ticket</span></strong></span> requesting "<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Traffic Control CIDR Allowlisting</span></strong></span>."
+							</p>
+							 <p>
+								You must provide the specific <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">IP CIDR blocks</span></strong></span> (for example, <code class="literal Role ARG Spec">192.0.2.0/24</code>) to be allowed.
+							</p>
+							 </td></tr><tr><td align="left" valign="top" headers="idm140547380047200"> <p>
+								PrivateLink access
+							</p>
+							 </td><td align="left" valign="top" headers="idm140547380046112"> <p>
+								Restricts access coming through your PrivateLink VPC Endpoint.
+							</p>
+							 </td><td align="left" valign="top" headers="idm140547380045024"> <p>
+								Customer
+							</p>
+							 </td><td align="left" valign="top" headers="idm140547380043936"> <p>
+								Configure the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">AWS Security Group</span></strong></span> attached to your <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">VPC Endpoint</span></strong></span> to allow inbound <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">HTTPS (443)</span></strong></span> traffic only from specific internal subnets or VPN CIDRs.
+							</p>
+							 </td></tr></tbody></table></div></section><section class="section Role ARG Spec" id="ref-saas-enabling-aws-privatelink"><div class="titlepage"><div><div><h2 class="title">7.4. Enabling AWS PrivateLink connectivity</h2></div></div></div><p class="_abstract _abstract">
+				To enable private link connectivity, submit a customer support ticket and the Red Hat team will work with you on the next steps.
+			</p><div class="admonition note Role ARG Spec"><div class="admonition_header">Note</div><div><p class="Role ARG Spec Role ARG Spec">
+					You must create <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">two</span></strong></span> separate support tickets for bi-directional connectivity:
+				</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+							One enabling AWS PrivateLink connectivity from Customer VPC <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">into the</span></strong></span> control plane
+						</li><li class="listitem">
+							One enabling AWS PrivateLink connectivity <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">out of the</span></strong></span> control plane to Customer VPC.
+						</li></ul></div></div></div><section class="section Role ARG Spec" id="proc-saas-config-ingress-privatelink"><div class="titlepage"><div><div><h3 class="title">7.4.1. Configuring AWS PrivateLink connectivity from customer VPC to Red Hat managed control plane</h3></div></div></div><p class="_abstract _abstract">
+					This configuration allows your internal users and automation to access the Ansible Automation Platform UI and API over PrivateLink.
+				</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem">
+							To request Ingress PrivateLink submit a <a class="link" href="https://access.redhat.com/support/cases/?extIdCarryOver=true&amp;sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true">Customer support</a> case to Red Hat using the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Ingress AWS PrivateLink request template</span></strong></span> step 2.
+						</li><li class="listitem"><p class="simpara">
+							You must include your:
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem">
+									<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">AWS Account ID</span></strong></span>.
+								</li><li class="listitem">
+									<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Region</span></strong></span>.
+								</li><li class="listitem">
+									<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Deployment URL</span></strong></span>.
+								</li><li class="listitem">
+									After Red Hat provides you with a VPC Endpoint Service Name, you must create a VPC Endpoint in your AWS account that points to the provided service name.
+								</li></ul></div></li><li class="listitem"><p class="simpara">
+							For your <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Ingress AWS PrivateLink request template</span></strong></span>:
+						</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="disc"><li class="listitem"><p class="simpara">
+									Select "Endpoint services that use NLBs and GWLBs".
+								</p><div class="itemizedlist Role ARG Spec"><ul class="itemizedlist Role ARG Spec" type="circle"><li class="listitem">
+											In the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Service name</span></strong></span> field, paste the VPC Endpoint Service Name provided by Red Hat and click <span class="guibutton">Verify service</span>.
+										</li></ul></div></li><li class="listitem"><p class="simpara">
+									Complete the network and security group configuration as required by your organization.
+								</p><pre class="screen Role ARG Spec Role ARG Spec">Subject:
+Request for Ingress PrivateLink Connection: &lt;Your Company Name&gt; - &lt;Deployment ID&gt;
+
+Body:
+Hello Red Hat Support,
+
+We would like to enable Ingress PrivateLink connectivity for our AAP on AWS instance. This will allow our internal users and automation tools to access the AAP Control Plane (UI/API) securely from our VPC without traversing the public internet.
+
+Deployment details:
+AAP Deployment Name/ID: &lt;for example., ans-123456&gt;
+AAP Deployment URL: &lt;for example, https://ans-123456.ansible.redhat.com&gt;
+Our Network Information:
+Our AWS Account ID: &lt;Your 12-digit AWS Account ID&gt;
+Target Region: &lt;for example, us-east-1&gt;
+
+Action required:
+Please create the Endpoint Service configuration on the Control Plane side and provide us with the VPC Endpoint Service Name so we can create the interface endpoint in our VPC.
+
+Thank you.</pre></li></ul></div></li></ol></div></section><section class="section Role ARG Spec" id="proc-saas-config-egress-privatelink"><div class="titlepage"><div><div><h3 class="title">7.4.2. Configuring AWS PrivateLink connectivity from Red Hat managed control plane to customer VPCs</h3></div></div></div><p class="_abstract _abstract">
+					This configuration allows the Ansible Automation Platform control plane to connect to your private resources, such as internal Git or private automation hub.
+				</p><div class="orderedlist Role ARG Spec"><p class="title"><strong>Procedure</strong></p><ol class="orderedlist Role ARG Spec" type="1"><li class="listitem"><p class="simpara">
+							Create an Endpoint Service in your VPC:
+						</p><div class="orderedlist Role ARG Spec"><ol class="orderedlist Role ARG Spec" type="a"><li class="listitem">
+									Confirm your private resource is behind an AWS Network Load Balancer (NLB).
+								</li><li class="listitem"><p class="simpara">
+									Create an Endpoint Service in your AWS VPC that points to that NLB.
+								</p><div class="admonition important Role ARG Spec"><div class="admonition_header">Important</div><div><p class="Role ARG Spec Role ARG Spec">
+										You must select the service type that supports Interface endpoints and enable the Private DNS option.
+									</p></div></div></li></ol></div></li><li class="listitem">
+							To initiate control plane egress, you must submit a <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">separate</span></strong></span> <a class="link" href="https://access.redhat.com/support/cases/?extIdCarryOver=true&amp;sc_cid=RHCTG0250000454096#/case/new/get-support?caseCreate=true">Customer support</a> case using the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Egress PrivateLink request template</span></strong></span>.
+						</li><li class="listitem">
+							Red Hat uses the information provided to create an Interface Endpoint on their side. When Red Hat creates this endpoint, they select the category "Endpoint services that use NLBs and GWLBs" to connect to your service.
+						</li><li class="listitem">
+							Your Internal Network or IT Team must configure the Internal DNS.
+						</li><li class="listitem">
+							To ensure users route through the secure PrivateLink connection, you must request a Split-Horizon DNS configuration.
+						</li><li class="listitem">
+							Copy the <span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Egress PrivateLink request template</span></strong></span>, fill in your specific VPC Endpoint Service Name, and submit it to Red Hat.
+						</li></ol></div><p class="Role ARG Spec Role ARG Spec">
+					<span class="strong strong"><strong><span class="Role ARG Spec Role ARG Spec">Egress PrivateLink request template</span></strong></span>
+				</p><pre class="screen Role ARG Spec Role ARG Spec">Subject:
+Egress PrivateLink Configuration for &lt;Instance ID&gt;
+
+Body:
+We need to enable Egress PrivateLink connectivity to allow the AAP control plane to access our internal private resources (for example, private automation hub, Git and so on).
+
+Configuration details:
+Our AWS Account ID: &lt;Your 12-digit AWS Account ID&gt;
+Our Endpoint Service Name: &lt;for example, com.amazonaws.vpce.us-east-1.vpce-svc-xxxxxxxx&gt;
+Service Regions/AZs: &lt;for example., us-east-1 / us-east-1a, us-east-1b&gt;
+
+Action required:
+Please confirm when Red Hat has initiated the connection request so we can approve it in our AWS Console.
+
+Thank you.</pre></section></section></section><div><div xml:lang="en-US" class="legalnotice" id="idm140547383478672"><h1 class="legalnotice">Legal Notice</h1><div class="para">
+		Copyright <span class="trademark"><!--Empty--></span>© Red Hat.
+	</div><div class="para">
+		Except as otherwise noted below, the text of and illustrations in this documentation are licensed by Red Hat under the Creative Commons Attribution–Share Alike 3.0 Unported license . If you distribute this document or an adaptation of it, you must provide the URL for the original version.
+	</div><div class="para">
+		Red Hat, as the licensor of this document, waives the right to enforce, and agrees not to assert, Section 4d of CC-BY-SA to the fullest extent permitted by applicable law.
+	</div><div class="para">
+		Red Hat, the Red Hat logo, JBoss, Hibernate, and RHCE are trademarks or registered trademarks of Red Hat, LLC. or its subsidiaries in the United States and other countries.
+	</div><div class="para">
+		<span class="trademark">Linux</span>® is the registered trademark of Linus Torvalds in the United States and other countries.
+	</div><div class="para">
+		XFS is a trademark or registered trademark of Hewlett Packard Enterprise Development LP or its subsidiaries in the United States and other countries.
+	</div><div class="para">
+		The <span class="trademark">OpenStack</span>® Word Mark and OpenStack logo are trademarks or registered trademarks of the Linux Foundation, used under license.
+	</div><div class="para">
+		All other trademarks are the property of their respective owners.
+	</div></div></div></div></body>

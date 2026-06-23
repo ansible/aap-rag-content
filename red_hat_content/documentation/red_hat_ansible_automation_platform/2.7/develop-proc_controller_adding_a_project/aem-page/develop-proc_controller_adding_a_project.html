@@ -1,0 +1,53 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-controller-adding-a-project">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Add a new project</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">You can create a logical collection of playbooks, called projects in automation controller.</p> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Projects</span></span>.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Projects</strong> page, click <span class="ph uicontrol button">Create project</span> to launch the <strong class="ph b">Create Project</strong> window.</span> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Enter the appropriate details into the following required fields: </span> 
+        <div class="itemgroup info"> 
+         <ul class="ul"> 
+          <li class="li"><strong class="ph b">Name</strong> (required)</li> 
+          <li class="li">Optional: <strong class="ph b">Description</strong></li> 
+          <li class="li"><strong class="ph b">Organization</strong> (required): A project must have at least one organization. Select one organization now to create the project. When the project is created you can add additional organizations.</li> 
+          <li class="li">Optional: <strong class="ph b">Execution environment</strong>: Enter the name of the execution environment or search from a list of existing ones to run this project. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-define__create__and_build_execution_environments" title="Run automation consistently across nodes with execution environments, which are container images that contain everything you need to run your automation.">Define, create, and build execution environments</a>.</li> 
+          <li class="li"><strong class="ph b">Source control type</strong> (required): Select an SCM type associated with this project from the menu. Options in the following sections become available depending on the type chosen. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_collections_support#proc-projects-manage-playbooks-manually" title="Manage Ansible playbooks and directories directly on the automation controller filesystem. This approach helps ensure proper file ownership and permissions when you cannot use source control.">Managing playbooks manually</a> or <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#ref-projects-manage-playbooks-with-source-control" title="Choose one of the following options when managing playbooks by using source control:">Managing playbooks using source control</a>.</li> 
+          <li class="li">Optional: <strong class="ph b">Content signature validation credential</strong>: Use this field to enable content verification. Specify the GPG key to use for validating content signature during project synchronization. If the content has been tampered with, the job will not run. For more information, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_project_signing#assembly-controller-project-signing" title="Use project signing and verification in your project directory to sign files. You can then verify whether or not that content has changed in any way, or files have been added to, or removed from the project unexpectedly.">Project signing and verification</a>.</li> 
+         </ul> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create project</span>.</span> </li>
+      </ol>
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_collections_support#proc-projects-manage-playbooks-manually" title="Manage Ansible playbooks and directories directly on the automation controller filesystem. This approach helps ensure proper file ownership and permissions when you cannot use source control.">Managing playbooks manually</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#proc-scm-git-subversion" title="Configure automation controller projects to synchronize Ansible playbooks directly from Git and Subversion. Integrating with Source Control Management supports collaboration and helps ensure you always deploy the latest automation code.">SCM Types - Configuring playbooks to use Git and Subversion</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#proc-scm-insights" title="Configure your projects to retrieve Ansible playbooks directly from Red Hat Lightspeed. Integrate with Red Hat Lightspeed to manage and deploy remediation playbooks identified through its analysis of your Red Hat Enterprise Linux environment.">SCM Type - Configuring playbooks to use Red Hat Lightspeed</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#proc-scm-remote-archive" title="Playbooks that use a remote archive enable projects to be based on a build process that produces a versioned artifact, or release, containing all the requirements for that project in a single archive.">SCM Type - Configuring playbooks to use a remote archive</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-ref_projects_manage_playbooks_with_source_control#ref-projects-manage-playbooks-with-source-control" title="Choose one of the following options when managing playbooks by using source control:">Managing playbooks using source control</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

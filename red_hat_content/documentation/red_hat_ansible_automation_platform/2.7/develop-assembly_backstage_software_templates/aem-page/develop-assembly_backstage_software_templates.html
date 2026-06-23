@@ -1,0 +1,70 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="backstage-software-templates"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Use custom actions and UI components in Backstage Software Templates</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">The Ansible automation portal is built on a Red Hat Developer Hub base image. It uses Backstage Software Templates, which are YAML-based workflow definitions that provide user forms to execute automation tasks in Ansible Automation Platform.</p>
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="devtools-backstage-overview"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Overview</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Learn how to use the custom actions, filters, and UI components provided by the <strong class="ph b">Ansible Backstage Plugins</strong> to create and manage custom software templates for the Ansible automation portal.</p> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">Red Hat does not support the use of the Red Hat Developer Hub image for standalone purposes outside the scope of the Ansible Automation Platform Ansible automation portal functionality. Refer to the official support policy for details.</p> 
+        </div>
+       </div> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="devtools-ansible-backstage-plugins"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Ansible backstage plugins</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">The portal’s capabilities are delivered through <strong class="ph b">Ansible Backstage Plugins</strong> that extend Red Hat Developer Hub functionality; the base Red Hat Developer Hub image is not customized. These plugins provide additional Backstage actions and filters that you use to create custom software templates.</p> 
+       <section class="section"> 
+        <table class="table">
+         <caption></caption>
+         <colgroup>
+          <col style="width:50%">
+          <col style="width:50%">
+         </colgroup>
+         <thead class="thead"> 
+          <tr class="row"> 
+           <th class="entry" id="devtools-ansible-backstage-plugins__entry__1">Plugin</th> 
+           <th class="entry" id="devtools-ansible-backstage-plugins__entry__2">Functionality</th> 
+          </tr> 
+         </thead>
+         <tbody class="tbody"> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-ansible-backstage-plugins__entry__1"> <p class="p">auth-backend-module-rhaap-provider</p> </td> 
+           <td class="entry" headers="devtools-ansible-backstage-plugins__entry__2"> <p class="p">Provides OAuth 2.0 authentication with Ansible Automation Platform.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-ansible-backstage-plugins__entry__1"> <p class="p">catalog-backend-module-rhaap</p> </td> 
+           <td class="entry" headers="devtools-ansible-backstage-plugins__entry__2"> <p class="p">Synchronizes Ansible Automation Platform job templates as Backstage Software Templates.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-ansible-backstage-plugins__entry__1"> <p class="p">scaffolder-backend-module-backstage-rhaap</p> </td> 
+           <td class="entry" headers="devtools-ansible-backstage-plugins__entry__2"> <p class="p">Provides the <code class="ph codeph">rhaap:launch-job-template</code> action.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-ansible-backstage-plugins__entry__1"> <p class="p">backstage-rhaap-common</p> </td> 
+           <td class="entry" headers="devtools-ansible-backstage-plugins__entry__2"> <p class="p">Contains shared libraries and utilities for Ansible Automation Platform integration.</p> </td> 
+          </tr> 
+          <tr class="row"> 
+           <td class="entry" headers="devtools-ansible-backstage-plugins__entry__1"> <p class="p">self-service</p> </td> 
+           <td class="entry" headers="devtools-ansible-backstage-plugins__entry__2"> <p class="p">Provides the user interface for all listed functionality.</p> </td> 
+          </tr> 
+         </tbody>
+        </table> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

@@ -23,8 +23,3 @@ You can use `awx-manage gather_analytics` (without `--ship`) to inspect the data
 
 This file contains several JSON and CSV files. Each file contains a different set of analytics data.
 
-## Automation Analytics Data Dictionary
-
-Automation Analytics Data is sent to the Red Hat Hybrid Cloud Console (HCC) to provide detailed analytics on your automation.
-
-The data dictionary outlines the information collected by Automation Analytics from the Red Hat Ansible Automation Platform automation controller, also known as Automation Execution.

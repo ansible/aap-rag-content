@@ -1,0 +1,43 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="self-service-about">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Install Ansible automation portal (OpenShift Container Platform only)</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">Ansible automation portal makes enterprise automation accessible to users of varying roles and skill levels through a simplified web interface designed for business users, not automation experts.</p> 
+     <p class="p">Instead of requiring users to understand Ansible playbooks or complex automation workflows, Ansible automation portal provides a streamlined "point-and-click" experience.</p> 
+     <p class="p">Ansible automation portal uses your existing Ansible Automation Platform setup: it uses the same logins, same security controls, and the same automation logic.</p> 
+     <p class="p">Job templates in Ansible Automation Platform are synced to Ansible automation portal, where they appear as auto-generated self-service templates. Users can launch the auto-generated self-service templates in Ansible automation portal to run the corresponding job templates in Ansible Automation Platform.</p> 
+     <p class="p">When launching a job, users follow step-by-step guided forms in Ansible automation portal. These forms are identical to the forms for the equivalent job templates in Ansible Automation Platform.</p> 
+     <p class="p">You can also import custom self-service templates in Ansible automation portal. These templates are pulled from a git repository, and their configuration file associates them with a job template in Ansible Automation Platform. The configuration file contains the forms for the template.</p> 
+     <p class="p">You can associate more than one custom self-service template with one Ansible Automation Platform job template. You set the RBAC for the custom self-service templates in Ansible automation portal. Therefore you can set up different types of forms for users with different levels of automation experience.</p> 
+     <p class="p">For example, for a job template that configures network settings, you could associate a custom template with minimum scope for adjusting settings to a group with less automation experience, and use a more detailed custom template with deeper scope for configuration for automation experts.</p> 
+     <p class="p">Ansible automation portal connects with Red Hat Ansible Automation Platform using an OAuth application for authentication.</p> 
+     <p class="p">The following restrictions apply:</p> 
+     <ul class="ul"> 
+      <li class="li">You can only use one Ansible Automation Platform instance.</li> 
+      <li class="li">You can only use one Ansible Automation Platform organization.</li> 
+     </ul> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_architecture_licensing">Architecture and licensing</a></strong><br>Ansible automation portal is built on Red Hat Developer Hub (RHDH), which provides the web interface and plugin framework. Your Ansible Automation Platform subscription includes the use of RHDH for the self-service portal without requiring a separate RHDH subscription.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_self_service_supported_platforms#self-service-supported-platforms">Supported platforms</a></strong><br>Ansible automation portal supports installation using a Helm chart on OpenShift Container Platform.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_select_org">Select an organization</a></strong><br>You must choose an organization in Ansible Automation Platform to use with Ansible automation portal. If you have not set up an organization, use the following procedure to create one.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_create_oauth_app#self-service-create-oauth-app">Create an OAuth application</a></strong><br>To use the Helm chart to deploy Ansible automation portal, you must have set up an OAuth application on your Ansible Automation Platform instance.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-choose_plug_in_delivery_method">Plug-in delivery method</a></strong><br>Ansible plug-ins for Red Hat Developer Hub support two delivery methods. Select the method that fits your environment.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_helm_install#self-service-helm-install">Install the Ansible automation portal Helm chart</a></strong><br>You can use the configured secrets and plugin registry to install the Ansible automation portal. Deploy the application onto your OpenShift cluster using the provided Helm chart.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_disconnected_install#self-service-disconnected-install">Install Ansible automation portal in air-gapped OpenShift Container Platform environments</a></strong><br>You can install Ansible automation portal in a disconnected OpenShift Container Platform environment. For new installations, use OCI container delivery and mirror required container images and plug-in artifacts to your internal registry.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_view_deployment#self-service-view-deployment">Verify the configuration</a></strong><br>You can inspect the deployment logs and ConfigMap on the OpenShift console to verify that the deployment conforms with the settings in your Helm chart.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-assembly_self_service_accessing_deployment#self-service-accessing-deployment">Update the deployment URL</a></strong><br>Complete the necessary post-installation configuration, including updating the OAuth application and setting up initial Role-Based Access Control (RBAC). You can then access and sign in to the portal.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_self_service_initial_rbac_setup#self-service-initial-rbac-setup">Set up initial RBAC rules in Ansible automation portal</a></strong><br>After you install Ansible automation portal and synchronize it with Ansible Automation Platform, only users with Ansible Automation Platform administrator privileges can view the auto-generated templates.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-con_portal_aap_sync_overview#portal-aap-sync-overview">Understanding Ansible Automation Platform synchronization</a></strong><br>The synchronization feature imports your Organization, Users, Teams, and Job Templates from Ansible Automation Platform into Ansible automation portal, making these entities securely discoverable and accessible to portal users.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_configure_external_database">Configure an external PostgreSQL database for Ansible automation portal</a></strong><br>By default, Ansible automation portal deploys an embedded PostgreSQL instance. For production deployments, configure Ansible automation portal to use an external PostgreSQL database managed by your organization's database team.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-proc_self_service_configure_custom_ssl">Configure custom SSL certificates for the Ansible automation portal</a></strong><br>If your Ansible Automation Platform instance uses custom or self-signed SSL certificates, configure the Ansible automation portal to trust those certificates to prevent authentication failures.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="ref-ee-builder-helm-values">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Complete Helm chart values reference for execution environment builder</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">A complete Helm chart values configuration for execution environment builder with GitHub App authentication, content discovery, and private automation hub enabled.</p> 
+     <section class="section">
+      <h2 class="title sectiontitle">Example configuration</h2> 
+      <p class="p">The following example shows all execution environment builder settings in context. Adapt this to your environment.</p> 
+      <pre class="pre codeblock"><code>upstream:
+    backstage:
+      appConfig:
+        integrations:
+          github:
+            - host: github.com
+              apps:
+                - appId: ${GITHUB_APP_ID}
+                  clientId: ${GITHUB_APP_CLIENT_ID}
+                  clientSecret: ${GITHUB_APP_CLIENT_SECRET}
+                  privateKey: ${GITHUB_APP_PRIVATE_KEY}
+
+        backend:
+          cors:
+            origin:
+              - ${BASE_URL}
+              ## Add self-hosted Git provider URLs if not using github.com / gitlab.com:
+              # - https://github.internal.example.com
+              # - https://gitlab.internal.example.com
+
+        auth:
+          providers:
+            github:
+              production:
+                clientId: ${GITHUB_OAUTH_CLIENT_ID}
+                clientSecret: ${GITHUB_OAUTH_CLIENT_SECRET}
+
+        catalog:
+          locations:
+            - type: url
+              target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-start-from-scratch.yaml
+              rules:
+                - allow: [Template]
+            - type: url
+              target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-cloud-automation.yaml
+              rules:
+                - allow: [Template]
+            - type: url
+              target: https://github.com/ansible/ansible-rhdh-templates/blob/v2.0.0/templates/ee-network-automation.yaml
+              rules:
+                - allow: [Template]
+
+          providers:
+            rhaap:
+              production:
+                sync:
+                  ansibleGitContents:
+                    enabled: true
+                    schedule:
+                      frequency: {minutes: 120}
+                      timeout: {minutes: 30}
+                    providers:
+                      github:
+                        - name: "github-org"
+                          host: github.com
+                          checkSSL: true
+                          orgs:
+                            - name: &lt;your_github_org&gt;
+                              branches: [main, master]
+                              tags: ['v*']
+                              galaxyFilePaths: []
+                              crawlDepth: 0
+
+                  pahCollections:
+                    enabled: true
+                    repositories:
+                      - name: rh-certified
+                        schedule:
+                          frequency: {days: 1}
+                          timeout: {minutes: 60}
+                      - name: validated
+                        schedule:
+                          frequency: {days: 1}
+                          timeout: {minutes: 60}
+                      - name: published
+                        schedule:
+                          frequency: {days: 1}
+                          timeout: {minutes: 60}
+
+          ansible:
+            skipTlsVerifyForHosts: []
+
+        ansible:
+          rhaap:
+            baseUrl: https://aap.example.com
+            token: ${AAP_API_TOKEN}</code></pre> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Replace placeholder values (<code class="ph codeph">${...}</code>, <code class="ph codeph">&lt;your_github_org&gt;</code>, <code class="ph codeph">aap.example.com</code>) with your actual environment values. Secrets referenced with <code class="ph codeph">${...}</code> are resolved from the <code class="ph codeph">secrets-scm</code> OpenShift secret at runtime.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">RHEL appliance configuration reference</h2> 
+      <p class="p">The following example shows the equivalent configuration for RHEL appliance deployments in <code class="ph codeph">/etc/portal/configs/app-config/app-config.production.yaml</code>. RHEL configuration omits the <code class="ph codeph">upstream.backstage.appConfig</code> nesting used by the Helm chart.</p> 
+      <pre class="pre codeblock"><code>integrations:
+    github:
+      - host: github.com
+        apps:
+          - appId: ${GITHUB_APP_ID}
+            clientId: ${GITHUB_APP_CLIENT_ID}
+            clientSecret: ${GITHUB_APP_CLIENT_SECRET}
+            privateKey: ${GITHUB_APP_PRIVATE_KEY}
+
+  backend:
+    cors:
+      origin:
+        - "https://portal.example.com"
+        ## Add self-hosted Git provider URLs if not using github.com / gitlab.com:
+        # - "https://github.internal.example.com"
+        # - "https://gitlab.internal.example.com"
+
+  auth:
+    providers:
+      github:
+        production:
+          clientId: ${GITHUB_OAUTH_CLIENT_ID}
+          clientSecret: ${GITHUB_OAUTH_CLIENT_SECRET}
+
+  catalog:
+    providers:
+      rhaap:
+        production:
+          sync:
+            ansibleGitContents:
+              enabled: true
+              schedule:
+                frequency: {minutes: 120}
+                timeout: {minutes: 30}
+              providers:
+                github:
+                  - name: "github-org"
+                    host: github.com
+                    checkSSL: true
+                    orgs:
+                      - name: &lt;your_github_org&gt;
+                        branches: [main, master]
+                        tags: ['v*']
+                        galaxyFilePaths: []
+
+            pahCollections:
+              enabled: true
+              repositories:
+                - name: rh-certified
+                  schedule:
+                    frequency: {days: 1}
+                    timeout: {minutes: 60}
+                - name: validated
+                  schedule:
+                    frequency: {days: 1}
+                    timeout: {minutes: 60}
+
+    ansible:
+      skipTlsVerifyForHosts: []
+
+  ansible:
+    rhaap:
+      baseUrl: https://aap.example.com
+      token: ${AAP_API_TOKEN}</code></pre> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">The <code class="ph codeph">${...}</code> references are resolved from Podman secrets through the Quadlet drop-in file (<code class="ph codeph">ee-builder-secrets.conf</code>). PAT-based secrets (<code class="ph codeph">portal_github_token</code>, <code class="ph codeph">portal_gitlab_token</code>) are managed by the base portal infrastructure and do not require a drop-in entry.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Key configuration sections</h2> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">integrations.github</code>
+       </dt> 
+       <dd class="dd">
+        Git provider authentication. Configure either a PAT (<code class="ph codeph">token</code>) or a GitHub App (<code class="ph codeph">apps</code>), not both. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_app_ee_builder" title="Create and install a GitHub App so that execution environment builder can scan your organization's repositories for Ansible collections.">Configure a GitHub App for content discovery</a> or <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_pat_ee_builder" title="Create and store a GitHub Personal Access Token (PAT) so that execution environment builder can scan repositories for Ansible collections.">Configure a Personal Access Token for GitHub</a>.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">backend.cors.origin</code>
+       </dt> 
+       <dd class="dd">
+        CORS allowed origins. Add self-hosted Git provider URLs if not using <code class="ph codeph">github.com</code> or <code class="ph codeph">gitlab.com</code>.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">auth.providers.github</code>
+       </dt> 
+       <dd class="dd">
+        OAuth App credentials for saving definition files and automated builds. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_github_oauth_ee_builder" title="Configure a GitHub OAuth App so that users can save execution environment definition files to a GitHub repository and trigger automated image builds.">Configure a GitHub OAuth App for saving definitions</a>.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">catalog.locations</code>
+       </dt> 
+       <dd class="dd">
+        EE Builder wizard templates. Replace with private repository URLs for air-gapped environments. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_host_templates_private_repo" title="Copy the EE Builder wizard templates from the public Ansible GitHub repository to a private repository for use in private or air-gapped environments.">Host EE wizard templates in a private Git repository</a>.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">catalog.providers.rhaap.production.sync.ansibleGitContents</code>
+       </dt> 
+       <dd class="dd">
+        Git content discovery configuration. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery" title="Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.">Configure collection discovery sources</a>.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">catalog.providers.rhaap.production.sync.pahCollections</code>
+       </dt> 
+       <dd class="dd">
+        Private automation hub collection discovery. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_configure_collection_discovery" title="Configure Git content discovery and private automation hub collection discovery so that Ansible collections are available in execution environment builder and the collection catalog.">Configure collection discovery sources</a>.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">ansible.rhaap</code>
+       </dt> 
+       <dd class="dd">
+        Ansible Automation Platform connection settings including base URL and API token.
+       </dd> 
+       <dt class="dt dlterm">
+        <code class="ph codeph">catalog.ansible.skipTlsVerifyForHosts</code>
+       </dt> 
+       <dd class="dd">
+        Hosts where TLS verification is skipped for catalog interactions. See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_host_templates_private_repo" title="Copy the EE Builder wizard templates from the public Ansible GitHub repository to a private repository for use in private or air-gapped environments.">Host EE wizard templates in a private Git repository</a>.
+       </dd> 
+      </dl> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

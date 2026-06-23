@@ -1,0 +1,167 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="gw-token-based-authentication"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure access to external applications with tokens</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">Token-based authentication permits authentication of third-party tools and services with the platform through integrated OAuth 2 token support. Ansible Automation Platform utilizes both OAuth Tokens and Personal Access Tokens (PATs).</p> 
+      <p class="p"> In Ansible Automation Platform 2.7, you must create and manage all tokens through platform gateway. Component-level token creation has been removed.</p> 
+      <dl class="dl"> 
+       <dt class="dt dlterm">
+        OAuth Tokens
+       </dt> 
+       <dd class="dd">
+        OAuth Tokens are tied to specific applications and allow applications to access data without disclosing user login information.
+       </dd> 
+       <dt class="dt dlterm">
+        Personal Access Tokens
+       </dt> 
+       <dd class="dd">
+        PATs are personal to a user and not tied to a specific application. They are created directly by a user for their own use through platform gateway.
+       </dd> 
+      </dl> 
+      <p class="p">The default expiration for access tokens has been updated from 1000 years to 1 year. This change ensures frequent token rotation for increased credential security.</p> 
+      <div class="note note note_note">
+       <span class="note__title">Note:</span> 
+       <div class="note__body"> 
+        <p class="p">Access tokens in controller 2.4 and previous versions of the platform gateway were valid for 1000 years. Any existing tokens created before the 2.5.20250604 patch release will retain a 1000 year expiration.</p> 
+       </div>
+      </div> 
+      <p class="p">You can customize this setting to meet your specific requirements by modifying the expiration time in your <code class="ph codeph">settings.py</code> file as follows:</p> 
+      <pre class="pre codeblock"><code>OAUTH2_PROVIDER__ACCESS_TOKEN_EXPIRE_SECONDS = 31536000</code></pre> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relref">
+       <strong>Related reference</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-ref_controller_token_session_management#ref-controller-token-session-management" title="Ansible Automation Platform supports the following commands for OAuth2 token management:">Token and session management</a></li>
+       </ul>
+      </div>
+      <div class="linklist relinfo">
+       <strong>Related information</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="https://datatracker.ietf.org/doc/html/rfc6749" target="_blank" rel="external noopener">The OAuth 2.0 Authorization Framework</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="assembly-controller-applications"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Manage OAuth applications</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Create and configure token-based authentication for external applications such as ServiceNow and Jenkins. With token-based authentication, external applications can easily integrate with Ansible Automation Platform.</p> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">Automation controller OAuth applications on the platform UI are not supported for 2.4 to 2.5 migration. </p> 
+        </div>
+       </div> 
+       <p class="p">As a platform administrator, you can configure a custom external application URL within the platform, providing seamless integration with external services. This functionality is currently available as a Technology Preview. Once configured, the external application URL is displayed in the platform UI navigation panel, providing users with easy access to the application. This feature streamlines workflows by ensuring quick access to external services from within the platform UI.</p> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">Technology Preview features are not supported with Red&nbsp;Hat production service level agreements (SLAs) and might not be functionally complete. Red&nbsp;Hat does not recommend using them in production. These features provide early access to upcoming product features, enabling customers to test functionality and provide feedback during the development process.</p> 
+        </div>
+       </div> 
+       <p class="p">With OAuth 2 you can use tokens to share data with an application without disclosing login information. You can configure these tokens as read-only.</p> 
+       <p class="p">You can create an application that is representative of the external application you are integrating with, then use it to create tokens for the application to use on behalf of its users.</p> 
+       <p class="p">Associate these tokens with an application resource to manage all tokens issued for a particular application. By separating the issue of tokens under <strong class="ph b">OAuth Applications</strong>, you can revoke all tokens based on the application without having to revoke all tokens in the system.</p> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist">
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://access.redhat.com/solutions/7091987" target="_blank" rel="external noopener">OAuth applications and tokens do not exist after migrating from Ansible Automation Platform 2.4 to 2.5</a></li>
+         <li class="linklist"><a class="link" href="https://access.redhat.com/support/offerings/techpreview/" target="_blank" rel="external noopener">Technology Preview Features - Scope of Support</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-controller-applications-getting-started"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Get started with OAuth Applications</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">You can access the <strong class="ph b">OAuth Applications</strong> page from the navigation panel by selecting <span class="ph menucascade"><span class="ph uicontrol">Access Management</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">OAuth Applications</span></span>. From there you can view, create, sort and search for applications currently managed by Ansible Automation Platform and automation controller.</p> 
+       <section class="section"> 
+        <p class="p">If no applications exist, you can create one by clicking <span class="ph uicontrol button">Create OAuth application</span>.</p> 
+       </section> 
+      </div> 
+      <article class="topic reference nested2" aria-labelledby="ariaid-title4" id="ref-gw-application-functions"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Application functions</h3> 
+       <div class="body refbody">
+        <p class="shortdesc">Several OAuth 2 utilities are available for authorization, token refresh, and revoke. You can specify the following grant types when creating an application:</p> 
+        <section class="section"> 
+         <dl class="dl"> 
+          <dt class="dt dlterm">
+           Password
+          </dt> 
+          <dd class="dd">
+           This grant type is ideal for users who have native access to the web application and must be used when the client is the resource owner.
+          </dd> 
+          <dt class="dt dlterm">
+           Authorization code
+          </dt> 
+          <dd class="dd">
+           This grant type should be used when access tokens must be issued directly to an external application or service.
+          </dd> 
+         </dl> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">You can only use the authorization code type to acquire an access token when using an application. When integrating an external web application with Ansible Automation Platform, that web application might need to create OAuth2 tokens on behalf of users in that other web application. Creating an application in the platform with the authorization code grant type is the preferred way to do this because:</p> 
+           <ul class="ul"> 
+            <li class="li">This allows an external application to obtain a token from Ansible Automation Platform for a user, using their credentials.</li> 
+            <li class="li">Compartmentalized tokens issued for a particular application enables those tokens to be easily managed. For example, revoking <em class="ph i">all</em> tokens associated with that application without having to revoke all tokens in the system.</li> 
+           </ul> 
+          </div>
+         </div> 
+        </section> 
+       </div> 
+      </article>
+      <article class="topic reference nested2" aria-labelledby="ariaid-title5" id="gw-request-token-after-expiration"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Request an access token after expiration</h3> 
+       <div class="body refbody">
+        <p class="shortdesc">The default expiration for access tokens is 1 year.</p> 
+        <section class="section"> 
+         <p class="p">The best way to set up application integrations by using the <strong class="ph b">Authorization code</strong> grant type is to allowlist the origins for those cross-site requests. More generally, you must allowlist the service or application you are integrating with the platform, for which you want to provide access tokens.</p> 
+         <p class="p">To do this, have your administrator add this allowlist to their local Ansible Automation Platform settings file:</p> 
+         <pre class="pre codeblock"><code>CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"http://django-oauth-toolkit.herokuapp.com*",
+    r"http://www.example.com*"
+]</code></pre> 
+         <p class="p">Where <code class="ph codeph"><a class="xref" href="http://django-oauth-toolkit.herokuapp.com" target="_blank" rel="external noopener">http://django-oauth-toolkit.herokuapp.com</a></code> and <code class="ph codeph"><a class="xref" href="http://www.example.com" target="_blank" rel="external noopener">http://www.example.com</a></code> are applications requiring tokens with which to access the platform.</p> 
+        </section> 
+       </div> 
+      </article>
+      <article class="topic concept nested2" aria-labelledby="ariaid-title6" id="gw-oauth2-app-and-token-migration"> 
+       <h3 class="title topictitle3" id="ariaid-title6">OAuth2 application and token migration (2.4 to 2.6)</h3> 
+       <div class="body conbody">
+        <p class="shortdesc">During the upgrade from Ansible Automation Platform 2.4 to 2.6, there are important changes to how OAuth2 applications and tokens are managed. Ansible Automation Platform now uses platform gateway OAuth applications and deprecates automation controller OAuth applications.</p> 
+        <ul class="ul"> 
+         <li class="li"><strong class="ph b">Automation controller OAuth applications</strong>: You can view and edit existing automation controller applications, but new ones can no longer be created. These legacy applications continue to function, but they might be removed in a future release. Plan to migrate to platform gateway OAuth applications.</li> 
+         <li class="li"><strong class="ph b">Automation controller tokens</strong>: Automation controller personal access tokens (PATs), are also deprecated. Guide users to move to platform gateway PATs.</li> 
+         <li class="li"><strong class="ph b">Platform gateway OAuth applications and tokens</strong>: Platform applications and tokens offer an updated interface and are the standard for future use. Move to these applications and tokens.</li> 
+        </ul> 
+       </div> 
+      </article>
+      <article class="topic concept nested2" aria-labelledby="ariaid-title7" id="gw-manage-oauth2-provider"> 
+       <h3 class="title topictitle3" id="ariaid-title7">Manage <code class="ph codeph">OAUTH2_PROVIDER</code> settings</h3> 
+       <div class="body conbody">
+        <p class="shortdesc">The <code class="ph codeph">OAUTH2_PROVIDER</code> settings from automation controller are managed by platform gateway after upgrading from 2.4. to 2.6. The default token expiration values might differ between automation controller and platform gateway.</p> 
+        <ul class="ul"> 
+         <li class="li">The default access token expiration is updated from 1,000 years to 1 year. This change increases credential security through more frequent token rotation.</li> 
+         <li class="li">Platform gateway’s default OAUTH2_PROVIDER settings are: <pre class="pre codeblock"><code>{
+  "ACCESS_TOKEN_EXPIRE_SECONDS": 31536000000,
+  "REFRESH_TOKEN_EXPIRE_SECONDS": 2628000,
+  "AUTHORIZATION_CODE_EXPIRE_SECONDS": 600
+}</code></pre><p class="p">If you previously set a token expiration shorter than one year, you must manually update the platform gateway settings to match your required configuration.</p></li> 
+        </ul> 
+       </div> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

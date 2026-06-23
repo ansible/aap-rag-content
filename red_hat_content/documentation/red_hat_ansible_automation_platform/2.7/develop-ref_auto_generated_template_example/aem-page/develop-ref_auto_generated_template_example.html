@@ -1,0 +1,192 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="auto-generated-template-example">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Auto-generated template example</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">The following example shows a template that Ansible automation portal auto-generates from an existing Ansible Automation Platform Job Template.</p> 
+     <section class="section"> 
+      <p class="p">Every field in the generated YAML maps directly to an Ansible Automation Platform artifact:</p> 
+      <ul class="ul"> 
+       <li class="li">The Ansible Automation Platform Job Template name and description become <code class="ph codeph">metadata</code> fields.</li> 
+       <li class="li">Each <strong class="ph b">Prompt on Launch</strong> option becomes an <code class="ph codeph">AAPResourcePicker</code> field.</li> 
+       <li class="li">Each Ansible Automation Platform Survey question becomes a standard form field.</li> 
+       <li class="li">The <code class="ph codeph">steps</code> section launches the original Ansible Automation Platform Job Template using the <code class="ph codeph">rhaap:launch-job-template</code> action.</li> 
+      </ul> 
+      <pre class="pre codeblock"><code>apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  # Namespace is hardcoded to "default"
+  namespace: default
+  # AAP artifact: Job Template name -&gt; lowercase with hyphens
+  name: deploy-application
+  # AAP artifact: Job Template name -&gt; title (copied directly)
+  title: Deploy Application
+  # AAP artifact: Job Template description -&gt; description (copied directly)
+  description: Deploy application to target environment
+  # AAP artifact: Job Template labels -&gt; tags (lowercase)
+  tags:
+    - automation
+    - aap
+  # AAP artifact: Job Template URL -&gt; annotations
+  annotations:
+    backstage.io/techdocs-ref: url:https://aap.example.com/#/templates/job_template/42
+    backstage.io/source-location: url:https://aap.example.com/#/templates/job_template/42
+
+spec:
+  type: service
+
+  parameters:
+    - title: "Please enter the following details"
+      required:
+        - token
+        - inventory
+        - app_name
+      properties:
+        # Always present: OAuth token for AAP authentication (hidden from user)
+        token:
+          title: Token
+          type: string
+          description: Oauth2 token
+          ui:field: AAPTokenField
+          ui:widget: hidden
+          ui:backstage:
+            review:
+              show: false
+          ui:options:
+            disabled: true
+            hidden: true
+
+        # AAP artifact: "Prompt on Launch" -&gt; Inventory
+        inventory:
+          title: Inventory
+          description: Please enter the inventory you want to use the services on
+          resource: inventories
+          ui:field: AAPResourcePicker
+          default: Production Servers
+
+        # AAP artifact: Survey question -&gt; "Application Name"
+        app_name:
+          title: Application Name
+          description: Name of the application to deploy
+          type: string
+          default: my-app
+
+  steps:
+    - id: launch-job
+      # AAP artifact: Job Template name used as the step name
+      name: Deploy Application
+      action: rhaap:launch-job-template
+      input:
+        token: ${{ parameters.token }}
+        values:
+          # AAP artifact: Job Template name identifies which template to launch
+          template: Deploy Application
+          # "Prompt on Launch" values passed as launch parameters
+          inventory: ${{ parameters.inventory }}
+          # Survey answers passed as extra variables to AAP
+          extraVariables:
+            app_name: ${{ parameters.app_name }}
+
+  output:
+    text:
+      - title: Deploy Application template executed successfully
+        content: |
+          **Job ID:** ${{ steps['launch-job'].output.data.id }}
+          **Job status:** ${{ steps['launch-job'].output.data.status }}</code></pre> 
+     </section> 
+     <section class="section">
+      <h2 class="title sectiontitle">Field mapping</h2> 
+      <p class="p">The following table maps each generated field to its Ansible Automation Platform source:</p> 
+      <table class="table">
+       <caption></caption>
+       <colgroup>
+        <col style="width:25%">
+        <col style="width:20%">
+        <col style="width:25%">
+        <col style="width:30%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry" id="auto-generated-template-example__entry__1">Ansible Automation Platform source</th> 
+         <th class="entry" id="auto-generated-template-example__entry__2">Ansible Automation Platform value</th> 
+         <th class="entry" id="auto-generated-template-example__entry__3">Generated field</th> 
+         <th class="entry" id="auto-generated-template-example__entry__4">Transformation</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry" headers="auto-generated-template-example__entry__1">N/A</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__2"><code class="ph codeph">default</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__3"><code class="ph codeph">metadata.namespace</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__4">Hardcoded to <code class="ph codeph">default</code>.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="auto-generated-template-example__entry__1">Job Template &gt; Name</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__2">Deploy Application</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__3"><code class="ph codeph">metadata.name</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__4">Lowercase with hyphens.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="auto-generated-template-example__entry__1">Job Template &gt; Name</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__2">Deploy Application</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__3"><code class="ph codeph">metadata.title</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__4">Copied directly.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="auto-generated-template-example__entry__1">Job Template &gt; Description</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__2">Deploy application to target environment</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__3"><code class="ph codeph">metadata.description</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__4">Copied directly.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="auto-generated-template-example__entry__1">Job Template &gt; Labels</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__2"><code class="ph codeph">automation</code>, <code class="ph codeph">aap</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__3"><code class="ph codeph">metadata.tags</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__4">Lowercase, special characters replaced with hyphens.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="auto-generated-template-example__entry__1">Always present</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__2">OAuth2 token</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__3"><code class="ph codeph">parameters.token</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__4">Auto-populated and hidden from user.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="auto-generated-template-example__entry__1">Prompt on Launch &gt; Inventory</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__2">Production Servers</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__3"><code class="ph codeph">parameters.inventory</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__4"><code class="ph codeph">AAPResourcePicker</code>; user selects by name, resolved to Ansible Automation Platform ID at launch.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="auto-generated-template-example__entry__1">Survey &gt; Question 1</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__2">app_name (text, required, default: "my-app")</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__3"><code class="ph codeph">parameters.app_name</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__4">Variable, title, type, and default copied from Survey spec.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="auto-generated-template-example__entry__1">Job Template &gt; Name</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__2">Deploy Application</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__3"><code class="ph codeph">input.values.template</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__4">Identifies which Ansible Automation Platform Job Template to launch.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="auto-generated-template-example__entry__1">Prompt on Launch value</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__2"><code class="ph codeph">${{ parameters.inventory }}</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__3"><code class="ph codeph">input.values.inventory</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__4">Name resolved to Ansible Automation Platform ID at launch.</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry" headers="auto-generated-template-example__entry__1">Survey answers</td> 
+         <td class="entry" headers="auto-generated-template-example__entry__2"><code class="ph codeph">${{ parameters.app_name }}</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__3"><code class="ph codeph">input.values.extraVariables</code></td> 
+         <td class="entry" headers="auto-generated-template-example__entry__4">Passed as <code class="ph codeph">extra_vars</code> to the Ansible Automation Platform Job.</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

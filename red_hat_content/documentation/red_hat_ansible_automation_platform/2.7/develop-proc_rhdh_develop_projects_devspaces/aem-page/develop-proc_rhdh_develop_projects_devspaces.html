@@ -1,0 +1,108 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="rhdh-develop-projects-devspaces"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Develop and execute projects in Dev Spaces</h1> 
+     <div class="body taskbody"> 
+      <p class="shortdesc">OpenShift Dev Spaces provides a web-based Integrated Development Environment that includes the Ansible VS Code extension and command line tools. You can use this environment to develop and test your automation code.</p> 
+      <section class="section context"> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">About this task</h2> 
+       </div> 
+       <p class="p">The OpenShift Dev Spaces instance provides a default configuration that installs the Ansible VS Code extension and provides the Ansible command line tools.</p> 
+      </section> 
+      <section> 
+       <div class="tasklabel"> 
+        <h2 class="sectiontitle tasklabel">Procedure</h2> 
+       </div> 
+       <div class="ul steps-unordered"> 
+        <div class="li step p"> <span class="ph cmd">Activate Ansible Lightspeed in the Ansible VS Code extension. For more information, refer to the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index" target="_blank" rel="external noopener">Red Hat Ansible Lightspeed with IBM watsonx Code Assistant User Guide</a>. </span> 
+         <div class="itemgroup info"> 
+          <div class="note important note_important"> <span class="note__title">Important:</span> 
+           <div class="note__body"> 
+            <p class="p"><a class="xref" href="https://access.redhat.com/products/red-hat-openshift-dev-spaces" target="_blank" rel="external noopener">OpenShift Dev Spaces</a> is not included with your Ansible Automation Platform subscription or the Ansible plug-ins for Red Hat Developer Hub.</p> 
+           </div> 
+          </div> 
+         </div> 
+        </div> 
+       </div> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="rhdh-execute-automation-devspaces"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Execute automation tasks in Dev Spaces</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">The default configuration for Dev Spaces provides access to the Ansible command line tools.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <div class="ul steps-unordered"> 
+         <div class="li step p"> <span class="ph cmd">To execute an automation task in Dev Spaces from the VSCode user interface: </span> 
+          <ol class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Right-click a playbook name in the list of files.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Select <strong class="ph b">Run Ansible Playbook via ansible-navigator run</strong> or <strong class="ph b">Run playbook via ansible-playbook</strong>. <br><img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/playbook.png" alt="Run a playbook from VS Code"><br></span> </li> 
+          </ol> 
+         </div> 
+        </div> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="rhdh-set-up-controller-project"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Connect your project to Ansible Automation Platform</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Access Ansible Automation Platform through the Red Hat Developer Hub to create a project for your playbook repository, then set up a job template that uses the playbook. You can go directly to your automation controller instance if it was not configured during the plug-in installation.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">The Ansible plug-ins provide a link to Ansible Automation Platform.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to your Red Hat Developer Hub UI.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the Ansible <code class="ph codeph">A</code> icon in the Red Hat Developer Hub navigation panel.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Operate</strong> to display a link to your Ansible Automation Platform instance. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">If automation controller was not included in your plug-in installation, a link to the product feature page is displayed.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Go to Ansible Automation Platform</strong> to open your platform instance in a new browser tab. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">Alternatively, if your platform instance was not configured during the Ansible plug-in installation, navigate to your automation controller instance in a browser and log in.</p> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to automation controller.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a project in Ansible Automation Platform for the GitHub repository where you stored your playbook project. Refer to <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_controller_projects" title="A project is a logical collection of Ansible playbooks, represented in automation controller.">Projects</a> for more information.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a job template that uses a playbook from the project that you created. Refer to <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-assembly_ug_controller_workflow_job_templates" title="A workflow job template links together a sequence of disparate resources that tracks the full set of jobs that were part of the release process as a single unit.">Workflow job templates</a> for more information.</span> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="rhdh-example"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Example: Automate a Red Hat Linux firewall configuration</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">This example demonstrates how the Ansible plug-ins can help Ansible users of all skill levels create quality Ansible content.</p> 
+       <p class="p">As an infrastructure engineer new to Ansible, you have been tasked to create a playbook to configure a Red Hat Enterprise Linux (RHEL) host firewall.</p> 
+       <p class="p">The following procedures show you how to use the Ansible plug-ins and Dev Spaces to develop a playbook.</p> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title5" id="rhdh-firewall-example-learn"> 
+       <h3 class="title topictitle3" id="ariaid-title5">Learn more about playbooks</h3> 
+       <div class="body taskbody"> 
+        <p class="shortdesc">The first step is to learn more about Ansible playbooks using the available learning paths.</p> 
+        <section> 
+         <div class="tasklabel"> 
+          <h4 class="sectiontitle tasklabel">Procedure</h4> 
+         </div> 
+         <ol class="ol steps"> 
+          <li class="li step"> <span class="ph cmd">Click the Ansible <code class="ph codeph">A</code> icon in the Red Hat Developer Hub navigation panel.</span> </li> 
+          <li class="li step"> <span class="ph cmd">Click <strong class="ph b">Learn</strong> and select the <strong class="ph b">Getting Started with Ansible Playbooks</strong> learning path. This redirects you to the Red Hat Developer website.</span> </li> 
+          <li class="li step"> <span class="ph cmd">If you are prompted to log in, create a Red Hat Developer account, or enter your details.</span> </li> 
+          <li class="li step"> <span class="ph cmd">Complete the learning path.</span> </li> 
+         </ol> 
+        </section> 
+       </div> 
+      </article> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

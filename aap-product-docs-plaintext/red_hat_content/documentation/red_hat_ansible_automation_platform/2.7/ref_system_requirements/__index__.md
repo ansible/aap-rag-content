@@ -33,29 +33,3 @@ Note:
 
 These are minimum requirements and can be increased for larger workloads in increments of 2x (for example 16GB becomes 32GB and 4 vCPU becomes 8vCPU). See [Horizontally scale tested deployment models to improve performance](/documentation/en-us/red_hat_ansible_automation_platform/2.7/optimize-con_horizontal_scaling_for_performance "Horizontal scaling involves increasing the number of replicas (pods or virtual machines) for a given service. Similar to vertical scaling, this approach is useful for high resource utilization or workload scaling.") for more information.
 
-## Repository requirements
-
-Enable the following repositories only when installing Red Hat Ansible Automation Platform:
-
-- RHEL BaseOS
-- RHEL AppStream
-
-
-Note:
-
-If you enable repositories besides those mentioned above, the Red Hat Ansible Automation Platform installation could fail unexpectedly.
-
-The following are necessary for you to work with project updates and collections:
-
-- Ensure that the [Network ports and protocols table](/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-assembly_network_ports_protocols#network-ports-protocols_table "The following table indicates the destination port and the direction of network traffic:") are available for successful connection and download of collections from automation hub or Ansible Galaxy server.
-
-## Additional notes for Red Hat Ansible Automation Platform requirements
-
-- The Ansible Automation Platform database backups are staged on each node at `/var/backups/automation-platform` through the variable `backup_dir`. You might need to mount a new volume to `/var/backups` or change the staging location with the variable `backup_dir` to prevent issues with disk space before running the `./setup.sh -b` script.
-- If performing a bundled Ansible Automation Platform installation, the installation setup.sh script attempts to install ansible-core (and its dependencies) from the bundle for you.
-- If you have installed Ansible-core manually, the Ansible Automation Platform installation setup.sh script detects that Ansible has been installed and does not attempt to reinstall it.
-
-
-Note:
-
-You must use Ansible-core, which is installed by using DNF. Ansible-core version 2.16 is required for versions 2.6 and later.

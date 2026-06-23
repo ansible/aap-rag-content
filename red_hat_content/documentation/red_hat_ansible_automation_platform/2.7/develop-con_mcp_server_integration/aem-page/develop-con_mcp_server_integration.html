@@ -1,0 +1,38 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="con-mcp-server-integration">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">MCP server integration</h1> 
+    <div class="body conbody">
+     <p class="shortdesc">An MCP server implements Model Context Protocol (MCP) for a specific backend such as a REST API, various services, databases, and other external systems. The MCP server exposes its operations as discoverable tools that AI agents or large language models (LLMs) can call.</p> 
+     <p class="p">MCP servers are integrated into execution environments (EEs) using a robust Ansible plugin framework. This setup allows Ansible playbooks to call MCP servers directly. A crucial design strategy is the ephemeral nature of these servers, meaning they exist only for the duration of the job execution.</p> 
+     <p class="p">The core requirement for enabling MCP support involves securely installing the required MCP server software into the execution environment during the build process, typically using the <code class="ph codeph">ansible-builder</code> command.</p> 
+     <p class="p">You can configure MCP servers in two ways:</p> 
+     <ul class="ul"> 
+      <li class="li"><strong class="ph b">For embedded (local) MCP servers</strong>: The EE image must explicitly include the MCP server binaries or libraries installed on the image path. This setup enables the execution environment to discover and start the specific embedded server required for the job.</li> 
+      <li class="li"><strong class="ph b">For remote (external) MCP servers</strong>: The EE build process facilitates defining remote connection details in a manifest file contained within the EE. This manifest informs the core MCP collection plugin on how to connect, typically pointing to a specific remote URL using an HTTP connection.</li> 
+     </ul> 
+     <section class="section" id="con-mcp-server-integration__supported-mcp-servers">
+      <h2 class="title sectiontitle">Supported MCP servers</h2> 
+      <p class="p">To use MCP servers, you must specify the required MCP support information in your EE definitions. This configuration pulls the necessary dependencies into your EE YAML file. The following MCP servers are currently targeted for support:</p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">AWS Core MCP</strong>: Serves as a starting point for working across Amazon MCPs.</li> 
+       <li class="li"><strong class="ph b">AWS Cloud Control API MCP</strong>: Provides the execution layer for AWS resource management.</li> 
+       <li class="li"><strong class="ph b">GitHub MCP</strong>: Used for testing and validation, often targeting remote server connections.</li> 
+      </ul> 
+     </section> 
+     <section class="section" id="con-mcp-server-integration__dependencies">
+      <h2 class="title sectiontitle">Dependencies</h2> 
+      <p class="p">Dependencies are incorporated into the EE YAML when you create the definition files. For example, the demonstration jobs target scenarios like AWS EC2 and VPC management, GitHub repository, and pull request operations.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/develop-proc_implementing_automation_content_for_ephemeral_mcp_agents">Implement automation content for ephemeral MCP agents</a></strong><br>Create an Ansible playbook that uses the execution environment (EE) setup so that ephemeral MCP servers are provisioned during Ansible Automation Platform controller job creation.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

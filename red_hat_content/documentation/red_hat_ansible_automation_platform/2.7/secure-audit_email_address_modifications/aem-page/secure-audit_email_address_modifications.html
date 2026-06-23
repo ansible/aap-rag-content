@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-e64bd4ab-7c4e-45de-9509-87281524a4db">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Audit email address modifications</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Use the <span class="keyword cmdname">detect_changed_emails</span> management command to identify users whose email addresses have been modified. The command analyzes audit data from the activity stream and compares it against current user records.</p> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">The command does not attribute changes to specific causes. It provides data for you to investigate changes that might require further action.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Run the following command to list email changes recorded in the activity stream:</span> 
+        <div class="itemgroup stepxmp"> 
+         <pre class="pre codeblock"><code>$ aap-gateway-manage detect_changed_emails</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Optional: To run a full security audit that includes authenticator linkage checks, duplicate email detection, and high-risk scoring, add the <code class="ph codeph">--audit</code> flag:</span> 
+        <div class="itemgroup stepxmp"> 
+         <pre class="pre codeblock"><code>$ aap-gateway-manage detect_changed_emails --audit</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Review the output and investigate any accounts where the email address does not match the expected owner based on your organization's directory, the account has elevated RBAC permissions, the email change occurred shortly before a new identity provider login, or the account has both local and external authenticators linked.</span> </li>
+      </ol>
+     </section> 
+    </div> 
+   </article>
+  </main>
+ </body>
+</html>

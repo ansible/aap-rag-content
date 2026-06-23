@@ -1,0 +1,55 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="controller-job-branch-overriding"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Advanced configuration for jobs tied to source control management systems</h1> 
+     <div class="body conbody"> 
+      <p class="shortdesc">In automation controller, you can configure projects to allow job templates to override the branch, tag, or reference used for source control.</p> 
+      <p class="p">Projects specify the branch, tag, or reference to use from source control in the <code class="ph codeph">scm_branch</code> field. These are represented by the values specified in the <strong class="ph b">Type Details</strong> fields:</p> 
+      <br> 
+      <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/ug-scm-project-branching-emphasized.png" alt="Project branching emphasized"> 
+      <br> 
+      <p class="p">When creating or editing a job you have the option to <strong class="ph b">Allow branch override</strong>. When this option is checked, project administrators can delegate branch selection to the job templates that use that project, requiring only project <code class="ph codeph">use_role</code>.</p> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="controller-source-tree-copy"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Source tree copy behavior</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">When automation controller runs a job, it creates a private copy of the project’s source tree for that job run.</p> 
+       <p class="p">Every job run has its own private data directory. This directory contains a copy of the project source tree for the given <code class="ph codeph">scm_branch</code> that the job is running. Jobs are free to make changes to the project folder and make use of those changes while it is still running. This folder is temporary and is removed at the end of the job run.</p> 
+       <p class="p">If you check the <strong class="ph b">Clean</strong> option, modified files are removed in automation controller’s local copy of the repository. This is done through use of the force parameter in its corresponding Ansible modules pertaining to git or sub-version.</p> 
+      </div> 
+     </article> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="controller-project-revision-behavior"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Project revision behavior</h2> 
+      <div class="body conbody"> 
+       <p class="shortdesc">Automation controller integrates with SCM systems like Git to manage project revisions. This ensures the correct version of your project files is tracked and used consistently during job execution.</p> 
+       <p class="p">During a project update, the revision of the default branch (specified in the <strong class="ph b">Source control branch</strong> field of the project) is stored when updated. If providing a non-default <strong class="ph b">Source control branch</strong> (not a commit hash or tag) in a job, the newest revision is pulled from the source control remote immediately before the job starts. This revision is shown in the <strong class="ph b">Source control revision</strong> field of the job and its project update.</p> 
+       <p class="p">As a result, offline job runs are impossible for non-default branches. To ensure that a job is running a static version from source control, use tags or commit hashes. Project updates do not save all branches, only the project default branch.</p> 
+       <p class="p">The <strong class="ph b">Source control branch</strong> field is not validated, so the project must update to assure it is valid. If this field is provided or prompted for, the <strong class="ph b">Playbook</strong> field of job templates is not validated, and you have to launch the job template to verify presence of the expected playbook.</p> 
+      </div> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="controller-git-refspec"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Git refspec</h2> 
+      <div class="body refbody"> 
+       <p class="shortdesc">The <strong class="ph b">Source control refspec</strong> field specifies the extra references the update should download from the remote. A refspec maps references from the remote repository to references in the local repository. If you leave this field blank, only the default references are fetched. </p> 
+       <section class="section"> 
+        <p class="p">Examples include the following:</p> 
+        <ul class="ul"> 
+         <li class="li"><code class="ph codeph">refs/<strong class="ph b">:refs/remotes/origin/</strong></code>: This fetches all references, including remotes of the remote</li> 
+         <li class="li"><code class="ph codeph">refs/pull/<strong class="ph b">:refs/remotes/origin/pull/</strong></code> (GitHub-specific): This fetches all refs for all pull requests</li> 
+         <li class="li"><code class="ph codeph">refs/pull/62/head:refs/remotes/origin/pull/62/head</code>: This fetches the ref for one GitHub pull request</li> 
+        </ul> 
+        <p class="p">For large projects, consider performance impact when using the first or second examples.</p> 
+        <p class="p">The <strong class="ph b">Source control refspec</strong> parameter affects the availability of the project branch, and can enable access to references not otherwise available. Use the earlier examples to supply a pull request from the <strong class="ph b">Source control branch</strong>, which is not possible without the <strong class="ph b">Source control refspec</strong> field.</p> 
+        <p class="p">The Ansible git module fetches <code class="ph codeph">refs/heads/</code> by default. This means that you can use a project’s branches, tags and commit hashes, as the <strong class="ph b">Source control branch</strong> if <strong class="ph b">Source control refspec</strong> is blank. The value specified in the <strong class="ph b">Source control refspec</strong> field affects which <strong class="ph b">Source control branch</strong> fields can be used as overrides. Project updates (of any type) perform an extra <code class="ph codeph">git fetch</code> command to pull that refspec from the remote.</p> 
+        <p class="p"><strong class="ph b">Example</strong> You can set up a project that enables branch override with the first or second refspec example. Use this in a job template that prompts for the <strong class="ph b">Source control branch</strong>. A client can then start the job template when a new pull request is created, providing the branch <code class="ph codeph">pull/N/head</code> and the job template can run against the provided GitHub pull request reference.</p> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

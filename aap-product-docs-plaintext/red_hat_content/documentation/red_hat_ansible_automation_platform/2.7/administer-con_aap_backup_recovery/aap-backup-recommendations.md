@@ -1,0 +1,9 @@
+# About backup and recovery
+## Backup recommendations
+
+Recovering from data loss requires that you plan for and create backup resources of your Red Hat Ansible Automation Platform deployments on a regular basis. At a minimum, Red Hat recommends backing up deployments of Red Hat Ansible Automation Platform under the following circumstances:
+
+- Before upgrading your Red Hat Ansible Automation Platform deployments.
+- Before upgrading your OpenShift cluster.
+- Once per week. This is particularly important if your environment is configured for automatic upgrades.
+

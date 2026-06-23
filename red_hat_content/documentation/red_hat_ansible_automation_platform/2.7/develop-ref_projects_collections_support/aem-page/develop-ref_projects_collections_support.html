@@ -1,0 +1,110 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-projects-collections-support"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Configure collections from source management to run in a project</h1> 
+     <div class="body refbody"> 
+      <p class="shortdesc">Automation controller supports project-specific Ansible collections in job runs.</p> 
+      <section class="section"> 
+       <p class="p">If you specify a collections requirements file in the SCM at <code class="ph codeph">collections/requirements.yml</code>, automation controller installs collections in that file in the implicit project synchronization before a job run.</p> 
+       <p class="p">Automation controller has a system-wide setting that enables collections to be dynamically downloaded from the <code class="ph codeph">collections/requirements.yml</code> file for SCM projects. You can turn off this setting in the <strong class="ph b">Job Settings</strong> screen from the navigation panel <span class="ph menucascade"><span class="ph uicontrol">Settings</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Automation Execution</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Job</span></span>, by unchecking the <strong class="ph b">Enable Collection(s) Download</strong> box.</p> 
+       <p class="p">Roles and collections are locally cached for performance reasons, and you select <strong class="ph b">Update revision on launch</strong> in the project <strong class="ph b">Options</strong> to ensure this:</p> 
+       <div class="note note note_note"> <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">If you also have collections installed in your execution environment, the collections specified in the project’s <code class="ph codeph">requirements.yml</code> file will take precedence when running a job. This precedence applies regardless of the version of the collection. For example, if the collection specified in <code class="ph codeph">requirements.yml</code> is older than the collection within the execution environment, the collection specified in <code class="ph codeph">requirements.yml</code> is used.</p> 
+        </div> 
+       </div> 
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="proc-projects-using-collections-with-hub"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Use collections with automation hub</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Before automation controller can use automation hub as the default source for collections content, you must create an API token in the automation hub UI. You then specify this token in automation controller.</p> 
+       <section class="section context"> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">About this task</h3> 
+        </div> 
+        <p class="p">Use the following procedure to connect to private automation hub or automation hub, the only difference is which URL you specify.</p> 
+       </section> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ol class="ol steps"> 
+         <li class="li step stepexpand"> <span class="ph cmd">Go to <a class="xref" href="https://console.redhat.com/ansible/automation-hub/token" target="_blank" rel="external noopener">https://console.redhat.com/ansible/automation-hub/token</a>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Load token</span>.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Click the copy <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/copy.png" width="15" alt="Copy"> icon to copy the API token to the clipboard.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a credential by choosing one of the following options: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">To use automation hub, create an automation hub credential by using the copied token and pointing to the URLs shown in the <strong class="ph b">Server URL</strong> and <strong class="ph b">SSO URL</strong> fields of the token page: </span> 
+            <div class="itemgroup info"> 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b">Galaxy Server URL</strong> = <code class="ph codeph"><a class="xref" href="https://console.redhat.com/ansible/automation-hub/token" target="_blank" rel="external noopener">https://console.redhat.com/ansible/automation-hub/token</a></code></li> 
+             </ul> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">To use private automation hub, create an automation hub credential using a token retrieved from the <strong class="ph b">Repo Management</strong> dashboard of your private automation hub and pointing to the published repository URL as shown: </span> 
+            <div class="itemgroup info"> 
+             <p class="p"> <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/projects-ah-repo-mgmt-repos-published.png" alt="image"> </p> 
+             <p class="p">You can create different repositories with different namespaces or collections in them. For each repository in automation hub you must create a different credential.</p> 
+            </div> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Copy the <strong class="ph b">Ansible CLI URL</strong> from the UI in the format of <code class="ph codeph">/https://$&lt;hub_url&gt;/api/galaxy/content/&lt;repo you want to pull from&gt;</code> into the <strong class="ph b">Galaxy Server URL</strong> field of <strong class="ph b">Create Credential</strong>: </span> 
+            <div class="itemgroup info"> 
+             <p class="p">For UI specific instructions, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_managing_cert_valid_content" title="With Ansible automation hub, you can access and curate a unique set of collections from all forms of Ansible content.">Red Hat Certified, validated, and Ansible Galaxy content in automation hub</a>.</p> 
+            </div> </li> 
+          </ol> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Go to the organization for which you want to synchronize content from and add the new credential to the organization. This enables you to associate each organization with the credential, or repository, that you want to use content from. </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <strong class="ph b">Example</strong> </p> 
+           <p class="p">You have two repositories:</p> 
+           <ul class="ul"> 
+            <li class="li"><em class="ph i">Prod</em>: <code class="ph codeph">Namespace 1</code> and <code class="ph codeph">Namespace 2</code>, each with collection <code class="ph codeph">A</code> and <code class="ph codeph">B</code> so: <code class="ph codeph">namespace1.collectionA:v2.0.0</code> and <code class="ph codeph">namespace2.collectionB:v2.0.0</code></li> 
+            <li class="li"><em class="ph i">Stage</em>: <code class="ph codeph">Namespace 1</code> with only collection <code class="ph codeph">A</code> so: <code class="ph codeph">namespace1.collectionA:v1.5.0</code> on , you have a repository URL for <em class="ph i">Prod</em> and <em class="ph i">Stage</em>. <p class="p">You can create a credential for each one.</p> <p class="p">Then you can assign different levels of access to different organizations. For example, you can create a <code class="ph codeph">Developers</code> organization that has access to both repository, while an Operations organization just has access to the <strong class="ph b">Prod</strong> repository only.</p> <p class="p">For UI specific instructions, see <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/con_create_groups" title="You can create and assign permissions to a team in private automation hub that enables users to access specified features in the system.">Configuring user access for container repositories in private automation hub</a>.</p> </li> 
+           </ul> 
+          </div> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">If automation hub has self-signed certificates, use the toggle to enable the setting <strong class="ph b">Ignore Ansible Galaxy SSL Certificate Verification</strong> in <strong class="ph b">Job Settings</strong>. For automation hub, which uses a signed certificate, use the toggle to disable it instead. This is a global setting:</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">Create a project, where the source repository specifies the necessary collections in a requirements file located in the <code class="ph codeph">collections/requirements.yml</code> file.</span> </li> 
+         <li class="li step stepexpand"> <span class="ph cmd">In the <strong class="ph b">Projects</strong> list view, click the sync <img class="image" height="15" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/sync.png" width="15" alt="Update"> icon to update this project. Automation controller fetches the Galaxy collections from the <code class="ph codeph">collections/requirements.yml</code> file and reports it as changed. The collections are installed for any job template using this project. </span> 
+          <div class="itemgroup info"> 
+           <div class="note note note_note"> <span class="note__title">Note:</span> 
+            <div class="note__body"> 
+             <p class="p">If updates are required from Galaxy or Collections, a sync is performed that downloads the required roles, consuming that much more space in your /tmp file. In cases where you have a large project (around 10 GB), disk space on <code class="ph codeph">/tmp</code> may be an issue.</p> 
+            </div> 
+           </div> 
+          </div> </li> 
+        </ol> 
+       </section> 
+      </div> 
+     </article> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="proc-projects-manage-playbooks-manually"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Manage playbooks manually</h2> 
+      <div class="body taskbody"> 
+       <p class="shortdesc">Manage Ansible playbooks and directories directly on the automation controller filesystem. This approach helps ensure proper file ownership and permissions when you cannot use source control.</p> 
+       <section> 
+        <div class="tasklabel"> 
+         <h3 class="sectiontitle tasklabel">Procedure</h3> 
+        </div> 
+        <ul class="ul steps-unordered"> 
+         <li class="li step"> <span class="ph cmd">Create one or more directories to store playbooks under the Project Base Path, for example, <code class="ph codeph">/var/lib/awx/projects/</code>.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Create or copy playbook files into the playbook directory.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Ensure that the playbook directory and files are owned by the same UNIX user and group that the service runs as.</span> </li> 
+         <li class="li step"> <span class="ph cmd">Ensure that the permissions are appropriate for the playbook directories and files.</span> </li> 
+        </ul> 
+       </section> 
+       <section class="section tasktroubleshooting"> 
+        <ul class="ul"> 
+         <li class="li">If you have not added any Ansible Playbook directories to the base project path, an error message is displayed. Choose one of the following options to troubleshoot this error: 
+          <ul class="ul"> 
+           <li class="li">Create the appropriate playbook directories and check out playbooks from your SCM.</li> 
+           <li class="li">Copy playbooks into the appropriate playbook directories.</li> 
+          </ul> </li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

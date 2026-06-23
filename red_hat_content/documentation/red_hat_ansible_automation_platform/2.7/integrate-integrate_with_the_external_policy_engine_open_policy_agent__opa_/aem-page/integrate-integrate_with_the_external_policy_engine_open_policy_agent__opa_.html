@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-95c533fe-922e-45ee-bf8b-7cd95088bc91">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Integrate with the external policy engine Open Policy Agent (OPA)</h1> 
+    <div class="body refbody">
+     <p class="shortdesc">Integrating Ansible Automation Platform with Open Policy Agent (OPA) enforces policies at automation runtime. Use encoded rules to define, manage, and enforce how users interact with the platform. Automate policy management to improve security, compliance, and operational efficiency. </p> 
+     <section class="section" id="GUID-95c533fe-922e-45ee-bf8b-7cd95088bc91__section_1"> 
+      <div class="p">
+       Integrating with OPA helps you to: 
+       <ul class="ul" id="GUID-95c533fe-922e-45ee-bf8b-7cd95088bc91__ul_1"> 
+        <li class="li"><strong class="ph b">Enforce policies at runtime</strong>: Stop automation actions that violate organizational policies and provide users with clear information about policy violations before jobs run. </li> 
+        <li class="li"><strong class="ph b">Centralize policy management</strong>: Offload policy decisions to your OPA server and manage automation governance rules alongside organizational policies. </li> 
+        <li class="li"><strong class="ph b">Improve compliance and security</strong>: Apply policy rules to automation content at the organization, inventory, or job template level to ensure consistent governance. </li> 
+       </ul> 
+      </div> 
+     </section> 
+     <section class="section" id="GUID-95c533fe-922e-45ee-bf8b-7cd95088bc91__section_2">
+      <h2 class="title sectiontitle">How Ansible Automation Platform supports OPA integration </h2> 
+      <p class="p">When you trigger policy enforcement, policies are retrieved from your OPA server. These policies are applied to automation content before jobs run. If a violation is detected, the action stops and you receive information about the specific policy violation. </p> 
+      <p class="p">Associate policies with organizations, inventories, or job templates to control where policy enforcement occurs.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-assembly_controller_pac#controller-pac">Implement policy enforcement</a></strong><br>Policy enforcement at automation runtime is a feature that uses encoded rules to define, manage, and enforce policies that govern how your users interact with your Ansible Automation Platform instance. Policy enforcement automates policy management, improving security, compliance, and efficiency.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-proc_configure_pac_enforcement#configure-enforcement-points">Configure enforcement points</a></strong><br>After you have set up your Ansible Automation Platform instance to communicate with the OPA server, you can set up enforcement points where you want the policy to be applied.</li>
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/integrate-ref_pac_inputs_outputs">Policy enforcement input and output options</a></strong><br>Use the following inputs and outputs to craft policies for use in policy enforcement.</li>
+     </ul>
+    </nav>
+   </article>
+  </main>
+ </body>
+</html>

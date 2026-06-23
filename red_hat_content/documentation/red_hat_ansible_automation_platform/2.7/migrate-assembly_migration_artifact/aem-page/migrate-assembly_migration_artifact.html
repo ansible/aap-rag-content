@@ -1,0 +1,110 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="migration-artifact"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Contents of the migration artifact</h1> 
+     <p class="shortdesc">The migration artifact packages all necessary data and configurations from your source environment. Verify its structure and contents to ensure a successful migration.</p> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="artifact-structure"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Artifact structure</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The migration artifact is a comprehensive package containing all necessary components to transfer your Ansible Automation Platform deployment.</p> 
+       <p class="p">Structure the artifact as follows:</p> 
+       <pre class="pre codeblock"><code>/
+  manifest.yml
+  secrets.yml
+  sha256sum.txt
+
+  -&gt; controller:
+     controller.pgc
+     -&gt; custom_configs:
+        foo.py
+        bar.py
+  -&gt; gateway:
+     gateway.pgc
+  -&gt; hub:
+     hub.pgc</code></pre> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="manifest-file"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Manifest file</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The <code class="ph codeph">manifest.yml</code> file serves as the primary metadata document for the migration artifact. It contains critical versioning and component information from your source environment.</p> 
+       <p class="p">Structure the manifest as follows:</p> 
+       <pre class="pre codeblock"><code>---
+aap_version: X.Y # The version being migrated
+platform: rpm # The source platform type
+components:
+  - name: controller
+    version: x.y.z
+  - name: hub
+    version: x.y.z
+  - name: gateway
+    version: x.y.z</code></pre> 
+      </div> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title4" id="secrets-file"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Secrets file</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The <code class="ph codeph">secrets.yml</code> file in the migration artifact includes essential Django <code class="ph codeph">SECRET_KEY</code> values required for authentication between services.</p> 
+       <p class="p">Structure the secrets file as follows:</p> 
+       <pre class="pre codeblock"><code>controller_pg_database: &lt;redacted&gt;
+controller_secret_key: &lt;redacted&gt;
+gateway_pg_database: &lt;redacted&gt;
+gateway_secret_key: &lt;redacted&gt;
+hub_pg_database: &lt;redacted&gt;
+hub_secret_key: &lt;redacted&gt;
+hub_db_fields_encryption_key: &lt;redacted&gt;</code></pre> 
+       <div class="note note note_note">
+        <span class="note__title">Note:</span> 
+        <div class="note__body"> 
+         <p class="p">Ensure the <code class="ph codeph">secrets.yml</code> file is encrypted and kept in a secure location.</p> 
+        </div>
+       </div> 
+      </div> 
+     </article>
+     <article class="topic reference nested1" aria-labelledby="ariaid-title5" id="migration-artifact-checklist"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Migration artifact creation checklist</h2> 
+      <div class="body refbody">
+       <p class="shortdesc">Use this checklist to verify the migration artifact.</p> 
+       <section class="section"> 
+        <ul class="ul"> 
+         <li class="li">Database dumps: Include complete database dumps for each component. 
+          <ul class="ul">
+           <li class="li">Ensure the automation controller database (<code class="ph codeph">controller.pgc</code>) is present in the artifact.</li>
+           <li class="li">Ensure the automation hub database (<code class="ph codeph">hub.pgc</code>) is present in the artifact.</li>
+           <li class="li">Ensure the platform gateway database (<code class="ph codeph">gateway.pgc</code>) is present in the artifact.</li>
+          </ul></li> 
+         <li class="li">Secret dumps: Export and include all security-related information. 
+          <ul class="ul">
+           <li class="li">Validate that all secret values are present in the <code class="ph codeph">secrets.yml</code> file.</li>
+          </ul></li> 
+         <li class="li">Custom configurations: Package all customizations from the source environment. 
+          <ul class="ul">
+           <li class="li">Validate that any custom Python scripts or modules (for example <code class="ph codeph">foo.py</code>, <code class="ph codeph">bar.py</code>) are present on the artifact.</li>
+           <li class="li">Document any non-standard configurations or environment-specific settings.</li>
+          </ul></li> 
+         <li class="li">Database information: Document database details. 
+          <ul class="ul">
+           <li class="li">Include the database names for all components.</li>
+           <li class="li">Document database users and required permissions.</li>
+           <li class="li">Note any database-specific configurations or optimizations.</li>
+          </ul></li> 
+         <li class="li">Verification: Ensure artifact integrity and completeness. 
+          <ul class="ul">
+           <li class="li">Verify that all required files are included in the artifact.</li>
+           <li class="li">Verify that checksums exist for all included database files.</li>
+           <li class="li">Test the artifact’s structure and accessibility.</li>
+           <li class="li">Consider encrypting the artifact for secure transfer to the target environment.</li>
+           <li class="li">Document any known limitations or special considerations.</li>
+          </ul></li> 
+        </ul> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

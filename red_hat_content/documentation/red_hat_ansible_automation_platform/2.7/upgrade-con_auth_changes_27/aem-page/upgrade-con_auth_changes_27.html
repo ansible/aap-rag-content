@@ -1,0 +1,85 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="con-auth-changes-27"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Authentication changes in Ansible Automation Platform 2.7</h1> 
+     <div class="body conbody">
+      <p class="shortdesc">In Ansible Automation Platform 2.7, all authentication has been consolidated through platform gateway. Direct API access to individual platform components has been removed.</p> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">Only upgrades from Ansible Automation Platform 2.6 to 2.7 are supported. If you are running version 2.4 or 2.5, you must first upgrade to version 2.6 before upgrading to 2.7.</p> 
+       </div>
+      </div> 
+     </div> 
+     <nav role="navigation" class="related-links">
+      <div class="linklist relconcepts">
+       <strong>Related concepts</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27#con-architectural-changes-27" title="Ansible Automation Platform 2.7 removes direct API access and component-level authentication. All external access to platform components must go through platform gateway.">Architectural changes in 2.7</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27#con-direct-access-prevention-27" title="In Ansible Automation Platform 2.7, platform components are configured to accept only platform gateway JWT authentication, ensuring that all external access goes through platform gateway.">How direct access is prevented</a></li>
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-mandatory_platform_gateway_authentication_in_ansible_automation_platform_2_7#con-mandatory-gateway-auth" title="In Red Hat Ansible Automation Platform 2.7, platform gateway is the only supported method for external authentication to platform components. Direct API access to automation controller, automation hub, and Event-Driven Ansible has been removed.">Mandatory platform gateway authentication in Ansible Automation Platform 2.7</a></li>
+       </ul>
+      </div>
+      <div class="linklist reltasks">
+       <strong>Related tasks</strong>
+       <br>
+       <ul class="linklist">
+        <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_prepare_gateway_accounts_upgrade" title="In Red Hat Ansible Automation Platform 2.6, users without a platform gateway account can authenticate using an automation controller password. In Ansible Automation Platform 2.7, this fallback authentication mechanism is removed.">Prepare platform gateway accounts for the 2.7 upgrade</a></li>
+       </ul>
+      </div>
+     </nav> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-architectural-changes-27"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Architectural changes in Ansible Automation Platform 2.7</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">Ansible Automation Platform 2.7 removes direct API access and component-level authentication. All external access to platform components must go through platform gateway.</p> 
+       <p class="p">The following features and access methods are removed in this release:</p> 
+       <ul class="ul"> 
+        <li class="li">Direct API access to automation controller, automation hub, and Event-Driven Ansible controller.</li> 
+        <li class="li">Basic authentication at the component level.</li> 
+        <li class="li">Component-level Personal Access Tokens (PATs) and legacy OAuth applications.</li> 
+        <li class="li">Third-party authentication provider configuration (LDAP, SAML, RADIUS, TACACS+) within automation controller.</li> 
+        <li class="li">Direct external routes or ingress to automation controller and automation hub.</li> 
+       </ul> 
+       <div class="note important note_important">
+        <span class="note__title">Important:</span> 
+        <div class="note__body"> 
+         <p class="p">If you use Red Hat Ansible Lightspeed and have automation or scripts that change the <code class="ph codeph">max_stream_duration</code> or <code class="ph codeph">stream_idle_timeout</code> global proxy settings, you must update your scripts. These global settings have been removed, and you should now use the per-route service timeouts that are configurable on any route.</p> 
+        </div>
+       </div> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relconcepts">
+        <strong>Related concepts</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27#con-auth-changes-27" title="In Ansible Automation Platform 2.7, all authentication has been consolidated through platform gateway. Direct API access to individual platform components has been removed.">Authentication changes in Ansible Automation Platform 2.7</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-con_auth_changes_27#con-direct-access-prevention-27" title="In Ansible Automation Platform 2.7, platform components are configured to accept only platform gateway JWT authentication, ensuring that all external access goes through platform gateway.">How direct access is prevented</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_api_basic_auth_removal_27" title="Basic authentication has been removed in Ansible Automation Platform 2.7. Direct authentication to automation controller, automation hub, and Event-Driven Ansible controller is no longer available. Use OAuth 2 token authentication through platform gateway instead.">Basic authentication removal</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_pat_removal_27#con-pat-removal-27" title="In Ansible Automation Platform 2.7, component-level Personal Access Tokens (PATs) have been removed. Tokens created directly in automation controller, automation hub, or Event-Driven Ansible controller in Ansible Automation Platform 2.6 or earlier no longer work in Ansible Automation Platform 2.7.">Personal Access Token removal in Ansible Automation Platform 2.7</a></li>
+        </ul>
+       </div>
+       <div class="linklist reltasks">
+        <strong>Related tasks</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/secure-con_gateway_route_timeouts#proc-configure-lightspeed-route-timeouts" title="If you use Red Hat Ansible Lightspeed and need to adjust streaming timeouts, configure the request_timeout_seconds and idle_timeout_seconds fields on the Lightspeed route.">Configure Ansible Lightspeed route timeouts</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title3" id="con-direct-access-prevention-27"> 
+      <h2 class="title topictitle2" id="ariaid-title3">How direct access is prevented in Ansible Automation Platform 2.7</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">In Ansible Automation Platform 2.7, platform components are configured to accept only platform gateway JWT authentication, ensuring that all external access goes through platform gateway.</p> 
+       <p class="p">When deployed as part of Ansible Automation Platform, this enforcement is immutable and cannot be changed through configuration files or environment variables, ensuring no bypass is possible.</p> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

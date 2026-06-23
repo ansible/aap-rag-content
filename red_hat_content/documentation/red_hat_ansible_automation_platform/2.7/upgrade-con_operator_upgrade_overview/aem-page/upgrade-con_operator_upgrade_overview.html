@@ -1,0 +1,38 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body id="operator-upgrade-overview"> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Overview</h1> 
+    <div class="body conbody"> 
+     <p class="shortdesc">Upgrade Ansible Automation Platform on Red Hat OpenShift Container Platform. You can perform full upgrades from supported previous versions or apply patch updates within your current version.</p> 
+     <div class="note important note_important"> <span class="note__title">Important:</span> 
+      <div class="note__body"> 
+       <p class="p">Upgrading from version 2.4 or 2.5 is not supported. Upgrade to Red Hat Ansible Automation Platform 2.6 before upgrading to version 2.7.</p> 
+       <p class="p">See the Upgrading Red Hat Ansible Automation Platform Operator in the version 2.6 documentation, for help updating to 2.6.</p> 
+      </div> 
+     </div> 
+     <p class="p">The Ansible Automation Platform Operator manages deployments, upgrades, backups, and restores of automation controller and automation hub. It also handles deployments of AnsibleJob and JobTemplate resources from the Ansible Automation Platform Resource Operator.</p> 
+     <p class="p">Each operator version has default automation controller and automation hub versions. When the operator is upgraded, it also upgrades the automation controller and automation hub deployments it manages, unless overridden in the spec.</p> 
+     <p class="p">OpenShift deployments of Ansible Automation Platform use the built-in Operator Lifecycle Management (OLM) functionality. For more information, see <strong class="ph b">Operator Lifecycle Manager concepts and resources</strong>. OpenShift does this by using Subscription, CSV, InstallPlan, and OperatorGroup objects. Most users will not have to interact directly with these resources. They are created when the Ansible Automation Platform Operator is installed from <strong class="ph b">OperatorHub</strong> and managed through the <strong class="ph b">Subscriptions</strong> tab in the OpenShift console UI. For more information, refer to <strong class="ph b">Accessing the web console</strong>.</p> 
+     <p class="p"><img class="image" id="operator-upgrade-overview__image_1" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/aap-operator-stable-2.7-deployment.png" alt="Subscription tab in the OpenShift console"></p> 
+    </div> 
+    <nav role="navigation" class="related-links"> 
+     <div class="linklist reltasks"> <strong>Related tasks</strong> 
+      <br> 
+      <ul class="linklist"> 
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/upgrade-proc_operator_upgrade#upgrading-operator" title="To upgrade to the latest version of Ansible Automation Platform Operator on OpenShift Container Platform, you can use the following procedure:">Upgrade the Ansible Automation Platform Operator</a></li> 
+      </ul> 
+     </div> 
+     <div class="linklist relinfo"> <strong>Related information</strong> 
+      <br> 
+      <ul class="linklist"> 
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.16/html/operators/understanding-operators#olm-understanding-olm" target="_blank" rel="external noopener">Operator Lifecycle Manager concepts and resources</a></li> 
+       <li class="linklist"><a class="link" href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.16/html/web_console/web-console" target="_blank" rel="external noopener">Accessing the web console</a></li> 
+      </ul> 
+     </div> 
+    </nav> 
+   </article> 
+  </main>  
+ </body>
+</html>

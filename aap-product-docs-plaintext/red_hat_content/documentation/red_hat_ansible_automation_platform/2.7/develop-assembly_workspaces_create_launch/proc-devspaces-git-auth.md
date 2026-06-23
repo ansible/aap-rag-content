@@ -1,0 +1,25 @@
+# Create and launch an Ansible development workspace
+## Configure Git personal access token authentication
+
+You must create a personal access token (PAT) in your Git provider, and add it to OpenShift Dev Spaces to enable access to your repositories from your Ansible development workspace.
+
+### About this task
+
+### Procedure
+
+1.  Create a personal access token in your Git provider and save it.
+
+- See [Managing your personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) in the GitHub documentation.
+- See [Personal access tokens](https://docs.gitlab.com/user/profile/personal_access_tokens) in the Gitlab documentation.
+
+2.  In a browser, navigate to the OpenShift Dev Spaces dashboard provided by your administrator, and log in.
+3.  Expand the dropdown menu under your login name and select **User Preferences**.
+4.  Select **Personal Access Tokens**.
+5.  Click **+Add Token**.
+6.  Complete the **Add Personal Access Token** form:
+
+- **Token Name**: Enter a name for your token
+- **Token**: Enter your personal access token for your Git repository.
+
+7.  Click **Add** to save the personal access token.
+

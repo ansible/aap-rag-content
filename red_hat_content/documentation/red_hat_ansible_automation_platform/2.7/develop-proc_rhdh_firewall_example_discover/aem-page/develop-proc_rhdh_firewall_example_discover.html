@@ -1,0 +1,204 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="rhdh-firewall-example-discover"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Discover existing Ansible content for RHEL system roles</h1> 
+     <div class="body taskbody">
+      <p class="shortdesc">Red Hat recommends that you use trusted automation content that has been tested and approved by Red Hat or your organization.</p> 
+      <section class="section context">
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">About this task</h2>
+       </div> 
+       <p class="p">Automation hub is a central repository for discovering, downloading, and managing trusted content collections from Red Hat and its partners. Private automation hub provides an on-premise solution for managing content collections.</p> 
+      </section> 
+      <section>
+       <div class="tasklabel">
+        <h2 class="sectiontitle tasklabel">Procedure</h2>
+       </div>
+       <ol class="ol steps">
+        <li class="li step stepexpand"> <span class="ph cmd">Click on the Ansible <code class="ph codeph">A</code> icon in the Red Hat Developer Hub navigation panel.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Discover existing collections</strong>.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Go to Automation Hub</strong>. </span> 
+         <div class="itemgroup info"> 
+          <div class="div"> 
+           <ul class="ul"> 
+            <li class="li">If private automation hub has been configured in the Ansible plug-ins, you are redirected to your <strong class="ph b">PrivateHubName</strong> instance.</li> 
+            <li class="li">If private automation hub has not been configured in the Ansible plug-ins installation configuration, you will be redirected to the Red Hat Hybrid Console (RHCC) automation hub.</li> 
+           </ul> 
+          </div> 
+          <p class="p">In this example, you are redirected to the RHCC automation hub.</p> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">If you are prompted to log in, provide your Red Hat Customer Portal credentials.</span> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Filter the collections with the <code class="ph codeph">rhel firewall</code> keywords. </span> 
+         <div class="itemgroup info"> 
+          <p class="p">The search returns the <code class="ph codeph">rhel_system_roles</code> collection.</p> 
+          <p class="p">The RHEL System Roles collection contains certified Ansible content that you can reuse to configure your firewall.</p> 
+         </div> </li>
+       </ol>
+      </section> 
+     </div> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="rhdh-firewall-example-create-playbook"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Create a new playbook project to configure a firewall</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">Create a new Ansible Playbook project quickly using the plug-in templates. This sets up the basic structure needed to configure your Red Hat Enterprise Linux firewall successfully.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Click the Ansible <code class="ph codeph">A</code> icon in the Red Hat Developer Hub navigation panel.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">From the <strong class="ph b">Create</strong> dropdown menu on the landing page, select <strong class="ph b">Create Ansible Git Project</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Choose</strong> in the <strong class="ph b">Create Ansible Playbook Project</strong> software template.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Fill in the following information in the <strong class="ph b">Create Ansible Playbook Project</strong> page: </span> 
+          <div class="itemgroup info"> 
+           <table class="table">
+            <caption></caption>
+            <colgroup>
+             <col style="width:30%">
+             <col style="width:10%">
+             <col style="width:30%">
+             <col style="width:30%">
+            </colgroup>
+            <thead class="thead"> 
+             <tr class="row"> 
+              <th class="entry" id="rhdh-firewall-example-create-playbook__entry__1">Field</th> 
+              <th class="entry" id="rhdh-firewall-example-create-playbook__entry__2">Required</th> 
+              <th class="entry" id="rhdh-firewall-example-create-playbook__entry__3">Description</th> 
+              <th class="entry" id="rhdh-firewall-example-create-playbook__entry__4">Example value</th> 
+             </tr> 
+            </thead>
+            <tbody class="tbody"> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__1"> <p class="p">Source code repository organization name or username</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__2"> <p class="p">Yes</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__3"> <p class="p">The name of your source code repository username or organization name.</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__4"> <p class="p"> <code class="ph codeph">my_github_username</code> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__1"> <p class="p">Playbook repository name</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__2"> <p class="p">Yes</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__3"> <p class="p">The name of your new Git repository.</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__4"> <p class="p"> <code class="ph codeph">rhel_firewall_config</code> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__1"> <p class="p">Playbook description</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__2"> <p class="p">No</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__3"> <p class="p">A description of the new playbook project.</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__4"> <p class="p"> <code class="ph codeph">This playbook configures firewalls on Red Hat Enterprise Linux systems</code> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__1"> <p class="p">Playbook project’s collection namespace</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__2"> <p class="p">Yes</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__3"> <p class="p">The new playbook Git project creates an example collection folder for you. Enter a value for the collection namespace.</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__4"> <p class="p"> <code class="ph codeph">my_galaxy_username</code> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__1"> <p class="p">Playbook project’s collection name</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__2"> <p class="p">Yes</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__3"> <p class="p">This is the name of the example collection.</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__4"> <p class="p"> <code class="ph codeph">rhel_firewall_config</code> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__1"> <p class="p">Catalog Owner Name</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__2"> <p class="p">Yes</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__3"> <p class="p">The name of the Developer Hub catalog item owner. It is a Red Hat Developer Hub field.</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__4"> <p class="p"> <code class="ph codeph">my_rhdh_username</code> </p> </td> 
+             </tr> 
+             <tr class="row"> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__1"> <p class="p">System</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__2"> <p class="p">No</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__3"> <p class="p">This is a Red Hat Developer Hub field.</p> </td> 
+              <td class="entry" headers="rhdh-firewall-example-create-playbook__entry__4"> <p class="p"> <code class="ph codeph">my_rhdh_linux_system</code> </p> </td> 
+             </tr> 
+            </tbody>
+           </table> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Review</strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Create</strong> to provision your new playbook project.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <strong class="ph b">Open in catalog</strong> to view your project.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+      <article class="topic task nested2" aria-labelledby="ariaid-title3" id="rhdh-firewall-example-new-playbook"> 
+       <h3 class="title topictitle3" id="ariaid-title3">Create a new playbook to automate the firewall configuration</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">Create a new playbook and use the RHEL System Role collection to automate your Red Hat Enterprise Linux firewall configuration.</p> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <ol class="ol steps">
+          <li class="li step stepexpand"> <span class="ph cmd">In your Dev Spaces instance, click <span class="ph menucascade"><span class="ph uicontrol">File</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">New File</span></span>.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Enter <code class="ph codeph">firewall.yml</code> for the filename and click <strong class="ph b">OK</strong> to save it in the root directory.</span> </li>
+          <li class="li step stepexpand"> <span class="ph cmd">Add the following lines to your <code class="ph codeph">firewall.yml</code> file: </span> 
+           <div class="itemgroup info"> 
+            <pre class="pre codeblock"><code>---
+- name: Open HTTPS and SSH on firewall
+  hosts: rhel
+  become: true
+  tasks:
+    - name: Use rhel system roles to allow https and ssh traffic
+      vars:
+        firewall:
+          - service: https
+            state: enabled
+            permanent: true
+            immediate: true
+            zone: public
+          - service: ssh
+            state: enabled
+            permanent: true
+            immediate: true
+            zone: public
+      ansible.builtin.include_role:
+        name: redhat.rhel_system_roles.firewall</code></pre> 
+            <div class="note note note_note">
+             <span class="note__title">Note:</span> 
+             <div class="note__body"> 
+              <p class="p">You can use Ansible Lightspeed with IBM watsonx Code Assistant from the Ansible VS Code extension to help you generate playbooks. For more information, refer to the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant/2.x_latest/html-single/red_hat_ansible_lightspeed_with_ibm_watsonx_code_assistant_user_guide/index" target="_blank" rel="external noopener">Ansible Lightspeed with IBM watsonx Code Assistant User Guide</a>.</p> 
+             </div>
+            </div> 
+           </div> </li>
+         </ol>
+        </section> 
+       </div> 
+      </article>
+      <article class="topic task nested2" aria-labelledby="ariaid-title4" id="rhdh-firewall-example-edit"> 
+       <h3 class="title topictitle3" id="ariaid-title4">Edit your firewall playbook project</h3> 
+       <div class="body taskbody">
+        <p class="shortdesc">The Ansible plug-ins integrate OpenShift Dev Spaces to edit your Ansible projects. OpenShift Dev Spaces provides on-demand, web-based Integrated Development Environments (IDEs).</p> 
+        <section class="section context">
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">About this task</h4>
+         </div> 
+         <p class="p">Ansible Git projects provisioned using the Ansible plug-ins include best practice configurations for OpenShift Dev Spaces. These configurations include installing the Ansible VS Code extension and providing access from the IDE terminal to Ansible development tools, such as Ansible Navigator and Ansible Lint.</p> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">OpenShift Dev Spaces is optional and it is not required to run the Ansible plug-ins. It is a separate Red Hat product and it is not included in the Ansible Automation Platform or Red Hat Developer Hub subscription.</p> 
+          </div>
+         </div> 
+         <p class="p">This example assumes that OpenShift Dev Spaces has been configured in the Ansible plug-ins installation.</p> 
+        </section> 
+        <section>
+         <div class="tasklabel">
+          <h4 class="sectiontitle tasklabel">Procedure</h4>
+         </div>
+         <div class="ul steps-unordered">
+          <div class="li step p"> <span class="ph cmd">In the <strong class="ph b">catalog item</strong> view of your playbook project, click <strong class="ph b">Open Ansible project in OpenShift Dev Spaces</strong>. </span> 
+           <div class="itemgroup info"> 
+            <p class="p">A VS Code instance of OpenShift Dev Spaces opens in a new browser tab. It automatically loads your new Ansible Playbook Git project.</p> 
+           </div> 
+          </div>
+         </div>
+        </section> 
+       </div> 
+      </article>
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

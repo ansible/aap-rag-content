@@ -1,0 +1,350 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="terraform-using-tf-actions-eda"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Use TF Actions with Event-Driven Ansible</h1> 
+     <p class="shortdesc">Event-Driven Ansible is an automation feature that allows Ansible Automation Platform to react to real-time events, instead of being triggered on a schedule or by a manual request.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="terraform-provider-configuring-event-stream"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Configure an event stream for TF actions</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To use TF Actions with Event-Driven Ansible, you must first configure the event stream in Ansible Automation Platform. TF actions will post events to this stream.</p> 
+       <section class="section prereq">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Before you begin</h3>
+        </div> 
+        <ul class="ul"> 
+         <li class="li">You have configured the AAP Terraform provider to authenticate with Ansible Automation Platform.</li> 
+         <li class="li">You have configured the AWS Terraform provider to authenticate with Amazon Web Services. 
+          <div class="note note note_note">
+           <span class="note__title">Note:</span> 
+           <div class="note__body">
+            The example below uses Amazon Web Services (AWS) and requires an AWS account that might incur charges. You can adapt the pattern to use a different cloud provider.
+           </div>
+          </div> </li> 
+         <li class="li">You have an Ansible Automation Platform inventory named <strong class="ph b">EDA Actions Demo Inventory</strong> in the <strong class="ph b">Default</strong> organization.</li> 
+         <li class="li">You have job templates configured with: 
+          <ul class="ul"> 
+           <li class="li">Inventory set to <strong class="ph b">EDA Actions Demo Inventory</strong>.</li> 
+           <li class="li">A machine credential (private key) matching a public key available in a local file.</li> 
+          </ul> </li> 
+        </ul> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Log in to the Ansible Automation Platform user interface.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Navigate to <strong class="ph b"><span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Event Streams</span></span></strong>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create event stream</span>.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">On the <strong class="ph b">Create event stream</strong> page, edit the fields: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b">Name:</strong> A descriptive, unique name for your event stream (such as <code class="ph codeph">Terraform provider_Events</code>).</li> 
+            <li class="li"><strong class="ph b">Organization:</strong> Select the organization this event stream will belong to (usually <code class="ph codeph">Default</code> or your specific organization).</li> 
+            <li class="li"><strong class="ph b">Event stream type:</strong> Select the type that matches how you want to receive events. <strong class="ph b">Basic Event Stream</strong> (username/password) is supported with this integration.</li> 
+            <li class="li"><strong class="ph b">Credential:</strong> Select a credential that you have pre-created for authentication with this event stream.</li> 
+            <li class="li"><strong class="ph b">Headers:</strong> (Optional) Enter comma-separated HTTP header keys that you want to include in the event payload that gets forwarded to the rulebook. Leave this empty to include all headers.</li> 
+            <li class="li"><strong class="ph b">Forward events to rulebook activation:</strong> This option is typically enabled by default. Disabling it is useful for testing and diagnosing your connection and incoming data without inadvertently triggering any automation.</li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Click <span class="ph uicontrol button">Create event stream</span>. Then navigate to <strong class="ph b"><span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Event Streams</span></span></strong> to verify the event stream was created and see the number of events received so far. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">You can also click on the specific stream to see its detailed configuration, including the organization, event stream type, associated credential, and event forwarding settings.</p> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Set up a rule book activation. Make sure to: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep"> <span class="ph cmd">Add the event stream to the rulebook.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">(Recommended) Select the <strong class="ph b">Rulebook activation enabled?</strong> option to automatically start the activation after creation.</span> </li> 
+           <li class="li substep"> <span class="ph cmd">Activate the rulebook.</span> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <strong class="ph b"><span class="ph menucascade"><span class="ph uicontrol">Automation Decisions</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Rulebook Activations</span></span></strong> to verify that the rulebook is active and check its status.</span> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist">
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration" target="_blank" rel="external noopener">Authenticate with Amazon Web Services</a></li>
+         <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-assembly_eda_rulebook_activations#eda-set-up-rulebook-activation" title="Create a rulebook activation to link a rulebook to a decision environment and event sources, initiating the event-driven automation process.">Set up a rulebook activation</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title3" id="terraform-provider-configuring-tf-actions"> 
+      <h2 class="title topictitle2" id="ariaid-title3">Configure TF Actions</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">To connect the event stream to Terraform actions, you configure the main TF file (<code class="ph codeph">*.tf</code>) in Terraform.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Add a lifecycle block to call the Event-Driven Ansible event stream to your <code class="ph codeph">*.tf</code> file. The <code class="ph codeph">after_create</code> action will trigger the <code class="ph codeph">action.aap_eda_eventstream_post.create</code>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <strong class="ph b">Example</strong> </p> 
+           <p class="p">The following example shows a <code class="ph codeph">lifecycle</code> block added to the provisioning of an AWS EC2 server. After the new server is provisioned, the action runs.</p> 
+           <pre class="pre codeblock"><code>terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~&gt; 6.0"
+    }
+
+    aap = {
+      source  = "ansible/aap"
+      version = "~&gt; 1.4.0"
+    }
+  }
+}
+
+provider "aap" {
+  # Configure authentication as needed.
+}
+
+provider "aws" {
+  region = "us-west-1"
+  # Configure authentication as needed.
+}
+
+variable "public_key_path" {
+  type        = string
+  description = "Local path to a public key file to inject into the VM. Your AAP Job Template must have the matching private key configured as a machine credential."
+}
+
+variable "event_stream_username" {
+  type = string
+}
+
+variable "event_stream_password" {
+  type = string
+}
+
+resource "aws_key_pair" "key_pair" {
+  key_name   = "aap-terraform-actions-demo-key"
+  public_key = file(var.public_key_path)
+}
+
+data "aws_ami" "rhel_ami" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["RHEL-9*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["309956199498"] # Red Hat
+}
+
+resource "aws_instance" "instance" {
+  ami                         = data.aws_ami.rhel_ami.id
+  instance_type               = "t2.micro"
+  associate_public_ip_address = true
+  key_name                    = aws_key_pair.key_pair.key_name
+}
+
+# Look up an inventory
+
+data "aap_inventory" "inventory" {
+  name              = "EDA Actions Demo Inventory"
+  organization_name = "Default"
+}
+
+#
+# EDA Event launch action example
+#
+
+resource "aap_host" "host" {
+  inventory_id = data.aap_inventory.inventory.id
+  name         = resource.aws_instance.instance.public_ip
+  # Configure an EDA eventstream POST after the host is created in inventory
+  lifecycle {
+    action_trigger {
+      events  = [after_create]
+      actions = [action.aap_eda_eventstream_post.event_post]
+    }
+  }
+}
+
+data "aap_eda_eventstream" "eventstream" {
+  name = "TF Actions Event Stream"
+}
+
+action "aap_eda_eventstream_post" "event_post" {
+  config {
+    limit             = "all"
+    template_type     = "job"
+    job_template_name = "Demo Job Template"
+    organization_name = "Default"
+    event_stream_config = {
+      username = var.event_stream_username
+      password = var.event_stream_password
+      url      = data.aap_eda_eventstream.eventstream.url
+    }
+  }
+}</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">(Required) Configure the following parameters: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">event_stream_config</code>:</strong> (Attributes) Details for the Event-Driven Ansible event stream. You must include: 
+             <ul class="ul"> 
+              <li class="li"><strong class="ph b"><code class="ph codeph">username</code>:</strong> (String) Username to use when performing the POST to the event stream URL</li> 
+              <li class="li"><strong class="ph b"><code class="ph codeph">password</code>:</strong> (String) Password to use when performing the POST to the event stream URL</li> 
+              <li class="li"><strong class="ph b"><code class="ph codeph">url</code>:</strong> (String) URL to receive the event POST</li> 
+             </ul> </li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">limit</code>:</strong> (String) Ansible Automation Platform limit for job execution</li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">organization_name</code>:</strong> (String) Organization name</li> 
+            <li class="li"><strong class="ph b"><code class="ph codeph">template_type</code>:</strong> (String) Template type: either <code class="ph codeph">job</code> or <code class="ph codeph">workflow_job</code></li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">(Optional) You can set <code class="ph codeph">owners</code> to the Red Hat RHEL image ID so that the latest image is used each time the job runs.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">(Optional) Set additional parameters as needed.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Configure an action integration with event payload specifications and target rulebook mapping. </span> 
+          <div class="itemgroup info"> 
+           <p class="p"> <strong class="ph b">Example:</strong> </p> 
+           <pre class="pre codeblock"><code>- name: Dispatch TF Workflow Job Template Action
+      condition: event.payload.template_type == "workflow"
+      throttle:
+        once_after: 1 minute
+        group_by_attributes:
+          - event.payload.workflow_template_name
+          - event.payload.limit
+          - event.payload.organization_name
+      actions:
+        - debug:
+            msg: "Executing Workflow Template {{ event.payload.workflow_template_name }}"
+        - run_workflow_template:
+            name: "{{ event.payload.workflow_template_name }}"
+            organization: "{{ event.payload.organization_name }}"
+        - debug:
+            msg: "Executed Workflow Job Template {{ event.payload.workflow_template_name }}"</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://registry.terraform.io/providers/ansible/aap/latest/docs/actions/eda_eventstream_post" target="_blank" rel="external noopener">Additional parameters for event stream</a></li>
+         <li class="linklist"><a class="link" href="https://registry.terraform.io/providers/ansible/aap/latest/docs" target="_blank" rel="external noopener">Terraform provider documentation</a></li>
+         <li class="linklist"><a class="link" href="https://www.youtube.com/watch?v=6Btyq31la1E" target="_blank" rel="external noopener">IBM Hashicorp YouTube Demo</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic task nested1" aria-labelledby="ariaid-title4" id="terraform-provider-creating-applying-plan"> 
+      <h2 class="title topictitle2" id="ariaid-title4">Create and apply the plan</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">After you configure your Terraform plan to include Event-Driven Ansible events, you create and apply the plan to trigger the events.</p> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Run <code class="ph codeph">terraform init</code> to initialize your working directory.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Use <code class="ph codeph">terraform plan</code> to commit to create the plan. The following example also saves the plan to a file named <code class="ph codeph">tfplan.out</code>, but you can specify any name for the plan. Saving the plan is a best practice for automation because the saved plan is strictly enforced. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>terraform plan -out=tfplan.out</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Review the plan output.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Apply the saved plan. </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>terraform apply tfplan.out</code></pre> 
+           <p class="p">This creates and sends an event to the specified event stream. As each resource is created, TF actions are invoked and the corresponding Ansible Automation Platform playbooks are executed sequentially.</p> 
+          </div> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <ol class="ol"> 
+         <li class="li">Verify that the runs are updated in the Terraform user interface. Drill down on a resource to see that the action was invoked and a post event was executed.</li> 
+         <li class="li">From the Ansible Automation Platform user interface, verify that the event is successfully received by (EDAName} and triggers the appropriate rulebook activation: 
+          <ol class="ol" type="a"> 
+           <li class="li">Check the <strong class="ph b">Event Streams</strong> dashboard to see the TF Actions events were received.</li> 
+           <li class="li">Check the <strong class="ph b">Jobs</strong> dashboard to see the jobs running sequentially and with a <strong class="ph b">Success</strong> status.</li> 
+           <li class="li">Check the <strong class="ph b">Inventory</strong> dashboard to see the updates. For example, if you created new servers, check the <strong class="ph b">Hosts</strong> tab for the Terraform provisioned inventory.</li> 
+          </ol> </li> 
+        </ol> 
+       </section> 
+      </div> 
+      <nav role="navigation" class="related-links">
+       <div class="linklist relinfo">
+        <strong>Related information</strong>
+        <br>
+        <ul class="linklist">
+         <li class="linklist"><a class="link" href="https://developer.hashicorp.com/terraform/cli/run" target="_blank" rel="external noopener">Terraform workflow for provisioning infrastructure</a></li>
+        </ul>
+       </div>
+      </nav> 
+     </article>
+     <article class="topic concept nested1" aria-labelledby="ariaid-title5" id="example-rulebook"> 
+      <h2 class="title topictitle2" id="ariaid-title5">Example rulebook</h2> 
+      <div class="body conbody">
+       <p class="shortdesc">The following rulebook example shows how to use TF actions and Event-Driven Ansible to listen for events on a webhook.</p> 
+       <pre class="pre codeblock"><code>- name: Listen for events on a webhook
+  hosts: all
+
+  ## Define our source for events
+
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
+      filters:
+        - ansible.eda.insert_hosts_to_meta:
+            host_path: payload.limit
+
+  ## Define the conditions we are looking for
+
+  rules:
+    - name: Dispatch TF Job Template Action
+      condition: event.payload.template_type == "job"
+      throttle:
+        once_after: 1 minute
+        group_by_attributes:
+          - event.payload.job_template_name
+          - event.payload.limit
+          - event.payload.organization_name
+      actions:
+        - debug:
+            msg: "Executing Job Template {{ event.payload.job_template_name }}"
+        - run_job_template:
+            name: "{{ event.payload.job_template_name }}"
+            organization: "{{ event.payload.organization_name }}"
+        - debug:
+            msg: "Executed Job Template {{ event.payload.job_template_name }}"
+    - name: Dispatch TF Workflow Job Template Action
+      condition: event.payload.template_type == "workflow"
+      throttle:
+        once_after: 1 minute
+        group_by_attributes:
+          - event.payload.workflow_template_name
+          - event.payload.limit
+          - event.payload.organization_name
+      actions:
+        - debug:
+            msg: "Executing Workflow Template {{ event.payload.workflow_template_name }}"
+        - run_workflow_template:
+            name: "{{ event.payload.workflow_template_name }}"
+            organization: "{{ event.payload.organization_name }}"
+        - debug:
+            msg: "Executed Workflow Job Template {{ event.payload.workflow_template_name }}"</code></pre> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

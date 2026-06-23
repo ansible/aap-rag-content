@@ -1,0 +1,71 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body>
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1">
+    <article class="nested0" aria-labelledby="ariaid-title1" id="eda-reuse-rulebook-activation-configurations"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Reuse event-driven automation configurations</h1> 
+     <p class="shortdesc">Streamline your workflow by duplicating existing rulebook activations to reuse proven configurations. This section covers how to create copies, manage unique naming requirements, and navigate bulk-enablement safety warnings to avoid duplicate job failures.</p> 
+     <article class="topic task nested1" aria-labelledby="ariaid-title2" id="eda-copy-rulebook-activation"> 
+      <h2 class="title topictitle2" id="ariaid-title2">Duplicate a rulebook activation</h2> 
+      <div class="body taskbody">
+       <p class="shortdesc">When setting up a new rulebook activation with field inputs that are similar to one of your existing rulebook activations, you can use the <strong class="ph b">Duplicate rulebook activation</strong> feature instead of manually entering input into each field.</p> 
+       <section class="section context">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">About this task</h3>
+        </div> 
+        <p class="p">While setting up rulebook activations can be a lengthy process, the ability to duplicate the required fields from an existing activation saves time and, in some cases, reduces the possibility of human error.</p> 
+       </section> 
+       <section>
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Procedure</h3>
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">On the Rulebook Activations page, click the <strong class="ph b">More Actions</strong> icon <strong class="ph b">⋮</strong> on the row of the activation you want to duplicate. The More Actions list is displayed with three options: </span> 
+          <div class="itemgroup info"> 
+           <ul class="ul"> 
+            <li class="li"> <strong class="ph b">Restart rulebook activation</strong> </li> 
+            <li class="li"> <strong class="ph b">Duplicate rulebook activation</strong> </li> 
+            <li class="li"> <strong class="ph b">Delete rulebook activation</strong> </li> 
+           </ul> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Select <span class="ph uicontrol button">Duplicate rulebook activation</span>. </span> 
+          <div class="itemgroup info"> 
+           <p class="p">A message is displayed: "&lt;Name of rulebook activation 1&gt; duplicated." Initially, the newly duplicated activation is displayed as disabled on the Rulebook Activations page with the same name as the original activation followed by a time stamp in 24-hour format (for example, &lt;Name of rulebook activation 1&gt; @ 18:43:27).</p> 
+           <div class="note important note_important">
+            <span class="note__title">Important:</span> 
+            <div class="note__body"> 
+             <p class="p">The original rulebook activation continues to run after you have duplicated it. If you try to enable the duplicated activation without editing the fields (including the Name field) to distinguish it from the original, a message is displayed reminding you that the rulebook activation was duplicated from an original, and enabling it might fail or result in duplicate jobs and other complications.</p> 
+            </div>
+           </div> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Before you run the duplicated rulebook activation, edit the fields by completing the following: </span> 
+          <ol type="a" class="ol substeps"> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Next to the duplicated rulebook activation, click the <strong class="ph b">Edit</strong> icon. This takes you to the Edit form.</span> </li> 
+           <li class="li substep substepexpand"> <span class="ph cmd">Edit the desired fields. </span> 
+            <div class="itemgroup info"> 
+             <div class="note note note_note">
+              <span class="note__title">Note:</span> 
+              <div class="note__body"> 
+               <p class="p">Ensure that you have given your newly duplicated activation a meaningful <strong class="ph b">Name</strong> that distinguishes it from the original activation.</p> 
+              </div>
+             </div> 
+            </div> </li> 
+          </ol> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Toggle the <span class="ph uicontrol button">Enable rulebook activation</span> button to the on position.</span> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">After confirming all of your edits are complete, click <span class="ph uicontrol button">Save rulebook activation</span>.</span> </li>
+        </ol>
+       </section> 
+       <section class="section result">
+        <div class="tasklabel">
+         <h3 class="sectiontitle tasklabel">Results</h3>
+        </div> 
+        <p class="p">This initiates the rulebook activation, and if it runs successfully, the status changes to <strong class="ph b">Running</strong> or <strong class="ph b">Completed</strong>.</p> 
+       </section> 
+      </div> 
+     </article>
+    </article>
+   </article>
+  </main>
+ </body>
+</html>

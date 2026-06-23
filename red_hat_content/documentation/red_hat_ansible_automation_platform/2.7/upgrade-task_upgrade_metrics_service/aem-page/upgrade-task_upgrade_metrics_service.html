@@ -1,0 +1,94 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="task-upgrade-metrics-service">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Upgrade metrics service</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Safely upgrade metrics service when upgrading Ansible Automation Platform to benefit from new features and bug fixes while maintaining continuous data collection.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">Current metrics service installation is operational</li> 
+       <li class="li">Backup of <code class="ph codeph">metrics_service</code> database completed</li> 
+       <li class="li">New version of Ansible Automation Platform containerized installer downloaded</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Back up current configuration</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>cp /path/to/installer/inventory /path/to/backup/inventory.backup.$(date +%Y%m%d)
+pg_dump -h localhost -U metrics_service metrics_service &gt; metrics_service_backup_$(date +%Y%m%d).sql</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Stop metrics service</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>systemctl --user stop automation-metrics-web.service automation-metrics-tasks.service automation-metrics-scheduler.service</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Run upgrade installer</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>cd /path/to/new-installer
+ansible-playbook -i inventory install.yml</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">There is no separate <span class="ph filepath">upgrade.yml</span> playbook. The <span class="ph filepath">install.yml</span> playbook handles upgrades. The role's <span class="ph filepath">tasks/update.yml</span> automatically detects image changes, stops services, and recreates containers with the new image.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify database schema migration</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Database migrations are handled automatically during upgrade via the <code class="ph codeph">automation-metrics-init</code> container, which executes Django migrations through <span class="ph filepath">/app/scripts/init.sh</span>. The process retries up to 5 times if failures occur.</p> 
+         <pre class="pre codeblock"><code># Check init container logs for migration status
+podman logs automation-metrics-init
+
+# Verify database schema
+psql -h localhost -U metrics_service -d metrics_service -c "\dt"</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">The <span class="ph filepath">update.yml</span> task in the automationmetrics role automatically handles container image updates and sets a recreate flag when newer images are detected.</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Start metrics service</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code>systemctl --user start automation-metrics-web.service automation-metrics-tasks.service automation-metrics-scheduler.service</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="example">
+      <h2 class="title sectiontitle">Rollback procedure</h2> 
+      <p class="p"><strong class="ph b">Rollback is not supported.</strong> Metrics service does not provide rollback functionality.</p> 
+      <p class="p"><strong class="ph b">Recovery procedure if upgrade fails:</strong></p> 
+      <ol class="ol"> 
+       <li class="li">Uninstall metrics service.</li> 
+       <li class="li">Reinstall previous version using previous installer</li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Important limitations:</strong></p> 
+      <ul class="ul"> 
+       <li class="li">Backup &amp; restore is <strong class="ph b">not guaranteed to work</strong> if the version goes down (version downgrade)</li> 
+       <li class="li">Django migrations may not be reversible</li> 
+       <li class="li">Database schema changes may be incompatible with older versions</li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Recommendation:</strong> Test upgrades in non-production environments first to validate upgrade path and verify data integrity before upgrading production systems.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-back_up_and_restore_your_containerized_deployment#task-backup-restore-metrics-service" title="Back up and restore the metrics service database and configuration to recover from hardware failures, data corruption, or operational errors without losing historical metrics data.">Back up and restore metrics service</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

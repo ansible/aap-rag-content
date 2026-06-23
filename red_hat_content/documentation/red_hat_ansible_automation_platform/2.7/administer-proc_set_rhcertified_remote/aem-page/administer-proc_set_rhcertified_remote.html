@@ -1,0 +1,65 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="proc-set-rhcertified-remote">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure the rh-certified remote repository</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">You can edit the <strong class="ph b">rh-certified</strong> remote repository to synchronize collections from automation hub hosted on console.redhat.com to your private automation hub.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have valid <strong class="ph b">Modify Ansible repo content</strong> permissions.</li> 
+       <li class="li">You have retrieved the Sync URL and API Token from the automation hub hosted service on console.redhat.com.</li> 
+       <li class="li">You have configured access to port 443. This is required for synchronizing certified collections. For more information, see the automation hub table in the "Network ports and protocols" chapter of Planning your installation.</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">By default, your private automation hub <code class="ph codeph">rh-certified</code> repository includes the URL for the entire group of Ansible Certified Content Collections.</p> 
+      <p class="p">To use only those collections specified by your organization, a private automation hub administrator can upload manually-created requirements files from the <code class="ph codeph">rh-certified</code> remote.</p> 
+      <p class="p">If you have collections <code class="ph codeph">A</code>, <code class="ph codeph">B</code>, and <code class="ph codeph">C</code> in your requirements file, and a new collection <code class="ph codeph">X</code> is added to console.redhat.com that you want to use, you must add <code class="ph codeph">X</code> to your requirements file for private automation hub to synchronize it.</p> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step"> <span class="ph cmd">Log in to your Ansible Automation Platform.</span> </li>
+       <li class="li step"> <span class="ph cmd">From the navigation panel, select <span class="ph menucascade"><span class="ph uicontrol">Automation Content</span><abbr title="and then"> &gt; </abbr><span class="ph uicontrol">Remotes</span></span>.</span> </li>
+       <li class="li step"> <span class="ph cmd">In the <strong class="ph b">rh-certified</strong> remote repository, click <span class="ph uicontrol button">Edit remote</span>.</span> </li>
+       <li class="li step"> <span class="ph cmd">In the <strong class="ph b">URL</strong> field, paste the <strong class="ph b">Sync URL</strong>.</span> </li>
+       <li class="li step"> <span class="ph cmd">In the <strong class="ph b">Token</strong> field, paste the token you acquired from console.redhat.com.</span> </li>
+       <li class="li step"> <span class="ph cmd">Click <span class="ph uicontrol button">Save remote</span>.</span> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">You can now synchronize collections from console.redhat.com to your private automation hub.</p> 
+     </section> 
+     <section class="section postreq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">What to do next</h2>
+      </div> 
+      <p class="p">See <a class="xref" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/administer-proc_create_synclist" title="You can sync certified and validated collections in Ansible automation hub from console.redhat.com.">Synchronizing Ansible content collections in automation hub</a> for syncing steps.</p> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relconcepts">
+      <strong>Related concepts</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/plan-assembly_network_ports_protocols#network-ports-protocols" title="Red Hat Ansible Automation Platform uses several ports to communicate with its services. These ports must be open and available for incoming connections to the Red Hat Ansible Automation Platform server in order for it to work.">Network ports and protocols</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

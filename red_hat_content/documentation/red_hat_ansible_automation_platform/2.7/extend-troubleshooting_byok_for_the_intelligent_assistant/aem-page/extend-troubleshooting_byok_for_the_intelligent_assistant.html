@@ -1,0 +1,121 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="GUID-f3948bd6-7648-46cb-aada-0b7ec6ee6ec6">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Troubleshooting BYOK for the intelligent assistant</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Resolve common issues when deploying or using BYOK with the intelligent assistant.</p> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <div class="ol steps">
+       <div class="li step p"> <span class="ph cmd">Begin by retrieving and reviewing the chatbot container logs.</span> 
+        <div class="itemgroup stepxmp">
+          For operator-based installations, run the following command to view the chatbot pod logs: 
+         <pre class="pre codeblock"><code>oc logs deployment/&lt;aap-instance&gt;-lightspeed-chatbot-api -n &lt;aap_namespace&gt;</code></pre> 
+        </div> 
+        <div class="itemgroup stepresult">
+         In the log output, look for the following entries: 
+         <ul class="ul" id="GUID-f3948bd6-7648-46cb-aada-0b7ec6ee6ec6__ul_1"> 
+          <li class="li"><code class="ph codeph">BYOK_IMAGE</code> is set: this confirms that the BYOK image is configured.</li> 
+          <li class="li"><code class="ph codeph">Knowledge_search</code> tool results indicate that the intelligent assistant is querying the BYOK RAG pipeline.</li> 
+          <li class="li">Vector database initialization messages confirm that the BYOK database loaded correctly.</li> 
+          <li class="li">Errors referring to a missing BYOK image indicate a configuration or deployment error.</li> 
+         </ul> 
+        </div> 
+       </div>
+      </div>
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <ul class="ullinks">
+      <li class="link ulchildlink"><strong><a href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/extend-bring_your_own_knowledge_frequently_asked_questions">Bring your own knowledge frequently asked questions</a></strong><br>Below, find some frequently-asked questions about the BYOK to the automation assistant feature.</li>
+     </ul>
+    </nav>
+    <article class="topic task nested1" aria-labelledby="ariaid-title2" id="task_1"> 
+     <h2 class="title topictitle2" id="ariaid-title2">Issue: The containerized installer fails because the BYOK image is not loaded</h2> 
+     <div class="body taskbody">
+      <p class="shortdesc"><strong class="ph b">Symptom: </strong>The containerized installer fails and displays an error stating that the image is not loaded in Podman.</p> 
+      <section class="section context" id="task_1__context_1">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">About this task</h3>
+       </div><strong class="ph b">Cause: </strong>The BYOK image was not pulled to the target Lightspeed node before running the installer. The installer expects the image to be available locally on the node.
+      </section> 
+      <section id="task_1__steps_1">
+       <div class="tasklabel">
+        <h3 class="sectiontitle tasklabel">Procedure</h3>
+       </div>
+       <ol class="ol steps" id="task_1__steps_1">
+        <li class="li step stepexpand"> <span class="ph cmd">Connect to the Lightspeed node through SSH:</span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>ssh ansible@&lt;lightspeed_node&gt;</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Pull the BYOK image from your registry:</span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>podman pull &lt;your_registry&gt;/&lt;repository&gt;/&lt;image&gt;:&lt;label&gt;</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Verify that the image is available locally:</span> 
+         <div class="itemgroup info"> 
+          <pre class="pre codeblock"><code>podman images | grep &lt;your-byok-image-name&gt;</code></pre> 
+         </div> </li>
+        <li class="li step stepexpand"> <span class="ph cmd">Run the installer again.</span> </li>
+       </ol>
+      </section> 
+     </div> 
+     <article class="topic task nested2" aria-labelledby="ariaid-title3" id="task_2"> 
+      <h3 class="title topictitle3" id="ariaid-title3">The intelligent assistant does not return BYOK-enhanced responses after deployment</h3> 
+      <div class="body taskbody">
+       <p class="shortdesc"><strong class="ph b">Symptom: </strong>After you deploy the BYOK image, the intelligent assistant responds to queries, but does not incorporate your custom BYOK content.</p> 
+       <section class="section context" id="task_2__context_2">
+        <div class="tasklabel">
+         <h4 class="sectiontitle tasklabel">About this task</h4>
+        </div><strong class="ph b">Cause: </strong>The chatbot service might not have restarted after the BYOK configuration change, or the BYOK image did not load correctly.
+       </section> 
+       <section id="task_2__steps_2">
+        <div class="tasklabel">
+         <h4 class="sectiontitle tasklabel">Procedure</h4>
+        </div>
+        <div class="li stepsection">
+         For containerized installations:
+        </div>
+        <ol class="ol steps">
+         <li class="li step stepexpand"> <span class="ph cmd">Restart the chatbot service:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>systemctl --user restart ansible-lightspeed-chatbot.service</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Verify that the service has restarted:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>systemctl --user status ansible-lightspeed-chatbot.service</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Review the chatbot container logs to confirm that the BYOK image loaded:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>podman logs ansible-lightspeed-chatbot 2&gt;&amp;1 | grep -i "byok"</code></pre> 
+          </div> </li>
+        </ol>
+        <div class="li stepsection">
+         For operator-based installations:
+        </div>
+        <ol class="ol steps" start="4">
+         <li class="li step stepexpand"> <span class="ph cmd">Roll out a restart of the chatbot deployment:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc rollout restart deployment/&lt;aap-instance&gt;-lightspeed-chatbot-api -n &lt;aap_namespace&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Wait for the rollout to complete. You can run the following command to check on the status:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc rollout status deployment/&lt;aap-instance&gt;-lightspeed-chatbot-api -n &lt;aap_namespace&gt;</code></pre> 
+          </div> </li>
+         <li class="li step stepexpand"> <span class="ph cmd">Review the chatbot pod logs to confirm that the BYOK image loaded:</span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>oc logs deployment/&lt;aap-instance&gt;-lightspeed-chatbot-api -n &lt;aap_namespace&gt; | grep -i "byok"</code></pre> 
+          </div> </li>
+        </ol>
+       </section> 
+      </div> 
+     </article> 
+    </article> 
+   </article>
+  </main>
+ </body>
+</html>

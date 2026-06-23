@@ -1,0 +1,21 @@
+# Prepare to migrate to Managed Ansible Automation Platform
+## Reconcile the target environment post-migration
+
+Update necessary configurations after migrating to Managed Ansible Automation Platform.
+
+### Procedure
+
+1.  Log in to the Managed Ansible Automation Platform instance by using the local administrator account to confirm that data was imported.
+2.  Perform the following actions based on the configuration of the source deployment:
+1.  Reconfigure Single Sign-On (SSO) authenticators and mappings to reflect the new URLs.
+2.  Update private automation hub content to reflect the new URLs.     1. Run the following command to update the automation hub repositories:
+
+```
+curl -d '{\"verify_checksums\": true }' -X POST -k https://<platform url>/api/galaxy/pulp/api/v3/repair/ -u <admin_user>:<admin_password>
+```
+
+2. Perform a sync on any repositories configured in automation hub.
+3. Push any custom execution environments from the source automation hub to the target automation hub.
+
+3.  Reconfigure automation mesh.
+3.  After migration, you can request standard Site Reliability Engineering (SRE) tasks through support tickets, such as configuration of custom certificates, a custom domain, or connectivity through private endpoints.

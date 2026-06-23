@@ -1,0 +1,64 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="downloading-ansible-automation-platform">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Download Ansible Automation Platform</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Choose the installation program you need based on your Red Hat Enterprise Linux environment internet connectivity and download the installation program to your Red Hat Enterprise Linux host.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">You have logged in to the Red Hat Enterprise Linux host as your non-root user.</li> 
+      </ul> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Download the latest version of containerized Ansible Automation Platform from the <a class="xref" href="https://access.redhat.com/downloads/content/480/ver=2.6/rhel---9/2.6/x86_64/product-software" target="_blank" rel="external noopener">Ansible Automation Platform download page</a>. </span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep"> <span class="ph cmd">For online installations: <strong class="ph b">Ansible Automation Platform 2.7 Containerized Setup</strong></span> </li> 
+         <li class="li substep"> <span class="ph cmd">For offline or bundled installations: <strong class="ph b">Ansible Automation Platform 2.7 Containerized Setup Bundle</strong></span> </li> 
+        </ol> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Copy the installation program <code class="ph codeph">.tar.gz</code> file and the optional manifest <code class="ph codeph">.zip</code> file onto your Red Hat Enterprise Linux host. </span> 
+        <div class="itemgroup info"> 
+         <p class="p">Use the <code class="ph codeph">scp</code> command to securely copy the files. The basic syntax for <code class="ph codeph">scp</code> is:</p> 
+         <pre class="pre codeblock"><code>scp [options] &lt;path_to_source_file&gt; &lt;path_to_destination&gt;</code></pre> 
+         <p class="p">For example, use the following <code class="ph codeph">scp</code> command to copy the installation program <code class="ph codeph">.tar.gz</code> file to an AWS EC2 instance with a private key (replace the placeholder <code class="ph codeph">&lt;&gt;</code> values with your actual information):</p> 
+         <pre class="pre codeblock"><code>scp -i &lt;path_to_private_key&gt; ansible-automation-platform-containerized-setup-&lt;version_number&gt;.tar.gz ec2-user@&lt;remote_host_ip_or_hostname&gt;:&lt;path_to_destination&gt;</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Decide where you want the installation program to reside on the file system. This is your installation directory. </span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep"> <span class="ph cmd">The installation creates installation-related files under this location and requires at least 15 GB for the initial installation.</span> </li> 
+        </ol> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Unpack the installation program <code class="ph codeph">.tar.gz</code> file into your installation directory, and go to the unpacked directory. </span> 
+        <ol type="a" class="ol substeps"> 
+         <li class="li substep substepexpand"> <span class="ph cmd">To unpack the online installer: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ tar xfvz ansible-automation-platform-containerized-setup-&lt;version_number&gt;.tar.gz</code></pre> 
+          </div> </li> 
+         <li class="li substep substepexpand"> <span class="ph cmd">To unpack the offline or bundled installer: </span> 
+          <div class="itemgroup info"> 
+           <pre class="pre codeblock"><code>$ tar xfvz ansible-automation-platform-containerized-setup-bundle-&lt;version_number&gt;-&lt;arch_name&gt;.tar.gz</code></pre> 
+          </div> </li> 
+        </ol> </li>
+      </ol>
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist relinfo">
+      <strong>Related information</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="https://man7.org/linux/man-pages/man1/scp.1.html" target="_blank" rel="external noopener">scp(1) - Linux manual page</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>

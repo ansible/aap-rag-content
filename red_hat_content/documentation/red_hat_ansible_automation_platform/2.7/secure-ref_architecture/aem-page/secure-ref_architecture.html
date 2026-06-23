@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">  
+ <body> 
+  <main role="main"> 
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <article class="nested0" aria-labelledby="ariaid-title1" id="ref-architecture"> 
+     <h1 class="title topictitle1" id="ariaid-title1">Plan your topology and networking configuration</h1> 
+     <div class="body refbody"> 
+      <p class="shortdesc">Install Ansible Automation Platform using a tested deployment model. Choose between an enterprise reference architecture for high performance and scalability or a growth architecture for resource-constrained environments.</p> 
+      <section class="section"> 
+       <p class="p">It is possible to install Ansible Automation Platform on different infrastructure reference architectures and with different environment configurations. Red Hat does not fully test architectures outside of published reference architectures. Red Hat recommends using a tested reference architecture for all new deployments and provides commercially reasonable support for deployments that meet minimum requirements.</p> 
+       <p class="p">The following diagram is a tested container enterprise architecture:</p> 
+       <figure class="fig fignone"> 
+        <figcaption> <span class="fig--title-label">Figure 1. </span>Reference architecture overview 
+        </figcaption> 
+        <br> 
+        <img class="image" src="/webassets/aem/red_hat_ansible_automation_platform/2.7/images/cont-b-env-a.png" alt="Infrastructure reference architecture that Red Hat has tested that customers can use when self-managing Ansible Automation Platform"> 
+        <br> 
+       </figure> 
+      </section> 
+      <section class="section" id="ref-architecture__section_1"> 
+       <p class="p">When planning firewall or cloud network security group configurations related to Ansible Automation Platform, see the Network Ports section of your chosen topology in <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/plan-ref_installation_deployment_models" target="_blank" rel="external noopener">Installation and deployment models</a> to understand what network ports need to be opened on a firewall or security group.</p> 
+       <p class="p">For internet-connected systems, the <a class="xref" href="https://docs.redhat.com/en/documentation/red_hat_ansible_automation_platform/2.6/plan-assembly_network_ports_protocols#network-ports-protocols_table" target="_blank" rel="external noopener">Network ports and protocols table</a> defines the outgoing traffic requirements for services that Ansible Automation Platform can be configured to use, such as Red Hat automation hub, Red Hat Lightspeed for Ansible Automation Platform, Ansible Galaxy, the registry.redhat.io container image registry, and so on.</p> 
+       <p class="p">Restrict access to the ports used by the Ansible Automation Platform components to protected networks and clients. The following restrictions are highly recommended:</p> 
+       <ul class="ul" id="ref-architecture__ul_1"> 
+        <li class="li">Restrict the PostgreSQL database port (5432) on the database servers so that only the other Ansible Automation Platform component servers (automation controller, automation hub, Event-Driven Ansible controller) are permitted access.</li> 
+        <li class="li">Restrict SSH access to the Ansible Automation Platform servers from the installation host and other trusted systems used for maintenance access to the Ansible Automation Platform servers.</li> 
+        <li class="li">Restrict HTTPS access to the automation controller, automation hub, and Event-Driven Ansible controller from trusted networks and clients.</li> 
+       </ul> 
+      </section> 
+     </div> 
+     <article class="topic concept nested1" aria-labelledby="ariaid-title2" id="con-dns-ntp-service-planning.adoc"> 
+      <h2 class="title topictitle2" id="ariaid-title2">DNS, NTP, and service planning</h2> 
+      <p class="shortdesc">When installing Ansible Automation Platform, DNS and NTP configurations are crucial for a successful deployment and proper operation.</p> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title3" id="ref-dns"> 
+      <h2 class="title topictitle2" id="ariaid-title3">DNS</h2> 
+      <p class="shortdesc">Define a valid Fully Qualified Domain Name (FQDN) for all infrastructure nodes in your installation inventory file. Resolving these to a routable IP address in DNS passes installer checks and helps ensure a successful setup.</p> 
+     </article> 
+     <article class="topic reference nested1" aria-labelledby="ariaid-title4" id="ref-dns-load-balancing"> 
+      <h2 class="title topictitle2" id="ariaid-title4">DNS and load balancing</h2> 
+      <p class="shortdesc">When using a load balancer with Ansible Automation Platform, an additional FQDN is required. For example, <code class="ph codeph">aap.example.com</code> could be used for the load balancer to direct traffic to each platform gateway component defined in the installation inventory.</p> 
+     </article> 
+    </article> 
+   </article> 
+  </main>  
+ </body>
+</html>

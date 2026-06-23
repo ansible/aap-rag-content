@@ -1,0 +1,423 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+ <body id="task-configure-external-database-operator">
+  <main role="main">
+   <article role="article" aria-labelledby="ariaid-title1"> 
+    <h1 class="title topictitle1" id="ariaid-title1">Configure external PostgreSQL database for metrics service with OpenShift operator</h1> 
+    <div class="body taskbody">
+     <p class="shortdesc">Configure metrics service to use external PostgreSQL databases instead of operator-provisioned databases to leverage enterprise infrastructure.</p> 
+     <section class="section prereq">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Before you begin</h2>
+      </div> 
+      <ul class="ul"> 
+       <li class="li">External PostgreSQL 15 or later database server accessible from metrics service</li> 
+       <li class="li">Database administrator credentials with CREATE DATABASE and CREATE USER privileges</li> 
+       <li class="li">Network connectivity to database server (port 5432 default)</li> 
+       <li class="li">Firewall rules configured to allow connections from metrics service pods</li> 
+       <li class="li">Ansible Automation Platform operator installed on OpenShift Container Platform</li> 
+       <li class="li"><span class="keyword cmdname">oc</span> CLI access with cluster-admin or sufficient role-based access control (RBAC) permissions</li> 
+       <li class="li">Kubernetes secret creation permissions in target namespace</li> 
+       <li class="li">Understanding of OpenShift networking (pod network CIDR, network policies)</li> 
+      </ul> 
+     </section> 
+     <section class="section context">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">About this task</h2>
+      </div> 
+      <p class="p">This procedure configures metrics service to use an external PostgreSQL database instead of operator-provisioned databases when deploying with the Ansible Automation Platform operator on OpenShift Container Platform. By using enterprise database infrastructure, you eliminate operator-managed PostgreSQL pods (saving approximately 2 GB memory and 2 vCPU per database instance), reduce database provisioning time by approximately 50% (5 minutes versus 10 minutes), enable centralized database management with unified backup, restore, and high availability for all Ansible Automation Platform components, and prevent pod scheduling failures caused by the operator attempting to provision databases when external databases are configured.</p> 
+      <div class="note important note_important">
+       <span class="note__title">Important:</span> 
+       <div class="note__body"> 
+        <p class="p">The operator supports externally managed databases for both the metrics service database (<code class="ph codeph">metrics_service</code>) and the read-only connection to the automation controller database (<code class="ph codeph">ms_awx_readonly_user</code>). Without proper configuration, the operator attempts to provision PostgreSQL pods using KubeVirt (Kubernetes virtualization), causing scheduling failures.</p> 
+       </div>
+      </div> 
+     </section> 
+     <section>
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Procedure</h2>
+      </div>
+      <ol class="ol steps">
+       <li class="li step stepexpand"> <span class="ph cmd">Create external databases and users</span> 
+        <div class="itemgroup info"> 
+         <p class="p">On the external PostgreSQL server, create the <code class="ph codeph">metrics_service</code> database and required users:</p> 
+         <p class="p"><strong class="ph b">Create the metrics_service database:</strong></p> 
+         <pre class="pre codeblock"><code>psql -h &lt;EXTERNAL_DB_HOST&gt; -U postgres
+
+CREATE DATABASE metrics_service
+  WITH ENCODING='UTF8'
+       LC_COLLATE='en_US.UTF-8'
+       LC_CTYPE='en_US.UTF-8'
+       TEMPLATE=template0;</code></pre> 
+         <p class="p"><strong class="ph b">Create database users:</strong></p> 
+         <pre class="pre codeblock"><code>-- metrics service user (ALL privileges)
+CREATE USER metrics_service WITH PASSWORD '&lt;SECURE_PASSWORD&gt;';
+GRANT ALL PRIVILEGES ON DATABASE metrics_service TO metrics_service;
+\c metrics_service
+GRANT ALL ON SCHEMA public TO metrics_service;
+
+-- Read-only user for controller database
+\c postgres
+CREATE USER ms_awx_readonly WITH PASSWORD '&lt;READONLY_PASSWORD&gt;';
+\c awx
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_readonly;</code></pre> 
+         <div class="note important note_important">
+          <span class="note__title">Important:</span> 
+          <div class="note__body"> 
+           <p class="p">Change <code class="ph codeph">awx</code> to match your actual database name for automation controller. Common alternative names: <code class="ph codeph">automationcontroller</code>, <code class="ph codeph">tower</code>, <code class="ph codeph">awx_production</code>.</p> 
+          </div>
+         </div> 
+         <p class="p"><strong class="ph b">Network access requirement:</strong> Ensure OpenShift pods can reach the external PostgreSQL server. Verify network policies, firewall rules, and routes allow connectivity from the metrics service namespace to the database host on port 5432.</p> 
+         <p class="p"><strong class="ph b">Example pg_hba.conf for OpenShift:</strong></p> 
+         <pre class="pre codeblock"><code># Allow connections from OpenShift pod network CIDR
+host    metrics_service    metrics_service    10.128.0.0/14    scram-sha-256
+host    awx               ms_awx_readonly    10.128.0.0/14    scram-sha-256</code></pre> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">Replace <code class="ph codeph">10.128.0.0/14</code> with your OpenShift cluster's pod network CIDR. Find it with: <code class="ph codeph">oc get network.config cluster -o jsonpath='{.status.clusterNetwork[0].cidr}'</code></p> 
+          </div>
+         </div> 
+         <p class="p"><strong class="ph b">After configuring pg_hba.conf:</strong></p> 
+         <pre class="pre codeblock"><code># Reload PostgreSQL configuration
+sudo systemctl reload postgresql
+
+# Or for containerized PostgreSQL:
+podman exec postgres-container pg_ctl reload</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Create Kubernetes secrets for database credentials</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Create two secrets in the same namespace where you deploy the <code class="ph codeph">metricsService</code> CR. These secrets store database connection parameters that the operator uses to configure metrics service.</p> 
+         <p class="p"><strong class="ph b">Secret 1: Metrics service database credentials</strong></p> 
+         <pre class="pre codeblock"><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: automation-platform-metrics-postgres-configuration
+  namespace: &lt;your-namespace&gt;
+type: Opaque
+stringData:
+  host: external-db.example.com
+  port: "5432"
+  database: metrics_service
+  username: metrics_service
+  password: &lt;SECURE_PASSWORD&gt;
+  sslmode: prefer
+  type: unmanaged</code></pre> 
+         <p class="p"><strong class="ph b">Secret 2: Automation controller database read-only credentials</strong></p> 
+         <pre class="pre codeblock"><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: automation-controller-read-postgres-configuration
+  namespace: &lt;your-namespace&gt;
+type: Opaque
+stringData:
+  host: controller-db.example.com
+  port: "5432"
+  database: awx
+  username: ms_awx_readonly
+  password: &lt;READONLY_PASSWORD&gt;
+  sslmode: prefer
+  type: unmanaged</code></pre> 
+         <p class="p"><strong class="ph b">Apply the secrets:</strong></p> 
+         <pre class="pre codeblock"><code>oc create -f automation-platform-metrics-postgres-configuration.yaml
+oc create -f automation-controller-read-postgres-configuration.yaml
+
+# Verify secrets created
+oc get secret -n &lt;your-namespace&gt; | grep postgres-configuration</code></pre> 
+         <p class="p"><strong class="ph b">Secret field reference:</strong></p> 
+         <table class="table frame-all">
+          <caption></caption>
+          <colgroup>
+           <col style="width:25%">
+           <col style="width:25%">
+           <col style="width:50%">
+          </colgroup>
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry colsep-1 rowsep-1" id="task-configure-external-database-operator__entry__1">Field</th> 
+            <th class="entry colsep-1 rowsep-1" id="task-configure-external-database-operator__entry__2">Required</th> 
+            <th class="entry rowsep-1" id="task-configure-external-database-operator__entry__3">Description</th> 
+           </tr> 
+          </thead>
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__1"><code class="ph codeph">host</code></td> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__2">Yes</td> 
+            <td class="entry rowsep-1" headers="task-configure-external-database-operator__entry__3">Database server hostname or IP address</td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__1"><code class="ph codeph">port</code></td> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__2">Yes</td> 
+            <td class="entry rowsep-1" headers="task-configure-external-database-operator__entry__3">Database port (5432 default)</td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__1"><code class="ph codeph">database</code></td> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__2">Yes</td> 
+            <td class="entry rowsep-1" headers="task-configure-external-database-operator__entry__3">Database name</td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__1"><code class="ph codeph">username</code></td> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__2">Yes</td> 
+            <td class="entry rowsep-1" headers="task-configure-external-database-operator__entry__3">Database user</td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__1"><code class="ph codeph">password</code></td> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__2">Yes</td> 
+            <td class="entry rowsep-1" headers="task-configure-external-database-operator__entry__3">Database password</td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__1"><code class="ph codeph">sslmode</code></td> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__2">No</td> 
+            <td class="entry rowsep-1" headers="task-configure-external-database-operator__entry__3">SSL mode: disable, allow, prefer, require, verify-ca, verify-full (default: prefer)</td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry colsep-1" headers="task-configure-external-database-operator__entry__1"><code class="ph codeph">type</code></td> 
+            <td class="entry colsep-1" headers="task-configure-external-database-operator__entry__2">Yes</td> 
+            <td class="entry" headers="task-configure-external-database-operator__entry__3">Must be<code class="ph codeph">managed</code> for operator-managed configuration</td> 
+           </tr> 
+          </tbody>
+         </table> 
+         <div class="note note note_note">
+          <span class="note__title">Note:</span> 
+          <div class="note__body"> 
+           <p class="p">Replace <code class="ph codeph">&lt;your-namespace&gt;</code> with the namespace where you deploy metrics service (for example, <code class="ph codeph">aap-27-metrics</code>).</p> 
+          </div>
+         </div> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Create metricsService custom resource with external database configuration</span> 
+        <div class="itemgroup info"> 
+         <p class="p">Create a <code class="ph codeph">metricsService</code> CR that references the external database secrets. This configuration directs the operator to use external databases instead of provisioning PostgreSQL pods.</p> 
+         <pre class="pre codeblock"><code>apiVersion: automationmetricsservice.ansible.com/v1alpha1
+kind: MetricsService
+metadata:
+  name: metrics-service
+  namespace: &lt;your-namespace&gt;
+spec:
+  database:
+    database_secret: automation-platform-metrics-postgres-configuration
+    externally_managed: true
+    ms_awx_readonly_user_secret: automation-controller-read-postgres-configuration
+  ms_awx_readonly_user:
+    externally_managed: true
+  image_pull_secrets:
+    - redhat-operators-pull-secret
+  ingress_type: None</code></pre> 
+         <p class="p"><strong class="ph b">Key configuration fields:</strong></p> 
+         <table class="table frame-all">
+          <caption></caption>
+          <colgroup>
+           <col style="width:28.57142857142857%">
+           <col style="width:28.57142857142857%">
+           <col style="width:42.857142857142854%">
+          </colgroup>
+          <thead class="thead"> 
+           <tr class="row"> 
+            <th class="entry colsep-1 rowsep-1" id="task-configure-external-database-operator__entry__25">Field</th> 
+            <th class="entry colsep-1 rowsep-1" id="task-configure-external-database-operator__entry__26">Value</th> 
+            <th class="entry rowsep-1" id="task-configure-external-database-operator__entry__27">Description</th> 
+           </tr> 
+          </thead>
+          <tbody class="tbody"> 
+           <tr class="row"> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__25"><code class="ph codeph">metrics.database.database_secret</code></td> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__26"><code class="ph codeph">automation-platform-metrics-postgres-configuration</code></td> 
+            <td class="entry rowsep-1" headers="task-configure-external-database-operator__entry__27">Name of secret containing metrics service database credentials</td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__25"><code class="ph codeph">metrics.database.externally_managed</code></td> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__26"><code class="ph codeph">true</code></td> 
+            <td class="entry rowsep-1" headers="task-configure-external-database-operator__entry__27">Tells operator NOT to provision a PostgreSQL pod for metrics service</td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__25"><code class="ph codeph">metrics.ms_awx_readonly_user.externally_managed</code></td> 
+            <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__26"><code class="ph codeph">true</code></td> 
+            <td class="entry rowsep-1" headers="task-configure-external-database-operator__entry__27">Tells operator NOT to create<code class="ph codeph">ms_awx_readonly</code> user automatically</td> 
+           </tr> 
+           <tr class="row"> 
+            <td class="entry colsep-1" headers="task-configure-external-database-operator__entry__25"><code class="ph codeph">metrics.ms_awx_readonly_user_secret</code></td> 
+            <td class="entry colsep-1" headers="task-configure-external-database-operator__entry__26"><code class="ph codeph">automation-controller-read-postgres-configuration</code></td> 
+            <td class="entry" headers="task-configure-external-database-operator__entry__27">Name of secret containing read-only controller database credentials</td> 
+           </tr> 
+          </tbody>
+         </table> 
+         <div class="note important note_important">
+          <span class="note__title">Important:</span> 
+          <div class="note__body"> 
+           <p class="p">Both <code class="ph codeph">metrics.database.externally_managed: true</code> AND <code class="ph codeph">metrics.ms_awx_readonly_user.externally_managed: true</code> must be set. If only one is set, the operator attempts to provision database resources, causing pod scheduling failures with errors like <code class="ph codeph">Insufficient devices.kubevirt.io/kvm</code> or <code class="ph codeph">Insufficient memory</code>.</p> 
+          </div>
+         </div> 
+         <p class="p"><strong class="ph b">Why both fields are required:</strong></p> 
+         <ul class="ul"> 
+          <li class="li"><code class="ph codeph">metrics.database.externally_managed: true</code> — Prevents operator from creating PostgreSQL pod for metrics service database</li> 
+          <li class="li"><code class="ph codeph">metrics.ms_awx_readonly_user.externally_managed: true</code> — Prevents operator from attempting to create <code class="ph codeph">ms_awx_readonly</code> user (assumes you created it manually)</li> 
+          <li class="li">Missing either field triggers operator's default behavior: provision database using KubeVirt virtual machines (VMs)</li> 
+         </ul> 
+         <p class="p"><strong class="ph b">Apply the CR:</strong></p> 
+         <pre class="pre codeblock"><code>oc create -f metricsservice-external-db.yaml
+
+# Monitor CR status
+oc get metricsservice metrics-service -n &lt;your-namespace&gt; -w</code></pre> 
+        </div> </li>
+       <li class="li step stepexpand"> <span class="ph cmd">Verify deployment</span> 
+        <div class="itemgroup info"> 
+         <pre class="pre codeblock"><code># Check metricsService CR status
+oc get metricsservice metrics-service -n &lt;your-namespace&gt;
+
+# Expected output shows Ready condition
+NAME              AGE
+metrics-service   5m
+
+# Check pod status (should show metrics pods, NO postgres pods)
+oc get pods -n &lt;your-namespace&gt;
+
+# Expected output:
+# metrics-service-web-xxx     1/1  Running
+# metrics-service-tasks-xxx   1/1  Running
+# metrics-service-scheduler-xxx   1/1  Running
+# NO virt-launcher-postgres-* pods should exist
+
+# Verify NO virt-launcher pods (confirms external DB config worked)
+oc get pods -n &lt;your-namespace&gt; | grep virt-launcher &amp;&amp; echo "ERROR: Database pods found" || echo "SUCCESS: No database pods"
+
+# Check pod logs for database connectivity
+oc logs deployment/metrics-service-web -n &lt;your-namespace&gt; | tail -20
+
+# Verify database connectivity from pod
+oc exec deployment/metrics-service-web -n &lt;your-namespace&gt; -- \
+  psql -h external-db.example.com -U metrics_service -d metrics_service -c "SELECT 1;"
+# Expected output:
+#  ?column?
+# ----------
+#         1
+
+# Verify read-only access to controller database
+oc exec deployment/metrics-service-tasks -n &lt;your-namespace&gt; -- \
+  psql -h controller-db.example.com -U ms_awx_readonly -d awx -c "SELECT COUNT(*) FROM main_job LIMIT 1;"
+# Expected output: count (non-zero if jobs exist)
+
+# Check for scheduling errors (should return no events)
+oc get events -n &lt;your-namespace&gt; | grep FailedScheduling</code></pre> 
+        </div> </li>
+      </ol>
+     </section> 
+     <section class="section result">
+      <div class="tasklabel">
+       <h2 class="sectiontitle tasklabel">Results</h2>
+      </div> 
+      <p class="p">External database is successfully configured when:</p> 
+      <ul class="ul"> 
+       <li class="li"><code class="ph codeph">metricsService</code> CR shows <code class="ph codeph">Ready</code> status in <code class="ph codeph">oc get metricsservice</code> output</li> 
+       <li class="li">metrics service pods are running (check with <code class="ph codeph">oc get pods</code>)</li> 
+       <li class="li"><strong class="ph b">No operator-provisioned PostgreSQL pods exist</strong> (no <code class="ph codeph">virt-launcher-postgres-*</code> pods)</li> 
+       <li class="li">Pods can connect to external <code class="ph codeph">metrics_service</code> database</li> 
+       <li class="li">Pods can query automation controller database by using the <code class="ph codeph">ms_awx_readonly</code> user</li> 
+       <li class="li">No <code class="ph codeph">FailedScheduling</code> events related to database pods or kubevirt devices</li> 
+       <li class="li">Health endpoint returns 200 status: <code class="ph codeph">oc exec deployment/metrics-service-web -- curl -s http://localhost:8087/health/</code></li> 
+      </ul> 
+      <p class="p"><strong class="ph b">Common verification failures:</strong></p> 
+      <table class="table frame-all">
+       <caption></caption>
+       <colgroup>
+        <col style="width:40%">
+        <col style="width:60%">
+       </colgroup>
+       <thead class="thead"> 
+        <tr class="row"> 
+         <th class="entry colsep-1 rowsep-1" id="task-configure-external-database-operator__entry__40">Symptom</th> 
+         <th class="entry rowsep-1" id="task-configure-external-database-operator__entry__41">Likely Cause</th> 
+        </tr> 
+       </thead>
+       <tbody class="tbody"> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__40"><code class="ph codeph">virt-launcher-postgres-*</code> pods appear</td> 
+         <td class="entry rowsep-1" headers="task-configure-external-database-operator__entry__41"><code class="ph codeph">externally_managed: true</code> not set correctly for one or both database configurations</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__40">FailedScheduling: Insufficient devices.kubevirt.io/*</td> 
+         <td class="entry rowsep-1" headers="task-configure-external-database-operator__entry__41">Operator attempting to provision VM-based PostgreSQL despite external config (check BOTH<code class="ph codeph">externally_managed</code> fields)</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1 rowsep-1" headers="task-configure-external-database-operator__entry__40">FailedScheduling: Insufficient memory or CPU</td> 
+         <td class="entry rowsep-1" headers="task-configure-external-database-operator__entry__41">Operator attempting to provision PostgreSQL pod despite external config</td> 
+        </tr> 
+        <tr class="row"> 
+         <td class="entry colsep-1" headers="task-configure-external-database-operator__entry__40">Pod CrashLoopBackOff</td> 
+         <td class="entry" headers="task-configure-external-database-operator__entry__41">Database connection failure (check secrets, network connectivity, firewall rules)</td> 
+        </tr> 
+       </tbody>
+      </table> 
+     </section> 
+     <section class="example">
+      <h2 class="title sectiontitle">Troubleshooting</h2> 
+      <p class="p"><strong class="ph b">Pod fails to schedule with insufficient resources</strong></p> 
+      <p class="p"><strong class="ph b">Symptom:</strong> Pod scheduling fails with errors like <code class="ph codeph">Insufficient memory</code>, <code class="ph codeph">Insufficient cpu</code>, or <code class="ph codeph">Insufficient devices.kubevirt.io/kvm</code>, <code class="ph codeph">devices.kubevirt.io/tun</code>, or <code class="ph codeph">devices.kubevirt.io/vhost-net</code>.</p> 
+      <p class="p"><strong class="ph b">Cause:</strong> The operator is attempting to provision a PostgreSQL VM or pod despite the <code class="ph codeph">externally_managed: true</code> configuration. This typically occurs when one or both of the required <code class="ph codeph">externally_managed</code> fields are missing or incorrect.</p> 
+      <p class="p"><strong class="ph b">Solution:</strong></p> 
+      <ol class="ol"> 
+       <li class="li">Verify <code class="ph codeph">metrics.database.externally_managed: true</code> is set in the metricsService CR: <pre class="pre codeblock"><code>oc get metricsservice metrics-service -o yaml | grep externally_managed</code></pre> </li> 
+       <li class="li">Verify <code class="ph codeph">metrics.ms_awx_readonly_user.externally_managed: true</code> is also set. BOTH fields are required: <pre class="pre codeblock"><code>oc get metricsservice metrics-service -o yaml | grep -A 2 ms_awx_readonly_user</code></pre> </li> 
+       <li class="li">Check that database secret names match exactly in the CR: <pre class="pre codeblock"><code>oc get metricsservice metrics-service -o yaml | grep -E 'database_secret|ms_awx_readonly_user_secret'</code></pre> </li> 
+       <li class="li">Verify both secrets exist in the same namespace as the CR: <pre class="pre codeblock"><code>oc get secret -n &lt;namespace&gt; | grep postgres-configuration</code></pre> </li> 
+       <li class="li">If you corrected the configuration, delete and recreate the metricsService CR: <pre class="pre codeblock"><code>oc delete metricsservice metrics-service
+oc create -f metricsservice-external-db.yaml</code></pre> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Database connection errors in pod logs</strong></p> 
+      <p class="p"><strong class="ph b">Symptom:</strong> Pod logs show connection errors such as "connection refused", "timeout", or "could not connect to server".</p> 
+      <p class="p"><strong class="ph b">Cause:</strong> Network connectivity issues between OpenShift pods and the external database server, or incorrect database credentials in the secret.</p> 
+      <p class="p"><strong class="ph b">Solution:</strong></p> 
+      <ol class="ol"> 
+       <li class="li">Verify network policies allow pod-to-database connectivity: <pre class="pre codeblock"><code>oc get networkpolicy -n &lt;namespace&gt;</code></pre> </li> 
+       <li class="li">Test database connectivity from a debug pod: <pre class="pre codeblock"><code>oc run -it --rm debug --image=registry.redhat.io/rhel9/postgresql-15 -- \
+  psql -h external-db.example.com -U metrics_service -d metrics_service</code></pre> </li> 
+       <li class="li">Verify secret values are correct (note: password is base64 encoded): <pre class="pre codeblock"><code>oc get secret automation-platform-metrics-postgres-configuration -o yaml | \
+  grep -E 'host|port|database|username'</code></pre> </li> 
+       <li class="li">Check that firewall rules on the database host allow connections from the OpenShift pod network CIDR.</li> 
+       <li class="li">Verify the database server is listening on the correct network interface: <pre class="pre codeblock"><code># Run on database server
+ss -tulpn | grep 5432</code></pre> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Permission denied errors for ms_awx_readonly user</strong></p> 
+      <p class="p"><strong class="ph b">Symptom:</strong> Pod logs show "permission denied for table main_job" or similar permission errors when querying the automation controller database.</p> 
+      <p class="p"><strong class="ph b">Cause:</strong> The <code class="ph codeph">ms_awx_readonly</code> user lacks SELECT privileges on the automation controller database tables.</p> 
+      <p class="p"><strong class="ph b">Solution:</strong></p> 
+      <ol class="ol"> 
+       <li class="li">Connect to the automation controller database: <pre class="pre codeblock"><code>psql -h controller-db.example.com -U postgres -d awx</code></pre> </li> 
+       <li class="li">Grant SELECT privileges on all existing tables: <pre class="pre codeblock"><code>GRANT SELECT ON ALL TABLES IN SCHEMA public TO ms_awx_readonly;</code></pre> </li> 
+       <li class="li">Set default privileges for future tables: <pre class="pre codeblock"><code>ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO ms_awx_readonly;</code></pre> </li> 
+       <li class="li">Verify privileges were granted: <pre class="pre codeblock"><code>SELECT grantee, privilege_type
+FROM information_schema.role_table_grants
+WHERE grantee='ms_awx_readonly';</code></pre> </li> 
+      </ol> 
+      <p class="p"><strong class="ph b">Database security best practices</strong></p> 
+      <ul class="ul"> 
+       <li class="li"><strong class="ph b">Use strong, unique passwords</strong> for <code class="ph codeph">metrics_service</code> and <code class="ph codeph">ms_awx_readonly</code> users (minimum 16 characters, alphanumeric and special characters)</li> 
+       <li class="li"><strong class="ph b">Enable TLS/SSL</strong> for database connections</li> 
+       <li class="li"><strong class="ph b">Restrict database network access</strong> to only metrics service pods</li> 
+       <li class="li"><strong class="ph b">Use Kubernetes secrets</strong> for credential storage (never hard-code credentials in CR specs or ConfigMaps)</li> 
+       <li class="li"><strong class="ph b">Apply RBAC</strong> to restrict secret access to necessary service accounts only</li> 
+       <li class="li"><strong class="ph b">Regularly rotate database credentials</strong> (update secrets quarterly or per security policy)</li> 
+      </ul> 
+     </section> 
+    </div> 
+    <nav role="navigation" class="related-links">
+     <div class="linklist reltasks">
+      <strong>Related tasks</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_tls_ssl_metrics_service_databases" title="Enable TLS/SSL encryption for metrics service database connections to protect metrics data in transit and meet security policies.">Configure TLS/SSL for metrics service databases</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-task_configure_external_database_containerized" title="Configure metrics service to use an external PostgreSQL database to leverage enterprise database management, backup, and high availability infrastructure.">Configure external PostgreSQL database for metrics service with containerized installer</a></li>
+      </ul>
+     </div>
+     <div class="linklist relref">
+      <strong>Related reference</strong>
+      <br>
+      <ul class="linklist">
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/install-ref_metrics_service_deployment_requirements" title="Review infrastructure requirements and prerequisites for deploying metrics service to provision appropriate resources and ensure successful deployment without capacity or compatibility issues.">Metrics service deployment requirements</a></li>
+       <li class="linklist"><a class="link" href="/documentation/en-us/red_hat_ansible_automation_platform/2.7/troubleshoot-ref_troubleshoot_metrics_service" title="Diagnostic procedures and solutions for common metrics service issues to resolve problems and restore data collection.">Troubleshoot metrics service</a></li>
+      </ul>
+     </div>
+    </nav> 
+   </article>
+  </main>
+ </body>
+</html>
